@@ -1,4 +1,5 @@
 var gulp = require("gulp");
+var template = require("gulp-template");
 var _ = require("lodash");
 var rename = require("gulp-rename");
 var glob = require("glob");
@@ -10,32 +11,6 @@ var modifyCssUrls = require("gulp-modify-css-urls");
 var autoprefixer = require('gulp-autoprefixer');
 var minifyCss = require('gulp-minify-css');
 var templateCache = require('gulp-angular-templatecache');
-var gutil = require('gulp-util');
-var through = require('through2');
-
-function template(data, options) {
-    return through.obj(function (file, enc, cb) {
-        if (file.isNull()) {
-            cb(null, file);
-            return;
-        }
-
-        if (file.isStream()) {
-            cb(new gutil.PluginError('gulp-template', 'Streaming not supported'));
-            return;
-        }
-
-        try {
-            var tpl = _.template(file.contents.toString(), options);
-            file.contents = new Buffer(tpl(_.merge({}, file.data, data)));
-            this.push(file);
-        } catch (err) {
-            this.emit('error', new gutil.PluginError('gulp-template', err, {fileName: file.path}));
-        }
-
-        cb();
-    });
-}
 
 // apiEndpoint must have the trailing slash
 var environmentConfig = {
