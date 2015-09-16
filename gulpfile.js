@@ -12,6 +12,15 @@ var autoprefixer = require('gulp-autoprefixer');
 var minifyCss = require('gulp-minify-css');
 var templateCache = require('gulp-angular-templatecache');
 
+var environmentConfig = {
+    dev: {
+        apiEndpoint: "http://localhost:38328/"
+    },
+    prod: {
+        apiEndpoint: "http://testflight.keylol.com/"
+    }
+};
+
 var vendorScripts = [
     "bower_components/jquery/dist/jquery.js",
     "bower_components/moment/moment.js",
@@ -26,6 +35,7 @@ var vendorScripts = [
 
 var appSrcipts = [
     "keylol-app.js",
+    "environment-config.js",
     "root-controller.js",
     "components/editor/quill.js",
     "components/editor/**/*.js",
@@ -45,20 +55,34 @@ var getFiles = function(arr){
 };
 
 gulp.task("clean", function(){
-    return del("app/bundles");
+    return del(["app/bundles/!(web.config)", "index.html", "environment-config.js"]);
+});
+
+gulp.task("compile-environment-config", ["clean"], function(){
+    return gulp.src("app/environment-config.js.ejs")
+        .pipe(template(environmentConfig.dev))
+        .pipe(rename("environment-config.js"))
+        .pipe(gulp.dest("app"));
+});
+
+gulp.task("compile-environment-config:prod", ["clean"], function(){
+    return gulp.src("app/environment-config.js.ejs")
+        .pipe(template(environmentConfig.prod))
+        .pipe(rename("environment-config.js"))
+        .pipe(gulp.dest("app"));
 });
 
 gulp.task("vendor-script-bundle", ["clean"], function(){
-    return gulp.src(vendorScripts, {cwd: "app"})
-        .pipe(concat("vendor.min.js"))
-        .pipe(rev())
-        .pipe(uglify())
-        .pipe(gulp.dest("app/bundles"));
-});
+        return gulp.src(vendorScripts, {cwd: "app"})
+            .pipe(concat("vendor.min.js"))
+            .pipe(rev())
+            .pipe(uglify())
+            .pipe(gulp.dest("app/bundles"));
+    });
 
-gulp.task("app-script-bundle", ["clean"], function(){
-    return gulp.src(appSrcipts, {cwd: "app"})
-        .pipe(concat("app.min.js"))
+gulp.task("app-script-bundle", ["clean", "compile-environment-config:prod"], function(){
+        return gulp.src(appSrcipts, {cwd: "app"})
+            .pipe(concat("app.min.js"))
         .pipe(rev())
         .pipe(uglify())
         .pipe(gulp.dest("app/bundles"));
@@ -86,7 +110,7 @@ gulp.task("stylesheet-bundle", ["clean"], function(){
         .pipe(gulp.dest("app/bundles"));
 });
 
-gulp.task("compile-index", function(){
+gulp.task("compile-index", ["compile-environment-config"], function(){
     var scriptPaths = getFiles(vendorScripts.concat(appSrcipts));
     var stylesheetPaths = getFiles(stylesheets);
     return gulp.src("app/index.html.ejs")
