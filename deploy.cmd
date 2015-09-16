@@ -102,7 +102,7 @@ IF EXIST "%DEPLOYMENT_SOURCE%\package.json" (
 :: 3. Install bower packages
 IF EXIST "%DEPLOYMENT_SOURCE%\bower.json" (
   pushd "%DEPLOYMENT_SOURCE%"
-  call :ExecuteCmd ".\node-modules\.bin\bower" install --production
+  call :ExecuteCmd ".\node_modules\.bin\bower" install --production
   IF !ERRORLEVEL! NEQ 0 goto error
   popd
 )
@@ -116,24 +116,14 @@ IF EXIST "%DEPLOYMENT_SOURCE%\gulpfile.js" (
 )
 
 :: 5. Delete unused files
-IF EXIST "%DEPLOYMENT_SOURCE%\app\components" (
-  RD /S /Q "%DEPLOYMENT_SOURCE%\app\components"
-)
-IF EXIST "%DEPLOYMENT_SOURCE%\app\bower_components" (
-  RD /S /Q "%DEPLOYMENT_SOURCE%\app\bower_components"
-)
-IF EXIST "%DEPLOYMENT_SOURCE%\app\assets\stylesheets" (
-  RD /S /Q "%DEPLOYMENT_SOURCE%\app\assets\stylesheets"
-)
-IF EXIST "%DEPLOYMENT_SOURCE%\app\assets\fonts\keylol-rail-sung-full.ttf" (
-  DEL "%DEPLOYMENT_SOURCE%\app\assets\fonts\keylol-rail-sung-full.ttf"
-)
-IF EXIST "%DEPLOYMENT_SOURCE%\app\assets\fonts\lisong-full.ttf" (
-  DEL "%DEPLOYMENT_SOURCE%\app\assets\fonts\lisong-full.ttf"
-)
-IF EXIST "%DEPLOYMENT_SOURCE%\app\assets\fonts\myriadpro-regular-full.woff" (
-  DEL "%DEPLOYMENT_SOURCE%\app\assets\fonts\myriadpro-regular-full.woff"
-)
+RD /S /Q "%DEPLOYMENT_SOURCE%\app\components"
+RD /S /Q "%DEPLOYMENT_SOURCE%\app\bower_components"
+RD /S /Q "%DEPLOYMENT_SOURCE%\app\assets\stylesheets"
+DEL "%DEPLOYMENT_SOURCE%\app\assets\fonts\keylol-rail-sung-full.ttf"
+DEL "%DEPLOYMENT_SOURCE%\app\assets\fonts\lisong-full.ttf"
+DEL "%DEPLOYMENT_SOURCE%\app\assets\fonts\myriadpro-regular-full.woff"
+DEL "%DEPLOYMENT_SOURCE%\app\*.ejs"
+DEL "%DEPLOYMENT_SOURCE%\app\*.js"
 
 :: 6. KuduSync
 IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (
