@@ -88,10 +88,10 @@ goto :EOF
 :Deployment
 echo Handling node.js deployment.
 
-:: 1. Select node version
+echo 1. Select node version
 call :SelectNodeVersion
 
-:: 2. Install npm packages
+echo 2. Install npm packages
 IF EXIST "%DEPLOYMENT_SOURCE%\package.json" (
   pushd "%DEPLOYMENT_SOURCE%"
   call :ExecuteCmd !NPM_CMD! install --production
@@ -99,7 +99,7 @@ IF EXIST "%DEPLOYMENT_SOURCE%\package.json" (
   popd
 )
 
-:: 3. Install bower packages
+echo 3. Install bower packages
 IF EXIST "%DEPLOYMENT_SOURCE%\bower.json" (
   pushd "%DEPLOYMENT_SOURCE%"
   call :ExecuteCmd ".\node_modules\.bin\bower" install --production
@@ -107,7 +107,7 @@ IF EXIST "%DEPLOYMENT_SOURCE%\bower.json" (
   popd
 )
 
-:: 4. Execute gulp tasks
+echo 4. Execute gulp tasks
 IF EXIST "%DEPLOYMENT_SOURCE%\gulpfile.js" (
   pushd "%DEPLOYMENT_SOURCE%"
   call :ExecuteCmd ".\node_modules\.bin\gulp" prod
@@ -115,7 +115,7 @@ IF EXIST "%DEPLOYMENT_SOURCE%\gulpfile.js" (
   popd
 )
 
-:: 5. Delete unused files
+echo 5. Delete unused files
 RD /S /Q "%DEPLOYMENT_SOURCE%\app\components"
 RD /S /Q "%DEPLOYMENT_SOURCE%\app\bower_components"
 RD /S /Q "%DEPLOYMENT_SOURCE%\app\assets\stylesheets"
@@ -125,7 +125,7 @@ DEL "%DEPLOYMENT_SOURCE%\app\assets\fonts\myriadpro-regular-full.woff"
 DEL "%DEPLOYMENT_SOURCE%\app\*.ejs"
 DEL "%DEPLOYMENT_SOURCE%\app\*.js"
 
-:: 6. KuduSync
+echo 6. KuduSync
 IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (
   call :ExecuteCmd "%KUDU_SYNC_CMD%" -v 50 -f "%DEPLOYMENT_SOURCE%\app" -t "%DEPLOYMENT_TARGET%" -n "%NEXT_MANIFEST_PATH%" -p "%PREVIOUS_MANIFEST_PATH%" -i ".git;.hg;.deployment;deploy.cmd"
   IF !ERRORLEVEL! NEQ 0 goto error

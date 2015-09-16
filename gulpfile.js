@@ -18,7 +18,7 @@ var environmentConfig = {
         apiEndpoint: "http://localhost:38328/"
     },
     prod: {
-        apiEndpoint: "http://testflight.keylol.com/"
+        apiEndpoint: "http://testflight-api.keylol.com/"
     }
 };
 
