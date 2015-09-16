@@ -102,7 +102,7 @@ IF EXIST "%DEPLOYMENT_SOURCE%\package.json" (
 echo 3. Install bower packages
 IF EXIST "%DEPLOYMENT_SOURCE%\bower.json" (
   pushd "%DEPLOYMENT_SOURCE%"
-  call :ExecuteCmd "bower" install
+  call :ExecuteCmd ".\node_modules\.bin\bower" install
   IF !ERRORLEVEL! NEQ 0 goto error
   popd
 )
