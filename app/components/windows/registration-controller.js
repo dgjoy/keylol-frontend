@@ -2,8 +2,8 @@
     "use strict";
 
     keylolApp.controller("RegistrationController", [
-        "$scope", "close", "$http", "utils", "union",
-        function($scope, close, $http, utils, union) {
+        "$scope", "close", "$http", "utils", "union", "apiEndpoint",
+        function($scope, close, $http, utils, union, apiEndpoint) {
             $scope.vm = {
                 IdCode: "",
                 UserName: "",
@@ -45,7 +45,7 @@
                 }
                 if (!$.isEmptyObject($scope.error))
                     return;
-                $http.post("api/user", $scope.vm)
+                $http.post(apiEndpoint + "user", $scope.vm)
                     .then(function(response) {
                         var login = response.data.LoginLog;
                         delete response.data.LoginLog;

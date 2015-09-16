@@ -8,3 +8,4 @@ tmp
 app/bundles/*
 !app/bundles/web.config
 app/index.html
+app/environment-config.js

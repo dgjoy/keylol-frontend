@@ -15,8 +15,8 @@
         "ngStorage"
     ]);
     app.config([
-        "$routeProvider", "$locationProvider", "utilsProvider", "pageTitleProvider", "$localStorageProvider", "httpBatchConfigProvider",
-        function($routeProvider, $locationProvider, utilsProvider, pageTitleProvider, $localStorageProvider, httpBatchConfigProvider) {
+        "$routeProvider", "$locationProvider", "utilsProvider", "pageTitleProvider", "$localStorageProvider", "$httpProvider",
+        function($routeProvider, $locationProvider, utilsProvider, pageTitleProvider, $localStorageProvider, $httpProvider) {
             $locationProvider.html5Mode(true);
 
             $routeProvider.when("/", {
@@ -41,9 +41,7 @@
 
             $localStorageProvider.setKeyPrefix("keylol-");
 
-            httpBatchConfigProvider.setAllowedBatchEndpoint("api/", "api/batch", {
-                batchRequestCollectionDelay: 10
-            });
+            $httpProvider.defaults.withCredentials = true;
         }
     ]);
     app.constant("amTimeAgoConfig", {

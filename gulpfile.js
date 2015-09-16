@@ -12,6 +12,7 @@ var autoprefixer = require('gulp-autoprefixer');
 var minifyCss = require('gulp-minify-css');
 var templateCache = require('gulp-angular-templatecache');
 
+// apiEndpoint must have the trailing slash
 var environmentConfig = {
     dev: {
         apiEndpoint: "http://localhost:38328/"

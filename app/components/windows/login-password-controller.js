@@ -2,8 +2,8 @@
 	"use strict";
 
 	keylolApp.controller("LoginPasswordController", [
-		"$scope", "close", "$http", "utils", "union",
-		function ($scope, close, $http, utils, union) {
+		"$scope", "close", "$http", "utils", "union", "apiEndpoint",
+		function ($scope, close, $http, utils, union, apiEndpoint) {
 		    $scope.error = {};
 		    $scope.errorDetect = utils.modelErrorDetect;
 
@@ -39,7 +39,7 @@
 				}
 				if (!$.isEmptyObject($scope.error))
 					return;
-				$http.post("api/login", $scope.vm)
+				$http.post(apiEndpoint + "login", $scope.vm)
 					.then(function(response) {
 					    union.$localStorage.login = response.data;
 				        close();

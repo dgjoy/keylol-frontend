@@ -2,9 +2,13 @@
     "use strict";
 
     keylolApp.config([
-        "apiEndpointProvider",
-        function(apiEndpointProvider){
+        "apiEndpointProvider", "httpBatchConfigProvider",
+        function(apiEndpointProvider, httpBatchConfigProvider){
             apiEndpointProvider.setEndPoint("<%= apiEndpoint %>");
+
+            httpBatchConfigProvider.setAllowedBatchEndpoint("<%= apiEndpoint %>", "<%= apiEndpoint %>batch", {
+                batchRequestCollectionDelay: 10
+            });
         }
     ]);
 })();

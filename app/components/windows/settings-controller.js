@@ -2,8 +2,8 @@
     "use strict";
 
     keylolApp.controller("SettingsController", [
-        "$scope", "close", "utils", "$http", "union",
-        function($scope, close, utils, $http, union) {
+        "$scope", "close", "utils", "$http", "union", "apiEndpoint",
+        function($scope, close, utils, $http, union, apiEndpoint) {
             $scope.error = {};
             $scope.errorDetect = utils.modelErrorDetect;
             $scope.page = "profiles";
@@ -58,7 +58,7 @@
             };
             updateVM(union.$localStorage.user);
 
-            $http.get("api/user/" + union.$localStorage.login.UserId + "?includeClaims=true&includeProfilePointBackgroundImage=true").then(function(response) {
+            $http.get(apiEndpoint + "user/" + union.$localStorage.login.UserId + "?includeClaims=true&includeProfilePointBackgroundImage=true").then(function(response) {
                 var user = response.data;
                 $scope.vm.ProfilePointBackgroundImage = user.ProfilePointBackgroundImage;
                 delete user.ProfilePointBackgroundImage;
@@ -220,7 +220,7 @@
                     return;
                 }
 
-                $http.put("api/user/" + union.$localStorage.login.UserId, dirtyFields)
+                $http.put(apiEndpoint + "user/" + union.$localStorage.login.UserId, dirtyFields)
                     .then(function() {
                         $.extend(union.$localStorage.user, dirtyFields);
                         alert("保存成功。");
@@ -242,7 +242,7 @@
 
             $scope.logout = function() {
                 if (confirm("确认退出登录？")) {
-                    $http.delete("api/login/current").then(function() {
+                    $http.delete(apiEndpoint + "login/current").then(function() {
                         delete union.$localStorage.login;
                         alert("成功退出登录。");
                         close();
