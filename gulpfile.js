@@ -15,10 +15,10 @@ var templateCache = require('gulp-angular-templatecache');
 // apiEndpoint must have the trailing slash
 var environmentConfig = {
     dev: {
-        apiEndpoint: "http://localhost:38328/"
+        apiEndpoint: "https://localhost/"
     },
     prod: {
-        apiEndpoint: "http://testflight-api.keylol.com/"
+        apiEndpoint: "https://testflight-api.keylol.com/"
     }
 };
 
