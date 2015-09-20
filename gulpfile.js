@@ -49,47 +49,47 @@ var stylesheets = [
     "assets/stylesheets/site.css"
 ];
 
-var getFiles = function(arr){
-    return _.union.apply(this, _.map(arr, function(path){
+var getFiles = function (arr) {
+    return _.union.apply(this, _.map(arr, function (path) {
         return glob.sync(path, {cwd: "app"});
     }));
 };
 
-gulp.task("clean", function(){
+gulp.task("clean", function () {
     return del(["app/bundles/!(web.config)", "index.html", "environment-config.js"]);
 });
 
-gulp.task("compile-environment-config", ["clean"], function(){
+gulp.task("compile-environment-config", ["clean"], function () {
     return gulp.src("app/environment-config.js.ejs")
         .pipe(template(environmentConfig.dev))
         .pipe(rename("environment-config.js"))
         .pipe(gulp.dest("app"));
 });
 
-gulp.task("compile-environment-config:prod", ["clean"], function(){
+gulp.task("compile-environment-config:prod", ["clean"], function () {
     return gulp.src("app/environment-config.js.ejs")
         .pipe(template(environmentConfig.prod))
         .pipe(rename("environment-config.js"))
         .pipe(gulp.dest("app"));
 });
 
-gulp.task("vendor-script-bundle", ["clean"], function(){
-        return gulp.src(vendorScripts, {cwd: "app"})
-            .pipe(concat("vendor.min.js"))
-            .pipe(rev())
-            .pipe(uglify())
-            .pipe(gulp.dest("app/bundles"));
-    });
-
-gulp.task("app-script-bundle", ["clean", "compile-environment-config:prod"], function(){
-        return gulp.src(appSrcipts, {cwd: "app"})
-            .pipe(concat("app.min.js"))
+gulp.task("vendor-script-bundle", ["clean"], function () {
+    return gulp.src(vendorScripts, {cwd: "app"})
+        .pipe(concat("vendor.min.js"))
         .pipe(rev())
         .pipe(uglify())
         .pipe(gulp.dest("app/bundles"));
 });
 
-gulp.task("template-bundle", ["clean"], function(){
+gulp.task("app-script-bundle", ["clean", "compile-environment-config:prod"], function () {
+    return gulp.src(appSrcipts, {cwd: "app"})
+        .pipe(concat("app.min.js"))
+        .pipe(rev())
+        .pipe(uglify())
+        .pipe(gulp.dest("app/bundles"));
+});
+
+gulp.task("template-bundle", ["clean"], function () {
     return gulp.src("app/components/**/*.html")
         .pipe(templateCache("templates.min.js", {
             root: "components/",
@@ -99,11 +99,13 @@ gulp.task("template-bundle", ["clean"], function(){
         .pipe(gulp.dest("app/bundles"));
 });
 
-gulp.task("stylesheet-bundle", ["clean"], function(){
+gulp.task("stylesheet-bundle", ["clean"], function () {
     return gulp.src(stylesheets, {cwd: "app"})
-        .pipe(modifyCssUrls({modify: function(url) {
-            return url.startsWith("data:") ? url : "../assets/stylesheets/" + url;
-        }}))
+        .pipe(modifyCssUrls({
+            modify: function (url) {
+                return url.startsWith("data:") ? url : "../assets/stylesheets/" + url;
+            }
+        }))
         .pipe(autoprefixer())
         .pipe(concat("stylesheets.min.css"))
         .pipe(rev())
@@ -111,7 +113,7 @@ gulp.task("stylesheet-bundle", ["clean"], function(){
         .pipe(gulp.dest("app/bundles"));
 });
 
-gulp.task("compile-index", ["compile-environment-config"], function(){
+gulp.task("compile-index", ["compile-environment-config"], function () {
     var scriptPaths = getFiles(vendorScripts.concat(appSrcipts));
     var stylesheetPaths = getFiles(stylesheets);
     return gulp.src("app/index.html.ejs")
@@ -123,7 +125,7 @@ gulp.task("compile-index", ["compile-environment-config"], function(){
         .pipe(gulp.dest("app"));
 });
 
-gulp.task("compile-index:prod", ["vendor-script-bundle", "app-script-bundle", "template-bundle", "stylesheet-bundle"], function(){
+gulp.task("compile-index:prod", ["vendor-script-bundle", "app-script-bundle", "template-bundle", "stylesheet-bundle"], function () {
     var scriptPaths = getFiles(["bundles/vendor-*.min.js", "bundles/app-*.min.js", "bundles/templates-*.min.js"]);
     var stylesheetPaths = getFiles(["bundles/stylesheets-*.min.css"]);
     return gulp.src("app/index.html.ejs")

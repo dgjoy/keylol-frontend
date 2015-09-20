@@ -5,8 +5,8 @@ bower_components/
 tmp
 .DS_Store
 .idea
-app/bundles/*
-!app/bundles/web.config
-app/index.html
-app/environment-config.js
+#app/bundles/*
+#!app/bundles/web.config
+#app/index.html
+#app/environment-config.js
 app/debug
