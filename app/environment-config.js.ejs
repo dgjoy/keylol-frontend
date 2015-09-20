@@ -2,18 +2,13 @@
     "use strict";
 
     keylolApp.config([
-        "apiEndpointProvider", "httpBatchConfigProvider", "$sceDelegateProvider",
-        function (apiEndpointProvider, httpBatchConfigProvider, $sceDelegateProvider) {
+        "apiEndpointProvider", "httpBatchConfigProvider",
+        function(apiEndpointProvider, httpBatchConfigProvider){
             apiEndpointProvider.setEndPoint("<%= apiEndpoint %>");
 
             httpBatchConfigProvider.setAllowedBatchEndpoint("<%= apiEndpoint %>", "<%= apiEndpoint %>batch", {
                 batchRequestCollectionDelay: 10
             });
-
-            $sceDelegateProvider.resourceUrlWhitelist([
-                "self",
-                "<%= cdnBase %>**"
-            ]);
         }
     ]);
 })();
