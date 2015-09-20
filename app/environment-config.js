@@ -4,9 +4,9 @@
     keylolApp.config([
         "apiEndpointProvider", "httpBatchConfigProvider",
         function(apiEndpointProvider, httpBatchConfigProvider){
-            apiEndpointProvider.setEndPoint("https://localhost/");
+            apiEndpointProvider.setEndPoint("https://testflight-api.keylol.com/");
 
-            httpBatchConfigProvider.setAllowedBatchEndpoint("https://localhost/", "https://localhost/batch", {
+            httpBatchConfigProvider.setAllowedBatchEndpoint("https://testflight-api.keylol.com/", "https://testflight-api.keylol.com/batch", {
                 batchRequestCollectionDelay: 10
             });
         }
