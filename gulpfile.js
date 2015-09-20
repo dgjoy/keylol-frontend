@@ -109,13 +109,13 @@ gulp.task("template-bundle", ["clean"], function () {
 gulp.task("stylesheet-bundle", ["clean"], function () {
     return gulp.src(stylesheets, {cwd: "app"})
         .pipe(autoprefixer())
-        .pipe(concat("stylesheets.min.css"))
-        .pipe(rev())
         .pipe(minifyCss({
             keepSpecialComments: 0,
-            relativeTo: "app/assets/stylesheets",
+            relativeTo: "app/bundles",
             target: "app/bundles"
         }))
+        .pipe(concat("stylesheets.min.css"))
+        .pipe(rev())
         .pipe(gulp.dest("app/bundles"));
 });
 
