@@ -7,7 +7,6 @@ var concat = require("gulp-concat");
 var uglify = require("gulp-uglify");
 var rev = require("gulp-rev");
 var del = require("del");
-var modifyCssUrls = require("gulp-modify-css-urls");
 var autoprefixer = require('gulp-autoprefixer');
 var minifyCss = require('gulp-minify-css');
 var templateCache = require('gulp-angular-templatecache');
@@ -18,7 +17,8 @@ var environmentConfig = {
         apiEndpoint: "https://localhost/"
     },
     prod: {
-        apiEndpoint: "https://testflight-api.keylol.com/"
+        apiEndpoint: "https://testflight-api.keylol.com/",
+        cdnBase: "https://keylol-static.b0.upaiyun.com/"
     }
 };
 
@@ -53,6 +53,13 @@ var getFiles = function (arr) {
     return _.union.apply(this, _.map(arr, function (path) {
         return glob.sync(path, {cwd: "app"});
     }));
+};
+
+var getBundleFilePaths = function () {
+    return {
+        scripts: getFiles(["bundles/vendor-*.min.js", "bundles/app-*.min.js", "bundles/templates-*.min.js"]),
+        stylesheets: getFiles(["bundles/stylesheets-*.min.css"])
+    };
 };
 
 gulp.task("clean", function () {
@@ -101,15 +108,14 @@ gulp.task("template-bundle", ["clean"], function () {
 
 gulp.task("stylesheet-bundle", ["clean"], function () {
     return gulp.src(stylesheets, {cwd: "app"})
-        .pipe(modifyCssUrls({
-            modify: function (url) {
-                return url.startsWith("data:") ? url : "../assets/stylesheets/" + url;
-            }
-        }))
         .pipe(autoprefixer())
         .pipe(concat("stylesheets.min.css"))
         .pipe(rev())
-        .pipe(minifyCss())
+        .pipe(minifyCss({
+            keepSpecialComments: 0,
+            relativeTo: "app/assets/stylesheets",
+            target: "app/bundles"
+        }))
         .pipe(gulp.dest("app/bundles"));
 });
 
@@ -126,17 +132,32 @@ gulp.task("compile-index", ["compile-environment-config"], function () {
 });
 
 gulp.task("compile-index:prod", ["vendor-script-bundle", "app-script-bundle", "template-bundle", "stylesheet-bundle"], function () {
-    var scriptPaths = getFiles(["bundles/vendor-*.min.js", "bundles/app-*.min.js", "bundles/templates-*.min.js"]);
-    var stylesheetPaths = getFiles(["bundles/stylesheets-*.min.css"]);
+    var files = getBundleFilePaths();
     return gulp.src("app/index.html.ejs")
         .pipe(template({
-            scripts: scriptPaths,
-            stylesheets: stylesheetPaths
+            scripts: files.scripts,
+            stylesheets: files.stylesheets
+        }))
+        .pipe(rename("index.html"))
+        .pipe(gulp.dest("app"));
+});
+
+gulp.task("compile-index:prod:cdn", ["vendor-script-bundle", "app-script-bundle", "template-bundle", "stylesheet-bundle"], function () {
+    var files = getBundleFilePaths();
+    var mapCdnPath = function (path) {
+        return environmentConfig.prod.cdnBase + path;
+    };
+    return gulp.src("app/index.html.ejs")
+        .pipe(template({
+            scripts: _.map(files.scripts, mapCdnPath),
+            stylesheets: _.map(files.stylesheets, mapCdnPath)
         }))
         .pipe(rename("index.html"))
         .pipe(gulp.dest("app"));
 });
 
 gulp.task("prod", ["compile-index:prod"]);
+
+gulp.task("prod:cdn", ["compile-index:prod:cdn"]);
 
 gulp.task("default", ["compile-index"]);
