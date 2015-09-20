@@ -14,7 +14,8 @@ var templateCache = require('gulp-angular-templatecache');
 // apiEndpoint must have the trailing slash
 var environmentConfig = {
     dev: {
-        apiEndpoint: "https://localhost/"
+        apiEndpoint: "https://localhost/",
+        cdnBase: "/"
     },
     prod: {
         apiEndpoint: "https://testflight-api.keylol.com/",
@@ -124,6 +125,7 @@ gulp.task("compile-index", ["compile-environment-config"], function () {
     var stylesheetPaths = getFiles(stylesheets);
     return gulp.src("app/index.html.ejs")
         .pipe(template({
+            base: environmentConfig.dev.cdnBase,
             scripts: scriptPaths,
             stylesheets: stylesheetPaths
         }))
@@ -135,6 +137,7 @@ gulp.task("compile-index:prod", ["vendor-script-bundle", "app-script-bundle", "t
     var files = getBundleFilePaths();
     return gulp.src("app/index.html.ejs")
         .pipe(template({
+            base: environmentConfig.prod.cdnBase,
             scripts: files.scripts,
             stylesheets: files.stylesheets
         }))
@@ -142,22 +145,6 @@ gulp.task("compile-index:prod", ["vendor-script-bundle", "app-script-bundle", "t
         .pipe(gulp.dest("app"));
 });
 
-gulp.task("compile-index:prod:cdn", ["vendor-script-bundle", "app-script-bundle", "template-bundle", "stylesheet-bundle"], function () {
-    var files = getBundleFilePaths();
-    var mapCdnPath = function (path) {
-        return environmentConfig.prod.cdnBase + path;
-    };
-    return gulp.src("app/index.html.ejs")
-        .pipe(template({
-            scripts: _.map(files.scripts, mapCdnPath),
-            stylesheets: _.map(files.stylesheets, mapCdnPath)
-        }))
-        .pipe(rename("index.html"))
-        .pipe(gulp.dest("app"));
-});
-
 gulp.task("prod", ["compile-index:prod"]);
-
-gulp.task("prod:cdn", ["compile-index:prod:cdn"]);
 
 gulp.task("default", ["compile-index"]);

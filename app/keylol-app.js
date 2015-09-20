@@ -1,4 +1,4 @@
-﻿(function() {
+﻿(function () {
     "use strict";
 
     var app = angular.module("KeylolApp", [
@@ -16,7 +16,7 @@
     ]);
     app.config([
         "$routeProvider", "$locationProvider", "utilsProvider", "pageTitleProvider", "$localStorageProvider", "$httpProvider",
-        function($routeProvider, $locationProvider, utilsProvider, pageTitleProvider, $localStorageProvider, $httpProvider) {
+        function ($routeProvider, $locationProvider, utilsProvider, pageTitleProvider, $localStorageProvider, $httpProvider) {
             $locationProvider.html5Mode(true);
 
             $routeProvider.when("/", {
