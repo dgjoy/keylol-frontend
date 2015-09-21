@@ -10,11 +10,12 @@ var del = require("del");
 var autoprefixer = require('gulp-autoprefixer');
 var minifyCss = require('gulp-minify-css');
 var templateCache = require('gulp-angular-templatecache');
+var htmlmin = require('gulp-htmlmin');
 
 // apiEndpoint must have the trailing slash
 var environmentConfig = {
     dev: {
-        apiEndpoint: "https://localhost/"
+        apiEndpoint: "https://localhost:44300/"
     },
     prod: {
         apiEndpoint: "https://testflight-api.keylol.com/",
@@ -48,6 +49,21 @@ var stylesheets = [
     "components/editor/quill.snow.css",
     "assets/stylesheets/site.css"
 ];
+
+var htmlminOptions = {
+    collapseWhitespace: true,
+    conservativeCollapse: true,
+    preserveLineBreaks: true,
+    preventAttributesEscaping: true,
+    removeComments: true,
+    removeCommentsFromCDATA: true,
+    collapseBooleanAttributes: true,
+    removeAttributeQuotes: true,
+    removeScriptTypeAttributes: true,
+    removeStyleLinkTypeAttributes: true,
+    removeOptionalTags: true,
+    removeIgnored: true
+};
 
 var getFiles = function (arr) {
     return _.union.apply(this, _.map(arr, function (path) {
@@ -98,11 +114,13 @@ gulp.task("app-script-bundle", ["clean", "compile-environment-config:prod"], fun
 
 gulp.task("template-bundle", ["clean"], function () {
     return gulp.src("app/components/**/*.html")
+        .pipe(htmlmin(htmlminOptions))
         .pipe(templateCache("templates.min.js", {
             root: "components/",
             module: "KeylolApp"
         }))
         .pipe(rev())
+        .pipe(uglify())
         .pipe(gulp.dest("app/bundles"));
 });
 
@@ -139,6 +157,7 @@ gulp.task("compile-index:prod", ["vendor-script-bundle", "app-script-bundle", "t
             stylesheets: files.stylesheets
         }))
         .pipe(rename("index.html"))
+        .pipe(htmlmin(htmlminOptions))
         .pipe(gulp.dest("app"));
 });
 
@@ -153,6 +172,7 @@ gulp.task("compile-index:prod:cdn", ["vendor-script-bundle", "app-script-bundle"
             stylesheets: _.map(files.stylesheets, mapCdnPath)
         }))
         .pipe(rename("index.html"))
+        .pipe(htmlmin(htmlminOptions))
         .pipe(gulp.dest("app"));
 });
 
