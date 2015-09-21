@@ -1,0 +1,37 @@
+.section-search-box {
+    width: 100%;
+    min-width: 184px;
+    height: 100%;
+    min-height: 40px;
+    padding: 7px 30px 7px 10px;
+    background-color: #11254A;
+    position: relative;
+}
+
+.section-search-box input[type=search] {
+    box-shadow: none;
+    height: 100%;
+    line-height: 26px;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 6px;
+}
+
+.section-search-box a {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 26px;
+}
+
+.section-search-box a img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 15px;
+    height: 15px;
+    margin-left: -10px;
+    margin-top: -7px;
+}

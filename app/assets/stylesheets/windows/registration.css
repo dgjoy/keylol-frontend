@@ -1,0 +1,98 @@
+.modal-registration .modal-window {
+    padding: 14px;
+    width: 900px;
+}
+
+.modal-registration .error {
+    color: red;
+}
+
+.modal-registration .heading {
+    margin: 28px 0;
+}
+
+.modal-registration .heading img {
+    float: right;
+    width: 44px;
+    height: 44px;
+}
+
+.modal-registration table {
+    margin: 28px 0;
+    width: 100%;
+}
+
+.modal-registration .platform {
+    float: left;
+    width: 33%;
+    margin: 10px 0 8px;
+    text-align: center;
+    position: relative;
+}
+
+.modal-registration .platform .go-binding-anchor {
+    display: inline-block;
+    opacity: 0.25;
+}
+
+.modal-registration .platform .go-binding-anchor:hover {
+    text-decoration: none;
+    opacity: 1.0;
+}
+
+.modal-registration .platform .go-binding-anchor img {
+    width: 35px;
+    height: 35px;
+    vertical-align: middle;
+}
+
+.modal-registration .platform .go-binding-anchor span {
+    font-size: 15px;
+    color: #333;
+}
+
+.modal-registration .platform .pasted-card {
+    width: 270px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.modal-registration .generate-id-code {
+    float: right;
+    color: #748a97;
+    margin: 5px 5px 0;
+}
+
+.modal-registration .id-code {
+    text-align: center;
+    margin: 10px 0 14px;
+}
+
+.modal-registration .avatar-box-left-spacing {
+    border: none;
+}
+
+.modal-registration .upload-avatar {
+    text-align: center;
+}
+
+.modal-registration .upload-avatar button {
+    margin: 6px 0;
+}
+
+.modal-registration [id^=geetest-] {
+    margin: 14px 0;
+}
+
+.modal-registration .declaration {
+    max-width: 580px;
+}
+
+.modal-registration .declaration h3.single-line + h4 {
+    top: 6px;
+}
+
+.modal-registration .modal-window .modal-confirm-button {
+    margin-right: -24px;
+}

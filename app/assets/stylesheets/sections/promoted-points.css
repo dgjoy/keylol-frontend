@@ -1,0 +1,71 @@
+.section-promoted-points {
+    background-color: white;
+    width: 100%;
+    min-width: 200px;
+}
+
+.section-promoted-points .heading {
+    background-color: #11254a;
+    position: relative;
+}
+
+.section-promoted-points .heading:before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: -64px;
+    width: 59px;
+    height: 60px;
+    z-index: -1;
+    box-shadow: 0 0 2px #B8BABB;
+    transform: rotate(135deg);
+    transform-origin: bottom right;
+    background-color: #adafb0;
+}
+
+.section-promoted-points .heading .exit {
+    float: left;
+    margin-left: -5px;
+    width: 60px;
+    height: 60px;
+}
+
+.section-promoted-points .heading .parking {
+    float: left;
+    width: 34px;
+    height: 34px;
+    margin: 13px 10px 13px 13px;
+}
+
+.section-promoted-points .heading p {
+    margin: 0;
+    color: white;
+}
+
+.section-promoted-points .heading p:first-of-type {
+    font-size: 17px;
+    padding-top: 13px;
+}
+
+.section-promoted-points .point {
+    margin-left: 20px;
+    padding: 10px 0;
+    border-bottom: 1px solid #000003;
+}
+
+.section-promoted-points .point:last-of-type {
+    border-bottom: none;
+}
+
+.section-promoted-points .point p {
+    margin: 0;
+}
+
+.section-promoted-points .point p:first-of-type {
+    font-weight: bold;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    margin-right: 12px;
+    margin-bottom: 2px;
+}

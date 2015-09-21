@@ -47,7 +47,10 @@ var appSrcipts = [
 var stylesheets = [
     "assets/stylesheets/normalize.css",
     "components/editor/quill.snow.css",
-    "assets/stylesheets/site.css"
+    "assets/stylesheets/common.css",
+    "assets/stylesheets/modal.css",
+    "assets/stylesheets/article.css",
+    "assets/stylesheets/@(directives|sections|windows)/**/*.css"
 ];
 
 var htmlminOptions = {
@@ -126,14 +129,14 @@ gulp.task("template-bundle", ["clean"], function () {
 
 gulp.task("stylesheet-bundle", ["clean"], function () {
     return gulp.src(stylesheets, {cwd: "app"})
+        .pipe(concat("stylesheets.min.css"))
+        .pipe(rev())
         .pipe(autoprefixer())
         .pipe(minifyCss({
             keepSpecialComments: 0,
             relativeTo: "app/bundles",
             target: "app/bundles"
         }))
-        .pipe(concat("stylesheets.min.css"))
-        .pipe(rev())
         .pipe(gulp.dest("app/bundles"));
 });
 

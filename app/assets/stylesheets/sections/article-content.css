@@ -1,0 +1,22 @@
+.section-article-content {
+    background: white;
+    padding: 26px 26px 18px;
+    width: 100%;
+    min-width: 300px;
+}
+
+.section-article-content .share-actions {
+    text-align: center;
+    padding: 20px 0 2px;
+}
+
+.section-article-content .share-actions p {
+    margin: 0;
+    font-weight: bold;
+    font-size: 17px;
+    color: #11254a;
+}
+
+.section-article-content .share-actions a {
+    color: #748a97;
+}

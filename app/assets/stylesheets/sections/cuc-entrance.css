@@ -1,0 +1,40 @@
+.section-cuc-entrance {
+    background-color: #252626;
+    height: 100%;
+    width: 100%;
+    min-height: 60px;
+    min-width: 300px;
+}
+
+.section-cuc-entrance a {
+    display: block;
+    text-decoration: none;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.section-cuc-entrance .cuc-content {
+    width: 276px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.section-cuc-entrance img {
+    float: left;
+    width: 52px;
+    height: 46px;
+    margin-right: 2px;
+}
+
+.section-cuc-entrance p {
+    margin: 0;
+    color: #fefefe;
+}
+
+.section-cuc-entrance p:first-of-type {
+    font-size: 19px;
+    margin: 4px 0 0;
+}

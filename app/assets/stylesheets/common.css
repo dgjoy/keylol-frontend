@@ -1,0 +1,335 @@
+/* --------- */
+/* Font Face */
+/* --------- */
+@font-face {
+    font-family: "Myriad Pro";
+    font-style: normal;
+    font-weight: normal;
+    src: url(../fonts/myriadpro-regular.woff) format("woff");
+}
+
+@font-face {
+    font-family: "Keylol Rail Sung";
+    font-style: normal;
+    font-weight: normal;
+    src: url(../fonts/keylol-rail-sung-f64293596a95078abc8673b55ba4131b.woff) format("woff");
+}
+
+@font-face {
+    font-family: "LiSong";
+    font-style: normal;
+    font-weight: normal;
+    src: url(../fonts/lisong-fdd0168d0a8b87a3de93bb498775e41d.woff) format("woff");
+}
+
+/* ------------------- */
+/* Font Family Presets */
+/* ------------------- */
+.font-myriad-keylol {
+    font-family: "Myriad Pro", "Keylol Rail Sung", serif;
+}
+
+.font-myriad-lisong {
+    font-family: "Myriad Pro", LiSong, serif;
+}
+
+/* --------- */
+/* Keyframes */
+/* --------- */
+@keyframes exit-background-flash {
+    from {
+        fill: #009e57;
+    }
+
+    to {
+        fill: white;
+    }
+}
+
+@keyframes exit-text-flash {
+    from {
+        fill: white;
+    }
+
+    to {
+        fill: #009e57;
+    }
+}
+
+/* -------------------- */
+/* Common HTML Elements */
+/* -------------------- */
+body {
+    color: #333;
+    background-color: #eef1f3;
+    font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, "Hiragino Sans GB", "Microsoft YaHei", "Microsoft JhengHei", "WenQuanYi Micro Hei", sans-serif;
+    font-size: 13px;
+    min-width: 1220px;
+    box-sizing: border-box;
+}
+
+a {
+    color: #11254a;
+    text-decoration: none;
+}
+
+a:hover,
+a:focus {
+    text-decoration: underline;
+}
+
+input[type=checkbox], input[type=radio] {
+    vertical-align: middle;
+    position: relative;
+    bottom: 1px;
+}
+
+input[type=radio] {
+    bottom: 2px;
+}
+
+input[type=search],
+input[type=text],
+input[type=password],
+input[type=email],
+textarea,
+.ql-container {
+    border-radius: 4px;
+    box-shadow: 2.12px 2.12px 2px rgba(53, 72, 86, 0.15), inset 1px 1px 2px rgba(0, 0, 0, 0.25);
+    border: none;
+    padding: 8px;
+    background: white;
+}
+
+/* ----------- */
+/* Grid System */
+/* ----------- */
+.container {
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.row {
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+.row.as-section {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.row.as-section [class^=col-] {
+    margin-top: -20px;
+    margin-bottom: -20px;
+}
+
+.col-left {
+    width: 200px;
+}
+
+.col-middle {
+    width: 640px;
+}
+
+.col-right {
+    width: 300px;
+}
+
+.col-left-middle {
+    width: 870px;
+}
+
+[class^=col-] {
+    margin-left: 15px;
+    margin-right: 15px;
+    float: left;
+}
+
+[class^=col-] section {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+[class^=section-] {
+    box-sizing: border-box;
+}
+
+/* --------- */
+/* Utilities */
+/* --------- */
+.box-shadowed {
+    box-shadow: 2.12px 2.12px 2px rgba(53, 72, 86, 0.15);
+}
+
+.box-shadowed-inset {
+    box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.50);
+}
+
+.box-shadowed-glowed {
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.35), 2.12px 2.12px 2px rgba(53, 72, 86, 0.15);
+}
+
+.labeled-heading {
+    position: relative;
+    line-height: 22px;
+    padding-left: 8px;
+    font-size: 15px;
+    color: #11254a;
+    font-weight: normal;
+}
+
+.labeled-heading:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: -5px;
+    width: 8px;
+    height: 22px;
+    background-color: #11254a;
+}
+
+.labeled-heading:before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: -13px;
+    width: 8px;
+    height: 22px;
+    z-index: -1;
+    box-shadow: 0 0 2px #B8BABB;
+    transform: rotate(135deg);
+    transform-origin: bottom right;
+    background-color: #adafb0;
+}
+
+.row:after,
+.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.list-inline {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.list-inline li {
+    display: inline;
+}
+
+.entry-type {
+    font-size: 15px;
+    color: white;
+    background-color: #11254a;
+    padding: 2px 3px 1px;
+}
+
+.avatar-small {
+    border-radius: 50%;
+    border: 2px solid #11254A;
+    box-sizing: border-box;
+    display: block;
+}
+
+.avatar-big {
+    border-radius: 50%;
+    border: 3px solid #11254A;
+    box-sizing: border-box;
+    display: block;
+}
+
+.border-button {
+    border: none;
+    padding: 3px 7px;
+    color: white;
+    position: relative;
+    background: #748a97 no-repeat;
+    background-size: contain;
+}
+
+.border-button.left-border:after {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 8px;
+    height: 4px;
+    z-index: -1;
+    box-shadow: 0 0 2px #B8BABB;
+    transform: rotate(45deg);
+    transform-origin: bottom left;
+    background-color: #adafb0;
+}
+
+.border-button.right-border:after {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 8px;
+    height: 4px;
+    z-index: -1;
+    box-shadow: 0 0 2px #B8BABB;
+    transform: rotate(315deg);
+    transform-origin: bottom right;
+    background-color: #adafb0;
+}
+
+.border-button.bottom-border:after {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 4px;
+    height: 8px;
+    z-index: -1;
+    box-shadow: 0 0 2px #B8BABB;
+    transform: rotate(45deg);
+    transform-origin: bottom right;
+    background-color: #adafb0;
+}
+
+.border-button.top-border:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 4px;
+    height: 8px;
+    z-index: -1;
+    box-shadow: 0 0 2px #B8BABB;
+    transform: rotate(315deg);
+    transform-origin: top right;
+    background-color: #adafb0;
+}
+
+/* --------------- */
+/* Geetest Restyle */
+/* --------------- */
+[id^=geetest-] {
+    height: 28px;
+    position: relative;
+    text-align: center;
+}
+
+[id^=geetest-]:before {
+    content: "加载中，若无响应请刷新";
+    color: #c7cdd1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.gt_holder {
+    display: inline-block;
+}

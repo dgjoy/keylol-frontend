@@ -1,0 +1,20 @@
+.section-site-footer {
+    text-align: right;
+    width: 100%;
+    min-width: 250px;
+    margin-top: -3px;
+}
+
+.section-site-footer p {
+    margin: 5px 0;
+}
+
+.section-site-footer .divider {
+    margin: 0 4px;
+    color: #c7cdd1;
+}
+
+.section-site-footer,
+.section-site-footer a {
+    color: #748a97;
+}

@@ -1,0 +1,53 @@
+.section-promoted-readings {
+    width: 100%;
+    min-width: 206px;
+    background-color: white;
+    padding-top: 6px;
+    padding-bottom: 9px;
+}
+
+.section-promoted-readings .article {
+    padding: 12px 15px;
+}
+
+.section-promoted-readings .article h2 {
+    font-weight: normal;
+    font-size: 13px;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.section-promoted-readings .article h2 span {
+    margin-right: 4px;
+    color: #748a97;
+}
+
+.section-promoted-readings .article p {
+    margin: 7px 0;
+    max-height: 36px;
+    overflow: hidden;
+    line-height: 18px;
+}
+
+.section-promoted-readings .article footer {
+    text-align: right;
+    color: #748a97;
+    height: 16px;
+    line-height: 16px;
+}
+
+.section-promoted-readings .article footer span {
+    margin-left: 15px;
+    display: none;
+}
+
+.section-promoted-readings .article:hover footer span.datetime {
+    display: none;
+}
+
+.section-promoted-readings .article footer span.datetime,
+.section-promoted-readings .article:hover footer span {
+    display: inline-block;
+}

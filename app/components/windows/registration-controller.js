@@ -1,9 +1,9 @@
-﻿(function() {
+﻿(function () {
     "use strict";
 
     keylolApp.controller("RegistrationController", [
-        "$scope", "close", "$http", "utils", "union", "apiEndpoint",
-        function($scope, close, $http, utils, union, apiEndpoint) {
+        "$scope", "close", "$http", "utils", "union", "apiEndpoint", "modal",
+        function ($scope, close, $http, utils, union, apiEndpoint, modal) {
             $scope.vm = {
                 IdCode: "",
                 UserName: "",
@@ -13,7 +13,7 @@
             };
             var geetestResult;
             var gee;
-            $scope.geetestId = utils.createGeetest("float", function(result, geetest) {
+            $scope.geetestId = utils.createGeetest("float", function (result, geetest) {
                 gee = geetest;
                 geetestResult = result;
                 $scope.vm.GeetestChallenge = geetestResult.geetest_challenge;
@@ -22,10 +22,16 @@
             });
             $scope.error = {};
             $scope.errorDetect = utils.modelErrorDetect;
-            $scope.cancel = function() {
+            $scope.cancel = function () {
                 close();
             };
-            $scope.submit = function(form) {
+            $scope.showSteamConnectWindow = function () {
+                modal.show({
+                    templateUrl: "components/windows/steam-connect.html",
+                    controller: "SteamConnectController"
+                });
+            };
+            $scope.submit = function (form) {
                 $scope.error = {};
                 $scope.vm.IdCode = $scope.vm.IdCode.toUpperCase();
                 utils.modelValidate.idCode($scope.vm.IdCode, $scope.error, "vm.IdCode");
@@ -46,23 +52,23 @@
                 if (!$.isEmptyObject($scope.error))
                     return;
                 $http.post(apiEndpoint + "user", $scope.vm)
-                    .then(function(response) {
+                    .then(function (response) {
                         var login = response.data.LoginLog;
                         delete response.data.LoginLog;
                         union.$localStorage.user = response.data;
                         login.fromRegistration = true;
                         union.$localStorage.login = login;
                         close();
-                    }, function(response) {
+                    }, function (response) {
                         switch (response.status) {
-                        case 400:
-                            $scope.error = response.data.ModelState;
-                            if ($scope.error.authCode) {
-                                gee.refresh();
-                            }
-                            break;
-                        default:
-                            alert(response.data);
+                            case 400:
+                                $scope.error = response.data.ModelState;
+                                if ($scope.error.authCode) {
+                                    gee.refresh();
+                                }
+                                break;
+                            default:
+                                alert(response.data);
                         }
                     });
             };

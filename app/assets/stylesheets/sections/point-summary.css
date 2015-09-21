@@ -1,0 +1,87 @@
+.section-point-summary {
+    background: white;
+    width: 100%;
+    min-width: 400px;
+    height: 100%;
+    min-height: 80px;
+    position: relative;
+}
+
+.section-point-summary .background {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    opacity: 0.2;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.section-point-summary .content {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding: 10px 20px 0 0;
+    box-sizing: border-box;
+}
+
+.section-point-summary .avatar-anchor {
+    float: right;
+    margin-left: 16px;
+}
+
+.section-point-summary .avatar-anchor img {
+    width: 48px;
+    height: 48px;
+}
+
+.section-point-summary .main-heading {
+    font-weight: bold;
+    margin: 5px 0 2px;
+    font-size: 16px;
+}
+
+.section-point-summary .main-heading .text-block {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    display: block;
+}
+
+.section-point-summary .subheading {
+    font-weight: normal;
+    font-size: 13px;
+    color: #333;
+    margin-left: 9px;
+}
+
+.section-point-summary .summary {
+    margin: 0 0 0 8px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.section-point-summary .actions {
+    position: absolute;
+    bottom: -5px;
+    padding-right: 5px;
+    right: 15px;
+    left: 8px;
+    text-align: right;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.section-point-summary .actions button {
+    margin-left: 15px;
+}
+
+.section-point-summary .actions button:first-of-type {
+    margin-left: 0;
+}
+
+.section-point-summary .actions button.subscribed {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAAz1BMVEX+/v7////+/v7////+/v7////////+/v7////////////+/v7////////////+/v7////////+/v7////+/v7////////////+/v7////////////////+/v7+/v7////////////////+/v7////////////+/v7///////////////////////////////////////////////////////////////////////////////////////////////////////////////////8kdPWFAAAARHRSTlMAAAYMDxIUFhYYGykpKi0uLjE1O0RMTlBSUlhdZWlrbnB0d3iMj5WYnp+ho6epq7C6vL3Fy8zN0tXX3t/k5unt8fj5+vqs8psAAADRSURBVHja7dTFEoMwEIDh3bpRd6Xu7kYt7/9MZUOhvUDDsVP2wATm/2ZCDgG0OQ5wwL8AMBagvQI9Y+uMLZC/MyVgAwyYOldhkNhQ/2iJggqjUcIgBjx93ne9YAbqtU8gHXhfBTQBoSFjKVpoRYPnqyigGZjRcejAPeL9GNEcxG9qMdFA+sz7LFgBLFAj0zeZ58skWgPsURZE15z3HYBvAHf0m+Uj5ZciCgCJ6bP1gwjA3KtvIogBnPLtlEAY4J6xhQ9sgMipbdRv4FwzDvhF8AS6qyri6TzO9AAAAABJRU5ErkJggg==);
+    padding-left: 22px;
+}

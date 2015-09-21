@@ -1,0 +1,62 @@
+.section-article-header {
+    background: white;
+    padding: 15px 0;
+    width: 100%;
+    min-width: 870px;
+}
+
+.section-article-header h1 {
+    margin: 0 0 10px;
+    padding-right: 13px;
+}
+
+.section-article-header h1 .time {
+    float: right;
+    margin-left: 34px;
+}
+
+.section-article-header h1 .entry-type {
+    margin-right: 5px;
+    vertical-align: top;
+}
+
+.section-article-header h1 .title {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: inline-block;
+    max-width: 80%;
+    vertical-align: top;
+}
+
+.section-article-header h1 .vote {
+    float: right;
+    margin-left: 6px;
+    color: #748a97;
+}
+
+.section-article-header div {
+    padding: 0 13px 0 8px;
+    line-height: 20px;
+}
+
+.section-article-header div .actions {
+    float: right;
+    margin-left: 20px;
+}
+
+.section-article-header div .points {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+}
+
+.section-article-header .actions a {
+    color: #748a97;
+    margin-right: 9px;
+}
+
+.section-article-header .actions a:last-of-type {
+    margin-right: 0;
+}

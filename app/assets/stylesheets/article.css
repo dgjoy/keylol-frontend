@@ -1,0 +1,78 @@
+/* -------------------- */
+/* Article Basic Styles */
+/* -------------------- */
+.article-content {
+    outline: none;
+    tab-size: 4;
+    white-space: pre-wrap;
+    font-size: 15px;
+    line-height: 1.6em;
+}
+
+.article-content div {
+    margin: 8px 0 16px;
+}
+
+.article-content h1 {
+    font-size: 16px;
+    font-weight: bold;
+    color: #11254a;
+    margin: 20px 0 8px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.article-content h1:before {
+    content: ">";
+    font-family: "Keylol Rail Sung", serif;
+    margin-right: 6px;
+    font-size: 16px;
+}
+
+.article-content blockquote {
+    background: #EEF1F3;
+    border-left: 5px solid #11254a;
+    margin: 8px 0 16px;
+    padding: 10px 13px;
+}
+
+.article-content img {
+    max-width: 100%;
+    display: block;
+    margin: 8px auto 16px;
+}
+
+.article-content a {
+    color: #748a97;
+}
+
+.article-content b {
+    font-weight: bold;
+}
+
+.article-content i {
+    font-style: italic;
+}
+
+.article-content s {
+    text-decoration: line-through;
+}
+
+.article-content u {
+    text-decoration: underline;
+}
+
+.article-content div:first-child,
+.article-content h1:first-child,
+.article-content img:first-child,
+.article-content blockquote:first-child {
+    margin-top: 0;
+}
+
+.article-content div:last-child,
+.article-content h1:last-child,
+.article-content img:last-child,
+.article-content blockquote:last-child {
+    margin-bottom: 0;
+}

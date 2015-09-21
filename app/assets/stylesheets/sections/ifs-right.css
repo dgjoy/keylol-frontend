@@ -1,0 +1,18 @@
+.section-ifs-right {
+    height: 100%;
+    width: 100%;
+    min-height: 143px;
+    min-width: 269px;
+    background-color: white;
+    position: relative;
+}
+
+.section-ifs-right svg {
+    margin: 0 auto;
+    width: 256px;
+    height: 128px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
