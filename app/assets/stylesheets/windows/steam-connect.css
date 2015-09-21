@@ -1,0 +1,50 @@
+.modal-steam-connect .modal-window {
+    width: 1024px;
+}
+
+.modal-steam-connect .content {
+    border: 4px solid transparent;
+    border-image: url(../../images/border-slash.png) 30 round;
+}
+
+.modal-steam-connect .heading {
+    margin: 20px 0 30px 20px;
+}
+
+.modal-steam-connect .steps {
+    background-color: white;
+    padding: 8px 5%;
+}
+
+.modal-steam-connect .steps .step {
+    width: 50%;
+    float: left;
+    text-align: center;
+}
+
+.modal-steam-connect .step img {
+    vertical-align: middle;
+    margin-right: 18px;
+}
+
+.modal-steam-connect .steps .step-description {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+}
+
+.modal-steam-connect .step-description h3 {
+    font-size: 18px;
+    font-weight: normal;
+    color: #57bae8;
+}
+
+.modal-steam-connect .step-description a {
+    color: #748a97;
+}
+
+.modal-steam-connect .step-description .auth-code {
+    font-weight: bold;
+    text-decoration: underline;
+    color: #333;
+}
