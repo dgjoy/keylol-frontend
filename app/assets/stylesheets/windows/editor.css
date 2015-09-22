@@ -1,24 +1,24 @@
-.modal-editor .modal-window {
+.window-editor .window {
     padding: 20px 0 30px;
     width: 884px;
 }
 
-.modal-editor .ql-container {
+.window-editor .ql-container {
     height: 300px;
     margin: 0 14px;
 }
 
-.modal-editor input[type=text] {
+.window-editor input[type=text] {
     width: calc(100% - 28px);
     box-sizing: border-box;
     margin-left: 14px;
 }
 
-.modal-editor .type-title {
+.window-editor .type-title {
     position: relative;
 }
 
-.modal-editor .article-type {
+.window-editor .article-type {
     font-size: 19px;
     background: #11254a;
     color: white;
@@ -28,7 +28,7 @@
     left: -5px;
 }
 
-.modal-editor .article-type:after {
+.window-editor .article-type:after {
     content: "";
     display: block;
     position: absolute;
@@ -43,40 +43,40 @@
     background-color: #d9d9d9;
 }
 
-.modal-editor .article-type span {
+.window-editor .article-type span {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
 }
 
-.modal-editor .article-type + span {
+.window-editor .article-type + span {
     display: block;
     overflow: hidden;
     padding: 2px 28px 2px 65px;
 }
 
-.modal-editor .article-type + span input {
+.window-editor .article-type + span input {
     width: 100%;
 }
 
-.modal-editor form h3 {
+.window-editor form h3 {
     margin: 19px 0 11px;
 }
 
-.modal-editor form h3:first-of-type {
+.window-editor form h3:first-of-type {
     margin-top: 29px;
 }
 
-.modal-editor .pad-right {
+.window-editor .pad-right {
     position: relative;
 }
 
-.modal-editor .pad-right input[type=text] {
+.window-editor .pad-right input[type=text] {
     width: calc(100% - 296px);
 }
 
-.modal-editor .pad-right .right-content {
+.window-editor .pad-right .right-content {
     position: absolute;
     right: 14px;
     top: 0;
@@ -84,23 +84,23 @@
     width: 254px;
 }
 
-.modal-editor .pad-right label {
+.window-editor .pad-right label {
     margin: 0 26px 0 4px;
     font-size: 15px;
 }
 
-.modal-editor .pad-right label:last-of-type {
+.window-editor .pad-right label:last-of-type {
     margin-right: 0;
 }
 
-.modal-editor .pad-right .right-content span {
+.window-editor .pad-right .right-content span {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
-.modal-editor .pad-right .right-content span.left-align {
+.window-editor .pad-right .right-content span.left-align {
     left: 0;
     right: 0;
     text-overflow: ellipsis;
@@ -108,26 +108,26 @@
     transform: translateY(-50%);
 }
 
-.modal-editor .modal-confirm-button {
+.window-editor .window-confirm-button {
     margin-top: 40px;
 }
 
-.modal-editor .save-draft {
+.window-editor .save-draft {
     max-width: 570px;
     padding-top: 44px;
 }
 
-.modal-editor .save-draft button {
+.window-editor .save-draft button {
     margin-left: -5px;
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAAIVBMVEUAAAD////////////////+/v7+/v7+/v7+/v7+/v7///92EJ5ZAAAACnRSTlMAFCBAgI+fq7ffnxGb6AAAAEpJREFUeNrt0rEKACAIRdGyeqX//8G1BTZITQ3vDELCXaREFFMzq0nWlL2s66kMfJAB5JvAiYITAwZvQRenBQFuf+soDn69ElFoAjToFA1LQoTVAAAAAElFTkSuQmCC);
     padding-left: 22px;
 }
 
-.modal-editor .save-draft span {
+.window-editor .save-draft span {
     color: #748a97;
     margin-left: 6px;
 }
 
-.modal-editor .save-draft p {
+.window-editor .save-draft p {
     margin: 14px 14px 0;
 }

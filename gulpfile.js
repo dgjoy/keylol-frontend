@@ -48,7 +48,7 @@ var stylesheets = [
     "assets/stylesheets/normalize.css",
     "components/editor/quill.snow.css",
     "assets/stylesheets/common.css",
-    "assets/stylesheets/modal.css",
+    "assets/stylesheets/window.css",
     "assets/stylesheets/article.css",
     "assets/stylesheets/@(directives|sections|windows)/**/*.css"
 ];

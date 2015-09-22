@@ -4,7 +4,7 @@
 
 	var module = angular.module('angularModalService', []);
 
-	module.factory('modal', [
+	module.factory('window', [
 		'$document', '$compile', '$controller', '$http', '$rootScope', '$q', '$templateCache', '$window',
 		function($document, $compile, $controller, $http, $rootScope, $q, $templateCache, $window) {
 
@@ -57,7 +57,7 @@
 				self.measureScrollbar = function() {
 					var body = $(document.body);
 					var scrollDiv = document.createElement('div');
-					scrollDiv.className = 'modal-scrollbar-measure';
+					scrollDiv.className = 'scrollbar-measure';
 					body.append(scrollDiv);
 					var scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
 					angular.element(scrollDiv).remove();
@@ -76,13 +76,13 @@
 				self.emitBodyModalState = function() {
 					var body = $(document.body);
 					if (bodyModalCounter > 0) {
-						if (!body.hasClass("body-modal-open")) {
+						if (!body.hasClass("body-window-open")) {
 							self.checkScrollbar();
 							self.setScrollbar();
 						}
-						body.addClass("body-modal-open");
+						body.addClass("body-window-open");
 					} else {
-						body.removeClass("body-modal-open");
+						body.removeClass("body-window-open");
 						body.css('padding-right', self.originalBodyPad);
 					}
 				};

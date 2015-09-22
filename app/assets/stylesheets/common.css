@@ -19,7 +19,7 @@
     font-family: "LiSong";
     font-style: normal;
     font-weight: normal;
-    src: url(../fonts/lisong-fdd0168d0a8b87a3de93bb498775e41d.woff) format("woff");
+    src: url(../fonts/lisong-0fd7b689c78d287367f32ffd2cf3d653.woff) format("woff");
 }
 
 /* ------------------- */
@@ -31,29 +31,6 @@
 
 .font-myriad-lisong {
     font-family: "Myriad Pro", LiSong, serif;
-}
-
-/* --------- */
-/* Keyframes */
-/* --------- */
-@keyframes exit-background-flash {
-    from {
-        fill: #009e57;
-    }
-
-    to {
-        fill: white;
-    }
-}
-
-@keyframes exit-text-flash {
-    from {
-        fill: white;
-    }
-
-    to {
-        fill: #009e57;
-    }
 }
 
 /* -------------------- */

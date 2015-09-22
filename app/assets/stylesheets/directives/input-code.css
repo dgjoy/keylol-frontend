@@ -1,6 +1,7 @@
-/* -------------------- */
-/* Input Code Directive */
-/* -------------------- */
+input-code {
+    display: inline-block;
+}
+
 input-code span {
     display: inline-block;
     position: relative;

@@ -2,8 +2,8 @@
     "use strict";
 
     keylolApp.controller("RegistrationController", [
-        "$scope", "close", "$http", "utils", "union", "apiEndpoint", "modal",
-        function ($scope, close, $http, utils, union, apiEndpoint, modal) {
+        "$scope", "close", "$http", "utils", "union", "apiEndpoint", "window",
+        function ($scope, close, $http, utils, union, apiEndpoint, window) {
             $scope.vm = {
                 IdCode: "",
                 UserName: "",
@@ -26,7 +26,7 @@
                 close();
             };
             $scope.showSteamConnectWindow = function () {
-                modal.show({
+                window.show({
                     templateUrl: "components/windows/steam-connect.html",
                     controller: "SteamConnectController"
                 });

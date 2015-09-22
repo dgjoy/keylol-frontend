@@ -1,11 +1,30 @@
 /* ------------------------------ */
 /* Common Styles for Modal Window */
 /* ------------------------------ */
-.body-modal-open {
+
+@keyframes exit-background-flash {
+    from {
+        fill: #009e57;
+    }
+    to {
+        fill: white;
+    }
+}
+
+@keyframes exit-text-flash {
+    from {
+        fill: white;
+    }
+    to {
+        fill: #009e57;
+    }
+}
+
+.body-window-open {
     overflow: hidden;
 }
 
-.modal-scrollbar-measure {
+.scrollbar-measure {
     position: absolute;
     top: -9999px;
     width: 50px;
@@ -13,7 +32,7 @@
     overflow: scroll;
 }
 
-kl-modal {
+window {
     position: fixed;
     top: 0;
     left: 0;
@@ -23,68 +42,68 @@ kl-modal {
     white-space: nowrap;
 }
 
-kl-modal:after {
+window:after {
     display: inline-block;
     height: 100%;
     margin-left: -0.05em;
     content: "";
 }
 
-kl-modal:last-of-type {
+window:last-of-type {
     background-color: rgba(0, 0, 0, 0.65);
 }
 
-[class^=modal-position-] {
+[class^=window-position-] {
     display: inline-block;
     text-align: left;
 }
 
-kl-modal[position=center] {
+window[position=center] {
     text-align: center;
 }
 
-.modal-position-center,
-kl-modal[position=center]:after {
+.window-position-center,
+window[position=center]:after {
     vertical-align: middle;
 }
 
-kl-modal[position=top] {
+window[position=top] {
     text-align: center;
 }
 
-.modal-position-top,
-kl-modal[position=top]:after {
+.window-position-top,
+window[position=top]:after {
     vertical-align: top;
 }
 
-kl-modal[position=bottom] {
+window[position=bottom] {
     text-align: center;
 }
 
-.modal-position-bottom,
-kl-modal[position=bottom]:after {
+.window-position-bottom,
+window[position=bottom]:after {
     vertical-align: bottom;
 }
 
-kl-modal[position=left] {
+window[position=left] {
     text-align: left;
 }
 
-.modal-position-left,
-kl-modal[position=left]:after {
+.window-position-left,
+window[position=left]:after {
     vertical-align: middle;
 }
 
-kl-modal[position=right] {
+window[position=right] {
     text-align: right;
 }
 
-.modal-position-right,
-kl-modal[position=right]:after {
+.window-position-right,
+window[position=right]:after {
     vertical-align: middle;
 }
 
-.modal-window {
+.window {
     background-color: #eef1f3;
     box-shadow: 2.12px 2.12px 2px rgba(53, 72, 86, 0.15);
     position: relative;
@@ -92,7 +111,7 @@ kl-modal[position=right]:after {
 }
 
 /* Secret Barcode */
-.modal-window .secret-barcode {
+.window .secret-barcode {
     width: 678px;
     height: 20px;
     margin: 0 auto;
@@ -100,14 +119,14 @@ kl-modal[position=right]:after {
 }
 
 /* Table */
-.modal-window table td {
+.window table td {
     border: 1px solid #11254a;
     padding: 1px 3px;
 }
 
-.modal-window table input[type=text],
-.modal-window table input[type=password],
-.modal-window table input[type=email] {
+.window table input[type=text],
+.window table input[type=password],
+.window table input[type=email] {
     background: none;
     height: 100%;
     width: 100%;
@@ -118,13 +137,13 @@ kl-modal[position=right]:after {
     padding: 0 6px;
 }
 
-.modal-window table input[type=text]:disabled,
-.modal-window table input[type=email]:disabled {
+.window table input[type=text]:disabled,
+.window table input[type=email]:disabled {
     cursor: text;
 }
 
 /* Confirm Button */
-.modal-window .modal-confirm-button {
+.window .window-confirm-button {
     float: right;
     background-color: #11254a;
     border: none;
@@ -136,7 +155,7 @@ kl-modal[position=right]:after {
     min-width: 305px;
 }
 
-.modal-window .modal-confirm-button:after {
+.window .window-confirm-button:after {
     content: "";
     display: block;
     position: absolute;
@@ -151,37 +170,37 @@ kl-modal[position=right]:after {
     background-color: #adafb0;
 }
 
-.modal-window .modal-confirm-button img {
+.window .window-confirm-button img {
     float: right;
     margin-left: 18px;
     position: relative;
 }
 
-.modal-window .modal-confirm-button .arrow-right {
+.window .window-confirm-button .arrow-right {
     width: 42px;
     height: 34px;
     top: 7px;
 }
 
-.modal-window .modal-confirm-button .signature-pen {
+.window .window-confirm-button .signature-pen {
     width: 30px;
     height: 40px;
     top: 4px;
 }
 
-.modal-window .modal-confirm-button hgroup {
+.window .window-confirm-button hgroup {
     float: right;
     margin-left: 30px;
 }
 
-.modal-window .modal-confirm-button hgroup h1 {
+.window .window-confirm-button hgroup h1 {
     color: white;
     font-size: 19px;
     margin: 4px 0;
     font-weight: normal;
 }
 
-.modal-window .modal-confirm-button hgroup h2 {
+.window .window-confirm-button hgroup h2 {
     color: white;
     font-size: 13px;
     font-weight: normal;
@@ -189,7 +208,7 @@ kl-modal[position=right]:after {
 }
 
 /* Exit Button */
-.modal-window .modal-exit-button {
+.window .window-exit-button {
     display: block;
     position: absolute;
     top: 0;
@@ -198,64 +217,64 @@ kl-modal[position=right]:after {
     cursor: pointer;
 }
 
-.modal-window .modal-exit-button svg {
+.window .window-exit-button svg {
     width: 48px;
     height: 48px;
 }
 
-.modal-window .modal-exit-button.focused .background {
+.window .window-exit-button.focused .background {
     animation: exit-background-flash 150ms ease-in-out 6 alternate;
 }
 
-.modal-window .modal-exit-button.focused .text {
+.window .window-exit-button.focused .text {
     animation: exit-text-flash 150ms ease-in-out 6 alternate;
 }
 
-.modal-window .modal-exit-button:hover .background {
+.window .window-exit-button:hover .background {
     fill: white;
 }
 
-.modal-window .modal-exit-button:hover .text {
+.window .window-exit-button:hover .text {
     fill: #009e57;
 }
 
 /* Headings */
-.modal-window h1 {
+.window h1 {
     font-size: 19px;
     color: #11254a;
     margin: 3px 0;
 }
 
-.modal-window h2 {
+.window h2 {
     font-size: 15px;
     font-weight: normal;
     margin: 3px 0;
 }
 
-.modal-window h3 {
+.window h3 {
     color: #11254a;
     font-size: 15px;
     margin: 3px 0;
 }
 
-.modal-window h3.single-line {
+.window h3.single-line {
     float: left;
     margin-right: 8px;
 }
 
-.modal-window h3.single-line + h4 {
+.window h3.single-line + h4 {
     position: relative;
     top: 1px;
 }
 
-.modal-window h4 {
+.window h4 {
     font-weight: normal;
     font-size: 13px;
     margin: 3px 0;
 }
 
 /* Pasted Card */
-.modal-window .pasted-card {
+.window .pasted-card {
     position: relative;
     background-color: #fdfeeb;
     border: 4px solid transparent;
@@ -266,35 +285,35 @@ kl-modal[position=right]:after {
     box-sizing: border-box;
 }
 
-.modal-window .pasted-card .needle {
+.window .pasted-card .needle {
     position: absolute;
     top: -3px;
     left: 4px;
 }
 
-.modal-window .pasted-card > div {
+.window .pasted-card > div {
     display: inline-block;
     margin: 6px 0 4px;
 }
 
-.modal-window .pasted-card div img {
+.window .pasted-card div img {
     float: left;
     width: 35px;
     height: 35px;
     margin: 1px 8px 0 0;
 }
 
-.modal-window .pasted-card div h5 {
+.window .pasted-card div h5 {
     font-size: 13px;
     font-weight: normal;
     margin: 2px 0;
 }
 
-.modal-window .pasted-card div a {
+.window .pasted-card div a {
     font-weight: bold;
 }
 
-.modal-window .pasted-card div div {
+.window .pasted-card div div {
     float: left;
     text-align: left;
     max-width: 192px;

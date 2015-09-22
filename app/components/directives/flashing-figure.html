@@ -1,0 +1,9 @@
+<div class="stations clearfix">
+    <div ng-class="['station', {current: current == $index}]" ng-repeat="station in stations">
+        <div class="light"></div>
+        <hgroup>
+            <h1 class="font-myriad-lisong">{{station.cnName}}</h1>
+            <h2 class="font-myriad-lisong">{{station.enName}}</h2>
+        </hgroup>
+    </div>
+</div>

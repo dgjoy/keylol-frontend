@@ -1,6 +1,6 @@
-<kl-modal position="center" class="modal-steam-connect">
-    <div class="modal-window clearfix">
-        <div class="modal-exit-button" ng-click="cancel()">
+<window position="center" class="window-steam-connect">
+    <div class="window clearfix">
+        <div class="window-exit-button" ng-click="cancel()">
             <div ng-include="'assets/images/exit.svg'"></div>
         </div>
         <div class="content">
@@ -8,22 +8,40 @@
                 <h1 class="font-myriad-lisong">平台连接向导</h1>
                 <h2>绑定 Steam 账户只需轻松两步</h2>
             </div>
-            <div class="steps clearfix">
+            <div class="steps clearfix box-shadowed">
                 <div class="step">
-                    <img src="assets/images/connect-step-one.png">
-                    <div class="step-description">
+                    <img src="assets/images/connect-step-one.png"><!--
+                 --><div class="step-description">
                         <h3>添加其乐机器人为 Steam 好友</h3>
                         <h4>一键<a href="test">添加</a>好友 / 在<a href="test">资料页</a>添加</h4>
                     </div>
                 </div>
                 <div class="step">
-                    <img src="assets/images/connect-step-two.png">
-                    <div class="step-description">
+                    <img src="assets/images/connect-step-two.png"><!--
+                 --><div class="step-description">
                         <h3>发送绑定验证码「<span class="auth-code">HZDK5870</span>」</h3>
                         <h4>一键<a href="test">发起</a>对话 / 手动打开窗口</h4>
                     </div>
                 </div>
             </div>
+            <flashing-figure stations='[
+                {
+                    cnName: "等待添加",
+                    enName: "Yet Invited"
+                },
+                {
+                    cnName: "成为好友",
+                    enName: "Friended"
+                },
+                {
+                    cnName: "收到验证码",
+                    enName: "Passcode Received"
+                },
+                {
+                    cnName: "绑定成功",
+                    enName: "Steam Connected"
+                }
+            ]' current="currentStation"></flashing-figure>
         </div>
     </div>
-</kl-modal>
+</window>

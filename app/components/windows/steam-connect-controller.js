@@ -7,6 +7,7 @@
             $scope.cancel = function () {
                 close();
             };
+            $scope.currentStation = 1;
         }
     ]);
 })();

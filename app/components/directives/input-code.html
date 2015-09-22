@@ -1,1 +1,3 @@
-﻿<span ng-repeat="i in getNumber(length) track by $index"><input class="code-input-textbox" type="text" maxlength="1" ng-model="text[$index]" ng-trim="false" focus-me="focus[$index]" ng-keydown="keydown($index, $event)"></span>
+﻿<span ng-repeat="i in getNumber(length) track by $index"><!--
+    --><input class="code-input-textbox" type="text" maxlength="1" ng-model="text[$index]" ng-trim="false" ng-focus="$index > 0 ? focusFirstIfEmpty() : null" focus-me="focus[$index]" ng-keydown="keydown($index, $event)">
+</span>
