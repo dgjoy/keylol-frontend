@@ -102,16 +102,16 @@ gulp.task("compile-environment-config:prod", ["clean"], function () {
 gulp.task("vendor-script-bundle", ["clean"], function () {
     return gulp.src(vendorScripts, {cwd: "app"})
         .pipe(concat("vendor.min.js"))
-        .pipe(rev())
         .pipe(uglify())
+        .pipe(rev())
         .pipe(gulp.dest("app/bundles"));
 });
 
 gulp.task("app-script-bundle", ["clean", "compile-environment-config:prod"], function () {
     return gulp.src(appSrcipts, {cwd: "app"})
         .pipe(concat("app.min.js"))
-        .pipe(rev())
         .pipe(uglify())
+        .pipe(rev())
         .pipe(gulp.dest("app/bundles"));
 });
 
@@ -122,21 +122,21 @@ gulp.task("template-bundle", ["clean"], function () {
             root: "components/",
             module: "KeylolApp"
         }))
-        .pipe(rev())
         .pipe(uglify())
+        .pipe(rev())
         .pipe(gulp.dest("app/bundles"));
 });
 
 gulp.task("stylesheet-bundle", ["clean"], function () {
     return gulp.src(stylesheets, {cwd: "app"})
-        .pipe(concat("stylesheets.min.css"))
-        .pipe(rev())
         .pipe(autoprefixer())
         .pipe(minifyCss({
             keepSpecialComments: 0,
             relativeTo: "app/bundles",
             target: "app/bundles"
         }))
+        .pipe(concat("stylesheets.min.css"))
+        .pipe(rev())
         .pipe(gulp.dest("app/bundles"));
 });
 
