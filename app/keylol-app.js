@@ -1,4 +1,4 @@
-﻿(function() {
+﻿(function () {
     "use strict";
 
     var app = angular.module("KeylolApp", [
@@ -15,8 +15,10 @@
         "ngStorage"
     ]);
     app.config([
-        "$routeProvider", "$locationProvider", "utilsProvider", "pageTitleProvider", "$localStorageProvider", "$httpProvider",
-        function($routeProvider, $locationProvider, utilsProvider, pageTitleProvider, $localStorageProvider, $httpProvider) {
+        "$routeProvider", "$locationProvider", "utilsProvider", "pageTitleProvider", "$localStorageProvider",
+        "$httpProvider", "$compileProvider",
+        function ($routeProvider, $locationProvider, utilsProvider, pageTitleProvider, $localStorageProvider,
+                  $httpProvider, $compileProvider) {
             $locationProvider.html5Mode(true);
 
             $routeProvider.when("/", {
@@ -42,6 +44,8 @@
             $localStorageProvider.setKeyPrefix("keylol-");
 
             $httpProvider.defaults.withCredentials = true;
+
+            $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|tel|file|steam):/);
         }
     ]);
     app.constant("amTimeAgoConfig", {

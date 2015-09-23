@@ -276,7 +276,7 @@ window[position=right]:after {
 /* Pasted Card */
 .window .pasted-card {
     position: relative;
-    background-color: #fdfeeb;
+    background-color: white;
     border: 4px solid transparent;
     border-image: url(../images/border-slash.png) 30 round;
     transform: rotate(-1deg);
@@ -298,9 +298,9 @@ window[position=right]:after {
 
 .window .pasted-card div img {
     float: left;
-    width: 35px;
-    height: 35px;
-    margin: 1px 8px 0 0;
+    width: 39px;
+    height: 39px;
+    margin-right: 8px;
 }
 
 .window .pasted-card div h5 {

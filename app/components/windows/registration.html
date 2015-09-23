@@ -9,7 +9,7 @@
             <h1>会员注册表单</h1>
             <h2>Keylol Membership Application Form</h2>
         </div>
-        <form name="form" class="clearfix" ng-submit="submit(form)">
+        <form class="clearfix" ng-submit="submit()">
             <table>
                 <colgroup>
                     <col style="width: 33%">
@@ -26,13 +26,13 @@
                                 <img src="assets/images/steam-circle-mono.png" alt="绑定 Steam">
                                 <span>Steam</span>
                             </a>
-                            <div class="pasted-card box-shadowed">
+                            <div class="pasted-card box-shadowed" ng-if="vm.SteamBindingTokenId">
                                 <img class="needle" src="assets/images/card-needle.png" alt="订书针">
                                 <div>
-                                    <img src="assets/images/steam-circle.png" alt="Steam">
+                                    <img class="avatar-small" ng-src="{{steamAvatarUrl}}" alt="Steam">
                                     <div>
-                                        <h5>已连接 <a href="test">×</a></h5>
-                                        <h5>leeberun_os</h5>
+                                        <h5>已连接 <a href="" ng-click="discardBinding()">×</a></h5>
+                                        <h5>{{steamProfileName}}</h5>
                                     </div>
                                 </div>
                             </div>
@@ -84,40 +84,6 @@
                     </td>
                     <td>
                         <input type="password" ng-model="vm.Password">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <h3 class="font-myriad-lisong">确认登录口令</h3>
-                        <h4 ng-switch="error['vm.ConfirmPassword']">
-                            <span class="error" ng-switch-when="not match">密码不匹配。</span>
-                            <span ng-switch-default>再次输入你的登录口令，以避免输入失误。</span>
-                        </h4>
-                    </td>
-                    <td>
-                        <input type="password" ng-model="vm.ConfirmPassword">
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-            <table>
-                <colgroup>
-                    <col style="width: 36%">
-                    <col style="width: 64%">
-                </colgroup>
-                <tbody>
-                <tr>
-                    <td>
-                        <h3 class="font-myriad-lisong">电子邮箱</h3>
-                        <h4 ng-switch="errorDetect.email(error['vm.Email'])">
-                            <span class="error" ng-switch-when="empty">邮箱不能为空。</span>
-                            <span class="error" ng-switch-when="malformed">邮箱格式不正确。</span>
-                            <span class="error" ng-switch-when="used">这个邮箱已经被别人使用了。</span>
-                            <span ng-switch-default>用以找回账户、登录和接收订阅资讯。</span>
-                        </h4>
-                    </td>
-                    <td>
-                        <input name="email" type="email" ng-model="vm.Email">
                     </td>
                 </tr>
                 </tbody>

@@ -11,4 +11,6 @@
             });
         }
     ]);
+
+    window.apiEndpoint = "https://localhost:44300/";
 })();

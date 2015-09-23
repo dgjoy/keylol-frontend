@@ -78,31 +78,33 @@
             registerHubProxies(proxies, false);
         });
 
-        proxies['debugInfoHub'] = this.createHubProxy('debugInfoHub'); 
-        proxies['debugInfoHub'].client = { };
-        proxies['debugInfoHub'].server = {
-        };
+        proxies['debugInfoHub'] = this.createHubProxy('debugInfoHub');
+        proxies['debugInfoHub'].client = {};
+        proxies['debugInfoHub'].server = {};
 
-        proxies['steamBindingHub'] = this.createHubProxy('steamBindingHub'); 
-        proxies['steamBindingHub'].client = { };
+        proxies['steamBindingHub'] = this.createHubProxy('steamBindingHub');
+        proxies['steamBindingHub'].client = {};
         proxies['steamBindingHub'].server = {
             createToken: function () {
                 return proxies['steamBindingHub'].invoke.apply(proxies['steamBindingHub'], $.merge(["CreateToken"], $.makeArray(arguments)));
-             }
+            }
         };
 
-        proxies['steamLoginHub'] = this.createHubProxy('steamLoginHub'); 
-        proxies['steamLoginHub'].client = { };
+        proxies['steamLoginHub'] = this.createHubProxy('steamLoginHub');
+        proxies['steamLoginHub'].client = {};
         proxies['steamLoginHub'].server = {
             createToken: function () {
                 return proxies['steamLoginHub'].invoke.apply(proxies['steamLoginHub'], $.merge(["CreateToken"], $.makeArray(arguments)));
-             }
+            }
         };
 
         return proxies;
     };
 
-    signalR.hub = $.hubConnection("/signalr", { useDefaultPath: false });
-    $.extend(signalR, signalR.hub.createHubProxies());
+    signalR.new = function () {
+        var connection = $.hubConnection(window.apiEndpoint + "/signalr", {useDefaultPath: false})
+        $.extend(connection, connection.createHubProxies());
+        return connection;
+    };
 
 }(window.jQuery, window));

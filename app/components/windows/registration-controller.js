@@ -8,12 +8,12 @@
                 IdCode: "",
                 UserName: "",
                 Password: "",
-                ConfirmPassword: "",
-                Email: "",
+                SteamBindingTokenId: "",
                 GeetestChallenge: "",
                 GeetestSeccode: "",
                 GeetestValidate: ""
             };
+            var consumeBindingToken;
             var geetestResult;
             var gee;
             $scope.geetestId = utils.createGeetest("float", function (result, geetest) {
@@ -27,28 +27,37 @@
             $scope.errorDetect = utils.modelErrorDetect;
             $scope.cancel = function () {
                 close();
+                if (consumeBindingToken)
+                    consumeBindingToken.resolve();
             };
             $scope.showSteamConnectWindow = function () {
                 window.show({
                     templateUrl: "components/windows/steam-connect.html",
                     controller: "SteamConnectController"
+                }).then(function (modal) {
+                    modal.close.then(function (result) {
+                        if (result) {
+                            consumeBindingToken = result.consume;
+                            $scope.vm.SteamBindingTokenId = result.tokenId;
+                            $scope.steamProfileName = result.steamProfileName;
+                            $scope.steamAvatarUrl = "//steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/" + result.steamAvatarHash.substring(0, 2) + "/" + result.steamAvatarHash + ".jpg";
+                        } else {
+                            $scope.vm.SteamBindingTokenId = "";
+                        }
+                    });
                 });
             };
-            $scope.submit = function (form) {
+            $scope.discardBinding = function () {
+                $scope.vm.SteamBindingTokenId = "";
+                if (consumeBindingToken)
+                    consumeBindingToken.resolve();
+            };
+            $scope.submit = function () {
                 $scope.error = {};
                 $scope.vm.IdCode = $scope.vm.IdCode.toUpperCase();
                 utils.modelValidate.idCode($scope.vm.IdCode, $scope.error, "vm.IdCode");
                 utils.modelValidate.username($scope.vm.UserName, $scope.error, "vm.UserName");
-                if (utils.modelValidate.password($scope.vm.Password, $scope.error, "vm.Password")) {
-                    if ($scope.vm.Password !== $scope.vm.ConfirmPassword) {
-                        $scope.error["vm.ConfirmPassword"] = "not match";
-                    }
-                }
-                if (form.email.$invalid) {
-                    $scope.error["vm.Email"] = "Email is invalid.";
-                } else if (!$scope.vm.Email) {
-                    $scope.error["vm.Email"] = "Email cannot be empty.";
-                }
+                utils.modelValidate.password($scope.vm.Password, $scope.error, "vm.Password");
                 if (typeof geetestResult === "undefined") {
                     $scope.error.authCode = true;
                 }
@@ -62,6 +71,8 @@
                         login.fromRegistration = true;
                         union.$localStorage.login = login;
                         close();
+                        if (consumeBindingToken)
+                            consumeBindingToken.resolve();
                     }, function (response) {
                         switch (response.status) {
                             case 400:
