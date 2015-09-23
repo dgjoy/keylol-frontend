@@ -28,6 +28,9 @@
             }).when("/point", {
                 templateUrl: "components/pages/point.html",
                 controller: "PointController"
+            }).when("/post", {
+                templateUrl: "components/pages/post.html",
+                controller: "PostController"
             }).otherwise({
                 templateUrl: "components/pages/not-found.html",
                 controller: "NotFoundController"
