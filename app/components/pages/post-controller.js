@@ -15,7 +15,7 @@
                     subHead: "Postal Services"
                 },
                 background: {
-                    url: "//keylol.b0.upaiyun.com/Banner_Personal_point.jpg!profile.point.background"
+                    url: "//keylol.b0.upaiyun.com/post-summary-header.png!profile.point.background"
                 },
                 defaultSum: {
                     text: "社区功能页面"
