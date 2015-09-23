@@ -97,7 +97,7 @@ flashing-figure .station:last-child {
 
 flashing-figure .station .light {
     height: 34px;
-    background: url(../../images/flashing-figure-background.png) no-repeat 0 -252px;
+    background: url(../../assets/images/flashing-figure-background.png) no-repeat 0 -252px;
     background-size: 169px 394px;
     animation: 1s steps(3) infinite;
 }

@@ -25,6 +25,7 @@ var environmentConfig = {
 
 var vendorScripts = [
     "bower_components/jquery/dist/jquery.js",
+    "bower_components/signalr/jquery.signalR.js",
     "bower_components/moment/moment.js",
     "bower_components/moment/locale/zh-cn.js",
     "bower_components/angular/angular.js",
@@ -50,7 +51,7 @@ var stylesheets = [
     "assets/stylesheets/common.css",
     "assets/stylesheets/window.css",
     "assets/stylesheets/article.css",
-    "assets/stylesheets/@(directives|sections|windows)/**/*.css"
+    "components/**/*.css"
 ];
 
 var htmlminOptions = {

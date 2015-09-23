@@ -23,9 +23,7 @@
 }
 
 .window-registration .platform {
-    float: left;
-    width: 33%;
-    margin: 10px 0 8px;
+    margin: 11px 0 10px;
     text-align: center;
     position: relative;
 }
@@ -52,10 +50,10 @@
 }
 
 .window-registration .platform .pasted-card {
-    width: 270px;
+    width: 314px;
     position: absolute;
     top: 0;
-    left: 0;
+    left: -23px;
 }
 
 .window-registration .generate-id-code {
@@ -69,16 +67,8 @@
     margin: 10px 0 14px;
 }
 
-.window-registration .avatar-box-left-spacing {
+.window-registration .id-code-left-spacing {
     border: none;
-}
-
-.window-registration .upload-avatar {
-    text-align: center;
-}
-
-.window-registration .upload-avatar button {
-    margin: 6px 0;
 }
 
 .window-registration [id^=geetest-] {

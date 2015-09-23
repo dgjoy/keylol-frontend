@@ -9,7 +9,10 @@
                 UserName: "",
                 Password: "",
                 ConfirmPassword: "",
-                Email: ""
+                Email: "",
+                GeetestChallenge: "",
+                GeetestSeccode: "",
+                GeetestValidate: ""
             };
             var geetestResult;
             var gee;

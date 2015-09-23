@@ -9,7 +9,10 @@
 
 			$scope.vm = {
 				EmailOrIdCode: "",
-				Password: ""
+				Password: "",
+				GeetestChallenge: "",
+				GeetestSeccode: "",
+				GeetestValidate: ""
 			};
 
 			var geetestResult;

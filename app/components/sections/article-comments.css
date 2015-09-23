@@ -73,9 +73,8 @@
     position: absolute;
     right: -25px;
     bottom: 8px;
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAAHlBMVEX///////////////////////////////////////8V2MxSAAAACXRSTlMAESIzRGZ3iLtU0KdmAAAAOUlEQVR42u3HuREAIAwDMEL4vP/CXKBz4QmsTs3M7MuRMmwD2CIsUEKEdJQuwg6Ao8JirhkiZmbPBS/FAnGzq3lQAAAAAElFTkSuQmCC);
     padding-right: 23px;
-    background-position: 100% 1px;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAAHlBMVEX///////////////////////////////////////8V2MxSAAAACXRSTlMAESIzRGZ3iLtU0KdmAAAAOUlEQVR42u3HuREAIAwDMEL4vP/CXKBz4QmsTs3M7MuRMmwD2CIsUEKEdJQuwg6Ao8JirhkiZmbPBS/FAnGzq3lQAAAAAElFTkSuQmCC) 100% 1px;
 }
 
 .section-article-comments .textarea-container {
