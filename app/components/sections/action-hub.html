@@ -10,7 +10,7 @@
     <div ng-if="union.$localStorage.login">
         <div class="clearfix">
             <a class="avatar-anchor" href="test">
-                <img class="avatar-big" src="assets/images/exit.svg" alt="{{union.$localStorage.user.UserName}}">
+                <img class="avatar-big" webp-src="{{union.$localStorage.user.AvatarImage | avatarUrl}}" alt="{{union.$localStorage.user.UserName}}">
             </a>
             <div class="name-settings">
                 <h4 class="name">

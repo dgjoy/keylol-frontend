@@ -33,7 +33,9 @@ var vendorScripts = [
     "bower_components/angular-route/angular-route.js",
     "bower_components/angular-http-batcher/dist/angular-http-batch.js",
     "bower_components/angular-moment/angular-moment.js",
-    "bower_components/ngstorage/ngStorage.js"
+    "bower_components/ngstorage/ngStorage.js",
+    "bower_components/ng-file-upload/ng-file-upload.js",
+    "bower_components/angular-utf8-base64/angular-utf8-base64.js"
 ];
 
 var appSrcipts = [

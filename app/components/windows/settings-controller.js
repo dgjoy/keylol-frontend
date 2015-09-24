@@ -1,9 +1,9 @@
-﻿(function() {
+﻿(function () {
     "use strict";
 
     keylolApp.controller("SettingsController", [
-        "$scope", "close", "utils", "$http", "union", "apiEndpoint",
-        function($scope, close, utils, $http, union, apiEndpoint) {
+        "$scope", "close", "utils", "$http", "union", "apiEndpoint", "base64", "Upload",
+        function ($scope, close, utils, $http, union, apiEndpoint, base64, Upload) {
             $scope.error = {};
             $scope.errorDetect = utils.modelErrorDetect;
             $scope.page = "profiles";
@@ -12,6 +12,7 @@
                 $scope.uniqueIds[i] = utils.uniqueId();
             }
             $scope.union = union;
+            $scope.files = {};
 
             $scope.vm = {
                 ProfilePointBackgroundImage: "",
@@ -20,7 +21,7 @@
                 ConfirmPassword: ""
             };
             var originalVM = {};
-            var updateVM = function(user) {
+            var updateVM = function (user) {
                 $.extend($scope.vm, {
                     GamerTag: user.GamerTag,
                     AvatarImage: user.AvatarImage,
@@ -53,12 +54,12 @@
                 });
                 $.extend(originalVM, $scope.vm);
             };
-            var isVMDirty = function(key) {
+            var isVMDirty = function (key) {
                 return $scope.vm[key] !== originalVM[key];
             };
             updateVM(union.$localStorage.user);
 
-            $http.get(apiEndpoint + "user/" + union.$localStorage.login.UserId + "?includeClaims=true&includeProfilePointBackgroundImage=true").then(function(response) {
+            $http.get(apiEndpoint + "user/" + union.$localStorage.login.UserId + "?includeClaims=true&includeProfilePointBackgroundImage=true").then(function (response) {
                 var user = response.data;
                 $scope.vm.ProfilePointBackgroundImage = user.ProfilePointBackgroundImage;
                 delete user.ProfilePointBackgroundImage;
@@ -68,7 +69,7 @@
 
             var geetestResult;
             var gee;
-            $scope.geetestId = utils.createGeetest("float", function(result, geetest) {
+            $scope.geetestId = utils.createGeetest("float", function (result, geetest) {
                 gee = geetest;
                 geetestResult = result;
                 $scope.vm.GeetestChallenge = geetestResult.geetest_challenge;
@@ -76,98 +77,98 @@
                 $scope.vm.GeetestValidate = geetestResult.geetest_validate;
             });
 
-            $scope.cancel = function() {
+            $scope.cancel = function () {
                 close();
             };
 
-            $scope.setPage = function(page) {
+            $scope.setPage = function (page) {
                 $scope.page = page;
             };
 
-            $scope.optionsInPageChanged = function(page) {
+            $scope.optionsInPageChanged = function (page) {
                 var keys = [];
                 switch (page) {
-                case "profiles":
-                    keys = [
-                        "GamerTag",
-                        "Email",
-                        "AvatarImage",
-                        "ProfilePointBackgroundImage"
-                    ];
-                    break;
-                case "platform":
-                    keys = [
-                        "AutoShareOnAcquiringNewGame",
-                        "AutoShareOnAddingFavorite",
-                        "AutoShareOnAddingNewFriend",
-                        "AutoShareOnAddingVideo",
-                        "AutoShareOnCreatingGroup",
-                        "AutoShareOnJoiningGroup",
-                        "AutoShareOnPublishingReview",
-                        "AutoShareOnUnlockingAchievement",
-                        "AutoShareOnUpdatingWishlist",
-                        "AutoShareOnUploadingScreenshot"
-                    ];
-                    break;
-                case "security":
-                    keys = [
-                        "LockoutEnabled",
-                        "EmailNotifyOnAdvertisement",
-                        "EmailNotifyOnArticleReplied",
-                        "EmailNotifyOnCommentReplied",
-                        "EmailNotifyOnEditorRecommended",
-                        "EmailNotifyOnMessageReceived",
-                        "NewPassword"
-                    ];
-                    break;
-                case "preferences":
-                    keys = [
-                        "EmailNotifyOnAdvertisement",
-                        "EmailNotifyOnArticleReplied",
-                        "EmailNotifyOnCommentReplied",
-                        "EmailNotifyOnEditorRecommended",
-                        "EmailNotifyOnMessageReceived",
-                        "MessageNotifyOnArticleLiked",
-                        "MessageNotifyOnArticleReplied",
-                        "MessageNotifyOnCommentLiked",
-                        "MessageNotifyOnCommentReplied",
-                        "MessageNotifyOnEditorRecommended"
-                    ];
-                    break;
+                    case "profiles":
+                        keys = [
+                            "GamerTag",
+                            "Email",
+                            "AvatarImage",
+                            "ProfilePointBackgroundImage"
+                        ];
+                        break;
+                    case "platform":
+                        keys = [
+                            "AutoShareOnAcquiringNewGame",
+                            "AutoShareOnAddingFavorite",
+                            "AutoShareOnAddingNewFriend",
+                            "AutoShareOnAddingVideo",
+                            "AutoShareOnCreatingGroup",
+                            "AutoShareOnJoiningGroup",
+                            "AutoShareOnPublishingReview",
+                            "AutoShareOnUnlockingAchievement",
+                            "AutoShareOnUpdatingWishlist",
+                            "AutoShareOnUploadingScreenshot"
+                        ];
+                        break;
+                    case "security":
+                        keys = [
+                            "LockoutEnabled",
+                            "EmailNotifyOnAdvertisement",
+                            "EmailNotifyOnArticleReplied",
+                            "EmailNotifyOnCommentReplied",
+                            "EmailNotifyOnEditorRecommended",
+                            "EmailNotifyOnMessageReceived",
+                            "NewPassword"
+                        ];
+                        break;
+                    case "preferences":
+                        keys = [
+                            "EmailNotifyOnAdvertisement",
+                            "EmailNotifyOnArticleReplied",
+                            "EmailNotifyOnCommentReplied",
+                            "EmailNotifyOnEditorRecommended",
+                            "EmailNotifyOnMessageReceived",
+                            "MessageNotifyOnArticleLiked",
+                            "MessageNotifyOnArticleReplied",
+                            "MessageNotifyOnCommentLiked",
+                            "MessageNotifyOnCommentReplied",
+                            "MessageNotifyOnEditorRecommended"
+                        ];
+                        break;
                 }
-                return keys.some(function(key) {
+                return keys.some(function (key) {
                     return isVMDirty(key);
                 });
             };
 
-            $scope.optionsInPageError = function(page) {
+            $scope.optionsInPageError = function (page) {
                 var keys = [];
                 switch (page) {
-                case "profiles":
-                    keys = [
-                        "vm.GamerTag",
-                        "vm.Email"
-                    ];
-                    break;
-                case "platform":
-                    break;
-                case "security":
-                    keys = [
-                        "vm.Password",
-                        "vm.NewPassword",
-                        "vm.ConfirmPassword",
-                        "authCode"
-                    ];
-                    break;
-                case "preferences":
-                    break;
+                    case "profiles":
+                        keys = [
+                            "vm.GamerTag",
+                            "vm.Email"
+                        ];
+                        break;
+                    case "platform":
+                        break;
+                    case "security":
+                        keys = [
+                            "vm.Password",
+                            "vm.NewPassword",
+                            "vm.ConfirmPassword",
+                            "authCode"
+                        ];
+                        break;
+                    case "preferences":
+                        break;
                 }
-                return keys.some(function(key) {
+                return keys.some(function (key) {
                     return $scope.error[key];
                 });
             };
 
-            var focusErrorPage = function() {
+            var focusErrorPage = function () {
                 var pages = ["profiles", "platform", "security", "preferences"];
                 for (var pi in pages) {
                     if (pages.hasOwnProperty(pi) && $scope.optionsInPageError(pages[pi])) {
@@ -177,7 +178,7 @@
                 }
             };
 
-            $scope.submit = function() {
+            $scope.submit = function () {
                 $scope.error = {};
                 utils.modelValidate.gamerTag($scope.vm.GamerTag, $scope.error, "vm.GamerTag");
                 if (isVMDirty("NewPassword") || isVMDirty("LockoutEnabled")) {
@@ -214,39 +215,71 @@
                         dirtyFields[key] = $scope.vm[key];
                     }
                 }
-                if ($.isEmptyObject(dirtyFields)) { // Nothing changed
+                if (!$scope.files.avatarImage && $.isEmptyObject(dirtyFields)) { // Nothing changed
                     alert("保存成功。");
                     close();
                     return;
                 }
 
-                $http.put(apiEndpoint + "user/" + union.$localStorage.login.UserId, dirtyFields)
-                    .then(function() {
-                        $.extend(union.$localStorage.user, dirtyFields);
-                        alert("保存成功。");
-                        close();
-                    }, function(response) {
-                        switch (response.status) {
-                        case 400:
-                            $scope.error = response.data.ModelState;
-                            if ($scope.error.authCode) {
-                                gee.refresh();
+                var submit = function () {
+                    $http.put(apiEndpoint + "user/" + union.$localStorage.login.UserId, dirtyFields)
+                        .then(function () {
+                            $.extend(union.$localStorage.user, dirtyFields);
+                            alert("保存成功。");
+                            close();
+                        }, function (response) {
+                            switch (response.status) {
+                                case 400:
+                                    $scope.error = response.data.ModelState;
+                                    if ($scope.error.authCode) {
+                                        gee.refresh();
+                                    }
+                                    focusErrorPage();
+                                    break;
+                                default:
+                                    alert(response.data);
                             }
-                            focusErrorPage();
-                            break;
-                        default:
-                            alert(response.data);
-                        }
+                        });
+                };
+
+                if ($scope.files.avatarImage) {
+                    var options = {
+                        bucket: "keylol",
+                        "save-key": "{filemd5}{.suffix}",
+                        expiration: Math.round(new Date().getTime() / 1000) + 90,
+                        "content-length-range": "0,10485760"
+                    };
+                    var policy = base64.encode(JSON.stringify(options));
+                    $http.post(apiEndpoint + "upload-signature?policy=" + policy, null).then(function (response) {
+                        Upload.upload({
+                            url: "//v0.api.upyun.com/keylol",
+                            file: $scope.files.avatarImage,
+                            fields: {
+                                policy: policy,
+                                signature: response.data
+                            },
+                            withCredentials: false
+                        }).then(function (response) {
+                            dirtyFields.AvatarImage = "keylol://avatars/" + response.data.url;
+                            submit();
+                        }, function () {
+                            alert("头像上传失败。");
+                        });
+                    }, function () {
+                        alert("头像保存失败。");
                     });
+                } else {
+                    submit();
+                }
             };
 
-            $scope.logout = function() {
+            $scope.logout = function () {
                 if (confirm("确认退出登录？")) {
-                    $http.delete(apiEndpoint + "login/current").then(function() {
+                    $http.delete(apiEndpoint + "login/current").then(function () {
                         delete union.$localStorage.login;
                         alert("成功退出登录。");
                         close();
-                    }, function(response) {
+                    }, function (response) {
                         alert(response.data);
                     });
                 }

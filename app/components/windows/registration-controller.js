@@ -9,6 +9,7 @@
                 UserName: "",
                 Password: "",
                 SteamBindingTokenId: "",
+                AvatarImage: "",
                 GeetestChallenge: "",
                 GeetestSeccode: "",
                 GeetestValidate: ""
@@ -40,7 +41,7 @@
                             consumeBindingToken = result.consume;
                             $scope.vm.SteamBindingTokenId = result.tokenId;
                             $scope.steamProfileName = result.steamProfileName;
-                            $scope.steamAvatarUrl = "//steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/" + result.steamAvatarHash.substring(0, 2) + "/" + result.steamAvatarHash + ".jpg";
+                            $scope.vm.AvatarImage = "steam://avatars/" + result.steamAvatarHash;
                         } else {
                             $scope.vm.SteamBindingTokenId = "";
                         }

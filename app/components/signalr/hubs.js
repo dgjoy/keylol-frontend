@@ -102,7 +102,7 @@
     };
 
     signalR.new = function () {
-        var connection = $.hubConnection(window.apiEndpoint + "/signalr", {useDefaultPath: false})
+        var connection = $.hubConnection(window.apiEndpoint + "signalr", {useDefaultPath: false})
         $.extend(connection, connection.createHubProxies());
         return connection;
     };

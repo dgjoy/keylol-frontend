@@ -12,7 +12,9 @@
         "jcs.angular-http-batch",
         "angularModalService",
         "angularMoment",
-        "ngStorage"
+        "ngStorage",
+        "ngFileUpload",
+        "ab-base64"
     ]);
     app.config([
         "$routeProvider", "$locationProvider", "utilsProvider", "pageTitleProvider", "$localStorageProvider",

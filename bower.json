@@ -12,7 +12,9 @@
     "angular-i18n": "~1.4.5",
     "angular-moment": "~0.10.3",
     "angular-route": "~1.4.5",
+    "angular-utf8-base64": "~0.0.5",
     "jquery": "~2.1.4",
+    "ng-file-upload": "~7.3.8",
     "ngstorage": "~0.3.9",
     "signalr": "~2.2.0"
   }
