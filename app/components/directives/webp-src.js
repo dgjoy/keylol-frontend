@@ -7,12 +7,12 @@
 			return {
 				restrict: "A",
 				priority: 98,
-				link: function(scope, iElement, iAttrs) {
-					iAttrs.$observe("webpSrc", function(value) {
+				link: function(scope, element, attrs) {
+					attrs.$observe("webpSrc", function(value) {
 						utils.supportWebp.then(function() {
-							iAttrs.$set("src", value + ".webp");
+							attrs.$set("src", value + ".webp");
 						}, function() {
-							iAttrs.$set("src", value);
+							attrs.$set("src", value);
 						});
 					});
 				}

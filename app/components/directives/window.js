@@ -14,10 +14,10 @@
 				},
 				compile: function() {
 					return {
-						post: function postLink(scope, iElement) {
-							exitFocus = angular.element(iElement[0].querySelector(".window-exit-button"));
-							iElement.on("click", function(e) {
-								if (e.target === iElement[0]) {
+						post: function postLink(scope, element) {
+							exitFocus = angular.element(element[0].querySelector(".window-exit-button"));
+							element.on("click", function(e) {
+								if (e.target === element[0]) {
 									if (!exitFocus.hasClass("focused")) {
 										exitFocus.addClass("focused");
 										$timeout(function() {

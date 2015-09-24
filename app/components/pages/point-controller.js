@@ -25,7 +25,7 @@
                     src: "assets/images/exit.svg"
                 },
                 background: {
-                    url: "//keylol.b0.upaiyun.com/Banner_Personal_point.jpg!profile.point.background"
+                    url: "//keylol.b0.upaiyun.com/5a3e206aab9decee842a3ea88ac2a312.jpg!profile.point.background"
                 },
                 pointSum: {
                     type: "游戏",

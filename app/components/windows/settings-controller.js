@@ -2,8 +2,8 @@
     "use strict";
 
     keylolApp.controller("SettingsController", [
-        "$scope", "close", "utils", "$http", "union", "apiEndpoint", "base64", "Upload",
-        function ($scope, close, utils, $http, union, apiEndpoint, base64, Upload) {
+        "$scope", "close", "utils", "$http", "union", "apiEndpoint", "base64", "Upload", "$q",
+        function ($scope, close, utils, $http, union, apiEndpoint, base64, Upload, $q) {
             $scope.error = {};
             $scope.errorDetect = utils.modelErrorDetect;
             $scope.page = "profiles";
@@ -26,6 +26,7 @@
                     GamerTag: user.GamerTag,
                     AvatarImage: user.AvatarImage,
                     Email: user.Email,
+                    ProfilePointBackgroundImage: user.ProfilePointBackgroundImage,
 
                     AutoShareOnAcquiringNewGame: user.AutoShareOnAcquiringNewGame,
                     AutoShareOnAddingFavorite: user.AutoShareOnAddingFavorite,
@@ -59,13 +60,13 @@
             };
             updateVM(union.$localStorage.user);
 
-            $http.get(apiEndpoint + "user/" + union.$localStorage.login.UserId + "?includeClaims=true&includeProfilePointBackgroundImage=true").then(function (response) {
-                var user = response.data;
-                $scope.vm.ProfilePointBackgroundImage = user.ProfilePointBackgroundImage;
-                delete user.ProfilePointBackgroundImage;
-                updateVM(user);
-                union.$localStorage.user = user;
-            });
+            $http.get(apiEndpoint + "user/" + union.$localStorage.login.UserId
+                + "?includeClaims=true&includeProfilePointBackgroundImage=true&includeSteamBot=true")
+                .then(function (response) {
+                    var user = response.data;
+                    updateVM(user);
+                    union.$localStorage.user = user;
+                });
 
             var geetestResult;
             var gee;
@@ -215,7 +216,8 @@
                         dirtyFields[key] = $scope.vm[key];
                     }
                 }
-                if (!$scope.files.avatarImage && $.isEmptyObject(dirtyFields)) { // Nothing changed
+                if (!$scope.files.avatarImage && !$scope.files.profilePointBackgroundImage
+                    && $.isEmptyObject(dirtyFields)) { // Nothing changed
                     alert("保存成功。");
                     close();
                     return;
@@ -224,6 +226,7 @@
                 var submit = function () {
                     $http.put(apiEndpoint + "user/" + union.$localStorage.login.UserId, dirtyFields)
                         .then(function () {
+                            if (dirtyFields.ProfilePointBackgroundImage)
                             $.extend(union.$localStorage.user, dirtyFields);
                             alert("保存成功。");
                             close();
@@ -242,31 +245,52 @@
                         });
                 };
 
-                if ($scope.files.avatarImage) {
+                if ($scope.files.avatarImage || $scope.files.profilePointBackgroundImage) {
                     var options = {
                         bucket: "keylol",
                         "save-key": "{filemd5}{.suffix}",
                         expiration: Math.round(new Date().getTime() / 1000) + 90,
                         "content-length-range": "0,10485760"
                     };
+                    var uploadEndpoint = "//v0.api.upyun.com/keylol";
                     var policy = base64.encode(JSON.stringify(options));
                     $http.post(apiEndpoint + "upload-signature?policy=" + policy, null).then(function (response) {
-                        Upload.upload({
-                            url: "//v0.api.upyun.com/keylol",
-                            file: $scope.files.avatarImage,
-                            fields: {
-                                policy: policy,
-                                signature: response.data
-                            },
-                            withCredentials: false
-                        }).then(function (response) {
-                            dirtyFields.AvatarImage = "keylol://avatars/" + response.data.url;
+                        var uploads = {};
+                        if ($scope.files.avatarImage) {
+                            uploads.avatarImage = Upload.upload({
+                                url: uploadEndpoint,
+                                file: $scope.files.avatarImage,
+                                fields: {
+                                    policy: policy,
+                                    signature: response.data
+                                },
+                                withCredentials: false
+                            }).then(function (response) {
+                                dirtyFields.AvatarImage = "keylol://avatars/" + response.data.url;
+                            }, function () {
+                                alert("头像上传失败。");
+                            });
+                        }
+                        if ($scope.files.profilePointBackgroundImage) {
+                            uploads.profilePointBackgroundImage = Upload.upload({
+                                url: uploadEndpoint,
+                                file: $scope.files.profilePointBackgroundImage,
+                                fields: {
+                                    policy: policy,
+                                    signature: response.data
+                                },
+                                withCredentials: false
+                            }).then(function (response) {
+                                dirtyFields.ProfilePointBackgroundImage = response.data.url;
+                            }, function () {
+                                alert("个人据点横幅上传失败。");
+                            });
+                        }
+                        $q.all(uploads).then(function () {
                             submit();
-                        }, function () {
-                            alert("头像上传失败。");
                         });
                     }, function () {
-                        alert("头像保存失败。");
+                        alert("文件上传验证失效。");
                     });
                 } else {
                     submit();

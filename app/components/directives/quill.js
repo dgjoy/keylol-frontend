@@ -11,7 +11,7 @@
 				},
 				transclude: true,
 				templateUrl: "components/directives/quill.html",
-				link: function(scope, iElement, iAttrs, ngModel) {
+				link: function(scope, element, attrs, ngModel) {
 					var options = {
 						modules: {
 							toolbar: { container: null },
@@ -21,15 +21,15 @@
 						theme: "snow",
 						formats: ["bold", "italic", "underline", "link", "image"]
 					};
-					if (iAttrs.quill)
-						$.extend(options, scope.$eval(iAttrs.quill));
-					var toolbar = iElement.find("[quill-toolbar]")[0];
+					if (attrs.quill)
+						$.extend(options, scope.$eval(attrs.quill));
+					var toolbar = element.find("[quill-toolbar]")[0];
 					if (toolbar) {
 						options.modules.toolbar.container = toolbar;
 					} else {
 						delete options.modules.toolbar;
 					}
-					var contentArea = iElement.find("[quill-content]")[0];
+					var contentArea = element.find("[quill-content]")[0];
 					var quill = new Quill(contentArea, options);
 					quill.addFormat("blockquote", { tag: "BLOCKQUOTE", type: "line", exclude: "subtitle" });
 					quill.addFormat("subtitle", { tag: "H1", prepare: "heading", type: "line", exclude: "blockquote" });

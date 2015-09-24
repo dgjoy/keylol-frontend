@@ -50,17 +50,17 @@
             <td class="avatar-box-left-spacing"></td>
             <td rowspan="3" class="upload-avatar">
                 <div ng-if="vm.AvatarImage">
-                    <button type="button" class="clear-button" ng-click="vm.AvatarImage = ''"></button>
+                    <div class="clear-button" ng-click="vm.AvatarImage = ''"></div>
                     <img class="avatar-big" webp-src="{{vm.AvatarImage | avatarUrl:'big' }}">
                 </div>
                 <div ng-if="files.avatarImage">
-                    <button type="button" class="clear-button" ng-click="files.avatarImage = null"></button>
+                    <div class="clear-button" ng-click="files.avatarImage = null"></div>
                     <div class="avatar-big" ngf-background="files.avatarImage"></div>
                 </div>
                 <div ng-if="!vm.AvatarImage && !files.avatarImage">
                     <h3 class="font-myriad-lisong">账户头像</h3>
                     <h4>用胶水贴上一张照片</h4>
-                    <button type="button" tabindex="5" ngf-select ng-model="files.avatarImage">胶水</button>
+                    <button type="button" tabindex="5" ngf-select ng-model="files.avatarImage" accept="image/*">胶水</button>
                 </div>
             </td>
         </tr>
@@ -114,8 +114,17 @@
             <td>
                 <h3 class="font-myriad-lisong">个人据点横幅</h3>
                 <h4>640 x 92 大小的背景图片，展示在个人据点顶部。</h4>
-                <div class="profile-point-background">
-                    <img webp-src="//keylol.b0.upaiyun.com/Banner_Personal_point.jpg!profile.point.background" alt="个人据点横幅">
+                <div class="profile-point-background" ng-if="vm.ProfilePointBackgroundImage">
+                    <div class="clear-button" ng-click="vm.ProfilePointBackgroundImage = ''"></div>
+                    <img class="image" webp-src="//keylol.b0.upaiyun.com/{{vm.ProfilePointBackgroundImage}}!profile.point.background" alt="个人据点横幅">
+                </div>
+                <div class="profile-point-background" ng-if="files.profilePointBackgroundImage">
+                    <div class="clear-button" ng-click="files.profilePointBackgroundImage = null"></div>
+                    <div class="image as-background" ngf-background="files.profilePointBackgroundImage"></div>
+                </div>
+                <div class="profile-point-background no-image" ng-if="!vm.ProfilePointBackgroundImage && !files.profilePointBackgroundImage">
+                    <h4>用胶水贴上一张照片</h4>
+                    <button type="button" tabindex="6" ngf-select ng-model="files.profilePointBackgroundImage" accept="image/*">胶水</button>
                 </div>
             </td>
         </tr>
@@ -142,25 +151,27 @@
                 <div class="platform-status right-border">
                     <div class="text-block">
                         <h4>资料透明度</h4>
-                        <h4><span class="light-yellow"></span>仅自己可见</h4>
+                        <h4><span class="light-grey"></span>暂时无法检测</h4>
                     </div>
                 </div>
                 <div class="platform-status">
                     <div class="text-block">
-                        <h4>机器人信息</h4>
-                        <h4 class="bot-name">其乐机器人 #41</h4>
+                        <h4>机器人 Steam ID</h4>
+                        <h4><a class="bot-steam-profile-anchor" ng-href="https://steamcommunity.com/profiles/{{union.$localStorage.user.SteamBot.SteamId64}}">{{union.$localStorage.user.SteamBot.SteamId}}</a></h4>
                     </div>
                 </div>
                 <div class="platform-status">
                     <div class="text-block">
                         <h4>通讯关系</h4>
-                        <h4><span class="light-green"></span>双向好友</h4>
+                        <h4 ng-if="!union.$localStorage.user.StatusClaim"><span class="light-green"></span>双向好友</h4>
+                        <h4 ng-if="union.$localStorage.user.StatusClaim"><span class="light-red"></span>友情崩裂</h4>
                     </div>
                 </div>
                 <div class="platform-status">
                     <div class="text-block">
                         <h4>机器人状态</h4>
-                        <h4><span class="light-green"></span>正常在线</h4>
+                        <h4 ng-if="union.$localStorage.user.SteamBot.Online"><span class="light-green"></span>正常在线</h4>
+                        <h4 ng-if="!union.$localStorage.user.SteamBot.Online"><span class="light-red"></span>异常离线</h4>
                     </div>
                 </div>
             </td>

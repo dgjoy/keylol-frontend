@@ -70,9 +70,9 @@
     right: 5px;
     width: 12px;
     height: 12px;
-    border: none;
-    background: transparent url(../../assets/images/clear-button.png) no-repeat;
+    background: url(../../assets/images/clear-button.png) no-repeat;
     background-size: contain;
+    cursor: pointer;
 }
 
 .window-settings table {
@@ -83,11 +83,44 @@
 .window-settings .profile-point-background {
     margin: 14px 0;
     text-align: center;
+    position: relative;
 }
 
-.window-settings .profile-point-background img {
+.window-settings .profile-point-background .clear-button {
+    position: absolute;
+    top: 0;
+    left: calc(50% + 325px);
+    width: 12px;
+    height: 12px;
+    background: url(../../assets/images/clear-button.png) no-repeat;
+    background-size: contain;
+    cursor: pointer;
+}
+
+.window-settings .profile-point-background .image {
     width: 640px;
     height: 92px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.window-settings .profile-point-background .image.as-background {
+    background-size: cover;
+    background-position: center;
+}
+
+.window-settings .profile-point-background.no-image {
+    width: 640px;
+    height: 92px;
+    padding-top: 18px;
+    box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px dashed #738a95;
+}
+
+.window-settings .profile-point-background.no-image h4 {
+    margin-bottom: 8px;
 }
 
 .window-settings .platform-status {
@@ -99,22 +132,24 @@
     box-sizing: border-box;
 }
 
-.window-settings .platform-status span.light-yellow {
+.window-settings .platform-status [class^=light] {
     border-radius: 50%;
-    background-color: #F38B00;
     height: 10px;
     width: 10px;
     display: inline-block;
     margin-right: 4px;
 }
 
-.window-settings .platform-status span.light-green {
-    border-radius: 50%;
+.window-settings .platform-status .light-grey {
+    background-color: #c7cdd1;
+}
+
+.window-settings .platform-status .light-red {
+    background-color: #e30613;
+}
+
+.window-settings .platform-status .light-green {
     background-color: #00AF41;
-    height: 10px;
-    width: 10px;
-    display: inline-block;
-    margin-right: 4px;
 }
 
 .window-settings .platform-status.larger {
@@ -130,7 +165,7 @@
     text-align: left;
 }
 
-.window-settings .platform-status .bot-name {
+.window-settings .platform-status .bot-steam-profile-anchor {
     color: #748a97;
 }
 

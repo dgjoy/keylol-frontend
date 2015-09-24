@@ -10,7 +10,7 @@
                     length: "="
                 },
                 require: "ngModel",
-                link: function (scope, iElement, iAttrs, ngModel) {
+                link: function (scope, element, attrs, ngModel) {
                     scope.getNumber = function (num) {
                         return new Array(num);
                     };
