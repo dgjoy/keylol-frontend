@@ -2,8 +2,8 @@
 	"use strict";
 
 	keylolApp.controller("LoginPasswordController", [
-		"$scope", "close", "$http", "utils", "union", "apiEndpoint",
-		function ($scope, close, $http, utils, union, apiEndpoint) {
+		"$scope", "close", "$http", "utils", "union", "apiEndpoint", "window",
+		function ($scope, close, $http, utils, union, apiEndpoint, window) {
 		    $scope.error = {};
 		    $scope.errorDetect = utils.modelErrorDetect;
 
@@ -26,6 +26,14 @@
 			});
 
 			$scope.cancel = function() {
+				close();
+			};
+
+			$scope.switchToLoginSteamWindow = function () {
+				window.show({
+					templateUrl: "components/windows/login-steam.html",
+					controller: "LoginSteamController"
+				});
 				close();
 			};
 

@@ -13,10 +13,10 @@
 		        });
 		    };
 
-		    $scope.showLoginPasswordWindow = function () {
+		    $scope.showLoginSteamWindow = function () {
 				window.show({
-		            templateUrl: "components/windows/login-password.html",
-		            controller: "LoginPasswordController"
+		            templateUrl: "components/windows/login-steam.html",
+		            controller: "LoginSteamController"
 		        });
 		    };
 

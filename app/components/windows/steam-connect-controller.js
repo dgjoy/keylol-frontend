@@ -11,6 +11,7 @@
             var steamBindingHubProxy = connection.steamBindingHub;
 
             $scope.currentStation = 0;
+            $scope.code = "　　　　";
 
             $scope.cancel = function () {
                 close(result);
@@ -25,6 +26,7 @@
                         $scope.currentStation = 1;
                 });
             };
+
             steamBindingHubProxy.client.NotifyCodeReceived = function (steamProfileName, steamAvatarHash) {
                 $scope.$apply(function () {
                     $scope.currentStation = 2;
@@ -49,6 +51,7 @@
                     }, 200);
                 });
             };
+
             connection.start().then(function () {
                 steamBindingHubProxy.server.createToken().then(function (token) {
                     $scope.$apply(function () {
