@@ -249,7 +249,7 @@
                         bucket: "keylol",
                         "save-key": "{filemd5}{.suffix}",
                         expiration: Math.round(new Date().getTime() / 1000) + 90,
-                        "content-length-range": "0,10485760"
+                        "content-length-range": "0,5242880"
                     };
                     var uploadEndpoint = "//v0.api.upyun.com/keylol";
                     var policy = base64.encode(JSON.stringify(options));
