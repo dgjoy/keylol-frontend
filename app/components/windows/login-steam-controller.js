@@ -34,7 +34,7 @@
                             connection.stop();
                             $timeout(function () {
                                 close();
-                            }, 2000);
+                            }, 1500);
                         }, function (response) {
                             alert(response.data);
                         });

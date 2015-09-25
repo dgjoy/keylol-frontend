@@ -10,6 +10,7 @@
                 Password: "",
                 SteamBindingTokenId: "",
                 AvatarImage: "",
+                SteamProfileName: "",
                 GeetestChallenge: "",
                 GeetestSeccode: "",
                 GeetestValidate: ""
@@ -40,7 +41,7 @@
                         if (result) {
                             consumeBindingToken = result.consume;
                             $scope.vm.SteamBindingTokenId = result.tokenId;
-                            $scope.steamProfileName = result.steamProfileName;
+                            $scope.vm.SteamProfileName = result.steamProfileName;
                             $scope.vm.AvatarImage = "steam://avatars/" + result.steamAvatarHash;
                         } else {
                             $scope.vm.SteamBindingTokenId = "";

@@ -309,7 +309,7 @@ window[position=right]:after {
     margin: 2px 0;
 }
 
-.window .pasted-card div a {
+.window .pasted-card .clear-button {
     font-weight: bold;
 }
 
