@@ -226,7 +226,6 @@
                 var submit = function () {
                     $http.put(apiEndpoint + "user/" + union.$localStorage.login.UserId, dirtyFields)
                         .then(function () {
-                            if (dirtyFields.ProfilePointBackgroundImage)
                             $.extend(union.$localStorage.user, dirtyFields);
                             alert("保存成功。");
                             close();
