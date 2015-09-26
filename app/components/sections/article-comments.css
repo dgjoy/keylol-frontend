@@ -35,20 +35,23 @@
 }
 
 .section-article-comments .header {
-    height: 25px;
-    font-size: 15px;
+    height: 22px;
+}
+
+.section-article-comments .header .name {
+    font-weight: bold;
 }
 
 .section-article-comments .header .as-author {
-    color: #748a97;
+    color: #738a95;
 }
 
 .section-article-comments .header .time {
-    font-size: 13px;
+    color: #c7cdd1;
 }
 
 .section-article-comments .header .action {
-    color: #748a97;
+    color: #738a95;
     margin-left: 12px;
     display: none;
 }
@@ -66,7 +69,7 @@
 
 .section-article-comments form {
     position: relative;
-    margin-top: 52px;
+    margin-top: 24px;
 }
 
 .section-article-comments button[type=submit] {
@@ -74,7 +77,8 @@
     right: -25px;
     bottom: 8px;
     padding-right: 23px;
-    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAAHlBMVEX///////////////////////////////////////8V2MxSAAAACXRSTlMAESIzRGZ3iLtU0KdmAAAAOUlEQVR42u3HuREAIAwDMEL4vP/CXKBz4QmsTs3M7MuRMmwD2CIsUEKEdJQuwg6Ao8JirhkiZmbPBS/FAnGzq3lQAAAAAElFTkSuQmCC) 100% 1px;
+    background-position: 100% 1px;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAAHlBMVEX///////////////////////////////////////8V2MxSAAAACXRSTlMAESIzRGZ3iLtU0KdmAAAAOUlEQVR42u3HuREAIAwDMEL4vP/CXKBz4QmsTs3M7MuRMmwD2CIsUEKEdJQuwg6Ao8JirhkiZmbPBS/FAnGzq3lQAAAAAElFTkSuQmCC);
 }
 
 .section-article-comments .textarea-container {

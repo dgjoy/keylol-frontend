@@ -27,7 +27,7 @@
 }
 
 .section-point-votes .positive-vs-negative {
-    background: #748a97;
+    background: #738a95;
     height: 5px;
     margin-bottom: 3px;
 }
@@ -59,7 +59,7 @@
 }
 
 .section-point-votes .negative-text p:first-child {
-    color: #748a97;
+    color: #738a95;
 }
 
 .section-point-votes .external-links {
@@ -71,7 +71,7 @@
 }
 
 .section-point-votes .external-links a {
-    color: #748a97;
+    color: #738a95;
 }
 
 .section-point-votes .external-links .divider {

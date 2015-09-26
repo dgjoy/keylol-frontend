@@ -32,7 +32,7 @@
 .section-article-header h1 .vote {
     float: right;
     margin-left: 6px;
-    color: #748a97;
+    color: #738a95;
 }
 
 .section-article-header div {
@@ -53,7 +53,7 @@
 }
 
 .section-article-header .actions a {
-    color: #748a97;
+    color: #738a95;
     margin-right: 9px;
 }
 

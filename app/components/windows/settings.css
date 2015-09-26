@@ -39,11 +39,16 @@
     margin-left: 0;
 }
 
+.window-settings .heading .menu-right ul li a {
+    color: #738a95;
+}
+
 .window-settings .heading .menu-right ul li.current {
     font-weight: bold;
 }
 
-.window-settings .heading .menu-right ul li.current a:hover {
+.window-settings .heading .menu-right ul li.current a {
+    color: #333;
     text-decoration: none;
 }
 
@@ -157,7 +162,7 @@
 }
 
 .window-settings .platform-status.right-border {
-    border-right: 1px solid #748A97;
+    border-right: 1px solid #738a95;
 }
 
 .window-settings .platform-status .text-block {
@@ -166,7 +171,7 @@
 }
 
 .window-settings .platform-status .bot-steam-profile-anchor {
-    color: #748a97;
+    color: #738a95;
 }
 
 .window-settings .platform-status .pasted-card {
