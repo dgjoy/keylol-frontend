@@ -264,7 +264,8 @@
                                     signature: response.data
                                 },
                                 withCredentials: false
-                            }).then(function (response) {
+                            });
+                            uploads.avatarImage.then(function (response) {
                                 dirtyFields.AvatarImage = "keylol://avatars/" + response.data.url;
                             }, function () {
                                 alert("头像上传失败。");
@@ -279,7 +280,8 @@
                                     signature: response.data
                                 },
                                 withCredentials: false
-                            }).then(function (response) {
+                            });
+                            uploads.profilePointBackgroundImage.then(function (response) {
                                 dirtyFields.ProfilePointBackgroundImage = response.data.url;
                             }, function () {
                                 alert("个人据点横幅上传失败。");
