@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Debug Info Output</title>
+    <meta charset="utf-8"/>
+    <script src="jquery-2.1.4.js"></script>
+    <script src="jquery.signalR.js"></script>
+    <script src="https://localhost:44300/signalr/hubs"></script>
+    <style>
+        body {
+            background: #2b2b2b;
+            color: #D5D5D5;
+            font-family: "Segoe UI", "Arial", sans-serif;
+            font-size: 16px;
+        }
+
+        .cursor {
+            display: inline-block;
+            border-bottom: 3px solid;
+            animation: 1s blink step-end infinite;
+        }
+
+        .cursor:before {
+            content: "@";
+            color: transparent;
+        }
+
+        @keyframes blink {
+            from, to {
+                border-bottom-color: transparent;
+            }
+            50% {
+                border-bottom-color: #D5D5D5;
+            }
+        }
+
+        input[type=checkbox] {
+            position: relative;
+            top: 1px;
+        }
+
+        .container {
+            width: 1200px;
+            margin: 21px auto 59px;
+        }
+
+        .float-container {
+            width: 1200px;
+            margin: 0 auto;
+            padding: 1px 0 3px;
+            text-align: right;
+        }
+
+        #float {
+            position: fixed;
+            bottom: 0;
+            background-color: #232323;
+            width: 100%;
+            left: 0;
+            padding: 3px 0 4px;
+            box-shadow: 0 0 6px #161616;
+        }
+        
+        #float label {
+            padding-left: 3px;
+        }
+
+        pre {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <pre><span id="debug-info"></span><span class="cursor"></span></pre>
+</div>
+<div id="float">
+    <div class="float-container">
+        <input type="checkbox" id="scroll-checkbox" checked><label for="scroll-checkbox">Auto Scroll</label>
+    </div>
+</div>
+<script>
+    $.connection.hub.url = "https://localhost:44300/signalr";
+    var $body = $("body");
+    var $scrollCheckbox = $("#scroll-checkbox");
+    var write = function (text) {
+        $("#debug-info").append(text);
+        if ($scrollCheckbox.is(":checked"))
+            $body.animate({scrollTop: $(document).height()}, {duration: "slow", queue: false});
+    };
+    var writeLine = function (text) {
+        write(text + "\n");
+    };
+    if ($.connection.debugInfoHub) {
+        $.connection.debugInfoHub.client.Write = write;
+        $.connection.debugInfoHub.client.WriteLine = writeLine;
+        $.connection.hub.start().then(function () {
+            writeLine("Connected.")
+        });
+    }
+</script>
+</body>
+</html>
