@@ -4,13 +4,13 @@
     keylolApp.config([
         "apiEndpointProvider", "httpBatchConfigProvider",
         function(apiEndpointProvider, httpBatchConfigProvider){
-            apiEndpointProvider.setEndPoint("https://localhost:44300/");
+            apiEndpointProvider.setEndPoint("https://testflight-api.keylol.com/");
 
-            httpBatchConfigProvider.setAllowedBatchEndpoint("https://localhost:44300/", "https://localhost:44300/batch", {
+            httpBatchConfigProvider.setAllowedBatchEndpoint("https://testflight-api.keylol.com/", "https://testflight-api.keylol.com/batch", {
                 batchRequestCollectionDelay: 10
             });
         }
     ]);
 
-    window.apiEndpoint = "https://localhost:44300/";
+    window.apiEndpoint = "https://testflight-api.keylol.com/";
 })();

@@ -22,7 +22,7 @@
                     var $body = $(document.body);
                     if ($body.find("> window").length > 0) {
                         if (!$body.hasClass("body-window-open")) {
-                            bodyOriginalPaddingRight = document.body.style.paddingRight || '';
+                            bodyOriginalPaddingRight = document.body.style.paddingRight || "";
 
                             // Test if body is overflowing
                             var fullWindowWidth = $window.innerWidth;
@@ -32,29 +32,27 @@
                             }
                             if (document.body.clientWidth < fullWindowWidth) { // Body is overflowing
                                 // Set body padding-right
-                                var bodyPaddingRight = parseInt(($body.css('padding-right') || 0), 10);
-                                $body.css('padding-right', bodyPaddingRight + scrollBarWidth + "px");
+                                var bodyPaddingRight = parseInt(($body.css("padding-right") || 0), 10);
+                                $body.css("padding-right", bodyPaddingRight + scrollBarWidth + "px");
                             }
 
                             $body.addClass("body-window-open");
                         }
                     } else {
                         if ($body.hasClass("body-window-open")) {
-                            $body.css('padding-right', bodyOriginalPaddingRight);
+                            $body.css("padding-right", bodyOriginalPaddingRight);
                             $body.removeClass("body-window-open");
                         }
                     }
                 };
 
                 self.show = function (options) {
-
                     //  Create a deferred we'll resolve when the window is ready.
                     var deferred = $q.defer();
 
-                    var controllerName = options.controller;
-
                     //  If a 'controllerAs' option has been provided, we change the controller
                     //  name to use 'as' syntax. $controller will automatically handle this.
+                    var controllerName = options.controller;
                     if (options.controllerAs) {
                         controllerName = controllerName + " as " + options.controllerAs;
                     }
