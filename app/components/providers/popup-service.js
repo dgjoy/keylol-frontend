@@ -6,7 +6,6 @@
 		'$document', '$compile', '$controller', '$http', '$rootScope', '$q', '$templateCache',
 		function($document, $compile, $controller, $http, $rootScope, $q, $templateCache) {
 
-
 			function PopupService() {
 
 				var self = this;

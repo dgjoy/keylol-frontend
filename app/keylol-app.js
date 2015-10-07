@@ -10,7 +10,6 @@
 
         // 3rd Party Modules
         "jcs.angular-http-batch",
-        "angularModalService",
         "angularMoment",
         "ngStorage",
         "ngFileUpload",
