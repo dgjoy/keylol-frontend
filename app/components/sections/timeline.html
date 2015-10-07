@@ -1,7 +1,7 @@
 ﻿<div class="section-timeline" ng-controller="TimelineController">
     <div class="heading inverse">
-        <a href="{{rightButton.href}}" class="right-button box-shadowed">
-            <img ng-src="{{rightButton.avatar}}" alt="{{rightButton.alt}}">
+        <a href="{{data.rightButton.href}}" class="right-button box-shadowed">
+            <img ng-src="{{data.rightButton.avatar}}" alt="{{data.rightButton.alt}}">
         </a>
         <div class="left-info box-shadowed card">
             <svg xmlns="http://www.w3.org/2000/svg" class="card-line">
@@ -9,12 +9,12 @@
                 <circle cx="8.5" cy="50%" r="5"></circle>
             </svg>
             <div class="title font-myriad-keylol">
-                <h1>{{title.mainTitle}}</h1>
-                <h2>{{title.subTitle}}</h2>
+                <h1>{{data.title.mainTitle}}</h1>
+                <h2>{{data.title.subTitle}}</h2>
             </div>
         </div>
     </div>
-    <div class="entry card" ng-repeat="entry in entries">
+    <div class="entry card" ng-repeat="entry in data.entries">
         <svg xmlns="http://www.w3.org/2000/svg" class="card-line">
             <rect x="6" width="5" height="100%"></rect>
             <circle cx="8.5" cy="42" r="5"></circle>

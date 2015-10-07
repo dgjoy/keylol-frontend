@@ -10,7 +10,7 @@
 				else
 					return "title";
 			};
-			$.extend($scope, union.timeline);
+			$scope.data =  union.timeline;
 		}
 	]);
 })();

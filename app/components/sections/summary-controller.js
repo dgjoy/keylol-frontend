@@ -7,7 +7,7 @@
     keylolApp.controller("SummaryController", [
         "$scope", "union",
         function($scope, union) {
-            $.extend($scope, union.summary);
+            $scope.data = union.summary;
         }
     ]);
 })();

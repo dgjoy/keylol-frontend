@@ -51,6 +51,7 @@ IF NOT EXIST "%DEPLOYMENT_SOURCE%\app\bundles\*.min.*" (
 )
 
 echo 2. Delete unused files
+RD /S /Q "%DEPLOYMENT_SOURCE%\app\debug"
 RD /S /Q "%DEPLOYMENT_SOURCE%\app\components"
 RD /S /Q "%DEPLOYMENT_SOURCE%\app\bower_components"
 RD /S /Q "%DEPLOYMENT_SOURCE%\app\assets\stylesheets"
