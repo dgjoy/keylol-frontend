@@ -258,8 +258,8 @@
                         if ($scope.files.avatarImage) {
                             uploads.avatarImage = Upload.upload({
                                 url: uploadEndpoint,
-                                file: $scope.files.avatarImage,
-                                fields: {
+                                data: {
+                                    file: $scope.files.avatarImage,
                                     policy: policy,
                                     signature: response.data
                                 },
@@ -274,8 +274,8 @@
                         if ($scope.files.profilePointBackgroundImage) {
                             uploads.profilePointBackgroundImage = Upload.upload({
                                 url: uploadEndpoint,
-                                file: $scope.files.profilePointBackgroundImage,
-                                fields: {
+                                data: {
+                                    file: $scope.files.profilePointBackgroundImage,
                                     policy: policy,
                                     signature: response.data
                                 },
