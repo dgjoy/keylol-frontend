@@ -18,7 +18,7 @@
                     return width;
                 })();
 
-                var resetBodyClass = function () {
+                var adjustScrollBar = function () {
                     var $body = $(document.body);
                     if ($body.find("> window").length > 0) {
                         if (!$body.hasClass("body-window-open")) {
@@ -47,6 +47,10 @@
                 };
 
                 self.show = function (options) {
+                    options = $.extend({
+                        adjustScrollBar: true
+                    }, options);
+
                     //  Create a deferred we'll resolve when the window is ready.
                     var deferred = $q.defer();
 
@@ -62,21 +66,31 @@
                         var linkFn = $compile(template);
                         var $element = linkFn(scope);
 
+                        if (options.styles) {
+                            $element.css(options.styles);
+                        }
+
                         var closeDeferred = $q.defer();
+                        var closeDelay = 0;
+                        var close = function (result) {
+                            //  Resolve the 'close' promise.
+                            closeDeferred.resolve(result);
+                            $element.addClass("closing");
+                            $timeout(function () {
+                                //  We can now clean up the scope and remove the element from the DOM.
+                                scope.$destroy();
+                                $element.remove();
+                                if (options.adjustScrollBar)
+                                    adjustScrollBar();
+                            }, closeDelay);
+                        };
+
                         var inputs = {
                             $scope: scope,
                             $element: $element,
-                            close: function (result, delay) {
-                                if (delay === undefined || delay === null) delay = 0;
-                                $timeout(function () {
-                                    //  Resolve the 'close' promise.
-                                    closeDeferred.resolve(result);
-
-                                    //  We can now clean up the scope and remove the element from the DOM.
-                                    scope.$destroy();
-                                    $element.remove();
-                                    resetBodyClass();
-                                }, delay);
+                            close: close,
+                            setCloseDelay: function(delay) {
+                                closeDelay = delay;
                             }
                         };
 
@@ -86,17 +100,21 @@
                         }
 
                         //  Create the controller, explicitly specifying the scope to use.
-                        var controller = $controller(controllerName, inputs);
+                        var controller;
+                        if (controllerName)
+                            controller = $controller(controllerName, inputs);
 
                         // Append to body
                         $(document.body).append($element);
-                        resetBodyClass();
+                        if (options.adjustScrollBar)
+                            adjustScrollBar();
 
                         deferred.resolve({
                             controller: controller,
                             scope: scope,
                             $element: $element,
-                            close: closeDeferred.promise
+                            close: closeDeferred.promise,
+                            closeNow: close
                         });
                     };
 

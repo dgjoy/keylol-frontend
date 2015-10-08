@@ -36,8 +36,8 @@
                 window.show({
                     templateUrl: "components/windows/steam-connect.html",
                     controller: "SteamConnectController"
-                }).then(function (modal) {
-                    modal.close.then(function (result) {
+                }).then(function (window) {
+                    window.close.then(function (result) {
                         if (result) {
                             consumeBindingToken = result.consume;
                             $scope.vm.SteamBindingTokenId = result.tokenId;
