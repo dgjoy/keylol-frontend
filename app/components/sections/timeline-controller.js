@@ -11,18 +11,6 @@
                     return "title";
             };
             $scope.data = union.timeline;
-
-            $scope.showSelectorClick = function (options) {
-                var popup = $scope.showSelectorClickImpl(options);
-                if (popup) {
-                    popup.then(function (popup) {
-                        return popup.close;
-                    }).then(function (result) {
-                        console.log("悬浮窗返回结果。")
-                        console.log(result);
-                    });
-                }
-            };
         }
     ]);
 })();

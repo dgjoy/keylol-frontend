@@ -1,0 +1,77 @@
+.popup-filter .arrow-down {
+    margin: 0 0 9px 194px;
+}
+
+.popup-filter .filter-main {
+    width: 235px;
+    height: 185px;
+    background-color: white;
+}
+
+.popup-filter .filter-main button {
+    position: absolute;
+    right: 10px;
+    bottom: -5px;
+}
+
+.popup-filter .filter-main ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.popup-filter .filter-main ul::before {
+    width: 25px;
+    height: 8px;
+    background: #11254A;
+    display: block;
+    content: "";
+    margin-left: 42px;
+}
+
+.popup-filter .filter-main ul::after {
+    width: 25px;
+    height: 22px;
+    background: #11254A;
+    display: block;
+    content: "";
+    margin-left: 42px;
+}
+
+.popup-filter .filter-main ul li {
+    height: 31px;
+    line-height: 31px;
+    padding-left: 20px;
+    position: relative;
+}
+
+.popup-filter .filter-main ul li:hover {
+    background: #eef1f3;
+}
+
+.popup-filter .filter-main ul li input {
+}
+
+.popup-filter .filter-main ul li span {
+    position: absolute;
+    left: 42px;
+    top: 0;
+    display: block;
+    width: 25px;
+    background: transparent;
+    color: #11254A;
+    text-align: center;
+    font-size: 18px;
+}
+
+.popup-filter .filter-main ul li span.active {
+    background: #11254a;
+    color: white;
+}
+
+.popup-filter .filter-main ul li p {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    margin: 0;
+}

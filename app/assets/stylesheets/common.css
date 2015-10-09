@@ -141,7 +141,7 @@ textarea,
 }
 
 .box-shadowed-deeper {
-    box-shadow: 3px 3px 2px rgba(53,72,86,0.5);
+    box-shadow: 3px 3px 2px rgba(53, 72, 86, 0.5);
 }
 
 .box-shadowed-inset {
@@ -233,6 +233,10 @@ textarea,
     background-size: contain;
 }
 
+.border-button:hover {
+    background: #889ba5;
+}
+
 .border-button.left-border::after {
     content: "";
     display: block;
@@ -291,6 +295,14 @@ textarea,
     transform: rotate(315deg);
     transform-origin: top right;
     background-color: #adafb0;
+}
+
+.arrow-down {
+    width: 0;
+    height: 0;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-top: 7px solid #11254A;
 }
 
 /* --------------- */

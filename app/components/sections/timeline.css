@@ -85,6 +85,19 @@
     overflow: hidden;
 }
 
+.section-timeline .heading .left-info .expand-button {
+    color: white;
+    cursor: pointer;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translate(0, -50%);
+}
+
+.section-timeline .heading .left-info .expand-button a {
+    color: white;
+}
+
 .section-timeline .heading .right-button {
     position: absolute;
     right: 0;
