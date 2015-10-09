@@ -2,8 +2,8 @@
     "use strict";
 
     keylolApp.factory("window", [
-        "$compile", "$controller", "$rootScope", "$q", "$window", "$templateRequest", "$timeout",
-        function ($compile, $controller, $rootScope, $q, $window, $templateRequest, $timeout) {
+        "$compile", "$controller", "$rootScope", "$q", "$window", "$templateRequest", "$timeout", "$animate",
+        function ($compile, $controller, $rootScope, $q, $window, $templateRequest, $timeout, $animate) {
 
             function WindowService() {
                 var self = this;
@@ -71,27 +71,21 @@
                         }
 
                         var closeDeferred = $q.defer();
-                        var closeDelay = 0;
                         var close = function (result) {
                             //  Resolve the 'close' promise.
                             closeDeferred.resolve(result);
-                            $element.addClass("closing");
-                            $timeout(function () {
+                            $animate.leave($element).then(function () {
                                 //  We can now clean up the scope and remove the element from the DOM.
                                 scope.$destroy();
-                                $element.remove();
                                 if (options.adjustScrollBar)
                                     adjustScrollBar();
-                            }, closeDelay);
+                            });
                         };
 
                         var inputs = {
                             $scope: scope,
                             $element: $element,
-                            close: close,
-                            setCloseDelay: function(delay) {
-                                closeDelay = delay;
-                            }
+                            close: close
                         };
 
                         //  If we have provided any inputs, pass them to the controller.
@@ -105,7 +99,7 @@
                             controller = $controller(controllerName, inputs);
 
                         // Append to body
-                        $(document.body).append($element);
+                        $animate.enter($element, document.body, document.body.lastChild);
                         if (options.adjustScrollBar)
                             adjustScrollBar();
 
