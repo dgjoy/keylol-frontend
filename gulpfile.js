@@ -52,6 +52,7 @@ var stylesheets = [
     "components/editor/quill.snow.css",
     "assets/stylesheets/common.css",
     "assets/stylesheets/window.css",
+    "assets/stylesheets/popup.css",
     "assets/stylesheets/article.css",
     "components/**/*.css"
 ];

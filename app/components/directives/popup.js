@@ -26,7 +26,8 @@
                             // e.g. mouseenter event will be changed to mouseover after the its listener has been excuted.
                             optionsOverride.event = $.extend({}, optionsOverride.event);
                             if (optionsOverride.event.type === "mouseenter") {
-                                options.showDelay = 500; // Change default delay for mouseenter trigger type
+                                // Change default delay for mouseenter trigger type
+                                options.showDelay = 500;
                                 options.closeDelay = 500;
                             }
                         }
@@ -65,71 +66,60 @@
                                 showTimeout = $timeout(function () {
                                     showTimeout = null;
 
-                                    var position = element.offset();
-                                    switch (options.attachSide) {
-                                        case "bottom":
-                                            switch (options.align) {
-                                                case "left":
-                                                    break;
-
-                                                case "right":
-                                                    break;
-
-                                                default: // Center
-                                                    break;
-                                            }
-                                            break;
-
-                                        case "left":
-                                            switch (options.align) {
-                                                case "top":
-                                                    break;
-
-                                                case "bottom":
-                                                    break;
-
-                                                default: // Center
-                                                    break;
-                                            }
-                                            break;
-
-                                        case "right":
-                                            switch (options.align) {
-                                                case "top":
-                                                    break;
-
-                                                case "bottom":
-                                                    break;
-
-                                                default: // Center
-                                                    break;
-                                            }
-                                            break;
-
-                                        default: // Top
-                                            switch (options.align) {
-                                                case "left":
-                                                    break;
-
-                                                case "right":
-                                                    break;
-
-                                                default: // Center
-                                                    break;
-                                            }
-                                            break;
-                                    }
-
                                     windowPromise = window.show({
                                         template: options.template,
                                         templateUrl: options.templateUrl,
                                         controller: options.controller,
-                                        adjustScrollBar: false,
-                                        styles: {
-                                            position: "fixed",
-                                            top: "2px",
-                                            left: "2px"
+                                        adjustScrollBar: false
+                                    });
+
+                                    windowPromise.then(function (window) {
+                                        var position = element.offset();
+                                        var width = element.innerWidth();
+                                        var height = element.innerHeight();
+                                        var popupWidth = window.$element.innerWidth();
+                                        var popupHeight = window.$element.innerHeight();
+
+                                        if (options.attachSide === "left" || options.attachSide === "right") {
+                                            switch (options.align) {
+                                                case "top":
+                                                    break;
+
+                                                case "bottom":
+                                                    position.top = position.top + height - popupHeight;
+                                                    break;
+
+                                                default: // Center
+                                                    position.top = (2 * position.top + height - popupHeight) / 2;
+                                                    break;
+                                            }
+                                            if (options.attachSide === "left") { // Left
+                                                position.left -= popupWidth;
+                                            } else { // Right
+                                                position.left += width;
+                                            }
+                                        } else {
+                                            switch (options.align) {
+                                                case "left":
+                                                    break;
+
+                                                case "right":
+                                                    position.left = position.left + width - popupWidth;
+                                                    break;
+
+                                                default: // Center
+                                                    position.left = (2 * position.left + width - popupWidth) / 2;
+                                                    break;
+                                            }
+                                            if (options.attachSide === "bottom") { // Bottom
+                                                position.top += height;
+                                            } else { // Top
+                                                position.top -= popupHeight;
+                                            }
                                         }
+                                        position.left += options.offsetX;
+                                        position.top += options.offsetY;
+                                        window.$element.css(position);
                                     });
 
                                     if (options.event) {
@@ -140,8 +130,7 @@
                                                     if (e.target === options.event.currentTarget ||
                                                         $.contains(options.event.currentTarget, e.target))
                                                         e.stopPropagation();
-                                                    if (e.target !== window.$element[0] &&
-                                                        !$.contains(window.$element[0], e.target))
+                                                    if (e.target !== window.$element[0] && !$.contains(window.$element[0], e.target))
                                                         close();
                                                 };
                                                 document.body.addEventListener("click", onBodyClick, true);
@@ -167,6 +156,7 @@
                                             });
                                         }
                                     }
+                                    return windowPromise;
                                 }, options.showDelay);
 
                                 if (options.event && options.event.type === "mouseenter") {
@@ -185,10 +175,14 @@
                                         $(options.event.currentTarget).off("mouseleave", onTriggerMouseLeave);
                                     });
                                 }
+
+                                return showTimeout.then(function (windowPromise) {
+                                    return windowPromise;
+                                });
                             }
                         };
 
-                        show();
+                        return show();
                     };
                 }
             };

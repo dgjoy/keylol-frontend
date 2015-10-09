@@ -3,18 +3,26 @@
         <a href="{{data.rightButton.href}}" class="right-button box-shadowed">
             <img ng-src="{{data.rightButton.avatar}}" alt="{{data.rightButton.alt}}">
         </a>
-        <div class="left-info box-shadowed card" popup="showSelector">
+        <div class="left-info box-shadowed card">
             <svg xmlns="http://www.w3.org/2000/svg" class="card-line">
                 <rect x="6" width="5" height="100%"></rect>
                 <circle cx="8.5" cy="50%" r="5"></circle>
             </svg>
             <div class="title">
-                <div style="float: right; color: red"
-                        ng-mouseenter="showSelector({
+                <button style="float: right; color: red" popup="showSelectorClickImpl"
+                        ng-mouseenter="showSelectorClick({
+                            templateUrl: 'components/popup/entry-type-selector.html',
+                            controller: 'EntryTypeSelectorController',
+                            event: $event,
+                            attachSide: 'bottom',
+                            offsetY: 3
+                        })">全部（点击）</button>
+                <button style="float: right; color: red" popup="showSelectorHover"
+                        ng-mouseenter="showSelectorHover({
                             templateUrl: 'components/popup/entry-type-selector.html',
                             event: $event,
-                            context: context
-                        })">全部<span style="display: inline-block">all</span></div>
+                            align: 'left'
+                        })">全部（悬浮）</button>
                 <h1 class="font-myriad-keylol">{{data.title.mainTitle}}</h1>
                 <h2 class="font-myriad-keylol">{{data.title.subTitle}}</h2>
             </div>

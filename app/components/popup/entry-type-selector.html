@@ -1,5 +1,8 @@
 ﻿<popup>
-    <div class="popup-entry-type-selector box-shadowed" style="background: white; padding: 20px">
+    <div class="popup-entry-type-selector box-shadowed-deeper" style="background: white; padding: 20px">
         这是文章类型选择器，支持单选，多选，开关动画
+        <button ng-click="close(1)">返回 1</button>
+        <button ng-click="close('haha')">返回 haha</button>
+        <button ng-click="close(true)">返回 true</button>
     </div>
 </popup>
