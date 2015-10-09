@@ -37,10 +37,9 @@
 }
 
 .popup-filter .filter-main ul li {
-    height: 31px;
-    line-height: 31px;
     padding: 0 20px;
     position: relative;
+    cursor: default;
 }
 
 .popup-filter .filter-main ul li:hover {
@@ -59,7 +58,8 @@
     color: #11254A;
     text-align: center;
     font-size: 18px;
-    margin-left: 9px;
+    margin: 0 9px;
+    padding: 3px 0;
 }
 
 .popup-filter .filter-main ul li span.active {

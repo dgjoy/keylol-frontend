@@ -25,13 +25,22 @@
             };
             $scope.expand = function ($event) {
                 $scope.expanded = !$scope.expanded;
-                $scope.showFilter({
+                var popup = $scope.showFilter({
                     templateUrl: 'components/popup/filter.html',
                     controller: 'FilterController',
                     event: $event,
                     attachSide: 'bottom',
                     align: 'right'
                 });
+                if (popup) {
+                    popup.then(function (popup) {
+                        return popup.close;
+                    }).then(function (result) {
+                        console.log("悬浮窗返回结果。");
+                        console.log(result);
+                    });
+                }
+
             };
             function changeExpandString(){
                 var optionsTrue = [];
