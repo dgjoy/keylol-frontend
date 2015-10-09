@@ -43,14 +43,14 @@
                         scope.onPageChanged({oldPage: scope.current, newPage: newPage});
                     };
 
-                    scope.submit = function(){
-                        if(scope.newPage == scope.current){
+                    scope.submit = function () {
+                        if (scope.newPage == scope.current) {
                             return;
                         }
                         var newPageHref = scope.pageHref(scope.newPage);
-                        if(newPageHref){
+                        if (newPageHref) {
                             $location.url(newPageHref);
-                        }else{
+                        } else {
                             scope.changePage(parseInt(scope.newPage));
                         }
                     };
