@@ -27,8 +27,8 @@
                             optionsOverride.event = $.extend({}, optionsOverride.event);
                             if (optionsOverride.event.type === "mouseenter") {
                                 // Change default delay for mouseenter trigger type
-                                options.showDelay = 500;
-                                options.closeDelay = 500;
+                                options.showDelay = 350;
+                                options.closeDelay = 400;
                             }
                         }
                         $.extend(options, optionsOverride);
