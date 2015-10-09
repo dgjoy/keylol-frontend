@@ -1,0 +1,25 @@
+<form ng-submit="submit()">
+    <ul class="clearfix list-inline">
+        <li ng-if="hasLeftEllipsis">
+            <a ng-href="{{pageHref({page: 1})}}" ng-click="changePage(1)">1</a>
+        </li><!--
+     --><li ng-if="hasLeftEllipsis">
+            <span>···</span>
+        </li><!--
+     --><li ng-repeat="i in leftPages">
+            <a ng-href="{{pageHref({page: i})}}" ng-click="changePage(i)">{{i}}</a>
+        </li><!--
+     --><li>
+            <input type="text" ng-model="newPage" ng-style="{width: (9*current.toString().length) + 'px'}">
+        </li><!--
+     --><li ng-repeat="i in rightPages">
+            <a ng-href="{{pageHref({page: i})}}" ng-click="changePage(i)">{{i}}</a>
+        </li><!--
+     --><li ng-if="hasRightEllipsis">
+            <span>···</span>
+        </li><!--
+     --><li ng-if="hasRightEllipsis">
+            <a ng-href="{{pageHref({page: total})}}" ng-click="changePage(total)">{{total}}</a>
+        </li>
+    </ul>
+</form>
