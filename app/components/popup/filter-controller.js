@@ -1,10 +1,10 @@
-﻿(function() {
-	"use strict";
+﻿(function () {
+    "use strict";
 
-	keylolApp.controller("FilterController", [
-		"$scope", "close", "$element", "utils",
-		function($scope, close, $element, utils) {
-			$scope.filterOptions = [true, true, true, true, true];
-		}
-	]);
+    keylolApp.controller("FilterController", [
+        "$scope", "union",
+        function ($scope, union) {
+            $scope.data = union.filter;
+        }
+    ]);
 })();

@@ -2,32 +2,32 @@
     <div class="popup-filter">
         <div class="arrow-down"></div>
         <div class="filter-main box-shadowed-deeper">
-            <button class="border-button bottom-border">过滤</button>
+            <button class="border-button bottom-border" ng-click="data.onFilter()">过滤</button>
             <form>
                 <ul>
                     <li>
-                        <input type="checkbox" ng-model="filterOptions[0]">
-                        <span ng-class="{active: filterOptions[0]}">评</span>
+                        <input type="checkbox" ng-model="data.filterOptions[0]">
+                        <span ng-class="{active: data.filterOptions[0]}">评</span>
                         <p>感悟、心得、体验、报告</p>
                     </li>
                     <li>
-                        <input type="checkbox" ng-model="filterOptions[1]">
-                        <span ng-class="{active: filterOptions[1]}">研</span>
+                        <input type="checkbox" ng-model="data.filterOptions[1]">
+                        <span ng-class="{active: data.filterOptions[1]}">研</span>
                         <p>攻略、技术、成就、教程</p>
                     </li>
                     <li>
-                        <input type="checkbox" ng-model="filterOptions[2]">
-                        <span ng-class="{active: filterOptions[2]}">讯</span>
+                        <input type="checkbox" ng-model="data.filterOptions[2]">
+                        <span ng-class="{active: data.filterOptions[2]}">讯</span>
                         <p>新闻、购物、更新、竞技</p>
                     </li>
                     <li>
-                        <input type="checkbox" ng-model="filterOptions[3]">
-                        <span ng-class="{active: filterOptions[3]}">谈</span>
+                        <input type="checkbox" ng-model="data.filterOptions[3]">
+                        <span ng-class="{active: data.filterOptions[3]}">谈</span>
                         <p>聊天、灌水、吐槽、杂文</p>
                     </li>
                     <li>
-                        <input type="checkbox" ng-model="filterOptions[4]">
-                        <span ng-class="{active: filterOptions[4]}">档</span>
+                        <input type="checkbox" ng-model="data.filterOptions[4]">
+                        <span ng-class="{active: data.filterOptions[4]}">档</span>
                         <p>声画、模组、插件、汉化</p>
                     </li>
                 </ul>

@@ -12,14 +12,13 @@
                 <h1 class="font-myriad-keylol">{{data.title.mainTitle}}</h1>
                 <h2 class="font-myriad-keylol">{{data.title.subTitle}}</h2>
             </div>
-            <span class="expand-button"
-                  ng-click="showFilter({
-                            templateUrl: 'components/popup/filter.html',
-                            controller: 'FilterController',
-                            event: $event,
-                            attachSide: 'bottom',
-                            align: 'right'})"
-                    ><a>全部</a>&nbsp;&nbsp;▾</span>
+            <span class="expand-button" ng-switch="expanded"
+                  ng-click="expand($event)">
+                <a>{{expandString}}</a>
+                &nbsp;
+                <span ng-switch-when="false">▾</span>
+                <span ng-switch-when="true">▴</span>
+            </span>
         </div>
     </div>
     <div class="entry card" ng-repeat="entry in data.entries">
