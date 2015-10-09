@@ -19,11 +19,11 @@
             $scope.expandString = filterStringModule[0];
             $scope.expand = function ($event) {
                 var popup = $scope.showFilter({
-                    templateUrl: 'components/popup/filter.html',
-                    controller: 'FilterController',
+                    templateUrl: "components/popup/entry-filter.html",
+                    controller: "EntryFilterController",
                     event: $event,
-                    attachSide: 'bottom',
-                    align: 'right',
+                    attachSide: "bottom",
+                    align: "right",
                     offsetX: 5,
                     inputs: {
                         filterOptions: filterOptions
@@ -41,7 +41,6 @@
                         $scope.expanded = !$scope.expanded;
                     });
                 }
-
             };
             function changeExpandString() {
                 var optionsTrue = [];

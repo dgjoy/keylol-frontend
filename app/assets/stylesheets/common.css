@@ -234,7 +234,7 @@ textarea,
 }
 
 .border-button:hover {
-    background: #889ba5;
+    background-color: #889ba5;
 }
 
 .border-button.left-border::after {
@@ -295,14 +295,6 @@ textarea,
     transform: rotate(315deg);
     transform-origin: top right;
     background-color: #adafb0;
-}
-
-.arrow-down {
-    width: 0;
-    height: 0;
-    border-left: 7px solid transparent;
-    border-right: 7px solid transparent;
-    border-top: 7px solid #11254A;
 }
 
 /* --------------- */

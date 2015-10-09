@@ -1,65 +1,65 @@
-.popup-filter {
+.popup-entry-filter {
     overflow: hidden;
     padding-right: 5px;
     padding-bottom: 5px;
 }
 
-.popup-filter.ng-enter {
+.popup-entry-filter.ng-enter {
     transition-duration: 3s;
 }
 
-.popup-filter.ng-leave {
+.popup-entry-filter.ng-leave {
     transition-duration: 2s;
 }
 
-.popup-filter.ng-enter .filter-container {
+.popup-entry-filter.ng-enter .filter-container {
     transform: translateY(-100%);
     opacity: 0;
 }
 
-.popup-filter.ng-enter-active .filter-container {
+.popup-entry-filter.ng-enter-active .filter-container {
     transform: translateY(0);
     opacity: 1;
     transition: 2s;
 }
 
-.popup-filter.ng-leave .filter-container {
+.popup-entry-filter.ng-leave .filter-container {
     transform: translateY(-100%);
     opacity: 0;
     transition: 2s;
 }
 
-.popup-filter.ng-enter .arrow-down {
+.popup-entry-filter.ng-enter .arrow-down {
     transform: translateY(-100%);
 }
 
-.popup-filter.ng-enter-active .arrow-down {
+.popup-entry-filter.ng-enter-active .arrow-down {
     transform: translateY(0);
     transition: 1s 2s;
 }
 
-.popup-filter .arrow-down {
+.popup-entry-filter .arrow-down {
     margin: 0 0 9px 194px;
 }
 
-.popup-filter .filter-main {
+.popup-entry-filter .filter-main {
     background-color: white;
     position: relative;
 }
 
-.popup-filter .filter-main button {
+.popup-entry-filter .filter-main button {
     position: absolute;
     right: 10px;
     bottom: -5px;
 }
 
-.popup-filter .filter-main ul {
+.popup-entry-filter .filter-main ul {
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-.popup-filter .filter-main ul::before {
+.popup-entry-filter .filter-main ul::before {
     width: 25px;
     height: 8px;
     background: #11254A;
@@ -68,7 +68,7 @@
     margin-left: 42px;
 }
 
-.popup-filter .filter-main ul::after {
+.popup-entry-filter .filter-main ul::after {
     width: 25px;
     height: 22px;
     background: #11254A;
@@ -77,22 +77,22 @@
     margin-left: 42px;
 }
 
-.popup-filter .filter-main ul li {
+.popup-entry-filter .filter-main ul li {
     padding: 0 20px;
     position: relative;
     cursor: default;
 }
 
-.popup-filter .filter-main ul li:hover {
+.popup-entry-filter .filter-main ul li:hover {
     background: #eef1f3;
 }
 
-.popup-filter .filter-main ul li input {
+.popup-entry-filter .filter-main ul li input {
     width: 13px;
     height: 13px;
 }
 
-.popup-filter .filter-main ul li span {
+.popup-entry-filter .filter-main ul li span {
     display: inline-block;
     width: 25px;
     background: transparent;
@@ -103,12 +103,12 @@
     padding: 3px 0;
 }
 
-.popup-filter .filter-main ul li span.active {
+.popup-entry-filter .filter-main ul li span.active {
     background: #11254a;
     color: white;
 }
 
-.popup-filter .filter-main ul li p {
+.popup-entry-filter .filter-main ul li p {
     display: inline-block;
     margin: 0;
 }

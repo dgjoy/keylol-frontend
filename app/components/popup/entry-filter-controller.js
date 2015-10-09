@@ -1,7 +1,7 @@
 ﻿(function () {
     "use strict";
 
-    keylolApp.controller("FilterController", [
+    keylolApp.controller("EntryFilterController", [
         "$scope", "filterOptions", "close",
         function ($scope, filterOptions, close) {
             $scope.filterOptions = filterOptions;
