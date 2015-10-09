@@ -70,7 +70,8 @@
                                         template: options.template,
                                         templateUrl: options.templateUrl,
                                         controller: options.controller,
-                                        adjustScrollBar: false
+                                        adjustScrollBar: false,
+                                        inputs: options.inputs
                                     });
 
                                     windowPromise.then(function (window) {
