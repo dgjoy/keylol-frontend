@@ -8,7 +8,7 @@
     width: 300px;
 }
 
-    .ql-image-tooltip:after {
+    .ql-image-tooltip::after {
         clear: both;
         content: "";
         display: table;

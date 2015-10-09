@@ -9,7 +9,7 @@ input-code span {
     vertical-align: bottom;
 }
 
-input-code span:before {
+input-code span::before {
     content: "";
     display: block;
     position: absolute;
@@ -26,7 +26,7 @@ input-code span:first-of-type {
     padding-left: 1px;
 }
 
-input-code span:first-of-type:before {
+input-code span:first-of-type::before {
     border-left: 1px solid #11254a;
     left: 0;
     width: 34px;

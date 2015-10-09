@@ -11,13 +11,13 @@
     position: relative;
 }
 
-.window-settings .tab-changed:after {
+.window-settings .tab-changed::after {
     content: "*";
     position: absolute;
     top: 0;
 }
 
-.window-settings .tab-changed.tab-error:after {
+.window-settings .tab-changed.tab-error::after {
     color: red;
 }
 

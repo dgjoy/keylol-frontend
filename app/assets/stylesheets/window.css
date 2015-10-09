@@ -42,7 +42,7 @@ window {
     white-space: nowrap;
 }
 
-window:after {
+window::after {
     display: inline-block;
     height: 100%;
     margin-left: -0.05em;
@@ -63,7 +63,7 @@ window[position=center] {
 }
 
 .window-position-center,
-window[position=center]:after {
+window[position=center]::after {
     vertical-align: middle;
 }
 
@@ -72,7 +72,7 @@ window[position=top] {
 }
 
 .window-position-top,
-window[position=top]:after {
+window[position=top]::after {
     vertical-align: top;
 }
 
@@ -81,7 +81,7 @@ window[position=bottom] {
 }
 
 .window-position-bottom,
-window[position=bottom]:after {
+window[position=bottom]::after {
     vertical-align: bottom;
 }
 
@@ -90,7 +90,7 @@ window[position=left] {
 }
 
 .window-position-left,
-window[position=left]:after {
+window[position=left]::after {
     vertical-align: middle;
 }
 
@@ -99,7 +99,7 @@ window[position=right] {
 }
 
 .window-position-right,
-window[position=right]:after {
+window[position=right]::after {
     vertical-align: middle;
 }
 
@@ -155,7 +155,7 @@ window[position=right]:after {
     min-width: 305px;
 }
 
-.window .window-confirm-button:after {
+.window .window-confirm-button::after {
     content: "";
     display: block;
     position: absolute;

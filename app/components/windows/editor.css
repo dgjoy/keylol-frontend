@@ -28,7 +28,7 @@
     left: -5px;
 }
 
-.window-editor .article-type:after {
+.window-editor .article-type::after {
     content: "";
     display: block;
     position: absolute;

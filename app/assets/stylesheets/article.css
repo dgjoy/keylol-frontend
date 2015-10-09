@@ -23,7 +23,7 @@
     text-overflow: ellipsis;
 }
 
-.article-content h1:before {
+.article-content h1::before {
     content: ">";
     font-family: "Keylol Rail Sung", serif;
     margin-right: 6px;

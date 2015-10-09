@@ -172,7 +172,7 @@ textarea,
     background-color: #11254a;
 }
 
-.labeled-heading:before {
+.labeled-heading::before {
     content: "";
     display: block;
     position: absolute;
@@ -186,8 +186,8 @@ textarea,
     background-color: #adafb0;
 }
 
-.row:after,
-.clearfix:after {
+.row::after,
+.clearfix::after {
     content: "";
     display: table;
     clear: both;
@@ -233,7 +233,7 @@ textarea,
     background-size: contain;
 }
 
-.border-button.left-border:after {
+.border-button.left-border::after {
     content: "";
     display: block;
     position: absolute;
@@ -248,7 +248,7 @@ textarea,
     background-color: #adafb0;
 }
 
-.border-button.right-border:after {
+.border-button.right-border::after {
     content: "";
     display: block;
     position: absolute;
@@ -263,7 +263,7 @@ textarea,
     background-color: #adafb0;
 }
 
-.border-button.bottom-border:after {
+.border-button.bottom-border::after {
     content: "";
     display: block;
     position: absolute;
@@ -278,7 +278,7 @@ textarea,
     background-color: #adafb0;
 }
 
-.border-button.top-border:after {
+.border-button.top-border::after {
     content: "";
     display: block;
     position: absolute;
@@ -302,7 +302,7 @@ textarea,
     text-align: center;
 }
 
-[id^=geetest-]:before {
+[id^=geetest-]::before {
     content: "加载中，若无响应请刷新";
     color: #c7cdd1;
     position: absolute;
