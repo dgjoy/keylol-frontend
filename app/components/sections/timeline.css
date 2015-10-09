@@ -96,7 +96,19 @@
 
 .section-timeline .heading .left-info .expand-button a {
     color: white;
-    margin-right: 5px;
+    margin-right: 3px;
+}
+
+.section-timeline .heading .left-info .expand-button a:hover {
+    text-decoration: none;
+}
+
+.section-timeline .heading .left-info .expand-button span {
+    font-family: "Keylol Rail Sung", serif;
+}
+
+.section-timeline .heading .left-info .expand-button:hover a {
+    text-decoration: underline;
 }
 
 .section-timeline .heading .right-button {

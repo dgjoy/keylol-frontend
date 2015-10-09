@@ -5,11 +5,11 @@
 }
 
 .popup-entry-filter.ng-enter {
-    transition-duration: 3s;
+    transition-duration: 460ms;
 }
 
 .popup-entry-filter.ng-leave {
-    transition-duration: 2s;
+    transition-duration: 400ms;
 }
 
 .popup-entry-filter.ng-enter .filter-container {
@@ -20,13 +20,13 @@
 .popup-entry-filter.ng-enter-active .filter-container {
     transform: translateY(0);
     opacity: 1;
-    transition: 2s;
+    transition: cubic-bezier(0.22, 0.61, 0.36, 1) 280ms;
 }
 
 .popup-entry-filter.ng-leave .filter-container {
     transform: translateY(-100%);
     opacity: 0;
-    transition: 2s;
+    transition: cubic-bezier(0.22, 0.61, 0.36, 1) 400ms;
 }
 
 .popup-entry-filter.ng-enter .arrow-down {
@@ -35,7 +35,7 @@
 
 .popup-entry-filter.ng-enter-active .arrow-down {
     transform: translateY(0);
-    transition: 1s 2s;
+    transition: 180ms 280ms;
 }
 
 .popup-entry-filter .arrow-down {

@@ -4,6 +4,7 @@
 
 popup {
     position: absolute;
+    z-index: 0;
 }
 
 popup .arrow-down {
