@@ -1,9 +1,50 @@
+.popup-filter {
+    overflow: hidden;
+    padding-right: 5px;
+    padding-bottom: 5px;
+}
+
+.popup-filter.ng-enter {
+    transition-duration: 3s;
+}
+
+.popup-filter.ng-leave {
+    transition-duration: 2s;
+}
+
+.popup-filter.ng-enter .filter-container {
+    transform: translateY(-100%);
+    opacity: 0;
+}
+
+.popup-filter.ng-enter-active .filter-container {
+    transform: translateY(0);
+    opacity: 1;
+    transition: 2s;
+}
+
+.popup-filter.ng-leave .filter-container {
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: 2s;
+}
+
+.popup-filter.ng-enter .arrow-down {
+    transform: translateY(-100%);
+}
+
+.popup-filter.ng-enter-active .arrow-down {
+    transform: translateY(0);
+    transition: 1s 2s;
+}
+
 .popup-filter .arrow-down {
     margin: 0 0 9px 194px;
 }
 
 .popup-filter .filter-main {
     background-color: white;
+    position: relative;
 }
 
 .popup-filter .filter-main button {

@@ -17,32 +17,33 @@
             var filterOptions = [true, true, true, true, true];
             var filterStringModule = ["全部", "不看", "只看", "全部不看"];
             $scope.expandString = filterStringModule[0];
-            union.filter = {
-                filterOptions: filterOptions,
-                onFilter: function () {
-                    changeExpandString();
-                }
-            };
             $scope.expand = function ($event) {
-                $scope.expanded = !$scope.expanded;
                 var popup = $scope.showFilter({
                     templateUrl: 'components/popup/filter.html',
                     controller: 'FilterController',
                     event: $event,
                     attachSide: 'bottom',
-                    align: 'right'
+                    align: 'right',
+                    offsetX: 5,
+                    inputs: {
+                        filterOptions: filterOptions
+                    }
                 });
+                $scope.expanded = !$scope.expanded;
                 if (popup) {
                     popup.then(function (popup) {
                         return popup.close;
                     }).then(function (result) {
-                        console.log("悬浮窗返回结果。");
-                        console.log(result);
+                        if (result) {
+                            filterOptions = result;
+                            changeExpandString();
+                        }
+                        $scope.expanded = !$scope.expanded;
                     });
                 }
 
             };
-            function changeExpandString(){
+            function changeExpandString() {
                 var optionsTrue = [];
                 var optionsFalse = [];
                 for (var i = 0; i < filterOptions.length; i++) {

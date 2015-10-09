@@ -2,12 +2,15 @@
     "use strict";
 
     keylolApp.controller("FilterController", [
-        "$scope", "union",
-        function ($scope, union) {
-            $scope.data = union.filter;
+        "$scope", "filterOptions", "close",
+        function ($scope, filterOptions, close) {
+            $scope.filterOptions = filterOptions;
+            $scope.onFilter = function () {
+                close($scope.filterOptions);
+            };
 
-            $scope.changeFilterOption = function(index){
-                $scope.data.filterOptions[index] = !$scope.data.filterOptions[index];
+            $scope.changeFilterOption = function (index) {
+                $scope.filterOptions[index] = !$scope.filterOptions[index];
             };
         }
     ]);

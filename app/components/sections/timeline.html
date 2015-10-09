@@ -14,10 +14,7 @@
             </div>
             <span class="expand-button" ng-switch="expanded"
                   ng-click="expand($event)">
-                <a>{{expandString}}</a>
-                &nbsp;
-                <span ng-switch-when="false">▾</span>
-                <span ng-switch-when="true">▴</span>
+                <a>{{expandString}}</a><span ng-switch-when="false">▾</span><span ng-switch-when="true">▴</span>
             </span>
         </div>
     </div>
