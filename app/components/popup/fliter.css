@@ -3,8 +3,6 @@
 }
 
 .popup-filter .filter-main {
-    width: 235px;
-    height: 185px;
     background-color: white;
 }
 
@@ -41,7 +39,7 @@
 .popup-filter .filter-main ul li {
     height: 31px;
     line-height: 31px;
-    padding-left: 20px;
+    padding: 0 20px;
     position: relative;
 }
 
@@ -50,18 +48,18 @@
 }
 
 .popup-filter .filter-main ul li input {
+    width: 13px;
+    height: 13px;
 }
 
 .popup-filter .filter-main ul li span {
-    position: absolute;
-    left: 42px;
-    top: 0;
-    display: block;
+    display: inline-block;
     width: 25px;
     background: transparent;
     color: #11254A;
     text-align: center;
     font-size: 18px;
+    margin-left: 5px;
 }
 
 .popup-filter .filter-main ul li span.active {
@@ -70,8 +68,6 @@
 }
 
 .popup-filter .filter-main ul li p {
-    position: absolute;
-    top: 0;
-    right: 20px;
+    display: inline-block;
     margin: 0;
 }
