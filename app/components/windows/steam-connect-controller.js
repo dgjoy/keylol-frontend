@@ -11,7 +11,6 @@
             var steamBindingHubProxy = connection.steamBindingHub;
 
             $scope.currentStation = 0;
-            $scope.code = "　　　　";
 
             $scope.cancel = function () {
                 close(result);
