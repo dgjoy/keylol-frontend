@@ -237,6 +237,11 @@ textarea,
     background-color: #889ba5;
 }
 
+.border-button.subscribed {
+    padding-left: 22px;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAAz1BMVEX+/v7////+/v7////+/v7////////+/v7////////////+/v7////////////+/v7////////+/v7////+/v7////////////+/v7////////////////+/v7+/v7////////////////+/v7////////////+/v7///////////////////////////////////////////////////////////////////////////////////////////////////////////////////8kdPWFAAAARHRSTlMAAAYMDxIUFhYYGykpKi0uLjE1O0RMTlBSUlhdZWlrbnB0d3iMj5WYnp+ho6epq7C6vL3Fy8zN0tXX3t/k5unt8fj5+vqs8psAAADRSURBVHja7dTFEoMwEIDh3bpRd6Xu7kYt7/9MZUOhvUDDsVP2wATm/2ZCDgG0OQ5wwL8AMBagvQI9Y+uMLZC/MyVgAwyYOldhkNhQ/2iJggqjUcIgBjx93ne9YAbqtU8gHXhfBTQBoSFjKVpoRYPnqyigGZjRcejAPeL9GNEcxG9qMdFA+sz7LFgBLFAj0zeZ58skWgPsURZE15z3HYBvAHf0m+Uj5ZciCgCJ6bP1gwjA3KtvIogBnPLtlEAY4J6xhQ9sgMipbdRv4FwzDvhF8AS6qyri6TzO9AAAAABJRU5ErkJggg==);
+}
+
 .border-button.left-border::after {
     content: "";
     display: block;
@@ -296,12 +301,6 @@ textarea,
     transform-origin: top right;
     background-color: #adafb0;
 }
-
-.border-button.subscribed {
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAAz1BMVEX+/v7////+/v7////+/v7////////+/v7////////////+/v7////////////+/v7////////+/v7////+/v7////////////+/v7////////////////+/v7+/v7////////////////+/v7////////////+/v7///////////////////////////////////////////////////////////////////////////////////////////////////////////////////8kdPWFAAAARHRSTlMAAAYMDxIUFhYYGykpKi0uLjE1O0RMTlBSUlhdZWlrbnB0d3iMj5WYnp+ho6epq7C6vL3Fy8zN0tXX3t/k5unt8fj5+vqs8psAAADRSURBVHja7dTFEoMwEIDh3bpRd6Xu7kYt7/9MZUOhvUDDsVP2wATm/2ZCDgG0OQ5wwL8AMBagvQI9Y+uMLZC/MyVgAwyYOldhkNhQ/2iJggqjUcIgBjx93ne9YAbqtU8gHXhfBTQBoSFjKVpoRYPnqyigGZjRcejAPeL9GNEcxG9qMdFA+sz7LFgBLFAj0zeZ58skWgPsURZE15z3HYBvAHf0m+Uj5ZciCgCJ6bP1gwjA3KtvIogBnPLtlEAY4J6xhQ9sgMipbdRv4FwzDvhF8AS6qyri6TzO9AAAAABJRU5ErkJggg==);
-    padding-left: 22px;
-}
-
 
 /* --------------- */
 /* Geetest Restyle */
