@@ -1,0 +1,22 @@
+﻿<popup class="popup-point-preview-card">
+    <div class="arrow-up"></div>
+    <div class="card-main box-shadowed-deeper">
+        <div class="background"
+             webp-background="{{data.background}}"></div>
+        <div class="content">
+            <button class="border-button bottom-border"  ng-class="data.action.extraClass">{{data.action.text}}</button>
+            <div class="avatar-anchor">
+                <img class="avatar-small" ng-src="{{data.avatar}}">
+            </div>
+            <div class="heading">
+                <h1>{{data.head.mainHead}}</h1>
+
+                <h2>{{data.head.subHead}}</h2>
+            </div>
+            <div class="summary">
+                <span class="left-summary">{{data.pointSum.type}}据点</span>
+                <span class="right-summary">{{data.pointSum.readerNum}} 名读者 / {{data.pointSum.articleNum}} 篇文章</span>
+            </div>
+        </div>
+    </div>
+</popup>

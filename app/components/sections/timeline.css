@@ -86,7 +86,7 @@
 }
 
 .section-timeline .heading .left-info .expand-button {
-    color: white;
+    color: #C7CDD1;
     cursor: pointer;
     position: absolute;
     right: 15px;
@@ -95,8 +95,16 @@
 }
 
 .section-timeline .heading .left-info .expand-button a {
-    color: white;
+    color: #C7CDD1;
     margin-right: 3px;
+}
+
+.section-timeline .heading .left-info .expand-button.expanded {
+    color: white;
+}
+
+.section-timeline .heading .left-info .expand-button.expanded a {
+    color: white;
 }
 
 .section-timeline .heading .left-info .expand-button a:hover {

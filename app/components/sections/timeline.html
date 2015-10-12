@@ -13,7 +13,7 @@
                 <h2 class="font-myriad-keylol">{{data.title.subTitle}}</h2>
             </div>
             <span class="expand-button" ng-switch="expanded"
-                  ng-click="expand($event)">
+                  ng-click="expand($event)" ng-class="{expanded: expanded}">
                 <a>{{expandString}}</a><span ng-switch-when="false">▾</span><span ng-switch-when="true">▴</span>
             </span>
         </div>
