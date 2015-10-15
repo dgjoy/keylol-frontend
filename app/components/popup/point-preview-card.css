@@ -2,15 +2,22 @@
     width: 400px;
 }
 
+.popup-point-preview-card.loading {
+    width: 77px;
+}
+
 .popup-point-preview-card .arrow-up {
     margin-left: 32px;
 }
 
 .popup-point-preview-card .card-main {
-    width: 100%;
     height: 125px;
     background-color: white;
     position: relative;
+}
+
+.popup-point-preview-card.loading .card-main {
+    background-color: #eef1f3;
 }
 
 .popup-point-preview-card .card-main .content {
@@ -19,6 +26,12 @@
     height: 100%;
     padding: 10px 0 27px 0;
     box-sizing: border-box;
+}
+
+.popup-point-preview-card .loading-gif {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 10px auto;
 }
 
 .popup-point-preview-card .avatar-anchor {
@@ -55,6 +68,15 @@
     transform: translateY(-50%);
     color: white;
     margin-left: 15px;
+}
+
+.popup-point-preview-card .summary .loading-summary {
+    color: white;
+    width: 100%;
+    text-align: center;
+    display: inline-block;
+    margin-top: 15px;
+    transform: translateY(-50%);
 }
 
 .popup-point-preview-card .summary .right-summary {
