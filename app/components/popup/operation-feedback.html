@@ -3,7 +3,7 @@
         <div class="right-content">
             <p class="main-text">{{data.mainText}}</p>
             <div class="action-content" ng-if="data.actions">
-                <a class="action" ng-repeat="action in data.actions">>{{action.text}}</a>
+                <a class="action" ng-repeat="action in data.actions" ng-click="close()" href="">>{{action.text}}</a>
             </div>
         </div>
         <div class="left-content clearfix">
