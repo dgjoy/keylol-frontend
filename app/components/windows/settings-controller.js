@@ -300,7 +300,7 @@
 
             $scope.logout = function () {
                 if (confirm("确认退出登录？")) {
-                    $http.delete(apiEndpoint + "login/current").then(function () {
+                    $http.delete(apiEndpoint + "login").then(function () {
                         delete union.$localStorage.login;
                         alert("成功退出登录。");
                         close();
