@@ -20,12 +20,21 @@
 
 .window-editor .article-type {
     font-size: 19px;
-    background: #11254a;
+    background: #738a95 no-repeat;
     color: white;
     position: absolute;
     height: 100%;
     width: 70px;
     left: -5px;
+    cursor: pointer;
+}
+
+.window-editor .article-type:hover {
+    background-color: #889ba5;
+}
+
+.window-editor .article-type.expanded, .window-editor .article-type.expanded:hover {
+    background-color: #11254A;
 }
 
 .window-editor .article-type::after {
@@ -43,11 +52,15 @@
     background-color: #d9d9d9;
 }
 
-.window-editor .article-type span {
+.window-editor .article-type .expand-button {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
+}
+
+.window-editor .article-type .expand-button a {
+    color: white;
 }
 
 .window-editor .article-type + span {

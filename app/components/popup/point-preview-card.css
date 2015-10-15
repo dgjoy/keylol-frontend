@@ -51,14 +51,16 @@
 
 .popup-point-preview-card .summary .left-summary {
     float: left;
-    line-height: 30px;
+    margin-top: 15px;
+    transform: translateY(-50%);
     color: white;
     margin-left: 15px;
 }
 
 .popup-point-preview-card .summary .right-summary {
     float: right;
-    line-height: 30px;
+    margin-top: 15px;
+    transform: translateY(-50%);
     color: white;
     margin-right: 15px;
 }

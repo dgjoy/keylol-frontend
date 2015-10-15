@@ -5,8 +5,12 @@
         </div>
         <form name="form" ng-submit="submit()">
             <div class="type-title">
-                <div class="article-type font-myriad-keylol">
-                    <span>感悟 ▼</span></div>
+                <div class="article-type font-myriad-keylol" popup="funcs.showSelector" ng-switch="expanded"
+                     ng-click="expand($event)" ng-class="{expanded: expanded}">
+                    <span class="expand-button">
+                        {{expandString}}<span ng-switch-when="false">▾</span><span ng-switch-when="true">▴</span>
+                    </span>
+                </div>
                 <span><input type="text" ng-model="vm.title" placeholder="标题"></span>
             </div>
             <div quill ng-model="vm.content"></div>
