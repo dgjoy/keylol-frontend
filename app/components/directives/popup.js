@@ -14,6 +14,7 @@
                     var objectReferences = [];
                     scope.showFn = function (optionsOverride) {
                         var options = {
+                            computePosition: true,
                             attachSide: "top",
                             align: "center",
                             offsetX: 0,
@@ -75,52 +76,55 @@
                                     });
 
                                     windowPromise.then(function (window) {
-                                        var position = element.offset();
-                                        var width = element.innerWidth();
-                                        var height = element.innerHeight();
-                                        var popupWidth = window.$element.innerWidth();
-                                        var popupHeight = window.$element.innerHeight();
+                                        if (options.computePosition) {
 
-                                        if (options.attachSide === "left" || options.attachSide === "right") {
-                                            switch (options.align) {
-                                                case "top":
-                                                    break;
+                                            var position = element.offset();
+                                            var width = element.innerWidth();
+                                            var height = element.innerHeight();
+                                            var popupWidth = window.$element.innerWidth();
+                                            var popupHeight = window.$element.innerHeight();
 
-                                                case "bottom":
-                                                    position.top = position.top + height - popupHeight;
-                                                    break;
+                                            if (options.attachSide === "left" || options.attachSide === "right") {
+                                                switch (options.align) {
+                                                    case "top":
+                                                        break;
 
-                                                default: // Center
-                                                    position.top = (2 * position.top + height - popupHeight) / 2;
-                                                    break;
+                                                    case "bottom":
+                                                        position.top = position.top + height - popupHeight;
+                                                        break;
+
+                                                    default: // Center
+                                                        position.top = (2 * position.top + height - popupHeight) / 2;
+                                                        break;
+                                                }
+                                                if (options.attachSide === "left") { // Left
+                                                    position.left -= popupWidth;
+                                                } else { // Right
+                                                    position.left += width;
+                                                }
+                                            } else {
+                                                switch (options.align) {
+                                                    case "left":
+                                                        break;
+
+                                                    case "right":
+                                                        position.left = position.left + width - popupWidth;
+                                                        break;
+
+                                                    default: // Center
+                                                        position.left = (2 * position.left + width - popupWidth) / 2;
+                                                        break;
+                                                }
+                                                if (options.attachSide === "bottom") { // Bottom
+                                                    position.top += height;
+                                                } else { // Top
+                                                    position.top -= popupHeight;
+                                                }
                                             }
-                                            if (options.attachSide === "left") { // Left
-                                                position.left -= popupWidth;
-                                            } else { // Right
-                                                position.left += width;
-                                            }
-                                        } else {
-                                            switch (options.align) {
-                                                case "left":
-                                                    break;
-
-                                                case "right":
-                                                    position.left = position.left + width - popupWidth;
-                                                    break;
-
-                                                default: // Center
-                                                    position.left = (2 * position.left + width - popupWidth) / 2;
-                                                    break;
-                                            }
-                                            if (options.attachSide === "bottom") { // Bottom
-                                                position.top += height;
-                                            } else { // Top
-                                                position.top -= popupHeight;
-                                            }
+                                            position.left += options.offsetX;
+                                            position.top += options.offsetY;
+                                            window.$element.css(position);
                                         }
-                                        position.left += options.offsetX;
-                                        position.top += options.offsetY;
-                                        window.$element.css(position);
                                     });
 
                                     if (options.event) {
@@ -129,8 +133,10 @@
                                             windowPromise.then(function (window) {
                                                 onBodyClick = function (e) {
                                                     if (e.target === options.event.currentTarget ||
-                                                        $.contains(options.event.currentTarget, e.target))
+                                                        $.contains(options.event.currentTarget, e.target)) {
                                                         e.stopPropagation();
+                                                        e.preventDefault();
+                                                    }
                                                     if (e.target !== window.$element[0] && !$.contains(window.$element[0], e.target))
                                                         close();
                                                 };
