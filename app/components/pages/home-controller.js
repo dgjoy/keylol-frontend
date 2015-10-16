@@ -15,6 +15,8 @@
                     alt: "发表新文章",
                     href: "test"
                 },
+                datetime: "outBlock",
+                hasExpand: true,
                 entries: [
                     {
                         types: ["评测", "好评"],

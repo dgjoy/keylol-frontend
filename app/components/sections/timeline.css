@@ -68,6 +68,9 @@
 /* Layout */
 .section-timeline .heading {
     position: relative;
+}
+
+.section-timeline .heading.hasRightButton {
     padding-right: 65px;
 }
 
@@ -119,6 +122,22 @@
     text-decoration: underline;
 }
 
+.section-timeline .heading .left-info .actions {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translate(0, -50%);
+}
+
+.section-timeline .heading .left-info .actions a {
+    color: #C7CDD1;
+    margin-left: 25px;
+}
+
+.section-timeline .heading .left-info .actions a.active {
+    color: white;
+}
+
 .section-timeline .heading .right-button {
     position: absolute;
     right: 0;
@@ -165,6 +184,15 @@
     margin-right: 5px;
 }
 
+.section-timeline .entry-heading .entry-new {
+    width: 7px;
+    height: 7px;
+}
+
+.section-timeline .entry-heading .entry-new circle {
+    fill: #f38b00;
+}
+
 .section-timeline .entry-heading .entry-author {
     float: right;
     width: 184px;
@@ -196,11 +224,20 @@
     background-color: white;
 }
 
+.section-timeline .entry-content.clickable {
+    cursor: pointer;
+}
+
 .section-timeline .entry-content .thumbnail {
     float: left;
     width: 210px;
     height: 118px;
     margin-right: 10px;
+}
+
+.section-timeline .entry-content .datetime-in-block {
+    padding: 8px 10px 0 10px;
+    color: #C7CDD1;
 }
 
 .section-timeline .entry-content .summary {
@@ -228,6 +265,13 @@
 
 .section-timeline .entry-content p.two-line {
     height: 36px;
+}
+
+.section-timeline .entry-content p.one-line {
+    height: 18px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* Footer */
@@ -263,6 +307,19 @@
 
 .section-timeline .entry footer .counts span:first-of-type {
     margin-left: 0;
+}
+
+.section-timeline .entry footer .comment-target {
+    float: left;
+}
+
+.section-timeline .entry footer .delete {
+    float: right;
+    color: #748a97;
+}
+
+.section-timeline .entry footer .comment-target a {
+    color: #748a97;
 }
 
 .section-timeline .entry:hover footer {

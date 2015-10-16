@@ -1,6 +1,6 @@
 ﻿<div class="section-timeline" ng-controller="TimelineController">
-    <div class="heading inverse">
-        <a href="{{data.rightButton.href}}" class="right-button box-shadowed">
+    <div class="heading inverse" ng-class="{hasRightButton: data.rightButton}">
+        <a href="{{data.rightButton.href}}" class="right-button box-shadowed" ng-if="data.rightButton">
             <img ng-src="{{data.rightButton.avatar}}" alt="{{data.rightButton.alt}}">
         </a>
         <div class="left-info box-shadowed card"  popup="showFilter">
@@ -13,12 +13,15 @@
                 <h2 class="font-myriad-keylol">{{data.title.subTitle}}</h2>
             </div>
             <span class="expand-button" ng-switch="expanded"
-                  ng-click="expand($event)" ng-class="{expanded: expanded}">
+                  ng-click="expand($event)" ng-class="{expanded: expanded}" ng-if="data.hasExpand">
                 <a>{{expandString}}</a><span ng-switch-when="false">▾</span><span ng-switch-when="true">▴</span>
             </span>
+            <div class="actions">
+                <a href="" ng-repeat="action in data.actions" ng-click="action.onClick()" ng-class="{active: action.active}">{{action.text}}</a>
+            </div>
         </div>
     </div>
-    <div class="entry card" ng-repeat="entry in data.entries">
+    <div class="entry card" ng-repeat="entry in data.entries" ng-switch="data.datetime">
         <svg xmlns="http://www.w3.org/2000/svg" class="card-line">
             <rect x="6" width="5" height="100%"></rect>
             <circle cx="8.5" cy="42" r="5"></circle>
@@ -34,26 +37,50 @@
             </div>
             <h3>
                 <span class="entry-type font-myriad-keylol" ng-repeat="type in entry.types">{{type}}</span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="entry-new" ng-if="entry.isNew">
+                    <circle cx="3.5" cy="3.5" r="3.5"></circle>
+                </svg>
                 <span>
                     <a ng-href="{{source.url}}" ng-repeat="source in entry.sources">「{{source.name}}」</a>
                     <span ng-if="entry.privateMesNum">{{entry.privateMesNum.number}} 条对话</span>
+                    <span ng-if="entry.fromArticle"><a href="{{entry.fromArticle.href}}">《{{entry.fromArticle.text|maxLength:14}}》</a>中的评论</span>
                 </span>
             </h3>
         </div>
-        <div class="entry-content clearfix box-shadowed-glowed">
+        <div class="entry-content clearfix box-shadowed-glowed clickable" ng-click="clickTheBox()" ng-if="data.clickable">
             <img ng-if="entry.thumbnail" class="thumbnail" webp-src="{{entry.thumbnail}}" alt="预览图">
-            <span ng-if="postDatetime"></span>
+            <p ng-if="entry.datetime" am-time-ago="entry.datetime" class="datetime-in-block" ng-switch-when="inBlock"></p>
             <div class="summary">
                 <h3 ng-if="entry.title">
                     <a ng-href="{{entry.url}}">{{entry.title}}</a>
                 </h3>
-                <p ng-class="{'two-line': !entry.thumbnail}">{{entry.summary}}</p>
+                <p ng-class="{'two-line': !entry.thumbnail, 'one-line': data.oneLine}">{{entry.summary}}</p>
+            </div>
+        </div>
+        <div class="entry-content clearfix box-shadowed-glowed" ng-if="!(data.clickable)">
+            <img ng-if="entry.thumbnail" class="thumbnail" webp-src="{{entry.thumbnail}}" alt="预览图">
+            <p ng-if="entry.datetime" am-time-ago="entry.datetime" class="datetime-in-block" ng-switch-when="inBlock"></p>
+            <div class="summary">
+                <h3 ng-if="entry.title">
+                    <a ng-href="{{entry.url}}">{{entry.title}}</a>
+                </h3>
+                <p ng-class="{'two-line': !entry.thumbnail, 'one-line': data.oneLine}">{{entry.summary}}</p>
             </div>
         </div>
         <footer>
             <span class="counts" ng-if="entry.count"><span>[+1] {{entry.count.like}}</span><span>(···) {{entry.count.comment}}</span></span>
-            <span class="datetime" am-time-ago="entry.datetime"></span>
+            <span class="datetime" am-time-ago="entry.datetime" ng-switch-when="outBlock"></span>
             <span class="likes" ng-if="entry.count.like">Stackia、Lee. 赞了这篇文章</span>
+            <span class="comment-target" ng-if="entry.commentTarget" ng-switch="entry.commentTarget.type">
+                回复
+                <span ng-switch-when="comment">
+                    <a href="test">@{{entry.commentTarget.author}}</a>
+                    的评论
+                    <a href="test">「{{entry.commentTarget.text|maxLength:16}}」</a>
+                </span>
+                <span ng-switch-when="article">文章</span>
+            </span>
+            <a class="delete" ng-if="data.hasDeleteButton" href="" ng-click="">移除纪录</a>
         </footer>
     </div>
 </div>

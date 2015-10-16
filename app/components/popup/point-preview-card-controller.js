@@ -5,7 +5,7 @@
         "$scope", "data", "$timeout",
         function ($scope, data, $timeout) {
             $scope.loading = true;
-            $timeout(function(){
+            $timeout(function () {
                 $scope.data = {
                     action: {
                         text: "已订阅",
@@ -24,7 +24,7 @@
                     }
                 };
                 $scope.loading = false;
-            },data*1000);
+            }, data * 1000);
         }
     ]);
 })();

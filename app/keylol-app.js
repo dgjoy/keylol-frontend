@@ -35,6 +35,9 @@
             }).when("/post", {
                 templateUrl: "components/pages/post.html",
                 controller: "PostController"
+            }).when("/comments", {
+                templateUrl: "components/pages/comments.html",
+                controller: "CommentsController"
             }).otherwise({
                 templateUrl: "components/pages/not-found.html",
                 controller: "NotFoundController"

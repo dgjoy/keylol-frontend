@@ -2,8 +2,8 @@
     "use strict";
 
     keylolApp.controller("TimelineController", [
-        "$scope", "union",
-        function ($scope, union) {
+        "$scope", "union", "$location",
+        function ($scope, union, $location) {
             $scope.headingDisplayMode = function (entry) {
                 if (entry.source)
                     return "source";
@@ -11,6 +11,10 @@
                     return "title";
             };
             $scope.data = union.timeline;
+
+            $scope.clickTheBox = function () {
+                $location.url("test");
+            };
 
             $scope.expanded = false;
             var filterValues = ["『评』", "『研』", "『讯』", "『谈』", "『档』"];
