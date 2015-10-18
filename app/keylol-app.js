@@ -38,6 +38,9 @@
             }).when("/comments", {
                 templateUrl: "components/pages/comments.html",
                 controller: "CommentsController"
+            }).when("/acknowledgements", {
+                templateUrl: "components/pages/acknowledgements.html",
+                controller: "AcknowledgementsController"
             }).otherwise({
                 templateUrl: "components/pages/not-found.html",
                 controller: "NotFoundController"
