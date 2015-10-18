@@ -1,0 +1,35 @@
+.popup-point-selector {
+    width: 300px;
+}
+.popup-point-selector .selector-main{
+    background: white;
+    margin-top: 15px;
+}
+.popup-point-selector .selector-main ul{
+    padding: 0;
+}
+.popup-point-selector .selector-main li{
+    list-style: none;
+    padding: 10px 15px;
+}
+.popup-point-selector .selector-main li.selected{
+    background-color: #EEF1F3;
+}
+.popup-point-selector .selector-main li .avatar-anchor{
+    float: left;
+}
+.popup-point-selector .selector-main li .avatar-anchor img{
+    width: 32px;
+    height: 32px;
+}
+.popup-point-selector .selector-main li .title{
+    float: left;
+    margin-left: 14px;
+}
+.popup-point-selector .selector-main li .title p{
+    margin: 0;
+    line-height: 16px;
+}
+.popup-point-selector .selector-main li .title p span{
+    color: #748a97;
+}

@@ -15,7 +15,8 @@
             </div>
             <div quill ng-model="vm.content"></div>
             <h3 class="labeled-heading">推送至据点</h3>
-            <input type="text" placeholder="最多可以同时推送至五个据点，每篇文章都会自动发布在你的个人据点中">
+            <!--<input type="text" placeholder="最多可以同时推送至五个据点，每篇文章都会自动发布在你的个人据点中" ng-model="">-->
+            <input-point ng-model="vm.selector"></input-point>
             <h3 class="labeled-heading">评价游戏</h3>
             <div class="pad-right">
                 <input type="text" placeholder="选择一个游戏据点作为评价对象">
