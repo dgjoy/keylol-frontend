@@ -32,7 +32,7 @@
                     <img class="avatar-small" ng-src="{{entry.author.avatarUrl}}" alt="头像">
                 </a>
                 <h4>
-                    <a href="test">@{{entry.author.username}}</a>
+                    <a href="test">{{entry.author.username|userName:true}}</a>
                 </h4>
             </div>
             <h3>
@@ -72,7 +72,7 @@
             <p ng-if="entry.datetime" am-time-ago="entry.datetime" class="datetime-in-block" ng-switch-when="inBlock"></p>
             <div class="summary">
                 <h3 ng-if="entry.title">
-                    <a ng-href="{{entry.url}}"><span ng-if="entry.isUser">@</span>{{entry.title}}</a>
+                    <a ng-href="{{entry.url}}">{{entry.title|userName:entry.isUser}}</a>
                 </h3>
                 <p ng-class="{'two-line': !entry.thumbnail, 'one-line': data.oneLine || entry.pointAvatar}">{{entry.summary}}</p>
             </div>
@@ -89,7 +89,7 @@
             <span class="comment-target" ng-if="entry.commentTarget" ng-switch="entry.commentTarget.type">
                 回复
                 <span ng-switch-when="comment">
-                    <a href="test">@{{entry.commentTarget.author}}</a>
+                    <a href="test">{{entry.commentTarget.author|userName:true}}</a>
                     的评论
                     <a href="test">「{{entry.commentTarget.text|maxLength:16}}」</a>
                 </span>

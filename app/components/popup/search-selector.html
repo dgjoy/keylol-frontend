@@ -12,11 +12,10 @@
                     <img class="avatar-small" ng-src="{{result.avatar}}">
                 </div>
                 <div class="title">
-                    <p>{{result.mainTitle|maxLength: 15}}</p>
+                    <p>{{result.mainTitle|maxLength:15}}</p>
                     <p>
                         <span ng-if="result.type">[{{result.type}}]</span>
-                        <span ng-if="result.isUser">@</span>
-                        {{result.subTitle|maxLength: 15}}
+                        {{result.subTitle|maxLength:15|userName:result.isUser}}
                     </p>
                 </div>
             </li>
