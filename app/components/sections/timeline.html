@@ -27,7 +27,7 @@
             <circle cx="8.5" cy="42" r="5"></circle>
         </svg>
         <div class="entry-heading">
-            <div class="entry-author">
+            <div class="entry-author" ng-if="entry.author">
                 <a class="avatar-anchor" href="test">
                     <img class="avatar-small" ng-src="{{entry.author.avatarUrl}}" alt="头像">
                 </a>
@@ -44,11 +44,15 @@
                     <a ng-href="{{source.url}}" ng-repeat="source in entry.sources">「{{source.name}}」</a>
                     <span ng-if="entry.privateMesNum">{{entry.privateMesNum.number}} 条对话</span>
                     <span ng-if="entry.fromArticle"><a href="{{entry.fromArticle.href}}">《{{entry.fromArticle.text|maxLength:14}}》</a><span ng-if="entry.fromArticle.fromComment">中的评论</span></span>
+                    <span ng-if="entry.pointInfo">{{entry.pointInfo.reader}}名读者 / {{entry.pointInfo.article}}篇文章</span>
                 </span>
             </h3>
         </div>
         <div class="entry-content clearfix box-shadowed-glowed clickable" ng-click="clickTheBox()" ng-if="data.clickable">
             <img ng-if="entry.thumbnail" class="thumbnail" webp-src="{{entry.thumbnail}}" alt="预览图">
+            <a ng-href="{{entry.url}}" class="point-avatar" ng-if="entry.pointAvatar">
+                <img class="avatar-big" ng-src="{{entry.pointAvatar}}" alt="头像">
+            </a>
             <p ng-if="entry.datetime" am-time-ago="entry.datetime" class="datetime-in-block" ng-switch-when="inBlock"></p>
             <div class="summary">
                 <h3 ng-if="entry.title">
@@ -56,15 +60,26 @@
                 </h3>
                 <p ng-class="{'two-line': !entry.thumbnail, 'one-line': data.oneLine}">{{entry.summary}}</p>
             </div>
+            <div class="actions">
+                <button class="border-button right-border" ng-repeat="action in entry.actions" ng-class="action.extraClass">{{action.text}}</button>
+            </div>
         </div>
         <div class="entry-content clearfix box-shadowed-glowed" ng-if="!(data.clickable)">
             <img ng-if="entry.thumbnail" class="thumbnail" webp-src="{{entry.thumbnail}}" alt="预览图">
+            <a ng-href="{{entry.url}}" class="point-avatar" ng-if="entry.pointAvatar">
+                <img class="avatar-big" ng-src="{{entry.pointAvatar}}" alt="头像">
+            </a>
             <p ng-if="entry.datetime" am-time-ago="entry.datetime" class="datetime-in-block" ng-switch-when="inBlock"></p>
             <div class="summary">
                 <h3 ng-if="entry.title">
-                    <a ng-href="{{entry.url}}">{{entry.title}}</a>
+                    <a ng-href="{{entry.url}}"><span ng-if="entry.isUser">@</span>{{entry.title}}</a>
                 </h3>
-                <p ng-class="{'two-line': !entry.thumbnail, 'one-line': data.oneLine}">{{entry.summary}}</p>
+                <p ng-class="{'two-line': !entry.thumbnail, 'one-line': data.oneLine || entry.pointAvatar}">{{entry.summary}}</p>
+            </div>
+            <div class="actions">
+                <p ng-repeat="action in entry.actions">
+                    <button class="border-button right-border" ng-class="action.extraClass">{{action.text}}</button>
+                </p>
             </div>
         </div>
         <footer>
@@ -83,4 +98,7 @@
             <a class="delete" ng-if="data.hasDeleteButton" href="" ng-click="">移除纪录</a>
         </footer>
     </div>
+    <svg xmlns="http://www.w3.org/2000/svg" class="card-end">
+        <rect x="14" width="15" height="5"></rect>
+    </svg>
 </div>

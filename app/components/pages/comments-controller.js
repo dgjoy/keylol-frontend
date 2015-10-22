@@ -48,7 +48,7 @@
                         }
                     },
                     {
-                        active: true,
+                        active: false,
                         text: "发出",
                         onClick: function () {
                             changeActive(this);

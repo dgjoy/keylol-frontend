@@ -6,8 +6,8 @@
                     <img class="avatar-small" ng-src="{{point.avatar}}">
                 </div>
                 <div class="title">
-                    <p>{{point.mainTitle}}</p>
-                    <p><span>[{{point.type}}]</span>{{point.subTitle}}</p>
+                    <p>{{point.mainTitle|maxLength: 15}}</p>
+                    <p><span>[{{point.type}}]</span>{{point.subTitle|maxLength: 15}}</p>
                 </div>
             </li>
         </ul>
