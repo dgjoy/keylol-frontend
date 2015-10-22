@@ -1,8 +1,11 @@
 .section-search-box {
     width: 100%;
     min-width: 184px;
-    height: 100%;
     min-height: 40px;
+}
+
+.section-search-box .search-box {
+    height: 100%;
     padding: 7px 30px 7px 10px;
     background-color: #11254A;
     position: relative;

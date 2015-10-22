@@ -1,0 +1,28 @@
+﻿<popup class="popup-search-selector">
+    <div class="selector-main box-shadowed-deeper clearfix">
+        <div class="search-filter">
+            <div>
+
+            </div>
+            <a href="" ng-repeat="filter in filterArray" ng-click="changeFilter($index)" ng-class="{active: filter.active}">{{filter.text}}</a>
+        </div>
+        <ul class="result-list">
+            <li ng-repeat="result in resultArray" class="clearfix" ng-click="jumpTo(result.url)">
+                <div class="avatar-anchor">
+                    <img class="avatar-small" ng-src="{{result.avatar}}">
+                </div>
+                <div class="title">
+                    <p>{{result.mainTitle|maxLength: 15}}</p>
+                    <p>
+                        <span ng-if="result.type">[{{result.type}}]</span>
+                        <span ng-if="result.isUser">@</span>
+                        {{result.subTitle|maxLength: 15}}
+                    </p>
+                </div>
+            </li>
+        </ul>
+        <div class="all-results">
+            <a href="" ng-click="onSearching()">全部结果</a>
+        </div>
+    </div>
+</popup>

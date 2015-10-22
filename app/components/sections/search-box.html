@@ -1,4 +1,6 @@
-﻿<div class="section-search-box box-shadowed">
-    <a href="test"><img src="assets/images/search-box-button.png" alt="搜索"></a>
-    <input type="search" placeholder="探索你最喜欢的游戏">
+﻿<div class="section-search-box box-shadowed" ng-controller="SearchBoxController">
+    <form class="search-box" popup="showSearchSelector" ng-submit="onSearching()">
+        <a href="" ng-click="onSearching()"><img src="assets/images/search-box-button.png" alt="搜索"></a>
+        <input type="search" placeholder="探索你最喜欢的游戏" ng-click="getSearchResults($event)" ng-model="searchText">
+    </form>
 </div>
