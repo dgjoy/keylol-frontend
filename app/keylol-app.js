@@ -41,6 +41,9 @@
             }).when("/acknowledgements", {
                 templateUrl: "components/pages/acknowledgements.html",
                 controller: "AcknowledgementsController"
+            }).when("/searchResults", {
+                templateUrl: "components/pages/search-results.html",
+                controller: "SearchResultsController"
             }).otherwise({
                 templateUrl: "components/pages/not-found.html",
                 controller: "NotFoundController"
