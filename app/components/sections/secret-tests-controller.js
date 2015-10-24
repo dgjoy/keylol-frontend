@@ -22,12 +22,12 @@
                     mainText: "文章已发布",
                     mainTitle: "成功",
                     subTitle: "Succeeded"
-                },{
+                }, {
                     type: "error",
                     mainText: "发生未知错误，请重试或与站务职员联系",
                     mainTitle: "错误",
                     subTitle: "Error"
-                },{
+                }, {
                     type: "attention",
                     mainText: "确认要登出当前账户吗？",
                     mainTitle: "注意",
@@ -35,7 +35,7 @@
                     actions: [
                         {
                             text: "登出"
-                        },{
+                        }, {
                             text: "取消"
                         }
                     ]

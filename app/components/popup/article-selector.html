@@ -3,25 +3,9 @@
         <div class="arrow-down"></div>
         <div class="selector-main box-shadowed-deeper">
             <ul>
-                <li ng-click="changeSelector(0)">
-                    <span ng-class="{active: typeOptions[0]}" class="font-myriad-keylol">评</span><!--
-                    --><p>感悟、心得、体验、报告</p>
-                </li>
-                <li ng-click="changeSelector(1)">
-                    <span ng-class="{active: typeOptions[1]}" class="font-myriad-keylol">研</span><!--
-                    --><p>攻略、技术、成就、教程</p>
-                </li>
-                <li ng-click="changeSelector(2)">
-                    <span ng-class="{active: typeOptions[2]}" class="font-myriad-keylol">讯</span><!--
-                    --><p>新闻、购物、更新、竞技</p>
-                </li>
-                <li ng-click="changeSelector(3)">
-                    <span ng-class="{active: typeOptions[3]}" class="font-myriad-keylol">谈</span><!--
-                    --><p>聊天、灌水、吐槽、杂文</p>
-                </li>
-                <li ng-click="changeSelector(4)">
-                    <span ng-class="{active: typeOptions[4]}" class="font-myriad-keylol">档</span><!--
-                    --><p>声画、模组、插件、汉化</p>
+                <li ng-click="changeSelector($index)" ng-repeat="articleType in articleTypeArray">
+                    <span ng-class="{active: typeOptions[$index]}" class="font-myriad-keylol">{{articleType.Name}}</span><!--
+                    --><p>{{articleType.Description}}</p>
                 </li>
             </ul>
         </div>

@@ -16,25 +16,26 @@
             <div quill ng-model="vm.content"></div>
             <h3 class="labeled-heading">推送至据点</h3>
             <!--<input type="text" placeholder="最多可以同时推送至五个据点，每篇文章都会自动发布在你的个人据点中" ng-model="">-->
-            <input-point ng-model="vm.selector"></input-point>
-            <h3 class="labeled-heading">评价游戏</h3>
-            <div class="pad-right">
-                <input type="text" placeholder="选择一个游戏据点作为评价对象">
+            <input-point ng-model="vm.selector" placeholder="'最多可以同时推送至五个据点，每篇文章都会自动发布在你的个人据点中'"></input-point>
+            <h3 class="labeled-heading" ng-if="allowVote">评价游戏</h3>
+            <div class="pad-right" ng-if="allowVote">
+                <!--<input type="text" placeholder="选择一个游戏据点作为评价对象">-->
+                <input-point ng-model="vm.voteForPoint" placeholder="'选择一个游戏据点作为评价对象'"></input-point>
                 <div class="right-content">
                     <span>
-                        <input type="radio" id="radio-{{radioId[0]}}" name="vote" checked><label for="radio-{{radioId[0]}}">好评</label>
-                        <input type="radio" id="radio-{{radioId[1]}}" name="vote"><label for="radio-{{radioId[1]}}">差评</label>
-                        <input type="radio" id="radio-{{radioId[2]}}" name="vote"><label for="radio-{{radioId[2]}}">中立</label>
+                        <input type="radio" id="radio-{{radioId[0]}}" ng-model="vm.vote" ng-value="0" name="vote" checked><label for="radio-{{radioId[0]}}">好评</label>
+                        <input type="radio" id="radio-{{radioId[1]}}" ng-model="vm.vote" ng-value="1" name="vote"><label for="radio-{{radioId[1]}}">差评</label>
+                        <input type="radio" id="radio-{{radioId[2]}}" ng-model="vm.vote" ng-value="2" name="vote"><label for="radio-{{radioId[2]}}">中立</label>
                     </span>
                 </div>
             </div>
-            <h3 class="labeled-heading">推荐阅读链接</h3>
-            <div class="pad-right">
-                <input type="text" class="pad-right" name="point" ng-model="vm.point" placeholder="如果希望推荐一篇其他其乐文章给读者扩展阅读，可以粘贴文章链接 (URL) 在这里">
-                <div class="right-content">
-                    <span class="left-align" ng-if="form.point.$dirty"><a href="test">德军总部：新秩序 单人剧情视频</a></span>
-                </div>
-            </div>
+            <!--<h3 class="labeled-heading">推荐阅读链接</h3>-->
+            <!--<div class="pad-right">-->
+                <!--<input type="text" class="pad-right" name="point" ng-model="vm.point" placeholder="如果希望推荐一篇其他其乐文章给读者扩展阅读，可以粘贴文章链接 (URL) 在这里">-->
+                <!--<div class="right-content">-->
+                    <!--<span class="left-align" ng-if="form.point.$dirty"><a href="test">德军总部：新秩序 单人剧情视频</a></span>-->
+                <!--</div>-->
+            <!--</div>-->
             <button type="submit" class="window-confirm-button">
                 <img class="arrow-right" src="assets/images/arrow-right.png" alt="下一步">
                 <img class="signature-pen" src="assets/images/signature-pen.png" alt="提交">

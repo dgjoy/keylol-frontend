@@ -11,17 +11,21 @@ input-point {
     cursor: text;
     padding: 8px;
 }
-input-point .point-title{
+
+input-point .point-title {
     float: left;
     cursor: default;
 }
+
 input-point .point-title:hover {
     background-color: #EEF1F3;
 }
+
 input-point .point-title.selected {
     background-color: #EEF1F3;
 }
-input-point input[type=text].input{
+
+input-point input[type=text].input {
     float: left;
     padding: 0;
     width: auto;
@@ -30,6 +34,7 @@ input-point input[type=text].input{
     outline: none;
     margin: 0;
 }
+
 input-point input[type=text].has-placeholder {
     width: 100%;
 }

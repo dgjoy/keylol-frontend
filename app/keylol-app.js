@@ -29,6 +29,9 @@
             }).when("/article", {
                 templateUrl: "components/pages/article.html",
                 controller: "ArticleController"
+            }).when("/article/:author/:article", {
+                templateUrl: "components/pages/article.html",
+                controller: "ArticleController"
             }).when("/point", {
                 templateUrl: "components/pages/point.html",
                 controller: "PointController"

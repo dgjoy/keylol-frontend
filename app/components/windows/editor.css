@@ -89,6 +89,10 @@
     width: calc(100% - 296px);
 }
 
+.window-editor .pad-right input-point {
+    width: calc(100% - 296px);
+}
+
 .window-editor .pad-right .right-content {
     position: absolute;
     right: 14px;
