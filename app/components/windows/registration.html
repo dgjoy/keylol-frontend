@@ -7,7 +7,7 @@
         <div class="heading font-myriad-lisong">
             <img src="assets/images/logo-mono.svg" alt="Logo">
             <h1>会员注册表单</h1>
-            <h2>Keylol Membership Application Form</h2>
+            <h2>Membership Application Form</h2>
         </div>
         <form class="clearfix" ng-submit="submit()">
             <table>
@@ -45,7 +45,7 @@
                         <h4 ng-switch="errorDetect.idCode(error['vm.IdCode'])">
                             <span class="error" ng-switch-when="format">仅限使用字母、数字。</span>
                             <span class="error" ng-switch-when="used">这个代码已经被别人使用。</span>
-                            <span ng-switch-default>自定义字母数字组合的五位用户代码，注册后不可更改。</span>
+                            <span ng-switch-default>五位长度的自定义代码，社区用户的永久身份凭证。</span>
                         </h4>
                         <div class="id-code">
                             <input-code length="5" ng-model="vm.IdCode"></input-code>
@@ -67,7 +67,7 @@
                             <span class="error" ng-switch-when="used">这个昵称已被别人使用。</span>
                             <span class="error" ng-switch-when="format">仅限使用字母、数字、汉字。</span>
                             <span class="error" ng-switch-when="length">仅限 3-16 字节。</span>
-                            <span ng-switch-default>具有唯一性，仅限字母、数字、汉字，3-16 字节。</span>
+                            <span ng-switch-default>展现在日常界面中，不可与他人重复。</span>
                         </h4>
                     </td>
                     <td>
@@ -79,7 +79,7 @@
                         <h3 class="font-myriad-lisong">登录口令</h3>
                         <h4 ng-switch="errorDetect.password(error['vm.Password'])">
                             <span class="error" ng-switch-when="length">密码需要至少长 6 位。</span>
-                            <span ng-switch-default>拉丁字母、数字、字符，大小写敏感，至少 6 位。</span>
+                            <span ng-switch-default>由至少6位的字母、数字、符号组成。</span>
                         </h4>
                     </td>
                     <td>

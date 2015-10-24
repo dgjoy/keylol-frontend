@@ -8,6 +8,9 @@
         </a>
     </div>
     <div ng-if="union.$localStorage.login">
+        <div class="actions">
+            <button class="border-button top-border">(···)</button><button class="border-button top-border">[+]</button>
+        </div>
         <div class="clearfix">
             <a class="avatar-anchor" href="test">
                 <img class="avatar-big" webp-src="{{union.$localStorage.user.AvatarImage | avatarUrl}}" alt="{{union.$localStorage.user.UserName}}">
@@ -23,19 +26,15 @@
         </div>
         <ul class="links list-inline">
             <li>
-                <h4>文章</h4>
+                <h4>订阅</h4>
                 <a href="test">46</a>
             </li>
             <li>
-                <h4>据点</h4>
+                <h4>文章</h4>
                 <a href="test">85</a>
             </li>
             <li>
-                <h4>提醒</h4>
-                <a href="test">0</a>
-            </li>
-            <li>
-                <h4>私信</h4>
+                <h4>读者</h4>
                 <a href="test">0</a>
             </li>
         </ul>

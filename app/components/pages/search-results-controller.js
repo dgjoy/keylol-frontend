@@ -103,9 +103,6 @@
                         url: "test",
                         actions: [
                             {
-                                text: "私信"
-                            },
-                            {
                                 text: "订阅据点"
                             }
                         ]

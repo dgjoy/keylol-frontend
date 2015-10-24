@@ -23,9 +23,6 @@
             union.summary = {
                 actions: [
                     {
-                        text: "编辑据点"
-                    },
-                    {
                         text: "已订阅",
                         extraClass: [
                             "subscribed"

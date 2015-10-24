@@ -1,20 +1,20 @@
-﻿<div class="section-promoted-points box-shadowed" ng-controller="PromotedPointsController">
+﻿<div class="section-related-points box-shadowed" ng-controller="RelatedPointsController">
     <div class="clearfix heading font-myriad-keylol">
         <div class="exit" ng-include="'assets/images/exit.svg'"></div>
         <svg class="parking" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 34 34">
             <rect width="34" height="34" fill="#738a95"/>
-            <text fill="#e8edf0" font-size="33" x="17" y="28" text-anchor="middle">P</text>
+            <text fill="#e8edf0" font-size="33" x="17" y="28" text-anchor="middle">R</text>
         </svg>
-        <p>推荐据点</p>
-        <p>Points</p>
+        <p>关联据点</p>
+        <p>Relations</p>
     </div>
     <div ng-repeat="point in recommendedPoints" class="point">
         <p>
             <a ng-href="{{point.url}}">{{point.name}}</a>
         </p>
         <p>
-            根据你已订阅的据点：<br>
-            <a ng-href="{{point.by.url}}">「{{point.by.name}}」</a>
+            <span>[{{point.type}}]</span>
+            <span>{{point.subName}}</span>
         </p>
     </div>
 </div>

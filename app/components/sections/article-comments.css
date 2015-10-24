@@ -1,6 +1,6 @@
 .section-article-comments {
     background: white;
-    padding: 20px 20px 30px;
+    padding: 20px 100px 30px 20px;
     width: 100%;
     min-width: 300px;
 }
@@ -24,14 +24,32 @@
 
 .section-article-comments .comment {
     margin-top: 20px;
+    position: relative;
 }
 
 .section-article-comments .comment:hover .action {
     display: inline;
 }
 
+.section-article-comments .comment:hover .floor {
+    display: block;
+}
+
 .section-article-comments .comment:first-of-type {
     margin-top: 28px;
+}
+
+.section-article-comments .floor {
+    width: 47px;
+    height: 32px;
+    position: absolute;
+    right: -100px;
+    top: 4px;
+    color: white;
+    background-color: #11254A;
+    text-align: center;
+    line-height: 32px;
+    display: none;
 }
 
 .section-article-comments .header {
@@ -74,7 +92,7 @@
 
 .section-article-comments button[type=submit] {
     position: absolute;
-    right: -25px;
+    right: -105px;
     bottom: 8px;
     padding-right: 23px;
     background-position: 100% 1px;
@@ -84,7 +102,7 @@
 .section-article-comments .textarea-container {
     display: block;
     overflow: hidden;
-    padding: 2px 90px 2px 8px;
+    padding: 2px 30px 2px 8px;
 }
 
 .section-article-comments .textarea-container textarea {

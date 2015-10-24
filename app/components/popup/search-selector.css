@@ -10,13 +10,13 @@
     background: white;
 }
 
-.popup-search-selector .selector-main .search-filter{
+.popup-search-selector .selector-main .search-filter {
     height: 30px;
     padding-top: 10px;
     float: right;
 }
 
-.popup-search-selector .selector-main .search-filter a{
+.popup-search-selector .selector-main .search-filter a {
     margin-right: 12px;
     color: #748a97;
 }
@@ -59,6 +59,11 @@
 .popup-search-selector .selector-main li .title p {
     margin: 0;
     line-height: 16px;
+}
+
+.popup-search-selector .selector-main li .title p:first-of-type {
+    color: #11254A;
+    font-weight: bold;
 }
 
 .popup-search-selector .selector-main li .title p span {

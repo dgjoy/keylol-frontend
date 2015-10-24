@@ -1,9 +1,9 @@
-﻿(function() {
+﻿(function () {
     "use strict";
 
     keylolApp.controller("HomeController", [
         "pageTitle", "$scope", "union",
-		function(pageTitle, $scope, union) {
+        function (pageTitle, $scope, union) {
             pageTitle.set("其乐");
             union.timeline = {
                 title: {
@@ -19,17 +19,20 @@
                 hasExpand: true,
                 entries: [
                     {
-                        types: ["评测", "好评"],
-                        sources: [
-                            {
-                                name: "战地：硬仗",
-                                url: "test"
-                            },
-                            {
-                                name: "战地系列",
-                                url: "test"
-                            }
-                        ],
+                        types: ["评"],
+                        sources: {
+                            type: "point",
+                            pointArray: [
+                                {
+                                    name: "战地：硬仗",
+                                    url: "test"
+                                },
+                                {
+                                    name: "战地系列",
+                                    url: "test"
+                                }
+                            ]
+                        },
                         author: {
                             username: "crakyGALU",
                             avatarUrl: "assets/images/exit.svg"
@@ -45,13 +48,10 @@
                         }
                     },
                     {
-                        types: ["模组"],
-                        sources: [
-                            {
-                                name: "战地：硬仗",
-                                url: "test"
-                            }
-                        ],
+                        types: ["讯"],
+                        sources: {
+                            type: "publish"
+                        },
                         author: {
                             username: "crakyGALU",
                             avatarUrl: "assets/images/exit.svg"
@@ -66,17 +66,24 @@
                         }
                     },
                     {
-                        types: ["资讯"],
+                        types: ["研"],
                         author: {
                             username: "crakyGALU",
                             avatarUrl: "assets/images/exit.svg"
                         },
-                        sources: [
-                            {
-                                name: "战地：硬仗",
-                                url: "test"
-                            }
-                        ],
+                        sources: {
+                            type: "acknowledgement",
+                            userArray: [
+                                {
+                                    name: "ZenDay",
+                                    url: "test"
+                                },
+                                {
+                                    name: "Stackia",
+                                    url: "test"
+                                }
+                            ]
+                        },
                         datetime: moment().subtract(3, "days"),
                         title: "代工就是不如原厂：这硬仗真的是打的艰辛",
                         summary: "说起这个警匪死磕的话，相比",
@@ -88,17 +95,24 @@
                         }
                     },
                     {
-                        types: ["评测", "差评"],
+                        types: ["档"],
                         author: {
                             username: "crakyGALU字数补丁字数补丁字数补丁",
                             avatarUrl: "assets/images/exit.svg"
                         },
-                        sources: [
-                            {
-                                name: "战地：硬仗",
-                                url: "test"
-                            }
-                        ],
+                        sources: {
+                            type: "point",
+                            pointArray: [
+                                {
+                                    name: "Dota2",
+                                    url: "test"
+                                },
+                                {
+                                    name: "信仰",
+                                    url: "test"
+                                }
+                            ]
+                        },
                         datetime: moment().subtract(1, "years"),
                         title: "代工就是不如原厂：这硬仗真的是打的艰辛 字数补丁字数补丁字数补丁字数补丁字数补丁字数补丁",
                         summary: "说起这个警匪死磕的话，相比正玩家们没有不知道那大名鼎鼎的CF啊不对CS，也就是《反恐精英（Counter-Strike）》",

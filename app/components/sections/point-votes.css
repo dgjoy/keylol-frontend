@@ -5,25 +5,56 @@
     padding: 10px;
 }
 
-.section-point-votes .reputation-level {
-    text-align: center;
-}
-
-.section-point-votes .reputation-level span {
-    background: #11254a;
-    padding: 3px 5px;
-    font-size: 17px;
-    display: inline-block;
-    color: white;
-}
-
 .section-point-votes .point-name {
     font-size: 15px;
     text-align: center;
-    margin: 9px 0;
+    margin: 12px 0 7px 0;
+    font-weight: bold;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.section-point-votes .reputation-level {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.section-point-votes .reputation-number {
+    margin-right: 5px;
+}
+
+.section-point-votes .reputation-circle {
+    text-align: center;
+    display: inline-block;
+    width: 10px;
+    height: 8px;
+    fill: #c7cdd1;
+}
+
+.section-point-votes .reputation-level .awesome {
+    color: #00ab4e;
+    fill: #00ab4e;
+}
+
+.section-point-votes .reputation-level .good {
+    color: #71bf44;
+    fill: #71bf44;
+}
+
+.section-point-votes .reputation-level .not-bad {
+    color: #f7943e;
+    fill: #f7943e;
+}
+
+.section-point-votes .reputation-level .bad {
+    color: #e30613;
+    fill: #e30613;
+}
+
+.section-point-votes .reputation-level .terrible {
+    color: #541912;
+    fill: #541912;
 }
 
 .section-point-votes .positive-vs-negative {
@@ -42,24 +73,16 @@
 }
 
 .section-point-votes [class$=-text] a {
-    color: #333;
+    color: #738a95;
 }
 
 .section-point-votes .positive-text {
     float: left;
 }
 
-.section-point-votes .positive-text p:first-child {
-    color: #11254a;
-}
-
 .section-point-votes .negative-text {
     float: right;
     text-align: right;
-}
-
-.section-point-votes .negative-text p:first-child {
-    color: #738a95;
 }
 
 .section-point-votes .external-links {

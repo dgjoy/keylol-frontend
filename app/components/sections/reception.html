@@ -1,10 +1,11 @@
 ﻿<div class="section-reception box-shadowed" ng-controller="ReceptionController">
     <div class="quick-link">
-        <h1 class="labeled-heading">快速链接</h1>
+        <h1 class="labeled-heading">收藏夹</h1>
         <ul>
-            <li ng-repeat="link in quickLinks"><a ng-href="{{link.url}}">{{link.name}}</a></li>
-            <li><a ng-href="#" popup="showTestHover" ng-mouseenter="testHover($event)">测试据点卡片</a></li>
+            <li ng-repeat="link in quickLinks"><span class="delete">x</span><a ng-href="{{link.url}}">{{link.name}}</a></li>
+            <li><a ng-href="#" popup="showTestHover" ng-mouseenter="testHover($event)">测试据点卡片</a><span class="delete">x</span></li>
         </ul>
+        <a ng-if="isInPoint" href="test" class="add">添加当前据点</a>
     </div>
     <div class="recent-link">
         <h1 class="labeled-heading">最近访问</h1>

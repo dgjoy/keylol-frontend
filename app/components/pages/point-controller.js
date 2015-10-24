@@ -1,15 +1,12 @@
-﻿(function() {
+﻿(function () {
     "use strict";
 
     keylolApp.controller("PointController", [
         "pageTitle", "$scope", "union",
-		function(pageTitle, $scope, union) {
+        function (pageTitle, $scope, union) {
             pageTitle.set("据点 - 其乐");
             union.summary = {
                 actions: [
-                    {
-                        text: "编辑据点"
-                    },
                     {
                         text: "已订阅",
                         extraClass: [
@@ -39,19 +36,11 @@
                     alt: "发表新文章",
                     href: "test"
                 },
+                datetime: "outBlock",
+                hasExpand: true,
                 entries: [
                     {
-                        types: ["评测", "好评"],
-                        sources: [
-                            {
-                                name: "战地：硬仗",
-                                url: "test"
-                            },
-                            {
-                                name: "战地系列",
-                                url: "test"
-                            }
-                        ],
+                        types: ["评"],
                         author: {
                             username: "crakyGALU",
                             avatarUrl: "assets/images/exit.svg"
@@ -67,13 +56,7 @@
                         }
                     },
                     {
-                        types: ["模组"],
-                        sources: [
-                            {
-                                name: "战地：硬仗",
-                                url: "test"
-                            }
-                        ],
+                        types: ["讯"],
                         author: {
                             username: "crakyGALU",
                             avatarUrl: "assets/images/exit.svg"
@@ -88,17 +71,11 @@
                         }
                     },
                     {
-                        types: ["资讯"],
+                        types: ["讯"],
                         author: {
                             username: "crakyGALU",
                             avatarUrl: "assets/images/exit.svg"
                         },
-                        sources: [
-                            {
-                                name: "战地：硬仗",
-                                url: "test"
-                            }
-                        ],
                         datetime: moment().subtract(3, "days"),
                         title: "代工就是不如原厂：这硬仗真的是打的艰辛",
                         summary: "说起这个警匪死磕的话，相比",
@@ -110,17 +87,11 @@
                         }
                     },
                     {
-                        types: ["评测", "差评"],
+                        types: ["评"],
                         author: {
                             username: "crakyGALU字数补丁字数补丁字数补丁",
                             avatarUrl: "assets/images/exit.svg"
                         },
-                        sources: [
-                            {
-                                name: "战地：硬仗",
-                                url: "test"
-                            }
-                        ],
                         datetime: moment().subtract(1, "years"),
                         title: "代工就是不如原厂：这硬仗真的是打的艰辛 字数补丁字数补丁字数补丁字数补丁字数补丁字数补丁",
                         summary: "说起这个警匪死磕的话，相比正玩家们没有不知道那大名鼎鼎的CF啊不对CS，也就是《反恐精英（Counter-Strike）》",
@@ -132,6 +103,6 @@
                     }
                 ]
             };
-		}
+        }
     ]);
 })();

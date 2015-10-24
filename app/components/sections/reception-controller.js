@@ -4,6 +4,7 @@
     keylolApp.controller("ReceptionController", [
         "$scope",
         function ($scope) {
+            $scope.isInPoint = true;
             $scope.quickLinks = [
                 {
                     name: "League of Legends",

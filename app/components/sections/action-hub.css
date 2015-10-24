@@ -3,6 +3,7 @@
     height: 134px;
     background-color: white;
     padding: 12px;
+    position: relative;
 }
 
 .section-action-hub .not-logged-in {
@@ -60,6 +61,17 @@
     margin-left: 62px;
 }
 
+.section-action-hub .actions {
+    position: absolute;
+    right: 5px;
+    top: -6px;
+}
+
+.section-action-hub .actions button {
+    margin-right: 10px;
+    padding: 5px;
+}
+
 .section-action-hub .name-settings h4 {
     margin: 0;
     line-height: 22px;
@@ -86,12 +98,17 @@
 
 .section-action-hub .links {
     margin-top: 16px;
+    text-align: center;
 }
 
 .section-action-hub .links li {
     display: inline-block;
     text-align: center;
     width: 66px;
+}
+
+.section-action-hub .links li:not(:last-child) {
+    border-right: 1px solid #C7CDD1;
 }
 
 .section-action-hub .links h4 {

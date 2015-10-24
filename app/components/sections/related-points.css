@@ -1,15 +1,15 @@
-.section-promoted-points {
+.section-related-points {
     background-color: white;
     width: 100%;
     min-width: 200px;
 }
 
-.section-promoted-points .heading {
+.section-related-points .heading {
     background-color: #11254a;
     position: relative;
 }
 
-.section-promoted-points .heading::before {
+.section-related-points .heading::before {
     content: "";
     display: block;
     position: absolute;
@@ -23,49 +23,52 @@
     background-color: #adafb0;
 }
 
-.section-promoted-points .heading .exit {
+.section-related-points .heading .exit {
     float: left;
     margin-left: -5px;
     width: 60px;
     height: 60px;
 }
 
-.section-promoted-points .heading .parking {
+.section-related-points .heading .parking {
     float: left;
     width: 34px;
     height: 34px;
     margin: 13px 10px 13px 13px;
 }
 
-.section-promoted-points .heading p {
+.section-related-points .heading p {
     margin: 0;
     color: white;
 }
 
-.section-promoted-points .heading p:first-of-type {
+.section-related-points .heading p:first-of-type {
     font-size: 17px;
     padding-top: 13px;
 }
 
-.section-promoted-points .point {
+.section-related-points .point {
     margin-left: 20px;
     padding: 10px 0;
     border-bottom: 1px solid #000003;
 }
 
-.section-promoted-points .point:last-of-type {
+.section-related-points .point:last-of-type {
     border-bottom: none;
 }
 
-.section-promoted-points .point p {
-    margin: 0;
-}
-
-.section-promoted-points .point p:first-of-type {
-    font-weight: bold;
+.section-related-points .point p {
+    margin: 0 12px 0 0;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    margin-right: 12px;
+}
+
+.section-related-points .point p:first-of-type {
+    font-weight: bold;
     margin-bottom: 2px;
+}
+
+.section-related-points .point p:last-of-type span:first-of-type {
+    color: #748a97;
 }

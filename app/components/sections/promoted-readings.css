@@ -11,7 +11,6 @@
 }
 
 .section-promoted-readings .article h2 {
-    font-weight: normal;
     font-size: 13px;
     margin: 0;
     white-space: nowrap;
@@ -25,7 +24,7 @@
 }
 
 .section-promoted-readings .article p {
-    margin: 7px 0;
+    margin: 0 0;
     max-height: 36px;
     overflow: hidden;
     line-height: 18px;
@@ -43,11 +42,6 @@
     display: none;
 }
 
-.section-promoted-readings .article:hover footer span.datetime {
-    display: none;
-}
-
-.section-promoted-readings .article footer span.datetime,
 .section-promoted-readings .article:hover footer span {
     display: inline-block;
 }

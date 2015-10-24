@@ -20,7 +20,7 @@
 }
 
 .section-main-navigation .labeled-heading + ul li {
-    display: inline-block;
+    display: list-item;
     margin-right: 7px;
 }
 

@@ -1,9 +1,9 @@
-﻿(function() {
+﻿(function () {
     "use strict";
 
     keylolApp.controller("MainNavigationController", [
         "$scope",
-		function($scope) {
+        function ($scope) {
             $scope.categories = [
                 {
                     name: "游戏",
@@ -27,10 +27,6 @@
                         },
                         {
                             name: "军团要塞2",
-                            url: "test"
-                        },
-                        {
-                            name: "求生之路2",
                             url: "test"
                         }
                     ]
@@ -58,14 +54,6 @@
                         {
                             name: "沙盒",
                             url: "test"
-                        },
-                        {
-                            name: "塔防",
-                            url: "test"
-                        },
-                        {
-                            name: "角色扮演",
-                            url: "test"
                         }
                     ]
                 },
@@ -92,26 +80,6 @@
                         {
                             name: "动视",
                             url: "test"
-                        },
-                        {
-                            name: "暴雪",
-                            url: "test"
-                        },
-                        {
-                            name: "引信",
-                            url: "test"
-                        },
-                        {
-                            name: "卡普空",
-                            url: "test"
-                        },
-                        {
-                            name: "索尼",
-                            url: "test"
-                        },
-                        {
-                            name: "Paradox",
-                            url: "test"
                         }
                     ]
                 },
@@ -137,26 +105,6 @@
                         },
                         {
                             name: "3DS",
-                            url: "test"
-                        },
-                        {
-                            name: "uPlay",
-                            url: "test"
-                        },
-                        {
-                            name: "战网",
-                            url: "test"
-                        },
-                        {
-                            name: "WiiU",
-                            url: "test"
-                        },
-                        {
-                            name: "PS3",
-                            url: "test"
-                        },
-                        {
-                            name: "XBOX360",
                             url: "test"
                         }
                     ]
