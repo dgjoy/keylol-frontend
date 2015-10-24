@@ -26,7 +26,7 @@
             steamLoginHubProxy.client.NotifyCodeReceived = function () {
                 $scope.$apply(function () {
                     $scope.currentStation = 1;
-                    $http.post(apiEndpoint + "login?steamLoginTokenId=" + tokenId, null)
+                    $http.post(apiEndpoint + "login/token/" + tokenId, null)
                         .then(function (response) {
                             $scope.currentStation = 2;
                             union.$localStorage.login = response.data;
