@@ -46,7 +46,7 @@
     right: -100px;
     top: 4px;
     color: white;
-    background-color: #11254A;
+    background-color: #c7cdd1;
     text-align: center;
     line-height: 32px;
     display: none;
@@ -80,7 +80,7 @@
 
 .section-article-comments .content .like-count {
     color: white;
-    background: #11254a;
+    background: #333;
     padding: 1px 4px;
     margin-left: 7px;
 }

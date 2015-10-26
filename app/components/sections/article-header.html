@@ -1,18 +1,15 @@
 ﻿<div class="section-article-header box-shadowed" ng-controller="ArticleHeaderController">
     <h1 class="labeled-heading">
-        <span class="time">2015-8-29</span>
-        <span class="entry-type font-myriad-keylol">评</span><span class="title"><span class="vote">[差评]</span>{{article.Title}}</span>
+        <span class="time"am-time-ago="article.PublishTime"></span>
+        <span class="entry-type font-myriad-keylol">{{article.TypeName}}</span>
+        <span class="title"><span class="vote" ng-if="article.Vote">[{{article.Vote}}]</span>{{article.Title}}</span>
     </h1>
     <div>
         <span class="actions">
-            <a ng-href="test">编辑</a>
+            <a ng-href="test" ng-if="article.canBeEdit">编辑</a>
         </span>
         <span class="points">
-            <a href="test">「FINAL FANTASY XIII」</a>
-            <a href="test">「PS3」</a>
-            <a href="test">「Steam」</a>
-            <a href="test">「JRPG」</a>
-            <a href="test">「Square Enix」</a>
+            <a href="" ng-repeat="point in article.AttachedPoints">「{{point.mainName}}」</a>
         </span>
     </div>
 </div>
