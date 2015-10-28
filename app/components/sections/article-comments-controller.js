@@ -7,6 +7,7 @@
             $scope.comments = union.comments;
             $scope.hotComments = union.hotComments;
             $scope.user = union.$localStorage.user;
+            $scope.pageElements = union.pageElements;
             $scope.textFocus = false;
             $scope.doComment = function(){
                 var replyArray = dealWithReply($scope.currentComment);

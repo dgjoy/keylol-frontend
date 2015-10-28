@@ -6,6 +6,7 @@
         function (pageTitle, $scope, $sce, union, $routeParams, $http) {
             union.article = {};
             union.summary = {};
+            union.pageElements = {};
             union.comments = [];
             union.hotComments = [];
             if ($routeParams.author && $routeParams.article) {
@@ -47,7 +48,7 @@
                                 if (hotComments[i].LikeCount > 0) {
                                     hotComments[i].hasLike = true;
                                 }
-                                hotComments[i].Content = $sce.trustAsHtml(parseComments(hotComments[i].Content, parseInt(i)));
+                                hotComments[i].Content = $sce.trustAsHtml(parseComments(hotComments[i].Content, hotComments[i].SequenceNumberForArticle));
                             }
                             $.extend(union.hotComments, hotComments);
                             console.log(response);
@@ -58,7 +59,8 @@
 
                         $http.get(apiEndpoint + "comment", {
                             params: {
-                                articleId: article.Id
+                                articleId: article.Id,
+                                take: 27
                             }
                         }).then(function (response) {
                             var comments = response.data;
@@ -69,9 +71,27 @@
                                 if (comments[i].LikeCount > 0) {
                                     comments[i].hasLike = true;
                                 }
-                                comments[i].Content = $sce.trustAsHtml(parseComments(comments[i].Content, parseInt(i)));
+                                comments[i].Content = $sce.trustAsHtml(parseComments(comments[i].Content, comments[i].SequenceNumberForArticle));
                             }
                             union.article.totalComments = response.headers("X-Total-Record-Count");
+                            $.extend(union.pageElements, {
+                                totalPages: union.article.totalComments < 27 ? 1 : (union.article.totalComments - 1) / 30 + 1,
+                                currPage: 1,
+                                ChangePage: function (oldPage, newPage) {
+                                    $http.get(apiEndpoint + "comment", {
+                                        params: {
+                                            articleId: article.Id,
+                                            skip: newPage == 1 ? 0 : (27 + (newPage - 2) * 30),
+                                            take: newPage == 1 ? 27 : 30
+                                        }
+                                    }).then(function (response) {
+                                        console.log(response);
+                                    }, function (error) {
+                                        alert("翻页失败");
+                                        console.error(error);
+                                    });
+                                }
+                            });
                             $.extend(union.comments, comments);
                             console.log(response);
                         }, function (error) {
