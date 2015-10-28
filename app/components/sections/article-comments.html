@@ -35,6 +35,7 @@
             <div class="content"><span  ng-bind-html="comment.Content"></span><span class="like-count" ng-if="comment.hasLike">+{{comment.LikeCount}}</span></div>
         </article>
     </div>
+    <pagination total="pageElements.totalPages" current="pageElements.currPage" on-page-changed="pageElements.changePage(oldPage, newPage)" page-href=""></pagination>
     <form ng-submit="doComment()">
         <a class="avatar-anchor" href="test">
             <img class="avatar-small" webp-src="{{user.AvatarImage|avatarUrl}}">
