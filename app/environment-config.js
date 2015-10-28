@@ -2,13 +2,9 @@
     "use strict";
 
     keylolApp.config([
-        "apiEndpointProvider", "httpBatchConfigProvider",
-        function(apiEndpointProvider, httpBatchConfigProvider){
+        "apiEndpointProvider",
+        function(apiEndpointProvider){
             apiEndpointProvider.setEndPoint("https://testflight-api.keylol.com/");
-
-            httpBatchConfigProvider.setAllowedBatchEndpoint("https://testflight-api.keylol.com/", "https://testflight-api.keylol.com/batch", {
-                batchRequestCollectionDelay: 10
-            });
         }
     ]);
 
