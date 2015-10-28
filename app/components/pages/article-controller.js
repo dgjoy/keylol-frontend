@@ -7,6 +7,7 @@
             union.article = {};
             union.summary = {};
             union.comments = [];
+            union.hotComments = [];
             if ($routeParams.author && $routeParams.article) {
                 $http.get(apiEndpoint + "article/" + $routeParams.author + "/" + $routeParams.article)
                     .then(function (response) {
@@ -30,14 +31,67 @@
                         }
                         $.extend(union.article, article);
 
-                        $http.get(apiEndpoint + "comment", {params: {articleId: article.Id}})
-                            .then(function (response) {
-                                $.extend(union.comments, response.data);
-                                console.log(response.data);
-                            }, function (error) {
-                                alert("未知错误");
-                                console.error(error);
+                        $http.get(apiEndpoint + "comment", {
+                            params: {
+                                articleId: article.Id,
+                                orderBy: "LikeCount",
+                                desc: true,
+                                take: 3
+                            }
+                        }).then(function (response) {
+                            var hotComments = response.data;
+                            for (var i in hotComments) {
+                                if (hotComments[i].Commentotar.IdCode == article.AuthorIdCode) {
+                                    hotComments[i].Commentotar.isAuthor = true;
+                                }
+                                if (hotComments[i].LikeCount > 0) {
+                                    hotComments[i].hasLike = true;
+                                }
+                                hotComments[i].Content = $sce.trustAsHtml(parseComments(hotComments[i].Content, parseInt(i)));
+                            }
+                            $.extend(union.hotComments, hotComments);
+                            console.log(response);
+                        }, function (error) {
+                            alert("未知错误");
+                            console.error(error);
+                        });
+
+                        $http.get(apiEndpoint + "comment", {
+                            params: {
+                                articleId: article.Id
+                            }
+                        }).then(function (response) {
+                            var comments = response.data;
+                            for (var i in comments) {
+                                if (comments[i].Commentotar.IdCode == article.AuthorIdCode) {
+                                    comments[i].Commentotar.isAuthor = true;
+                                }
+                                if (comments[i].LikeCount > 0) {
+                                    comments[i].hasLike = true;
+                                }
+                                comments[i].Content = $sce.trustAsHtml(parseComments(comments[i].Content, parseInt(i)));
+                            }
+                            union.article.totalComments = response.headers("X-Total-Record-Count");
+                            $.extend(union.comments, comments);
+                            console.log(response);
+                        }, function (error) {
+                            alert("未知错误");
+                            console.error(error);
+                        });
+
+                        var parseComments = function (str, index) {
+                            var regExpForComment = /^((?:#\d+[ \t]*)+)(?:$|[ \t]+)/gm;
+                            var regExpForEachLine = /#(\d+)/g;
+                            return str.replace(regExpForComment, function (match) {
+                                return match.replace(regExpForEachLine, function (m) {
+                                    var sqNumber = parseInt(m.slice(1, m.length));
+                                    if (sqNumber < index + 1) {
+                                        return '<a href="' + sqNumber + '">' + m + '</a>';
+                                    }
+                                    return m;
+                                });
                             });
+                        };
                     }, function (error) {
                         alert("未知错误");
                         console.error(error);

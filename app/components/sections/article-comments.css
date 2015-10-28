@@ -23,7 +23,7 @@
 }
 
 .section-article-comments .comment {
-    margin-top: 20px;
+    margin-top: 25px;
     position: relative;
 }
 
@@ -37,6 +37,15 @@
 
 .section-article-comments .comment:first-of-type {
     margin-top: 28px;
+}
+
+.section-article-comments .cut-off {
+    margin-top: 25px;
+    margin-left: 9px;
+    position: relative;
+    background-color: #EEF1F3;
+    width: 810px;
+    height: 1px;
 }
 
 .section-article-comments .floor {
@@ -76,9 +85,21 @@
 
 .section-article-comments .content {
     line-height: 1.6em;
+    white-space: pre-wrap;
+}
+
+.section-article-comments .content a{
+    color: #738a95;
 }
 
 .section-article-comments .content .like-count {
+    color: white;
+    background: #333;
+    padding: 1px 4px;
+    margin-left: 7px;
+}
+
+.section-article-comments .content .hot-signal {
     color: white;
     background: #333;
     padding: 1px 4px;

@@ -1,26 +1,45 @@
 ﻿<div class="section-article-comments box-shadowed" ng-controller="ArticleCommentsController">
     <h1 class="labeled-heading">共 {{comments.length}} 则讨论</h1>
-    <div class="comment" ng-repeat="comment in comments">
-        <span class="floor">#{{$index+1}}</span>
-        <a class="avatar-anchor" href="test">
-            <img class="avatar-small" src="assets/images/exit.svg">
+    <div class="comment" ng-repeat="comment in hotComments">
+        <span class="floor">#{{comment.SequenceNumberForArticle}}</span>
+        <a class="avatar-anchor" ng-href="/point/{{comment.Commentotar.IdCode}}">
+            <img class="avatar-small" webp-src="{{comment.Commentotar.AvatarImage|avatarUrl}}">
         </a>
         <article>
-            <div class="header">
-                <a class="name" href="test">@Lee.Exit</a>
-                <span class="as-author">[文章作者]</span>
-                <span class="time">16 小时前</span>
-                <a href="" class="action">回复</a>
-                <a href="" class="action">认可</a>
+            <div class="header" ng-switch="comment.Liked">
+                <a class="name" ng-href="/point/{{comment.Commentotar.IdCode}}">@{{comment.Commentotar.UserName}}</a>
+                <span class="as-author" ng-if="comment.Commentotar.isAuthor">[文章作者]</span>
+                <span class="time" am-time-ago="comment.PublishTime"></span>
+                <a href="" class="action" ng-click="reply(comment.SequenceNumberForArticle)">回复</a>
+                <a href="" class="action" ng-click="acknowledge(comment)" ng-switch-when="false">认可</a>
+                <a href="" class="action" ng-click="cancelAcknowledge(comment)" ng-switch-when="true">取消认可</a>
             </div>
-            <div class="content"><a href="test">@alcohol</a> 写完这篇点评终于算是填上一个坑了，还有一个XIII-2下周再填。你们是不是觉得我省略号用太多了？13-2开玩的时候，正是我FF13刚刚白金之时，当我从FF13中爬出来，终于白金了FF13之后，脑袋发热的我将当初同时跟FF13一起买的...<span class="like-count">+13</span></div>
+            <div class="content"><span  ng-bind-html="comment.Content"></span><span class="hot-signal">HOT</span><span class="like-count" ng-if="comment.hasLike">+{{comment.LikeCount}}</span></div>
         </article>
     </div>
-    <form ng-submit="">
+    <div class="cut-off"></div>
+    <div class="comment" ng-repeat="comment in comments">
+        <span class="floor">#{{comment.SequenceNumberForArticle}}</span>
+        <a class="avatar-anchor" ng-href="/point/{{comment.Commentotar.IdCode}}">
+            <img class="avatar-small" webp-src="{{comment.Commentotar.AvatarImage|avatarUrl}}">
+        </a>
+        <article>
+            <div class="header" ng-switch="comment.Liked">
+                <a class="name" ng-href="/point/{{comment.Commentotar.IdCode}}">@{{comment.Commentotar.UserName}}</a>
+                <span class="as-author" ng-if="comment.Commentotar.isAuthor">[文章作者]</span>
+                <span class="time" am-time-ago="comment.PublishTime"></span>
+                <a href="" class="action" ng-click="reply(comment.SequenceNumberForArticle)">回复</a>
+                <a href="" class="action" ng-click="acknowledge(comment)" ng-switch-when="false">认可</a>
+                <a href="" class="action" ng-click="cancelAcknowledge(comment)" ng-switch-when="true">取消认可</a>
+            </div>
+            <div class="content"><span  ng-bind-html="comment.Content"></span><span class="like-count" ng-if="comment.hasLike">+{{comment.LikeCount}}</span></div>
+        </article>
+    </div>
+    <form ng-submit="doComment()">
         <a class="avatar-anchor" href="test">
             <img class="avatar-small" webp-src="{{user.AvatarImage|avatarUrl}}">
         </a>
         <button type="submit" class="border-button right-border">发表评论</button>
-        <span class="textarea-container"><textarea placeholder="对作者的见解有什么见解？" ng-model="currentComment"></textarea></span>
+        <span class="textarea-container"><textarea placeholder="对作者的见解有什么见解？" ng-model="currentComment" focus-me="textFocus"></textarea></span>
     </form>
 </div>
