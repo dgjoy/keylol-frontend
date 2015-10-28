@@ -27,12 +27,37 @@
                     AvatarImage: user.AvatarImage,
                     Email: user.Email,
                     ProfilePointBackgroundImage: user.ProfilePointBackgroundImage,
+
+                    AutoShareOnAcquiringNewGame: user.AutoShareOnAcquiringNewGame,
+                    AutoShareOnAddingFavorite: user.AutoShareOnAddingFavorite,
+                    AutoShareOnAddingNewFriend: user.AutoShareOnAddingNewFriend,
+                    AutoShareOnAddingVideo: user.AutoShareOnAddingVideo,
+                    AutoShareOnCreatingGroup: user.AutoShareOnCreatingGroup,
+                    AutoShareOnJoiningGroup: user.AutoShareOnJoiningGroup,
+                    AutoShareOnPublishingReview: user.AutoShareOnPublishingReview,
+                    AutoShareOnUnlockingAchievement: user.AutoShareOnUnlockingAchievement,
+                    AutoShareOnUpdatingWishlist: user.AutoShareOnUpdatingWishlist,
+                    AutoShareOnUploadingScreenshot: user.AutoShareOnUploadingScreenshot,
+
                     LockoutEnabled: user.LockoutEnabled,
+
+                    EmailNotifyOnAdvertisement: user.EmailNotifyOnAdvertisement,
+                    EmailNotifyOnArticleReplied: user.EmailNotifyOnArticleReplied,
+                    EmailNotifyOnCommentReplied: user.EmailNotifyOnCommentReplied,
+                    EmailNotifyOnEditorRecommended: user.EmailNotifyOnEditorRecommended,
+                    EmailNotifyOnMessageReceived: user.EmailNotifyOnMessageReceived,
+
+                    MessageNotifyOnArticleLiked: user.MessageNotifyOnArticleLiked,
+                    MessageNotifyOnArticleReplied: user.MessageNotifyOnArticleReplied,
+                    MessageNotifyOnCommentLiked: user.MessageNotifyOnCommentLiked,
+                    MessageNotifyOnCommentReplied: user.MessageNotifyOnCommentReplied,
+                    MessageNotifyOnEditorRecommended: user.MessageNotifyOnEditorRecommended,
+
                     SteamId: user.SteamId,
                     SteamId64: user.SteamId64,
                     SteamProfileName: user.SteamProfileName,
                     StatusClaim: user.StatusClaim,
-                    StaffClaim: user.StaffClaim,
+                    StaffClaim: user.StaffClaim
                 });
                 $.extend(originalVM, $scope.vm);
             };
