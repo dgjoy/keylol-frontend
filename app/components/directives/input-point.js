@@ -101,7 +101,7 @@
                                     }
                                     $window.removeEventListener("keydown", union.keydownCallback, true);
                                     if (newValue != "") {
-                                        $http.get(apiEndpoint + "normal-point?keyword=" + newValue, null)
+                                        $http.get(apiEndpoint + "normal-point", {params: {keyword: newValue}})
                                             .then(function (response) {
                                                 var pointArray = response.data;
                                                 scope.nowPopup = scope.showSelector({

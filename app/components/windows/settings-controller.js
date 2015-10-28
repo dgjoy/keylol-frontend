@@ -27,31 +27,12 @@
                     AvatarImage: user.AvatarImage,
                     Email: user.Email,
                     ProfilePointBackgroundImage: user.ProfilePointBackgroundImage,
-
-                    AutoShareOnAcquiringNewGame: user.AutoShareOnAcquiringNewGame,
-                    AutoShareOnAddingFavorite: user.AutoShareOnAddingFavorite,
-                    AutoShareOnAddingNewFriend: user.AutoShareOnAddingNewFriend,
-                    AutoShareOnAddingVideo: user.AutoShareOnAddingVideo,
-                    AutoShareOnCreatingGroup: user.AutoShareOnCreatingGroup,
-                    AutoShareOnJoiningGroup: user.AutoShareOnJoiningGroup,
-                    AutoShareOnPublishingReview: user.AutoShareOnPublishingReview,
-                    AutoShareOnUnlockingAchievement: user.AutoShareOnUnlockingAchievement,
-                    AutoShareOnUpdatingWishlist: user.AutoShareOnUpdatingWishlist,
-                    AutoShareOnUploadingScreenshot: user.AutoShareOnUploadingScreenshot,
-
                     LockoutEnabled: user.LockoutEnabled,
-
-                    EmailNotifyOnAdvertisement: user.EmailNotifyOnAdvertisement,
-                    EmailNotifyOnArticleReplied: user.EmailNotifyOnArticleReplied,
-                    EmailNotifyOnCommentReplied: user.EmailNotifyOnCommentReplied,
-                    EmailNotifyOnEditorRecommended: user.EmailNotifyOnEditorRecommended,
-                    EmailNotifyOnMessageReceived: user.EmailNotifyOnMessageReceived,
-
-                    MessageNotifyOnArticleLiked: user.MessageNotifyOnArticleLiked,
-                    MessageNotifyOnArticleReplied: user.MessageNotifyOnArticleReplied,
-                    MessageNotifyOnCommentLiked: user.MessageNotifyOnCommentLiked,
-                    MessageNotifyOnCommentReplied: user.MessageNotifyOnCommentReplied,
-                    MessageNotifyOnEditorRecommended: user.MessageNotifyOnEditorRecommended
+                    SteamId: user.SteamId,
+                    SteamId64: user.SteamId64,
+                    SteamProfileName: user.SteamProfileName,
+                    StatusClaim: user.StatusClaim,
+                    StaffClaim: user.StaffClaim,
                 });
                 $.extend(originalVM, $scope.vm);
             };
@@ -60,13 +41,18 @@
             };
             updateVM(union.$localStorage.user);
 
-            $http.get(apiEndpoint + "user/" + union.$localStorage.login.UserId
-                + "?includeClaims=true&includeProfilePointBackgroundImage=true&includeSteamBot=true")
-                .then(function (response) {
-                    var user = response.data;
-                    updateVM(user);
-                    union.$localStorage.user = user;
-                });
+            $http.get(apiEndpoint + "user/" + union.$localStorage.login.UserId, {
+                params: {
+                    includeClaims: true,
+                    includeProfilePointBackgroundImage: true,
+                    includeSteamBot: true,
+                    includeMoreOptions: true
+                }
+            }).then(function (response) {
+                var user = response.data;
+                updateVM(user);
+                union.$localStorage.user = user;
+            });
 
             var geetestResult;
             var gee;
@@ -253,7 +239,7 @@
                     };
                     var uploadEndpoint = "//v0.api.upyun.com/keylol";
                     var policy = base64.encode(JSON.stringify(options));
-                    $http.post(apiEndpoint + "upload-signature?policy=" + policy, null).then(function (response) {
+                    $http.post(apiEndpoint + "upload-signature", null, {params: {policy: policy}}).then(function (response) {
                         var uploads = {};
                         if ($scope.files.avatarImage) {
                             uploads.avatarImage = Upload.upload({

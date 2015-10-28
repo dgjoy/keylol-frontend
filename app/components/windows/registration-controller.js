@@ -67,11 +67,7 @@
                     return;
                 $http.post(apiEndpoint + "user", $scope.vm)
                     .then(function (response) {
-                        var login = response.data.LoginLog;
-                        delete response.data.LoginLog;
-                        union.$localStorage.user = response.data;
-                        login.fromRegistration = true;
-                        union.$localStorage.login = login;
+                        union.$localStorage.login = response.data;
                         close();
                         if (consumeBindingToken)
                             consumeBindingToken.resolve();
