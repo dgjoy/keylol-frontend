@@ -1,0 +1,255 @@
+﻿<style>
+    body {
+        min-width: 1200px;
+    }
+
+    h1 {
+        font-family: "Myriad Pro", "Keylol Rail Sung", serif;
+        margin: 0;
+    }
+
+    h3 {
+        margin: 0;
+        font-weight: lighter;
+        font-family: "Myriad Pro", "Helvetica Neue", Helvetica, "Segoe UI", Arial, "Hiragino Sans GB", "Microsoft YaHei", "Microsoft JhengHei", "WenQuanYi Micro Hei", sans-serif;
+    }
+
+    .screen {
+        width: 100%;
+        height: 768px;
+        position: relative;
+    }
+
+    .description h1{
+        font-size: 48px;
+    }
+
+    .description h3{
+        font-size: 18px;
+    }
+
+</style>
+<style>
+
+    .first {
+        background: url("assets/images/alpha/bg-1.jpg") no-repeat center;
+        background-size: cover;
+        color: white;
+    }
+
+    .first .keylol {
+        position: absolute;
+        top: 48px;
+        left: 8.4%;
+    }
+
+    .first .steamCN {
+        position: absolute;
+        top: 48px;
+        right: 8.4%;
+        text-align: right;
+    }
+
+    .first .entrance {
+        position: absolute;
+        bottom: 60px;
+        left: 50%;
+        text-align: right;
+        transform: translateX(-50%);
+        cursor: pointer;
+    }
+
+    .first .entrance:hover h1 {
+        text-decoration: underline;
+    }
+
+    .first .keylol img, .first .steamCN img, .first .entrance img {
+        display: inline-block;
+        width: 55px;
+        height: 55px;
+        vertical-align: middle;
+    }
+
+    .first .entrance img {
+        width: 48px;
+        height: 48px;
+    }
+
+    .first .keylol div, .first .steamCN div, .first .entrance div {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .first .keylol div{
+        margin-left: 13px;
+    }
+
+    .first .steamCN div {
+        margin-right: 14px;
+    }
+
+    .first .keylol div h1, .first .steamCN div h1 {
+        font-size: 24px;
+    }
+
+    .first .entrance div h1 {
+        font-size: 22px;
+    }
+
+    .first .keylol div h3, .first .steamCN div h3 {
+        font-size: 14px;
+    }
+
+    .first .entrance div h3 {
+        font-size: 13px;
+    }
+
+    .first .description {
+        position: absolute;
+        top: 335px;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: right;
+    }
+</style>
+<div class="screen first">
+    <div class="keylol">
+        <img src="assets/images/alpha/Keylol.png">
+        <div>
+            <h1>其乐</h1>
+            <h3>Keylol.com</h3>
+        </div>
+    </div>
+    <div class="steamCN">
+        <div>
+            <h1 class="font-myriad-keylol">蒸汽动力</h1>
+            <h3>独立社区</h3>
+        </div>
+        <img src="assets/images/alpha/SteamCN.png">
+    </div>
+    <div class="description">
+        <h1>请无视游戏与艺术之间的空隙</h1>
+        <h3>其乐是一个交流评测感悟的玩家社区</h3>
+    </div>
+    <div class="entrance">
+        <div>
+            <h3>通过 Steam 账号</h3>
+            <h1>进入其乐社区</h1>
+        </div>
+        <img src="assets/images/alpha/Steam.png">
+    </div>
+</div>
+<style>
+    .second{
+        overflow: hidden;
+    }
+
+    .second .description {
+        position: absolute;
+        top: 100px;
+        transition: left 0.5s ease-out 1.5s;
+        left: -20%;
+    }
+
+    .second .description.moved {
+        left: 4%;
+    }
+
+    .second .description h1{
+        color: #11254A;
+    }
+
+    .second .description h3{
+        color: #333;
+    }
+
+    .second .three-dm {
+        position: absolute;
+        left: 10%;
+        top: 250px;
+    }
+
+    .second .three-dm img {
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+
+    .second .three-dm img.middle-layer.moved {
+        left: 100px;
+        top: 10px;
+    }
+
+    .second .three-dm img.top-layer.moved {
+        left: 200px;
+        top: 20px;
+    }
+
+    .second .kylo {
+        position: absolute;
+        right: 10%;
+        top: 145px;
+    }
+
+    .second .kylo img {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+
+    .second .kylo img.middle-layer.moved {
+        right: 100px;
+        top: 10px;
+    }
+
+    .second .kylo img.top-layer.moved {
+        right: 200px;
+        top: 20px;
+    }
+
+    .second img.base-layer {
+        transition: opacity 0.5s 1s;
+    }
+
+    .second img.middle-layer {
+        transition:  all ease-out 0.5s, opacity 0.5s 1s;
+    }
+
+    .second img.top-layer {
+        transition:  all ease-out 1s, opacity 0.5s 1s;
+    }
+
+    .second img.base-layer.faded {
+        opacity: 0;
+    }
+
+    .second img.middle-layer.faded {
+        opacity: 0;
+    }
+
+    .second img.top-layer.colourized {
+        opacity: 0;
+    }
+</style>
+<div class="screen second">
+    <div class="description" ng-class="{moved: secondAnimate}">
+        <h1>信息无噪音</h1>
+        <h3>根据你的订阅推送游戏资讯</h3>
+    </div>
+    <div class="three-dm">
+        <img src="assets/images/alpha/3DM/Base-Layer-Faded.png" class="base-layer">
+        <img src="assets/images/alpha/3DM/Base-Layer.png" class="base-layer" ng-class="{faded: secondAnimate}">
+        <img src="assets/images/alpha/3DM/Middle-Layer-Faded.png" class="middle-layer" ng-class="{moved: secondAnimate}">
+        <img src="assets/images/alpha/3DM/Middle-Layer.png" class="middle-layer" ng-class="{faded: secondAnimate, moved: secondAnimate}">
+        <img src="assets/images/alpha/3DM/Top-Layer-Colourized.png" class="top-layer" ng-class="{moved: secondAnimate}">
+        <img src="assets/images/alpha/3DM/Top-Layer.png" class="top-layer" ng-class="{colourized: secondAnimate, moved: secondAnimate}">
+    </div>
+    <div class="kylo">
+        <img src="assets/images/alpha/KYLO/Base-Layer-Faded.png" class="base-layer">
+        <img src="assets/images/alpha/KYLO/Base-Layer.png" class="base-layer" ng-class="{faded: secondAnimate}">
+        <img src="assets/images/alpha/KYLO/Middle-Layer-Faded.png" class="middle-layer" ng-class="{moved: secondAnimate}">
+        <img src="assets/images/alpha/KYLO/Middle-Layer.png" class="middle-layer" ng-class="{faded: secondAnimate, moved: secondAnimate}">
+        <img src="assets/images/alpha/KYLO/Top-Layer-Colourized.png" class="top-layer" ng-class="{moved: secondAnimate}">
+        <img src="assets/images/alpha/KYLO/Top-Layer.png" class="top-layer" ng-class="{colourized: secondAnimate, moved: secondAnimate}">
+    </div>
+</div>

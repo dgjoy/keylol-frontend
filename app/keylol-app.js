@@ -25,6 +25,9 @@
             $routeProvider.when("/", {
                 templateUrl: "components/pages/home.html",
                 controller: "HomeController"
+            }).when("/alpha", {
+                templateUrl: "components/pages/alpha-entrance.html",
+                controller: "AlphaEntranceController"
             }).when("/article", {
                 templateUrl: "components/pages/article.html",
                 controller: "ArticleController"
