@@ -13,7 +13,6 @@
                 $http.get(apiEndpoint + "article/" + $routeParams.author + "/" + $routeParams.article)
                     .then(function (response) {
                         var article = response.data;
-                        console.log(article);
                         pageTitle.set(article.Title + " - 其乐");
                         article.Content = $sce.trustAsHtml(article.Content);
                         for (var i in article.AttachedPoints) {
@@ -35,7 +34,6 @@
                         getAndFlushComments(article, null, "hot");
                         getAndFlushComments(article, 1, "page");
                         union.pageElements.changePage = function (oldPage, newPage) {
-                            console.log(oldPage);
                             getAndFlushComments(article, newPage, "page");
                         };
                     }, function (error) {
@@ -50,14 +48,7 @@
                 }).then(function (response) {
                     var author = response.data;
                     var summary = {
-                        actions: [
-                            {
-                                text: "已订阅",
-                                extraClass: [
-                                    "subscribed"
-                                ]
-                            }
-                        ],
+                        actions: [],
                         head: {
                             mainHead: author.UserName,
                             subHead: author.GamerTag
@@ -71,6 +62,40 @@
                         }
                     };
                     $.extend(union.summary, summary);
+                    if (author.IdCode != union.$localStorage.user.IdCode){
+                        $http.get(apiEndpoint + "user-point-subscription", {
+                            params: {
+                                pointId: author.Id
+                            }
+                        }).then(function (response) {
+                            if (response.data) {
+                                union.summary.actions.push({
+                                    text: "已订阅",
+                                    extraClass: "subscribed"
+                                });
+                            } else {
+                                summary.actions.push({
+                                    text: "订阅",
+                                    clickAction: function(){
+                                        var that = this;
+                                        $http.post(apiEndpoint + "user-point-subscription", {}, {
+                                            params: {
+                                                pointId: author.Id
+                                            }
+                                        }).then(function (response) {
+                                            summary
+                                        }, function (error) {
+                                            alert("未知错误");
+                                            console.error(error);
+                                        });
+                                    }
+                                });
+                            }
+                        }, function (error) {
+                            alert("未知错误");
+                            console.error(error);
+                        });
+                    }
                 }, function (error) {
                     alert("未知错误");
                     console.error(error);

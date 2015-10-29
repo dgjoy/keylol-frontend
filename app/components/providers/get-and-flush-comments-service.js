@@ -1,9 +1,9 @@
-﻿(function() {
+﻿(function () {
     "use strict";
 
     keylolApp.factory("getAndFlushComments", [
         "$http", "$sce", "union",
-        function($http, $sce, union) {
+        function ($http, $sce, union) {
             var parseComments = function (str, index) {
                 var regExpForComment = /^((?:#\d+[ \t]*)+)(?:$|[ \t]+)/gm;
                 var regExpForEachLine = /#(\d+)/g;
@@ -18,8 +18,8 @@
                 });
             };
 
-            return function getAndFlushComments(article, pageNumOrSqNum, getCommentsType){
-                if(getCommentsType == "hot"){
+            return function getAndFlushComments(article, pageNumOrSqNum, getCommentsType) {
+                if (getCommentsType == "hot") {
                     $http.get(apiEndpoint + "comment", {
                         params: {
                             articleId: article.Id,
@@ -39,12 +39,11 @@
                             hotComments[i].Content = $sce.trustAsHtml(parseComments(hotComments[i].Content, hotComments[i].SequenceNumberForArticle));
                         }
                         $.extend(union.hotComments, hotComments);
-                        console.log(response);
                     }, function (error) {
                         alert("未知错误");
                         console.error(error);
                     });
-                }else if(getCommentsType == "page"){
+                } else if (getCommentsType == "page") {
                     var pageNum = pageNumOrSqNum;
                     $http.get(apiEndpoint + "comment", {
                         params: {
@@ -68,12 +67,11 @@
                         union.pageElements.currPage = pageNum;
                         union.comments.length = 0;
                         $.extend(union.comments, comments);
-                        console.log(response);
                     }, function (error) {
                         alert("未知错误");
                         console.error(error);
                     });
-                }else {
+                } else {
                     var sqNum = pageNumOrSqNum;
                     $http.get(apiEndpoint + "comment", {
                         params: {

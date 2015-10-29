@@ -15,7 +15,6 @@
                 },
                 link: function (scope) {
                     scope.$watchGroup(["current", "total"], function () {
-                        console.log(scope.total, scope.current);
                         scope.newPage = scope.current;
                         scope.hasLeftEllipsis = scope.current > 4;
                         scope.hasRightEllipsis = scope.total - scope.current > 4;
