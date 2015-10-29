@@ -49,7 +49,7 @@
                     $http.get(apiEndpoint + "comment", {
                         params: {
                             articleId: article.Id,
-                            skip: pageNum == 1 ? 0 : (27 + (newPage - 2) * 30),
+                            skip: pageNum == 1 ? 0 : (27 + (pageNum - 2) * 30),
                             take: pageNum == 1 ? 27 : 30
                         }
                     }).then(function (response) {
@@ -64,7 +64,7 @@
                             comments[i].Content = $sce.trustAsHtml(parseComments(comments[i].Content, comments[i].SequenceNumberForArticle));
                         }
                         union.article.totalComments = response.headers("X-Total-Record-Count");
-                        union.pageElements.totalPages = union.article.totalComments <= 27 ? 1 : parseInt((union.article.totalComments - 27) / 30) + 2;
+                        union.pageElements.totalPages = union.article.totalComments <= 27 ? 1 : parseInt((union.article.totalComments - 28) / 30) + 2;
                         union.pageElements.currPage = pageNum;
                         union.comments.length = 0;
                         $.extend(union.comments, comments);
@@ -93,8 +93,8 @@
                             comments[i].Content = $sce.trustAsHtml(parseComments(comments[i].Content, comments[i].SequenceNumberForArticle));
                         }
                         union.article.totalComments = response.headers("X-Total-Record-Count");
-                        union.pageElements.totalPages = union.article.totalComments <= 27 ? 1 : parseInt((union.article.totalComments - 27) / 30) + 2;
-                        union.pageElements.currPage = sqNum <= 27 ? 1 : parseInt((sqNumber - 27) / 30) + 2;
+                        union.pageElements.totalPages = union.article.totalComments <= 27 ? 1 : parseInt((union.article.totalComments - 28) / 30) + 2;
+                        union.pageElements.currPage = sqNum <= 27 ? 1 : parseInt((sqNum - 27) / 30) + 2;
                         union.comments.length = 0;
                         $.extend(union.comments, comments);
                     }, function (error) {

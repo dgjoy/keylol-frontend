@@ -9,7 +9,9 @@
             $scope.user = union.$localStorage.user;
             $scope.pageElements = union.pageElements;
             $scope.textFocus = false;
+            $scope.submitDisabled = false;
             $scope.doComment = function () {
+                $scope.submitDisabled = true;
                 var replyArray = dealWithReply($scope.currentComment);
                 console.log(replyArray);
                 $http.post(apiEndpoint + "comment", {
@@ -18,11 +20,13 @@
                     ReplyToCommentsSN: replyArray
                 }).then(function (response) {
                     alert("发送成功");
+                    $scope.submitDisabled = false;
                     $scope.currentComment = "";
                     var sqNumber = response.data.SequenceNumberForArticle;
                     getAndFlushComments(union.article, sqNumber, "Sequence");
                 }, function (error) {
                     alert("评论发送失败");
+                    $scope.submitDisabled = false;
                     console.log(error);
                 });
             };

@@ -35,6 +35,7 @@
                         getAndFlushComments(article, null, "hot");
                         getAndFlushComments(article, 1, "page");
                         union.pageElements.changePage = function (oldPage, newPage) {
+                            console.log(oldPage);
                             getAndFlushComments(article, newPage, "page");
                         };
                     }, function (error) {

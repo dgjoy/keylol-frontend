@@ -1,6 +1,6 @@
 ﻿<div class="section-article-comments box-shadowed" ng-controller="ArticleCommentsController">
     <h1 class="labeled-heading">共 {{comments.length}} 则讨论</h1>
-    <div class="comment" ng-if="pageElements.currPage" ng-repeat="comment in hotComments">
+    <div class="comment" ng-if="pageElements.currPage == 1" ng-repeat="comment in hotComments">
         <span class="floor">#{{comment.SequenceNumberForArticle}}</span>
         <a class="avatar-anchor" ng-href="/point/{{comment.Commentotar.IdCode}}">
             <img class="avatar-small" webp-src="{{comment.Commentotar.AvatarImage|avatarUrl}}">
@@ -40,7 +40,7 @@
         <a class="avatar-anchor" href="test">
             <img class="avatar-small" webp-src="{{user.AvatarImage|avatarUrl}}">
         </a>
-        <button type="submit" class="border-button right-border">发表评论</button>
+        <button type="submit" class="border-button right-border" ng-disabled="submitDisabled">发表评论</button>
         <span class="textarea-container"><textarea placeholder="对作者的见解有什么见解？" ng-model="currentComment" focus-me="textFocus"></textarea></span>
     </form>
 </div>
