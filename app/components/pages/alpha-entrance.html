@@ -155,12 +155,13 @@
     .second .description {
         position: absolute;
         top: 100px;
-        transition: left 0.3s ease-out 0.9s;
-        left: -20%;
+        left: 4%;
+        transition: all 0.3s ease-out 0.9s;
+        transform: translateX(-200%);
     }
 
     .second .description.moved {
-        left: 4%;
+        transform: translateX(0);
     }
 
     .second .description h1{
@@ -184,13 +185,11 @@
     }
 
     .second .three-dm img.middle-layer.moved {
-        left: 100px;
-        top: 10px;
+        transform: translate(100px, 10px);
     }
 
     .second .three-dm img.top-layer.moved {
-        left: 200px;
-        top: 20px;
+        transform: translate(200px, 20px);
     }
 
     .second .kylo {
@@ -206,13 +205,11 @@
     }
 
     .second .kylo img.middle-layer.moved {
-        right: 100px;
-        top: 10px;
+        transform: translate(-100px, 10px);
     }
 
     .second .kylo img.top-layer.moved {
-        right: 200px;
-        top: 20px;
+        transform: translate(-200px, 20px);
     }
 
     .second img.base-layer {
@@ -299,18 +296,18 @@
         border-radius: 40px;
         background-color: #11254a;
         position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
+        left: calc(50% - 40px);
         z-index: 19;
-        transition: top 0.4s;
+        top: 0;
+        transition: transform 0.4s;
     }
 
     .third .circle.active-0 {
-        top: -80px;
+        transform: translateY(-80px);
     }
 
     .third .circle.active-6 {
-        top: 848px;
+        transform: translateY(848px);
     }
 
     .third .title {
@@ -354,29 +351,49 @@
         top: 590px;
     }
 
-    .third .comment.active, .third .circle.active-1 {
+    .third .comment.active {
         top: 212px;
         color: white;
     }
 
-    .third .research.active, .third .circle.active-2 {
+    .third .circle.active-1 {
+        transform: translateY(212px);
+    }
+
+    .third .research.active {
         top: 312px;
         color: white;
     }
 
-    .third .information.active, .third .circle.active-3 {
+    .third .circle.active-2 {
+        transform: translateY(312px);
+    }
+
+    .third .information.active {
         top: 412px;
         color: white;
     }
 
-    .third .talk.active, .third .circle.active-4 {
+    .third .circle.active-3 {
+        transform: translateY(412px);
+    }
+
+    .third .talk.active {
         top: 512px;
         color: white;
     }
 
-    .third .file.active, .third .circle.active-5 {
+    .third .circle.active-4 {
+        transform: translateY(512px);
+    }
+
+    .third .file.active {
         top: 612px;
         color: white;
+    }
+
+    .third .circle.active-5 {
+        transform: translateY(612px);
     }
 
     .third .research.sink {
@@ -416,41 +433,41 @@
     .third .title .text.left {
         left: 0;
         top: 50%;
-        transform: translateY(-50%);
+        transform: translate(0, -50%);
     }
 
     .third .title.active .text.left {
-        left: -45px;
+        transform: translate(-45px, -50%);
     }
 
     .third .title .text.right {
         right: 0;
         top: 50%;
-        transform: translateY(-50%);
+        transform: translate(0, -50%);
     }
 
     .third .title.active .text.right {
-        right: -45px;
+        transform: translate(45px, -50%);
     }
 
     .third .title .text.up {
         left: 50%;
         top: 0;
-        transform: translateX(-50%);
+        transform: translate(-50%, 0);
     }
 
     .third .title.active .text.up {
-        top: -28px;
+        transform: translate(-50%, -28px);
     }
 
     .third .title .text.down {
         bottom: 0;
         left: 50%;
-        transform: translateX(-50%);
+        transform: translate(-50%, 0);
     }
 
     .third .title.active .text.down {
-        bottom: -28px;
+        transform: translate(-50%, 28px);
     }
 </style>
 <div class="screen third">
