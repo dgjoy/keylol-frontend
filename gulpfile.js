@@ -7,10 +7,12 @@ var concat = require("gulp-concat");
 var uglify = require("gulp-uglify");
 var rev = require("gulp-rev");
 var del = require("del");
-var autoprefixer = require('gulp-autoprefixer');
-var minifyCss = require('gulp-minify-css');
-var templateCache = require('gulp-angular-templatecache');
-var htmlmin = require('gulp-htmlmin');
+var autoprefixer = require("gulp-autoprefixer");
+var htmlAutoprefixer = require("gulp-html-autoprefixer");
+var minifyInline = require("gulp-minify-inline");
+var minifyCss = require("gulp-minify-css");
+var templateCache = require("gulp-angular-templatecache");
+var htmlmin = require("gulp-htmlmin");
 
 // apiEndpoint must have the trailing slash
 var environmentConfig = {
@@ -121,6 +123,12 @@ gulp.task("app-script-bundle", ["clean", "compile-environment-config:prod"], fun
 
 gulp.task("template-bundle", ["clean"], function () {
     return gulp.src("app/components/**/*.html")
+        .pipe(htmlAutoprefixer())
+        .pipe(minifyInline({
+            css: {
+                keepSpecialComments: 0
+            }
+        }))
         .pipe(htmlmin(htmlminOptions))
         .pipe(templateCache("templates.min.js", {
             root: "components/",
