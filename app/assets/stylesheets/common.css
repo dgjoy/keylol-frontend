@@ -12,18 +12,22 @@
     font-family: "Keylol Rail Sung";
     font-style: normal;
     font-weight: normal;
-    src: url("../fonts/keylol-rail-sung-subset-1a242ac4be.eot"); /* IE9 */
-    src: url("../fonts/keylol-rail-sung-subset-1a242ac4be.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
-    url("../fonts/keylol-rail-sung-subset-a4a57c97c6.woff") format("woff"), /* chrome, firefox */
-    url("../fonts/keylol-rail-sung-subset-d74168b2ba.ttf") format("truetype"), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
-    url("../fonts/keylol-rail-sung-subset-5c7b0d60ec.svg#Keylol Rail Sung") format("svg"); /* iOS 4.1- */
+    src: url("../fonts/keylol-rail-sung-subset-a80a6b0f39.eot"); /* IE9 */
+    src: url("../fonts/keylol-rail-sung-subset-a80a6b0f39.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    url("../fonts/keylol-rail-sung-subset-70a3699c25.woff") format("woff"), /* chrome, firefox */
+    url("../fonts/keylol-rail-sung-subset-4175334ad6.ttf") format("truetype"), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+    url("../fonts/keylol-rail-sung-subset-0009a1adb3.svg#Keylol Rail Sung") format("svg"); /* iOS 4.1- */
 }
 
 @font-face {
     font-family: "LiSong";
     font-style: normal;
     font-weight: normal;
-    src: url(../fonts/lisong-c2c9419afc84e3902efb9a800bda076a.woff) format("woff");
+    src: url("../fonts/lisong-subset-c868bc5645.eot"); /* IE9 */
+    src: url("../fonts/lisong-subset-c868bc5645.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    url("../fonts/lisong-subset-ef6eabe224.woff") format("woff"), /* chrome, firefox */
+    url("../fonts/lisong-subset-4938218e83.ttf") format("truetype"), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+    url("../fonts/lisong-subset-9286b4dc82.svg#LiSong") format("svg"); /* iOS 4.1- */
 }
 
 /* ------------------- */
