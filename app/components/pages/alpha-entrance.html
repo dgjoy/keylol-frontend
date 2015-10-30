@@ -6,12 +6,20 @@
     h1 {
         font-family: "Myriad Pro", "Keylol Rail Sung", serif;
         margin: 0;
+        font-weight: normal;
     }
 
     h3 {
         margin: 0;
         font-weight: lighter;
         font-family: "Myriad Pro", "Helvetica Neue", Helvetica, "Segoe UI", Arial, "Hiragino Sans GB", "Microsoft YaHei", "Microsoft JhengHei", "WenQuanYi Micro Hei", sans-serif;
+    }
+
+    h5 {
+        margin: 0;
+        font-weight: lighter;
+        font-family: "Myriad Pro", "Helvetica Neue", Helvetica, "Segoe UI", Arial, "Hiragino Sans GB", "Microsoft YaHei", "Microsoft JhengHei", "WenQuanYi Micro Hei", sans-serif;
+        font-size: 13px;
     }
 
     .screen {
@@ -252,4 +260,637 @@
         <img src="assets/images/alpha/KYLO/Top-Layer-Colourized.png" class="top-layer" ng-class="{moved: secondAnimate}">
         <img src="assets/images/alpha/KYLO/Top-Layer.png" class="top-layer" ng-class="{colourized: secondAnimate, moved: secondAnimate}">
     </div>
+</div>
+<style>
+    .third {
+        background: url("assets/images/alpha/bg-2.jpg") no-repeat center;
+        background-size: cover;
+        overflow: hidden;
+    }
+
+    .third .description {
+        position: absolute;
+        top: 65px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(255, 255, 255, 0.6);
+    }
+
+    .third .description h1{
+        color: #11254A;
+    }
+
+    .third .description h3{
+        color: #333;
+    }
+
+    .third .type-container {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 0;
+        width: 170px;
+        height: 100%;
+    }
+
+    .third .circle {
+        width: 80px;
+        height: 80px;
+        border-radius: 40px;
+        background-color: #11254a;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 19;
+        transition: top 1s;
+    }
+
+    .third .circle.active-0 {
+        top: -80px;
+    }
+
+    .third .circle.active-6 {
+        top: 848px;
+    }
+
+    .third .title {
+        width: 80px;
+        height: 80px;
+        line-height: 80px;
+        text-align: center;
+        color: #11254A;
+        font-size: 48px;
+        font-family: "Myriad Pro", "Keylol Rail Sung", serif;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 20;
+        transition:  all 1s, color 0s;
+    }
+
+    .third .title-circle {
+        background-color: rgba(255, 255, 255, 0.6);
+        z-index: 18;
+        transition:  all 1s;
+    }
+
+    .third .comment {
+        top: 190px;
+    }
+
+    .third .research {
+        top: 290px;
+    }
+
+    .third .information {
+        top: 390px;
+    }
+
+    .third .talk {
+        top: 490px;
+    }
+
+    .third .file {
+        top: 590px;
+    }
+
+    .third .comment.active, .third .circle.active-1 {
+        top: 212px;
+        color: white;
+    }
+
+    .third .research.active, .third .circle.active-2 {
+        top: 312px;
+        color: white;
+    }
+
+    .third .information.active, .third .circle.active-3 {
+        top: 412px;
+        color: white;
+    }
+
+    .third .talk.active, .third .circle.active-4 {
+        top: 512px;
+        color: white;
+    }
+
+    .third .file.active, .third .circle.active-5 {
+        top: 612px;
+        color: white;
+    }
+
+    .third .research.sink {
+        top: 334px;
+    }
+
+    .third .information.sink {
+        top: 434px;
+    }
+
+    .third .talk.sink {
+        top: 534px;
+    }
+
+    .third .file.sink {
+        top: 634px;
+    }
+
+    .third .title .text {
+        display: block;
+        position: absolute;
+        font-size: 18px;
+        font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, "Hiragino Sans GB", "Microsoft YaHei", "Microsoft JhengHei", "WenQuanYi Micro Hei", sans-serif;
+        font-weight: lighter;
+        line-height: normal;
+        color: #11254A;
+        z-index: -1;
+        opacity: 0;
+        transition: all 1s;
+    }
+
+    .third .title.active .text {
+        opacity: 1;
+        transition: all 1s 1s;
+    }
+
+    .third .title .text.left {
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .third .title.active .text.left {
+        left: -45px;
+    }
+
+    .third .title .text.right {
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .third .title.active .text.right {
+        right: -45px;
+    }
+
+    .third .title .text.up {
+        left: 50%;
+        top: 0;
+        transform: translateX(-50%);
+    }
+
+    .third .title.active .text.up {
+        top: -28px;
+    }
+
+    .third .title .text.down {
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .third .title.active .text.down {
+        bottom: -28px;
+    }
+</style>
+<div class="screen third">
+    <div class="type-container">
+        <span class="circle active-{{active}}"></span>
+
+        <span class="circle title-circle comment" ng-class="{active: active == 1}"></span>
+        <div class="title comment" ng-class="{active: active == 1}">
+            <span class="text left">感悟</span>
+            <span class="text right">心得</span>
+            <span class="text down">体验</span>
+            <span class="text up">报告</span>
+            评
+        </div>
+
+        <span class="circle title-circle research" ng-class="{active: active == 2, sink: active < 2 && active > 0}"></span>
+        <div class="title research" ng-class="{active: active == 2, sink: active < 2 && active > 0}">
+            <span class="text left">攻略</span>
+            <span class="text right">技术</span>
+            <span class="text down">成就</span>
+            <span class="text up">教程</span>
+            研
+        </div>
+
+        <span class="circle title-circle information" ng-class="{active: active == 3, sink: active < 3 && active > 0}"></span>
+        <div class="title information" ng-class="{active: active == 3, sink: active < 3 && active > 0}">
+            <span class="text left">新闻</span>
+            <span class="text right">购物</span>
+            <span class="text down">更新</span>
+            <span class="text up">竞技</span>
+            讯
+        </div>
+
+        <span class="circle title-circle talk" ng-class="{active: active == 4, sink: active < 4 && active > 0}"></span>
+        <div class="title talk" ng-class="{active: active == 4, sink: active < 4 && active > 0}">
+            <span class="text left">聊天</span>
+            <span class="text right">灌水</span>
+            <span class="text down">吐槽</span>
+            <span class="text up">杂文</span>
+            谈
+        </div>
+
+        <span class="circle title-circle file" ng-class="{active: active == 5, sink: active < 5 && active > 0}"></span>
+        <div class="title file" ng-class="{active: active == 5, sink: active < 5 && active > 0}">
+            <span class="text left">声画</span>
+            <span class="text right">模组</span>
+            <span class="text down">插件</span>
+            <span class="text up">汉化</span>
+            档
+        </div>
+    </div>
+    <div class="description">
+        <h1>零死角讨论</h1>
+        <h3>精确分类游戏交流的每个方向</h3>
+    </div>
+</div>
+<style>
+    .forth .description {
+        position: absolute;
+        top: 90px;
+        left: 4%;
+    }
+
+    .forth .description h1{
+        color: #11254A;
+    }
+
+    .forth .description h3{
+        color: #333;
+    }
+
+    .forth .details {
+        position: absolute;
+        top: 475px;
+        left: 4%;
+    }
+
+    .forth .details h3 {
+        font-size: 13px;
+        color: #d2d2d2;
+        margin-top: 18px;
+    }
+
+    .forth .card{
+        width: 450px;
+        height: 160px;
+        background: url("assets/images/alpha/Card.jpg") no-repeat center;
+        background-size: cover;
+    }
+
+    .forth .card .item {
+        float: left;
+        margin-left: 20px;
+        margin-top: 18px;
+    }
+
+    .forth .card .item .item-image{
+        background-color: white;
+        margin-top: 10px;
+        width: 96px;
+        height: 96px;
+    }
+
+    .forth .cartoon {
+        position: absolute;
+        top: 85px;
+        right: 9%;
+    }
+</style>
+<div class="screen forth">
+    <div class="description">
+        <h1>独特的鼓励机制 *</h1>
+        <h3>向你认可的文章作者赠赏 Steam 物品</h3>
+    </div>
+    <div class="details">
+        <div class="card">
+            <div class="item">
+                <h5>锁匙</h5>
+                <div class="item-image">
+                    <img src="assets/images/alpha/Keys_Animated.gif">
+                </div>
+            </div>
+            <div class="item">
+                <h5>饰品道具</h5>
+                <div class="item-image">
+                    <img src="assets/images/alpha/Skins_Animated.gif">
+                </div>
+            </div>
+            <div class="item">
+                <h5>游戏</h5>
+                <div class="item-image">
+                    <img src="assets/images/alpha/Games_Animated.gif">
+                </div>
+            </div>
+        </div>
+        <h3>* 道具将通过与其乐机器人中转交易给文章作者，赠赏功能预计在内测中期上线</h3>
+    </div>
+    <img src="assets/images/alpha/Cartoon.gif" class="cartoon">
+</div>
+<style>
+    .fifth .description {
+        position: absolute;
+        top: 88px;
+        left: 4%;
+    }
+
+    .fifth .description h1{
+        color: #11254A;
+    }
+
+    .fifth .description h3{
+        color: #333;
+    }
+
+    .fifth .hover-effect {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 1200px;
+        height: 100%;
+        background: url("assets/images/alpha/hover/Base-Layer.png") no-repeat center;
+        background-size: cover;
+    }
+
+    .fifth .hover-effect .top-layer {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .fifth .hover-effect .hover1 {
+        position: absolute;
+        top: 574px;
+        left: 32px;
+        opacity: 0;
+    }
+
+    .fifth .hover-effect .hover2 {
+        position: absolute;
+        top: 350px;
+        left: 69px;
+        opacity: 0;
+    }
+
+    .fifth .hover-effect .hover3 {
+        position: absolute;
+        top: 521px;
+        left: 380px;
+        opacity: 0;
+    }
+
+    .fifth .hover-effect .hover4 {
+        position: absolute;
+        top: 548px;
+        left: 478px;
+        opacity: 0;
+    }
+
+    .fifth .hover-effect .hover5 {
+        position: absolute;
+        top: 604px;
+        left: 762px;
+        opacity: 0;
+    }
+
+    .fifth .hover-effect .hover6 {
+        position: absolute;
+        top: 505px;
+        left: 861px;
+        opacity: 0;
+    }
+
+    .fifth .hover-effect img:hover {
+        opacity: 1;
+    }
+
+    .fifth .brown-line{
+        position: absolute;
+        top: 613px;
+        width: 100%;
+        height: 5px;
+        background-color: #d2d2d2;
+    }
+</style>
+<div class="screen fifth">
+    <div class="brown-line"></div>
+    <div class="hover-effect">
+        <img src="assets/images/alpha/hover/Top-Layer.png" class="top-layer">
+        <img src="assets/images/alpha/hover/Hover2.png" class="hover2">
+        <img src="assets/images/alpha/hover/Hover1.png" class="hover1">
+        <img src="assets/images/alpha/hover/Hover3.png" class="hover3">
+        <img src="assets/images/alpha/hover/Hover4.png" class="hover4">
+        <img src="assets/images/alpha/hover/Hover5.png" class="hover5">
+        <img src="assets/images/alpha/hover/Hover6.png" class="hover6">
+    </div>
+    <div class="description">
+        <h1>志同道合 琴瑟合曲</h1>
+        <h3>以游戏为据点，和抱有相同兴趣的玩家营造最理想的讨论氛围</h3>
+    </div>
+</div>
+<style>
+    .sixth {
+        background: url("assets/images/alpha/bg-3.jpg") no-repeat center;
+        background-size: cover;
+        color: white;
+    }
+    .sixth .description {
+        position: absolute;
+        top: 98px;
+        left: 4%;
+    }
+
+    .sixth .entrance {
+        position: absolute;
+        top: 98px;
+        right: 4%;
+        cursor: pointer;
+        text-align: right;
+    }
+
+    .sixth .entrance:hover h1 {
+        text-decoration: underline;
+    }
+
+    .sixth .entrance img {
+        display: inline-block;
+        vertical-align: middle;
+        width: 48px;
+        height: 48px;
+    }
+
+    .sixth .entrance div {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .sixth .entrance div h1 {
+        font-size: 22px;
+    }
+
+    .sixth .entrance div h3 {
+        font-size: 13px;
+    }
+
+    .sixth .activity {
+        position: absolute;
+        top: 510px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .sixth .activity a {
+        display: block;
+        border: 1px solid white;
+        color: white;
+        width: 254px;
+    }
+
+    .sixth .activity a:hover {
+        background-color: white;
+        color: #110806;
+        text-decoration: none;
+    }
+
+    .sixth .activity a div {
+        display: inline-block;
+        vertical-align: top;
+        margin-top: 10px;
+    }
+
+    .sixth .activity a div h3 {
+        font-size: 18px;
+    }
+
+    .sixth .activity .steamCN span {
+        display: inline-block;
+        width: 25px;
+        height: 25px;
+        margin: 20px 23px 17px 23px;
+        background: url("assets/images/alpha/SteamCN_Static.png") no-repeat center;
+        background-size: cover;
+    }
+
+    .sixth .activity .steamCN:hover span {
+        background:  url("assets/images/alpha/SteamCN_Hovered.png") no-repeat center;
+    }
+
+    .sixth .activity .mail {
+        margin-top: 30px;
+    }
+
+    .sixth .activity .mail span {
+        display: inline-block;
+        width: 23px;
+        height: 17px;
+        margin: 25px 24px 20px 24px;
+        background: url("assets/images/alpha/Email_Static.png") no-repeat center;
+        background-size: cover;
+    }
+
+    .sixth .activity .mail:hover span {
+        background:  url("assets/images/alpha/Email_Hovered.png") no-repeat center;
+    }
+</style>
+<div class="screen sixth">
+    <div class="description">
+        <h1>即日内测</h1>
+        <h3>多种参与渠道，为不同类型的玩家提供体验机会</h3>
+    </div>
+    <div class="entrance">
+        <div>
+            <h3>通过 Steam 账号</h3>
+            <h1>进入其乐社区</h1>
+        </div>
+        <img src="assets/images/alpha/Steam.png">
+    </div>
+    <div class="activity">
+        <a class="steamCN" href="test">
+            <span></span>
+            <div>
+                <h3>蒸汽动力活动</h3>
+                <h5>用论坛积分抽取内测邀请码</h5>
+            </div>
+        </a>
+        <a class="mail" href="test">
+            <span></span>
+            <div>
+                <h3>邮件申请</h3>
+                <h5>向我们介绍你的游戏生涯</h5>
+            </div>
+        </a>
+    </div>
+</div>
+<style>
+    .seventh .description {
+        position: absolute;
+        top: 98px;
+        left: 4%;
+    }
+
+    .seventh .description h1{
+        color: #11254A;
+    }
+
+    .seventh .description h3{
+        color: #333;
+    }
+
+    .seventh iframe {
+        position: absolute;
+        top: 176px;
+        right: 110px;
+    }
+
+    .seventh footer {
+        position: absolute;
+        top: 580px;
+        width: 100%;
+        height: 130px;
+        background-color: #11254A;
+        color: #EEF1F3;
+    }
+
+    .seventh footer img{
+        position: absolute;
+        top: 0;
+        left: 4%;
+    }
+
+    .seventh footer .details{
+        position: absolute;
+        top: 0;
+        right: 5.8%;
+        text-align: right;
+    }
+
+    .seventh footer .details h4{
+        font-weight: lighter;
+        font-size: 18px;
+        margin-top: 20px;
+        margin-bottom: 30px;
+    }
+
+    .seventh footer .details p{
+        margin: 0;
+    }
+</style>
+<div class="screen seventh">
+    <div class="description">
+        <h1>欲知测情</h1>
+        <h3>欢迎订阅邮件提醒，了解其他邀请码发放活动和公测信息</h3>
+    </div>
+    <iframe height="600" allowTransparency="true" style="width:483px;border:none;overflow:auto;" frameborder="0" src="http://form.mikecrm.com/f.php?t=iwPvNK"></iframe>
+    <footer>
+        <img src="assets/images/alpha/Keylol-Logo.png">
+        <div class="details">
+            <h4>其乐是一个专注于 Steam 游戏的深度交流社区，以玩家的兴趣为核心提供订阅式的一页流阅读体验</h4>
+            <p>SteamCN 蒸汽动力 ©2004-2015 Chinese Steam Users' Fan Site</p>
+            <p>冀 ICP 备 05004600 号</p>
+        </div>
+    </footer>
 </div>
