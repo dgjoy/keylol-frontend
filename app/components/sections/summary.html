@@ -9,8 +9,9 @@
         </h1>
         <p class="summary" ng-if="data.pointSum">{{data.pointSum.type}}据点 : {{data.pointSum.readerNum}} 名读者 / {{data.pointSum.articleNum}} 篇文章</p>
         <p class="summary" ng-if="data.defaultSum">{{data.defaultSum.text}}</p>
-        <div class="actions">
-            <button type="button" ng-repeat="action in data.actions" class="border-button bottom-border" ng-class="action.extraClass">{{action.text}}</button>
+        <div class="actions" ng-switch="data.subscribed">
+            <button type="button" ng-switch-when="false" ng-disabled="subscribeDisabled" class="border-button bottom-border" ng-click="subscribe(data.id)">订阅</button>
+            <button type="button" ng-switch-when="true" ng-disabled="subscribeDisabled" class="border-button bottom-border subscribed" ng-click="unsubscribe(data.id)">已订阅</button>
         </div>
     </div>
 </div>
