@@ -2,8 +2,8 @@
     "use strict";
 
     keylolApp.controller("AlphaEntranceController", [
-        "pageTitle", "$scope", "$timeout",
-        function (pageTitle, $scope, $timeout) {
+        "pageTitle", "$scope", "$timeout", "$rootScope",
+        function (pageTitle, $scope, $timeout, $rootScope) {
             pageTitle.set("内测 - 其乐");
             $scope.secondAnimate = false;
             var activeLock = 0;
@@ -39,6 +39,11 @@
                 });
             });
 
+            var cancelListenRoute = $rootScope.$on("$routeChangeStart", function(){
+                $(window).unbind("scroll");
+                cancelListenRoute();
+            });
+
             var changeActive = function(index){
                 if(activeLock != index){
                     activeLock = index;
@@ -46,7 +51,6 @@
                         $timeout.cancel(activeTimeout);
                     }
                     activeTimeout = $timeout(function(){
-                        console.log($(window).scrollTop());
                         $scope.active = index;
                     }, 100);
                 }

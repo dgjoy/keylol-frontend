@@ -6,7 +6,7 @@
     </h1>
     <div>
         <span class="actions">
-            <a ng-href="test" ng-if="article.canBeEdit">编辑</a>
+            <a ng-href="test" ng-if="article.isMyArticle">编辑</a>
         </span>
         <span class="points">
             <a href="" ng-repeat="point in article.AttachedPoints">「{{point.mainName}}」</a>

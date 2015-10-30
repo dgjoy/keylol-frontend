@@ -2,7 +2,8 @@
     <article ng-bind-html="article.Content" class="article-content"></article>
     <div class="share-actions" ng-switch="article.Liked">
         <p class="like-count">{{article.LikeCount}}</p>
-        <a href="" ng-click="acknowledge()" ng-switch-when="false">认可文章+1</a>
-        <a href="" ng-click="cancelAcknowledge()" ng-switch-when="true">取消认可-1</a>
+        <a href="" ng-click="acknowledge()" ng-if="!article.isMyArticle" ng-switch-when="false">认可文章+1</a>
+        <a href="" ng-click="cancelAcknowledge()" ng-if="!article.isMyArticle" ng-switch-when="true">取消认可-1</a>
+        <span ng-if="article.isMyArticle">认可</span>
     </div>
 </div>

@@ -36,6 +36,9 @@
                             if (hotComments[i].LikeCount > 0) {
                                 hotComments[i].hasLike = true;
                             }
+                            if (hotComments[i].Commentotar.IdCode == union.$localStorage.user.IdCode){
+                                hotComments[i].cannotLike = true;
+                            }
                             hotComments[i].Content = $sce.trustAsHtml(parseComments(hotComments[i].Content, hotComments[i].SequenceNumberForArticle));
                         }
                         $.extend(union.hotComments, hotComments);
@@ -59,6 +62,9 @@
                             }
                             if (comments[i].LikeCount > 0) {
                                 comments[i].hasLike = true;
+                            }
+                            if (comments[i].Commentotar.IdCode == union.$localStorage.user.IdCode){
+                                comments[i].cannotLike = true;
                             }
                             comments[i].Content = $sce.trustAsHtml(parseComments(comments[i].Content, comments[i].SequenceNumberForArticle));
                         }
@@ -87,6 +93,9 @@
                             }
                             if (comments[i].LikeCount > 0) {
                                 comments[i].hasLike = true;
+                            }
+                            if (comments[i].Commentotar.IdCode == union.$localStorage.user.IdCode){
+                                comments[i].cannotLike = true;
                             }
                             comments[i].Content = $sce.trustAsHtml(parseComments(comments[i].Content, comments[i].SequenceNumberForArticle));
                         }

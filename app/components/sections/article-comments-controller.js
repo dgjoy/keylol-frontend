@@ -5,6 +5,7 @@
         "$scope", "union", "$http", "utils", "$sce", "getAndFlushComments",
         function ($scope, union, $http, utils, $sce, getAndFlushComments) {
             $scope.comments = union.comments;
+            $scope.article = union.article;
             $scope.hotComments = union.hotComments;
             $scope.user = union.$localStorage.user;
             $scope.pageElements = union.pageElements;
