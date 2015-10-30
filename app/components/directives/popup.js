@@ -1,23 +1,26 @@
 (function () {
     "use strict";
 
-    keylolApp.directive('captureClick', function($parse) {
-        return {
-            restrict: 'A',
-            compile: function(element, attrs) {
-                var fn = $parse(attrs.captureClick);
-                return function(scope, element) {
-                    element[0].addEventListener('click', function(event) {
-                        scope.$apply(function() {
-                            fn(scope, {
-                                $event: event
+    keylolApp.directive('captureClick', [
+        "$parse",
+        function ($parse) {
+            return {
+                restrict: 'A',
+                compile: function (element, attrs) {
+                    var fn = $parse(attrs.captureClick);
+                    return function (scope, element) {
+                        element[0].addEventListener('click', function (event) {
+                            scope.$apply(function () {
+                                fn(scope, {
+                                    $event: event
+                                });
                             });
-                        });
-                    }, true);
-                };
+                        }, true);
+                    };
+                }
             }
         }
-    });
+    ]);
 
     keylolApp.directive("popup", [
         "window", "$timeout",

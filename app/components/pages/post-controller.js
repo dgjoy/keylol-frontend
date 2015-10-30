@@ -14,7 +14,7 @@
                     mainHead: "邮政服务",
                     subHead: "Postal Services"
                 },
-                background: "//keylol.b0.upaiyun.com/04be114e21692aa38afe2e4d1bc605b6.png!profile.point.background",
+                background: "04be114e21692aa38afe2e4d1bc605b6.png",
                 defaultSum: {
                     text: "社区功能页面"
                 }

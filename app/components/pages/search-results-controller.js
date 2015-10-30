@@ -14,7 +14,7 @@
                     mainHead: "cs",
                     subHead: "的搜索结果"
                 },
-                background: "//keylol.b0.upaiyun.com/04be114e21692aa38afe2e4d1bc605b6.png!profile.point.background",
+                background: "04be114e21692aa38afe2e4d1bc605b6.png",
                 defaultSum: {
                     text: "找到 3 个符合的项目"
                 }

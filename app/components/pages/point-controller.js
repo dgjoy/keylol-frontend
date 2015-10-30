@@ -19,7 +19,7 @@
                     subHead: "反恐精英：全球攻势"
                 },
                 avatar: "assets/images/exit.svg",
-                background: "//keylol.b0.upaiyun.com/5a3e206aab9decee842a3ea88ac2a312.jpg!profile.point.background",
+                background: "5a3e206aab9decee842a3ea88ac2a312.jpg",
                 pointSum: {
                     type: "游戏",
                     readerNum: 157,
