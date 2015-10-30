@@ -12,22 +12,24 @@
             $(window).scroll(function(){
                 $scope.$apply(function(){
                     if($scope.secondAnimate == false){
-                        if($(window).scrollTop() >= 768){
+                        if($(window).scrollTop() >= 538){
                             $scope.secondAnimate = true;
                         }
                     }
-                    if($(window).scrollTop() < 1300){
+                    if($(window).scrollTop() < 1152){
                         $scope.active = 0;
-                    }else if($(window).scrollTop() > 2200){
+                        activeLock = 0;
+                    }else if($(window).scrollTop() > 2077){
                         $scope.active = 6;
+                        activeLock = 6;
                     }else{
-                        if($(window).scrollTop() < 1480){
+                        if($(window).scrollTop() < 1337){
                             changeActive(1);
-                        }else if($(window).scrollTop() < 1660){
+                        }else if($(window).scrollTop() < 1522){
                             changeActive(2);
-                        }else if($(window).scrollTop() < 1840){
+                        }else if($(window).scrollTop() < 1707){
                             changeActive(3);
-                        }else if($(window).scrollTop() < 2020){
+                        }else if($(window).scrollTop() < 1892){
                             changeActive(4);
                         }else{
                             changeActive(5);
