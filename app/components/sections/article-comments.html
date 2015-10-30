@@ -1,5 +1,5 @@
 ﻿<div class="section-article-comments box-shadowed" ng-controller="ArticleCommentsController">
-    <h1 class="labeled-heading">共 {{comments.length}} 则讨论</h1>
+    <h1 class="labeled-heading">共 {{article.totalComments}} 则讨论</h1>
     <div class="comment" ng-if="pageElements.currPage == 1" ng-repeat="comment in hotComments">
         <span class="floor">#{{comment.SequenceNumberForArticle}}</span>
         <a class="avatar-anchor" ng-href="/point/{{comment.Commentotar.IdCode}}">
@@ -11,8 +11,8 @@
                 <span class="as-author" ng-if="comment.Commentotar.isAuthor">[文章作者]</span>
                 <span class="time" am-time-ago="comment.PublishTime"></span>
                 <a href="" class="action" ng-click="reply(comment.SequenceNumberForArticle)">回复</a>
-                <a href="" class="action" ng-click="acknowledge(comment)" ng-switch-when="false">认可</a>
-                <a href="" class="action" ng-click="cancelAcknowledge(comment)" ng-switch-when="true">取消认可</a>
+                <a href="" class="action" ng-if="!comment.cannotLike" ng-click="acknowledge(comment)" ng-switch-when="false">认可</a>
+                <a href="" class="action" ng-if="!comment.cannotLike" ng-click="cancelAcknowledge(comment)" ng-switch-when="true">取消认可</a>
             </div>
             <div class="content"><span  ng-bind-html="comment.Content"></span><span class="hot-signal">HOT</span><span class="like-count" ng-if="comment.hasLike">+{{comment.LikeCount}}</span></div>
         </article>
@@ -29,8 +29,8 @@
                 <span class="as-author" ng-if="comment.Commentotar.isAuthor">[文章作者]</span>
                 <span class="time" am-time-ago="comment.PublishTime"></span>
                 <a href="" class="action" ng-click="reply(comment.SequenceNumberForArticle)">回复</a>
-                <a href="" class="action" ng-click="acknowledge(comment)" ng-switch-when="false">认可</a>
-                <a href="" class="action" ng-click="cancelAcknowledge(comment)" ng-switch-when="true">取消认可</a>
+                <a href="" class="action" ng-if="!comment.cannotLike" ng-click="acknowledge(comment)" ng-switch-when="false">认可</a>
+                <a href="" class="action" ng-if="!comment.cannotLike" ng-click="cancelAcknowledge(comment)" ng-switch-when="true">取消认可</a>
             </div>
             <div class="content"><span  ng-bind-html="comment.Content"></span><span class="like-count" ng-if="comment.hasLike">+{{comment.LikeCount}}</span></div>
         </article>

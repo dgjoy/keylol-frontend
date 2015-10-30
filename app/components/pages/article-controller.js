@@ -18,7 +18,7 @@
                         for (var i in article.AttachedPoints) {
                             article.AttachedPoints[i].mainName = article.AttachedPoints[i][article.AttachedPoints[i].PreferedName + "Name"];
                         }
-                        article.canBeEdit = (union.$localStorage.user.IdCode == article.AuthorIdCode);
+                        article.isMyArticle = (union.$localStorage.user.IdCode == article.AuthorIdCode);
                         if (article.Vote) {
                             switch (article.Vote) {
                                 case "Positive":
