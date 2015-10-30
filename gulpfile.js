@@ -13,6 +13,7 @@ var minifyInline = require("gulp-minify-inline");
 var minifyCss = require("gulp-minify-css");
 var templateCache = require("gulp-angular-templatecache");
 var htmlmin = require("gulp-htmlmin");
+var fontmin = require('gulp-fontmin');
 
 // apiEndpoint must have the trailing slash
 var environmentConfig = {
@@ -59,6 +60,10 @@ var stylesheets = [
     "components/**/*.css"
 ];
 
+var keylolTextList = "`{}>▾▴其乐推荐据点客务中心讯息轨道评测好评资讯差评模组感悟请无视游戏与艺术之间的空隙提交注册申请登入其乐发布文章由你筛选的游戏讯息轨道提交变更函注册其乐会员评研讯谈档邮政服务私信蒸汽动力进社区噪音零死角讨论独特鼓励机制志同合琴瑟合曲即日内欲知情关联注意成功错误认可论索取表单开设此据点阅读";
+
+var lisongTextList = "/评测好评差评模组资讯会员注册表单登录表单连接游戏平台昵称账户头像登录口令确认登录口令电子邮箱人机验证声明桌面类蒸汽第一人称射击时空枪使命召唤侠盗猎车手橘子孢子上帝视角文明红色警戒模拟城市塔防即时策略折扣资讯原声控僵尸末日泰拉瑞亚独立游戏用户识别码玩家标签个人据点横幅会员信息变更函提示守则平台账户分享社区动态当前登录口令新登录口令确认新登录口令登录保护邮件订阅简讯通知等待添加成为好友收到验证码绑定成功平台连接向导";
+
 var htmlminOptions = {
     collapseWhitespace: true,
     conservativeCollapse: true,
@@ -87,8 +92,34 @@ var getBundleFilePaths = function () {
     };
 };
 
+gulp.task("font-keylol", ["clean-font"], function () {
+    return gulp.src("app/assets/fonts/keylol-rail-sung-full.ttf")
+        .pipe(rename("keylol-rail-sung-subset.ttf"))
+        .pipe(fontmin({
+            text: keylolTextList
+        }))
+        .pipe(rev())
+        .pipe(gulp.dest("app/assets/fonts"))
+});
+
+gulp.task("font-lisong", ["clean-font"], function () {
+    return gulp.src("app/assets/fonts/lisong-full.ttf")
+        .pipe(rename("lisong-subset.ttf"))
+        .pipe(fontmin({
+            text: lisongTextList
+        }))
+        .pipe(rev())
+        .pipe(gulp.dest("app/assets/fonts"))
+});
+
+gulp.task("font", ["font-keylol", "font-lisong"]);
+
 gulp.task("clean", function () {
     return del(["app/bundles/!(web.config)", "index.html", "environment-config.js"]);
+});
+
+gulp.task("clean-font", function () {
+    return del(["app/assets/fonts/keylol-rail-sung-subset-*", "app/assets/fonts/lisong-subset-*"]);
 });
 
 gulp.task("compile-environment-config", ["clean"], function () {
