@@ -2,8 +2,8 @@
     "use strict";
 
     keylolApp.controller("HomeController", [
-        "pageTitle", "$scope", "union",
-        function (pageTitle, $scope, union) {
+        "pageTitle", "$scope", "union", "$http",
+        function (pageTitle, $scope, union, $http) {
             pageTitle.set("其乐");
             union.timeline = {
                 title: {
@@ -17,113 +17,99 @@
                 },
                 datetime: "outBlock",
                 hasExpand: true,
-                entries: [
-                    {
-                        types: ["评"],
-                        sources: {
-                            type: "point",
-                            pointArray: [
-                                {
-                                    name: "战地：硬仗",
-                                    url: "test"
-                                },
-                                {
-                                    name: "战地系列",
-                                    url: "test"
-                                }
-                            ]
-                        },
+                loadAction: function(params, callback){
+                    $http.get(apiEndpoint + "article/subscription", {
+                        params: params
+                    }).then(function(response){
+                        callback(response);
+                    },function(error){
+                        alert("未知错误");
+                        console.log(error);
+                    });
+                },
+                entries: []
+            };
+            if(union.$localStorage.homeTimeline){
+                union.timeline.entries = union.$localStorage.homeTimeline;
+            }
+
+
+            $http.get(apiEndpoint + "article/subscription", {
+                params: {
+                    take: 20
+                }
+            }).then(function(response){
+                var articleList = response.data;
+                if(articleList.length < 20){
+                    union.timeline.noMoreArticle = true;
+                }
+                union.timeline.entries.length = 0;
+
+                /**
+                 * 对于请求回来的文章列表做一系列处理并按照用户据点的文章格式储存在 union.timeline.entries 中
+                 */
+                for(var i in articleList){
+                    var article = articleList[i];
+                    var entry = {
+                        types: [article.TypeName],
                         author: {
-                            username: "crakyGALU",
-                            avatarUrl: "assets/images/exit.svg"
+                            username: article.Author.UserName,
+                            avatarUrl: article.Author.AvatarImage,
+                            url: "user/" + article.Author.IdCode
                         },
-                        datetime: moment().subtract(1, "seconds"),
-                        title: "代工就是不如原厂：这硬仗真的是打的艰辛",
-                        summary: "说起这个警匪死磕的话，相比正玩家们没有不知道那大名鼎鼎的CF啊不对CS，也就是《反恐精英（Counter-Strike）》，这款游戏的出现让警匪对殴的模式风靡全球，至今依然有大批玩家热衷于此，除此之外类似的游戏也有不少，例如《彩虹六号系列》，例如《收获日系列》等等，如今FPS界极其有影响力的战地系列也开始涉及此类题材，眼下BETA版本已经开始测试，本篇评测是根据测试版而来，所以并不代表游戏的最终品质！",
-                        url: "test",
-                        thumbnail: "//keylol.b0.upaiyun.com/ffc1c0643b2857caa83ec2cf254e510f.jpg!timeline.thumbnail",
+                        sources: {},
+                        datetime: article.PublishTime,
+                        title: article.Title,
+                        summary: article.Content,
+                        url: "/article/" + article.Author.IdCode + "/" + article.SequenceNumberForAuthor,
                         count: {
-                            like: 666,
-                            comment: 222
+                            like: article.LikeCount,
+                            comment: article.CommentCount
                         }
-                    },
-                    {
-                        types: ["讯"],
-                        sources: {
-                            type: "publish"
-                        },
-                        author: {
-                            username: "crakyGALU",
-                            avatarUrl: "assets/images/exit.svg"
-                        },
-                        datetime: moment().subtract(1, "hours").subtract(34, "minutes"),
-                        title: "代工就是不如原厂：这硬仗真的是打的艰辛 字数补丁字数补丁字数补丁字数补丁字数补丁字数补丁字数补丁",
-                        summary: "说起这个警匪死磕的话，相比正玩家们没有不知道那大名鼎鼎的CF啊不对CS，也就是《反恐精英（Counter-Strike）》，这款游戏的出现让警匪对殴的模式风靡全球，至今依然有大批玩家热衷于此，除此之外类似的游戏也有不少，例如《彩虹六号系列》，例如《收获日系列》等等，如今FPS界极其有影响力的战地系列也开始涉及此类题材，眼下BETA版本已经开始测试，本篇评测是根据测试版而来，所以并不代表游戏的最终品质！",
-                        url: "test",
-                        count: {
-                            like: 666,
-                            comment: 222
-                        }
-                    },
-                    {
-                        types: ["研"],
-                        author: {
-                            username: "crakyGALU",
-                            avatarUrl: "assets/images/exit.svg"
-                        },
-                        sources: {
-                            type: "acknowledgement",
-                            userArray: [
-                                {
-                                    name: "ZenDay",
-                                    url: "test"
-                                },
-                                {
-                                    name: "Stackia",
-                                    url: "test"
+                    };
+                    if(article.TimelineReason) {
+                        switch (article.TimelineReason){
+                            case "Like":
+                                entry.sources.type = "like";
+                                entry.sources.userArray = [];
+                                if(article.LikeByUsers){
+                                    for(var j in article.LikeByUsers){
+                                        entry.sources.userArray.push({
+                                            name: article.LikeByUsers[j].UserName,
+                                            url: "/user/" + article.LikeByUsers[j].IdCode
+                                        });
+                                    }
+                                }else {
+                                    entry.sources.userArray.push({
+                                        name: union.user.UserName,
+                                        url: "/user/" + union.$localStorage.user.IdCode
+                                    });
                                 }
-                            ]
-                        },
-                        datetime: moment().subtract(3, "days"),
-                        title: "代工就是不如原厂：这硬仗真的是打的艰辛",
-                        summary: "说起这个警匪死磕的话，相比",
-                        url: "test",
-                        thumbnail: "//keylol.b0.upaiyun.com/da6d364b68257cb921c071d4cea66576.jpg!timeline.thumbnail",
-                        count: {
-                            like: 666,
-                            comment: 222
-                        }
-                    },
-                    {
-                        types: ["档"],
-                        author: {
-                            username: "crakyGALU字数补丁字数补丁字数补丁",
-                            avatarUrl: "assets/images/exit.svg"
-                        },
-                        sources: {
-                            type: "point",
-                            pointArray: [
-                                {
-                                    name: "Dota2",
-                                    url: "test"
-                                },
-                                {
-                                    name: "信仰",
-                                    url: "test"
+                                break;
+                            case "Point":
+                                entry.sources.type = "point";
+                                entry.sources.pointArray = [];
+                                for(var j in article.AttachedPoints){
+                                    entry.sources.pointArray.push({
+                                        name: article.AttachedPoints[j][article.AttachedPoints[j].PreferedName + "Name"],
+                                        url: "/point/" + article.AttachedPoints[j].IdCode
+                                    });
                                 }
-                            ]
-                        },
-                        datetime: moment().subtract(1, "years"),
-                        title: "代工就是不如原厂：这硬仗真的是打的艰辛 字数补丁字数补丁字数补丁字数补丁字数补丁字数补丁",
-                        summary: "说起这个警匪死磕的话，相比正玩家们没有不知道那大名鼎鼎的CF啊不对CS，也就是《反恐精英（Counter-Strike）》",
-                        url: "test",
-                        count: {
-                            like: 666,
-                            comment: 222
+                                break;
+                            case "Publish":
+                                entry.sources.type = "publish";
+                                break;
+                            default :
+                                break;
                         }
                     }
-                ]
-            };
+                    union.timeline.entries.push(entry);
+                }
+                union.$localStorage.homeTimeline = union.timeline.entries;
+            },function(error){
+                alert("未知错误");
+                console.log(error);
+            });
         }
     ]);
 })();

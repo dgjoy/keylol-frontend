@@ -32,7 +32,7 @@
                     <img class="avatar-small" webp-src="{{entry.author.avatarUrl|avatarUrl}}" alt="头像">
                 </a>
                 <h4>
-                    <a href="test">{{entry.author.username|userName:true}}</a>
+                    <a href="" ng-href="{{entry.author.url}}">{{entry.author.username|userName:true}}</a>
                 </h4>
             </div>
             <h3>
@@ -42,10 +42,10 @@
                 </svg>
                 <span ng-switch="entry.sources.type">
                     <a ng-switch-when="point" ng-href="{{point.url}}" ng-repeat="point in entry.sources.pointArray">「{{point.name}}」</a>
-                    <span ng-switch-when="publish"><a href="test">{{entry.author.username|userName:true}}</a> 发布了这篇文章</span>
-                    <span ng-switch-when="acknowledgement">
+                    <span ng-switch-when="publish"><a href="" ng-href="{{entry.author.url}}">{{entry.author.username|userName:true}}</a> 发布了这篇文章</span>
+                    <span ng-switch-when="like">
                         <span ng-repeat="user in entry.sources.userArray">
-                            <a href="" ng-href="user.url">{{user.name|userName:true}}</a>
+                            <a href="" ng-href="{{user.url}}">{{user.name|userName:true}}</a>
                             <span ng-if="!$last">、</span>
                         </span>认同这篇文章</span>
                 </span>

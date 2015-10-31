@@ -16,7 +16,6 @@
                 $http.get(apiEndpoint + "article/" + $routeParams.author + "/" + $routeParams.article)
                     .then(function (response) {
                         var article = response.data;
-                        console.log(article);
                         pageTitle.set(article.Title + " - 其乐");
                         article.Content = $sce.trustAsHtml(article.Content);
                         for (var i in article.AttachedPoints) {
@@ -38,7 +37,6 @@
                                     includeVotes: true
                                 }
                             }).then(function (response) {
-                                console.log(response.data);
                                 var point = response.data;
                                 point.mainName = point[point.PreferedName + "Name"];
                                 point.votePercent = (point.PositiveArticleCount * 10 / (point.PositiveArticleCount + point.NegativeArticleCount)).toFixed(1);
@@ -83,6 +81,7 @@
                     });
                 $http.get(apiEndpoint + "user/" + $routeParams.author, {
                     params: {
+                        includeSubscribed: $routeParams.author != union.$localStorage.user.IdCode,
                         includeProfilePointBackgroundImage: true,
                         idType: "IdCode"
                     }
@@ -97,23 +96,14 @@
                         background: author.ProfilePointBackgroundImage,
                         pointSum: {
                             type: "个人",
-                            readerNum: 157,
-                            articleNum: 48
+                            readerNum: author.SubscriberCount,
+                            articleNum: author.ArticleCount
                         },
                         id: author.Id
                     };
                     $.extend(union.summary, summary);
                     if (author.IdCode != union.$localStorage.user.IdCode){
-                        $http.get(apiEndpoint + "user-point-subscription", {
-                            params: {
-                                pointId: author.Id
-                            }
-                        }).then(function (response) {
-                            union.summary.subscribed = response.data;
-                        }, function (error) {
-                            alert("未知错误");
-                            console.error(error);
-                        });
+                        union.summary.subscribed = author.Subscribed;
                     }
                 }, function (error) {
                     alert("未知错误");

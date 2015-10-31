@@ -39,7 +39,6 @@
                         content: $scope.vm.content,
                         saveTime: $scope.vm.saveTime
                     };
-                    console.log("save");
                     createTimeout();
                 }, 30000);
             };
@@ -67,7 +66,6 @@
                         submitObj.Vote = $scope.vm.vote;
                     }
                 }
-                console.log("发布内容", submitObj);
                 $http.post(apiEndpoint + "article", submitObj)
                     .then(function (response) {
                         alert("发布成功");
@@ -81,7 +79,6 @@
                         }
                         close();
                         $location.url("article/" + union.$localStorage.user.IdCode + "/" + response.data.SequenceNumberForAuthor);
-                        console.log(response);
                     }, function (error) {
                         alert("未知错误, 请尝试再次发布");
                         console.error(error);

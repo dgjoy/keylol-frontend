@@ -92,25 +92,29 @@
                     $scope.data.loadAction({
                         idType: "IdCode",
                         articleTypeFilter: filters,
-                        take: 10
+                        take: 20
                     }, function (response) {
                         var articleList = response.data;
-                        console.log(response);
                         if(!isLoadingMore){
                             $scope.data.entries.length = 0;
                         }
-                        if(articleList.length < 10){
+                        if(articleList.length < 20){
                             $scope.data.noMoreArticle = true;
                         }
 
                         for (var i in articleList) {
                             var article = articleList[i];
-                            $scope.data.entries.push({
+                            if(!article.Author){
+                                article.Author = union.user;
+                            }
+                            var entry = {
                                 types: [article.TypeName],
                                 author: {
                                     username: article.Author.UserName,
-                                    avatarUrl: article.Author.AvatarImage
+                                    avatarUrl: article.Author.AvatarImage,
+                                    url: "user/" + article.Author.IdCode
                                 },
+                                sources: {},
                                 datetime: article.PublishTime,
                                 title: article.Title,
                                 summary: article.Content,
@@ -119,7 +123,44 @@
                                     like: article.LikeCount,
                                     comment: article.CommentCount
                                 }
-                            });
+                            };
+                            if(article.TimelineReason) {
+                                switch (article.TimelineReason){
+                                    case "Like":
+                                        entry.sources.type = "like";
+                                        entry.sources.userArray = [];
+                                        if(article.LikeByUsers){
+                                            for(var j in article.LikeByUsers){
+                                                entry.sources.userArray.push({
+                                                    name: article.LikeByUsers[j].UserName,
+                                                    url: "/user/" + article.LikeByUsers[j].IdCode
+                                                });
+                                            }
+                                        }else {
+                                            entry.sources.userArray.push({
+                                                name: union.user.UserName,
+                                                url: "/user/" + union.$localStorage.user.IdCode
+                                            });
+                                        }
+                                        break;
+                                    case "Point":
+                                        entry.sources.type = "point";
+                                        entry.sources.pointArray = [];
+                                        for(var j in article.AttachedPoints){
+                                            entry.sources.pointArray.push({
+                                                name: article.AttachedPoints[j][article.AttachedPoints[j].PreferedName + "Name"],
+                                                url: "/point/" + article.AttachedPoints[j].IdCode
+                                            });
+                                        }
+                                        break;
+                                    case "Publish":
+                                        entry.sources.type = "publish";
+                                        break;
+                                    default :
+                                        break;
+                                }
+                            }
+                            $scope.data.entries.push(entry);
                         }
                         loadingLock = false;
                     });

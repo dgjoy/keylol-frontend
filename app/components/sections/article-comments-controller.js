@@ -15,7 +15,6 @@
                 if($scope.currentComment){
                     $scope.submitDisabled = true;
                     var replyArray = dealWithReply($scope.currentComment);
-                    console.log(replyArray);
                     $http.post(apiEndpoint + "comment", {
                         Content: $scope.currentComment,
                         ArticleId: union.article.Id,
@@ -48,7 +47,6 @@
                     TargetId: comment.Id,
                     Type: "CommentLike"
                 }).then(function (response) {
-                    console.log(response);
                 }, function (error) {
                     alert("认可评论失败");
                     console.log(error);
@@ -64,7 +62,6 @@
                         type: "CommentLike"
                     }
                 }).then(function (response) {
-                    console.log(response);
                 }, function (error) {
                     alert("取消认可评论失败");
                     console.log(error);

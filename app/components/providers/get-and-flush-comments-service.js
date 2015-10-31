@@ -28,18 +28,23 @@
                             take: 3
                         }
                     }).then(function (response) {
-                        var hotComments = response.data;
-                        for (var i in hotComments) {
-                            if (hotComments[i].Commentotar.IdCode == article.AuthorIdCode) {
-                                hotComments[i].Commentotar.isAuthor = true;
+                        var preHotComments = response.data;
+                        var hotComments = [];
+                        for (var i in preHotComments) {
+                            if(preHotComments[i].LikeCount >= 5){
+                                var hotComment = preHotComments[i];
+                                if (hotComment.Commentotar.IdCode == article.AuthorIdCode) {
+                                    hotComment.Commentotar.isAuthor = true;
+                                }
+                                if (hotComment.LikeCount > 0) {
+                                    hotComment.hasLike = true;
+                                }
+                                if (hotComment.Commentotar.IdCode == union.$localStorage.user.IdCode){
+                                    hotComment.cannotLike = true;
+                                }
+                                hotComment.Content = $sce.trustAsHtml(parseComments(hotComment.Content, hotComment.SequenceNumberForArticle));
+                                hotComments.push(hotComment);
                             }
-                            if (hotComments[i].LikeCount > 0) {
-                                hotComments[i].hasLike = true;
-                            }
-                            if (hotComments[i].Commentotar.IdCode == union.$localStorage.user.IdCode){
-                                hotComments[i].cannotLike = true;
-                            }
-                            hotComments[i].Content = $sce.trustAsHtml(parseComments(hotComments[i].Content, hotComments[i].SequenceNumberForArticle));
                         }
                         $.extend(union.hotComments, hotComments);
                     }, function (error) {

@@ -4,7 +4,11 @@
     keylolApp.controller("PointController", [
         "pageTitle", "$scope", "union", "$routeParams", "$http", "utils",
         function (pageTitle, $scope, union, $routeParams, $http, utils) {
+            /**
+             * 初始化union的一些属性
+             */
             union.summary = {};
+            union.user = {};
             union.timeline = {
                 title: {
                     mainTitle: "讯息轨道",
@@ -20,10 +24,15 @@
                 entries: []
             };
             union.point = {};
-            if($routeParams.userIdCode){}
-            if($routeParams.pointIdCode){
+
+            if($routeParams.userIdCode){
+                /**
+                 * 定义在 timeline 中调用的加载函数
+                 * @param params 加载时请求的参数
+                 * @param callback 加载后的回调
+                 */
                 union.timeline.loadAction = function(params, callback){
-                    $http.get(apiEndpoint + "/article/point/" + $routeParams.pointIdCode, {
+                    $http.get(apiEndpoint + "article/user/" + $routeParams.userIdCode, {
                         params: params
                     }).then(function(response){
                         callback(response);
@@ -32,14 +41,168 @@
                         console.log(error);
                     });
                 };
-                $http.get(apiEndpoint + "/normal-point/" + $routeParams.pointIdCode, {
+
+                /**
+                 * 请求用户信息，用户的信息会被存储在 union.user 里。
+                 * 同时对用户部分信息做处理后，用于 summary 中。
+                 */
+                $http.get(apiEndpoint + "user/" + $routeParams.userIdCode, {
+                    params: {
+                        includeStats: true,
+                        idType: "IdCode",
+                        includeProfilePointBackgroundImage: true
+                    }
+                }).then(function(response){
+                    console.log(response.data);
+
+                    var user = response.data;
+                    var summary = {
+                        head: {
+                            mainHead: user.UserName,
+                            subHead: user.GamerTag
+                        },
+                        avatar: user.AvatarImage,
+                        background: user.ProfilePointBackgroundImage,
+                        pointSum: {
+                            type: "个人",
+                            readerNum: user.SubscriberCount,
+                            articleNum: user.ArticleCount
+                        },
+                        id: user.Id
+                    };
+                    $.extend(union.user, user);
+                    $.extend(union.summary, summary);
+                    if (user.IdCode != union.$localStorage.user.IdCode){
+                        $http.get(apiEndpoint + "user-point-subscription", {
+                            params: {
+                                pointId: user.Id
+                            }
+                        }).then(function (response) {
+                            union.summary.subscribed = response.data;
+                        }, function (error) {
+                            alert("未知错误");
+                            console.error(error);
+                        });
+                    }
+
+
+                    /**
+                     * 请求文章列表，放于请求用户信息之后
+                     */
+                    $http.get(apiEndpoint + "article/user/" + $routeParams.userIdCode, {
+                        params: {
+                            idType: "IdCode",
+                            take: 20
+                        }
+                    }).then(function(response){
+                        var articleList = response.data;
+                        if(articleList.length < 20){
+                            union.timeline.noMoreArticle = true;
+                        }
+
+                        /**
+                         * 对于请求回来的文章列表做一系列处理并按照用户据点的文章格式储存在 union.timeline.entries 中
+                         */
+                        for(var i in articleList){
+                            var article = articleList[i];
+                            if(!article.Author){
+                                article.Author = union.user;
+                            }
+                            var entry = {
+                                types: [article.TypeName],
+                                author: {
+                                    username: article.Author.UserName,
+                                    avatarUrl: article.Author.AvatarImage,
+                                    url: "user/" + article.Author.IdCode
+                                },
+                                sources: {},
+                                datetime: article.PublishTime,
+                                title: article.Title,
+                                summary: article.Content,
+                                url: "/article/" + article.Author.IdCode + "/" + article.SequenceNumberForAuthor,
+                                count: {
+                                    like: article.LikeCount,
+                                    comment: article.CommentCount
+                                }
+                            };
+                            if(article.TimelineReason) {
+                                switch (article.TimelineReason){
+                                    case "Like":
+                                        entry.sources.type = "like";
+                                        entry.sources.userArray = [];
+                                        if(article.LikeByUsers){
+                                            for(var j in article.LikeByUsers){
+                                                entry.sources.userArray.push({
+                                                    name: article.LikeByUsers[j].UserName,
+                                                    url: "/user/" + article.LikeByUsers[j].IdCode
+                                                });
+                                            }
+                                        }else {
+                                            entry.sources.userArray.push({
+                                                name: union.user.UserName,
+                                                url: "/user/" + union.$localStorage.user.IdCode
+                                            });
+                                        }
+                                        break;
+                                    case "Point":
+                                        entry.sources.type = "point";
+                                        entry.sources.pointArray = [];
+                                        for(var j in article.AttachedPoints){
+                                            entry.sources.pointArray.push({
+                                                name: article.AttachedPoints[j][article.AttachedPoints[j].PreferedName + "Name"],
+                                                url: "/point/" + article.AttachedPoints[j].IdCode
+                                            });
+                                        }
+                                        break;
+                                    case "Publish":
+                                        entry.sources.type = "publish";
+                                        break;
+                                    default :
+                                        break;
+                                }
+                            }
+                            union.timeline.entries.push(entry);
+                        }
+                    },function(error){
+                        alert("未知错误");
+                        console.log(error);
+                    });
+                },function(error){
+                    alert("未知错误");
+                    console.log(error);
+                });
+
+            }
+
+            if($routeParams.pointIdCode){
+                $scope.hasVote = true;
+                /**
+                 * 定义在 timeline 中调用的加载函数
+                 * @param params 加载时请求的参数
+                 * @param callback 加载后的回调
+                 */
+                union.timeline.loadAction = function(params, callback){
+                    $http.get(apiEndpoint + "article/point/" + $routeParams.pointIdCode, {
+                        params: params
+                    }).then(function(response){
+                        callback(response);
+                    },function(error){
+                        alert("未知错误");
+                        console.log(error);
+                    });
+                };
+
+                /**
+                 * 请求据点信息，储存在 union.point 中。
+                 * 以 summary 的格式对于 union.point 做一些处理, 存储到 union.summary 中。
+                 */
+                $http.get(apiEndpoint + "normal-point/" + $routeParams.pointIdCode, {
                     params: {
                         includeStats: true,
                         includeVotes: true,
                         idType: "IdCode"
                     }
                 }).then(function(response){
-                    console.log(response.data);
 
                     var point = response.data;
                     var summary = {
@@ -104,15 +267,17 @@
                     console.log(error);
                 });
 
-                $http.get(apiEndpoint + "/article/point/" + $routeParams.pointIdCode, {
+                /**
+                 * 请求据点对应的文章
+                 */
+                $http.get(apiEndpoint + "article/point/" + $routeParams.pointIdCode, {
                     params: {
                         idType: "IdCode",
-                        take: 10
+                        take: 20
                     }
                 }).then(function(response){
-                    console.log(response.data);
                     var articleList = response.data;
-                    if(articleList.length < 10){
+                    if(articleList.length < 20){
                         union.timeline.noMoreArticle = true;
                     }
 
