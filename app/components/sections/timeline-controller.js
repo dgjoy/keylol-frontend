@@ -26,7 +26,7 @@
                     }
                 });
             });
-            var cancelListenRoute = $rootScope.$on("$routeChangeStart", function () {
+            var cancelListenRoute = $scope.$on("$destroy", function () {
                 $(window).unbind("scroll");
                 cancelListenRoute();
             });
