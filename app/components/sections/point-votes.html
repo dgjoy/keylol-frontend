@@ -1,32 +1,20 @@
-﻿<div class="section-point-votes box-shadowed">
-    <div class="point-name">Counter-Strike: Global Offensive</div>
+﻿<div class="section-point-votes box-shadowed" ng-controller="PointVotesController">
+    <div class="point-name">{{data.mainName}}</div>
     <div class="reputation-level">
-        <span class="reputation-number good">7.6</span><!--
-        --><svg xmlns="http://www.w3.org/2000/svg" class="reputation-circle good">
-            <circle cx="3.5" cy="3.5" r="3.5"></circle>
-        </svg><!--
-        --><svg xmlns="http://www.w3.org/2000/svg" class="reputation-circle good">
-            <circle cx="3.5" cy="3.5" r="3.5"></circle>
-        </svg><!--
-        --><svg xmlns="http://www.w3.org/2000/svg" class="reputation-circle good">
-            <circle cx="3.5" cy="3.5" r="3.5"></circle>
-        </svg><!--
-        --><svg xmlns="http://www.w3.org/2000/svg" class="reputation-circle good">
-            <circle cx="3.5" cy="3.5" r="3.5"></circle>
-        </svg><!--<!--
-        --><svg xmlns="http://www.w3.org/2000/svg" class="reputation-circle">
+        <span class="reputation-number {{data.voteCircles[0].type}}">{{data.votePercent}}</span>
+        <svg xmlns="http://www.w3.org/2000/svg" ng-repeat="voteCircle in data.voteCircles" class="reputation-circle {{voteCircle.type}}">
             <circle cx="3.5" cy="3.5" r="3.5"></circle>
         </svg>
     </div>
     <div class="positive-vs-negative">
-        <div style="width: 76.89%;"></div>
+        <div style="width: {{data.votePercent * 10}}%;"></div>
     </div>
     <div class="clearfix">
         <div class="positive-text">
-            <p><a href="test">173</a> 篇好评</p>
+            <p><a href="test">{{data.PositiveArticleCount}}</a> 篇好评</p>
         </div>
         <div class="negative-text">
-            <p><a href="test">52</a> 篇差评</p>
+            <p><a href="test">{{data.NegativeArticleCount}}</a> 篇差评</p>
         </div>
     </div>
     <div class="external-links">
