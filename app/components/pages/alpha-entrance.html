@@ -35,10 +35,8 @@
     .description h3{
         font-size: 18px;
     }
-
 </style>
 <style>
-
     .first {
         background: url("//keylol-static.b0.upaiyun.com/assets/images/alpha/bg-1.jpg") no-repeat center;
         background-size: cover;
@@ -65,6 +63,8 @@
         bottom: 60px;
         left: 50%;
         text-align: right;
+        -webkit-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
         transform: translateX(-50%);
         cursor: pointer;
     }
@@ -156,11 +156,16 @@
         position: absolute;
         top: 100px;
         left: 4%;
+        -webkit-transition: all 0.3s ease-out 0.9s;
         transition: all 0.3s ease-out 0.9s;
+        -webkit-transform: translateX(-200%);
+        -ms-transform: translateX(-200%);
         transform: translateX(-200%);
     }
 
     .second .description.moved {
+        -webkit-transform: translateX(0);
+        -ms-transform: translateX(0);
         transform: translateX(0);
     }
 
@@ -185,10 +190,14 @@
     }
 
     .second .three-dm img.middle-layer.moved {
+        -webkit-transform: translate(100px, 10px);
+        -ms-transform: translate(100px, 10px);
         transform: translate(100px, 10px);
     }
 
     .second .three-dm img.top-layer.moved {
+        -webkit-transform: translate(200px, 20px);
+        -ms-transform: translate(200px, 20px);
         transform: translate(200px, 20px);
     }
 
@@ -205,35 +214,45 @@
     }
 
     .second .kylo img.middle-layer.moved {
+        -webkit-transform: translate(-100px, 10px);
+        -ms-transform: translate(-100px, 10px);
         transform: translate(-100px, 10px);
     }
 
     .second .kylo img.top-layer.moved {
+        -webkit-transform: translate(-200px, 20px);
+        -ms-transform: translate(-200px, 20px);
         transform: translate(-200px, 20px);
     }
 
     .second img.base-layer {
+        -webkit-transition: opacity 0.3s 0.6s;
         transition: opacity 0.3s 0.6s;
     }
 
     .second img.middle-layer {
+        -webkit-transition:  all ease-out 0.3s, opacity 0.3s 0.6s;
         transition:  all ease-out 0.3s, opacity 0.3s 0.6s;
     }
 
     .second img.top-layer {
+        -webkit-transition:  all ease-out 0.6s, opacity 0.3s 0.6s;
         transition:  all ease-out 0.6s, opacity 0.3s 0.6s;
     }
 
     .second img.base-layer.faded {
         opacity: 0;
+        filter: alpha(opacity=0);
     }
 
     .second img.middle-layer.faded {
         opacity: 0;
+        filter: alpha(opacity=0);
     }
 
     .second img.top-layer.colourized {
         opacity: 0;
+        filter: alpha(opacity=0);
     }
 </style>
 <div class="screen second">
@@ -269,6 +288,8 @@
         position: absolute;
         top: 65px;
         left: 50%;
+        -webkit-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
         transform: translateX(-50%);
         background-color: rgba(255, 255, 255, 0.6);
     }
@@ -284,6 +305,8 @@
     .third .type-container {
         position: absolute;
         left: 50%;
+        -webkit-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
         transform: translateX(-50%);
         top: 0;
         width: 170px;
@@ -299,14 +322,19 @@
         left: calc(50% - 40px);
         z-index: 19;
         top: 0;
+        -webkit-transition: -webkit-transform 0.4s;
         transition: transform 0.4s;
     }
 
     .third .circle.active-0 {
+        -webkit-transform: translateY(-80px);
+        -ms-transform: translateY(-80px);
         transform: translateY(-80px);
     }
 
     .third .circle.active-6 {
+        -webkit-transform: translateY(848px);
+        -ms-transform: translateY(848px);
         transform: translateY(848px);
     }
 
@@ -320,14 +348,18 @@
         font-family: "Myriad Pro", "Keylol Rail Sung", serif;
         position: absolute;
         left: 50%;
+        -webkit-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
         transform: translateX(-50%);
         z-index: 20;
+        -webkit-transition:  all 0.4s, color 0s;
         transition:  all 0.4s, color 0s;
     }
 
     .third .title-circle {
         background-color: rgba(255, 255, 255, 0.6);
         z-index: 18;
+        -webkit-transition:  all 0.4s;
         transition:  all 0.4s;
     }
 
@@ -357,6 +389,8 @@
     }
 
     .third .circle.active-1 {
+        -webkit-transform: translateY(212px);
+        -ms-transform: translateY(212px);
         transform: translateY(212px);
     }
 
@@ -366,6 +400,8 @@
     }
 
     .third .circle.active-2 {
+        -webkit-transform: translateY(312px);
+        -ms-transform: translateY(312px);
         transform: translateY(312px);
     }
 
@@ -375,6 +411,8 @@
     }
 
     .third .circle.active-3 {
+        -webkit-transform: translateY(412px);
+        -ms-transform: translateY(412px);
         transform: translateY(412px);
     }
 
@@ -384,6 +422,8 @@
     }
 
     .third .circle.active-4 {
+        -webkit-transform: translateY(512px);
+        -ms-transform: translateY(512px);
         transform: translateY(512px);
     }
 
@@ -393,6 +433,8 @@
     }
 
     .third .circle.active-5 {
+        -webkit-transform: translateY(612px);
+        -ms-transform: translateY(612px);
         transform: translateY(612px);
     }
 
@@ -422,51 +464,71 @@
         color: #11254A;
         z-index: -1;
         opacity: 0;
+        filter: alpha(opacity=0);
+        -webkit-transition: all 0.1s;
         transition: all 0.1s;
     }
 
     .third .title.active .text {
         opacity: 1;
+        filter: alpha(opacity=100);
+        -webkit-transition: all 0.1s 0.4s;
         transition: all 0.1s 0.4s;
     }
 
     .third .title .text.left {
         left: 0;
         top: 50%;
+        -webkit-transform: translate(0, -50%);
+        -ms-transform: translate(0, -50%);
         transform: translate(0, -50%);
     }
 
     .third .title.active .text.left {
+        -webkit-transform: translate(-45px, -50%);
+        -ms-transform: translate(-45px, -50%);
         transform: translate(-45px, -50%);
     }
 
     .third .title .text.right {
         right: 0;
         top: 50%;
+        -webkit-transform: translate(0, -50%);
+        -ms-transform: translate(0, -50%);
         transform: translate(0, -50%);
     }
 
     .third .title.active .text.right {
+        -webkit-transform: translate(45px, -50%);
+        -ms-transform: translate(45px, -50%);
         transform: translate(45px, -50%);
     }
 
     .third .title .text.up {
         left: 50%;
         top: 0;
+        -webkit-transform: translate(-50%, 0);
+        -ms-transform: translate(-50%, 0);
         transform: translate(-50%, 0);
     }
 
     .third .title.active .text.up {
+        -webkit-transform: translate(-50%, -28px);
+        -ms-transform: translate(-50%, -28px);
         transform: translate(-50%, -28px);
     }
 
     .third .title .text.down {
         bottom: 0;
         left: 50%;
+        -webkit-transform: translate(-50%, 0);
+        -ms-transform: translate(-50%, 0);
         transform: translate(-50%, 0);
     }
 
     .third .title.active .text.down {
+        -webkit-transform: translate(-50%, 28px);
+        -ms-transform: translate(-50%, 28px);
         transform: translate(-50%, 28px);
     }
 </style>
@@ -626,6 +688,8 @@
         position: absolute;
         top: 0;
         left: 50%;
+        -webkit-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
         transform: translateX(-50%);
         width: 1200px;
         height: 100%;
@@ -644,6 +708,7 @@
         top: 574px;
         left: 32px;
         opacity: 0;
+        filter: alpha(opacity=0);
     }
 
     .fifth .hover-effect .hover2 {
@@ -651,6 +716,7 @@
         top: 350px;
         left: 69px;
         opacity: 0;
+        filter: alpha(opacity=0);
     }
 
     .fifth .hover-effect .hover3 {
@@ -658,6 +724,7 @@
         top: 521px;
         left: 380px;
         opacity: 0;
+        filter: alpha(opacity=0);
     }
 
     .fifth .hover-effect .hover4 {
@@ -665,6 +732,7 @@
         top: 548px;
         left: 478px;
         opacity: 0;
+        filter: alpha(opacity=0);
     }
 
     .fifth .hover-effect .hover5 {
@@ -672,6 +740,7 @@
         top: 604px;
         left: 762px;
         opacity: 0;
+        filter: alpha(opacity=0);
     }
 
     .fifth .hover-effect .hover6 {
@@ -679,10 +748,12 @@
         top: 505px;
         left: 861px;
         opacity: 0;
+        filter: alpha(opacity=0);
     }
 
     .fifth .hover-effect img:hover {
         opacity: 1;
+        filter: alpha(opacity=100);
     }
 
     .fifth .brown-line{
@@ -757,6 +828,8 @@
         position: absolute;
         top: 510px;
         left: 50%;
+        -webkit-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
         transform: translateX(-50%);
     }
 
