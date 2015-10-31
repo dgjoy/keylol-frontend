@@ -2,9 +2,10 @@
     "use strict";
 
     keylolApp.controller("EntryFilterController", [
-        "$scope", "filterOptions", "close",
-        function ($scope, filterOptions, close) {
+        "$scope", "filterOptions", "close", "filterArray",
+        function ($scope, filterOptions, close, filterArray) {
             $scope.filterOptions = filterOptions;
+            $scope.filterArray = filterArray;
             $scope.onFilter = function () {
                 close($scope.filterOptions);
             };

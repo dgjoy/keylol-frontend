@@ -2,30 +2,9 @@
     "use strict";
 
     keylolApp.controller("PointController", [
-        "pageTitle", "$scope", "union",
-        function (pageTitle, $scope, union) {
-            pageTitle.set("据点 - 其乐");
-            union.summary = {
-                actions: [
-                    {
-                        text: "已订阅",
-                        extraClass: [
-                            "subscribed"
-                        ]
-                    }
-                ],
-                head: {
-                    mainHead: "Counter-Strike: Global Offensive",
-                    subHead: "反恐精英：全球攻势"
-                },
-                avatar: "assets/images/exit.svg",
-                background: "5a3e206aab9decee842a3ea88ac2a312.jpg",
-                pointSum: {
-                    type: "游戏",
-                    readerNum: 157,
-                    articleNum: 48
-                }
-            };
+        "pageTitle", "$scope", "union", "$routeParams", "$http", "utils",
+        function (pageTitle, $scope, union, $routeParams, $http, utils) {
+            union.summary = {};
             union.timeline = {
                 title: {
                     mainTitle: "讯息轨道",
@@ -38,71 +17,127 @@
                 },
                 datetime: "outBlock",
                 hasExpand: true,
-                entries: [
-                    {
-                        types: ["评"],
-                        author: {
-                            username: "crakyGALU",
-                            avatarUrl: "assets/images/exit.svg"
-                        },
-                        datetime: moment().subtract(1, "seconds"),
-                        title: "代工就是不如原厂：这硬仗真的是打的艰辛",
-                        summary: "说起这个警匪死磕的话，相比正玩家们没有不知道那大名鼎鼎的CF啊不对CS，也就是《反恐精英（Counter-Strike）》，这款游戏的出现让警匪对殴的模式风靡全球，至今依然有大批玩家热衷于此，除此之外类似的游戏也有不少，例如《彩虹六号系列》，例如《收获日系列》等等，如今FPS界极其有影响力的战地系列也开始涉及此类题材，眼下BETA版本已经开始测试，本篇评测是根据测试版而来，所以并不代表游戏的最终品质！",
-                        url: "test",
-                        thumbnail: "//keylol.b0.upaiyun.com/ffc1c0643b2857caa83ec2cf254e510f.jpg!timeline.thumbnail",
-                        count: {
-                            like: 666,
-                            comment: 222
-                        }
-                    },
-                    {
-                        types: ["讯"],
-                        author: {
-                            username: "crakyGALU",
-                            avatarUrl: "assets/images/exit.svg"
-                        },
-                        datetime: moment().subtract(1, "hours").subtract(34, "minutes"),
-                        title: "代工就是不如原厂：这硬仗真的是打的艰辛 字数补丁字数补丁字数补丁字数补丁字数补丁字数补丁字数补丁",
-                        summary: "说起这个警匪死磕的话，相比正玩家们没有不知道那大名鼎鼎的CF啊不对CS，也就是《反恐精英（Counter-Strike）》，这款游戏的出现让警匪对殴的模式风靡全球，至今依然有大批玩家热衷于此，除此之外类似的游戏也有不少，例如《彩虹六号系列》，例如《收获日系列》等等，如今FPS界极其有影响力的战地系列也开始涉及此类题材，眼下BETA版本已经开始测试，本篇评测是根据测试版而来，所以并不代表游戏的最终品质！",
-                        url: "test",
-                        count: {
-                            like: 666,
-                            comment: 222
-                        }
-                    },
-                    {
-                        types: ["讯"],
-                        author: {
-                            username: "crakyGALU",
-                            avatarUrl: "assets/images/exit.svg"
-                        },
-                        datetime: moment().subtract(3, "days"),
-                        title: "代工就是不如原厂：这硬仗真的是打的艰辛",
-                        summary: "说起这个警匪死磕的话，相比",
-                        url: "test",
-                        thumbnail: "//keylol.b0.upaiyun.com/da6d364b68257cb921c071d4cea66576.jpg!timeline.thumbnail",
-                        count: {
-                            like: 666,
-                            comment: 222
-                        }
-                    },
-                    {
-                        types: ["评"],
-                        author: {
-                            username: "crakyGALU字数补丁字数补丁字数补丁",
-                            avatarUrl: "assets/images/exit.svg"
-                        },
-                        datetime: moment().subtract(1, "years"),
-                        title: "代工就是不如原厂：这硬仗真的是打的艰辛 字数补丁字数补丁字数补丁字数补丁字数补丁字数补丁",
-                        summary: "说起这个警匪死磕的话，相比正玩家们没有不知道那大名鼎鼎的CF啊不对CS，也就是《反恐精英（Counter-Strike）》",
-                        url: "test",
-                        count: {
-                            like: 666,
-                            comment: 222
-                        }
-                    }
-                ]
+                loadAction: function(params, callback){
+                    $http.get(apiEndpoint + "/article/point/" + $routeParams.idCode, {
+                        params: params
+                    }).then(function(response){
+                        callback(response);
+                    },function(error){
+                        alert("未知错误");
+                        console.log(error);
+                    });
+                },
+                entries: []
             };
+            union.point = {};
+            if($routeParams.idCode){
+                $http.get(apiEndpoint + "/normal-point/" + $routeParams.idCode, {
+                    params: {
+                        includeStats: true,
+                        includeVotes: true,
+                        idType: "IdCode"
+                    }
+                }).then(function(response){
+                    console.log(response.data);
+
+                    var point = response.data;
+                    var summary = {
+                        head: {},
+                        avatar: point.AvatarImage,
+                        background: point.BackgroundImage,
+                        pointSum: {
+                            type: utils.getPointType(point.Type),
+                            readerNum: point.SubscriberCount,
+                            articleNum: point.ArticleCount
+                        },
+                        id: point.Id
+                    };
+
+                    if(point.PreferedName == "Chinese"){
+                        point.mainName = point.ChineseName;
+                        summary.head.mainHead = point.ChineseName;
+                        summary.head.subHead = point.EnglishName;
+                    }else {
+                        point.mainName = point.EnglishName;
+                        summary.head.mainHead = point.EnglishName;
+                        summary.head.subHead = point.ChineseName;
+                    }
+                    pageTitle.set(point.mainName + " - 其乐");
+                    point.votePercent = (point.PositiveArticleCount * 10 / (point.PositiveArticleCount + point.NegativeArticleCount)).toFixed(1);
+                    point.voteCircles = [{},{},{},{},{}];
+                    if(point.votePercent >= 8){
+                        for(var i in point.voteCircles){
+                            point.voteCircles[i].type = "awesome";
+                        }
+                    }else if(point.votePercent >= 6){
+                        for(var i = 0; i < 4; i++){
+                            point.voteCircles[i].type = "good";
+                        }
+                    }else if(point.votePercent >= 4){
+                        for(var i = 0; i < 3; i++){
+                            point.voteCircles[i].type = "not-bad";
+                        }
+                    }else if(point.votePercent >= 2){
+                        for(var i = 0; i < 2; i++){
+                            point.voteCircles[i].type = "bad";
+                        }
+                    }else {
+                        point.voteCircles[0].type = "terrible"
+                    }
+
+                    $.extend(union.point, point);
+                    $.extend(union.summary, summary);
+
+                    $http.get(apiEndpoint + "user-point-subscription", {
+                        params: {
+                            pointId: point.Id
+                        }
+                    }).then(function (response) {
+                        union.summary.subscribed = response.data;
+                    }, function (error) {
+                        alert("未知错误");
+                        console.error(error);
+                    });
+                },function(error){
+                    alert("未知错误");
+                    console.log(error);
+                });
+
+                $http.get(apiEndpoint + "/article/point/" + $routeParams.idCode, {
+                    params: {
+                        idType: "IdCode",
+                        take: 10
+                    }
+                }).then(function(response){
+                    console.log(response.data);
+                    var articleList = response.data;
+                    if(articleList.length < 10){
+                        union.timeline.noMoreArticle = true;
+                    }
+
+                    for(var i in articleList){
+                        var article = articleList[i];
+                        union.timeline.entries.push({
+                            types: [article.TypeName],
+                            author: {
+                                username: article.Author.UserName,
+                                avatarUrl: article.Author.AvatarImage
+                            },
+                            datetime: article.PublishTime,
+                            title: article.Title,
+                            summary: article.Content,
+                            url: "/article/" + article.Author.IdCode + "/" + article.SequenceNumberForAuthor,
+                            count: {
+                                like: article.LikeCount,
+                                comment: article.CommentCount
+                            }
+                        });
+                    }
+                },function(error){
+                    alert("未知错误");
+                    console.log(error);
+                });
+            }
         }
     ]);
 })();

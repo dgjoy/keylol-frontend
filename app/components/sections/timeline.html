@@ -29,7 +29,7 @@
         <div class="entry-heading">
             <div class="entry-author" ng-if="entry.author">
                 <a class="avatar-anchor" href="test">
-                    <img class="avatar-small" ng-src="{{entry.author.avatarUrl}}" alt="头像">
+                    <img class="avatar-small" webp-src="{{entry.author.avatarUrl|avatarUrl}}" alt="头像">
                 </a>
                 <h4>
                     <a href="test">{{entry.author.username|userName:true}}</a>

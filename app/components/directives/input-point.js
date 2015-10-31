@@ -14,16 +14,23 @@
                 link: function (scope, element, attrs, ngModel) {
                     var focusLock = false;
                     scope.pointArray = [];
-                    console.log(scope.placeholder);
                     var placeholder = scope.placeholder;
                     scope.placeholder = placeholder;
                     scope.hasPlaceholder = true;
                     var addPoint = function (result) {
-                        scope.pointArray.push({
-                            title: result.ChineseName,
-                            selected: false,
-                            id: result.Id
-                        });
+                        var hasBeenExist = false;
+                        for(var i in scope.pointArray){
+                            if(scope.pointArray[i].id === result.Id){
+                                hasBeenExist = true
+                            }
+                        }
+                        if(!hasBeenExist){
+                            scope.pointArray.push({
+                                title: result[result.PreferedName + "Name"],
+                                selected: false,
+                                id: result.Id
+                            });
+                        }
                         scope.data = "";
                         ngModel.$setViewValue(scope.pointArray);
                     };
@@ -101,7 +108,7 @@
                                     }
                                     $window.removeEventListener("keydown", union.keydownCallback, true);
                                     if (newValue != "") {
-                                        $http.get(apiEndpoint + "normal-point", {params: {keyword: newValue}})
+                                        $http.get(apiEndpoint + "normal-point/keyword/" + newValue)
                                             .then(function (response) {
                                                 var pointArray = response.data;
                                                 scope.nowPopup = scope.showSelector({

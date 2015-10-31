@@ -4,6 +4,8 @@
     keylolApp.controller("ArticleController", [
         "pageTitle", "$scope", "$sce", "union", "$routeParams", "$http", "getAndFlushComments",
         function (pageTitle, $scope, $sce, union, $routeParams, $http, getAndFlushComments) {
+            $scope.articleExist = true;
+            pageTitle.set("文章 - 其乐");
             union.article = {};
             union.point = {};
             union.summary = {};
@@ -20,7 +22,7 @@
                         for (var i in article.AttachedPoints) {
                             article.AttachedPoints[i].mainName = article.AttachedPoints[i][article.AttachedPoints[i].PreferedName + "Name"];
                         }
-                        article.isMyArticle = (union.$localStorage.user.IdCode == article.AuthorIdCode);
+                        article.isMyArticle = (union.$localStorage.user.IdCode == $routeParams.author);
                         if (article.Vote) {
                             $scope.hasVote = true;
                             switch (article.Vote) {
@@ -39,8 +41,6 @@
                                 console.log(response.data);
                                 var point = response.data;
                                 point.mainName = point[point.PreferedName + "Name"];
-                                point.PositiveArticleCount = 10;
-                                point.NegativeArticleCount = 30;
                                 point.votePercent = (point.PositiveArticleCount * 10 / (point.PositiveArticleCount + point.NegativeArticleCount)).toFixed(1);
                                 point.voteCircles = [{},{},{},{},{}];
                                 if(point.votePercent >= 8){
@@ -76,7 +76,9 @@
                             getAndFlushComments(article, newPage, "page");
                         };
                     }, function (error) {
-                        alert("未知错误");
+                        if(error.status === 404){
+                            $scope.articleExist = false;
+                        }
                         console.error(error);
                     });
                 $http.get(apiEndpoint + "user/" + $routeParams.author, {
@@ -118,7 +120,6 @@
                     console.error(error);
                 });
             }
-            pageTitle.set("文章 - 其乐");
         }
     ]);
 })();

@@ -23,9 +23,9 @@
                 <input-point ng-model="vm.voteForPoint" placeholder="'选择一个游戏据点作为评价对象'"></input-point>
                 <div class="right-content">
                     <span>
-                        <input type="radio" id="radio-{{radioId[0]}}" ng-model="vm.vote" ng-value="0" name="vote" checked><label for="radio-{{radioId[0]}}">好评</label>
+                        <input type="radio" id="radio-{{radioId[0]}}" ng-model="vm.vote" ng-value="0" name="vote"><label for="radio-{{radioId[0]}}">好评</label>
                         <input type="radio" id="radio-{{radioId[1]}}" ng-model="vm.vote" ng-value="1" name="vote"><label for="radio-{{radioId[1]}}">差评</label>
-                        <input type="radio" id="radio-{{radioId[2]}}" ng-model="vm.vote" ng-value="2" name="vote"><label for="radio-{{radioId[2]}}">中立</label>
+                        <input type="radio" id="radio-{{radioId[2]}}" ng-model="vm.vote" ng-value="2" name="vote" checked><label for="radio-{{radioId[2]}}">中立</label>
                     </span>
                 </div>
             </div>
@@ -45,8 +45,8 @@
                 </hgroup>
             </button>
             <div class="save-draft">
-                <button type="button" class="border-button left-border" ng-click="cancel()">保存草稿</button>
-                <span>自动保存于 39 秒 前</span>
+                <button type="button" class="border-button left-border" ng-click="saveDraft()">保存草稿</button>
+                <span ng-if="vm.saveTime">自动保存于 <span am-time-ago="vm.saveTime"></span></span>
                 <p>草稿将保存在本地浏览器缓存中，并在下次打开编辑框时自动加载。</p>
             </div>
         </form>

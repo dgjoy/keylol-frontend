@@ -2,25 +2,12 @@
     "use strict";
 
     keylolApp.controller("PointSelectorController", [
-        "$scope", "$window", "close", "union", "selected", "pointArray",
-        function ($scope, $window, close, union, selected, pointArray) {
+        "$scope", "$window", "close", "union", "selected", "pointArray", "utils",
+        function ($scope, $window, close, union, selected, pointArray, utils) {
             $scope.pointArray = pointArray;
             for (var i in $scope.pointArray) {
                 $scope.pointArray[i].selected = false;
-                switch ($scope.pointArray[i].Type) {
-                    case 0:
-                        $scope.pointArray[i].type = "游戏";
-                        break;
-                    case 1:
-                        $scope.pointArray[i].type = "类型";
-                        break;
-                    case 2:
-                        $scope.pointArray[i].type = "厂商";
-                        break;
-                    case 3:
-                        $scope.pointArray[i].type = "平台";
-                        break;
-                }
+                $scope.pointArray[i].type = utils.getPointType($scope.pointArray[i].Type);
             }
             $scope.pointArray[selected].selected = true;
             $scope.changeSelector = function (newSelected) {

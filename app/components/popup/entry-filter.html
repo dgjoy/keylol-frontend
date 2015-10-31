@@ -5,30 +5,10 @@
             <button class="border-button bottom-border" ng-click="onFilter()">过滤</button>
             <form>
                 <ul>
-                    <li ng-click="changeFilterOption(0)">
-                        <input type="checkbox" ng-checked="filterOptions[0]"><!--
-                    --><span ng-class="{active: filterOptions[0]}" class="font-myriad-keylol">评</span><!--
-                    --><p>感悟、心得、体验、报告</p>
-                    </li>
-                    <li ng-click="changeFilterOption(1)">
-                        <input type="checkbox" ng-checked="filterOptions[1]"><!--
-                    --><span ng-class="{active: filterOptions[1]}" class="font-myriad-keylol">研</span><!--
-                    --><p>攻略、技术、成就、教程</p>
-                    </li>
-                    <li ng-click="changeFilterOption(2)">
-                        <input type="checkbox" ng-checked="filterOptions[2]"><!--
-                    --><span ng-class="{active: filterOptions[2]}" class="font-myriad-keylol">讯</span><!--
-                    --><p>新闻、购物、更新、竞技</p>
-                    </li>
-                    <li ng-click="changeFilterOption(3)">
-                        <input type="checkbox" ng-checked="filterOptions[3]"><!--
-                    --><span ng-class="{active: filterOptions[3]}" class="font-myriad-keylol">谈</span><!--
-                    --><p>聊天、灌水、吐槽、杂文</p>
-                    </li>
-                    <li ng-click="changeFilterOption(4)">
-                        <input type="checkbox" ng-checked="filterOptions[4]"><!--
-                    --><span ng-class="{active: filterOptions[4]}" class="font-myriad-keylol">档</span><!--
-                    --><p>声画、模组、插件、汉化</p>
+                    <li ng-click="changeFilterOption($index)" ng-repeat="filter in filterArray">
+                        <input type="checkbox" ng-checked="filterOptions[$index]"><!--
+                    --><span ng-class="{active: filterOptions[$index]}" class="font-myriad-keylol">{{filter.Name}}</span><!--
+                    --><p>{{filter.Description}}</p>
                     </li>
                 </ul>
             </form>

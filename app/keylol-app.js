@@ -28,13 +28,10 @@
             }).when("/alpha", {
                 templateUrl: "components/pages/alpha-entrance.html",
                 controller: "AlphaEntranceController"
-            }).when("/article", {
-                templateUrl: "components/pages/article.html",
-                controller: "ArticleController"
             }).when("/article/:author/:article", {
                 templateUrl: "components/pages/article.html",
                 controller: "ArticleController"
-            }).when("/point", {
+            }).when("/point/:idCode", {
                 templateUrl: "components/pages/point.html",
                 controller: "PointController"
             }).when("/post", {

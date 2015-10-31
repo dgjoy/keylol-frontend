@@ -1,4 +1,4 @@
-﻿<div class="container">
+﻿<div class="container" ng-if="articleExist">
     <div class="row">
         <div class="col-left-middle">
             <div class="row as-section">
@@ -22,3 +22,4 @@
         </div>
     </div>
 </div>
+<div ng-if="!articleExist" ng-include="'components/pages/not-found.html'" ng-controller="NotFoundController"></div>

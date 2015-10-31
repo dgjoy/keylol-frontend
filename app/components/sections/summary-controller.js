@@ -19,6 +19,7 @@
                     alert("订阅成功！");
                     $scope.data.subscribed = true;
                     $scope.subscribeDisabled = false;
+                    $scope.data.pointSum.readerNum++;
                 }, function (error) {
                     alert("未知错误");
                     console.error(error);
@@ -34,6 +35,7 @@
                     alert("取消订阅成功！");
                     $scope.data.subscribed = false;
                     $scope.subscribeDisabled = false;
+                    $scope.data.pointSum.readerNum--;
                 }, function (error) {
                     alert("未知错误");
                     console.error(error);

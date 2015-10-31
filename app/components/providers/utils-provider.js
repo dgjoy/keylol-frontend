@@ -77,7 +77,7 @@
 						};
 
 						self.arrayUnique = function(arr) {
-							if(arr.length == 0){
+							if(arr.length === 0){
 								return arr;
 							}
 							arr.sort();
@@ -90,6 +90,21 @@
 								}
 							}
 							return re;
+						};
+
+						self.getPointType = function(type){
+							if(type === "Game"){
+								return "游戏";
+							}
+							if(type === "Genre"){
+								return "类型";
+							}
+							if(type === "Manufacturer"){
+								return "厂商";
+							}
+							if(type === "Platform"){
+								return "平台";
+							}
 						};
 
 						self.modelValidate = {
