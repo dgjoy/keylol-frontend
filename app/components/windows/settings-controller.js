@@ -69,7 +69,9 @@
             $http.get(apiEndpoint + "user/" + union.$localStorage.login.UserId, {
                 params: {
                     includeClaims: true,
+                    includeSecurity: true,
                     includeProfilePointBackgroundImage: true,
+                    includeSteam: true,
                     includeSteamBot: true,
                     includeMoreOptions: true
                 }
