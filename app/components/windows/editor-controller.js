@@ -89,45 +89,47 @@
             $scope.expanded = false;
             var selectedType = 0;
             $scope.articleTypeArray = union.$localStorage.articleTypes;
-            $http.get(apiEndpoint + "article-type")
-                .then(function (response) {
-                    $scope.articleTypeArray = response.data;
-                    union.$localStorage.articleTypes = response.data;
-
-                    $scope.expandString = $scope.articleTypeArray[selectedType].Name;
-                    $scope.allowVote = $scope.articleTypeArray[selectedType].AllowVote;
-                    $scope.expand = function ($event) {
-                        var popup = $scope.funcs.showSelector({
-                            templateUrl: "components/popup/article-selector.html",
-                            controller: "ArticleSelectorController",
-                            event: $event,
-                            attachSide: "bottom",
-                            align: "left",
-                            offsetX: -6,
-                            inputs: {
-                                selectedType: selectedType,
-                                articleTypeArray: $scope.articleTypeArray
-                            }
-                        });
-
-                        $scope.expanded = !$scope.expanded;
-                        if (popup) {
-                            popup.then(function (popup) {
-                                return popup.close;
-                            }).then(function (result) {
-                                if (result || result == 0) {
-                                    selectedType = result;
-                                    $scope.expandString = $scope.articleTypeArray[selectedType].Name;
-                                    $scope.allowVote = $scope.articleTypeArray[selectedType].AllowVote;
-                                }
-                                $scope.expanded = !$scope.expanded;
-                            });
-                        }
+            if ($scope.articleTypeArray) {
+                $scope.expandString = $scope.articleTypeArray[selectedType].Name;
+                $scope.allowVote = $scope.articleTypeArray[selectedType].AllowVote;
+            }
+            $scope.expand = function ($event) {
+                if (!$scope.articleTypeArray) return;
+                var popup = $scope.funcs.showSelector({
+                    templateUrl: "components/popup/article-selector.html",
+                    controller: "ArticleSelectorController",
+                    event: $event,
+                    attachSide: "bottom",
+                    align: "left",
+                    offsetX: -6,
+                    inputs: {
+                        selectedType: selectedType,
+                        articleTypeArray: $scope.articleTypeArray
                     }
-                }, function (error) {
-                    notification.error(error);
-                    console.error(error);
                 });
+
+                $scope.expanded = !$scope.expanded;
+                if (popup) {
+                    popup.then(function (popup) {
+                        return popup.close;
+                    }).then(function (result) {
+                        if (result || result == 0) {
+                            selectedType = result;
+                            $scope.expandString = $scope.articleTypeArray[selectedType].Name;
+                            $scope.allowVote = $scope.articleTypeArray[selectedType].AllowVote;
+                        }
+                        $scope.expanded = !$scope.expanded;
+                    });
+                }
+            };
+
+            $http.get(apiEndpoint + "article-type").then(function (response) {
+                $scope.articleTypeArray = response.data;
+                union.$localStorage.articleTypes = response.data;
+            }, function (error) {
+                notification.error(error);
+                console.error(error);
+            });
         }
     ]);
 })();
