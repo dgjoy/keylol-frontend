@@ -243,6 +243,7 @@ window[position=right]::after {
     font-size: 19px;
     color: #11254a;
     margin: 3px 0;
+    font-weight: bold;
 }
 
 .window h2 {
@@ -255,6 +256,7 @@ window[position=right]::after {
     color: #11254a;
     font-size: 15px;
     margin: 3px 0;
+    font-weight: bold;
 }
 
 .window h3.single-line {

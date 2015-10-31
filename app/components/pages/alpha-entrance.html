@@ -139,7 +139,7 @@
         <h1>请无视游戏与艺术之间的空隙</h1>
         <h3>其乐是一个交流评测感悟的玩家社区</h3>
     </div>
-    <div class="entrance">
+    <div class="entrance" ng-click="showInvitationWindow()">
         <div>
             <h3>通过 Steam 账号</h3>
             <h1>进入其乐社区</h1>
@@ -886,12 +886,12 @@
         background:  url("//keylol-static.b0.upaiyun.com/assets/images/alpha/Email_Hovered.png") no-repeat center;
     }
 </style>
-<div class="screen sixth">
+<div id="get-invitation-code" class="screen sixth">
     <div class="description">
         <h1>即日内测</h1>
         <h3>多种参与渠道，为不同类型的玩家提供体验机会</h3>
     </div>
-    <div class="entrance">
+    <div class="entrance" ng-click="showInvitationWindow()">
         <div>
             <h3>通过 Steam 账号</h3>
             <h1>进入其乐社区</h1>

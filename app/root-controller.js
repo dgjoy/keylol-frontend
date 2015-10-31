@@ -2,8 +2,8 @@
     "use strict";
 
     keylolApp.controller("RootController", [
-        "$scope", "pageTitle", "union", "$http", "apiEndpoint", "notification",
-        function ($scope, pageTitle, union, $http, apiEndpoint, notification) {
+        "$scope", "pageTitle", "union", "$http", "apiEndpoint", "notification", "$location",
+        function ($scope, pageTitle, union, $http, apiEndpoint, notification, $location) {
             pageTitle.loading();
             $scope.$watch(function () {
                 return union.$localStorage.login;
@@ -25,6 +25,7 @@
                     });
                 } else {
                     delete union.$localStorage.user;
+                    $location.url("/");
                 }
             });
         }

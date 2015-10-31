@@ -3,7 +3,7 @@
 
     keylolApp.controller("RegistrationController", [
         "$scope", "close", "$http", "utils", "union", "apiEndpoint", "window", "notification",
-        function ($scope, close, $http, utils, union, apiEndpoint, window, notification) {
+        function ($scope, close, $http, utils, union, apiEndpoint, window) {
             $scope.vm = {
                 IdCode: "",
                 UserName: "",
@@ -13,7 +13,8 @@
                 SteamProfileName: "",
                 GeetestChallenge: "",
                 GeetestSeccode: "",
-                GeetestValidate: ""
+                GeetestValidate: "",
+                InvitationCode: union.invitationCode
             };
             var consumeBindingToken;
             var geetestResult;

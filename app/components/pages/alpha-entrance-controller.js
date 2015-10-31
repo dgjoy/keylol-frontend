@@ -2,55 +2,70 @@
     "use strict";
 
     keylolApp.controller("AlphaEntranceController", [
-        "pageTitle", "$scope", "$timeout", "$rootScope",
-        function (pageTitle, $scope, $timeout, $rootScope) {
-            pageTitle.set("内测 - 其乐");
+        "pageTitle", "$scope", "$timeout", "$rootScope", "window", "$window", "union", "$location",
+        function (pageTitle, $scope, $timeout, $rootScope, window, $window, union, $location) {
+            pageTitle.set("其乐游戏社区");
+
+            $scope.$watch(function () {
+                return union.$localStorage.login;
+            }, function (newValue) {
+                if (newValue) {
+                    $location.url("home");
+                }
+            });
+
+            $scope.showInvitationWindow = function () {
+                window.show({
+                    templateUrl: "components/windows/alpha-invitation.html",
+                    controller: "AlphaInvitationController"
+                });
+            };
+
             $scope.secondAnimate = false;
             var activeLock = 0;
             $scope.active = 0;
             var activeTimeout;
-            $(window).scroll(function(){
-                $scope.$apply(function(){
-                    if($scope.secondAnimate == false){
-                        if($(window).scrollTop() >= 538){
+            $($window).scroll(function () {
+                $scope.$apply(function () {
+                    if ($scope.secondAnimate == false) {
+                        if ($($window).scrollTop() >= 538) {
                             $scope.secondAnimate = true;
                         }
                     }
-                    if($(window).scrollTop() < 1152){
+                    if ($($window).scrollTop() < 1152) {
                         $scope.active = 0;
                         activeLock = 0;
-                    }else if($(window).scrollTop() > 2077){
+                    } else if ($($window).scrollTop() > 2077) {
                         $scope.active = 6;
                         activeLock = 6;
-                    }else{
-                        if($(window).scrollTop() < 1337){
+                    } else {
+                        if ($($window).scrollTop() < 1337) {
                             changeActive(1);
-                        }else if($(window).scrollTop() < 1522){
+                        } else if ($($window).scrollTop() < 1522) {
                             changeActive(2);
-                        }else if($(window).scrollTop() < 1707){
+                        } else if ($($window).scrollTop() < 1707) {
                             changeActive(3);
-                        }else if($(window).scrollTop() < 1892){
+                        } else if ($($window).scrollTop() < 1892) {
                             changeActive(4);
-                        }else{
+                        } else {
                             changeActive(5);
                         }
                     }
-
                 });
             });
 
-            var cancelListenRoute = $rootScope.$on("$routeChangeStart", function(){
-                $(window).unbind("scroll");
+            var cancelListenRoute = $scope.$on("$destroy", function () {
+                $($window).unbind("scroll");
                 cancelListenRoute();
             });
 
-            var changeActive = function(index){
-                if(activeLock != index){
+            var changeActive = function (index) {
+                if (activeLock != index) {
                     activeLock = index;
-                    if(activeTimeout){
+                    if (activeTimeout) {
                         $timeout.cancel(activeTimeout);
                     }
-                    activeTimeout = $timeout(function(){
+                    activeTimeout = $timeout(function () {
                         $scope.active = index;
                     }, 100);
                 }

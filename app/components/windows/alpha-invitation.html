@@ -1,0 +1,48 @@
+<window position="center" class="window-alpha-invitation">
+    <div class="window">
+        <div class="window-exit-button" ng-click="cancel()">
+            <div ng-include="'assets/images/exit.svg'"></div>
+        </div>
+        <img class="secret-barcode" src="assets/images/secret-barcode-login.png" alt="条形码">
+        <div class="heading">
+            <a href="" ng-click="getInvitationCode()">没有邀请码？</a>
+            <h1 class="font-myriad-lisong">内测邀请码</h1>
+            <h2>填写注册表单之前，需要确认您的内测参与意向</h2>
+        </div>
+        <form class="clearfix" ng-submit="submit()">
+            <table>
+                <colgroup>
+                    <col style="width: 30%">
+                    <col style="width: 70%">
+                </colgroup>
+                <tbody>
+                <tr>
+                    <td>
+                        <h3 class="font-myriad-lisong">邀请码</h3>
+                        <h4 ng-switch="invitationCodeError">
+                            <span class="error" ng-switch-when="empty">邀请码不能为空。</span>
+                            <span class="error" ng-switch-when="invalid">邀请码无效，请检查。</span>
+                            <span ng-switch-default>请在右侧填写 32 位代码；包括破折线。</span>
+                        </h4>
+                    </td>
+                    <td>
+                        <input type="text" tabindex="1" ng-model="vm.InvitationCode">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <button type="submit" class="window-confirm-button">
+                <img class="arrow-right" src="assets/images/arrow-right.png" alt="下一步">
+                <img class="signature-pen" src="assets/images/signature-pen.png" alt="提交">
+                <hgroup class="font-myriad-keylol">
+                    <h1>索取注册表单</h1>
+                    <h2>Request for Registration</h2>
+                </hgroup>
+            </button>
+            <div class="switch-to-login">
+                <button type="button" class="border-button left-border" ng-click="switchToLoginWindow()">已注册用户登录</button>
+                <p>在成功注册帐号之前，你所填写的邀请码不会失效。</p>
+            </div>
+        </form>
+    </div>
+</window>

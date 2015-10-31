@@ -22,10 +22,10 @@
                   $httpProvider, $compileProvider) {
             $locationProvider.html5Mode(true);
 
-            $routeProvider.when("/", {
+            $routeProvider.when("/home", {
                 templateUrl: "components/pages/home.html",
                 controller: "HomeController"
-            }).when("/alpha", {
+            }).when("/", {
                 templateUrl: "components/pages/alpha-entrance.html",
                 controller: "AlphaEntranceController"
             }).when("/article/:author/:article", {
