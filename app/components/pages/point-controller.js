@@ -17,8 +17,13 @@
                 },
                 datetime: "outBlock",
                 hasExpand: true,
-                loadAction: function(params, callback){
-                    $http.get(apiEndpoint + "/article/point/" + $routeParams.idCode, {
+                entries: []
+            };
+            union.point = {};
+            if($routeParams.userIdCode){}
+            if($routeParams.pointIdCode){
+                union.timeline.loadAction = function(params, callback){
+                    $http.get(apiEndpoint + "/article/point/" + $routeParams.pointIdCode, {
                         params: params
                     }).then(function(response){
                         callback(response);
@@ -26,12 +31,8 @@
                         alert("未知错误");
                         console.log(error);
                     });
-                },
-                entries: []
-            };
-            union.point = {};
-            if($routeParams.idCode){
-                $http.get(apiEndpoint + "/normal-point/" + $routeParams.idCode, {
+                };
+                $http.get(apiEndpoint + "/normal-point/" + $routeParams.pointIdCode, {
                     params: {
                         includeStats: true,
                         includeVotes: true,
@@ -103,7 +104,7 @@
                     console.log(error);
                 });
 
-                $http.get(apiEndpoint + "/article/point/" + $routeParams.idCode, {
+                $http.get(apiEndpoint + "/article/point/" + $routeParams.pointIdCode, {
                     params: {
                         idType: "IdCode",
                         take: 10

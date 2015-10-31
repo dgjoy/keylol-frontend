@@ -31,7 +31,10 @@
             }).when("/article/:author/:article", {
                 templateUrl: "components/pages/article.html",
                 controller: "ArticleController"
-            }).when("/point/:idCode", {
+            }).when("/point/:pointIdCode", {
+                templateUrl: "components/pages/point.html",
+                controller: "PointController"
+            }).when("/user/:userIdCode", {
                 templateUrl: "components/pages/point.html",
                 controller: "PointController"
             }).when("/post", {

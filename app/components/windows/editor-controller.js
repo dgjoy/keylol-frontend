@@ -5,32 +5,34 @@
         "$scope", "close", "$element", "utils", "$http", "union", "$timeout", "$location",
         function ($scope, close, $element, utils, $http, union, $timeout, $location) {
             $scope.cancel = function () {
-                if($scope.cancelTimeout){
+                if ($scope.cancelTimeout) {
                     $timeout.cancel($scope.cancelTimeout);
                 }
                 close();
             };
             $scope.radioId = [utils.uniqueId(), utils.uniqueId(), utils.uniqueId()];
             $scope.vm = {
-                title: union.$localStorage.editCache.title,
-                content: union.$localStorage.editCache.content,
-                saveTime: union.$localStorage.editCache.saveTime,
                 vote: 0
             };
-            $scope.saveDraft = function(){
+            if (union.$localStorage.editCache) {
+                $scope.vm.title = union.$localStorage.editCache.title;
+                $scope.vm.content = union.$localStorage.editCache.content;
+                $scope.vm.saveTime = union.$localStorage.editCache.saveTime;
+            }
+            $scope.saveDraft = function () {
                 $scope.vm.saveTime = moment();
                 union.$localStorage.editCache = {
                     title: $scope.vm.title,
                     content: $scope.vm.content,
                     saveTime: $scope.vm.saveTime
                 };
-                if($scope.cancelTimeout){
+                if ($scope.cancelTimeout) {
                     $timeout.cancel($scope.cancelTimeout);
                 }
                 createTimeout();
             };
-            var createTimeout = function(){
-                $scope.cancelTimeout = $timeout(function(){
+            var createTimeout = function () {
+                $scope.cancelTimeout = $timeout(function () {
                     $scope.vm.saveTime = moment();
                     union.$localStorage.editCache = {
                         title: $scope.vm.title,
@@ -44,7 +46,7 @@
             createTimeout();
             $scope.submit = function () {
                 var attachedId = [];
-                if($scope.vm.selector && $scope.vm.selector.length > 5){
+                if ($scope.vm.selector && $scope.vm.selector.length > 5) {
                     return alert("不能同时投稿多于5个据点");
                 }
                 for (var i in $scope.vm.selector) {
@@ -74,7 +76,7 @@
                             content: "",
                             saveTime: null
                         };
-                        if($scope.cancelTimeout){
+                        if ($scope.cancelTimeout) {
                             $timeout.cancel($scope.cancelTimeout);
                         }
                         close();
