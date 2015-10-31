@@ -2,8 +2,8 @@
     "use strict";
 
     keylolApp.controller("SettingsController", [
-        "$scope", "close", "utils", "$http", "union", "apiEndpoint", "base64", "Upload", "$q",
-        function ($scope, close, utils, $http, union, apiEndpoint, base64, Upload, $q) {
+        "$scope", "close", "utils", "$http", "union", "apiEndpoint", "base64", "Upload", "$q", "notification",
+        function ($scope, close, utils, $http, union, apiEndpoint, base64, Upload, $q, notification) {
             $scope.error = {};
             $scope.errorDetect = utils.modelErrorDetect;
             $scope.page = "profiles";
@@ -231,7 +231,7 @@
                 }
                 if (!$scope.files.avatarImage && !$scope.files.profilePointBackgroundImage
                     && $.isEmptyObject(dirtyFields)) { // Nothing changed
-                    alert("保存成功。");
+                    notification.success("保存成功。");
                     close();
                     return;
                 }
@@ -240,7 +240,7 @@
                     $http.put(apiEndpoint + "user/" + union.$localStorage.login.UserId, dirtyFields)
                         .then(function () {
                             $.extend(union.$localStorage.user, dirtyFields);
-                            alert("保存成功。");
+                            notification.success("保存成功。");
                             close();
                         }, function (response) {
                             switch (response.status) {
@@ -252,7 +252,8 @@
                                     focusErrorPage();
                                     break;
                                 default:
-                                    alert(response.data);
+                                    notification.error("未知错误");
+                                    console.error(response.data);
                             }
                         });
                 };
@@ -281,7 +282,7 @@
                             uploads.avatarImage.then(function (response) {
                                 dirtyFields.AvatarImage = "keylol://avatars/" + response.data.url;
                             }, function () {
-                                alert("头像上传失败。");
+                                notification.error("头像上传失败。");
                             });
                         }
                         if ($scope.files.profilePointBackgroundImage) {
@@ -297,14 +298,14 @@
                             uploads.profilePointBackgroundImage.then(function (response) {
                                 dirtyFields.ProfilePointBackgroundImage = response.data.url;
                             }, function () {
-                                alert("个人据点横幅上传失败。");
+                                notification.error("个人据点横幅上传失败。");
                             });
                         }
                         $q.all(uploads).then(function () {
                             submit();
                         });
                     }, function () {
-                        alert("文件上传验证失效。");
+                        notification.error("文件上传验证失效。");
                     });
                 } else {
                     submit();
@@ -312,15 +313,21 @@
             };
 
             $scope.logout = function () {
-                if (confirm("确认退出登录？")) {
-                    $http.delete(apiEndpoint + "login/current").then(function () {
-                        delete union.$localStorage.login;
-                        alert("成功退出登录。");
-                        close();
-                    }, function (response) {
-                        alert(response.data);
-                    });
-                }
+                notification.attention("确认要登出当前账户吗？", [
+                    {action: "登出", value: true},
+                    {action: "取消"}
+                ]).then(function (result) {
+                    if (result) {
+                        $http.delete(apiEndpoint + "login/current").then(function () {
+                            delete union.$localStorage.login;
+                            notification.success("成功退出登录。");
+                            close();
+                        }, function (response) {
+                            notification.error("未知错误");
+                            console.error(response.data);
+                        });
+                    }
+                });
             };
         }
     ]);

@@ -2,8 +2,8 @@
     "use strict";
 
     keylolApp.controller("ArticleCommentsController", [
-        "$scope", "union", "$http", "utils", "$sce", "getAndFlushComments",
-        function ($scope, union, $http, utils, $sce, getAndFlushComments) {
+        "$scope", "union", "$http", "utils", "$sce", "getAndFlushComments", "notification",
+        function ($scope, union, $http, utils, $sce, getAndFlushComments, notification) {
             $scope.comments = union.comments;
             $scope.article = union.article;
             $scope.hotComments = union.hotComments;
@@ -20,15 +20,15 @@
                         ArticleId: union.article.Id,
                         ReplyToCommentsSN: replyArray
                     }).then(function (response) {
-                        alert("发送成功");
+                        notification.success("发送成功");
                         $scope.submitDisabled = false;
                         $scope.currentComment = "";
                         var sqNumber = response.data.SequenceNumberForArticle;
                         getAndFlushComments(union.article, sqNumber, "Sequence");
                     }, function (error) {
-                        alert("评论发送失败");
+                        notification.error("评论发送失败");
                         $scope.submitDisabled = false;
-                        console.log(error);
+                        console.error(error);
                     });
                 }
             };
@@ -48,8 +48,8 @@
                     Type: "CommentLike"
                 }).then(function (response) {
                 }, function (error) {
-                    alert("认可评论失败");
-                    console.log(error);
+                    notification.error("认可评论失败");
+                    console.error(error);
                 });
                 comment.Liked = true;
                 comment.hasLike = true;
@@ -63,8 +63,8 @@
                     }
                 }).then(function (response) {
                 }, function (error) {
-                    alert("取消认可评论失败");
-                    console.log(error);
+                    notification.error("取消认可评论失败");
+                    console.error(error);
                 });
                 comment.Liked = false;
                 comment.LikeCount -= 1;

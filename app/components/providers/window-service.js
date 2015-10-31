@@ -9,14 +9,14 @@
                 var self = this;
 
                 var bodyOriginalPaddingRight;
-                var scrollBarWidth = (function () {
+                var scrollBarWidth = function () {
                     var scrollDiv = document.createElement("div");
                     scrollDiv.className = "scrollbar-measure";
                     $(document.body).append(scrollDiv);
                     var width = scrollDiv.offsetWidth - scrollDiv.clientWidth;
                     $(scrollDiv).remove();
                     return width;
-                })();
+                };
 
                 var adjustScrollBar = function () {
                     var $body = $(document.body);
@@ -33,7 +33,7 @@
                             if (document.body.clientWidth < fullWindowWidth) { // Body is overflowing
                                 // Set body padding-right
                                 var bodyPaddingRight = parseInt(($body.css("padding-right") || 0), 10);
-                                $body.css("padding-right", bodyPaddingRight + scrollBarWidth + "px");
+                                $body.css("padding-right", bodyPaddingRight + scrollBarWidth() + "px");
                             }
 
                             $body.addClass("body-window-open");

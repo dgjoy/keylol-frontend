@@ -11,7 +11,6 @@
             }
             $scope.typeOptions[selectedType] = true;
             $scope.changeSelector = function (index) {
-                console.log(index);
                 $scope.typeOptions[index] = true;
                 $scope.typeOptions[selectedType] = false;
                 close(index);

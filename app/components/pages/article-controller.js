@@ -2,8 +2,8 @@
     "use strict";
 
     keylolApp.controller("ArticleController", [
-        "pageTitle", "$scope", "$sce", "union", "$routeParams", "$http", "getAndFlushComments",
-        function (pageTitle, $scope, $sce, union, $routeParams, $http, getAndFlushComments) {
+        "pageTitle", "$scope", "$sce", "union", "$routeParams", "$http", "getAndFlushComments", "notification",
+        function (pageTitle, $scope, $sce, union, $routeParams, $http, getAndFlushComments, notification) {
             $scope.articleExist = true;
             pageTitle.set("文章 - 其乐");
             union.article = {};
@@ -62,7 +62,7 @@
                                 }
                                 $.extend(union.point, point);
                             }, function (error) {
-                                alert("未知错误");
+                                notification.error("未知错误");
                                 console.error(error);
                             });
                         }
@@ -82,6 +82,7 @@
                 $http.get(apiEndpoint + "user/" + $routeParams.author, {
                     params: {
                         includeSubscribed: $routeParams.author != union.$localStorage.user.IdCode,
+                        includeStats: true,
                         includeProfilePointBackgroundImage: true,
                         idType: "IdCode"
                     }
@@ -106,7 +107,7 @@
                         union.summary.subscribed = author.Subscribed;
                     }
                 }, function (error) {
-                    alert("未知错误");
+                    notification.error("未知错误");
                     console.error(error);
                 });
             }

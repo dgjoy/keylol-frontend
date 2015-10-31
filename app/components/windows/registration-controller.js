@@ -2,8 +2,8 @@
     "use strict";
 
     keylolApp.controller("RegistrationController", [
-        "$scope", "close", "$http", "utils", "union", "apiEndpoint", "window",
-        function ($scope, close, $http, utils, union, apiEndpoint, window) {
+        "$scope", "close", "$http", "utils", "union", "apiEndpoint", "window", "notification",
+        function ($scope, close, $http, utils, union, apiEndpoint, window, notification) {
             $scope.vm = {
                 IdCode: "",
                 UserName: "",
@@ -80,7 +80,8 @@
                                 }
                                 break;
                             default:
-                                alert(response.data);
+                                notification.error("未知错误");
+                                console.error(response.data);
                         }
                     });
             };

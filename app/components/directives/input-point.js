@@ -12,19 +12,15 @@
                 },
                 require: "ngModel",
                 link: function (scope, element, attrs, ngModel) {
-                    var focusLock = false;
                     scope.pointArray = [];
-                    var placeholder = scope.placeholder;
-                    scope.placeholder = placeholder;
-                    scope.hasPlaceholder = true;
                     var addPoint = function (result) {
                         var hasBeenExist = false;
-                        for(var i in scope.pointArray){
-                            if(scope.pointArray[i].id === result.Id){
+                        for (var i in scope.pointArray) {
+                            if (scope.pointArray[i].id === result.Id) {
                                 hasBeenExist = true
                             }
                         }
-                        if(!hasBeenExist){
+                        if (!hasBeenExist) {
                             scope.pointArray.push({
                                 title: result[result.PreferedName + "Name"],
                                 selected: false,
@@ -45,11 +41,10 @@
                             }
                         });
                     };
-                    scope.selectPoint = function (index, $event) {
+                    scope.selectPoint = function (index) {
                         scope.pointArray[index].selected = true;
                         var keydownCallback = function (e) {
                             scope.$apply(function () {
-                                console.log("key");
                                 scope.pointArray[index].selected = false;
                                 if (e.keyCode == 8) {
                                     deleteSelectorPoint(index);
@@ -62,55 +57,40 @@
                         };
                         var clickCallback = function (e) {
                             scope.$apply(function () {
-                                console.log("click");
                                 scope.pointArray[index].selected = false;
                                 $window.removeEventListener("click", clickCallback, true);
                                 $window.removeEventListener("keydown", keydownCallback, true);
-                                e.stopPropagation();
-                                e.preventDefault();
                             });
                         };
                         $window.addEventListener("click", clickCallback, true);
                         $window.addEventListener("keydown", keydownCallback, true);
-                        $event.stopPropagation();
-                        $event.preventDefault();
                     };
 
-                    var changgePlaceholder = function () {
-                        if (!scope.data && scope.pointArray.length == 0) {
-                            if (scope.placeholder == "") {
-                                scope.hasPlaceholder = true;
-                                scope.placeholder = placeholder;
-                            } else {
-                                scope.hasPlaceholder = false;
-                                scope.placeholder = "";
-                            }
-                        }
-                    };
-                    $(element).click(function () {
-                        $(element).children("input").focus();
+                    var $input = element.find(".input");
+
+                    element.click(function (e) {
+                        if (e.target === $input[0] || $(e.target).is(element.find(".point-title"))) return;
+                        element.children("input").focus();
                     });
 
-                    $(element).children("input").focus(function () {
-                        if (!focusLock) {
-                            focusLock = true;
-                            changgePlaceholder();
-                            $window.addEventListener("keydown", deleteKeyCallback, true);
-                            scope.disWatchData = scope.$watch("data", function (newValue) {
-                                if (scope.dataChangeTimeout) {
-                                    $timeout.cancel(scope.dataChangeTimeout);
+                    $input.focus(function () {
+                        $window.addEventListener("keydown", deleteKeyCallback, true);
+                        scope.disWatchData = scope.$watch("data", function (newValue) {
+                            if (scope.dataChangeTimeout) {
+                                $timeout.cancel(scope.dataChangeTimeout);
+                            }
+                            scope.dataChangeTimeout = $timeout(function () {
+                                if (scope.nowPopup) {
+                                    scope.nowPopup.then(function (popup) {
+                                        popup.closeNow();
+                                    });
                                 }
-                                scope.dataChangeTimeout = $timeout(function () {
-                                    if (scope.nowPopup) {
-                                        scope.nowPopup.then(function (popup) {
-                                            popup.closeNow();
-                                        });
-                                    }
-                                    $window.removeEventListener("keydown", union.keydownCallback, true);
-                                    if (newValue != "") {
-                                        $http.get(apiEndpoint + "normal-point/keyword/" + newValue)
-                                            .then(function (response) {
-                                                var pointArray = response.data;
+                                $window.removeEventListener("keydown", union.keydownCallback, true);
+                                if (newValue) {
+                                    $http.get(apiEndpoint + "normal-point/keyword/" + encodeURIComponent(newValue))
+                                        .then(function (response) {
+                                            var pointArray = response.data;
+                                            if (pointArray.length) {
                                                 scope.nowPopup = scope.showSelector({
                                                     templateUrl: "components/popup/point-selector.html",
                                                     controller: "PointSelectorController",
@@ -133,22 +113,17 @@
                                                         addPoint(result);
                                                     }
                                                 });
-                                            }, function (error) {
-                                                alert("未知错误");
-                                                console.error(error);
-                                            });
-                                    }
-                                }, 200);
-                            });
-                        }
+                                            }
+                                        });
+                                }
+                            }, 200);
+                        });
                     });
 
-                    $(element).children("input").blur(function () {
+                    $input.blur(function () {
                         if (scope.dataChangeTimeout) {
                             $timeout.cancel(scope.dataChangeTimeout);
                         }
-                        focusLock = false;
-                        changgePlaceholder();
                         $window.removeEventListener("keydown", deleteKeyCallback, true);
                         scope.disWatchData();
                     });

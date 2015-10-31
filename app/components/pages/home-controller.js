@@ -2,8 +2,8 @@
     "use strict";
 
     keylolApp.controller("HomeController", [
-        "pageTitle", "$scope", "union", "$http",
-        function (pageTitle, $scope, union, $http) {
+        "pageTitle", "$scope", "union", "$http", "notification",
+        function (pageTitle, $scope, union, $http, notification) {
             pageTitle.set("其乐");
             union.timeline = {
                 title: {
@@ -23,7 +23,7 @@
                     }).then(function(response){
                         callback(response);
                     },function(error){
-                        alert("未知错误");
+                        notification.error("未知错误");
                         console.log(error);
                     });
                 },
@@ -88,9 +88,9 @@
                                 break;
                             case "Point":
                                 entry.sources.type = "point";
-                                entry.sources.pointArray = [];
+                                entry.sources.points = [];
                                 for(var j in article.AttachedPoints){
-                                    entry.sources.pointArray.push({
+                                    entry.sources.points.push({
                                         name: article.AttachedPoints[j][article.AttachedPoints[j].PreferedName + "Name"],
                                         url: "/point/" + article.AttachedPoints[j].IdCode
                                     });
@@ -107,7 +107,7 @@
                 }
                 union.$localStorage.homeTimeline = union.timeline.entries;
             },function(error){
-                alert("未知错误");
+                notification.error("未知错误");
                 console.log(error);
             });
         }

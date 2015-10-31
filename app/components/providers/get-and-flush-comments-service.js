@@ -2,8 +2,8 @@
     "use strict";
 
     keylolApp.factory("getAndFlushComments", [
-        "$http", "$sce", "union",
-        function ($http, $sce, union) {
+        "$http", "$sce", "union", "notification",
+        function ($http, $sce, union, notification) {
             var parseComments = function (str, index) {
                 var regExpForComment = /^((?:#\d+[ \t]*)+)(?:$|[ \t]+)/gm;
                 var regExpForEachLine = /#(\d+)/g;
@@ -48,7 +48,7 @@
                         }
                         $.extend(union.hotComments, hotComments);
                     }, function (error) {
-                        alert("未知错误");
+                        notification.error("未知错误");
                         console.error(error);
                     });
                 } else if (getCommentsType == "page") {
@@ -79,7 +79,7 @@
                         union.comments.length = 0;
                         $.extend(union.comments, comments);
                     }, function (error) {
-                        alert("未知错误");
+                        notification.error("未知错误");
                         console.error(error);
                     });
                 } else {
@@ -110,7 +110,7 @@
                         union.comments.length = 0;
                         $.extend(union.comments, comments);
                     }, function (error) {
-                        alert("评论刷新失败");
+                        notification.error("评论刷新失败");
                         console.error(error);
                     });
                 }

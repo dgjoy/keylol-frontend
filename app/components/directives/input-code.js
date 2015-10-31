@@ -11,9 +11,7 @@
                 },
                 require: "ngModel",
                 link: function (scope, element, attrs, ngModel) {
-                    scope.getNumber = function (num) {
-                        return new Array(num);
-                    };
+                    scope.repeats = new Array(scope.length); // For ng-repeat
                     scope.text = {};
                     scope.focus = {};
                     scope.keydown = function (index, event) {
@@ -42,20 +40,16 @@
                         }
                     };
 
-                    var getText = function () {
-                        var t = "";
-                        for (var i = 0; i < scope.length; i++) {
-                            if (scope.text[i]) {
-                                t += scope.text[i][0];
-                            }
-                        }
-                        return t;
-                    };
-
                     for (var j = 0; j < scope.length; ++j) {
                         (function (j) {
                             scope.$watch("text[" + j + "]", function (newValue, oldValue) {
-                                var fullText = getText();
+                                // Get full text
+                                var fullText = "";
+                                for (var i = 0; i < scope.length; i++) {
+                                    if (scope.text[i]) {
+                                        fullText += scope.text[i][0];
+                                    }
+                                }
                                 ngModel.$setViewValue(fullText);
                                 if (newValue && (!oldValue || newValue.length >= oldValue.length))
                                     scope.focus[j + 1] = true;

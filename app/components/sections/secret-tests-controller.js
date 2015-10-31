@@ -2,8 +2,8 @@
     "use strict";
 
     keylolApp.controller("SecretTestsController", [
-        "$scope", "window",
-        function ($scope, window) {
+        "$scope", "window", "notification",
+        function ($scope, window, notification) {
             $scope.showEditor = function () {
                 window.show({
                     templateUrl: "components/windows/editor.html",
@@ -18,40 +18,41 @@
             };
             var feedbackArray = [
                 {
-                    type: "progress",
-                    mainText: "文章已发布",
-                    mainTitle: "成功",
+                    description: "文章已发布",
+                    title: "成功",
                     subTitle: "Succeeded"
                 }, {
-                    type: "error",
-                    mainText: "发生未知错误，请重试或与站务职员联系",
-                    mainTitle: "错误",
+                    description: "发生未知错误，请重试或与站务职员联系",
+                    title: "错误",
                     subTitle: "Error"
                 }, {
-                    type: "attention",
-                    mainText: "确认要登出当前账户吗？",
-                    mainTitle: "注意",
+                    description: "确认要登出当前账户吗？",
+                    title: "注意",
                     subTitle: "Attention",
                     actions: [
                         {
-                            text: "登出"
+                            action: "登出"
                         }, {
-                            text: "取消"
+                            action: "取消"
                         }
                     ]
                 }
             ];
-            $scope.showFeedback = function (index, $event) {
-                $scope.onFeedback({
-                    templateUrl: "components/popup/operation-feedback.html",
-                    controller: "OperationFeedbackController",
-                    event: $event,
-                    computePosition: false,
-                    inputs: {
-                        data: feedbackArray[index]
-                    }
+            $scope.showSuccess = function () {
+                notification.success("文章已发布")
+            };
+            $scope.showError = function () {
+                notification.error("发生未知错误，请重试或与站务职员联系");
+            };
+            $scope.showWarning = function () {
+                notification.attention("确认要登出当前账户吗？", [
+                    {action: "登出", value: true},
+                    {action: "取消"}
+                ]).then(function (result) {
+                    if (result)
+                        notification.success("已登出");
                 });
-            }
+            };
         }
     ]);
 })();

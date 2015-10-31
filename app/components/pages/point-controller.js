@@ -2,8 +2,8 @@
     "use strict";
 
     keylolApp.controller("PointController", [
-        "pageTitle", "$scope", "union", "$routeParams", "$http", "utils",
-        function (pageTitle, $scope, union, $routeParams, $http, utils) {
+        "pageTitle", "$scope", "union", "$routeParams", "$http", "utils", "notification",
+        function (pageTitle, $scope, union, $routeParams, $http, utils, notification) {
             /**
              * 初始化union的一些属性
              */
@@ -37,8 +37,8 @@
                     }).then(function(response){
                         callback(response);
                     },function(error){
-                        alert("未知错误");
-                        console.log(error);
+                        notification.error("未知错误");
+                        console.error(error);
                     });
                 };
 
@@ -80,7 +80,7 @@
                         }).then(function (response) {
                             union.summary.subscribed = response.data;
                         }, function (error) {
-                            alert("未知错误");
+                            notification.error("未知错误");
                             console.error(error);
                         });
                     }
@@ -146,9 +146,9 @@
                                         break;
                                     case "Point":
                                         entry.sources.type = "point";
-                                        entry.sources.pointArray = [];
+                                        entry.sources.points = [];
                                         for(var j in article.AttachedPoints){
-                                            entry.sources.pointArray.push({
+                                            entry.sources.points.push({
                                                 name: article.AttachedPoints[j][article.AttachedPoints[j].PreferedName + "Name"],
                                                 url: "/point/" + article.AttachedPoints[j].IdCode
                                             });
@@ -164,12 +164,12 @@
                             union.timeline.entries.push(entry);
                         }
                     },function(error){
-                        alert("未知错误");
-                        console.log(error);
+                        notification.error("未知错误");
+                        console.error(error);
                     });
                 },function(error){
-                    alert("未知错误");
-                    console.log(error);
+                    notification.error("未知错误");
+                    console.error(error);
                 });
 
             }
@@ -187,8 +187,8 @@
                     }).then(function(response){
                         callback(response);
                     },function(error){
-                        alert("未知错误");
-                        console.log(error);
+                        notification.error("未知错误");
+                        console.error(error);
                     });
                 };
 
@@ -259,12 +259,12 @@
                     }).then(function (response) {
                         union.summary.subscribed = response.data;
                     }, function (error) {
-                        alert("未知错误");
+                        notification.error("未知错误");
                         console.error(error);
                     });
                 },function(error){
-                    alert("未知错误");
-                    console.log(error);
+                    notification.error("未知错误");
+                    console.error(error);
                 });
 
                 /**
@@ -300,8 +300,8 @@
                         });
                     }
                 },function(error){
-                    alert("未知错误");
-                    console.log(error);
+                    notification.error("未知错误");
+                    console.error(error);
                 });
             }
         }

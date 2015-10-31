@@ -2,8 +2,8 @@
     "use strict";
 
     keylolApp.controller("LoginSteamController", [
-        "$scope", "close", "$http", "apiEndpoint", "window", "union", "$timeout",
-        function ($scope, close, $http, apiEndpoint, window, union, $timeout) {
+        "$scope", "close", "$http", "apiEndpoint", "window", "union", "$timeout", "notification",
+        function ($scope, close, $http, apiEndpoint, window, union, $timeout, notification) {
             var connection = $.connection.new();
             var steamLoginHubProxy = connection.steamLoginHub;
             var tokenId;
@@ -35,7 +35,8 @@
                                 close();
                             }, 1500);
                         }, function (response) {
-                            alert(response.data);
+                            notification.error("未知错误");
+                            console.error(response.data);
                         });
                 });
             };
@@ -48,7 +49,7 @@
                     });
                 });
             }, function () {
-                alert("连接失败。");
+                notification.error("连接失败");
                 $scope.cancel();
             });
         }

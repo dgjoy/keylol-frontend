@@ -2,8 +2,8 @@
     "use strict";
 
     keylolApp.controller("SteamConnectController", [
-        "$scope", "close", "$timeout", "$q",
-        function ($scope, close, $timeout, $q) {
+        "$scope", "close", "$timeout", "$q", "notification",
+        function ($scope, close, $timeout, $q, notification) {
             var tokenId;
             var result;
             var closed = false;
@@ -59,13 +59,13 @@
                             $scope.botSteamId64 = token.BotSteamId64;
                             $scope.code = token.Code;
                         } else {
-                            alert("暂无可用机器人。");
+                            notification.error("暂无可用机器人。");
                             $scope.cancel();
                         }
                     });
                 });
             }, function () {
-                alert("连接失败。");
+                notification.error("连接失败。");
                 $scope.cancel();
             });
         }

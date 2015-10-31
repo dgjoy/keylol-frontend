@@ -2,8 +2,8 @@
     "use strict";
 
     keylolApp.controller("TimelineController", [
-        "$scope", "union", "$location", "$http", "$rootScope", "$element",
-        function ($scope, union, $location, $http, $rootScope, $element) {
+        "$scope", "union", "$location", "$http", "$rootScope", "$element", "notification",
+        function ($scope, union, $location, $http, $rootScope, $element, notification) {
             $scope.headingDisplayMode = function (entry) {
                 if (entry.source)
                     return "source";
@@ -17,27 +17,31 @@
             };
 
             var loadingLock = false;
-            $(window).scroll(function(){
+            $(window).scroll(function () {
                 var $windowBottomY = $(window).scrollTop() + $(window).height();
                 var $timelineBottomY = $element.offset().top + $element.height();
-                $scope.$apply(function(){
-                    if($windowBottomY > $timelineBottomY - 768 && !loadingLock && !$scope.data.noMoreArticle) {
+                $scope.$apply(function () {
+                    if ($windowBottomY > $timelineBottomY - 768 && !loadingLock && !$scope.data.noMoreArticle) {
                         requestWhenFiltering(true);
                     }
                 });
             });
-            var cancelListenRoute = $rootScope.$on("$routeChangeStart", function(){
+            var cancelListenRoute = $rootScope.$on("$routeChangeStart", function () {
                 $(window).unbind("scroll");
                 cancelListenRoute();
             });
 
             $scope.expanded = false;
             var filterStringModule = ["全部", "不看", "只看", "全部不看"];
-            var filterOptions = [];
+            $scope.filterArray = union.$localStorage.articleTypes;
+            var filterOptions = $scope.filterArray ? new Array($scope.filterArray.length) : [];
+            for (var i = 0; i < filterOptions.length; ++i)
+                filterOptions[i] = true;
             $scope.expandString = filterStringModule[0];
             $http.get(apiEndpoint + "article-type")
                 .then(function (response) {
                     $scope.filterArray = response.data;
+                    union.$localStorage.articleTypes = response.data;
                     while (filterOptions.length < $scope.filterArray.length) {
                         filterOptions.push(true);
                     }
@@ -70,7 +74,7 @@
                         }
                     };
                 }, function (error) {
-                    alert("未知错误");
+                    notification.error("未知错误");
                     console.error(error);
                 });
 
@@ -95,16 +99,16 @@
                         take: 20
                     }, function (response) {
                         var articleList = response.data;
-                        if(!isLoadingMore){
+                        if (!isLoadingMore) {
                             $scope.data.entries.length = 0;
                         }
-                        if(articleList.length < 20){
+                        if (articleList.length < 20) {
                             $scope.data.noMoreArticle = true;
                         }
 
                         for (var i in articleList) {
                             var article = articleList[i];
-                            if(!article.Author){
+                            if (!article.Author) {
                                 article.Author = union.user;
                             }
                             var entry = {
@@ -124,19 +128,19 @@
                                     comment: article.CommentCount
                                 }
                             };
-                            if(article.TimelineReason) {
-                                switch (article.TimelineReason){
+                            if (article.TimelineReason) {
+                                switch (article.TimelineReason) {
                                     case "Like":
                                         entry.sources.type = "like";
                                         entry.sources.userArray = [];
-                                        if(article.LikeByUsers){
-                                            for(var j in article.LikeByUsers){
+                                        if (article.LikeByUsers) {
+                                            for (var j in article.LikeByUsers) {
                                                 entry.sources.userArray.push({
                                                     name: article.LikeByUsers[j].UserName,
                                                     url: "/user/" + article.LikeByUsers[j].IdCode
                                                 });
                                             }
-                                        }else {
+                                        } else {
                                             entry.sources.userArray.push({
                                                 name: union.user.UserName,
                                                 url: "/user/" + union.$localStorage.user.IdCode
@@ -146,7 +150,7 @@
                                     case "Point":
                                         entry.sources.type = "point";
                                         entry.sources.pointArray = [];
-                                        for(var j in article.AttachedPoints){
+                                        for (var j in article.AttachedPoints) {
                                             entry.sources.pointArray.push({
                                                 name: article.AttachedPoints[j][article.AttachedPoints[j].PreferedName + "Name"],
                                                 url: "/point/" + article.AttachedPoints[j].IdCode

@@ -2,8 +2,8 @@
     "use strict";
 
     keylolApp.controller("EditorController", [
-        "$scope", "close", "$element", "utils", "$http", "union", "$timeout", "$location",
-        function ($scope, close, $element, utils, $http, union, $timeout, $location) {
+        "$scope", "close", "$element", "utils", "$http", "union", "$timeout", "$location", "notification",
+        function ($scope, close, $element, utils, $http, union, $timeout, $location, notification) {
             $scope.cancel = function () {
                 if ($scope.cancelTimeout) {
                     $timeout.cancel($scope.cancelTimeout);
@@ -46,7 +46,8 @@
             $scope.submit = function () {
                 var attachedId = [];
                 if ($scope.vm.selector && $scope.vm.selector.length > 5) {
-                    return alert("不能同时投稿多于5个据点");
+                    notification.attention("不能同时投稿多于5个据点");
+                    return;
                 }
                 for (var i in $scope.vm.selector) {
                     attachedId.push($scope.vm.selector[i].id);
@@ -68,7 +69,7 @@
                 }
                 $http.post(apiEndpoint + "article", submitObj)
                     .then(function (response) {
-                        alert("发布成功");
+                        notification.success("发布成功");
                         union.$localStorage.editCache = {
                             title: "",
                             content: "",
@@ -80,16 +81,18 @@
                         close();
                         $location.url("article/" + union.$localStorage.user.IdCode + "/" + response.data.SequenceNumberForAuthor);
                     }, function (error) {
-                        alert("未知错误, 请尝试再次发布");
+                        notification.error("未知错误, 请尝试再次发布");
                         console.error(error);
                     });
             };
             $scope.funcs = {};
             $scope.expanded = false;
             var selectedType = 0;
+            $scope.articleTypeArray = union.$localStorage.articleTypes;
             $http.get(apiEndpoint + "article-type")
                 .then(function (response) {
                     $scope.articleTypeArray = response.data;
+                    union.$localStorage.articleTypes = response.data;
 
                     $scope.expandString = $scope.articleTypeArray[selectedType].Name;
                     $scope.allowVote = $scope.articleTypeArray[selectedType].AllowVote;
@@ -122,7 +125,7 @@
                         }
                     }
                 }, function (error) {
-                    alert(error);
+                    notification.error(error);
                     console.error(error);
                 });
         }

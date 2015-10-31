@@ -2,8 +2,8 @@
     "use strict";
 
     keylolApp.controller("ArticleContentController", [
-        "$scope", "union", "$http",
-        function ($scope, union, $http) {
+        "$scope", "union", "$http", "notification",
+        function ($scope, union, $http, notification) {
             $scope.article = union.article;
             $scope.acknowledge = function () {
                 $http.post(apiEndpoint + "like", {
@@ -11,8 +11,8 @@
                     Type: "ArticleLike"
                 }).then(function (response) {
                 }, function (error) {
-                    alert("认可评论失败");
-                    console.log(error);
+                    notification.error("认可评论失败");
+                    console.error(error);
                 });
                 $scope.article.Liked = true;
                 $scope.article.hasLike = true;
@@ -26,8 +26,8 @@
                     }
                 }).then(function (response) {
                 }, function (error) {
-                    alert("取消认可评论失败");
-                    console.log(error);
+                    notification.error("取消认可评论失败");
+                    console.error(error);
                 });
                 $scope.article.Liked = false;
                 $scope.article.LikeCount -= 1;
