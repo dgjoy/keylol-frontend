@@ -5,10 +5,17 @@
         "$scope", "close", "$element", "utils", "$http", "union", "$timeout", "$location", "notification", "options",
         function ($scope, close, $element, utils, $http, union, $timeout, $location, notification, options) {
             $scope.cancel = function () {
-                if ($scope.cancelTimeout) {
-                    $timeout.cancel($scope.cancelTimeout);
-                }
-                close();
+                notification.attention("关闭已改动的编辑器", [
+                    {action: "关闭", value: true},
+                    {action: "取消"}
+                ]).then(function (result) {
+                    if (result) {
+                        if ($scope.cancelTimeout) {
+                            $timeout.cancel($scope.cancelTimeout);
+                        }
+                        close();
+                    }
+                });
             };
             $scope.radioId = [utils.uniqueId(), utils.uniqueId(), utils.uniqueId()];
 
@@ -24,6 +31,8 @@
                         vote: 2,
                         selectedType: 0
                     }
+                } else {
+                    notification.success("本地草稿已加载");
                 }
             } else {
                 if (!($scope.vm = union.$localStorage.editCache[options.article.Id])) {
@@ -55,6 +64,8 @@
                             });
                         }
                     }
+                } else {
+                    notification.success("本地草稿已加载");
                 }
             }
 
@@ -114,7 +125,7 @@
                 if (options.type === "upload") {
                     $http.post(apiEndpoint + "article", submitObj)
                         .then(function (response) {
-                            notification.success("发布成功");
+                            notification.success("文章已发布");
                             union.$localStorage.editCache = {
                                 title: "",
                                 content: "",

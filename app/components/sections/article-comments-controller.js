@@ -20,7 +20,7 @@
                         ArticleId: union.article.Id,
                         ReplyToCommentsSN: replyArray
                     }).then(function (response) {
-                        notification.success("发送成功");
+                        notification.success("评论已发出");
                         $scope.submitDisabled = false;
                         $scope.currentComment = "";
                         var sqNumber = response.data.SequenceNumberForArticle;
@@ -47,6 +47,7 @@
                     TargetId: comment.Id,
                     Type: "CommentLike"
                 }).then(function (response) {
+                    notification.success("认可已生效");
                 }, function (error) {
                     notification.error("认可评论失败");
                     console.error(error);
@@ -62,6 +63,7 @@
                         type: "CommentLike"
                     }
                 }).then(function (response) {
+                    notification.success("此认可已被撤销");
                 }, function (error) {
                     notification.error("取消认可评论失败");
                     console.error(error);

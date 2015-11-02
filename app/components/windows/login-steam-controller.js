@@ -32,6 +32,7 @@
                             union.$localStorage.login = response.data;
                             connection.stop();
                             $timeout(function () {
+                                notification.success("登录成功，欢迎回到其乐");
                                 close();
                             }, 1500);
                         }, function (response) {

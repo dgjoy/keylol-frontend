@@ -53,6 +53,7 @@
                 $http.post(apiEndpoint + "login", $scope.vm)
                     .then(function (response) {
                         union.$localStorage.login = response.data;
+                        notification.success("登录成功，欢迎回到其乐");
                         close();
                     }, function (response) {
                         switch (response.status) {

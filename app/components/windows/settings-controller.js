@@ -231,7 +231,7 @@
                 }
                 if (!$scope.files.avatarImage && !$scope.files.profilePointBackgroundImage
                     && $.isEmptyObject(dirtyFields)) { // Nothing changed
-                    notification.success("保存成功。");
+                    notification.success("个人设定已更新");
                     close();
                     return;
                 }
@@ -240,7 +240,7 @@
                     $http.put(apiEndpoint + "user/" + union.$localStorage.login.UserId, dirtyFields)
                         .then(function () {
                             $.extend(union.$localStorage.user, dirtyFields);
-                            notification.success("保存成功。");
+                            notification.success("个人设定已更新");
                             close();
                         }, function (response) {
                             switch (response.status) {
@@ -281,6 +281,7 @@
                             });
                             uploads.avatarImage.then(function (response) {
                                 dirtyFields.AvatarImage = "keylol://avatars/" + response.data.url;
+                                notification.success("图像已上传，提交后将生效");
                             }, function () {
                                 notification.error("头像上传失败。");
                             });
@@ -297,6 +298,7 @@
                             });
                             uploads.profilePointBackgroundImage.then(function (response) {
                                 dirtyFields.ProfilePointBackgroundImage = response.data.url;
+                                notification.success("图像已上传，提交后将生效");
                             }, function () {
                                 notification.error("个人据点横幅上传失败。");
                             });
@@ -313,14 +315,14 @@
             };
 
             $scope.logout = function () {
-                notification.attention("确认要登出当前账户吗？", [
+                notification.attention("从当前账户登出", [
                     {action: "登出", value: true},
                     {action: "取消"}
                 ]).then(function (result) {
                     if (result) {
                         $http.delete(apiEndpoint + "login/current").then(function () {
                             delete union.$localStorage.login;
-                            notification.success("成功退出登录。");
+                            notification.success("已登出当前账户");
                             close();
                         }, function (response) {
                             notification.error("未知错误");

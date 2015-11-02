@@ -54,7 +54,7 @@
                         pointId: id
                     }
                 }).then(function () {
-                    notification.success("订阅成功！");
+                    notification.success("据点已订阅，其今后收到的文章投稿将推送到你的首页");
                     $scope.data.subscribed = true;
                     $scope.subscribeDisabled = false;
                     $scope.data.pointSum.readerNum++;
@@ -65,18 +65,26 @@
             };
             $scope.unsubscribe = function (id) {
                 $scope.subscribeDisabled = true;
-                $http.delete(apiEndpoint + "user-point-subscription", {
-                    params: {
-                        pointId: id
+                notification.attention("退订并不再接收此据点的文章推送", [
+                    {action: "退订", value: true},
+                    {action: "取消"}
+                ]).then(function (result) {
+                    if (result) {
+                        $http.delete(apiEndpoint + "user-point-subscription", {
+                            params: {
+                                pointId: id
+                            }
+                        }).then(function () {
+                            notification.success("据点已退订");
+                            $scope.data.subscribed = false;
+                            $scope.subscribeDisabled = false;
+                            $scope.data.pointSum.readerNum--;
+                        }, function (error) {
+                            notification.error("未知错误");
+                            console.error(error);
+                            $scope.subscribeDisabled = false;
+                        });
                     }
-                }).then(function () {
-                    notification.success("取消订阅成功！");
-                    $scope.data.subscribed = false;
-                    $scope.subscribeDisabled = false;
-                    $scope.data.pointSum.readerNum--;
-                }, function (error) {
-                    notification.error("未知错误");
-                    console.error(error);
                 });
             };
         }
