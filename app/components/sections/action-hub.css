@@ -72,6 +72,15 @@
     padding: 5px;
 }
 
+.section-action-hub .actions button.active {
+    background-color: #11254A;
+    color: #f3d92a;
+}
+
+.section-action-hub .actions button.active:hover {
+    background-color: #344565;
+}
+
 .section-action-hub .name-settings h4 {
     margin: 0;
     line-height: 22px;

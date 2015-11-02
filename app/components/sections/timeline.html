@@ -1,7 +1,8 @@
 ﻿<div class="section-timeline" ng-controller="TimelineController">
     <div class="heading inverse" ng-class="{hasRightButton: data.rightButton}">
-        <a href="{{data.rightButton.href}}" class="right-button box-shadowed" ng-if="data.rightButton">
+        <a href="" ng-click="data.rightButton.clickAction()" class="right-button box-shadowed" ng-if="data.rightButton">
             <img ng-src="{{data.rightButton.avatar}}" alt="{{data.rightButton.alt}}">
+            <span class="font-myriad-keylol">文</span>
         </a>
         <div class="left-info box-shadowed card"  popup="showFilter">
             <svg xmlns="http://www.w3.org/2000/svg" class="card-line">
@@ -41,7 +42,7 @@
                     <circle cx="3.5" cy="3.5" r="3.5"></circle>
                 </svg>
                 <span ng-switch="entry.sources.type">
-                    <a ng-switch-when="point" ng-href="{{point.url}}" ng-repeat="point in entry.sources.pointArray">「{{point.name}}」</a>
+                    <point-link ng-switch-when="point" ng-repeat="point in entry.sources.points" id-code="point.idCode" point-name="'「' + point.name + '」'"></point-link>
                     <span ng-switch-when="publish"><a href="" ng-href="{{entry.author.url}}">{{entry.author.username|userName:true}}</a> 发布了这篇文章</span>
                     <span ng-switch-when="like">
                         <span ng-repeat="user in entry.sources.userArray">

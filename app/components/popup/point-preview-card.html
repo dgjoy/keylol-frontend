@@ -1,12 +1,15 @@
 ﻿<popup class="popup-point-preview-card" ng-class="{loading: loading}">
     <div class="arrow-up"></div>
     <div class="card-main box-shadowed-deeper" ng-switch="loading">
-        <div class="background" webp-background="{{data.background}}" ng-switch-when="false"></div>
+        <div class="background" webp-background="{{data.background|backgroundUrl}}" ng-switch-when="false"></div>
         <div class="content">
-            <button class="border-button bottom-border"  ng-class="data.action.extraClass" ng-switch-when="false">{{data.action.text}}</button>
+            <div class="actions" ng-switch="data.subscribed" ng-switch-when="false">
+                <button type="button" ng-switch-when="false" ng-disabled="subscribeDisabled" class="border-button bottom-border" ng-click="subscribe(data.id)">订阅</button>
+                <button type="button" ng-switch-when="true" ng-disabled="subscribeDisabled" class="border-button bottom-border subscribed" ng-click="unsubscribe(data.id)">已订阅</button>
+            </div>
             <div class="loading-gif" ng-switch-when="true" style="background-image: url('assets/images/loading.gif');"></div>
             <div class="avatar-anchor" ng-switch-when="false">
-                <img class="avatar-big" ng-src="{{data.avatar}}">
+                <img class="avatar-big" webp-src="{{data.avatar|avatarUrl}}">
             </div>
             <div class="heading" ng-switch-when="false">
                 <h1>{{data.head.mainHead}}</h1>

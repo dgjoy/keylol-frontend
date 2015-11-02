@@ -143,6 +143,11 @@
     right: 0;
     width: 50px;
     height: 100%;
+    overflow: hidden;
+}
+
+.section-timeline .heading .right-button:hover {
+    background-color: #344565;
 }
 
 .section-timeline .heading .right-button img {
@@ -152,6 +157,29 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    opacity: 1;
+    transition: 0.3s;
+}
+
+.section-timeline .heading .right-button:hover img {
+    transform: translate(-100%, -50%);
+    opacity: 0;
+}
+
+.section-timeline .heading .right-button span {
+    color: white;
+    position: absolute;
+    font-size: 26px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -15%);
+    opacity: 0;
+    transition: 0.3s;
+}
+
+.section-timeline .heading .right-button:hover span {
+    transform: translate(-50%, -50%);
+    opacity: 1;
 }
 
 /* ----- */

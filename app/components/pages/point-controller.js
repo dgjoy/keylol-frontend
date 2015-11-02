@@ -2,8 +2,8 @@
     "use strict";
 
     keylolApp.controller("PointController", [
-        "pageTitle", "$scope", "union", "$routeParams", "$http", "utils", "notification",
-        function (pageTitle, $scope, union, $routeParams, $http, utils, notification) {
+        "pageTitle", "$scope", "union", "$routeParams", "$http", "utils", "notification", "window",
+        function (pageTitle, $scope, union, $routeParams, $http, utils, notification, window) {
             /**
              * 初始化union的一些属性
              */
@@ -17,10 +17,18 @@
                 rightButton: {
                     avatar: "assets/images/edit-pen.png",
                     alt: "发表新文章",
-                    href: "test"
+                    href: "test",
+                    text: "文",
+                    clickAction: function(){
+                        window.show({
+                            templateUrl: "components/windows/editor.html",
+                            controller: "EditorController"
+                        });
+                    }
                 },
                 datetime: "outBlock",
                 hasExpand: true,
+                noMoreArticle: true,
                 entries: []
             };
             union.point = {};
@@ -98,6 +106,8 @@
                         var articleList = response.data;
                         if(articleList.length < 20){
                             union.timeline.noMoreArticle = true;
+                        }else {
+                            union.timeline.noMoreArticle = false;
                         }
 
                         /**
@@ -150,7 +160,7 @@
                                         for(var j in article.AttachedPoints){
                                             entry.sources.points.push({
                                                 name: article.AttachedPoints[j][article.AttachedPoints[j].PreferedName + "Name"],
-                                                url: "/point/" + article.AttachedPoints[j].IdCode
+                                                idCode: article.AttachedPoints[j].IdCode
                                             });
                                         }
                                         break;

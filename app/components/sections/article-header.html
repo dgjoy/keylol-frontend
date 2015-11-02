@@ -9,7 +9,7 @@
             <a ng-href="test" ng-if="article.isMyArticle">编辑</a>
         </span>
         <span class="points">
-            <a href="" ng-repeat="point in article.AttachedPoints">「{{point.mainName}}」</a>
+            <point-link ng-repeat="point in article.AttachedPoints" id-code="point.IdCode" point-name="'「' + point.mainName + '」'"></point-link>
         </span>
     </div>
 </div>

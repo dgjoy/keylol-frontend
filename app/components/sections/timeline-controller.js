@@ -153,7 +153,7 @@
                                         for (var j in article.AttachedPoints) {
                                             entry.sources.pointArray.push({
                                                 name: article.AttachedPoints[j][article.AttachedPoints[j].PreferedName + "Name"],
-                                                url: "/point/" + article.AttachedPoints[j].IdCode
+                                                idCode: article.AttachedPoints[j].IdCode
                                             });
                                         }
                                         break;

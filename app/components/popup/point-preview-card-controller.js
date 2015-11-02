@@ -2,29 +2,84 @@
     "use strict";
 
     keylolApp.controller("PointPreviewCardController", [
-        "$scope", "data", "$timeout",
-        function ($scope, data, $timeout) {
+        "$scope", "idCode", "$timeout", "$http", "utils", "notification", "union",
+        function ($scope, idCode, $timeout, $http, utils, notification, union) {
             $scope.loading = true;
-            $timeout(function () {
-                $scope.data = {
-                    action: {
-                        text: "已订阅",
-                        extraClass: "subscribed"
-                    },
-                    head: {
-                        mainHead: "Counter-Strike: Global Offensive",
-                        subHead: "反恐精英：全球攻势"
-                    },
-                    avatar: "assets/images/exit.svg",
-                    background: "//keylol.b0.upaiyun.com/5a3e206aab9decee842a3ea88ac2a312.jpg!point.card.background",
-                    pointSum: {
-                        type: "游戏",
-                        readerNum: 157,
-                        articleNum: 48
+            if(!union.pointCards){
+                union.pointCards = {};
+            }
+            if(!union.pointCards[idCode]){
+                $http.get(apiEndpoint + "normal-point/" + idCode, {
+                    params: {
+                        includeStats: true,
+                        includeSubscribed: true,
+                        idType: "IdCode"
                     }
-                };
+                }).then(function(response){
+                    console.log("请求完毕");
+                    var point = response.data;
+                    $scope.data = {
+                        id: point.Id,
+                        subscribed: point.Subscribed,
+                        head: {},
+                        avatar: point.AvatarImage,
+                        background: point.BackgroundImage,
+                        pointSum: {
+                            type: utils.getPointType(point.Type),
+                            readerNum: point.SubscriberCount,
+                            articleNum: point.ArticleCount
+                        }
+                    };
+                    if(point.PreferedName == "Chinese"){
+                        $scope.data.head.mainHead = point.ChineseName;
+                        $scope.data.head.subHead = point.EnglishName;
+                    }else {
+                        $scope.data.head.mainHead = point.EnglishName;
+                        $scope.data.head.subHead = point.ChineseName;
+                    }
+                    union.pointCards[idCode] = $scope.data;
+                    $scope.loading = false;
+                }, function(error){
+                    notification.error("据点卡片请求错误");
+                    console.log(error);
+                });
+            } else {
                 $scope.loading = false;
-            }, data * 1000);
+                $scope.data = union.pointCards[idCode];
+            }
+            $scope.subscribeDisabled = false;
+            $scope.subscribe = function(id){
+                $scope.subscribeDisabled = true;
+                $http.post(apiEndpoint + "user-point-subscription", {}, {
+                    params: {
+                        pointId: id
+                    }
+                }).then(function () {
+                    notification.success("订阅成功！");
+                    $scope.data.subscribed = true;
+                    $scope.subscribeDisabled = false;
+                    $scope.data.pointSum.readerNum++;
+                }, function (error) {
+                    notification.error("未知错误");
+                    console.error(error);
+                });
+            };
+            $scope.unsubscribe = function(id){
+                $scope.subscribeDisabled = true;
+                $http.delete(apiEndpoint + "user-point-subscription", {
+                    params: {
+                        pointId: id
+                    }
+                }).then(function () {
+                    notification.success("取消订阅成功！");
+                    $scope.data.subscribed = false;
+                    $scope.subscribeDisabled = false;
+                    $scope.data.pointSum.readerNum--;
+                }, function (error) {
+                    notification.error("未知错误");
+                    console.error(error);
+                });
+            };
         }
     ]);
 })();

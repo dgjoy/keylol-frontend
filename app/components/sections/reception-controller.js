@@ -7,16 +7,8 @@
             $scope.isInPoint = true;
             $scope.quickLinks = [
                 {
-                    name: "League of Legends",
-                    url: "test"
-                },
-                {
-                    name: "Counter-Strike: Global Offense",
-                    url: "test"
-                },
-                {
-                    name: "战地：硬仗",
-                    url: "test"
+                    name: "军团要塞2",
+                    idCode: "TMFT2"
                 }
             ];
             $scope.recentLinks = [
