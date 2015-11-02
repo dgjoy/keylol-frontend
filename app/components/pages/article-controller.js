@@ -17,7 +17,7 @@
                     .then(function (response) {
                         var article = response.data;
                         pageTitle.set(article.Title + " - 其乐");
-                        article.Content = $sce.trustAsHtml(article.Content);
+                        article.trustContent = $sce.trustAsHtml(article.Content);
                         for (var i in article.AttachedPoints) {
                             article.AttachedPoints[i].mainName = article.AttachedPoints[i][article.AttachedPoints[i].PreferedName + "Name"];
                         }
@@ -40,24 +40,24 @@
                                 var point = response.data;
                                 point.mainName = point[point.PreferedName + "Name"];
                                 point.votePercent = (point.PositiveArticleCount * 10 / (point.PositiveArticleCount + point.NegativeArticleCount)).toFixed(1);
-                                point.voteCircles = [{},{},{},{},{}];
-                                if(point.votePercent >= 8){
-                                    for(var i in point.voteCircles){
+                                point.voteCircles = [{}, {}, {}, {}, {}];
+                                if (point.votePercent >= 8) {
+                                    for (var i in point.voteCircles) {
                                         point.voteCircles[i].type = "awesome";
                                     }
-                                }else if(point.votePercent >= 6){
-                                    for(var i = 0; i < 4; i++){
+                                } else if (point.votePercent >= 6) {
+                                    for (var i = 0; i < 4; i++) {
                                         point.voteCircles[i].type = "good";
                                     }
-                                }else if(point.votePercent >= 4){
-                                    for(var i = 0; i < 3; i++){
+                                } else if (point.votePercent >= 4) {
+                                    for (var i = 0; i < 3; i++) {
                                         point.voteCircles[i].type = "not-bad";
                                     }
-                                }else if(point.votePercent >= 2){
-                                    for(var i = 0; i < 2; i++){
+                                } else if (point.votePercent >= 2) {
+                                    for (var i = 0; i < 2; i++) {
                                         point.voteCircles[i].type = "bad";
                                     }
-                                }else {
+                                } else {
                                     point.voteCircles[0].type = "terrible"
                                 }
                                 $.extend(union.point, point);
@@ -74,7 +74,7 @@
                             getAndFlushComments(article, newPage, "page");
                         };
                     }, function (error) {
-                        if(error.status === 404){
+                        if (error.status === 404) {
                             $scope.articleExist = false;
                         }
                         console.error(error);
@@ -103,7 +103,7 @@
                         id: author.Id
                     };
                     $.extend(union.summary, summary);
-                    if (author.IdCode != union.$localStorage.user.IdCode){
+                    if (author.IdCode != union.$localStorage.user.IdCode) {
                         union.summary.subscribed = author.Subscribed;
                     }
                 }, function (error) {

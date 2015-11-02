@@ -6,7 +6,7 @@
     </h1>
     <div class="clearfix">
         <span class="actions">
-            <a ng-href="test" ng-if="article.isMyArticle">编辑</a>
+            <a href="" ng-click="editArticle()" ng-if="article.isMyArticle">编辑</a>
         </span>
         <span class="points">
             <point-link ng-repeat="point in article.AttachedPoints" id-code="point.IdCode" point-name="'「' + point.mainName + '」'"></point-link>

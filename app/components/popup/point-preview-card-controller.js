@@ -5,18 +5,17 @@
         "$scope", "idCode", "$timeout", "$http", "utils", "notification", "union",
         function ($scope, idCode, $timeout, $http, utils, notification, union) {
             $scope.loading = true;
-            if(!union.pointCards){
+            if (!union.pointCards) {
                 union.pointCards = {};
             }
-            if(!union.pointCards[idCode]){
+            if (!union.pointCards[idCode]) {
                 $http.get(apiEndpoint + "normal-point/" + idCode, {
                     params: {
                         includeStats: true,
                         includeSubscribed: true,
                         idType: "IdCode"
                     }
-                }).then(function(response){
-                    console.log("请求完毕");
+                }).then(function (response) {
                     var point = response.data;
                     $scope.data = {
                         id: point.Id,
@@ -30,16 +29,16 @@
                             articleNum: point.ArticleCount
                         }
                     };
-                    if(point.PreferedName == "Chinese"){
+                    if (point.PreferedName == "Chinese") {
                         $scope.data.head.mainHead = point.ChineseName;
                         $scope.data.head.subHead = point.EnglishName;
-                    }else {
+                    } else {
                         $scope.data.head.mainHead = point.EnglishName;
                         $scope.data.head.subHead = point.ChineseName;
                     }
                     union.pointCards[idCode] = $scope.data;
                     $scope.loading = false;
-                }, function(error){
+                }, function (error) {
                     notification.error("据点卡片请求错误");
                     console.log(error);
                 });
@@ -48,7 +47,7 @@
                 $scope.data = union.pointCards[idCode];
             }
             $scope.subscribeDisabled = false;
-            $scope.subscribe = function(id){
+            $scope.subscribe = function (id) {
                 $scope.subscribeDisabled = true;
                 $http.post(apiEndpoint + "user-point-subscription", {}, {
                     params: {
@@ -64,7 +63,7 @@
                     console.error(error);
                 });
             };
-            $scope.unsubscribe = function(id){
+            $scope.unsubscribe = function (id) {
                 $scope.subscribeDisabled = true;
                 $http.delete(apiEndpoint + "user-point-subscription", {
                     params: {

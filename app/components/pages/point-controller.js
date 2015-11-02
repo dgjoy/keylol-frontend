@@ -19,10 +19,15 @@
                     alt: "发表新文章",
                     href: "test",
                     text: "文",
-                    clickAction: function(){
+                    clickAction: function () {
                         window.show({
                             templateUrl: "components/windows/editor.html",
-                            controller: "EditorController"
+                            controller: "EditorController",
+                            inputs: {
+                                options: {
+                                    type: "upload"
+                                }
+                            }
                         });
                     }
                 },
@@ -33,18 +38,18 @@
             };
             union.point = {};
 
-            if($routeParams.userIdCode){
+            if ($routeParams.userIdCode) {
                 /**
                  * 定义在 timeline 中调用的加载函数
                  * @param params 加载时请求的参数
                  * @param callback 加载后的回调
                  */
-                union.timeline.loadAction = function(params, callback){
+                union.timeline.loadAction = function (params, callback) {
                     $http.get(apiEndpoint + "article/user/" + $routeParams.userIdCode, {
                         params: params
-                    }).then(function(response){
+                    }).then(function (response) {
                         callback(response);
-                    },function(error){
+                    }, function (error) {
                         notification.error("未知错误");
                         console.error(error);
                     });
@@ -60,8 +65,7 @@
                         idType: "IdCode",
                         includeProfilePointBackgroundImage: true
                     }
-                }).then(function(response){
-                    console.log(response.data);
+                }).then(function (response) {
 
                     var user = response.data;
                     var summary = {
@@ -80,7 +84,7 @@
                     };
                     $.extend(union.user, user);
                     $.extend(union.summary, summary);
-                    if (user.IdCode != union.$localStorage.user.IdCode){
+                    if (user.IdCode != union.$localStorage.user.IdCode) {
                         $http.get(apiEndpoint + "user-point-subscription", {
                             params: {
                                 pointId: user.Id
@@ -102,20 +106,20 @@
                             idType: "IdCode",
                             take: 20
                         }
-                    }).then(function(response){
+                    }).then(function (response) {
                         var articleList = response.data;
-                        if(articleList.length < 20){
+                        if (articleList.length < 20) {
                             union.timeline.noMoreArticle = true;
-                        }else {
+                        } else {
                             union.timeline.noMoreArticle = false;
                         }
 
                         /**
                          * 对于请求回来的文章列表做一系列处理并按照用户据点的文章格式储存在 union.timeline.entries 中
                          */
-                        for(var i in articleList){
+                        for (var i in articleList) {
                             var article = articleList[i];
-                            if(!article.Author){
+                            if (!article.Author) {
                                 article.Author = union.user;
                             }
                             var entry = {
@@ -135,19 +139,19 @@
                                     comment: article.CommentCount
                                 }
                             };
-                            if(article.TimelineReason) {
-                                switch (article.TimelineReason){
+                            if (article.TimelineReason) {
+                                switch (article.TimelineReason) {
                                     case "Like":
                                         entry.sources.type = "like";
                                         entry.sources.userArray = [];
-                                        if(article.LikeByUsers){
-                                            for(var j in article.LikeByUsers){
+                                        if (article.LikeByUsers) {
+                                            for (var j in article.LikeByUsers) {
                                                 entry.sources.userArray.push({
                                                     name: article.LikeByUsers[j].UserName,
                                                     url: "/user/" + article.LikeByUsers[j].IdCode
                                                 });
                                             }
-                                        }else {
+                                        } else {
                                             entry.sources.userArray.push({
                                                 name: union.user.UserName,
                                                 url: "/user/" + union.$localStorage.user.IdCode
@@ -157,7 +161,7 @@
                                     case "Point":
                                         entry.sources.type = "point";
                                         entry.sources.points = [];
-                                        for(var j in article.AttachedPoints){
+                                        for (var j in article.AttachedPoints) {
                                             entry.sources.points.push({
                                                 name: article.AttachedPoints[j][article.AttachedPoints[j].PreferedName + "Name"],
                                                 idCode: article.AttachedPoints[j].IdCode
@@ -173,30 +177,30 @@
                             }
                             union.timeline.entries.push(entry);
                         }
-                    },function(error){
+                    }, function (error) {
                         notification.error("未知错误");
                         console.error(error);
                     });
-                },function(error){
+                }, function (error) {
                     notification.error("未知错误");
                     console.error(error);
                 });
 
             }
 
-            if($routeParams.pointIdCode){
+            if ($routeParams.pointIdCode) {
                 $scope.hasVote = true;
                 /**
                  * 定义在 timeline 中调用的加载函数
                  * @param params 加载时请求的参数
                  * @param callback 加载后的回调
                  */
-                union.timeline.loadAction = function(params, callback){
+                union.timeline.loadAction = function (params, callback) {
                     $http.get(apiEndpoint + "article/point/" + $routeParams.pointIdCode, {
                         params: params
-                    }).then(function(response){
+                    }).then(function (response) {
                         callback(response);
-                    },function(error){
+                    }, function (error) {
                         notification.error("未知错误");
                         console.error(error);
                     });
@@ -212,7 +216,7 @@
                         includeVotes: true,
                         idType: "IdCode"
                     }
-                }).then(function(response){
+                }).then(function (response) {
 
                     var point = response.data;
                     var summary = {
@@ -227,35 +231,35 @@
                         id: point.Id
                     };
 
-                    if(point.PreferedName == "Chinese"){
+                    if (point.PreferedName == "Chinese") {
                         point.mainName = point.ChineseName;
                         summary.head.mainHead = point.ChineseName;
                         summary.head.subHead = point.EnglishName;
-                    }else {
+                    } else {
                         point.mainName = point.EnglishName;
                         summary.head.mainHead = point.EnglishName;
                         summary.head.subHead = point.ChineseName;
                     }
                     pageTitle.set(point.mainName + " - 其乐");
                     point.votePercent = (point.PositiveArticleCount * 10 / (point.PositiveArticleCount + point.NegativeArticleCount)).toFixed(1);
-                    point.voteCircles = [{},{},{},{},{}];
-                    if(point.votePercent >= 8){
-                        for(var i in point.voteCircles){
+                    point.voteCircles = [{}, {}, {}, {}, {}];
+                    if (point.votePercent >= 8) {
+                        for (var i in point.voteCircles) {
                             point.voteCircles[i].type = "awesome";
                         }
-                    }else if(point.votePercent >= 6){
-                        for(var i = 0; i < 4; i++){
+                    } else if (point.votePercent >= 6) {
+                        for (var i = 0; i < 4; i++) {
                             point.voteCircles[i].type = "good";
                         }
-                    }else if(point.votePercent >= 4){
-                        for(var i = 0; i < 3; i++){
+                    } else if (point.votePercent >= 4) {
+                        for (var i = 0; i < 3; i++) {
                             point.voteCircles[i].type = "not-bad";
                         }
-                    }else if(point.votePercent >= 2){
-                        for(var i = 0; i < 2; i++){
+                    } else if (point.votePercent >= 2) {
+                        for (var i = 0; i < 2; i++) {
                             point.voteCircles[i].type = "bad";
                         }
-                    }else {
+                    } else {
                         point.voteCircles[0].type = "terrible"
                     }
 
@@ -272,7 +276,7 @@
                         notification.error("未知错误");
                         console.error(error);
                     });
-                },function(error){
+                }, function (error) {
                     notification.error("未知错误");
                     console.error(error);
                 });
@@ -285,13 +289,13 @@
                         idType: "IdCode",
                         take: 20
                     }
-                }).then(function(response){
+                }).then(function (response) {
                     var articleList = response.data;
-                    if(articleList.length < 20){
+                    if (articleList.length < 20) {
                         union.timeline.noMoreArticle = true;
                     }
 
-                    for(var i in articleList){
+                    for (var i in articleList) {
                         var article = articleList[i];
                         union.timeline.entries.push({
                             types: [article.TypeName],
@@ -309,7 +313,7 @@
                             }
                         });
                     }
-                },function(error){
+                }, function (error) {
                     notification.error("未知错误");
                     console.error(error);
                 });

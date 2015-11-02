@@ -15,29 +15,34 @@
                     alt: "发表新文章",
                     href: "test",
                     text: "文",
-                    clickAction: function(){
+                    clickAction: function () {
                         window.show({
                             templateUrl: "components/windows/editor.html",
-                            controller: "EditorController"
+                            controller: "EditorController",
+                            inputs: {
+                                options: {
+                                    type: "upload"
+                                }
+                            }
                         });
                     }
                 },
                 datetime: "outBlock",
                 hasExpand: true,
                 noMoreArticle: true,
-                loadAction: function(params, callback){
+                loadAction: function (params, callback) {
                     $http.get(apiEndpoint + "article/subscription", {
                         params: params
-                    }).then(function(response){
+                    }).then(function (response) {
                         callback(response);
-                    },function(error){
+                    }, function (error) {
                         notification.error("未知错误");
                         console.log(error);
                     });
                 },
                 entries: []
             };
-            if(union.$localStorage.homeTimeline){
+            if (union.$localStorage.homeTimeline) {
                 union.timeline.entries = union.$localStorage.homeTimeline;
             }
 
@@ -46,9 +51,9 @@
                 params: {
                     take: 20
                 }
-            }).then(function(response){
+            }).then(function (response) {
                 var articleList = response.data;
-                if(articleList.length < 20){
+                if (articleList.length < 20) {
                     union.timeline.noMoreArticle = true;
                 } else {
                     union.timeline.noMoreArticle = true;
@@ -58,7 +63,7 @@
                 /**
                  * 对于请求回来的文章列表做一系列处理并按照用户据点的文章格式储存在 union.timeline.entries 中
                  */
-                for(var i in articleList){
+                for (var i in articleList) {
                     var article = articleList[i];
                     var entry = {
                         types: [article.TypeName],
@@ -77,19 +82,19 @@
                             comment: article.CommentCount
                         }
                     };
-                    if(article.TimelineReason) {
-                        switch (article.TimelineReason){
+                    if (article.TimelineReason) {
+                        switch (article.TimelineReason) {
                             case "Like":
                                 entry.sources.type = "like";
                                 entry.sources.userArray = [];
-                                if(article.LikeByUsers){
-                                    for(var j in article.LikeByUsers){
+                                if (article.LikeByUsers) {
+                                    for (var j in article.LikeByUsers) {
                                         entry.sources.userArray.push({
                                             name: article.LikeByUsers[j].UserName,
                                             url: "/user/" + article.LikeByUsers[j].IdCode
                                         });
                                     }
-                                }else {
+                                } else {
                                     entry.sources.userArray.push({
                                         name: union.user.UserName,
                                         url: "/user/" + union.$localStorage.user.IdCode
@@ -99,7 +104,7 @@
                             case "Point":
                                 entry.sources.type = "point";
                                 entry.sources.points = [];
-                                for(var j in article.AttachedPoints){
+                                for (var j in article.AttachedPoints) {
                                     entry.sources.points.push({
                                         name: article.AttachedPoints[j][article.AttachedPoints[j].PreferedName + "Name"],
                                         idCode: article.AttachedPoints[j].IdCode
@@ -116,7 +121,7 @@
                     union.timeline.entries.push(entry);
                 }
                 union.$localStorage.homeTimeline = union.timeline.entries;
-            },function(error){
+            }, function (error) {
                 notification.error("未知错误");
                 console.log(error);
             });

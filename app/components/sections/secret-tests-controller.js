@@ -7,7 +7,12 @@
             $scope.showEditor = function () {
                 window.show({
                     templateUrl: "components/windows/editor.html",
-                    controller: "EditorController"
+                    controller: "EditorController",
+                    inputs: {
+                        options: {
+                            type: "upload"
+                        }
+                    }
                 });
             };
             $scope.showSettings = function () {
