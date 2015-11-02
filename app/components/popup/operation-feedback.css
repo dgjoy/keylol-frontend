@@ -82,7 +82,7 @@
 
 .popup-operation-feedback .left-content .title .main-title {
     display: block;
-    font-size: 21px;
+    font-size: 19px;
 }
 
 .popup-operation-feedback .left-content .title .sub-title {
@@ -99,8 +99,12 @@
     text-align: right;
 }
 
+.popup-operation-feedback .right-content .action-content {
+    text-align: right;
+}
+
 .popup-operation-feedback .right-content .action-content a {
-    color: #748a97;
+    color: #738a95;
     margin-left: 8px;
     margin-right: 7px;
 }

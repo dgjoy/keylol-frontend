@@ -5,8 +5,9 @@
         <span title="斜体" class="ql-format-button ql-italic"></span>
         <span title="下划线" class="ql-format-button ql-underline"></span>
         <span title="引用" class="ql-format-button ql-blockquote"></span>
-        <span title="图片" class="ql-format-button ql-image"></span>
-        <span title="视频" class="ql-format-button ql-video"></span>
+        <span title="图片" class="ql-format-button ql-image" ngf-select="uploadImages($files)" ngf-multiple="true" accept="image/*"></span>
+        <!--<span title="视频" class="ql-format-button ql-video"></span>-->
     </span>
 </div>
-<div quill-content ng-transclude></div>
+<div quill-content ng-transclude ngf-drop="uploadImages($files)" ngf-multiple="true" ngf-pattern="'image/*'"></div>
+<div class="ql-notice-message" ng-if="noticeMessage">{{noticeMessage}}</div>

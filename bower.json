@@ -14,7 +14,7 @@
     "angular-route": "~1.4.5",
     "angular-utf8-base64": "~0.0.5",
     "jquery": "~2.1.4",
-    "ng-file-upload": "~9.0.7",
+    "ng-file-upload": "~9.1.2",
     "ngstorage": "1b5018206fc21adc5d9b66725954c7298db1624b",
     "signalr": "~2.2.0"
   }
