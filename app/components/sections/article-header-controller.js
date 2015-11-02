@@ -10,10 +10,7 @@
                     templateUrl: "components/windows/editor.html",
                     controller: "EditorController",
                     inputs: {
-                        options: {
-                            type: "edit",
-                            article: $scope.article
-                        }
+                        vm: $scope.article
                     }
                 });
             }

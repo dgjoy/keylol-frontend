@@ -9,9 +9,7 @@
                     templateUrl: "components/windows/editor.html",
                     controller: "EditorController",
                     inputs: {
-                        options: {
-                            type: "upload"
-                        }
+                        vm: null
                     }
                 });
             };

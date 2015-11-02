@@ -2,8 +2,8 @@
     "use strict";
 
     keylolApp.controller("TimelineController", [
-        "$scope", "union", "$location", "$http", "$rootScope", "$element", "notification",
-        function ($scope, union, $location, $http, $rootScope, $element, notification) {
+        "$scope", "union", "$location", "$http", "$rootScope", "$element", "articleTypes",
+        function ($scope, union, $location, $http, $rootScope, $element, articleTypes) {
             $scope.headingDisplayMode = function (entry) {
                 if (entry.source)
                     return "source";
@@ -32,64 +32,48 @@
             });
 
             $scope.expanded = false;
-            var filterStringModule = ["全部", "不看", "只看", "全部不看"];
-            $scope.filterArray = union.$localStorage.articleTypes;
-            var filterOptions = $scope.filterArray ? new Array($scope.filterArray.length) : [];
-            for (var i = 0; i < filterOptions.length; ++i)
-                filterOptions[i] = true;
-            $scope.expandString = filterStringModule[0];
-            $http.get(apiEndpoint + "article-type")
-                .then(function (response) {
-                    $scope.filterArray = response.data;
-                    union.$localStorage.articleTypes = response.data;
-                    while (filterOptions.length < $scope.filterArray.length) {
-                        filterOptions.push(true);
-                    }
 
-                    $scope.expand = function ($event) {
-                        var popup = $scope.showFilter({
-                            templateUrl: "components/popup/entry-filter.html",
-                            controller: "EntryFilterController",
-                            event: $event,
-                            attachSide: "bottom",
-                            align: "right",
-                            offsetX: 5,
-                            inputs: {
-                                filterArray: $scope.filterArray,
-                                filterOptions: filterOptions
-                            }
-                        });
-                        $scope.expanded = !$scope.expanded;
-                        if (popup) {
-                            popup.then(function (popup) {
-                                return popup.close;
-                            }).then(function (result) {
-                                if (result) {
-                                    filterOptions = result;
-                                    changeExpandString();
-                                    requestWhenFiltering();
-                                }
-                                $scope.expanded = !$scope.expanded;
-                            });
-                        }
-                    };
-                }, function (error) {
-                    notification.error("未知错误");
-                    console.error(error);
+            var filterOptions = [];
+            for (var i = 0; i < articleTypes.length; ++i) {
+                filterOptions.push(true);
+            }
+
+            $scope.expand = function ($event) {
+                $scope.expanded = !$scope.expanded;
+                $scope.showFilter({
+                    templateUrl: "components/popup/entry-filter.html",
+                    controller: "EntryFilterController",
+                    event: $event,
+                    attachSide: "bottom",
+                    align: "right",
+                    offsetX: 5,
+                    inputs: {
+                        types: articleTypes,
+                        selectedIndexes: filterOptions
+                    }
+                }).then(function (popup) {
+                    return popup.close;
+                }).then(function (result) {
+                    $scope.expanded = !$scope.expanded;
+                    if (result) {
+                        filterOptions = result;
+                        requestWhenFiltering();
+                    }
                 });
+            };
 
             function requestWhenFiltering(isLoadingMore) {
                 loadingLock = true;
                 var filters = "";
-                for (var i = 0; i < $scope.filterArray.length; i++) {
+                for (var i = 0; i < articleTypes.length; i++) {
                     if (filterOptions[i]) {
                         if (i !== 0) {
                             filters += ",";
                         }
-                        filters += $scope.filterArray[i].Id;
+                        filters += articleTypes[i].name;
                     }
                 }
-                if (filters === "") {
+                if (!filters) {
                     $scope.data.entries.length = 0;
                     $scope.data.noMoreArticle = true;
                 } else {
@@ -128,41 +112,39 @@
                                     comment: article.CommentCount
                                 }
                             };
-                            if (article.TimelineReason) {
-                                switch (article.TimelineReason) {
-                                    case "Like":
-                                        entry.sources.type = "like";
-                                        entry.sources.userArray = [];
-                                        if (article.LikeByUsers) {
-                                            for (var j in article.LikeByUsers) {
-                                                entry.sources.userArray.push({
-                                                    name: article.LikeByUsers[j].UserName,
-                                                    url: "/user/" + article.LikeByUsers[j].IdCode
-                                                });
-                                            }
-                                        } else {
+                            switch (article.TimelineReason) {
+                                case "Like":
+                                    entry.sources.type = "like";
+                                    entry.sources.userArray = [];
+                                    if (article.LikeByUsers) {
+                                        for (var j in article.LikeByUsers) {
                                             entry.sources.userArray.push({
-                                                name: union.user.UserName,
-                                                url: "/user/" + union.$localStorage.user.IdCode
+                                                name: article.LikeByUsers[j].UserName,
+                                                url: "/user/" + article.LikeByUsers[j].IdCode
                                             });
                                         }
-                                        break;
-                                    case "Point":
-                                        entry.sources.type = "point";
-                                        entry.sources.pointArray = [];
-                                        for (var j in article.AttachedPoints) {
-                                            entry.sources.pointArray.push({
-                                                name: article.AttachedPoints[j][article.AttachedPoints[j].PreferedName + "Name"],
-                                                idCode: article.AttachedPoints[j].IdCode
-                                            });
-                                        }
-                                        break;
-                                    case "Publish":
-                                        entry.sources.type = "publish";
-                                        break;
-                                    default :
-                                        break;
-                                }
+                                    } else {
+                                        entry.sources.userArray.push({
+                                            name: union.user.UserName,
+                                            url: "/user/" + union.$localStorage.user.IdCode
+                                        });
+                                    }
+                                    break;
+
+                                case "Point":
+                                    entry.sources.type = "point";
+                                    entry.sources.pointArray = [];
+                                    for (var k in article.AttachedPoints) {
+                                        entry.sources.pointArray.push({
+                                            name: article.AttachedPoints[k][article.AttachedPoints[k].PreferedName + "Name"],
+                                            idCode: article.AttachedPoints[k].IdCode
+                                        });
+                                    }
+                                    break;
+
+                                case "Publish":
+                                    entry.sources.type = "publish";
+                                    break;
                             }
                             $scope.data.entries.push(entry);
                         }
@@ -171,7 +153,7 @@
                 }
             }
 
-            function changeExpandString() {
+            $scope.filterText = function () {
                 var optionsTrue = [];
                 var optionsFalse = [];
                 for (var i = 0; i < filterOptions.length; i++) {
@@ -182,22 +164,24 @@
                     }
                 }
 
-                if (optionsTrue.length == 5) {
-                    $scope.expandString = filterStringModule[0];
-                } else if (optionsTrue.length >= 3) {
-                    $scope.expandString = filterStringModule[1];
+                var text;
+                if (optionsTrue.length == articleTypes.length) {
+                    text = "全部";
+                } else if (optionsTrue.length >= Math.floor(articleTypes.length / 2) + 1) {
+                    text = "不看";
                     for (var falseIndex in optionsFalse) {
-                        $scope.expandString += ("『" + $scope.filterArray[optionsFalse[falseIndex]].Name + "』");
+                        text += ("『" + articleTypes[optionsFalse[falseIndex]].name + "』");
                     }
-                } else if (optionsFalse.length == 5) {
-                    $scope.expandString = filterStringModule[3];
+                } else if (optionsFalse.length == articleTypes.length) {
+                    text = "全部不看";
                 } else {
-                    $scope.expandString = filterStringModule[2];
+                    text = "只看";
                     for (var trueIndex in optionsTrue) {
-                        $scope.expandString += ("『" + $scope.filterArray[optionsTrue[trueIndex]].Name + "』");
+                        text += ("『" + articleTypes[optionsTrue[trueIndex]].name + "』");
                     }
                 }
-            }
+                return text;
+            };
         }
     ]);
 })();

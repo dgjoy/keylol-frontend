@@ -1,0 +1,13 @@
+﻿<popup class="popup-article-type-selector">
+    <div class="selector-container">
+        <div class="arrow-down"></div>
+        <div class="selector-main box-shadowed-deeper">
+            <ul>
+                <li ng-click="select($index)" ng-repeat="type in articleTypes">
+                    <span ng-class="{active: selectedIndex === $index}" class="font-myriad-keylol">{{type.name}}</span><!--
+                    --><p>{{type.description}}</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</popup>

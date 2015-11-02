@@ -103,12 +103,14 @@
                         if (options.adjustScrollBar)
                             adjustScrollBar();
 
-                        deferred.resolve({
-                            controller: controller,
-                            scope: scope,
-                            $element: $element,
-                            close: closeDeferred.promise,
-                            closeNow: close
+                        $timeout(function () {
+                            deferred.resolve({
+                                controller: controller,
+                                scope: scope,
+                                $element: $element,
+                                close: closeDeferred.promise,
+                                closeNow: close
+                            })
                         });
                     };
 

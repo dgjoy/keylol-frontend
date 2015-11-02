@@ -5,9 +5,9 @@
         "$scope", "$window", "close", "union", "selected", "pointArray", "utils",
         function ($scope, $window, close, union, selected, pointArray, utils) {
             $scope.pointArray = pointArray;
+            $scope.utils = utils;
             for (var i in $scope.pointArray) {
                 $scope.pointArray[i].selected = false;
-                $scope.pointArray[i].type = utils.getPointType($scope.pointArray[i].Type);
             }
             $scope.pointArray[selected].selected = true;
             $scope.changeSelector = function (newSelected) {
@@ -16,6 +16,7 @@
                 $scope.pointArray[newSelected].selected = true;
             };
             $scope.selectPoint = function () {
+                $scope.pointArray[selected].selected = false;
                 close($scope.pointArray[selected]);
             };
             union.keydownCallback = function (e) {

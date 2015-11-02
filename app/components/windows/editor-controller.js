@@ -2,190 +2,174 @@
     "use strict";
 
     keylolApp.controller("EditorController", [
-        "$scope", "close", "$element", "utils", "$http", "union", "$timeout", "$location", "notification", "options",
-        function ($scope, close, $element, utils, $http, union, $timeout, $location, notification, options) {
+        "$scope", "close", "utils", "$http", "union", "$timeout", "$location", "notification", "vm", "articleTypes", "$route",
+        function ($scope, close, utils, $http, union, $timeout, $location, notification, vm, articleTypes, $route) {
+            $scope.radioId = [utils.uniqueId(), utils.uniqueId(), utils.uniqueId()];
+            $scope.articleTypes = articleTypes;
+            $scope.expanded = false;
+            $scope.lastSaveTime = null;
+            $scope.inline = {};
+            $scope.selectedTypeIndex = 0;
+
+            if (!union.$localStorage.editorDrafts) union.$localStorage.editorDrafts = {};
+            var draftKey = vm ? vm.Id : "new";
+            var draft = union.$localStorage.editorDrafts[draftKey];
+            if (draft) {
+                $scope.vm = draft.vm;
+                $scope.lastSaveTime = draft.time;
+                $scope.inline.attachedPoints = draft.attachedPoints;
+                $scope.inline.voteForPoints = draft.voteForPoints;
+                $scope.selectedTypeIndex = draft.selectedTypeIndex;
+                notification.success("本地草稿已加载");
+            } else {
+                $scope.vm = $.extend({}, vm) || {
+                        Title: "",
+                        Content: "",
+                        Vote: null
+                    };
+                if ($scope.vm.TypeName) {
+                    for (var i = 0; i < articleTypes.length; ++i) {
+                        if (articleTypes[i].name === $scope.vm.TypeName) {
+                            $scope.selectedTypeIndex = i;
+                            break;
+                        }
+                    }
+                }
+                if ($scope.vm.AttachedPoints)
+                    $scope.inline.attachedPoints = $scope.vm.AttachedPoints;
+                if ($scope.vm.VoteForPointId)
+                    $scope.inline.voteForPoints = [{Id: $scope.vm.VoteForPointId, Name: $scope.vm.VoteForPointName}];
+            }
+
+            $scope.$watchCollection("inline.attachedPoints", function (newValue) {
+                $scope.vm.AttachedPointsId = [];
+                if (newValue)
+                    for (var i = 0; i < newValue.length; ++i) {
+                        $scope.vm.AttachedPointsId.push(newValue[i].Id);
+                    }
+            });
+
+            $scope.$watchCollection("inline.voteForPoints", function (newValue) {
+                $scope.vm.VoteForPointId = null;
+                if (newValue && newValue.length > 0)
+                    $scope.vm.VoteForPointId = newValue[0].Id;
+            });
+
+            $scope.$watch("selectedTypeIndex", function (newValue) {
+                $scope.vm.TypeName = articleTypes[$scope.selectedTypeIndex].name;
+            });
+
+            var autoSaveTimeout = $timeout($scope.saveDraft, 30000);
+            $scope.saveDraft = function () {
+                $timeout.cancel(autoSaveTimeout);
+                $scope.lastSaveTime = moment();
+                union.$localStorage.editorDrafts[draftKey] = {
+                    vm: $scope.vm,
+                    time: $scope.lastSaveTime,
+                    selectedTypeIndex: $scope.selectedTypeIndex,
+                    attachedPoints: $scope.inline.attachedPoints,
+                    voteForPoints: $scope.inline.voteForPoints
+                };
+                autoSaveTimeout = $timeout($scope.saveDraft, 30000);
+            };
+
+            $scope.expand = function ($event) {
+                $scope.expanded = !$scope.expanded;
+                $scope.inline.showSelector({
+                    templateUrl: "components/popup/article-type-selector.html",
+                    controller: "ArticleTypeSelectorController",
+                    event: $event,
+                    attachSide: "bottom",
+                    align: "left",
+                    offsetX: -6,
+                    inputs: {
+                        selectedIndex: $scope.selectedTypeIndex
+                    }
+                }).then(function (popup) {
+                    return popup.close;
+                }).then(function (result) {
+                    $scope.expanded = !$scope.expanded;
+                    if (!angular.isUndefined(result)) {
+                        $scope.selectedTypeIndex = result;
+                    }
+                });
+            };
+
             $scope.cancel = function () {
-                notification.attention("关闭已改动的编辑器", [
+                notification.attention("关闭文章编辑器需要额外确认", [
                     {action: "关闭", value: true},
                     {action: "取消"}
                 ]).then(function (result) {
                     if (result) {
-                        if ($scope.cancelTimeout) {
-                            $timeout.cancel($scope.cancelTimeout);
-                        }
+                        $timeout.cancel(autoSaveTimeout);
                         close();
                     }
                 });
             };
-            $scope.radioId = [utils.uniqueId(), utils.uniqueId(), utils.uniqueId()];
 
-            /**
-             * 读取对应文章在本地的缓存或读取文章信息以初始化 vm 变量。
-             */
-            if (!union.$localStorage.editCache) {
-                union.$localStorage.editCache = {}
-            }
-            if (options.type === "upload") {
-                if (!($scope.vm = union.$localStorage.editCache["upload"])) {
-                    $scope.vm = {
-                        vote: 2,
-                        selectedType: 0
-                    }
-                } else {
-                    notification.success("本地草稿已加载");
-                }
-            } else {
-                if (!($scope.vm = union.$localStorage.editCache[options.article.Id])) {
-                    $scope.vm = {
-                        title: options.article.Title,
-                        content: options.article.Content,
-                        selectedType: 0
-                    };
-                    if (options.article.Vote) {
-                        switch (options.article.Vote) {
-                            case "好评":
-                                $scope.vm.vote = 0;
-                                break;
-                            case "差评":
-                                $scope.vm.vote = 1;
-                                break;
-                        }
-                    } else {
-                        $scope.vm.vote = 2;
-                    }
-                    if (options.article.AttachedPoints.length > 0) {
-                        $scope.vm.selector = [];
-                        for (var i in options.article.AttachedPoints) {
-                            var point = options.article.AttachedPoints[i];
-                            $scope.vm.selector.push({
-                                title: point[point.PreferedName + "Name"],
-                                selected: false,
-                                id: point.Id
-                            });
-                        }
-                    }
-                } else {
-                    notification.success("本地草稿已加载");
-                }
-            }
-
-            $scope.funcs = {};
-            $scope.expanded = false;
-            $scope.articleTypeArray = union.$localStorage.articleTypes;
-            if ($scope.articleTypeArray) {
-                $scope.expandString = $scope.articleTypeArray[$scope.vm.selectedType].Name;
-                $scope.allowVote = $scope.articleTypeArray[$scope.vm.selectedType].AllowVote;
-            }
-
-            $scope.saveDraft = function () {
-                $scope.vm.saveTime = moment();
-                var editCacheObj;
-                if (options.type === "upload") {
-                    editCacheObj = "upload";
-                } else {
-                    editCacheObj = options.article.Id;
-                }
-                union.$localStorage.editCache[editCacheObj] = {};
-                $.extend(union.$localStorage.editCache[editCacheObj], $scope.vm);
-                if ($scope.cancelTimeout) {
-                    $timeout.cancel($scope.cancelTimeout);
-                }
-                createTimeout();
-            };
-            var createTimeout = function () {
-                $scope.cancelTimeout = $timeout(function () {
-                    $scope.saveDraft();
-                }, 30000);
-            };
-            createTimeout();
             $scope.submit = function () {
-                var attachedId = [];
-                if ($scope.vm.selector && $scope.vm.selector.length > 5) {
+                if ($scope.vm.AttachedPointsId.length > 5) {
                     notification.attention("不能同时投稿多于5个据点");
                     return;
                 }
-                for (var i in $scope.vm.selector) {
-                    attachedId.push($scope.vm.selector[i].id);
-                }
-                var submitObj = {
-                    TypeId: $scope.articleTypeArray[$scope.vm.selectedType].Id,
-                    Title: $scope.vm.title,
-                    Content: $scope.vm.content,
-                    AttachedPointsId: attachedId
-                };
-                if ($scope.articleTypeArray[$scope.vm.selectedType].AllowVote) {
-                    submitObj.VoteForPointId = "";
-                    if ($scope.vm.voteForPoint && $scope.vm.voteForPoint[0]) {
-                        submitObj.VoteForPointId = $scope.vm.voteForPoint[0].id;
+                if ($scope.vm.Id) {
+
+                    var dirtyFields = {};
+                    for (var key in $scope.vm) {
+                        if (key === "AttachedPointsId") {
+                            var oldAttachedPointsId = [];
+                            for (var i = 0; i < vm.AttachedPoints.length; ++i)
+                                oldAttachedPointsId.push(vm.AttachedPoints[i].Id);
+                            if (JSON.stringify($scope.vm.AttachedPointsId) != JSON.stringify(oldAttachedPointsId))
+                                dirtyFields.AttachedPointsId = $scope.vm.AttachedPointsId;
+                            continue;
+                        }
+
+                        if ($scope.vm.hasOwnProperty(key) && $scope.vm[key] != vm[key]) {
+                            if ($scope.vm[key] != vm[key])
+                                dirtyFields[key] = $scope.vm[key];
+                        }
                     }
-                    if ($scope.vm.vote != 2) {
-                        submitObj.Vote = $scope.vm.vote;
+
+                    if ($.isEmptyObject(dirtyFields)) {
+                        notification.success("文章已发布");
+                        delete union.$localStorage.editorDrafts[draftKey];
+                        $timeout.cancel(autoSaveTimeout);
+                        close();
+                        return;
                     }
-                }
-                if (options.type === "upload") {
-                    $http.post(apiEndpoint + "article", submitObj)
+
+                    dirtyFields.AttachedPointsId = $scope.vm.AttachedPointsId;
+                    dirtyFields.VoteForPointId = $scope.vm.VoteForPointId;
+                    dirtyFields.Vote = $scope.vm.Vote;
+
+                    $http.put(apiEndpoint + "article/" + $scope.vm.Id, dirtyFields)
+                        .then(function () {
+                            delete union.$localStorage.editorDrafts[draftKey];
+                            $timeout.cancel(autoSaveTimeout);
+                            close();
+                            $route.reload();
+                            $timeout(function () {
+                                notification.success("文章已发布")
+                            });
+                        }, function (error) {
+                            notification.error("未知错误, 请尝试再次发布");
+                            console.error(error);
+                        });
+                } else {
+                    $http.post(apiEndpoint + "article", $scope.vm)
                         .then(function (response) {
                             notification.success("文章已发布");
-                            union.$localStorage.editCache = {
-                                title: "",
-                                content: "",
-                                saveTime: null
-                            };
-                            if ($scope.cancelTimeout) {
-                                $timeout.cancel($scope.cancelTimeout);
-                            }
+                            delete union.$localStorage.editorDrafts[draftKey];
+                            $timeout.cancel(autoSaveTimeout);
                             close();
                             $location.url("article/" + union.$localStorage.user.IdCode + "/" + response.data.SequenceNumberForAuthor);
                         }, function (error) {
                             notification.error("未知错误, 请尝试再次发布");
                             console.error(error);
                         });
-                } else {
-                    console.log(submitObj);
                 }
             };
-
-            $scope.expand = function ($event) {
-                if (!$scope.articleTypeArray) return;
-                var popup = $scope.funcs.showSelector({
-                    templateUrl: "components/popup/article-selector.html",
-                    controller: "ArticleSelectorController",
-                    event: $event,
-                    attachSide: "bottom",
-                    align: "left",
-                    offsetX: -6,
-                    inputs: {
-                        selectedType: $scope.vm.selectedType,
-                        articleTypeArray: $scope.articleTypeArray
-                    }
-                });
-
-                $scope.expanded = !$scope.expanded;
-                if (popup) {
-                    popup.then(function (popup) {
-                        return popup.close;
-                    }).then(function (result) {
-                        if (result || result == 0) {
-                            $scope.vm.selectedType = result;
-                            $scope.expandString = $scope.articleTypeArray[$scope.vm.selectedType].Name;
-                            $scope.allowVote = $scope.articleTypeArray[$scope.vm.selectedType].AllowVote;
-                        }
-                        $scope.expanded = !$scope.expanded;
-                    });
-                }
-            };
-
-            $http.get(apiEndpoint + "article-type").then(function (response) {
-                $scope.articleTypeArray = response.data;
-                union.$localStorage.articleTypes = response.data;
-                if (!$scope.expandString) {
-                    $scope.expandString = $scope.articleTypeArray[$scope.vm.selectedType].Name;
-                    $scope.allowVote = $scope.articleTypeArray[$scope.vm.selectedType].AllowVote;
-                }
-            }, function (error) {
-                notification.error(error);
-                console.error(error);
-            });
         }
     ]);
 })();

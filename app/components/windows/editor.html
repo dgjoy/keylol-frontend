@@ -5,27 +5,25 @@
         </div>
         <form name="form" ng-submit="submit()">
             <div class="type-title">
-                <div class="article-type font-myriad-keylol" popup="funcs.showSelector" ng-switch="expanded"
+                <div class="article-type font-myriad-keylol" popup="inline.showSelector" ng-switch="expanded"
                      ng-click="expand($event)" ng-class="{expanded: expanded}">
                     <span class="expand-button">
-                        {{expandString}}<span ng-switch-when="false">▾</span><span ng-switch-when="true">▴</span>
+                        {{articleTypes[selectedTypeIndex].name}}<span ng-switch-when="false">▾</span><span ng-switch-when="true">▴</span>
                     </span>
                 </div>
-                <span><input type="text" ng-model="vm.title" placeholder="标题"></span>
+                <span><input type="text" ng-model="vm.Title" placeholder="标题"></span>
             </div>
-            <div quill ng-model="vm.content"></div>
+            <div quill ng-model="vm.Content"></div>
             <h3 class="labeled-heading">投稿至据点</h3>
-            <!--<input type="text" placeholder="最多可以同时推送至五个据点，每篇文章都会自动发布在你的个人据点中" ng-model="">-->
-            <input-point ng-model="vm.selector" placeholder="'最多可以同时投稿至 5 个据点，个人据点会自动记录你发布的所有文章'"></input-point>
-            <h3 class="labeled-heading" ng-if="allowVote">评价游戏</h3>
-            <div class="pad-right" ng-if="allowVote">
-                <!--<input type="text" placeholder="选择一个游戏据点作为评价对象">-->
-                <input-point ng-model="vm.voteForPoint" placeholder="'选择一个游戏据点作为评价对象'"></input-point>
+            <input-point ng-model="inline.attachedPoints" placeholder="'最多可以同时投稿至 5 个据点，个人据点会自动记录你发布的所有文章'"></input-point>
+            <h3 class="labeled-heading" ng-if="articleTypes[selectedTypeIndex].allowVote">评价游戏</h3>
+            <div class="pad-right" ng-if="articleTypes[selectedTypeIndex].allowVote">
+                <input-point ng-model="inline.voteForPoints" placeholder="'选择一个游戏据点作为评价对象'"></input-point>
                 <div class="right-content">
                     <span>
-                        <input type="radio" id="radio-{{radioId[0]}}" ng-model="vm.vote" ng-value="0" name="vote"><label for="radio-{{radioId[0]}}">好评</label>
-                        <input type="radio" id="radio-{{radioId[1]}}" ng-model="vm.vote" ng-value="1" name="vote"><label for="radio-{{radioId[1]}}">差评</label>
-                        <input type="radio" id="radio-{{radioId[2]}}" ng-model="vm.vote" ng-value="2" name="vote" checked><label for="radio-{{radioId[2]}}">中立</label>
+                        <input type="radio" id="radio-{{radioId[0]}}" ng-model="vm.Vote" ng-value="'Positive'" name="vote"><label for="radio-{{radioId[0]}}">好评</label>
+                        <input type="radio" id="radio-{{radioId[1]}}" ng-model="vm.Vote" ng-value="'Negative'" name="vote"><label for="radio-{{radioId[1]}}">差评</label>
+                        <input type="radio" id="radio-{{radioId[2]}}" ng-model="vm.Vote" ng-value="null" name="vote"><label for="radio-{{radioId[2]}}">中立</label>
                     </span>
                 </div>
             </div>
@@ -46,7 +44,7 @@
             </button>
             <div class="save-draft">
                 <button type="button" class="border-button left-border" ng-click="saveDraft()">保存草稿</button>
-                <span ng-if="vm.saveTime">自动保存于 <span am-time-ago="vm.saveTime"></span></span>
+                <span ng-if="lastSaveTime">自动保存于<span am-time-ago="lastSaveTime"></span></span>
                 <p>草稿将保存在本地浏览器缓存中，并在下次打开编辑框时自动加载。</p>
             </div>
         </form>

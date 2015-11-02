@@ -1,59 +1,59 @@
-.popup-article-selector {
+.popup-article-type-selector {
     overflow: hidden;
     padding-right: 5px;
     padding-bottom: 5px;
 }
 
-.popup-article-selector.ng-enter {
+.popup-article-type-selector.ng-enter {
     transition-duration: 460ms;
 }
 
-.popup-article-selector.ng-leave {
+.popup-article-type-selector.ng-leave {
     transition-duration: 400ms;
 }
 
-.popup-article-selector.ng-enter .selector-container {
+.popup-article-type-selector.ng-enter .selector-container {
     transform: translateY(-100%);
     opacity: 0;
 }
 
-.popup-article-selector.ng-enter-active .selector-container {
+.popup-article-type-selector.ng-enter-active .selector-container {
     transform: translateY(0);
     opacity: 1;
     transition: cubic-bezier(0.22, 0.61, 0.36, 1) 280ms;
 }
 
-.popup-article-selector.ng-leave .selector-container {
+.popup-article-type-selector.ng-leave .selector-container {
     transform: translateY(-100%);
     opacity: 0;
     transition: cubic-bezier(0.22, 0.61, 0.36, 1) 400ms;
 }
 
-.popup-article-selector.ng-enter .arrow-down {
+.popup-article-type-selector.ng-enter .arrow-down {
     transform: translateY(-100%);
 }
 
-.popup-article-selector.ng-enter-active .arrow-down {
+.popup-article-type-selector.ng-enter-active .arrow-down {
     transform: translateY(0);
     transition: 180ms 280ms;
 }
 
-.popup-article-selector .arrow-down {
+.popup-article-type-selector .arrow-down {
     margin: 0 0 8px 25px;
 }
 
-.popup-article-selector .selector-main {
+.popup-article-type-selector .selector-main {
     background-color: white;
     position: relative;
 }
 
-.popup-article-selector .selector-main ul {
+.popup-article-type-selector .selector-main ul {
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-.popup-article-selector .selector-main ul::before {
+.popup-article-type-selector .selector-main ul::before {
     width: 25px;
     height: 9px;
     background: #11254A;
@@ -62,7 +62,7 @@
     margin-left: 14px;
 }
 
-.popup-article-selector .selector-main ul::after {
+.popup-article-type-selector .selector-main ul::after {
     width: 25px;
     height: 8px;
     background: #11254A;
@@ -71,17 +71,17 @@
     margin-left: 14px;
 }
 
-.popup-article-selector .selector-main ul li {
+.popup-article-type-selector .selector-main ul li {
     padding: 0 14px;
     position: relative;
     cursor: default;
 }
 
-.popup-article-selector .selector-main ul li:hover {
+.popup-article-type-selector .selector-main ul li:hover {
     background: #eef1f3;
 }
 
-.popup-article-selector .selector-main ul li span {
+.popup-article-type-selector .selector-main ul li span {
     display: inline-block;
     width: 25px;
     background: transparent;
@@ -93,12 +93,12 @@
     vertical-align: middle;
 }
 
-.popup-article-selector .selector-main ul li span.active {
+.popup-article-type-selector .selector-main ul li span.active {
     background: #11254a;
     color: white;
 }
 
-.popup-article-selector .selector-main ul li p {
+.popup-article-type-selector .selector-main ul li p {
     display: inline-block;
     margin: 0;
     vertical-align: middle;

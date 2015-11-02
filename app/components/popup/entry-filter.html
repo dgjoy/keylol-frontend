@@ -2,13 +2,13 @@
     <div class="filter-container">
         <div class="arrow-down"></div>
         <div class="filter-main box-shadowed-deeper">
-            <button class="border-button bottom-border" ng-click="onFilter()">过滤</button>
+            <button class="border-button bottom-border" ng-click="confirm()">过滤</button>
             <form>
                 <ul>
-                    <li ng-click="changeFilterOption($index)" ng-repeat="filter in filterArray">
-                        <input type="checkbox" ng-checked="filterOptions[$index]"><!--
-                    --><span ng-class="{active: filterOptions[$index]}" class="font-myriad-keylol">{{filter.Name}}</span><!--
-                    --><p>{{filter.Description}}</p>
+                    <li ng-click="selectedIndexes[$index] = !selectedIndexes[$index]" ng-repeat="type in entryTypes">
+                        <input type="checkbox" ng-checked="selectedIndexes[$index]"><!--
+                    --><span ng-class="{active: selectedIndexes[$index]}" class="font-myriad-keylol">{{type.name}}</span><!--
+                    --><p>{{type.description}}</p>
                     </li>
                 </ul>
             </form>

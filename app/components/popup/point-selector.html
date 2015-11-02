@@ -7,7 +7,7 @@
                 </div>
                 <div class="title">
                     <p>{{point.ChineseName|maxLength: 15}}</p>
-                    <p><span>[{{point.type}}]</span>{{point.EnglishName|maxLength: 15}}</p>
+                    <p><span>[{{utils.getPointType(point.Type)}}]</span>{{point.EnglishName|maxLength: 15}}</p>
                 </div>
             </li>
         </ul>

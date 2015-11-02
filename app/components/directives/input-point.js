@@ -20,37 +20,35 @@
                             }
                         }
                     };
-                    for (var i in ngModel.$viewValue) {
-                        scope.pointArray.push(ngModel.$viewValue[i]);
-                    }
+
                     var addPoint = function (result) {
                         var hasBeenExist = false;
                         for (var i in scope.pointArray) {
-                            if (scope.pointArray[i].id === result.Id) {
+                            if (scope.pointArray[i].Id === result.Id) {
                                 hasBeenExist = true
                             }
                         }
                         if (!hasBeenExist) {
-                            scope.pointArray.push({
-                                title: result[result.PreferedName + "Name"],
-                                selected: false,
-                                id: result.Id
-                            });
+                            scope.pointArray.push(result);
                         }
                         scope.data = "";
                         ngModel.$setViewValue(scope.pointArray);
                     };
+
                     var deleteSelectorPoint = function (index) {
                         scope.pointArray.splice(index, 1);
                         ngModel.$setViewValue(scope.pointArray);
                     };
+
                     var deleteKeyCallback = function (e) {
                         scope.$apply(function () {
-                            if (e.keyCode == 8 && scope.pointArray.length > 0 && scope.data == "") {
+                            if (e.keyCode == 8 && scope.pointArray.length > 0 && !scope.data) {
                                 scope.pointArray.splice(-1, 1);
+                                ngModel.$setViewValue(scope.pointArray);
                             }
                         });
                     };
+
                     scope.selectPoint = function (index) {
                         scope.pointArray[index].selected = true;
                         var keydownCallback = function (e) {
