@@ -20,7 +20,7 @@ var environmentConfig = {
         apiEndpoint: "https://localhost:44300/"
     },
     prod: {
-        apiEndpoint: "https://testflight-api.keylol.com/",
+        apiEndpoint: "https://api.keylol.com/",
         cdnBase: "https://keylol-static.b0.upaiyun.com/"
     }
 };

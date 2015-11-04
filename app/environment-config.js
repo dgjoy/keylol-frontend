@@ -4,9 +4,9 @@
     keylolApp.config([
         "apiEndpointProvider",
         function(apiEndpointProvider){
-            apiEndpointProvider.setEndPoint("https://testflight-api.keylol.com/");
+            apiEndpointProvider.setEndPoint("https://api.keylol.com/");
         }
     ]);
 
-    window.apiEndpoint = "https://testflight-api.keylol.com/";
+    window.apiEndpoint = "https://api.keylol.com/";
 })();
