@@ -98,12 +98,12 @@
                         if (controllerName)
                             controller = $controller(controllerName, inputs);
 
-                        // Append to body
-                        $animate.enter($element, document.body, document.body.lastChild);
-                        if (options.adjustScrollBar)
-                            adjustScrollBar();
-
                         $timeout(function () {
+                            // Append to body
+                            $animate.enter($element, document.body, document.body.lastChild);
+                            if (options.adjustScrollBar)
+                                adjustScrollBar();
+
                             deferred.resolve({
                                 controller: controller,
                                 scope: scope,

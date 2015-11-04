@@ -132,10 +132,10 @@
                     }
 
                     if ($.isEmptyObject(dirtyFields)) {
-                        notification.success("文章已发布");
                         delete union.$localStorage.editorDrafts[draftKey];
                         $timeout.cancel(autoSaveTimeout);
                         close();
+                        notification.success("文章已发布");
                         return;
                     }
 
@@ -149,9 +149,7 @@
                             $timeout.cancel(autoSaveTimeout);
                             close();
                             $route.reload();
-                            $timeout(function () {
-                                notification.success("文章已发布")
-                            });
+                            notification.success("文章已发布");
                         }, function (error) {
                             notification.error("未知错误, 请尝试再次发布");
                             console.error(error);
@@ -159,11 +157,11 @@
                 } else {
                     $http.post(apiEndpoint + "article", $scope.vm)
                         .then(function (response) {
-                            notification.success("文章已发布");
                             delete union.$localStorage.editorDrafts[draftKey];
                             $timeout.cancel(autoSaveTimeout);
                             close();
                             $location.url("article/" + union.$localStorage.user.IdCode + "/" + response.data.SequenceNumberForAuthor);
+                            notification.success("文章已发布");
                         }, function (error) {
                             notification.error("未知错误, 请尝试再次发布");
                             console.error(error);

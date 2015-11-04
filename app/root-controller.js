@@ -7,10 +7,9 @@
             pageTitle.loading();
             $scope.$watch(function () {
                 return union.$localStorage.login;
-            }, function () {
-                var login = union.$localStorage.login;
-                if (login) {
-                    $http.get(apiEndpoint + "user/" + login.UserId, {
+            }, function (newLogin) {
+                if (newLogin) {
+                    $http.get(apiEndpoint + "user/" + newLogin.UserId, {
                         params: {
                             includeClaims: true,
                             includeStats: true,
@@ -21,11 +20,11 @@
                     }, function () {
                         $http.delete(apiEndpoint + "login/current");
                         delete union.$localStorage.login;
-                        notification.error("登录失效，请重新登录。");
                     });
                 } else {
                     delete union.$localStorage.user;
                     $location.url("/");
+                    notification.error("登录失效，请重新登录。");
                 }
             });
         }
