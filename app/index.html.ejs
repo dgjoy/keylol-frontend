@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="zh" ng-app="KeylolApp" ng-controller="RootController">
 <head>
+    <script>(/^keylol\.com$/.test(window.location.hostname)||"https:"!==window.location.protocol)&&(window.location="https://www.keylol.com"+window.location.pathname);</script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title ng-bind="pageTitle">载入中 - 其乐</title>
     <link rel="apple-touch-icon" href="assets/images/apple-touch-icon-180.png">
     <link rel="icon" href="assets/images/favicon.ico">
     <base href="/">
-    <script>(/^keylol\.com$/.test(window.location.hostname)||"https:"!==window.location.protocol)&&(window.location="https://www.keylol.com"+window.location.pathname);</script>
     <% _.forEach(stylesheets, function(stylesheet) { %><link rel="stylesheet" href="<%= stylesheet %>"><% }); %>
     <% _.forEach(scripts, function(script) { %><script src="<%= script %>"></script><% }); %>
 </head>
