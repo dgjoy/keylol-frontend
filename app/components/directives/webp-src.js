@@ -1,22 +1,25 @@
-﻿(function() {
-	"use strict";
+﻿(function () {
+    "use strict";
 
-	keylolApp.directive("webpSrc", [
-		"utils",
-		function(utils) {
-			return {
-				restrict: "A",
-				priority: 98,
-				link: function(scope, element, attrs) {
-					attrs.$observe("webpSrc", function(value) {
-						utils.supportWebp.then(function() {
-							attrs.$set("src", value + ".webp");
-						}, function() {
-							attrs.$set("src", value);
-						});
-					});
-				}
-			};
-		}
-	]);
+    keylolApp.directive("webpSrc", [
+        "utils",
+        function (utils) {
+            return {
+                restrict: "A",
+                priority: 98,
+                link: function (scope, element, attrs) {
+                    attrs.$observe("webpSrc", function (value) {
+                        utils.supportWebp.then(function () {
+                            if (value.indexOf("!") === -1)
+                                attrs.$set("src", value + "!webp");
+                            else
+                                attrs.$set("src", value + ".webp");
+                        }, function () {
+                            attrs.$set("src", value);
+                        });
+                    });
+                }
+            };
+        }
+    ]);
 })();
