@@ -28,6 +28,7 @@
     max-height: 36px;
     overflow: hidden;
     line-height: 18px;
+    word-wrap: break-word;
 }
 
 .section-promoted-readings .article footer {

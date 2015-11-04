@@ -1,13 +1,13 @@
 ﻿<div class="section-promoted-readings box-shadowed" ng-controller="PromotedReadingsController">
     <h1 class="labeled-heading">阅读推荐</h1>
-    <div ng-repeat="article in recommendedArticles" class="article">
+    <div ng-repeat="article in articles" class="article">
         <h2>
-            <span ng-show="article.recommendedByKeylol">[其乐推荐]</span>
-            <a ng-href="{{article.url}}">{{article.title}}</a>
+            <span ng-show="article.RecommendedByKeylol">[其乐推荐]</span>
+            <a ng-href="article/{{article.AuthorIdCode}}/{{article.SequenceNumberForAuthor}}">{{article.Title}}</a>
         </h2>
-        <p>{{article.summary}}</p>
+        <p>{{article.Content}}</p>
         <footer>
-            <span class="datetime" am-time-ago="article.datetime"></span>
+            <span class="datetime" am-time-ago="article.PublishTime"></span>
         </footer>
     </div>
 </div>

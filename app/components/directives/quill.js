@@ -62,7 +62,7 @@
                     };
 
                     scope.uploadImages = function (files) {
-                        if (files) {
+                        if (files && files.length > 0) {
                             noticeMessage("图片上传中");
                             var insertIndex = currentSelectionRange.start;
                             var policy = upyun.policy();
@@ -70,7 +70,7 @@
                                 for (var i = files.length - 1; i >= 0; --i) {
                                     if (files[i]) {
                                         upyun.upload(files[i], policy, signature).then(function (response) {
-                                            quill.insertEmbed(insertIndex, "image", "//keylol.b0.upaiyun.com/" + response.data.url);
+                                            quill.insertEmbed(insertIndex, "image", "//keylol.b0.upaiyun.com/" + response.data.url + "!article.image");
                                         });
                                     }
                                 }

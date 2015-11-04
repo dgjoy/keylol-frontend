@@ -6,7 +6,7 @@
 }
 
 .section-article-header h1 {
-    margin: 0 0 10px;
+    margin: 0;
     padding-right: 13px;
 }
 
@@ -35,17 +35,18 @@
     color: #738a95;
 }
 
-.section-article-header div {
+.section-article-header .related-info {
     padding: 0 13px 0 8px;
     line-height: 20px;
+    margin-top: 10px;
 }
 
-.section-article-header div .actions {
+.section-article-header .related-info .actions {
     float: right;
     margin-left: 20px;
 }
 
-.section-article-header div .points {
+.section-article-header .related-info .points {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
