@@ -47,7 +47,7 @@
 body {
     color: #333;
     background-color: #eef1f3;
-    font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, "Hiragino Sans GB", "Microsoft YaHei", "Microsoft JhengHei", "WenQuanYi Micro Hei", sans-serif;
+    font-family: "Helvetica Neue", "Segoe UI", Arial, "Hiragino Sans GB", "Microsoft YaHei", "Microsoft JhengHei", "WenQuanYi Micro Hei", sans-serif;
     font-size: 13px;
     min-width: 1220px;
     box-sizing: border-box;
