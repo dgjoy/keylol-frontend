@@ -2,10 +2,11 @@
     "use strict";
 
     keylolApp.controller("PromotedReadingsController", [
-        "$scope", "$http", "apiEndpoint",
-        function ($scope, $http, apiEndpoint) {
+        "$scope", "$http", "apiEndpoint", "union",
+        function ($scope, $http, apiEndpoint, union) {
+            $scope.articles = union.$localStorage.promotedReadings;
             $http.get(apiEndpoint + "article/hot").then(function (response) {
-                $scope.articles = response.data;
+                union.$localStorage.promotedReadings = $scope.articles = response.data;
             });
         }
     ]);
