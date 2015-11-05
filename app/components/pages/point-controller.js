@@ -7,6 +7,7 @@
             /**
              * 初始化union的一些属性
              */
+            $scope.isInPoint = true;
             union.summary = {};
             union.user = {};
             union.timeline = {
@@ -80,6 +81,8 @@
                         },
                         id: user.Id
                     };
+                    utils.addRecentBroswe("ProfilePoint", user.UserName, user.IdCode);
+                    pageTitle.set(user.UserName + " - 其乐");
                     $.extend(union.user, user);
                     $.extend(union.summary, summary);
                     if (user.IdCode != union.$localStorage.user.IdCode) {
@@ -261,6 +264,7 @@
                         point.voteCircles[0].type = "terrible"
                     }
 
+                    utils.addRecentBroswe("NormalPoint", point.mainName, point.IdCode);
                     $.extend(union.point, point);
                     $.extend(union.summary, summary);
 
@@ -299,7 +303,8 @@
                             types: [article.TypeName],
                             author: {
                                 username: article.Author.UserName,
-                                avatarUrl: article.Author.AvatarImage
+                                avatarUrl: article.Author.AvatarImage,
+                                idCode: article.Author.IdCode
                             },
                             datetime: article.PublishTime,
                             title: article.Title,

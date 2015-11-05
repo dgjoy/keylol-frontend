@@ -56,7 +56,10 @@
                     });
                 };
 
-                self.error = function (message) {
+                self.error = function (message, error) {
+                    if(error){
+                        console.error(error);
+                    }
                     return self.show({
                         type: "error",
                         title: "错误",

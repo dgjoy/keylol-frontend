@@ -44,3 +44,16 @@
     padding: 2px 0;
     margin-left: 10px;
 }
+
+.section-reception .recent-link h1 .delete {
+    font-size: 13px;
+    cursor: pointer;
+    float: right;
+    padding: 0 5px;
+    color: #738a95;
+    display: none;
+}
+
+.section-reception .recent-link h1:hover .delete {
+    display: inline-block;
+}

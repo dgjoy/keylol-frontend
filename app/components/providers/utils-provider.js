@@ -11,8 +11,8 @@
 				return _config;
 			},
 			$get: [
-				"$q",
-				function($q) {
+				"$q", "union",
+				function($q, union) {
 					function Utils() {
 						var self = this;
 						var uniqueId = 1;
@@ -104,6 +104,31 @@
 							}
 							if(type === "Platform"){
 								return "平台";
+							}
+						};
+
+						self.addRecentBroswe = function(type, name, idCode){
+							if(!union.$localStorage.recentBrowse){
+								union.$localStorage.recentBrowse = [];
+							}
+							var inHistoryIndex = -1;
+							for(var i in union.$localStorage.recentBrowse){
+								if(union.$localStorage.recentBrowse[i].type === type){
+									if(union.$localStorage.recentBrowse[i].idCode === idCode){
+										inHistoryIndex = i;
+									}
+								}
+							}
+							if(inHistoryIndex !== -1){
+								union.$localStorage.recentBrowse.splice(inHistoryIndex, 1);
+							}
+							union.$localStorage.recentBrowse.unshift({
+								type: type,
+								idCode: idCode,
+								name: name
+							});
+							while(union.$localStorage.recentBrowse.length > 5){
+								union.$localStorage.recentBrowse.pop();
 							}
 						};
 
