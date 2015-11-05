@@ -29,11 +29,9 @@
         </svg>
         <div class="entry-heading">
             <div class="entry-author" ng-if="entry.author">
-                <a class="avatar-anchor" href="test">
-                    <img class="avatar-small" webp-src="{{entry.author.avatarUrl|avatarUrl}}" alt="头像">
-                </a>
+                <point-link type="'user-avatar'" avatar-url="entry.author.avatarUrl" id-code="entry.author.idCode"></point-link>
                 <h4>
-                    <a href="" ng-href="{{entry.author.url}}">{{entry.author.username|userName:true}}</a>
+                    <point-link type="'user-name'" point-name="'@' + entry.author.username" id-code="entry.author.idCode"></point-link>
                 </h4>
             </div>
             <h3>
@@ -42,11 +40,11 @@
                     <circle cx="3.5" cy="3.5" r="3.5"></circle>
                 </svg>
                 <span ng-switch="entry.sources.type">
-                    <point-link ng-switch-when="point" ng-repeat="point in entry.sources.points" id-code="point.idCode" point-name="'「' + point.name + '」'"></point-link>
-                    <span ng-switch-when="publish"><a href="" ng-href="{{entry.author.url}}">{{entry.author.username|userName:true}}</a> 发布了这篇文章</span>
+                    <point-link ng-switch-when="point" ng-repeat="point in entry.sources.points" type="'normal-point'" id-code="point.idCode" point-name="'「' + point.name + '」'"></point-link>
+                    <span ng-switch-when="publish"><point-link type="'user-name'" point-name="'@' + entry.author.username" id-code="entry.author.idCode"></point-link> 发布了这篇文章</span>
                     <span ng-switch-when="like">
                         <span ng-repeat="user in entry.sources.userArray">
-                            <a href="" ng-href="{{user.url}}">{{user.name|userName:true}}</a>
+                            <point-link type="'user-name'" point-name="'@' + user.name" id-code="user.idCode"></point-link>
                             <span ng-if="!$last">、</span>
                         </span>认同这篇文章</span>
                 </span>

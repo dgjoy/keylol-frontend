@@ -8,20 +8,40 @@
                 templateUrl: "components/directives/point-link.html",
                 scope: {
                     idCode: "=",
-                    pointName: "="
+                    pointName: "=",
+                    type: "=",
+                    avatarUrl: "="
                 },
-                link: function (scope) {
+                link: function (scope, element) {
+                    scope.funcs = {};
                     scope.linkHover = function ($event) {
-                        scope.cardPopup =  scope.showPointCard({
-                            templateUrl: "components/popup/point-preview-card.html",
-                            controller: "PointPreviewCardController",
-                            event: $event,
-                            attachSide: "bottom",
-                            align: "left",
-                            inputs: {
-                                idCode: scope.idCode
-                            }
-                        });
+                        if(scope.type == "user-avatar"){
+                            var avatarWidth = element.children().children().width();
+                            scope.cardPopup =  scope.funcs.showPointCard({
+                                templateUrl: "components/popup/point-preview-card.html",
+                                controller: "PointPreviewCardController",
+                                event: $event,
+                                attachSide: "bottom",
+                                align: "left",
+                                offsetX: avatarWidth/2 - 39,
+                                inputs: {
+                                    idCode: scope.idCode,
+                                    type: scope.type
+                                }
+                            });
+                        } else {
+                            scope.cardPopup =  scope.funcs.showPointCard({
+                                templateUrl: "components/popup/point-preview-card.html",
+                                controller: "PointPreviewCardController",
+                                event: $event,
+                                attachSide: "bottom",
+                                align: "left",
+                                inputs: {
+                                    idCode: scope.idCode,
+                                    type: scope.type
+                                }
+                            });
+                        }
                     };
                     scope.stopShowPointCard = function() {
                         if (scope.cardPopup) {

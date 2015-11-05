@@ -2,7 +2,7 @@
     <div class="quick-link">
         <h1 class="labeled-heading">收藏夹</h1>
         <ul>
-            <li ng-repeat="link in quickLinks"><span class="delete">x</span><point-link id-code="link.idCode" point-name="link.name"></point-link></li>
+            <li ng-repeat="link in quickLinks"><span class="delete">x</span><point-link type="'normal-point'" id-code="link.idCode" point-name="link.name"></point-link></li>
         </ul>
         <a ng-if="isInPoint" href="test" class="add">添加当前据点</a>
     </div>
