@@ -66,6 +66,14 @@
                                 showTimeout = $timeout(function () {
                                     showTimeout = null;
 
+                                    if (!$.contains(document, element[0])) {
+                                        if (options.event && options.event.type === "mouseenter") {
+                                            delete contexts[contextId];
+                                            $(options.event.currentTarget).off("mouseleave", onTriggerMouseLeave);
+                                        }
+                                        return;
+                                    }
+
                                     windowPromise = window.show({
                                         template: options.template,
                                         templateUrl: options.templateUrl,
