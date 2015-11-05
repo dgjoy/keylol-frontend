@@ -155,7 +155,6 @@
 .ql-container {
     box-sizing: border-box;
     cursor: text;
-    font-family: Helvetica, 'Arial', sans-serif;
     font-size: 13px;
     height: 250px;
     line-height: 1.42;
@@ -218,7 +217,6 @@
 .ql-snow .ql-multi-cursor .cursor-name {
     border-radius: 4px;
     font-size: 11px;
-    font-family: Arial;
     margin-left: -50%;
     padding: 4px 10px;
 }
@@ -322,7 +320,6 @@
         box-sizing: border-box;
         color: #444;
         display: inline-block;
-        font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
         font-size: 14px;
         font-weight: 500;
         position: relative;
