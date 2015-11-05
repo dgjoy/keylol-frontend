@@ -100,7 +100,7 @@
                                 author: {
                                     username: article.Author.UserName,
                                     avatarUrl: article.Author.AvatarImage,
-                                    url: "user/" + article.Author.IdCode
+                                    idCode: article.Author.IdCode
                                 },
                                 sources: {},
                                 datetime: article.PublishTime,
@@ -120,13 +120,13 @@
                                         for (var j in article.LikeByUsers) {
                                             entry.sources.userArray.push({
                                                 name: article.LikeByUsers[j].UserName,
-                                                url: "/user/" + article.LikeByUsers[j].IdCode
+                                                idCode: article.LikeByUsers[j].IdCode
                                             });
                                         }
                                     } else {
                                         entry.sources.userArray.push({
-                                            name: union.user.UserName,
-                                            url: "/user/" + union.$localStorage.user.IdCode
+                                            name: union.$localStorage.user.UserName,
+                                            idCode: union.$localStorage.user.IdCode
                                         });
                                     }
                                     break;

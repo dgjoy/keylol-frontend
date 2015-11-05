@@ -2,49 +2,94 @@
     "use strict";
 
     keylolApp.controller("PointPreviewCardController", [
-        "$scope", "idCode", "$timeout", "$http", "utils", "notification", "union",
-        function ($scope, idCode, $timeout, $http, utils, notification, union) {
+        "$scope", "idCode", "type", "$timeout", "$http", "utils", "notification", "union",
+        function ($scope, idCode, type, $timeout, $http, utils, notification, union) {
             $scope.loading = true;
-            if (!union.pointCards) {
-                union.pointCards = {};
-            }
-            if (!union.pointCards[idCode]) {
-                $http.get(apiEndpoint + "normal-point/" + idCode, {
-                    params: {
-                        includeStats: true,
-                        includeSubscribed: true,
-                        idType: "IdCode"
-                    }
-                }).then(function (response) {
-                    var point = response.data;
-                    $scope.data = {
-                        id: point.Id,
-                        subscribed: point.Subscribed,
-                        head: {},
-                        avatar: point.AvatarImage,
-                        background: point.BackgroundImage,
-                        pointSum: {
-                            type: utils.getPointType(point.Type),
-                            readerNum: point.SubscriberCount,
-                            articleNum: point.ArticleCount
+            if(type === "normal-point"){
+                if (!union.pointCards) {
+                    union.pointCards = {};
+                }
+                if (!union.pointCards[idCode]) {
+                    $http.get(apiEndpoint + "normal-point/" + idCode, {
+                        params: {
+                            includeStats: true,
+                            includeSubscribed: true,
+                            idType: "IdCode"
                         }
-                    };
-                    if (point.PreferedName == "Chinese") {
-                        $scope.data.head.mainHead = point.ChineseName;
-                        $scope.data.head.subHead = point.EnglishName;
-                    } else {
-                        $scope.data.head.mainHead = point.EnglishName;
-                        $scope.data.head.subHead = point.ChineseName;
-                    }
-                    union.pointCards[idCode] = $scope.data;
+                    }).then(function (response) {
+                        var point = response.data;
+                        $scope.data = {
+                            id: point.Id,
+                            subscribed: point.Subscribed,
+                            head: {},
+                            avatar: point.AvatarImage,
+                            background: point.BackgroundImage,
+                            pointSum: {
+                                type: utils.getPointType(point.Type),
+                                readerNum: point.SubscriberCount,
+                                articleNum: point.ArticleCount
+                            }
+                        };
+                        if (point.PreferedName == "Chinese") {
+                            $scope.data.head.mainHead = point.ChineseName;
+                            $scope.data.head.subHead = point.EnglishName;
+                        } else {
+                            $scope.data.head.mainHead = point.EnglishName;
+                            $scope.data.head.subHead = point.ChineseName;
+                        }
+                        union.pointCards[idCode] = $scope.data;
+                        $scope.loading = false;
+                    }, function (error) {
+                        notification.error("据点卡片请求错误");
+                        console.log(error);
+                    });
+                } else {
                     $scope.loading = false;
-                }, function (error) {
-                    notification.error("据点卡片请求错误");
-                    console.log(error);
-                });
-            } else {
-                $scope.loading = false;
-                $scope.data = union.pointCards[idCode];
+                    $scope.data = union.pointCards[idCode];
+                }
+            }else {
+                if (!union.userCards) {
+                    union.userCards = {};
+                }
+                if (!union.userCards[idCode]) {
+                    var includeSubscribed = true;
+                    if(idCode === union.$localStorage.user.IdCode){
+                        includeSubscribed = false;
+                    }
+                    $http.get(apiEndpoint + "user/" + idCode, {
+                        params: {
+                            includeStats: true,
+                            includeSubscribed: includeSubscribed,
+                            includeProfilePointBackgroundImage: true,
+                            idType: "IdCode"
+                        }
+                    }).then(function (response) {
+                        var user = response.data;
+                        $scope.data = {
+                            id: user.Id,
+                            subscribed: user.Subscribed,
+                            head: {
+                                mainHead: user.UserName,
+                                subHead: user.GamerTag
+                            },
+                            avatar: user.AvatarImage,
+                            background: user.ProfilePointBackgroundImage,
+                            pointSum: {
+                                type: "个人",
+                                readerNum: user.SubscriberCount,
+                                articleNum: user.ArticleCount
+                            }
+                        };
+                        union.userCards[idCode] = $scope.data;
+                        $scope.loading = false;
+                    }, function (error) {
+                        notification.error("据点卡片请求错误");
+                        console.log(error);
+                    });
+                } else {
+                    $scope.loading = false;
+                    $scope.data = union.userCards[idCode];
+                }
             }
             $scope.subscribeDisabled = false;
             $scope.subscribe = function (id) {

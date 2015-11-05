@@ -18,7 +18,7 @@
     height: 32px;
 }
 
-.section-article-comments .avatar-anchor + article {
+.section-article-comments .comment article {
     margin-left: 40px;
 }
 
