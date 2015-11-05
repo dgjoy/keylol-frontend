@@ -2,8 +2,8 @@
     "use strict";
 
     keylolApp.controller("ArticleCommentsController", [
-        "$scope", "union", "$http", "utils", "$sce", "getAndFlushComments", "notification",
-        function ($scope, union, $http, utils, $sce, getAndFlushComments, notification) {
+        "$scope", "union", "$http", "utils", "getAndFlushComments", "notification",
+        function ($scope, union, $http, utils, getAndFlushComments, notification) {
             $scope.comments = union.comments;
             $scope.article = union.article;
             $scope.hotComments = union.hotComments;

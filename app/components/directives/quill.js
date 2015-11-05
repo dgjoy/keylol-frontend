@@ -2,8 +2,8 @@
     "use strict";
 
     keylolApp.directive("quill", [
-        "upyun", "$timeout",
-        function (upyun, $timeout) {
+        "upyun", "$timeout", "$compile",
+        function (upyun, $timeout, $compile) {
             return {
                 restrict: "A",
                 require: "ngModel",
@@ -38,7 +38,12 @@
                         ngModel.$setViewValue(quill.getHTML());
                     }
                     ngModel.$render = function () {
-                        quill.setHTML(ngModel.$viewValue || "");
+                        if (ngModel.$viewValue) {
+                            quill.setHTML(ngModel.$viewValue);
+                            $compile(element.find(".ql-editor"))(scope);
+                        } else {
+                            quill.setHTML("");
+                        }
                     };
 
                     quill.on("text-change", function () {

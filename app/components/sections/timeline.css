@@ -304,6 +304,7 @@
     line-height: 18px;
     max-height: 72px;
     overflow: hidden;
+    word-break: break-all;
 }
 
 .section-timeline .entry-content p.two-line {

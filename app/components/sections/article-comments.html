@@ -12,7 +12,7 @@
                 <a href="" class="action" ng-if="!comment.cannotLike" ng-click="acknowledge(comment)" ng-switch-when="false">认可</a>
                 <a href="" class="action" ng-if="!comment.cannotLike" ng-click="cancelAcknowledge(comment)" ng-switch-when="true">取消认可</a>
             </div>
-            <div class="content"><span  ng-bind-html="comment.Content"></span><span class="hot-signal">HOT</span><span class="like-count" ng-if="comment.hasLike">+{{comment.LikeCount}}</span></div>
+            <div class="content"><span bind-html-compile="comment.Content"></span><span class="hot-signal">HOT</span><span class="like-count" ng-if="comment.hasLike">+{{comment.LikeCount}}</span></div>
         </article>
     </div>
     <div class="cut-off" ng-if="pageElements.currPage == 1 && hotComments.length > 0"></div>
@@ -28,7 +28,7 @@
                 <a href="" class="action" ng-if="!comment.cannotLike" ng-click="acknowledge(comment)" ng-switch-when="false">认可</a>
                 <a href="" class="action" ng-if="!comment.cannotLike" ng-click="cancelAcknowledge(comment)" ng-switch-when="true">取消认可</a>
             </div>
-            <div class="content"><span  ng-bind-html="comment.Content"></span><span class="like-count" ng-if="comment.hasLike">+{{comment.LikeCount}}</span></div>
+            <div class="content"><span bind-html-compile="comment.Content"></span><span class="like-count" ng-if="comment.hasLike">+{{comment.LikeCount}}</span></div>
         </article>
     </div>
     <pagination total="pageElements.totalPages" current="pageElements.currPage" on-page-changed="pageElements.changePage(oldPage, newPage)" page-href=""></pagination>

@@ -9,14 +9,17 @@
                 priority: 98,
                 link: function (scope, element, attrs) {
                     attrs.$observe("webpSrc", function (value) {
-                        utils.supportWebp.then(function () {
-                            if (value.indexOf("!") === -1)
-                                attrs.$set("src", value + "!webp");
-                            else
-                                attrs.$set("src", value + ".webp");
-                        }, function () {
+                        if (/^(?:http:|https:)?\/\/keylol\.b0\.upaiyun\.com\//i.test(value))
+                            utils.supportWebp.then(function () {
+                                if (value.indexOf("!") === -1)
+                                    attrs.$set("src", value + "!webp");
+                                else
+                                    attrs.$set("src", value + ".webp");
+                            }, function () {
+                                attrs.$set("src", value);
+                            });
+                        else
                             attrs.$set("src", value);
-                        });
                     });
                 }
             };

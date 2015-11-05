@@ -54,7 +54,7 @@
             </h3>
         </div>
         <div class="entry-content clearfix box-shadowed-glowed clickable" ng-click="clickTheBox()" ng-if="data.clickable">
-            <img ng-if="entry.thumbnail" class="thumbnail" webp-src="{{entry.thumbnail}}" alt="预览图">
+            <img ng-if="entry.thumbnail" class="thumbnail" webp-src="{{entry.thumbnail | timelineThumbnailUrl}}" alt="预览图">
             <a ng-href="{{entry.url}}" class="point-avatar" ng-if="entry.pointAvatar">
                 <img class="avatar-big" ng-src="{{entry.pointAvatar}}" alt="头像">
             </a>
@@ -70,7 +70,7 @@
             </div>
         </div>
         <div class="entry-content clearfix box-shadowed-glowed" ng-if="!(data.clickable)">
-            <img ng-if="entry.thumbnail" class="thumbnail" webp-src="{{entry.thumbnail}}" alt="预览图">
+            <img ng-if="entry.thumbnail" class="thumbnail" webp-src="{{entry.thumbnail | timelineThumbnailUrl}}" alt="预览图">
             <a ng-href="{{entry.url}}" class="point-avatar" ng-if="entry.pointAvatar">
                 <img class="avatar-big" ng-src="{{entry.pointAvatar}}" alt="头像">
             </a>

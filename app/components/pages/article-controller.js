@@ -2,8 +2,8 @@
     "use strict";
 
     keylolApp.controller("ArticleController", [
-        "pageTitle", "$scope", "$sce", "union", "$routeParams", "$http", "getAndFlushComments", "notification",
-        function (pageTitle, $scope, $sce, union, $routeParams, $http, getAndFlushComments, notification) {
+        "pageTitle", "$scope", "union", "$routeParams", "$http", "getAndFlushComments", "notification",
+        function (pageTitle, $scope, union, $routeParams, $http, getAndFlushComments, notification) {
             $scope.articleExist = true;
             pageTitle.set("文章 - 其乐");
             union.article = {};
@@ -17,7 +17,6 @@
                     .then(function (response) {
                         var article = response.data;
                         pageTitle.set(article.Title + " - 其乐");
-                        article.trustContent = $sce.trustAsHtml(article.Content);
                         for (var i in article.AttachedPoints) {
                             article.AttachedPoints[i].mainName = article.AttachedPoints[i][article.AttachedPoints[i].PreferedName + "Name"];
                         }

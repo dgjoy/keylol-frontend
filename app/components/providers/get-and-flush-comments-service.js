@@ -2,12 +2,12 @@
     "use strict";
 
     keylolApp.factory("getAndFlushComments", [
-        "$http", "$sce", "union", "notification",
-        function ($http, $sce, union, notification) {
+        "$http", "union", "notification", "utils",
+        function ($http, union, notification, utils) {
             var parseComments = function (str, index) {
                 var regExpForComment = /^((?:#\d+[ \t]*)+)(?:$|[ \t]+)/gm;
                 var regExpForEachLine = /#(\d+)/g;
-                return str.replace(regExpForComment, function (match) {
+                return utils.escapeHtml(str).replace(regExpForComment, function (match) {
                     return match.replace(regExpForEachLine, function (m) {
                         var sqNumber = parseInt(m.slice(1, m.length));
                         if (sqNumber < index + 1) {
@@ -31,7 +31,7 @@
                         var preHotComments = response.data;
                         var hotComments = [];
                         for (var i in preHotComments) {
-                            if(preHotComments[i].LikeCount >= 5){
+                            if (preHotComments[i].LikeCount >= 5) {
                                 var hotComment = preHotComments[i];
                                 if (hotComment.Commentotar.IdCode == article.AuthorIdCode) {
                                     hotComment.Commentotar.isAuthor = true;
@@ -39,10 +39,10 @@
                                 if (hotComment.LikeCount > 0) {
                                     hotComment.hasLike = true;
                                 }
-                                if (hotComment.Commentotar.IdCode == union.$localStorage.user.IdCode){
+                                if (hotComment.Commentotar.IdCode == union.$localStorage.user.IdCode) {
                                     hotComment.cannotLike = true;
                                 }
-                                hotComment.Content = $sce.trustAsHtml(parseComments(hotComment.Content, hotComment.SequenceNumberForArticle));
+                                hotComment.Content = parseComments(hotComment.Content, hotComment.SequenceNumberForArticle);
                                 hotComments.push(hotComment);
                             }
                         }
@@ -68,10 +68,10 @@
                             if (comments[i].LikeCount > 0) {
                                 comments[i].hasLike = true;
                             }
-                            if (comments[i].Commentotar.IdCode == union.$localStorage.user.IdCode){
+                            if (comments[i].Commentotar.IdCode == union.$localStorage.user.IdCode) {
                                 comments[i].cannotLike = true;
                             }
-                            comments[i].Content = $sce.trustAsHtml(parseComments(comments[i].Content, comments[i].SequenceNumberForArticle));
+                            comments[i].Content = parseComments(comments[i].Content, comments[i].SequenceNumberForArticle);
                         }
                         union.article.totalComments = response.headers("X-Total-Record-Count");
                         union.pageElements.totalPages = union.article.totalComments <= 17 ? 1 : parseInt((union.article.totalComments - 18) / 20) + 2;
@@ -99,10 +99,10 @@
                             if (comments[i].LikeCount > 0) {
                                 comments[i].hasLike = true;
                             }
-                            if (comments[i].Commentotar.IdCode == union.$localStorage.user.IdCode){
+                            if (comments[i].Commentotar.IdCode == union.$localStorage.user.IdCode) {
                                 comments[i].cannotLike = true;
                             }
-                            comments[i].Content = $sce.trustAsHtml(parseComments(comments[i].Content, comments[i].SequenceNumberForArticle));
+                            comments[i].Content = parseComments(comments[i].Content, comments[i].SequenceNumberForArticle);
                         }
                         union.article.totalComments = response.headers("X-Total-Record-Count");
                         union.pageElements.totalPages = union.article.totalComments <= 17 ? 1 : parseInt((union.article.totalComments - 18) / 20) + 2;

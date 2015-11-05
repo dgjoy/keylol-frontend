@@ -74,6 +74,7 @@
                         datetime: article.PublishTime,
                         title: article.Title,
                         summary: article.Content,
+                        thumbnail: article.ThumbnailImage,
                         url: "/article/" + article.Author.IdCode + "/" + article.SequenceNumberForAuthor,
                         count: {
                             like: article.LikeCount,
