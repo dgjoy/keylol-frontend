@@ -187,7 +187,8 @@ gulp.task("compile-index", ["compile-environment-config"], function () {
     return gulp.src("app/index.html.ejs")
         .pipe(template({
             scripts: scriptPaths,
-            stylesheets: stylesheetPaths
+            stylesheets: stylesheetPaths,
+            urlCanonical: false
         }))
         .pipe(rename("index.html"))
         .pipe(gulp.dest("app"));
@@ -198,7 +199,8 @@ gulp.task("compile-index:prod", ["vendor-script-bundle", "app-script-bundle", "t
     return gulp.src("app/index.html.ejs")
         .pipe(template({
             scripts: files.scripts,
-            stylesheets: files.stylesheets
+            stylesheets: files.stylesheets,
+            urlCanonical: true
         }))
         .pipe(rename("index.html"))
         .pipe(htmlmin(htmlminOptions))
@@ -213,7 +215,8 @@ gulp.task("compile-index:prod:cdn", ["vendor-script-bundle", "app-script-bundle"
     return gulp.src("app/index.html.ejs")
         .pipe(template({
             scripts: _.map(files.scripts, mapCdnPath),
-            stylesheets: _.map(files.stylesheets, mapCdnPath)
+            stylesheets: _.map(files.stylesheets, mapCdnPath),
+            urlCanonical: true
         }))
         .pipe(rename("index.html"))
         .pipe(htmlmin(htmlminOptions))
