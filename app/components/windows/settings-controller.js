@@ -78,7 +78,7 @@
             }).then(function (response) {
                 var user = response.data;
                 updateVM(user);
-                union.$localStorage.user = user;
+                $.extend(union.$localStorage.user, user);
             });
 
             var geetestResult;
