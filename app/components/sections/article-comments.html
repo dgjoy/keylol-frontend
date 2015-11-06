@@ -2,11 +2,11 @@
     <h1 class="labeled-heading">共 {{article.totalComments}} 则讨论</h1>
     <div class="comment" ng-if="pageElements.currPage == 1 && hotComments.length > 0" ng-repeat="comment in hotComments">
         <span class="floor">#{{comment.SequenceNumberForArticle}}</span>
-        <point-link type="'user-avatar'" avatar-url="comment.Commentotar.AvatarImage" id-code="comment.Commentotar.IdCode"></point-link>
+        <point-link type="'user-avatar'" avatar-url="comment.Commentator.AvatarImage" id-code="comment.Commentator.IdCode"></point-link>
         <article>
             <div class="header" ng-switch="comment.Liked">
-                <point-link class="name" type="'user-name'" point-name="'@' + comment.Commentotar.UserName" id-code="comment.Commentotar.IdCode"></point-link>
-                <span class="as-author" ng-if="comment.Commentotar.isAuthor">[文章作者]</span>
+                <point-link class="name" type="'user-name'" point-name="'@' + comment.Commentator.UserName" id-code="comment.Commentator.IdCode"></point-link>
+                <span class="as-author" ng-if="comment.Commentator.isAuthor">[文章作者]</span>
                 <span class="time" am-time-ago="comment.PublishTime"></span>
                 <a href="" class="action" ng-click="reply(comment.SequenceNumberForArticle)">回复</a>
                 <a href="" class="action" ng-if="!comment.cannotLike" ng-click="acknowledge(comment)" ng-switch-when="false">认可</a>
@@ -18,11 +18,11 @@
     <div class="cut-off" ng-if="pageElements.currPage == 1 && hotComments.length > 0"></div>
     <div class="comment" ng-repeat="comment in comments">
         <span class="floor">#{{comment.SequenceNumberForArticle}}</span>
-        <point-link type="'user-avatar'" avatar-url="comment.Commentotar.AvatarImage" id-code="comment.Commentotar.IdCode"></point-link>
+        <point-link type="'user-avatar'" avatar-url="comment.Commentator.AvatarImage" id-code="comment.Commentator.IdCode"></point-link>
         <article>
             <div class="header" ng-switch="comment.Liked">
-                <point-link class="name" type="'user-name'" point-name="'@' + comment.Commentotar.UserName" id-code="comment.Commentotar.IdCode"></point-link>
-                <span class="as-author" ng-if="comment.Commentotar.isAuthor">[文章作者]</span>
+                <point-link class="name" type="'user-name'" point-name="'@' + comment.Commentator.UserName" id-code="comment.Commentator.IdCode"></point-link>
+                <span class="as-author" ng-if="comment.Commentator.isAuthor">[文章作者]</span>
                 <span class="time" am-time-ago="comment.PublishTime"></span>
                 <a href="" class="action" ng-click="reply(comment.SequenceNumberForArticle)">回复</a>
                 <a href="" class="action" ng-if="!comment.cannotLike" ng-click="acknowledge(comment)" ng-switch-when="false">认可</a>
