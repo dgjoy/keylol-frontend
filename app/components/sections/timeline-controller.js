@@ -22,6 +22,7 @@
                 var $timelineBottomY = $element.offset().top + $element.height();
                 $scope.$apply(function () {
                     if ($windowBottomY > $timelineBottomY - 768 && !loadingLock && !$scope.data.noMoreArticle) {
+                        console.log("load!");
                         requestWhenFiltering(true);
                     }
                 });
@@ -77,18 +78,21 @@
                     $scope.data.entries.length = 0;
                     $scope.data.noMoreArticle = true;
                 } else {
+                    var beforeSN = 2147483647;
+                    if(isLoadingMore){
+                        beforeSN = $scope.data.entries[$scope.data.entries.length - 1].sequenceNumber;
+                    }
                     $scope.data.loadAction({
                         idType: "IdCode",
                         articleTypeFilter: filters,
-                        take: 20
+                        take: 20,
+                        beforeSN: beforeSN
                     }, function (response) {
                         var articleList = response.data;
                         if (!isLoadingMore) {
                             $scope.data.entries.length = 0;
                         }
-                        if (articleList.length < 20) {
-                            $scope.data.noMoreArticle = true;
-                        }
+                        $scope.data.noMoreArticle = articleList.length < 20;
 
                         for (var i in articleList) {
                             var article = articleList[i];
@@ -102,6 +106,7 @@
                                     avatarUrl: article.Author.AvatarImage,
                                     idCode: article.Author.IdCode
                                 },
+                                sequenceNumber: article.SequenceNumber,
                                 sources: {},
                                 datetime: article.PublishTime,
                                 title: article.Title,
@@ -131,12 +136,12 @@
                                         });
                                     }
                                     break;
-
                                 case "Point":
                                     entry.sources.type = "point";
-                                    entry.sources.pointArray = [];
+                                    entry.sources.points = [];
+                                    console.log(article.AttachedPoints);
                                     for (var k in article.AttachedPoints) {
-                                        entry.sources.pointArray.push({
+                                        entry.sources.points.push({
                                             name: article.AttachedPoints[k][article.AttachedPoints[k].PreferedName + "Name"],
                                             idCode: article.AttachedPoints[k].IdCode
                                         });

@@ -51,11 +51,7 @@
                 }
             }).then(function (response) {
                 var articleList = response.data;
-                if (articleList.length < 20) {
-                    union.timeline.noMoreArticle = true;
-                } else {
-                    union.timeline.noMoreArticle = true;
-                }
+                union.timeline.noMoreArticle = articleList.length < 20;
                 union.timeline.entries.length = 0;
 
                 /**
@@ -70,6 +66,7 @@
                             avatarUrl: article.Author.AvatarImage,
                             idCode: article.Author.IdCode
                         },
+                        sequenceNumber: article.SequenceNumber,
                         sources: {},
                         datetime: article.PublishTime,
                         title: article.Title,

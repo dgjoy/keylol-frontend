@@ -46,7 +46,9 @@
                     scope.stopShowPointCard = function() {
                         if (scope.cardPopup) {
                             scope.cardPopup.then(function (popup) {
-                                popup.closeNow();
+                                if(popup){
+                                    popup.closeNow();
+                                }
                             });
                         }
                     }

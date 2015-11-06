@@ -10,7 +10,7 @@
                 return utils.escapeHtml(str).replace(regExpForComment, function (match) {
                     return match.replace(regExpForEachLine, function (m) {
                         var sqNumber = parseInt(m.slice(1, m.length));
-                        if (sqNumber < index + 1) {
+                        if (sqNumber < index) {
                             return '<a href="' + sqNumber + '">' + m + '</a>';
                         }
                         return m;
