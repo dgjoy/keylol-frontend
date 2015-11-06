@@ -2,95 +2,118 @@
     "use strict";
 
     keylolApp.controller("SearchSelectorController", [
-        "$scope", "union", "$location", "onSearching", "$timeout",
-        function ($scope, union, $location, onSearching, $timeout) {
+        "$scope", "union", "$location", "onSearching", "searchText", "$http", "notification",
+        function ($scope, union, $location, onSearching, searchText, $http, notification) {
             $scope.onSearching = onSearching;
-            $scope.resultArray = [
-                {
-                    avatar: "assets/images/exit.svg",
-                    isUser: true,
-                    mainTitle: "去月球去月球去月球去月球去月球去月球去月球去月球去月球",
-                    subTitle: "To the Moon",
-                    url: "test"
-                },
-                {
-                    avatar: "assets/images/exit.svg",
-                    type: "游戏",
-                    mainTitle: "Dota2Dota2Dota2Dota2Dota2Dota2Dota2Dota2Dota2",
-                    subTitle: "刀塔",
-                    url: "test"
-                },
-                {
-                    avatar: "assets/images/exit.svg",
-                    type: "游戏",
-                    mainTitle: "Dota2Dota2Dota2Dota2Dota2Dota2Dota2Dota2Dota2",
-                    subTitle: "刀塔",
-                    url: "test"
-                },
-                {
-                    avatar: "assets/images/exit.svg",
-                    type: "游戏",
-                    mainTitle: "Dota2Dota2Dota2Dota2Dota2Dota2Dota2Dota2Dota2",
-                    subTitle: "刀塔",
-                    url: "test"
-                },
-                {
-                    avatar: "assets/images/exit.svg",
-                    type: "游戏",
-                    mainTitle: "Dota2Dota2Dota2Dota2Dota2Dota2Dota2Dota2Dota2",
-                    subTitle: "刀塔",
-                    url: "test"
-                }
-            ];
             $scope.filterArray = union.searchFilter;
+            var getSearchResult = function(filterTxt){
+                if(searchText){
+                    switch (filterTxt) {
+                        case "据点":
+                            $http.get(apiEndpoint + "normal-point/keyword/" + encodeURIComponent(searchText))
+                                .then(function(response){
+                                    if(response.data.length > 0){
+                                        $scope.resultArray = [];
+                                        for(var i in response.data){
+                                            var point = response.data[i];
+                                            var result = {
+                                                avatar: point.AvatarImage,
+                                                type: point.Type,
+                                                url: "point/" + point.IdCode
+                                            };
+                                            if(point.PreferedName === "Chinese"){
+                                                result.mainTitle = point.ChineseName;
+                                                result.subTitle = point.EnglishName;
+                                            }else {
+                                                result.mainTitle = point.EnglishName;
+                                                result.subTitle = point.ChineseName;
+                                            }
+                                            $scope.resultArray.push(result);
+                                        }
+                                    }else {
+                                        $scope.resultArray = undefined;
+                                        $scope.notFound = true;
+                                    }
+                                },function(error){
+                                    notification.error("未知错误", error);
+                                });
+                            break;
+                        case "文章":
+                            $http.get(apiEndpoint + "article/keyword/" + encodeURIComponent(searchText))
+                                .then(function(response){
+                                    if(response.data.length > 0){
+                                        $scope.resultArray = [];
+                                        for(var i in response.data){
+                                            var article = response.data[i];
+                                            $scope.resultArray.push({
+                                                mainTitle: article.Title,
+                                                articleInfo: {
+                                                    acknowledgeNum: article.LikeCount,
+                                                    commentNum: article.CommentCount
+                                                },
+                                                url: "article/" + article.AuthorIdCode + "/" + article.SequenceNumberForAuthor
+                                            });
+                                        }
+                                    }else {
+                                        $scope.resultArray = undefined;
+                                        $scope.notFound = true;
+                                    }
+                                },function(error){
+                                    notification.error("未知错误", error);
+                                });
+                            break;
+                        case "用户":
+                            $http.get(apiEndpoint + "user/" + encodeURIComponent(searchText), {
+                                params: {
+                                    idType: "UserName"
+                                }
+                            }).then(function(response){
+                                if(response.data){
+                                    $scope.resultArray = [];
+                                    var user = response.data;
+                                    $scope.resultArray.push({
+                                        mainTitle: user.UserName,
+                                        subTitle: user.GamerTag,
+                                        avatar: user.AvatarImage,
+                                        type: "个人",
+                                        url: "user/" + user.IdCode,
+                                        isUser: true
+                                    });
+                                }
+                            },function(error){
+                                if(error.status === 404){
+                                    $scope.resultArray = undefined;
+                                    $scope.notFound = true;
+                                }else {
+                                    notification.error("未知错误", error);
+                                }
+                            });
+                            break;
+                        default :
+                            $scope.resultArray = undefined;
+                            $scope.notFound = true;
+                    }
+                }
+            };
+            var filterText;
+            for(var i in $scope.filterArray){
+                if($scope.filterArray[i].active === true){
+                    filterText = $scope.filterArray[i].text;
+                }
+            }
+            getSearchResult(filterText);
             $scope.changeFilter = function($index){
                 if(!$scope.filterArray[$index].active){
                     for(var i in $scope.filterArray){
                         $scope.filterArray[i].active = false;
                     }
                     $scope.filterArray[$index].active = true;
+                    getSearchResult($scope.filterArray[$index].text);
                 }
-                    $scope.resultArray = [
-                        {
-                            avatar: "assets/images/exit.svg",
-                            isUser: true,
-                            mainTitle: "去月球去月球去月球去月球去月球去月球去月球去月球去月球",
-                            subTitle: "To the Moon",
-                            url: "test"
-                        },
-                        {
-                            avatar: "assets/images/exit.svg",
-                            type: "游戏",
-                            mainTitle: "Dota2Dota2Dota2Dota2Dota2Dota2Dota2Dota2Dota2",
-                            subTitle: "刀塔",
-                            url: "test"
-                        },
-                        {
-                            avatar: "assets/images/exit.svg",
-                            type: "游戏",
-                            mainTitle: "Dota2Dota2Dota2Dota2Dota2Dota2Dota2Dota2Dota2",
-                            subTitle: "刀塔",
-                            url: "test"
-                        },
-                        {
-                            avatar: "assets/images/exit.svg",
-                            type: "游戏",
-                            mainTitle: "Dota2Dota2Dota2Dota2Dota2Dota2Dota2Dota2Dota2",
-                            subTitle: "刀塔",
-                            url: "test"
-                        },
-                        {
-                            avatar: "assets/images/exit.svg",
-                            type: "游戏",
-                            mainTitle: "Dota2Dota2Dota2Dota2Dota2Dota2Dota2Dota2Dota2",
-                            subTitle: "刀塔",
-                            url: "test"
-                        }
-                    ];
             };
             $scope.jumpTo = function(url){
                 $location.url(url);
-            }
+            };
         }
     ]);
 })();

@@ -43,15 +43,6 @@
                             });
                         }
                     };
-                    scope.stopShowPointCard = function() {
-                        if (scope.cardPopup) {
-                            scope.cardPopup.then(function (popup) {
-                                if(popup){
-                                    popup.closeNow();
-                                }
-                            });
-                        }
-                    }
                 }
             };
         }

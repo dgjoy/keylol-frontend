@@ -25,6 +25,24 @@
     color: #000003;
 }
 
+.popup-search-selector .selector-main .default {
+    padding-top: 95px;
+    margin-bottom: 45px;
+    text-align: center;
+}
+
+.popup-search-selector .selector-main .default img {
+    height: 89px;
+    width: auto;
+}
+
+.popup-search-selector .selector-main .default h1 {
+    margin: 20px 0 0 0;
+    font-size: 24px;
+    color: #C7CDD1;
+    font-weight: normal;
+}
+
 .popup-search-selector .selector-main ul {
     padding: 0;
     margin: 0;
@@ -68,6 +86,20 @@
 
 .popup-search-selector .selector-main li .title p span {
     color: #748a97;
+}
+
+.popup-search-selector .selector-main li .title p.info {
+    height: 18px;
+    width: 100%;
+}
+
+.popup-search-selector .selector-main li .title p.info span {
+    margin-left: 8px;
+    color: #C7CDD1;
+}
+
+.popup-search-selector .selector-main li .title p.info span:first-of-type {
+    margin-left: 0;
 }
 
 .popup-search-selector .selector-main .all-results {

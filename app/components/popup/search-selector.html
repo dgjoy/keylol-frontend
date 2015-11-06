@@ -1,21 +1,30 @@
 ﻿<popup class="popup-search-selector">
     <div class="selector-main box-shadowed-deeper clearfix">
         <div class="search-filter">
-            <div>
-
-            </div>
             <a href="" ng-repeat="filter in filterArray" ng-click="changeFilter($index)" ng-class="{active: filter.active}">{{filter.text}}</a>
         </div>
-        <ul class="result-list">
+        <div class="default" ng-if="!resultArray && !notFound">
+            <img src="assets/images/teleporter.png">
+            <h1 class="font-myriad-keylol">传送装置已就位</h1>
+        </div>
+        <div class="default" ng-if="!resultArray && notFound">
+            <img src="assets/images/hit_final.png">
+            <h1 class="font-myriad-keylol">未能撞到结果</h1>
+        </div>
+        <ul class="result-list" ng-if="resultArray">
             <li ng-repeat="result in resultArray" class="clearfix" ng-click="jumpTo(result.url)">
-                <div class="avatar-anchor">
-                    <img class="avatar-small" ng-src="{{result.avatar}}">
+                <div class="avatar-anchor"ng-if="result.avatar">
+                    <img class="avatar-small" webp-src="{{result.avatar|avatarUrl}}">
                 </div>
                 <div class="title">
-                    <p>{{result.mainTitle|maxLength:15}}</p>
-                    <p>
+                    <p>{{result.mainTitle|maxLength:15|userName:result.isUser}}</p>
+                    <p ng-if="result.subTitle">
                         <span ng-if="result.type">[{{result.type}}]</span>
-                        {{result.subTitle|maxLength:15|userName:result.isUser}}
+                        {{result.subTitle|maxLength:15}}
+                    </p>
+                    <p class="info" ng-if="result.articleInfo">
+                        <span ng-if="result.articleInfo.acknowledgeNum">[+1] {{result.articleInfo.acknowledgeNum}}</span><!--
+                        --><span ng-if="result.articleInfo.commentNum">(···) {{result.articleInfo.commentNum}}</span>
                     </p>
                 </div>
             </li>
