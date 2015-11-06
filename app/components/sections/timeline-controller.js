@@ -2,8 +2,8 @@
     "use strict";
 
     keylolApp.controller("TimelineController", [
-        "$scope", "union", "$location", "$http", "$rootScope", "$element", "articleTypes",
-        function ($scope, union, $location, $http, $rootScope, $element, articleTypes) {
+        "$scope", "union", "$location", "$http", "$rootScope", "$element", "articleTypes", "notification",
+        function ($scope, union, $location, $http, $rootScope, $element, articleTypes, notification) {
             $scope.headingDisplayMode = function (entry) {
                 if (entry.source)
                     return "source";
@@ -22,7 +22,6 @@
                 var $timelineBottomY = $element.offset().top + $element.height();
                 $scope.$apply(function () {
                     if ($windowBottomY > $timelineBottomY - 768 && !loadingLock && !$scope.data.noMoreArticle) {
-                        console.log("load!");
                         requestWhenFiltering(true);
                     }
                 });
@@ -139,7 +138,6 @@
                                 case "Point":
                                     entry.sources.type = "point";
                                     entry.sources.points = [];
-                                    console.log(article.AttachedPoints);
                                     for (var k in article.AttachedPoints) {
                                         entry.sources.points.push({
                                             name: article.AttachedPoints[k][article.AttachedPoints[k].PreferedName + "Name"],
@@ -188,6 +186,45 @@
                 }
                 return text;
             };
+
+            $scope.subscribe = function(entry){
+                entry.subscribeDisabled = true;
+                $http.post(apiEndpoint + "user-point-subscription", {}, {
+                    params: {
+                        pointId: entry.id
+                    }
+                }).then(function () {
+                    notification.success("据点已订阅，其今后收到的文章投稿将推送到你的首页");
+                    entry.subscribed = true;
+                    entry.subscribeDisabled = false;
+                    entry.pointInfo.reader++;
+                }, function (error) {
+                    notification.error("未知错误", error);
+                });
+            };
+            $scope.unsubscribe = function(entry){
+                entry.subscribeDisabled = true;
+                notification.attention("退订并不再接收此据点的文章推送", [
+                    {action: "退订", value: true},
+                    {action: "取消"}
+                ]).then(function (result) {
+                    if (result) {
+                        $http.delete(apiEndpoint + "user-point-subscription", {
+                            params: {
+                                pointId: entry.id
+                            }
+                        }).then(function () {
+                            notification.success("据点已退订");
+                            entry.subscribed = false;
+                            entry.subscribeDisabled = false;
+                            entry.pointInfo.reader--;
+                        }, function (error) {
+                            notification.error("未知错误", error);
+                            entry.subscribeDisabled = false;
+                        });
+                    }
+                });
+            }
         }
     ]);
 })();

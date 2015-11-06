@@ -46,7 +46,7 @@
             }).when("/acknowledgements", {
                 templateUrl: "components/pages/acknowledgements.html",
                 controller: "AcknowledgementsController"
-            }).when("/searchResults", {
+            }).when("/search/:searchType/:keyword", {
                 templateUrl: "components/pages/search-results.html",
                 controller: "SearchResultsController"
             }).otherwise({

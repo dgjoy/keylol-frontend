@@ -332,6 +332,7 @@
 
 .section-timeline .entry-content .actions button {
     display: inline-block;
+    margin-bottom: 7px;
 }
 
 /* Footer */
@@ -386,6 +387,18 @@
     visibility: visible;
 }
 
+.section-timeline .card-end {
+    height: 50px;
+}
+
 .section-timeline .card-end rect {
     fill: #11254a;
+}
+
+.section-timeline .search-not-found {
+    text-align: center;
+}
+
+.section-timeline .search-not-found h1 {
+    color: #C7CDD1;
 }

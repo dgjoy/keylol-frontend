@@ -62,7 +62,8 @@
                     params: {
                         includeStats: true,
                         idType: "IdCode",
-                        includeProfilePointBackgroundImage: true
+                        includeProfilePointBackgroundImage: true,
+                        includeSubscribed: true
                     }
                 }).then(function (response) {
 
@@ -81,22 +82,13 @@
                         },
                         id: user.Id
                     };
+                    if (user.IdCode != union.$localStorage.user.IdCode) {
+                        union.summary.subscribed = user.Subscribed;
+                    }
                     utils.addRecentBroswe("ProfilePoint", user.UserName, user.IdCode);
                     pageTitle.set(user.UserName + " - 其乐");
                     $.extend(union.user, user);
                     $.extend(union.summary, summary);
-                    if (user.IdCode != union.$localStorage.user.IdCode) {
-                        $http.get(apiEndpoint + "user-point-subscription", {
-                            params: {
-                                pointId: user.Id
-                            }
-                        }).then(function (response) {
-                            union.summary.subscribed = response.data;
-                        }, function (error) {
-                            notification.error("未知错误");
-                            console.error(error);
-                        });
-                    }
 
 
                     /**
@@ -213,6 +205,8 @@
                     params: {
                         includeStats: true,
                         includeVotes: true,
+                        includeSubscribed: true,
+                        includeAssociated: true,
                         idType: "IdCode"
                     }
                 }).then(function (response) {
@@ -221,6 +215,7 @@
                     var summary = {
                         head: {},
                         avatar: point.AvatarImage,
+                        subscribed: point.Subscribed,
                         background: point.BackgroundImage,
                         pointSum: {
                             type: utils.getPointType(point.Type),
@@ -266,16 +261,6 @@
                     $.extend(union.point, point);
                     $.extend(union.summary, summary);
 
-                    $http.get(apiEndpoint + "user-point-subscription", {
-                        params: {
-                            pointId: point.Id
-                        }
-                    }).then(function (response) {
-                        union.summary.subscribed = response.data;
-                    }, function (error) {
-                        notification.error("未知错误");
-                        console.error(error);
-                    });
                 }, function (error) {
                     notification.error("未知错误");
                     console.error(error);

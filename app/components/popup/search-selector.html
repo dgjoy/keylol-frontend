@@ -30,7 +30,7 @@
             </li>
         </ul>
         <div class="all-results">
-            <a href="" ng-click="onSearching()">全部结果</a>
+            <a href="" ng-click="onSearching()" ng-if="resultArray || notFound">全部结果</a>
         </div>
     </div>
 </popup>

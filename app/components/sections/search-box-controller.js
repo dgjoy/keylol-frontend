@@ -2,10 +2,18 @@
     "use strict";
 
     keylolApp.controller("SearchBoxController", [
-        "$scope", "union", "$timeout",
-        function ($scope, union, $timeout) {
+        "$scope", "union", "$timeout", "$location",
+        function ($scope, union, $timeout, $location) {
             $scope.onSearching = function(){
-                console.log(union.searchFilter, $scope.searchText);
+                var searchType = "";
+                for(var i in union.searchFilter){
+                    if(union.searchFilter[i].active){
+                        searchType = union.searchFilter[i].type;
+                    }
+                }
+                if($scope.searchText){
+                    $location.url("search/" + searchType + "/" + encodeURIComponent($scope.searchText));
+                }
             };
             var bindElement;
             $scope.getSearchResults = function($event){
@@ -31,7 +39,6 @@
                     $timeout.cancel($scope.delayGetResult);
                 }
                 if($scope.searchText !== undefined){
-                    console.log($scope.searchText);
                     $scope.delayGetResult = $timeout(function(){
                         if($scope.nowPopup){
                             $scope.nowPopup.then(function (popup) {
@@ -47,13 +54,16 @@
             });
             union.searchFilter = [
                 {
+                    type: "point",
                     text: "据点",
                     active: true
                 },
                 {
+                    type: "article",
                     text: "文章"
                 },
                 {
+                    type: "user",
                     text: "用户"
                 }
             ];

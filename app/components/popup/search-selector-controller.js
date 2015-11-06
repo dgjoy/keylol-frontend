@@ -2,8 +2,8 @@
     "use strict";
 
     keylolApp.controller("SearchSelectorController", [
-        "$scope", "union", "$location", "onSearching", "searchText", "$http", "notification",
-        function ($scope, union, $location, onSearching, searchText, $http, notification) {
+        "$scope", "union", "$location", "onSearching", "searchText", "$http", "notification", "utils",
+        function ($scope, union, $location, onSearching, searchText, $http, notification, utils) {
             $scope.onSearching = onSearching;
             $scope.filterArray = union.searchFilter;
             var getSearchResult = function(filterTxt){
@@ -18,7 +18,7 @@
                                             var point = response.data[i];
                                             var result = {
                                                 avatar: point.AvatarImage,
-                                                type: point.Type,
+                                                type: utils.getPointType(point.Type),
                                                 url: "point/" + point.IdCode
                                             };
                                             if(point.PreferedName === "Chinese"){

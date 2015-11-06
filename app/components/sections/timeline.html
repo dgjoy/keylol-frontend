@@ -54,25 +54,9 @@
             </h3>
         </div>
         <div class="entry-content clearfix box-shadowed-glowed clickable" ng-click="clickTheBox()" ng-if="data.clickable">
-            <img ng-if="entry.thumbnail" class="thumbnail" webp-src="{{entry.thumbnail | timelineThumbnailUrl}}" alt="预览图">
+            <img ng-if="entry.thumbnail" class="thumbnail" webp-src="{{entry.thumbnail|timelineThumbnailUrl}}" alt="预览图">
             <a ng-href="{{entry.url}}" class="point-avatar" ng-if="entry.pointAvatar">
-                <img class="avatar-big" ng-src="{{entry.pointAvatar}}" alt="头像">
-            </a>
-            <p ng-if="entry.datetime" am-time-ago="entry.datetime" class="datetime-in-block" ng-switch-when="inBlock"></p>
-            <div class="summary">
-                <h3 ng-if="entry.title">
-                    <a ng-href="{{entry.url}}">{{entry.title}}</a>
-                </h3>
-                <p ng-class="{'two-line': !entry.thumbnail, 'one-line': data.oneLine}">{{entry.summary}}</p>
-            </div>
-            <div class="actions">
-                <button class="border-button right-border" ng-repeat="action in entry.actions" ng-class="action.extraClass">{{action.text}}</button>
-            </div>
-        </div>
-        <div class="entry-content clearfix box-shadowed-glowed" ng-if="!(data.clickable)">
-            <img ng-if="entry.thumbnail" class="thumbnail" webp-src="{{entry.thumbnail | timelineThumbnailUrl}}" alt="预览图">
-            <a ng-href="{{entry.url}}" class="point-avatar" ng-if="entry.pointAvatar">
-                <img class="avatar-big" ng-src="{{entry.pointAvatar}}" alt="头像">
+                <img class="avatar-big" webp-src="{{entry.pointAvatar|avatarUrl}}" alt="头像">
             </a>
             <p ng-if="entry.datetime" am-time-ago="entry.datetime" class="datetime-in-block" ng-switch-when="inBlock"></p>
             <div class="summary">
@@ -81,10 +65,26 @@
                 </h3>
                 <p ng-class="{'one-line': !entry.thumbnail}">{{entry.summary}}</p>
             </div>
-            <div class="actions">
-                <p ng-repeat="action in entry.actions">
-                    <button class="border-button right-border" ng-class="action.extraClass">{{action.text}}</button>
-                </p>
+            <div class="actions" ng-switch="entry.subscribed">
+                <button ng-switch-when="false" ng-disabled="subscribeDisabled" class="border-button right-border" ng-click="subscribe(data.id)">订阅</button>
+                <button ng-switch-when="true" ng-disabled="subscribeDisabled" class="border-button right-border subscribed" ng-click="unsubscribe(data.id)">已订阅</button>
+            </div>
+        </div>
+        <div class="entry-content clearfix box-shadowed-glowed" ng-if="!(data.clickable)">
+            <img ng-if="entry.thumbnail" class="thumbnail" webp-src="{{entry.thumbnail|timelineThumbnailUrl}}" alt="预览图">
+            <a ng-href="{{entry.url}}" class="point-avatar" ng-if="entry.pointAvatar">
+                <img class="avatar-big" webp-src="{{entry.pointAvatar|avatarUrl}}" alt="头像">
+            </a>
+            <p ng-if="entry.datetime" am-time-ago="entry.datetime" class="datetime-in-block" ng-switch-when="inBlock"></p>
+            <div class="summary">
+                <h3 ng-if="entry.title">
+                    <a ng-href="{{entry.url}}">{{entry.title|userName:entry.isUser}}</a>
+                </h3>
+                <p ng-class="{'one-line': !entry.thumbnail}">{{entry.summary}}</p>
+            </div>
+            <div class="actions" ng-switch="entry.subscribed">
+                <button ng-switch-when="false" ng-disabled="subscribeDisabled" class="border-button right-border" ng-click="subscribe(entry)">订阅</button>
+                <button ng-switch-when="true" ng-disabled="subscribeDisabled" class="border-button right-border subscribed" ng-click="unsubscribe(entry)">已订阅</button>
             </div>
         </div>
         <footer>
@@ -105,4 +105,8 @@
     <svg xmlns="http://www.w3.org/2000/svg" class="card-end">
         <rect x="14" width="15" height="5"></rect>
     </svg>
+    <div class="search-not-found" ng-if="data.searchNotFound">
+        <img src="assets/images/hit_final.png">
+        <h1 class="font-myriad-keylol">未能撞到结果</h1>
+    </div>
 </div>

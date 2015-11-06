@@ -5,127 +5,183 @@
     "use strict";
 
     keylolApp.controller("SearchResultsController", [
-        "pageTitle", "$scope", "union",
-        function (pageTitle, $scope, union) {
-            pageTitle.set("搜索结果 - 其乐");
+        "pageTitle", "$scope", "union", "$http", "notification", "$routeParams", "$location", "utils",
+        function (pageTitle, $scope, union, $http, notification, $routeParams, $location, utils) {
+            if(!$routeParams.searchType || !$routeParams.keyword){
+                $location.url("404");
+            }
+            pageTitle.set($routeParams.keyword + " 的搜索结果 - 其乐");
             union.summary = {
                 actions: [],
                 head: {
-                    mainHead: "cs",
+                    mainHead: $routeParams.keyword ,
                     subHead: "的搜索结果"
                 },
                 background: "04be114e21692aa38afe2e4d1bc605b6.png",
                 defaultSum: {
-                    text: "找到 3 个符合的项目"
+                    text: "找到  个符合的项目"
                 }
             };
-            function changeActive(activeObject) {
-                var actions = union.timeline.actions;
-                for (var i = 0; i < actions.length; i++) {
-                    actions[i].active = false;
-                }
-                activeObject.active = true;
-            }
-
             union.timeline = {
                 title: {
                     mainTitle: "搜索结果",
                     subTitle: "Search Result"
                 },
+                noMoreArticle: true,
+                searchNotFound: true,
                 actions: [
                     {
                         active: false,
                         text: "据点",
                         onClick: function () {
-                            changeActive(this);
+                            $location.url("search/point/" + encodeURIComponent($routeParams.keyword));
                         }
                     },
                     {
                         active: false,
                         text: "文章",
                         onClick: function () {
-                            changeActive(this);
+                            $location.url("search/article/" + encodeURIComponent($routeParams.keyword));
                         }
                     },
                     {
                         active: false,
                         text: "用户",
                         onClick: function () {
-                            changeActive(this);
+                            $location.url("search/user/" + encodeURIComponent($routeParams.keyword));
                         }
                     },
                     {
-                        active: true,
+                        active: false,
                         text: "全站",
                         onClick: function () {
-                            changeActive(this);
                         }
                     }
                 ],
                 datetime: "outBlock",
-                entries: [
-                    {
-                        types: ["评测"],
-                        sources: [
-                            {
-                                name: "战地：硬仗",
-                                url: "test"
-                            },
-                            {
-                                name: "战地系列",
-                                url: "test"
-                            }
-                        ],
-                        author: {
-                            username: "crakyGALU",
-                            avatarUrl: "assets/images/exit.svg"
-                        },
-                        datetime: moment().subtract(1, "seconds"),
-                        title: "代工就是不如原厂：这硬仗真的是打的艰辛",
-                        summary: "说起这个警匪死磕的话，相比正玩家们没有不知道那大名鼎鼎的CF啊不对CS，也就是《反恐精英（Counter-Strike）》，这款游戏的出现让警匪对殴的模式风靡全球，至今依然有大批玩家热衷于此，除此之外类似的游戏也有不少，例如《彩虹六号系列》，例如《收获日系列》等等，如今FPS界极其有影响力的战地系列也开始涉及此类题材，眼下BETA版本已经开始测试，本篇评测是根据测试版而来，所以并不代表游戏的最终品质！",
-                        url: "test",
-                        thumbnail: "//keylol.b0.upaiyun.com/ffc1c0643b2857caa83ec2cf254e510f.jpg!timeline.thumbnail",
-                        count: {
-                            like: 666,
-                            comment: 222
-                        }
-                    },
-                    {
-                        types: ["用户"],
-                        pointInfo: {
-                            reader: 157,
-                            article: 48
-                        },
-                        pointAvatar: "assets/images/exit.svg",
-                        isUser: true,
-                        title: "css",
-                        summary: "说了多少次是起源不是前端",
-                        url: "test",
-                        actions: [
-                            {
-                                text: "订阅据点"
-                            }
-                        ]
-                    },
-                    {
-                        types: ["游戏"],
-                        pointInfo: {
-                            reader: 157,
-                            article: 48
-                        },
-                        pointAvatar: "assets/images/exit.svg",
-                        title: "Counter-Strike: Global Offensive",
-                        summary: "反恐精英：全球攻势",
-                        url: "test",
-                        actions: [
-                            {
-                                text: "已订阅",
-                                extraClass: "subscribed"
-                            }
-                        ]
-                    }
-                ]
+                entries: []
             };
+            switch ($routeParams.searchType){
+                case "point":
+                    union.timeline.loadAction = function (params, callback) {};
+                    union.timeline.actions[0].active = true;
+                    $http.get(apiEndpoint + "normal-point/keyword/" + encodeURIComponent($routeParams.keyword), {
+                        params: {
+                            full: true,
+                            take: 50
+                        }
+                    }).then(function(response){
+                        union.summary.defaultSum.text = "找到 " + response.data.length + " 个符合的项目";
+                        if(response.data.length > 0){
+                            union.timeline.searchNotFound = false;
+                            for(var i in response.data){
+                                var point = response.data[i];
+                                var result = {
+                                    types: [utils.getPointType(point.Type)],
+                                    pointInfo: {
+                                        reader: point.SubscriberCount,
+                                        article: point.ArticleCount
+                                    },
+                                    pointAvatar: point.AvatarImage,
+                                    url: "point/" + point.IdCode,
+                                    subscribed: point.Subscribed,
+                                    id: point.Id
+                                };
+                                if(point.PreferedName === "Chinese"){
+                                    result.title = point.ChineseName;
+                                    result.summary = point.EnglishName;
+                                }else {
+                                    result.title = point.EnglishName;
+                                    result.summary = point.ChineseName;
+                                }
+                                union.timeline.entries.push(result);
+                            }
+                        }
+                    },function(error){
+                        notification.error("未知错误", error);
+                    });
+                    break;
+                case "article":
+                    union.timeline.loadAction = function (params, callback) {};
+                    union.timeline.actions[1].active = true;
+                    $http.get(apiEndpoint + "article/keyword/" + encodeURIComponent($routeParams.keyword), {
+                        params: {
+                            full: true,
+                            take: 50
+                        }
+                    }).then(function(response){
+                        union.summary.defaultSum.text = "找到 " + response.data.length + " 个符合的项目";
+                        if(response.data.length > 0) {
+                            union.timeline.searchNotFound = false;
+                            for (var i in response.data) {
+                                var article = response.data[i];
+                                var result = {
+                                    types: [article.TypeName],
+                                    author: {
+                                        username: article.Author.UserName,
+                                        avatarUrl: article.Author.AvatarImage,
+                                        idCode: article.Author.IdCode
+                                    },
+                                    sequenceNumber: article.SequenceNumber,
+                                    datetime: article.PublishTime,
+                                    title: article.Title,
+                                    summary: article.Content,
+                                    thumbnail: article.ThumbnailImage,
+                                    url: "/article/" + article.Author.IdCode + "/" + article.SequenceNumberForAuthor,
+                                    count: {
+                                        like: article.LikeCount,
+                                        comment: article.CommentCount
+                                    }
+                                };
+                                union.timeline.entries.push(result);
+                            }
+                        }
+                    },function(error){
+                        notification.error("未知错误", error);
+                    });
+                    break;
+                case "user":
+                    union.timeline.loadAction = function (params, callback) {};
+                    union.timeline.actions[2].active = true;
+                    $http.get(apiEndpoint + "user/" + encodeURIComponent($routeParams.keyword), {
+                        params: {
+                            idType: "UserName",
+                            includeStats: true,
+                            includeSubscribed: true
+                        }
+                    }).then(function(response){
+                        if(response.data){
+                            union.timeline.searchNotFound = false;
+                            union.summary.defaultSum.text = "找到 1 个符合的项目";
+                            var user = response.data;
+                            union.timeline.entries.push({
+                                types: ["个人"],
+                                pointInfo: {
+                                    reader: user.SubscriberCount,
+                                    article: user.ArticleCount
+                                },
+                                title: user.UserName,
+                                summary: user.GamerTag,
+                                pointAvatar: user.AvatarImage,
+                                url: "user/" + user.IdCode,
+                                isUser: true,
+                                id: user.Id
+                            });
+                            if (user.IdCode != union.$localStorage.user.IdCode) {
+                                union.timeline.entries[0].subscribed = user.Subscribed;
+                            }
+                        }
+                    },function(error){
+                        if(error.status === 404){
+                            union.summary.defaultSum.text = "找到 0 个符合的项目";
+                        }else {
+                            notification.error("未知错误", error);
+                        }
+                    });
+                    break;
+                default :
+                    $location.url("404");
+            }
         }
     ]);
 })();
