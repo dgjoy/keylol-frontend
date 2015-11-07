@@ -24,7 +24,7 @@
                         $scope.submitDisabled = false;
                         $scope.currentComment = "";
                         var sqNumber = response.data.SequenceNumberForArticle;
-                        getAndFlushComments(union.article, sqNumber, "Sequence");
+                        getAndFlushComments(union.article, sqNumber, "sequence");
                     }, function (error) {
                         notification.error("评论发送失败");
                         $scope.submitDisabled = false;

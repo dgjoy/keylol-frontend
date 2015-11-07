@@ -2,8 +2,8 @@
     "use strict";
 
     keylolApp.controller("ArticleController", [
-        "pageTitle", "$scope", "union", "$routeParams", "$http", "getAndFlushComments", "notification",
-        function (pageTitle, $scope, union, $routeParams, $http, getAndFlushComments, notification) {
+        "pageTitle", "$scope", "union", "$routeParams", "$http", "getAndFlushComments", "notification", "$location", "$timeout",
+        function (pageTitle, $scope, union, $routeParams, $http, getAndFlushComments, notification, $location, $timeout) {
             $scope.articleExist = true;
             pageTitle.set("文章 - 其乐");
             union.article = {};
@@ -16,6 +16,8 @@
                 $http.get(apiEndpoint + "article/" + $routeParams.author + "/" + $routeParams.article)
                     .then(function (response) {
                         var article = response.data;
+                        article.authorIdCode = $routeParams.author;
+                        article.sqNumberForAuthor = $routeParams.article;
                         pageTitle.set(article.Title + " - 其乐");
                         for (var i in article.AttachedPoints) {
                             article.AttachedPoints[i].mainName = article.AttachedPoints[i][article.AttachedPoints[i].PreferedName + "Name"];
@@ -68,7 +70,19 @@
                         $.extend(union.article, article);
 
                         getAndFlushComments(article, null, "hot");
-                        getAndFlushComments(article, 1, "page");
+                        if(!$location.hash()){
+                            getAndFlushComments(article, 1, "page");
+                        }else {
+                            getAndFlushComments(article, $location.hash(), "sequence", function(){
+                                $timeout(function(){
+                                    $("body").animate({
+                                        scrollTop: $("#comment-" + $location.hash()).offset().top
+                                    }, function(){
+                                        $("#comment-" + $location.hash()).addClass("highlight");
+                                    });
+                                });
+                            });
+                        }
                         union.pageElements.changePage = function (oldPage, newPage) {
                             getAndFlushComments(article, newPage, "page");
                         };

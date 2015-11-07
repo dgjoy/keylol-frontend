@@ -1,12 +1,21 @@
+@keyframes comment-highlight {
+    from {
+        background-color: rgba(0, 171, 78, 0.1);
+    }
+    to {
+        background-color: transparent;
+    }
+}
+
 .section-article-comments {
     background: white;
-    padding: 20px 100px 30px 20px;
+    padding: 20px 0 30px 0;
     width: 100%;
     min-width: 300px;
 }
 
 .section-article-comments .labeled-heading {
-    margin-left: -20px;
+    margin-left: 0;
 }
 
 .section-article-comments .avatar-anchor {
@@ -23,8 +32,13 @@
 }
 
 .section-article-comments .comment {
+    padding: 0 100px 0 20px;
     margin-top: 25px;
     position: relative;
+}
+
+.section-article-comments .comment.highlight {
+    animation: comment-highlight 5s;
 }
 
 .section-article-comments .comment:hover .action {
@@ -52,7 +66,7 @@
     width: 47px;
     height: 32px;
     position: absolute;
-    right: -100px;
+    right: 0;
     top: 4px;
     color: white;
     background-color: #c7cdd1;
@@ -111,13 +125,13 @@
     float: right;
     margin-bottom: 24px;
     position: relative;
-    right: -80px;
+    right: 20px;
 }
 
 .section-article-comments form {
     clear: both;
     position: relative;
-    margin-top: 24px;
+    margin: 24px 100px 0 20px;
 }
 
 .section-article-comments button[type=submit] {

@@ -381,6 +381,7 @@
 .section-timeline .entry footer .delete {
     float: right;
     color: #748a97;
+    margin-left: 10px;
 }
 
 .section-timeline .entry footer .comment-target a {
@@ -391,15 +392,12 @@
     visibility: visible;
 }
 
-.section-timeline .card-end {
-    height: 50px;
-}
-
 .section-timeline .card-end rect {
     fill: #11254a;
 }
 
 .section-timeline .search-not-found {
+    margin-top: 50px;
     text-align: center;
 }
 

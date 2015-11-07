@@ -18,13 +18,6 @@
                     text: "文章回复中的互动"
                 }
             };
-            function changeActive(activeObject) {
-                var actions = union.timeline.actions;
-                for (var i = 0; i < actions.length; i++) {
-                    actions[i].active = false;
-                }
-                activeObject.active = true;
-            }
 
             union.timeline = {
                 title: {
@@ -34,75 +27,151 @@
                 actions: [
                     {
                         active: true,
-                        text: "全部",
-                        onClick: function () {
-                            changeActive(this);
-                        }
-                    },
-                    {
-                        active: false,
                         text: "收到",
                         onClick: function () {
-                            changeActive(this);
+                            if(!this.active){
+                                changeActive(this);
+                                getReceiveComments();
+                            }
                         }
                     },
                     {
                         active: false,
                         text: "发出",
                         onClick: function () {
-                            changeActive(this);
+                            if(!this.active){
+                                changeActive(this);
+                                getSendComments();
+                            }
                         }
                     }
                 ],
+                loadAction: function(callback){
+                    if(union.timeline.actions[0].active){
+                        getReceiveComments(union.timeline.entries.length, callback);
+                    }else {
+                        getSendComments(union.timeline.entries.length, callback);
+                    }
+                },
                 datetime: "inBlock",
                 oneLine: true,
-                hasDeleteButton: true,
                 clickable: true,
+                noMoreArticle: true,
                 entries: []
             };
-            $http.get(apiEndpoint + "comment/my").then(function(response){
-                console.log(response.data);
-                for(var i in response.data){
-                    var comment = response.data[i];
-                    var result = {
-                        types: ["收到"],
-                        isNew: !comment.ReadByTargetUser,
-                        fromArticle: {
-                            fromComment: true,
-                            text: comment.Article.Title,
-                            href: "article/" + comment.Article.AuthorIdCode + "/" + comment.Article.SequenceNumberForAuthor
-                        },
-                        datetime: comment.PublishTime,
-                        author: {
-                            username: comment.Commentator.UserName,
-                            avatarUrl: comment.Commentator.AvatarImage,
-                            idCode: comment.Commentator.IdCode
-                        },
-                        summary: comment.Content,
-                        url: "article/" + comment.Article.AuthorIdCode + "/" + comment.Article.SequenceNumberForAuthor
-                    };
-                    if(comment.ReplyToUser){
-                        console.log(comment.ReplyToUser);
-                    }
-                    if(comment.ReplyToComment){
-                        result.commentTarget = {
-                            type: "comment",
-                            author: {
-                                username: "Zenday",
-                                idCode: "66666"
-                            },
-                            text: comment.ReplyToComment.Content,
-                            url: "article/" + comment.Article.AuthorIdCode + "/" + comment.Article.SequenceNumberForAuthor
-                        }
-                    }
-                    if(comment.ReplyToMultipleUser){
-                        console.log(comment.ReplyToMultipleUser);
-                    }
-                    union.timeline.entries.push(result);
+            getReceiveComments();
+
+            function changeActive(activeObject) {
+                var actions = union.timeline.actions;
+                for (var i = 0; i < actions.length; i++) {
+                    actions[i].active = false;
                 }
-            },function(error){
-                notification.error("未知错误", error);
-            });
+                activeObject.active = true;
+            }
+
+            function getSendComments(skip, callback){
+                if(!skip){
+                    union.timeline.entries.length = 0;
+                    skip = 0;
+                }
+                $http.get(apiEndpoint + "comment/my", {
+                    params: {
+                        type: "Sent",
+                        skip: skip,
+                        take: timeLineLoadCount
+                    }
+                }).then(function(response){
+                    union.timeline.noMoreArticle = response.data.length < timeLineLoadCount;
+                    for(var i in response.data){
+                        var comment = response.data[i];
+                        var result = {
+                            types: ["发出"],
+                            fromArticle: {
+                                fromComment: true,
+                                text: comment.Article.Title,
+                                href: "article/" + comment.Article.AuthorIdCode + "/" + comment.Article.SequenceNumberForAuthor
+                            },
+                            datetime: comment.PublishTime,
+                            author: {
+                                username: union.$localStorage.user.UserName,
+                                avatarUrl: union.$localStorage.user.AvatarImage,
+                                idCode: union.$localStorage.user.IdCode
+                            },
+                            summary: comment.Content,
+                            url: "article/" + comment.Article.AuthorIdCode + "/" + comment.Article.SequenceNumberForAuthor + "#" + comment.SequenceNumberForArticle
+                        };
+                        if(comment.ReplyToComment && comment.ReplyToUser){
+                            result.commentTarget = {
+                                type: "comment",
+                                author: {
+                                    username: comment.ReplyToUser.UserName,
+                                    idCode: comment.ReplyToUser.IdCode
+                                },
+                                text: comment.ReplyToComment.Content,
+                                url: "article/" + comment.Article.AuthorIdCode + "/" + comment.Article.SequenceNumberForAuthor + "#" + comment.ReplyToComment.SequenceNumberForArticle
+                            }
+                        }
+                        union.timeline.entries.push(result);
+                    }
+                    if(callback){
+                        callback();
+                    }
+                },function(error){
+                    notification.error("未知错误", error);
+                });
+            }
+
+            function getReceiveComments(skip, callback){
+                if(!skip){
+                    union.timeline.entries.length = 0;
+                    skip = 0;
+                }
+                $http.get(apiEndpoint + "comment/my", {
+                    params: {
+                        skip: skip,
+                        take: timeLineLoadCount
+                    }
+                }).then(function(response){
+                    union.timeline.noMoreArticle = response.data.length < timeLineLoadCount;
+                    for(var i in response.data){
+                        var comment = response.data[i];
+                        var result = {
+                            types: ["收到"],
+                            isNew: !comment.ReadByTargetUser,
+                            fromArticle: {
+                                fromComment: true,
+                                text: comment.Article.Title,
+                                href: "article/" + comment.Article.AuthorIdCode + "/" + comment.Article.SequenceNumberForAuthor
+                            },
+                            datetime: comment.PublishTime,
+                            author: {
+                                username: comment.Commentator.UserName,
+                                avatarUrl: comment.Commentator.AvatarImage,
+                                idCode: comment.Commentator.IdCode
+                            },
+                            summary: comment.Content,
+                            url: "article/" + comment.Article.AuthorIdCode + "/" + comment.Article.SequenceNumberForAuthor + "#" + comment.SequenceNumberForArticle
+                        };
+                        if(comment.ReplyToComment){
+                            result.commentTarget = {
+                                type: "comment",
+                                author: {
+                                    username: union.$localStorage.user.UserName,
+                                    idCode: union.$localStorage.user.IdCode
+                                },
+                                text: comment.ReplyToComment.Content,
+                                url: "article/" + comment.Article.AuthorIdCode + "/" + comment.Article.SequenceNumberForAuthor + "#" + comment.ReplyToComment.SequenceNumberForArticle
+                            }
+                        }
+                        union.timeline.entries.push(result);
+                    }
+                    if(callback){
+                        callback();
+                    }
+                },function(error){
+                    notification.error("未知错误", error);
+                });
+            }
         }
     ]);
 })();

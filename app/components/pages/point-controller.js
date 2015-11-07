@@ -97,11 +97,11 @@
                     $http.get(apiEndpoint + "article/user/" + $routeParams.userIdCode, {
                         params: {
                             idType: "IdCode",
-                            take: 20
+                            take: timeLineLoadCount
                         }
                     }).then(function (response) {
                         var articleList = response.data;
-                        union.timeline.noMoreArticle = articleList.length < 20;
+                        union.timeline.noMoreArticle = articleList.length < timeLineLoadCount;
 
                         /**
                          * 对于请求回来的文章列表做一系列处理并按照用户据点的文章格式储存在 union.timeline.entries 中
@@ -169,12 +169,10 @@
                             union.timeline.entries.push(entry);
                         }
                     }, function (error) {
-                        notification.error("未知错误");
-                        console.error(error);
+                        notification.error("未知错误", error);
                     });
                 }, function (error) {
-                    notification.error("未知错误");
-                    console.error(error);
+                    notification.error("未知错误", error);
                 });
 
             }
@@ -192,8 +190,7 @@
                     }).then(function (response) {
                         callback(response);
                     }, function (error) {
-                        notification.error("未知错误");
-                        console.error(error);
+                        notification.error("未知错误", error);
                     });
                 };
 
@@ -262,8 +259,7 @@
                     $.extend(union.summary, summary);
 
                 }, function (error) {
-                    notification.error("未知错误");
-                    console.error(error);
+                    notification.error("未知错误", error);
                 });
 
                 /**
@@ -272,11 +268,11 @@
                 $http.get(apiEndpoint + "article/point/" + $routeParams.pointIdCode, {
                     params: {
                         idType: "IdCode",
-                        take: 20
+                        take: timeLineLoadCount
                     }
                 }).then(function (response) {
                     var articleList = response.data;
-                    union.timeline.noMoreArticle = articleList.length < 20;
+                    union.timeline.noMoreArticle = articleList.length < timeLineLoadCount;
 
                     for (var i in articleList) {
                         var article = articleList[i];
@@ -300,8 +296,7 @@
                         });
                     }
                 }, function (error) {
-                    notification.error("未知错误");
-                    console.error(error);
+                    notification.error("未知错误", error);
                 });
             }
         }

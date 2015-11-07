@@ -16,13 +16,54 @@
                 $location.url(entry.url);
             };
 
+            $scope.ignore = function (entry){
+                $scope.data.entries.splice($scope.data.entries.indexOf(entry), 1);
+                $http.put(apiEndpoint + "like/" + entry.id, {}, {
+                    params: {
+                        ignore: true
+                    }
+                }).then(function(){
+                    notification.success("移除记录成功");
+                }, function(error){
+                    notification.error("移除记录失败", error);
+                });
+            };
+
+            $scope.noMoreRemind = function (entry){
+                if(entry.commentId){
+                    $http.put(apiEndpoint + "comment/" + entry.commentId + "/ignore", {}, {
+                        params: {
+                            ignore: true
+                        }
+                    }).then(function(){
+                        notification.success("评论认可不再提醒成功");
+                    }, function(error){
+                        notification.error("评论认可不再提醒失败", error);
+                    });
+                }else {
+                    $http.put(apiEndpoint + "article/" + entry.fromArticle.Id + "/ignore", {}, {
+                        params: {
+                            ignore: true
+                        }
+                    }).then(function(){
+                        notification.success("文章认可不再提醒成功");
+                    }, function(error){
+                        notification.error("文章认可不再提醒失败", error);
+                    });
+                }
+            };
+
             var loadingLock = false;
             $(window).scroll(function () {
                 var $windowBottomY = $(window).scrollTop() + $(window).height();
                 var $timelineBottomY = $element.offset().top + $element.height();
                 $scope.$apply(function () {
                     if ($windowBottomY > $timelineBottomY - 768 && !loadingLock && !$scope.data.noMoreArticle) {
-                        requestWhenFiltering(true);
+                        if($scope.data.hasExpand){
+                            requestWhenFiltering(true);
+                        }else if($scope.data.actions){
+                            requestWithAction();
+                        }
                     }
                 });
             });
@@ -62,6 +103,13 @@
                 });
             };
 
+            function requestWithAction () {
+                loadingLock = true;
+                $scope.data.loadAction(function(){
+                    loadingLock = false;
+                });
+            }
+
             function requestWhenFiltering(isLoadingMore) {
                 loadingLock = true;
                 var filters = "";
@@ -84,14 +132,14 @@
                     $scope.data.loadAction({
                         idType: "IdCode",
                         articleTypeFilter: filters,
-                        take: 20,
+                        take: timeLineLoadCount,
                         beforeSN: beforeSN
                     }, function (response) {
                         var articleList = response.data;
                         if (!isLoadingMore) {
                             $scope.data.entries.length = 0;
                         }
-                        $scope.data.noMoreArticle = articleList.length < 20;
+                        $scope.data.noMoreArticle = articleList.length < timeLineLoadCount;
 
                         for (var i in articleList) {
                             var article = articleList[i];

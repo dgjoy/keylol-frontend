@@ -99,14 +99,15 @@
                 </span>
                 <span ng-switch-when="article">文章</span>
             </span>
-            <a class="delete" ng-if="data.hasDeleteButton" href="" ng-click="">移除纪录</a>
+            <a class="delete" ng-if="data.hasDeleteButton" href="" ng-click="ignore(entry)">移除纪录</a>
+            <a class="delete" ng-if="data.hasDeleteButton" href="" ng-click="noMoreRemind(entry)">不再提醒</a>
         </footer>
     </div>
-    <svg xmlns="http://www.w3.org/2000/svg" class="card-end">
-        <rect x="14" width="15" height="5"></rect>
-    </svg>
     <div class="search-not-found" ng-if="data.searchNotFound">
         <img src="assets/images/hit_final.png">
         <h1 class="font-myriad-keylol">未能撞到结果</h1>
     </div>
+    <svg xmlns="http://www.w3.org/2000/svg" ng-if="!data.searchNotFound" class="card-end">
+        <rect x="14" width="15" height="5"></rect>
+    </svg>
 </div>

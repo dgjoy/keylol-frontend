@@ -9,4 +9,5 @@
     ]);
 
     window.apiEndpoint = "https://api.keylol.com/";
+    window.timeLineLoadCount = 50;
 })();

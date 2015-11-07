@@ -16,7 +16,7 @@
         </article>
     </div>
     <div class="cut-off" ng-if="pageElements.currPage == 1 && hotComments.length > 0"></div>
-    <div class="comment" ng-repeat="comment in comments">
+    <div class="comment" ng-repeat="comment in comments" id="comment-{{comment.SequenceNumberForArticle}}">
         <span class="floor">#{{comment.SequenceNumberForArticle}}</span>
         <point-link type="'user-avatar'" avatar-url="comment.Commentator.AvatarImage" id-code="comment.Commentator.IdCode"></point-link>
         <article>

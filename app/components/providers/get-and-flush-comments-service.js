@@ -11,14 +11,17 @@
                     return match.replace(regExpForEachLine, function (m) {
                         var sqNumber = parseInt(m.slice(1, m.length));
                         if (sqNumber < index) {
-                            return '<a href="' + sqNumber + '">' + m + '</a>';
+                            return '<a href="article/' + union.article.authorIdCode + "/" + union.article.sqNumberForAuthor + "#" + sqNumber + '">' + m + '</a>';
                         }
                         return m;
                     });
                 });
             };
 
-            return function getAndFlushComments(article, pageNumOrSqNum, getCommentsType) {
+            return function getAndFlushComments(article, pageNumOrSqNum, getCommentsType, callback) {
+                if(!callback){
+                    callback = function(){};
+                }
                 if (getCommentsType == "hot") {
                     $http.get(apiEndpoint + "comment", {
                         params: {
@@ -109,6 +112,7 @@
                         union.pageElements.currPage = sqNum <= 17 ? 1 : parseInt((sqNum - 17) / 20) + 2;
                         union.comments.length = 0;
                         $.extend(union.comments, comments);
+                        callback();
                     }, function (error) {
                         notification.error("评论刷新失败");
                         console.error(error);
