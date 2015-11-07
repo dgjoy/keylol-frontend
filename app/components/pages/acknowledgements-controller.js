@@ -5,8 +5,8 @@
     "use strict";
 
     keylolApp.controller("AcknowledgementsController", [
-        "pageTitle", "$scope", "union",
-        function (pageTitle, $scope, union) {
+        "pageTitle", "$scope", "union", "$http", "notification",
+        function (pageTitle, $scope, union, $http, notification) {
             pageTitle.set("认同 - 其乐");
             union.summary = {
                 actions: [],
@@ -14,7 +14,7 @@
                     mainHead: "认同",
                     subHead: "Acknowledgement"
                 },
-                background: "//keylol.b0.upaiyun.com/04be114e21692aa38afe2e4d1bc605b6.png!profile.point.background",
+                background: "/04be114e21692aa38afe2e4d1bc605b6.png",
                 defaultSum: {
                     text: "文章/评论获得的认同"
                 }
@@ -59,63 +59,40 @@
                 oneLine: true,
                 hasDeleteButton: true,
                 clickable: true,
-                entries: [
-                    {
-                        types: ["文章"],
-                        isNew: true,
-                        fromArticle: {
-                            text: "扩展屏幕下，如何一个屏幕全补字数补字数补字数补字数补字数",
-                            href: "test"
-                        },
-                        datetime: moment().subtract(4, "minutes"),
-                        author: {
-                            username: "ZenDay",
-                            avatarUrl: "assets/images/exit.svg"
-                        },
-                        summary: "认同你的文章"
-                    },
-                    {
-                        types: ["文章"],
-                        fromArticle: {
-                            text: "扩展屏幕下，如何一个屏幕全补字数补字数补字数补字数补字数",
-                            href: "test"
-                        },
-                        datetime: moment().subtract(4, "minutes"),
-                        author: {
-                            username: "Lee",
-                            avatarUrl: "assets/images/exit.svg"
-                        },
-                        summary: "认同你的文章"
-                    },
-                    {
-                        types: ["评论"],
-                        fromArticle: {
-                            fromComment: true,
-                            text: "扩展屏幕下，如何一个屏幕全补字数补字数补字数补字数补字数",
-                            href: "test"
-                        },
-                        datetime: moment().subtract(4, "minutes"),
-                        author: {
-                            username: "ZenDay",
-                            avatarUrl: "assets/images/exit.svg"
-                        },
-                        summary: "认同你的评论"
-                    },
-                    {
-                        types: ["文章"],
-                        fromArticle: {
-                            text: "扩展屏幕下，如何一个屏幕全补字数补字数补字数补字数补字数",
-                            href: "test"
-                        },
-                        datetime: moment().subtract(4, "minutes"),
-                        author: {
-                            username: "ZenDay",
-                            avatarUrl: "assets/images/exit.svg"
-                        },
-                        summary: "认同你的文章"
-                    }
-                ]
+                entries: []
             };
+            $http.get(apiEndpoint + "like/my").then(function(response){
+                console.log(response.data);
+                for(var i in response.data){
+                    var like = response.data[i];
+                    var result = {
+                        isNew: !like.ReadByTargetUser,
+                        fromArticle: {
+                            text: like.Article.Title,
+                            href: "article/" + like.Article.AuthorIdCode + "/" + like.Article.SequenceNumberForAuthor
+                        },
+                        datetime: like.Time,
+                        author: {
+                            username: like.Operator.UserName,
+                            avatarUrl: like.Operator.AvatarImage,
+                            idCode: like.Operator.IdCode
+                        }
+                    };
+                    if(like.Comment){
+                        result.types = ["评论"];
+                        result.fromArticle.fromComment = true;
+                        result.summary = "认同你的评论";
+                        result.url = "article/" + like.Article.AuthorIdCode + "/" + like.Article.SequenceNumberForAuthor;
+                    }else {
+                        result.types = ["文章"];
+                        result.summary = "认同你的文章";
+                        result.url = "article/" + like.Article.AuthorIdCode + "/" + like.Article.SequenceNumberForAuthor;
+                    }
+                    union.timeline.entries.push(result);
+                }
+            },function(error){
+                notification.error("未知错误", error);
+            });
         }
     ]);
 })();

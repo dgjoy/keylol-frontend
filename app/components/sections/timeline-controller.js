@@ -12,8 +12,8 @@
             };
             $scope.data = union.timeline;
 
-            $scope.clickTheBox = function () {
-                $location.url("test");
+            $scope.clickTheBox = function (entry) {
+                $location.url(entry.url);
             };
 
             var loadingLock = false;

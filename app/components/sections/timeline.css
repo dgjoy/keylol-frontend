@@ -257,6 +257,10 @@
     cursor: pointer;
 }
 
+.section-timeline .entry-content.clickable:hover {
+    background-color: #f3f4f5;
+}
+
 .section-timeline .entry-content .thumbnail {
     float: left;
     width: 210px;

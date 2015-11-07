@@ -53,7 +53,7 @@
                 <span ng-if="entry.pointInfo">{{entry.pointInfo.reader}}名读者 / {{entry.pointInfo.article}}篇文章</span>
             </h3>
         </div>
-        <div class="entry-content clearfix box-shadowed-glowed clickable" ng-click="clickTheBox()" ng-if="data.clickable">
+        <div class="entry-content clearfix box-shadowed-glowed clickable" ng-click="clickTheBox(entry)" ng-if="data.clickable">
             <img ng-if="entry.thumbnail" class="thumbnail" webp-src="{{entry.thumbnail|timelineThumbnailUrl}}" alt="预览图">
             <a ng-href="{{entry.url}}" class="point-avatar" ng-if="entry.pointAvatar">
                 <img class="avatar-big" webp-src="{{entry.pointAvatar|avatarUrl}}" alt="头像">
@@ -93,9 +93,9 @@
             <span class="comment-target" ng-if="entry.commentTarget" ng-switch="entry.commentTarget.type">
                 回复
                 <span ng-switch-when="comment">
-                    <a href="test">{{entry.commentTarget.author|userName:true}}</a>
+                    <point-link type="'user-name'" point-name="'@' + entry.commentTarget.author.username" id-code="entry.commentTarget.author.idCode"></point-link>
                     的评论
-                    <a href="test">「{{entry.commentTarget.text|maxLength:16}}」</a>
+                    <a href="{{entry.commentTarget.url}}">「{{entry.commentTarget.text|maxLength:16}}」</a>
                 </span>
                 <span ng-switch-when="article">文章</span>
             </span>
