@@ -137,8 +137,12 @@
                                             windowPromise.then(function (window) {
                                                 onBodyClick = function (e) {
                                                     if (e.target === options.event.currentTarget ||
-                                                        $.contains(options.event.currentTarget, e.target))
-                                                        e.stopPropagation();
+                                                        $.contains(options.event.currentTarget, e.target)) {
+                                                        if (!options.event.acceptCurrentTarget)
+                                                            e.stopPropagation();
+                                                        else
+                                                            return;
+                                                    }
                                                     if (e.target !== window.$element[0] && !$.contains(window.$element[0], e.target))
                                                         close();
                                                 };

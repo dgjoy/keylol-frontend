@@ -7,7 +7,6 @@
             $scope.categories = [
                 {
                     name: "游戏",
-                    url: "test",
                     items: [
                         {
                             name: "刀塔",
@@ -33,7 +32,6 @@
                 },
                 {
                     name: "类型",
-                    url: "test",
                     items: [
                         {
                             name: "第一人称射击",
@@ -59,7 +57,6 @@
                 },
                 {
                     name: "厂商",
-                    url: "test",
                     items: [
                         {
                             name: "威乐",
@@ -85,7 +82,6 @@
                 },
                 {
                     name: "平台",
-                    url: "test",
                     items: [
                         {
                             name: "Steam",

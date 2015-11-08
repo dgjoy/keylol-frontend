@@ -7,6 +7,7 @@
             /**
              * 初始化union的一些属性
              */
+            $scope.union = union;
             $scope.isInPoint = true;
             union.summary = {};
             union.user = {};
@@ -18,7 +19,6 @@
                 rightButton: {
                     avatar: "assets/images/edit-pen.png",
                     alt: "发表新文章",
-                    href: "test",
                     text: "文",
                     clickAction: function () {
                         window.show({

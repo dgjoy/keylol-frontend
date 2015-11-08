@@ -13,7 +13,6 @@
                 rightButton: {
                     avatar: "assets/images/edit-pen.png",
                     alt: "发表新文章",
-                    href: "test",
                     text: "文",
                     clickAction: function () {
                         window.show({

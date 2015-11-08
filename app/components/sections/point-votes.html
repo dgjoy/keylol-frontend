@@ -1,8 +1,8 @@
 ﻿<div class="section-point-votes box-shadowed" ng-controller="PointVotesController">
-    <div class="point-name">{{data.mainName}}</div>
+    <div class="point-name">{{point.mainName}}</div>
     <div class="reputation-level">
-        <span class="reputation-number {{data.voteCircles[0].type}}">{{data.votePercent}}</span>
-        <svg xmlns="http://www.w3.org/2000/svg" ng-repeat="voteCircle in data.voteCircles" class="reputation-circle {{voteCircle.type}}">
+        <span class="reputation-number {{point.voteCircles[0].type}}">{{point.votePercent}}</span>
+        <svg xmlns="http://www.w3.org/2000/svg" ng-repeat="voteCircle in point.voteCircles" class="reputation-circle {{voteCircle.type}}">
             <circle cx="3.5" cy="3.5" r="3.5"></circle>
         </svg>
     </div>
@@ -11,13 +11,13 @@
     </div>
     <div class="clearfix">
         <div class="positive-text">
-            <p><a href="test">{{data.PositiveArticleCount}}</a> 篇好评</p>
+            <p>{{point.PositiveArticleCount}} 篇好评</p>
         </div>
         <div class="negative-text">
-            <p><a href="test">{{data.NegativeArticleCount}}</a> 篇差评</p>
+            <p>{{point.NegativeArticleCount}} 篇差评</p>
         </div>
     </div>
-    <div class="external-links">
-        <a href="test">Steam 商店</a><span class="divider">|</span><a href="test">SteamDB</a>
+    <div class="external-links" ng-if="point.StoreLink">
+        <a ng-href="{{point.StoreLink}}">Steam 商店</a><span class="divider">|</span><a ng-href="{{point.StoreLink | storeUrlToSteamDB}}">SteamDB</a>
     </div>
 </div>

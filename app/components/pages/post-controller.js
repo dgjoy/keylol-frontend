@@ -26,8 +26,7 @@
                 },
                 rightButton: {
                     avatar: "assets/images/message-edit.png",
-                    alt: "发送私信",
-                    href: "test"
+                    alt: "发送私信"
                 },
                 entries: [
                     {

@@ -5,6 +5,7 @@
         "$scope", "pageTitle", "union", "$http", "apiEndpoint", "notification", "$location", "$rootScope",
         function ($scope, pageTitle, union, $http, apiEndpoint, notification, $location, $rootScope) {
             pageTitle.loading();
+
             function getUserInfo() {
                 $http.get(apiEndpoint + "user/" + union.$localStorage.login.UserId, {
                     params: {
@@ -21,6 +22,7 @@
                     notification.error("登录失效，请重新登录。");
                 });
             }
+
             $scope.$watch(function () {
                 return union.$localStorage.login;
             }, function (newLogin) {
@@ -31,8 +33,14 @@
                     $location.url("/");
                 }
             });
-            $rootScope.$on("$routeChangeSuccess", function(){
-                if(union.$localStorage.login){
+
+            var firstLoad = true;
+            $rootScope.$on("$routeChangeSuccess", function () {
+                if (firstLoad) {
+                    firstLoad = false;
+                    return;
+                }
+                if (union.$localStorage.login) {
                     getUserInfo();
                 }
             });

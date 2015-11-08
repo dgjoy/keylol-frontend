@@ -2,15 +2,15 @@
     "use strict";
 
     keylolApp.controller("SearchSelectorController", [
-        "$scope", "union", "$location", "onSearching", "searchText", "$http", "notification", "utils",
-        function ($scope, union, $location, onSearching, searchText, $http, notification, utils) {
-            $scope.onSearching = onSearching;
+        "$scope", "union", "$location", "options", "$http", "notification", "utils",
+        function ($scope, union, $location, options, $http, notification, utils) {
+            $scope.onSearching = options.onSearching;
             $scope.filterArray = union.searchFilter;
             var getSearchResult = function (filterTxt) {
-                if (searchText) {
+                if (options.searchText) {
                     switch (filterTxt) {
                         case "据点":
-                            $http.get(apiEndpoint + "normal-point/keyword/" + encodeURIComponent(searchText))
+                            $http.get(apiEndpoint + "normal-point/keyword/" + encodeURIComponent(options.searchText))
                                 .then(function (response) {
                                     if (response.data.length > 0) {
                                         $scope.resultArray = [];
@@ -34,7 +34,7 @@
                                 });
                             break;
                         case "文章":
-                            $http.get(apiEndpoint + "article/keyword/" + encodeURIComponent(searchText))
+                            $http.get(apiEndpoint + "article/keyword/" + encodeURIComponent(options.searchText))
                                 .then(function (response) {
                                     if (response.data.length > 0) {
                                         $scope.resultArray = [];
@@ -58,7 +58,7 @@
                                 });
                             break;
                         case "用户":
-                            $http.get(apiEndpoint + "user/" + encodeURIComponent(searchText), {
+                            $http.get(apiEndpoint + "user/" + encodeURIComponent(options.searchText), {
                                 params: {
                                     idType: "UserName"
                                 }
@@ -96,7 +96,11 @@
                     filterText = $scope.filterArray[i].text;
                 }
             }
-            getSearchResult(filterText);
+            $scope.$watch(function () {
+                return options.searchText
+            }, function () {
+                getSearchResult(filterText);
+            });
             $scope.changeFilter = function ($index) {
                 if (!$scope.filterArray[$index].active) {
                     for (var i in $scope.filterArray) {
