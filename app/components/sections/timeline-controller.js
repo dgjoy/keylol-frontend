@@ -16,38 +16,38 @@
                 $location.url(entry.url);
             };
 
-            $scope.ignore = function (entry){
+            $scope.ignore = function (entry) {
                 $scope.data.entries.splice($scope.data.entries.indexOf(entry), 1);
                 $http.put(apiEndpoint + "like/" + entry.id, {}, {
                     params: {
                         ignore: true
                     }
-                }).then(function(){
+                }).then(function () {
                     notification.success("移除记录成功");
-                }, function(error){
+                }, function (error) {
                     notification.error("移除记录失败", error);
                 });
             };
 
-            $scope.noMoreRemind = function (entry){
-                if(entry.commentId){
+            $scope.noMoreRemind = function (entry) {
+                if (entry.commentId) {
                     $http.put(apiEndpoint + "comment/" + entry.commentId + "/ignore", {}, {
                         params: {
                             ignore: true
                         }
-                    }).then(function(){
+                    }).then(function () {
                         notification.success("评论认可不再提醒成功");
-                    }, function(error){
+                    }, function (error) {
                         notification.error("评论认可不再提醒失败", error);
                     });
-                }else {
+                } else {
                     $http.put(apiEndpoint + "article/" + entry.fromArticle.Id + "/ignore", {}, {
                         params: {
                             ignore: true
                         }
-                    }).then(function(){
+                    }).then(function () {
                         notification.success("文章认可不再提醒成功");
-                    }, function(error){
+                    }, function (error) {
                         notification.error("文章认可不再提醒失败", error);
                     });
                 }
@@ -59,9 +59,9 @@
                 var $timelineBottomY = $element.offset().top + $element.height();
                 $scope.$apply(function () {
                     if ($windowBottomY > $timelineBottomY - 768 && !loadingLock && !$scope.data.noMoreArticle) {
-                        if($scope.data.hasExpand){
+                        if ($scope.data.hasExpand) {
                             requestWhenFiltering(true);
-                        }else if($scope.data.actions){
+                        } else if ($scope.data.actions) {
                             requestWithAction();
                         }
                     }
@@ -103,9 +103,9 @@
                 });
             };
 
-            function requestWithAction () {
+            function requestWithAction() {
                 loadingLock = true;
-                $scope.data.loadAction(function(){
+                $scope.data.loadAction(function () {
                     loadingLock = false;
                 });
             }
@@ -126,7 +126,7 @@
                     $scope.data.noMoreArticle = true;
                 } else {
                     var beforeSN = 2147483647;
-                    if(isLoadingMore){
+                    if (isLoadingMore) {
                         beforeSN = $scope.data.entries[$scope.data.entries.length - 1].sequenceNumber;
                     }
                     $scope.data.loadAction({
@@ -235,7 +235,7 @@
                 return text;
             };
 
-            $scope.subscribe = function(entry){
+            $scope.subscribe = function (entry) {
                 entry.subscribeDisabled = true;
                 $http.post(apiEndpoint + "user-point-subscription", {}, {
                     params: {
@@ -250,7 +250,7 @@
                     notification.error("未知错误", error);
                 });
             };
-            $scope.unsubscribe = function(entry){
+            $scope.unsubscribe = function (entry) {
                 entry.subscribeDisabled = true;
                 notification.attention("退订并不再接收此据点的文章推送", [
                     {action: "退订", value: true},

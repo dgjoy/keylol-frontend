@@ -5,7 +5,7 @@
         "$scope", "idCode", "type", "$timeout", "$http", "utils", "notification", "union",
         function ($scope, idCode, type, $timeout, $http, utils, notification, union) {
             $scope.loading = true;
-            if(type === "normal-point"){
+            if (type === "normal-point") {
                 if (!union.pointCards) {
                     union.pointCards = {};
                 }
@@ -30,13 +30,8 @@
                                 articleNum: point.ArticleCount
                             }
                         };
-                        if (point.PreferedName == "Chinese") {
-                            $scope.data.head.mainHead = point.ChineseName;
-                            $scope.data.head.subHead = point.EnglishName;
-                        } else {
-                            $scope.data.head.mainHead = point.EnglishName;
-                            $scope.data.head.subHead = point.ChineseName;
-                        }
+                        $scope.data.head.mainHead = utils.getPointFirstName(point);
+                        $scope.data.head.subHead = utils.getPointSecondName(point);
                         union.pointCards[idCode] = $scope.data;
                         $scope.loading = false;
                     }, function (error) {
@@ -47,13 +42,13 @@
                     $scope.loading = false;
                     $scope.data = union.pointCards[idCode];
                 }
-            }else {
+            } else {
                 if (!union.userCards) {
                     union.userCards = {};
                 }
                 if (!union.userCards[idCode]) {
                     var includeSubscribed = true;
-                    if(idCode === union.$localStorage.user.IdCode){
+                    if (idCode === union.$localStorage.user.IdCode) {
                         includeSubscribed = false;
                     }
                     $http.get(apiEndpoint + "user/" + idCode, {

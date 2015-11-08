@@ -6,44 +6,39 @@
         function ($scope, union, $location, onSearching, searchText, $http, notification, utils) {
             $scope.onSearching = onSearching;
             $scope.filterArray = union.searchFilter;
-            var getSearchResult = function(filterTxt){
-                if(searchText){
+            var getSearchResult = function (filterTxt) {
+                if (searchText) {
                     switch (filterTxt) {
                         case "据点":
                             $http.get(apiEndpoint + "normal-point/keyword/" + encodeURIComponent(searchText))
-                                .then(function(response){
-                                    if(response.data.length > 0){
+                                .then(function (response) {
+                                    if (response.data.length > 0) {
                                         $scope.resultArray = [];
-                                        for(var i in response.data){
+                                        for (var i in response.data) {
                                             var point = response.data[i];
                                             var result = {
                                                 avatar: point.AvatarImage,
                                                 type: utils.getPointType(point.Type),
                                                 url: "point/" + point.IdCode
                                             };
-                                            if(point.PreferedName === "Chinese"){
-                                                result.mainTitle = point.ChineseName;
-                                                result.subTitle = point.EnglishName;
-                                            }else {
-                                                result.mainTitle = point.EnglishName;
-                                                result.subTitle = point.ChineseName;
-                                            }
+                                            result.mainTitle = utils.getPointFirstName(point);
+                                            result.subTitle = utils.getPointSecondName(point);
                                             $scope.resultArray.push(result);
                                         }
-                                    }else {
+                                    } else {
                                         $scope.resultArray = undefined;
                                         $scope.notFound = true;
                                     }
-                                },function(error){
+                                }, function (error) {
                                     notification.error("未知错误", error);
                                 });
                             break;
                         case "文章":
                             $http.get(apiEndpoint + "article/keyword/" + encodeURIComponent(searchText))
-                                .then(function(response){
-                                    if(response.data.length > 0){
+                                .then(function (response) {
+                                    if (response.data.length > 0) {
                                         $scope.resultArray = [];
-                                        for(var i in response.data){
+                                        for (var i in response.data) {
                                             var article = response.data[i];
                                             $scope.resultArray.push({
                                                 mainTitle: article.Title,
@@ -54,11 +49,11 @@
                                                 url: "article/" + article.AuthorIdCode + "/" + article.SequenceNumberForAuthor
                                             });
                                         }
-                                    }else {
+                                    } else {
                                         $scope.resultArray = undefined;
                                         $scope.notFound = true;
                                     }
-                                },function(error){
+                                }, function (error) {
                                     notification.error("未知错误", error);
                                 });
                             break;
@@ -67,8 +62,8 @@
                                 params: {
                                     idType: "UserName"
                                 }
-                            }).then(function(response){
-                                if(response.data){
+                            }).then(function (response) {
+                                if (response.data) {
                                     $scope.resultArray = [];
                                     var user = response.data;
                                     $scope.resultArray.push({
@@ -80,11 +75,11 @@
                                         isUser: true
                                     });
                                 }
-                            },function(error){
-                                if(error.status === 404){
+                            }, function (error) {
+                                if (error.status === 404) {
                                     $scope.resultArray = undefined;
                                     $scope.notFound = true;
-                                }else {
+                                } else {
                                     notification.error("未知错误", error);
                                 }
                             });
@@ -96,22 +91,22 @@
                 }
             };
             var filterText;
-            for(var i in $scope.filterArray){
-                if($scope.filterArray[i].active === true){
+            for (var i in $scope.filterArray) {
+                if ($scope.filterArray[i].active === true) {
                     filterText = $scope.filterArray[i].text;
                 }
             }
             getSearchResult(filterText);
-            $scope.changeFilter = function($index){
-                if(!$scope.filterArray[$index].active){
-                    for(var i in $scope.filterArray){
+            $scope.changeFilter = function ($index) {
+                if (!$scope.filterArray[$index].active) {
+                    for (var i in $scope.filterArray) {
                         $scope.filterArray[i].active = false;
                     }
                     $scope.filterArray[$index].active = true;
                     getSearchResult($scope.filterArray[$index].text);
                 }
             };
-            $scope.jumpTo = function(url){
+            $scope.jumpTo = function (url) {
                 $location.url(url);
             };
         }

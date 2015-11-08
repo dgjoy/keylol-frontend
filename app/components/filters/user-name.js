@@ -2,10 +2,10 @@
     "use strict";
 
     keylolApp.filter("userName", function () {
-        return function (input, option) {
-            if(option){
+        return function (input, showAt) {
+            if (showAt) {
                 return "@" + input;
-            }else {
+            } else {
                 return input;
             }
         };

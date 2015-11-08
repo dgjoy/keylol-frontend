@@ -13,7 +13,7 @@
                     mainHead: "评论",
                     subHead: "Comments"
                 },
-                background: "/04be114e21692aa38afe2e4d1bc605b6.png",
+                background: "672a1bab71b9af43215d252471a893e0.jpg",
                 defaultSum: {
                     text: "文章回复中的互动"
                 }
@@ -29,7 +29,7 @@
                         active: true,
                         text: "收到",
                         onClick: function () {
-                            if(!this.active){
+                            if (!this.active) {
                                 changeActive(this);
                                 getReceiveComments();
                             }
@@ -39,17 +39,17 @@
                         active: false,
                         text: "发出",
                         onClick: function () {
-                            if(!this.active){
+                            if (!this.active) {
                                 changeActive(this);
                                 getSendComments();
                             }
                         }
                     }
                 ],
-                loadAction: function(callback){
-                    if(union.timeline.actions[0].active){
+                loadAction: function (callback) {
+                    if (union.timeline.actions[0].active) {
                         getReceiveComments(union.timeline.entries.length, callback);
-                    }else {
+                    } else {
                         getSendComments(union.timeline.entries.length, callback);
                     }
                 },
@@ -69,8 +69,8 @@
                 activeObject.active = true;
             }
 
-            function getSendComments(skip, callback){
-                if(!skip){
+            function getSendComments(skip, callback) {
+                if (!skip) {
                     union.timeline.entries.length = 0;
                     skip = 0;
                 }
@@ -80,9 +80,9 @@
                         skip: skip,
                         take: timeLineLoadCount
                     }
-                }).then(function(response){
+                }).then(function (response) {
                     union.timeline.noMoreArticle = response.data.length < timeLineLoadCount;
-                    for(var i in response.data){
+                    for (var i in response.data) {
                         var comment = response.data[i];
                         var result = {
                             types: ["发出"],
@@ -100,7 +100,7 @@
                             summary: comment.Content,
                             url: "article/" + comment.Article.AuthorIdCode + "/" + comment.Article.SequenceNumberForAuthor + "#" + comment.SequenceNumberForArticle
                         };
-                        if(comment.ReplyToComment && comment.ReplyToUser){
+                        if (comment.ReplyToComment && comment.ReplyToUser) {
                             result.commentTarget = {
                                 type: "comment",
                                 author: {
@@ -113,16 +113,16 @@
                         }
                         union.timeline.entries.push(result);
                     }
-                    if(callback){
+                    if (callback) {
                         callback();
                     }
-                },function(error){
+                }, function (error) {
                     notification.error("未知错误", error);
                 });
             }
 
-            function getReceiveComments(skip, callback){
-                if(!skip){
+            function getReceiveComments(skip, callback) {
+                if (!skip) {
                     union.timeline.entries.length = 0;
                     skip = 0;
                 }
@@ -131,9 +131,9 @@
                         skip: skip,
                         take: timeLineLoadCount
                     }
-                }).then(function(response){
+                }).then(function (response) {
                     union.timeline.noMoreArticle = response.data.length < timeLineLoadCount;
-                    for(var i in response.data){
+                    for (var i in response.data) {
                         var comment = response.data[i];
                         var result = {
                             types: ["收到"],
@@ -152,7 +152,7 @@
                             summary: comment.Content,
                             url: "article/" + comment.Article.AuthorIdCode + "/" + comment.Article.SequenceNumberForAuthor + "#" + comment.SequenceNumberForArticle
                         };
-                        if(comment.ReplyToComment){
+                        if (comment.ReplyToComment) {
                             result.commentTarget = {
                                 type: "comment",
                                 author: {
@@ -165,10 +165,10 @@
                         }
                         union.timeline.entries.push(result);
                     }
-                    if(callback){
+                    if (callback) {
                         callback();
                     }
-                },function(error){
+                }, function (error) {
                     notification.error("未知错误", error);
                 });
             }

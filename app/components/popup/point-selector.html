@@ -3,11 +3,11 @@
         <ul>
             <li ng-repeat="point in pointArray" ng-click="selectPoint($event)" class="clearfix" ng-class="{selected: point.selected}" ng-mouseenter="changeSelector($index)">
                 <div class="avatar-anchor">
-                    <img class="avatar-small" ng-src="{{point.AvatarImage|avatarUrl:'small'}}">
+                    <img class="avatar-small" ng-src="{{point.AvatarImage | avatarUrl:'small'}}">
                 </div>
                 <div class="title">
-                    <p>{{point.ChineseName|maxLength: 15}}</p>
-                    <p><span>[{{utils.getPointType(point.Type)}}]</span>{{point.EnglishName|maxLength: 15}}</p>
+                    <p>{{utils.getPointFirstName(point) | maxLength: 15}}</p>
+                    <p><span>[{{utils.getPointType(point.Type)}}]</span>{{utils.getPointSecondName(point) | maxLength: 15}}</p>
                 </div>
             </li>
         </ul>

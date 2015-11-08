@@ -105,6 +105,17 @@
                             }
                         };
 
+                        self.getPointFirstName = function (point) {
+                            return point[point.PreferedName + "Name"];
+                        };
+
+                        self.getPointSecondName = function (point) {
+                            if (point.PreferedName === "Chinese")
+                                return point.EnglishName;
+                            else if (point.PreferedName === "English")
+                                return point.ChineseName;
+                        };
+
                         self.addRecentBroswe = function (type, name, idCode) {
                             if (!union.$localStorage.recentBrowse) {
                                 union.$localStorage.recentBrowse = [];

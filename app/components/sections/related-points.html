@@ -8,13 +8,13 @@
         <p>关联据点</p>
         <p>Relations</p>
     </div>
-    <div ng-repeat="point in recommendedPoints" class="point">
+    <div ng-repeat="point in union.associatedPoints" class="point">
         <p>
-            <a ng-href="{{point.url}}">{{point.name}}</a>
+            <a ng-href="point/{{point.IdCode}}">{{utils.getPointFirstName(point)}}</a>
         </p>
         <p>
-            <span>[{{point.type}}]</span>
-            <span>{{point.subName}}</span>
+            <span>[{{utils.getPointType(point.Type)}}]</span>
+            <span>{{utils.getPointSecondName(point)}}</span>
         </p>
     </div>
 </div>

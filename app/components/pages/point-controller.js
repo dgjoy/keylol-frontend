@@ -174,7 +174,6 @@
                 }, function (error) {
                     notification.error("未知错误", error);
                 });
-
             }
 
             if ($routeParams.pointIdCode) {
@@ -209,6 +208,9 @@
                 }).then(function (response) {
 
                     var point = response.data;
+
+                    union.associatedPoints = point.AssociatedPoints;
+
                     var summary = {
                         head: {},
                         avatar: point.AvatarImage,
@@ -222,15 +224,10 @@
                         id: point.Id
                     };
 
-                    if (point.PreferedName == "Chinese") {
-                        point.mainName = point.ChineseName;
-                        summary.head.mainHead = point.ChineseName;
-                        summary.head.subHead = point.EnglishName;
-                    } else {
-                        point.mainName = point.EnglishName;
-                        summary.head.mainHead = point.EnglishName;
-                        summary.head.subHead = point.ChineseName;
-                    }
+                    point.mainName = utils.getPointFirstName(point);
+                    summary.head.mainHead = utils.getPointFirstName(point);
+                    summary.head.subHead = utils.getPointSecondName(point);
+
                     pageTitle.set(point.mainName + " - 其乐");
                     point.votePercent = (point.PositiveArticleCount * 10 / (point.PositiveArticleCount + point.NegativeArticleCount)).toFixed(1);
                     point.voteCircles = [{}, {}, {}, {}, {}];

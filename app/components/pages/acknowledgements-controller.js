@@ -14,7 +14,7 @@
                     mainHead: "认可",
                     subHead: "Acknowledgement"
                 },
-                background: "/04be114e21692aa38afe2e4d1bc605b6.png",
+                background: "0abeafd8e4c049bce860686bc4c04829.jpg",
                 defaultSum: {
                     text: "文章/评论获得的认可"
                 }
