@@ -64,7 +64,7 @@
 .section-action-hub .actions {
     position: absolute;
     right: 5px;
-    top: -6px;
+    top: 0;
 }
 
 .section-action-hub .actions a {
