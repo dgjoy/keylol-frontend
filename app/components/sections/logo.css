@@ -6,7 +6,8 @@
     min-width: 186px;
 }
 
-.section-logo:hover {
+.section-logo:hover,
+.section-logo:active {
     background: #344565;
 }
 
