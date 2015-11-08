@@ -10,6 +10,7 @@
         // Custom modules
 
         // 3rd Party Modules
+        "ng-fastclick",
         "angularMoment",
         "ngStorage",
         "ngFileUpload",

@@ -16,6 +16,8 @@
     "jquery": "~2.1.4",
     "ng-file-upload": "~9.1.2",
     "ngstorage": "1b5018206fc21adc5d9b66725954c7298db1624b",
-    "signalr": "~2.2.0"
+    "signalr": "~2.2.0",
+    "fastclick": "~1.0.6",
+    "ng-fastclick": "~1.0.2"
   }
 }
