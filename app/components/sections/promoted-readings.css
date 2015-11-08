@@ -43,6 +43,7 @@
     display: none;
 }
 
-.section-promoted-readings .article:hover footer span {
+.section-promoted-readings .article:hover footer span,
+.section-promoted-readings .article:active footer span {
     display: inline-block;
 }
