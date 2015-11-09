@@ -126,8 +126,7 @@
                         union.summary.subscribed = author.Subscribed;
                     }
                 }, function (error) {
-                    notification.error("未知错误");
-                    console.error(error);
+                    notification.error("未知错误", error);
                 });
             }
         }

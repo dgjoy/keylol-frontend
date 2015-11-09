@@ -5,8 +5,8 @@
     "use strict";
 
     keylolApp.controller("AcknowledgementsController", [
-        "pageTitle", "$scope", "union", "$http", "notification", "utils",
-        function (pageTitle, $scope, union, $http, notification, utils) {
+        "pageTitle", "$scope", "union", "$http", "notification", "utils", "$timeout",
+        function (pageTitle, $scope, union, $http, notification, utils, $timeout) {
             pageTitle.set("认可 - 其乐");
             union.summary = {
                 actions: [],
@@ -64,17 +64,18 @@
                         }
                     }
                 ],
-                loadAction: function(callback){
+                loadAction: function(){
+                    union.timeline.loadingLock = true;
                     if(union.timeline.actions[0].active){
-                        getLike("All", union.timeline.entries.length, callback);
+                        getLike("All", union.timeline.entries.length);
                     }else if(union.timeline.actions[1].active){
-                        getLike("ArticleLike", union.timeline.entries.length, callback);
+                        getLike("ArticleLike", union.timeline.entries.length);
                     }else {
-                        getLike("CommentLike", union.timeline.entries.length, callback);
+                        getLike("CommentLike", union.timeline.entries.length);
                     }
                 },
                 datetime: "inBlock",
-                noMoreArticle: true,
+                loadingLock: true,
                 oneLine: true,
                 hasDeleteButton: true,
                 clickable: true,
@@ -82,7 +83,7 @@
             };
             getLike("All");
 
-            function getLike(type, skip, callback) {
+            function getLike(type, skip) {
                 if(!skip){
                     union.timeline.entries.length = 0;
                     skip = 0;
@@ -94,9 +95,11 @@
                         take: utils.timelineLoadCount
                     }
                 }).then(function(response){
+                    union.timeline.noMoreArticle = response.data.length < utils.timelineLoadCount;
+                    var timelineTimeout;
                     for(var i in response.data){
                         var like = response.data[i];
-                        var result = {
+                        var entry = {
                             isNew: !like.ReadByTargetUser,
                             fromArticle: {
                                 id: like.Article.Id,
@@ -112,23 +115,38 @@
                             id: like.Id
                         };
                         if(like.Comment){
-                            result.commentId = like.Comment.Id;
-                            result.types = ["评论"];
-                            result.fromArticle.fromComment = true;
-                            result.summary = "认可你的评论";
-                            result.url = "article/" + like.Article.AuthorIdCode + "/" + like.Article.SequenceNumberForAuthor + "#" + like.Comment.SequenceNumberForArticle;
+                            entry.commentId = like.Comment.Id;
+                            entry.types = ["评论"];
+                            entry.fromArticle.fromComment = true;
+                            entry.summary = "认可你的评论";
+                            entry.url = "article/" + like.Article.AuthorIdCode + "/" + like.Article.SequenceNumberForAuthor + "#" + like.Comment.SequenceNumberForArticle;
                         }else {
-                            result.types = ["文章"];
-                            result.summary = "认可你的文章";
-                            result.url = "article/" + like.Article.AuthorIdCode + "/" + like.Article.SequenceNumberForAuthor;
+                            entry.types = ["文章"];
+                            entry.summary = "认可你的文章";
+                            entry.url = "article/" + like.Article.AuthorIdCode + "/" + like.Article.SequenceNumberForAuthor;
                         }
-                        union.timeline.entries.push(result);
+                        (function(entry){
+                            if(!timelineTimeout){
+                                union.timeline.entries.push(entry);
+                                timelineTimeout = $timeout(function(){}, 100);
+                            }else {
+                                timelineTimeout = timelineTimeout.then(function(){
+                                    union.timeline.entries.push(entry);
+                                    return $timeout(function(){}, 100);
+                                });
+                            }
+                        })(entry);
                     }
-                    if(callback){
-                        callback();
+                    if(timelineTimeout){
+                        timelineTimeout.then(function(){
+                            union.timeline.loadingLock = false;
+                        });
+                    }else {
+                        union.timeline.loadingLock = false;
                     }
                 },function(error){
                     notification.error("未知错误", error);
+                    union.timeline.loadingLock = false;
                 });
             }
         }

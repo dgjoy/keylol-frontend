@@ -7,7 +7,8 @@
         <div class="left-info box-shadowed card"  popup="showFilter">
             <svg xmlns="http://www.w3.org/2000/svg" class="card-line">
                 <rect x="6" width="5" height="100%"></rect>
-                <circle cx="8.5" cy="50%" r="5"></circle>
+                <circle cx="8.5" cy="50%" class="inverse"></circle>
+                <circle cx="8.5" cy="50%"></circle>
             </svg>
             <div class="title">
                 <h1 class="font-myriad-keylol">{{data.title.mainTitle}}</h1>
@@ -52,7 +53,8 @@
     <div class="entry card" ng-repeat="entry in data.entries" ng-switch="data.datetime">
         <svg xmlns="http://www.w3.org/2000/svg" class="card-line">
             <rect x="6" width="5" height="100%"></rect>
-            <circle cx="8.5" cy="42" r="5"></circle>
+            <circle cx="8.5" cy="42" class="inverse"></circle>
+            <circle cx="8.5" cy="42"></circle>
         </svg>
         <div class="entry-heading">
             <div class="entry-author" ng-if="entry.author">
@@ -73,7 +75,7 @@
                         <span ng-repeat="user in entry.sources.userArray">
                             <point-link type="'user'" point-name="'@' + user.name" id-code="user.idCode"></point-link>
                             <span ng-if="!$last">、</span>
-                        </span>认同这篇文章</span>
+                        </span>认可这篇文章</span>
                 </span>
                 <span ng-if="entry.privateMesNum">{{entry.privateMesNum.number}} 条对话</span>
                 <span ng-if="entry.fromArticle"><a href="{{entry.fromArticle.href}}">《{{entry.fromArticle.text|maxLength:14}}》</a><span ng-if="entry.fromArticle.fromComment">中的评论</span></span>
@@ -134,8 +136,8 @@
         <img src="assets/images/hit_final.png">
         <h1 class="font-myriad-keylol">未能撞到结果</h1>
     </div>
-    <svg xmlns="http://www.w3.org/2000/svg" ng-if="!data.searchNotFound && !data.activePoints && !loadingLock" class="card-end">
+    <svg xmlns="http://www.w3.org/2000/svg" ng-if="!data.searchNotFound && !data.activePoints && !data.loadingLock" class="card-end">
         <rect x="14" width="15" height="5"></rect>
     </svg>
-    <img class="loading" src="../../assets/images/timeline-loading.gif" ng-if="loadingLock">
+    <img class="loading" src="../../assets/images/timeline-loading.gif" ng-if="data.loadingLock">
 </div>

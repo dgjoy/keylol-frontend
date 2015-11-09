@@ -2,8 +2,8 @@
     "use strict";
 
     keylolApp.controller("HomeController", [
-        "pageTitle", "$scope", "union", "$http", "notification", "window", "utils",
-        function (pageTitle, $scope, union, $http, notification, window, utils) {
+        "pageTitle", "$scope", "union", "$http", "notification", "window", "utils", "$timeout",
+        function (pageTitle, $scope, union, $http, notification, window, utils, $timeout) {
             pageTitle.set("其乐");
             $scope.union = union;
             union.timeline = {
@@ -27,7 +27,7 @@
                 },
                 datetime: "outBlock",
                 hasExpand: true,
-                noMoreArticle: true,
+                loadingLock: true,
                 loadAction: function (params, callback) {
                     $http.get(apiEndpoint + "article/subscription", {
                         params: params
@@ -40,9 +40,6 @@
                 },
                 entries: []
             };
-            if (union.$localStorage.homeTimeline) {
-                union.timeline.entries = union.$localStorage.homeTimeline;
-            }
 
 
             $http.get(apiEndpoint + "article/subscription", {
@@ -55,6 +52,7 @@
                 union.timeline.entries.length = 0;
 
                 if(articleList.length > 0){
+                    var timelineTimeout;
 
                     /**
                      * 对于请求回来的文章列表做一系列处理并按照用户据点的文章格式储存在 union.timeline.entries 中
@@ -116,9 +114,25 @@
                                     break;
                             }
                         }
-                        union.timeline.entries.push(entry);
+                        (function(entry){
+                            if(!timelineTimeout){
+                                union.timeline.entries.push(entry);
+                                timelineTimeout = $timeout(function(){}, 100);
+                            }else {
+                                timelineTimeout = timelineTimeout.then(function(){
+                                    union.timeline.entries.push(entry);
+                                    return $timeout(function(){}, 100);
+                                });
+                            }
+                        })(entry);
                     }
-                    union.$localStorage.homeTimeline = union.timeline.entries;
+                    if(timelineTimeout){
+                        timelineTimeout.then(function(){
+                            union.timeline.loadingLock = false;
+                        });
+                    }else {
+                        union.timeline.loadingLock = false;
+                    }
                 }else {
                     $http.get(apiEndpoint + "normal-point/active").then(function(response){
                         union.timeline.activePoints = response.data;
@@ -134,8 +148,8 @@
                 }
 
             }, function (error) {
-                notification.error("未知错误");
-                console.log(error);
+                notification.error("未知错误", error);
+                union.timeline.loadingLock = false;
             });
         }
     ]);

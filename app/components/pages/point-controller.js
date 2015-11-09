@@ -2,8 +2,8 @@
     "use strict";
 
     keylolApp.controller("PointController", [
-        "pageTitle", "$scope", "union", "$routeParams", "$http", "utils", "notification", "window", "$location",
-        function (pageTitle, $scope, union, $routeParams, $http, utils, notification, window, $location) {
+        "pageTitle", "$scope", "union", "$routeParams", "$http", "utils", "notification", "window", "$location", "$timeout",
+        function (pageTitle, $scope, union, $routeParams, $http, utils, notification, window, $location, $timeout) {
             /**
              * 初始化union的一些属性
              */
@@ -34,7 +34,7 @@
                 publishOnly: /\/user\/.+\/publications/i.test($location.url()),
                 datetime: "outBlock",
                 hasExpand: true,
-                noMoreArticle: true,
+                loadingLock: true,
                 entries: []
             };
             union.point = {};
@@ -105,6 +105,7 @@
                     }).then(function (response) {
                         var articleList = response.data;
                         union.timeline.noMoreArticle = articleList.length < utils.timelineLoadCount;
+                        var timelineTimeout;
 
                         /**
                          * 对于请求回来的文章列表做一系列处理并按照用户据点的文章格式储存在 union.timeline.entries 中
@@ -169,10 +170,28 @@
                                         break;
                                 }
                             }
-                            union.timeline.entries.push(entry);
+                            (function(entry){
+                                if(!timelineTimeout){
+                                    union.timeline.entries.push(entry);
+                                    timelineTimeout = $timeout(function(){}, 100);
+                                }else {
+                                    timelineTimeout = timelineTimeout.then(function(){
+                                        union.timeline.entries.push(entry);
+                                        return $timeout(function(){}, 100);
+                                    });
+                                }
+                            })(entry);
+                        }
+                        if(timelineTimeout){
+                            timelineTimeout.then(function(){
+                                union.timeline.loadingLock = false;
+                            });
+                        }else {
+                            union.timeline.loadingLock = false;
                         }
                     }, function (error) {
                         notification.error("未知错误", error);
+                        union.timeline.loadingLock = false;
                     });
                 }, function (error) {
                     $scope.pointExist = false;
@@ -283,10 +302,12 @@
                 }).then(function (response) {
                     var articleList = response.data;
                     union.timeline.noMoreArticle = articleList.length < utils.timelineLoadCount;
+                    var timelineTimeout;
+
 
                     for (var i in articleList) {
                         var article = articleList[i];
-                        union.timeline.entries.push({
+                        var entry = {
                             types: [article.TypeName],
                             author: {
                                 username: article.Author.UserName,
@@ -303,10 +324,29 @@
                                 like: article.LikeCount,
                                 comment: article.CommentCount
                             }
+                        };
+                        (function(entry){
+                            if(!timelineTimeout){
+                                union.timeline.entries.push(entry);
+                                timelineTimeout = $timeout(function(){}, 100);
+                            }else {
+                                timelineTimeout = timelineTimeout.then(function(){
+                                    union.timeline.entries.push(entry);
+                                    return $timeout(function(){}, 100);
+                                });
+                            }
+                        })(entry);
+                    }
+                    if(timelineTimeout){
+                        timelineTimeout.then(function(){
+                            union.timeline.loadingLock = false;
                         });
+                    }else {
+                        union.timeline.loadingLock = false;
                     }
                 }, function (error) {
                     notification.error("未知错误", error);
+                    union.timeline.loadingLock = false;
                 });
             }
         }

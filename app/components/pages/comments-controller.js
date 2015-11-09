@@ -5,8 +5,8 @@
     "use strict";
 
     keylolApp.controller("CommentsController", [
-        "pageTitle", "$scope", "union", "$http", "notification", "utils",
-        function (pageTitle, $scope, union, $http, notification, utils) {
+        "pageTitle", "$scope", "union", "$http", "notification", "utils", "$timeout",
+        function (pageTitle, $scope, union, $http, notification, utils, $timeout) {
             pageTitle.set("评论 - 其乐");
             union.summary = {
                 head: {
@@ -46,17 +46,18 @@
                         }
                     }
                 ],
-                loadAction: function (callback) {
+                loadAction: function () {
+                    union.timeline.loadingLock = true;
                     if (union.timeline.actions[0].active) {
-                        getReceiveComments(union.timeline.entries.length, callback);
+                        getReceiveComments(union.timeline.entries.length);
                     } else {
-                        getSendComments(union.timeline.entries.length, callback);
+                        getSendComments(union.timeline.entries.length);
                     }
                 },
                 datetime: "inBlock",
                 oneLine: true,
                 clickable: true,
-                noMoreArticle: true,
+                loadingLock: true,
                 entries: []
             };
             getReceiveComments();
@@ -69,7 +70,7 @@
                 activeObject.active = true;
             }
 
-            function getSendComments(skip, callback) {
+            function getSendComments(skip) {
                 if (!skip) {
                     union.timeline.entries.length = 0;
                     skip = 0;
@@ -82,9 +83,10 @@
                     }
                 }).then(function (response) {
                     union.timeline.noMoreArticle = response.data.length < utils.timelineLoadCount;
+                    var timelineTimeout;
                     for (var i in response.data) {
                         var comment = response.data[i];
-                        var result = {
+                        var entry = {
                             types: ["发出"],
                             fromArticle: {
                                 fromComment: true,
@@ -101,7 +103,7 @@
                             url: "article/" + comment.Article.AuthorIdCode + "/" + comment.Article.SequenceNumberForAuthor + "#" + comment.SequenceNumberForArticle
                         };
                         if (comment.ReplyToComment && comment.ReplyToUser) {
-                            result.commentTarget = {
+                            entry.commentTarget = {
                                 type: "comment",
                                 author: {
                                     username: comment.ReplyToUser.UserName,
@@ -111,18 +113,32 @@
                                 url: "article/" + comment.Article.AuthorIdCode + "/" + comment.Article.SequenceNumberForAuthor + "#" + comment.ReplyToComment.SequenceNumberForArticle
                             }
                         }
-                        union.timeline.entries.push(result);
+                        (function(entry){
+                            if(!timelineTimeout){
+                                union.timeline.entries.push(entry);
+                                timelineTimeout = $timeout(function(){}, 100);
+                            }else {
+                                timelineTimeout = timelineTimeout.then(function(){
+                                    union.timeline.entries.push(entry);
+                                    return $timeout(function(){}, 100);
+                                });
+                            }
+                        })(entry);
+                    }
+                    if(timelineTimeout){
+                        timelineTimeout.then(function(){
+                            union.timeline.loadingLock = false;
+                        });
+                    }else {
+                        union.timeline.loadingLock = false;
                     }
                 }, function (error) {
                     notification.error("未知错误", error);
-                }).finally(function () {
-                    if (callback) {
-                        callback();
-                    }
+                    union.timeline.loadingLock = false;
                 });
             }
 
-            function getReceiveComments(skip, callback) {
+            function getReceiveComments(skip) {
                 if (!skip) {
                     union.timeline.entries.length = 0;
                     skip = 0;
@@ -134,9 +150,10 @@
                     }
                 }).then(function (response) {
                     union.timeline.noMoreArticle = response.data.length < utils.timelineLoadCount;
+                    var timelineTimeout;
                     for (var i in response.data) {
                         var comment = response.data[i];
-                        var result = {
+                        var entry = {
                             types: ["收到"],
                             isNew: !comment.ReadByTargetUser,
                             fromArticle: {
@@ -154,7 +171,7 @@
                             url: "article/" + comment.Article.AuthorIdCode + "/" + comment.Article.SequenceNumberForAuthor + "#" + comment.SequenceNumberForArticle
                         };
                         if (comment.ReplyToComment) {
-                            result.commentTarget = {
+                            entry.commentTarget = {
                                 type: "comment",
                                 author: {
                                     username: union.$localStorage.user.UserName,
@@ -164,14 +181,28 @@
                                 url: "article/" + comment.Article.AuthorIdCode + "/" + comment.Article.SequenceNumberForAuthor + "#" + comment.ReplyToComment.SequenceNumberForArticle
                             }
                         }
-                        union.timeline.entries.push(result);
+                        (function(entry){
+                            if(!timelineTimeout){
+                                union.timeline.entries.push(entry);
+                                timelineTimeout = $timeout(function(){}, 100);
+                            }else {
+                                timelineTimeout = timelineTimeout.then(function(){
+                                    union.timeline.entries.push(entry);
+                                    return $timeout(function(){}, 100);
+                                });
+                            }
+                        })(entry);
+                    }
+                    if(timelineTimeout){
+                        timelineTimeout.then(function(){
+                            union.timeline.loadingLock = false;
+                        });
+                    }else {
+                        union.timeline.loadingLock = false;
                     }
                 }, function (error) {
                     notification.error("未知错误", error);
-                }).finally(function () {
-                    if (callback) {
-                        callback();
-                    }
+                    union.timeline.loadingLock = false;
                 });
             }
         }
