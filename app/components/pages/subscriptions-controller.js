@@ -5,8 +5,8 @@
     "use strict";
 
     keylolApp.controller("SubscriptionsController", [
-        "pageTitle", "$scope", "union", "$http", "notification", "$location", "utils",
-        function (pageTitle, $scope, union, $http, notification, $location, utils) {
+        "pageTitle", "$scope", "union", "$http", "notification", "$location", "utils", "$timeout",
+        function (pageTitle, $scope, union, $http, notification, $location, utils, $timeout) {
 
             $scope.searchExist = true;
             union.summary = {
@@ -39,10 +39,9 @@
                     mainTitle: "搜索结果",
                     subTitle: "Search Result"
                 },
-                noMoreArticle: true,
-                searchNotFound: true,
                 datetime: "outBlock",
-                loadAction: function(callback){
+                loadAction: function(){
+                    union.timeline.loadingLock = true;
                     $http.get(apiEndpoint + "user-point-subscription/my", {
                         params: {
                             take: utils.timelineLoadCount,
@@ -50,29 +49,30 @@
                         }
                     }).then(function (response) {
                         union.timeline.noMoreArticle = response.data.length < utils.timelineLoadCount;
+                        var timelineTimeout;
                         if(response.data.length > 0){
                             union.timeline.searchNotFound = false;
+                            var entry;
                             for (var i in response.data) {
                                 if(response.data[i].NormalPoint){
                                     var point = response.data[i].NormalPoint;
-                                    var result = {
+                                    entry = {
                                         types: [utils.getPointType(point.Type)],
                                         pointInfo: {
                                             reader: response.data[i].SubscriberCount,
                                             article: response.data[i].ArticleCount
                                         },
+                                        title: utils.getPointFirstName(point),
+                                        summary: utils.getPointSecondName(point),
                                         pointAvatar: point.AvatarImage,
                                         url: "point/" + point.IdCode,
                                         subscribed: true,
                                         id: point.Id
                                     };
-                                    result.title = utils.getPointFirstName(point);
-                                    result.summary = utils.getPointSecondName(point);
-                                    union.timeline.entries.push(result);
                                 }else if(response.data[i].User){
                                     var user = response.data[i].User;
                                     union.timeline.searchNotFound = false;
-                                    union.timeline.entries.push({
+                                    entry = {
                                         types: ["个人"],
                                         pointInfo: {
                                             reader: response.data[i].SubscriberCount,
@@ -85,16 +85,33 @@
                                         url: "user/" + user.IdCode,
                                         isUser: true,
                                         id: user.Id
-                                    });
+                                    };
                                 }
+                                (function(entry){
+                                    if(!timelineTimeout){
+                                        union.timeline.entries.push(entry);
+                                        timelineTimeout = $timeout(function(){}, 100);
+                                    }else {
+                                        timelineTimeout = timelineTimeout.then(function(){
+                                            union.timeline.entries.push(entry);
+                                            return $timeout(function(){}, 100);
+                                        });
+                                    }
+                                })(entry);
                             }
+                        }else {
+                            union.timeline.searchNotFound = true;
+                        }
+                        if(timelineTimeout){
+                            timelineTimeout.then(function(){
+                                union.timeline.loadingLock = false;
+                            });
+                        }else {
+                            union.timeline.loadingLock = false;
                         }
                     }, function (error) {
                         notification.error("未知错误", error);
-                    }).finally(function () {
-                        if (callback) {
-                            callback();
-                        }
+                        union.timeline.loadingLock = false;
                     });
                 },
                 entries: []

@@ -19,9 +19,13 @@
 }
 
 .section-timeline .card .card-line circle {
+    r: 4px;
     fill: white;
-    stroke: #11254a;
-    stroke-width: 2px;
+}
+
+.section-timeline .card .card-line circle.inverse {
+    r: 6.5px;
+    fill: #11254a;
 }
 
 /* ------- */
@@ -58,7 +62,10 @@
 
 .section-timeline .heading.inverse .card-line circle {
     fill: #11254a;
-    stroke: white;
+}
+
+.section-timeline .heading.inverse .card-line circle.inverse {
+    fill: white;
 }
 
 .section-timeline .heading.inverse .card-line rect {
@@ -273,6 +280,60 @@
     padding-right: 14px;
 }
 
+.section-timeline .entry.ng-enter {
+    transition-duration: 0.8s;
+}
+
+.section-timeline .entry.ng-enter .card-line {
+    transform: scale(1,0);
+    transform-origin: left top;
+    transition-duration: 0.1s;
+}
+
+.section-timeline .entry.ng-enter-active .card-line {
+    transform: scale(1,1);
+}
+
+.section-timeline .entry.ng-enter .card-line circle {
+    transition-duration: 0.3s;
+    transition-delay: 0.4s;
+    r: 0;
+}
+
+.section-timeline .entry.ng-enter .card-line circle.inverse {
+    transition-delay: 0.1s;
+}
+
+.section-timeline .entry.ng-enter-active .card-line circle {
+    r: 4px;
+}
+
+.section-timeline .entry.ng-enter-active .card-line .inverse {
+    r: 6.5px;
+}
+
+.section-timeline .entry.ng-enter .entry-heading,
+.section-timeline .entry.ng-enter footer,
+.section-timeline .entry.ng-enter .entry-content {
+    transition-duration: 0.4s;
+    transition-delay: 0.7s;
+    transform: translateX(-15%);
+    opacity: 0;
+}
+
+.section-timeline .entry.ng-enter-active .entry-heading,
+.section-timeline .entry.ng-enter-active footer,
+.section-timeline .entry.ng-enter-active .entry-content {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+
+
+.section-timeline .entry.ng-enter .card-line .inverse {
+    transition-delay: 1s;
+}
+
 /* Heading */
 .section-timeline .entry-heading {
     margin-bottom: 10px;
@@ -485,6 +546,7 @@
 
 .section-timeline .search-not-found h1 {
     color: #C7CDD1;
+    font-weight: normal;
 }
 
 .section-timeline .loading {

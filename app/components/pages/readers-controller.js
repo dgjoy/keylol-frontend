@@ -5,8 +5,8 @@
     "use strict";
 
     keylolApp.controller("ReadersController", [
-        "pageTitle", "$scope", "union", "$http", "notification", "utils",
-        function (pageTitle, $scope, union, $http, notification, utils) {
+        "pageTitle", "$scope", "union", "$http", "notification", "utils", "$timeout",
+        function (pageTitle, $scope, union, $http, notification, utils, $timeout) {
 
             $scope.searchExist = true;
             union.summary = {
@@ -39,10 +39,9 @@
                     mainTitle: "搜索结果",
                     subTitle: "Search Result"
                 },
-                noMoreArticle: true,
-                searchNotFound: true,
                 datetime: "outBlock",
-                loadAction: function(callback){
+                loadAction: function(){
+                    union.timeline.loadingLock = true;
                     $http.get(apiEndpoint + "user/my", {
                         params: {
                             take: utils.timelineLoadCount,
@@ -50,33 +49,50 @@
                         }
                     }).then(function (response) {
                         union.timeline.noMoreArticle = response.data.length < utils.timelineLoadCount;
+                        var timelineTimeout;
                         if(response.data.length > 0){
                             union.timeline.searchNotFound = false;
                             for (var i in response.data) {
                                 var user = response.data[i];
                                 union.timeline.searchNotFound = false;
-                                union.timeline.entries.push({
+                                var entry = {
                                     types: ["个人"],
                                     pointInfo: {
                                         reader: user.SubscriberCount,
                                         article: user.ArticleCount
                                     },
-                                    subscribed: true,
                                     title: user.UserName,
                                     summary: user.GamerTag,
                                     pointAvatar: user.AvatarImage,
                                     url: "user/" + user.IdCode,
                                     isUser: true,
                                     id: user.Id
-                                });
+                                };
+                                (function(entry){
+                                    if(!timelineTimeout){
+                                        union.timeline.entries.push(entry);
+                                        timelineTimeout = $timeout(function(){}, 100);
+                                    }else {
+                                        timelineTimeout = timelineTimeout.then(function(){
+                                            union.timeline.entries.push(entry);
+                                            return $timeout(function(){}, 100);
+                                        });
+                                    }
+                                })(entry);
                             }
+                        }else {
+                            union.timeline.searchNotFound = true;
+                        }
+                        if(timelineTimeout){
+                            timelineTimeout.then(function(){
+                                union.timeline.loadingLock = false;
+                            });
+                        }else {
+                            union.timeline.loadingLock = false;
                         }
                     }, function (error) {
                         notification.error("未知错误", error);
-                    }).finally(function () {
-                        if (callback) {
-                            callback();
-                        }
+                        union.timeline.loadingLock = false;
                     });
                 },
                 entries: []

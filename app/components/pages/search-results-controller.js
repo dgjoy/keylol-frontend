@@ -5,8 +5,8 @@
     "use strict";
 
     keylolApp.controller("SearchResultsController", [
-        "pageTitle", "$scope", "union", "$http", "notification", "$routeParams", "$location", "utils",
-        function (pageTitle, $scope, union, $http, notification, $routeParams, $location, utils) {
+        "pageTitle", "$scope", "union", "$http", "notification", "$routeParams", "$location", "utils", "$timeout",
+        function (pageTitle, $scope, union, $http, notification, $routeParams, $location, utils, $timeout) {
             $scope.searchExist = true;
             if (!$routeParams.searchType || !$routeParams.keyword) {
                 $scope.searchExist = false;
@@ -28,8 +28,6 @@
                     mainTitle: "搜索结果",
                     subTitle: "Search Result"
                 },
-                noMoreArticle: true,
-                searchNotFound: true,
                 actions: [
                     {
                         active: false,
@@ -65,7 +63,8 @@
             switch ($routeParams.searchType) {
                 case "point":
                     union.timeline.actions[0].active = true;
-                    union.timeline.loadAction = function (callback) {
+                    union.timeline.loadAction = function () {
+                        union.timeline.loadingLock = true;
                         var skip = union.timeline.entries.length;
                         $http.get(apiEndpoint + "normal-point/keyword/" + encodeURIComponent($routeParams.keyword), {
                             params: {
@@ -77,13 +76,14 @@
                             var totalRecordCount = response.headers("X-Total-Record-Count");
                             union.summary.defaultSum.text = "找到 " + totalRecordCount + " 个符合的项目";
                             union.timeline.noMoreArticle = response.data.length < utils.timelineLoadCount;
+                            var timelineTimeout;
                             if (totalRecordCount > 0) {
                                 if (!skip)
                                     union.summary.background = response.data[0].BackgroundImage;
                                 union.timeline.searchNotFound = false;
                                 for (var i in response.data) {
                                     var point = response.data[i];
-                                    var result = {
+                                    var entry = {
                                         types: [utils.getPointType(point.Type)],
                                         pointInfo: {
                                             reader: point.SubscriberCount,
@@ -94,24 +94,42 @@
                                         subscribed: point.Subscribed,
                                         id: point.Id
                                     };
-                                    result.title = utils.getPointFirstName(point);
-                                    result.summary = utils.getPointSecondName(point);
-                                    union.timeline.entries.push(result);
+                                    entry.title = utils.getPointFirstName(point);
+                                    entry.summary = utils.getPointSecondName(point);
+
+                                    (function(entry){
+                                        if(!timelineTimeout){
+                                            union.timeline.entries.push(entry);
+                                            timelineTimeout = $timeout(function(){}, 100);
+                                        }else {
+                                            timelineTimeout = timelineTimeout.then(function(){
+                                                union.timeline.entries.push(entry);
+                                                return $timeout(function(){}, 100);
+                                            });
+                                        }
+                                    })(entry);
                                 }
+                            }else {
+                                union.timeline.searchNotFound = true;
+                            }
+                            if(timelineTimeout){
+                                timelineTimeout.then(function(){
+                                    union.timeline.loadingLock = false;
+                                });
+                            }else {
+                                union.timeline.loadingLock = false;
                             }
                         }, function (error) {
                             notification.error("未知错误", error);
-                        }).finally(function () {
-                            if (callback) {
-                                callback();
-                            }
+                            union.timeline.loadingLock = false;
                         });
                     };
                     union.timeline.loadAction();
                     break;
                 case "article":
                     union.timeline.actions[1].active = true;
-                    union.timeline.loadAction = function (callback) {
+                    union.timeline.loadAction = function () {
+                        union.timeline.loadingLock = true;
                         var skip = union.timeline.entries.length;
                         $http.get(apiEndpoint + "article/keyword/" + encodeURIComponent($routeParams.keyword), {
                             params: {
@@ -127,9 +145,10 @@
                                 if (!skip)
                                     union.summary.background = response.data[0].AuthorProfilePointBackgroundImage;
                                 union.timeline.searchNotFound = false;
+                                var timelineTimeout;
                                 for (var i in response.data) {
                                     var article = response.data[i];
-                                    var result = {
+                                    var entry = {
                                         types: [article.TypeName],
                                         author: {
                                             username: article.Author.UserName,
@@ -147,22 +166,39 @@
                                             comment: article.CommentCount
                                         }
                                     };
-                                    union.timeline.entries.push(result);
+                                    (function(entry){
+                                        if(!timelineTimeout){
+                                            union.timeline.entries.push(entry);
+                                            timelineTimeout = $timeout(function(){}, 100);
+                                        }else {
+                                            timelineTimeout = timelineTimeout.then(function(){
+                                                union.timeline.entries.push(entry);
+                                                return $timeout(function(){}, 100);
+                                            });
+                                        }
+                                    })(entry);
                                 }
+                            }else {
+                                union.timeline.searchNotFound = true;
+                            }
+                            if(timelineTimeout){
+                                timelineTimeout.then(function(){
+                                    union.timeline.loadingLock = false;
+                                });
+                            }else {
+                                union.timeline.loadingLock = false;
                             }
                         }, function (error) {
                             notification.error("未知错误", error);
-                        }).finally(function () {
-                            if (callback) {
-                                callback();
-                            }
+                            union.timeline.loadingLock = false;
                         });
                     };
                     union.timeline.loadAction();
                     break;
                 case "user":
-                    union.timeline.loadAction = function () {
-                    };
+                    union.timeline.loadAction = function () {};
+                    union.timeline.loadingLock = true;
+                    union.timeline.noMoreArticle = true;
                     union.timeline.actions[2].active = true;
                     $http.get(apiEndpoint + "user/" + encodeURIComponent($routeParams.keyword), {
                         params: {
@@ -194,16 +230,17 @@
                                 union.timeline.entries[0].subscribed = user.Subscribed;
                             }
                         }
+                        union.timeline.loadingLock = false;
                     }, function (error) {
                         if (error.status === 404) {
                             union.summary.defaultSum.text = "找到 0 个符合的项目";
                         } else {
                             notification.error("未知错误", error);
                         }
+                        union.timeline.loadingLock = false;
+                        union.timeline.searchNotFound = true;
                     });
                     break;
-                default :
-                    $location.url("404");
             }
         }
     ]);
