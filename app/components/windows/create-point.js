@@ -45,22 +45,29 @@
                     }
             });
 
+            var submitLock = false;
             $scope.submit = function () {
+                if (submitLock)
+                    return;
+                submitLock = true;
                 var regex = /^(?:http:|https:)?\/\/keylol\.b0\.upaiyun\.com\/(.*?)(?:!.*)?$/i;
                 var avatarMatch = $scope.inline.avatarImageFull.match(regex);
                 if (!avatarMatch) {
                     notification.error("据点头像输入有误，请检查");
+                    submitLock = false;
                     return;
                 }
                 $scope.vm.AvatarImage = "keylol://avatars/" + avatarMatch[1];
                 var backgroundMatch = $scope.inline.backgroundImageFull.match(regex);
                 if (!backgroundMatch) {
                     notification.error("据点背景图输入有误，请检查");
+                    submitLock = false;
                     return;
                 }
                 $scope.vm.BackgroundImage = backgroundMatch[1];
                 if ($scope.vm.Type === "Game" && !/(http:|https:)\/\/store\.steampowered\.com\/app\/(\d+)/i.test($scope.vm.StoreLink)) {
                     notification.error("商店链接输入有误，请检查");
+                    submitLock = false;
                     return;
                 }
                 $scope.vm.IdCode = $scope.vm.IdCode.toUpperCase();
@@ -74,10 +81,12 @@
                         } else if (response.status === 404) {
                             notification.error("指定据点不存在");
                         }
+                        submitLock = false;
                     });
                 } else {
                     $http.post(apiEndpoint + "normal-point", $scope.vm).then(function () {
                         notification.success("据点创建成功");
+                        submitLock = false;
                         init();
                     }, function (response) {
                         if (response.status === 400) {
@@ -85,6 +94,7 @@
                         } else {
                             notification.error("未知错误", response);
                         }
+                        submitLock = false;
                     });
                 }
             };

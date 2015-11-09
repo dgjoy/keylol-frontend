@@ -55,7 +55,12 @@
                 if (consumeBindingToken)
                     consumeBindingToken.resolve();
             };
+
+            var submitLock = false;
             $scope.submit = function () {
+                if (submitLock)
+                    return;
+                submitLock = true;
                 $scope.error = {};
                 $scope.vm.IdCode = $scope.vm.IdCode.toUpperCase();
                 utils.modelValidate.idCode($scope.vm.IdCode, $scope.error, "vm.IdCode");
@@ -64,8 +69,10 @@
                 if (typeof geetestResult === "undefined") {
                     $scope.error.authCode = true;
                 }
-                if (!$.isEmptyObject($scope.error))
+                if (!$.isEmptyObject($scope.error)) {
+                    submitLock = false;
                     return;
+                }
                 $http.post(apiEndpoint + "user", $scope.vm)
                     .then(function (response) {
                         union.$localStorage.login = response.data;
@@ -81,9 +88,9 @@
                                 }
                                 break;
                             default:
-                                notification.error("未知错误");
-                                console.error(response.data);
+                                notification.error("未知错误", response);
                         }
+                        submitLock = false;
                     });
             };
         }

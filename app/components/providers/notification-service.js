@@ -56,6 +56,15 @@
                     });
                 };
 
+                self.process = function (message) {
+                    return self.show({
+                        type: "process",
+                        title: "处理中",
+                        subtitle: "Processing",
+                        message: message
+                    });
+                };
+
                 self.error = function (messageOrModelStateError, error) {
                     if (typeof messageOrModelStateError === "string") { // Is message
                         if (error) {

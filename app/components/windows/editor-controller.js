@@ -107,13 +107,17 @@
                 });
             };
 
+            var submitLock = false;
             $scope.submit = function () {
+                if (submitLock)
+                    return;
+                submitLock = true;
                 if ($scope.vm.AttachedPointsId.length > 5) {
                     notification.attention("不能同时投稿多于5个据点");
+                    submitLock = false;
                     return;
                 }
                 if ($scope.vm.Id) {
-
                     var dirtyFields = {};
                     for (var key in $scope.vm) {
                         if (key === "AttachedPointsId") {
@@ -150,9 +154,9 @@
                             close();
                             $route.reload();
                             notification.success("文章已发布");
-                        }, function (error) {
-                            notification.error("未知错误, 请尝试再次发布");
-                            console.error(error);
+                        }, function (response) {
+                            notification.error("未知错误, 请尝试再次发布", response);
+                            submitLock = false;
                         });
                 } else {
                     $http.post(apiEndpoint + "article", $scope.vm)
@@ -162,9 +166,9 @@
                             close();
                             $location.url("article/" + union.$localStorage.user.IdCode + "/" + response.data.SequenceNumberForAuthor);
                             notification.success("文章已发布");
-                        }, function (error) {
-                            notification.error("未知错误, 请尝试再次发布");
-                            console.error(error);
+                        }, function (response) {
+                            notification.error("未知错误, 请尝试再次发布", response);
+                            submitLock = false;
                         });
                 }
             };

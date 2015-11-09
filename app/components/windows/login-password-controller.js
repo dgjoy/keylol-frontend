@@ -37,7 +37,11 @@
                 close();
             };
 
+            var submitLock = false;
             $scope.submit = function () {
+                if (submitLock)
+                    return;
+                submitLock = true;
                 $scope.error = {};
                 if (!$scope.vm.EmailOrIdCode) {
                     $scope.error["vm.EmailOrIdCode"] = "Email or UIC cannot be empty.";
@@ -48,8 +52,10 @@
                 if (typeof geetestResult === "undefined") {
                     $scope.error.authCode = true;
                 }
-                if (!$.isEmptyObject($scope.error))
+                if (!$.isEmptyObject($scope.error)) {
+                    submitLock = false;
                     return;
+                }
                 $http.post(apiEndpoint + "login", $scope.vm)
                     .then(function (response) {
                         union.$localStorage.login = response.data;
@@ -64,9 +70,9 @@
                                 }
                                 break;
                             default:
-                                notification.error("未知错误");
-                                console.error(response.data);
+                                notification.error("未知错误", response);
                         }
+                        submitLock = false;
                     });
             };
         }

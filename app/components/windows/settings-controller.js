@@ -192,7 +192,11 @@
                 }
             };
 
+            var submitLock = false;
             $scope.submit = function () {
+                if (submitLock)
+                    return;
+                submitLock = true;
                 $scope.error = {};
                 utils.modelValidate.gamerTag($scope.vm.GamerTag, $scope.error, "vm.GamerTag");
                 if (isVMDirty("NewPassword") || isVMDirty("LockoutEnabled")) {
@@ -219,6 +223,7 @@
                 }
                 if (!$.isEmptyObject($scope.error)) {
                     focusErrorPage();
+                    submitLock = false;
                     return;
                 }
 
@@ -252,13 +257,14 @@
                                     focusErrorPage();
                                     break;
                                 default:
-                                    notification.error("未知错误");
-                                    console.error(response.data);
+                                    notification.error("未知错误", response.data);
                             }
+                            submitLock = false;
                         });
                 };
 
                 if ($scope.files.avatarImage || $scope.files.profilePointBackgroundImage) {
+                    notification.process("图像正在上传");
                     var options = {
                         bucket: "keylol",
                         "save-key": "{filemd5}{.suffix}",
@@ -281,9 +287,9 @@
                             });
                             uploads.avatarImage.then(function (response) {
                                 dirtyFields.AvatarImage = "keylol://avatars/" + response.data.url;
-                                notification.success("图像已上传，提交后将生效");
                             }, function () {
                                 notification.error("头像上传失败。");
+                                submitLock = false;
                             });
                         }
                         if ($scope.files.profilePointBackgroundImage) {
@@ -298,9 +304,9 @@
                             });
                             uploads.profilePointBackgroundImage.then(function (response) {
                                 dirtyFields.ProfilePointBackgroundImage = response.data.url;
-                                notification.success("图像已上传，提交后将生效");
                             }, function () {
                                 notification.error("个人据点横幅上传失败。");
+                                submitLock = false;
                             });
                         }
                         $q.all(uploads).then(function () {
@@ -308,6 +314,7 @@
                         });
                     }, function () {
                         notification.error("文件上传验证失效。");
+                        submitLock = false;
                     });
                 } else {
                     submit();
@@ -322,11 +329,11 @@
                     if (result) {
                         $http.delete(apiEndpoint + "login/current").then(function () {
                             delete union.$localStorage.login;
+                            delete union.$localStorage.recentBrowse;
                             notification.success("已登出当前账户");
                             close();
                         }, function (response) {
-                            notification.error("未知错误");
-                            console.error(response.data);
+                            notification.error("未知错误", response);
                         });
                     }
                 });

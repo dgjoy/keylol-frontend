@@ -27,11 +27,16 @@
                 }, 3000);
             };
 
+            var submitLock = false;
             $scope.submit = function () {
+                if (submitLock)
+                    return;
+                submitLock = true;
                 $scope.invitationCodeError = null;
 
                 if (!$scope.vm.InvitationCode) {
                     $scope.invitationCodeError = "empty";
+                    submitLock = false;
                     return;
                 }
 
@@ -46,17 +51,10 @@
                     if (response.status === 404) {
                         $scope.invitationCodeError = "invalid";
                     } else {
-                        notification.error("未知错误");
-                        console.log(response.data);
+                        notification.error("未知错误", response.data);
                     }
+                    submitLock = false;
                 });
-
-                //.then(function (window) {
-                //    return window.close;
-                //}).then(function () {
-                //    if (union.$localStorage.login)
-                //        $location.url("home");
-                //})
             };
         }
     ]);
