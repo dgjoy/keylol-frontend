@@ -483,3 +483,7 @@
 .section-timeline .search-not-found h1 {
     color: #C7CDD1;
 }
+
+.section-timeline .loading {
+    margin: 5px 10px;
+}

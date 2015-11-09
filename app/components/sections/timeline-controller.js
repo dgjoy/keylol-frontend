@@ -2,8 +2,8 @@
     "use strict";
 
     keylolApp.controller("TimelineController", [
-        "$scope", "union", "$location", "$http", "$rootScope", "$element", "articleTypes", "notification", "utils",
-        function ($scope, union, $location, $http, $rootScope, $element, articleTypes, notification, utils) {
+        "$scope", "union", "$location", "$http", "$rootScope", "$element", "articleTypes", "notification", "utils", "$timeout",
+        function ($scope, union, $location, $http, $rootScope, $element, articleTypes, notification, utils, $timeout) {
             $scope.headingDisplayMode = function (entry) {
                 if (entry.source)
                     return "source";
@@ -63,15 +63,15 @@
                 }
             };
 
-            var loadingLock = false;
+            $scope.loadingLock = false;
             $(window).scroll(function () {
                 var $windowBottomY = $(window).scrollTop() + $(window).height();
                 var $timelineBottomY = $element.offset().top + $element.height();
                 $scope.$apply(function () {
-                    if ($windowBottomY > $timelineBottomY - 768 && !loadingLock && !$scope.data.noMoreArticle) {
+                    if ($windowBottomY > $timelineBottomY - 768 && !$scope.loadingLock && !$scope.data.noMoreArticle) {
                         if ($scope.data.hasExpand) {
                             requestWhenFiltering(true);
-                        } else if ($scope.data.actions) {
+                        } else {
                             requestWithAction();
                         }
                     }
@@ -114,14 +114,14 @@
             };
 
             function requestWithAction() {
-                loadingLock = true;
+                $scope.loadingLock = true;
                 $scope.data.loadAction(function () {
-                    loadingLock = false;
+                    $scope.loadingLock = false;
                 });
             }
 
             function requestWhenFiltering(isLoadingMore) {
-                loadingLock = true;
+                $scope.loadingLock = true;
                 var filters = "";
                 for (var i = 0; i < articleTypes.length; i++) {
                     if (filterOptions[i]) {
@@ -139,80 +139,83 @@
                     if (isLoadingMore) {
                         beforeSN = $scope.data.entries[$scope.data.entries.length - 1].sequenceNumber;
                     }
-                    $scope.data.loadAction({
-                        idType: "IdCode",
-                        articleTypeFilter: filters,
-                        publishOnly: $scope.data.publishOnly,
-                        take: utils.timelineLoadCount,
-                        beforeSN: beforeSN
-                    }, function (response) {
-                        var articleList = response.data;
-                        if (!isLoadingMore) {
-                            $scope.data.entries.length = 0;
-                        }
-                        $scope.data.noMoreArticle = articleList.length < utils.timelineLoadCount;
+                    $timeout(function(){
 
-                        for (var i in articleList) {
-                            var article = articleList[i];
-                            if (!article.Author) {
-                                article.Author = union.user;
+                        $scope.data.loadAction({
+                            idType: "IdCode",
+                            articleTypeFilter: filters,
+                            publishOnly: $scope.data.publishOnly,
+                            take: utils.timelineLoadCount,
+                            beforeSN: beforeSN
+                        }, function (response) {
+                            var articleList = response.data;
+                            if (!isLoadingMore) {
+                                $scope.data.entries.length = 0;
                             }
-                            var entry = {
-                                types: [article.TypeName],
-                                author: {
-                                    username: article.Author.UserName,
-                                    avatarUrl: article.Author.AvatarImage,
-                                    idCode: article.Author.IdCode
-                                },
-                                sequenceNumber: article.SequenceNumber,
-                                sources: {},
-                                datetime: article.PublishTime,
-                                title: article.Title,
-                                summary: article.Content,
-                                thumbnail: article.ThumbnailImage,
-                                url: "/article/" + article.Author.IdCode + "/" + article.SequenceNumberForAuthor,
-                                count: {
-                                    like: article.LikeCount,
-                                    comment: article.CommentCount
+                            $scope.data.noMoreArticle = articleList.length < utils.timelineLoadCount;
+
+                            for (var i in articleList) {
+                                var article = articleList[i];
+                                if (!article.Author) {
+                                    article.Author = union.user;
                                 }
-                            };
-                            switch (article.TimelineReason) {
-                                case "Like":
-                                    entry.sources.type = "like";
-                                    entry.sources.userArray = [];
-                                    if (article.LikeByUsers) {
-                                        for (var j in article.LikeByUsers) {
+                                var entry = {
+                                    types: [article.TypeName],
+                                    author: {
+                                        username: article.Author.UserName,
+                                        avatarUrl: article.Author.AvatarImage,
+                                        idCode: article.Author.IdCode
+                                    },
+                                    sequenceNumber: article.SequenceNumber,
+                                    sources: {},
+                                    datetime: article.PublishTime,
+                                    title: article.Title,
+                                    summary: article.Content,
+                                    thumbnail: article.ThumbnailImage,
+                                    url: "/article/" + article.Author.IdCode + "/" + article.SequenceNumberForAuthor,
+                                    count: {
+                                        like: article.LikeCount,
+                                        comment: article.CommentCount
+                                    }
+                                };
+                                switch (article.TimelineReason) {
+                                    case "Like":
+                                        entry.sources.type = "like";
+                                        entry.sources.userArray = [];
+                                        if (article.LikeByUsers) {
+                                            for (var j in article.LikeByUsers) {
+                                                entry.sources.userArray.push({
+                                                    name: article.LikeByUsers[j].UserName,
+                                                    idCode: article.LikeByUsers[j].IdCode
+                                                });
+                                            }
+                                        } else {
                                             entry.sources.userArray.push({
-                                                name: article.LikeByUsers[j].UserName,
-                                                idCode: article.LikeByUsers[j].IdCode
+                                                name: union.$localStorage.user.UserName,
+                                                idCode: union.$localStorage.user.IdCode
                                             });
                                         }
-                                    } else {
-                                        entry.sources.userArray.push({
-                                            name: union.$localStorage.user.UserName,
-                                            idCode: union.$localStorage.user.IdCode
-                                        });
-                                    }
-                                    break;
-                                case "Point":
-                                    entry.sources.type = "point";
-                                    entry.sources.points = [];
-                                    for (var k in article.AttachedPoints) {
-                                        entry.sources.points.push({
-                                            name: article.AttachedPoints[k][article.AttachedPoints[k].PreferedName + "Name"],
-                                            idCode: article.AttachedPoints[k].IdCode
-                                        });
-                                    }
-                                    break;
+                                        break;
+                                    case "Point":
+                                        entry.sources.type = "point";
+                                        entry.sources.points = [];
+                                        for (var k in article.AttachedPoints) {
+                                            entry.sources.points.push({
+                                                name: article.AttachedPoints[k][article.AttachedPoints[k].PreferedName + "Name"],
+                                                idCode: article.AttachedPoints[k].IdCode
+                                            });
+                                        }
+                                        break;
 
-                                case "Publish":
-                                    entry.sources.type = "publish";
-                                    break;
+                                    case "Publish":
+                                        entry.sources.type = "publish";
+                                        break;
+                                }
+                                $scope.data.entries.push(entry);
                             }
-                            $scope.data.entries.push(entry);
-                        }
-                        loadingLock = false;
-                    });
+                            $scope.loadingLock = false;
+                        });
+                    }, 10000);
                 }
             }
 

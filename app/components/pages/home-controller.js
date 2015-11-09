@@ -47,11 +47,11 @@
 
             $http.get(apiEndpoint + "article/subscription", {
                 params: {
-                    take: 20
+                    take: utils.timelineLoadCount
                 }
             }).then(function (response) {
                 var articleList = response.data;
-                union.timeline.noMoreArticle = articleList.length < 20;
+                union.timeline.noMoreArticle = articleList.length < utils.timelineLoadCount;
                 union.timeline.entries.length = 0;
 
                 if(articleList.length > 0){

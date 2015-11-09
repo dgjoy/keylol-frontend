@@ -134,7 +134,8 @@
         <img src="assets/images/hit_final.png">
         <h1 class="font-myriad-keylol">未能撞到结果</h1>
     </div>
-    <svg xmlns="http://www.w3.org/2000/svg" ng-if="!data.searchNotFound && !data.activePoints" class="card-end">
+    <svg xmlns="http://www.w3.org/2000/svg" ng-if="!data.searchNotFound && !data.activePoints && !loadingLock" class="card-end">
         <rect x="14" width="15" height="5"></rect>
     </svg>
+    <img class="loading" src="../../assets/images/timeline-loading.gif" ng-if="loadingLock">
 </div>

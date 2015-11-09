@@ -37,7 +37,6 @@
                 noMoreArticle: true,
                 entries: []
             };
-            console.log(union.timeline.publishOnly);
             union.point = {};
 
             if ($routeParams.userIdCode) {
