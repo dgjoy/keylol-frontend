@@ -45,7 +45,7 @@
                 }
                 searchSelectorOptions.searchText = searchText;
                 if (!searchSelectorDisplayed)
-                    showSearchSelector($.extend($event, {acceptCurrentTarget: true}));
+                    showSearchSelector($.extend($event, {type: "click", acceptCurrentTarget: true}));
             };
 
             $scope.$watch("searchText", function () {
