@@ -27,10 +27,10 @@
                             $scope.hasVote = true;
                             switch (article.Vote) {
                                 case "Positive":
-                                    article.Vote = "好评";
+                                    article.VoteText = "好评";
                                     break;
                                 case "Negative":
-                                    article.Vote = "差评";
+                                    article.VoteText = "差评";
                                     break;
                             }
                             $http.get(apiEndpoint + "normal-point/" + article.VoteForPointId, {
