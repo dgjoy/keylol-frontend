@@ -7,7 +7,8 @@
         </svg>
     </div>
     <div class="positive-vs-negative">
-        <div style="width: {{data.votePercent * 10}}%;"></div>
+        <div style="width: {{point.votePercent * 10}}%;" ng-if="!point.noVotes"></div>
+        <div class="point-no-votes" ng-if="point.noVotes"></div>
     </div>
     <div class="clearfix">
         <div class="positive-text">

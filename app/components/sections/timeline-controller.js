@@ -12,6 +12,16 @@
             };
             $scope.data = union.timeline;
 
+            $scope.clickToSearch = function(){
+                var $searchInput = $(".search-box input");
+                $searchInput.focus();
+                if($searchInput.hasClass("highlight")){
+                    $searchInput.removeClass("highlight");
+                    $searchInput[0].offsetWidth;
+                }
+                $searchInput.addClass("highlight");
+            };
+
             $scope.clickTheBox = function (entry) {
                 $location.url(entry.url);
             };
@@ -132,6 +142,7 @@
                     $scope.data.loadAction({
                         idType: "IdCode",
                         articleTypeFilter: filters,
+                        publishOnly: $scope.data.publishOnly,
                         take: utils.timelineLoadCount,
                         beforeSN: beforeSN
                     }, function (response) {

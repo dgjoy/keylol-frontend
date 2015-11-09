@@ -1,6 +1,6 @@
 @keyframes comment-highlight {
     from {
-        background-color: rgba(0, 171, 78, 0.1);
+        background-color: #f2fbf6;
     }
     to {
         background-color: transparent;

@@ -37,6 +37,15 @@
             }).when("/user/:userIdCode", {
                 templateUrl: "components/pages/point.html",
                 controller: "PointController"
+            }).when("/user/:userIdCode/publications", {
+                templateUrl: "components/pages/point.html",
+                controller: "PointController"
+            }).when("/subscriptions", {
+                templateUrl: "components/pages/search-results.html",
+                controller: "SubscriptionsController"
+            }).when("/readers", {
+                templateUrl: "components/pages/search-results.html",
+                controller: "ReadersController"
             }).when("/post", {
                 templateUrl: "components/pages/post.html",
                 controller: "PostController"

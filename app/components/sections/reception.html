@@ -4,8 +4,8 @@
         <ul>
             <li ng-repeat="link in quickLinks" ng-switch="link.Type">
                 <span class="delete" ng-click="deleteFavorite($index)">x</span>
-                <point-link ng-switch-when="NormalPoint" type="'normal-point'" id-code="link.IdCode" point-name="link.Name"></point-link>
-                <point-link ng-switch-when="ProfilePoint" type="'user-name'" id-code="link.IdCode" point-name="link.Name"></point-link>
+                <point-link ng-switch-when="NormalPoint" type="'point'" id-code="link.IdCode" point-name="link.Name"></point-link>
+                <point-link ng-switch-when="ProfilePoint" type="'user'" id-code="link.IdCode" point-name="link.Name"></point-link>
             </li>
         </ul>
         <a ng-if="isInPoint && canBeAdd" href="" ng-click="addFavorite()" class="add">添加当前据点</a>
@@ -14,8 +14,8 @@
         <h1 class="labeled-heading">最近访问<span class="delete" ng-click="deleteRecentBroswe()">清除记录</span></h1>
         <ul>
             <li ng-repeat="link in recentLinks" ng-switch="link.type">
-                <point-link ng-switch-when="NormalPoint" type="'normal-point'" id-code="link.idCode" point-name="link.name"></point-link>
-                <point-link ng-switch-when="ProfilePoint" type="'user-name'" id-code="link.idCode" point-name="link.name"></point-link>
+                <point-link ng-switch-when="NormalPoint" type="'point'" id-code="link.idCode" point-name="link.name"></point-link>
+                <point-link ng-switch-when="ProfilePoint" type="'user'" id-code="link.idCode" point-name="link.name"></point-link>
             </li>
         </ul>
     </div>

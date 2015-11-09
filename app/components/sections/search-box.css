@@ -1,7 +1,20 @@
+@keyframes search-box-highlight {
+    from {
+        background-color: #f2fbf6;
+    }
+    to {
+        background-color: white;
+    }
+}
+
 .section-search-box {
     width: 100%;
     min-width: 184px;
     min-height: 40px;
+}
+
+.section-search-box input.highlight {
+    animation: search-box-highlight 2s;
 }
 
 .section-search-box .search-box {

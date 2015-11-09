@@ -2,12 +2,13 @@
     "use strict";
 
     keylolApp.controller("PointController", [
-        "pageTitle", "$scope", "union", "$routeParams", "$http", "utils", "notification", "window",
-        function (pageTitle, $scope, union, $routeParams, $http, utils, notification, window) {
+        "pageTitle", "$scope", "union", "$routeParams", "$http", "utils", "notification", "window", "$location",
+        function (pageTitle, $scope, union, $routeParams, $http, utils, notification, window, $location) {
             /**
              * 初始化union的一些属性
              */
             $scope.union = union;
+            $scope.pointExist = true;
             $scope.isInPoint = true;
             union.summary = {};
             union.user = {};
@@ -30,11 +31,13 @@
                         });
                     }
                 },
+                publishOnly: /\/user\/.+\/publications/i.test($location.url()),
                 datetime: "outBlock",
                 hasExpand: true,
                 noMoreArticle: true,
                 entries: []
             };
+            console.log(union.timeline.publishOnly);
             union.point = {};
 
             if ($routeParams.userIdCode) {
@@ -97,6 +100,7 @@
                     $http.get(apiEndpoint + "article/user/" + $routeParams.userIdCode, {
                         params: {
                             idType: "IdCode",
+                            publishOnly: union.timeline.publishOnly,
                             take: utils.timelineLoadCount
                         }
                     }).then(function (response) {
@@ -172,12 +176,12 @@
                         notification.error("未知错误", error);
                     });
                 }, function (error) {
+                    $scope.pointExist = false;
                     notification.error("未知错误", error);
                 });
             }
 
             if ($routeParams.pointIdCode) {
-                $scope.hasVote = true;
                 /**
                  * 定义在 timeline 中调用的加载函数
                  * @param params 加载时请求的参数
@@ -210,6 +214,9 @@
                     var point = response.data;
 
                     union.associatedPoints = point.AssociatedPoints;
+                    if(point.Type === "Game"){
+                        $scope.hasVote = true;
+                    }
 
                     var summary = {
                         head: {},
@@ -229,26 +236,32 @@
                     summary.head.subHead = utils.getPointSecondName(point);
 
                     pageTitle.set(point.mainName + " - 其乐");
-                    point.votePercent = (point.PositiveArticleCount * 10 / (point.PositiveArticleCount + point.NegativeArticleCount)).toFixed(1);
-                    point.voteCircles = [{}, {}, {}, {}, {}];
-                    if (point.votePercent >= 8) {
-                        for (var i in point.voteCircles) {
-                            point.voteCircles[i].type = "awesome";
+                    if(point.PositiveArticleCount + point.NegativeArticleCount > 0){
+                        point.votePercent = (point.PositiveArticleCount * 10 / (point.PositiveArticleCount + point.NegativeArticleCount)).toFixed(1);
+                        point.voteCircles = [{}, {}, {}, {}, {}];
+                        if (point.votePercent >= 8) {
+                            for (var i in point.voteCircles) {
+                                point.voteCircles[i].type = "awesome";
+                            }
+                        } else if (point.votePercent >= 6) {
+                            for (var i = 0; i < 4; i++) {
+                                point.voteCircles[i].type = "good";
+                            }
+                        } else if (point.votePercent >= 4) {
+                            for (var i = 0; i < 3; i++) {
+                                point.voteCircles[i].type = "not-bad";
+                            }
+                        } else if (point.votePercent >= 2) {
+                            for (var i = 0; i < 2; i++) {
+                                point.voteCircles[i].type = "bad";
+                            }
+                        } else {
+                            point.voteCircles[0].type = "terrible"
                         }
-                    } else if (point.votePercent >= 6) {
-                        for (var i = 0; i < 4; i++) {
-                            point.voteCircles[i].type = "good";
-                        }
-                    } else if (point.votePercent >= 4) {
-                        for (var i = 0; i < 3; i++) {
-                            point.voteCircles[i].type = "not-bad";
-                        }
-                    } else if (point.votePercent >= 2) {
-                        for (var i = 0; i < 2; i++) {
-                            point.voteCircles[i].type = "bad";
-                        }
-                    } else {
-                        point.voteCircles[0].type = "terrible"
+                    }else {
+                        point.votePercent = "N/A";
+                        point.voteCircles = [{}, {}, {}, {}, {}];
+                        point.noVotes = true;
                     }
 
                     utils.addRecentBroswe("NormalPoint", point.mainName, point.IdCode);
@@ -256,6 +269,7 @@
                     $.extend(union.summary, summary);
 
                 }, function (error) {
+                    $scope.pointExist = false;
                     notification.error("未知错误", error);
                 });
 

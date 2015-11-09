@@ -13,7 +13,7 @@
         </div>
         <ul class="result-list" ng-if="resultArray">
             <li ng-repeat="result in resultArray" class="clearfix" ng-click="jumpTo(result.url)">
-                <div class="avatar-anchor"ng-if="result.avatar">
+                <div class="avatar-anchor" ng-if="result.avatar">
                     <img class="avatar-small" webp-src="{{result.avatar|avatarUrl}}">
                 </div>
                 <div class="title">

@@ -15,7 +15,7 @@
                 link: function (scope, element) {
                     scope.funcs = {};
                     scope.linkHover = function ($event) {
-                        if(scope.type == "user-avatar"){
+                        if(scope.avatarUrl){
                             var avatarWidth = element.children().children().width();
                             scope.cardPopup =  scope.funcs.showPointCard({
                                 templateUrl: "components/popup/point-preview-card.html",

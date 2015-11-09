@@ -7,8 +7,9 @@
     keylolApp.controller("SearchResultsController", [
         "pageTitle", "$scope", "union", "$http", "notification", "$routeParams", "$location", "utils",
         function (pageTitle, $scope, union, $http, notification, $routeParams, $location, utils) {
+            $scope.searchExist = true;
             if (!$routeParams.searchType || !$routeParams.keyword) {
-                $location.url("404");
+                $scope.searchExist = false;
             }
             pageTitle.set($routeParams.keyword + " 的搜索结果 - 其乐");
             union.summary = {

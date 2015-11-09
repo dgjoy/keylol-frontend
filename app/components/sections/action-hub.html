@@ -28,15 +28,15 @@
         <ul class="links list-inline">
             <li>
                 <h4>订阅</h4>
-                <a href="">{{union.$localStorage.user.SubscribedPointCount}}</a>
+                <a href="/subscriptions">{{union.$localStorage.user.SubscribedPointCount}}</a>
             </li>
             <li>
                 <h4>文章</h4>
-                <a href="">{{union.$localStorage.user.ArticleCount}}</a>
+                <a href="user/{{union.$localStorage.user.IdCode}}/publications">{{union.$localStorage.user.ArticleCount}}</a>
             </li>
             <li>
                 <h4>读者</h4>
-                <a href="">{{union.$localStorage.user.SubscriberCount}}</a>
+                <a href="/readers">{{union.$localStorage.user.SubscriberCount}}</a>
             </li>
         </ul>
     </div>
