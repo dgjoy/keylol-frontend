@@ -2,8 +2,8 @@
     "use strict";
 
     keylolApp.controller("TimelineController", [
-        "$scope", "union", "$location", "$http", "$rootScope", "$element", "articleTypes", "notification",
-        function ($scope, union, $location, $http, $rootScope, $element, articleTypes, notification) {
+        "$scope", "union", "$location", "$http", "$rootScope", "$element", "articleTypes", "notification", "utils",
+        function ($scope, union, $location, $http, $rootScope, $element, articleTypes, notification, utils) {
             $scope.headingDisplayMode = function (entry) {
                 if (entry.source)
                     return "source";
@@ -11,6 +11,16 @@
                     return "title";
             };
             $scope.data = union.timeline;
+
+            $scope.clickToSearch = function(){
+                var $searchInput = $(".search-box input");
+                $searchInput.focus();
+                if($searchInput.hasClass("highlight")){
+                    $searchInput.removeClass("highlight");
+                    $searchInput[0].offsetWidth;
+                }
+                $searchInput.addClass("highlight");
+            };
 
             $scope.clickTheBox = function (entry) {
                 $location.url(entry.url);
@@ -133,7 +143,8 @@
                         idType: "IdCode",
                         articleTypeFilter: filters,
                         take: timeLineLoadCount,
-                        beforeSN: beforeSN
+                        beforeSN: beforeSN,
+                        publishOnly: $scope.data.publishOnly
                     }, function (response) {
                         var articleList = response.data;
                         if (!isLoadingMore) {

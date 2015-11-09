@@ -68,6 +68,11 @@
     height: 100%;
 }
 
+.section-point-votes .positive-vs-negative div.point-no-votes {
+    background: #c7cdd1;
+    height: 100%;
+}
+
 .section-point-votes [class$=-text] p {
     margin: 0;
 }

@@ -1,7 +1,4 @@
-﻿<ng-switch on="type">
-    <a ng-switch-when="normal-point" href="point/{{idCode}}" popup="funcs.showPointCard" ng-mouseenter="linkHover($event)">{{pointName}}</a>
-    <a ng-switch-when="user-name" href="user/{{idCode}}" popup="funcs.showPointCard" ng-mouseenter="linkHover($event)">{{pointName}}</a>
-    <a class="avatar-anchor" ng-switch-when="user-avatar" href="user/{{idCode}}" popup="funcs.showPointCard" ng-mouseenter="linkHover($event)">
-        <img class="avatar-small" webp-src="{{avatarUrl|avatarUrl}}" alt="头像">
-    </a>
-</ng-switch>
+﻿<a href="{{type}}/{{idCode}}" ng-class="{'avatar-anchor': avatarUrl}" popup="funcs.showPointCard" ng-mouseenter="linkHover($event)">
+    {{pointName}}
+    <img class="avatar-small" webp-src="{{avatarUrl|avatarUrl}}" alt="头像" ng-if="avatarUrl">
+</a>

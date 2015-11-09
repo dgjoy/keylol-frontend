@@ -22,6 +22,33 @@
             </div>
         </div>
     </div>
+    <div class="default" ng-if="data.activePoints">
+        <img src="../../assets/images/clipart.png" class="clipart">
+        <h1 class="font-myriad-keylol">从你的游戏兴趣开始，慢慢搭建一条讯息轨道。</h1>
+        <h3>订阅一个据点后，其收到的文章投稿会推送到这里</h3>
+        <ul class="clearfix">
+            <li ng-repeat="activePoint in data.activePoints">
+                <point-link type="'point'" avatar-url="activePoint.AvatarImage" id-code="activePoint.IdCode" ></point-link>
+                <div class="title">
+                    <p>
+                        <point-link type="'point'" point-name="activePoint.mainName" id-code="activePoint.IdCode" ></point-link>
+                    </p>
+                    <p>
+                        <span ng-if="activePoint.type">[{{activePoint.type}}]</span>
+                        {{activePoint.subName|maxLength:15}}
+                    </p>
+                </div>
+            </li>
+            <li class="search">
+                <a href="" class="avatar-anchor" ng-click="clickToSearch()">
+                    <img src="assets/images/search-inverse.png" class="avatar-small">
+                </a>
+                <div class="title">
+                    <span class="fake-input" ng-click="clickToSearch()"></span>
+                </div>
+            </li>
+        </ul>
+    </div>
     <div class="entry card" ng-repeat="entry in data.entries" ng-switch="data.datetime">
         <svg xmlns="http://www.w3.org/2000/svg" class="card-line">
             <rect x="6" width="5" height="100%"></rect>
@@ -29,9 +56,9 @@
         </svg>
         <div class="entry-heading">
             <div class="entry-author" ng-if="entry.author">
-                <point-link type="'user-avatar'" avatar-url="entry.author.avatarUrl" id-code="entry.author.idCode"></point-link>
+                <point-link type="'user'" avatar-url="entry.author.avatarUrl" id-code="entry.author.idCode"></point-link>
                 <h4>
-                    <point-link type="'user-name'" point-name="'@' + entry.author.username" id-code="entry.author.idCode"></point-link>
+                    <point-link type="'user'" point-name="'@' + entry.author.username" id-code="entry.author.idCode"></point-link>
                 </h4>
             </div>
             <h3>
@@ -40,11 +67,11 @@
                     <circle cx="3.5" cy="3.5" r="3.5"></circle>
                 </svg>
                 <span ng-switch="entry.sources.type">
-                    <point-link ng-switch-when="point" ng-repeat="point in entry.sources.points" type="'normal-point'" id-code="point.idCode" point-name="'「' + point.name + '」'"></point-link>
-                    <span ng-switch-when="publish"><point-link type="'user-name'" point-name="'@' + entry.author.username" id-code="entry.author.idCode"></point-link> 发布了这篇文章</span>
+                    <point-link ng-switch-when="point" ng-repeat="point in entry.sources.points" type="'point'" id-code="point.idCode" point-name="'「' + point.name + '」'"></point-link>
+                    <span ng-switch-when="publish"><point-link type="'user'" point-name="'@' + entry.author.username" id-code="entry.author.idCode"></point-link> 发布了这篇文章</span>
                     <span ng-switch-when="like">
                         <span ng-repeat="user in entry.sources.userArray">
-                            <point-link type="'user-name'" point-name="'@' + user.name" id-code="user.idCode"></point-link>
+                            <point-link type="'user'" point-name="'@' + user.name" id-code="user.idCode"></point-link>
                             <span ng-if="!$last">、</span>
                         </span>认同这篇文章</span>
                 </span>
@@ -93,7 +120,7 @@
             <span class="comment-target" ng-if="entry.commentTarget" ng-switch="entry.commentTarget.type">
                 回复
                 <span ng-switch-when="comment">
-                    <point-link type="'user-name'" point-name="'@' + entry.commentTarget.author.username" id-code="entry.commentTarget.author.idCode"></point-link>
+                    <point-link type="'user'" point-name="'@' + entry.commentTarget.author.username" id-code="entry.commentTarget.author.idCode"></point-link>
                     的评论
                     <a href="{{entry.commentTarget.url}}">「{{entry.commentTarget.text|maxLength:16}}」</a>
                 </span>
@@ -107,7 +134,7 @@
         <img src="assets/images/hit_final.png">
         <h1 class="font-myriad-keylol">未能撞到结果</h1>
     </div>
-    <svg xmlns="http://www.w3.org/2000/svg" ng-if="!data.searchNotFound" class="card-end">
+    <svg xmlns="http://www.w3.org/2000/svg" ng-if="!data.searchNotFound && !data.activePoints" class="card-end">
         <rect x="14" width="15" height="5"></rect>
     </svg>
 </div>

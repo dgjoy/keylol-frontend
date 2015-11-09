@@ -40,26 +40,32 @@
                             }).then(function (response) {
                                 var point = response.data;
                                 point.mainName = point[point.PreferedName + "Name"];
-                                point.votePercent = (point.PositiveArticleCount * 10 / (point.PositiveArticleCount + point.NegativeArticleCount)).toFixed(1);
-                                point.voteCircles = [{}, {}, {}, {}, {}];
-                                if (point.votePercent >= 8) {
-                                    for (var i in point.voteCircles) {
-                                        point.voteCircles[i].type = "awesome";
+                                if(point.PositiveArticleCount + point.NegativeArticleCount > 0){
+                                    point.votePercent = (point.PositiveArticleCount * 10 / (point.PositiveArticleCount + point.NegativeArticleCount)).toFixed(1);
+                                    point.voteCircles = [{}, {}, {}, {}, {}];
+                                    if (point.votePercent >= 8) {
+                                        for (var i in point.voteCircles) {
+                                            point.voteCircles[i].type = "awesome";
+                                        }
+                                    } else if (point.votePercent >= 6) {
+                                        for (var i = 0; i < 4; i++) {
+                                            point.voteCircles[i].type = "good";
+                                        }
+                                    } else if (point.votePercent >= 4) {
+                                        for (var i = 0; i < 3; i++) {
+                                            point.voteCircles[i].type = "not-bad";
+                                        }
+                                    } else if (point.votePercent >= 2) {
+                                        for (var i = 0; i < 2; i++) {
+                                            point.voteCircles[i].type = "bad";
+                                        }
+                                    } else {
+                                        point.voteCircles[0].type = "terrible"
                                     }
-                                } else if (point.votePercent >= 6) {
-                                    for (var i = 0; i < 4; i++) {
-                                        point.voteCircles[i].type = "good";
-                                    }
-                                } else if (point.votePercent >= 4) {
-                                    for (var i = 0; i < 3; i++) {
-                                        point.voteCircles[i].type = "not-bad";
-                                    }
-                                } else if (point.votePercent >= 2) {
-                                    for (var i = 0; i < 2; i++) {
-                                        point.voteCircles[i].type = "bad";
-                                    }
-                                } else {
-                                    point.voteCircles[0].type = "terrible"
+                                }else {
+                                    point.votePercent = "N/A";
+                                    point.voteCircles = [{}, {}, {}, {}, {}];
+                                    point.noVotes = true;
                                 }
                                 $.extend(union.point, point);
                             }, function (error) {

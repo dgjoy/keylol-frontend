@@ -5,7 +5,7 @@
         "$scope", "idCode", "type", "$timeout", "$http", "utils", "notification", "union",
         function ($scope, idCode, type, $timeout, $http, utils, notification, union) {
             $scope.loading = true;
-            if (type === "normal-point") {
+            if (type === "point") {
                 if (!union.pointCards) {
                     union.pointCards = {};
                 }

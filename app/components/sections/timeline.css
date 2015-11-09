@@ -183,6 +183,85 @@
 }
 
 /* ----- */
+/* default */
+/* ----- */
+
+.section-timeline .default .clipart {
+    width: 100%;
+}
+
+.section-timeline .default>h1 {
+    margin: 20px 60px 0 0;
+    text-align: right;
+    color: #11254A;
+    font-size: 24px;
+    font-weight: normal;
+}
+
+.section-timeline .default>h3 {
+    margin: 10px 80px 0 0;
+    text-align: right;
+    color: #C7CDD1;
+    font-size: 15px;
+    font-weight: normal;
+}
+
+.section-timeline .default ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.section-timeline .default li {
+    padding: 10px;
+    float: left;
+    width: 193.33px;
+    height: 32px;
+}
+
+.section-timeline .default li .avatar-anchor {
+    float: left;
+}
+
+.section-timeline .default li .avatar-anchor img {
+    width: 32px;
+    height: 32px;
+}
+
+.section-timeline .default li .title {
+    float: left;
+    margin-left: 14px;
+}
+
+.section-timeline .default li .title p {
+    margin: 0;
+    line-height: 16px;
+}
+
+.section-timeline .default li .title p:first-of-type {
+    color: #11254A;
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 140px;
+}
+
+.section-timeline .default li .title p span {
+    color: #748a97;
+}
+
+.section-timeline .default li.search .fake-input {
+    display: inline-block;
+    width: 128px;
+    height: 25px;
+    border-radius: 5px;
+    background-color: white;
+    cursor: text;
+    margin-top: 3.5px;
+}
+
+/* ----- */
 /* Entry */
 /* ----- */
 
