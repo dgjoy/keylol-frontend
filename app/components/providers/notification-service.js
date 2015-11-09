@@ -56,16 +56,25 @@
                     });
                 };
 
-                self.error = function (message, error) {
-                    if(error){
-                        console.error(error);
+                self.error = function (messageOrModelStateError, error) {
+                    if (typeof messageOrModelStateError === "string") { // Is message
+                        if (error) {
+                            console.error(error);
+                        }
+                        return self.show({
+                            type: "error",
+                            title: "错误",
+                            subtitle: "Error",
+                            message: messageOrModelStateError
+                        });
                     }
-                    return self.show({
-                        type: "error",
-                        title: "错误",
-                        subtitle: "Error",
-                        message: message
-                    });
+                    // Is model state error
+                    for (var error in messageOrModelStateError.ModelState) {
+                        if (messageOrModelStateError.ModelState.hasOwnProperty(error) && typeof(error) !== "function") {
+                            self.error(messageOrModelStateError.ModelState[error][0]);
+                            break;
+                        }
+                    }
                 };
 
                 self.attention = function (message, actions) {

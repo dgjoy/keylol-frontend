@@ -1,5 +1,5 @@
 <form ng-submit="submit()">
-    <ul class="clearfix list-inline">
+    <ul class="clearfix list-inline" ng-show="current > 0">
         <li ng-if="hasLeftEllipsis">
             <a ng-href="{{pageHref({page: 1})}}" ng-click="changePage(1)">1</a>
         </li><!--

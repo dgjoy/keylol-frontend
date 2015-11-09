@@ -1,0 +1,31 @@
+﻿<window position="center" class="window-point-list">
+    <div class="window">
+        <div class="window-exit-button" ng-click="cancel()">
+            <div ng-include="'assets/images/exit.svg'"></div>
+        </div>
+        <img class="secret-barcode" src="assets/images/secret-barcode-login.png" alt="条形码">
+        <div class="heading font-myriad-lisong">
+            <h1>据点列表</h1>
+            <h2>Points</h2>
+        </div>
+        <table>
+            <tr class="font-myriad-lisong">
+                <td><h3>识别码</h3></td>
+                <td><h3>中文名称</h3></td>
+                <td><h3>英文名称</h3></td>
+                <td><h3>文章数</h3></td>
+                <td><h3>读者数</h3></td>
+                <td><h3>操作</h3></td>
+            </tr>
+            <tr ng-repeat="point in points">
+                <td>{{point.IdCode}}</td>
+                <td>{{point.ChineseName}}</td>
+                <td>{{point.EnglishName}}</td>
+                <td>{{point.ArticleCount}}</td>
+                <td>{{point.SubscriberCount}}</td>
+                <td><a href="" ng-click="inline.editPoint(point)">编辑</a></td>
+            </tr>
+        </table>
+        <pagination total="inline.totalPages" current="inline.currentPage" on-page-changed="inline.onPageChange(newPage)" page-href=""></pagination>
+    </div>
+</window>

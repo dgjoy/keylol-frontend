@@ -2,24 +2,33 @@
     "use strict";
 
     keylolApp.controller("CreatePointController", [
-        "$scope", "close", "$http", "apiEndpoint", "utils", "notification",
-        function ($scope, close, $http, apiEndpoint, utils, notification) {
+        "$scope", "close", "$http", "apiEndpoint", "utils", "notification", "vm", "avatarUrlFilter",
+        function ($scope, close, $http, apiEndpoint, utils, notification, vm, avatarUrlFilter) {
             $scope.radioId = [utils.uniqueId(), utils.uniqueId(), utils.uniqueId(), utils.uniqueId()];
 
             var init = function () {
-                $scope.vm = {
-                    Type: "Game",
-                    ChineseName: "",
-                    EnglishName: "",
-                    ChineseAliases: "",
-                    EnglishAliases: "",
-                    IdCode: "",
-                    StoreLink: ""
-                };
-                $scope.inline = {
-                    avatarImageFull: "",
-                    backgroundImageFull: "",
-                    associatedPoints: []
+                if (vm) {
+                    $scope.vm = $.extend({}, vm);
+                    $scope.inline = {
+                        avatarImageFull: avatarUrlFilter(vm.AvatarImage),
+                        backgroundImageFull: "https://keylol.b0.upaiyun.com/" + vm.BackgroundImage,
+                        associatedPoints: vm.AssociatedPoints
+                    }
+                } else {
+                    $scope.vm = {
+                        Type: "Game",
+                        ChineseName: "",
+                        EnglishName: "",
+                        ChineseAliases: "",
+                        EnglishAliases: "",
+                        IdCode: "",
+                        StoreLink: ""
+                    };
+                    $scope.inline = {
+                        avatarImageFull: "",
+                        backgroundImageFull: "",
+                        associatedPoints: []
+                    }
                 }
             };
             init();
@@ -50,17 +59,34 @@
                     return;
                 }
                 $scope.vm.BackgroundImage = backgroundMatch[1];
-                if (!/(http:|https:)\/\/store\.steampowered\.com\/app\/(\d+)/i.test($scope.vm.StoreLink)) {
+                if ($scope.vm.Type === "Game" && !/(http:|https:)\/\/store\.steampowered\.com\/app\/(\d+)/i.test($scope.vm.StoreLink)) {
                     notification.error("商店链接输入有误，请检查");
                     return;
                 }
                 $scope.vm.IdCode = $scope.vm.IdCode.toUpperCase();
-                $http.post(apiEndpoint + "normal-point", $scope.vm).then(function () {
-                    notification.success("据点创建成功");
-                    init();
-                }, function (response) {
-                    notification.error("未知错误", response);
-                });
+                if (vm) {
+                    $http.put(apiEndpoint + "normal-point/" + $scope.vm.Id, $scope.vm).then(function () {
+                        notification.success("据点编辑成功");
+                        close();
+                    }, function (response) {
+                        if (response.status === 400) {
+                            notification.error(response.data);
+                        } else if (response.status === 404) {
+                            notification.error("指定据点不存在");
+                        }
+                    });
+                } else {
+                    $http.post(apiEndpoint + "normal-point", $scope.vm).then(function () {
+                        notification.success("据点创建成功");
+                        init();
+                    }, function (response) {
+                        if (response.status === 400) {
+                            notification.error(response.data);
+                        } else {
+                            notification.error("未知错误", response);
+                        }
+                    });
+                }
             };
         }
     ]);

@@ -1,0 +1,13 @@
+.window-point-list .window {
+    padding: 14px;
+    width: 900px;
+}
+
+.window-point-list .heading {
+    margin: 16px 0 28px;
+}
+
+.window-point-list table {
+    margin: 28px auto;
+    width: 100%;
+}
