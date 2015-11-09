@@ -8,7 +8,8 @@
     margin: 0 14px;
 }
 
-.window-editor input[type=text] {
+.window-editor input[type=text],
+.window-editor input-point {
     width: calc(100% - 28px);
     box-sizing: border-box;
     margin-left: 14px;

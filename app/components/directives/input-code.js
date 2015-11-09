@@ -34,9 +34,7 @@
 
                     ngModel.$render = function () {
                         for (var k = 0; k < scope.length; k++) {
-                            if (ngModel.$viewValue) {
-                                scope.text[k] = ngModel.$viewValue[k];
-                            }
+                            scope.text[k] = ngModel.$viewValue[k];
                         }
                     };
 

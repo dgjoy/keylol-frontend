@@ -5,6 +5,7 @@
         "pageTitle", "$scope", "union", "$http", "notification", "window",
         function (pageTitle, $scope, union, $http, notification, window) {
             pageTitle.set("其乐");
+            $scope.union = union;
             union.timeline = {
                 title: {
                     mainTitle: "讯息轨道",

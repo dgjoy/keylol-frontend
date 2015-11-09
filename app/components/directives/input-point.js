@@ -12,12 +12,10 @@
                 },
                 require: "ngModel",
                 link: function (scope, element, attrs, ngModel) {
-                    scope.pointArray = [];
                     ngModel.$render = function () {
-                        if (ngModel.$viewValue) {
-                            for (var i = 0; i < ngModel.$viewValue.length; i++) {
-                                scope.pointArray.push(ngModel.$viewValue[i]);
-                            }
+                        scope.pointArray = [];
+                        for (var i = 0; i < ngModel.$viewValue.length; i++) {
+                            scope.pointArray.push(ngModel.$viewValue[i]);
                         }
                     };
 
