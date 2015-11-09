@@ -5,8 +5,8 @@
     "use strict";
 
     keylolApp.controller("CommentsController", [
-        "pageTitle", "$scope", "union", "$http", "notification",
-        function (pageTitle, $scope, union, $http, notification) {
+        "pageTitle", "$scope", "union", "$http", "notification", "utils",
+        function (pageTitle, $scope, union, $http, notification, utils) {
             pageTitle.set("评论 - 其乐");
             union.summary = {
                 head: {
@@ -78,10 +78,10 @@
                     params: {
                         type: "Sent",
                         skip: skip,
-                        take: timeLineLoadCount
+                        take: utils.timelineLoadCount
                     }
                 }).then(function (response) {
-                    union.timeline.noMoreArticle = response.data.length < timeLineLoadCount;
+                    union.timeline.noMoreArticle = response.data.length < utils.timelineLoadCount;
                     for (var i in response.data) {
                         var comment = response.data[i];
                         var result = {
@@ -113,11 +113,12 @@
                         }
                         union.timeline.entries.push(result);
                     }
+                }, function (error) {
+                    notification.error("未知错误", error);
+                }).finally(function () {
                     if (callback) {
                         callback();
                     }
-                }, function (error) {
-                    notification.error("未知错误", error);
                 });
             }
 
@@ -129,10 +130,10 @@
                 $http.get(apiEndpoint + "comment/my", {
                     params: {
                         skip: skip,
-                        take: timeLineLoadCount
+                        take: utils.timelineLoadCount
                     }
                 }).then(function (response) {
-                    union.timeline.noMoreArticle = response.data.length < timeLineLoadCount;
+                    union.timeline.noMoreArticle = response.data.length < utils.timelineLoadCount;
                     for (var i in response.data) {
                         var comment = response.data[i];
                         var result = {
@@ -165,11 +166,12 @@
                         }
                         union.timeline.entries.push(result);
                     }
+                }, function (error) {
+                    notification.error("未知错误", error);
+                }).finally(function () {
                     if (callback) {
                         callback();
                     }
-                }, function (error) {
-                    notification.error("未知错误", error);
                 });
             }
         }

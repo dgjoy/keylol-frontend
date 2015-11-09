@@ -63,86 +63,104 @@
             };
             switch ($routeParams.searchType) {
                 case "point":
-                    union.timeline.loadAction = function (params, callback) {
-                    };
                     union.timeline.actions[0].active = true;
-                    $http.get(apiEndpoint + "normal-point/keyword/" + encodeURIComponent($routeParams.keyword), {
-                        params: {
-                            full: true,
-                            take: 50
-                        }
-                    }).then(function (response) {
-                        var totalRecordCount = response.headers("X-Total-Record-Count");
-                        union.summary.defaultSum.text = "找到 " + totalRecordCount + " 个符合的项目";
-                        if (totalRecordCount > 0) {
-                            union.summary.background = response.data[0].BackgroundImage;
-                            union.timeline.searchNotFound = false;
-                            for (var i in response.data) {
-                                var point = response.data[i];
-                                var result = {
-                                    types: [utils.getPointType(point.Type)],
-                                    pointInfo: {
-                                        reader: point.SubscriberCount,
-                                        article: point.ArticleCount
-                                    },
-                                    pointAvatar: point.AvatarImage,
-                                    url: "point/" + point.IdCode,
-                                    subscribed: point.Subscribed,
-                                    id: point.Id
-                                };
-                                result.title = utils.getPointFirstName(point);
-                                result.summary = utils.getPointSecondName(point);
-                                union.timeline.entries.push(result);
+                    union.timeline.loadAction = function (callback) {
+                        var skip = union.timeline.entries.length;
+                        $http.get(apiEndpoint + "normal-point/keyword/" + encodeURIComponent($routeParams.keyword), {
+                            params: {
+                                full: true,
+                                skip: skip,
+                                take: utils.timelineLoadCount
                             }
-                        }
-                    }, function (error) {
-                        notification.error("未知错误", error);
-                    });
+                        }).then(function (response) {
+                            var totalRecordCount = response.headers("X-Total-Record-Count");
+                            union.summary.defaultSum.text = "找到 " + totalRecordCount + " 个符合的项目";
+                            union.timeline.noMoreArticle = response.data.length < utils.timelineLoadCount;
+                            if (totalRecordCount > 0) {
+                                if (!skip)
+                                    union.summary.background = response.data[0].BackgroundImage;
+                                union.timeline.searchNotFound = false;
+                                for (var i in response.data) {
+                                    var point = response.data[i];
+                                    var result = {
+                                        types: [utils.getPointType(point.Type)],
+                                        pointInfo: {
+                                            reader: point.SubscriberCount,
+                                            article: point.ArticleCount
+                                        },
+                                        pointAvatar: point.AvatarImage,
+                                        url: "point/" + point.IdCode,
+                                        subscribed: point.Subscribed,
+                                        id: point.Id
+                                    };
+                                    result.title = utils.getPointFirstName(point);
+                                    result.summary = utils.getPointSecondName(point);
+                                    union.timeline.entries.push(result);
+                                }
+                            }
+                        }, function (error) {
+                            notification.error("未知错误", error);
+                        }).finally(function () {
+                            if (callback) {
+                                callback();
+                            }
+                        });
+                    };
+                    union.timeline.loadAction();
                     break;
                 case "article":
-                    union.timeline.loadAction = function (params, callback) {
-                    };
                     union.timeline.actions[1].active = true;
-                    $http.get(apiEndpoint + "article/keyword/" + encodeURIComponent($routeParams.keyword), {
-                        params: {
-                            full: true,
-                            take: 50
-                        }
-                    }).then(function (response) {
-                        var totalRecordCount = response.headers("X-Total-Record-Count");
-                        union.summary.defaultSum.text = "找到 " + totalRecordCount + " 个符合的项目";
-                        if (totalRecordCount > 0) {
-                            union.summary.background = response.data[0].AuthorProfilePointBackgroundImage;
-                            union.timeline.searchNotFound = false;
-                            for (var i in response.data) {
-                                var article = response.data[i];
-                                var result = {
-                                    types: [article.TypeName],
-                                    author: {
-                                        username: article.Author.UserName,
-                                        avatarUrl: article.Author.AvatarImage,
-                                        idCode: article.Author.IdCode
-                                    },
-                                    sequenceNumber: article.SequenceNumber,
-                                    datetime: article.PublishTime,
-                                    title: article.Title,
-                                    summary: article.Content,
-                                    thumbnail: article.ThumbnailImage,
-                                    url: "/article/" + article.Author.IdCode + "/" + article.SequenceNumberForAuthor,
-                                    count: {
-                                        like: article.LikeCount,
-                                        comment: article.CommentCount
-                                    }
-                                };
-                                union.timeline.entries.push(result);
+                    union.timeline.loadAction = function (callback) {
+                        var skip = union.timeline.entries.length;
+                        $http.get(apiEndpoint + "article/keyword/" + encodeURIComponent($routeParams.keyword), {
+                            params: {
+                                full: true,
+                                skip: skip,
+                                take: utils.timelineLoadCount
                             }
-                        }
-                    }, function (error) {
-                        notification.error("未知错误", error);
-                    });
+                        }).then(function (response) {
+                            var totalRecordCount = response.headers("X-Total-Record-Count");
+                            union.summary.defaultSum.text = "找到 " + totalRecordCount + " 个符合的项目";
+                            union.timeline.noMoreArticle = response.data.length < utils.timelineLoadCount;
+                            if (totalRecordCount > 0) {
+                                if (!skip)
+                                    union.summary.background = response.data[0].AuthorProfilePointBackgroundImage;
+                                union.timeline.searchNotFound = false;
+                                for (var i in response.data) {
+                                    var article = response.data[i];
+                                    var result = {
+                                        types: [article.TypeName],
+                                        author: {
+                                            username: article.Author.UserName,
+                                            avatarUrl: article.Author.AvatarImage,
+                                            idCode: article.Author.IdCode
+                                        },
+                                        sequenceNumber: article.SequenceNumber,
+                                        datetime: article.PublishTime,
+                                        title: article.Title,
+                                        summary: article.Content,
+                                        thumbnail: article.ThumbnailImage,
+                                        url: "/article/" + article.Author.IdCode + "/" + article.SequenceNumberForAuthor,
+                                        count: {
+                                            like: article.LikeCount,
+                                            comment: article.CommentCount
+                                        }
+                                    };
+                                    union.timeline.entries.push(result);
+                                }
+                            }
+                        }, function (error) {
+                            notification.error("未知错误", error);
+                        }).finally(function () {
+                            if (callback) {
+                                callback();
+                            }
+                        });
+                    };
+                    union.timeline.loadAction();
                     break;
                 case "user":
-                    union.timeline.loadAction = function (params, callback) {
+                    union.timeline.loadAction = function () {
                     };
                     union.timeline.actions[2].active = true;
                     $http.get(apiEndpoint + "user/" + encodeURIComponent($routeParams.keyword), {

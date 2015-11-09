@@ -97,11 +97,11 @@
                     $http.get(apiEndpoint + "article/user/" + $routeParams.userIdCode, {
                         params: {
                             idType: "IdCode",
-                            take: timeLineLoadCount
+                            take: utils.timelineLoadCount
                         }
                     }).then(function (response) {
                         var articleList = response.data;
-                        union.timeline.noMoreArticle = articleList.length < timeLineLoadCount;
+                        union.timeline.noMoreArticle = articleList.length < utils.timelineLoadCount;
 
                         /**
                          * 对于请求回来的文章列表做一系列处理并按照用户据点的文章格式储存在 union.timeline.entries 中
@@ -265,11 +265,11 @@
                 $http.get(apiEndpoint + "article/point/" + $routeParams.pointIdCode, {
                     params: {
                         idType: "IdCode",
-                        take: timeLineLoadCount
+                        take: utils.timelineLoadCount
                     }
                 }).then(function (response) {
                     var articleList = response.data;
-                    union.timeline.noMoreArticle = articleList.length < timeLineLoadCount;
+                    union.timeline.noMoreArticle = articleList.length < utils.timelineLoadCount;
 
                     for (var i in articleList) {
                         var article = articleList[i];

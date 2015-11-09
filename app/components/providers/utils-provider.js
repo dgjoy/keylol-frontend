@@ -233,6 +233,8 @@
                                 .replace(/"/g, "&quot;")
                                 .replace(/'/g, "&#039;");
                         };
+
+                        self.timelineLoadCount = 20;
                     }
 
                     return new Utils();

@@ -2,8 +2,8 @@
     "use strict";
 
     keylolApp.controller("TimelineController", [
-        "$scope", "union", "$location", "$http", "$rootScope", "$element", "articleTypes", "notification",
-        function ($scope, union, $location, $http, $rootScope, $element, articleTypes, notification) {
+        "$scope", "union", "$location", "$http", "$rootScope", "$element", "articleTypes", "notification", "utils",
+        function ($scope, union, $location, $http, $rootScope, $element, articleTypes, notification, utils) {
             $scope.headingDisplayMode = function (entry) {
                 if (entry.source)
                     return "source";
@@ -132,14 +132,14 @@
                     $scope.data.loadAction({
                         idType: "IdCode",
                         articleTypeFilter: filters,
-                        take: timeLineLoadCount,
+                        take: utils.timelineLoadCount,
                         beforeSN: beforeSN
                     }, function (response) {
                         var articleList = response.data;
                         if (!isLoadingMore) {
                             $scope.data.entries.length = 0;
                         }
-                        $scope.data.noMoreArticle = articleList.length < timeLineLoadCount;
+                        $scope.data.noMoreArticle = articleList.length < utils.timelineLoadCount;
 
                         for (var i in articleList) {
                             var article = articleList[i];
