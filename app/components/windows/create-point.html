@@ -1,0 +1,143 @@
+﻿<window position="center" class="window-create-point">
+    <div class="window">
+        <div class="window-exit-button" ng-click="cancel()">
+            <div ng-include="'assets/images/exit.svg'"></div>
+        </div>
+        <img class="secret-barcode" src="assets/images/secret-barcode-login.png" alt="条形码">
+        <div class="heading">
+            <h1 style="font-family: STHupo">开设据点</h1>
+            <h2>这是你要的开设据点 这是你要的开设据点 这是你要的开设据点 这是你要的开设据点</h2>
+        </div>
+        <form class="clearfix" ng-submit="submit()">
+            <table>
+                <colgroup>
+                    <col style="width: 30%">
+                    <col style="width: 70%">
+                </colgroup>
+                <tbody>
+                <tr>
+                    <td>
+                        <h3 style="font-family: STHupo">据点类型</h3>
+                        <h4>
+                            <span>据点的类型。</span>
+                        </h4>
+                    </td>
+                    <td>
+                        <input type="radio" id="radio-{{radioId[0]}}" ng-model="vm.Type" ng-value="'Game'" name="type"><label for="radio-{{radioId[0]}}">游戏</label>
+                        <input type="radio" id="radio-{{radioId[1]}}" ng-model="vm.Type" ng-value="'Genre'" name="type"><label for="radio-{{radioId[1]}}">类型</label>
+                        <input type="radio" id="radio-{{radioId[2]}}" ng-model="vm.Type" ng-value="'Manufacturer'" name="type"><label for="radio-{{radioId[2]}}">厂商</label>
+                        <input type="radio" id="radio-{{radioId[3]}}" ng-model="vm.Type" ng-value="'Platform'" name="type"><label for="radio-{{radioId[3]}}">平台</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h3 style="font-family: STHupo">中文名称</h3>
+                        <h4>
+                            <span>据点的中文名称或译名。</span>
+                        </h4>
+                    </td>
+                    <td>
+                        <input type="text" ng-model="vm.ChineseName">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h3 style="font-family: STHupo">英文名称</h3>
+                        <h4>
+                            <span>据点的英文名称。</span>
+                        </h4>
+                    </td>
+                    <td>
+                        <input type="text" ng-model="vm.EnglishName">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h3 style="font-family: STHupo">中文别名</h3>
+                        <h4>
+                            <span>便于检索的别名，用半角逗号分隔。</span>
+                        </h4>
+                    </td>
+                    <td>
+                        <input type="text" ng-model="vm.ChineseAliases">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h3 style="font-family: STHupo">英文别名</h3>
+                        <h4>
+                            <span>便于检索的别名，用半角逗号分隔。</span>
+                        </h4>
+                    </td>
+                    <td>
+                        <input type="text" ng-model="vm.EnglishAliases">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h3 style="font-family: STHupo">唯一识别码</h3>
+                        <h4>
+                            <span>biu~ biu~ biu~</span>
+                        </h4>
+                    </td>
+                    <td>
+                        <input-code length="5" ng-model="vm.IdCode"></input-code>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h3 style="font-family: STHupo">商店链接</h3>
+                        <h4>
+                            <span>商店链接，会自动转换 SteamDB 链接。</span>
+                        </h4>
+                    </td>
+                    <td>
+                        <input type="text" ng-model="vm.StoreLink">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h3 style="font-family: STHupo">据点头像</h3>
+                        <h4>
+                            <span>输入据点头像链接。</span>
+                        </h4>
+                    </td>
+                    <td>
+                        <input type="text" ng-model="inline.avatarImageFull">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h3 style="font-family: STHupo">据点背景图</h3>
+                        <h4>
+                            <span>输入据点背景图链接。</span>
+                        </h4>
+                    </td>
+                    <td>
+                        <input type="text" ng-model="inline.backgroundImageFull">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h3 style="font-family: STHupo">关联据点</h3>
+                        <h4>
+                            <span>输入据点的关联据点。</span>
+                        </h4>
+                    </td>
+                    <td>
+                        <input-point ng-model="inline.associatedPoints"></input-point>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <button type="submit" class="window-confirm-button">
+                <img class="arrow-right" src="assets/images/arrow-right.png" alt="下一步">
+                <img class="signature-pen" src="assets/images/signature-pen.png" alt="提交">
+                <hgroup style="font-family: STHupo">
+                    <h1>点我</h1>
+                    <h2>Click Me</h2>
+                </hgroup>
+            </button>
+        </form>
+    </div>
+</window>

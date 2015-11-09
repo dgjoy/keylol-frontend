@@ -142,15 +142,15 @@
                     $scope.data.loadAction({
                         idType: "IdCode",
                         articleTypeFilter: filters,
-                        take: timeLineLoadCount,
-                        beforeSN: beforeSN,
-                        publishOnly: $scope.data.publishOnly
+                        publishOnly: $scope.data.publishOnly,
+                        take: utils.timelineLoadCount,
+                        beforeSN: beforeSN
                     }, function (response) {
                         var articleList = response.data;
                         if (!isLoadingMore) {
                             $scope.data.entries.length = 0;
                         }
-                        $scope.data.noMoreArticle = articleList.length < timeLineLoadCount;
+                        $scope.data.noMoreArticle = articleList.length < utils.timelineLoadCount;
 
                         for (var i in articleList) {
                             var article = articleList[i];

@@ -5,8 +5,8 @@
     "use strict";
 
     keylolApp.controller("AcknowledgementsController", [
-        "pageTitle", "$scope", "union", "$http", "notification",
-        function (pageTitle, $scope, union, $http, notification) {
+        "pageTitle", "$scope", "union", "$http", "notification", "utils",
+        function (pageTitle, $scope, union, $http, notification, utils) {
             pageTitle.set("认可 - 其乐");
             union.summary = {
                 actions: [],
@@ -91,7 +91,7 @@
                     params: {
                         type: type,
                         skip: skip,
-                        take: timeLineLoadCount
+                        take: utils.timelineLoadCount
                     }
                 }).then(function(response){
                     for(var i in response.data){
