@@ -8,7 +8,7 @@
 
 .section-spotlight-banner .banner {
     width: 200px;
-    height: 91px;
+    height: 90px;
     display: inline-block;
     background-color: white;
 }
@@ -19,4 +19,9 @@
 
 .section-spotlight-banner .banner:not(:last-of-type) {
     margin-right: 20px;
+}
+
+.section-spotlight-banner .banner img {
+    width: 100%;
+    height: 100%;
 }
