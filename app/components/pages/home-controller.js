@@ -145,6 +145,7 @@
                     },function(error){
                         notification.error("未知错误", error);
                     });
+                    union.timeline.loadingLock = false;
                 }
 
             }, function (error) {
