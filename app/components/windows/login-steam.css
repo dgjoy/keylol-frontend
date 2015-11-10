@@ -12,6 +12,10 @@
     padding: 20px 0 30px 20px;
 }
 
+.window-login-steam .steps a {
+    color: #738a95;
+}
+
 .window-login-steam .steps {
     background-color: white;
     padding: 8px 5%;
