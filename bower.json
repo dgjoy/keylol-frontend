@@ -10,7 +10,7 @@
     "angular": "~1.4.5",
     "angular-animate": "~1.4.7",
     "angular-i18n": "~1.4.5",
-    "angular-moment": "~0.10.3",
+    "angular-moment": "stackia/angular-moment#b67628f0b5672d0744760afb5f6767fab8752ca1",
     "angular-route": "~1.4.5",
     "angular-utf8-base64": "~0.0.5",
     "jquery": "~2.1.4",

@@ -14,8 +14,10 @@
                 link: function (scope, element, attrs, ngModel) {
                     ngModel.$render = function () {
                         scope.pointArray = [];
-                        for (var i = 0; i < ngModel.$viewValue.length; i++) {
-                            scope.pointArray.push(ngModel.$viewValue[i]);
+                        if (ngModel.$viewValue) {
+                            for (var i = 0; i < ngModel.$viewValue.length; i++) {
+                                scope.pointArray.push(ngModel.$viewValue[i]);
+                            }
                         }
                     };
 

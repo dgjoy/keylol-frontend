@@ -56,10 +56,10 @@
             });
 
             $scope.$watch("selectedTypeIndex", function (newValue) {
-                $scope.vm.TypeName = articleTypes[$scope.selectedTypeIndex].name;
+                $scope.vm.TypeName = articleTypes[newValue].name;
             });
 
-            var autoSaveTimeout = $timeout($scope.saveDraft, 30000);
+            var autoSaveTimeout;
             $scope.saveDraft = function () {
                 $timeout.cancel(autoSaveTimeout);
                 $scope.lastSaveTime = moment();
@@ -72,6 +72,7 @@
                 };
                 autoSaveTimeout = $timeout($scope.saveDraft, 30000);
             };
+            autoSaveTimeout = $timeout($scope.saveDraft, 30000);
 
             $scope.expand = function ($event) {
                 $scope.expanded = !$scope.expanded;
@@ -101,6 +102,7 @@
                     {action: "取消"}
                 ]).then(function (result) {
                     if (result) {
+                        $scope.saveDraft();
                         $timeout.cancel(autoSaveTimeout);
                         close();
                     }

@@ -78,8 +78,11 @@
     ]);
     app.constant("amTimeAgoConfig", {
         fullDateThreshold: 1,
-        fullDateFormat: "YYYY-MM-DD hh:mm",
-        titleFormat: "YYYY-MM-DD hh:mm:ss"
+        fullDateFormat: "YYYY-MM-DD HH:mm",
+        titleFormat: "YYYY-MM-DD HH:mm:ss"
+    });
+    app.constant("angularMomentConfig", {
+        timezone: "+0800"
     });
 
     window.keylolApp = app;
