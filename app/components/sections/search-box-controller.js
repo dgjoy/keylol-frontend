@@ -27,7 +27,7 @@
                     controller: "SearchSelectorController",
                     attachSide: "bottom",
                     event: $event,
-                    align: "left",
+                    align: "right",
                     inputs: {
                         options: searchSelectorOptions
                     }
