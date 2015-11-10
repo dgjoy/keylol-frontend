@@ -4,7 +4,10 @@
     keylolApp.controller("CreatePointController", [
         "$scope", "close", "$http", "apiEndpoint", "utils", "notification", "vm", "avatarUrlFilter",
         function ($scope, close, $http, apiEndpoint, utils, notification, vm, avatarUrlFilter) {
-            $scope.radioId = [utils.uniqueId(), utils.uniqueId(), utils.uniqueId(), utils.uniqueId()];
+            $scope.radioId = [];
+            for (var i = 0; i < 6; ++i) {
+                $scope.radioId.push(utils.uniqueId());
+            }
 
             var init = function () {
                 if (vm) {
@@ -19,6 +22,7 @@
                         Type: "Game",
                         ChineseName: "",
                         EnglishName: "",
+                        PreferredName: "Chinese",
                         ChineseAliases: "",
                         EnglishAliases: "",
                         IdCode: "",
@@ -74,6 +78,7 @@
                 if (vm) {
                     $http.put(apiEndpoint + "normal-point/" + $scope.vm.Id, $scope.vm).then(function () {
                         notification.success("据点编辑成功");
+                        $.extend(vm, $scope.vm);
                         close();
                     }, function (response) {
                         if (response.status === 400) {

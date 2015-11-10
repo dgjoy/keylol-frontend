@@ -20,7 +20,7 @@
                         article.sqNumberForAuthor = $routeParams.article;
                         pageTitle.set(article.Title + " - 其乐");
                         for (var i in article.AttachedPoints) {
-                            article.AttachedPoints[i].mainName = article.AttachedPoints[i][article.AttachedPoints[i].PreferedName + "Name"];
+                            article.AttachedPoints[i].mainName = article.AttachedPoints[i][article.AttachedPoints[i].PreferredName + "Name"];
                         }
                         article.isMyArticle = (union.$localStorage.user.IdCode == $routeParams.author);
                         if (article.Vote) {
@@ -39,7 +39,7 @@
                                 }
                             }).then(function (response) {
                                 var point = response.data;
-                                point.mainName = point[point.PreferedName + "Name"];
+                                point.mainName = point[point.PreferredName + "Name"];
                                 if(point.PositiveArticleCount + point.NegativeArticleCount > 0){
                                     point.votePercent = (point.PositiveArticleCount * 10 / (point.PositiveArticleCount + point.NegativeArticleCount)).toFixed(1);
                                     point.voteCircles = [{}, {}, {}, {}, {}];

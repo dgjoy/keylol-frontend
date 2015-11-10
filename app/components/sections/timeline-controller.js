@@ -193,7 +193,7 @@
                                     entry.sources.points = [];
                                     for (var k in article.AttachedPoints) {
                                         entry.sources.points.push({
-                                            name: article.AttachedPoints[k][article.AttachedPoints[k].PreferedName + "Name"],
+                                            name: article.AttachedPoints[k][article.AttachedPoints[k].PreferredName + "Name"],
                                             idCode: article.AttachedPoints[k].IdCode
                                         });
                                     }

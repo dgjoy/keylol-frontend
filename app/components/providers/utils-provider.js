@@ -106,13 +106,13 @@
                         };
 
                         self.getPointFirstName = function (point) {
-                            return point[point.PreferedName + "Name"];
+                            return point[point.PreferredName + "Name"];
                         };
 
                         self.getPointSecondName = function (point) {
-                            if (point.PreferedName === "Chinese")
+                            if (point.PreferredName === "Chinese")
                                 return point.EnglishName;
-                            else if (point.PreferedName === "English")
+                            else if (point.PreferredName === "English")
                                 return point.ChineseName;
                         };
 

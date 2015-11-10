@@ -102,7 +102,7 @@
                                     entry.sources.points = [];
                                     for (var j in article.AttachedPoints) {
                                         entry.sources.points.push({
-                                            name: article.AttachedPoints[j][article.AttachedPoints[j].PreferedName + "Name"],
+                                            name: article.AttachedPoints[j][article.AttachedPoints[j].PreferredName + "Name"],
                                             idCode: article.AttachedPoints[j].IdCode
                                         });
                                     }

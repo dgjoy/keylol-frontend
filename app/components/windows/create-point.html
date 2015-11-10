@@ -53,6 +53,18 @@
                 </tr>
                 <tr>
                     <td>
+                        <h3 class="font-myriad-lisong">名称偏好</h3>
+                        <h4>
+                            <span>据点主名称显示方式。</span>
+                        </h4>
+                    </td>
+                    <td>
+                        <input type="radio" id="radio-{{radioId[4]}}" ng-model="vm.PreferredName" ng-value="'Chinese'" name="preferredName"><label for="radio-{{radioId[4]}}">中文</label>
+                        <input type="radio" id="radio-{{radioId[5]}}" ng-model="vm.PreferredName" ng-value="'English'" name="preferredName"><label for="radio-{{radioId[5]}}">英文</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
                         <h3 class="font-myriad-lisong">中文别名</h3>
                         <h4>
                             <span>便于检索的别名，用半角逗号分隔。</span>

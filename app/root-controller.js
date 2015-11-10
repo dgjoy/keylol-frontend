@@ -29,8 +29,14 @@
                 if (newLogin) {
                     getUserInfo();
                 } else {
-                    delete union.$localStorage.user;
-                    delete union.$localStorage.recentBrowse;
+                    for (var i in union.$localStorage) {
+                        if (union.$localStorage.hasOwnProperty(i) && i.indexOf("$") !== 0)
+                            delete union.$localStorage[i];
+                    }
+                    for (var j in union.$sessionStorage) {
+                        if (union.$sessionStorage.hasOwnProperty(j) && j.indexOf("$") !== 0)
+                            delete union.$sessionStorage[j];
+                    }
                     $location.url("/");
                 }
             });
