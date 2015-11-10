@@ -2,8 +2,8 @@
     "use strict";
 
     keylolApp.controller("CreatePointController", [
-        "$scope", "close", "$http", "apiEndpoint", "utils", "notification", "vm", "avatarUrlFilter",
-        function ($scope, close, $http, apiEndpoint, utils, notification, vm, avatarUrlFilter) {
+        "$scope", "close", "$http", "apiEndpoint", "utils", "notification", "vm",
+        function ($scope, close, $http, apiEndpoint, utils, notification, vm) {
             $scope.radioId = [];
             for (var i = 0; i < 6; ++i) {
                 $scope.radioId.push(utils.uniqueId());
@@ -13,7 +13,7 @@
                 if (vm) {
                     $scope.vm = $.extend({}, vm);
                     $scope.inline = {
-                        avatarImageFull: avatarUrlFilter(vm.AvatarImage),
+                        avatarImageFull: "https://keylol.b0.upaiyun.com/" + vm.AvatarImage.match(/keylol:\/\/avatars\/(.*)/i)[1],
                         backgroundImageFull: "https://keylol.b0.upaiyun.com/" + vm.BackgroundImage,
                         associatedPoints: vm.AssociatedPoints
                     }
@@ -69,7 +69,7 @@
                     return;
                 }
                 $scope.vm.BackgroundImage = backgroundMatch[1];
-                if ($scope.vm.Type === "Game" && !/(http:|https:)\/\/store\.steampowered\.com\/app\/(\d+)/i.test($scope.vm.StoreLink)) {
+                if ($scope.vm.Type === "Game" && !/^http:\/\/store\.steampowered\.com\/app\/(\d+)\//i.test($scope.vm.StoreLink)) {
                     notification.error("商店链接输入有误，请检查");
                     submitLock = false;
                     return;
