@@ -251,15 +251,15 @@
 .section-timeline .default li .title p {
     margin: 0;
     line-height: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 140px;
 }
 
 .section-timeline .default li .title p:first-of-type {
     color: #11254A;
     font-weight: bold;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    width: 140px;
 }
 
 .section-timeline .default li .title p span {
