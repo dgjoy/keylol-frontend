@@ -329,7 +329,6 @@
                     if (result) {
                         $http.delete(apiEndpoint + "login/current").then(function () {
                             delete union.$localStorage.login;
-                            delete union.$localStorage.recentBrowse;
                             notification.success("已登出当前账户");
                             close();
                         }, function (response) {

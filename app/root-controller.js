@@ -30,6 +30,7 @@
                     getUserInfo();
                 } else {
                     delete union.$localStorage.user;
+                    delete union.$localStorage.recentBrowse;
                     $location.url("/");
                 }
             });
