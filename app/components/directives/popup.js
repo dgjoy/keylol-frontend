@@ -83,11 +83,12 @@
                                     });
 
                                     windowPromise.then(function (window) {
+                                        var popupWidth = window.$element.innerWidth();
+                                        var popupHeight = window.$element.innerHeight();
+                                        window.$element.hide();
                                         var position = element.offset();
                                         var width = element.innerWidth();
                                         var height = element.innerHeight();
-                                        var popupWidth = window.$element.innerWidth();
-                                        var popupHeight = window.$element.innerHeight();
 
                                         if (options.attachSide === "left" || options.attachSide === "right") {
                                             switch (options.align) {
@@ -129,6 +130,7 @@
                                         position.left += options.offsetX;
                                         position.top += options.offsetY;
                                         window.$element.css(position);
+                                        window.$element.show();
                                     });
 
                                     if (options.event) {

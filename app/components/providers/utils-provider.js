@@ -235,6 +235,14 @@
                         };
 
                         self.timelineLoadCount = 20;
+
+                        self.firefoxLinkFix = function (event) {
+                            if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
+                                var newWindow = window.open($(event.currentTarget).attr("href"), "newwindow", "width=300, height=250");
+                                newWindow.close();
+                                event.preventDefault();
+                            }
+                        };
                     }
 
                     return new Utils();

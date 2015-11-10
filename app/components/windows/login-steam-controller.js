@@ -2,13 +2,14 @@
     "use strict";
 
     keylolApp.controller("LoginSteamController", [
-        "$scope", "close", "$http", "apiEndpoint", "window", "union", "$timeout", "notification",
-        function ($scope, close, $http, apiEndpoint, window, union, $timeout, notification) {
+        "$scope", "close", "$http", "apiEndpoint", "window", "union", "$timeout", "notification", "utils",
+        function ($scope, close, $http, apiEndpoint, window, union, $timeout, notification, utils) {
             var connection = $.connection.new();
             var steamLoginHubProxy = connection.steamLoginHub;
             var tokenId;
 
             $scope.currentStation = 0;
+            $scope.utils = utils;
 
             $scope.cancel = function () {
                 close();

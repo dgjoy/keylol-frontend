@@ -2,14 +2,15 @@
     "use strict";
 
     keylolApp.controller("SteamConnectController", [
-        "$scope", "close", "$timeout", "$q", "notification",
-        function ($scope, close, $timeout, $q, notification) {
+        "$scope", "close", "$timeout", "$q", "notification", "utils",
+        function ($scope, close, $timeout, $q, notification, utils) {
             var tokenId;
             var result;
             var closed = false;
             var connection = $.connection.new();
             var steamBindingHubProxy = connection.steamBindingHub;
 
+            $scope.utils = utils;
             $scope.currentStation = 0;
 
             $scope.cancel = function () {

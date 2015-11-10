@@ -13,14 +13,14 @@
                     <img src="assets/images/connect-step-one.png"><!--
                  --><div class="step-description">
                         <h3>添加其乐机器人为 Steam 好友</h3>
-                        <h4><a ng-href="steam://friends/add/{{botSteamId64}}">一键添加好友</a> / 在<a ng-href="https://steamcommunity.com/profiles/{{botSteamId64}}">资料页</a>添加</h4>
+                        <h4><a ng-href="steam://friends/add/{{botSteamId64}}" ng-click="utils.firefoxLinkFix($event)">一键添加好友</a> / 在<a ng-href="https://steamcommunity.com/profiles/{{botSteamId64}}">资料页</a>添加</h4>
                     </div>
                 </div>
                 <div class="step">
                     <img src="assets/images/connect-step-two.png"><!--
                  --><div class="step-description">
                         <h3>发送绑定验证码「<span class="auth-code">{{code}}</span>」</h3>
-                        <h4><a ng-href="steam://friends/message/{{botSteamId64}}">一键发起对话</a> / 手动打开窗口</h4>
+                        <h4><a ng-href="steam://friends/message/{{botSteamId64}}" ng-click="utils.firefoxLinkFix($event)">一键发起对话</a> / 手动打开窗口</h4>
                     </div>
                 </div>
             </div>
