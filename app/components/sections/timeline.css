@@ -193,27 +193,35 @@
 /* Default */
 /* ------- */
 
+.section-timeline .default {
+    text-align: center;
+}
+
 .section-timeline .default .clipart {
     width: 100%;
 }
 
-.section-timeline .default>h1 {
-    margin: 20px 60px 0 0;
+.section-timeline .default .description {
+    display: inline-block;
     text-align: right;
+}
+
+.section-timeline .default .description h1 {
+    margin: 20px 0 0 0;
     color: #11254A;
     font-size: 24px;
     font-weight: normal;
 }
 
-.section-timeline .default>h3 {
-    margin: 3px 80px 18px 0;
-    text-align: right;
+.section-timeline .default .description h3 {
+    margin: 3px 0 18px 0;
     color: #C7CDD1;
     font-size: 15px;
     font-weight: normal;
 }
 
 .section-timeline .default ul {
+    text-align: left;
     list-style: none;
     padding: 0;
     margin: 0;
@@ -400,8 +408,8 @@
     cursor: pointer;
 }
 
-.section-timeline .entry-content.clickable:hover {
-    background-color: #f3f4f5;
+.section-timeline .entry-content:hover {
+    background-color: #fafbfc;
 }
 
 .section-timeline .entry-content .thumbnail {

@@ -11,7 +11,10 @@
         <p class="summary" ng-if="data.defaultSum">{{data.defaultSum.text}}</p>
         <div class="actions" ng-switch="data.subscribed">
             <button type="button" ng-switch-when="false" ng-disabled="subscribeDisabled" class="border-button bottom-border" ng-click="subscribe(data.id)">订阅</button>
-            <button type="button" ng-switch-when="true" ng-disabled="subscribeDisabled" class="border-button bottom-border subscribed" ng-click="unsubscribe(data.id)">已订阅</button>
+            <button type="button" ng-switch-when="true" ng-disabled="subscribeDisabled" class="border-button bottom-border subscribed" ng-click="unsubscribe(data.id)">
+                <span class="is-subscribed">已订阅</span>
+                <span class="cancel-subscribed">退订</span>
+            </button>
         </div>
     </div>
 </div>

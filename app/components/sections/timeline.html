@@ -25,8 +25,10 @@
     </div>
     <div class="default" ng-if="data.activePoints">
         <img src="../../assets/images/clipart.png" class="clipart">
-        <h1 class="font-myriad-keylol">从你的游戏兴趣开始，慢慢搭建一条讯息轨道。</h1>
-        <h3>订阅一个据点后，其收到的文章投稿会推送到这里</h3>
+        <div class="description">
+            <h1 class="font-myriad-keylol">{{data.noArticleText.main}}</h1>
+            <h3>{{data.noArticleText.sub}}</h3>
+        </div>
         <ul class="clearfix">
             <li ng-repeat="activePoint in data.activePoints">
                 <point-link type="'point'" avatar-url="activePoint.AvatarImage" id-code="activePoint.IdCode" ></point-link>
@@ -113,7 +115,10 @@
             </div>
             <div class="actions" ng-switch="entry.subscribed">
                 <button ng-switch-when="false" ng-disabled="subscribeDisabled" class="border-button right-border" ng-click="subscribe(entry)">订阅</button>
-                <button ng-switch-when="true" ng-disabled="subscribeDisabled" class="border-button right-border subscribed" ng-click="unsubscribe(entry)">已订阅</button>
+                <button ng-switch-when="true" ng-disabled="subscribeDisabled" class="border-button right-border subscribed" ng-click="unsubscribe(entry)">
+                    <span class="is-subscribed">已订阅</span>
+                    <span class="cancel-subscribed">退订</span>
+                </button>
             </div>
         </div>
         <footer>

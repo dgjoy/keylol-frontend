@@ -40,6 +40,12 @@
             union.point = {};
 
             if ($routeParams.userIdCode) {
+
+                union.timeline.noArticleText = {
+                    main: "这位用户尚未发布或认可任何文章",
+                    sub: "订阅并关注即将到来的动态。"
+                };
+
                 /**
                  * 定义在 timeline 中调用的加载函数
                  * @param params 加载时请求的参数
@@ -105,88 +111,105 @@
                     }).then(function (response) {
                         var articleList = response.data;
                         union.timeline.noMoreArticle = articleList.length < utils.timelineLoadCount;
-                        var timelineTimeout;
 
-                        /**
-                         * 对于请求回来的文章列表做一系列处理并按照用户据点的文章格式储存在 union.timeline.entries 中
-                         */
-                        for (var i in articleList) {
-                            var article = articleList[i];
-                            if (!article.Author) {
-                                article.Author = union.user;
-                            }
-                            var entry = {
-                                types: [article.TypeName],
-                                author: {
-                                    username: article.Author.UserName,
-                                    avatarUrl: article.Author.AvatarImage,
-                                    idCode: article.Author.IdCode
-                                },
-                                sequenceNumber: article.SequenceNumber,
-                                sources: {},
-                                datetime: article.PublishTime,
-                                title: article.Title,
-                                summary: article.Content,
-                                thumbnail: article.ThumbnailImage,
-                                url: "/article/" + article.Author.IdCode + "/" + article.SequenceNumberForAuthor,
-                                count: {
-                                    like: article.LikeCount,
-                                    comment: article.CommentCount
+                        if(articleList.length > 0){
+
+                            var timelineTimeout;
+
+                            /**
+                             * 对于请求回来的文章列表做一系列处理并按照用户据点的文章格式储存在 union.timeline.entries 中
+                             */
+                            for (var i in articleList) {
+                                var article = articleList[i];
+                                if (!article.Author) {
+                                    article.Author = union.user;
                                 }
-                            };
-                            if (article.TimelineReason) {
-                                switch (article.TimelineReason) {
-                                    case "Like":
-                                        entry.sources.type = "like";
-                                        entry.sources.userArray = [];
-                                        if (article.LikeByUsers) {
-                                            for (var j in article.LikeByUsers) {
+                                var entry = {
+                                    types: [article.TypeName],
+                                    author: {
+                                        username: article.Author.UserName,
+                                        avatarUrl: article.Author.AvatarImage,
+                                        idCode: article.Author.IdCode
+                                    },
+                                    sequenceNumber: article.SequenceNumber,
+                                    sources: {},
+                                    datetime: article.PublishTime,
+                                    title: article.Title,
+                                    summary: article.Content,
+                                    thumbnail: article.ThumbnailImage,
+                                    url: "/article/" + article.Author.IdCode + "/" + article.SequenceNumberForAuthor,
+                                    count: {
+                                        like: article.LikeCount,
+                                        comment: article.CommentCount
+                                    }
+                                };
+                                if (article.TimelineReason) {
+                                    switch (article.TimelineReason) {
+                                        case "Like":
+                                            entry.sources.type = "like";
+                                            entry.sources.userArray = [];
+                                            if (article.LikeByUsers) {
+                                                for (var j in article.LikeByUsers) {
+                                                    entry.sources.userArray.push({
+                                                        name: article.LikeByUsers[j].UserName,
+                                                        idCode: article.LikeByUsers[j].IdCode
+                                                    });
+                                                }
+                                            } else {
                                                 entry.sources.userArray.push({
-                                                    name: article.LikeByUsers[j].UserName,
-                                                    idCode: article.LikeByUsers[j].IdCode
+                                                    name: union.$localStorage.user.UserName,
+                                                    idCode: union.$localStorage.user.IdCode
                                                 });
                                             }
-                                        } else {
-                                            entry.sources.userArray.push({
-                                                name: union.$localStorage.user.UserName,
-                                                idCode: union.$localStorage.user.IdCode
-                                            });
-                                        }
-                                        break;
-                                    case "Point":
-                                        entry.sources.type = "point";
-                                        entry.sources.points = [];
-                                        for (var j in article.AttachedPoints) {
-                                            entry.sources.points.push({
-                                                name: article.AttachedPoints[j][article.AttachedPoints[j].PreferredName + "Name"],
-                                                idCode: article.AttachedPoints[j].IdCode
-                                            });
-                                        }
-                                        break;
-                                    case "Publish":
-                                        entry.sources.type = "publish";
-                                        break;
-                                    default :
-                                        break;
+                                            break;
+                                        case "Point":
+                                            entry.sources.type = "point";
+                                            entry.sources.points = [];
+                                            for (var j in article.AttachedPoints) {
+                                                entry.sources.points.push({
+                                                    name: article.AttachedPoints[j][article.AttachedPoints[j].PreferredName + "Name"],
+                                                    idCode: article.AttachedPoints[j].IdCode
+                                                });
+                                            }
+                                            break;
+                                        case "Publish":
+                                            entry.sources.type = "publish";
+                                            break;
+                                        default :
+                                            break;
+                                    }
                                 }
-                            }
-                            (function(entry){
-                                if(!timelineTimeout){
-                                    union.timeline.entries.push(entry);
-                                    timelineTimeout = $timeout(function(){}, 100);
-                                }else {
-                                    timelineTimeout = timelineTimeout.then(function(){
+                                (function(entry){
+                                    if(!timelineTimeout){
                                         union.timeline.entries.push(entry);
-                                        return $timeout(function(){}, 100);
-                                    });
-                                }
-                            })(entry);
-                        }
-                        if(timelineTimeout){
-                            timelineTimeout.then(function(){
+                                        timelineTimeout = $timeout(function(){}, 100);
+                                    }else {
+                                        timelineTimeout = timelineTimeout.then(function(){
+                                            union.timeline.entries.push(entry);
+                                            return $timeout(function(){}, 100);
+                                        });
+                                    }
+                                })(entry);
+                            }
+                            if(timelineTimeout){
+                                timelineTimeout.then(function(){
+                                    union.timeline.loadingLock = false;
+                                });
+                            }else {
                                 union.timeline.loadingLock = false;
-                            });
+                            }
                         }else {
+                            $http.get(apiEndpoint + "normal-point/active").then(function(response){
+                                union.timeline.activePoints = response.data;
+                                for(var i in union.timeline.activePoints){
+                                    var point = union.timeline.activePoints[i];
+                                    union.timeline.activePoints[i].mainName = utils.getPointFirstName(point);
+                                    union.timeline.activePoints[i].subName = utils.getPointSecondName(point);
+                                    union.timeline.activePoints[i].type = utils.getPointType(point.Type);
+                                }
+                            },function(error){
+                                notification.error("未知错误", error);
+                            });
                             union.timeline.loadingLock = false;
                         }
                     }, function (error) {
@@ -200,6 +223,12 @@
             }
 
             if ($routeParams.pointIdCode) {
+
+                union.timeline.noArticleText = {
+                    main: "当前据点尚未收到任何文章投稿",
+                    sub: "考虑成为首篇文章的作者？"
+                };
+
                 /**
                  * 定义在 timeline 中调用的加载函数
                  * @param params 加载时请求的参数
@@ -302,46 +331,61 @@
                 }).then(function (response) {
                     var articleList = response.data;
                     union.timeline.noMoreArticle = articleList.length < utils.timelineLoadCount;
-                    var timelineTimeout;
+                    if(articleList.length > 0){
+                        var timelineTimeout;
 
 
-                    for (var i in articleList) {
-                        var article = articleList[i];
-                        var entry = {
-                            types: [article.TypeName],
-                            author: {
-                                username: article.Author.UserName,
-                                avatarUrl: article.Author.AvatarImage,
-                                idCode: article.Author.IdCode
-                            },
-                            sequenceNumber: article.SequenceNumber,
-                            datetime: article.PublishTime,
-                            title: article.Title,
-                            summary: article.Content,
-                            thumbnail: article.ThumbnailImage,
-                            url: "/article/" + article.Author.IdCode + "/" + article.SequenceNumberForAuthor,
-                            count: {
-                                like: article.LikeCount,
-                                comment: article.CommentCount
-                            }
-                        };
-                        (function(entry){
-                            if(!timelineTimeout){
-                                union.timeline.entries.push(entry);
-                                timelineTimeout = $timeout(function(){}, 100);
-                            }else {
-                                timelineTimeout = timelineTimeout.then(function(){
+                        for (var i in articleList) {
+                            var article = articleList[i];
+                            var entry = {
+                                types: [article.TypeName],
+                                author: {
+                                    username: article.Author.UserName,
+                                    avatarUrl: article.Author.AvatarImage,
+                                    idCode: article.Author.IdCode
+                                },
+                                sequenceNumber: article.SequenceNumber,
+                                datetime: article.PublishTime,
+                                title: article.Title,
+                                summary: article.Content,
+                                thumbnail: article.ThumbnailImage,
+                                url: "/article/" + article.Author.IdCode + "/" + article.SequenceNumberForAuthor,
+                                count: {
+                                    like: article.LikeCount,
+                                    comment: article.CommentCount
+                                }
+                            };
+                            (function(entry){
+                                if(!timelineTimeout){
                                     union.timeline.entries.push(entry);
-                                    return $timeout(function(){}, 100);
-                                });
-                            }
-                        })(entry);
-                    }
-                    if(timelineTimeout){
-                        timelineTimeout.then(function(){
+                                    timelineTimeout = $timeout(function(){}, 100);
+                                }else {
+                                    timelineTimeout = timelineTimeout.then(function(){
+                                        union.timeline.entries.push(entry);
+                                        return $timeout(function(){}, 100);
+                                    });
+                                }
+                            })(entry);
+                        }
+                        if(timelineTimeout){
+                            timelineTimeout.then(function(){
+                                union.timeline.loadingLock = false;
+                            });
+                        }else {
                             union.timeline.loadingLock = false;
-                        });
+                        }
                     }else {
+                        $http.get(apiEndpoint + "normal-point/active").then(function(response){
+                            union.timeline.activePoints = response.data;
+                            for(var i in union.timeline.activePoints){
+                                var point = union.timeline.activePoints[i];
+                                union.timeline.activePoints[i].mainName = utils.getPointFirstName(point);
+                                union.timeline.activePoints[i].subName = utils.getPointSecondName(point);
+                                union.timeline.activePoints[i].type = utils.getPointType(point.Type);
+                            }
+                        },function(error){
+                            notification.error("未知错误", error);
+                        });
                         union.timeline.loadingLock = false;
                     }
                 }, function (error) {
