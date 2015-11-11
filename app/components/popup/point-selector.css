@@ -14,6 +14,7 @@
 .popup-point-selector .selector-main li {
     list-style: none;
     padding: 10px 15px;
+    cursor: pointer;
 }
 
 .popup-point-selector .selector-main li.selected {
