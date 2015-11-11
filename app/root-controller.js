@@ -16,6 +16,7 @@
                     }
                 }).then(function (response) {
                     union.$localStorage.user = response.data;
+                    _czc.push(["_setCustomVar", "登录用户", response.data.IdCode + "-" + response.data.UserName, 1]);
                 }, function () {
                     $http.delete(apiEndpoint + "login/current");
                     delete union.$localStorage.login;
@@ -29,6 +30,7 @@
                 if (newLogin) {
                     getUserInfo();
                 } else {
+                    _czc.push(["_setCustomVar", "登录用户", "游客", 1]);
                     for (var i in union.$localStorage) {
                         if (union.$localStorage.hasOwnProperty(i) && i.indexOf("$") !== 0)
                             delete union.$localStorage[i];
