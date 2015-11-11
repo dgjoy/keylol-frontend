@@ -88,7 +88,8 @@
                             readerNum: user.SubscriberCount,
                             articleNum: user.ArticleCount
                         },
-                        id: user.Id
+                        id: user.Id,
+                        url: "user/" + user.IdCode
                     };
                     if (user.IdCode != union.$localStorage.user.IdCode) {
                         union.summary.subscribed = user.Subscribed;
@@ -275,7 +276,8 @@
                             readerNum: point.SubscriberCount,
                             articleNum: point.ArticleCount
                         },
-                        id: point.Id
+                        id: point.Id,
+                        url: "point/" + point.IdCode
                     };
 
                     point.mainName = utils.getPointFirstName(point);

@@ -1,11 +1,11 @@
 ﻿<div class="section-summary box-shadowed" ng-controller="SummaryController">
     <div class="background" webp-background="{{data.background|backgroundUrl}}"></div>
     <div class="content">
-        <a class="avatar-anchor" ng-if="data.avatar">
+        <a href="{{data.url}}" class="avatar-anchor" ng-if="data.avatar">
             <img class="avatar-big" webp-src="{{data.avatar|avatarUrl}}">
         </a>
         <h1 class="labeled-heading main-heading">
-            <span class="text-block">{{data.head.mainHead}}<span class="subheading">{{data.head.subHead}}</span></span>
+            <span class="text-block"><a href="{{data.url}}">{{data.head.mainHead}}</a><span class="subheading">{{data.head.subHead}}</span></span>
         </h1>
         <p class="summary" ng-if="data.pointSum">{{data.pointSum.type}}据点 : {{data.pointSum.readerNum}} 名读者 / {{data.pointSum.articleNum}} 篇文章</p>
         <p class="summary" ng-if="data.defaultSum">{{data.defaultSum.text}}</p>

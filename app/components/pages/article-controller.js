@@ -119,7 +119,8 @@
                             readerNum: author.SubscriberCount,
                             articleNum: author.ArticleCount
                         },
-                        id: author.Id
+                        id: author.Id,
+                        url: "user/" + author.IdCode
                     };
                     $.extend(union.summary, summary);
                     if (author.IdCode != union.$localStorage.user.IdCode) {
