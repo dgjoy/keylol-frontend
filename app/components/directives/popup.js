@@ -166,13 +166,13 @@
                                                 };
                                                 document.body.addEventListener("click", onBodyClick, true);
                                                 window.$element.hover(onPopupMouseEnter, onPopupMouseLeave);
-                                                return window.close;
-                                            }).then(function () {
-                                                delete contexts[contextId];
-                                                document.body.removeEventListener("click", onBodyClick, true);
-                                                $(options.event.currentTarget).off("mouseleave", onTriggerMouseLeave);
-                                                window.$element.off("mouseenter", onPopupMouseEnter);
-                                                window.$element.off("mouseleave", onPopupMouseLeave);
+                                                window.close.then(function () {
+                                                    delete contexts[contextId];
+                                                    document.body.removeEventListener("click", onBodyClick, true);
+                                                    $(options.event.currentTarget).off("mouseleave", onTriggerMouseLeave);
+                                                    window.$element.off("mouseenter", onPopupMouseEnter);
+                                                    window.$element.off("mouseleave", onPopupMouseLeave);
+                                                });
                                             });
                                         }
                                     }

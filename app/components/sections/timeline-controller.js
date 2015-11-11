@@ -12,10 +12,10 @@
             };
             $scope.data = union.timeline;
 
-            $scope.clickToSearch = function(){
+            $scope.clickToSearch = function () {
                 var $searchInput = $(".search-box input");
                 $searchInput.focus();
-                if($searchInput.hasClass("highlight")){
+                if ($searchInput.hasClass("highlight")) {
                     $searchInput.removeClass("highlight");
                     $searchInput[0].offsetWidth;
                 }
@@ -203,23 +203,25 @@
                                     entry.sources.type = "publish";
                                     break;
                             }
-                            (function(entry){
-                                if(!timelineTimeout){
+                            (function (entry) {
+                                if (!timelineTimeout) {
                                     $scope.data.entries.push(entry);
-                                    timelineTimeout = $timeout(function(){}, utils.timelineInsertDelay);
-                                }else {
-                                    timelineTimeout = timelineTimeout.then(function(){
+                                    timelineTimeout = $timeout(function () {
+                                    }, utils.timelineInsertDelay);
+                                } else {
+                                    timelineTimeout = timelineTimeout.then(function () {
                                         $scope.data.entries.push(entry);
-                                        return $timeout(function(){}, utils.timelineInsertDelay);
+                                        return $timeout(function () {
+                                        }, utils.timelineInsertDelay);
                                     });
                                 }
                             })(entry);
                         }
-                        if(timelineTimeout){
-                            timelineTimeout.then(function(){
+                        if (timelineTimeout) {
+                            timelineTimeout.then(function () {
                                 $scope.data.loadingLock = false;
                             });
-                        }else {
+                        } else {
                             $scope.data.loadingLock = false;
                         }
                     });
@@ -286,13 +288,15 @@
                         }).then(function () {
                             notification.success("据点已退订");
                             entry.subscribed = false;
-                            entry.subscribeDisabled = false;
                             entry.pointInfo.reader--;
                             union.$localStorage.user.SubscribedPointCount--;
                         }, function (error) {
                             notification.error("未知错误", error);
-                            entry.subscribeDisabled = false;
+                        }).finally(function () {
+                            $scope.subscribeDisabled = false;
                         });
+                    } else {
+                        entry.subscribeDisabled = false;
                     }
                 });
             }

@@ -32,7 +32,7 @@
                         };
                         $scope.data.head.mainHead = utils.getPointFirstName(point);
                         $scope.data.head.subHead = utils.getPointSecondName(point);
-                        if(union.pointCards){
+                        if (union.pointCards) {
                             union.pointCards[idCode] = $scope.data;
                         }
                         $scope.loading = false;
@@ -120,14 +120,15 @@
                         }).then(function () {
                             notification.success("据点已退订");
                             $scope.data.subscribed = false;
-                            $scope.subscribeDisabled = false;
                             $scope.data.pointSum.readerNum--;
                             union.$localStorage.user.SubscribedPointCount--;
                         }, function (error) {
-                            notification.error("未知错误");
-                            console.error(error);
+                            notification.error("未知错误", error);
+                        }).finally(function () {
                             $scope.subscribeDisabled = false;
                         });
+                    } else {
+                        $scope.subscribeDisabled = false;
                     }
                 });
             };
