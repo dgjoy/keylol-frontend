@@ -36,9 +36,8 @@
                             union.pointCards[idCode] = $scope.data;
                         }
                         $scope.loading = false;
-                    }, function (error) {
-                        notification.error("据点卡片请求错误");
-                        console.log(error);
+                    }, function (response) {
+                        notification.error("据点卡片请求错误", response);
                     });
                 } else {
                     $scope.loading = false;
@@ -79,9 +78,8 @@
                         };
                         union.userCards[idCode] = $scope.data;
                         $scope.loading = false;
-                    }, function (error) {
-                        notification.error("据点卡片请求错误");
-                        console.log(error);
+                    }, function (response) {
+                        notification.error("据点卡片请求错误", response);
                     });
                 } else {
                     $scope.loading = false;
@@ -101,9 +99,8 @@
                     $scope.subscribeDisabled = false;
                     $scope.data.pointSum.readerNum++;
                     union.$localStorage.user.SubscribedPointCount++;
-                }, function (error) {
-                    notification.error("未知错误");
-                    console.error(error);
+                }, function (response) {
+                    notification.error("未知错误", response);
                 });
             };
             $scope.unsubscribe = function (id) {
@@ -122,8 +119,8 @@
                             $scope.data.subscribed = false;
                             $scope.data.pointSum.readerNum--;
                             union.$localStorage.user.SubscribedPointCount--;
-                        }, function (error) {
-                            notification.error("未知错误", error);
+                        }, function (response) {
+                            notification.error("未知错误", response);
                         }).finally(function () {
                             $scope.subscribeDisabled = false;
                         });

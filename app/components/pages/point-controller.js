@@ -56,9 +56,8 @@
                         params: params
                     }).then(function (response) {
                         callback(response);
-                    }, function (error) {
-                        notification.error("未知错误");
-                        console.error(error);
+                    }, function (response) {
+                        notification.error("未知错误", response);
                     });
                 };
 
@@ -113,7 +112,7 @@
                         var articleList = response.data;
                         union.timeline.noMoreArticle = articleList.length < utils.timelineLoadCount;
 
-                        if(articleList.length > 0){
+                        if (articleList.length > 0) {
 
                             var timelineTimeout;
 
@@ -180,46 +179,48 @@
                                             break;
                                     }
                                 }
-                                (function(entry){
-                                    if(!timelineTimeout){
+                                (function (entry) {
+                                    if (!timelineTimeout) {
                                         union.timeline.entries.push(entry);
-                                        timelineTimeout = $timeout(function(){}, utils.timelineInsertDelay);
-                                    }else {
-                                        timelineTimeout = timelineTimeout.then(function(){
+                                        timelineTimeout = $timeout(function () {
+                                        }, utils.timelineInsertDelay);
+                                    } else {
+                                        timelineTimeout = timelineTimeout.then(function () {
                                             union.timeline.entries.push(entry);
-                                            return $timeout(function(){}, utils.timelineInsertDelay);
+                                            return $timeout(function () {
+                                            }, utils.timelineInsertDelay);
                                         });
                                     }
                                 })(entry);
                             }
-                            if(timelineTimeout){
-                                timelineTimeout.then(function(){
+                            if (timelineTimeout) {
+                                timelineTimeout.then(function () {
                                     union.timeline.loadingLock = false;
                                 });
-                            }else {
+                            } else {
                                 union.timeline.loadingLock = false;
                             }
-                        }else {
-                            $http.get(apiEndpoint + "normal-point/active").then(function(response){
+                        } else {
+                            $http.get(apiEndpoint + "normal-point/active").then(function (response) {
                                 union.timeline.activePoints = response.data;
-                                for(var i in union.timeline.activePoints){
+                                for (var i in union.timeline.activePoints) {
                                     var point = union.timeline.activePoints[i];
                                     union.timeline.activePoints[i].mainName = utils.getPointFirstName(point);
                                     union.timeline.activePoints[i].subName = utils.getPointSecondName(point);
                                     union.timeline.activePoints[i].type = utils.getPointType(point.Type);
                                 }
-                            },function(error){
-                                notification.error("未知错误", error);
+                            }, function (response) {
+                                notification.error("未知错误", response);
                             });
                             union.timeline.loadingLock = false;
                         }
-                    }, function (error) {
-                        notification.error("未知错误", error);
+                    }, function (response) {
+                        notification.error("未知错误", response);
                         union.timeline.loadingLock = false;
                     });
-                }, function (error) {
+                }, function (response) {
                     $scope.pointExist = false;
-                    notification.error("未知错误", error);
+                    notification.error("未知错误", response);
                 });
             }
 
@@ -240,8 +241,8 @@
                         params: params
                     }).then(function (response) {
                         callback(response);
-                    }, function (error) {
-                        notification.error("未知错误", error);
+                    }, function (response) {
+                        notification.error("未知错误", response);
                     });
                 };
 
@@ -262,7 +263,7 @@
                     var point = response.data;
 
                     union.associatedPoints = point.AssociatedPoints;
-                    if(point.Type === "Game"){
+                    if (point.Type === "Game") {
                         $scope.hasVote = true;
                     }
 
@@ -285,7 +286,7 @@
                     summary.head.subHead = utils.getPointSecondName(point);
 
                     pageTitle.set(point.mainName + " - 其乐");
-                    if(point.PositiveArticleCount + point.NegativeArticleCount > 0){
+                    if (point.PositiveArticleCount + point.NegativeArticleCount > 0) {
                         point.votePercent = (point.PositiveArticleCount * 10 / (point.PositiveArticleCount + point.NegativeArticleCount)).toFixed(1);
                         point.voteCircles = [{}, {}, {}, {}, {}];
                         if (point.votePercent >= 8) {
@@ -307,7 +308,7 @@
                         } else {
                             point.voteCircles[0].type = "terrible"
                         }
-                    }else {
+                    } else {
                         point.votePercent = "N/A";
                         point.voteCircles = [{}, {}, {}, {}, {}];
                         point.noVotes = true;
@@ -317,9 +318,9 @@
                     $.extend(union.point, point);
                     $.extend(union.summary, summary);
 
-                }, function (error) {
+                }, function (response) {
                     $scope.pointExist = false;
-                    notification.error("未知错误", error);
+                    notification.error("未知错误", response);
                 });
 
                 /**
@@ -333,7 +334,7 @@
                 }).then(function (response) {
                     var articleList = response.data;
                     union.timeline.noMoreArticle = articleList.length < utils.timelineLoadCount;
-                    if(articleList.length > 0){
+                    if (articleList.length > 0) {
                         var timelineTimeout;
 
 
@@ -357,41 +358,43 @@
                                     comment: article.CommentCount
                                 }
                             };
-                            (function(entry){
-                                if(!timelineTimeout){
+                            (function (entry) {
+                                if (!timelineTimeout) {
                                     union.timeline.entries.push(entry);
-                                    timelineTimeout = $timeout(function(){}, utils.timelineInsertDelay);
-                                }else {
-                                    timelineTimeout = timelineTimeout.then(function(){
+                                    timelineTimeout = $timeout(function () {
+                                    }, utils.timelineInsertDelay);
+                                } else {
+                                    timelineTimeout = timelineTimeout.then(function () {
                                         union.timeline.entries.push(entry);
-                                        return $timeout(function(){}, utils.timelineInsertDelay);
+                                        return $timeout(function () {
+                                        }, utils.timelineInsertDelay);
                                     });
                                 }
                             })(entry);
                         }
-                        if(timelineTimeout){
-                            timelineTimeout.then(function(){
+                        if (timelineTimeout) {
+                            timelineTimeout.then(function () {
                                 union.timeline.loadingLock = false;
                             });
-                        }else {
+                        } else {
                             union.timeline.loadingLock = false;
                         }
-                    }else {
-                        $http.get(apiEndpoint + "normal-point/active").then(function(response){
+                    } else {
+                        $http.get(apiEndpoint + "normal-point/active").then(function (response) {
                             union.timeline.activePoints = response.data;
-                            for(var i in union.timeline.activePoints){
+                            for (var i in union.timeline.activePoints) {
                                 var point = union.timeline.activePoints[i];
                                 union.timeline.activePoints[i].mainName = utils.getPointFirstName(point);
                                 union.timeline.activePoints[i].subName = utils.getPointSecondName(point);
                                 union.timeline.activePoints[i].type = utils.getPointType(point.Type);
                             }
-                        },function(error){
-                            notification.error("未知错误", error);
+                        }, function (response) {
+                            notification.error("未知错误", response);
                         });
                         union.timeline.loadingLock = false;
                     }
-                }, function (error) {
-                    notification.error("未知错误", error);
+                }, function (response) {
+                    notification.error("未知错误", response);
                     union.timeline.loadingLock = false;
                 });
             }

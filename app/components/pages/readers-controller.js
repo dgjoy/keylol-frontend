@@ -30,8 +30,8 @@
                 }
             }).then(function (response) {
                 union.summary.background = response.data.ProfilePointBackgroundImage;
-            }, function (error) {
-                notification.error("未知错误", error);
+            }, function (response) {
+                notification.error("未知错误", response);
             });
 
             union.timeline = {
@@ -40,7 +40,7 @@
                     subTitle: "Search Result"
                 },
                 datetime: "outBlock",
-                loadAction: function(){
+                loadAction: function () {
                     union.timeline.loadingLock = true;
                     $http.get(apiEndpoint + "user/my", {
                         params: {
@@ -50,7 +50,7 @@
                     }).then(function (response) {
                         union.timeline.noMoreArticle = response.data.length < utils.timelineLoadCount;
                         var timelineTimeout;
-                        if(response.data.length > 0){
+                        if (response.data.length > 0) {
                             union.timeline.searchNotFound = false;
                             for (var i in response.data) {
                                 var user = response.data[i];
@@ -68,30 +68,32 @@
                                     isUser: true,
                                     id: user.Id
                                 };
-                                (function(entry){
-                                    if(!timelineTimeout){
+                                (function (entry) {
+                                    if (!timelineTimeout) {
                                         union.timeline.entries.push(entry);
-                                        timelineTimeout = $timeout(function(){}, utils.timelineInsertDelay);
-                                    }else {
-                                        timelineTimeout = timelineTimeout.then(function(){
+                                        timelineTimeout = $timeout(function () {
+                                        }, utils.timelineInsertDelay);
+                                    } else {
+                                        timelineTimeout = timelineTimeout.then(function () {
                                             union.timeline.entries.push(entry);
-                                            return $timeout(function(){}, utils.timelineInsertDelay);
+                                            return $timeout(function () {
+                                            }, utils.timelineInsertDelay);
                                         });
                                     }
                                 })(entry);
                             }
-                        }else {
+                        } else {
                             union.timeline.searchNotFound = true;
                         }
-                        if(timelineTimeout){
-                            timelineTimeout.then(function(){
+                        if (timelineTimeout) {
+                            timelineTimeout.then(function () {
                                 union.timeline.loadingLock = false;
                             });
-                        }else {
+                        } else {
                             union.timeline.loadingLock = false;
                         }
-                    }, function (error) {
-                        notification.error("未知错误", error);
+                    }, function (response) {
+                        notification.error("未知错误", response);
                         union.timeline.loadingLock = false;
                     });
                 },

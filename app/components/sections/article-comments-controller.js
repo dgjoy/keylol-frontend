@@ -12,7 +12,7 @@
             $scope.textFocus = false;
             $scope.submitDisabled = false;
             $scope.doComment = function () {
-                if($scope.currentComment){
+                if ($scope.currentComment) {
                     $scope.submitDisabled = true;
                     var replyArray = dealWithReply($scope.currentComment);
                     $http.post(apiEndpoint + "comment", {
@@ -25,10 +25,9 @@
                         $scope.currentComment = "";
                         var sqNumber = response.data.SequenceNumberForArticle;
                         getAndFlushComments(union.article, sqNumber, "sequence");
-                    }, function (error) {
-                        notification.error("评论发送失败");
+                    }, function (response) {
+                        notification.error("评论发送失败", response);
                         $scope.submitDisabled = false;
-                        console.error(error);
                     });
                 }
             };
@@ -46,11 +45,10 @@
                 $http.post(apiEndpoint + "like", {
                     TargetId: comment.Id,
                     Type: "CommentLike"
-                }).then(function (response) {
+                }).then(function () {
                     notification.success("认可已生效");
-                }, function (error) {
-                    notification.error("认可评论失败");
-                    console.error(error);
+                }, function (response) {
+                    notification.error("认可评论失败", response);
                 });
                 comment.Liked = true;
                 comment.hasLike = true;
@@ -62,11 +60,10 @@
                         targetId: comment.Id,
                         type: "CommentLike"
                     }
-                }).then(function (response) {
+                }).then(function () {
                     notification.success("此认可已被撤销");
-                }, function (error) {
-                    notification.error("取消认可评论失败");
-                    console.error(error);
+                }, function (response) {
+                    notification.error("取消认可评论失败", response);
                 });
                 comment.Liked = false;
                 comment.LikeCount -= 1;

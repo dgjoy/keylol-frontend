@@ -97,30 +97,32 @@
                                     entry.title = utils.getPointFirstName(point);
                                     entry.summary = utils.getPointSecondName(point);
 
-                                    (function(entry){
-                                        if(!timelineTimeout){
+                                    (function (entry) {
+                                        if (!timelineTimeout) {
                                             union.timeline.entries.push(entry);
-                                            timelineTimeout = $timeout(function(){}, utils.timelineInsertDelay);
-                                        }else {
-                                            timelineTimeout = timelineTimeout.then(function(){
+                                            timelineTimeout = $timeout(function () {
+                                            }, utils.timelineInsertDelay);
+                                        } else {
+                                            timelineTimeout = timelineTimeout.then(function () {
                                                 union.timeline.entries.push(entry);
-                                                return $timeout(function(){}, utils.timelineInsertDelay);
+                                                return $timeout(function () {
+                                                }, utils.timelineInsertDelay);
                                             });
                                         }
                                     })(entry);
                                 }
-                            }else {
+                            } else {
                                 union.timeline.searchNotFound = true;
                             }
-                            if(timelineTimeout){
-                                timelineTimeout.then(function(){
+                            if (timelineTimeout) {
+                                timelineTimeout.then(function () {
                                     union.timeline.loadingLock = false;
                                 });
-                            }else {
+                            } else {
                                 union.timeline.loadingLock = false;
                             }
-                        }, function (error) {
-                            notification.error("未知错误", error);
+                        }, function (response) {
+                            notification.error("未知错误", response);
                             union.timeline.loadingLock = false;
                         });
                     };
@@ -166,37 +168,40 @@
                                             comment: article.CommentCount
                                         }
                                     };
-                                    (function(entry){
-                                        if(!timelineTimeout){
+                                    (function (entry) {
+                                        if (!timelineTimeout) {
                                             union.timeline.entries.push(entry);
-                                            timelineTimeout = $timeout(function(){}, utils.timelineInsertDelay);
-                                        }else {
-                                            timelineTimeout = timelineTimeout.then(function(){
+                                            timelineTimeout = $timeout(function () {
+                                            }, utils.timelineInsertDelay);
+                                        } else {
+                                            timelineTimeout = timelineTimeout.then(function () {
                                                 union.timeline.entries.push(entry);
-                                                return $timeout(function(){}, utils.timelineInsertDelay);
+                                                return $timeout(function () {
+                                                }, utils.timelineInsertDelay);
                                             });
                                         }
                                     })(entry);
                                 }
-                            }else {
+                            } else {
                                 union.timeline.searchNotFound = true;
                             }
-                            if(timelineTimeout){
-                                timelineTimeout.then(function(){
+                            if (timelineTimeout) {
+                                timelineTimeout.then(function () {
                                     union.timeline.loadingLock = false;
                                 });
-                            }else {
+                            } else {
                                 union.timeline.loadingLock = false;
                             }
-                        }, function (error) {
-                            notification.error("未知错误", error);
+                        }, function (response) {
+                            notification.error("未知错误", response);
                             union.timeline.loadingLock = false;
                         });
                     };
                     union.timeline.loadAction();
                     break;
                 case "user":
-                    union.timeline.loadAction = function () {};
+                    union.timeline.loadAction = function () {
+                    };
                     union.timeline.loadingLock = true;
                     union.timeline.noMoreArticle = true;
                     union.timeline.actions[2].active = true;
@@ -231,11 +236,11 @@
                             }
                         }
                         union.timeline.loadingLock = false;
-                    }, function (error) {
+                    }, function (response) {
                         if (error.status === 404) {
                             union.summary.defaultSum.text = "找到 0 个符合的项目";
                         } else {
-                            notification.error("未知错误", error);
+                            notification.error("未知错误", response);
                         }
                         union.timeline.loadingLock = false;
                         union.timeline.searchNotFound = true;

@@ -19,8 +19,9 @@
             };
 
             return function getAndFlushComments(article, pageNumOrSqNum, getCommentsType, callback) {
-                if(!callback){
-                    callback = function(){};
+                if (!callback) {
+                    callback = function () {
+                    };
                 }
                 if (getCommentsType == "hot") {
                     $http.get(apiEndpoint + "comment", {
@@ -50,9 +51,8 @@
                             }
                         }
                         $.extend(union.hotComments, hotComments);
-                    }, function (error) {
-                        notification.error("未知错误");
-                        console.error(error);
+                    }, function (response) {
+                        notification.error("未知错误", response);
                     });
                 } else if (getCommentsType == "page") {
                     var pageNum = pageNumOrSqNum;
@@ -81,9 +81,8 @@
                         union.pageElements.currPage = pageNum;
                         union.comments.length = 0;
                         $.extend(union.comments, comments);
-                    }, function (error) {
-                        notification.error("未知错误");
-                        console.error(error);
+                    }, function (response) {
+                        notification.error("未知错误", response);
                     });
                 } else {
                     var sqNum = pageNumOrSqNum;
@@ -113,9 +112,8 @@
                         union.comments.length = 0;
                         $.extend(union.comments, comments);
                         callback();
-                    }, function (error) {
-                        notification.error("评论刷新失败");
-                        console.error(error);
+                    }, function (response) {
+                        notification.error("评论刷新失败", response);
                     });
                 }
             }

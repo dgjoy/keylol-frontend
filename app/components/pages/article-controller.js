@@ -41,7 +41,7 @@
                             }).then(function (response) {
                                 var point = response.data;
                                 point.mainName = point[point.PreferredName + "Name"];
-                                if(point.PositiveArticleCount + point.NegativeArticleCount > 0){
+                                if (point.PositiveArticleCount + point.NegativeArticleCount > 0) {
                                     point.votePercent = (point.PositiveArticleCount * 10 / (point.PositiveArticleCount + point.NegativeArticleCount)).toFixed(1);
                                     point.voteCircles = [{}, {}, {}, {}, {}];
                                     if (point.votePercent >= 8) {
@@ -63,28 +63,27 @@
                                     } else {
                                         point.voteCircles[0].type = "terrible"
                                     }
-                                }else {
+                                } else {
                                     point.votePercent = "N/A";
                                     point.voteCircles = [{}, {}, {}, {}, {}];
                                     point.noVotes = true;
                                 }
                                 $.extend(union.point, point);
-                            }, function (error) {
-                                notification.error("未知错误");
-                                console.error(error);
+                            }, function (response) {
+                                notification.error("未知错误", response);
                             });
                         }
                         $.extend(union.article, article);
 
                         getAndFlushComments(article, null, "hot");
-                        if(!$location.hash()){
+                        if (!$location.hash()) {
                             getAndFlushComments(article, 1, "page");
-                        }else {
-                            getAndFlushComments(article, $location.hash(), "sequence", function(){
-                                $timeout(function(){
+                        } else {
+                            getAndFlushComments(article, $location.hash(), "sequence", function () {
+                                $timeout(function () {
                                     $("body").animate({
                                         scrollTop: $("#comment-" + $location.hash()).offset().top
-                                    }, function(){
+                                    }, function () {
                                         $("#comment-" + $location.hash()).addClass("highlight");
                                     });
                                 });
@@ -127,8 +126,8 @@
                     if (author.IdCode != union.$localStorage.user.IdCode) {
                         union.summary.subscribed = author.Subscribed;
                     }
-                }, function (error) {
-                    notification.error("未知错误", error);
+                }, function (response) {
+                    notification.error("未知错误", response);
                 });
             }
         }

@@ -1,9 +1,9 @@
-﻿(function() {
+﻿(function () {
     "use strict";
 
     keylolApp.controller("NotFoundController", [
-        "pageTitle", "$scope",
-		function(pageTitle, $scope) {
+        "pageTitle",
+        function (pageTitle) {
             pageTitle.set("404 Not Found - 其乐");
         }
     ]);

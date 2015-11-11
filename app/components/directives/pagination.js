@@ -40,11 +40,11 @@
                     });
 
                     scope.changePage = function (newPage) {
-                        if(newPage > scope.total){
+                        if (newPage > scope.total) {
                             scope.onPageChanged({oldPage: scope.current, newPage: scope.total});
-                        }else if(newPage < 1){
+                        } else if (newPage < 1) {
                             scope.onPageChanged({oldPage: scope.current, newPage: 1});
-                        }else {
+                        } else {
                             scope.onPageChanged({oldPage: scope.current, newPage: newPage});
                         }
                     };

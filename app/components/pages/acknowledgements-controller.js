@@ -37,7 +37,7 @@
                         active: true,
                         text: "全部",
                         onClick: function () {
-                            if(!this.active){
+                            if (!this.active) {
                                 changeActive(this);
                                 getLike("All");
                             }
@@ -47,7 +47,7 @@
                         active: false,
                         text: "文章",
                         onClick: function () {
-                            if(!this.active){
+                            if (!this.active) {
                                 changeActive(this);
                                 getLike("ArticleLike");
                             }
@@ -57,20 +57,20 @@
                         active: false,
                         text: "评论",
                         onClick: function () {
-                            if(!this.active){
+                            if (!this.active) {
                                 changeActive(this);
                                 getLike("CommentLike");
                             }
                         }
                     }
                 ],
-                loadAction: function(){
+                loadAction: function () {
                     union.timeline.loadingLock = true;
-                    if(union.timeline.actions[0].active){
+                    if (union.timeline.actions[0].active) {
                         getLike("All", union.timeline.entries.length);
-                    }else if(union.timeline.actions[1].active){
+                    } else if (union.timeline.actions[1].active) {
                         getLike("ArticleLike", union.timeline.entries.length);
-                    }else {
+                    } else {
                         getLike("CommentLike", union.timeline.entries.length);
                     }
                 },
@@ -84,7 +84,7 @@
             getLike("All");
 
             function getLike(type, skip) {
-                if(!skip){
+                if (!skip) {
                     union.timeline.entries.length = 0;
                     skip = 0;
                 }
@@ -94,10 +94,10 @@
                         skip: skip,
                         take: utils.timelineLoadCount
                     }
-                }).then(function(response){
+                }).then(function (response) {
                     union.timeline.noMoreArticle = response.data.length < utils.timelineLoadCount;
                     var timelineTimeout;
-                    for(var i in response.data){
+                    for (var i in response.data) {
                         var like = response.data[i];
                         var entry = {
                             isNew: !like.ReadByTargetUser,
@@ -114,38 +114,40 @@
                             },
                             id: like.Id
                         };
-                        if(like.Comment){
+                        if (like.Comment) {
                             entry.commentId = like.Comment.Id;
                             entry.types = ["评论"];
                             entry.fromArticle.fromComment = true;
                             entry.summary = "认可你的评论";
                             entry.url = "article/" + like.Article.AuthorIdCode + "/" + like.Article.SequenceNumberForAuthor + "#" + like.Comment.SequenceNumberForArticle;
-                        }else {
+                        } else {
                             entry.types = ["文章"];
                             entry.summary = "认可你的文章";
                             entry.url = "article/" + like.Article.AuthorIdCode + "/" + like.Article.SequenceNumberForAuthor;
                         }
-                        (function(entry){
-                            if(!timelineTimeout){
+                        (function (entry) {
+                            if (!timelineTimeout) {
                                 union.timeline.entries.push(entry);
-                                timelineTimeout = $timeout(function(){}, utils.timelineInsertDelay);
-                            }else {
-                                timelineTimeout = timelineTimeout.then(function(){
+                                timelineTimeout = $timeout(function () {
+                                }, utils.timelineInsertDelay);
+                            } else {
+                                timelineTimeout = timelineTimeout.then(function () {
                                     union.timeline.entries.push(entry);
-                                    return $timeout(function(){}, utils.timelineInsertDelay);
+                                    return $timeout(function () {
+                                    }, utils.timelineInsertDelay);
                                 });
                             }
                         })(entry);
                     }
-                    if(timelineTimeout){
-                        timelineTimeout.then(function(){
+                    if (timelineTimeout) {
+                        timelineTimeout.then(function () {
                             union.timeline.loadingLock = false;
                         });
-                    }else {
+                    } else {
                         union.timeline.loadingLock = false;
                     }
-                },function(error){
-                    notification.error("未知错误", error);
+                }, function (response) {
+                    notification.error("未知错误", response);
                     union.timeline.loadingLock = false;
                 });
             }

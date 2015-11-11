@@ -1,12 +1,12 @@
 /**
  * Created by Rex on 15/9/23.
  */
-(function() {
+(function () {
     "use strict";
 
     keylolApp.controller("PostController", [
         "pageTitle", "$scope", "union",
-        function(pageTitle, $scope, union) {
+        function (pageTitle, $scope, union) {
             pageTitle.set("邮政 - 其乐");
             union.summary = {
                 actions: [],

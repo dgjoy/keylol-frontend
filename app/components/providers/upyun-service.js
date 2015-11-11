@@ -8,7 +8,7 @@
             function UpyunService() {
                 var self = this;
 
-                self.policy = function(){
+                self.policy = function () {
                     var options = {
                         bucket: "keylol",
                         "save-key": "{filemd5}{.suffix}",
@@ -18,13 +18,13 @@
                     return base64.encode(JSON.stringify(options));
                 };
 
-                self.signature = function(policy){
+                self.signature = function (policy) {
                     return $http.post(apiEndpoint + "upload-signature", null, {params: {policy: policy}}).then(function (response) {
                         return response.data;
                     });
                 };
 
-                self.upload = function(file, policy, signature) {
+                self.upload = function (file, policy, signature) {
                     return Upload.upload({
                         url: "//v0.api.upyun.com/keylol",
                         data: {

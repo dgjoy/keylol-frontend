@@ -113,27 +113,29 @@
                                 url: "article/" + comment.Article.AuthorIdCode + "/" + comment.Article.SequenceNumberForAuthor + "#" + comment.ReplyToComment.SequenceNumberForArticle
                             }
                         }
-                        (function(entry){
-                            if(!timelineTimeout){
+                        (function (entry) {
+                            if (!timelineTimeout) {
                                 union.timeline.entries.push(entry);
-                                timelineTimeout = $timeout(function(){}, utils.timelineInsertDelay);
-                            }else {
-                                timelineTimeout = timelineTimeout.then(function(){
+                                timelineTimeout = $timeout(function () {
+                                }, utils.timelineInsertDelay);
+                            } else {
+                                timelineTimeout = timelineTimeout.then(function () {
                                     union.timeline.entries.push(entry);
-                                    return $timeout(function(){}, utils.timelineInsertDelay);
+                                    return $timeout(function () {
+                                    }, utils.timelineInsertDelay);
                                 });
                             }
                         })(entry);
                     }
-                    if(timelineTimeout){
-                        timelineTimeout.then(function(){
+                    if (timelineTimeout) {
+                        timelineTimeout.then(function () {
                             union.timeline.loadingLock = false;
                         });
-                    }else {
+                    } else {
                         union.timeline.loadingLock = false;
                     }
-                }, function (error) {
-                    notification.error("未知错误", error);
+                }, function (response) {
+                    notification.error("未知错误", response);
                     union.timeline.loadingLock = false;
                 });
             }
@@ -181,27 +183,29 @@
                                 url: "article/" + comment.Article.AuthorIdCode + "/" + comment.Article.SequenceNumberForAuthor + "#" + comment.ReplyToComment.SequenceNumberForArticle
                             }
                         }
-                        (function(entry){
-                            if(!timelineTimeout){
+                        (function (entry) {
+                            if (!timelineTimeout) {
                                 union.timeline.entries.push(entry);
-                                timelineTimeout = $timeout(function(){}, utils.timelineInsertDelay);
-                            }else {
-                                timelineTimeout = timelineTimeout.then(function(){
+                                timelineTimeout = $timeout(function () {
+                                }, utils.timelineInsertDelay);
+                            } else {
+                                timelineTimeout = timelineTimeout.then(function () {
                                     union.timeline.entries.push(entry);
-                                    return $timeout(function(){}, utils.timelineInsertDelay);
+                                    return $timeout(function () {
+                                    }, utils.timelineInsertDelay);
                                 });
                             }
                         })(entry);
                     }
-                    if(timelineTimeout){
-                        timelineTimeout.then(function(){
+                    if (timelineTimeout) {
+                        timelineTimeout.then(function () {
                             union.timeline.loadingLock = false;
                         });
-                    }else {
+                    } else {
                         union.timeline.loadingLock = false;
                     }
-                }, function (error) {
-                    notification.error("未知错误", error);
+                }, function (response) {
+                    notification.error("未知错误", response);
                     union.timeline.loadingLock = false;
                 });
             }

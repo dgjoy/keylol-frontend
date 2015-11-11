@@ -50,7 +50,7 @@
                     if (response.status === 404) {
                         $scope.invitationCodeError = "invalid";
                     } else {
-                        notification.error("未知错误", response.data);
+                        notification.error("未知错误", response);
                     }
                     submitLock = false;
                 });

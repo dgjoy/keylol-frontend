@@ -37,8 +37,7 @@
                                 close();
                             }, 1500);
                         }, function (response) {
-                            notification.error("未知错误");
-                            console.error(response.data);
+                            notification.error("未知错误", response);
                         });
                 });
             };

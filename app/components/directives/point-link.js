@@ -15,22 +15,22 @@
                 link: function (scope, element) {
                     scope.funcs = {};
                     scope.linkHover = function ($event) {
-                        if(scope.avatarUrl){
+                        if (scope.avatarUrl) {
                             var avatarWidth = element.children().children().width();
-                            scope.cardPopup =  scope.funcs.showPointCard({
+                            scope.cardPopup = scope.funcs.showPointCard({
                                 templateUrl: "components/popup/point-preview-card.html",
                                 controller: "PointPreviewCardController",
                                 event: $event,
                                 attachSide: "bottom",
                                 align: "left",
-                                offsetX: avatarWidth/2 - 37,
+                                offsetX: avatarWidth / 2 - 37,
                                 inputs: {
                                     idCode: scope.idCode,
                                     type: scope.type
                                 }
                             });
                         } else {
-                            scope.cardPopup =  scope.funcs.showPointCard({
+                            scope.cardPopup = scope.funcs.showPointCard({
                                 templateUrl: "components/popup/point-preview-card.html",
                                 controller: "PointPreviewCardController",
                                 event: $event,

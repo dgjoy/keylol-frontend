@@ -1,15 +1,15 @@
 /**
  * Created by Rex on 15/9/23.
  */
-(function() {
+(function () {
     "use strict";
 
     keylolApp.controller("SummaryController", [
         "$scope", "union", "$http", "notification",
-        function($scope, union, $http, notification) {
+        function ($scope, union, $http, notification) {
             $scope.data = union.summary;
             $scope.subscribeDisabled = false;
-            $scope.subscribe = function(id){
+            $scope.subscribe = function (id) {
                 $scope.subscribeDisabled = true;
                 $http.post(apiEndpoint + "user-point-subscription", {}, {
                     params: {
@@ -21,12 +21,11 @@
                     $scope.subscribeDisabled = false;
                     $scope.data.pointSum.readerNum++;
                     union.$localStorage.user.SubscribedPointCount++;
-                }, function (error) {
-                    notification.error("未知错误");
-                    console.error(error);
+                }, function (response) {
+                    notification.error("未知错误", response);
                 });
             };
-            $scope.unsubscribe = function(id){
+            $scope.unsubscribe = function (id) {
                 $scope.subscribeDisabled = true;
                 notification.attention("退订并不再接收此据点的文章推送", [
                     {action: "退订", value: true},
@@ -42,9 +41,8 @@
                             $scope.data.subscribed = false;
                             $scope.data.pointSum.readerNum--;
                             union.$localStorage.user.SubscribedPointCount--;
-                        }, function (error) {
-                            notification.error("未知错误");
-                            console.error(error);
+                        }, function (response) {
+                            notification.error("未知错误", response);
                         }).finally(function () {
                             $scope.subscribeDisabled = false;
                         });

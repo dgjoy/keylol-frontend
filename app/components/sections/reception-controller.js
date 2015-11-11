@@ -47,8 +47,8 @@
                         if (deleteLink.Type !== "Unknown" && ($routeParams.pointIdCode === deleteLink.IdCode || $routeParams.userIdCode === deleteLink.IdCode)) {
                             $scope.canBeAdd = true;
                         }
-                    }, function () {
-                        notification.error("未知错误");
+                    }, function (response) {
+                        notification.error("未知错误", response);
                     });
                 $scope.quickLinks.splice(index, 1);
             };
@@ -67,8 +67,8 @@
                             IdCode: union.point.IdCode,
                             Name: union.point.mainName
                         })
-                    }, function () {
-                        notification.error("未知错误");
+                    }, function (response) {
+                        notification.error("未知错误", response);
                         $scope.canBeAdd = true;
                     });
                 } else if ($routeParams.userIdCode && union.user.Id) {
@@ -84,8 +84,8 @@
                             IdCode: union.user.IdCode,
                             Name: union.user.UserName
                         })
-                    }, function () {
-                        notification.error("未知错误");
+                    }, function (response) {
+                        notification.error("未知错误", response);
                         $scope.canBeAdd = true;
                     });
                 }

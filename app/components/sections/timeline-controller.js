@@ -34,8 +34,8 @@
                     }
                 }).then(function () {
                     notification.success("移除记录成功");
-                }, function (error) {
-                    notification.error("移除记录失败", error);
+                }, function (response) {
+                    notification.error("移除记录失败", response);
                 });
             };
 
@@ -47,8 +47,8 @@
                         }
                     }).then(function () {
                         notification.success("评论认可不再提醒成功");
-                    }, function (error) {
-                        notification.error("评论认可不再提醒失败", error);
+                    }, function (response) {
+                        notification.error("评论认可不再提醒失败", response);
                     });
                 } else {
                     $http.put(apiEndpoint + "article/" + entry.fromArticle.Id + "/ignore", {}, {
@@ -57,8 +57,8 @@
                         }
                     }).then(function () {
                         notification.success("文章认可不再提醒成功");
-                    }, function (error) {
-                        notification.error("文章认可不再提醒失败", error);
+                    }, function (response) {
+                        notification.error("文章认可不再提醒失败", response);
                     });
                 }
             };
@@ -270,8 +270,8 @@
                     entry.subscribeDisabled = false;
                     entry.pointInfo.reader++;
                     union.$localStorage.user.SubscribedPointCount++;
-                }, function (error) {
-                    notification.error("未知错误", error);
+                }, function (response) {
+                    notification.error("未知错误", response);
                 });
             };
             $scope.unsubscribe = function (entry) {
@@ -290,8 +290,8 @@
                             entry.subscribed = false;
                             entry.pointInfo.reader--;
                             union.$localStorage.user.SubscribedPointCount--;
-                        }, function (error) {
-                            notification.error("未知错误", error);
+                        }, function (response) {
+                            notification.error("未知错误", response);
                         }).finally(function () {
                             $scope.subscribeDisabled = false;
                         });

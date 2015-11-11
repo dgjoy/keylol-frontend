@@ -29,8 +29,8 @@
                                         $scope.resultArray = undefined;
                                         $scope.notFound = true;
                                     }
-                                }, function (error) {
-                                    notification.error("未知错误", error);
+                                }, function (response) {
+                                    notification.error("未知错误", response);
                                 });
                             break;
                         case "文章":
@@ -53,8 +53,8 @@
                                         $scope.resultArray = undefined;
                                         $scope.notFound = true;
                                     }
-                                }, function (error) {
-                                    notification.error("未知错误", error);
+                                }, function (response) {
+                                    notification.error("未知错误", response);
                                 });
                             break;
                         case "用户":
@@ -75,12 +75,12 @@
                                         isUser: true
                                     });
                                 }
-                            }, function (error) {
+                            }, function (response) {
                                 if (error.status === 404) {
                                     $scope.resultArray = undefined;
                                     $scope.notFound = true;
                                 } else {
-                                    notification.error("未知错误", error);
+                                    notification.error("未知错误", response);
                                 }
                             });
                             break;

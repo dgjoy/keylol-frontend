@@ -37,9 +37,8 @@
                         params: params
                     }).then(function (response) {
                         callback(response);
-                    }, function (error) {
-                        notification.error("未知错误");
-                        console.log(error);
+                    }, function (response) {
+                        notification.error("未知错误", response);
                     });
                 },
                 entries: []
@@ -54,7 +53,7 @@
                 var articleList = response.data;
                 union.timeline.noMoreArticle = articleList.length < utils.timelineLoadCount;
 
-                if(articleList.length > 0){
+                if (articleList.length > 0) {
                     var timelineTimeout;
 
                     /**
@@ -117,42 +116,44 @@
                                     break;
                             }
                         }
-                        (function(entry){
-                            if(!timelineTimeout){
+                        (function (entry) {
+                            if (!timelineTimeout) {
                                 union.timeline.entries.push(entry);
-                                timelineTimeout = $timeout(function(){}, utils.timelineInsertDelay);
-                            }else {
-                                timelineTimeout = timelineTimeout.then(function(){
+                                timelineTimeout = $timeout(function () {
+                                }, utils.timelineInsertDelay);
+                            } else {
+                                timelineTimeout = timelineTimeout.then(function () {
                                     union.timeline.entries.push(entry);
-                                    return $timeout(function(){}, utils.timelineInsertDelay);
+                                    return $timeout(function () {
+                                    }, utils.timelineInsertDelay);
                                 });
                             }
                         })(entry);
                     }
-                    if(timelineTimeout){
-                        timelineTimeout.then(function(){
+                    if (timelineTimeout) {
+                        timelineTimeout.then(function () {
                             union.timeline.loadingLock = false;
                         });
-                    }else {
+                    } else {
                         union.timeline.loadingLock = false;
                     }
-                }else {
-                    $http.get(apiEndpoint + "normal-point/active").then(function(response){
+                } else {
+                    $http.get(apiEndpoint + "normal-point/active").then(function (response) {
                         union.timeline.activePoints = response.data;
-                        for(var i in union.timeline.activePoints){
+                        for (var i in union.timeline.activePoints) {
                             var point = union.timeline.activePoints[i];
                             union.timeline.activePoints[i].mainName = utils.getPointFirstName(point);
                             union.timeline.activePoints[i].subName = utils.getPointSecondName(point);
                             union.timeline.activePoints[i].type = utils.getPointType(point.Type);
                         }
-                    },function(error){
-                        notification.error("未知错误", error);
+                    }, function (response) {
+                        notification.error("未知错误", response);
                     });
                     union.timeline.loadingLock = false;
                 }
 
-            }, function (error) {
-                notification.error("未知错误", error);
+            }, function (response) {
+                notification.error("未知错误", response);
                 union.timeline.loadingLock = false;
             });
         }
