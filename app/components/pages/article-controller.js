@@ -22,7 +22,8 @@
                         for (var i in article.AttachedPoints) {
                             article.AttachedPoints[i].mainName = article.AttachedPoints[i][article.AttachedPoints[i].PreferredName + "Name"];
                         }
-                        article.isMyArticle = (union.$localStorage.user.IdCode == $routeParams.author);
+                        article.isMyArticle = union.$localStorage.user.IdCode === $routeParams.author;
+                        article.canEdit = article.isMyArticle || union.$localStorage.user.StaffClaim === "operator";
                         if (article.Vote) {
                             $scope.hasVote = true;
                             switch (article.Vote) {
