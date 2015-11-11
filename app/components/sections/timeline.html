@@ -24,7 +24,7 @@
         </div>
     </div>
     <div class="default" ng-if="data.activePoints">
-        <img src="../../assets/images/clipart.png" class="clipart">
+        <img src="assets/images/clipart.png" class="clipart">
         <div class="description">
             <h1 class="font-myriad-keylol">{{data.noArticleText.main}}</h1>
             <h3>{{data.noArticleText.sub}}</h3>
@@ -144,5 +144,5 @@
     <svg xmlns="http://www.w3.org/2000/svg" ng-if="!data.searchNotFound && !data.activePoints && !data.loadingLock" class="card-end">
         <rect x="14" width="15" height="5"></rect>
     </svg>
-    <img class="loading" src="../../assets/images/timeline-loading.gif" ng-if="data.loadingLock">
+    <img class="loading" src="assets/images/timeline-loading.gif" ng-if="data.loadingLock">
 </div>
