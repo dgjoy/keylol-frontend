@@ -32,7 +32,9 @@
                         };
                         $scope.data.head.mainHead = utils.getPointFirstName(point);
                         $scope.data.head.subHead = utils.getPointSecondName(point);
-                        union.pointCards[idCode] = $scope.data;
+                        if(union.pointCards){
+                            union.pointCards[idCode] = $scope.data;
+                        }
                         $scope.loading = false;
                     }, function (error) {
                         notification.error("据点卡片请求错误");
@@ -98,6 +100,7 @@
                     $scope.data.subscribed = true;
                     $scope.subscribeDisabled = false;
                     $scope.data.pointSum.readerNum++;
+                    union.$localStorage.user.SubscribedPointCount++;
                 }, function (error) {
                     notification.error("未知错误");
                     console.error(error);
@@ -119,6 +122,7 @@
                             $scope.data.subscribed = false;
                             $scope.subscribeDisabled = false;
                             $scope.data.pointSum.readerNum--;
+                            union.$localStorage.user.SubscribedPointCount--;
                         }, function (error) {
                             notification.error("未知错误");
                             console.error(error);

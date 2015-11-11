@@ -20,6 +20,7 @@
                     $scope.data.subscribed = true;
                     $scope.subscribeDisabled = false;
                     $scope.data.pointSum.readerNum++;
+                    union.$localStorage.user.SubscribedPointCount++;
                 }, function (error) {
                     notification.error("未知错误");
                     console.error(error);
@@ -41,6 +42,7 @@
                             $scope.data.subscribed = false;
                             $scope.subscribeDisabled = false;
                             $scope.data.pointSum.readerNum--;
+                            union.$localStorage.user.SubscribedPointCount--;
                         }, function (error) {
                             notification.error("未知错误");
                             console.error(error);

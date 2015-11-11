@@ -267,6 +267,7 @@
                     entry.subscribed = true;
                     entry.subscribeDisabled = false;
                     entry.pointInfo.reader++;
+                    union.$localStorage.user.SubscribedPointCount++;
                 }, function (error) {
                     notification.error("未知错误", error);
                 });
@@ -287,6 +288,7 @@
                             entry.subscribed = false;
                             entry.subscribeDisabled = false;
                             entry.pointInfo.reader--;
+                            union.$localStorage.user.SubscribedPointCount--;
                         }, function (error) {
                             notification.error("未知错误", error);
                             entry.subscribeDisabled = false;
