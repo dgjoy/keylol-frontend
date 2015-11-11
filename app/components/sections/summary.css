@@ -34,6 +34,10 @@
     height: 48px;
 }
 
+.section-summary .avatar-anchor + .main-heading {
+    margin-right: 52px;
+}
+
 .section-summary .main-heading {
     font-weight: bold;
     margin: 5px 0 2px;
