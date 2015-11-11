@@ -123,7 +123,7 @@
                             for (var i in articleList) {
                                 var article = articleList[i];
                                 if (!article.Author) {
-                                    article.Author = union.user;
+                                    article.Author = user;
                                 }
                                 var entry = {
                                     types: [article.TypeName],
