@@ -1,8 +1,11 @@
 <!DOCTYPE html>
-<html lang="zh" ng-app="KeylolApp" ng-controller="RootController">
+<html lang="zh" ng-controller="RootController">
 <head>
     <% if (urlCanonical) { %>
-    <script>(/^keylol\.com$/.test(window.location.hostname)||"https:"!==window.location.protocol)&&(window.location="https://www.keylol.com"+window.location.pathname);</script>
+    <script>
+        if (/^keylol\.com$/.test(window.location.hostname) || "https:" !== window.location.protocol)
+            window.location = "https://www.keylol.com" + window.location.pathname;
+    </script>
     <% } %>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=1240">
@@ -12,7 +15,11 @@
     <link rel="icon" href="assets/images/favicon.ico">
     <base href="/">
     <% _.forEach(stylesheets, function(stylesheet) { %><link rel="stylesheet" href="<%= stylesheet %>"><% }); %>
-    <% _.forEach(scripts, function(script) { %><script src="<%= script %>"></script><% }); %>
 </head>
-<body ng-view></body>
+<body>
+<main ng-view></main>
+<% _.forEach(scripts, function(script) { %><script src="<%= script %>"></script><% }); %>
+<script>angular.bootstrap(document, ["KeylolApp"]);</script>
+<script src="//w.cnzz.com/q_stat.php?id=1256746604"></script>
+</body>
 </html>

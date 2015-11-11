@@ -13,13 +13,14 @@
         "angularMoment",
         "ngStorage",
         "ngFileUpload",
-        "ab-base64"
+        "ab-base64",
+        "angulartics"
     ]);
     app.config([
         "$routeProvider", "$locationProvider", "utilsProvider", "pageTitleProvider", "$localStorageProvider",
-        "$httpProvider", "$compileProvider",
+        "$httpProvider", "$compileProvider", "$analyticsProvider",
         function ($routeProvider, $locationProvider, utilsProvider, pageTitleProvider, $localStorageProvider,
-                  $httpProvider, $compileProvider) {
+                  $httpProvider, $compileProvider, $analyticsProvider) {
             $locationProvider.html5Mode(true);
 
             $routeProvider.when("/home", {
@@ -74,6 +75,24 @@
             $httpProvider.defaults.withCredentials = true;
 
             $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|tel|file|steam):/);
+
+            window._czc = [];
+            _czc.push(["_setAutoPageview", false]);
+
+            $analyticsProvider.registerPageTrack(function (path) {
+                _czc.push(["_trackPageview", path]);
+            });
+
+            $analyticsProvider.registerEventTrack(function (action, prop) {
+                _czc.push([
+                    "_trackEvent",
+                    prop.category || "未分类",
+                    action,
+                    prop.label,
+                    prop.value,
+                    prop.nodeid
+                ]);
+            });
         }
     ]);
     app.constant("amTimeAgoConfig", {

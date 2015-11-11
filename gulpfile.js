@@ -37,7 +37,8 @@ var vendorScripts = [
     "bower_components/angular-moment/angular-moment.js",
     "bower_components/ngstorage/ngStorage.js",
     "bower_components/ng-file-upload/ng-file-upload.js",
-    "bower_components/angular-utf8-base64/angular-utf8-base64.js"
+    "bower_components/angular-utf8-base64/angular-utf8-base64.js",
+    "bower_components/angulartics/src/angulartics.js"
 ];
 
 var appSrcipts = [
@@ -203,6 +204,11 @@ gulp.task("compile-index:prod", ["vendor-script-bundle", "app-script-bundle", "t
             urlCanonical: true
         }))
         .pipe(rename("index.html"))
+        .pipe(minifyInline({
+            css: {
+                keepSpecialComments: 0
+            }
+        }))
         .pipe(htmlmin(htmlminOptions))
         .pipe(gulp.dest("app"));
 });
@@ -219,6 +225,11 @@ gulp.task("compile-index:prod:cdn", ["vendor-script-bundle", "app-script-bundle"
             urlCanonical: true
         }))
         .pipe(rename("index.html"))
+        .pipe(minifyInline({
+            css: {
+                keepSpecialComments: 0
+            }
+        }))
         .pipe(htmlmin(htmlminOptions))
         .pipe(gulp.dest("app"));
 });
