@@ -51,6 +51,9 @@
                                 window.activateGeetest = {};
                             }
                             var id = self.uniqueId();
+                            var readyDeferred = $q.defer();
+                            var successDeferred = $q.defer();
+                            var refreshDefered;
                             activateGeetest[id] = function () {
                                 var gee = new Geetest({
                                     gt: _config.geetestId,
@@ -58,9 +61,11 @@
                                     https: location.protocol === "https:"
                                 });
                                 gee.onSuccess(function () {
-                                    onSuccess(gee.getValidate(), gee);
+                                    successDeferred.resolve(gee);
+                                    if (refreshDefered)
+                                        refreshDefered.resolve(gee);
                                 });
-                                gee.appendTo("#geetest-" + id);
+                                readyDeferred.resolve(gee);
                             };
                             if (typeof window.Geetest === "undefined") {
                                 var s = document.createElement("script");
@@ -69,7 +74,18 @@
                             } else {
                                 activateGeetest[id]();
                             }
-                            return id;
+                            return {
+                                id: id,
+                                ready: readyDeferred.promise,
+                                success: successDeferred.promise,
+                                refresh: function () {
+                                    refreshDefered = $q.defer();
+                                    readyDeferred.promise.then(function (gee) {
+                                        gee.refresh();
+                                    });
+                                    return refreshDefered.promise;
+                                }
+                            };
                         };
 
                         self.uniqueId = function () {
@@ -142,6 +158,13 @@
                         };
 
                         self.modelValidate = {
+                            steamBindingTokenId: function (str, errorObj, modelName) {
+                                if (!str) {
+                                    errorObj[modelName] = "SteamBindingTokenId cannot be empty.";
+                                    return false;
+                                }
+                                return true;
+                            },
                             idCode: function (str, errorObj, modelName) {
                                 if (!/^[A-Z0-9]{5}$/.test(str)) {
                                     errorObj[modelName] = "Only 5 uppercase letters and digits are allowed in IdCode.";
@@ -178,6 +201,11 @@
                         };
 
                         self.modelErrorDetect = {
+                            steamBindingTokenId: function (message) {
+                                if (/cannot be empty/.test(message))
+                                    return "empty";
+                                return "unknown";
+                            },
                             idCode: function (message) {
                                 if (/Only.*allowed/.test(message))
                                     return "format";

@@ -26,7 +26,7 @@
                     scrollTop: $("#get-invitation-code").offset().top
                 }, 3000);
             };
-
+            
             var submitLock = false;
             $scope.submit = function () {
                 if (submitLock)
@@ -39,7 +39,6 @@
                     submitLock = false;
                     return;
                 }
-
                 $http.get(apiEndpoint + "invitation-code/" + $scope.vm.InvitationCode).then(function () {
                     union.invitationCode = $scope.vm.InvitationCode;
                     window.show({

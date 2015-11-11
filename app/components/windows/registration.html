@@ -12,15 +12,18 @@
         <form class="clearfix" ng-submit="submit()">
             <table>
                 <colgroup>
-                    <col style="width: 33%">
+                    <col style="width: 38%">
                     <col style="width: 2%;">
-                    <col style="width: 65%;">
+                    <col style="width: 60%">
                 </colgroup>
                 <tbody>
                 <tr>
                     <td>
                         <h3 class="font-myriad-lisong">连接游戏平台</h3>
-                        <h4>绑定 Steam 平台的有效账户。</h4>
+                        <h4 ng-switch="errorDetect.steamBindingTokenId(error['vm.SteamBindingTokenId'])">
+                            <span class="error" ng-switch-when="empty">您必须绑定一个 Steam 账户才可以注册成为其乐用户。</span>
+                            <span ng-switch-default>绑定 Steam 平台的有效账户。</span>
+                        </h4>
                         <div class="platform">
                             <a class="go-binding-anchor" href="" ng-click="showSteamConnectWindow()">
                                 <img src="assets/images/steam-circle-mono.png" alt="绑定 Steam">

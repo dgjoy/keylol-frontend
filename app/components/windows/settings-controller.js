@@ -2,8 +2,10 @@
     "use strict";
 
     keylolApp.controller("SettingsController", [
-        "$scope", "close", "utils", "$http", "union", "apiEndpoint", "base64", "Upload", "$q", "notification",
-        function ($scope, close, utils, $http, union, apiEndpoint, base64, Upload, $q, notification) {
+        "$scope", "close", "utils", "$http", "union", "apiEndpoint", "base64", "Upload", "$q", "notification", "$element",
+        "$timeout",
+        function ($scope, close, utils, $http, union, apiEndpoint, base64, Upload, $q, notification, $element,
+                  $timeout) {
             $scope.error = {};
             $scope.errorDetect = utils.modelErrorDetect;
             $scope.page = "profiles";
@@ -82,14 +84,21 @@
             });
 
             var geetestResult;
-            var gee;
-            $scope.geetestId = utils.createGeetest("float", function (result, geetest) {
-                gee = geetest;
-                geetestResult = result;
+            var geetest = utils.createGeetest("float");
+            $scope.geetestId = geetest.id;
+            geetest.ready.then(function (gee) {
+                $timeout(function () {
+                    var geetestDom = $("#geetest-" + geetest.id, $element);
+                    gee.appendTo(geetestDom);
+                });
+            });
+            var useGeetestResult = function (gee) {
+                geetestResult = gee.getValidate();
                 $scope.vm.GeetestChallenge = geetestResult.geetest_challenge;
                 $scope.vm.GeetestSeccode = geetestResult.geetest_seccode;
                 $scope.vm.GeetestValidate = geetestResult.geetest_validate;
-            });
+            };
+            geetest.success.then(useGeetestResult);
 
             $scope.cancel = function () {
                 close();
@@ -203,7 +212,7 @@
                     if (!$scope.vm.Password) {
                         $scope.error["vm.Password"] = "Password cannot be empty.";
                     }
-                    if (typeof geetestResult === "undefined") {
+                    if (!geetestResult) {
                         $scope.error.authCode = true;
                     }
                     if ($scope.vm.NewPassword) {
@@ -251,9 +260,8 @@
                             switch (response.status) {
                                 case 400:
                                     $scope.error = response.data.ModelState;
-                                    if ($scope.error.authCode) {
-                                        gee.refresh();
-                                    }
+                                    geetestResult = null;
+                                    geetest.refresh().then(useGeetestResult);
                                     focusErrorPage();
                                     break;
                                 default:

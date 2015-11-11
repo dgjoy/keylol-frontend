@@ -2,8 +2,8 @@
     "use strict";
 
     keylolApp.controller("RegistrationController", [
-        "$scope", "close", "$http", "utils", "union", "apiEndpoint", "window", "notification",
-        function ($scope, close, $http, utils, union, apiEndpoint, window) {
+        "$scope", "close", "$http", "utils", "union", "apiEndpoint", "window", "notification", "$element", "$timeout",
+        function ($scope, close, $http, utils, union, apiEndpoint, window, notification, $element, $timeout) {
             $scope.vm = {
                 IdCode: "",
                 UserName: "",
@@ -18,21 +18,31 @@
             };
             var consumeBindingToken;
             var geetestResult;
-            var gee;
-            $scope.geetestId = utils.createGeetest("float", function (result, geetest) {
-                gee = geetest;
-                geetestResult = result;
+            var geetest = utils.createGeetest("float");
+            $scope.geetestId = geetest.id;
+            geetest.ready.then(function (gee) {
+                $timeout(function () {
+                    var geetestDom = $("#geetest-" + geetest.id, $element);
+                    gee.appendTo(geetestDom);
+                });
+            });
+            var useGeetestResult = function (gee) {
+                geetestResult = gee.getValidate();
                 $scope.vm.GeetestChallenge = geetestResult.geetest_challenge;
                 $scope.vm.GeetestSeccode = geetestResult.geetest_seccode;
                 $scope.vm.GeetestValidate = geetestResult.geetest_validate;
-            });
+            };
+            geetest.success.then(useGeetestResult);
+
             $scope.error = {};
             $scope.errorDetect = utils.modelErrorDetect;
+
             $scope.cancel = function () {
                 close();
                 if (consumeBindingToken)
                     consumeBindingToken.resolve();
             };
+
             $scope.showSteamConnectWindow = function () {
                 window.show({
                     templateUrl: "components/windows/steam-connect.html",
@@ -50,6 +60,7 @@
                     });
                 });
             };
+
             $scope.discardBinding = function () {
                 $scope.vm.SteamBindingTokenId = "";
                 if (consumeBindingToken)
@@ -63,10 +74,11 @@
                 submitLock = true;
                 $scope.error = {};
                 $scope.vm.IdCode = $scope.vm.IdCode.toUpperCase();
+                utils.modelValidate.steamBindingTokenId($scope.vm.SteamBindingTokenId, $scope.error, "vm.SteamBindingTokenId");
                 utils.modelValidate.idCode($scope.vm.IdCode, $scope.error, "vm.IdCode");
                 utils.modelValidate.username($scope.vm.UserName, $scope.error, "vm.UserName");
                 utils.modelValidate.password($scope.vm.Password, $scope.error, "vm.Password");
-                if (typeof geetestResult === "undefined") {
+                if (!geetestResult) {
                     $scope.error.authCode = true;
                 }
                 if (!$.isEmptyObject($scope.error)) {
@@ -83,9 +95,8 @@
                         switch (response.status) {
                             case 400:
                                 $scope.error = response.data.ModelState;
-                                if ($scope.error.authCode) {
-                                    gee.refresh();
-                                }
+                                geetestResult = null;
+                                geetest.refresh().then(useGeetestResult);
                                 break;
                             default:
                                 notification.error("未知错误", response);

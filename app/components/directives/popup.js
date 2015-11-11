@@ -134,16 +134,15 @@
                                     });
 
                                     if (options.event) {
+                                        var onBodyClick;
                                         if (options.event.type === "click") {
-                                            var onBodyClick;
                                             windowPromise.then(function (window) {
                                                 onBodyClick = function (e) {
                                                     if (e.target === options.event.currentTarget ||
                                                         $.contains(options.event.currentTarget, e.target)) {
-                                                        if (!options.event.acceptCurrentTarget)
-                                                            e.stopPropagation();
-                                                        else
+                                                        if (options.event.acceptCurrentTarget)
                                                             return;
+                                                        e.stopPropagation();
                                                     }
                                                     if (e.target !== window.$element[0] && !$.contains(window.$element[0], e.target))
                                                         close();
@@ -161,13 +160,19 @@
                                                 close();
                                             };
                                             windowPromise.then(function (window) {
+                                                onBodyClick = function (e) {
+                                                    if (e.target !== window.$element[0] && !$.contains(window.$element[0], e.target))
+                                                        window.closeNow();
+                                                };
+                                                document.body.addEventListener("click", onBodyClick, true);
                                                 window.$element.hover(onPopupMouseEnter, onPopupMouseLeave);
-                                                window.close.then(function () {
-                                                    delete contexts[contextId];
-                                                    $(options.event.currentTarget).off("mouseleave", onTriggerMouseLeave);
-                                                    window.$element.off("mouseenter", onPopupMouseEnter);
-                                                    window.$element.off("mouseleave", onPopupMouseLeave);
-                                                });
+                                                return window.close;
+                                            }).then(function () {
+                                                delete contexts[contextId];
+                                                document.body.removeEventListener("click", onBodyClick, true);
+                                                $(options.event.currentTarget).off("mouseleave", onTriggerMouseLeave);
+                                                window.$element.off("mouseenter", onPopupMouseEnter);
+                                                window.$element.off("mouseleave", onPopupMouseLeave);
                                             });
                                         }
                                     }
