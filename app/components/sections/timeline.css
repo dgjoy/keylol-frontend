@@ -295,7 +295,8 @@
 .section-timeline .entry.ng-enter .card-line {
     transform: scale(1,0);
     transform-origin: left top;
-    transition-duration: 0.1s;
+    transition-duration: 150ms;
+    transition-timing-function: linear;
 }
 
 .section-timeline .entry.ng-enter-active .card-line {
@@ -304,12 +305,12 @@
 
 .section-timeline .entry.ng-enter .card-line circle {
     transition-duration: 0.3s;
-    transition-delay: 0.4s;
+    transition-delay: 375ms;
     r: 0;
 }
 
 .section-timeline .entry.ng-enter .card-line circle.inverse {
-    transition-delay: 0.1s;
+    transition-delay: 75ms;
 }
 
 .section-timeline .entry.ng-enter-active .card-line circle {
@@ -323,8 +324,8 @@
 .section-timeline .entry.ng-enter .entry-heading,
 .section-timeline .entry.ng-enter footer,
 .section-timeline .entry.ng-enter .entry-content {
-    transition-duration: 0.4s;
-    transition-delay: 0.7s;
+    transition-duration: 0.3s;
+    transition-delay: 0.3s;
     transform: translateX(-15%);
     opacity: 0;
 }

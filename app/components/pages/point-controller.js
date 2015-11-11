@@ -123,7 +123,7 @@
                             for (var i in articleList) {
                                 var article = articleList[i];
                                 if (!article.Author) {
-                                    article.Author = union.user;
+                                    article.Author = user;
                                 }
                                 var entry = {
                                     types: [article.TypeName],
@@ -183,11 +183,11 @@
                                 (function(entry){
                                     if(!timelineTimeout){
                                         union.timeline.entries.push(entry);
-                                        timelineTimeout = $timeout(function(){}, 100);
+                                        timelineTimeout = $timeout(function(){}, utils.timelineInsertDelay);
                                     }else {
                                         timelineTimeout = timelineTimeout.then(function(){
                                             union.timeline.entries.push(entry);
-                                            return $timeout(function(){}, 100);
+                                            return $timeout(function(){}, utils.timelineInsertDelay);
                                         });
                                     }
                                 })(entry);
@@ -360,11 +360,11 @@
                             (function(entry){
                                 if(!timelineTimeout){
                                     union.timeline.entries.push(entry);
-                                    timelineTimeout = $timeout(function(){}, 100);
+                                    timelineTimeout = $timeout(function(){}, utils.timelineInsertDelay);
                                 }else {
                                     timelineTimeout = timelineTimeout.then(function(){
                                         union.timeline.entries.push(entry);
-                                        return $timeout(function(){}, 100);
+                                        return $timeout(function(){}, utils.timelineInsertDelay);
                                     });
                                 }
                             })(entry);
