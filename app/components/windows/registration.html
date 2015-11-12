@@ -48,7 +48,7 @@
                         <h4 ng-switch="errorDetect.idCode(error['vm.IdCode'])">
                             <span class="error" ng-switch-when="format">仅限使用字母、数字。</span>
                             <span class="error" ng-switch-when="used">这个代码已经被别人使用。</span>
-                            <span ng-switch-default>五位长度的自定义代码，社区用户的永久身份凭证。</span>
+                            <span ng-switch-default>自定义五位长度的用户代码，作为个人页面的链接与登录凭证。</span>
                         </h4>
                         <div class="id-code">
                             <input-code length="5" ng-model="vm.IdCode"></input-code>
@@ -70,7 +70,7 @@
                             <span class="error" ng-switch-when="used">这个昵称已被别人使用。</span>
                             <span class="error" ng-switch-when="format">仅限使用字母、数字、汉字。</span>
                             <span class="error" ng-switch-when="length">仅限 3-16 字节。</span>
-                            <span ng-switch-default>展现在日常界面中，不可与他人重复。</span>
+                            <span ng-switch-default>展现在日常界面中，不与其他用户重复。</span>
                         </h4>
                     </td>
                     <td>
@@ -82,7 +82,7 @@
                         <h3 class="font-myriad-lisong">登录口令</h3>
                         <h4 ng-switch="errorDetect.password(error['vm.Password'])">
                             <span class="error" ng-switch-when="length">密码需要至少长 6 位。</span>
-                            <span ng-switch-default>由至少6位的字母、数字、符号组成。</span>
+                            <span ng-switch-default>由至少 6 位的数字或字母或符号组成。</span>
                         </h4>
                     </td>
                     <td>
@@ -111,7 +111,7 @@
             <div class="declaration">
                 <h3 class="single-line font-myriad-lisong">守则</h3>
                 <h4>Terms and Conditions</h4>
-                <p>申请人已悉知并同意遵循《其乐社区用户通用守则》以及所在地区的相关法律。</p>
+                <p>申请人已悉知并同意遵循<a href="http://steamcn.com/t46755-1-1">《蒸汽动力社区通用守则》</a>以及所在地区的相关法律。</p>
             </div>
         </form>
     </div>
