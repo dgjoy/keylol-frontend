@@ -15,6 +15,7 @@
                         templateUrl: "components/popup/operation-feedback.html",
                         controller: "OperationFeedbackController",
                         adjustScrollBar: false,
+                        global: true,
                         inputs: {
                             options: options
                         }

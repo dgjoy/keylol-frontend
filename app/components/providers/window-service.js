@@ -48,7 +48,9 @@
 
                 self.show = function (options) {
                     options = $.extend({
-                        adjustScrollBar: true
+                        adjustScrollBar: true,
+                        global: false,
+                        delayAppend: false
                     }, options);
 
                     //  Create a deferred we'll resolve when the window is ready.
@@ -98,9 +100,10 @@
                         if (controllerName)
                             controller = $controller(controllerName, inputs);
 
-                        $timeout(function () {
-                            // Append to body
-                            $animate.enter($element, document.body, document.body.lastChild);
+                        // Append
+                        var appendWindow = function () {
+                            var main = options.global ? document.body : $("main[ng-view]")[0];
+                            $animate.enter($element, main, main.lastChild);
                             if (options.adjustScrollBar)
                                 adjustScrollBar();
 
@@ -110,8 +113,13 @@
                                 $element: $element,
                                 close: closeDeferred.promise,
                                 closeNow: close
-                            })
-                        });
+                            });
+                        };
+
+                        if (options.delayAppend)
+                            $timeout(appendWindow);
+                        else
+                            appendWindow();
                     };
 
                     if (options.template) {

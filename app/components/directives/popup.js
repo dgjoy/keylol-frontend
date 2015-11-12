@@ -79,6 +79,7 @@
                                         templateUrl: options.templateUrl,
                                         controller: options.controller,
                                         adjustScrollBar: false,
+                                        delayAppend: true,
                                         inputs: options.inputs
                                     });
 
