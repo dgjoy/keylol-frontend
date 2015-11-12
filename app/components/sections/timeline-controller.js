@@ -116,9 +116,11 @@
             function requestWhenFiltering(isLoadingMore) {
                 $scope.data.loadingLock = true;
                 var filters = "";
+                var filterCount = 0;
                 for (var i = 0; i < articleTypes.length; i++) {
                     if (filterOptions[i]) {
-                        if (i !== 0) {
+                        filterCount++;
+                        if (filters.length !== 0) {
                             filters += ",";
                         }
                         filters += articleTypes[i].name;
@@ -131,6 +133,9 @@
                     var beforeSN = 2147483647;
                     if (isLoadingMore) {
                         beforeSN = $scope.data.entries[$scope.data.entries.length - 1].sequenceNumber;
+                    }
+                    if(filterCount === 5){
+                        filters = undefined;
                     }
                     $scope.data.loadAction({
                         idType: "IdCode",

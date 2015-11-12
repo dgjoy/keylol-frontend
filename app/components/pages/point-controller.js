@@ -157,8 +157,8 @@
                                                 }
                                             } else {
                                                 entry.sources.userArray.push({
-                                                    name: union.$localStorage.user.UserName,
-                                                    idCode: union.$localStorage.user.IdCode
+                                                    name: user.UserName,
+                                                    idCode: user.IdCode
                                                 });
                                             }
                                             break;
