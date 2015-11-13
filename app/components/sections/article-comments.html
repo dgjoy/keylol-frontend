@@ -16,7 +16,7 @@
         </article>
     </div>
     <div class="cut-off" ng-if="pageElements.currPage == 1 && hotComments.length > 0"></div>
-    <div class="comment" ng-repeat="comment in comments" id="comment-{{comment.SequenceNumberForArticle}}">
+    <div class="comment" ng-repeat="comment in comments track by comment.Id" id="comment-{{comment.SequenceNumberForArticle}}">
         <span class="floor">#{{comment.SequenceNumberForArticle}}</span>
         <point-link type="'user'" avatar-url="comment.Commentator.AvatarImage" id-code="comment.Commentator.IdCode"></point-link>
         <article>
@@ -33,9 +33,7 @@
     </div>
     <pagination total="pageElements.totalPages" current="pageElements.currPage" on-page-changed="pageElements.changePage(oldPage, newPage)" page-href=""></pagination>
     <form ng-submit="doComment()">
-        <a class="avatar-anchor" href="test">
-            <img class="avatar-small" webp-src="{{user.AvatarImage|avatarUrl}}">
-        </a>
+        <point-link type="'user'" avatar-url="user.AvatarImage" id-code="user.IdCode"></point-link>
         <button type="submit" class="border-button right-border" ng-disabled="submitDisabled">发表评论</button>
         <span class="textarea-container"><textarea placeholder="对作者的见解有什么见解？" ng-model="currentComment" focus-me="textFocus"></textarea></span>
     </form>
