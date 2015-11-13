@@ -18,11 +18,11 @@
             }, options);
 
             var setupNewVM = function () {
-                $scope.vm = options.vm || {
-                        Title: "",
-                        Content: "",
-                        Vote: null
-                    };
+                $scope.vm = options.vm ? $.extend({}, options.vm) : {
+                    Title: "",
+                    Content: "",
+                    Vote: null
+                };
                 if ($scope.vm.TypeName) {
                     for (var i = 0; i < articleTypes.length; ++i) {
                         if (articleTypes[i].name === $scope.vm.TypeName) {
