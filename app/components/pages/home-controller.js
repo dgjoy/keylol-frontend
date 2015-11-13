@@ -20,7 +20,7 @@
                             templateUrl: "components/windows/editor.html",
                             controller: "EditorController",
                             inputs: {
-                                vm: null
+                                options: null
                             }
                         });
                     }

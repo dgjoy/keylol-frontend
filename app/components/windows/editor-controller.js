@@ -2,27 +2,23 @@
     "use strict";
 
     keylolApp.controller("EditorController", [
-        "$scope", "close", "utils", "$http", "union", "$timeout", "$location", "notification", "vm", "articleTypes", "$route",
-        function ($scope, close, utils, $http, union, $timeout, $location, notification, vm, articleTypes, $route) {
+        "$scope", "close", "utils", "$http", "union", "$timeout", "$location", "notification", "options", "articleTypes", "$route",
+        function ($scope, close, utils, $http, union, $timeout, $location, notification, options, articleTypes, $route) {
             $scope.radioId = [utils.uniqueId(), utils.uniqueId(), utils.uniqueId()];
             $scope.articleTypes = articleTypes;
             $scope.expanded = false;
             $scope.lastSaveTime = null;
             $scope.inline = {};
             $scope.selectedTypeIndex = 0;
+            var autoSaveInterval = 30000;
 
-            if (!union.$localStorage.editorDrafts) union.$localStorage.editorDrafts = {};
-            var draftKey = vm ? vm.Id : "new";
-            var draft = union.$localStorage.editorDrafts[draftKey];
-            if (draft) {
-                $scope.vm = draft.vm;
-                $scope.lastSaveTime = draft.time;
-                $scope.inline.attachedPoints = draft.attachedPoints;
-                $scope.inline.voteForPoints = draft.voteForPoints;
-                $scope.selectedTypeIndex = draft.selectedTypeIndex;
-                notification.success("本地草稿已加载");
-            } else {
-                $scope.vm = $.extend({}, vm) || {
+            options = $.extend({
+                vm: null,
+                needConfirmLoadingDraft: false
+            }, options);
+
+            var setupNewVM = function () {
+                $scope.vm = options.vm || {
                         Title: "",
                         Content: "",
                         Vote: null
@@ -39,6 +35,52 @@
                     $scope.inline.attachedPoints = $scope.vm.AttachedPoints;
                 if ($scope.vm.VoteForPointId)
                     $scope.inline.voteForPoints = [{Id: $scope.vm.VoteForPointId, Name: $scope.vm.VoteForPointName}];
+            };
+
+            var autoSaveTimeout;
+            $scope.saveDraft = function () {
+                $timeout.cancel(autoSaveTimeout);
+                $scope.lastSaveTime = moment();
+                union.$localStorage.editorDrafts[draftKey] = {
+                    vm: $scope.vm,
+                    time: $scope.lastSaveTime,
+                    selectedTypeIndex: $scope.selectedTypeIndex,
+                    attachedPoints: $scope.inline.attachedPoints,
+                    voteForPoints: $scope.inline.voteForPoints
+                };
+                autoSaveTimeout = $timeout($scope.saveDraft, autoSaveInterval);
+            };
+
+            if (!union.$localStorage.editorDrafts) union.$localStorage.editorDrafts = {};
+            var draftKey = options.vm ? options.vm.Id : "new";
+            var draft = union.$localStorage.editorDrafts[draftKey];
+            if (draft) {
+                var loadDraft = function () {
+                    $scope.vm = draft.vm;
+                    $scope.lastSaveTime = draft.time;
+                    $scope.inline.attachedPoints = draft.attachedPoints;
+                    $scope.inline.voteForPoints = draft.voteForPoints;
+                    $scope.selectedTypeIndex = draft.selectedTypeIndex;
+                    notification.success("本地草稿已加载");
+                };
+                if (options.needConfirmLoadingDraft) {
+                    setupNewVM();
+                    notification.attention("直接编辑上次未完成的草稿", [
+                        {action: "加载草稿", value: true},
+                        {action: "取消"}
+                    ]).then(function (result) {
+                        if (result) {
+                            loadDraft();
+                        }
+                        autoSaveTimeout = $timeout($scope.saveDraft, autoSaveInterval);
+                    });
+                } else {
+                    loadDraft();
+                    autoSaveTimeout = $timeout($scope.saveDraft, autoSaveInterval);
+                }
+            } else {
+                setupNewVM();
+                autoSaveTimeout = $timeout($scope.saveDraft, autoSaveInterval);
             }
 
             $scope.$watchCollection("inline.attachedPoints", function (newValue) {
@@ -58,21 +100,6 @@
             $scope.$watch("selectedTypeIndex", function (newValue) {
                 $scope.vm.TypeName = articleTypes[newValue].name;
             });
-
-            var autoSaveTimeout;
-            $scope.saveDraft = function () {
-                $timeout.cancel(autoSaveTimeout);
-                $scope.lastSaveTime = moment();
-                union.$localStorage.editorDrafts[draftKey] = {
-                    vm: $scope.vm,
-                    time: $scope.lastSaveTime,
-                    selectedTypeIndex: $scope.selectedTypeIndex,
-                    attachedPoints: $scope.inline.attachedPoints,
-                    voteForPoints: $scope.inline.voteForPoints
-                };
-                autoSaveTimeout = $timeout($scope.saveDraft, 30000);
-            };
-            autoSaveTimeout = $timeout($scope.saveDraft, 30000);
 
             $scope.expand = function ($event) {
                 $scope.expanded = !$scope.expanded;
@@ -102,7 +129,6 @@
                     {action: "取消"}
                 ]).then(function (result) {
                     if (result) {
-                        $scope.saveDraft();
                         $timeout.cancel(autoSaveTimeout);
                         close();
                     }
@@ -124,15 +150,15 @@
                     for (var key in $scope.vm) {
                         if (key === "AttachedPointsId") {
                             var oldAttachedPointsId = [];
-                            for (var i = 0; i < vm.AttachedPoints.length; ++i)
-                                oldAttachedPointsId.push(vm.AttachedPoints[i].Id);
+                            for (var i = 0; i < options.vm.AttachedPoints.length; ++i)
+                                oldAttachedPointsId.push(options.vm.AttachedPoints[i].Id);
                             if (JSON.stringify($scope.vm.AttachedPointsId) != JSON.stringify(oldAttachedPointsId))
                                 dirtyFields.AttachedPointsId = $scope.vm.AttachedPointsId;
                             continue;
                         }
 
-                        if ($scope.vm.hasOwnProperty(key) && $scope.vm[key] != vm[key]) {
-                            if ($scope.vm[key] != vm[key])
+                        if ($scope.vm.hasOwnProperty(key) && $scope.vm[key] != options.vm[key]) {
+                            if ($scope.vm[key] != options.vm[key])
                                 dirtyFields[key] = $scope.vm[key];
                         }
                     }

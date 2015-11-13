@@ -10,7 +10,10 @@
                     templateUrl: "components/windows/editor.html",
                     controller: "EditorController",
                     inputs: {
-                        vm: $scope.article
+                        options: {
+                            vm: $scope.article,
+                            needConfirmLoadingDraft: true
+                        }
                     }
                 });
             }
