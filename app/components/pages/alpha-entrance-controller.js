@@ -4,7 +4,7 @@
     keylolApp.controller("AlphaEntranceController", [
         "pageTitle", "$scope", "$timeout", "$rootScope", "window", "$window", "union", "$location",
         function (pageTitle, $scope, $timeout, $rootScope, window, $window, union, $location) {
-            pageTitle.set("其乐游戏社区");
+            pageTitle.set("其乐 - 一个交流评测感悟的玩家社区");
 
             $scope.$watch(function () {
                 return union.$localStorage.login;

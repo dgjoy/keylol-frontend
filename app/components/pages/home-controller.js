@@ -4,7 +4,7 @@
     keylolApp.controller("HomeController", [
         "pageTitle", "$scope", "union", "$http", "notification", "window", "utils", "$timeout",
         function (pageTitle, $scope, union, $http, notification, window, utils, $timeout) {
-            pageTitle.set("其乐");
+            pageTitle.set("其乐 - 请无视游戏与艺术之间的空隙");
             $scope.union = union;
             union.timeline = {
                 title: {
