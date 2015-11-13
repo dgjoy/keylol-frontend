@@ -8,7 +8,7 @@
         <p>关联据点</p>
         <p>Relations</p>
     </div>
-    <div ng-repeat="point in union.associatedPoints" class="point">
+    <div ng-repeat="point in union.associatedPoints track by point.Id" class="point">
         <p>
             <a ng-href="point/{{point.IdCode}}">{{utils.getPointFirstName(point)}}</a>
         </p>

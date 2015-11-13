@@ -1,7 +1,7 @@
 ﻿<popup class="popup-point-selector">
     <div class="selector-main box-shadowed-deeper">
         <ul>
-            <li ng-repeat="point in pointArray" ng-click="selectPoint($event)" class="clearfix" ng-class="{selected: point.selected}" ng-mouseenter="changeSelector($index)">
+            <li ng-repeat="point in pointArray track by point.Id" ng-click="selectPoint($event)" class="clearfix" ng-class="{selected: point.selected}" ng-mouseenter="changeSelector($index)">
                 <div class="avatar-anchor">
                     <img class="avatar-small" ng-src="{{point.AvatarImage | avatarUrl:'small'}}">
                 </div>

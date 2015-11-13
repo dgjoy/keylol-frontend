@@ -5,7 +5,7 @@
             <button class="border-button bottom-border" ng-click="confirm()">过滤</button>
             <form>
                 <ul>
-                    <li ng-click="selectedIndexes[$index] = !selectedIndexes[$index]" ng-repeat="type in entryTypes">
+                    <li ng-click="selectedIndexes[$index] = !selectedIndexes[$index]" ng-repeat="type in entryTypes track by type.name">
                         <input type="checkbox" ng-checked="selectedIndexes[$index]"><!--
                     --><span ng-class="{active: selectedIndexes[$index]}" class="font-myriad-keylol">{{type.name}}</span><!--
                     --><p>{{type.description}}</p>

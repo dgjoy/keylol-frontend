@@ -2,7 +2,7 @@
     <div class="quick-link">
         <h1 class="labeled-heading">收藏夹</h1>
         <ul>
-            <li ng-repeat="link in quickLinks" ng-switch="link.Type">
+            <li ng-repeat="link in quickLinks track by link.Id" ng-switch="link.Type">
                 <span class="delete" ng-click="deleteFavorite($index)">x</span>
                 <point-link ng-switch-when="NormalPoint" type="'point'" id-code="link.IdCode" point-name="link.Name"></point-link>
                 <point-link ng-switch-when="ProfilePoint" type="'user'" id-code="link.IdCode" point-name="link.Name"></point-link>

@@ -3,7 +3,7 @@
         <div class="arrow-down"></div>
         <div class="selector-main box-shadowed-deeper">
             <ul>
-                <li ng-click="select($index)" ng-repeat="type in articleTypes">
+                <li ng-click="select($index)" ng-repeat="type in articleTypes track by type.name">
                     <span ng-class="{active: selectedIndex === $index}" class="font-myriad-keylol">{{type.name}}</span><!--
                     --><p>{{type.description}}</p>
                 </li>

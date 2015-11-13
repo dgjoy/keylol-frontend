@@ -1,6 +1,6 @@
 ﻿<div class="section-article-comments box-shadowed" ng-controller="ArticleCommentsController">
     <h1 class="labeled-heading">共 {{article.totalComments}} 则讨论</h1>
-    <div class="comment" ng-if="pageElements.currPage == 1 && hotComments.length > 0" ng-repeat="comment in hotComments">
+    <div class="comment" ng-if="pageElements.currPage == 1 && hotComments.length > 0" ng-repeat="comment in hotComments track by comment.Id">
         <span class="floor">#{{comment.SequenceNumberForArticle}}</span>
         <point-link type="'user'" avatar-url="comment.Commentator.AvatarImage" id-code="comment.Commentator.IdCode"></point-link>
         <article>

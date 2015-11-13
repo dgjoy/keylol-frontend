@@ -30,7 +30,7 @@
             <h3>{{data.noArticleText.sub}}</h3>
         </div>
         <ul class="clearfix">
-            <li ng-repeat="activePoint in data.activePoints">
+            <li ng-repeat="activePoint in data.activePoints track by activePoint.Id">
                 <point-link type="'point'" avatar-url="activePoint.AvatarImage" id-code="activePoint.IdCode" ></point-link>
                 <div class="title">
                     <p>

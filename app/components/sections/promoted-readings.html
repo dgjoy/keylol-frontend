@@ -1,6 +1,6 @@
 ﻿<div class="section-promoted-readings box-shadowed" ng-controller="PromotedReadingsController">
     <h1 class="labeled-heading">阅读推荐</h1>
-    <div ng-repeat="article in articles" class="article">
+    <div ng-repeat="article in articles track by article.Id" class="article">
         <h2>
             <span ng-show="article.RecommendedByKeylol">[其乐推荐]</span>
             <a ng-href="article/{{article.AuthorIdCode}}/{{article.SequenceNumberForAuthor}}">{{article.Title}}</a>

@@ -9,7 +9,7 @@
             <a href="" ng-click="editArticle()" ng-if="article.canEdit">编辑</a>
         </span>
         <span class="points">
-            <point-link ng-repeat="point in article.AttachedPoints" type="'point'" id-code="point.IdCode" point-name="'「' + point.mainName + '」'"></point-link>
+            <point-link ng-repeat="point in article.AttachedPoints track by point.Id" type="'point'" id-code="point.IdCode" point-name="'「' + point.mainName + '」'"></point-link>
         </span>
     </div>
 </div>

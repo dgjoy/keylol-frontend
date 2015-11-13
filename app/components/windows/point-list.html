@@ -17,7 +17,7 @@
                 <td><h3>读者数</h3></td>
                 <td><h3>操作</h3></td>
             </tr>
-            <tr ng-repeat="point in points">
+            <tr ng-repeat="point in points track by point.Id">
                 <td>{{point.IdCode}}</td>
                 <td>{{point.ChineseName}}</td>
                 <td>{{point.EnglishName}}</td>
