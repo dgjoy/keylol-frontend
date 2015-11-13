@@ -104,6 +104,16 @@
     signalR.new = function () {
         var connection = $.hubConnection(window.apiEndpoint + "signalr", {useDefaultPath: false})
         $.extend(connection, connection.createHubProxies());
+        var connectionStart = connection.start;
+        connection.start = function (options, callback) {
+            var config = {
+                pingInterval: 300000,
+                waitForPageLoad: false,
+                transport: "auto",
+                jsonp: false
+            };
+            return connectionStart.call(this, $.extend(config, options), callback);
+        };
         return connection;
     };
 
