@@ -12,11 +12,11 @@
     font-family: "Keylol Rail Sung";
     font-style: normal;
     font-weight: normal;
-    src: url("../fonts/keylol-rail-sung-subset-bd9407c5f4.eot"); /* IE9 */
-    src: url("../fonts/keylol-rail-sung-subset-bd9407c5f4.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
-    url("../fonts/keylol-rail-sung-subset-3346a62ea6.woff") format("woff"), /* chrome, firefox */
-    url("../fonts/keylol-rail-sung-subset-31477d7b83.ttf") format("truetype"), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
-    url("../fonts/keylol-rail-sung-subset-a0e3e0dfde.svg#Keylol Rail Sung") format("svg"); /* iOS 4.1- */
+    src: url("../fonts/keylol-rail-sung-subset-39cd226e93.eot"); /* IE9 */
+    src: url("../fonts/keylol-rail-sung-subset-39cd226e93.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    url("../fonts/keylol-rail-sung-subset-db89d13a46.woff") format("woff"), /* chrome, firefox */
+    url("../fonts/keylol-rail-sung-subset-b40e3af624.ttf") format("truetype"), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+    url("../fonts/keylol-rail-sung-subset-4b904337ee.svg#Keylol Rail Sung") format("svg"); /* iOS 4.1- */
 }
 
 @font-face {
