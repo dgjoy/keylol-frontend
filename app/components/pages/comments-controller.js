@@ -8,6 +8,7 @@
         "pageTitle", "$scope", "union", "$http", "notification", "utils", "$timeout",
         function (pageTitle, $scope, union, $http, notification, utils, $timeout) {
             pageTitle.set("评论 - 其乐");
+            $scope.union = union;
             union.summary = {
                 head: {
                     mainHead: "评论",

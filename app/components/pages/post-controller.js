@@ -8,6 +8,7 @@
         "pageTitle", "$scope", "union",
         function (pageTitle, $scope, union) {
             pageTitle.set("邮政 - 其乐");
+            $scope.union = union;
             union.summary = {
                 actions: [],
                 head: {

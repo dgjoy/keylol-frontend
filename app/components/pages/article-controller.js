@@ -5,6 +5,7 @@
         "pageTitle", "$scope", "union", "$routeParams", "$http", "getAndFlushComments", "notification", "$location", "$timeout",
         function (pageTitle, $scope, union, $routeParams, $http, getAndFlushComments, notification, $location, $timeout) {
             $scope.articleExist = true;
+            $scope.union = union;
             pageTitle.set("文章 - 其乐");
             union.article = {};
             union.point = {};

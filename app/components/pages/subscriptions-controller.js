@@ -7,7 +7,7 @@
     keylolApp.controller("SubscriptionsController", [
         "pageTitle", "$scope", "union", "$http", "notification", "$location", "utils", "$timeout",
         function (pageTitle, $scope, union, $http, notification, $location, utils, $timeout) {
-
+            $scope.union = union;
             $scope.searchExist = true;
             union.summary = {
                 head: {

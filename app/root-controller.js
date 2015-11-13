@@ -45,6 +45,7 @@
 
             var firstLoad = true;
             $rootScope.$on("$routeChangeSuccess", function () {
+                window.scrollTo(0, 0);
                 if (firstLoad) {
                     firstLoad = false;
                     return;

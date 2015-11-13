@@ -13,15 +13,10 @@
 }
 
 .section-main-navigation .labeled-heading + ul {
-    padding-left: 10px;
-    padding-right: 10px;
-    margin-right: -7px;
+    padding: 0 10px;
+    margin: 0;
     line-height: 22px;
-}
-
-.section-main-navigation .labeled-heading + ul li {
-    display: list-item;
-    margin-right: 7px;
+    list-style: none;
 }
 
 .section-main-navigation .labeled-heading + ul + p {

@@ -7,7 +7,7 @@
     keylolApp.controller("ReadersController", [
         "pageTitle", "$scope", "union", "$http", "notification", "utils", "$timeout",
         function (pageTitle, $scope, union, $http, notification, utils, $timeout) {
-
+            $scope.union = union;
             $scope.searchExist = true;
             union.summary = {
                 head: {

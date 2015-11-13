@@ -8,6 +8,7 @@
         "pageTitle", "$scope", "union", "$http", "notification", "$routeParams", "$location", "utils", "$timeout",
         function (pageTitle, $scope, union, $http, notification, $routeParams, $location, utils, $timeout) {
             $scope.searchExist = true;
+            $scope.union = union;
             if (!$routeParams.searchType || !$routeParams.keyword) {
                 $scope.searchExist = false;
             }
