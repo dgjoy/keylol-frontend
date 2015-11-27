@@ -9,18 +9,8 @@
         function (pageTitle, $scope, union, $http, notification, utils, $timeout) {
             pageTitle.set("评论 - 其乐");
             $scope.union = union;
-            union.summary = {
-                head: {
-                    mainHead: "评论",
-                    subHead: "Comments"
-                },
-                background: "672a1bab71b9af43215d252471a893e0.jpg",
-                defaultSum: {
-                    text: "文章回复中的互动"
-                }
-            };
 
-            union.timeline = {
+            var timeline = {
                 title: {
                     mainTitle: "评论",
                     subTitle: "Comments"
@@ -48,11 +38,11 @@
                     }
                 ],
                 loadAction: function () {
-                    union.timeline.loadingLock = true;
-                    if (union.timeline.actions[0].active) {
-                        getReceiveComments(union.timeline.entries.length);
+                    timeline.loadingLock = true;
+                    if (timeline.actions[0].active) {
+                        getReceiveComments(timeline.entries.length);
                     } else {
-                        getSendComments(union.timeline.entries.length);
+                        getSendComments(timeline.entries.length);
                     }
                 },
                 datetime: "inBlock",
@@ -64,7 +54,7 @@
             getReceiveComments();
 
             function changeActive(activeObject) {
-                var actions = union.timeline.actions;
+                var actions = timeline.actions;
                 for (var i = 0; i < actions.length; i++) {
                     actions[i].active = false;
                 }
@@ -73,7 +63,7 @@
 
             function getSendComments(skip) {
                 if (!skip) {
-                    union.timeline.entries.length = 0;
+                    timeline.entries.length = 0;
                     skip = 0;
                 }
                 $http.get(apiEndpoint + "comment/my", {
@@ -83,7 +73,7 @@
                         take: utils.timelineLoadCount
                     }
                 }).then(function (response) {
-                    union.timeline.noMoreArticle = response.data.length < utils.timelineLoadCount;
+                    timeline.noMoreArticle = response.data.length < utils.timelineLoadCount;
                     var timelineTimeout;
                     for (var i in response.data) {
                         var comment = response.data[i];
@@ -116,12 +106,12 @@
                         }
                         (function (entry) {
                             if (!timelineTimeout) {
-                                union.timeline.entries.push(entry);
+                                timeline.entries.push(entry);
                                 timelineTimeout = $timeout(function () {
                                 }, utils.timelineInsertDelay);
                             } else {
                                 timelineTimeout = timelineTimeout.then(function () {
-                                    union.timeline.entries.push(entry);
+                                    timeline.entries.push(entry);
                                     return $timeout(function () {
                                     }, utils.timelineInsertDelay);
                                 });
@@ -130,20 +120,20 @@
                     }
                     if (timelineTimeout) {
                         timelineTimeout.then(function () {
-                            union.timeline.loadingLock = false;
+                            timeline.loadingLock = false;
                         });
                     } else {
-                        union.timeline.loadingLock = false;
+                        timeline.loadingLock = false;
                     }
                 }, function (response) {
                     notification.error("未知错误", response);
-                    union.timeline.loadingLock = false;
+                    timeline.loadingLock = false;
                 });
             }
 
             function getReceiveComments(skip) {
                 if (!skip) {
-                    union.timeline.entries.length = 0;
+                    timeline.entries.length = 0;
                     skip = 0;
                 }
                 $http.get(apiEndpoint + "comment/my", {
@@ -152,7 +142,7 @@
                         take: utils.timelineLoadCount
                     }
                 }).then(function (response) {
-                    union.timeline.noMoreArticle = response.data.length < utils.timelineLoadCount;
+                    timeline.noMoreArticle = response.data.length < utils.timelineLoadCount;
                     var timelineTimeout;
                     for (var i in response.data) {
                         var comment = response.data[i];
@@ -186,12 +176,12 @@
                         }
                         (function (entry) {
                             if (!timelineTimeout) {
-                                union.timeline.entries.push(entry);
+                                timeline.entries.push(entry);
                                 timelineTimeout = $timeout(function () {
                                 }, utils.timelineInsertDelay);
                             } else {
                                 timelineTimeout = timelineTimeout.then(function () {
-                                    union.timeline.entries.push(entry);
+                                    timeline.entries.push(entry);
                                     return $timeout(function () {
                                     }, utils.timelineInsertDelay);
                                 });
@@ -200,16 +190,28 @@
                     }
                     if (timelineTimeout) {
                         timelineTimeout.then(function () {
-                            union.timeline.loadingLock = false;
+                            timeline.loadingLock = false;
                         });
                     } else {
-                        union.timeline.loadingLock = false;
+                        timeline.loadingLock = false;
                     }
                 }, function (response) {
                     notification.error("未知错误", response);
-                    union.timeline.loadingLock = false;
+                    timeline.loadingLock = false;
                 });
             }
+
+            union.timeline = timeline;
+            union.summary = {
+                head: {
+                    mainHead: "评论",
+                    subHead: "Comments"
+                },
+                background: "672a1bab71b9af43215d252471a893e0.jpg",
+                defaultSum: {
+                    text: "文章回复中的互动"
+                }
+            };
         }
     ]);
 })();

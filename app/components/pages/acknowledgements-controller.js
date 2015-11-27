@@ -9,26 +9,15 @@
         function (pageTitle, $scope, union, $http, notification, utils, $timeout) {
             pageTitle.set("认可 - 其乐");
             $scope.union = union;
-            union.summary = {
-                actions: [],
-                head: {
-                    mainHead: "认可",
-                    subHead: "Acknowledgement"
-                },
-                background: "0abeafd8e4c049bce860686bc4c04829.jpg",
-                defaultSum: {
-                    text: "文章/评论获得的认可"
-                }
-            };
             function changeActive(activeObject) {
-                var actions = union.timeline.actions;
+                var actions = timeline.actions;
                 for (var i = 0; i < actions.length; i++) {
                     actions[i].active = false;
                 }
                 activeObject.active = true;
             }
 
-            union.timeline = {
+            var timeline = {
                 title: {
                     mainTitle: "认可",
                     subTitle: "Acknowledgement"
@@ -66,13 +55,13 @@
                     }
                 ],
                 loadAction: function () {
-                    union.timeline.loadingLock = true;
-                    if (union.timeline.actions[0].active) {
-                        getLike("All", union.timeline.entries.length);
-                    } else if (union.timeline.actions[1].active) {
-                        getLike("ArticleLike", union.timeline.entries.length);
+                    timeline.loadingLock = true;
+                    if (timeline.actions[0].active) {
+                        getLike("All", timeline.entries.length);
+                    } else if (timeline.actions[1].active) {
+                        getLike("ArticleLike", timeline.entries.length);
                     } else {
-                        getLike("CommentLike", union.timeline.entries.length);
+                        getLike("CommentLike", timeline.entries.length);
                     }
                 },
                 datetime: "inBlock",
@@ -86,7 +75,7 @@
 
             function getLike(type, skip) {
                 if (!skip) {
-                    union.timeline.entries.length = 0;
+                    timeline.entries.length = 0;
                     skip = 0;
                 }
                 $http.get(apiEndpoint + "like/my", {
@@ -96,7 +85,7 @@
                         take: utils.timelineLoadCount
                     }
                 }).then(function (response) {
-                    union.timeline.noMoreArticle = response.data.length < utils.timelineLoadCount;
+                    timeline.noMoreArticle = response.data.length < utils.timelineLoadCount;
                     var timelineTimeout;
                     for (var i in response.data) {
                         var like = response.data[i];
@@ -128,12 +117,12 @@
                         }
                         (function (entry) {
                             if (!timelineTimeout) {
-                                union.timeline.entries.push(entry);
+                                timeline.entries.push(entry);
                                 timelineTimeout = $timeout(function () {
                                 }, utils.timelineInsertDelay);
                             } else {
                                 timelineTimeout = timelineTimeout.then(function () {
-                                    union.timeline.entries.push(entry);
+                                    timeline.entries.push(entry);
                                     return $timeout(function () {
                                     }, utils.timelineInsertDelay);
                                 });
@@ -142,16 +131,29 @@
                     }
                     if (timelineTimeout) {
                         timelineTimeout.then(function () {
-                            union.timeline.loadingLock = false;
+                            timeline.loadingLock = false;
                         });
                     } else {
-                        union.timeline.loadingLock = false;
+                        timeline.loadingLock = false;
                     }
                 }, function (response) {
                     notification.error("未知错误", response);
-                    union.timeline.loadingLock = false;
+                    timeline.loadingLock = false;
                 });
             }
+
+            union.timeline = timeline;
+            union.summary = {
+                actions: [],
+                head: {
+                    mainHead: "认可",
+                    subHead: "Acknowledgement"
+                },
+                background: "0abeafd8e4c049bce860686bc4c04829.jpg",
+                defaultSum: {
+                    text: "文章/评论获得的认可"
+                }
+            };
         }
     ]);
 })();

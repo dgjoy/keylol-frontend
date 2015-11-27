@@ -6,7 +6,7 @@
         function (pageTitle, $scope, union, $http, notification, window, utils, $timeout) {
             pageTitle.set("其乐 - 请无视游戏与艺术之间的空隙");
             $scope.union = union;
-            union.timeline = {
+            var timeline = {
                 title: {
                     mainTitle: "讯息轨道",
                     subTitle: "Timeline"
@@ -51,7 +51,7 @@
                 }
             }).then(function (response) {
                 var articleList = response.data;
-                union.timeline.noMoreArticle = articleList.length < utils.timelineLoadCount;
+                timeline.noMoreArticle = articleList.length < utils.timelineLoadCount;
 
                 if (articleList.length > 0) {
                     var timelineTimeout;
@@ -118,12 +118,12 @@
                         }
                         (function (entry) {
                             if (!timelineTimeout) {
-                                union.timeline.entries.push(entry);
+                                timeline.entries.push(entry);
                                 timelineTimeout = $timeout(function () {
                                 }, utils.timelineInsertDelay);
                             } else {
                                 timelineTimeout = timelineTimeout.then(function () {
-                                    union.timeline.entries.push(entry);
+                                    timeline.entries.push(entry);
                                     return $timeout(function () {
                                     }, utils.timelineInsertDelay);
                                 });
@@ -132,30 +132,32 @@
                     }
                     if (timelineTimeout) {
                         timelineTimeout.then(function () {
-                            union.timeline.loadingLock = false;
+                            timeline.loadingLock = false;
                         });
                     } else {
-                        union.timeline.loadingLock = false;
+                        timeline.loadingLock = false;
                     }
                 } else {
                     $http.get(apiEndpoint + "normal-point/active").then(function (response) {
-                        union.timeline.activePoints = response.data;
-                        for (var i in union.timeline.activePoints) {
-                            var point = union.timeline.activePoints[i];
-                            union.timeline.activePoints[i].mainName = utils.getPointFirstName(point);
-                            union.timeline.activePoints[i].subName = utils.getPointSecondName(point);
-                            union.timeline.activePoints[i].type = utils.getPointType(point.Type);
+                        timeline.activePoints = response.data;
+                        for (var i in timeline.activePoints) {
+                            var point = timeline.activePoints[i];
+                            timeline.activePoints[i].mainName = utils.getPointFirstName(point);
+                            timeline.activePoints[i].subName = utils.getPointSecondName(point);
+                            timeline.activePoints[i].type = utils.getPointType(point.Type);
                         }
                     }, function (response) {
                         notification.error("未知错误", response);
                     });
-                    union.timeline.loadingLock = false;
+                    timeline.loadingLock = false;
                 }
 
             }, function (response) {
                 notification.error("未知错误", response);
-                union.timeline.loadingLock = false;
+                timeline.loadingLock = false;
             });
+
+            union.timeline = timeline;
         }
     ]);
 })();

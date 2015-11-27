@@ -10,9 +10,10 @@
             $scope.union = union;
             $scope.pointExist = true;
             $scope.isInPoint = true;
-            union.summary = {};
-            union.user = {};
-            union.timeline = {
+            var summary = {};
+            var unionUser = {};
+            var unionPoint = {};
+            var timeline = {
                 title: {
                     mainTitle: "讯息轨道",
                     subTitle: "Timeline"
@@ -37,11 +38,10 @@
                 loadingLock: true,
                 entries: []
             };
-            union.point = {};
 
             if ($routeParams.userIdCode) {
 
-                union.timeline.noArticleText = {
+                timeline.noArticleText = {
                     main: "这位用户尚未发布或认可任何文章",
                     sub: "订阅并关注即将到来的动态。"
                 };
@@ -51,7 +51,7 @@
                  * @param params 加载时请求的参数
                  * @param callback 加载后的回调
                  */
-                union.timeline.loadAction = function (params, callback) {
+                timeline.loadAction = function (params, callback) {
                     $http.get(apiEndpoint + "article/user/" + $routeParams.userIdCode, {
                         params: params
                     }).then(function (response) {
@@ -62,7 +62,7 @@
                 };
 
                 /**
-                 * 请求用户信息，用户的信息会被存储在 union.user 里。
+                 * 请求用户信息，用户的信息会被存储在 unionUser 里。
                  * 同时对用户部分信息做处理后，用于 summary 中。
                  */
                 $http.get(apiEndpoint + "user/" + $routeParams.userIdCode, {
@@ -75,7 +75,13 @@
                 }).then(function (response) {
 
                     var user = response.data;
-                    var summary = {
+                    if (user.IdCode != union.$localStorage.user.IdCode) {
+                        summary.subscribed = user.Subscribed;
+                    }
+                    utils.addRecentBroswe("ProfilePoint", user.UserName, user.IdCode);
+                    pageTitle.set(user.UserName + " - 其乐");
+                    $.extend(unionUser, user);
+                    $.extend(summary, {
                         head: {
                             mainHead: user.UserName,
                             subHead: user.GamerTag
@@ -89,14 +95,7 @@
                         },
                         id: user.Id,
                         url: "user/" + user.IdCode
-                    };
-                    if (user.IdCode != union.$localStorage.user.IdCode) {
-                        union.summary.subscribed = user.Subscribed;
-                    }
-                    utils.addRecentBroswe("ProfilePoint", user.UserName, user.IdCode);
-                    pageTitle.set(user.UserName + " - 其乐");
-                    $.extend(union.user, user);
-                    $.extend(union.summary, summary);
+                    });
 
 
                     /**
@@ -105,19 +104,19 @@
                     $http.get(apiEndpoint + "article/user/" + $routeParams.userIdCode, {
                         params: {
                             idType: "IdCode",
-                            publishOnly: union.timeline.publishOnly,
+                            publishOnly: timeline.publishOnly,
                             take: utils.timelineLoadCount
                         }
                     }).then(function (response) {
                         var articleList = response.data;
-                        union.timeline.noMoreArticle = articleList.length < utils.timelineLoadCount;
+                        timeline.noMoreArticle = articleList.length < utils.timelineLoadCount;
 
                         if (articleList.length > 0) {
 
                             var timelineTimeout;
 
                             /**
-                             * 对于请求回来的文章列表做一系列处理并按照用户据点的文章格式储存在 union.timeline.entries 中
+                             * 对于请求回来的文章列表做一系列处理并按照用户据点的文章格式储存在 timeline.entries 中
                              */
                             for (var i in articleList) {
                                 var article = articleList[i];
@@ -181,12 +180,12 @@
                                 }
                                 (function (entry) {
                                     if (!timelineTimeout) {
-                                        union.timeline.entries.push(entry);
+                                        timeline.entries.push(entry);
                                         timelineTimeout = $timeout(function () {
                                         }, utils.timelineInsertDelay);
                                     } else {
                                         timelineTimeout = timelineTimeout.then(function () {
-                                            union.timeline.entries.push(entry);
+                                            timeline.entries.push(entry);
                                             return $timeout(function () {
                                             }, utils.timelineInsertDelay);
                                         });
@@ -195,28 +194,28 @@
                             }
                             if (timelineTimeout) {
                                 timelineTimeout.then(function () {
-                                    union.timeline.loadingLock = false;
+                                    timeline.loadingLock = false;
                                 });
                             } else {
-                                union.timeline.loadingLock = false;
+                                timeline.loadingLock = false;
                             }
                         } else {
                             $http.get(apiEndpoint + "normal-point/active").then(function (response) {
-                                union.timeline.activePoints = response.data;
-                                for (var i in union.timeline.activePoints) {
-                                    var point = union.timeline.activePoints[i];
-                                    union.timeline.activePoints[i].mainName = utils.getPointFirstName(point);
-                                    union.timeline.activePoints[i].subName = utils.getPointSecondName(point);
-                                    union.timeline.activePoints[i].type = utils.getPointType(point.Type);
+                                timeline.activePoints = response.data;
+                                for (var i in timeline.activePoints) {
+                                    var point = timeline.activePoints[i];
+                                    timeline.activePoints[i].mainName = utils.getPointFirstName(point);
+                                    timeline.activePoints[i].subName = utils.getPointSecondName(point);
+                                    timeline.activePoints[i].type = utils.getPointType(point.Type);
                                 }
                             }, function (response) {
                                 notification.error("未知错误", response);
                             });
-                            union.timeline.loadingLock = false;
+                            timeline.loadingLock = false;
                         }
                     }, function (response) {
                         notification.error("未知错误", response);
-                        union.timeline.loadingLock = false;
+                        timeline.loadingLock = false;
                     });
                 }, function (response) {
                     $scope.pointExist = false;
@@ -226,7 +225,7 @@
 
             if ($routeParams.pointIdCode) {
 
-                union.timeline.noArticleText = {
+                timeline.noArticleText = {
                     main: "当前据点尚未收到任何文章投稿",
                     sub: "考虑成为首篇文章的作者？"
                 };
@@ -236,7 +235,7 @@
                  * @param params 加载时请求的参数
                  * @param callback 加载后的回调
                  */
-                union.timeline.loadAction = function (params, callback) {
+                timeline.loadAction = function (params, callback) {
                     $http.get(apiEndpoint + "article/point/" + $routeParams.pointIdCode, {
                         params: params
                     }).then(function (response) {
@@ -247,8 +246,8 @@
                 };
 
                 /**
-                 * 请求据点信息，储存在 union.point 中。
-                 * 以 summary 的格式对于 union.point 做一些处理, 存储到 union.summary 中。
+                 * 请求据点信息，储存在 unionPoint 中。
+                 * 以 summary 的格式对于 unionPoint 做一些处理, 存储到 summary 中。
                  */
                 $http.get(apiEndpoint + "normal-point/" + $routeParams.pointIdCode, {
                     params: {
@@ -267,23 +266,7 @@
                         $scope.hasVote = true;
                     }
 
-                    var summary = {
-                        head: {},
-                        avatar: point.AvatarImage,
-                        subscribed: point.Subscribed,
-                        background: point.BackgroundImage,
-                        pointSum: {
-                            type: utils.getPointType(point.Type),
-                            readerNum: point.SubscriberCount,
-                            articleNum: point.ArticleCount
-                        },
-                        id: point.Id,
-                        url: "point/" + point.IdCode
-                    };
-
                     point.mainName = utils.getPointFirstName(point);
-                    summary.head.mainHead = utils.getPointFirstName(point);
-                    summary.head.subHead = utils.getPointSecondName(point);
 
                     pageTitle.set(point.mainName + " - 其乐");
                     if (point.PositiveArticleCount + point.NegativeArticleCount > 0) {
@@ -315,8 +298,23 @@
                     }
 
                     utils.addRecentBroswe("NormalPoint", point.mainName, point.IdCode);
-                    $.extend(union.point, point);
-                    $.extend(union.summary, summary);
+                    $.extend(unionPoint, point);
+                    $.extend(summary, {
+                        head: {
+                            mainHead: utils.getPointFirstName(point),
+                            subHead: utils.getPointSecondName(point)
+                        },
+                        avatar: point.AvatarImage,
+                        subscribed: point.Subscribed,
+                        background: point.BackgroundImage,
+                        pointSum: {
+                            type: utils.getPointType(point.Type),
+                            readerNum: point.SubscriberCount,
+                            articleNum: point.ArticleCount
+                        },
+                        id: point.Id,
+                        url: "point/" + point.IdCode
+                    });
 
                 }, function (response) {
                     $scope.pointExist = false;
@@ -333,7 +331,7 @@
                     }
                 }).then(function (response) {
                     var articleList = response.data;
-                    union.timeline.noMoreArticle = articleList.length < utils.timelineLoadCount;
+                    timeline.noMoreArticle = articleList.length < utils.timelineLoadCount;
                     if (articleList.length > 0) {
                         var timelineTimeout;
 
@@ -360,12 +358,12 @@
                             };
                             (function (entry) {
                                 if (!timelineTimeout) {
-                                    union.timeline.entries.push(entry);
+                                    timeline.entries.push(entry);
                                     timelineTimeout = $timeout(function () {
                                     }, utils.timelineInsertDelay);
                                 } else {
                                     timelineTimeout = timelineTimeout.then(function () {
-                                        union.timeline.entries.push(entry);
+                                        timeline.entries.push(entry);
                                         return $timeout(function () {
                                         }, utils.timelineInsertDelay);
                                     });
@@ -374,30 +372,35 @@
                         }
                         if (timelineTimeout) {
                             timelineTimeout.then(function () {
-                                union.timeline.loadingLock = false;
+                                timeline.loadingLock = false;
                             });
                         } else {
-                            union.timeline.loadingLock = false;
+                            timeline.loadingLock = false;
                         }
                     } else {
                         $http.get(apiEndpoint + "normal-point/active").then(function (response) {
-                            union.timeline.activePoints = response.data;
-                            for (var i in union.timeline.activePoints) {
-                                var point = union.timeline.activePoints[i];
-                                union.timeline.activePoints[i].mainName = utils.getPointFirstName(point);
-                                union.timeline.activePoints[i].subName = utils.getPointSecondName(point);
-                                union.timeline.activePoints[i].type = utils.getPointType(point.Type);
+                            timeline.activePoints = response.data;
+                            for (var i in timeline.activePoints) {
+                                var point = timeline.activePoints[i];
+                                timeline.activePoints[i].mainName = utils.getPointFirstName(point);
+                                timeline.activePoints[i].subName = utils.getPointSecondName(point);
+                                timeline.activePoints[i].type = utils.getPointType(point.Type);
                             }
                         }, function (response) {
                             notification.error("未知错误", response);
                         });
-                        union.timeline.loadingLock = false;
+                        timeline.loadingLock = false;
                     }
                 }, function (response) {
                     notification.error("未知错误", response);
-                    union.timeline.loadingLock = false;
+                    timeline.loadingLock = false;
                 });
             }
+
+            union.timeline = timeline;
+            union.user = unionUser;
+            union.point = unionPoint;
+            union.summary = summary;
         }
     ]);
 })();

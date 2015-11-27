@@ -7,12 +7,10 @@
             $scope.articleExist = true;
             $scope.union = union;
             pageTitle.set("文章 - 其乐");
-            union.article = {};
-            union.point = {};
-            union.summary = {};
-            union.pageElements = {};
-            union.comments = [];
-            union.hotComments = [];
+            var unionArticle = {};
+            var unionPoint = {};
+            var summary = {};
+            var pageElements = {};
             if ($routeParams.author && $routeParams.article) {
                 $http.get(apiEndpoint + "article/" + $routeParams.author + "/" + $routeParams.article)
                     .then(function (response) {
@@ -69,12 +67,12 @@
                                     point.voteCircles = [{}, {}, {}, {}, {}];
                                     point.noVotes = true;
                                 }
-                                $.extend(union.point, point);
+                                $.extend(unionPoint, point);
                             }, function (response) {
                                 notification.error("未知错误", response);
                             });
                         }
-                        $.extend(union.article, article);
+                        $.extend(unionArticle, article);
 
                         getAndFlushComments(article, null, "hot");
                         if (!$location.hash()) {
@@ -90,7 +88,7 @@
                                 });
                             });
                         }
-                        union.pageElements.changePage = function (oldPage, newPage) {
+                        pageElements.changePage = function (oldPage, newPage) {
                             getAndFlushComments(article, newPage, "page");
                         };
                     }, function (error) {
@@ -108,7 +106,7 @@
                     }
                 }).then(function (response) {
                     var author = response.data;
-                    var summary = {
+                    $.extend(summary, {
                         head: {
                             mainHead: author.UserName,
                             subHead: author.GamerTag
@@ -122,15 +120,20 @@
                         },
                         id: author.Id,
                         url: "user/" + author.IdCode
-                    };
-                    $.extend(union.summary, summary);
+                    });
                     if (author.IdCode != union.$localStorage.user.IdCode) {
-                        union.summary.subscribed = author.Subscribed;
+                        summary.subscribed = author.Subscribed;
                     }
                 }, function (response) {
                     notification.error("未知错误", response);
                 });
             }
+            union.summary = summary;
+            union.article = unionArticle;
+            union.point = unionPoint;
+            union.comments = [];
+            union.hotComments = [];
+            union.pageElements = pageElements;
         }
     ]);
 })();

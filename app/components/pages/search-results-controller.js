@@ -13,7 +13,7 @@
                 $scope.searchExist = false;
             }
             pageTitle.set($routeParams.keyword + " 的搜索结果 - 其乐");
-            union.summary = {
+            var summary = {
                 actions: [],
                 head: {
                     mainHead: $routeParams.keyword,
@@ -24,7 +24,7 @@
                     text: ""
                 }
             };
-            union.timeline = {
+            var timeline = {
                 title: {
                     mainTitle: "搜索结果",
                     subTitle: "Search Result"
@@ -63,10 +63,10 @@
             };
             switch ($routeParams.searchType) {
                 case "point":
-                    union.timeline.actions[0].active = true;
-                    union.timeline.loadAction = function () {
-                        union.timeline.loadingLock = true;
-                        var skip = union.timeline.entries.length;
+                    timeline.actions[0].active = true;
+                    timeline.loadAction = function () {
+                        timeline.loadingLock = true;
+                        var skip = timeline.entries.length;
                         $http.get(apiEndpoint + "normal-point/keyword/" + encodeURIComponent($routeParams.keyword), {
                             params: {
                                 full: true,
@@ -75,13 +75,13 @@
                             }
                         }).then(function (response) {
                             var totalRecordCount = response.headers("X-Total-Record-Count");
-                            union.summary.defaultSum.text = "找到 " + totalRecordCount + " 个符合的项目";
-                            union.timeline.noMoreArticle = response.data.length < utils.timelineLoadCount;
+                            summary.defaultSum.text = "找到 " + totalRecordCount + " 个符合的项目";
+                            timeline.noMoreArticle = response.data.length < utils.timelineLoadCount;
                             var timelineTimeout;
                             if (totalRecordCount > 0) {
                                 if (!skip)
-                                    union.summary.background = response.data[0].BackgroundImage;
-                                union.timeline.searchNotFound = false;
+                                    summary.background = response.data[0].BackgroundImage;
+                                timeline.searchNotFound = false;
                                 for (var i in response.data) {
                                     var point = response.data[i];
                                     var entry = {
@@ -100,12 +100,12 @@
 
                                     (function (entry) {
                                         if (!timelineTimeout) {
-                                            union.timeline.entries.push(entry);
+                                            timeline.entries.push(entry);
                                             timelineTimeout = $timeout(function () {
                                             }, utils.timelineInsertDelay);
                                         } else {
                                             timelineTimeout = timelineTimeout.then(function () {
-                                                union.timeline.entries.push(entry);
+                                                timeline.entries.push(entry);
                                                 return $timeout(function () {
                                                 }, utils.timelineInsertDelay);
                                             });
@@ -113,27 +113,27 @@
                                     })(entry);
                                 }
                             } else {
-                                union.timeline.searchNotFound = true;
+                                timeline.searchNotFound = true;
                             }
                             if (timelineTimeout) {
                                 timelineTimeout.then(function () {
-                                    union.timeline.loadingLock = false;
+                                    timeline.loadingLock = false;
                                 });
                             } else {
-                                union.timeline.loadingLock = false;
+                                timeline.loadingLock = false;
                             }
                         }, function (response) {
                             notification.error("未知错误", response);
-                            union.timeline.loadingLock = false;
+                            timeline.loadingLock = false;
                         });
                     };
-                    union.timeline.loadAction();
+                    timeline.loadAction();
                     break;
                 case "article":
-                    union.timeline.actions[1].active = true;
-                    union.timeline.loadAction = function () {
-                        union.timeline.loadingLock = true;
-                        var skip = union.timeline.entries.length;
+                    timeline.actions[1].active = true;
+                    timeline.loadAction = function () {
+                        timeline.loadingLock = true;
+                        var skip = timeline.entries.length;
                         $http.get(apiEndpoint + "article/keyword/" + encodeURIComponent($routeParams.keyword), {
                             params: {
                                 full: true,
@@ -142,12 +142,12 @@
                             }
                         }).then(function (response) {
                             var totalRecordCount = response.headers("X-Total-Record-Count");
-                            union.summary.defaultSum.text = "找到 " + totalRecordCount + " 个符合的项目";
-                            union.timeline.noMoreArticle = response.data.length < utils.timelineLoadCount;
+                            summary.defaultSum.text = "找到 " + totalRecordCount + " 个符合的项目";
+                            timeline.noMoreArticle = response.data.length < utils.timelineLoadCount;
                             if (totalRecordCount > 0) {
                                 if (!skip)
-                                    union.summary.background = response.data[0].AuthorProfilePointBackgroundImage;
-                                union.timeline.searchNotFound = false;
+                                    summary.background = response.data[0].AuthorProfilePointBackgroundImage;
+                                timeline.searchNotFound = false;
                                 var timelineTimeout;
                                 for (var i in response.data) {
                                     var article = response.data[i];
@@ -171,12 +171,12 @@
                                     };
                                     (function (entry) {
                                         if (!timelineTimeout) {
-                                            union.timeline.entries.push(entry);
+                                            timeline.entries.push(entry);
                                             timelineTimeout = $timeout(function () {
                                             }, utils.timelineInsertDelay);
                                         } else {
                                             timelineTimeout = timelineTimeout.then(function () {
-                                                union.timeline.entries.push(entry);
+                                                timeline.entries.push(entry);
                                                 return $timeout(function () {
                                                 }, utils.timelineInsertDelay);
                                             });
@@ -184,28 +184,28 @@
                                     })(entry);
                                 }
                             } else {
-                                union.timeline.searchNotFound = true;
+                                timeline.searchNotFound = true;
                             }
                             if (timelineTimeout) {
                                 timelineTimeout.then(function () {
-                                    union.timeline.loadingLock = false;
+                                    timeline.loadingLock = false;
                                 });
                             } else {
-                                union.timeline.loadingLock = false;
+                                timeline.loadingLock = false;
                             }
                         }, function (response) {
                             notification.error("未知错误", response);
-                            union.timeline.loadingLock = false;
+                            timeline.loadingLock = false;
                         });
                     };
-                    union.timeline.loadAction();
+                    timeline.loadAction();
                     break;
                 case "user":
-                    union.timeline.loadAction = function () {
+                    timeline.loadAction = function () {
                     };
-                    union.timeline.loadingLock = true;
-                    union.timeline.noMoreArticle = true;
-                    union.timeline.actions[2].active = true;
+                    timeline.loadingLock = true;
+                    timeline.noMoreArticle = true;
+                    timeline.actions[2].active = true;
                     $http.get(apiEndpoint + "user/" + encodeURIComponent($routeParams.keyword), {
                         params: {
                             idType: "UserName",
@@ -216,10 +216,10 @@
                     }).then(function (response) {
                         if (response.data) {
                             var user = response.data;
-                            union.summary.background = user.ProfilePointBackgroundImage;
-                            union.timeline.searchNotFound = false;
-                            union.summary.defaultSum.text = "找到 1 个符合的项目";
-                            union.timeline.entries.push({
+                            summary.background = user.ProfilePointBackgroundImage;
+                            timeline.searchNotFound = false;
+                            summary.defaultSum.text = "找到 1 个符合的项目";
+                            timeline.entries.push({
                                 types: ["个人"],
                                 pointInfo: {
                                     reader: user.SubscriberCount,
@@ -233,21 +233,24 @@
                                 id: user.Id
                             });
                             if (user.IdCode != union.$localStorage.user.IdCode) {
-                                union.timeline.entries[0].subscribed = user.Subscribed;
+                                timeline.entries[0].subscribed = user.Subscribed;
                             }
                         }
-                        union.timeline.loadingLock = false;
+                        timeline.loadingLock = false;
                     }, function (response) {
                         if (error.status === 404) {
-                            union.summary.defaultSum.text = "找到 0 个符合的项目";
+                            summary.defaultSum.text = "找到 0 个符合的项目";
                         } else {
                             notification.error("未知错误", response);
                         }
-                        union.timeline.loadingLock = false;
-                        union.timeline.searchNotFound = true;
+                        timeline.loadingLock = false;
+                        timeline.searchNotFound = true;
                     });
                     break;
             }
+
+            union.timeline = timeline;
+            union.summary = summary;
         }
     ]);
 })();
