@@ -17,10 +17,10 @@
                     <img class="avatar-small" webp-src="{{result.avatar|avatarUrl}}">
                 </div>
                 <div class="title">
-                    <p>{{result.mainTitle|maxLength:15|userName:result.isUser}}</p>
+                    <p>{{result.mainTitle|maxLength:14|userName:result.isUser}}</p>
                     <p ng-if="result.subTitle">
                         <span ng-if="result.type">[{{result.type}}]</span>
-                        {{result.subTitle|maxLength:15}}
+                        {{result.subTitle|maxLength:14}}
                     </p>
                     <p class="info" ng-if="result.articleInfo">
                         <span ng-if="result.articleInfo.acknowledgeNum">[+1] {{result.articleInfo.acknowledgeNum}}</span><!--
