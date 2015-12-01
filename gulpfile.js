@@ -17,7 +17,7 @@ var fontmin = require('gulp-fontmin');
 // apiEndpoint must have the trailing slash
 var environmentConfig = {
     dev: {
-        apiEndpoint: "https://api.keylol.com/"
+        apiEndpoint: "https://localhost:44300/"
     },
     prod: {
         apiEndpoint: "https://api.keylol.com/",

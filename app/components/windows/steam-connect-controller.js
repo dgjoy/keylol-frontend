@@ -34,6 +34,8 @@
                     consume.promise.finally(function () {
                         connection.stop();
                     });
+                    if (steamAvatarHash === "0000000000000000000000000000000000000000")
+                        steamAvatarHash = "fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb";
                     result = {
                         tokenId: tokenId,
                         steamProfileName: steamProfileName,
