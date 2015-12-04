@@ -51,7 +51,7 @@
                         notification.error("评论认可不再提醒失败", response);
                     });
                 } else {
-                    $http.put(apiEndpoint + "article/" + entry.fromArticle.Id + "/ignore", {}, {
+                    $http.put(apiEndpoint + "article/" + entry.fromArticle.id + "/ignore", {}, {
                         params: {
                             ignore: true
                         }
