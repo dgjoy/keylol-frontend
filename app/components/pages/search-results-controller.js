@@ -238,7 +238,7 @@
                         }
                         timeline.loadingLock = false;
                     }, function (response) {
-                        if (error.status === 404) {
+                        if (response.status === 404) {
                             summary.defaultSum.text = "找到 0 个符合的项目";
                         } else {
                             notification.error("未知错误", response);
