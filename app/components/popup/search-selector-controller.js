@@ -8,7 +8,6 @@
             $scope.filterArray = union.searchFilter;
             var getSearchResult = function (filterTxt) {
                 if (options.searchText) {
-                    console.log(filterTxt);
                     switch (filterTxt) {
                         case "据点":
                             $http.get(apiEndpoint + "normal-point/keyword/" + encodeURIComponent(options.searchText))
