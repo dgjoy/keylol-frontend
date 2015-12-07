@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test for Keyditor</title>
+</head>
+<body>
+<style>
+    .container {
+        width: 100%;
+        height: 400px;
+        background: #f1f2f3;
+    }
+    .editor {
+        width: 600px;
+        height: 300px;
+        margin: auto;
+        position: relative;
+        top: 50px;
+        background: #fff;
+    }
+</style>
+<div class="container">
+    <div class="editor" contenteditable="true">
+        <h1>H<i>iiiii</i>1</h1>
+        <blockquote>bl<u>uuuuu</u>ockquote</blockquote>
+        <div>di<strike>sssssss</strike>v</div>
+    </div>
+</div>
+<button class="test-button">test button</button>
+<script src="../../../../bower_components/jquery/dist/jquery.min.js"></script>
+<script src="../keyditor.js"></script>
+</body>
+</html>
