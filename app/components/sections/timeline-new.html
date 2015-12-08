@@ -62,7 +62,7 @@
                 <circle cx="8.5" cy="42" class="inverse"></circle>
                 <circle cx="8.5" cy="42"></circle>
             </svg>
-            <div class="entry-source">
+            <div class="entry-source" ng-if="entry.sources">
                 <span ng-switch="entry.sources.type">
                     <point-link ng-switch-when="point" ng-repeat="point in entry.sources.points" type="'point'" id-code="point.idCode" point-name="'「' + point.name + '」'"></point-link>
                     <span ng-switch-when="publish"><point-link type="'user'" point-name="'@' + entry.author.username" id-code="entry.author.idCode"></point-link> 发布了这篇文章</span>
@@ -73,7 +73,7 @@
                         </span>认可这篇文章</span>
                 </span>
             </div>
-            <div class="entry-main">
+            <div class="entry-main" ng-class="{'has-sources': entry.sources}">
                 <div class="entry-heading">
                     <div class="entry-author" ng-if="entry.author">
                         <point-link type="'user'" avatar-url="entry.author.avatarUrl" id-code="entry.author.idCode"></point-link>

@@ -7,7 +7,8 @@
         </div>
         <div class="col-middle">
             <section ng-include="'components/sections/summary.html'" style="height: 92px;"></section>
-            <section ng-include="'components/sections/timeline.html'"></section>
+            <section ng-if="!searchArticle" ng-include="'components/sections/timeline.html'"></section>
+            <section ng-if="searchArticle" ng-include="'components/sections/timeline-new.html'"></section>
         </div>
         <div class="col-right">
             <section ng-include="'components/sections/search-box.html'" style="height: 40px"></section>

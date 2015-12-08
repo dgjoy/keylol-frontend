@@ -350,6 +350,9 @@
     margin-left: 4px;
     margin-right: 2px;
     padding-top: 15px;
+}
+
+.section-timeline-new .entry-main.has-sources {
     border-top: 1px solid #c7cdd1;
 }
 
@@ -412,6 +415,7 @@
     margin-left: 12px;
     margin-right: 10px;
     height: 175px;
+    z-index: 0;
 }
 
 .section-timeline-new .entry-content .thumbnail {
@@ -423,7 +427,6 @@
 .section-timeline-new .entry-content .summary {
     position: relative;
     top: 111px;
-    z-index: 1;
     background-color: rgba(256,256,256,0.85);
     padding: 8px 10px;
 }

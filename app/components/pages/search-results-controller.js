@@ -130,6 +130,7 @@
                     timeline.loadAction();
                     break;
                 case "article":
+                    $scope.searchArticle = true;
                     timeline.actions[1].active = true;
                     timeline.loadAction = function () {
                         timeline.loadingLock = true;
