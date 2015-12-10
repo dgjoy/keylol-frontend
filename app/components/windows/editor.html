@@ -13,7 +13,7 @@
                 </div>
                 <span><input type="text" ng-model="vm.Title" placeholder="标题"></span>
             </div>
-            <div quill ng-model="vm.Content"></div>
+            <div simditor ng-model="vm.Content"></div>
             <h3 class="labeled-heading">投稿至据点</h3>
             <input-point ng-model="inline.attachedPoints" placeholder="'最多可以同时投稿至 5 个据点，个人据点会自动记录你发布的所有文章'"></input-point>
             <h3 class="labeled-heading" ng-if="articleTypes[selectedTypeIndex].allowVote">评价游戏</h3>

@@ -8,6 +8,11 @@
     margin: 0 14px;
 }
 
+.window-editor .simditor {
+    height: 300px;
+    margin: 0 14px;
+}
+
 .window-editor input[type=text],
 .window-editor input-point {
     width: calc(100% - 28px);

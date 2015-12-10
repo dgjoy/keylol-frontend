@@ -38,7 +38,11 @@ var vendorScripts = [
     "bower_components/ngstorage/ngStorage.js",
     "bower_components/ng-file-upload/ng-file-upload.js",
     "bower_components/angular-utf8-base64/angular-utf8-base64.js",
-    "bower_components/angulartics/src/angulartics.js"
+    "bower_components/angulartics/src/angulartics.js",
+    "bower_components/simple-module/lib/module.js",
+    "bower_components/simple-hotkeys/lib/hotkeys.js",
+    "bower_components/simple-uploader/lib/uploader.js",
+    "bower_components/simditor/lib/simditor.js"
 ];
 
 var appSrcipts = [
@@ -53,6 +57,7 @@ var appSrcipts = [
 var stylesheets = [
     "assets/stylesheets/normalize.css",
     "components/editor/quill.snow.css",
+    "bower_components/simditor/styles/simditor.css",
     "assets/stylesheets/common.css",
     "assets/stylesheets/window.css",
     "assets/stylesheets/popup.css",
