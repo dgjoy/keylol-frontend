@@ -83,22 +83,29 @@
                     </div>
                     <h3>
                         <span class="entry-type font-myriad-keylol" ng-repeat="type in entry.types">{{type}}</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="entry-new" ng-if="entry.isNew">
+                            <circle cx="3.5" cy="3.5" r="3.5"></circle>
+                        </svg>
                         <point-link ng-if="entry.sources.type == 'point'" ng-repeat="point in entry.sources.points" type="'point'" id-code="point.idCode" point-name="'「' + point.name + '」'"></point-link>
+                        <span ng-if="entry.fromArticle"><a href="{{entry.fromArticle.href}}">《{{entry.fromArticle.text|maxLength:14}}》</a><span ng-if="entry.fromArticle.fromComment">中的评论</span></span>
                     </h3>
                 </div>
-                <div class="entry-content clearfix box-shadowed-glowed" ng-click="clickTheBox(entry)">
+                <div class="entry-content clearfix box-shadowed-glowed" ng-class="{'free-height': !entry.thumbnail}" ng-click="clickTheBox(entry)">
                     <img ng-if="entry.thumbnail" class="thumbnail" webp-src="{{entry.thumbnail|timelineThumbnailUrl}}" alt="预览图">
+                    <div ng-if="entry.background" class="background" webp-background="{{entry.background|backgroundUrl}}"></div>
                     <div class="summary">
                         <h3 ng-if="entry.title">
                             <a ng-href="{{entry.url}}">{{entry.title}}</a>
                         </h3>
-                        <p class="one-line">{{entry.summary}}</p>
+                        <p>{{entry.summary}}</p>
                     </div>
                 </div>
             </div>
             <footer>
                 <span class="counts" ng-if="entry.count"><span>[+1] {{entry.count.like}}</span><span>(···) {{entry.count.comment}}</span></span>
                 <span class="datetime" am-time-ago="entry.datetime" ng-switch-when="outBlock"></span>
+                <a class="delete" ng-if="data.hasDeleteButton" href="" ng-click="ignore(entry)">移除纪录</a>
+                <a class="delete" ng-if="data.hasDeleteButton" href="" ng-click="noMoreRemind(entry)">不再提醒</a>
             </footer>
         </div>
     </div>

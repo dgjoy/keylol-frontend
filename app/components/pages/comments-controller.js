@@ -45,8 +45,8 @@
                         getSendComments(timeline.entries.length);
                     }
                 },
-                datetime: "inBlock",
-                oneLine: true,
+                datetime: "outBlock",
+                notArticle: true,
                 clickable: true,
                 loadingLock: true,
                 entries: []
@@ -90,6 +90,7 @@
                                 avatarUrl: union.$localStorage.user.AvatarImage,
                                 idCode: union.$localStorage.user.IdCode
                             },
+                            background: "672a1bab71b9af43215d252471a893e0.jpg",
                             summary: comment.Content,
                             url: "article/" + comment.Article.AuthorIdCode + "/" + comment.Article.SequenceNumberForAuthor + "#" + comment.SequenceNumberForArticle
                         };
@@ -160,6 +161,7 @@
                                 avatarUrl: comment.Commentator.AvatarImage,
                                 idCode: comment.Commentator.IdCode
                             },
+                            background: "672a1bab71b9af43215d252471a893e0.jpg",
                             summary: comment.Content,
                             url: "article/" + comment.Article.AuthorIdCode + "/" + comment.Article.SequenceNumberForAuthor + "#" + comment.SequenceNumberForArticle
                         };

@@ -382,6 +382,10 @@
     height: 7px;
 }
 
+.section-timeline-new .entry-heading .entry-new circle {
+    fill: #f38b00;
+}
+
 .section-timeline-new .entry-heading .entry-author {
     float: right;
     width: 184px;
@@ -417,6 +421,9 @@
     height: 175px;
     z-index: 0;
 }
+.section-timeline-new .entry-content.free-height {
+    height: auto;
+}
 
 .section-timeline-new .entry-content .thumbnail {
     position: absolute;
@@ -424,11 +431,24 @@
     height: 100%;
 }
 
+.section-timeline-new .entry-content .background {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
 .section-timeline-new .entry-content .summary {
     position: relative;
     top: 111px;
     background-color: rgba(256,256,256,0.85);
     padding: 8px 10px;
+}
+
+.section-timeline-new .entry-content.free-height .summary {
+    top: 0;
 }
 
 .section-timeline-new .entry-content:hover .summary {
@@ -461,6 +481,12 @@
     text-overflow: ellipsis;
 }
 
+.section-timeline-new .entry-content.free-height p {
+    height: auto;
+    max-height: 54px;
+    white-space: normal;
+}
+
 /* Footer */
 .section-timeline-new .entry footer {
     text-align: center;
@@ -472,6 +498,12 @@
 
 .section-timeline-new .entry footer .datetime {
     float: left;
+}
+
+.section-timeline-new .entry footer .delete {
+    float: right;
+    color: #748a97;
+    margin-left: 10px;
 }
 
 .section-timeline-new .entry footer .likes {
