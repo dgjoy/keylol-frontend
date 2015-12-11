@@ -29,7 +29,6 @@
                     main: "从你的游戏兴趣开始，慢慢搭建一条讯息轨道",
                     sub: "订阅一个据点后，其收到的文章投稿会推送到这里。"
                 },
-                datetime: "outBlock",
                 hasExpand: true,
                 loadingLock: true,
                 loadAction: function (params, callback) {
@@ -70,9 +69,11 @@
                             },
                             sequenceNumber: article.SequenceNumber,
                             sources: {},
+                            voteForPoint: article.VoteForPoint,
                             datetime: article.PublishTime,
                             title: article.Title,
                             summary: article.Content,
+                            hasBackground: false,
                             thumbnail: article.ThumbnailImage,
                             url: "/article/" + article.Author.IdCode + "/" + article.SequenceNumberForAuthor,
                             count: {
@@ -100,13 +101,11 @@
                                     }
                                     break;
                                 case "Point":
-                                    entry.sources.type = "point";
-                                    entry.sources.points = [];
-                                    for (var j in article.AttachedPoints) {
-                                        entry.sources.points.push({
-                                            name: article.AttachedPoints[j][article.AttachedPoints[j].PreferredName + "Name"],
-                                            idCode: article.AttachedPoints[j].IdCode
-                                        });
+                                    if (article.AttachedPoints) {
+                                        entry.sources.type = "point";
+                                        entry.sources.points = article.AttachedPoints;
+                                    } else {
+                                        entry.sources = null;
                                     }
                                     break;
                                 case "Publish":

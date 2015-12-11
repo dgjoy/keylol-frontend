@@ -82,6 +82,9 @@
 .window-registration .declaration h3.single-line + h4 {
     top: 6px;
 }
+.window-registration .declaration p a {
+    color: #738a95;
+}
 
 .window-registration .window .window-confirm-button {
     margin-right: -24px;
