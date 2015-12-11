@@ -132,9 +132,11 @@
                                     },
                                     sequenceNumber: article.SequenceNumber,
                                     sources: {},
+                                    voteForPoint: article.VoteForPoint,
                                     datetime: article.PublishTime,
                                     title: article.Title,
                                     summary: article.Content,
+                                    hasBackground: false,
                                     thumbnail: article.ThumbnailImage,
                                     url: "/article/" + article.Author.IdCode + "/" + article.SequenceNumberForAuthor,
                                     count: {
@@ -345,10 +347,12 @@
                                     avatarUrl: article.Author.AvatarImage,
                                     idCode: article.Author.IdCode
                                 },
+                                voteForPoint: article.VoteForPoint,
                                 sequenceNumber: article.SequenceNumber,
                                 datetime: article.PublishTime,
                                 title: article.Title,
                                 summary: article.Content,
+                                hasBackground: false,
                                 thumbnail: article.ThumbnailImage,
                                 url: "/article/" + article.Author.IdCode + "/" + article.SequenceNumberForAuthor,
                                 count: {

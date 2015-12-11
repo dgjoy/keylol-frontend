@@ -89,6 +89,7 @@
                                 avatarUrl: union.$localStorage.user.AvatarImage,
                                 idCode: union.$localStorage.user.IdCode
                             },
+                            hasBackground: true,
                             background: "672a1bab71b9af43215d252471a893e0.jpg",
                             summary: comment.Content,
                             url: "article/" + comment.Article.AuthorIdCode + "/" + comment.Article.SequenceNumberForAuthor + "#" + comment.SequenceNumberForArticle
@@ -160,6 +161,7 @@
                                 avatarUrl: comment.Commentator.AvatarImage,
                                 idCode: comment.Commentator.IdCode
                             },
+                            hasBackground: true,
                             background: "672a1bab71b9af43215d252471a893e0.jpg",
                             summary: comment.Content,
                             url: "article/" + comment.Article.AuthorIdCode + "/" + comment.Article.SequenceNumberForAuthor + "#" + comment.SequenceNumberForArticle

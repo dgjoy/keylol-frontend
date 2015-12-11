@@ -96,6 +96,7 @@
                                 href: "article/" + like.Article.AuthorIdCode + "/" + like.Article.SequenceNumberForAuthor
                             },
                             datetime: like.Time,
+                            hasBackground: true,
                             background: "0abeafd8e4c049bce860686bc4c04829.jpg",
                             author: {
                                 username: like.Operator.UserName,

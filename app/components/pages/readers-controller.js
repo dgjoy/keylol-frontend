@@ -63,6 +63,8 @@
                                     },
                                     title: user.UserName,
                                     summary: user.GamerTag,
+                                    hasBackground: true,
+                                    background: user.ProfilePointBackgroundImage,
                                     pointAvatar: user.AvatarImage,
                                     url: "user/" + user.IdCode,
                                     isUser: true,

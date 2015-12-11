@@ -1,7 +1,7 @@
 ﻿(function () {
     "use strict";
 
-    keylolApp.controller("TimelineNewController", [
+    keylolApp.controller("TimelineController", [
         "$scope", "union", "$location", "$http", "$rootScope", "$element", "articleTypes", "notification", "utils", "$timeout",
         function ($scope, union, $location, $http, $rootScope, $element, articleTypes, notification, utils, $timeout) {
             $scope.headingDisplayMode = function (entry) {
@@ -11,6 +11,7 @@
                     return "title";
             };
             $scope.data = union.timeline;
+            $scope.utils = utils;
 
             $scope.clickToSearch = function () {
                 var $searchInput = $(".search-box input");
@@ -165,9 +166,11 @@
                                 },
                                 sequenceNumber: article.SequenceNumber,
                                 sources: {},
+                                voteForPoint: article.VoteForPoint,
                                 datetime: article.PublishTime,
                                 title: article.Title,
                                 summary: article.Content,
+                                hasBackground: false,
                                 thumbnail: article.ThumbnailImage,
                                 url: "/article/" + article.Author.IdCode + "/" + article.SequenceNumberForAuthor,
                                 count: {
@@ -194,13 +197,11 @@
                                     }
                                     break;
                                 case "Point":
-                                    entry.sources.type = "point";
-                                    entry.sources.points = [];
-                                    for (var k in article.AttachedPoints) {
-                                        entry.sources.points.push({
-                                            name: article.AttachedPoints[k][article.AttachedPoints[k].PreferredName + "Name"],
-                                            idCode: article.AttachedPoints[k].IdCode
-                                        });
+                                    if (article.AttachedPoints) {
+                                        entry.sources.type = "point";
+                                        entry.sources.points = article.AttachedPoints;
+                                    } else {
+                                        entry.sources = null;
                                     }
                                     break;
 

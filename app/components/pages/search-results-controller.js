@@ -89,6 +89,7 @@
                                             reader: point.SubscriberCount,
                                             article: point.ArticleCount
                                         },
+                                        hasBackground: true,
                                         background: point.BackgroundImage,
                                         pointAvatar: point.AvatarImage,
                                         url: "point/" + point.IdCode,
@@ -146,7 +147,7 @@
                             timeline.noMoreArticle = response.data.length < utils.timelineLoadCount;
                             if (totalRecordCount > 0) {
                                 if (!skip)
-                                    summary.background = response.data[0].AuthorProfilePointBackgroundImage;
+                                    summary.background = response.data[0].ThumbnailImage;
                                 timeline.searchNotFound = false;
                                 var timelineTimeout;
                                 for (var i in response.data) {
@@ -158,10 +159,12 @@
                                             avatarUrl: article.Author.AvatarImage,
                                             idCode: article.Author.IdCode
                                         },
+                                        voteForPoint: article.VoteForPoint,
                                         sequenceNumber: article.SequenceNumber,
                                         datetime: article.PublishTime,
                                         title: article.Title,
                                         summary: article.Content,
+                                        hasBackground: false,
                                         thumbnail: article.ThumbnailImage,
                                         url: "/article/" + article.Author.IdCode + "/" + article.SequenceNumberForAuthor,
                                         count: {
@@ -224,6 +227,7 @@
                                     reader: user.SubscriberCount,
                                     article: user.ArticleCount
                                 },
+                                hasBackground: true,
                                 background: user.ProfilePointBackgroundImage,
                                 title: user.UserName,
                                 summary: user.GamerTag,

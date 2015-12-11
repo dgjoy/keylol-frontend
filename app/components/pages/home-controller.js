@@ -69,9 +69,11 @@
                             },
                             sequenceNumber: article.SequenceNumber,
                             sources: {},
+                            voteForPoint: article.VoteForPoint,
                             datetime: article.PublishTime,
                             title: article.Title,
                             summary: article.Content,
+                            hasBackground: false,
                             thumbnail: article.ThumbnailImage,
                             url: "/article/" + article.Author.IdCode + "/" + article.SequenceNumberForAuthor,
                             count: {
@@ -99,13 +101,11 @@
                                     }
                                     break;
                                 case "Point":
-                                    entry.sources.type = "point";
-                                    entry.sources.points = [];
-                                    for (var j in article.AttachedPoints) {
-                                        entry.sources.points.push({
-                                            name: article.AttachedPoints[j][article.AttachedPoints[j].PreferredName + "Name"],
-                                            idCode: article.AttachedPoints[j].IdCode
-                                        });
+                                    if (article.AttachedPoints) {
+                                        entry.sources.type = "point";
+                                        entry.sources.points = article.AttachedPoints;
+                                    } else {
+                                        entry.sources = null;
                                     }
                                     break;
                                 case "Publish":
