@@ -29,7 +29,6 @@
                     main: "从你的游戏兴趣开始，慢慢搭建一条讯息轨道",
                     sub: "订阅一个据点后，其收到的文章投稿会推送到这里。"
                 },
-                datetime: "outBlock",
                 hasExpand: true,
                 loadingLock: true,
                 loadAction: function (params, callback) {

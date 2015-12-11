@@ -58,7 +58,6 @@
                         }
                     }
                 ],
-                datetime: "outBlock",
                 entries: []
             };
             switch ($routeParams.searchType) {
@@ -90,6 +89,7 @@
                                             reader: point.SubscriberCount,
                                             article: point.ArticleCount
                                         },
+                                        background: point.BackgroundImage,
                                         pointAvatar: point.AvatarImage,
                                         url: "point/" + point.IdCode,
                                         subscribed: point.Subscribed,
@@ -130,7 +130,6 @@
                     timeline.loadAction();
                     break;
                 case "article":
-                    $scope.searchArticle = true;
                     timeline.actions[1].active = true;
                     timeline.loadAction = function () {
                         timeline.loadingLock = true;
@@ -202,8 +201,7 @@
                     timeline.loadAction();
                     break;
                 case "user":
-                    timeline.loadAction = function () {
-                    };
+                    timeline.loadAction = function () {};
                     timeline.loadingLock = true;
                     timeline.noMoreArticle = true;
                     timeline.actions[2].active = true;
@@ -226,6 +224,7 @@
                                     reader: user.SubscriberCount,
                                     article: user.ArticleCount
                                 },
+                                background: user.ProfilePointBackgroundImage,
                                 title: user.UserName,
                                 summary: user.GamerTag,
                                 pointAvatar: user.AvatarImage,

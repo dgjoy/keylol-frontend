@@ -45,7 +45,6 @@
                         getSendComments(timeline.entries.length);
                     }
                 },
-                datetime: "outBlock",
                 notArticle: true,
                 clickable: true,
                 loadingLock: true,

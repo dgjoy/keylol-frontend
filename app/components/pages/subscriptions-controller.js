@@ -39,7 +39,7 @@
                     mainTitle: "搜索结果",
                     subTitle: "Search Result"
                 },
-                datetime: "outBlock",
+                cannotClick: true,
                 loadAction: function () {
                     timeline.loadingLock = true;
                     $http.get(apiEndpoint + "user-point-subscription/my", {

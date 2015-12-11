@@ -418,10 +418,16 @@
     cursor: pointer;
     margin-left: 12px;
     margin-right: 10px;
+    margin-bottom: 6px;
     height: 175px;
     z-index: 0;
 }
+
 .section-timeline-new .entry-content.free-height {
+    height: auto;
+}
+
+.section-timeline-new .entry-content.for-point {
     height: auto;
 }
 
@@ -440,6 +446,21 @@
     background-position: center;
 }
 
+.section-timeline-new .entry-content .point-avatar {
+    width: 72px;
+    height: 72px;
+    float: left;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+
+.section-timeline-new .entry-content .point-avatar img {
+    width: 45px;
+    height: 45px;
+    margin: 50% 0 0 50%;
+    transform: translate(-50%, -50%);
+}
+
 .section-timeline-new .entry-content .summary {
     position: relative;
     top: 111px;
@@ -449,6 +470,16 @@
 
 .section-timeline-new .entry-content.free-height .summary {
     top: 0;
+}
+
+.section-timeline-new .entry-content.for-point .summary {
+    top: 0;
+    position: absolute;
+    right: 0;
+    width: 200px;
+    height: 56px;
+    padding-left: 34px;
+    padding-right: 50px;
 }
 
 .section-timeline-new .entry-content:hover .summary {
@@ -487,13 +518,27 @@
     white-space: normal;
 }
 
+.section-timeline-new .action {
+    position: absolute;
+    right: 30px;
+    top: 80px;
+}
+
+.section-timeline-new .action a{
+    cursor: pointer;
+    color: #738a95;
+}
+
+.section-timeline-new .action .subscribed{
+    color: #c7cdd1;
+}
+
 /* Footer */
 .section-timeline-new .entry footer {
     text-align: center;
     color: #c7cdd1;
     height: 26px;
     line-height: 26px;
-    margin-top: 6px;
 }
 
 .section-timeline-new .entry footer .datetime {

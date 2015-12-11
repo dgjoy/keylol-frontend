@@ -52,7 +52,7 @@
             </li>
         </ul>
     </div>
-    <div class="entry" ng-repeat="entry in data.entries" ng-switch="data.datetime">
+    <div class="entry" ng-repeat="entry in data.entries">
         <svg xmlns="http://www.w3.org/2000/svg" class="card-line-background">
             <rect x="6" width="5" height="100%"></rect>
         </svg>
@@ -88,9 +88,10 @@
                         </svg>
                         <point-link ng-if="entry.sources.type == 'point'" ng-repeat="point in entry.sources.points" type="'point'" id-code="point.idCode" point-name="'「' + point.name + '」'"></point-link>
                         <span ng-if="entry.fromArticle"><a href="{{entry.fromArticle.href}}">《{{entry.fromArticle.text|maxLength:14}}》</a><span ng-if="entry.fromArticle.fromComment">中的评论</span></span>
+                        <span ng-if="entry.pointInfo">{{entry.pointInfo.reader}} 名读者 / {{entry.pointInfo.article}} 篇文章</span>
                     </h3>
                 </div>
-                <div class="entry-content clearfix box-shadowed-glowed" ng-class="{'free-height': !entry.thumbnail}" ng-click="clickTheBox(entry)">
+                <div class="entry-content clearfix box-shadowed-glowed" ng-class="{'free-height': !entry.thumbnail && !entry.pointAvatar, 'for-point': entry.pointAvatar}" ng-click="clickTheBox(entry)">
                     <img ng-if="entry.thumbnail" class="thumbnail" webp-src="{{entry.thumbnail|timelineThumbnailUrl}}" alt="预览图">
                     <div ng-if="entry.background" class="background" webp-background="{{entry.background|backgroundUrl}}"></div>
                     <div class="summary">
@@ -99,11 +100,18 @@
                         </h3>
                         <p>{{entry.summary}}</p>
                     </div>
+                    <a ng-href="{{entry.url}}" class="point-avatar" ng-if="entry.pointAvatar">
+                        <img class="avatar-big" webp-src="{{entry.pointAvatar|avatarUrl}}" alt="头像">
+                    </a>
+                </div>
+                <div class="action" ng-switch="entry.subscribed">
+                    <a ng-switch-when="false" ng-disabled="subscribeDisabled" ng-click="subscribe(entry)">订阅</a>
+                    <a ng-switch-when="true" class="subscribed" ng-disabled="subscribeDisabled" ng-click="unsubscribe(entry)">已订阅</a>
                 </div>
             </div>
-            <footer>
+            <footer ng-if="(entry.datetime || entry.count) || data.hasDeleteButton">
                 <span class="counts" ng-if="entry.count"><span>[+1] {{entry.count.like}}</span><span>(···) {{entry.count.comment}}</span></span>
-                <span class="datetime" am-time-ago="entry.datetime" ng-switch-when="outBlock"></span>
+                <span class="datetime" am-time-ago="entry.datetime" ng-if="entry.datetime"></span>
                 <a class="delete" ng-if="data.hasDeleteButton" href="" ng-click="ignore(entry)">移除纪录</a>
                 <a class="delete" ng-if="data.hasDeleteButton" href="" ng-click="noMoreRemind(entry)">不再提醒</a>
             </footer>

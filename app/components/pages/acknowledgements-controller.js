@@ -64,7 +64,6 @@
                         getLike("CommentLike", timeline.entries.length);
                     }
                 },
-                datetime: "outBlock",
                 loadingLock: true,
                 notArticle: true,
                 hasDeleteButton: true,
