@@ -33,7 +33,7 @@
                                     article.VoteText = "差评";
                                     break;
                             }
-                            $http.get(apiEndpoint + "normal-point/" + article.VoteForPointId, {
+                            $http.get(apiEndpoint + "normal-point/" + article.VoteForPoint.Id, {
                                 params: {
                                     includeVotes: true
                                 }

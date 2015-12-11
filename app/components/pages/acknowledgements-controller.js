@@ -64,9 +64,8 @@
                         getLike("CommentLike", timeline.entries.length);
                     }
                 },
-                datetime: "inBlock",
                 loadingLock: true,
-                oneLine: true,
+                notArticle: true,
                 hasDeleteButton: true,
                 clickable: true,
                 entries: []
@@ -97,6 +96,8 @@
                                 href: "article/" + like.Article.AuthorIdCode + "/" + like.Article.SequenceNumberForAuthor
                             },
                             datetime: like.Time,
+                            hasBackground: true,
+                            background: "0abeafd8e4c049bce860686bc4c04829.jpg",
                             author: {
                                 username: like.Operator.UserName,
                                 avatarUrl: like.Operator.AvatarImage,

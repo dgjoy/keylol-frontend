@@ -52,26 +52,19 @@
             </li>
         </ul>
     </div>
-    <div class="entry card" ng-repeat="entry in data.entries" ng-switch="data.datetime">
-        <svg xmlns="http://www.w3.org/2000/svg" class="card-line">
+    <div class="entry" ng-repeat="entry in data.entries">
+        <svg xmlns="http://www.w3.org/2000/svg" class="card-line-background">
             <rect x="6" width="5" height="100%"></rect>
-            <circle cx="8.5" cy="42" class="inverse"></circle>
-            <circle cx="8.5" cy="42"></circle>
         </svg>
-        <div class="entry-heading">
-            <div class="entry-author" ng-if="entry.author">
-                <point-link type="'user'" avatar-url="entry.author.avatarUrl" id-code="entry.author.idCode"></point-link>
-                <h4>
-                    <point-link type="'user'" point-name="'@' + entry.author.username" id-code="entry.author.idCode"></point-link>
-                </h4>
-            </div>
-            <h3>
-                <span class="entry-type font-myriad-keylol" ng-repeat="type in entry.types">{{type}}</span>
-                <svg xmlns="http://www.w3.org/2000/svg" class="entry-new" ng-if="entry.isNew">
-                    <circle cx="3.5" cy="3.5" r="3.5"></circle>
-                </svg>
+        <div class="card box-shadowed">
+            <svg xmlns="http://www.w3.org/2000/svg" class="card-line">
+                <rect x="6" width="5" height="100%"></rect>
+                <circle cx="8.5" cy="42" class="inverse"></circle>
+                <circle cx="8.5" cy="42"></circle>
+            </svg>
+            <div class="entry-source" ng-if="entry.sources">
                 <span ng-switch="entry.sources.type">
-                    <point-link ng-switch-when="point" ng-repeat="point in entry.sources.points" type="'point'" id-code="point.idCode" point-name="'「' + point.name + '」'"></point-link>
+                    <span ng-switch-when="point"><point-link ng-repeat="point in entry.sources.points" type="'point'" id-code="point.IdCode" point-name="'「' + utils.getPointFirstName(point) + '」'"></point-link>收到了新的投稿</span>
                     <span ng-switch-when="publish"><point-link type="'user'" point-name="'@' + entry.author.username" id-code="entry.author.idCode"></point-link> 发布了这篇文章</span>
                     <span ng-switch-when="like">
                         <span ng-repeat="user in entry.sources.userArray">
@@ -79,70 +72,56 @@
                             <span ng-if="!$last">、</span>
                         </span>认可这篇文章</span>
                 </span>
-                <span ng-if="entry.privateMesNum">{{entry.privateMesNum.number}} 条对话</span>
-                <span ng-if="entry.fromArticle"><a href="{{entry.fromArticle.href}}">《{{entry.fromArticle.text|maxLength:14}}》</a><span ng-if="entry.fromArticle.fromComment">中的评论</span></span>
-                <span ng-if="entry.pointInfo">{{entry.pointInfo.reader}} 名读者 / {{entry.pointInfo.article}} 篇文章</span>
-            </h3>
+            </div>
+            <div class="entry-main" ng-class="{'has-sources': entry.sources}">
+                <div class="entry-heading">
+                    <div class="entry-author" ng-if="entry.author">
+                        <point-link type="'user'" avatar-url="entry.author.avatarUrl" id-code="entry.author.idCode"></point-link>
+                        <h4>
+                            <point-link type="'user'" point-name="'@' + entry.author.username" id-code="entry.author.idCode"></point-link>
+                        </h4>
+                    </div>
+                    <h3>
+                        <span class="entry-type font-myriad-keylol" ng-repeat="type in entry.types">{{type}}</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="entry-new" ng-if="entry.isNew">
+                            <circle cx="3.5" cy="3.5" r="3.5"></circle>
+                        </svg>
+                        <point-link ng-if="entry.voteForPoint" type="'point'" id-code="entry.voteForPoint.IdCode" point-name="'「' + utils.getPointFirstName(entry.voteForPoint) + '」'"></point-link>
+                        <span ng-if="entry.fromArticle"><a href="{{entry.fromArticle.href}}">《{{entry.fromArticle.text|maxLength:14}}》</a><span ng-if="entry.fromArticle.fromComment">中的评论</span></span>
+                        <span ng-if="entry.pointInfo">{{entry.pointInfo.reader}} 名读者 / {{entry.pointInfo.article}} 篇文章</span>
+                    </h3>
+                </div>
+                <a ng-href="{{entry.url}}" class="entry-content clearfix box-shadowed-glowed" ng-class="{'free-height': !entry.thumbnail && !entry.pointAvatar, 'for-point': entry.pointAvatar}">
+                    <div ng-if="entry.thumbnail" class="thumbnail" webp-background="{{entry.thumbnail|timelineThumbnailUrl}}"></div>
+                    <div ng-if="entry.hasBackground" class="background" webp-background="{{entry.background|backgroundUrl}}"></div>
+                    <div class="summary">
+                        <h3 ng-if="entry.title">{{entry.title}}</h3>
+                        <p>{{entry.summary}}</p>
+                    </div>
+                    <div class="point-avatar" ng-if="entry.pointAvatar">
+                        <img class="avatar-big" webp-src="{{entry.pointAvatar|avatarUrl}}" alt="头像">
+                    </div>
+                </a>
+                <div class="action" ng-switch="entry.subscribed">
+                    <a ng-switch-when="false" ng-disabled="subscribeDisabled" ng-click="subscribe(entry)">订阅</a>
+                    <a ng-switch-when="true" class="subscribed" ng-disabled="subscribeDisabled" ng-click="unsubscribe(entry)">已订阅</a>
+                </div>
+            </div>
+            <footer ng-if="(entry.datetime || entry.count) || data.hasDeleteButton">
+                <span class="counts" ng-if="entry.count"><span>[+1] {{entry.count.like}}</span><span>(···) {{entry.count.comment}}</span></span>
+                <span class="datetime" am-time-ago="entry.datetime" ng-if="entry.datetime"></span>
+                <a class="delete" ng-if="data.hasDeleteButton" href="" ng-click="ignore(entry)">移除纪录</a>
+                <a class="delete" ng-if="data.hasDeleteButton" href="" ng-click="noMoreRemind(entry)">不再提醒</a>
+            </footer>
         </div>
-        <div class="entry-content clearfix box-shadowed-glowed clickable" ng-click="clickTheBox(entry)" ng-if="data.clickable">
-            <img ng-if="entry.thumbnail" class="thumbnail" webp-src="{{entry.thumbnail|timelineThumbnailUrl}}" alt="预览图">
-            <a ng-href="{{entry.url}}" class="point-avatar" ng-if="entry.pointAvatar">
-                <img class="avatar-big" webp-src="{{entry.pointAvatar|avatarUrl}}" alt="头像">
-            </a>
-            <p ng-if="entry.datetime" am-time-ago="entry.datetime" class="datetime-in-block" ng-switch-when="inBlock"></p>
-            <div class="summary">
-                <h3 ng-if="entry.title">
-                    <a ng-href="{{entry.url}}">{{entry.title|userName:entry.isUser}}</a>
-                </h3>
-                <p ng-class="{'one-line': !entry.thumbnail}">{{entry.summary}}</p>
-            </div>
-            <div class="actions" ng-switch="entry.subscribed">
-                <button ng-switch-when="false" ng-disabled="subscribeDisabled" class="border-button right-border" ng-click="subscribe(data.id)">订阅</button>
-                <button ng-switch-when="true" ng-disabled="subscribeDisabled" class="border-button right-border subscribed" ng-click="unsubscribe(data.id)">已订阅</button>
-            </div>
-        </div>
-        <div class="entry-content clearfix box-shadowed-glowed" ng-if="!(data.clickable)">
-            <img ng-if="entry.thumbnail" class="thumbnail" webp-src="{{entry.thumbnail|timelineThumbnailUrl}}" alt="预览图">
-            <a ng-href="{{entry.url}}" class="point-avatar" ng-if="entry.pointAvatar">
-                <img class="avatar-big" webp-src="{{entry.pointAvatar|avatarUrl}}" alt="头像">
-            </a>
-            <p ng-if="entry.datetime" am-time-ago="entry.datetime" class="datetime-in-block" ng-switch-when="inBlock"></p>
-            <div class="summary">
-                <h3 ng-if="entry.title">
-                    <a ng-href="{{entry.url}}">{{entry.title|userName:entry.isUser}}</a>
-                </h3>
-                <p ng-class="{'one-line': !entry.thumbnail}">{{entry.summary}}</p>
-            </div>
-            <div class="actions" ng-switch="entry.subscribed">
-                <button ng-switch-when="false" ng-disabled="subscribeDisabled" class="border-button right-border" ng-click="subscribe(entry)">订阅</button>
-                <button ng-switch-when="true" ng-disabled="subscribeDisabled" class="border-button right-border subscribed" ng-click="unsubscribe(entry)">
-                    <span class="is-subscribed">已订阅</span>
-                    <span class="cancel-subscribed">退订</span>
-                </button>
-            </div>
-        </div>
-        <footer>
-            <span class="counts" ng-if="entry.count"><span>[+1] {{entry.count.like}}</span><span>(···) {{entry.count.comment}}</span></span>
-            <span class="datetime" am-time-ago="entry.datetime" ng-switch-when="outBlock"></span>
-            <span class="comment-target" ng-if="entry.commentTarget" ng-switch="entry.commentTarget.type">
-                回复
-                <span ng-switch-when="comment">
-                    <point-link type="'user'" point-name="'@' + entry.commentTarget.author.username" id-code="entry.commentTarget.author.idCode"></point-link>
-                    的评论
-                    <a href="{{entry.commentTarget.url}}">「{{entry.commentTarget.text|maxLength:16}}」</a>
-                </span>
-                <span ng-switch-when="article">文章</span>
-            </span>
-            <a class="delete" ng-if="data.hasDeleteButton" href="" ng-click="ignore(entry)">移除纪录</a>
-            <a class="delete" ng-if="data.hasDeleteButton" href="" ng-click="noMoreRemind(entry)">不再提醒</a>
-        </footer>
     </div>
     <div class="search-not-found" ng-if="data.searchNotFound">
         <img src="assets/images/hit-final.png">
         <h1 class="font-myriad-keylol">未能撞到结果</h1>
     </div>
     <svg xmlns="http://www.w3.org/2000/svg" ng-if="!data.searchNotFound && !data.activePoints && !data.loadingLock" class="card-end">
-        <rect x="14" width="15" height="5"></rect>
+        <rect x="19" width="5" height="20" class="line"></rect>
+        <rect x="14" y="20" width="15" height="5"></rect>
     </svg>
     <img class="loading" src="assets/images/timeline-loading.gif" ng-if="data.loadingLock">
 </div>
