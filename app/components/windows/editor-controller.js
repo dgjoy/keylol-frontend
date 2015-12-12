@@ -36,7 +36,7 @@
                 if ($scope.vm.VoteForPoint) {
                     options.vm.VoteForPointId = $scope.vm.VoteForPoint.Id;
                     $scope.inline.voteForPoints = [$scope.vm.VoteForPoint];
-                } else {
+                } else if (options.vm) {
                     options.vm.VoteForPointId = null;
                 }
             };
