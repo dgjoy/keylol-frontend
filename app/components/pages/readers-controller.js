@@ -39,7 +39,7 @@
                     mainTitle: "搜索结果",
                     subTitle: "Search Result"
                 },
-                datetime: "outBlock",
+                cannotClick: true,
                 loadAction: function () {
                     timeline.loadingLock = true;
                     $http.get(apiEndpoint + "user/my", {
@@ -63,6 +63,8 @@
                                     },
                                     title: user.UserName,
                                     summary: user.GamerTag,
+                                    hasBackground: true,
+                                    background: user.ProfilePointBackgroundImage,
                                     pointAvatar: user.AvatarImage,
                                     url: "user/" + user.IdCode,
                                     isUser: true,

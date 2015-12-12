@@ -33,8 +33,12 @@
                 }
                 if ($scope.vm.AttachedPoints)
                     $scope.inline.attachedPoints = $scope.vm.AttachedPoints;
-                if ($scope.vm.VoteForPointId)
-                    $scope.inline.voteForPoints = [{Id: $scope.vm.VoteForPointId, Name: $scope.vm.VoteForPointName}];
+                if ($scope.vm.VoteForPoint) {
+                    options.vm.VoteForPointId = $scope.vm.VoteForPoint.Id;
+                    $scope.inline.voteForPoints = [$scope.vm.VoteForPoint];
+                } else if (options.vm) {
+                    options.vm.VoteForPointId = null;
+                }
             };
 
             var autoSaveTimeout;
@@ -157,9 +161,8 @@
                             continue;
                         }
 
-                        if ($scope.vm.hasOwnProperty(key) && $scope.vm[key] != options.vm[key]) {
-                            if ($scope.vm[key] != options.vm[key])
-                                dirtyFields[key] = $scope.vm[key];
+                        if ($scope.vm.hasOwnProperty(key) && $scope.vm[key] !== options.vm[key]) {
+                            dirtyFields[key] = $scope.vm[key];
                         }
                     }
 

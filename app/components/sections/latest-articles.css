@@ -35,9 +35,4 @@
 
 .section-latest-articles .article footer span {
     margin-left: 15px;
-    display: none;
-}
-
-.section-latest-articles .article:hover footer span {
-    display: inline-block;
 }
