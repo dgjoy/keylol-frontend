@@ -116,18 +116,21 @@
                             entry.summary = "认可你的文章";
                             entry.url = "article/" + like.Article.AuthorIdCode + "/" + like.Article.SequenceNumberForAuthor;
                         }
+                        timeline.entries.push(entry);
                         (function (entry) {
-                            if (!timelineTimeout) {
-                                timeline.entries.push(entry);
-                                timelineTimeout = $timeout(function () {
-                                }, utils.timelineInsertDelay);
-                            } else {
-                                timelineTimeout = timelineTimeout.then(function () {
-                                    timeline.entries.push(entry);
-                                    return $timeout(function () {
-                                    }, utils.timelineInsertDelay);
-                                });
-                            }
+                            $timeout(function() {
+                                if (!timelineTimeout) {
+                                    entry.show = true;
+                                    timelineTimeout = $timeout(function () {
+                                    }, utils.timelineShowDelay);
+                                } else {
+                                    timelineTimeout = timelineTimeout.then(function () {
+                                        entry.show = true;
+                                        return $timeout(function () {
+                                        }, utils.timelineShowDelay);
+                                    });
+                                }
+                            });
                         })(entry);
                     }
                     if (timelineTimeout) {
