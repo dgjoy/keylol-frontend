@@ -180,18 +180,21 @@
                                             break;
                                     }
                                 }
+                                timeline.entries.push(entry);
                                 (function (entry) {
-                                    if (!timelineTimeout) {
-                                        timeline.entries.push(entry);
-                                        timelineTimeout = $timeout(function () {
-                                        }, utils.timelineInsertDelay);
-                                    } else {
-                                        timelineTimeout = timelineTimeout.then(function () {
-                                            timeline.entries.push(entry);
-                                            return $timeout(function () {
-                                            }, utils.timelineInsertDelay);
-                                        });
-                                    }
+                                    $timeout(function() {
+                                        if (!timelineTimeout) {
+                                            entry.show = true;
+                                            timelineTimeout = $timeout(function () {
+                                            }, utils.timelineShowDelay);
+                                        } else {
+                                            timelineTimeout = timelineTimeout.then(function () {
+                                                entry.show = true;
+                                                return $timeout(function () {
+                                                }, utils.timelineShowDelay);
+                                            });
+                                        }
+                                    });
                                 })(entry);
                             }
                             if (timelineTimeout) {
@@ -360,18 +363,21 @@
                                     comment: article.CommentCount
                                 }
                             };
+                            timeline.entries.push(entry);
                             (function (entry) {
-                                if (!timelineTimeout) {
-                                    timeline.entries.push(entry);
-                                    timelineTimeout = $timeout(function () {
-                                    }, utils.timelineInsertDelay);
-                                } else {
-                                    timelineTimeout = timelineTimeout.then(function () {
-                                        timeline.entries.push(entry);
-                                        return $timeout(function () {
-                                        }, utils.timelineInsertDelay);
-                                    });
-                                }
+                                $timeout(function() {
+                                    if (!timelineTimeout) {
+                                        entry.show = true;
+                                        timelineTimeout = $timeout(function () {
+                                        }, utils.timelineShowDelay);
+                                    } else {
+                                        timelineTimeout = timelineTimeout.then(function () {
+                                            entry.show = true;
+                                            return $timeout(function () {
+                                            }, utils.timelineShowDelay);
+                                        });
+                                    }
+                                });
                             })(entry);
                         }
                         if (timelineTimeout) {

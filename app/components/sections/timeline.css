@@ -292,6 +292,10 @@
     left: 13px;
     top: 0;
     fill: #c7cdd1;
+    transform: scale(1,0);
+    transform-origin: left top;
+    transition-duration: 150ms;
+    transition-timing-function: linear;
 }
 
 .section-timeline .entry .card {
@@ -300,31 +304,17 @@
     padding-left: 31px;
     padding-right: 13px;
     padding-bottom: 10px;
-}
-
-.section-timeline .entry.ng-enter {
-    transition-duration: 0.6s;
-}
-
-.section-timeline .entry.ng-enter .card-line-background {
-    transform: scale(1,0);
-    transform-origin: left top;
-    transition-duration: 150ms;
-    transition-timing-function: linear;
-}
-
-.section-timeline .entry.ng-enter-active .card-line-background {
-    transform: scale(1,1);
-}
-
-.section-timeline .entry.ng-enter .card {
     transition-duration: 0.3s;
     transition-delay: 0.3s;
     transform: translateX(-15%);
     opacity: 0;
 }
 
-.section-timeline .entry.ng-enter-active .card {
+.section-timeline .entry.show .card-line-background {
+    transform: scale(1,1);
+}
+
+.section-timeline .entry.show .card {
     transform: translateX(0);
     opacity: 1;
 }

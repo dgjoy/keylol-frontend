@@ -52,7 +52,7 @@
             </li>
         </ul>
     </div>
-    <div class="entry" ng-repeat="entry in data.entries">
+    <div class="entry" ng-repeat="entry in data.entries" ng-class="{'show': entry.show}">
         <svg xmlns="http://www.w3.org/2000/svg" class="card-line-background">
             <rect x="6" width="5" height="100%"></rect>
         </svg>

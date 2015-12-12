@@ -264,7 +264,7 @@
 
                         self.timelineLoadCount = 20;
 
-                        self.timelineInsertDelay = 150;
+                        self.timelineShowDelay = 150;
 
                         self.firefoxLinkFix = function (event) {
                             if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
