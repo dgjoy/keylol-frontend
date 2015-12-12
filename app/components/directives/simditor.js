@@ -26,7 +26,18 @@
                         $.extend(options, scope.$eval(attrs.simditor));
                     var contentArea = element.find("[simditor-content]")[0];
                     var editor = new Simditor({
-                        textarea: contentArea
+                        textarea: contentArea,
+                        toolbar: [
+                            "title", "|",
+                            "bold",
+                            "italic",
+                            "underline",
+                            "strikethrough", "|",
+                            "alignment",
+                            "hr", "|",
+                            "link", "|",
+                            "image"
+                        ]
                     });
                 }
             };

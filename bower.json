@@ -18,6 +18,6 @@
     "ngstorage": "1b5018206fc21adc5d9b66725954c7298db1624b",
     "signalr": "~2.2.0",
     "angulartics": "~0.20.1",
-    "simditor": "rexDainiel/simditor"
+    "simditor": "rexDainiel/simditor#master"
   }
 }
