@@ -52,7 +52,7 @@
             </li>
         </ul>
     </div>
-    <div class="entry" ng-repeat="entry in data.entries">
+    <div class="entry" ng-repeat="entry in data.entries" ng-class="{'show': entry.show}">
         <svg xmlns="http://www.w3.org/2000/svg" class="card-line-background">
             <rect x="6" width="5" height="100%"></rect>
         </svg>
@@ -91,7 +91,7 @@
                         <span ng-if="entry.pointInfo">{{entry.pointInfo.reader}} 名读者 / {{entry.pointInfo.article}} 篇文章</span>
                     </h3>
                 </div>
-                <a ng-href="{{entry.url}}" class="entry-content clearfix box-shadowed-glowed" ng-class="{'free-height': !entry.thumbnail && !entry.pointAvatar, 'for-point': entry.pointAvatar}">
+                <a ng-href="{{entry.url}}" class="entry-content clearfix" ng-class="{'free-height': !entry.thumbnail && !entry.pointAvatar, 'for-point': entry.pointAvatar}">
                     <div ng-if="entry.thumbnail" class="thumbnail" webp-background="{{entry.thumbnail|timelineThumbnailUrl}}"></div>
                     <div ng-if="entry.hasBackground" class="background" webp-background="{{entry.background|backgroundUrl}}"></div>
                     <div class="summary">

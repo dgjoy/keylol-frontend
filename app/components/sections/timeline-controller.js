@@ -209,18 +209,21 @@
                                     entry.sources.type = "publish";
                                     break;
                             }
+                            $scope.data.entries.push(entry);
                             (function (entry) {
-                                if (!timelineTimeout) {
-                                    $scope.data.entries.push(entry);
-                                    timelineTimeout = $timeout(function () {
-                                    }, utils.timelineInsertDelay);
-                                } else {
-                                    timelineTimeout = timelineTimeout.then(function () {
-                                        $scope.data.entries.push(entry);
-                                        return $timeout(function () {
-                                        }, utils.timelineInsertDelay);
-                                    });
-                                }
+                                $timeout(function() {
+                                    if (!timelineTimeout) {
+                                        entry.show = true;
+                                        timelineTimeout = $timeout(function () {
+                                        }, utils.timelineShowDelay);
+                                    } else {
+                                        timelineTimeout = timelineTimeout.then(function () {
+                                            entry.show = true;
+                                            return $timeout(function () {
+                                            }, utils.timelineShowDelay);
+                                        });
+                                    }
+                                });
                             })(entry);
                         }
                         if (timelineTimeout) {
