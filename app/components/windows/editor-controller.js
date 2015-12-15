@@ -8,10 +8,11 @@
                   articleTypes, $route, $element) {
             $scope.editorOptions = {
                 toolbar: [
-                    'title', '|',
+                    'paragraph', '|',
                     'bold', 'italic', 'underline', 'strikethrough', '|',
-                    'alignment', 'hr', '|',
-                    'link', 'image'
+                    'alignment', 'hr', 'blockquote', 'code', 'table', '|',
+                    'link', '|',
+                    'image'
                 ],
                 scrollableContainer: $element
             };
