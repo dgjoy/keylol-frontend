@@ -15,13 +15,27 @@ var htmlmin = require("gulp-htmlmin");
 var fontmin = require('gulp-fontmin');
 
 // apiEndpoint must have the trailing slash
-var environmentConfig = {
+var buildConfigs = {
+    local: {
+        bundle: false,
+        apiEndpoint: "https://localhost:44300/",
+        urlCanonical: false
+    },
     dev: {
-        apiEndpoint: "https://gay-api.keylol.com/"
+        bundle: false,
+        apiEndpoint: "https://gay-api.keylol.com/",
+        urlCanonical: false
+    },
+    gay: {
+        bundle: true,
+        apiEndpoint: "https://gay-api.keylol.com/",
+        urlCanonical: false
     },
     prod: {
+        bundle: true,
         apiEndpoint: "https://api.keylol.com/",
-        cdnBase: "https://keylol-static.b0.upaiyun.com/"
+        cdnBase: "https://keylol-static.b0.upaiyun.com/",
+        urlCanonical: true
     }
 };
 
@@ -31,7 +45,7 @@ var vendorScripts = [
     "bower_components/moment/moment.js",
     "bower_components/moment/locale/zh-cn.js",
     "bower_components/angular/angular.js",
-    "bower_components/angular/i18n/zh.js",
+    "bower_components/angular-i18n/angular-locale_zh.js",
     "bower_components/angular-route/angular-route.js",
     "bower_components/angular-animate/angular-animate.js",
     "bower_components/angular-moment/angular-moment.js",
@@ -85,14 +99,11 @@ var getFiles = function (arr) {
     }));
 };
 
-var getBundleFilePaths = function () {
-    return {
-        scripts: getFiles(["bundles/vendor-*.min.js", "bundles/app-*.min.js", "bundles/templates-*.min.js"]),
-        stylesheets: getFiles(["bundles/stylesheets-*.min.css"])
-    };
-};
+gulp.task("clean-font", function () {
+    return del(["app/assets/fonts/keylol-rail-sung-subset-*", "app/assets/fonts/lisong-subset-*"]);
+});
 
-gulp.task("font-keylol", ["clean-font"], function () {
+gulp.task("font-keylol", gulp.series("clean-font", function () {
     return gulp.src("app/assets/fonts/keylol-rail-sung-full.ttf")
         .pipe(rename("keylol-rail-sung-subset.ttf"))
         .pipe(fontmin({
@@ -100,9 +111,9 @@ gulp.task("font-keylol", ["clean-font"], function () {
         }))
         .pipe(rev())
         .pipe(gulp.dest("app/assets/fonts"))
-});
+}));
 
-gulp.task("font-lisong", ["clean-font"], function () {
+gulp.task("font-lisong", gulp.series("clean-font", function () {
     return gulp.src("app/assets/fonts/lisong-full.ttf")
         .pipe(rename("lisong-subset.ttf"))
         .pipe(fontmin({
@@ -110,132 +121,98 @@ gulp.task("font-lisong", ["clean-font"], function () {
         }))
         .pipe(rev())
         .pipe(gulp.dest("app/assets/fonts"))
-});
+}));
 
-gulp.task("font", ["font-keylol", "font-lisong"]);
+gulp.task("font", gulp.series("font-keylol", "font-lisong"));
 
 gulp.task("clean", function () {
     return del(["app/bundles/!(web.config)", "index.html", "environment-config.js"]);
 });
 
-gulp.task("clean-font", function () {
-    return del(["app/assets/fonts/keylol-rail-sung-subset-*", "app/assets/fonts/lisong-subset-*"]);
-});
+var getBuildTask = function (configName) {
+    var config = buildConfigs[configName];
+    return gulp.series("clean", function buildEnvironmentConfig() {
+        return gulp.src("app/environment-config.js.ejs")
+            .pipe(template(config))
+            .pipe(rename("environment-config.js"))
+            .pipe(gulp.dest("app"));
+    }, config.bundle ? gulp.parallel(function buildVendorScriptBundle() {
+        return gulp.src(vendorScripts, {cwd: "app"})
+            .pipe(concat("vendor.min.js"))
+            .pipe(uglify())
+            .pipe(rev())
+            .pipe(gulp.dest("app/bundles"));
+    }, function buildAppScriptBundle() {
+        return gulp.src(appSrcipts, {cwd: "app"})
+            .pipe(concat("app.min.js"))
+            .pipe(uglify())
+            .pipe(rev())
+            .pipe(gulp.dest("app/bundles"));
+    }, function buildTemplateBundle() {
+        return gulp.src("app/components/**/*.html")
+            .pipe(minifyInline({
+                css: {
+                    keepSpecialComments: 0
+                }
+            }))
+            .pipe(htmlmin(htmlminOptions))
+            .pipe(templateCache("templates.min.js", {
+                root: "components/",
+                module: "KeylolApp"
+            }))
+            .pipe(uglify())
+            .pipe(rev())
+            .pipe(gulp.dest("app/bundles"));
+    }, function buildStylesheetBundle() {
+        return gulp.src(stylesheets, {cwd: "app"})
+            .pipe(autoprefixer())
+            .pipe(minifyCss({
+                keepSpecialComments: 0,
+                relativeTo: "app/bundles",
+                target: "app/bundles"
+            }))
+            .pipe(concat("stylesheets.min.css"))
+            .pipe(rev())
+            .pipe(gulp.dest("app/bundles"));
+    }) : function skipBundles(done) {
+        done();
+    }, function buildEntryPage() {
+        var scriptFiles, stylesheetFiles;
+        if (config.bundle) {
+            scriptFiles = getFiles(["bundles/vendor-*.min.js", "bundles/app-*.min.js", "bundles/templates-*.min.js"]);
+            stylesheetFiles = getFiles(["bundles/stylesheets-*.min.css"]);
+        } else {
+            scriptFiles = getFiles(vendorScripts.concat(appSrcipts));
+            stylesheetFiles = getFiles(stylesheets);
+        }
+        var mapCdnPath = function (path) {
+            return config.cdnBase ? config.cdnBase + path : path;
+        };
+        var stream = gulp.src("app/index.html.ejs")
+            .pipe(template({
+                scripts: _.map(scriptFiles, mapCdnPath),
+                stylesheets: _.map(stylesheetFiles, mapCdnPath),
+                urlCanonical: config.urlCanonical
+            }))
+            .pipe(rename("index.html"));
+        if (config.bundle) {
+            stream = stream.pipe(minifyInline({
+                    css: {
+                        keepSpecialComments: 0
+                    }
+                }))
+                .pipe(htmlmin(htmlminOptions));
+        }
+        return stream.pipe(gulp.dest("app"));
+    });
+};
 
-gulp.task("compile-environment-config", ["clean"], function () {
-    return gulp.src("app/environment-config.js.ejs")
-        .pipe(template(environmentConfig.dev))
-        .pipe(rename("environment-config.js"))
-        .pipe(gulp.dest("app"));
-});
+gulp.task("prod", getBuildTask("prod"));
 
-gulp.task("compile-environment-config:prod", ["clean"], function () {
-    return gulp.src("app/environment-config.js.ejs")
-        .pipe(template(environmentConfig.prod))
-        .pipe(rename("environment-config.js"))
-        .pipe(gulp.dest("app"));
-});
+gulp.task("gay", getBuildTask("gay"));
 
-gulp.task("vendor-script-bundle", ["clean"], function () {
-    return gulp.src(vendorScripts, {cwd: "app"})
-        .pipe(concat("vendor.min.js"))
-        .pipe(uglify())
-        .pipe(rev())
-        .pipe(gulp.dest("app/bundles"));
-});
+gulp.task("dev", getBuildTask("dev"));
 
-gulp.task("app-script-bundle", ["clean", "compile-environment-config:prod"], function () {
-    return gulp.src(appSrcipts, {cwd: "app"})
-        .pipe(concat("app.min.js"))
-        .pipe(uglify())
-        .pipe(rev())
-        .pipe(gulp.dest("app/bundles"));
-});
+gulp.task("local", getBuildTask("local"));
 
-gulp.task("template-bundle", ["clean"], function () {
-    return gulp.src("app/components/**/*.html")
-        .pipe(minifyInline({
-            css: {
-                keepSpecialComments: 0
-            }
-        }))
-        .pipe(htmlmin(htmlminOptions))
-        .pipe(templateCache("templates.min.js", {
-            root: "components/",
-            module: "KeylolApp"
-        }))
-        .pipe(uglify())
-        .pipe(rev())
-        .pipe(gulp.dest("app/bundles"));
-});
-
-gulp.task("stylesheet-bundle", ["clean"], function () {
-    return gulp.src(stylesheets, {cwd: "app"})
-        .pipe(autoprefixer())
-        .pipe(minifyCss({
-            keepSpecialComments: 0,
-            relativeTo: "app/bundles",
-            target: "app/bundles"
-        }))
-        .pipe(concat("stylesheets.min.css"))
-        .pipe(rev())
-        .pipe(gulp.dest("app/bundles"));
-});
-
-gulp.task("compile-index", ["compile-environment-config"], function () {
-    var scriptPaths = getFiles(vendorScripts.concat(appSrcipts));
-    var stylesheetPaths = getFiles(stylesheets);
-    return gulp.src("app/index.html.ejs")
-        .pipe(template({
-            scripts: scriptPaths,
-            stylesheets: stylesheetPaths,
-            urlCanonical: false
-        }))
-        .pipe(rename("index.html"))
-        .pipe(gulp.dest("app"));
-});
-
-gulp.task("compile-index:prod", ["vendor-script-bundle", "app-script-bundle", "template-bundle", "stylesheet-bundle"], function () {
-    var files = getBundleFilePaths();
-    return gulp.src("app/index.html.ejs")
-        .pipe(template({
-            scripts: files.scripts,
-            stylesheets: files.stylesheets,
-            urlCanonical: true
-        }))
-        .pipe(rename("index.html"))
-        .pipe(minifyInline({
-            css: {
-                keepSpecialComments: 0
-            }
-        }))
-        .pipe(htmlmin(htmlminOptions))
-        .pipe(gulp.dest("app"));
-});
-
-gulp.task("compile-index:prod:cdn", ["vendor-script-bundle", "app-script-bundle", "template-bundle", "stylesheet-bundle"], function () {
-    var files = getBundleFilePaths();
-    var mapCdnPath = function (path) {
-        return environmentConfig.prod.cdnBase + path;
-    };
-    return gulp.src("app/index.html.ejs")
-        .pipe(template({
-            scripts: _.map(files.scripts, mapCdnPath),
-            stylesheets: _.map(files.stylesheets, mapCdnPath),
-            urlCanonical: true
-        }))
-        .pipe(rename("index.html"))
-        .pipe(minifyInline({
-            css: {
-                keepSpecialComments: 0
-            }
-        }))
-        .pipe(htmlmin(htmlminOptions))
-        .pipe(gulp.dest("app"));
-});
-
-gulp.task("prod", ["compile-index:prod"]);
-
-gulp.task("prod:cdn", ["compile-index:prod:cdn"]);
-
-gulp.task("default", ["compile-index"]);
+gulp.task("default", getBuildTask("dev"));
