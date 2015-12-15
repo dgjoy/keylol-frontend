@@ -45,7 +45,7 @@ var vendorScripts = [
     "bower_components/moment/moment.js",
     "bower_components/moment/locale/zh-cn.js",
     "bower_components/angular/angular.js",
-    "bower_components/angular-i18n/zh.js",
+    "bower_components/angular-i18n/angular-locale_zh.js",
     "bower_components/angular-route/angular-route.js",
     "bower_components/angular-animate/angular-animate.js",
     "bower_components/angular-moment/angular-moment.js",
