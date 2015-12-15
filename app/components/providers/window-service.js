@@ -20,7 +20,7 @@
 
                 var adjustScrollBar = function () {
                     var $body = $(document.body);
-                    if ($body.find("> window").length > 0) {
+                    if ($body.find("main[ng-view] > window").length > 0) {
                         if (!$body.hasClass("body-window-open")) {
                             bodyOriginalPaddingRight = document.body.style.paddingRight || "";
 
