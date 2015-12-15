@@ -7,10 +7,10 @@
     "url": "https://github.com/stackia/keylol-frontend"
   },
   "devDependencies": {
-    "bower": "^1.0.0",
+    "bower": "^1.7.1",
     "del": "^2.0.2",
     "glob": "^5.0.14",
-    "gulp": "^3.0.0",
+    "gulp": "gulpjs/gulp#4.0",
     "gulp-angular-templatecache": "^1.7.0",
     "gulp-autoprefixer": "^3.0.1",
     "gulp-concat": "^2.6.0",
