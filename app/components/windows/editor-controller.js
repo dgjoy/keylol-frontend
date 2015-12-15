@@ -2,8 +2,19 @@
     "use strict";
 
     keylolApp.controller("EditorController", [
-        "$scope", "close", "utils", "$http", "union", "$timeout", "$location", "notification", "options", "articleTypes", "$route",
-        function ($scope, close, utils, $http, union, $timeout, $location, notification, options, articleTypes, $route) {
+        "$scope", "close", "utils", "$http", "union", "$timeout", "$location", "notification", "options",
+        "articleTypes", "$route", "$element",
+        function ($scope, close, utils, $http, union, $timeout, $location, notification, options,
+                  articleTypes, $route, $element) {
+            $scope.editorOptions = {
+                toolbar: [
+                    'title', '|',
+                    'bold', 'italic', 'underline', 'strikethrough', '|',
+                    'alignment', 'hr', '|',
+                    'link', 'image'
+                ],
+                scrollableContainer: $element
+            };
             $scope.radioId = [utils.uniqueId(), utils.uniqueId(), utils.uniqueId()];
             $scope.articleTypes = articleTypes;
             $scope.expanded = false;

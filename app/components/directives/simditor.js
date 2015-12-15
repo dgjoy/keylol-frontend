@@ -8,36 +8,27 @@
                 restrict: "A",
                 require: "ngModel",
                 scope: {
+                    options: "=simditor",
                     content: "=ngModel"
                 },
-                transclude: true,
                 templateUrl: "components/directives/simditor.html",
                 link: function (scope, element, attrs, ngModel) {
-                    var options = {
-                        modules: {
-                            toolbar: {container: null},
-                            "click-expand": true,
-                            "float-toolbar": true
-                        },
-                        theme: "snow",
-                        formats: ["bold", "italic", "underline", "link", "image"]
-                    };
+                    var options = {};
                     if (attrs.simditor)
-                        $.extend(options, scope.$eval(attrs.simditor));
-                    var contentArea = element.find("[simditor-content]")[0];
-                    var editor = new Simditor({
-                        textarea: contentArea,
-                        toolbar: [
-                            "title", "|",
-                            "bold",
-                            "italic",
-                            "underline",
-                            "strikethrough", "|",
-                            "alignment",
-                            "hr", "|",
-                            "link", "|",
-                            "image"
-                        ]
+                        $.extend(options, scope.options);
+                    options.textarea = element.find("textarea");
+                    var editor = new Simditor(options);
+
+                    scope.$on("$destroy", function () {
+                        editor.destroy();
+                    });
+
+                    ngModel.$render = function () {
+                        editor.setValue(ngModel.$viewValue);
+                    };
+
+                    editor.on("valuechanged", function () {
+                        ngModel.$setViewValue(editor.getValue());
                     });
                 }
             };

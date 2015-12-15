@@ -13,7 +13,7 @@
                 </div>
                 <span><input type="text" ng-model="vm.Title" placeholder="标题"></span>
             </div>
-            <div simditor ng-model="vm.Content"></div>
+            <div simditor="editorOptions" ng-model="vm.Content"></div>
             <h3 class="labeled-heading">投稿至据点</h3>
             <input-point ng-model="inline.attachedPoints" placeholder="'最多可以同时投稿至 5 个据点，个人据点会自动记录你发布的所有文章'"></input-point>
             <h3 class="labeled-heading" ng-if="articleTypes[selectedTypeIndex].allowVote">评价游戏</h3>
@@ -27,13 +27,6 @@
                     </span>
                 </div>
             </div>
-            <!--<h3 class="labeled-heading">推荐阅读链接</h3>-->
-            <!--<div class="pad-right">-->
-                <!--<input type="text" class="pad-right" name="point" ng-model="vm.point" placeholder="如果希望推荐一篇其他其乐文章给读者扩展阅读，可以粘贴文章链接 (URL) 在这里">-->
-                <!--<div class="right-content">-->
-                    <!--<span class="left-align" ng-if="form.point.$dirty"><a href="test">德军总部：新秩序 单人剧情视频</a></span>-->
-                <!--</div>-->
-            <!--</div>-->
             <button type="submit" class="window-confirm-button">
                 <img class="arrow-right" src="assets/images/arrow-right.png" alt="下一步">
                 <img class="signature-pen" src="assets/images/signature-pen.png" alt="提交">
