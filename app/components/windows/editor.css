@@ -3,9 +3,8 @@
     width: 884px;
 }
 
-.window-editor .ql-container {
-    height: 300px;
-    margin: 0 14px;
+.window-editor div[simditor] {
+    margin: 19px 14px 11px;
 }
 
 .window-editor input[type=text],
@@ -28,6 +27,7 @@
     width: 70px;
     left: -5px;
     cursor: pointer;
+    transition: background-color 100ms ease-in-out;
 }
 
 .window-editor .article-type:hover {
@@ -76,10 +76,6 @@
 
 .window-editor form h3 {
     margin: 19px 0 11px;
-}
-
-.window-editor form h3:first-of-type {
-    margin-top: 29px;
 }
 
 .window-editor .pad-right {

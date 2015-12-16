@@ -2,8 +2,13 @@
     "use strict";
 
     keylolApp.controller("EditorController", [
-        "$scope", "close", "utils", "$http", "union", "$timeout", "$location", "notification", "options", "articleTypes", "$route",
-        function ($scope, close, utils, $http, union, $timeout, $location, notification, options, articleTypes, $route) {
+        "$scope", "close", "utils", "$http", "union", "$timeout", "$location", "notification", "options",
+        "articleTypes", "$route", "$element",
+        function ($scope, close, utils, $http, union, $timeout, $location, notification, options,
+                  articleTypes, $route, $element) {
+            $scope.editorOptions = {
+                scrollableContainer: $element
+            };
             $scope.radioId = [utils.uniqueId(), utils.uniqueId(), utils.uniqueId()];
             $scope.articleTypes = articleTypes;
             $scope.expanded = false;
@@ -158,6 +163,12 @@
                                 oldAttachedPointsId.push(options.vm.AttachedPoints[i].Id);
                             if (JSON.stringify($scope.vm.AttachedPointsId) != JSON.stringify(oldAttachedPointsId))
                                 dirtyFields.AttachedPointsId = $scope.vm.AttachedPointsId;
+                            continue;
+                        }
+
+                        if (key === "Content") {
+                            if ($scope.inline.editorDirty)
+                                dirtyFields.Content = $scope.vm.Content;
                             continue;
                         }
 
