@@ -35,6 +35,19 @@
                         withCredentials: false
                     });
                 };
+
+                self.extractFileName = function (uri) {
+                    var match = uri.match(/^(?:(?:(?:http:|https:)?\/\/keylol\.b0\.upaiyun\.com\/)|(?:keylol:\/\/))?([a-z0-9\.]+?)(?:!.*)?$/i);
+                    if (match)
+                        return match[1];
+                };
+
+                self.customVersionUrl = function (fileName, version) {
+                    var url = "//keylol.b0.upaiyun.com/" + fileName;
+                    if (version)
+                        url += "!" + version;
+                    return url;
+                };
             }
 
             return new UpyunService();

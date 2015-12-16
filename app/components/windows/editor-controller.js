@@ -166,6 +166,12 @@
                             continue;
                         }
 
+                        if (key === "Content") {
+                            if ($scope.inline.editorDirty)
+                                dirtyFields.Content = $scope.vm.Content;
+                            continue;
+                        }
+
                         if ($scope.vm.hasOwnProperty(key) && $scope.vm[key] !== options.vm[key]) {
                             dirtyFields[key] = $scope.vm[key];
                         }

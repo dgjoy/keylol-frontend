@@ -2,8 +2,8 @@
     "use strict";
 
     keylolApp.directive("simditor", [
-        "upyun", "$interval", "$compile",
-        function (upyun, $interval, $compile) {
+        "upyun", "$interval", "$compile", "$timeout",
+        function (upyun, $interval, $compile, $timeout) {
             return {
                 restrict: "A",
                 require: "ngModel",
@@ -17,7 +17,7 @@
                         toolbar: [
                             "paragraph", "|",
                             "bold", "italic", "underline", "strikethrough", "|",
-                            "alignment", "hr", "blockquote", "table", "|",
+                            "alignment", "hr", "blockquote", "spoiler", "table", "|",
                             "link", "image"
                         ],
                         tabIndent: false,
@@ -33,9 +33,9 @@
                     options.textarea = element.find("textarea");
                     var simditor = new Simditor(options);
 
-                    var updatePolicy = function (){
+                    var updatePolicy = function () {
                         var policy = upyun.policy();
-                        upyun.signature(policy).then(function(signature){
+                        upyun.signature(policy).then(function (signature) {
                             $.extend(simditor.uploader.opts.params, {
                                 policy: policy,
                                 signature: signature
@@ -53,6 +53,10 @@
 
                     ngModel.$render = function () {
                         simditor.setValue(ngModel.$viewValue);
+                        $compile(element.find(".simditor-body").find("img"))(scope);
+                        $timeout(function(){
+                            simditor.trigger("valuechanged");
+                        });
                     };
 
                     simditor.on("valuechanged", function () {

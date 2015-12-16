@@ -63,14 +63,11 @@ var appSrcipts = [
     "keylol-app.js",
     "environment-config.js",
     "root-controller.js",
-    "components/editor/quill.js",
-    "components/editor/**/*.js",
     "components/**/*.js"
 ];
 
 var stylesheets = [
     "assets/stylesheets/normalize.css",
-    "components/editor/quill.snow.css",
     "bower_components/simditor/styles/simditor.css",
     "assets/stylesheets/common.css",
     "assets/stylesheets/window.css",
