@@ -11,8 +11,8 @@
                 return _config;
             },
             $get: [
-                "$q", "union",
-                function ($q, union) {
+                "$q", "union", "upyun",
+                function ($q, union, upyun) {
                     function Utils() {
                         var self = this;
                         var uniqueId = 1;
@@ -260,6 +260,15 @@
                                 .replace(/>/g, "&gt;")
                                 .replace(/"/g, "&quot;")
                                 .replace(/'/g, "&#039;");
+                        };
+
+                        self.parseUri = function (uri, customVersion, defaultUrl) {
+                            if (!uri)
+                                return defaultUrl;
+                            var upyunFileName = upyun.extractFileName(uri);
+                            if (upyunFileName)
+                                return upyun.customVersionUrl(upyunFileName, customVersion);
+                            return uri;
                         };
 
                         self.timelineLoadCount = 20;

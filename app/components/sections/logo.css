@@ -4,6 +4,7 @@
     width: 100%;
     min-height: 70px;
     min-width: 186px;
+    transition: background-color 100ms ease-in-out;
 }
 
 .section-logo:hover {

@@ -1,5 +1,5 @@
 ﻿<div class="section-article-content box-shadowed" ng-controller="ArticleContentController">
-    <article bind-html-compile="article.Content" class="article-content"></article>
+    <article bind-html-compile="article.Content" class="editor-style"></article>
     <div class="share-actions" ng-switch="article.Liked">
         <p class="like-count">{{article.LikeCount}}</p>
         <a href="" ng-click="acknowledge()" ng-if="!article.isMyArticle" ng-switch-when="false">认可文章+1</a>
