@@ -26,7 +26,8 @@
                             url: "//v0.api.upyun.com/keylol",
                             params: {},
                             fileKey: "file"
-                        }
+                        },
+                        pasteImage: true
                     };
                     if (scope.options)
                         $.extend(options, scope.options);
