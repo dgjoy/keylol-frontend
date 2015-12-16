@@ -1,0 +1,41 @@
+point-review {
+    
+}
+
+point-review .review-text {
+    color: #11254A;
+}
+
+point-review .review-circle {
+    text-align: center;
+    display: inline-block;
+    width: 16px;
+    height: 12px;
+    fill: #c7cdd1;
+    cursor: pointer;
+}
+
+point-review .awesome {
+    color: #00ab4e;
+    fill: #00ab4e;
+}
+
+point-review .good {
+    color: #71bf44;
+    fill: #71bf44;
+}
+
+point-review .not-bad {
+    color: #f7943e;
+    fill: #f7943e;
+}
+
+point-review .bad {
+    color: #e30613;
+    fill: #e30613;
+}
+
+point-review .terrible {
+    color: #541912;
+    fill: #541912;
+}

@@ -1,0 +1,30 @@
+﻿<window position="center" class="window-short-review">
+    <div class="window clearfix">
+        <div class="window-exit-button" ng-click="cancel()">
+            <div ng-include="'assets/images/exit.svg'"></div>
+        </div>
+        <form name="form" ng-submit="submit()">
+            <div class="short-header">
+                <img class="point-cover" src="http://th08.deviantart.net/fs70/PRE/i/2013/071/1/8/dota_2_wallpaper_by_deviantartspeedfreak-d5u5agi.jpg">
+                <div class="title">
+                    <h4>简评 <span>反恐精英:全球攻势</span></h4>
+                    <p>在档159小时</p>
+                </div>
+                <point-review ng-model="y"></point-review>
+            </div>
+            <textarea class="short-content" placeholder="用轻笔淡墨让这段简评更有价值"></textarea>
+            <button type="submit" class="window-confirm-button">
+                <img class="arrow-right" src="assets/images/arrow-right.png" alt="下一步">
+                <img class="signature-pen" src="assets/images/signature-pen.png" alt="提交">
+                <hgroup class="font-myriad-keylol">
+                    <h1>发布简评</h1>
+                    <h2>Post Short Review</h2>
+                </hgroup>
+            </button>
+            <div class="change-to-long">
+                <button type="button" class="border-button left-border" ng-click="changeToLong()">切换为长评</button>
+                <p>使用完整编辑器可以发表深度长评</p>
+            </div>
+        </form>
+    </div>
+</window>
