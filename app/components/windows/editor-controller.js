@@ -7,13 +7,6 @@
         function ($scope, close, utils, $http, union, $timeout, $location, notification, options,
                   articleTypes, $route, $element) {
             $scope.editorOptions = {
-                toolbar: [
-                    'paragraph', '|',
-                    'bold', 'italic', 'underline', 'strikethrough', '|',
-                    'alignment', 'hr', 'blockquote', 'code', 'table', '|',
-                    'link', '|',
-                    'image'
-                ],
                 scrollableContainer: $element
             };
             $scope.radioId = [utils.uniqueId(), utils.uniqueId(), utils.uniqueId()];
