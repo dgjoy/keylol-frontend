@@ -1,5 +1,44 @@
 .section-point-info {
     background: white;
-    padding: 15px 12px;
+    padding: 20px 15px;
     width: 100%;
+}
+
+.section-point-info .main-description {
+    margin: 0 0 20px 0;
+}
+
+.section-point-info .info-details .info-attribute {
+    width: 475px;
+}
+
+.section-point-info .info-details .info-attribute p {
+    margin: 6px 0;
+}
+
+.section-point-info .info-details .info-attribute .title {
+    font-weight: bold;
+}
+
+.section-point-info .info-details .info-attribute a {
+    color: #738a95;
+}
+
+.section-point-info .info-details .info-review {
+    float: right;
+    border-left: 1px solid #C7CDD1;
+    padding: 5px 0 5px 15px;
+    min-height: 205px;
+}
+
+.section-point-info .info-details .info-review .point-cover {
+    width: 120px;
+    height: 45px;
+    display: block;
+}
+
+.section-point-info .info-details .info-review .play-time {
+    color: #C7CDD1;
+    margin: 12px 0;
+    text-align: center;
 }
