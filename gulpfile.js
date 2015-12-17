@@ -52,29 +52,30 @@ var vendorScripts = [
     "bower_components/ngstorage/ngStorage.js",
     "bower_components/ng-file-upload/ng-file-upload.js",
     "bower_components/angular-utf8-base64/angular-utf8-base64.js",
-    "bower_components/angulartics/src/angulartics.js"
+    "bower_components/angulartics/src/angulartics.js",
+    "bower_components/simple-module/lib/module.js",
+    "bower_components/simple-hotkeys/lib/hotkeys.js",
+    "bower_components/simple-uploader/lib/uploader.js",
+    "bower_components/simditor/lib/simditor.js"
 ];
 
 var appSrcipts = [
     "keylol-app.js",
     "environment-config.js",
     "root-controller.js",
-    "components/editor/quill.js",
-    "components/editor/**/*.js",
     "components/**/*.js"
 ];
 
 var stylesheets = [
     "assets/stylesheets/normalize.css",
-    "components/editor/quill.snow.css",
+    "bower_components/simditor/styles/simditor.css",
     "assets/stylesheets/common.css",
     "assets/stylesheets/window.css",
     "assets/stylesheets/popup.css",
-    "assets/stylesheets/article.css",
     "components/**/*.css"
 ];
 
-var keylolTextList = "`{}>▾▴其乐推荐据点客务中心讯息轨道评测好评资讯差评模组感悟请无视游戏与艺术之间的空隙提交注册申请登入其乐发布文章由你筛选的游戏讯息轨道提交变更函注册其乐会员评研讯谈档邮政服务私信蒸汽动力进社区噪音零死角讨论独特鼓励机制志同合琴瑟合曲即日内欲知情关联注意成功错误认可论索取表单开设此据点阅读搜结果传送装置已就位个人从兴趣始慢搭建一条收到出未能撞到处理中这位用户尚或任何当前投稿厂商类型平台";
+var keylolTextList = "`{}>▾▴其乐推荐据点客务中心讯息轨道评测好评资讯差评模组感悟请无视游戏与艺术之间的空隙提交注册申请登入其乐发布文章由你筛选的游戏讯息轨道提交变更函注册其乐会员评研讯谈档邮政服务私信蒸汽动力进社区噪音零死角讨论独特鼓励机制志同合琴瑟合曲即日内欲知情关联注意成功错误认可论索取表单开设此据点阅读搜结果传送装置已就位个人从兴趣始慢搭建一条收到出未能撞到处理中这位用户尚或任何当前投稿厂商类型平台剧透警告";
 
 var lisongTextList = "/评测好评差评模组资讯会员注册表单登录表单连接游戏平台昵称账户头像登录口令确认登录口令电子邮箱人机验证声明桌面类蒸汽第一人称射击时空枪使命召唤侠盗猎车手橘子孢子上帝视角文明红色警戒模拟城市塔防即时策略折扣资讯原声控僵尸末日泰拉瑞亚独立游戏用户识别码玩家标签个人据点横幅会员信息变更函提示守则平台账户分享社区动态当前登录口令新登录口令确认新登录口令登录保护邮件订阅简讯通知等待添加成为好友收到验证码绑定成功平台连接向导邀请内列中名英章数读者操作开设型唯商店链背景图关联偏（能暂未放）";
 
