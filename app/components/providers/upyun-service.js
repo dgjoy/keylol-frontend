@@ -12,7 +12,7 @@
                     var options = {
                         bucket: "keylol",
                         "save-key": "{filemd5}{.suffix}",
-                        expiration: Math.round(new Date().getTime() / 1000) + 90,
+                        expiration: Math.round(new Date().getTime() / 1000) + 300,
                         "content-length-range": "0,5242880"
                     };
                     return base64.encode(JSON.stringify(options));
@@ -34,6 +34,19 @@
                         },
                         withCredentials: false
                     });
+                };
+
+                self.extractFileName = function (uri) {
+                    var match = uri.match(/^(?:(?:(?:http:|https:)?\/\/keylol\.b0\.upaiyun\.com\/)|(?:keylol:\/\/))?([a-z0-9\.]+?)(?:!.*)?$/i);
+                    if (match)
+                        return match[1];
+                };
+
+                self.customVersionUrl = function (fileName, version) {
+                    var url = "//keylol.b0.upaiyun.com/" + fileName;
+                    if (version)
+                        url += "!" + version;
+                    return url;
                 };
             }
 

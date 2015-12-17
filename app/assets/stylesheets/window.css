@@ -230,6 +230,11 @@ window[position=right]::after {
     animation: exit-text-flash 150ms ease-in-out 6 alternate;
 }
 
+.window .window-exit-button .background,
+.window .window-exit-button .text {
+    transition: fill 100ms ease-in-out;
+}
+
 .window .window-exit-button:hover .background {
     fill: white;
 }
