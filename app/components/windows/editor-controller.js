@@ -17,6 +17,24 @@
             $scope.selectedTypeIndex = 0;
             var autoSaveInterval = 30000;
 
+            var editorId = utils.uniqueId();
+            $(window).on("beforeunload.editor" + editorId, function () {
+                return "未保存的内容将被弃置。";
+            });
+
+            $scope.$on("$destroy", function () {
+                $(window).off("beforeunload.editor" + editorId);
+            });
+
+            var detachLocationListener = $scope.$on("$locationChangeStart", function (e) {
+                if (confirm("未保存的内容将被弃置，确认离开？")) {
+                    detachLocationListener();
+                    $(window).off("beforeunload.editor" + editorId);
+                } else {
+                    e.preventDefault();
+                }
+            });
+
             options = $.extend({
                 vm: null,
                 needConfirmLoadingDraft: false
