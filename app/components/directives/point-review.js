@@ -7,10 +7,11 @@
                 restrict: "E",
                 templateUrl: "components/directives/point-review.html",
                 scope: {
-                    length: "="
+                    onClickReview: "&",
+                    bindReview: "=",
+                    isHollow: "="
                 },
-                require: "ngModel",
-                link: function (scope, element, attrs, ngModel) {
+                link: function (scope) {
                     scope.levelString = ["terrible", "bad", "not-bad", "good", "awesome"];
                     scope.reviewCircles = [{},{},{},{},{}];
                     scope.reviewLevel = -1;
@@ -27,8 +28,11 @@
                         scope.changeReview(scope.reviewLevel);
                     };
                     scope.setReview = function(i){
-                        scope.reviewLevel = i;
-                        scope.reviewString = scope.levelString[i];
+                        if(!scope.onClickReview()){
+                            scope.reviewLevel = i;
+                            scope.reviewString = scope.levelString[i];
+                            scope.bindReview = i;
+                        }
                     };
                 }
             };

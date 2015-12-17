@@ -1,16 +1,17 @@
 ﻿<div class="section-point-info box-shadowed" ng-controller="PointInfoController">
     <p class="main-description">{{data.mainDesc}}</p>
-    <div class="info-details clearfix">
-        <div class="info-review">
-            <img class="point-cover" src="http://th08.deviantart.net/fs70/PRE/i/2013/071/1/8/dota_2_wallpaper_by_deviantartspeedfreak-d5u5agi.jpg">
-            <p class="play-time">790.5 小时在档</p>
-        </div>
+    <div class="info-details">
         <div class="info-attribute">
             <p ng-repeat="attribute in data.attributes">
                 <span class="title">{{attribute.title}} ：</span>
                 <point-link ng-repeat="point in attribute.points" type="'point'" id-code="point.IdCode" point-name="'「' + utils.getPointFirstName(point) + '」'"></point-link>
                 <span>{{attribute.text}}</span>
             </p>
+        </div>
+        <div class="info-review">
+            <img class="point-cover" src="http://th08.deviantart.net/fs70/PRE/i/2013/071/1/8/dota_2_wallpaper_by_deviantartspeedfreak-d5u5agi.jpg">
+            <p class="play-time">790.5 小时在档</p>
+            <point-review on-click-review="showShortReviewWindow()" is-hollow="true"></point-review>
         </div>
     </div>
 </div>
