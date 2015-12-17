@@ -9,8 +9,8 @@
     </div>
     <div ng-if="union.$localStorage.login">
         <div class="actions">
-            <a href="comments" class="border-button top-border" ng-class="{active: union.$localStorage.user.HasNewComment}">(···)</a>
             <a href="acknowledgements" class="border-button top-border" ng-class="{active: union.$localStorage.user.HasNewLike}">[+]</a>
+            <a href="comments" class="border-button top-border" ng-class="{active: union.$localStorage.user.HasNewComment}">(···)</a>
         </div>
         <div class="clearfix">
             <a class="avatar-anchor" href="user/{{union.$localStorage.user.IdCode}}">
