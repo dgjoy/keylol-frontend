@@ -14,7 +14,22 @@
             };
             $scope.data = {
                 mainDesc: "《DOTA2》，是脱离了其上一代作品《DOTA》所依赖的War3的引擎，由《DOTA》的地图核心制作者IceFrog（冰蛙）联手美国Valve公司使用他们的Source引擎研发的、Valve运营，完美世界代理（国服），韩国NEXON代理（韩服）的多人联机对抗RPG。",
-                isGame: true,
+                isGame: false,
+                cover: "http://th08.deviantart.net/fs70/PRE/i/2013/071/1/8/dota_2_wallpaper_by_deviantartspeedfreak-d5u5agi.jpg",
+                relatedList: [
+                    {
+                        text: "此流派的游戏",
+                        count: 314
+                    },
+                    {
+                        text: "此特性的游戏",
+                        count: 314
+                    },
+                    {
+                        text: "此系列的游戏",
+                        count: 314
+                    }
+                ],
                 attributes: [
                     {
                         title: "开发厂",
