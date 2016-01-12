@@ -17,6 +17,13 @@
                     controller: "PointListController"
                 });
             };
+            $scope.showShortReviewWindow = function () {
+                window.show({
+                    templateUrl: "components/windows/short-review.html",
+                    controller: "ShortReviewController",
+                    inputs: {options: null}
+                });
+            };
         }
     ]);
 })();

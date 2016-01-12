@@ -13,20 +13,31 @@
                 </div>
                 <span><input type="text" ng-model="vm.Title" placeholder="标题"></span>
             </div>
-            <div simditor="editorOptions" ng-model="vm.Content" ng-click="inline.editorDirty = true"></div>
-            <h3 class="labeled-heading">投稿至据点</h3>
-            <input-point ng-model="inline.attachedPoints" placeholder="'最多可以同时投稿至 5 个据点，个人据点会自动记录你发布的所有文章'"></input-point>
-            <h3 class="labeled-heading" ng-if="articleTypes[selectedTypeIndex].allowVote">评价游戏</h3>
-            <div class="pad-right" ng-if="articleTypes[selectedTypeIndex].allowVote">
-                <input-point ng-model="inline.voteForPoints" placeholder="'选择一个游戏据点作为评价对象'"></input-point>
+            <div class="pad-right clearfix" ng-if="articleTypes[selectedTypeIndex].allowVote">
+                <div class="left-content">
+                    <h3 ng-if="articleTypes[selectedTypeIndex].allowVote">评价游戏</h3>
+                    <input-point ng-model="inline.voteForPoints" placeholder="'填写一个游戏据点'"></input-point>
+                </div>
                 <div class="right-content">
-                    <span>
-                        <input type="radio" id="radio-{{radioId[0]}}" ng-model="vm.Vote" ng-value="'Positive'" name="vote"><label for="radio-{{radioId[0]}}">好评</label>
-                        <input type="radio" id="radio-{{radioId[1]}}" ng-model="vm.Vote" ng-value="'Negative'" name="vote"><label for="radio-{{radioId[1]}}">差评</label>
-                        <input type="radio" id="radio-{{radioId[2]}}" ng-model="vm.Vote" ng-value="null" name="vote"><label for="radio-{{radioId[2]}}">中立</label>
-                    </span>
+                    <h3 ng-if="articleTypes[selectedTypeIndex].allowVote">你的评分</h3>
+                    <point-review no-string="true" bind-review="vm.Vote"></point-review>
                 </div>
             </div>
+            <h3>投稿至据点</h3>
+            <input-point ng-model="inline.attachedPoints" placeholder="'填写游戏会自动填写关联据点'"></input-point>
+            <div simditor="editorOptions" ng-model="vm.Content" ng-click="inline.editorDirty = true"></div>
+            <div class="centre-parting clearfix">
+                <div class="left-content">
+                    <h3 ng-if="articleTypes[selectedTypeIndex].allowVote">亮点小结</h3>
+                    <pro-con ng-model="x"></pro-con>
+                </div>
+                <div class="right-content">
+                    <h3 ng-if="articleTypes[selectedTypeIndex].allowVote">缺点小结</h3>
+                    <pro-con ng-model="y" is-negative="true"></pro-con>
+                </div>
+            </div>
+            <h3>概述总结</h3>
+            <input type="text" ng-model="vm.total" placeholder="一句话总结文章，概述会展示在信息轨道预览中。">
             <button type="submit" class="window-confirm-button">
                 <img class="arrow-right" src="assets/images/arrow-right.png" alt="下一步">
                 <img class="signature-pen" src="assets/images/signature-pen.png" alt="提交">

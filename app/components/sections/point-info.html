@@ -1,0 +1,26 @@
+﻿<div class="section-point-info box-shadowed" ng-controller="PointInfoController">
+    <p class="main-description">{{data.mainDesc}}</p>
+    <div ng-if="data.isGame" class="info-details">
+        <div class="info-attribute">
+            <p ng-repeat="attribute in data.attributes">
+                <span class="title">{{attribute.title}} ：</span>
+                <point-link ng-repeat="point in attribute.points" type="'point'" id-code="point.IdCode" point-name="'「' + utils.getPointFirstName(point) + '」'"></point-link>
+                <span>{{attribute.text}}</span>
+            </p>
+        </div>
+        <div class="info-review">
+            <img class="point-cover" src="{{data.cover}}">
+            <p class="play-time">{{data.gameHours}} 小时在档</p>
+            <point-review on-click-review="showShortReviewWindow()" is-hollow="true"></point-review>
+            <div class="actions">
+                <a href="" class="short-review" ng-click="showShortReviewWindow()">写简评</a>
+                <a href="" class="full-review">写长评</a>
+            </div>
+            <a href="" class="edit-info">编辑资料</a>
+        </div>
+    </div>
+    <div ng-if="!data.isGame" class="info-actions clearfix">
+        <span class="related-list" ng-repeat="list in data.relatedList"><a>{{list.text}}</a>（{{list.count}}）</span>
+        <a class="edit-info">编辑资料</a>
+    </div>
+</div>

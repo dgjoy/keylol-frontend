@@ -62,6 +62,7 @@
                 } else if (options.vm) {
                     options.vm.VoteForPointId = null;
                 }
+                console.log($scope.vm, options.vm);
             };
 
             var autoSaveTimeout;
@@ -101,6 +102,9 @@
                         }
                         autoSaveTimeout = $timeout($scope.saveDraft, autoSaveInterval);
                     });
+                } else if (options.doNotLoadDraft) {
+                    setupNewVM();
+                    autoSaveTimeout = $timeout($scope.saveDraft, autoSaveInterval);
                 } else {
                     loadDraft();
                     autoSaveTimeout = $timeout($scope.saveDraft, autoSaveInterval);

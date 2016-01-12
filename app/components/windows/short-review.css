@@ -1,0 +1,70 @@
+.window-short-review .window {
+    padding: 20px 0 30px;
+    width: 884px;
+}
+
+.window-short-review .short-header {
+    margin: 0 14px 20px 14px;
+}
+
+.window-short-review .short-header .point-cover {
+    width: 120px;
+    height: 45px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.window-short-review .short-header .title {
+    margin-left: 10px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.window-short-review .short-header .title h4 {
+    margin: 2px 0;
+}
+
+.window-short-review .short-header .title h4 span {
+    color: #11254A;
+    font-weight: bold;
+}
+
+.window-short-review .short-header .title p {
+    color: #C7CDD1;
+    margin: 0;
+}
+
+.window-short-review .short-header point-review {
+    float: right;
+}
+
+.window-short-review .short-content {
+    margin-left: 14px;
+    width: calc(100% - 44px);
+    max-width: calc(100% - 44px);
+    height: 72px;
+}
+
+.window-short-review .window-confirm-button {
+    margin-top: 40px;
+}
+
+.window-short-review .change-to-long {
+    max-width: 570px;
+    padding-top: 44px;
+}
+
+.window-short-review .change-to-long button {
+    margin-left: -5px;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAAIVBMVEUAAAD////////////////+/v7+/v7+/v7+/v7+/v7///92EJ5ZAAAACnRSTlMAFCBAgI+fq7ffnxGb6AAAAEpJREFUeNrt0rEKACAIRdGyeqX//8G1BTZITQ3vDELCXaREFFMzq0nWlL2s66kMfJAB5JvAiYITAwZvQRenBQFuf+soDn69ElFoAjToFA1LQoTVAAAAAElFTkSuQmCC);
+    padding-left: 22px;
+}
+
+.window-short-review .change-to-long span {
+    color: #738a95;
+    margin-left: 6px;
+}
+
+.window-short-review .change-to-long p {
+    margin: 14px 14px 0;
+}
