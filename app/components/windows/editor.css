@@ -75,51 +75,40 @@
 }
 
 .window-editor form h3 {
-    margin: 19px 0 11px;
+    margin: 19px 0 11px 14px;
+    font-weight: normal;
 }
 
-.window-editor .pad-right {
-    position: relative;
-}
-
-.window-editor .pad-right input[type=text] {
-    width: calc(100% - 296px);
-}
-
-.window-editor .pad-right input-point {
-    width: calc(100% - 296px);
+.window-editor .pad-right .left-content {
+    float: left;
+    width: calc(100% - 129px);
 }
 
 .window-editor .pad-right .right-content {
-    position: absolute;
-    right: 14px;
-    top: 0;
-    height: 100%;
-    width: 254px;
+    float: right;
+    width: 129px;
 }
 
-.window-editor .pad-right label {
-    margin: 0 26px 0 4px;
-    font-size: 15px;
+.window-editor .pad-right .right-content point-review {
+    margin-left: 14px;
+    height: 31px;
+    position: relative;
 }
 
-.window-editor .pad-right label:last-of-type {
-    margin-right: 0;
-}
-
-.window-editor .pad-right .right-content span {
+.window-editor .pad-right .right-content point-review div {
     position: absolute;
     top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateY(-50%);
 }
 
-.window-editor .pad-right .right-content span.left-align {
-    left: 0;
-    right: 0;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    transform: translateY(-50%);
+.window-editor .centre-parting .left-content {
+    float: left;
+    width: 50%;
+}
+
+.window-editor .centre-parting .right-content {
+    float: right;
+    width: 50%;
 }
 
 .window-editor .window-confirm-button {

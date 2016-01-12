@@ -7,7 +7,7 @@
                 restrict: "E",
                 templateUrl: "components/directives/point-review.html",
                 scope: {
-                    length: "="
+                    noString: "="
                 },
                 require: "ngModel",
                 link: function (scope, element, attrs, ngModel) {

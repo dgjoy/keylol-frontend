@@ -9,6 +9,8 @@
             $scope.editorOptions = {
                 scrollableContainer: $element
             };
+            $scope.x = ["xxxxxx"];
+            $scope.y = ["yyyy"];
             $scope.radioId = [utils.uniqueId(), utils.uniqueId(), utils.uniqueId()];
             $scope.articleTypes = articleTypes;
             $scope.expanded = false;
