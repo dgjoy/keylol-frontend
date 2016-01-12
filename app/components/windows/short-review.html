@@ -5,14 +5,14 @@
         </div>
         <form name="form" ng-submit="submit()">
             <div class="short-header">
-                <img class="point-cover" src="http://th08.deviantart.net/fs70/PRE/i/2013/071/1/8/dota_2_wallpaper_by_deviantartspeedfreak-d5u5agi.jpg">
+                <img class="point-cover" src="{{options.cover}}">
                 <div class="title">
-                    <h4>简评 <span>反恐精英:全球攻势</span></h4>
-                    <p>在档159小时</p>
+                    <h4>简评 <span>{{options.name}}</span></h4>
+                    <p>在档{{options.gameHours}}小时</p>
                 </div>
-                <point-review ng-model="y"></point-review>
+                <point-review bind-review="vm.Vote"></point-review>
             </div>
-            <textarea class="short-content" placeholder="用轻笔淡墨让这段简评更有价值"></textarea>
+            <textarea ng-model="vm.Content" class="short-content" placeholder="用轻笔淡墨让这段简评更有价值"></textarea>
             <button type="submit" class="window-confirm-button">
                 <img class="arrow-right" src="assets/images/arrow-right.png" alt="下一步">
                 <img class="signature-pen" src="assets/images/signature-pen.png" alt="提交">

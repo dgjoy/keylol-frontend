@@ -20,12 +20,7 @@
                 </div>
                 <div class="right-content">
                     <h3 ng-if="articleTypes[selectedTypeIndex].allowVote">你的评分</h3>
-                    <point-review no-string="true" ng-model="y"></point-review>
-                    <!--<span>-->
-                        <!--<input type="radio" id="radio-{{radioId[0]}}" ng-model="vm.Vote" ng-value="'Positive'" name="vote"><label for="radio-{{radioId[0]}}">好评</label>-->
-                        <!--<input type="radio" id="radio-{{radioId[1]}}" ng-model="vm.Vote" ng-value="'Negative'" name="vote"><label for="radio-{{radioId[1]}}">差评</label>-->
-                        <!--<input type="radio" id="radio-{{radioId[2]}}" ng-model="vm.Vote" ng-value="null" name="vote"><label for="radio-{{radioId[2]}}">中立</label>-->
-                    <!--</span>-->
+                    <point-review no-string="true" bind-review="vm.Vote"></point-review>
                 </div>
             </div>
             <h3>投稿至据点</h3>

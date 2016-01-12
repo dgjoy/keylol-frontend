@@ -1,6 +1,6 @@
-﻿<h4 ng-if="!noString" class="review-text {{reviewString}}">你的评价</h4>
+<h4 ng-if="!noString" class="review-text {{reviewString}}">你的评价</h4>
 <div ng-mouseleave="returnDefault()">
-    <svg xmlns="http://www.w3.org/2000/svg" ng-mouseenter="changeReview($index)" ng-click="setReview($index)" ng-repeat="reviewCircle in reviewCircles" class="review-circle {{reviewCircle.type}}">
-        <circle cx="6" cy="6" r="6"></circle>
+    <svg xmlns="http://www.w3.org/2000/svg" ng-class="{hollow: isHollow}" ng-mouseenter="changeReview($index)" ng-click="setReview($index)" ng-repeat="reviewCircle in reviewCircles" class="review-circle {{reviewCircle.type}}">
+        <circle cx="6" cy="6"></circle>
     </svg>
 </div>
