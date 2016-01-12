@@ -83,6 +83,9 @@
                         }
                         autoSaveTimeout = $timeout($scope.saveDraft, autoSaveInterval);
                     });
+                } else if (options.doNotLoadDraft) {
+                    setupNewVM();
+                    autoSaveTimeout = $timeout($scope.saveDraft, autoSaveInterval);
                 } else {
                     loadDraft();
                     autoSaveTimeout = $timeout($scope.saveDraft, autoSaveInterval);
