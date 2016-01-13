@@ -1,0 +1,50 @@
+﻿<window position="center" class="window-confirmation">
+    <div class="window">
+        <div class="window-exit-button" ng-click="cancel()">
+            <div ng-include="'assets/images/exit.svg'"></div>
+        </div>
+        <img class="secret-barcode" src="assets/images/secret-barcode-login.png" alt="条形码">
+        <div class="heading">
+            <h1 class="font-myriad-lisong">残缺不堪的据点资料</h1>
+            <h2>你可以完善未获取的信息，也可以直接开设此据点</h2>
+        </div>
+        <form class="clearfix" ng-submit="submit()">
+            <flashing-figure stations='[
+                {
+                    cnName: "等待输入",
+                    enName: "Yet Entired"
+                },
+                {
+                    cnName: "确认信息",
+                    enName: "Confirm Information"
+                },
+                {
+                    cnName: "开设成功",
+                    enName: "Point Created"
+                }
+            ]' current="1"></flashing-figure>
+            <div class="info-detail">
+                <div class="left-content">
+                    <div class="basic"></div>
+                    <div class="related-list"></div>
+                </div>
+                <div class="right-content">
+                    <div class="cover"></div>
+                    <div class="description"></div>
+                </div>
+            </div>
+            <button type="submit" class="window-confirm-button">
+                <img class="arrow-right" src="assets/images/arrow-right.png" alt="下一步">
+                <img class="new-point" src="assets/images/new-point.png" alt="提交">
+                <hgroup class="font-myriad-keylol">
+                    <h1>完成开设</h1>
+                    <h2>Finish</h2>
+                </hgroup>
+            </button>
+            <div class="switch-to-edit-info">
+                <button type="button" class="border-button left-border" ng-click="switchToEditInfo()">完善据点资料</button>
+                <p>你可以直接完成开设，日后再回到据点页面编辑完善这些资料。</p>
+            </div>
+        </form>
+    </div>
+</window>

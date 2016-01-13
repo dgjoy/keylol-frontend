@@ -188,6 +188,11 @@ window[position=right]::after {
     top: 4px;
 }
 
+.window .window-confirm-button .new-point {
+    height: 40px;
+    top: 4px;
+}
+
 .window .window-confirm-button hgroup {
     float: right;
     margin-left: 30px;

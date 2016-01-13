@@ -1,0 +1,28 @@
+.window-confirmation .window {
+    padding: 14px;
+    width: 900px;
+}
+
+.window-confirmation .heading {
+    margin: 16px 0 28px;
+}
+
+.window-confirmation .window .window-confirm-button {
+    margin-right: -24px;
+}
+
+.window-confirmation .window .info-detail {
+    margin-bottom: 10px;
+    padding: 82px 85px 100px 100px;
+    height: 226px;
+    background: url("../../assets/images/worned-backgound.png");
+}
+
+.window-confirmation .switch-to-edit-info button {
+    position: absolute;
+    left: -5px;
+}
+
+.window-confirmation .switch-to-edit-info p {
+    padding-top: 38px;
+}

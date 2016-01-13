@@ -24,6 +24,12 @@
                     inputs: {options: null}
                 });
             };
+            $scope.showPointAppealWindow = function () {
+                window.show({
+                    templateUrl: "components/windows/shop-link.html",
+                    controller: "ShopLinkController"
+                });
+            };
         }
     ]);
 })();

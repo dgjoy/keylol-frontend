@@ -1,0 +1,26 @@
+.window-shop-link .window {
+    padding: 14px;
+    width: 900px;
+}
+
+.window-shop-link .heading {
+    margin: 16px 0 28px;
+}
+
+.window-shop-link .window .window-confirm-button {
+    margin-right: -24px;
+}
+
+.window-shop-link .window table {
+    margin: 25px 0;
+    width: 100%;
+}
+
+.window-shop-link .switch-to-not-game button {
+    position: absolute;
+    left: -5px;
+}
+
+.window-shop-link .switch-to-not-game p {
+    padding-top: 38px;
+}
