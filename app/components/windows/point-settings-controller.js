@@ -119,7 +119,7 @@
                             "ProfilePointBackgroundImage"
                         ];
                         break;
-                    case "platform":
+                    case "relationship":
                         keys = [
                             "AutoShareOnAcquiringNewGame",
                             "AutoShareOnAddingFavorite",
@@ -133,7 +133,7 @@
                             "AutoShareOnUploadingScreenshot"
                         ];
                         break;
-                    case "security":
+                    case "images":
                         keys = [
                             "LockoutEnabled",
                             "EmailNotifyOnAdvertisement",
@@ -173,9 +173,9 @@
                             "vm.Email"
                         ];
                         break;
-                    case "platform":
+                    case "relationship":
                         break;
-                    case "security":
+                    case "images":
                         keys = [
                             "vm.Password",
                             "vm.NewPassword",
@@ -192,7 +192,7 @@
             };
 
             var focusErrorPage = function () {
-                var pages = ["basic", "platform", "security", "preferences"];
+                var pages = ["basic", "relationship", "images", "preferences"];
                 for (var pi in pages) {
                     if (pages.hasOwnProperty(pi) && $scope.optionsInPageError(pages[pi])) {
                         $scope.page = pages[pi];

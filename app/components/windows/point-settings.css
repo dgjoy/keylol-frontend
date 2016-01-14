@@ -110,6 +110,11 @@
     background-color: #ddd;
 }
 
+.window-point-settings .id-code {
+    margin: 14px 0;
+    text-align: center;
+}
+
 .window-point-settings .profile-point-background {
     margin: 14px 0;
     text-align: center;
@@ -224,56 +229,6 @@
 .window-point-settings .checkbox-group label {
     padding-left: 2px;
 }
-
-/* Customized Checkbox (Disabled) */
-/*.window-point-settings-checkbox {
-    width: 120px;
-    margin: 6px 26px;
-    position: relative;
-    float: left;
-}
-
-    .window-point-settings-checkbox span {
-        margin-left: 4px;
-    }
-
-    .window-point-settings-checkbox label {
-        cursor: pointer;
-        position: absolute;
-        width: 16px;
-        height: 16px;
-        top: 0;
-        left: 0;
-        background: #eee;
-        border: 1px solid #ddd;
-    }
-
-        .window-point-settings-checkbox label:after {
-            opacity: 0.2;
-            content: '';
-            position: absolute;
-            width: 9px;
-            height: 5px;
-            background: transparent;
-            top: 2px;
-            left: 2px;
-            border: 3px solid #333;
-            border-top: none;
-            border-right: none;
-            -webkit-transform: rotate(-45deg);
-            -moz-transform: rotate(-45deg);
-            -o-transform: rotate(-45deg);
-            -ms-transform: rotate(-45deg);
-            transform: rotate(-45deg);
-        }
-
-        .window-point-settings-checkbox label:hover::after {
-            opacity: 0.5;
-        }
-
-    .window-point-settings-checkbox input[type=checkbox]:checked + label:after {
-        opacity: 1;
-    }*/
 
 .window-point-settings [id^=geetest-] {
     margin: 14px 0;
