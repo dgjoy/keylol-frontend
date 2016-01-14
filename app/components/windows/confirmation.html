@@ -11,26 +11,42 @@
         <form class="clearfix" ng-submit="submit()">
             <flashing-figure stations='[
                 {
-                    cnName: "等待输入",
-                    enName: "Yet Entired"
+                    cnName: "输入链接",
+                    enName: "Link Received"
                 },
                 {
-                    cnName: "确认信息",
-                    enName: "Confirm Information"
+                    cnName: "确认据点",
+                    enName: "Confirm Point"
                 },
                 {
-                    cnName: "开设成功",
-                    enName: "Point Created"
+                    cnName: "完成开设",
+                    enName: "Finish"
                 }
             ]' current="1"></flashing-figure>
             <div class="info-detail">
-                <div class="left-content">
-                    <div class="basic"></div>
-                    <div class="related-list"></div>
-                </div>
                 <div class="right-content">
-                    <div class="cover"></div>
-                    <div class="description"></div>
+                    <div class="cover clearfix">
+                        <img src="{{data.cover}}">
+                    </div>
+                    <p class="description">© Valve Corporation, all rights reserved. Valve, the Valve logo, Steam, the Steam logo, Source, the Source logo, Valve Source and Dota are trademarks and/or registered trademarks of Valve Corporation.</p>
+                </div>
+                <div class="left-content">
+                    <div class="basic">
+                        <div class="avatar-anchor">
+                            <img class="avatar-big" src="//keylol-steam-cdn.b0.upaiyun.com/steamcommunity/public/images/avatars/fe/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full.jpg!medium">
+                        </div>
+                        <div class="name">
+                            <h1>Dota2</h1>
+                            <h2>中文名有待完善</h2>
+                        </div>
+                    </div>
+                    <div class="info-attribute">
+                        <p ng-repeat="attribute in data.attributes">
+                            <span class="title">{{attribute.title}} ：</span>
+                            <point-link ng-repeat="point in attribute.points" type="'point'" id-code="point.IdCode" point-name="'「' + utils.getPointFirstName(point) + '」'"></point-link>
+                            <span>{{attribute.text}}</span>
+                        </p>
+                    </div>
                 </div>
             </div>
             <button type="submit" class="window-confirm-button">

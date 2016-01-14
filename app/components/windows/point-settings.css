@@ -85,6 +85,31 @@
     width: 100%;
 }
 
+.window-point-settings table input[type=text]:disabled,
+.window-point-settings table input[type=email]:disabled {
+    color: #c7cdd1;
+}
+
+.window-point-settings table .description textarea {
+    height: 110px;
+}
+
+.window-point-settings table input-point {
+    background: none;
+    height: 100%;
+    width: 100%;
+    font-size: 17px;
+    box-sizing: border-box;
+    box-shadow: none;
+    border-radius: 0;
+    padding: 0 6px;
+}
+
+.window-point-settings table input-point .point-title:hover,
+.window-point-settings table input-point .point-title.selected {
+    background-color: #ddd;
+}
+
 .window-point-settings .profile-point-background {
     margin: 14px 0;
     text-align: center;

@@ -8,7 +8,7 @@
                   $timeout) {
             $scope.error = {};
             $scope.errorDetect = utils.modelErrorDetect;
-            $scope.page = "profiles";
+            $scope.page = "basic";
             $scope.uniqueIds = {};
             for (var i = 0; i < 22; ++i) {
                 $scope.uniqueIds[i] = utils.uniqueId();
@@ -111,7 +111,7 @@
             $scope.optionsInPageChanged = function (page) {
                 var keys = [];
                 switch (page) {
-                    case "profiles":
+                    case "basic":
                         keys = [
                             "GamerTag",
                             "Email",
@@ -167,7 +167,7 @@
             $scope.optionsInPageError = function (page) {
                 var keys = [];
                 switch (page) {
-                    case "profiles":
+                    case "basic":
                         keys = [
                             "vm.GamerTag",
                             "vm.Email"
@@ -192,7 +192,7 @@
             };
 
             var focusErrorPage = function () {
-                var pages = ["profiles", "platform", "security", "preferences"];
+                var pages = ["basic", "platform", "security", "preferences"];
                 for (var pi in pages) {
                     if (pages.hasOwnProperty(pi) && $scope.optionsInPageError(pages[pi])) {
                         $scope.page = pages[pi];

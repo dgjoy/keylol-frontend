@@ -126,7 +126,8 @@ window[position=right]::after {
 
 .window table input[type=text],
 .window table input[type=password],
-.window table input[type=email] {
+.window table input[type=email],
+.window table textarea{
     background: none;
     height: 100%;
     width: 100%;
@@ -135,6 +136,10 @@ window[position=right]::after {
     box-shadow: none;
     border-radius: 0;
     padding: 0 6px;
+}
+
+.window table textarea {
+    resize: vertical;
 }
 
 .window table input[type=text]:disabled,

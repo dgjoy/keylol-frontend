@@ -35,6 +35,7 @@
                         }
                     } else if (e.keyCode == 13) {
                         $scope.selectPoint(e);
+                        e.preventDefault();
                     }
                 });
             };

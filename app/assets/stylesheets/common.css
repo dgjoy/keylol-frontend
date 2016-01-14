@@ -12,10 +12,10 @@
     font-family: "Keylol Rail Sung";
     font-style: normal;
     font-weight: normal;
-    src: url("../fonts/keylol-rail-sung-subset-4b06ca71ec.eot"); /* IE9 */
-    src: url("../fonts/keylol-rail-sung-subset-4b06ca71ec.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
-    url("../fonts/keylol-rail-sung-subset-96eb37b7ff.woff") format("woff"), /* chrome, firefox */
-    url("../fonts/keylol-rail-sung-subset-f98d28280b.ttf") format("truetype"), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+    src: url("../fonts/keylol-rail-sung-subset-056dc7d1c4.eot"); /* IE9 */
+    src: url("../fonts/keylol-rail-sung-subset-056dc7d1c4.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    url("../fonts/keylol-rail-sung-subset-0d658a940f.woff") format("woff"), /* chrome, firefox */
+    url("../fonts/keylol-rail-sung-subset-8819768508.ttf") format("truetype"), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
     url("../fonts/keylol-rail-sung-subset-dec2507aa8.svg#Keylol Rail Sung") format("svg"); /* iOS 4.1- */
 }
 
@@ -23,11 +23,11 @@
     font-family: "LiSong";
     font-style: normal;
     font-weight: normal;
-    src: url("../fonts/lisong-subset-1fead165be.eot"); /* IE9 */
-    src: url("../fonts/lisong-subset-1fead165be.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
-    url("../fonts/lisong-subset-be1c92c95f.woff") format("woff"), /* chrome, firefox */
-    url("../fonts/lisong-subset-548534099e.ttf") format("truetype"), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
-    url("../fonts/lisong-subset-cbb5f4ea82.svg#LiSong") format("svg"); /* iOS 4.1- */
+    src: url("../fonts/lisong-subset-7fb210695f.eot"); /* IE9 */
+    src: url("../fonts/lisong-subset-7fb210695f.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    url("../fonts/lisong-subset-0a803930ce.woff") format("woff"), /* chrome, firefox */
+    url("../fonts/lisong-subset-d9018e0199.ttf") format("truetype"), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+    url("../fonts/lisong-subset-ddadae730c.svg#LiSong") format("svg"); /* iOS 4.1- */
 }
 
 /* ------------------- */
