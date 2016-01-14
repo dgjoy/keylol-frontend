@@ -3,9 +3,9 @@
 
     keylolApp.controller("SettingsController", [
         "$scope", "close", "utils", "$http", "union", "apiEndpoint", "base64", "Upload", "$q", "notification", "$element",
-        "$timeout",
+        "$timeout", "upyun",
         function ($scope, close, utils, $http, union, apiEndpoint, base64, Upload, $q, notification, $element,
-                  $timeout) {
+                  $timeout, upyun) {
             $scope.error = {};
             $scope.errorDetect = utils.modelErrorDetect;
             $scope.page = "profiles";
@@ -273,26 +273,11 @@
 
                 if ($scope.files.avatarImage || $scope.files.profilePointBackgroundImage) {
                     notification.process("图像正在上传");
-                    var options = {
-                        bucket: "keylol",
-                        "save-key": "{filemd5}{.suffix}",
-                        expiration: Math.round(new Date().getTime() / 1000) + 90,
-                        "content-length-range": "0,5242880"
-                    };
-                    var uploadEndpoint = "//v0.api.upyun.com/keylol";
-                    var policy = base64.encode(JSON.stringify(options));
-                    $http.post(apiEndpoint + "upload-signature", null, {params: {policy: policy}}).then(function (response) {
+                    var policy = upyun.policy();
+                    upyun.signature(policy).then(function (signature) {
                         var uploads = {};
                         if ($scope.files.avatarImage) {
-                            uploads.avatarImage = Upload.upload({
-                                url: uploadEndpoint,
-                                data: {
-                                    file: $scope.files.avatarImage,
-                                    policy: policy,
-                                    signature: response.data
-                                },
-                                withCredentials: false
-                            });
+                            uploads.avatarImage = upyun.upload($scope.files.avatarImage, policy, signature);
                             uploads.avatarImage.then(function (response) {
                                 dirtyFields.AvatarImage = "keylol://" + response.data.url;
                             }, function () {
@@ -301,15 +286,7 @@
                             });
                         }
                         if ($scope.files.profilePointBackgroundImage) {
-                            uploads.profilePointBackgroundImage = Upload.upload({
-                                url: uploadEndpoint,
-                                data: {
-                                    file: $scope.files.profilePointBackgroundImage,
-                                    policy: policy,
-                                    signature: response.data
-                                },
-                                withCredentials: false
-                            });
+                            uploads.profilePointBackgroundImage = upyun.upload($scope.files.profilePointBackgroundImage, policy, signature);
                             uploads.profilePointBackgroundImage.then(function (response) {
                                 dirtyFields.ProfilePointBackgroundImage = "keylol://" + response.data.url;
                             }, function () {
