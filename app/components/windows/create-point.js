@@ -13,8 +13,8 @@
                 if (vm) {
                     $scope.vm = $.extend({}, vm);
                     $scope.inline = {
-                        avatarImageFull: "https://keylol.b0.upaiyun.com/" + vm.AvatarImage.match(/keylol:\/\/avatars\/(.*)/i)[1],
-                        backgroundImageFull: "https://keylol.b0.upaiyun.com/" + vm.BackgroundImage,
+                        avatarImageFull: vm.AvatarImage,
+                        backgroundImageFull: vm.BackgroundImage,
                         associatedPoints: vm.AssociatedPoints
                     }
                 } else {
@@ -56,19 +56,9 @@
                 submitLock = true;
                 var regex = /^(?:http:|https:)?\/\/keylol\.b0\.upaiyun\.com\/(.*?)(?:!.*)?$/i;
                 var avatarMatch = $scope.inline.avatarImageFull.match(regex);
-                if (!avatarMatch) {
-                    notification.error("据点头像输入有误，请检查");
-                    submitLock = false;
-                    return;
-                }
-                $scope.vm.AvatarImage = "keylol://avatars/" + avatarMatch[1];
+                $scope.vm.AvatarImage = avatarMatch ? "keylol://" + avatarMatch[1] : $scope.inline.avatarImageFull;
                 var backgroundMatch = $scope.inline.backgroundImageFull.match(regex);
-                if (!backgroundMatch) {
-                    notification.error("据点背景图输入有误，请检查");
-                    submitLock = false;
-                    return;
-                }
-                $scope.vm.BackgroundImage = backgroundMatch[1];
+                $scope.vm.BackgroundImage = backgroundMatch ? "keylol://" + backgroundMatch[1] : $scope.inline.backgroundImageFull;
                 if ($scope.vm.Type === "Game" && !/^http:\/\/store\.steampowered\.com\/app\/(\d+)\//i.test($scope.vm.StoreLink)) {
                     notification.error("商店链接输入有误，请检查");
                     submitLock = false;
