@@ -21,7 +21,7 @@
             if (match = input.match(/^keylol:\/\/steam\/app-headers\/([^\/]*)$/i))
                 return "//keylol-steam-cdn.b0.upaiyun.com/steam/apps/" + match[1] + "/header.jpg" + suffix;
             if (match = input.match(/^keylol:\/\/steam\/app-icons\/(\d+)-([^\/]*)$/i))
-                return "//keylol-steam-cdn.b0.upaiyun.com/steam/apps/" + match[1] + "/" + match[2] + ".jpg" + suffix;
+                return "//keylol-steam-cdn.b0.upaiyun.com/steamcommunity/public/images/apps/" + match[1] + "/" + match[2] + ".jpg" + suffix;
             if (match = input.match(/^keylol:\/\/steam\/avatars\/([^\/]*)$/i))
                 return "//keylol-steam-cdn.b0.upaiyun.com/steamcommunity/public/images/avatars/" + match[1].substring(0, 2) + "/" + match[1] + "_full.jpg" + suffix;
 
