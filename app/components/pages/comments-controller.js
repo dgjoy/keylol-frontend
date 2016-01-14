@@ -90,7 +90,7 @@
                                 idCode: union.$localStorage.user.IdCode
                             },
                             hasBackground: true,
-                            background: "672a1bab71b9af43215d252471a893e0.jpg",
+                            background: "keylol://672a1bab71b9af43215d252471a893e0.jpg",
                             summary: comment.Content,
                             url: "article/" + comment.Article.AuthorIdCode + "/" + comment.Article.SequenceNumberForAuthor + "#" + comment.SequenceNumberForArticle
                         };
@@ -165,7 +165,7 @@
                                 idCode: comment.Commentator.IdCode
                             },
                             hasBackground: true,
-                            background: "672a1bab71b9af43215d252471a893e0.jpg",
+                            background: "keylol://672a1bab71b9af43215d252471a893e0.jpg",
                             summary: comment.Content,
                             url: "article/" + comment.Article.AuthorIdCode + "/" + comment.Article.SequenceNumberForAuthor + "#" + comment.SequenceNumberForArticle
                         };
@@ -216,7 +216,7 @@
                     mainHead: "评论",
                     subHead: "Comments"
                 },
-                background: "672a1bab71b9af43215d252471a893e0.jpg",
+                background: "keylol://672a1bab71b9af43215d252471a893e0.jpg",
                 defaultSum: {
                     text: "文章回复中的互动"
                 }

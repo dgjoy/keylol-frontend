@@ -12,4 +12,36 @@
             <point-link ng-repeat="point in article.AttachedPoints track by point.Id" type="'point'" id-code="point.IdCode" point-name="'「' + point.mainName + '」'"></point-link>
         </span>
     </div>
+    <div class="review-info clearfix">
+        <div class="info-attribute">
+            <p ng-repeat="attribute in data.attributes">
+                <span class="title">{{attribute.title}} ：</span>
+                <point-link ng-repeat="point in attribute.points" type="'point'" id-code="point.IdCode" point-name="'「' + utils.getPointFirstName(point) + '」'"></point-link>
+                <span>{{attribute.text}}</span>
+            </p>
+        </div>
+        <div class="divider"></div>
+        <div class="review-detail">
+            <div class="user-info">
+                <span class="game-hours">游戏在档 11 小时</span>
+                <point-link type="'user'" point-name="'@ZenDay'" id-code="10101"></point-link>
+                <p class="review-count">7 篇评测 / 29 段简评</p>
+            </div>
+            <blockquote>DOTA2是由DotA之父Icefrog主创打造的唯一正统续作,其完整继承了原作DotA超过一百位的英雄。</blockquote>
+            <div class="pros-cons">
+                <ul class="pros">
+                    <li>高质量画质</li>
+                    <li>良心音轨</li>
+                    <li>信仰之力</li>
+                </ul><!--
+                --><ul class="cons">
+                    <li>信仰之力不足, 炒冷饭</li>
+                    <li>炒冷饭</li>
+                    <li>炒冷饭</li>
+                    <li>炒冷饭</li>
+                    <li>炒冷饭</li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>

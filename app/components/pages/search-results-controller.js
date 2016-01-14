@@ -19,7 +19,7 @@
                     mainHead: $routeParams.keyword,
                     subHead: "的搜索结果"
                 },
-                background: "18714f31d985cb8e8b59661cabd9d23a.jpg",
+                background: "keylol://18714f31d985cb8e8b59661cabd9d23a.jpg",
                 defaultSum: {
                     text: ""
                 }

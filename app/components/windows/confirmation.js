@@ -1,22 +1,21 @@
 ﻿(function () {
     "use strict";
 
-    keylolApp.controller("ArticleHeaderController", [
-        "$scope", "union", "window", "utils",
-        function ($scope, union, window, utils) {
+    keylolApp.controller("ConfirmationController", [
+        "$scope", "close", "window", "apiEndpoint", "utils", "notification",
+        function ($scope, close, window, apiEndpoint, utils, notification) {
             $scope.utils = utils;
-            $scope.article = union.article;
-            $scope.editArticle = function () {
+            $scope.cancel = function () {
+                close();
+            };
+            $scope.submit = function () {
+            };
+            $scope.switchToEditInfo = function () {
                 window.show({
-                    templateUrl: "components/windows/editor.html",
-                    controller: "EditorController",
-                    inputs: {
-                        options: {
-                            vm: $scope.article,
-                            needConfirmLoadingDraft: true
-                        }
-                    }
+                    templateUrl: "components/windows/point-settings.html",
+                    controller: "PointSettingsController"
                 });
+                close();
             };
             $scope.data = {
                 id: "7df15815-1740-47b5-a92e-5f09a8f1d91d",
@@ -107,32 +106,8 @@
                                 IdCode: "MOLBA",
                                 PreferredName: "Chinese",
                                 ChineseName: "MOBA"
-                            },
-                            {
-                                IdCode: "MOLBA",
-                                PreferredName: "Chinese",
-                                ChineseName: "MOBA"
-                            },
-                            {
-                                IdCode: "MOLBA",
-                                PreferredName: "Chinese",
-                                ChineseName: "MOBA"
-                            },
-                            {
-                                IdCode: "MOLBA",
-                                PreferredName: "Chinese",
-                                ChineseName: "MOBA"
-                            },
-                            {
-                                IdCode: "MOLBA",
-                                PreferredName: "Chinese",
-                                ChineseName: "MOBA"
                             }
                         ]
-                    },
-                    {
-                        title: "别名",
-                        text: "倒塔、信仰2、鱼塘"
                     },
                     {
                         title: "面市",
@@ -140,16 +115,6 @@
                     },
                     {
                         title: "平台",
-                        points: [
-                            {
-                                IdCode: "STEAM",
-                                PreferredName: "Chinese",
-                                ChineseName: "Steam"
-                            }
-                        ]
-                    },
-                    {
-                        title: "次要平台",
                         points: [
                             {
                                 IdCode: "STEAM",

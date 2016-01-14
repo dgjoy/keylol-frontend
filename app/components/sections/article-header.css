@@ -61,3 +61,100 @@
 .section-article-header .actions a:last-of-type {
     margin-right: 0;
 }
+
+.section-article-header .review-info {
+    position: relative;
+    margin: 19px 15px 0 19px;
+}
+
+.section-article-header .review-info .info-attribute {
+    float: left;
+    width: 480px;
+}
+
+.section-article-header .review-info .info-attribute p {
+    margin: 6px 0;
+}
+
+.section-article-header .review-info .info-attribute .title {
+    font-weight: bold;
+}
+
+.section-article-header .review-info .info-attribute a {
+    color: #738a95;
+}
+
+.section-article-header .review-info .divider {
+    position: absolute;
+    top: 0;
+    left: 480px;
+    height: 100%;
+    background-color: #C7CDD1;
+    width: 1px;
+}
+
+.section-article-header .review-info .review-detail {
+    float: right;
+    width: 335px;
+}
+
+.section-article-header .review-info .review-detail .user-info .game-hours {
+    float: right;
+    line-height: 15px;
+}
+
+.section-article-header .review-info .review-detail .user-info .review-count {
+    margin: 7px 0 20px;
+    color: #c7cdd1;
+}
+
+.section-article-header .review-info .review-detail blockquote {
+    background: #EEF1F3;
+    border-left: 5px solid #11254a;
+    padding: 10px 13px;
+    margin: 0 0 20px;
+}
+
+.section-article-header .review-info .review-detail .pros-cons {
+    margin: 0 14px 0 5px;
+}
+
+.section-article-header .review-info .review-detail .pros-cons ul {
+    width: 128px;
+    margin: 0 15px;
+    display: inline-block;
+    padding: 4px 0 0 0;
+    vertical-align: top;
+    list-style-type: none;
+}
+
+.section-article-header .review-info .review-detail .pros-cons ul li {
+    padding-left: 12px;
+    line-height: 24px;
+    position: relative;
+}
+
+.section-article-header .review-info .review-detail .pros-cons ul li::before {
+    position: absolute;
+    left: 0;
+    top: 12px;
+    transform: translateY(-50%);
+}
+
+.section-article-header .review-info .review-detail .pros-cons .pros {
+    border-top: 2px solid #00ab4e;
+    color: #00ab4e;
+}
+
+.section-article-header .review-info .review-detail .pros-cons .pros li::before {
+    content: "+";
+}
+
+.section-article-header .review-info .review-detail .pros-cons .cons {
+    border-top: 2px solid #e30613;
+    color: #e30613;
+}
+
+.section-article-header .review-info .review-detail .pros-cons .cons li::before {
+    content: "-";
+}
