@@ -262,15 +262,6 @@
                                 .replace(/'/g, "&#039;");
                         };
 
-                        self.parseUri = function (uri, customVersion, defaultUrl) {
-                            if (!uri)
-                                return defaultUrl;
-                            var upyunFileName = upyun.extractFileName(uri);
-                            if (upyunFileName)
-                                return upyun.customVersionUrl(upyunFileName, customVersion);
-                            return uri;
-                        };
-
                         self.timelineLoadCount = 20;
 
                         self.timelineShowDelay = 150;

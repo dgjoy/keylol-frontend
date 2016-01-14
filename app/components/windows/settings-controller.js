@@ -294,7 +294,7 @@
                                 withCredentials: false
                             });
                             uploads.avatarImage.then(function (response) {
-                                dirtyFields.AvatarImage = "keylol://avatars/" + response.data.url;
+                                dirtyFields.AvatarImage = "keylol://" + response.data.url;
                             }, function () {
                                 notification.error("头像上传失败。");
                                 submitLock = false;
@@ -311,7 +311,7 @@
                                 withCredentials: false
                             });
                             uploads.profilePointBackgroundImage.then(function (response) {
-                                dirtyFields.ProfilePointBackgroundImage = response.data.url;
+                                dirtyFields.ProfilePointBackgroundImage = "keylol://" + response.data.url;
                             }, function () {
                                 notification.error("个人据点横幅上传失败。");
                                 submitLock = false;

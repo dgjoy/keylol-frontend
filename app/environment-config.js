@@ -4,9 +4,9 @@
     keylolApp.config([
         "apiEndpointProvider",
         function(apiEndpointProvider){
-            apiEndpointProvider.setEndPoint("https://gay-api.keylol.com/");
+            apiEndpointProvider.setEndPoint("https://localhost:44300/");
         }
     ]);
 
-    window.apiEndpoint = "https://gay-api.keylol.com/";
+    window.apiEndpoint = "https://localhost:44300/";
 })();
