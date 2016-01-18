@@ -67,7 +67,7 @@
             pageTitleProvider.setLoadingTitle("载入中 - 其乐");
 
             utilsProvider.config({
-                geetestId: "0c002064ef8f602ced7bccec08b8e10b"
+                geetestId: "accdaf35b04e4ad5bf4980c7d30edf87"
             });
 
             $localStorageProvider.setKeyPrefix("keylol-");
