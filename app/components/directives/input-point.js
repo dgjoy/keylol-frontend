@@ -8,7 +8,9 @@
                 restrict: "E",
                 templateUrl: "components/directives/input-point.html",
                 scope: {
-                    placeholder: "="
+                    placeholder: "=",
+                    limit: "=",
+                    disabled: "="
                 },
                 require: "ngModel",
                 link: function (scope, element, attrs, ngModel) {
@@ -28,14 +30,14 @@
                                 hasBeenExist = true
                             }
                         }
-                        if (!hasBeenExist) {
+                        if (!(hasBeenExist || scope.pointArray.length >= scope.limit)) {
                             scope.pointArray.push(result);
                         }
                         scope.data = "";
                         ngModel.$setViewValue(scope.pointArray);
                     };
 
-                    var deleteSelectorPoint = function (index) {
+                    scope.deleteSelectorPoint = function (index) {
                         scope.pointArray.splice(index, 1);
                         ngModel.$setViewValue(scope.pointArray);
                     };
@@ -55,7 +57,7 @@
                             scope.$apply(function () {
                                 scope.pointArray[index].selected = false;
                                 if (e.keyCode == 8) {
-                                    deleteSelectorPoint(index);
+                                    scope.deleteSelectorPoint(index);
                                 }
                                 $window.removeEventListener("click", clickCallback, true);
                                 $window.removeEventListener("keydown", keydownCallback, true);
@@ -135,6 +137,20 @@
                         $window.removeEventListener("keydown", deleteKeyCallback, true);
                         scope.disWatchData();
                     });
+
+                    scope.linkHover = function ($event, $index) {
+                        scope.pointArray[$index].showPointCard({
+                            templateUrl: "components/popup/point-preview-card.html",
+                            controller: "PointPreviewCardController",
+                            event: $event,
+                            attachSide: "bottom",
+                            align: "left",
+                            inputs: {
+                                idCode: scope.pointArray[$index].IdCode,
+                                type: "point"
+                            }
+                        });
+                    };
                 }
             };
         }

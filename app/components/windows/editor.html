@@ -16,7 +16,7 @@
             <div class="pad-right clearfix" ng-if="articleTypes[selectedTypeIndex].allowVote">
                 <div class="left-content">
                     <h3 ng-if="articleTypes[selectedTypeIndex].allowVote">评价游戏</h3>
-                    <input-point ng-model="inline.voteForPoints" placeholder="'填写一个游戏据点'"></input-point>
+                    <input-point class="clearfix" ng-model="inline.voteForPoints" placeholder="'填写一个游戏据点'"></input-point>
                 </div>
                 <div class="right-content">
                     <h3 ng-if="articleTypes[selectedTypeIndex].allowVote">你的评分</h3>
@@ -24,20 +24,20 @@
                 </div>
             </div>
             <h3>投稿至据点</h3>
-            <input-point ng-model="inline.attachedPoints" placeholder="'填写游戏会自动填写关联据点'"></input-point>
+            <input-point disabled="true" ng-model="inline.attachedPoints" placeholder="'填写游戏会自动填写关联据点'"></input-point>
             <div simditor="editorOptions" ng-model="vm.Content" ng-click="inline.editorDirty = true"></div>
-            <div class="centre-parting clearfix">
+            <div class="centre-parting clearfix" ng-if="articleTypes[selectedTypeIndex].allowVote">
                 <div class="left-content">
-                    <h3 ng-if="articleTypes[selectedTypeIndex].allowVote">亮点小结</h3>
-                    <pro-con ng-model="x"></pro-con>
+                    <h3>亮点小结</h3>
+                    <pro-con ng-model="vm.Pros"></pro-con>
                 </div>
                 <div class="right-content">
-                    <h3 ng-if="articleTypes[selectedTypeIndex].allowVote">缺点小结</h3>
-                    <pro-con ng-model="y" is-negative="true"></pro-con>
+                    <h3>缺点小结</h3>
+                    <pro-con ng-model="vm.Cons" is-negative="true"></pro-con>
                 </div>
             </div>
             <h3>概述总结</h3>
-            <input type="text" ng-model="vm.total" placeholder="一句话总结文章，概述会展示在信息轨道预览中。">
+            <input type="text" ng-model="vm.Summary" placeholder="一句话总结文章，概述会展示在信息轨道预览中。">
             <button type="submit" class="window-confirm-button">
                 <img class="arrow-right" src="assets/images/arrow-right.png" alt="下一步">
                 <img class="signature-pen" src="assets/images/signature-pen.png" alt="提交">

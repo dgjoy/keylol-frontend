@@ -9,7 +9,6 @@
             $scope.editorOptions = {
                 scrollableContainer: $element
             };
-            $scope.radioId = [utils.uniqueId(), utils.uniqueId(), utils.uniqueId()];
             $scope.articleTypes = articleTypes;
             $scope.expanded = false;
             $scope.lastSaveTime = null;
@@ -62,7 +61,6 @@
                 } else if (options.vm) {
                     options.vm.VoteForPointId = null;
                 }
-                console.log($scope.vm, options.vm);
             };
 
             var autoSaveTimeout;

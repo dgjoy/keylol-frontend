@@ -1,4 +1,6 @@
-﻿<div class="point-title" ng-repeat="point in pointArray track by point.Id"
-     ng-class="{selected: point.selected}" ng-click="selectPoint($index)">「{{point[point.PreferredName+"Name"] | maxLength: 10}}」</div>
-<input type="text" placeholder="{{pointArray.length ? '' : placeholder}}" ng-class="{'has-placeholder': !pointArray.length}"
+﻿<div ng-if="!disabled" popup="point.showPointCard" ng-mouseenter="linkHover($event, $index)" class="point-title" ng-repeat="point in pointArray track by point.Id"
+     ng-class="{selected: point.selected}" ng-click="selectPoint($index)">「{{point[point.PreferredName+"Name"] | maxLength: 10}}」<a href="" ng-click="deleteSelectorPoint($index)" class="delete">x</a></div>
+<div ng-if="disabled" popup="point.showPointCard" ng-mouseenter="linkHover($event, $index)" class="point-title" ng-repeat="point in pointArray track by point.Id"
+     ng-class="{disabled: disabled}">「{{point[point.PreferredName+"Name"] | maxLength: 10}}」</div>
+<input ng-disabled="disabled" ng-show="!(pointArray.length >= limit)" type="text" placeholder="{{pointArray.length ? '' : placeholder}}" ng-class="{'has-placeholder': !pointArray.length}"
        class="input" popup="showSelector" ng-model="data">
