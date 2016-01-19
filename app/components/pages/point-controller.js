@@ -259,7 +259,8 @@
                         includeStats: true,
                         includeVotes: true,
                         includeSubscribed: true,
-                        includeAssociated: true,
+                        includeRelated: true,
+                        includeCoverDescription: true,
                         idType: "IdCode"
                     }
                 }).then(function (response) {

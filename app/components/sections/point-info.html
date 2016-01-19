@@ -1,16 +1,47 @@
 ﻿<div class="section-point-info box-shadowed" ng-controller="PointInfoController">
-    <p class="main-description">{{data.mainDesc}}</p>
-    <div ng-if="data.isGame" class="info-details">
+    <p class="main-description">{{point.Description}}</p>
+    <div ng-if="union.point.Type === 'Game'" class="info-details">
         <div class="info-attribute">
-            <p ng-repeat="attribute in data.attributes">
-                <span class="title">{{attribute.title}} ：</span>
-                <point-link ng-repeat="point in attribute.points" type="'point'" id-code="point.IdCode" point-name="'「' + utils.getPointFirstName(point) + '」'"></point-link>
-                <span>{{attribute.text}}</span>
+            <p ng-if="point.DeveloperPoints.length > 0">
+                <span class="title">开发厂 ：</span>
+                <point-link ng-repeat="point in point.DeveloperPoints" type="'point'" id-code="point.IdCode" point-name="'「' + utils.getPointFirstName(point) + '」'"></point-link>
+            </p>
+            <p ng-if="point.PublisherPoints.length > 0">
+                <span class="title">发行商 ：</span>
+                <point-link ng-repeat="point in point.PublisherPoints" type="'point'" id-code="point.IdCode" point-name="'「' + utils.getPointFirstName(point) + '」'"></point-link>
+            </p>
+            <p ng-if="point.SeriesPoints.length > 0">
+                <span class="title">系列 ：</span>
+                <point-link ng-repeat="point in point.SeriesPoints" type="'point'" id-code="point.IdCode" point-name="'「' + utils.getPointFirstName(point) + '」'"></point-link>
+            </p>
+            <p ng-if="point.GenrePoints.length > 0">
+                <span class="title">流派 ：</span>
+                <point-link ng-repeat="point in point.GenrePoints" type="'point'" id-code="point.IdCode" point-name="'「' + utils.getPointFirstName(point) + '」'"></point-link>
+            </p>
+            <p ng-if="point.TagPoints.length > 0">
+                <span class="title">特性 ：</span>
+                <point-link ng-repeat="point in point.TagPoints" type="'point'" id-code="point.IdCode" point-name="'「' + utils.getPointFirstName(point) + '」'"></point-link>
+            </p>
+            <p ng-if="point.DisplayAliases">
+                <span class="title">别名 ：</span>
+                <span>{{point.DisplayAliases.text}}</span>
+            </p>
+            <p ng-if="point.ReleaseDate">
+                <span class="title">面市 ：</span>
+                <span>{{point.ReleaseDate | date: 'yyyy-MM-dd'}}</span>
+            </p>
+            <p ng-if="point.MajorPlatformPoints.length > 0">
+                <span class="title">平台 ：</span>
+                <point-link ng-repeat="point in point.MajorPlatformPoints" type="'point'" id-code="point.IdCode" point-name="'「' + utils.getPointFirstName(point) + '」'"></point-link>
+            </p>
+            <p ng-if="point.MinorPlatformPoints.length > 0">
+                <span class="title">次要平台 ：</span>
+                <point-link ng-repeat="point in point.MinorPlatformPoints" type="'point'" id-code="point.IdCode" point-name="'「' + utils.getPointFirstName(point) + '」'"></point-link>
             </p>
         </div>
         <div class="info-review">
-            <img class="point-cover" src="{{data.cover}}">
-            <p class="play-time">{{data.gameHours}} 小时在档</p>
+            <img class="point-cover" src="{{point.CoverImage | coverUrl}}">
+            <p class="play-time">790.5 小时在档</p>
             <point-review on-click-review="showShortReviewWindow()" is-hollow="true"></point-review>
             <div class="actions">
                 <a href="" class="short-review" ng-click="showShortReviewWindow()">写简评</a>
@@ -19,7 +50,7 @@
             <a href="" class="edit-info">编辑资料</a>
         </div>
     </div>
-    <div ng-if="!data.isGame" class="info-actions clearfix">
+    <div ng-if="union.point.Type !== 'Game'" class="info-actions clearfix">
         <span class="related-list" ng-repeat="list in data.relatedList"><a>{{list.text}}</a>（{{list.count}}）</span>
         <a class="edit-info">编辑资料</a>
     </div>

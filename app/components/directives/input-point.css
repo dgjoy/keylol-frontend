@@ -65,6 +65,10 @@ input-point input[type=text].input {
     margin-bottom: 8px;
 }
 
+input-point input[type=text][disabled] {
+    width: 0;
+}
+
 input-point input[type=text].has-placeholder {
     width: 100%;
 }

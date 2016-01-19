@@ -10,7 +10,8 @@
                 scope: {
                     placeholder: "=",
                     limit: "=",
-                    disabled: "="
+                    disabled: "=",
+                    type: "="
                 },
                 require: "ngModel",
                 link: function (scope, element, attrs, ngModel) {
@@ -97,34 +98,37 @@
                                 }
                                 $window.removeEventListener("keydown", union.keydownCallback, true);
                                 if (newValue) {
-                                    $http.get(apiEndpoint + "normal-point/keyword/" + encodeURIComponent(newValue))
-                                        .then(function (response) {
-                                            var pointArray = response.data;
-                                            if (pointArray.length) {
-                                                scope.nowPopup = scope.showSelector({
-                                                    templateUrl: "components/popup/point-selector.html",
-                                                    controller: "PointSelectorController",
-                                                    attachSide: "bottom",
-                                                    event: {
-                                                        type: "click",
-                                                        currentTarget: element
-                                                    },
-                                                    align: "left",
-                                                    offsetX: -8,
-                                                    inputs: {
-                                                        selected: 0,
-                                                        pointArray: pointArray
-                                                    }
-                                                });
-                                                scope.nowPopup.then(function (popup) {
-                                                    return popup.close;
-                                                }).then(function (result) {
-                                                    if (result) {
-                                                        addPoint(result);
-                                                    }
-                                                });
-                                            }
-                                        });
+                                    $http.get(apiEndpoint + "normal-point/keyword/" + encodeURIComponent(newValue), {
+                                        params: {
+                                            type: scope.type || 'Unspecified'
+                                        }
+                                    }).then(function (response) {
+                                        var pointArray = response.data;
+                                        if (pointArray.length) {
+                                            scope.nowPopup = scope.showSelector({
+                                                templateUrl: "components/popup/point-selector.html",
+                                                controller: "PointSelectorController",
+                                                attachSide: "bottom",
+                                                event: {
+                                                    type: "click",
+                                                    currentTarget: element
+                                                },
+                                                align: "left",
+                                                offsetX: -8,
+                                                inputs: {
+                                                    selected: 0,
+                                                    pointArray: pointArray
+                                                }
+                                            });
+                                            scope.nowPopup.then(function (popup) {
+                                                return popup.close;
+                                            }).then(function (result) {
+                                                if (result) {
+                                                    addPoint(result);
+                                                }
+                                            });
+                                        }
+                                    });
                                 }
                             }, 200);
                         });

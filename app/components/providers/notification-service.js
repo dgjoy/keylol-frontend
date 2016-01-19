@@ -66,24 +66,29 @@
                     });
                 };
 
-                self.error = function (messageOrModelStateError, error) {
-                    if (typeof messageOrModelStateError === "string") { // Is message
-                        if (error) {
-                            console.error(error);
+                self.error = function (message, errorResponse) {
+                    if (errorResponse) {
+                        console.error(errorResponse);
+                    }
+                    if (errorResponse && errorResponse.status === 400) {
+                        // Is model state error
+                        for (var error in errorResponse.data.ModelState) {
+                            if (errorResponse.data.ModelState.hasOwnProperty(error) && typeof(error) !== "function") {
+                                return self.show({
+                                    type: "error",
+                                    title: "错误",
+                                    subtitle: "Error",
+                                    message: errorResponse.data.ModelState[error][0]
+                                });
+                            }
                         }
+                    } else {
                         return self.show({
                             type: "error",
                             title: "错误",
                             subtitle: "Error",
-                            message: messageOrModelStateError
+                            message: message
                         });
-                    }
-                    // Is model state error
-                    for (var error in messageOrModelStateError.ModelState) {
-                        if (messageOrModelStateError.ModelState.hasOwnProperty(error) && typeof(error) !== "function") {
-                            self.error(messageOrModelStateError.ModelState[error][0]);
-                            break;
-                        }
                     }
                 };
 

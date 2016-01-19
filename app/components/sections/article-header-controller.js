@@ -7,12 +7,23 @@
             $scope.utils = utils;
             $scope.article = union.article;
             $scope.editArticle = function () {
+                console.log($scope.article);
                 window.show({
                     templateUrl: "components/windows/editor.html",
                     controller: "EditorController",
                     inputs: {
                         options: {
-                            vm: $scope.article,
+                            vm: {
+                                Title: $scope.article.Title,
+                                Content: $scope.article.Content,
+                                Summary: $scope.article.Summary,
+                                Pros: $scope.article.Pros,
+                                Cons: $scope.article.Cons,
+                                Vote: $scope.article.Vote,
+                                TypeName: $scope.article.TypeName
+                            },
+                            attachedPoints: $scope.article.AttachedPoints,
+                            voteForPoint: $scope.article.VoteForPoint,
                             needConfirmLoadingDraft: true
                         }
                     }

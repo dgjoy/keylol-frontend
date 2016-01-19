@@ -4,15 +4,18 @@
     keylolApp.controller("ShortReviewController", [
         "$scope", "close", "window", "notification", "$http", "options",
         function ($scope, close, window, notification, $http, options) {
-            $scope.vm = {
-                TypeName: "简评",
-                Content: "",
-                Vote: null,
-                VoteForPointId: options.pointId
-            };
             $scope.options = options;
 
-            $scope.cancel = function () {
+            $scope.vm = options.vm ? $.extend({}, options.vm) : {
+                TypeName: "简评",
+                Title: options.point.Name + " 的简评",
+                Content: "",
+                Vote: null,
+                VoteForPointId: options.point.Id
+            };
+            $scope.count = $scope.vm.Content.length;
+
+                $scope.cancel = function () {
                 close();
             };
             
@@ -30,14 +33,14 @@
                                     doNotLoadDraft: true,
                                     vm: {
                                         TypeName: "评",
+                                        Title: "",
                                         Content: $scope.vm.Content,
                                         Vote: $scope.vm.Vote,
-                                        VoteForPoint: {
-                                            Id: $scope.vm.VoteForPointId,
-                                            EnglishName: "Dota2",
-                                            PreferredName: "English"
-                                        }
-                                    }
+                                        Summary: "",
+                                        Pros: [],
+                                        Cons: []
+                                    },
+                                    voteForPoint: options.point
                                 }
                             }
                         });
@@ -47,8 +50,12 @@
             };
 
             var submitLock = false;
+            var checkVm = function(){
+                if(!$scope.vm.Content) return "简评内容不能为空";
+                if(!$scope.vm.Vote) return "简评评分不能为空";
+            };
             $scope.submit = function(){
-                if (submitLock || !$scope.vm.Content || !$scope.vm.Vote)
+                if (submitLock)
                     return;
                 submitLock = true;
                 $http.post(apiEndpoint + "article", $scope.vm)
