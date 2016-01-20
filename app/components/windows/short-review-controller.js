@@ -6,17 +6,13 @@
         function ($scope, close, window, notification, $http, options, $location, $route) {
             $scope.options = options;
 
-            $scope.vm = options.vm ? $.extend({
-                TypeName: "简评",
-                Title: options.point.Name + " 的简评",
-                VoteForPointId: options.point.Id
-            }, options.vm) : {
+            $scope.vm = $.extend({
                 TypeName: "简评",
                 Title: options.point.Name + " 的简评",
                 Content: "",
                 Vote: null,
                 VoteForPointId: options.point.Id
-            };
+            }, options.vm);
             $scope.count = $scope.vm.Content.length;
 
             $scope.cancel = function () {
@@ -24,8 +20,8 @@
             };
             
             $scope.changeToLong = function () {
-                notification.attention("从简评切换为长评将会覆盖长评已保存的草稿", [
-                    {action: "仍然切换", value: true},
+                notification.attention("切换为长评时会覆盖之前未发布的草稿", [
+                    {action: "覆盖", value: true},
                     {action: "取消"}
                 ]).then(function (result) {
                     if (result) {
@@ -37,7 +33,7 @@
                                     doNotLoadDraft: true,
                                     vm: {
                                         TypeName: "评",
-                                        Title: "",
+                                        Title: $scope.vm.Title,
                                         Content: $scope.vm.Content,
                                         Vote: $scope.vm.Vote,
                                         Summary: "",

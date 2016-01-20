@@ -47,7 +47,7 @@
 
 .section-point-info .info-details .info-review .play-time {
     color: #C7CDD1;
-    margin: 12px 0;
+    margin: 12px 0 0 0;
 }
 
 .section-point-info .info-details .info-review point-review h4 {
@@ -57,13 +57,13 @@
 }
 
 .section-point-info .info-details .info-review point-review div {
-    margin-top: 10px;
+    margin-top: 5px;
     transform: translateX(4px);
 }
 
 .section-point-info .info-details .info-review .actions {
     position: absolute;
-    top: calc(50% + 57px);
+    top: calc(50% + 48.5px);
     left: calc(50% + 7.5px);
     transform: translate(-50%, -50%);
 }

@@ -40,14 +40,15 @@
             }, options);
 
             var setupNewVM = function () {
-                $scope.vm = options.vm ? $.extend({}, options.vm) : {
+                console.log(options.voteForPoint);
+                $scope.vm = $.extend({
                     Title: "",
                     Content: "",
                     Summary: "",
                     Pros: [],
                     Cons: [],
                     Vote: null
-                };
+                }, options.vm);
                 if ($scope.vm.TypeName) {
                     for (var i = 0; i < articleTypes.length; ++i) {
                         if (articleTypes[i].name === options.TypeName) {
@@ -59,7 +60,7 @@
                 if (options.attachedPoints)
                     $scope.inline.attachedPoints = options.attachedPoints;
                 if (options.voteForPoint) {
-                    options.vm.VoteForPointId = options.voteForPoint.Id;
+                    $scope.vm.VoteForPointId = options.voteForPoint.Id;
                     $scope.inline.voteForPoints = [options.voteForPoint];
                 }
             };

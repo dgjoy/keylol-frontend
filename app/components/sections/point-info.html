@@ -42,10 +42,10 @@
         <div class="info-review">
             <img class="point-cover" src="{{point.CoverImage | coverUrl}}">
             <p class="play-time">790.5 小时在档</p>
-            <point-review on-click-review="showShortReviewWindow()" is-hollow="true"></point-review>
+            <point-review on-click-review="showShortReviewWindow(vote)" is-hollow="true"></point-review>
             <div class="actions">
                 <a href="" class="short-review" ng-click="showShortReviewWindow()">写简评</a>
-                <a href="" class="full-review">写长评</a>
+                <a href="" class="full-review"  ng-click="showEditorWindow()">写长评</a>
             </div>
             <a href="" class="edit-info">编辑资料</a>
         </div>

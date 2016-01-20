@@ -29,7 +29,7 @@
                         scope.changeReview(scope.reviewLevel);
                     };
                     scope.setReview = function(i){
-                        if(!scope.onClickReview()){
+                        if(!scope.onClickReview({vote: i+1})){
                             scope.reviewLevel = i;
                             scope.reviewString = scope.levelString[i];
                             scope.bindReview = i + 1;
