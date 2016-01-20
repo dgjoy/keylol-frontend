@@ -35,7 +35,8 @@
                             }
                             $http.get(apiEndpoint + "normal-point/" + article.VoteForPoint.Id, {
                                 params: {
-                                    includeVotes: true
+                                    includeVotes: true,
+                                    includeCoverDescription: true
                                 }
                             }).then(function (response) {
                                 var point = response.data;

@@ -41,6 +41,8 @@
 
             if ($routeParams.userIdCode) {
 
+                $scope.isInPoint = false;
+
                 timeline.noArticleText = {
                     main: "这位用户尚未发布或认可任何文章",
                     sub: "订阅并关注即将到来的动态。"

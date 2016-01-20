@@ -1,6 +1,6 @@
 .window-short-review .window {
     padding: 20px 0 30px;
-    width: 884px;
+    width: 600px;
 }
 
 .window-short-review .short-header {
@@ -46,9 +46,9 @@
 }
 
 .window-short-review .char-count {
-    position: absolute;
-    right: 14px;
-    top: 180px;
+    margin-right: 14px;
+    text-align: right;
+    display: block;
     color: #c7cdd1;
 }
 
@@ -57,12 +57,12 @@
 }
 
 .window-short-review .window-confirm-button {
-    margin-top: 40px;
+    margin-top: 20px;
 }
 
 .window-short-review .change-to-long {
     max-width: 570px;
-    padding-top: 44px;
+    padding-top: 20px;
 }
 
 .window-short-review .change-to-long button {

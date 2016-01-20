@@ -111,6 +111,17 @@
     width: 50%;
 }
 
+.window-editor .summary {
+    position: relative;
+}
+
+.window-editor .summary span {
+    position: absolute;
+    top: 15px;
+    right: 14px;
+    color: #c7cdd1;
+}
+
 .window-editor .window-confirm-button {
     margin-top: 40px;
 }

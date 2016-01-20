@@ -24,7 +24,7 @@
                 </div>
             </div>
             <h3>投稿至据点</h3>
-            <input-point disabled="articleTypes[selectedTypeIndex].allowVote" ng-model="inline.attachedPoints" placeholder="'填写游戏会自动填写关联据点'"></input-point>
+            <input-point ng-class="{disabled: articleTypes[selectedTypeIndex].allowVote}" disabled="articleTypes[selectedTypeIndex].allowVote" ng-model="inline.attachedPoints" placeholder="'填写游戏会自动填写关联据点'"></input-point>
             <div simditor="editorOptions" ng-model="vm.Content" ng-click="inline.editorDirty = true"></div>
             <div class="centre-parting clearfix" ng-if="articleTypes[selectedTypeIndex].allowVote">
                 <div class="left-content">
@@ -36,8 +36,11 @@
                     <pro-con ng-model="vm.Cons" is-negative="true"></pro-con>
                 </div>
             </div>
-            <h3>概述总结</h3>
-            <input type="text" ng-model="vm.Summary" placeholder="选填：文章在讯息轨道上预览时会展示这段概述。">
+            <div class="summary">
+                <h3>概述总结</h3>
+                <span>{{vm.Summary.length}}/49</span>
+                <input type="text" ng-model="vm.Summary" placeholder="选填：文章在讯息轨道上预览时会展示这段概述。">
+            </div>
             <button type="submit" class="window-confirm-button">
                 <img class="arrow-right" src="assets/images/arrow-right.png" alt="下一步">
                 <img class="signature-pen" src="assets/images/signature-pen.png" alt="提交">

@@ -141,8 +141,8 @@
                 $scope.vm.VoteForPointId = null;
                 if (newValue && newValue.length > 0){
                     $scope.vm.VoteForPointId = newValue[0].Id;
-                    getAttachedPointsFromVoteForPoint();
                 }
+                getAttachedPointsFromVoteForPoint();
             });
 
             $scope.$watch("selectedTypeIndex", function (newValue, oldValue) {
