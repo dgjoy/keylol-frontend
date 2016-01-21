@@ -1,5 +1,5 @@
 ﻿<div class="section-point-votes box-shadowed" ng-controller="PointVotesController">
-    <div class="point-info">
+    <div class="point-info clearfix">
         <div class="avatar-anchor">
             <img webp-src="{{point.AvatarImage |avatarUrl}}">
         </div>
@@ -8,13 +8,23 @@
             <h2>反恐精英{{utils.getPointSecondName(point)}}</h2>
         </div>
     </div>
-    <div class="reputation-level">
-        <span class="reputation-number {{point.voteCircles[0].type}}">{{point.votePercent}}</span>
-        <svg xmlns="http://www.w3.org/2000/svg" ng-repeat="voteCircle in point.voteCircles" class="reputation-circle {{voteCircle.type}}">
-            <circle cx="3.5" cy="3.5" r="3.5"></circle>
-        </svg>
+    <div class="reputation">
+        <div>
+            <span>
+                <span class="reputation-number" ng-class="{
+                    awesome: point.votePercent >= 8,
+                    good: point.votePercent >= 6 && point.votePercent < 8,
+                    'not-bad': point.votePercent >= 4 && point.votePercent < 6,
+                    bad: point.votePercent >= 2 && point.votePercent < 4,
+                    terrible: point.votePercent < 2
+                }">{{point.votePercent}}</span> / 10
+            </span>
+            <p>{{point.totalEvaluate}} 篇评测</p>
+        </div>
+        <div class="reputation-level" ng-repeat="stat in point.VoteStats">
+            <div class="" style="width: {{stat / point.totalEvaluate * 100}}%;" ng-if="!point.noVotes"></div>
+        </div>
     </div>
-    <div style="width: {{point.votePercent * 10}}%;" ng-if="!point.noVotes"></div>
     <div class="external-links" ng-if="point.StoreLink">
         <a ng-href="{{point.StoreLink}}">Steam 商店</a><span class="divider">|</span><a ng-href="{{point.StoreLink | storeUrlToSteamDB}}">SteamDB</a>
     </div>

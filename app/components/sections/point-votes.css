@@ -34,13 +34,24 @@
     font-weight: normal;
 }
 
-.section-point-votes .reputation-level {
-    text-align: center;
+.section-point-votes .reputation {
     margin-bottom: 25px;
 }
 
-.section-point-votes .reputation-number {
-    margin-right: 5px;
+.section-point-votes .reputation span {
+    color: #c7cdd1;
+}
+
+.section-point-votes .reputation p {
+    float: right;
+    margin: 0;
+    padding-top: 5px;
+    color: #738a95;
+    vertical-align: bottom;
+}
+
+.section-point-votes .reputation .reputation-number {
+    font-size: 19px;
 }
 
 .section-point-votes .reputation-circle {
@@ -51,27 +62,27 @@
     fill: #c7cdd1;
 }
 
-.section-point-votes .reputation-level .awesome {
+.section-point-votes .reputation .awesome {
     color: #00ab4e;
     fill: #00ab4e;
 }
 
-.section-point-votes .reputation-level .good {
+.section-point-votes .reputation .good {
     color: #71bf44;
     fill: #71bf44;
 }
 
-.section-point-votes .reputation-level .not-bad {
+.section-point-votes .reputation .not-bad {
     color: #f7943e;
     fill: #f7943e;
 }
 
-.section-point-votes .reputation-level .bad {
+.section-point-votes .reputation .bad {
     color: #e30613;
     fill: #e30613;
 }
 
-.section-point-votes .reputation-level .terrible {
+.section-point-votes .reputation .terrible {
     color: #541912;
     fill: #541912;
 }
@@ -90,23 +101,6 @@
 .section-point-votes .positive-vs-negative div.point-no-votes {
     background: #c7cdd1;
     height: 100%;
-}
-
-.section-point-votes [class$=-text] p {
-    margin: 0;
-}
-
-.section-point-votes [class$=-text] a {
-    color: #738a95;
-}
-
-.section-point-votes .positive-text {
-    float: left;
-}
-
-.section-point-votes .negative-text {
-    float: right;
-    text-align: right;
 }
 
 .section-point-votes .external-links {

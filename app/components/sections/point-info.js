@@ -2,8 +2,8 @@
     "use strict";
 
     keylolApp.controller("PointInfoController", [
-        "$scope", "union", "window", "utils",
-        function ($scope, union, window, utils) {
+        "$scope", "union", "window", "utils", "notification",
+        function ($scope, union, window, utils, notification) {
             $scope.utils = utils;
             $scope.point = union.point;
             $scope.showShortReviewWindow = function (vote) {
