@@ -2,8 +2,8 @@
     "use strict";
 
     keylolApp.controller("ReceptionController", [
-        "$scope", "$http", "notification", "union", "$routeParams",
-        function ($scope, $http, notification, union, $routeParams) {
+        "$scope", "$http", "notification", "union", "$routeParams", "utils",
+        function ($scope, $http, notification, union, $routeParams, utils) {
             $scope.quickLinks = [];
             $scope.recentLinks = [];
             $.extend($scope.recentLinks, union.$localStorage.recentBrowse);
@@ -65,7 +65,7 @@
                             Id: response.data,
                             Type: "NormalPoint",
                             IdCode: union.point.IdCode,
-                            Name: union.point.mainName
+                            Name: utils.getPointFirstName(union.point)
                         })
                     }, function (response) {
                         notification.error("未知错误", response);

@@ -1,18 +1,37 @@
 .section-point-votes {
     background: white;
     width: 100%;
-    /* min-width: 200px; */
-    padding: 10px;
+    padding: 0 15px 15px 20px;
 }
 
-.section-point-votes .point-name {
+.section-point-votes .point-info {
+    padding: 25px  0;
+}
+
+.section-point-votes .point-info .avatar-anchor {
+    float: left;
+    margin-right: 12px;
+}
+
+.section-point-votes .point-info .avatar-anchor img {
+    width: 32px;
+    height: 32px;
+}
+
+.section-point-votes .point-info .heading {
+    float: left;
+}
+
+.section-point-votes .point-info .heading h1 {
+    margin: 0;
     font-size: 15px;
-    text-align: center;
-    margin: 12px 0 7px 0;
-    font-weight: bold;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    color: #11254A;
+}
+
+.section-point-votes .point-info .heading h2 {
+    margin: 0;
+    font-size: 13px;
+    font-weight: normal;
 }
 
 .section-point-votes .reputation-level {

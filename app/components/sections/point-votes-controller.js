@@ -2,9 +2,10 @@
     "use strict";
 
     keylolApp.controller("PointVotesController", [
-        "$scope", "union",
-        function ($scope, union) {
+        "$scope", "union", "utils",
+        function ($scope, union, utils) {
             $scope.point = union.point;
+            $scope.utils = utils;
         }
     ]);
 })();

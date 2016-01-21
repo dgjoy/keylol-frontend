@@ -273,39 +273,13 @@
                     if (point.Type === "Game") {
                         $scope.hasVote = true;
                     }
+                    console.log(point);
 
-                    point.mainName = utils.getPointFirstName(point);
+                    var mainName = utils.getPointFirstName(point);
 
-                    pageTitle.set(point.mainName + " - 其乐");
-                    if (point.PositiveArticleCount + point.NegativeArticleCount > 0) {
-                        point.votePercent = (point.PositiveArticleCount * 10 / (point.PositiveArticleCount + point.NegativeArticleCount)).toFixed(1);
-                        point.voteCircles = [{}, {}, {}, {}, {}];
-                        if (point.votePercent >= 8) {
-                            for (var i in point.voteCircles) {
-                                point.voteCircles[i].type = "awesome";
-                            }
-                        } else if (point.votePercent >= 6) {
-                            for (var i = 0; i < 4; i++) {
-                                point.voteCircles[i].type = "good";
-                            }
-                        } else if (point.votePercent >= 4) {
-                            for (var i = 0; i < 3; i++) {
-                                point.voteCircles[i].type = "not-bad";
-                            }
-                        } else if (point.votePercent >= 2) {
-                            for (var i = 0; i < 2; i++) {
-                                point.voteCircles[i].type = "bad";
-                            }
-                        } else {
-                            point.voteCircles[0].type = "terrible"
-                        }
-                    } else {
-                        point.votePercent = "N/A";
-                        point.voteCircles = [{}, {}, {}, {}, {}];
-                        point.noVotes = true;
-                    }
+                    pageTitle.set(mainName + " - 其乐");
 
-                    utils.addRecentBroswe("NormalPoint", point.mainName, point.IdCode);
+                    utils.addRecentBroswe("NormalPoint", mainName, point.IdCode);
                     $.extend(unionPoint, point);
                     $.extend(summary, {
                         head: {
