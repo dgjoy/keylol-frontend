@@ -40,7 +40,6 @@
             }, options);
 
             var setupNewVM = function () {
-                console.log(options.voteForPoint);
                 $scope.vm = $.extend({
                     Title: "",
                     Content: "",
@@ -51,7 +50,7 @@
                 }, options.vm);
                 if ($scope.vm.TypeName) {
                     for (var i = 0; i < articleTypes.length; ++i) {
-                        if (articleTypes[i].name === options.TypeName) {
+                        if (articleTypes[i].name === $scope.vm.TypeName) {
                             $scope.selectedTypeIndex = i;
                             break;
                         }
@@ -95,14 +94,13 @@
                     notification.success("本地草稿已加载");
                 };
                 if (options.needConfirmLoadingDraft) {
+                    setupNewVM();
                     notification.attention("直接编辑上次未完成的草稿", [
                         {action: "加载草稿", value: true},
                         {action: "取消"}
                     ]).then(function (result) {
                         if (result) {
                             loadDraft();
-                        }else {
-                            setupNewVM();
                         }
                         autoSaveTimeout = $timeout($scope.saveDraft, autoSaveInterval);
                     });
@@ -143,7 +141,9 @@
                 if (newValue && newValue.length > 0){
                     $scope.vm.VoteForPointId = newValue[0].Id;
                 }
-                getAttachedPointsFromVoteForPoint();
+                if($scope.vm.TypeName === "评"){
+                    getAttachedPointsFromVoteForPoint();
+                }
             });
 
             $scope.$watch("selectedTypeIndex", function (newValue, oldValue) {

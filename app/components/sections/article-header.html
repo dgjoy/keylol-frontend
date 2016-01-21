@@ -8,38 +8,68 @@
         <span class="actions">
             <a href="" ng-click="editArticle()" ng-if="article.canEdit">编辑</a>
         </span>
-        <span class="points">
-            <point-link ng-repeat="point in article.AttachedPoints track by point.Id" type="'point'" id-code="point.IdCode" point-name="'「' + point.mainName + '」'"></point-link>
+        <span class="points" ng-if="article.TypeName != '评' && article.TypeName != '简评'">
+            <point-link ng-repeat="point in article.AttachedPoints track by point.Id" type="'point'" id-code="point.IdCode" point-name="'「' + utils.getPointFirstName(point) + '」'"></point-link>
+        </span>
+        <span class="points" ng-if="article.TypeName === '评' || article.TypeName === '简评'">
+            <point-link type="'point'" id-code="article.VoteForPoint.IdCode" point-name="'「' + utils.getPointFirstName(article.VoteForPoint) + '」'"></point-link>
         </span>
     </div>
-    <div class="review-info clearfix">
+    <div class="review-info clearfix" ng-if="article.TypeName === '评'">
         <div class="info-attribute">
-            <p ng-repeat="attribute in data.attributes">
-                <span class="title">{{attribute.title}} ：</span>
-                <point-link ng-repeat="point in attribute.points" type="'point'" id-code="point.IdCode" point-name="'「' + utils.getPointFirstName(point) + '」'"></point-link>
-                <span>{{attribute.text}}</span>
-            </p>
+            <div class="info-attribute">
+                <p ng-if="point.DeveloperPoints.length > 0">
+                    <span class="title">开发厂 ：</span>
+                    <point-link ng-repeat="point in point.DeveloperPoints" type="'point'" id-code="point.IdCode" point-name="'「' + utils.getPointFirstName(point) + '」'"></point-link>
+                </p>
+                <p ng-if="point.PublisherPoints.length > 0">
+                    <span class="title">发行商 ：</span>
+                    <point-link ng-repeat="point in point.PublisherPoints" type="'point'" id-code="point.IdCode" point-name="'「' + utils.getPointFirstName(point) + '」'"></point-link>
+                </p>
+                <p ng-if="point.SeriesPoints.length > 0">
+                    <span class="title">系列 ：</span>
+                    <point-link ng-repeat="point in point.SeriesPoints" type="'point'" id-code="point.IdCode" point-name="'「' + utils.getPointFirstName(point) + '」'"></point-link>
+                </p>
+                <p ng-if="point.GenrePoints.length > 0">
+                    <span class="title">流派 ：</span>
+                    <point-link ng-repeat="point in point.GenrePoints" type="'point'" id-code="point.IdCode" point-name="'「' + utils.getPointFirstName(point) + '」'"></point-link>
+                </p>
+                <p ng-if="point.TagPoints.length > 0">
+                    <span class="title">特性 ：</span>
+                    <point-link ng-repeat="point in point.TagPoints" type="'point'" id-code="point.IdCode" point-name="'「' + utils.getPointFirstName(point) + '」'"></point-link>
+                </p>
+                <p ng-if="point.DisplayAliases">
+                    <span class="title">别名 ：</span>
+                    <span>{{point.DisplayAliases.text}}</span>
+                </p>
+                <p ng-if="point.ReleaseDate">
+                    <span class="title">面市 ：</span>
+                    <span>{{point.ReleaseDate | date: 'yyyy-MM-dd'}}</span>
+                </p>
+                <p ng-if="point.MajorPlatformPoints.length > 0">
+                    <span class="title">平台 ：</span>
+                    <point-link ng-repeat="point in point.MajorPlatformPoints" type="'point'" id-code="point.IdCode" point-name="'「' + utils.getPointFirstName(point) + '」'"></point-link>
+                </p>
+                <p ng-if="point.MinorPlatformPoints.length > 0">
+                    <span class="title">次要平台 ：</span>
+                    <point-link ng-repeat="point in point.MinorPlatformPoints" type="'point'" id-code="point.IdCode" point-name="'「' + utils.getPointFirstName(point) + '」'"></point-link>
+                </p>
+            </div>
         </div>
         <div class="divider"></div>
         <div class="review-detail">
             <div class="user-info">
-                <span class="game-hours">游戏在档 11 小时</span>
+                <span class="game-hours">游戏在档 790.5 小时</span>
                 <point-link type="'user'" point-name="'@ZenDay'" id-code="10101"></point-link>
                 <p class="review-count">7 篇评测 / 29 段简评</p>
             </div>
-            <blockquote>DOTA2是由DotA之父Icefrog主创打造的唯一正统续作,其完整继承了原作DotA超过一百位的英雄。</blockquote>
+            <blockquote>{{article.Summary}}</blockquote>
             <div class="pros-cons">
                 <ul class="pros">
-                    <li>高质量画质</li>
-                    <li>良心音轨</li>
-                    <li>信仰之力</li>
+                    <li ng-repeat="pro in article.Pros">{{pro}}</li>
                 </ul><!--
-                --><ul class="cons">
-                    <li>信仰之力不足, 炒冷饭</li>
-                    <li>炒冷饭</li>
-                    <li>炒冷饭</li>
-                    <li>炒冷饭</li>
-                    <li>炒冷饭</li>
+             --><ul class="cons">
+                    <li ng-repeat="con in article.Cons">{{con}}</li>
                 </ul>
             </div>
         </div>

@@ -18,9 +18,6 @@
                         article.authorIdCode = $routeParams.author;
                         article.sqNumberForAuthor = $routeParams.article;
                         pageTitle.set(article.Title + " - 其乐");
-                        for (var i in article.AttachedPoints) {
-                            article.AttachedPoints[i].mainName = article.AttachedPoints[i][article.AttachedPoints[i].PreferredName + "Name"];
-                        }
                         article.isMyArticle = union.$localStorage.user.IdCode === $routeParams.author;
                         article.canEdit = article.isMyArticle || union.$localStorage.user.StaffClaim === "operator";
                         if (article.Vote) {
@@ -36,11 +33,11 @@
                             $http.get(apiEndpoint + "normal-point/" + article.VoteForPoint.Id, {
                                 params: {
                                     includeVotes: true,
-                                    includeCoverDescription: true
+                                    includeCoverDescription: true,
+                                    includeRelated: true
                                 }
                             }).then(function (response) {
                                 var point = response.data;
-                                point.mainName = point[point.PreferredName + "Name"];
                                 if (point.PositiveArticleCount + point.NegativeArticleCount > 0) {
                                     point.votePercent = (point.PositiveArticleCount * 10 / (point.PositiveArticleCount + point.NegativeArticleCount)).toFixed(1);
                                     point.voteCircles = [{}, {}, {}, {}, {}];
