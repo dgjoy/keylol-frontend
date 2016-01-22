@@ -232,6 +232,7 @@
                                     reader: user.SubscriberCount,
                                     article: user.ArticleCount
                                 },
+                                show: true,
                                 hasBackground: true,
                                 background: user.ProfilePointBackgroundImage,
                                 title: user.UserName,
