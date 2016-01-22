@@ -60,14 +60,6 @@
     font-size: 19px;
 }
 
-.section-point-votes .reputation-circle {
-    text-align: center;
-    display: inline-block;
-    width: 10px;
-    height: 8px;
-    fill: #c7cdd1;
-}
-
 .section-point-votes .reputation .awesome,
 .section-point-votes .reputation-stat:nth-of-type(5).active circle,
 .section-point-votes .reputation-stat:nth-of-type(5).active span {

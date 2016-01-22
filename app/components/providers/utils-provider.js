@@ -273,6 +273,10 @@
                                 event.preventDefault();
                             }
                         };
+
+                        self.getVoteColor = function (i) {
+                            return ["terrible", "bad", "not-bad", "good", "awesome"][i];
+                        };
                     }
 
                     return new Utils();

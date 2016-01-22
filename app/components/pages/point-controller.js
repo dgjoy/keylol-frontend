@@ -135,6 +135,8 @@
                                     sequenceNumber: article.SequenceNumber,
                                     sources: {},
                                     voteForPoint: article.VoteForPoint,
+                                    vote: article.Vote,
+                                    voteColor: article.Vote?utils.getVoteColor(article.Vote -1):null,
                                     datetime: article.PublishTime,
                                     title: article.Title,
                                     summary: article.Content,
@@ -338,6 +340,8 @@
                                     idCode: article.Author.IdCode
                                 },
                                 voteForPoint: article.VoteForPoint,
+                                vote: article.Vote,
+                                voteColor: article.Vote?utils.getVoteColor(article.Vote -1):null,
                                 sequenceNumber: article.SequenceNumber,
                                 datetime: article.PublishTime,
                                 title: article.Title,

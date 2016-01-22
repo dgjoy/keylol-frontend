@@ -91,11 +91,18 @@
                         <span ng-if="entry.pointInfo">{{entry.pointInfo.reader}} 名读者 / {{entry.pointInfo.article}} 篇文章</span>
                     </h3>
                 </div>
-                <a ng-href="{{entry.url}}" class="entry-content clearfix" ng-class="{'free-height': !entry.thumbnail && !entry.pointAvatar, 'for-point': entry.pointAvatar}">
+                <a ng-href="{{entry.url}}" class="entry-content clearfix" ng-class="{'one-line': !entry.thumbnail && !entry.pointAvatar, 'for-point': entry.pointAvatar, 'free-height': entry.types[0] == '简评'}">
                     <div ng-if="entry.thumbnail" class="thumbnail" webp-background="{{entry.thumbnail|timelineThumbnailUrl}}"></div>
                     <div ng-if="entry.hasBackground" class="background" webp-background="{{entry.background|backgroundUrl}}"></div>
                     <div class="summary">
-                        <h3 ng-if="entry.title">{{entry.title}}</h3>
+                        <h3 ng-if="entry.title">
+                            <span ng-if="entry.types[0] !== '简评'">{{entry.title}}</span>
+                            <div class="vote-circle" ng-if="entry.vote">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="{{entry.voteColor}}" ng-repeat="circle in circles(entry.vote) track by $index">
+                                    <circle cx="4" cy="4"></circle>
+                                </svg>
+                            </div>
+                        </h3>
                         <p>{{entry.summary}}</p>
                     </div>
                     <div class="point-avatar" ng-if="entry.pointAvatar">

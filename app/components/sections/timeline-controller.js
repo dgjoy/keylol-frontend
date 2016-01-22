@@ -18,9 +18,12 @@
                 $searchInput.focus();
                 if ($searchInput.hasClass("highlight")) {
                     $searchInput.removeClass("highlight");
-                    $searchInput[0].offsetWidth;
                 }
                 $searchInput.addClass("highlight");
+            };
+
+            $scope.circles = function(i){
+                return new Array(i);
             };
 
             $scope.clickTheBox = function (entry) {
@@ -171,6 +174,8 @@
                                 title: article.Title,
                                 summary: article.Content,
                                 hasBackground: false,
+                                vote: article.Vote,
+                                voteColor: article.Vote?utils.getVoteColor(article.Vote -1):null,
                                 thumbnail: article.ThumbnailImage,
                                 url: "/article/" + article.Author.IdCode + "/" + article.SequenceNumberForAuthor,
                                 count: {
