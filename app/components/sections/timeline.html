@@ -91,7 +91,7 @@
                         <span ng-if="entry.pointInfo">{{entry.pointInfo.reader}} 名读者 / {{entry.pointInfo.article}} 篇文章</span>
                     </h3>
                 </div>
-                <a ng-href="{{entry.url}}" class="entry-content clearfix" ng-class="{'one-line': !entry.thumbnail && !entry.pointAvatar, 'for-point': entry.pointAvatar, 'free-height': entry.types[0] == '简评'}">
+                <a ng-href="{{entry.url}}" class="entry-content clearfix" ng-class="{'one-line': !entry.thumbnail && !entry.isPoint && !entry.isUser, 'for-point': entry.isPoint || entry.isUser, 'free-height': entry.types[0] == '简评'}">
                     <div ng-if="entry.thumbnail" class="thumbnail" webp-background="{{entry.thumbnail|timelineThumbnailUrl}}"></div>
                     <div ng-if="entry.hasBackground" class="background" webp-background="{{entry.background|backgroundUrl}}"></div>
                     <div class="summary">
@@ -105,7 +105,7 @@
                         </h3>
                         <p>{{entry.summary}}</p>
                     </div>
-                    <div class="point-avatar" ng-if="entry.pointAvatar">
+                    <div class="point-avatar" ng-if="entry.isPoint || entry.isUser">
                         <img class="avatar-big" webp-src="{{entry.pointAvatar|avatarUrl}}" alt="头像">
                     </div>
                 </a>

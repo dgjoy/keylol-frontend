@@ -93,6 +93,7 @@
                                         background: point.BackgroundImage,
                                         pointAvatar: point.AvatarImage,
                                         url: "point/" + point.IdCode,
+                                        isPoint: true,
                                         subscribed: point.Subscribed,
                                         id: point.Id
                                     };
