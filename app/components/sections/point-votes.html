@@ -9,7 +9,7 @@
         </div>
     </div>
     <div class="reputation">
-        <div>
+        <div class="reputation-info">
             <span>
                 <span class="reputation-number" ng-class="{
                     awesome: point.votePercent >= 8,
@@ -19,10 +19,20 @@
                     terrible: point.votePercent < 2
                 }">{{point.votePercent}}</span> / 10
             </span>
-            <p>{{point.totalEvaluate}} 篇评测</p>
+            <p class="total">{{point.totalEvaluate}} 篇评测</p>
         </div>
-        <div class="reputation-level" ng-repeat="stat in point.VoteStats">
-            <div class="" style="width: {{stat / point.totalEvaluate * 100}}%;" ng-if="!point.noVotes"></div>
+        <div>
+            <div class="reputation-stat" ng-repeat="(stat, statCount) in point.VoteStats track by stat" ng-class="{active: stat === point.popularVote}">
+                <div class="left-content">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="reputation-circle" ng-repeat="circle in circles[$index] track by $index">
+                        <circle cx="4" cy="6"></circle>
+                    </svg>
+                    <span ng-if="point.totalEvaluate">{{statCount / point.totalEvaluate * 100 | number: 0}}%</span>
+                    <span ng-if="!point.totalEvaluate">0%</span>
+                </div><!--
+            --><div class="reputation-level" style="width: {{statCount / point.totalEvaluate * 100 }}px;"></div>
+                <p>{{statCount}}</p>
+            </div>
         </div>
     </div>
     <div class="external-links" ng-if="point.StoreLink">

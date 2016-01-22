@@ -42,12 +42,18 @@
     color: #c7cdd1;
 }
 
+.section-point-votes .reputation .reputation-info {
+    margin-bottom: 8px;
+}
+
 .section-point-votes .reputation p {
     float: right;
     margin: 0;
-    padding-top: 5px;
     color: #738a95;
-    vertical-align: bottom;
+}
+
+.section-point-votes .reputation p.total {
+    padding-top: 5px;
 }
 
 .section-point-votes .reputation .reputation-number {
@@ -62,45 +68,86 @@
     fill: #c7cdd1;
 }
 
-.section-point-votes .reputation .awesome {
-    color: #00ab4e;
-    fill: #00ab4e;
+.section-point-votes .reputation .awesome,
+.section-point-votes .reputation-stat:nth-of-type(5).active circle,
+.section-point-votes .reputation-stat:nth-of-type(5).active span {
+    color: #00ab4e !important;
+    fill: #00ab4e !important;
 }
 
-.section-point-votes .reputation .good {
-    color: #71bf44;
-    fill: #71bf44;
+.section-point-votes .reputation .good,
+.section-point-votes .reputation-stat:nth-of-type(4).active circle,
+.section-point-votes .reputation-stat:nth-of-type(4).active span {
+    color: #71bf44 !important;
+    fill: #71bf44 !important;
 }
 
-.section-point-votes .reputation .not-bad {
-    color: #f7943e;
-    fill: #f7943e;
+.section-point-votes .reputation .not-bad,
+.section-point-votes .reputation-stat:nth-of-type(3).active circle,
+.section-point-votes .reputation-stat:nth-of-type(3).active span {
+    color: #f7943e !important;
+    fill: #f7943e !important;
 }
 
-.section-point-votes .reputation .bad {
-    color: #e30613;
-    fill: #e30613;
+.section-point-votes .reputation .bad,
+.section-point-votes .reputation-stat:nth-of-type(2).active circle,
+.section-point-votes .reputation-stat:nth-of-type(2).active span {
+    color: #e30613 !important;
+    fill: #e30613 !important;
 }
 
-.section-point-votes .reputation .terrible {
-    color: #541912;
-    fill: #541912;
+.section-point-votes .reputation .terrible,
+.section-point-votes .reputation-stat:nth-of-type(1).active circle,
+.section-point-votes .reputation-stat:nth-of-type(1).active span {
+    color: #541912 !important;
+    fill: #541912 !important;
 }
 
-.section-point-votes .positive-vs-negative {
-    background: #738a95;
-    height: 5px;
-    margin-bottom: 3px;
+.section-point-votes .reputation-stat:nth-of-type(5).active .reputation-level {
+    background: #00ab4e !important;
 }
 
-.section-point-votes .positive-vs-negative div {
-    background: #11254a;
-    height: 100%;
+.section-point-votes .reputation-stat:nth-of-type(4).active .reputation-level {
+    background: #71bf44 !important;
 }
 
-.section-point-votes .positive-vs-negative div.point-no-votes {
-    background: #c7cdd1;
-    height: 100%;
+.section-point-votes .reputation-stat:nth-of-type(3).active .reputation-level {
+    background: #f7943e !important;
+}
+
+.section-point-votes .reputation-stat:nth-of-type(2).active .reputation-level {
+    background: #e30613 !important;
+}
+
+.section-point-votes .reputation-stat:nth-of-type(1).active .reputation-level {
+    background: #541912 !important;
+}
+
+.section-point-votes .reputation-stat {
+    padding: 4px 0;
+}
+
+.section-point-votes .reputation-stat .left-content {
+    width: 90px;
+    display: inline-block;
+}
+
+.section-point-votes .reputation-stat .reputation-circle {
+    width: 10px;
+    height: 10px;
+}
+
+.section-point-votes .reputation-stat .reputation-circle circle {
+    r: 4;
+    fill: #c7cdd1;
+}
+
+.section-point-votes .reputation-stat .reputation-level {
+    transform: translateY(-50%);
+    background: #c7cdd1 ;
+    height: 2px;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 .section-point-votes .external-links {

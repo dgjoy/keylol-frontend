@@ -274,13 +274,12 @@
                         $scope.hasVote = true;
                     }
 
-                    console.log(point);
                     point.totalEvaluate = 0;
                     var totalVote = 0;
                     for(var i in point.VoteStats){
                         point.totalEvaluate += point.VoteStats[i];
                         totalVote += point.VoteStats[i] * 2 * i;
-                        if(point.VoteStats[i] > 0 && (!point.popularVote || point.VoteStats[i] > point.VoteStats[point.popularVote])){
+                        if(point.VoteStats[i] > 0 && (!point.popularVote || point.VoteStats[i] >= point.VoteStats[point.popularVote])){
                             point.popularVote = i;
                         }
                     }
