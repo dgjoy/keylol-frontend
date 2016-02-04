@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=1240">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <% if (urlCanonical) { %><script>
-        if (/^keylol\.com$/.test(window.location.hostname) || "https:" !== window.location.protocol)
+        if (window.location.hostname !== "www.keylol.com" || window.location.protocol !== "https:")
             window.location = "https://www.keylol.com" + window.location.pathname;
     </script>
     <% } %><title ng-bind="pageTitle">载入中 - 其乐</title>

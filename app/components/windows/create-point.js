@@ -54,7 +54,7 @@
                 if (submitLock)
                     return;
                 submitLock = true;
-                var regex = /^(?:http:|https:)?\/\/keylol\.b0\.upaiyun\.com\/(.*?)(?:!.*)?$/i;
+                var regex = /^(?:http:|https:)?\/\/storage\.keylol\.com\/(.*?)(?:!.*)?$/i;
                 var avatarMatch = $scope.inline.avatarImageFull.match(regex);
                 $scope.vm.AvatarImage = avatarMatch ? "keylol://" + avatarMatch[1] : $scope.inline.avatarImageFull;
                 var backgroundMatch = $scope.inline.backgroundImageFull.match(regex);

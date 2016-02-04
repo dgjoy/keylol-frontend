@@ -10,7 +10,7 @@
                 link: function (scope, element, attrs) {
                     attrs.$observe("articleImageSrc", function (value) {
                         var destination = $filter("uriRelocate")(value, "article.image");
-                        if (/^(?:http:|https:)?\/\/(keylol|keylol-steam-cdn)\.b0\.upaiyun\.com\//i.test(destination))
+                        if (/^(?:http:|https:)?\/\/(storage|steamcdn)\.keylol\.com\//i.test(destination))
                             utils.supportWebp.then(function () {
                                 attrs.$set("src", destination + ".webp");
                             }, function () {

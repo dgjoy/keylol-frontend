@@ -34,7 +34,6 @@ var buildConfigs = {
     prod: {
         bundle: true,
         apiEndpoint: "https://api.keylol.com/",
-        cdnBase: "https://keylol-static.b0.upaiyun.com/",
         urlCanonical: true
     }
 };
@@ -186,13 +185,10 @@ var getBuildTask = function (configName) {
             scriptFiles = getFiles(vendorScripts.concat(appSrcipts));
             stylesheetFiles = getFiles(stylesheets);
         }
-        var mapCdnPath = function (path) {
-            return config.cdnBase ? config.cdnBase + path : path;
-        };
         var stream = gulp.src("app/index.html.ejs")
             .pipe(template({
-                scripts: _.map(scriptFiles, mapCdnPath),
-                stylesheets: _.map(stylesheetFiles, mapCdnPath),
+                scripts: scriptFiles,
+                stylesheets: stylesheetFiles,
                 urlCanonical: config.urlCanonical
             }))
             .pipe(rename("index.html"));
