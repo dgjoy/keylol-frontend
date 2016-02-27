@@ -22,7 +22,7 @@
             <p class="total">{{point.totalEvaluate}} 篇评测</p>
         </div>
         <div>
-            <div class="reputation-stat" ng-repeat="(stat, statCount) in point.VoteStats track by stat" ng-class="{active: stat === point.popularVote}">
+            <div class="reputation-stat" ng-repeat="(stat, statCount) in point.VoteStats track by stat" ng-class="{active: stat === point.highlight}">
                 <div class="left-content">
                     <svg xmlns="http://www.w3.org/2000/svg" class="reputation-circle" ng-repeat="circle in circles[$index] track by $index">
                         <circle cx="4" cy="6"></circle>

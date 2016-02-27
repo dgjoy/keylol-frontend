@@ -39,11 +39,15 @@
                             inputs: {
                                 options: {
                                     voteForPoint: $scope.point,
+                                    vm: {
+                                        TypeName: "评",
+                                        Pros: [],
+                                        Cons: []
+                                    },
                                     doNotLoadDraft: true
                                 }
                             }
                         });
-                        close();
                     }
                 });
             };
