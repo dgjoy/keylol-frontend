@@ -1,0 +1,22 @@
+﻿<popup class="popup-related-games">
+    <div class="wrapper clearfix box-shadowed-deeper">
+        <h1 class="labeled-heading">共 {{count}} 款{{typeText}}的游戏</h1>
+        <ul class="years">
+            <li ng-repeat="gameYear in gameYears track by gameYear.year">
+                <p>{{gameYear.year}}</p>
+                <ul class="games clearfix">
+                    <li ng-repeat="game in gameYear.games">
+                        <point-link type="'point'" avatar-url="game.AvatarImage" id-code="game.IdCode" ></point-link>
+                        <div class="title">
+                            <p>
+                                <point-link type="'point'" point-name="utils.getPointFirstName(game)" id-code="game.IdCode" ></point-link>
+                            </p>
+                            <p>{{utils.getPointSecondName(game)}}</p>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <a class="view-all">查看全部</a>
+    </div>
+</popup>

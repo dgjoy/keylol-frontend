@@ -90,16 +90,15 @@
                     }
                 }
             };
-            var filterText;
             for (var i in $scope.filterArray) {
                 if ($scope.filterArray[i].active === true) {
-                    filterText = $scope.filterArray[i].text;
+                    $scope.filterText = $scope.filterArray[i].text;
                 }
             }
             $scope.$watch(function () {
                 return options.searchText
             }, function () {
-                getSearchResult(filterText);
+                getSearchResult($scope.filterText);
             });
             $scope.changeFilter = function ($index) {
                 if (!$scope.filterArray[$index].active) {
@@ -107,8 +106,8 @@
                         $scope.filterArray[i].active = false;
                     }
                     $scope.filterArray[$index].active = true;
-                    filterText = $scope.filterArray[$index].text;
-                    getSearchResult(filterText);
+                    $scope.filterText = $scope.filterArray[$index].text;
+                    getSearchResult($scope.filterText);
                 }
             };
             $scope.jumpTo = function (url) {

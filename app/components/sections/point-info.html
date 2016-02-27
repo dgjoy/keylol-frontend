@@ -1,5 +1,5 @@
 ﻿<div class="section-point-info box-shadowed" ng-controller="PointInfoController">
-    <p class="main-description">{{point.Description}}</p>
+    <p class="main-description" popup="showRelatedPopup">{{point.Description}}</p>
     <div ng-if="union.point.Type === 'Game'" class="info-details">
         <div class="info-attribute">
             <p ng-if="point.DeveloperPoints.length > 0">
@@ -51,7 +51,11 @@
         </div>
     </div>
     <div ng-if="union.point.Type !== 'Game'" class="info-actions clearfix">
-        <span class="related-list" ng-repeat="list in data.relatedList"><a>{{list.text}}</a>（{{list.count}}）</span>
+        <span class="related-list" ng-if="point.GameCountAsGenre"><a ng-click="showRelatedGames($event, 'Genre', point.GameCountAsGenre)">此流派的游戏</a>（{{point.GameCountAsGenre}}）</span>
+        <span class="related-list" ng-if="point.GameCountAsTag"><a ng-click="showRelatedGames($event, 'Tag', point.GameCountAsTag)">此特性的游戏</a>（{{point.GameCountAsTag}}）</span>
+        <span class="related-list" ng-if="point.GameCountAsSeries"><a ng-click="showRelatedGames($event, 'Series', point.GameCountAsSeries)">此系列的游戏</a>（{{point.GameCountAsSeries}}）</span>
+        <span class="related-list" ng-if="point.GameCountAsPublisher"><a ng-click="showRelatedGames($event, 'Publisher', point.GameCountAsPublisher)">历代发行游戏</a>（{{point.GameCountAsPublisher}}）</span>
+        <span class="related-list" ng-if="point.GameCountAsDeveloper"><a ng-click="showRelatedGames($event, 'Developer', point.GameCountAsDeveloper)">历代开发游戏</a>（{{point.GameCountAsDeveloper}}）</span>
         <a class="edit-info">编辑资料</a>
     </div>
 </div>
