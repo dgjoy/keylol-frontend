@@ -41,7 +41,7 @@
                 <span>{{vm.Summary.length}}/49</span>
                 <input type="text" ng-model="vm.Summary" placeholder="选填：文章在讯息轨道上预览时会展示这段概述。">
             </div>
-            <button type="submit" class="window-confirm-button">
+            <button type="submit" class="window-confirm-button" ng-disabled="submitLock">
                 <img class="arrow-right" src="assets/images/arrow-right.png" alt="下一步">
                 <img class="signature-pen" src="assets/images/signature-pen.png" alt="提交">
                 <hgroup class="font-myriad-keylol">

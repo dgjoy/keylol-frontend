@@ -127,7 +127,7 @@ window[position=right]::after {
 .window table input[type=text],
 .window table input[type=password],
 .window table input[type=email],
-.window table textarea{
+.window table textarea {
     background: none;
     height: 100%;
     width: 100%;
@@ -158,6 +158,11 @@ window[position=right]::after {
     margin-right: -8px;
     position: relative;
     min-width: 305px;
+}
+
+.window .window-confirm-button[disabled=disabled] {
+    background-color: #C7CDD1;
+    cursor: wait;
 }
 
 .window .window-confirm-button::after {

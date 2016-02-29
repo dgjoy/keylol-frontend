@@ -10,10 +10,10 @@
             $scope.user = union.$localStorage.user;
             $scope.pageElements = union.pageElements;
             $scope.textFocus = false;
-            $scope.submitDisabled = false;
+            $scope.submitLock = false;
             $scope.doComment = function () {
                 if ($scope.currentComment) {
-                    $scope.submitDisabled = true;
+                    $scope.submitLock = true;
                     var replyArray = dealWithReply($scope.currentComment);
                     $http.post(apiEndpoint + "comment", {
                         Content: $scope.currentComment,
@@ -21,13 +21,13 @@
                         ReplyToCommentsSN: replyArray
                     }).then(function (response) {
                         notification.success("评论已发出");
-                        $scope.submitDisabled = false;
+                        $scope.submitLock = false;
                         $scope.currentComment = "";
                         var sqNumber = response.data.SequenceNumberForArticle;
                         getAndFlushComments(union.article, sqNumber, "sequence");
                     }, function (response) {
                         notification.error("评论发送失败", response);
-                        $scope.submitDisabled = false;
+                        $scope.submitLock = false;
                     });
                 }
             };

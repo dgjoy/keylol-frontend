@@ -199,11 +199,11 @@
                 return null;
             };
 
-            var submitLock = false;
+            $scope.submitLock = false;
             $scope.submit = function () {
-                if (submitLock)
+                if ($scope.submitLock)
                     return;
-                submitLock = true;
+                $scope.submitLock = true;
                 var notComplete = findNotCompleteVm();
                 if(!notComplete){
                     if ($scope.vm.Id) {
@@ -219,7 +219,7 @@
                                 notification.success("文章已发布");
                             }, function (response) {
                                 notification.error("未知错误, 请尝试再次发布", response);
-                                submitLock = false;
+                                $scope.submitLock = false;
                             });
                     } else {
                         $http.post(apiEndpoint + "article", $scope.vm)
@@ -233,12 +233,12 @@
                                 notification.success("文章已发布");
                             }, function (response) {
                                 notification.error("未知错误, 请尝试再次发布", response);
-                                submitLock = false;
+                                $scope.submitLock = false;
                             });
                     }
                 }else {
                     notification.error(notComplete + "不能为空");
-                    submitLock = false;
+                    $scope.submitLock = false;
                 }
             };
         }
