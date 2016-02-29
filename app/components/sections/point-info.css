@@ -5,6 +5,10 @@
 }
 
 .section-point-info .main-description {
+    margin: 0;
+}
+
+.section-point-info .has-description {
     margin: 0 0 20px 0;
 }
 
@@ -40,6 +44,7 @@
 }
 
 .section-point-info .info-details .info-review .point-cover {
+    margin-bottom: 10px;
     width: 120px;
     height: 45px;
     display: block;

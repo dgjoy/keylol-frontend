@@ -2,8 +2,8 @@
     "use strict";
 
     keylolApp.controller("SearchSelectorController", [
-        "$scope", "union", "$location", "options", "$http", "notification", "utils",
-        function ($scope, union, $location, options, $http, notification, utils) {
+        "$scope", "union", "$location", "options", "$http", "notification", "utils", "window",
+        function ($scope, union, $location, options, $http, notification, utils, window) {
             $scope.onSearching = options.onSearching;
             $scope.filterArray = union.searchFilter;
             var getSearchResult = function (filterTxt) {
@@ -100,6 +100,12 @@
             }, function () {
                 getSearchResult($scope.filterText);
             });
+            $scope.showPointAppealWindow = function () {
+                window.show({
+                    templateUrl: "components/windows/shop-link.html",
+                    controller: "ShopLinkController"
+                });
+            };
             $scope.changeFilter = function ($index) {
                 if (!$scope.filterArray[$index].active) {
                     for (var i in $scope.filterArray) {

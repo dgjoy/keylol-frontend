@@ -17,19 +17,6 @@
                     controller: "PointListController"
                 });
             };
-            $scope.showShortReviewWindow = function () {
-                window.show({
-                    templateUrl: "components/windows/short-review.html",
-                    controller: "ShortReviewController",
-                    inputs: {options: null}
-                });
-            };
-            $scope.showPointAppealWindow = function () {
-                window.show({
-                    templateUrl: "components/windows/shop-link.html",
-                    controller: "ShopLinkController"
-                });
-            };
         }
     ]);
 })();

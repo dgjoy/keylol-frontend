@@ -15,6 +15,10 @@
                     enName: "Link Received"
                 },
                 {
+                    cnName: "抓取信息",
+                    enName: "Fetching Information"
+                },
+                {
                     cnName: "确认据点",
                     enName: "Confirm Point"
                 },
@@ -22,7 +26,7 @@
                     cnName: "完成开设",
                     enName: "Finish"
                 }
-            ]' current="0"></flashing-figure>
+            ]' current="currentStation"></flashing-figure>
             <table>
                 <colgroup>
                     <col style="width: 38%">
@@ -33,16 +37,16 @@
                     <td>
                         <h3 class="font-myriad-lisong">商店链接</h3>
                         <h4>
-                            <span>例如：store.steampowered.com/app/255710</span>
+                            <span ng-class="{error: shopLinkError}">例如：store.steampowered.com/app/255710</span>
                         </h4>
                     </td>
                     <td>
-                        <input name="email" type="email" tabindex="4" ng-model="vm.Email">
+                        <input name="shopLink" type="text" tabindex="4" ng-model="vm.shopLink">
                     </td>
                 </tr>
                 </tbody>
             </table>
-            <button type="submit" class="window-confirm-button">
+            <button ng-disabled="submitLock" type="submit" class="window-confirm-button">
                 <img class="arrow-right" src="assets/images/arrow-right.png" alt="下一步">
                 <img class="new-point" src="assets/images/new-point.png" alt="提交">
                 <hgroup class="font-myriad-keylol">
@@ -51,7 +55,7 @@
                 </hgroup>
             </button>
             <div class="switch-to-not-game">
-                <button type="button" class="border-button left-border" ng-click="">开设非游戏据点</button>
+                <!--<button type="button" class="border-button left-border" ng-click="">开设非游戏据点</button>-->
                 <p>商店页面会提供开设据点需要的大部分资料，你也可以完善未采集到的信息。</p>
             </div>
         </form>

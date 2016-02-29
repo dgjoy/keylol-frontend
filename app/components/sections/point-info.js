@@ -66,6 +66,16 @@
                         count: count
                     }
                 });
+            };
+            $scope.showPointEdit = function (isGame) {
+                window.show({
+                    templateUrl: "components/windows/point-settings.html",
+                    controller: "PointSettingsController",
+                    inputs: {
+                        point: $scope.point,
+                        isGame: isGame
+                    }
+                });
             }
         }
     ]);

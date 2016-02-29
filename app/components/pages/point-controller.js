@@ -265,6 +265,7 @@
                         includeSubscribed: true,
                         includeRelated: true,
                         includeCoverDescription: true,
+                        includeMore: true,
                         idType: "IdCode"
                     }
                 }).then(function (response) {

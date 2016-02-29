@@ -32,6 +32,7 @@
                                 options: {
                                     doNotLoadDraft: true,
                                     vm: {
+                                        Id: $scope.vm.Id,
                                         TypeName: "评",
                                         Title: $scope.vm.Title,
                                         Content: $scope.vm.Content,

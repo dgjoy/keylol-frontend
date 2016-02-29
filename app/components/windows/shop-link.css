@@ -3,12 +3,21 @@
     width: 900px;
 }
 
+.window-shop-link .error {
+    color: red;
+}
+
 .window-shop-link .heading {
     margin: 16px 0 28px;
 }
 
 .window-shop-link .window .window-confirm-button {
     margin-right: -24px;
+}
+
+.window-shop-link .window .window-confirm-button[disabled=disabled] {
+    background-color: #C7CDD1;
+    cursor: wait;
 }
 
 .window-shop-link .window table {
