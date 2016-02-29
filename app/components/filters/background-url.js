@@ -5,7 +5,7 @@
         "$filter",
         function ($filter) {
             return function (input) {
-                return $filter("uriRelocate")(input, "profile.point.background", "keylol://0f9b6041e0354a7ae741e2650fa0c066.jpg");
+                return $filter("uriRelocate")(input, "profile.point.background", "keylol://e2d611b9650daf5c08d307f24cf8b308.jpg");
             };
         }
     ]);

@@ -177,6 +177,7 @@
                                 vote: article.Vote,
                                 voteColor: article.Vote?utils.getVoteColor(article.Vote -1):null,
                                 thumbnail: article.ThumbnailImage,
+                                hasThumbnail: true,
                                 url: "/article/" + article.Author.IdCode + "/" + article.SequenceNumberForAuthor,
                                 count: {
                                     like: article.LikeCount,

@@ -12,10 +12,10 @@
             };
             $scope.shopLinkError = false;
             $scope.submit = function () {
-                if(!$scope.submitLock){
+                if (!$scope.submitLock) {
                     $scope.submitLock = true;
                     var appId = checkShopLink($scope.vm.shopLink);
-                    if(appId){
+                    if (appId) {
                         notification.process("正在抓取商店信息，可能需要几秒的时间");
                         $scope.currentStation = 1;
                         $http.post(apiEndpoint + "normal-point/from-app-id", {}, {
@@ -37,7 +37,7 @@
                             notification.error("未知错误", response);
                             $scope.submitLock = false;
                         });
-                    }else {
+                    } else {
                         $scope.shopLinkError = true;
                         $scope.submitLock = false
                     }
@@ -45,12 +45,11 @@
             };
 
             function checkShopLink(input) {
-                var re1 = /^(http:\/\/)?(store.steampowered.com\/app\/)?\d+$/i;
-                if(!re1.test(input)){
-                    return false;
+                var matches = input.match(/(?:https?:\/\/)?store\.steampowered\.com\/app\/(\d+)\/*/i);
+                if (matches) {
+                    return parseInt(matches[1]);
                 }
-                var re2 = /\d+$/;
-                return parseInt(re2.exec(input)[0]);
+                return false;
             }
         }
     ]);

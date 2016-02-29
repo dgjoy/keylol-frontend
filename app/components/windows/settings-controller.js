@@ -281,7 +281,7 @@
                             uploads.avatarImage.then(function (response) {
                                 dirtyFields.AvatarImage = "keylol://" + response.data.url;
                             }, function () {
-                                notification.error("头像上传失败。");
+                                notification.error("头像上传失败");
                                 submitLock = false;
                             });
                         }
@@ -290,7 +290,7 @@
                             uploads.profilePointBackgroundImage.then(function (response) {
                                 dirtyFields.ProfilePointBackgroundImage = "keylol://" + response.data.url;
                             }, function () {
-                                notification.error("个人据点横幅上传失败。");
+                                notification.error("个人据点横幅上传失败");
                                 submitLock = false;
                             });
                         }
@@ -298,7 +298,7 @@
                             submit();
                         });
                     }, function () {
-                        notification.error("文件上传验证失效。");
+                        notification.error("文件上传验证失效");
                         submitLock = false;
                     });
                 } else {
