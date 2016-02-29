@@ -141,6 +141,7 @@
 }
 
 .window-point-settings table .description textarea {
+    padding: 5px;
     height: 110px;
 }
 

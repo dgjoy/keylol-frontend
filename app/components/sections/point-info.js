@@ -67,12 +67,13 @@
                     }
                 });
             };
-            $scope.showGameEdit = function () {
+            $scope.showPointEdit = function (isGame) {
                 window.show({
                     templateUrl: "components/windows/point-settings.html",
                     controller: "PointSettingsController",
                     inputs: {
-                        point: $scope.point
+                        point: $scope.point,
+                        isGame: isGame
                     }
                 });
             }

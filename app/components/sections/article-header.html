@@ -59,9 +59,9 @@
         <div class="divider"></div>
         <div class="review-detail">
             <div class="user-info">
-                <span class="game-hours">游戏在档 790.5 小时</span>
-                <point-link type="'user'" point-name="'@ZenDay'" id-code="10101"></point-link>
-                <p class="review-count">7 篇评测 / 29 段简评</p>
+                <!--<span class="game-hours">游戏在档 790.5 小时</span>-->
+                <point-link type="'user'" point-name="summary.userName" id-code="summary.idCode"></point-link>
+                <p class="review-count">{{summary.reviewCount}} 篇评测 / {{summary.shortReviewCount}} 段简评</p>
             </div>
             <blockquote>{{article.Summary}}</blockquote>
             <div class="pros-cons">

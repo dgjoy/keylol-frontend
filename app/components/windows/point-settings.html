@@ -10,7 +10,7 @@
             <li ng-class="{current: page === 'basic'}">
                 <a href="" ng-class="{'tab-changed': optionsInPageChanged('basic')}" ng-click="setPage('basic')">基础资料</a>
             </li>
-            <li ng-class="{current: page === 'relationship'}">
+            <li ng-if="isGame" ng-class="{current: page === 'relationship'}">
                 <a href="" ng-class="{'tab-changed': optionsInPageChanged('relationship')}" ng-click="setPage('relationship')">关联据点</a>
             </li>
             <li ng-class="{current: page === 'images'}">
@@ -38,7 +38,8 @@
             <td>
                 <h3 class="font-myriad-lisong">英文名</h3>
                 <h4>
-                    <span>Steam 商店中的游戏名称。</span>
+                    <span ng-if="isGame">Steam 商店中的游戏名称。</span>
+                    <span ng-if="!isGame">Steam 商店中的官方名称。</span>
                 </h4>
             </td>
             <td>
@@ -57,7 +58,7 @@
                 <input name="chineseName" type="text" tabindex="4" ng-model="vm.ChineseName">
             </td>
         </tr>
-        <tr>
+        <tr ng-if="isGame">
             <td>
                 <h3 class="font-myriad-lisong">别名</h3>
                 <h4>
@@ -94,9 +95,13 @@
     </table>
     <table>
         <tr>
-            <td>
+            <td ng-if="isGame">
                 <h3 class="font-myriad-lisong">游戏介绍</h3>
                 <h4>默认抓取自 Steam 商店页面，推荐重新撰写或润色翻译，游戏介绍会显示再据点页面的顶部和悬浮卡片中。</h4>
+            </td>
+            <td ng-if="!isGame">
+                <h3 class="font-myriad-lisong">据点介绍</h3>
+                <h4>对这个据点对象的简介，介绍会显示在据点页面的顶部和悬浮卡片中。</h4>
             </td>
         </tr>
         <tr>
@@ -105,7 +110,7 @@
             </td>
         </tr>
     </table>
-    <table>
+    <table ng-if="isGame">
         <colgroup>
             <col style="width: 36%">
             <col style="width: 64%">
@@ -126,7 +131,7 @@
         </tbody>
     </table>
 </div>
-<div ng-show="page === 'relationship'">
+<div ng-if="isGame" ng-show="page === 'relationship'">
     <table>
         <colgroup>
             <col style="width: 36%">
@@ -255,14 +260,14 @@
                     <button type="button" tabindex="5" ngf-select ng-model="files.avatarImage" accept="image/*">胶水</button>
                 </div>
             </td>
-            <td>
+            <td ng-if="isGame">
                 <h3 class="font-myriad-lisong">封面</h3>
                 <h4>
                     <span>评测页面中的长方形头像。</span>
                 </h4>
                 <div class="upload-cover" ng-if="vm.CoverImage">
                     <div class="clear-button" ng-click="vm.CoverImage = ''"></div>
-                    <img class="cover" webp-src="{{vm.CoverImage | coverUrl }}">
+                    <img class="cover" webp-src="{{vm.CoverImage | coverUrl: 'big' }}">
                 </div>
                 <div class="upload-cover" ng-if="files.coverImage">
                     <div class="clear-button" ng-click="files.coverImage = null"></div>

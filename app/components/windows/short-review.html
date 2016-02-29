@@ -5,10 +5,10 @@
         </div>
         <form name="form" ng-submit="submit()">
             <div class="short-header">
-                <img class="point-cover" src="{{options.point.CoverImage | coverUrl}}">
+                <img class="point-cover" webp-src="{{options.point.CoverImage | coverUrl}}">
                 <div class="title">
                     <h4>简评 <span>{{options.point.Name}}</span></h4>
-                    <p>在档{{options.gameHours}}小时</p>
+                    <!--<p>在档{{options.gameHours}}小时</p>-->
                 </div>
                 <point-review bind-review="vm.Vote"></point-review>
             </div>

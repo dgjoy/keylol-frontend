@@ -3,41 +3,56 @@
 
     keylolApp.controller("PointSettingsController", [
         "$scope", "close", "utils", "$http", "apiEndpoint", "base64", "Upload", "$q", "notification", "$timeout",
-        "point", "$filter", "$location", "union", "$route",
+        "point", "isGame", "$filter", "$location", "union", "$route",
         function ($scope, close, utils, $http, apiEndpoint, base64, Upload, $q, notification, $timeout,
-                  point, $filter, $location, union, $route) {
+                  point, isGame, $filter, $location, union, $route) {
             $scope.page = "basic";
             $scope.uniqueIds = {};
+            $scope.isGame = isGame;
             for (var i = 0; i < 2; ++i) {
                 $scope.uniqueIds[i] = utils.uniqueId();
             }
             $scope.files = {};
 
             var originalVM = {};
-            $scope.vm = {
-                ChineseName: point.ChineseName,
-                DisplayAliases: point.DisplayAliases,
-                EnglishAliases: point.EnglishAliases,
-                ChineseAliases: point.ChineseAliases,
-                Description: point.Description,
+            if(isGame){
+                $scope.vm = {
+                    ChineseName: point.ChineseName,
+                    DisplayAliases: point.DisplayAliases,
+                    EnglishAliases: point.EnglishAliases,
+                    ChineseAliases: point.ChineseAliases,
+                    Description: point.Description,
 
-                DeveloperPointsId: [],
-                PublisherPointsId: [],
-                GenrePointsId: [],
-                TagPointsId: [],
-                MajorPlatformPointsId: [],
-                MinorPlatformPointsId: [],
-                SeriesPointsId: [],
+                    DeveloperPointsId: [],
+                    PublisherPointsId: [],
+                    GenrePointsId: [],
+                    TagPointsId: [],
+                    MajorPlatformPointsId: [],
+                    MinorPlatformPointsId: [],
+                    SeriesPointsId: [],
 
-                AvatarImage: point.AvatarImage,
-                BackgroundImage: point.BackgroundImage,
-                CoverImage: point.CoverImage
-            };
+                    AvatarImage: point.AvatarImage,
+                    BackgroundImage: point.BackgroundImage,
+                    CoverImage: point.CoverImage
+                };
+            }else {
+                $scope.vm = {
+                    ChineseName: point.ChineseName,
+                    EnglishAliases: point.EnglishAliases,
+                    ChineseAliases: point.ChineseAliases,
+                    Description: point.Description,
+
+                    AvatarImage: point.AvatarImage,
+                    BackgroundImage: point.BackgroundImage
+                };
+            }
 
             if(union.$localStorage.user.StaffClaim === 'operator'){
                 $scope.isOperator = true;
                 $scope.vm.EnglishName = point.EnglishName;
-                $scope.vm.ReleaseDate = $filter("date")(point.ReleaseDate, "yyyy-MM-dd");
+                if(isGame){
+                    $scope.vm.ReleaseDate = $filter("date")(point.ReleaseDate, "yyyy-MM-dd");
+                }
 
                 $scope.vm.IdCode = point.IdCode;
                 $scope.vm.NameInSteamStore = point.NameInSteamStore;
@@ -45,35 +60,38 @@
             }else {
                 $scope.point = point;
             }
-            $scope.inline = {
-                DeveloperPoints: point.DeveloperPoints,
-                PublisherPoints: point.PublisherPoints,
-                GenrePoints: point.GenrePoints,
-                TagPoints: point.TagPoints,
-                MajorPlatformPoints: point.MajorPlatformPoints,
-                MinorPlatformPoints: point.MinorPlatformPoints,
-                SeriesPoints: point.SeriesPoints
-            };
             $.extend(originalVM, $scope.vm);
 
-            for(var attr in $scope.inline){
-                if($scope.inline.hasOwnProperty(attr)){
-                    (function(relatedName){
-                        $scope.$watchCollection("inline." + relatedName, function (newValue) {
-                            $scope.vm[relatedName + "Id"] = [];
-                            if (newValue)
-                                for (var i = 0; i < newValue.length; ++i) {
-                                    $scope.vm[relatedName + "Id"].push(newValue[i].Id);
-                                }
-                        });
-                    })(attr);
-                    var thisAttr = $scope.inline[attr];
-                    originalVM[attr + "Id"] = [];
-                    for (var j = 0; j < thisAttr.length; ++j) {
-                        originalVM[attr + "Id"].push(thisAttr[j].Id);
+            if(isGame){
+                $scope.inline = {
+                    DeveloperPoints: point.DeveloperPoints,
+                    PublisherPoints: point.PublisherPoints,
+                    GenrePoints: point.GenrePoints,
+                    TagPoints: point.TagPoints,
+                    MajorPlatformPoints: point.MajorPlatformPoints,
+                    MinorPlatformPoints: point.MinorPlatformPoints,
+                    SeriesPoints: point.SeriesPoints
+                };
+                for(var attr in $scope.inline){
+                    if($scope.inline.hasOwnProperty(attr)){
+                        (function(relatedName){
+                            $scope.$watchCollection("inline." + relatedName, function (newValue) {
+                                $scope.vm[relatedName + "Id"] = [];
+                                if (newValue)
+                                    for (var i = 0; i < newValue.length; ++i) {
+                                        $scope.vm[relatedName + "Id"].push(newValue[i].Id);
+                                    }
+                            });
+                        })(attr);
+                        var thisAttr = $scope.inline[attr];
+                        originalVM[attr + "Id"] = [];
+                        for (var j = 0; j < thisAttr.length; ++j) {
+                            originalVM[attr + "Id"].push(thisAttr[j].Id);
+                        }
                     }
                 }
             }
+
             var isVMDirty = function (key) {
                 if(typeof $scope.vm[key] !== "object"){
                     return $scope.vm[key] !== originalVM[key];
@@ -190,6 +208,7 @@
                             });
                             uploads.avatarImage.then(function (response) {
                                 $scope.vm.AvatarImage = "keylol://" + response.data.url;
+                                $scope.files.avatarImage = null;
                             }, function () {
                                 notification.error("据点图标上传失败。");
                                 submitLock = false;
@@ -207,6 +226,7 @@
                             });
                             uploads.backgroundImage.then(function (response) {
                                 $scope.vm.BackgroundImage = "keylol://" + response.data.url;
+                                $scope.files.backgroundImage = null;
                             }, function () {
                                 notification.error("据点大图上传失败。");
                                 submitLock = false;
@@ -224,6 +244,7 @@
                             });
                             uploads.coverImage.then(function (response) {
                                 $scope.vm.CoverImage = "keylol://" + response.data.url;
+                                $scope.files.coverImage = null;
                             }, function () {
                                 notification.error("据点封面上传失败。");
                                 submitLock = false;

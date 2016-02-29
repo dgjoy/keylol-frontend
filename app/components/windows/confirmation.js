@@ -19,7 +19,8 @@
                     templateUrl: "components/windows/point-settings.html",
                     controller: "PointSettingsController",
                     inputs: {
-                        point: point
+                        point: point,
+                        isGame: true
                     }
                 });
                 close();

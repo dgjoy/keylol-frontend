@@ -77,6 +77,7 @@
                         includeSubscribed: $routeParams.author != union.$localStorage.user.IdCode,
                         includeStats: true,
                         includeProfilePointBackgroundImage: true,
+                        includeReviewStats: true,
                         idType: "IdCode"
                     }
                 }).then(function (response) {
@@ -94,7 +95,11 @@
                             articleNum: author.ArticleCount
                         },
                         id: author.Id,
-                        url: "user/" + author.IdCode
+                        url: "user/" + author.IdCode,
+                        reviewCount: author.ReviewCount,
+                        shortReviewCount: author.ShortReviewCount,
+                        idCode: author.IdCode,
+                        userName: "@" + author.UserName
                     });
                     if (author.IdCode != union.$localStorage.user.IdCode) {
                         summary.subscribed = author.Subscribed;
