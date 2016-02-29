@@ -234,6 +234,7 @@
                     }
                 }else {
                     notification.error(notComplete + "不能为空");
+                    submitLock = false;
                 }
             };
         }

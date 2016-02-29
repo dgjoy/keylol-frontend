@@ -11,7 +11,7 @@
         <span class="points" ng-if="article.TypeName != '评' && article.TypeName != '简评'">
             <point-link ng-repeat="point in article.AttachedPoints track by point.Id" type="'point'" id-code="point.IdCode" point-name="'「' + utils.getPointFirstName(point) + '」'"></point-link>
         </span>
-        <span class="points" ng-if="article.TypeName === '评' || article.TypeName === '简评'">
+        <span class="points" ng-if="(article.TypeName === '评' || article.TypeName === '简评') && article.VoteForPoint">
             <point-link type="'point'" id-code="article.VoteForPoint.IdCode" point-name="'「' + utils.getPointFirstName(article.VoteForPoint) + '」'"></point-link>
         </span>
     </div>
@@ -66,10 +66,10 @@
             <blockquote>{{article.Summary}}</blockquote>
             <div class="pros-cons">
                 <ul class="pros">
-                    <li ng-repeat="pro in article.Pros">{{pro}}</li>
+                    <li ng-repeat="pro in article.Pros track by $index">{{pro}}</li>
                 </ul><!--
              --><ul class="cons">
-                    <li ng-repeat="con in article.Cons">{{con}}</li>
+                    <li ng-repeat="con in article.Cons track by $index">{{con}}</li>
                 </ul>
             </div>
         </div>
