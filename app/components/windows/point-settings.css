@@ -3,6 +3,10 @@
     width: 900px;
 }
 
+.window-point-settings h4 {
+    white-space: normal;
+}
+
 .window-point-settings .error {
     color: red;
 }
@@ -57,27 +61,73 @@
 }
 
 .window-point-settings .upload-avatar {
+    margin: 14px 0;
     text-align: center;
     position: relative;
 }
 
+.window-point-settings .upload-avatar .clear-button {
+    position: absolute;
+    top: 0;
+    left: calc(50% + 49px);
+    width: 14px;
+    height: 14px;
+    background: url(../../assets/images/clear-button.png) no-repeat;
+    background-size: contain;
+    cursor: pointer;
+}
+
 .window-point-settings .upload-avatar .avatar-big {
-    width: 112px;
-    height: 112px;
+    width: 90px;
+    height: 90px;
     margin: 0 auto;
     background-size: cover;
     background-position: center;
 }
 
-.window-point-settings .upload-avatar .clear-button {
+.window-point-settings .upload-avatar.no-image {
+    width: 90px;
+    height: 90px;
+    padding-top: 9px;
+    box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px dashed #738a95;
+}
+
+.window-point-settings .upload-cover {
+    margin: 14px 0;
+    text-align: center;
+    position: relative;
+}
+
+.window-point-settings .upload-cover .clear-button {
     position: absolute;
-    top: 5px;
-    right: 5px;
-    width: 12px;
-    height: 12px;
+    top: 0;
+    left: calc(50% + 124px);
+    width: 14px;
+    height: 14px;
     background: url(../../assets/images/clear-button.png) no-repeat;
     background-size: contain;
     cursor: pointer;
+}
+
+.window-point-settings .upload-cover .cover {
+    width: 240px;
+    height: 90px;
+    margin: 0 auto;
+    background-size: cover;
+    background-position: center;
+}
+
+.window-point-settings .upload-cover.no-image {
+    width: 90px;
+    height: 90px;
+    padding-top: 9px;
+    box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px dashed #738a95;
 }
 
 .window-point-settings table {

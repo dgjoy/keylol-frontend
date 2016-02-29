@@ -8,16 +8,16 @@
     <div class="menu-right">
         <ul class="list-inline">
             <li ng-class="{current: page === 'basic'}">
-                <a href="" ng-class="{'tab-changed': optionsInPageChanged('basic'), 'tab-error': optionsInPageError('basic')}" ng-click="setPage('basic')">基础资料</a>
+                <a href="" ng-class="{'tab-changed': optionsInPageChanged('basic')}" ng-click="setPage('basic')">基础资料</a>
             </li>
             <li ng-class="{current: page === 'relationship'}">
-                <a href="" ng-class="{'tab-changed': optionsInPageChanged('relationship'), 'tab-error': optionsInPageError('relationship')}" ng-click="setPage('relationship')">关联据点</a>
+                <a href="" ng-class="{'tab-changed': optionsInPageChanged('relationship')}" ng-click="setPage('relationship')">关联据点</a>
             </li>
             <li ng-class="{current: page === 'images'}">
-                <a href="" ng-class="{'tab-changed': optionsInPageChanged('images'), 'tab-error': optionsInPageError('images')}" ng-click="setPage('images')">图像信息</a>
+                <a href="" ng-class="{'tab-changed': optionsInPageChanged('images')}" ng-click="setPage('images')">图像信息</a>
             </li>
-            <li ng-class="{current: page === 'preferences'}">
-                <a href="" ng-class="{'tab-changed': optionsInPageChanged('preferences'), 'tab-error': optionsInPageError('preferences')}" ng-click="setPage('preferences')">进阶选项</a>
+            <li ng-if="isOperator" ng-class="{current: page === 'preferences'}">
+                <a href="" ng-class="{'tab-changed': optionsInPageChanged('preferences')}" ng-click="setPage('preferences')">进阶选项</a>
             </li>
         </ul>
     </div>
@@ -42,7 +42,8 @@
                 </h4>
             </td>
             <td>
-                <input value="Dota2" type="text" tabindex="4">
+                <input ng-if="isOperator" name="englishName" type="text" tabindex="4" ng-model="vm.EnglishName">
+                <input ng-if="!isOperator" disabled="disabled" name="englishName" type="text" tabindex="4" value="{{point.EnglishName}}">
             </td>
         </tr>
         <tr>
@@ -53,7 +54,7 @@
                 </h4>
             </td>
             <td>
-                <input name="email" type="email" tabindex="4" ng-model="vm.Email">
+                <input name="chineseName" type="text" tabindex="4" ng-model="vm.ChineseName">
             </td>
         </tr>
         <tr>
@@ -64,7 +65,7 @@
                 </h4>
             </td>
             <td>
-                <input name="email" type="email" tabindex="4" ng-model="vm.Email">
+                <input name="displayAliases" type="text" tabindex="4" ng-model="vm.DisplayAliases">
             </td>
         </tr>
         <tr>
@@ -75,7 +76,7 @@
                 </h4>
             </td>
             <td>
-                <input name="email" type="email" tabindex="4" ng-model="vm.Email">
+                <input name="englishAliases" type="text" tabindex="4" ng-model="vm.EnglishAliases">
             </td>
         </tr>
         <tr>
@@ -86,7 +87,7 @@
                 </h4>
             </td>
             <td>
-                <input name="email" type="email" tabindex="4" ng-model="vm.Email">
+                <input name="chineseAliases" type="text" tabindex="4" ng-model="vm.ChineseAliases">
             </td>
         </tr>
         </tbody>
@@ -100,7 +101,7 @@
         </tr>
         <tr>
             <td class="description">
-                <textarea></textarea>
+                <textarea name="description" ng-model="vm.Description"></textarea>
             </td>
         </tr>
     </table>
@@ -118,7 +119,8 @@
                 </h4>
             </td>
             <td>
-                <input value="2013-7-9" type="text" tabindex="4">
+                <input ng-if="isOperator" name="releaseDate" type="text" tabindex="4" ng-model="vm.ReleaseDate">
+                <input ng-if="!isOperator" disabled="disabled" name="releaseDate" type="text" tabindex="4" value="{{point.ReleaseDate | date: 'yyyy-MM-dd'}}">
             </td>
         </tr>
         </tbody>
@@ -139,7 +141,7 @@
                 </h4>
             </td>
             <td>
-                <input-point ng-model="attachedPoints"></input-point>
+                <input-point ng-model="inline.DeveloperPoints"></input-point>
             </td>
         </tr>
         <tr>
@@ -150,7 +152,7 @@
                 </h4>
             </td>
             <td>
-                <input-point ng-model="attached"></input-point>
+                <input-point ng-model="inline.PublisherPoints"></input-point>
             </td>
         </tr>
         </tbody>
@@ -169,7 +171,7 @@
                 </h4>
             </td>
             <td>
-                <input-point ng-model="attachedPoints"></input-point>
+                <input-point ng-model="inline.GenrePoints"></input-point>
             </td>
         </tr>
         <tr>
@@ -180,7 +182,7 @@
                 </h4>
             </td>
             <td>
-                <input-point ng-model="attached"></input-point>
+                <input-point ng-model="inline.TagPoints"></input-point>
             </td>
         </tr>
         <tr>
@@ -191,7 +193,7 @@
                 </h4>
             </td>
             <td>
-                <input-point ng-model="attached"></input-point>
+                <input-point ng-model="inline.SeriesPoints"></input-point>
             </td>
         </tr>
         </tbody>
@@ -210,7 +212,7 @@
                 </h4>
             </td>
             <td>
-                <input-point ng-model="attachedPoints"></input-point>
+                <input-point ng-model="inline.MajorPlatformPoints"></input-point>
             </td>
         </tr>
         <tr>
@@ -221,7 +223,7 @@
                 </h4>
             </td>
             <td>
-                <input-point ng-model="attached"></input-point>
+                <input-point ng-model="inline.MinorPlatformPoints"></input-point>
             </td>
         </tr>
         </tbody>
@@ -240,12 +242,36 @@
                 <h4>
                     <span>据点顶部与列表中的头像。</span>
                 </h4>
+                <div class="upload-avatar" ng-if="vm.AvatarImage">
+                    <div class="clear-button" ng-click="vm.AvatarImage = ''"></div>
+                    <img class="avatar-big" webp-src="{{vm.AvatarImage | avatarUrl:'big' }}">
+                </div>
+                <div class="upload-avatar" ng-if="files.avatarImage">
+                    <div class="clear-button" ng-click="files.avatarImage = null"></div>
+                    <div class="avatar-big" ngf-background="files.avatarImage"></div>
+                </div>
+                <div class="upload-avatar no-image" ng-if="!vm.AvatarImage && !files.avatarImage">
+                    <h4>用胶水贴上一张照片</h4>
+                    <button type="button" tabindex="5" ngf-select ng-model="files.avatarImage" accept="image/*">胶水</button>
+                </div>
             </td>
             <td>
                 <h3 class="font-myriad-lisong">封面</h3>
                 <h4>
                     <span>评测页面中的长方形头像。</span>
                 </h4>
+                <div class="upload-cover" ng-if="vm.CoverImage">
+                    <div class="clear-button" ng-click="vm.CoverImage = ''"></div>
+                    <img class="cover" webp-src="{{vm.CoverImage | coverUrl }}">
+                </div>
+                <div class="upload-cover" ng-if="files.coverImage">
+                    <div class="clear-button" ng-click="files.coverImage = null"></div>
+                    <div class="cover" ngf-background="files.coverImage"></div>
+                </div>
+                <div class="upload-cover no-image" ng-if="!vm.CoverImage && !files.coverImage">
+                    <h4>用胶水贴上一张照片</h4>
+                    <button type="button" tabindex="5" ngf-select ng-model="files.coverImage" accept="image/*">胶水</button>
+                </div>
             </td>
         </tr>
         </tbody>
@@ -255,11 +281,23 @@
             <td>
                 <h3 class="font-myriad-lisong">据点大图</h3>
                 <h4>据点顶部横幅、悬浮卡片以及默认文章预览的背景图片。</h4>
+                <div class="profile-point-background" ng-if="vm.BackgroundImage">
+                    <div class="clear-button" ng-click="vm.BackgroundImage = ''"></div>
+                    <img class="image" webp-src="{{vm.BackgroundImage | backgroundUrl}}" alt="个人据点横幅">
+                </div>
+                <div class="profile-point-background" ng-if="files.backgroundImage">
+                    <div class="clear-button" ng-click="files.backgroundImage = null"></div>
+                    <div class="image as-background" ngf-background="files.backgroundImage"></div>
+                </div>
+                <div class="profile-point-background no-image" ng-if="!vm.BackgroundImage && !files.backgroundImage">
+                    <h4>用胶水贴上一张照片</h4>
+                    <button type="button" tabindex="6" ngf-select ng-model="files.backgroundImage" accept="image/*">胶水</button>
+                </div>
             </td>
         </tr>
     </table>
 </div>
-<div ng-show="page === 'preferences'">
+<div ng-show="page === 'preferences'" ng-if="isOperator">
     <table>
         <tr>
             <td>
@@ -281,11 +319,11 @@
             <td>
                 <h3 class="font-myriad-lisong">商店匹配名</h3>
                 <h4>
-                    <span>抓取到这些字段时都视为此据点，半角逗号分隔。</span>
+                    <span>抓取到这些字段时都视为此据点。</span>
                 </h4>
             </td>
             <td>
-                <input value="2013-7-9" type="text" tabindex="4">
+                <input ng-model="vm.NameInSteamStore" type="text" tabindex="4">
             </td>
         </tr>
         </tbody>
@@ -297,12 +335,12 @@
                 <h4>据点在界面中使用的主要语言，没有被选中的语言会作为次要语言显示。</h4>
                 <div class="checkbox-group more clearfix">
                     <div>
-                        <input type="radio" id="radio-{{uniqueIds[10]}}" name="vote" ng-model="vm.LockoutEnabled" ng-value="true">
-                        <label for="radio-{{uniqueIds[10]}}">中文</label>
+                        <input type="radio" id="radio-{{uniqueIds[0]}}" name="preferred" ng-model="vm.PreferredName" ng-value="'Chinese'">
+                        <label for="radio-{{uniqueIds[0]}}">中文</label>
                     </div>
                     <div>
-                        <input type="radio" id="radio-{{uniqueIds[11]}}" name="vote" ng-model="vm.LockoutEnabled" ng-value="false">
-                        <label for="radio-{{uniqueIds[11]}}">英文</label>
+                        <input type="radio" id="radio-{{uniqueIds[1]}}" name="preferred" ng-model="vm.PreferredName" ng-value="'English'">
+                        <label for="radio-{{uniqueIds[1]}}">英文</label>
                     </div>
                 </div>
             </td>

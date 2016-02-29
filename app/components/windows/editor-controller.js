@@ -6,6 +6,7 @@
         "articleTypes", "$route", "$element",
         function ($scope, close, utils, $http, union, $timeout, $location, notification, options,
                   articleTypes, $route, $element) {
+            union.inEditor = true;
             $scope.editorOptions = {
                 scrollableContainer: $element
             };
@@ -182,6 +183,7 @@
                 ]).then(function (result) {
                     if (result) {
                         $timeout.cancel(autoSaveTimeout);
+                        union.inEditor = false;
                         close();
                     }
                 });
@@ -210,6 +212,7 @@
                             .then(function () {
                                 delete union.$localStorage.editorDrafts[draftKey];
                                 $timeout.cancel(autoSaveTimeout);
+                                union.inEditor = false;
                                 close();
                                 detachLocationListener();
                                 $route.reload();
@@ -223,6 +226,7 @@
                             .then(function (response) {
                                 delete union.$localStorage.editorDrafts[draftKey];
                                 $timeout.cancel(autoSaveTimeout);
+                                union.inEditor = false;
                                 close();
                                 detachLocationListener();
                                 $location.url("article/" + union.$localStorage.user.IdCode + "/" + response.data.SequenceNumberForAuthor);

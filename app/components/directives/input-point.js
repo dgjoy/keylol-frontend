@@ -103,31 +103,29 @@
                                             type: scope.type || 'Unspecified'
                                         }
                                     }).then(function (response) {
-                                        var pointArray = response.data;
-                                        if (pointArray.length) {
-                                            scope.nowPopup = scope.showSelector({
-                                                templateUrl: "components/popup/point-selector.html",
-                                                controller: "PointSelectorController",
-                                                attachSide: "bottom",
-                                                event: {
-                                                    type: "click",
-                                                    currentTarget: element
-                                                },
-                                                align: "left",
-                                                offsetX: -8,
-                                                inputs: {
-                                                    selected: 0,
-                                                    pointArray: pointArray
-                                                }
-                                            });
-                                            scope.nowPopup.then(function (popup) {
-                                                return popup.close;
-                                            }).then(function (result) {
-                                                if (result) {
-                                                    addPoint(result);
-                                                }
-                                            });
-                                        }
+                                        var pointArray = response.data.length?response.data:[];
+                                        scope.nowPopup = scope.showSelector({
+                                            templateUrl: "components/popup/point-selector.html",
+                                            controller: "PointSelectorController",
+                                            attachSide: "bottom",
+                                            event: {
+                                                type: "click",
+                                                currentTarget: element
+                                            },
+                                            align: "left",
+                                            offsetX: -8,
+                                            inputs: {
+                                                selected: 0,
+                                                pointArray: pointArray
+                                            }
+                                        });
+                                        scope.nowPopup.then(function (popup) {
+                                            return popup.close;
+                                        }).then(function (result) {
+                                            if (result) {
+                                                addPoint(result);
+                                            }
+                                        });
                                     });
                                 }
                             }, 200);

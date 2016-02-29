@@ -47,7 +47,7 @@
                 <a href="" class="short-review" ng-click="showShortReviewWindow()">写简评</a>
                 <a href="" class="full-review"  ng-click="showEditorWindow()">写长评</a>
             </div>
-            <a href="" class="edit-info">编辑资料</a>
+            <a href="" ng-click="showGameEdit()" class="edit-info">编辑资料</a>
         </div>
     </div>
     <div ng-if="union.point.Type !== 'Game'" class="info-actions clearfix">
