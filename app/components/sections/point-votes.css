@@ -22,15 +22,16 @@
     float: left;
 }
 
-.section-point-votes .point-info .heading h1 {
+.section-point-votes .point-info .heading point-link a {
     margin: 0;
-    font-size: 15px;
+    font-size: 14px;
     color: #11254A;
+    font-weight: bold;
 }
 
 .section-point-votes .point-info .heading h2 {
     margin: 0;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: normal;
 }
 

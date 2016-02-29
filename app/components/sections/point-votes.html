@@ -4,7 +4,7 @@
             <img webp-src="{{point.AvatarImage |avatarUrl}}">
         </div>
         <div class="heading">
-            <h1>{{utils.getPointFirstName(point)}}</h1>
+            <point-link ng-if="point.IdCode" type="'point'" point-name="utils.getPointFirstName(point)" id-code="point.IdCode"></point-link>
             <h2>{{utils.getPointSecondName(point)}}</h2>
         </div>
     </div>
