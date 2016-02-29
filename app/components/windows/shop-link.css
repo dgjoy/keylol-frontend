@@ -15,11 +15,6 @@
     margin-right: -24px;
 }
 
-.window-shop-link .window .window-confirm-button[disabled=disabled] {
-    background-color: #C7CDD1;
-    cursor: wait;
-}
-
 .window-shop-link .window table {
     margin: 25px 0;
     width: 100%;

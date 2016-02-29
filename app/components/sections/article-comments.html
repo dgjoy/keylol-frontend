@@ -34,7 +34,7 @@
     <pagination total="pageElements.totalPages" current="pageElements.currPage" on-page-changed="pageElements.changePage(oldPage, newPage)" page-href=""></pagination>
     <form ng-submit="doComment()">
         <point-link type="'user'" avatar-url="user.AvatarImage" id-code="user.IdCode"></point-link>
-        <button type="submit" class="border-button right-border" ng-disabled="submitDisabled">发表评论</button>
+        <button type="submit" class="border-button right-border" ng-disabled="submitLock">发表评论</button>
         <span class="textarea-container"><textarea placeholder="对作者的见解有什么见解？" ng-model="currentComment" focus-me="textFocus"></textarea></span>
     </form>
 </div>

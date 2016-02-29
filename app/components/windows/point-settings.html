@@ -21,8 +21,8 @@
             </li>
         </ul>
     </div>
-    <div class="font-myriad-lisong">
-        <h1>据点信息变更函</h1>
+    <div>
+        <h1 class="font-myriad-lisong">据点信息变更函</h1>
         <h2>补充完善关于游戏的信息资料</h2>
     </div>
 </div>
@@ -352,7 +352,7 @@
         </tr>
     </table>
 </div>
-    <button ng-if="isGame" type="submit" class="window-confirm-button">
+    <button ng-if="isGame" type="submit" class="window-confirm-button" ng-disabled="submitLock">
         <img class="arrow-right" src="assets/images/arrow-right.png" alt="下一步">
         <img class="new-point" src="assets/images/new-point.png" alt="提交">
         <hgroup class="font-myriad-keylol">
@@ -360,7 +360,7 @@
             <h2>Submit the Editing</h2>
         </hgroup>
     </button>
-    <button ng-if="!isGame" type="submit" class="window-confirm-button">
+    <button ng-if="!isGame" type="submit" class="window-confirm-button" ng-disabled="submitLock">
         <img class="arrow-right" src="assets/images/arrow-right.png" alt="下一步">
         <img class="new-point" src="assets/images/signature-pen.png" alt="提交">
         <hgroup class="font-myriad-keylol">

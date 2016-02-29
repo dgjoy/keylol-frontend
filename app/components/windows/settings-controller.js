@@ -201,11 +201,11 @@
                 }
             };
 
-            var submitLock = false;
+            $scope.submitLock = false;
             $scope.submit = function () {
-                if (submitLock)
+                if ($scope.submitLock)
                     return;
-                submitLock = true;
+                $scope.submitLock = true;
                 $scope.error = {};
                 utils.modelValidate.gamerTag($scope.vm.GamerTag, $scope.error, "vm.GamerTag");
                 if (isVMDirty("NewPassword") || isVMDirty("LockoutEnabled")) {
@@ -232,7 +232,7 @@
                 }
                 if (!$.isEmptyObject($scope.error)) {
                     focusErrorPage();
-                    submitLock = false;
+                    $scope.submitLock = false;
                     return;
                 }
 
@@ -267,7 +267,7 @@
                                 default:
                                     notification.error("未知错误", response);
                             }
-                            submitLock = false;
+                            $scope.submitLock = false;
                         });
                 };
 
@@ -282,7 +282,7 @@
                                 dirtyFields.AvatarImage = "keylol://" + response.data.url;
                             }, function () {
                                 notification.error("头像上传失败");
-                                submitLock = false;
+                                $scope.submitLock = false;
                             });
                         }
                         if ($scope.files.profilePointBackgroundImage) {
@@ -291,7 +291,7 @@
                                 dirtyFields.ProfilePointBackgroundImage = "keylol://" + response.data.url;
                             }, function () {
                                 notification.error("个人据点横幅上传失败");
-                                submitLock = false;
+                                $scope.submitLock = false;
                             });
                         }
                         $q.all(uploads).then(function () {
@@ -299,7 +299,7 @@
                         });
                     }, function () {
                         notification.error("文件上传验证失效");
-                        submitLock = false;
+                        $scope.submitLock = false;
                     });
                 } else {
                     submit();

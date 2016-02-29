@@ -159,11 +159,11 @@
                 });
             };
 
-            var submitLock = false;
+            $scope.submitLock = false;
             $scope.submit = function () {
-                if (submitLock)
+                if ($scope.submitLock)
                     return;
-                submitLock = true;
+                $scope.submitLock = true;
 
                 $scope.vm.IdCode = $scope.vm.IdCode.toUpperCase();
                 var submit = function () {
@@ -181,7 +181,7 @@
                             }
                         }, function (response) {
                             notification.error("未知错误", response);
-                            submitLock = false;
+                            $scope.submitLock = false;
                         });
                 };
 
@@ -197,7 +197,7 @@
                                 $scope.files.avatarImage = null;
                             }, function () {
                                 notification.error("据点图标上传失败");
-                                submitLock = false;
+                                $scope.submitLock = false;
                             });
                         }
                         if ($scope.files.backgroundImage) {
@@ -207,7 +207,7 @@
                                 $scope.files.backgroundImage = null;
                             }, function () {
                                 notification.error("据点大图上传失败");
-                                submitLock = false;
+                                $scope.submitLock = false;
                             });
                         }
                         if ($scope.files.coverImage) {
@@ -217,7 +217,7 @@
                                 $scope.files.coverImage = null;
                             }, function () {
                                 notification.error("据点封面上传失败");
-                                submitLock = false;
+                                $scope.submitLock = false;
                             });
                         }
                         $q.all(uploads).then(function () {
@@ -225,7 +225,7 @@
                         });
                     }, function () {
                         notification.error("文件上传验证失效");
-                        submitLock = false;
+                        $scope.submitLock = false;
                     });
                 } else {
                     submit();
