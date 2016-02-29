@@ -142,6 +142,7 @@
                                     summary: article.Content,
                                     hasBackground: false,
                                     thumbnail: article.ThumbnailImage,
+                                    hasThumbnail: true,
                                     url: "/article/" + article.Author.IdCode + "/" + article.SequenceNumberForAuthor,
                                     count: {
                                         like: article.LikeCount,
@@ -349,6 +350,7 @@
                                 summary: article.Content,
                                 hasBackground: false,
                                 thumbnail: article.ThumbnailImage,
+                                hasThumbnail: true,
                                 url: "/article/" + article.Author.IdCode + "/" + article.SequenceNumberForAuthor,
                                 count: {
                                     like: article.LikeCount,
