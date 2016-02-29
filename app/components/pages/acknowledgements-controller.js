@@ -97,7 +97,7 @@
                             },
                             datetime: like.Time,
                             hasBackground: true,
-                            background: "0abeafd8e4c049bce860686bc4c04829.jpg",
+                            background: "keylol://0abeafd8e4c049bce860686bc4c04829.jpg",
                             author: {
                                 username: like.Operator.UserName,
                                 avatarUrl: like.Operator.AvatarImage,
@@ -153,7 +153,7 @@
                     mainHead: "认可",
                     subHead: "Acknowledgement"
                 },
-                background: "0abeafd8e4c049bce860686bc4c04829.jpg",
+                background: "keylol://0abeafd8e4c049bce860686bc4c04829.jpg",
                 defaultSum: {
                     text: "文章/评论获得的认可"
                 }

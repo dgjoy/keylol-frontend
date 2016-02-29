@@ -65,6 +65,7 @@
                                         title: utils.getPointFirstName(point),
                                         summary: utils.getPointSecondName(point),
                                         hasBackground: true,
+                                        isPoint: true,
                                         background: point.BackgroundImage,
                                         pointAvatar: point.AvatarImage,
                                         url: "point/" + point.IdCode,

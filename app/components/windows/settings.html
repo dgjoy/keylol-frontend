@@ -116,7 +116,7 @@
                 <h4>640 x 92 大小的背景图片，展示在个人据点顶部。</h4>
                 <div class="profile-point-background" ng-if="vm.ProfilePointBackgroundImage">
                     <div class="clear-button" ng-click="vm.ProfilePointBackgroundImage = ''"></div>
-                    <img class="image" webp-src="//keylol.b0.upaiyun.com/{{vm.ProfilePointBackgroundImage}}!profile.point.background" alt="个人据点横幅">
+                    <img class="image" webp-src="{{vm.ProfilePointBackgroundImage | backgroundUrl}}" alt="个人据点横幅">
                 </div>
                 <div class="profile-point-background" ng-if="files.profilePointBackgroundImage">
                     <div class="clear-button" ng-click="files.profilePointBackgroundImage = null"></div>

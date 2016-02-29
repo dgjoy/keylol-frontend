@@ -262,15 +262,6 @@
                                 .replace(/'/g, "&#039;");
                         };
 
-                        self.parseUri = function (uri, customVersion, defaultUrl) {
-                            if (!uri)
-                                return defaultUrl;
-                            var upyunFileName = upyun.extractFileName(uri);
-                            if (upyunFileName)
-                                return upyun.customVersionUrl(upyunFileName, customVersion);
-                            return uri;
-                        };
-
                         self.timelineLoadCount = 20;
 
                         self.timelineShowDelay = 150;
@@ -281,6 +272,10 @@
                                 newWindow.close();
                                 event.preventDefault();
                             }
+                        };
+
+                        self.getVoteColor = function (i) {
+                            return ["terrible", "bad", "not-bad", "good", "awesome"][i];
                         };
                     }
 

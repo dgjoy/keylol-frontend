@@ -1,0 +1,7 @@
+﻿<div ng-repeat="value in valueArray track by $index" ng-class="{negative: isNegative}">
+    <input type="text" ng-model="valueArray[$index]" ng-blur="setValue()">
+    <a ng-if="valueArray.length > 1" href="" ng-click="deleteValue($index)" >删除</a>
+</div>
+<p ng-if="valueArray.length !== 5">
+    <a href="" ng-click="addValue()" >补充一个{{proConString}}点({{valueArray.length}}/5)</a>
+</p>

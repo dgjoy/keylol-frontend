@@ -1,0 +1,31 @@
+﻿<window position="center" class="window-short-review">
+    <div class="window clearfix">
+        <div class="window-exit-button" ng-click="cancel()">
+            <div ng-include="'assets/images/exit.svg'"></div>
+        </div>
+        <form name="form" ng-submit="submit()">
+            <div class="short-header">
+                <img class="point-cover" webp-src="{{options.point.CoverImage | coverUrl}}">
+                <div class="title">
+                    <h4>简评 <span>{{options.point.Name}}</span></h4>
+                    <!--<p>在档{{options.gameHours}}小时</p>-->
+                </div>
+                <point-review bind-review="vm.Vote"></point-review>
+            </div>
+            <textarea ng-model="vm.Content" class="short-content" placeholder="用一段话让其他玩家认可你的评价观点"></textarea>
+            <span class="char-count" ng-class="{error: vm.Content.length > 199}">{{vm.Content.length}}/199</span>
+            <button type="submit" class="window-confirm-button">
+                <img class="arrow-right" src="assets/images/arrow-right.png" alt="下一步">
+                <img class="signature-pen" src="assets/images/signature-pen.png" alt="提交">
+                <hgroup class="font-myriad-keylol">
+                    <h1>发布简评</h1>
+                    <h2>Post Short Review</h2>
+                </hgroup>
+            </button>
+            <div class="change-to-long">
+                <button type="button" class="border-button left-border" ng-click="changeToLong()">切换为长评</button>
+                <p>使用完整编辑器可以发表深度长评</p>
+            </div>
+        </form>
+    </div>
+</window>

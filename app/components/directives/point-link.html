@@ -1,4 +1,4 @@
-﻿<a href="{{type}}/{{idCode}}" ng-class="{'avatar-anchor': avatarUrl}" popup="funcs.showPointCard" ng-mouseenter="linkHover($event)">
+﻿<a href="{{type}}/{{idCode}}" ng-class="{'avatar-anchor': !pointName}" popup="funcs.showPointCard" ng-mouseenter="linkHover($event)">
     {{pointName}}
-    <img class="avatar-small" webp-src="{{avatarUrl|avatarUrl}}" alt="头像" ng-if="avatarUrl">
+    <img class="avatar-small" webp-src="{{avatarUrl|avatarUrl}}" alt="头像" ng-if="!pointName">
 </a>

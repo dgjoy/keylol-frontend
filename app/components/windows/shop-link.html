@@ -1,0 +1,63 @@
+﻿<window position="center" class="window-shop-link">
+    <div class="window">
+        <div class="window-exit-button" ng-click="cancel()">
+            <div ng-include="'assets/images/exit.svg'"></div>
+        </div>
+        <img class="secret-barcode" src="assets/images/secret-barcode-login.png" alt="条形码">
+        <div class="heading">
+            <h1 class="font-myriad-lisong">开设游戏据点</h1>
+            <h2>输入 steam 商店的页面链接，以便获得据点资料信息</h2>
+        </div>
+        <form class="clearfix" ng-submit="submit()">
+            <flashing-figure stations='[
+                {
+                    cnName: "输入链接",
+                    enName: "Link Received"
+                },
+                {
+                    cnName: "抓取信息",
+                    enName: "Fetching Information"
+                },
+                {
+                    cnName: "确认据点",
+                    enName: "Confirm Point"
+                },
+                {
+                    cnName: "完成开设",
+                    enName: "Finish"
+                }
+            ]' current="currentStation"></flashing-figure>
+            <table>
+                <colgroup>
+                    <col style="width: 38%">
+                    <col style="width: 62%">
+                </colgroup>
+                <tbody>
+                <tr>
+                    <td>
+                        <h3 class="font-myriad-lisong">商店链接</h3>
+                        <h4>
+                            <span ng-class="{error: shopLinkError}">例如：store.steampowered.com/app/255710</span>
+                        </h4>
+                    </td>
+                    <td>
+                        <input name="shopLink" type="text" tabindex="4" ng-model="vm.shopLink">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <button ng-disabled="submitLock" type="submit" class="window-confirm-button">
+                <img class="arrow-right" src="assets/images/arrow-right.png" alt="下一步">
+                <img class="new-point" src="assets/images/new-point.png" alt="提交">
+                <hgroup class="font-myriad-keylol">
+                    <h1>确认开设据点</h1>
+                    <h2>Review Information</h2>
+                </hgroup>
+            </button>
+            <div class="switch-to-not-game">
+                <!--<button type="button" class="border-button left-border" ng-click="">开设非游戏据点</button>-->
+                <p>商店页面会提供开设据点需要的大部分资料，你也可以完善未采集到的信息。</p>
+            </div>
+        </form>
+    </div>
+</window>

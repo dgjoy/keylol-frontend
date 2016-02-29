@@ -5,6 +5,10 @@
     min-width: 300px;
 }
 
+.section-article-content .editor-style.is-short {
+    white-space: pre-wrap;
+}
+
 .section-article-content .share-actions {
     text-align: center;
     padding: 20px 0 2px;

@@ -8,6 +8,7 @@
         </div>
         <div class="col-middle">
             <section ng-include="'components/sections/summary.html'" style="height: 92px;"></section>
+            <section ng-include="'components/sections/point-info.html'" ng-if="isInPoint"></section>
             <section ng-include="'components/sections/timeline.html'"></section>
         </div>
         <div class="col-right">

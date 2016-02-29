@@ -1,0 +1,75 @@
+point-review {
+    display: block;
+}
+
+point-review .review-text {
+    color: #11254A;
+}
+
+point-review .review-circle {
+    width: 16px;
+    height: 12px;
+    cursor: pointer;
+}
+
+point-review .review-circle circle {
+    r: 6;
+    fill: #c7cdd1;
+}
+
+point-review .review-circle.hollow circle {
+    fill: transparent;
+    r: 5;
+    stroke: #c7cdd1;
+    stroke-width: 1;
+}
+
+point-review .review-text.awesome {
+    color: #00ab4e;
+}
+
+point-review .review-circle.awesome circle {
+    fill: #00ab4e;
+    r: 6;
+    stroke-width: 0;
+}
+
+point-review .review-text.good {
+    color: #71bf44;
+}
+
+point-review .review-circle.good circle {
+    fill: #71bf44;
+    r: 6;
+    stroke-width: 0;
+}
+
+point-review .review-text.not-bad {
+    color: #f7943e;
+}
+
+point-review .review-circle.not-bad circle {
+    fill: #f7943e;
+    r: 6;
+    stroke-width: 0;
+}
+
+point-review .review-text.bad {
+    color: #e30613;
+}
+
+point-review .review-circle.bad circle {
+    fill: #e30613;
+    r: 6;
+    stroke-width: 0;
+}
+
+point-review .review-text.terrible {
+    color: #541912;
+}
+
+point-review .review-circle.terrible circle {
+    fill: #541912;
+    r: 6;
+    stroke-width: 0;
+}

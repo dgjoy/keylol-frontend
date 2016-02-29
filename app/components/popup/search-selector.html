@@ -13,12 +13,12 @@
         </div>
         <ul class="result-list" ng-if="resultArray">
             <li ng-repeat="result in resultArray" class="clearfix" ng-click="jumpTo(result.url)">
-                <div class="avatar-anchor" ng-if="result.avatar">
+                <div class="avatar-anchor" ng-if="filterText !== '文章'">
                     <img class="avatar-small" webp-src="{{result.avatar|avatarUrl}}">
                 </div>
                 <div class="title">
                     <p>{{result.mainTitle|maxLength:14|userName:result.isUser}}</p>
-                    <p ng-if="result.subTitle">
+                    <p ng-if="filterText !== '文章'">
                         <span ng-if="result.type">[{{result.type}}]</span>
                         {{result.subTitle|maxLength:14}}
                     </p>
@@ -30,6 +30,7 @@
             </li>
         </ul>
         <div class="all-results">
+            <a href="" ng-click="showPointAppealWindow()">开设新据点</a>
             <a href="" ng-click="onSearching()" ng-if="resultArray || notFound">全部结果</a>
         </div>
     </div>

@@ -1,19 +1,51 @@
 input-point {
     display: block;
     width: 100%;
-    height: 31px;
     box-sizing: border-box;
     border-radius: 4px;
     box-shadow: 2.12px 2.12px 2px rgba(53, 72, 86, 0.15), inset 1px 1px 2px rgba(0, 0, 0, 0.25);
     border: none;
     background: white;
     cursor: text;
-    padding: 8px;
+    padding: 8px 8px 0 8px;
+    zoom:1;
+}
+input-point.disabled {
+    background: #eef1f3;
+}
+
+input-point:before, input-point:after {
+    content:"";
+    display:table;
+}
+
+input-point:after {
+    clear:both;
 }
 
 input-point .point-title {
     float: left;
     cursor: default;
+    margin-bottom: 8px;
+}
+
+input-point .point-title .delete {
+    color: #c7cdd1;
+    padding-right: 5px;
+    text-decoration: none;
+    display: none;
+}
+
+input-point .point-title:hover .delete {
+    display: inline-block;
+}
+
+input-point .point-title.selected .delete {
+    display: inline-block;
+}
+
+input-point .point-title.disabled {
+    color: #c7cdd1;
 }
 
 input-point .point-title:hover {
@@ -25,6 +57,7 @@ input-point .point-title.selected {
 }
 
 input-point input[type=text].input {
+    cursor: text;
     float: left;
     padding: 0;
     width: auto;
@@ -32,6 +65,15 @@ input-point input[type=text].input {
     -webkit-appearance: none;
     outline: none;
     margin: 0;
+    margin-bottom: 8px;
+}
+
+input-point.disabled input[type=text].input {
+    background: #eef1f3;
+}
+
+input-point input[type=text][disabled] {
+    width: 0;
 }
 
 input-point input[type=text].has-placeholder {

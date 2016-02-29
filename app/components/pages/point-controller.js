@@ -41,6 +41,8 @@
 
             if ($routeParams.userIdCode) {
 
+                $scope.isInPoint = false;
+
                 timeline.noArticleText = {
                     main: "这位用户尚未发布或认可任何文章",
                     sub: "订阅并关注即将到来的动态。"
@@ -133,6 +135,8 @@
                                     sequenceNumber: article.SequenceNumber,
                                     sources: {},
                                     voteForPoint: article.VoteForPoint,
+                                    vote: article.Vote,
+                                    voteColor: article.Vote?utils.getVoteColor(article.Vote -1):null,
                                     datetime: article.PublishTime,
                                     title: article.Title,
                                     summary: article.Content,
@@ -259,7 +263,9 @@
                         includeStats: true,
                         includeVotes: true,
                         includeSubscribed: true,
-                        includeAssociated: true,
+                        includeRelated: true,
+                        includeCoverDescription: true,
+                        includeMore: true,
                         idType: "IdCode"
                     }
                 }).then(function (response) {
@@ -271,38 +277,22 @@
                         $scope.hasVote = true;
                     }
 
-                    point.mainName = utils.getPointFirstName(point);
-
-                    pageTitle.set(point.mainName + " - 其乐");
-                    if (point.PositiveArticleCount + point.NegativeArticleCount > 0) {
-                        point.votePercent = (point.PositiveArticleCount * 10 / (point.PositiveArticleCount + point.NegativeArticleCount)).toFixed(1);
-                        point.voteCircles = [{}, {}, {}, {}, {}];
-                        if (point.votePercent >= 8) {
-                            for (var i in point.voteCircles) {
-                                point.voteCircles[i].type = "awesome";
-                            }
-                        } else if (point.votePercent >= 6) {
-                            for (var i = 0; i < 4; i++) {
-                                point.voteCircles[i].type = "good";
-                            }
-                        } else if (point.votePercent >= 4) {
-                            for (var i = 0; i < 3; i++) {
-                                point.voteCircles[i].type = "not-bad";
-                            }
-                        } else if (point.votePercent >= 2) {
-                            for (var i = 0; i < 2; i++) {
-                                point.voteCircles[i].type = "bad";
-                            }
-                        } else {
-                            point.voteCircles[0].type = "terrible"
+                    point.totalEvaluate = 0;
+                    var totalVote = 0;
+                    for(var i in point.VoteStats){
+                        point.totalEvaluate += point.VoteStats[i];
+                        totalVote += point.VoteStats[i] * 2 * i;
+                        if(point.VoteStats[i] > 0 && (!point.highlight || point.VoteStats[i] >= point.VoteStats[point.highlight])){
+                            point.highlight = i;
                         }
-                    } else {
-                        point.votePercent = "N/A";
-                        point.voteCircles = [{}, {}, {}, {}, {}];
-                        point.noVotes = true;
                     }
+                    point.votePercent = (((totalVote / point.totalEvaluate) - 2) / 0.8).toFixed(1);
 
-                    utils.addRecentBroswe("NormalPoint", point.mainName, point.IdCode);
+                    var mainName = utils.getPointFirstName(point);
+
+                    pageTitle.set(mainName + " - 其乐");
+
+                    utils.addRecentBroswe("NormalPoint", mainName, point.IdCode);
                     $.extend(unionPoint, point);
                     $.extend(summary, {
                         head: {
@@ -351,6 +341,8 @@
                                     idCode: article.Author.IdCode
                                 },
                                 voteForPoint: article.VoteForPoint,
+                                vote: article.Vote,
+                                voteColor: article.Vote?utils.getVoteColor(article.Vote -1):null,
                                 sequenceNumber: article.SequenceNumber,
                                 datetime: article.PublishTime,
                                 title: article.Title,

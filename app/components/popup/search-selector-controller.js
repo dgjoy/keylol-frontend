@@ -2,8 +2,8 @@
     "use strict";
 
     keylolApp.controller("SearchSelectorController", [
-        "$scope", "union", "$location", "options", "$http", "notification", "utils",
-        function ($scope, union, $location, options, $http, notification, utils) {
+        "$scope", "union", "$location", "options", "$http", "notification", "utils", "window",
+        function ($scope, union, $location, options, $http, notification, utils, window) {
             $scope.onSearching = options.onSearching;
             $scope.filterArray = union.searchFilter;
             var getSearchResult = function (filterTxt) {
@@ -90,25 +90,30 @@
                     }
                 }
             };
-            var filterText;
             for (var i in $scope.filterArray) {
                 if ($scope.filterArray[i].active === true) {
-                    filterText = $scope.filterArray[i].text;
+                    $scope.filterText = $scope.filterArray[i].text;
                 }
             }
             $scope.$watch(function () {
                 return options.searchText
             }, function () {
-                getSearchResult(filterText);
+                getSearchResult($scope.filterText);
             });
+            $scope.showPointAppealWindow = function () {
+                window.show({
+                    templateUrl: "components/windows/shop-link.html",
+                    controller: "ShopLinkController"
+                });
+            };
             $scope.changeFilter = function ($index) {
                 if (!$scope.filterArray[$index].active) {
                     for (var i in $scope.filterArray) {
                         $scope.filterArray[i].active = false;
                     }
                     $scope.filterArray[$index].active = true;
-                    filterText = $scope.filterArray[$index].text;
-                    getSearchResult(filterText);
+                    $scope.filterText = $scope.filterArray[$index].text;
+                    getSearchResult($scope.filterText);
                 }
             };
             $scope.jumpTo = function (url) {

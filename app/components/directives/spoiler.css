@@ -1,3 +1,7 @@
+spoiler {
+    white-space: normal;
+}
+
 spoiler.actionable {
     cursor: pointer;
     background: #eef1f3;

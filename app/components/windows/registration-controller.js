@@ -53,7 +53,7 @@
                             consumeBindingToken = result.consume;
                             $scope.vm.SteamBindingTokenId = result.tokenId;
                             $scope.vm.SteamProfileName = result.steamProfileName;
-                            $scope.vm.AvatarImage = "steam://avatars/" + result.steamAvatarHash;
+                            $scope.vm.AvatarImage = "keylol://steam/avatars/" + result.steamAvatarHash;
                         } else {
                             $scope.vm.SteamBindingTokenId = "";
                         }
