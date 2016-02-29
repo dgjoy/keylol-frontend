@@ -352,14 +352,22 @@
         </tr>
     </table>
 </div>
-<button type="submit" class="window-confirm-button">
-    <img class="arrow-right" src="assets/images/arrow-right.png" alt="下一步">
-    <img class="new-point" src="assets/images/new-point.png" alt="提交">
-    <hgroup class="font-myriad-keylol">
-        <h1>提交编辑函</h1>
-        <h2>Submit the Editing</h2>
-    </hgroup>
-</button>
+    <button ng-if="isGame" type="submit" class="window-confirm-button">
+        <img class="arrow-right" src="assets/images/arrow-right.png" alt="下一步">
+        <img class="new-point" src="assets/images/new-point.png" alt="提交">
+        <hgroup class="font-myriad-keylol">
+            <h1>提交编辑函</h1>
+            <h2>Submit the Editing</h2>
+        </hgroup>
+    </button>
+    <button ng-if="!isGame" type="submit" class="window-confirm-button">
+        <img class="arrow-right" src="assets/images/arrow-right.png" alt="下一步">
+        <img class="new-point" src="assets/images/signature-pen.png" alt="提交">
+        <hgroup class="font-myriad-keylol">
+            <h1>编辑此据点</h1>
+            <h2>Edit the Point</h2>
+        </hgroup>
+    </button>
 <div class="tips" ng-switch="page">
     <div ng-switch-when="basic">
         <h3 class="single-line font-myriad-lisong">提示</h3>
