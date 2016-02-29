@@ -27,16 +27,16 @@
                 }, 3000);
             };
             
-            var submitLock = false;
+            $scope.submitLock = false;
             $scope.submit = function () {
-                if (submitLock)
+                if ($scope.submitLock)
                     return;
-                submitLock = true;
+                $scope.submitLock = true;
                 $scope.invitationCodeError = null;
 
                 if (!$scope.vm.InvitationCode) {
                     $scope.invitationCodeError = "empty";
-                    submitLock = false;
+                    $scope.submitLock = false;
                     return;
                 }
                 $http.get(apiEndpoint + "invitation-code/" + $scope.vm.InvitationCode).then(function () {
@@ -52,7 +52,7 @@
                     } else {
                         notification.error("未知错误", response);
                     }
-                    submitLock = false;
+                    $scope.submitLock = false;
                 });
             };
         }

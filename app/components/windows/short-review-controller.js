@@ -50,20 +50,20 @@
                 });
             };
 
-            var submitLock = false;
+            $scope.submitLock = false;
             var checkEmpty = function(){
                 if(!$scope.vm.Content) return "简评内容";
                 if(!$scope.vm.Vote) return "简评评分";
                 return null;
             };
             $scope.submit = function(){
-                if (submitLock || $scope.vm.Content.length > 199)
+                if ($scope.submitLock || $scope.vm.Content.length > 199)
                     return;
                 var emptyString = checkEmpty();
                 if(emptyString){
                     return notification.error(emptyString + "不能为空");
                 }
-                submitLock = true;
+                $scope.submitLock = true;
                 if ($scope.vm.Id) {
                     $http.put(apiEndpoint + "article/" + $scope.vm.Id, $scope.vm)
                         .then(function (response) {
@@ -72,7 +72,7 @@
                             notification.success("简评已发布");
                         }, function (response) {
                             notification.error("未知错误, 请尝试再次发布", response);
-                            submitLock = false;
+                            $scope.submitLock = false;
                         });
                 } else {
                     $http.post(apiEndpoint + "article", $scope.vm)
@@ -82,7 +82,7 @@
                             notification.success("简评已发布");
                         }, function (response) {
                             notification.error("未知错误, 请尝试再次发布", response);
-                            submitLock = false;
+                            $scope.submitLock = false;
                         });
                 }
             }

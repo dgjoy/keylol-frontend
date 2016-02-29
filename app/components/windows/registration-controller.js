@@ -67,11 +67,11 @@
                     consumeBindingToken.resolve();
             };
 
-            var submitLock = false;
+            $scope.submitLock = false;
             $scope.submit = function () {
-                if (submitLock)
+                if ($scope.submitLock)
                     return;
-                submitLock = true;
+                $scope.submitLock = true;
                 $scope.error = {};
                 $scope.vm.IdCode = $scope.vm.IdCode.toUpperCase();
                 utils.modelValidate.steamBindingTokenId($scope.vm.SteamBindingTokenId, $scope.error, "vm.SteamBindingTokenId");
@@ -82,7 +82,7 @@
                     $scope.error.authCode = true;
                 }
                 if (!$.isEmptyObject($scope.error)) {
-                    submitLock = false;
+                    $scope.submitLock = false;
                     return;
                 }
                 $http.post(apiEndpoint + "user", $scope.vm)
@@ -101,7 +101,7 @@
                             default:
                                 notification.error("未知错误", response);
                         }
-                        submitLock = false;
+                        $scope.submitLock = false;
                     });
             };
         }

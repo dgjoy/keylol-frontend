@@ -44,11 +44,11 @@
                 close();
             };
 
-            var submitLock = false;
+            $scope.submitLock = false;
             $scope.submit = function () {
-                if (submitLock)
+                if ($scope.submitLock)
                     return;
-                submitLock = true;
+                $scope.submitLock = true;
                 $scope.error = {};
                 if (!$scope.vm.EmailOrIdCode) {
                     $scope.error["vm.EmailOrIdCode"] = "Email or UIC cannot be empty.";
@@ -60,7 +60,7 @@
                     $scope.error.authCode = true;
                 }
                 if (!$.isEmptyObject($scope.error)) {
-                    submitLock = false;
+                    $scope.submitLock = false;
                     return;
                 }
                 $http.post(apiEndpoint + "login", $scope.vm)
@@ -78,7 +78,7 @@
                             default:
                                 notification.error("未知错误", response);
                         }
-                        submitLock = false;
+                        $scope.submitLock = false;
                     });
             };
         }
