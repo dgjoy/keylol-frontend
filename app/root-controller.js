@@ -17,10 +17,12 @@
                 }).then(function (response) {
                     union.$localStorage.user = response.data;
                     _czc.push(["_setCustomVar", "登录用户", response.data.IdCode + "-" + response.data.UserName, 1]);
-                }, function () {
-                    $http.delete(apiEndpoint + "login/current");
-                    delete union.$localStorage.login;
-                    notification.error("登录失效，请重新登录。");
+                }, function (response) {
+                    if(response.status !== 500){
+                        $http.delete(apiEndpoint + "login/current");
+                        delete union.$localStorage.login;
+                        notification.error("登录失效，请重新登录。");
+                    }
                 });
             }
 

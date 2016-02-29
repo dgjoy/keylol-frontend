@@ -59,6 +59,9 @@
             }).when("/search/:searchType/:keyword", {
                 templateUrl: "components/pages/search-results.html",
                 controller: "SearchResultsController"
+            }).when("/related/:idCode/:type", {
+                templateUrl: "components/pages/search-results.html",
+                controller: "RelatedController"
             }).otherwise({
                 templateUrl: "components/pages/not-found.html",
                 controller: "NotFoundController"

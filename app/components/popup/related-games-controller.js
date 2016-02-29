@@ -6,6 +6,8 @@
         function ($scope, close, type, count, idCode, $http, notification, $filter, utils) {
             $scope.count = count;
             $scope.utils = utils;
+            $scope.idCode = idCode;
+            $scope.type = type;
             $scope.gameYears = [];
             switch (type) {
                 case "Genre":
