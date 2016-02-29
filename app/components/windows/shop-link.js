@@ -45,7 +45,7 @@
             };
 
             function checkShopLink(input) {
-                var matches = input.match(/(?:https?:\/\/)?store\.steampowered\.com\/app\/(\d+)\/*/i);
+                var matches = input.match(/^(?:(?:https?:\/\/)?store\.steampowered\.com\/app\/)?(\d+)\/*$/i);
                 if (matches) {
                     return parseInt(matches[1]);
                 }
