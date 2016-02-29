@@ -281,8 +281,8 @@
                     for(var i in point.VoteStats){
                         point.totalEvaluate += point.VoteStats[i];
                         totalVote += point.VoteStats[i] * 2 * i;
-                        if(point.VoteStats[i] > 0 && (!point.popularVote || point.VoteStats[i] >= point.VoteStats[point.popularVote])){
-                            point.popularVote = i;
+                        if(point.VoteStats[i] > 0 && (!point.highlight || point.VoteStats[i] >= point.VoteStats[point.highlight])){
+                            point.highlight = i;
                         }
                     }
                     point.votePercent = (((totalVote / point.totalEvaluate) - 2) / 0.8).toFixed(1);

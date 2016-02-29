@@ -5,7 +5,7 @@
     min-width: 300px;
 }
 
-.section-article-content .editor-style {
+.section-article-content .editor-style.is-short {
     white-space: pre-wrap;
 }
 

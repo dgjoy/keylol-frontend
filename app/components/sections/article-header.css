@@ -110,6 +110,7 @@
 
 .section-article-header .review-info .review-detail blockquote {
     background: #EEF1F3;
+    word-break: break-all;
     border-left: 5px solid #11254a;
     padding: 10px 13px;
     margin: 0 0 20px;

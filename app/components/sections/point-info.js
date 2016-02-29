@@ -39,14 +39,34 @@
                             inputs: {
                                 options: {
                                     voteForPoint: $scope.point,
+                                    vm: {
+                                        TypeName: "评",
+                                        Pros: [],
+                                        Cons: []
+                                    },
                                     doNotLoadDraft: true
                                 }
                             }
                         });
-                        close();
                     }
                 });
             };
+            $scope.showRelatedGames = function ($event, type, count) {
+                $scope.showRelatedPopup({
+                    templateUrl: "components/popup/related-games.html",
+                    controller: "RelatedGamesController",
+                    event: $event,
+                    attachSide: "left",
+                    align: "top",
+                    offsetX: 580,
+                    offsetY: 32,
+                    inputs: {
+                        idCode: union.point.IdCode,
+                        type: type,
+                        count: count
+                    }
+                });
+            }
         }
     ]);
 })();

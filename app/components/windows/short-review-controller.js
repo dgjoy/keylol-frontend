@@ -2,8 +2,8 @@
     "use strict";
 
     keylolApp.controller("ShortReviewController", [
-        "$scope", "close", "window", "notification", "$http", "options", "$location", "$route",
-        function ($scope, close, window, notification, $http, options, $location, $route) {
+        "$scope", "close", "window", "notification", "$http", "options", "$location", "$route", "union",
+        function ($scope, close, window, notification, $http, options, $location, $route, union) {
             $scope.options = options;
 
             $scope.vm = $.extend({

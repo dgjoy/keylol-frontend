@@ -98,6 +98,7 @@
 
 .section-point-info .info-actions a {
     color: #738a95;
+    cursor: pointer;
 }
 
 .section-point-info .info-actions .related-list {

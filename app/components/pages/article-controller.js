@@ -22,14 +22,6 @@
                         article.canEdit = article.isMyArticle || union.$localStorage.user.StaffClaim === "operator";
                         if (article.Vote) {
                             $scope.hasVote = true;
-                            switch (article.Vote) {
-                                case "Positive":
-                                    article.VoteText = "好评";
-                                    break;
-                                case "Negative":
-                                    article.VoteText = "差评";
-                                    break;
-                            }
                             $http.get(apiEndpoint + "normal-point/" + article.VoteForPoint.Id, {
                                 params: {
                                     includeVotes: true,
@@ -44,8 +36,8 @@
                                 for(var i in point.VoteStats){
                                     point.totalEvaluate += point.VoteStats[i];
                                     totalVote += point.VoteStats[i] * 2 * i;
-                                    if(point.VoteStats[i] > 0 && (!point.popularVote || point.VoteStats[i] >= point.VoteStats[point.popularVote])){
-                                        point.popularVote = i;
+                                    if(article.Vote == i){
+                                        point.highlight = i;
                                     }
                                 }
                                 point.votePercent = (((totalVote / point.totalEvaluate) - 2) / 0.8).toFixed(1);
