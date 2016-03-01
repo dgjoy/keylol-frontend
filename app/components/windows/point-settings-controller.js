@@ -165,7 +165,8 @@
                     return;
                 $scope.submitLock = true;
 
-                $scope.vm.IdCode = $scope.vm.IdCode.toUpperCase();
+                if ($scope.vm.IdCode)
+                    $scope.vm.IdCode = $scope.vm.IdCode.toUpperCase();
                 var submit = function () {
                     $http.put(apiEndpoint + "normal-point/" + point.Id, $scope.vm)
                         .then(function () {
