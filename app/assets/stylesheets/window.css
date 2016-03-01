@@ -160,7 +160,7 @@ window[position=right]::after {
     min-width: 305px;
 }
 
-.window .window-confirm-button[disabled=disabled] {
+.window .window-confirm-button[disabled] {
     background-color: #C7CDD1;
     cursor: wait;
 }
