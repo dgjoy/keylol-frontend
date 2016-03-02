@@ -20,6 +20,8 @@
                 return "//steamcdn.keylol.com/steam/apps/" + match[1] + "/page_bg_generated.jpg" + suffix;
             if (match = input.match(/^keylol:\/\/steam\/app-headers\/([^\/]*)$/i))
                 return "//steamcdn.keylol.com/steam/apps/" + match[1] + "/header.jpg" + suffix;
+            if (match = input.match(/^keylol:\/\/steam\/app-capsules\/([^\/]*)$/i))
+                return "//steamcdn.keylol.com/steam/apps/" + match[1] + "/capsule_231x87.jpg" + suffix;
             if (match = input.match(/^keylol:\/\/steam\/app-icons\/(\d+)-([^\/]*)$/i))
                 return "//steamcdn.keylol.com/steamcommunity/public/images/apps/" + match[1] + "/" + match[2] + ".jpg" + suffix;
             if (match = input.match(/^keylol:\/\/steam\/avatars\/([^\/]*)$/i))

@@ -44,7 +44,7 @@
             </td>
             <td>
                 <input ng-if="isOperator" name="englishName" type="text" tabindex="4" ng-model="vm.EnglishName">
-                <input ng-if="!isOperator" disabled="disabled" name="englishName" type="text" tabindex="4" value="{{point.EnglishName}}">
+                <input ng-if="!isOperator" disabled name="englishName" type="text" tabindex="4" value="{{point.EnglishName}}">
             </td>
         </tr>
         <tr>
@@ -125,7 +125,7 @@
             </td>
             <td>
                 <input ng-if="isOperator" name="releaseDate" type="text" tabindex="4" ng-model="vm.ReleaseDate">
-                <input ng-if="!isOperator" disabled="disabled" name="releaseDate" type="text" tabindex="4" value="{{point.ReleaseDate | date: 'yyyy-MM-dd'}}">
+                <input ng-if="!isOperator" disabled name="releaseDate" type="text" tabindex="4" value="{{point.ReleaseDate | date: 'yyyy-MM-dd'}}">
             </td>
         </tr>
         </tbody>

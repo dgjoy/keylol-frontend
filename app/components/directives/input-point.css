@@ -72,7 +72,7 @@ input-point.disabled input[type=text].input {
     background: #eef1f3;
 }
 
-input-point input[type=text][disabled] {
+input-point input[type=text]:disabled {
     width: 0;
 }
 
