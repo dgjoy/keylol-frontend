@@ -3,9 +3,9 @@
 
     keylolApp.controller("PointSettingsController", [
         "$scope", "close", "utils", "$http", "apiEndpoint", "base64", "upyun", "$q", "notification", "$timeout",
-        "point", "isGame", "$filter", "$location", "union", "$route",
+        "point", "isGame", "isJustCreated", "$filter", "$location", "union", "$route",
         function ($scope, close, utils, $http, apiEndpoint, base64, upyun, $q, notification, $timeout,
-                  point, isGame, $filter, $location, union, $route) {
+                  point, isGame, isJustCreated, $filter, $location, union, $route) {
             $scope.page = "basic";
             $scope.uniqueIds = {};
             $scope.isGame = isGame;
@@ -170,7 +170,15 @@
                 var submit = function () {
                     $http.put(apiEndpoint + "normal-point/" + point.Id, $scope.vm)
                         .then(function () {
-                            notification.success("据点信息已更新");
+                            if(!isGame || !isJustCreated){
+                                notification.success("「据点信息已更新」");
+                            }else {
+                                if (union.inEditor) {
+                                    notification.success("「据点已开设，可以随时接收文章投稿」");
+                                }else {
+                                    notification.success("「据点已开设」");
+                                }
+                            }
                             close();
                             if (!union.inEditor) {
                                 var idCode = $scope.vm.IdCode || point.IdCode;
