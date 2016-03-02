@@ -508,7 +508,7 @@
 }
 
 .section-timeline .entry-content .summary .vote-circle circle {
-    r: 4;
+    r: 4px;
 }
 
 .section-timeline .entry-content h3 span {
