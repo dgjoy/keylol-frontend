@@ -73,7 +73,8 @@
                     controller: "PointSettingsController",
                     inputs: {
                         point: $scope.point,
-                        isGame: isGame
+                        isGame: isGame,
+                        isJustCreated: false
                     }
                 });
             }
