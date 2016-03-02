@@ -16,8 +16,10 @@
             var match;
             if (match = input.match(/^keylol:\/\/([^\/]*)$/i))
                 return "//storage.keylol.com/" + match[1] + suffix;
-            if (match = input.match(/^keylol:\/\/steam\/app-backgrounds\/([^\/]*)$/i))
+            if (match = input.match(/^keylol:\/\/steam\/app-backgrounds\/(\d+)$/i))
                 return "//steamcdn.keylol.com/steam/apps/" + match[1] + "/page_bg_generated.jpg" + suffix;
+            if (match = input.match(/^keylol:\/\/steam\/app-backgrounds\/(\d+)-([^\/]*)$/i))
+                return "//steamcdn.keylol.com/steam/apps/" + match[1] + "/ss_" + match[2] + ".jpg" + suffix;
             if (match = input.match(/^keylol:\/\/steam\/app-headers\/([^\/]*)$/i))
                 return "//steamcdn.keylol.com/steam/apps/" + match[1] + "/header.jpg" + suffix;
             if (match = input.match(/^keylol:\/\/steam\/app-capsules\/([^\/]*)$/i))
