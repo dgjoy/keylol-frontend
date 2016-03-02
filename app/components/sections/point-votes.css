@@ -140,7 +140,7 @@
 }
 
 .section-point-votes .reputation-stat .reputation-circle circle {
-    r: 4;
+    r: 4px;
     fill: #c7cdd1;
 }
 
