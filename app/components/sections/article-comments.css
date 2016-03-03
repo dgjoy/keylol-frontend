@@ -143,7 +143,7 @@
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAAHlBMVEX///////////////////////////////////////8V2MxSAAAACXRSTlMAESIzRGZ3iLtU0KdmAAAAOUlEQVR42u3HuREAIAwDMEL4vP/CXKBz4QmsTs3M7MuRMmwD2CIsUEKEdJQuwg6Ao8JirhkiZmbPBS/FAnGzq3lQAAAAAElFTkSuQmCC);
 }
 
-.section-article-comments button[type=submit][disabled=disabled] {
+.section-article-comments button[type=submit]:disabled {
     background-color: #c7cdd1;
 }
 

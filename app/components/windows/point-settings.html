@@ -44,7 +44,7 @@
             </td>
             <td>
                 <input ng-if="isOperator" name="englishName" type="text" tabindex="4" ng-model="vm.EnglishName">
-                <input ng-if="!isOperator" disabled="disabled" name="englishName" type="text" tabindex="4" value="{{point.EnglishName}}">
+                <input ng-if="!isOperator" disabled name="englishName" type="text" tabindex="4" value="{{point.EnglishName}}">
             </td>
         </tr>
         <tr>
@@ -125,7 +125,7 @@
             </td>
             <td>
                 <input ng-if="isOperator" name="releaseDate" type="text" tabindex="4" ng-model="vm.ReleaseDate">
-                <input ng-if="!isOperator" disabled="disabled" name="releaseDate" type="text" tabindex="4" value="{{point.ReleaseDate | date: 'yyyy-MM-dd'}}">
+                <input ng-if="!isOperator" disabled name="releaseDate" type="text" tabindex="4" value="{{point.ReleaseDate | date: 'yyyy-MM-dd'}}">
             </td>
         </tr>
         </tbody>
@@ -288,7 +288,7 @@
                 <h4>据点顶部横幅、悬浮卡片以及默认文章预览的背景图片。</h4>
                 <div class="profile-point-background" ng-if="vm.BackgroundImage">
                     <div class="clear-button" ng-click="vm.BackgroundImage = ''"></div>
-                    <img class="image" webp-src="{{vm.BackgroundImage | backgroundUrl}}" alt="个人据点横幅">
+                    <img class="image" webp-src="{{vm.BackgroundImage | backgroundUrl}}" alt="据点横幅">
                 </div>
                 <div class="profile-point-background" ng-if="files.backgroundImage">
                     <div class="clear-button" ng-click="files.backgroundImage = null"></div>
@@ -314,7 +314,7 @@
             </td>
         </tr>
     </table>
-    <table>
+    <table ng-if="!isGame">
         <colgroup>
             <col style="width: 36%">
             <col style="width: 64%">
