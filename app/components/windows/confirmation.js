@@ -12,9 +12,9 @@
                 close();
                 if(!union.inEditor){
                     $location.url('point/' + point.IdCode);
-                    notification.success("「据点已开设」");
+                    notification.success("据点已开设");
                 }else {
-                    notification.success("「据点已开设，可以随时接收文章投稿」");
+                    notification.success("据点已开设，可以随时接收文章投稿");
                 }
             };
             $scope.switchToEditInfo = function () {
