@@ -4,11 +4,10 @@
     keylolApp.controller("SecretTestsController", [
         "$scope", "window",
         function ($scope, window) {
-            $scope.showCreatePointWindow = function () {
+            $scope.showSyncWindow = function () {
                 window.show({
-                    templateUrl: "components/windows/create-point.html",
-                    controller: "CreatePointController",
-                    inputs: {vm: null}
+                    templateUrl: "components/windows/synchronization.html",
+                    controller: "SynchronizationController"
                 });
             };
             $scope.showPointListWindow = function () {
