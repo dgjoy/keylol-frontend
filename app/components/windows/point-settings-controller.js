@@ -171,12 +171,12 @@
                     $http.put(apiEndpoint + "normal-point/" + point.Id, $scope.vm)
                         .then(function () {
                             if(!isGame || !isJustCreated){
-                                notification.success("「据点信息已更新」");
+                                notification.success("据点信息已更新");
                             }else {
                                 if (union.inEditor) {
-                                    notification.success("「据点已开设，可以随时接收文章投稿」");
+                                    notification.success("据点已开设，可以随时接收文章投稿");
                                 }else {
-                                    notification.success("「据点已开设」");
+                                    notification.success("据点已开设");
                                 }
                             }
                             close();
