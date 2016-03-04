@@ -10,7 +10,7 @@
     width: 17px;
     left: 13px;
     top: 0;
-    fill: #11254a;
+    fill: #159;
 }
 
 .section-timeline .card .card-line circle {
@@ -20,7 +20,7 @@
 
 .section-timeline .card .card-line circle.inverse {
     r: 6.5px;
-    fill: #11254a;
+    fill: #159;
 }
 
 /* ------- */
@@ -29,7 +29,7 @@
 
 /* Title */
 .section-timeline .heading .title {
-    color: #11254a;
+    color: #159;
     padding: 7px 0 6px;
     margin-left: 2px;
 }
@@ -52,11 +52,11 @@
 
 /* Card Line */
 .section-timeline .heading .card-line rect {
-    fill: #11254a;
+    fill: #159;
 }
 
 .section-timeline .heading.inverse .card-line circle {
-    fill: #11254a;
+    fill: #159;
 }
 
 .section-timeline .heading.inverse .card-line circle.inverse {
@@ -83,7 +83,7 @@
 
 .section-timeline .heading.inverse .left-info,
 .section-timeline .heading.inverse .right-button {
-    background-color: #11254a;
+    background-color: #159;
 }
 
 .section-timeline .heading .left-info {
@@ -93,7 +93,7 @@
 }
 
 .section-timeline .heading .left-info .expand-button {
-    color: #C7CDD1;
+    color: #DDD;
     cursor: pointer;
     position: absolute;
     right: 15px;
@@ -102,7 +102,7 @@
 }
 
 .section-timeline .heading .left-info .expand-button a {
-    color: #C7CDD1;
+    color: #DDD;
     margin-right: 3px;
 }
 
@@ -134,7 +134,7 @@
 }
 
 .section-timeline .heading .left-info .actions a {
-    color: #C7CDD1;
+    color: #DDD;
     margin-left: 25px;
 }
 
@@ -151,7 +151,7 @@
 }
 
 .section-timeline .heading .right-button:hover {
-    background-color: #344565;
+    background-color: #2966a3;
 }
 
 .section-timeline .heading .right-button img {
@@ -205,14 +205,14 @@
 
 .section-timeline .default .description h1 {
     margin: 20px 0 0 0;
-    color: #11254A;
+    color: #159;
     font-size: 24px;
     font-weight: normal;
 }
 
 .section-timeline .default .description h3 {
     margin: 3px 0 18px 0;
-    color: #C7CDD1;
+    color: #BBB;
     font-size: 15px;
     font-weight: normal;
 }
@@ -255,7 +255,7 @@
 }
 
 .section-timeline .default li .title p:first-of-type {
-    color: #11254A;
+    color: #159;
     font-weight: bold;
 }
 
@@ -273,7 +273,7 @@
     margin-top: 3.5px;
     padding-left: 6px;
     line-height: 25px;
-    color: #c7cdd1;
+    color: #BBB;
 }
 
 /* ----- */
@@ -291,7 +291,7 @@
     width: 17px;
     left: 13px;
     top: 0;
-    fill: #c7cdd1;
+    fill: #CCC;
     transform: scale(1,0);
     transform-origin: left top;
     transition-duration: 150ms;
@@ -326,7 +326,7 @@
 }
 .section-timeline .entry-source a,
 .section-timeline .entry-source span {
-    color: #c7cdd1;
+    color: #BBB;
 }
 
 /* Main */
@@ -337,7 +337,7 @@
 }
 
 .section-timeline .entry-main.has-sources {
-    border-top: 1px solid #c7cdd1;
+    border-top: 1px solid #DDD;
 }
 
 /* Heading */
@@ -405,7 +405,7 @@
     margin-bottom: 6px;
     height: 175px;
     color: #333;
-    border: 1px solid #c7cdd1;
+    border: 1px solid #CCC;
 }
 
 .section-timeline .entry-content:hover,
@@ -520,7 +520,7 @@
 }
 
 .section-timeline .entry-content h3 {
-    color: #11254a;
+    color: #159;
     font-size: 15px;
     font-weight: bold;
     margin: 0 0 5px 0;
@@ -563,13 +563,13 @@
 
 .section-timeline .action a{
     cursor: pointer;
-    color: #738a95;
+    color: #89A;
 }
 
 /* Footer */
 .section-timeline .entry footer {
     text-align: center;
-    color: #c7cdd1;
+    color: #BBB;
     height: 26px;
     line-height: 26px;
 }
@@ -606,7 +606,7 @@
 }
 
 .section-timeline .card-end rect {
-    fill: #c7cdd1;
+    fill: #CCC;
 }
 
 .section-timeline .search-not-found {
@@ -615,7 +615,7 @@
 }
 
 .section-timeline .search-not-found h1 {
-    color: #C7CDD1;
+    color: #BBB;
     font-weight: normal;
 }
 

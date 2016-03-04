@@ -26,7 +26,7 @@
     margin: 0;
     font-size: 14px;
     display: block;
-    color: #11254A;
+    color: #159;
     font-weight: bold;
     max-width: 200px;
     white-space: nowrap;
@@ -49,7 +49,7 @@
 }
 
 .section-point-votes .reputation span {
-    color: #c7cdd1;
+    color: #BBB;
 }
 
 .section-point-votes .reputation .reputation-info {
@@ -59,7 +59,7 @@
 .section-point-votes .reputation p {
     float: right;
     margin: 0;
-    color: #738a95;
+    color: #89A;
 }
 
 .section-point-votes .reputation p.total {
@@ -141,12 +141,12 @@
 
 .section-point-votes .reputation-stat .reputation-circle circle {
     r: 4px;
-    fill: #c7cdd1;
+    fill: #CCC;
 }
 
 .section-point-votes .reputation-stat .reputation-level {
     transform: translateY(-50%);
-    background: #c7cdd1 ;
+    background: #CCC ;
     height: 2px;
     display: inline-block;
     vertical-align: middle;
@@ -161,10 +161,10 @@
 }
 
 .section-point-votes .external-links a {
-    color: #738a95;
+    color: #89A;
 }
 
 .section-point-votes .external-links .divider {
-    color: #c7cdd1;
+    color: #CCC;
     margin: 0 4px;
 }

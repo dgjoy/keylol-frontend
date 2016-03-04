@@ -14,7 +14,7 @@
 
 .popup-related-games .wrapper li>p {
     margin: 0;
-    color: #c7cdd1;
+    color: #BBB;
     padding-bottom: 10px;
 }
 
@@ -59,7 +59,7 @@
 }
 
 .popup-related-games .games li .title p:first-of-type {
-    color: #11254A;
+    color: #159;
     font-weight: bold;
 }
 
@@ -70,5 +70,5 @@
 .popup-related-games .view-all {
     float: right;
     margin-right: 20px;
-    color: #738a95;
+    color: #89A;
 }

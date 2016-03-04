@@ -17,7 +17,7 @@
 }
 
 .popup-point-preview-card.loading .card-main {
-    background-color: #eef1f3;
+    background-color: #EEE;
 }
 
 .popup-point-preview-card .card-main .content {
@@ -45,7 +45,7 @@
 }
 
 .popup-point-preview-card .heading h1 {
-    color: #11254a;
+    color: #159;
     margin: 3px 0;
     font-size: 16px;
 }
@@ -61,7 +61,7 @@
 .popup-point-preview-card .summary {
     width: 100%;
     height: 30px;
-    background-color: #11254A;
+    background-color: #159;
 }
 
 .popup-point-preview-card .summary .left-summary {

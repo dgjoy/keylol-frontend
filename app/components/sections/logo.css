@@ -1,5 +1,5 @@
 .section-logo {
-    background-color: #11254a;
+    background-color: #159;
     height: 100%;
     width: 100%;
     min-height: 70px;
@@ -8,7 +8,7 @@
 }
 
 .section-logo:hover {
-    background: #344565;
+    background: #2966a3;
 }
 
 .section-logo a {

@@ -25,12 +25,12 @@
 }
 
 .window-short-review .short-header .title h4 span {
-    color: #11254A;
+    color: #159;
     font-weight: bold;
 }
 
 .window-short-review .short-header .title p {
-    color: #C7CDD1;
+    color: #BBB;
     margin: 0;
 }
 
@@ -49,7 +49,7 @@
     margin-right: 14px;
     text-align: right;
     display: block;
-    color: #c7cdd1;
+    color: #BBB;
 }
 
 .window-short-review .char-count.error {
@@ -72,7 +72,7 @@
 }
 
 .window-short-review .change-to-long span {
-    color: #738a95;
+    color: #89A;
     margin-left: 6px;
 }
 

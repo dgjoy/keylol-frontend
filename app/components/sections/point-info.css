@@ -30,7 +30,7 @@
 }
 
 .section-point-info .info-details .info-attribute a {
-    color: #738a95;
+    color: #89A;
 }
 
 .section-point-info .info-details .info-review {
@@ -38,7 +38,7 @@
     right: 0;
     height: calc(100% - 10px);
     position: absolute;
-    border-left: 1px solid #C7CDD1;
+    border-left: 1px solid #CCC;
     padding: 5px 0 5px 15px;
     text-align: center;
 }
@@ -51,7 +51,7 @@
 }
 
 .section-point-info .info-details .info-review .play-time {
-    color: #C7CDD1;
+    color: #BBB;
     margin: 12px 0 0 0;
 }
 
@@ -92,7 +92,7 @@
 .section-point-info .info-details .info-review a {
     line-height: 15px;
     display: block;
-    color: #738a95;
+    color: #89A;
 }
 
 .section-point-info .info-details .info-review .actions a {
@@ -102,16 +102,16 @@
 }
 
 .section-point-info .info-actions a {
-    color: #738a95;
+    color: #89A;
     cursor: pointer;
 }
 
 .section-point-info .info-actions .related-list {
-    color: #C7CDD1;
+    color: #BBB;
 }
 
 .section-point-info .info-actions .related-list:not(:last-of-type) {
-    border-right: 1px solid #C7CDD1;
+    border-right: 1px solid #CCC;
     margin-right: 5px;
 }
 
