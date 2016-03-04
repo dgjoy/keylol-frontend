@@ -220,14 +220,12 @@ textarea,
 
 .avatar-small {
     border-radius: 50%;
-    border: 2px solid #159;
     box-sizing: border-box;
     display: block;
 }
 
 .avatar-big {
     border-radius: 50%;
-    border: 3px solid #159;
     box-sizing: border-box;
     display: block;
 }
@@ -243,7 +241,7 @@ textarea,
 }
 
 .border-button:hover {
-    background-color: #889ba5;
+    background-color: #9ad4ff;
 }
 
 .border-button.subscribed span {
