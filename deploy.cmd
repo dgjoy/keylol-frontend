@@ -110,7 +110,7 @@ IF EXIST "%DEPLOYMENT_SOURCE%\gulpfile.js" (
 
 echo 4. KuduSync
 IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (
-  call :ExecuteCmd "%KUDU_SYNC_CMD%" -v 50 -f "%DEPLOYMENT_SOURCE%" -t "%DEPLOYMENT_TARGET%" -n "%NEXT_MANIFEST_PATH%" -p "%PREVIOUS_MANIFEST_PATH%" -i ".git;.hg;.idea;.gitignore;.deployment;deploy.cmd;README.md;package.json;environment-config.js;keylol-app.js;root-controller.js;node-web-server.js;gulpfile.js;*.ejs;node_modules;debug;components;assets/stylesheets;*-full.ttf;*-full.woff"
+  call :ExecuteCmd "%KUDU_SYNC_CMD%" -v 50 -f "%DEPLOYMENT_SOURCE%" -t "%DEPLOYMENT_TARGET%" -n "%NEXT_MANIFEST_PATH%" -p "%PREVIOUS_MANIFEST_PATH%" -i ".git;.hg;.idea;.gitignore;.deployment;deploy.cmd;README.md;package.json;environment-config.js;keylol-app.js;root-controller.js;node-web-server.js;gulpfile.js;index.html.ejs;environment-config.js.ejs;node_modules;debug;components;assets/stylesheets;keylol-rail-sung-full.ttf;lisong-full.ttf;myriadpro-regular-full.woff"
   IF !ERRORLEVEL! NEQ 0 goto error
 )
 
