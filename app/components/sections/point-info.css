@@ -30,7 +30,7 @@
 }
 
 .section-point-info .info-details .info-attribute a {
-    color: #8CF;
+    color: #89A;
 }
 
 .section-point-info .info-details .info-review {
@@ -92,7 +92,7 @@
 .section-point-info .info-details .info-review a {
     line-height: 15px;
     display: block;
-    color: #8CF;
+    color: #89A;
 }
 
 .section-point-info .info-details .info-review .actions a {
@@ -102,7 +102,7 @@
 }
 
 .section-point-info .info-actions a {
-    color: #8CF;
+    color: #89A;
     cursor: pointer;
 }
 

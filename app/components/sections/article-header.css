@@ -32,7 +32,7 @@
 .section-article-header h1 .vote {
     float: right;
     margin-left: 6px;
-    color: #8CF;
+    color: #89A;
 }
 
 .section-article-header .related-info {
@@ -54,7 +54,7 @@
 }
 
 .section-article-header .actions a {
-    color: #8CF;
+    color: #89A;
     margin-right: 9px;
 }
 
@@ -81,7 +81,7 @@
 }
 
 .section-article-header .review-info .info-attribute a {
-    color: #8CF;
+    color: #89A;
 }
 
 .section-article-header .review-info .divider {
