@@ -39,7 +39,7 @@
 .popup-search-selector .selector-main .default h1 {
     margin: 20px 0 0 0;
     font-size: 24px;
-    color: #C7CDD1;
+    color: #BBB;
     font-weight: normal;
 }
 
@@ -80,7 +80,7 @@
 }
 
 .popup-search-selector .selector-main li .title p:first-of-type {
-    color: #11254A;
+    color: #159;
     font-weight: bold;
 }
 
@@ -95,7 +95,7 @@
 
 .popup-search-selector .selector-main li .title p.info span {
     margin-left: 8px;
-    color: #C7CDD1;
+    color: #BBB;
 }
 
 .popup-search-selector .selector-main li .title p.info span:first-of-type {

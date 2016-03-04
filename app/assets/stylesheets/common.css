@@ -46,7 +46,7 @@
 /* -------------------- */
 body {
     color: #333;
-    background-color: #eef1f3;
+    background-color: #EEE;
     font-family: "Helvetica Neue", "Segoe UI", Arial, "Hiragino Sans GB", "Microsoft YaHei", "Microsoft JhengHei", "WenQuanYi Micro Hei", sans-serif;
     font-size: 13px;
     min-width: 1240px;
@@ -54,7 +54,7 @@ body {
 }
 
 a {
-    color: #11254a;
+    color: #159;
     text-decoration: none;
 }
 
@@ -165,7 +165,7 @@ textarea,
     line-height: 22px;
     padding-left: 8px;
     font-size: 15px;
-    color: #11254a;
+    color: #159;
     font-weight: normal;
 }
 
@@ -177,7 +177,7 @@ textarea,
     left: -5px;
     width: 8px;
     height: 22px;
-    background-color: #11254a;
+    background-color: #159;
 }
 
 .labeled-heading::before {
@@ -214,20 +214,20 @@ textarea,
 .entry-type {
     font-size: 15px;
     color: white;
-    background-color: #11254a;
+    background-color: #159;
     padding: 2px 3px 1px;
 }
 
 .avatar-small {
     border-radius: 50%;
-    border: 2px solid #11254A;
+    border: 2px solid #159;
     box-sizing: border-box;
     display: block;
 }
 
 .avatar-big {
     border-radius: 50%;
-    border: 3px solid #11254A;
+    border: 3px solid #159;
     box-sizing: border-box;
     display: block;
 }
@@ -237,7 +237,7 @@ textarea,
     padding: 3px 7px;
     color: white;
     position: relative;
-    background: #738a95 no-repeat;
+    background: #8CF no-repeat;
     background-size: contain;
     transition: background-color 100ms ease-in-out;
 }
@@ -343,7 +343,7 @@ textarea,
 
 [id^=geetest-]::before {
     content: "加载中，若无响应请刷新";
-    color: #c7cdd1;
+    color: #BBB;
     position: absolute;
     top: 50%;
     left: 50%;

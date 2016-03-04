@@ -30,7 +30,7 @@ input-point .point-title {
 }
 
 input-point .point-title .delete {
-    color: #c7cdd1;
+    color: #BBB;
     padding-right: 5px;
     text-decoration: none;
     display: none;
@@ -45,7 +45,7 @@ input-point .point-title.selected .delete {
 }
 
 input-point .point-title.disabled {
-    color: #c7cdd1;
+    color: #BBB;
 }
 
 input-point .point-title:hover {

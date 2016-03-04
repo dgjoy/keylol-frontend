@@ -13,7 +13,7 @@ pro-con div::before {
     top: 15px;
     transform: translateY(-50%);
     left: 25px;
-    color: #c7cdd1;
+    color: #BBB;
 }
 
 pro-con div.negative::before {
@@ -28,7 +28,7 @@ pro-con div a {
     float: right;
     margin-right: 14px;
     margin-top: 5px;
-    color: #738a95;
+    color: #8CF;
     display: none;
 }
 
@@ -42,5 +42,5 @@ pro-con p {
 }
 
 pro-con p a {
-    color: #738a95;
+    color: #8CF;
 }
