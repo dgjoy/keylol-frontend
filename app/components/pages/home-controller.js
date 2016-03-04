@@ -37,7 +37,7 @@
                     }).then(function (response) {
                         callback(response);
                     }, function (response) {
-                        notification.error("未知错误", response);
+                        notification.error("发生未知错误，请重试或与站务职员联系", response);
                     });
                 },
                 entries: []
@@ -152,13 +152,13 @@
                             timeline.activePoints[i].type = utils.getPointType(point.Type);
                         }
                     }, function (response) {
-                        notification.error("未知错误", response);
+                        notification.error("发生未知错误，请重试或与站务职员联系", response);
                     });
                     timeline.loadingLock = false;
                 }
 
             }, function (response) {
-                notification.error("未知错误", response);
+                notification.error("发生未知错误，请重试或与站务职员联系", response);
                 timeline.loadingLock = false;
             });
 

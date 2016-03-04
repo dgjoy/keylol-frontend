@@ -107,6 +107,7 @@
         <tr>
             <td class="description">
                 <textarea name="description" ng-model="vm.Description"></textarea>
+                <span class="char-count" ng-class="{error: vm.Description.length > 399}">{{vm.Description.length}}/399</span>
             </td>
         </tr>
     </table>

@@ -35,8 +35,8 @@
 
             $http.get(apiEndpoint + "normal-point/" + $routeParams.idCode, {
                 params: {
-                    includeStats: true,
-                    includeSubscribed: true,
+                    stats: true,
+                    subscribed: true,
                     idType: "IdCode"
                 }
             }).then(function (response) {
@@ -63,7 +63,7 @@
 
             }, function (response) {
                 $scope.searchExist = false;
-                notification.error("未知错误", response);
+                notification.error("发生未知错误，请重试或与站务职员联系", response);
             });
 
             var timeline = {
@@ -79,7 +79,7 @@
                             take: utils.timelineLoadCount,
                             skip: timeline.entries.length,
                             idType: "IdCode",
-                            includeStats: true,
+                            stats: true,
                             relationship: $routeParams.type
                         }
                     }).then(function (response) {
@@ -103,7 +103,7 @@
                                     background: point.BackgroundImage,
                                     pointAvatar: point.AvatarImage,
                                     url: "point/" + point.IdCode,
-                                    subscribed: true,
+                                    subscribed: point.Subscribed,
                                     id: point.Id
                                 };
                                 timeline.entries.push(entry);
@@ -134,7 +134,7 @@
                             timeline.loadingLock = false;
                         }
                     }, function (response) {
-                        notification.error("未知错误", response);
+                        notification.error("发生未知错误，请重试或与站务职员联系", response);
                         timeline.loadingLock = false;
                     });
                 },

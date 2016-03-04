@@ -9,10 +9,10 @@
             function getUserInfo() {
                 $http.get(apiEndpoint + "user/" + union.$localStorage.login.UserId, {
                     params: {
-                        includeClaims: true,
-                        includeStats: true,
-                        includeSubscribeCount: true,
-                        includeCommentLike: true
+                        claims: true,
+                        stats: true,
+                        subscribeCount: true,
+                        commentLike: true
                     }
                 }).then(function (response) {
                     union.$localStorage.user = response.data;

@@ -6,6 +6,7 @@
 
 .section-point-info .main-description {
     margin: 0;
+    word-break: break-all;
 }
 
 .section-point-info .has-description {
