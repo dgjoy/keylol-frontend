@@ -59,7 +59,7 @@
                     }).then(function (response) {
                         callback(response);
                     }, function (response) {
-                        notification.error("未知错误", response);
+                        notification.error("发生未知错误，请重试或与站务职员联系", response);
                     });
                 };
 
@@ -69,10 +69,10 @@
                  */
                 $http.get(apiEndpoint + "user/" + $routeParams.userIdCode, {
                     params: {
-                        includeStats: true,
+                        stats: true,
                         idType: "IdCode",
-                        includeProfilePointBackgroundImage: true,
-                        includeSubscribed: true
+                        profilePointBackgroundImage: true,
+                        subscribed: true
                     }
                 }).then(function (response) {
 
@@ -219,17 +219,17 @@
                                     timeline.activePoints[i].type = utils.getPointType(point.Type);
                                 }
                             }, function (response) {
-                                notification.error("未知错误", response);
+                                notification.error("发生未知错误，请重试或与站务职员联系", response);
                             });
                             timeline.loadingLock = false;
                         }
                     }, function (response) {
-                        notification.error("未知错误", response);
+                        notification.error("发生未知错误，请重试或与站务职员联系", response);
                         timeline.loadingLock = false;
                     });
                 }, function (response) {
                     $scope.pointExist = false;
-                    notification.error("未知错误", response);
+                    notification.error("发生未知错误，请重试或与站务职员联系", response);
                 });
             }
 
@@ -251,7 +251,7 @@
                     }).then(function (response) {
                         callback(response);
                     }, function (response) {
-                        notification.error("未知错误", response);
+                        notification.error("发生未知错误，请重试或与站务职员联系", response);
                     });
                 };
 
@@ -261,12 +261,12 @@
                  */
                 $http.get(apiEndpoint + "normal-point/" + $routeParams.pointIdCode, {
                     params: {
-                        includeStats: true,
-                        includeVotes: true,
-                        includeSubscribed: true,
-                        includeRelated: true,
-                        includeCoverDescription: true,
-                        includeMore: true,
+                        stats: true,
+                        votes: true,
+                        subscribed: true,
+                        related: true,
+                        coverDescription: true,
+                        more: true,
                         idType: "IdCode"
                     }
                 }).then(function (response) {
@@ -314,7 +314,7 @@
 
                 }, function (response) {
                     $scope.pointExist = false;
-                    notification.error("未知错误", response);
+                    notification.error("发生未知错误，请重试或与站务职员联系", response);
                 });
 
                 /**
@@ -391,12 +391,12 @@
                                 timeline.activePoints[i].type = utils.getPointType(point.Type);
                             }
                         }, function (response) {
-                            notification.error("未知错误", response);
+                            notification.error("发生未知错误，请重试或与站务职员联系", response);
                         });
                         timeline.loadingLock = false;
                     }
                 }, function (response) {
-                    notification.error("未知错误", response);
+                    notification.error("发生未知错误，请重试或与站务职员联系", response);
                     timeline.loadingLock = false;
                 });
             }

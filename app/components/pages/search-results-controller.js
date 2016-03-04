@@ -127,7 +127,7 @@
                                 timeline.loadingLock = false;
                             }
                         }, function (response) {
-                            notification.error("未知错误", response);
+                            notification.error("发生未知错误，请重试或与站务职员联系", response);
                             timeline.loadingLock = false;
                         });
                     };
@@ -204,7 +204,7 @@
                                 timeline.loadingLock = false;
                             }
                         }, function (response) {
-                            notification.error("未知错误", response);
+                            notification.error("发生未知错误，请重试或与站务职员联系", response);
                             timeline.loadingLock = false;
                         });
                     };
@@ -218,9 +218,9 @@
                     $http.get(apiEndpoint + "user/" + encodeURIComponent($routeParams.keyword), {
                         params: {
                             idType: "UserName",
-                            includeStats: true,
-                            includeSubscribed: true,
-                            includeProfilePointBackgroundImage: true
+                            stats: true,
+                            subscribed: true,
+                            profilePointBackgroundImage: true
                         }
                     }).then(function (response) {
                         if (response.data) {
@@ -253,7 +253,7 @@
                         if (response.status === 404) {
                             summary.defaultSum.text = "找到 0 个符合的项目";
                         } else {
-                            notification.error("未知错误", response);
+                            notification.error("发生未知错误，请重试或与站务职员联系", response);
                         }
                         timeline.loadingLock = false;
                         timeline.searchNotFound = true;

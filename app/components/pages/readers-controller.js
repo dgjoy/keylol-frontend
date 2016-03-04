@@ -26,12 +26,12 @@
             $http.get(apiEndpoint + "user/" + union.$localStorage.user.IdCode, {
                 params: {
                     idType: "IdCode",
-                    includeProfilePointBackgroundImage: true
+                    profilePointBackgroundImage: true
                 }
             }).then(function (response) {
                 summary.background = response.data.ProfilePointBackgroundImage;
             }, function (response) {
-                notification.error("未知错误", response);
+                notification.error("发生未知错误，请重试或与站务职员联系", response);
             });
 
             var timeline = {
@@ -98,7 +98,7 @@
                             timeline.loadingLock = false;
                         }
                     }, function (response) {
-                        notification.error("未知错误", response);
+                        notification.error("发生未知错误，请重试或与站务职员联系", response);
                         timeline.loadingLock = false;
                     });
                 },

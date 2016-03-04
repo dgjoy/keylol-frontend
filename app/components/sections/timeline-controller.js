@@ -31,15 +31,22 @@
             };
 
             $scope.ignore = function (entry) {
-                $scope.data.entries.splice($scope.data.entries.indexOf(entry), 1);
-                $http.put(apiEndpoint + "like/" + entry.id, {}, {
-                    params: {
-                        ignore: true
+                notification.attention("移除后将不再显示这条记录", [
+                    {action: "移除", value: true},
+                    {action: "取消"}
+                ]).then(function (result) {
+                    if (result) {
+                        $http.put(apiEndpoint + "like/" + entry.id, {}, {
+                            params: {
+                                ignore: true
+                            }
+                        }).then(function () {
+                            notification.success("移除记录成功");
+                            $scope.data.entries.splice($scope.data.entries.indexOf(entry), 1);
+                        }, function (response) {
+                            notification.error("移除记录失败", response);
+                        });
                     }
-                }).then(function () {
-                    notification.success("移除记录成功");
-                }, function (response) {
-                    notification.error("移除记录失败", response);
                 });
             };
 
@@ -286,7 +293,7 @@
                     entry.pointInfo.reader++;
                     union.$localStorage.user.SubscribedPointCount++;
                 }, function (response) {
-                    notification.error("未知错误", response);
+                    notification.error("发生未知错误，请重试或与站务职员联系", response);
                 });
             };
             $scope.unsubscribe = function (entry) {
@@ -306,7 +313,7 @@
                             entry.pointInfo.reader--;
                             union.$localStorage.user.SubscribedPointCount--;
                         }, function (response) {
-                            notification.error("未知错误", response);
+                            notification.error("发生未知错误，请重试或与站务职员联系", response);
                         }).finally(function () {
                             $scope.subscribeDisabled = false;
                         });
