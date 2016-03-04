@@ -12,21 +12,21 @@
     font-family: "Keylol Rail Sung";
     font-style: normal;
     font-weight: normal;
-    src: url("../fonts/keylol-rail-sung-subset-f05581b21d.eot"); /* IE9 */
-    src: url("../fonts/keylol-rail-sung-subset-f05581b21d.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
-    url("../fonts/keylol-rail-sung-subset-9a6f2c86ba.woff") format("woff"), /* chrome, firefox */
-    url("../fonts/keylol-rail-sung-subset-bb6cec8bf1.ttf") format("truetype"), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
-    url("../fonts/keylol-rail-sung-subset-4cc8c56b2e.svg#Keylol Rail Sung") format("svg"); /* iOS 4.1- */
+    src: url("../fonts/keylol-rail-sung-subset-461c141cce.eot"); /* IE9 */
+    src: url("../fonts/keylol-rail-sung-subset-461c141cce.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    url("../fonts/keylol-rail-sung-subset-d774574e0f.woff") format("woff"), /* chrome, firefox */
+    url("../fonts/keylol-rail-sung-subset-c8d58df711.ttf") format("truetype"), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+    url("../fonts/keylol-rail-sung-subset-ab646c5583.svg#Keylol Rail Sung") format("svg"); /* iOS 4.1- */
 }
 
 @font-face {
     font-family: "LiSong";
     font-style: normal;
     font-weight: normal;
-    src: url("../fonts/lisong-subset-2095ebbdad.eot"); /* IE9 */
-    src: url("../fonts/lisong-subset-2095ebbdad.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
-    url("../fonts/lisong-subset-dab34017a2.woff") format("woff"), /* chrome, firefox */
-    url("../fonts/lisong-subset-0fa78d822a.ttf") format("truetype"), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+    src: url("../fonts/lisong-subset-a09f45dc57.eot"); /* IE9 */
+    src: url("../fonts/lisong-subset-a09f45dc57.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    url("../fonts/lisong-subset-8dcbb3e069.woff") format("woff"), /* chrome, firefox */
+    url("../fonts/lisong-subset-17a7f1f034.ttf") format("truetype"), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
     url("../fonts/lisong-subset-4313fc0942.svg#LiSong") format("svg"); /* iOS 4.1- */
 }
 
@@ -46,7 +46,7 @@
 /* -------------------- */
 body {
     color: #333;
-    background-color: #eef1f3;
+    background-color: #EEE;
     font-family: "Helvetica Neue", "Segoe UI", Arial, "Hiragino Sans GB", "Microsoft YaHei", "Microsoft JhengHei", "WenQuanYi Micro Hei", sans-serif;
     font-size: 13px;
     min-width: 1240px;
@@ -54,7 +54,7 @@ body {
 }
 
 a {
-    color: #11254a;
+    color: #159;
     text-decoration: none;
 }
 
@@ -165,7 +165,7 @@ textarea,
     line-height: 22px;
     padding-left: 8px;
     font-size: 15px;
-    color: #11254a;
+    color: #159;
     font-weight: normal;
 }
 
@@ -177,7 +177,7 @@ textarea,
     left: -5px;
     width: 8px;
     height: 22px;
-    background-color: #11254a;
+    background-color: #159;
 }
 
 .labeled-heading::before {
@@ -214,20 +214,20 @@ textarea,
 .entry-type {
     font-size: 15px;
     color: white;
-    background-color: #11254a;
+    background-color: #159;
     padding: 2px 3px 1px;
 }
 
 .avatar-small {
     border-radius: 50%;
-    border: 2px solid #11254A;
+    border: 2px solid #159;
     box-sizing: border-box;
     display: block;
 }
 
 .avatar-big {
     border-radius: 50%;
-    border: 3px solid #11254A;
+    border: 3px solid #159;
     box-sizing: border-box;
     display: block;
 }
@@ -237,7 +237,7 @@ textarea,
     padding: 3px 7px;
     color: white;
     position: relative;
-    background: #738a95 no-repeat;
+    background: #8CF no-repeat;
     background-size: contain;
     transition: background-color 100ms ease-in-out;
 }
@@ -343,7 +343,7 @@ textarea,
 
 [id^=geetest-]::before {
     content: "加载中，若无响应请刷新";
-    color: #c7cdd1;
+    color: #BBB;
     position: absolute;
     top: 50%;
     left: 50%;

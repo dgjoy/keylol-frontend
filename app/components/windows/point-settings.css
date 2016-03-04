@@ -21,10 +21,6 @@
     top: 0;
 }
 
-.window-point-settings .tab-changed.tab-error::after {
-    color: red;
-}
-
 .window-point-settings .heading {
     margin: 28px 0;
 }
@@ -44,7 +40,7 @@
 }
 
 .window-point-settings .heading .menu-right ul li a {
-    color: #738a95;
+    color: #8CF;
 }
 
 .window-point-settings .heading .menu-right ul li.current {
@@ -92,7 +88,7 @@
     box-sizing: border-box;
     margin-left: auto;
     margin-right: auto;
-    border: 1px dashed #738a95;
+    border: 1px dashed #8CF;
 }
 
 .window-point-settings .upload-cover {
@@ -127,7 +123,7 @@
     box-sizing: border-box;
     margin-left: auto;
     margin-right: auto;
-    border: 1px dashed #738a95;
+    border: 1px dashed #8CF;
 }
 
 .window-point-settings table {
@@ -137,7 +133,7 @@
 
 .window-point-settings table input[type=text]:disabled,
 .window-point-settings table input[type=email]:disabled {
-    color: #c7cdd1;
+    color: #BBB;
 }
 
 .window-point-settings table .description textarea {
@@ -202,64 +198,11 @@
     box-sizing: border-box;
     margin-left: auto;
     margin-right: auto;
-    border: 1px dashed #738a95;
+    border: 1px dashed #8CF;
 }
 
 .window-point-settings .profile-point-background.no-image h4 {
     margin-bottom: 8px;
-}
-
-.window-point-settings .platform-status {
-    width: 18%;
-    float: left;
-    text-align: center;
-    position: relative;
-    margin: 7px 0 9px;
-    box-sizing: border-box;
-}
-
-.window-point-settings .platform-status [class^=light] {
-    border-radius: 50%;
-    height: 10px;
-    width: 10px;
-    display: inline-block;
-    margin-right: 4px;
-}
-
-.window-point-settings .platform-status .light-grey {
-    background-color: #c7cdd1;
-}
-
-.window-point-settings .platform-status .light-red {
-    background-color: #e30613;
-}
-
-.window-point-settings .platform-status .light-green {
-    background-color: #00AF41;
-}
-
-.window-point-settings .platform-status.larger {
-    width: 28%;
-}
-
-.window-point-settings .platform-status.right-border {
-    border-right: 1px solid #738a95;
-}
-
-.window-point-settings .platform-status .text-block {
-    display: inline-block;
-    text-align: left;
-}
-
-.window-point-settings .platform-status .bot-steam-profile-anchor {
-    color: #738a95;
-}
-
-.window-point-settings .platform-status .pasted-card {
-    position: absolute;
-    top: 0;
-    left: -25px;
-    width: calc(100% + 25px);
 }
 
 .window-point-settings .checkbox-group {
@@ -279,10 +222,6 @@
 
 .window-point-settings .checkbox-group label {
     padding-left: 2px;
-}
-
-.window-point-settings [id^=geetest-] {
-    margin: 14px 0;
 }
 
 .window-point-settings .tips {

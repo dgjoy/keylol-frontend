@@ -1,0 +1,119 @@
+.window-synchronization .window {
+    padding: 30px 0;
+    width: 800px;
+}
+
+.window-synchronization ul {
+    list-style: none;
+}
+
+.window-synchronization .heading {
+    margin-bottom: 20px;
+}
+
+.window-synchronization .heading h2 {
+    margin: 0;
+}
+
+.window-synchronization .heading h4 {
+    float: right;
+    color: #BBB;
+    padding-right: 20px;
+    margin: 0;
+}
+
+.window-synchronization .cannot-sync {
+    text-align: center;
+    height: 515px;
+}
+
+.window-synchronization .cannot-sync img {
+    margin-top: 125px;
+}
+
+.window-synchronization .cannot-sync h1 {
+    font-size: 24px;
+    font-weight: normal;
+}
+
+.window-synchronization .cannot-sync h3 {
+    font-weight: normal;
+    text-align: right;
+    width: 475px;
+    margin: auto;
+    color: #BBB;
+}
+
+.window-synchronization .types {
+    padding: 0 10px;
+    margin: 0;
+}
+
+.window-synchronization .types li>p {
+    color: #BBB;
+}
+
+.window-synchronization .points {
+    padding-left: 10px;
+    padding-bottom: 10px;
+}
+
+.window-synchronization .points li {
+    padding: 10px;
+    float: left;
+    width: 236px;
+    height: 32px;
+}
+
+.window-synchronization .points li .avatar-anchor {
+    float: left;
+}
+
+.window-synchronization .points li .avatar-anchor img {
+    width: 32px;
+    height: 32px;
+}
+
+.window-synchronization .points li .title {
+    float: left;
+    margin-left: 14px;
+}
+
+.window-synchronization .points li .title p {
+    margin: 0;
+    line-height: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 150px;
+}
+
+.window-synchronization .points li .title p:first-of-type {
+    color: #159;
+    font-weight: bold;
+}
+
+.window-synchronization .points li .title p span {
+    color: #748a97;
+}
+
+.window-synchronization .points li .delete {
+    color: #BBB;
+    line-height: 32px;
+    visibility: hidden;
+}
+
+.window-synchronization .points li:hover .delete {
+    visibility: visible;
+}
+
+.window-synchronization .cancel-synchronization button, .window-synchronization .retry-synchronization button {
+    position: absolute;
+    left: -5px;
+}
+
+.window-synchronization .cancel-synchronization p, .window-synchronization .retry-synchronization p {
+    margin: 0;
+    padding-top: 38px;
+    padding-left: 20px;
+}
