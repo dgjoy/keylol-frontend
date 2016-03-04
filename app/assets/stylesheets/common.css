@@ -235,13 +235,13 @@ textarea,
     padding: 3px 7px;
     color: white;
     position: relative;
-    background: #8CF no-repeat;
+    background: #89A no-repeat;
     background-size: contain;
     transition: background-color 100ms ease-in-out;
 }
 
 .border-button:hover {
-    background-color: #9ad4ff;
+    background-color: #9AA8B7;
 }
 
 .border-button.subscribed span {

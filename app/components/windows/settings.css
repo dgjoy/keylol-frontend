@@ -40,7 +40,7 @@
 }
 
 .window-settings .heading .menu-right ul li a {
-    color: #8CF;
+    color: #89A;
 }
 
 .window-settings .heading .menu-right ul li.current {
@@ -121,7 +121,7 @@
     box-sizing: border-box;
     margin-left: auto;
     margin-right: auto;
-    border: 1px dashed #8CF;
+    border: 1px dashed #89A;
 }
 
 .window-settings .profile-point-background.no-image h4 {
@@ -162,7 +162,7 @@
 }
 
 .window-settings .platform-status.right-border {
-    border-right: 1px solid #8CF;
+    border-right: 1px solid #89A;
 }
 
 .window-settings .platform-status .text-block {
@@ -171,7 +171,7 @@
 }
 
 .window-settings .platform-status .bot-steam-profile-anchor {
-    color: #8CF;
+    color: #89A;
 }
 
 .window-settings .platform-status .pasted-card {

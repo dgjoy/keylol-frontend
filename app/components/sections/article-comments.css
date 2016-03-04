@@ -85,7 +85,7 @@
 }
 
 .section-article-comments .header .as-author {
-    color: #8CF;
+    color: #89A;
 }
 
 .section-article-comments .header .time {
@@ -93,7 +93,7 @@
 }
 
 .section-article-comments .header .action {
-    color: #8CF;
+    color: #89A;
     margin-left: 12px;
     display: none;
 }
@@ -104,7 +104,7 @@
 }
 
 .section-article-comments .content a{
-    color: #8CF;
+    color: #89A;
 }
 
 .section-article-comments .content .like-count {

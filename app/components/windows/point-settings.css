@@ -40,7 +40,7 @@
 }
 
 .window-point-settings .heading .menu-right ul li a {
-    color: #8CF;
+    color: #89A;
 }
 
 .window-point-settings .heading .menu-right ul li.current {
@@ -88,7 +88,7 @@
     box-sizing: border-box;
     margin-left: auto;
     margin-right: auto;
-    border: 1px dashed #8CF;
+    border: 1px dashed #89A;
 }
 
 .window-point-settings .upload-cover {
@@ -123,7 +123,7 @@
     box-sizing: border-box;
     margin-left: auto;
     margin-right: auto;
-    border: 1px dashed #8CF;
+    border: 1px dashed #89A;
 }
 
 .window-point-settings table {
@@ -198,7 +198,7 @@
     box-sizing: border-box;
     margin-left: auto;
     margin-right: auto;
-    border: 1px dashed #8CF;
+    border: 1px dashed #89A;
 }
 
 .window-point-settings .profile-point-background.no-image h4 {

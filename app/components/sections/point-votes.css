@@ -59,7 +59,7 @@
 .section-point-votes .reputation p {
     float: right;
     margin: 0;
-    color: #8CF;
+    color: #89A;
 }
 
 .section-point-votes .reputation p.total {
@@ -161,7 +161,7 @@
 }
 
 .section-point-votes .external-links a {
-    color: #8CF;
+    color: #89A;
 }
 
 .section-point-votes .external-links .divider {
