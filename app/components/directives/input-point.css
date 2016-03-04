@@ -11,7 +11,7 @@ input-point {
     zoom:1;
 }
 input-point.disabled {
-    background: #eef1f3;
+    background: #EEE;
 }
 
 input-point:before, input-point:after {
@@ -49,11 +49,11 @@ input-point .point-title.disabled {
 }
 
 input-point .point-title:hover {
-    background-color: #EEF1F3;
+    background-color: #EEE;
 }
 
 input-point .point-title.selected {
-    background-color: #EEF1F3;
+    background-color: #EEE;
 }
 
 input-point input[type=text].input {
@@ -69,7 +69,7 @@ input-point input[type=text].input {
 }
 
 input-point.disabled input[type=text].input {
-    background: #eef1f3;
+    background: #EEE;
 }
 
 input-point input[type=text]:disabled {

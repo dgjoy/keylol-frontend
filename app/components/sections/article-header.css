@@ -89,7 +89,7 @@
     top: 0;
     left: 480px;
     height: 100%;
-    background-color: #BBB;
+    background-color: #CCC;
     width: 1px;
 }
 
@@ -109,7 +109,7 @@
 }
 
 .section-article-header .review-info .review-detail blockquote {
-    background: #EEF1F3;
+    background: #fafaf9;
     word-break: break-all;
     border-left: 5px solid #159;
     padding: 10px 13px;

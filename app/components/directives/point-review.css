@@ -14,13 +14,13 @@ point-review .review-circle {
 
 point-review .review-circle circle {
     r: 6px;
-    fill: #BBB;
+    fill: #CCC;
 }
 
 point-review .review-circle.hollow circle {
     fill: transparent;
     r: 5px;
-    stroke: #BBB;
+    stroke: #CCC;
     stroke-width: 1;
 }
 

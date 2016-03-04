@@ -121,7 +121,7 @@
 }
 
 .section-action-hub .links li:not(:last-child) {
-    border-right: 1px solid #BBB;
+    border-right: 1px solid #CCC;
 }
 
 .section-action-hub .links h4 {

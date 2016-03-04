@@ -38,7 +38,7 @@
     right: 0;
     height: calc(100% - 10px);
     position: absolute;
-    border-left: 1px solid #BBB;
+    border-left: 1px solid #CCC;
     padding: 5px 0 5px 15px;
     text-align: center;
 }
@@ -111,7 +111,7 @@
 }
 
 .section-point-info .info-actions .related-list:not(:last-of-type) {
-    border-right: 1px solid #BBB;
+    border-right: 1px solid #CCC;
     margin-right: 5px;
 }
 
