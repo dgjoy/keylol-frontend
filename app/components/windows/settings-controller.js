@@ -70,12 +70,12 @@
 
             $http.get(apiEndpoint + "user/" + union.$localStorage.login.UserId, {
                 params: {
-                    includeClaims: true,
-                    includeSecurity: true,
-                    includeProfilePointBackgroundImage: true,
-                    includeSteam: true,
-                    includeSteamBot: true,
-                    includeMoreOptions: true
+                    claims: true,
+                    security: true,
+                    profilePointBackgroundImage: true,
+                    steam: true,
+                    steamBot: true,
+                    moreOptions: true
                 }
             }).then(function (response) {
                 var user = response.data;
@@ -265,7 +265,7 @@
                                     focusErrorPage();
                                     break;
                                 default:
-                                    notification.error("未知错误", response);
+                                    notification.error("发生未知错误，请重试或与站务职员联系", response);
                             }
                             $scope.submitLock = false;
                         });
@@ -317,7 +317,7 @@
                             notification.success("已登出当前账户");
                             close();
                         }, function (response) {
-                            notification.error("未知错误", response);
+                            notification.error("发生未知错误，请重试或与站务职员联系", response);
                         });
                     }
                 });

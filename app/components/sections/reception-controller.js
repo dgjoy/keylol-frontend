@@ -37,20 +37,27 @@
                     union.$localStorage.favorites = response.data;
                     setupQuickLinks(response.data);
                 }, function (response) {
-                    notification.error("未知错误", response);
+                    notification.error("发生未知错误，请重试或与站务职员联系", response);
                 });
 
             $scope.deleteFavorite = function (index) {
                 var deleteLink = $scope.quickLinks[index];
-                $http.delete(apiEndpoint + "favorite/" + deleteLink.Id)
-                    .then(function () {
-                        if (deleteLink.Type !== "Unknown" && ($routeParams.pointIdCode === deleteLink.IdCode || $routeParams.userIdCode === deleteLink.IdCode)) {
-                            $scope.canBeAdd = true;
-                        }
-                    }, function (response) {
-                        notification.error("未知错误", response);
-                    });
-                $scope.quickLinks.splice(index, 1);
+                notification.attention("将此据点由收藏夹移除", [
+                    {action: "移除", value: true},
+                    {action: "取消"}
+                ]).then(function (result) {
+                    if (result) {
+                        $http.delete(apiEndpoint + "favorite/" + deleteLink.Id)
+                            .then(function () {
+                                if (deleteLink.Type !== "Unknown" && ($routeParams.pointIdCode === deleteLink.IdCode || $routeParams.userIdCode === deleteLink.IdCode)) {
+                                    $scope.canBeAdd = true;
+                                }
+                                $scope.quickLinks.splice(index, 1);
+                            }, function (response) {
+                                notification.error("发生未知错误，请重试或与站务职员联系", response);
+                            });
+                    }
+                });
             };
 
             $scope.addFavorite = function () {
@@ -66,9 +73,10 @@
                             Type: "NormalPoint",
                             IdCode: union.point.IdCode,
                             Name: utils.getPointFirstName(union.point)
-                        })
+                        });
+                        notification.success("当前据点已添加到收藏夹");
                     }, function (response) {
-                        notification.error("未知错误", response);
+                        notification.error("发生未知错误，请重试或与站务职员联系", response);
                         $scope.canBeAdd = true;
                     });
                 } else if ($routeParams.userIdCode && union.user.Id) {
@@ -85,7 +93,7 @@
                             Name: union.user.UserName
                         })
                     }, function (response) {
-                        notification.error("未知错误", response);
+                        notification.error("发生未知错误，请重试或与站务职员联系", response);
                         $scope.canBeAdd = true;
                     });
                 }

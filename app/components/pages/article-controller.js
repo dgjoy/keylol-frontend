@@ -24,9 +24,9 @@
                             $scope.hasVote = true;
                             $http.get(apiEndpoint + "normal-point/" + article.VoteForPoint.Id, {
                                 params: {
-                                    includeVotes: true,
-                                    includeCoverDescription: true,
-                                    includeRelated: true
+                                    votes: true,
+                                    coverDescription: true,
+                                    related: true
                                 }
                             }).then(function (response) {
                                 var point = response.data;
@@ -44,7 +44,7 @@
 
                                 $.extend(unionPoint, point);
                             }, function (response) {
-                                notification.error("未知错误", response);
+                                notification.error("发生未知错误，请重试或与站务职员联系", response);
                             });
                         }
                         $.extend(unionArticle, article);
@@ -74,10 +74,10 @@
                     });
                 $http.get(apiEndpoint + "user/" + $routeParams.author, {
                     params: {
-                        includeSubscribed: $routeParams.author != union.$localStorage.user.IdCode,
-                        includeStats: true,
-                        includeProfilePointBackgroundImage: true,
-                        includeReviewStats: true,
+                        subscribed: $routeParams.author != union.$localStorage.user.IdCode,
+                        stats: true,
+                        profilePointBackgroundImage: true,
+                        reviewStats: true,
                         idType: "IdCode"
                     }
                 }).then(function (response) {
@@ -105,7 +105,7 @@
                         summary.subscribed = author.Subscribed;
                     }
                 }, function (response) {
-                    notification.error("未知错误", response);
+                    notification.error("发生未知错误，请重试或与站务职员联系", response);
                 });
             }
             union.summary = summary;

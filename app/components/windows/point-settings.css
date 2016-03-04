@@ -141,6 +141,17 @@
     height: 110px;
 }
 
+.window-point-settings table .description .char-count {
+    margin-right: 5px;
+    text-align: right;
+    display: block;
+    color: #BBB;
+}
+
+.window-point-settings table .description .char-count.error {
+    color: #e30613;
+}
+
 .window-point-settings table input-point {
     background: none;
     height: 100%;

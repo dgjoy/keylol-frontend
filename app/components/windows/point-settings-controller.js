@@ -163,6 +163,10 @@
             $scope.submit = function () {
                 if ($scope.submitLock)
                     return;
+                if ($scope.vm.Description.length > 399){
+                    notification.error("部分文字内容超出字数限制，请酌情删改后再次提交");
+                    return;
+                }
                 $scope.submitLock = true;
 
                 if ($scope.vm.IdCode)
@@ -189,7 +193,7 @@
                                 }
                             }
                         }, function (response) {
-                            notification.error("未知错误", response);
+                            notification.error("发生未知错误，请重试或与站务职员联系", response);
                             $scope.submitLock = false;
                         });
                 };
