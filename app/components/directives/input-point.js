@@ -10,7 +10,7 @@
                 scope: {
                     placeholder: "=",
                     limit: "=",
-                    disabled: "=",
+                    forbidden: "=",
                     type: "="
                 },
                 require: "ngModel",
