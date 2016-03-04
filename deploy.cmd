@@ -102,25 +102,14 @@ IF EXIST "%DEPLOYMENT_SOURCE%\package.json" (
 echo 3. Execute gulp tasks
 IF EXIST "%DEPLOYMENT_SOURCE%\gulpfile.js" (
   pushd "%DEPLOYMENT_SOURCE%"
-  call :ExecuteCmd ".\node_modules\.bin\gulp" prod
+  call :ExecuteCmd ".\node_modules\.bin\gulp" --gulpfile gulpfile.js prod
   IF !ERRORLEVEL! NEQ 0 goto error
   popd
 )
 
-:: echo 5. Delete unused files
-:: RD /S /Q "%DEPLOYMENT_SOURCE%\app\debug"
-:: RD /S /Q "%DEPLOYMENT_SOURCE%\app\components"
-:: RD /S /Q "%DEPLOYMENT_SOURCE%\app\bower_components"
-:: RD /S /Q "%DEPLOYMENT_SOURCE%\app\assets\stylesheets"
-:: DEL "%DEPLOYMENT_SOURCE%\app\assets\fonts\keylol-rail-sung-full.ttf"
-:: DEL "%DEPLOYMENT_SOURCE%\app\assets\fonts\lisong-full.ttf"
-:: DEL "%DEPLOYMENT_SOURCE%\app\assets\fonts\myriadpro-regular-full.woff"
-:: DEL "%DEPLOYMENT_SOURCE%\app\*.ejs"
-:: DEL "%DEPLOYMENT_SOURCE%\app\*.js"
-
-echo 5. KuduSync
+echo 4. KuduSync
 IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (
-  call :ExecuteCmd "%KUDU_SYNC_CMD%" -v 50 -f "%DEPLOYMENT_SOURCE%" -t "%DEPLOYMENT_TARGET%" -n "%NEXT_MANIFEST_PATH%" -p "%PREVIOUS_MANIFEST_PATH%" -i ".deployment;deploy.cmd;deploy-broken.cmd;*.ejs;gulpfile.js;node_modules"
+  call :ExecuteCmd "%KUDU_SYNC_CMD%" -v 50 -f "%DEPLOYMENT_SOURCE%" -t "%DEPLOYMENT_TARGET%" -n "%NEXT_MANIFEST_PATH%" -p "%PREVIOUS_MANIFEST_PATH%" -i ".git;.hg;.idea;.gitignore;.deployment;deploy.cmd;README.md;package.json;environment-config.js;keylol-app.js;root-controller.js;node-web-server.js;gulpfile.js;*.ejs;node_modules;debug;components;assets/stylesheets;*-full.ttf;*-full.woff"
   IF !ERRORLEVEL! NEQ 0 goto error
 )
 

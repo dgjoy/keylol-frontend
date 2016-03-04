@@ -1,4 +1,9 @@
-var gulp = require("gulp");
+var gulp;
+try {
+    gulp = require("gulp");
+} catch (e) {
+    gulp = require("gulp-4.0.build");
+}
 var template = require("gulp-template");
 var _ = require("lodash");
 var rename = require("gulp-rename");

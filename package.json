@@ -16,7 +16,7 @@
     "angulartics": "~1.0.3",
     "del": "~2.2.0",
     "glob": "~7.0.0",
-    "gulp": "gulpjs/gulp#4.0",
+    "gulp-4.0.build": "~4.0.0-build.a271520",
     "gulp-angular-templatecache": "~1.8.0",
     "gulp-autoprefixer": "~3.1.0",
     "gulp-concat": "~2.6.0",
