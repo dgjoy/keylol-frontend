@@ -8,13 +8,6 @@
 :: Prerequisites
 :: -------------
 
-:: Verify node.js installed
-where node 2>nul >nul
-IF %ERRORLEVEL% NEQ 0 (
-  echo Missing node.js executable, please install node.js, if already installed make sure it can be reached from current environment.
-  goto error
-)
-
 :: Setup
 :: -----
 
@@ -38,15 +31,6 @@ IF NOT DEFINED NEXT_MANIFEST_PATH (
   )
 )
 
-IF NOT DEFINED KUDU_SYNC_CMD (
-  :: Install kudu sync
-  echo Installing Kudu Sync
-  call npm install kudusync -g --silent
-  IF !ERRORLEVEL! NEQ 0 goto error
-
-  :: Locally just running "kuduSync" would also work
-  SET KUDU_SYNC_CMD=%appdata%\npm\kuduSync.cmd
-)
 goto Deployment
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -74,7 +58,7 @@ IF EXIST "%DEPLOYMENT_SOURCE%\gulpfile.js" (
 
 echo 4. KuduSync
 IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (
-  call :ExecuteCmd %KUDU_SYNC_CMD% -v 50 -f "%DEPLOYMENT_SOURCE%" -t "%DEPLOYMENT_TARGET%" -n "%NEXT_MANIFEST_PATH%" -p "%PREVIOUS_MANIFEST_PATH%" -i ".git;.hg;.idea;.gitignore;.deployment;deploy.cmd;README.md;package.json;environment-config.js;keylol-app.js;root-controller.js;node-web-server.js;gulpfile.js;*.ejs;node_modules;debug;components;assets/stylesheets;*-full.ttf;*-full.woff"
+  call :ExecuteCmd kudusync -v 50 -f "%DEPLOYMENT_SOURCE%" -t "%DEPLOYMENT_TARGET%" -n "%NEXT_MANIFEST_PATH%" -p "%PREVIOUS_MANIFEST_PATH%" -i ".git;.hg;.idea;.gitignore;.deployment;deploy.cmd;README.md;package.json;environment-config.js;keylol-app.js;root-controller.js;node-web-server.js;gulpfile.js;*.ejs;node_modules;debug;components;assets/stylesheets;*-full.ttf;*-full.woff"
   IF !ERRORLEVEL! NEQ 0 goto error
 )
 
