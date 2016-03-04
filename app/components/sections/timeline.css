@@ -93,7 +93,7 @@
 }
 
 .section-timeline .heading .left-info .expand-button {
-    color: #BBB;
+    color: #DDD;
     cursor: pointer;
     position: absolute;
     right: 15px;
@@ -102,7 +102,7 @@
 }
 
 .section-timeline .heading .left-info .expand-button a {
-    color: #BBB;
+    color: #DDD;
     margin-right: 3px;
 }
 
@@ -134,7 +134,7 @@
 }
 
 .section-timeline .heading .left-info .actions a {
-    color: #BBB;
+    color: #DDD;
     margin-left: 25px;
 }
 
@@ -291,7 +291,7 @@
     width: 17px;
     left: 13px;
     top: 0;
-    fill: #BBB;
+    fill: #CCC;
     transform: scale(1,0);
     transform-origin: left top;
     transition-duration: 150ms;
@@ -337,7 +337,7 @@
 }
 
 .section-timeline .entry-main.has-sources {
-    border-top: 1px solid #BBB;
+    border-top: 1px solid #DDD;
 }
 
 /* Heading */
@@ -405,7 +405,7 @@
     margin-bottom: 6px;
     height: 175px;
     color: #333;
-    border: 1px solid #BBB;
+    border: 1px solid #CCC;
 }
 
 .section-timeline .entry-content:hover,
@@ -606,7 +606,7 @@
 }
 
 .section-timeline .card-end rect {
-    fill: #BBB;
+    fill: #CCC;
 }
 
 .section-timeline .search-not-found {

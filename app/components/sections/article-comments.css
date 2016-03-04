@@ -57,7 +57,7 @@
     margin-top: 25px;
     margin-left: 9px;
     position: relative;
-    background-color: #EEF1F3;
+    background-color: #EEE;
     width: 810px;
     height: 1px;
 }
@@ -69,7 +69,7 @@
     right: 0;
     top: 4px;
     color: white;
-    background-color: #BBB;
+    background-color: #CCC;
     text-align: center;
     line-height: 32px;
     display: none;
@@ -144,7 +144,7 @@
 }
 
 .section-article-comments button[type=submit]:disabled {
-    background-color: #BBB;
+    background-color: #CCC;
 }
 
 .section-article-comments .textarea-container {

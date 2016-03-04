@@ -141,12 +141,12 @@
 
 .section-point-votes .reputation-stat .reputation-circle circle {
     r: 4px;
-    fill: #BBB;
+    fill: #CCC;
 }
 
 .section-point-votes .reputation-stat .reputation-level {
     transform: translateY(-50%);
-    background: #BBB ;
+    background: #CCC ;
     height: 2px;
     display: inline-block;
     vertical-align: middle;
@@ -165,6 +165,6 @@
 }
 
 .section-point-votes .external-links .divider {
-    color: #BBB;
+    color: #CCC;
     margin: 0 4px;
 }
