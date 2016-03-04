@@ -1,11 +1,8 @@
-logs/*
-!.gitkeep
 node_modules/
 bower_components/
-tmp
 .DS_Store
-.idea
-#app/bundles/*
-#!app/bundles/web.config
-#app/index.html
-#app/environment-config.js
+.idea/
+/index.html
+/environment-config.js
+/bundles/*
+!/bundles/web.config

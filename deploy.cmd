@@ -2,7 +2,18 @@
 
 :: ----------------------
 :: KUDU Deployment Script
+:: Version: 1.0.6
 :: ----------------------
+
+:: Prerequisites
+:: -------------
+
+:: Verify node.js installed
+where node 2>nul >nul
+IF %ERRORLEVEL% NEQ 0 (
+  echo Missing node.js executable, please install node.js, if already installed make sure it can be reached from current environment.
+  goto error
+)
 
 :: Setup
 :: -----
@@ -38,32 +49,78 @@ IF NOT DEFINED KUDU_SYNC_CMD (
 )
 goto Deployment
 
+:: Utility Functions
+:: -----------------
+
+:SelectNodeVersion
+
+IF DEFINED KUDU_SELECT_NODE_VERSION_CMD (
+  :: The following are done only on Windows Azure Websites environment
+  call %KUDU_SELECT_NODE_VERSION_CMD% "%DEPLOYMENT_SOURCE%" "%DEPLOYMENT_TARGET%" "%DEPLOYMENT_TEMP%"
+  IF !ERRORLEVEL! NEQ 0 goto error
+
+  IF EXIST "%DEPLOYMENT_TEMP%\__nodeVersion.tmp" (
+    SET /p NODE_EXE=<"%DEPLOYMENT_TEMP%\__nodeVersion.tmp"
+    IF !ERRORLEVEL! NEQ 0 goto error
+  )
+  
+  IF EXIST "%DEPLOYMENT_TEMP%\__npmVersion.tmp" (
+    SET /p NPM_JS_PATH=<"%DEPLOYMENT_TEMP%\__npmVersion.tmp"
+    IF !ERRORLEVEL! NEQ 0 goto error
+  )
+
+  IF NOT DEFINED NODE_EXE (
+    SET NODE_EXE=node
+  )
+
+  SET NPM_CMD="!NODE_EXE!" "!NPM_JS_PATH!"
+) ELSE (
+  SET NPM_CMD=npm
+  SET NODE_EXE=node
+)
+
+goto :EOF
+
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :: Deployment
 :: ----------
 
 :Deployment
-echo Starting deployment job.
+echo Handling node.js deployment.
 
-echo 1. Check if production ready
-IF NOT EXIST "%DEPLOYMENT_SOURCE%\app\bundles\*.min.*" (
-  goto error
+echo 1. Select node version
+call :SelectNodeVersion
+
+echo 2. Install npm packages
+IF EXIST "%DEPLOYMENT_SOURCE%\package.json" (
+  pushd "%DEPLOYMENT_SOURCE%"
+  call :ExecuteCmd !NPM_CMD! install
+  IF !ERRORLEVEL! NEQ 0 goto error
+  popd
 )
 
-echo 2. Delete unused files
-RD /S /Q "%DEPLOYMENT_SOURCE%\app\debug"
-RD /S /Q "%DEPLOYMENT_SOURCE%\app\components"
-RD /S /Q "%DEPLOYMENT_SOURCE%\app\bower_components"
-RD /S /Q "%DEPLOYMENT_SOURCE%\app\assets\stylesheets"
-DEL "%DEPLOYMENT_SOURCE%\app\assets\fonts\keylol-rail-sung-full.ttf"
-DEL "%DEPLOYMENT_SOURCE%\app\assets\fonts\lisong-full.ttf"
-DEL "%DEPLOYMENT_SOURCE%\app\assets\fonts\myriadpro-regular-full.woff"
-DEL "%DEPLOYMENT_SOURCE%\app\*.ejs"
-DEL "%DEPLOYMENT_SOURCE%\app\*.js"
+echo 3. Execute gulp tasks
+IF EXIST "%DEPLOYMENT_SOURCE%\gulpfile.js" (
+  pushd "%DEPLOYMENT_SOURCE%"
+  call :ExecuteCmd ".\node_modules\.bin\gulp" prod
+  IF !ERRORLEVEL! NEQ 0 goto error
+  popd
+)
 
-echo 3. KuduSync
+:: echo 5. Delete unused files
+:: RD /S /Q "%DEPLOYMENT_SOURCE%\app\debug"
+:: RD /S /Q "%DEPLOYMENT_SOURCE%\app\components"
+:: RD /S /Q "%DEPLOYMENT_SOURCE%\app\bower_components"
+:: RD /S /Q "%DEPLOYMENT_SOURCE%\app\assets\stylesheets"
+:: DEL "%DEPLOYMENT_SOURCE%\app\assets\fonts\keylol-rail-sung-full.ttf"
+:: DEL "%DEPLOYMENT_SOURCE%\app\assets\fonts\lisong-full.ttf"
+:: DEL "%DEPLOYMENT_SOURCE%\app\assets\fonts\myriadpro-regular-full.woff"
+:: DEL "%DEPLOYMENT_SOURCE%\app\*.ejs"
+:: DEL "%DEPLOYMENT_SOURCE%\app\*.js"
+
+echo 5. KuduSync
 IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (
-  call :ExecuteCmd "%KUDU_SYNC_CMD%" -v 50 -f "%DEPLOYMENT_SOURCE%\app" -t "%DEPLOYMENT_TARGET%" -n "%NEXT_MANIFEST_PATH%" -p "%PREVIOUS_MANIFEST_PATH%" -i ".git;.hg;.deployment;deploy.cmd"
+  call :ExecuteCmd "%KUDU_SYNC_CMD%" -v 50 -f "%DEPLOYMENT_SOURCE%" -t "%DEPLOYMENT_TARGET%" -n "%NEXT_MANIFEST_PATH%" -p "%PREVIOUS_MANIFEST_PATH%" -i ".deployment;deploy.cmd;deploy-broken.cmd;*.ejs;gulpfile.js;node_modules"
   IF !ERRORLEVEL! NEQ 0 goto error
 )
 

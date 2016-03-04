@@ -258,7 +258,7 @@
                 </div>
                 <div class="upload-avatar no-image" ng-if="!vm.AvatarImage && !files.avatarImage">
                     <h4>用胶水贴上一张照片</h4>
-                    <button type="button" tabindex="5" ngf-select ng-model="files.avatarImage" accept="image/*">胶水</button>
+                    <button type="button" tabindex="5" ngf-select ngf-fix-orientation="true" ng-model="files.avatarImage" accept="image/*">胶水</button>
                 </div>
             </td>
             <td ng-if="isGame">
@@ -276,7 +276,7 @@
                 </div>
                 <div class="upload-cover no-image" ng-if="!vm.CoverImage && !files.coverImage">
                     <h4>用胶水贴上一张照片</h4>
-                    <button type="button" tabindex="5" ngf-select ng-model="files.coverImage" accept="image/*">胶水</button>
+                    <button type="button" tabindex="5" ngf-select ngf-fix-orientation="true" ng-model="files.coverImage" accept="image/*">胶水</button>
                 </div>
             </td>
         </tr>
@@ -297,7 +297,7 @@
                 </div>
                 <div class="profile-point-background no-image" ng-if="!vm.BackgroundImage && !files.backgroundImage">
                     <h4>用胶水贴上一张照片</h4>
-                    <button type="button" tabindex="6" ngf-select ng-model="files.backgroundImage" accept="image/*">胶水</button>
+                    <button type="button" tabindex="6" ngf-select ngf-fix-orientation="true" ng-model="files.backgroundImage" accept="image/*">胶水</button>
                 </div>
             </td>
         </tr>
