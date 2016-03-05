@@ -15,10 +15,10 @@ ENV NPM_CONFIG_LOGLEVEL warn
 COPY package.json .
 RUN npm install
 
-COPY *.js .
-COPY *.ejs .
-COPY components .
-COPY assets .
+COPY *.js ./
+COPY *.ejs ./
+COPY components ./
+COPY assets ./
 
 ENV COPY_TARGET /usr/share/nginx/html
 RUN ./node_modules/.bin/gulp --gulpfile gulpfile.js prod \
