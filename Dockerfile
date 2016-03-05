@@ -38,4 +38,7 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log \
 
 EXPOSE 80 443
 
-CMD ["nginx", "-g", "daemon off;"]
+COPY keylol-frontend.conf /usr/local/bin
+RUN chmod +x /usr/local/bin/keylol-frontend.sh
+
+CMD /usr/local/bin/keylol-frontend.sh
