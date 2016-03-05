@@ -1,4 +1,9 @@
-var gulp = require("gulp");
+var gulp;
+try {
+    gulp = require("gulp");
+} catch (e) {
+    gulp = require("gulp-4.0.build");
+}
 var template = require("gulp-template");
 var _ = require("lodash");
 var rename = require("gulp-rename");
@@ -18,44 +23,37 @@ var fontmin = require('gulp-fontmin');
 var buildConfigs = {
     local: {
         bundle: false,
-        apiEndpoint: "https://localhost:44300/",
-        urlCanonical: false
+        apiEndpoint: "https://localhost:44300/"
     },
     dev: {
         bundle: false,
-        apiEndpoint: "https://gay-api.keylol.com/",
-        urlCanonical: false
-    },
-    gay: {
-        bundle: true,
-        apiEndpoint: "https://gay-api.keylol.com/",
-        urlCanonical: false
+        apiEndpoint: "https://gay-api.keylol.com/"
     },
     prod: {
         bundle: true,
-        apiEndpoint: "https://api.keylol.com/",
-        urlCanonical: true
+        apiEndpoint: "https://api.keylol.com/"
     }
 };
 
 var vendorScripts = [
-    "bower_components/jquery/dist/jquery.js",
-    "bower_components/signalr/jquery.signalR.js",
-    "bower_components/moment/moment.js",
-    "bower_components/moment/locale/zh-cn.js",
-    "bower_components/angular/angular.js",
-    "bower_components/angular-i18n/angular-locale_zh.js",
-    "bower_components/angular-route/angular-route.js",
-    "bower_components/angular-animate/angular-animate.js",
-    "bower_components/angular-moment/angular-moment.js",
-    "bower_components/ngstorage/ngStorage.js",
-    "bower_components/ng-file-upload/ng-file-upload.js",
-    "bower_components/angular-utf8-base64/angular-utf8-base64.js",
-    "bower_components/angulartics/src/angulartics.js",
-    "bower_components/simple-module/lib/module.js",
-    "bower_components/simple-hotkeys/lib/hotkeys.js",
-    "bower_components/simple-uploader/lib/uploader.js",
-    "bower_components/simditor/lib/simditor.js"
+    "node_modules/jquery/dist/jquery.js",
+    "node_modules/ms-signalr-client/jquery.signalr-2.2.0.js",
+    "node_modules/moment/moment.js",
+    "node_modules/moment/locale/zh-cn.js",
+    "node_modules/moment-timezone/builds/moment-timezone-with-data.js",
+    "node_modules/angular/angular.js",
+    "node_modules/angular-i18n/angular-locale_zh.js",
+    "node_modules/angular-route/angular-route.js",
+    "node_modules/angular-animate/angular-animate.js",
+    "node_modules/angular-moment/angular-moment.js",
+    "node_modules/ngstorage/ngStorage.js",
+    "node_modules/ng-file-upload/dist/ng-file-upload.js",
+    "node_modules/angular-utf8-base64/angular-utf8-base64.js",
+    "node_modules/angulartics/src/angulartics.js",
+    "node_modules/simditor/node_modules/simple-module/lib/module.js",
+    "node_modules/simditor/node_modules/simple-hotkeys/lib/hotkeys.js",
+    "node_modules/simditor/node_modules/simple-uploader/lib/uploader.js",
+    "node_modules/simditor/lib/simditor.js"
 ];
 
 var appSrcipts = [
@@ -67,7 +65,7 @@ var appSrcipts = [
 
 var stylesheets = [
     "assets/stylesheets/normalize.css",
-    "bower_components/simditor/styles/simditor.css",
+    "node_modules/simditor/styles/simditor.css",
     "assets/stylesheets/common.css",
     "assets/stylesheets/window.css",
     "assets/stylesheets/popup.css",
@@ -95,61 +93,61 @@ var htmlminOptions = {
 
 var getFiles = function (arr) {
     return _.union.apply(this, _.map(arr, function (path) {
-        return glob.sync(path, {cwd: "app"});
+        return glob.sync(path);
     }));
 };
 
 gulp.task("clean-font", function () {
-    return del(["app/assets/fonts/keylol-rail-sung-subset-*", "app/assets/fonts/lisong-subset-*"]);
+    return del(["assets/fonts/keylol-rail-sung-subset-*", "assets/fonts/lisong-subset-*"]);
 });
 
 gulp.task("font-keylol", function () {
-    return gulp.src("app/assets/fonts/keylol-rail-sung-full.ttf")
+    return gulp.src("assets/fonts/keylol-rail-sung-full.ttf")
         .pipe(rename("keylol-rail-sung-subset.ttf"))
         .pipe(fontmin({
             text: keylolTextList
         }))
         .pipe(rev())
-        .pipe(gulp.dest("app/assets/fonts"))
+        .pipe(gulp.dest("assets/fonts"))
 });
 
 gulp.task("font-lisong", function () {
-    return gulp.src("app/assets/fonts/lisong-full.ttf")
+    return gulp.src("assets/fonts/lisong-full.ttf")
         .pipe(rename("lisong-subset.ttf"))
         .pipe(fontmin({
             text: lisongTextList
         }))
         .pipe(rev())
-        .pipe(gulp.dest("app/assets/fonts"))
+        .pipe(gulp.dest("assets/fonts"))
 });
 
 gulp.task("font", gulp.series("clean-font", "font-keylol", "font-lisong"));
 
 gulp.task("clean", function () {
-    return del(["app/bundles/!(web.config)", "index.html", "environment-config.js"]);
+    return del(["bundles/!(web.config)", "index.html", "environment-config.js"]);
 });
 
 var getBuildTask = function (configName) {
     var config = buildConfigs[configName];
     return gulp.series("clean", function buildEnvironmentConfig() {
-        return gulp.src("app/environment-config.js.ejs")
+        return gulp.src("environment-config.js.ejs")
             .pipe(template(config))
             .pipe(rename("environment-config.js"))
-            .pipe(gulp.dest("app"));
+            .pipe(gulp.dest("./"));
     }, config.bundle ? gulp.parallel(function buildVendorScriptBundle() {
-        return gulp.src(vendorScripts, {cwd: "app"})
+        return gulp.src(vendorScripts)
             .pipe(concat("vendor.min.js"))
             .pipe(uglify())
             .pipe(rev())
-            .pipe(gulp.dest("app/bundles"));
+            .pipe(gulp.dest("bundles"));
     }, function buildAppScriptBundle() {
-        return gulp.src(appSrcipts, {cwd: "app"})
+        return gulp.src(appSrcipts)
             .pipe(concat("app.min.js"))
             .pipe(uglify())
             .pipe(rev())
-            .pipe(gulp.dest("app/bundles"));
+            .pipe(gulp.dest("bundles"));
     }, function buildTemplateBundle() {
-        return gulp.src("app/components/**/*.html")
+        return gulp.src("components/**/*.html")
             .pipe(minifyInline({
                 css: {
                     keepSpecialComments: 0
@@ -162,18 +160,18 @@ var getBuildTask = function (configName) {
             }))
             .pipe(uglify())
             .pipe(rev())
-            .pipe(gulp.dest("app/bundles"));
+            .pipe(gulp.dest("bundles"));
     }, function buildStylesheetBundle() {
-        return gulp.src(stylesheets, {cwd: "app"})
+        return gulp.src(stylesheets)
             .pipe(autoprefixer())
             .pipe(minifyCss({
                 keepSpecialComments: 0,
-                relativeTo: "app/bundles",
-                target: "app/bundles"
+                relativeTo: "bundles",
+                target: "bundles"
             }))
             .pipe(concat("stylesheets.min.css"))
             .pipe(rev())
-            .pipe(gulp.dest("app/bundles"));
+            .pipe(gulp.dest("bundles"));
     }) : function skipBundles(done) {
         done();
     }, function buildEntryPage() {
@@ -185,7 +183,7 @@ var getBuildTask = function (configName) {
             scriptFiles = getFiles(vendorScripts.concat(appSrcipts));
             stylesheetFiles = getFiles(stylesheets);
         }
-        var stream = gulp.src("app/index.html.ejs")
+        var stream = gulp.src("index.html.ejs")
             .pipe(template({
                 scripts: scriptFiles,
                 stylesheets: stylesheetFiles,
@@ -200,13 +198,11 @@ var getBuildTask = function (configName) {
                 }))
                 .pipe(htmlmin(htmlminOptions));
         }
-        return stream.pipe(gulp.dest("app"));
+        return stream.pipe(gulp.dest("./"));
     });
 };
 
 gulp.task("prod", getBuildTask("prod"));
-
-gulp.task("gay", getBuildTask("gay"));
 
 gulp.task("dev", getBuildTask("dev"));
 

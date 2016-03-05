@@ -7,10 +7,16 @@
     "url": "https://github.com/stackia/keylol-frontend"
   },
   "devDependencies": {
-    "bower": "~1.7.7",
+    "angular": "~1.5.0",
+    "angular-animate": "~1.5.0",
+    "angular-i18n": "~1.5.0",
+    "angular-moment": "~1.0.0-beta.4",
+    "angular-route": "~1.5.0",
+    "angular-utf8-base64": "stranger82/angular-utf8-base64#v0.0.5",
+    "angulartics": "~1.0.3",
     "del": "~2.2.0",
     "glob": "~7.0.0",
-    "gulp": "gulpjs/gulp#4.0",
+    "gulp-4.0.build": "~4.0.0-build.a271520",
     "gulp-angular-templatecache": "~1.8.0",
     "gulp-autoprefixer": "~3.1.0",
     "gulp-concat": "~2.6.0",
@@ -22,6 +28,13 @@
     "gulp-rev": "~7.0.0",
     "gulp-template": "~3.1.0",
     "gulp-uglify": "~1.5.3",
-    "lodash": "~4.6.1"
+    "jquery": "~2.2.1",
+    "lodash": "~4.6.1",
+    "moment": "~2.11.2",
+    "moment-timezone": "~0.5.1",
+    "ms-signalr-client": "~2.2.2",
+    "ng-file-upload": "~12.0.1",
+    "ngstorage": "~0.3.10",
+    "simditor": "rexdainiel/keylol-simditor"
   }
 }
