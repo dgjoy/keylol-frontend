@@ -59,7 +59,7 @@
         <div class="divider"></div>
         <div class="review-detail">
             <div class="user-info">
-                <!--<span class="game-hours">游戏在档 790.5 小时</span>-->
+                <span ng-if="point.hoursPlayed" class="game-hours">游戏在档 {{point.hoursPlayed}} 小时</span>
                 <point-link ng-if="summary.idCode" type="'user'" point-name="summary.userName" id-code="summary.idCode"></point-link>
                 <p class="review-count">{{summary.reviewCount}} 篇评测 / {{summary.shortReviewCount}} 段简评</p>
             </div>

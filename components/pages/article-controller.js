@@ -31,6 +31,19 @@
                             }).then(function (response) {
                                 var point = response.data;
 
+
+                                $http.get(apiEndpoint + "user-game-record/" + $routeParams.author + "/" + point.SteamAppId, {
+                                    params: {
+                                        idType: "IdCode"
+                                    }
+                                }).then(function (response) {
+                                    unionPoint.hoursPlayed = response.data;
+                                }, function (response) {
+                                    if(response.status !== 404){
+                                        notification.error("发生未知错误，请重试或与站务职员联系", response);
+                                    }
+                                });
+
                                 point.totalEvaluate = 0;
                                 var totalVote = 0;
                                 for(var i in point.VoteStats){

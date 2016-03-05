@@ -23,6 +23,7 @@
                     union.$localStorage.user.SubscribedPointCount++;
                 }, function (response) {
                     notification.error("发生未知错误，请重试或与站务职员联系", response);
+                    $scope.subscribeDisabled = false;
                 });
             };
             $scope.unsubscribe = function (id) {

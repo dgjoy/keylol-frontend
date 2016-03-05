@@ -5,8 +5,8 @@
     "use strict";
 
     keylolApp.controller("SubscriptionsController", [
-        "pageTitle", "$scope", "union", "$http", "notification", "$location", "utils", "$timeout",
-        function (pageTitle, $scope, union, $http, notification, $location, utils, $timeout) {
+        "pageTitle", "$scope", "union", "$http", "notification", "$location", "utils", "$timeout", "window",
+        function (pageTitle, $scope, union, $http, notification, $location, utils, $timeout, window) {
             $scope.union = union;
             $scope.searchExist = true;
             var summary = {
@@ -40,6 +40,35 @@
                     subTitle: "Search Result"
                 },
                 cannotClick: true,
+                actions: [
+                    {
+                        active: false,
+                        text: "同步订阅列表",
+                        onClick: function () {
+                            var that = this;
+                            if(!that.lock){
+                                that.lock = true;
+                                $http.get(apiEndpoint + "user-point-subscription/my/auto").then(function (response) {
+                                    that.lock = false;
+                                    window.show({
+                                        templateUrl: "components/windows/synchronization.html",
+                                        controller: "SynchronizationController",
+                                        inputs: {
+                                            fetchSuccess: true,
+                                            autoSubscribed: response.data,
+                                            options: {
+                                                notFirstTime: true
+                                            }
+                                        }
+                                    });
+                                }, function (response) {
+                                    notification.error("发生未知错误，请重试或与站务职员联系", response);
+                                    that.lock = false;
+                                });
+                            }
+                        }
+                    }
+                ],
                 loadAction: function () {
                     timeline.loadingLock = true;
                     $http.get(apiEndpoint + "user-point-subscription/my", {
