@@ -98,13 +98,16 @@
             });
         }
     ]);
+    app.run(["amMoment", function(amMoment) {
+        amMoment.changeLocale("zh-cn");
+    }]);
     app.constant("amTimeAgoConfig", {
         fullDateThreshold: 1,
         fullDateFormat: "YYYY-MM-DD HH:mm",
-        titleFormat: "YYYY-MM-DD HH:mm:ss"
+        titleFormat: "YYYY-MM-DD HH:mm:ss [GMT]Z"
     });
     app.constant("angularMomentConfig", {
-        timezone: "+0800"
+        timezone: "Asia/Shanghai"
     });
 
     window.keylolApp = app;
