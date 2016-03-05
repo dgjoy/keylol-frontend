@@ -17,8 +17,8 @@ RUN npm install
 
 COPY *.js ./
 COPY *.ejs ./
-COPY components ./
-COPY assets ./
+COPY components components/
+COPY assets assets/
 
 ENV COPY_TARGET /usr/share/nginx/html
 RUN ./node_modules/.bin/gulp --gulpfile gulpfile.js prod \
