@@ -23,23 +23,15 @@ var fontmin = require('gulp-fontmin');
 var buildConfigs = {
     local: {
         bundle: false,
-        apiEndpoint: "https://localhost:44300/",
-        urlCanonical: false
+        apiEndpoint: "https://localhost:44300/"
     },
     dev: {
         bundle: false,
-        apiEndpoint: "https://gay-api.keylol.com/",
-        urlCanonical: false
-    },
-    gay: {
-        bundle: true,
-        apiEndpoint: "https://gay-api.keylol.com/",
-        urlCanonical: false
+        apiEndpoint: "https://gay-api.keylol.com/"
     },
     prod: {
         bundle: true,
-        apiEndpoint: "https://api.keylol.com/",
-        urlCanonical: false
+        apiEndpoint: "https://api.keylol.com/"
     }
 };
 
@@ -210,8 +202,6 @@ var getBuildTask = function (configName) {
 };
 
 gulp.task("prod", getBuildTask("prod"));
-
-gulp.task("gay", getBuildTask("gay"));
 
 gulp.task("dev", getBuildTask("dev"));
 
