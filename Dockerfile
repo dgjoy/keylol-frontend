@@ -9,7 +9,7 @@ RUN apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 573BFD6B3D8FBC64107
   && apt-get install -y ca-certificates nginx=${NGINX_VERSION} gettext-base \
   && rm -rf /var/lib/apt/lists/*
 
-WORKDIR build
+WORKDIR /root/build
 ENV NPM_CONFIG_LOGLEVEL warn
 
 COPY package.json .
