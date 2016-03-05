@@ -2,8 +2,8 @@
     "use strict";
 
     keylolApp.controller("TimelineController", [
-        "$scope", "union", "$location", "$http", "$rootScope", "$element", "articleTypes", "notification", "utils", "$timeout",
-        function ($scope, union, $location, $http, $rootScope, $element, articleTypes, notification, utils, $timeout) {
+        "$scope", "union", "$location", "$http", "$rootScope", "$element", "articleTypes", "notification", "utils", "$timeout", "window",
+        function ($scope, union, $location, $http, $rootScope, $element, articleTypes, notification, utils, $timeout, window) {
             $scope.headingDisplayMode = function (entry) {
                 if (entry.source)
                     return "source";

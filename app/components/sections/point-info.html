@@ -41,7 +41,7 @@
         </div>
         <div class="info-review">
             <img class="point-cover" webp-src="{{point.CoverImage | coverUrl}}">
-            <!--<p class="play-time">790.5 小时在档</p>-->
+            <p ng-if="point.hoursPlayed" class="play-time">{{point.hoursPlayed}} 小时在档</p>
             <point-review on-click-review="showShortReviewWindow(vote)" is-hollow="true"></point-review>
             <div class="actions">
                 <a href="" class="short-review" ng-click="showShortReviewWindow()">写简评</a>
