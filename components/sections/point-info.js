@@ -21,7 +21,7 @@
                             vm: {
                                 Vote: vote
                             },
-                            gameHours: 790.5
+                            hoursPlayed: $scope.point.hoursPlayed
                         }
                     }
                 });

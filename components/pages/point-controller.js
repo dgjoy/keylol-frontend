@@ -276,6 +276,13 @@
                     union.associatedPoints = point.AssociatedPoints;
                     if (point.Type === "Game") {
                         $scope.hasVote = true;
+                        $http.get(apiEndpoint + "user-game-record/" + union.$localStorage.user.Id + "/" + point.SteamAppId).then(function (response) {
+                            unionPoint.hoursPlayed = response.data;
+                        }, function (response) {
+                            if(response.status !== 404){
+                                notification.error("发生未知错误，请重试或与站务职员联系", response);
+                            }
+                        });
                     }
 
                     point.totalEvaluate = 0;

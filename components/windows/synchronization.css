@@ -28,7 +28,9 @@
 }
 
 .window-synchronization .cannot-sync img {
+    height: 169px;
     margin-top: 125px;
+    margin-bottom: 17px;
 }
 
 .window-synchronization .cannot-sync h1 {

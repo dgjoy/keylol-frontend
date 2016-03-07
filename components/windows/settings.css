@@ -181,6 +181,12 @@
     width: calc(100% + 25px);
 }
 
+.window-settings .resync {
+    float: right;
+    color: #89A;
+    margin: 5px 5px 0;
+}
+
 .window-settings .checkbox-group {
     margin: 12px 0;
 }

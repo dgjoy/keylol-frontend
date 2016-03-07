@@ -12,22 +12,22 @@
     font-family: "Keylol Rail Sung";
     font-style: normal;
     font-weight: normal;
-    src: url("../fonts/keylol-rail-sung-subset-461c141cce.eot"); /* IE9 */
-    src: url("../fonts/keylol-rail-sung-subset-461c141cce.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
-    url("../fonts/keylol-rail-sung-subset-d774574e0f.woff") format("woff"), /* chrome, firefox */
-    url("../fonts/keylol-rail-sung-subset-c8d58df711.ttf") format("truetype"), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
-    url("../fonts/keylol-rail-sung-subset-ab646c5583.svg#Keylol Rail Sung") format("svg"); /* iOS 4.1- */
+    src: url("../fonts/keylol-rail-sung-subset-8c6f399df6.eot"); /* IE9 */
+    src: url("../fonts/keylol-rail-sung-subset-8c6f399df6.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    url("../fonts/keylol-rail-sung-subset-d12fdba8ff.woff") format("woff"), /* chrome, firefox */
+    url("../fonts/keylol-rail-sung-subset-93c9f989fc.ttf") format("truetype"), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+    url("../fonts/keylol-rail-sung-subset-87a2fe357a.svg#Keylol Rail Sung") format("svg"); /* iOS 4.1- */
 }
 
 @font-face {
     font-family: "LiSong";
     font-style: normal;
     font-weight: normal;
-    src: url("../fonts/lisong-subset-a09f45dc57.eot"); /* IE9 */
-    src: url("../fonts/lisong-subset-a09f45dc57.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
-    url("../fonts/lisong-subset-8dcbb3e069.woff") format("woff"), /* chrome, firefox */
-    url("../fonts/lisong-subset-17a7f1f034.ttf") format("truetype"), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
-    url("../fonts/lisong-subset-4313fc0942.svg#LiSong") format("svg"); /* iOS 4.1- */
+    src: url("../fonts/lisong-subset-c7640b9085.eot"); /* IE9 */
+    src: url("../fonts/lisong-subset-c7640b9085.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    url("../fonts/lisong-subset-88bcbe36b3.woff") format("woff"), /* chrome, firefox */
+    url("../fonts/lisong-subset-830383888a.ttf") format("truetype"), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+    url("../fonts/lisong-subset-c17f810241.svg#LiSong") format("svg"); /* iOS 4.1- */
 }
 
 /* ------------------- */

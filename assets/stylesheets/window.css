@@ -120,7 +120,7 @@ window[position=right]::after {
 
 /* Table */
 .window table td {
-    border: 1px solid #159;
+    border: 1px solid #ccc;
     padding: 1px 3px;
 }
 
