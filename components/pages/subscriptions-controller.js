@@ -54,11 +54,9 @@
                                         templateUrl: "components/windows/synchronization.html",
                                         controller: "SynchronizationController",
                                         inputs: {
-                                            fetchSuccess: true,
+                                            condition: "review",
                                             autoSubscribed: response.data,
-                                            options: {
-                                                notFirstTime: true
-                                            }
+                                            options: {}
                                         }
                                     });
                                 }, function (response) {

@@ -3,13 +3,17 @@
         <div class="window-exit-button" ng-click="cancel()">
             <div ng-include="'assets/images/exit.svg'"></div>
         </div>
-        <div class="heading">
-            <h4 ng-if="!notFirstTime">首次进入其乐时，同步订阅会为你发现感兴趣的信息</h4>
-            <h4 ng-if="notFirstTime">上次同步订阅已被更新为以下据点</h4>
-            <h2 ng-if="fetchSuccess" class="labeled-heading">你的据点订阅已与 Steam 动态同步</h2>
-            <h2 ng-if="!fetchSuccess" class="labeled-heading">未能进行同步订阅</h2>
+        <div class="heading" ng-switch="condition">
+            <h4 ng-switch-when="firstTime">同步订阅会为你自动关注兴趣据点</h4>
+            <h4 ng-switch-when="subsequential">上次同步订阅已被更新为以下据点</h4>
+            <h4 ng-switch-when="fetchFailed">首次进入其乐时，同步订阅会为你发现感兴趣的信息</h4>
+            <h4 ng-switch-when="review">在设置中可以调整下一次自动同步的时间</h4>
+            <h2 ng-switch-when="firstTime" class="labeled-heading">同步订阅列表已与你的 Steam 动态链接</h2>
+            <h2 ng-switch-when="subsequential" class="labeled-heading">你的据点订阅已与 Steam 动态同步</h2>
+            <h2 ng-switch-when="fetchFailed" class="labeled-heading">未能进行同步订阅</h2>
+            <h2 ng-switch-when="review" class="labeled-heading">最近一次同步订阅的据点列表</h2>
         </div>
-        <ul class="types" ng-if="fetchSuccess">
+        <ul class="types" ng-if="condition !== 'fetchFailed' && !subscribeEmpty">
             <li ng-if="autoSubscribed.MostPlayed.length > 0">
                 <p>游戏据点 - 在档时间最长</p>
                 <ul class="points clearfix">
@@ -71,29 +75,33 @@
                 </ul>
             </li>
         </ul>
-        <div ng-if="!fetchSuccess" class="cannot-sync">
+        <div ng-if="condition === 'fetchFailed'" class="cannot-sync">
             <img src="assets/images/flash-bang.png">
             <h1 class="font-myriad-keylol">你的资料设定太瞎了，获取不到个人动态了！</h1>
             <h3>若不启用同步订阅，其乐的阅读体验将大打折扣</h3>
         </div>
+        <div ng-if="condition !== 'fetchFailed' && subscribeEmpty" class="cannot-sync">
+            <img src="assets/images/portal-cake.png">
+            <h1 class="font-myriad-keylol">这里空空如也，连块蛋糕都没有。</h1>
+            <h3>目前没有同步订阅任何据点</h3>
+        </div>
         <button  class="window-confirm-button" ng-click="cancel()">
             <img class="arrow-right" src="assets/images/arrow-right.png" alt="下一步">
             <img class="new-point" src="assets/images/new-point.png" alt="提交">
-            <hgroup ng-if="fetchSuccess" class="font-myriad-keylol">
+            <hgroup ng-if="condition !== 'fetchFailed'" class="font-myriad-keylol">
                 <h1>确认同步</h1>
                 <h2>Confirming Sync</h2>
             </hgroup>
-            <hgroup ng-if="!fetchSuccess" class="font-myriad-keylol">
+            <hgroup ng-if="condition === 'fetchFailed'" class="font-myriad-keylol">
                 <h1>跳过同步</h1>
                 <h2>Skipping Sync</h2>
             </hgroup>
         </button>
-        <div ng-if="fetchSuccess" class="cancel-synchronization">
-            <button ng-if="notFirstTime" type="button" class="border-button left-border" ng-click="jumpToSettings()">同步订阅设置</button>
-            <p ng-if="notFirstTime">鼠标滑过可以单独退订某个据点。在设置表单中可以关闭订阅同步。</p>
-            <p ng-if="!notFirstTime">这份列表会自动定期更新，若要永久订阅，你可以手动订阅长期有兴趣的据点。</p>
+        <div ng-if="condition !== 'fetchFailed'" class="cancel-synchronization">
+            <button ng-if="condition !== 'firstTime'" type="button" class="border-button left-border" ng-click="jumpToSettings()">同步订阅设置</button>
+            <p>这份列表会自动定期更新，若要永久关注某个据点，需要再手动订阅长期有兴趣的据点。</p>
         </div>
-        <div ng-if="!fetchSuccess" class="retry-synchronization">
+        <div ng-if="condition === 'fetchFailed'" class="retry-synchronization">
             <button type="button" class="border-button left-border" ng-click="resync()">重新同步</button>
             <p>在 Steam 隐私页面 设置资料状态为「仅限好友」或「公开」后重新同步。</p>
         </div>

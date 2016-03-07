@@ -48,10 +48,9 @@
                     templateUrl: "components/windows/synchronization.html",
                     controller: "SynchronizationController",
                     inputs: {
-                        fetchSuccess: true,
+                        condition: "subsequential",
                         autoSubscribed: response.data,
                         options: {
-                            notFirstTime: true,
                             getSubscription: getSubscription
                         }
                     }
@@ -63,7 +62,7 @@
                         templateUrl: "components/windows/synchronization.html",
                         controller: "SynchronizationController",
                         inputs: {
-                            fetchSuccess: false,
+                            condition: "fetchFailed",
                             autoSubscribed: {},
                             options: {
                                 getSubscription: getSubscription

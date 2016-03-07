@@ -10,7 +10,7 @@
                         templateUrl: "components/windows/synchronization.html",
                         controller: "SynchronizationController",
                         inputs: {
-                            fetchSuccess: true,
+                            condition: "firstTime",
                             autoSubscribed: response.data,
                             options: {}
                         }
@@ -22,7 +22,7 @@
                             templateUrl: "components/windows/synchronization.html",
                             controller: "SynchronizationController",
                             inputs: {
-                                fetchSuccess: false,
+                                condition: "fetchFailed",
                                 autoSubscribed: {},
                                 options: {}
                             }

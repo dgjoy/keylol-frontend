@@ -2,12 +2,12 @@
     "use strict";
 
     keylolApp.controller("SynchronizationController", [
-        "$scope", "close", "fetchSuccess", "autoSubscribed", "options", "utils", "$http", "notification", "window",
+        "$scope", "close", "condition", "autoSubscribed", "options", "utils", "$http", "notification", "window",
         "$location",
-        function ($scope, close, fetchSuccess, autoSubscribed, options, utils, $http, notification, window,
+        function ($scope, close, condition, autoSubscribed, options, utils, $http, notification, window,
         $location) {
             $scope.cancel = function () {
-                if($location.url() === "/home" && typeof options.getSubscription === "function" && fetchSuccess){
+                if($location.url() === "/home" && typeof options.getSubscription === "function" && condition === "subsequential"){
                     options.getSubscription();
                 }
                 close();
@@ -33,9 +33,15 @@
                 });
                 close();
             };
-            $scope.fetchSuccess = fetchSuccess;
+            console.log(condition);
+            $scope.condition = condition;
             $scope.autoSubscribed = autoSubscribed;
-            $scope.notFirstTime = options.notFirstTime;
+            $scope.subscribeEmpty = true;
+            //for(var i in $scope.autoSubscribed){
+            //    if($scope.autoSubscribed[i].length > 0){
+            //        $scope.subscribeEmpty = false;
+            //    }
+            //}
             $scope.utils = utils;
         }
     ]);
