@@ -17,7 +17,7 @@
                 <a href="" ng-class="{'tab-changed': optionsInPageChanged('security'), 'tab-error': optionsInPageError('security')}" ng-click="setPage('security')">安全</a>
             </li>
             <li ng-class="{current: page === 'preferences'}">
-                <a href="" ng-class="{'tab-changed': optionsInPageChanged('preferences'), 'tab-error': optionsInPageError('preferences')}" ng-click="setPage('preferences')">偏好设定</a>
+                <a href="" ng-class="{'tab-changed': optionsInPageChanged('preferences'), 'tab-error': optionsInPageError('preferences')}" ng-click="setPage('preferences')">同步订阅</a>
             </li>
             <li>
                 <a href="" ng-click="logout()">退出登录</a>
@@ -308,28 +308,17 @@
     <table>
         <tr>
             <td>
-                <h3 class="font-myriad-lisong">邮件订阅（功能暂未开放）</h3>
+                <a class="resync" href="" ng-click="resync()">立即重新同步</a>
+                <h3 class="font-myriad-lisong">同步订阅开关</h3>
                 <h4>可以通过邮件订阅掌握其乐账户的日常动态。</h4>
                 <div class="checkbox-group clearfix">
                     <div>
-                        <input type="checkbox" id="settings-checkbox-{{uniqueIds[12]}}" ng-model="vm.EmailNotifyOnArticleReplied">
-                        <label for="settings-checkbox-{{uniqueIds[12]}}">文章被回复</label>
+                        <input type="radio" id="radio-{{uniqueIds[12]}}" name="syncEnabled" ng-model="vm.AutoSubscribeEnabled" ng-value="true">
+                        <label for="radio-{{uniqueIds[12]}}">开启</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="settings-checkbox-{{uniqueIds[13]}}" ng-model="vm.EmailNotifyOnCommentReplied">
-                        <label for="settings-checkbox-{{uniqueIds[13]}}">评论被回复</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" id="settings-checkbox-{{uniqueIds[14]}}" ng-model="vm.EmailNotifyOnEditorRecommended">
-                        <label for="settings-checkbox-{{uniqueIds[14]}}">编辑推荐</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" id="settings-checkbox-{{uniqueIds[15]}}" ng-model="vm.EmailNotifyOnMessageReceived">
-                        <label for="settings-checkbox-{{uniqueIds[15]}}">站内简讯</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" id="settings-checkbox-{{uniqueIds[16]}}" ng-model="vm.EmailNotifyOnAdvertisement">
-                        <label for="settings-checkbox-{{uniqueIds[16]}}">商业广告（不推荐）</label>
+                        <input type="radio" id="radio-{{uniqueIds[13]}}" name="syncEnabled" ng-model="vm.AutoSubscribeEnabled" ng-value="false">
+                        <label for="radio-{{uniqueIds[13]}}">关闭</label>
                     </div>
                 </div>
             </td>
@@ -338,28 +327,24 @@
     <table>
         <tr>
             <td>
-                <h3 class="font-myriad-lisong">简讯通知</h3>
-                <h4>每当账户有以下动态，你会收到站内简讯通知。</h4>
+                <h3 class="font-myriad-lisong">同步周期</h3>
+                <h4>每次自动同步的最短时间间隔。</h4>
                 <div class="checkbox-group clearfix">
                     <div>
-                        <input type="checkbox" id="settings-checkbox-{{uniqueIds[17]}}" ng-model="vm.MessageNotifyOnArticleReplied">
-                        <label for="settings-checkbox-{{uniqueIds[17]}}">文章被回复</label>
+                        <input type="radio" id="radio-{{uniqueIds[14]}}" name="syncDay" ng-model="vm.AutoSubscribeDaySpan" ng-value="7">
+                        <label for="radio-{{uniqueIds[14]}}">7 天</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="settings-checkbox-{{uniqueIds[18]}}" ng-model="vm.MessageNotifyOnCommentReplied">
-                        <label for="settings-checkbox-{{uniqueIds[18]}}">评论被回复</label>
+                        <input type="radio" id="radio-{{uniqueIds[15]}}" name="syncDay" ng-model="vm.AutoSubscribeDaySpan" ng-value="14">
+                        <label for="radio-{{uniqueIds[15]}}">14 天</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="settings-checkbox-{{uniqueIds[19]}}" ng-model="vm.MessageNotifyOnEditorRecommended">
-                        <label for="settings-checkbox-{{uniqueIds[19]}}">编辑推荐</label>
+                        <input type="radio" id="radio-{{uniqueIds[16]}}" name="syncDay" ng-model="vm.AutoSubscribeDaySpan" ng-value="30">
+                        <label for="radio-{{uniqueIds[16]}}">30 天</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="settings-checkbox-{{uniqueIds[20]}}" ng-model="vm.MessageNotifyOnArticleLiked">
-                        <label for="settings-checkbox-{{uniqueIds[20]}}">文章被认可</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" id="settings-checkbox-{{uniqueIds[21]}}" ng-model="vm.MessageNotifyOnCommentLiked">
-                        <label for="settings-checkbox-{{uniqueIds[21]}}">评论被认可</label>
+                        <input type="radio" id="radio-{{uniqueIds[17]}}" name="syncDay" ng-model="vm.AutoSubscribeDaySpan" ng-value="90">
+                        <label for="radio-{{uniqueIds[17]}}">90 天</label>
                     </div>
                 </div>
             </td>

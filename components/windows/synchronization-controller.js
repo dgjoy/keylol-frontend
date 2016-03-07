@@ -7,7 +7,7 @@
         function ($scope, close, condition, autoSubscribed, options, utils, $http, notification, window,
         $location) {
             $scope.cancel = function () {
-                if($location.url() === "/home" && typeof options.getSubscription === "function" && condition === "subsequential"){
+                if($location.url() === "/home" && typeof options.getSubscription === "function" && condition !== "fetchFailed"){
                     options.getSubscription();
                 }
                 close();
@@ -29,19 +29,23 @@
             $scope.resync = function () {
                 window.show({
                     templateUrl: "components/windows/sync-loading.html",
-                    controller: "SyncLoadingController"
+                    controller: "SyncLoadingController",
+                    inputs: {
+                        options: {
+                            getSubscription : options.getSubscription
+                        }
+                    }
                 });
                 close();
             };
-            console.log(condition);
             $scope.condition = condition;
             $scope.autoSubscribed = autoSubscribed;
             $scope.subscribeEmpty = true;
-            //for(var i in $scope.autoSubscribed){
-            //    if($scope.autoSubscribed[i].length > 0){
-            //        $scope.subscribeEmpty = false;
-            //    }
-            //}
+            for(var i in $scope.autoSubscribed){
+                if($scope.autoSubscribed[i].length > 0){
+                    $scope.subscribeEmpty = false;
+                }
+            }
             $scope.utils = utils;
         }
     ]);

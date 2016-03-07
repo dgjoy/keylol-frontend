@@ -97,13 +97,24 @@
                 <h2>Skipping Sync</h2>
             </hgroup>
         </button>
-        <div ng-if="condition !== 'fetchFailed'" class="cancel-synchronization">
-            <button ng-if="condition !== 'firstTime'" type="button" class="border-button left-border" ng-click="jumpToSettings()">同步订阅设置</button>
-            <p>这份列表会自动定期更新，若要永久关注某个据点，需要再手动订阅长期有兴趣的据点。</p>
+        <div ng-if="condition === 'firstTime' && !subscribeEmpty" class="cancel-synchronization">
+            <p>这份列表会被定期更新，你还可以在进入其乐后手动订阅其他兴趣据点。</p>
+        </div>
+        <div ng-if="condition === 'subsequential' && !subscribeEmpty" class="cancel-synchronization">
+            <button type="button" class="border-button left-border" ng-click="jumpToSettings()">同步订阅设置</button>
+            <p>这份列表会被定期更新，没有额外手动订阅的据点可能被替换。</p>
+        </div>
+        <div ng-if="condition === 'review' && !subscribeEmpty" class="cancel-synchronization">
+            <button type="button" class="border-button left-border" ng-click="jumpToSettings()">同步订阅设置</button>
+            <p>这份列表会被定期更新，你可以在设置中调整同步订阅的周期。</p>
         </div>
         <div ng-if="condition === 'fetchFailed'" class="retry-synchronization">
             <button type="button" class="border-button left-border" ng-click="resync()">重新同步</button>
             <p>在 Steam 隐私页面 设置资料状态为「仅限好友」或「公开」后重新同步。</p>
+        </div>
+        <div ng-if="condition !== 'fetchFailed' && subscribeEmpty" class="retry-synchronization">
+            <button type="button" class="border-button left-border" ng-click="resync()">重新同步</button>
+            <p>确保你的 Steam 库中至少有一款游戏有对应据点，再尝试重新同步。</p>
         </div>
     </div>
 </window>

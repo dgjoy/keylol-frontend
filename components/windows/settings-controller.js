@@ -3,9 +3,9 @@
 
     keylolApp.controller("SettingsController", [
         "$scope", "close", "utils", "$http", "union", "apiEndpoint", "base64", "Upload", "$q", "notification", "$element",
-        "$timeout", "upyun",
+        "$timeout", "upyun", "window",
         function ($scope, close, utils, $http, union, apiEndpoint, base64, Upload, $q, notification, $element,
-                  $timeout, upyun) {
+                  $timeout, upyun, window) {
             $scope.error = {};
             $scope.errorDetect = utils.modelErrorDetect;
             $scope.page = "profiles";
@@ -15,6 +15,17 @@
             }
             $scope.union = union;
             $scope.files = {};
+
+            $scope.resync = function () {
+                window.show({
+                    templateUrl: "components/windows/sync-loading.html",
+                    controller: "SyncLoadingController",
+                    inputs: {
+                        options: {}
+                    }
+                });
+                close();
+            };
 
             $scope.vm = {
                 ProfilePointBackgroundImage: "",
@@ -43,17 +54,8 @@
 
                     LockoutEnabled: user.LockoutEnabled,
 
-                    EmailNotifyOnAdvertisement: user.EmailNotifyOnAdvertisement,
-                    EmailNotifyOnArticleReplied: user.EmailNotifyOnArticleReplied,
-                    EmailNotifyOnCommentReplied: user.EmailNotifyOnCommentReplied,
-                    EmailNotifyOnEditorRecommended: user.EmailNotifyOnEditorRecommended,
-                    EmailNotifyOnMessageReceived: user.EmailNotifyOnMessageReceived,
-
-                    MessageNotifyOnArticleLiked: user.MessageNotifyOnArticleLiked,
-                    MessageNotifyOnArticleReplied: user.MessageNotifyOnArticleReplied,
-                    MessageNotifyOnCommentLiked: user.MessageNotifyOnCommentLiked,
-                    MessageNotifyOnCommentReplied: user.MessageNotifyOnCommentReplied,
-                    MessageNotifyOnEditorRecommended: user.MessageNotifyOnEditorRecommended,
+                    AutoSubscribeEnabled: user.AutoSubscribeEnabled,
+                    AutoSubscribeDaySpan: user.AutoSubscribeDaySpan,
 
                     SteamId: user.SteamId,
                     SteamId64: user.SteamId64,
@@ -146,16 +148,8 @@
                         break;
                     case "preferences":
                         keys = [
-                            "EmailNotifyOnAdvertisement",
-                            "EmailNotifyOnArticleReplied",
-                            "EmailNotifyOnCommentReplied",
-                            "EmailNotifyOnEditorRecommended",
-                            "EmailNotifyOnMessageReceived",
-                            "MessageNotifyOnArticleLiked",
-                            "MessageNotifyOnArticleReplied",
-                            "MessageNotifyOnCommentLiked",
-                            "MessageNotifyOnCommentReplied",
-                            "MessageNotifyOnEditorRecommended"
+                            "AutoSubscribeEnabled",
+                            "AutoSubscribeDaySpan"
                         ];
                         break;
                 }
