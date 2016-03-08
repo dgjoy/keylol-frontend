@@ -82,8 +82,9 @@
                     }, function (error) {
                         if (error.status === 404) {
                             $scope.articleExist = false;
+                            return;
                         }
-                        console.error(error);
+                        notification.error("发生未知错误，请重试或与站务职员联系", error)
                     });
                 $http.get(apiEndpoint + "user/" + $routeParams.author, {
                     params: {

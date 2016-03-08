@@ -3,12 +3,12 @@
 
     keylolApp.controller("SettingsController", [
         "$scope", "close", "utils", "$http", "union", "apiEndpoint", "base64", "Upload", "$q", "notification", "$element",
-        "$timeout", "upyun", "window",
+        "$timeout", "upyun", "window", "options",
         function ($scope, close, utils, $http, union, apiEndpoint, base64, Upload, $q, notification, $element,
-                  $timeout, upyun, window) {
+                  $timeout, upyun, window, options) {
             $scope.error = {};
             $scope.errorDetect = utils.modelErrorDetect;
-            $scope.page = "profiles";
+            $scope.page = options.page || "profiles";
             $scope.uniqueIds = {};
             for (var i = 0; i < 22; ++i) {
                 $scope.uniqueIds[i] = utils.uniqueId();

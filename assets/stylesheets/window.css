@@ -20,6 +20,24 @@
     }
 }
 
+@keyframes error-text-flash {
+    from {
+        color: red;
+    }
+    to {
+        color: #ccc;
+    }
+}
+
+@keyframes error-border-flash {
+    from {
+        border-color: red;
+    }
+    to {
+        border-color: #ccc;
+    }
+}
+
 .body-window-open {
     overflow: hidden;
 }
@@ -243,6 +261,20 @@ window[position=right]::after {
 
 .window .window-exit-button.focused .text {
     animation: exit-text-flash 150ms ease-in-out 6 alternate;
+}
+
+.window .error-flash, .window .error-flash td {
+    animation: error-border-flash 150ms ease-in-out 6 alternate;
+    border-color: red;
+}
+
+.window .error-flash .error {
+    animation: error-text-flash 150ms ease-in-out 6 alternate;
+}
+
+.window .error-flash h3 {
+    animation: error-text-flash 150ms ease-in-out 6 alternate;
+    color: red;
 }
 
 .window .window-exit-button .background,
