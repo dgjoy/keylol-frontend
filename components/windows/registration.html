@@ -18,7 +18,7 @@
                 </colgroup>
                 <tbody>
                 <tr>
-                    <td>
+                    <td ng-class="{'error-flash': errorDetect.steamBindingTokenId(error['vm.SteamBindingTokenId']) !== 'unknown'}">
                         <h3 class="font-myriad-lisong">连接游戏平台</h3>
                         <h4 ng-switch="errorDetect.steamBindingTokenId(error['vm.SteamBindingTokenId'])">
                             <span class="error" ng-switch-when="empty">您必须绑定一个 Steam 账户才可以注册成为其乐用户。</span>
@@ -42,7 +42,7 @@
                         </div>
                     </td>
                     <td class="id-code-left-spacing"></td>
-                    <td>
+                    <td ng-class="{'error-flash': errorDetect.idCode(error['vm.IdCode']) !== 'unknown'}">
                         <!--<a class="generate-id-code" href="">没兴趣自定义？自动生成！</a>-->
                         <h3 class="font-myriad-lisong">用户识别码</h3>
                         <h4 ng-switch="errorDetect.idCode(error['vm.IdCode'])">
@@ -63,7 +63,7 @@
                     <col style="width: 62%">
                 </colgroup>
                 <tbody>
-                <tr>
+                <tr ng-class="{'error-flash': errorDetect.username(error['vm.UserName']) !== 'unknown'}">
                     <td>
                         <h3 class="font-myriad-lisong">昵称</h3>
                         <h4 ng-switch="errorDetect.username(error['vm.UserName'])">
@@ -77,7 +77,7 @@
                         <input type="text" ng-model="vm.UserName">
                     </td>
                 </tr>
-                <tr>
+                <tr ng-class="{'error-flash': errorDetect.password(error['vm.Password']) !== 'unknown'}">
                     <td>
                         <h3 class="font-myriad-lisong">登录口令</h3>
                         <h4 ng-switch="errorDetect.password(error['vm.Password'])">
@@ -92,7 +92,7 @@
                 </tbody>
             </table>
             <table>
-                <tr>
+                <tr ng-class="{'error-flash': error.authCode}">
                     <td>
                         <h3 class="font-myriad-lisong">人机验证</h3>
                         <h4 ng-class="{error: error.authCode}">拖动滑块并完成拼图，协助我们抵御恶意攻击。</h4>

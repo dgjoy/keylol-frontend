@@ -23,7 +23,10 @@
             $scope.showSettingsWindow = function () {
                 window.show({
                     templateUrl: "components/windows/settings.html",
-                    controller: "SettingsController"
+                    controller: "SettingsController",
+                    inputs: {
+                        options: {}
+                    }
                 });
             };
         }

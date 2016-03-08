@@ -78,6 +78,7 @@
 
             function getSubscription() {
                 timeline.entries = [];
+                timeline.loadingLock = true;
                 $http.get(apiEndpoint + "article/subscription", {
                     params: {
                         take: utils.timelineLoadCount

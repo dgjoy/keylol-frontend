@@ -39,7 +39,6 @@
                 });
                 var rowCount = 1;
                 var nowYear = $scope.gameYears[0];
-                console.log(points);
                 for(var i = 1;i < points.length;i++){
                     if($filter('date')(points[i].ReleaseDate, "yyyy") === nowYear.year){
                         nowYear.games.push(points[i]);

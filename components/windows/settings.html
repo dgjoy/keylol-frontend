@@ -73,7 +73,7 @@
                 <input type="text" tabindex="2" ng-model="union.$localStorage.user.IdCode" disabled>
             </td>
         </tr>
-        <tr>
+        <tr ng-class="{'error-flash': errorDetect.gamerTag(error['vm.GamerTag']) !== 'unknown'}">
             <td>
                 <h3 class="font-myriad-lisong">玩家标签</h3>
                 <h4 ng-switch="errorDetect.gamerTag(error['vm.GamerTag'])">
@@ -93,7 +93,7 @@
             <col style="width: 64%">
         </colgroup>
         <tbody>
-        <tr>
+        <tr ng-class="{'error-flash': errorDetect.email(error['vm.Email']) !== 'unknown'}">
             <td>
                 <h3 class="font-myriad-lisong">电子邮箱</h3>
                 <h4 ng-switch="errorDetect.email(error['vm.Email'])">
@@ -180,50 +180,24 @@
     <table>
         <tr>
             <td>
-                <h3 class="font-myriad-lisong">分享社区动态（功能暂未开放）</h3>
-                <h4>在个人据点自动同步 Steam 账户活动，需要设定你的 Steam 资料为 "好友可见" 或 "公开"。</h4>
+                <h3 class="font-myriad-lisong">机器人通知（功能暂未开放）</h3>
+                <h4>让其乐机器人用 Steam 对话推送以下账户动态的提醒。</h4>
                 <div class="checkbox-group clearfix">
                     <div>
                         <input type="checkbox" id="settings-checkbox-{{uniqueIds[0]}}" ng-model="vm.AutoShareOnAddingNewFriend">
-                        <label for="settings-checkbox-{{uniqueIds[0]}}">新增好友</label>
+                        <label for="settings-checkbox-{{uniqueIds[0]}}">文章收到评论</label>
                     </div>
                     <div>
                         <input type="checkbox" id="settings-checkbox-{{uniqueIds[1]}}" ng-model="vm.AutoShareOnUnlockingAchievement">
-                        <label for="settings-checkbox-{{uniqueIds[1]}}">解锁成就</label>
+                        <label for="settings-checkbox-{{uniqueIds[1]}}">评论收到回复</label>
                     </div>
                     <div>
                         <input type="checkbox" id="settings-checkbox-{{uniqueIds[2]}}" ng-model="vm.AutoShareOnAcquiringNewGame">
-                        <label for="settings-checkbox-{{uniqueIds[2]}}">预购/入库游戏</label>
+                        <label for="settings-checkbox-{{uniqueIds[2]}}">文章被认可</label>
                     </div>
                     <div>
                         <input type="checkbox" id="settings-checkbox-{{uniqueIds[3]}}" ng-model="vm.AutoShareOnJoiningGroup">
-                        <label for="settings-checkbox-{{uniqueIds[3]}}">加入群组</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" id="settings-checkbox-{{uniqueIds[4]}}" ng-model="vm.AutoShareOnCreatingGroup">
-                        <label for="settings-checkbox-{{uniqueIds[4]}}">创建群组</label>
-                    </div>
-                </div>
-                <div class="checkbox-group clearfix">
-                    <div>
-                        <input type="checkbox" id="settings-checkbox-{{uniqueIds[5]}}" ng-model="vm.AutoShareOnUpdatingWishlist">
-                        <label for="settings-checkbox-{{uniqueIds[5]}}">愿望清单更新</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" id="settings-checkbox-{{uniqueIds[6]}}" ng-model="vm.AutoShareOnPublishingReview">
-                        <label for="settings-checkbox-{{uniqueIds[6]}}">发布游戏评论</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" id="settings-checkbox-{{uniqueIds[7]}}" ng-model="vm.AutoShareOnUploadingScreenshot">
-                        <label for="settings-checkbox-{{uniqueIds[7]}}">上传截图</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" id="settings-checkbox-{{uniqueIds[8]}}" ng-model="vm.AutoShareOnAddingVideo">
-                        <label for="settings-checkbox-{{uniqueIds[8]}}">添加视频</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" id="settings-checkbox-{{uniqueIds[9]}}" ng-model="vm.AutoShareOnAddingFavorite">
-                        <label for="settings-checkbox-{{uniqueIds[9]}}">收藏更新</label>
+                        <label for="settings-checkbox-{{uniqueIds[3]}}">评论被认可</label>
                     </div>
                 </div>
             </td>
@@ -237,7 +211,7 @@
             <col style="width: 62%">
         </colgroup>
         <tbody>
-        <tr>
+        <tr ng-class="{'error-flash': errorDetect.password(error['vm.Password']) !== 'unknown'}">
             <td>
                 <h3 class="font-myriad-lisong">当前登录口令</h3>
                 <h4 ng-switch="errorDetect.password(error['vm.Password'])">
@@ -250,7 +224,7 @@
                 <input type="password" ng-model="vm.Password">
             </td>
         </tr>
-        <tr>
+        <tr ng-class="{'error-flash': errorDetect.password(error['vm.NewPassword']) !== 'unknown'}">
             <td>
                 <h3 class="font-myriad-lisong">新登录口令</h3>
                 <h4 ng-switch="errorDetect.password(error['vm.NewPassword'])">
@@ -262,7 +236,7 @@
                 <input type="password" ng-model="vm.NewPassword">
             </td>
         </tr>
-        <tr>
+        <tr ng-class="{'error-flash': error['vm.ConfirmPassword'] === 'not match'}">
             <td>
                 <h3 class="font-myriad-lisong">确认新登录口令</h3>
                 <h4 ng-switch="error['vm.ConfirmPassword']">
@@ -295,7 +269,7 @@
         </tr>
     </table>
     <table>
-        <tr>
+        <tr ng-class="{'error-flash': error.authCode}">
             <td>
                 <h3 class="font-myriad-lisong">人机验证</h3>
                 <h4 ng-class="{error: error.authCode}">更改安全设定时需要进行人机验证。</h4>
@@ -310,7 +284,7 @@
             <td>
                 <a class="resync" href="" ng-click="resync()">立即重新同步</a>
                 <h3 class="font-myriad-lisong">同步订阅开关</h3>
-                <h4>可以通过邮件订阅掌握其乐账户的日常动态。</h4>
+                <h4>你的据点订阅会定期与你的 Steam 游戏动态同步，自动订阅接触的游戏和关联据点。</h4>
                 <div class="checkbox-group clearfix">
                     <div>
                         <input type="radio" id="radio-{{uniqueIds[12]}}" name="syncEnabled" ng-model="vm.AutoSubscribeEnabled" ng-value="true">
