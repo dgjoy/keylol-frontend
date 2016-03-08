@@ -18,6 +18,23 @@
     text-overflow: ellipsis;
 }
 
+.section-latest-articles .article h2 svg {
+    vertical-align: middle;
+    width: 11px;
+    height: 6px;
+    display: inline-block;
+}
+
+.section-latest-articles .article h2 svg circle {
+    r: 3px;
+    fill: #159;
+}
+
+.section-latest-articles .article h2 a {
+    vertical-align: middle;
+    color: #333;
+}
+
 .section-latest-articles .article p {
     margin: 0 0;
     max-height: 36px;
