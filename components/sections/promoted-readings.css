@@ -18,9 +18,21 @@
     text-overflow: ellipsis;
 }
 
-.section-promoted-readings .article h2 span {
-    margin-right: 4px;
-    color: #89A;
+.section-promoted-readings .article h2 svg {
+    vertical-align: middle;
+    width: 11px;
+    height: 6px;
+    display: inline-block;
+}
+
+.section-promoted-readings .article h2 svg circle {
+    r: 3px;
+    fill: #159;
+}
+
+.section-promoted-readings .article h2 a {
+    vertical-align: middle;
+    color: #333;
 }
 
 .section-promoted-readings .article p {

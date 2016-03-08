@@ -1,0 +1,15 @@
+.section-new-point {
+    background: white;
+}
+
+.section-new-point .new-main {
+    padding: 20px 10px;
+}
+
+.section-new-point .new-main img {
+    width: 28px;
+}
+
+.section-new-point .new-main a * {
+    vertical-align: middle;
+}
