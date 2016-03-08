@@ -3,9 +3,9 @@
 
     keylolApp.controller("SynchronizationController", [
         "$scope", "close", "condition", "autoSubscribed", "options", "utils", "$http", "notification", "window",
-        "$location",
+        "$location", "$rootScope",
         function ($scope, close, condition, autoSubscribed, options, utils, $http, notification, window,
-        $location) {
+        $location, $rootScope) {
             $scope.cancel = function () {
                 if($location.url() === "/home" && typeof options.getSubscription === "function" && condition !== "fetchFailed"){
                     options.getSubscription();
@@ -38,6 +38,18 @@
                 });
                 close();
             };
+            $scope.jumpToSettings = function () {
+                window.show({
+                    templateUrl: "components/windows/settings.html",
+                    controller: "SettingsController",
+                    inputs: {
+                        options: {
+                            page: "preferences"
+                        }
+                    }
+                });
+                close();
+            };
             $scope.condition = condition;
             $scope.autoSubscribed = autoSubscribed;
             $scope.subscribeEmpty = true;
@@ -47,6 +59,10 @@
                 }
             }
             $scope.utils = utils;
+            var cancelListen = $rootScope.$on("$locationChangeSuccess", function(){
+                close();
+                cancelListen();
+            });
         }
     ]);
 })();
