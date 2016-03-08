@@ -43,42 +43,57 @@
                 entries: []
             };
 
-            $http.put(apiEndpoint + "user-game-record/my", {}).then(function (response) {
+            if(union.$localStorage.firstOpenKeylol){
+                union.$localStorage.firstOpenKeylol = false;
                 window.show({
-                    templateUrl: "components/windows/synchronization.html",
-                    controller: "SynchronizationController",
+                    templateUrl: "components/windows/sync-loading.html",
+                    controller: "SyncLoadingController",
                     inputs: {
-                        condition: "subsequential",
-                        autoSubscribed: response.data,
                         options: {
+                            isFirstTime: true,
                             getSubscription: getSubscription
                         }
                     }
                 });
-            }, function (response) {
-                if(response.status === 404) return;
-                if(response.status === 401) {
+            }else {
+                getSubscription();
+
+                $http.put(apiEndpoint + "user-game-record/my", {}).then(function (response) {
                     window.show({
                         templateUrl: "components/windows/synchronization.html",
                         controller: "SynchronizationController",
                         inputs: {
-                            condition: "fetchFailed",
-                            autoSubscribed: {},
+                            condition: "subsequential",
+                            autoSubscribed: response.data,
                             options: {
                                 getSubscription: getSubscription
                             }
                         }
                     });
-                    return;
-                }
-                notification.error("发生未知错误，请重试或与站务职员联系", response);
-            });
-
-            getSubscription();
+                }, function (response) {
+                    if(response.status === 404) return;
+                    if(response.status === 401) {
+                        window.show({
+                            templateUrl: "components/windows/synchronization.html",
+                            controller: "SynchronizationController",
+                            inputs: {
+                                condition: "fetchFailed",
+                                autoSubscribed: {},
+                                options: {
+                                    getSubscription: getSubscription
+                                }
+                            }
+                        });
+                        return;
+                    }
+                    notification.error("发生未知错误，请重试或与站务职员联系", response);
+                });
+            }
 
             function getSubscription() {
                 timeline.entries = [];
                 timeline.loadingLock = true;
+                timeline.activePoints = null;
                 $http.get(apiEndpoint + "article/subscription", {
                     params: {
                         take: utils.timelineLoadCount
