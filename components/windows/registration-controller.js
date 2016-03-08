@@ -87,6 +87,7 @@
                 }
                 $http.post(apiEndpoint + "user", $scope.vm)
                     .then(function (response) {
+                        union.$localStorage.firstOpenKeylol = true;
                         union.$localStorage.login = response.data;
                         close();
                         if (consumeBindingToken)

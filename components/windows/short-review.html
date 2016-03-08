@@ -8,7 +8,7 @@
                 <img class="point-cover" webp-src="{{options.point.CoverImage | coverUrl}}">
                 <div class="title">
                     <h4>简评 <span>{{options.point.Name}}</span></h4>
-                    <p ng-if="options.hoursPlayed">在档{{options.hoursPlayed}}小时</p>
+                    <p ng-if="options.hoursPlayed">在档 {{options.hoursPlayed}} 小时</p>
                 </div>
                 <point-review bind-review="vm.Vote"></point-review>
             </div>
