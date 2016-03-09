@@ -4,6 +4,7 @@
     keylolApp.controller("ArticleCommentsController", [
         "$scope", "union", "$http", "utils", "getAndFlushComments", "notification",
         function ($scope, union, $http, utils, getAndFlushComments, notification) {
+            $scope.union = union;
             $scope.comments = union.comments;
             $scope.article = union.article;
             $scope.hotComments = union.hotComments;

@@ -180,23 +180,23 @@
     <table>
         <tr>
             <td>
-                <h3 class="font-myriad-lisong">机器人通知（功能暂未开放）</h3>
+                <h3 class="font-myriad-lisong">机器人通知</h3>
                 <h4>让其乐机器人用 Steam 对话推送以下账户动态的提醒。</h4>
                 <div class="checkbox-group clearfix">
                     <div>
-                        <input type="checkbox" id="settings-checkbox-{{uniqueIds[0]}}" ng-model="vm.AutoShareOnAddingNewFriend">
+                        <input type="checkbox" id="settings-checkbox-{{uniqueIds[0]}}" ng-model="vm.SteamNotifyOnArticleReplied">
                         <label for="settings-checkbox-{{uniqueIds[0]}}">文章收到评论</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="settings-checkbox-{{uniqueIds[1]}}" ng-model="vm.AutoShareOnUnlockingAchievement">
+                        <input type="checkbox" id="settings-checkbox-{{uniqueIds[1]}}" ng-model="vm.SteamNotifyOnCommentReplied">
                         <label for="settings-checkbox-{{uniqueIds[1]}}">评论收到回复</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="settings-checkbox-{{uniqueIds[2]}}" ng-model="vm.AutoShareOnAcquiringNewGame">
+                        <input type="checkbox" id="settings-checkbox-{{uniqueIds[2]}}" ng-model="vm.SteamNotifyOnArticleLiked">
                         <label for="settings-checkbox-{{uniqueIds[2]}}">文章被认可</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="settings-checkbox-{{uniqueIds[3]}}" ng-model="vm.AutoShareOnJoiningGroup">
+                        <input type="checkbox" id="settings-checkbox-{{uniqueIds[3]}}" ng-model="vm.SteamNotifyOnCommentLiked">
                         <label for="settings-checkbox-{{uniqueIds[3]}}">评论被认可</label>
                     </div>
                 </div>

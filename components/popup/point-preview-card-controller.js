@@ -49,7 +49,7 @@
                 }
                 if (!union.userCards[idCode]) {
                     var includeSubscribed = true;
-                    if (idCode === union.$localStorage.user.IdCode) {
+                    if (!union.$localStorage.user || idCode === union.$localStorage.user.IdCode) {
                         includeSubscribed = false;
                     }
                     $http.get(apiEndpoint + "user/" + idCode, {
