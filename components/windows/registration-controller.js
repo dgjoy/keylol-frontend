@@ -60,6 +60,7 @@
                     });
                 });
             };
+            $timeout($scope.showSteamConnectWindow, 500);
 
             $scope.discardBinding = function () {
                 $scope.vm.SteamBindingTokenId = "";
