@@ -2,8 +2,8 @@
     "use strict";
 
     keylolApp.controller("TimelineController", [
-        "$scope", "union", "$location", "$http", "$rootScope", "$element", "articleTypes", "notification", "utils", "$timeout", "window",
-        function ($scope, union, $location, $http, $rootScope, $element, articleTypes, notification, utils, $timeout, window) {
+        "$scope", "union", "$location", "$http", "$rootScope", "$element", "articleTypes", "notification", "utils", "$timeout", "$window",
+        function ($scope, union, $location, $http, $rootScope, $element, articleTypes, notification, utils, $timeout, $window) {
             $scope.headingDisplayMode = function (entry) {
                 if (entry.source)
                     return "source";
@@ -76,8 +76,8 @@
             };
 
             $scope.loadingLock = false;
-            $(window).scroll(function () {
-                var $windowBottomY = $(window).scrollTop() + $(window).height();
+            $($window).scroll(function () {
+                var $windowBottomY = $($window).scrollTop() + $($window).height();
                 var $timelineBottomY = $element.offset().top + $element.height();
                 $scope.$apply(function () {
                     if ($windowBottomY > $timelineBottomY - 60 && !$scope.data.loadingLock && !$scope.data.noMoreArticle) {
@@ -90,7 +90,7 @@
                 });
             });
             var cancelListenRoute = $scope.$on("$destroy", function () {
-                $(window).unbind("scroll");
+                $($window).unbind("scroll");
                 cancelListenRoute();
             });
 
