@@ -70,7 +70,7 @@
 .section-point-info .info-details .info-review .actions {
     position: absolute;
     margin: 0;
-    top: calc(50% + 15.5px);
+    top: calc(50% + 44.5px);
     left: calc(50% + 7.5px);
     transform: translate(-50%, -50%);
 }
@@ -103,7 +103,7 @@
     padding-left: 20px;
 }
 
-.section-point-info .info-details .info-review p {
+.section-point-info .info-details .info-review .join-review {
     position: absolute;
     width: 80px;
     top: calc(50% + 22.5px);
@@ -112,7 +112,7 @@
     color: #159;
 }
 
-.section-point-info .info-details .info-review p point-review div {
+.section-point-info .info-details .info-review .join-review point-review div {
     margin-top: 0;
 }
 
