@@ -12,6 +12,7 @@
             $scope.pageElements = union.pageElements;
             $scope.textFocus = false;
             $scope.submitLock = false;
+            $scope.comment = {};
             $scope.showRegistrationWindow = function () {
                 window.show({
                     templateUrl: "components/windows/registration.html",
@@ -29,17 +30,18 @@
                 });
             };
             $scope.doComment = function () {
-                if ($scope.currentComment) {
+                console.log("aaa");
+                if ($scope.comment.currentComment) {
                     $scope.submitLock = true;
-                    var replyArray = dealWithReply($scope.currentComment);
+                    var replyArray = dealWithReply($scope.comment.currentComment);
                     $http.post(apiEndpoint + "comment", {
-                        Content: $scope.currentComment,
+                        Content: $scope.comment.currentComment,
                         ArticleId: union.article.Id,
                         ReplyToCommentsSN: replyArray
                     }).then(function (response) {
                         notification.success("评论已发出");
                         $scope.submitLock = false;
-                        $scope.currentComment = "";
+                        $scope.comment.currentComment = "";
                         var sqNumber = response.data.SequenceNumberForArticle;
                         getAndFlushComments(union.article, sqNumber, "sequence");
                     }, function (response) {
@@ -49,12 +51,12 @@
                 }
             };
             $scope.reply = function (sqNumber) {
-                if (!$scope.currentComment) {
-                    $scope.currentComment = "#" + sqNumber + " ";
-                } else if ($scope.currentComment == "") {
-                    $scope.currentComment += "#" + sqNumber + " ";
+                if (!$scope.comment.currentComment) {
+                    $scope.comment.currentComment = "#" + sqNumber + " ";
+                } else if ($scope.comment.currentComment == "") {
+                    $scope.comment.currentComment += "#" + sqNumber + " ";
                 } else {
-                    $scope.currentComment += "\n#" + sqNumber + " ";
+                    $scope.comment.currentComment += "\n#" + sqNumber + " ";
                 }
                 $scope.textFocus = true;
             };
