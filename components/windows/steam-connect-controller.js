@@ -75,7 +75,7 @@
                             $scope.code = token.Code;
                         } else {
                             notification.error("暂无可用机器人。");
-                            //$scope.cancel();
+                            $scope.cancel();
                         }
                     });
                 });
