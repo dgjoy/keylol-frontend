@@ -294,8 +294,8 @@
                     {action: "取消"}
                 ]).then(function (result) {
                     if (result) {
+                        delete union.$localStorage.login;
                         $http.delete(apiEndpoint + "login/current").then(function () {
-                            delete union.$localStorage.login;
                             notification.success("已登出当前账户");
                             close();
                         }, function (response) {
