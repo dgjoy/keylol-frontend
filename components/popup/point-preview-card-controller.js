@@ -13,7 +13,7 @@
                     $http.get(apiEndpoint + "normal-point/" + idCode, {
                         params: {
                             stats: true,
-                            subscribed: true,
+                            subscribed: union.$localStorage.user?true:false,
                             idType: "IdCode"
                         }
                     }).then(function (response) {
@@ -49,7 +49,7 @@
                 }
                 if (!union.userCards[idCode]) {
                     var includeSubscribed = true;
-                    if (idCode === union.$localStorage.user.IdCode) {
+                    if (!union.$localStorage.user || idCode === union.$localStorage.user.IdCode) {
                         includeSubscribed = false;
                     }
                     $http.get(apiEndpoint + "user/" + idCode, {

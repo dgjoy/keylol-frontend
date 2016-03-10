@@ -41,16 +41,10 @@
                     Email: user.Email,
                     ProfilePointBackgroundImage: user.ProfilePointBackgroundImage,
 
-                    AutoShareOnAcquiringNewGame: user.AutoShareOnAcquiringNewGame,
-                    AutoShareOnAddingFavorite: user.AutoShareOnAddingFavorite,
-                    AutoShareOnAddingNewFriend: user.AutoShareOnAddingNewFriend,
-                    AutoShareOnAddingVideo: user.AutoShareOnAddingVideo,
-                    AutoShareOnCreatingGroup: user.AutoShareOnCreatingGroup,
-                    AutoShareOnJoiningGroup: user.AutoShareOnJoiningGroup,
-                    AutoShareOnPublishingReview: user.AutoShareOnPublishingReview,
-                    AutoShareOnUnlockingAchievement: user.AutoShareOnUnlockingAchievement,
-                    AutoShareOnUpdatingWishlist: user.AutoShareOnUpdatingWishlist,
-                    AutoShareOnUploadingScreenshot: user.AutoShareOnUploadingScreenshot,
+                    SteamNotifyOnArticleReplied: user.SteamNotifyOnArticleReplied,
+                    SteamNotifyOnCommentReplied: user.SteamNotifyOnCommentReplied,
+                    SteamNotifyOnArticleLiked: user.SteamNotifyOnArticleLiked,
+                    SteamNotifyOnCommentLiked: user.SteamNotifyOnCommentLiked,
 
                     LockoutEnabled: user.LockoutEnabled,
 
@@ -123,16 +117,10 @@
                         break;
                     case "platform":
                         keys = [
-                            "AutoShareOnAcquiringNewGame",
-                            "AutoShareOnAddingFavorite",
-                            "AutoShareOnAddingNewFriend",
-                            "AutoShareOnAddingVideo",
-                            "AutoShareOnCreatingGroup",
-                            "AutoShareOnJoiningGroup",
-                            "AutoShareOnPublishingReview",
-                            "AutoShareOnUnlockingAchievement",
-                            "AutoShareOnUpdatingWishlist",
-                            "AutoShareOnUploadingScreenshot"
+                            "SteamNotifyOnArticleReplied",
+                            "SteamNotifyOnCommentReplied",
+                            "SteamNotifyOnArticleLiked",
+                            "SteamNotifyOnCommentLiked"
                         ];
                         break;
                     case "security":
@@ -306,8 +294,8 @@
                     {action: "取消"}
                 ]).then(function (result) {
                     if (result) {
+                        delete union.$localStorage.login;
                         $http.delete(apiEndpoint + "login/current").then(function () {
-                            delete union.$localStorage.login;
                             notification.success("已登出当前账户");
                             close();
                         }, function (response) {

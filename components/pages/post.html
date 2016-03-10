@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-left">
             <section ng-include="'components/sections/logo.html'" style="height: 92px"></section>
-            <section ng-include="'components/sections/reception.html'"></section>
+            <section ng-if="union.$localStorage.user" ng-include="'components/sections/reception.html'"></section>
             <section ng-include="'components/sections/main-navigation.html'"></section>
             <section ng-include="'components/sections/related-points.html'"></section>
         </div>

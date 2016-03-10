@@ -9,7 +9,10 @@
             $scope.showRegistrationWindow = function () {
                 window.show({
                     templateUrl: "components/windows/registration.html",
-                    controller: "RegistrationController"
+                    controller: "RegistrationController",
+                    inputs: {
+                        options: {}
+                    }
                 });
             };
 

@@ -2,8 +2,8 @@
     "use strict";
 
     keylolApp.controller("SteamConnectController", [
-        "$scope", "close", "$timeout", "$q", "notification", "utils",
-        function ($scope, close, $timeout, $q, notification, utils) {
+        "$scope", "close", "$timeout", "$q", "notification", "utils", "options", "window",
+        function ($scope, close, $timeout, $q, notification, utils, options, window) {
             var tokenId;
             var result;
             var closed = false;
@@ -12,6 +12,18 @@
 
             $scope.utils = utils;
             $scope.currentStation = 0;
+            $scope.options = options;
+
+            $scope.showLoginSteamWindow = function() {
+                window.show({
+                    templateUrl: "components/windows/login-steam.html",
+                    controller: "LoginSteamController"
+                });
+                $scope.cancel();
+                if(typeof options.registrationClose === "function"){
+                    options.registrationClose();
+                }
+            };
 
             $scope.cancel = function () {
                 close(result);

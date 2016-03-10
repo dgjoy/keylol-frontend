@@ -18,8 +18,10 @@
                         article.authorIdCode = $routeParams.author;
                         article.sqNumberForAuthor = $routeParams.article;
                         pageTitle.set(article.Title + " - 其乐");
-                        article.isMyArticle = union.$localStorage.user.IdCode === $routeParams.author;
-                        article.canEdit = article.isMyArticle || union.$localStorage.user.StaffClaim === "operator";
+                        if(union.$localStorage.user){
+                            article.isMyArticle = union.$localStorage.user.IdCode === $routeParams.author;
+                            article.canEdit = article.isMyArticle || union.$localStorage.user.StaffClaim === "operator";
+                        }
                         if (article.Vote) {
                             $scope.hasVote = true;
                             $http.get(apiEndpoint + "normal-point/" + article.VoteForPoint.Id, {
@@ -88,7 +90,7 @@
                     });
                 $http.get(apiEndpoint + "user/" + $routeParams.author, {
                     params: {
-                        subscribed: $routeParams.author != union.$localStorage.user.IdCode,
+                        subscribed: union.$localStorage.user?$routeParams.author != union.$localStorage.user.IdCode:false,
                         stats: true,
                         profilePointBackgroundImage: true,
                         reviewStats: true,
@@ -115,7 +117,7 @@
                         idCode: author.IdCode,
                         userName: "@" + author.UserName
                     });
-                    if (author.IdCode != union.$localStorage.user.IdCode) {
+                    if (union.$localStorage.user && author.IdCode != union.$localStorage.user.IdCode) {
                         summary.subscribed = author.Subscribed;
                     }
                 }, function (response) {

@@ -5,8 +5,12 @@
     "use strict";
 
     keylolApp.controller("ReadersController", [
-        "pageTitle", "$scope", "union", "$http", "notification", "utils", "$timeout",
-        function (pageTitle, $scope, union, $http, notification, utils, $timeout) {
+        "pageTitle", "$scope", "union", "$http", "notification", "utils", "$timeout", "$location",
+        function (pageTitle, $scope, union, $http, notification, utils, $timeout, $location) {
+            if(!union.$localStorage.user){
+                $location.url("/");
+                return;
+            }
             $scope.union = union;
             $scope.searchExist = true;
             var summary = {

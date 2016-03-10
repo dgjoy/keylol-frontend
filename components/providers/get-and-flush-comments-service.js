@@ -71,7 +71,7 @@
                             if (comments[i].LikeCount > 0) {
                                 comments[i].hasLike = true;
                             }
-                            if (comments[i].Commentator.IdCode == union.$localStorage.user.IdCode) {
+                            if (union.$localStorage.user && comments[i].Commentator.IdCode == union.$localStorage.user.IdCode) {
                                 comments[i].cannotLike = true;
                             }
                             comments[i].Content = parseComments(comments[i].Content, comments[i].SequenceNumberForArticle);

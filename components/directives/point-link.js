@@ -23,7 +23,7 @@
                                 event: $event,
                                 attachSide: "bottom",
                                 align: "left",
-                                offsetX: avatarWidth / 2 - 37,
+                                offsetX: avatarWidth / 2 - 39,
                                 inputs: {
                                     idCode: scope.idCode,
                                     type: scope.type

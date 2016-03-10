@@ -128,7 +128,7 @@
     right: 20px;
 }
 
-.section-article-comments form {
+.section-article-comments form, .section-article-comments .for-visitor {
     clear: both;
     position: relative;
     margin: 24px 100px 0 20px;
@@ -157,4 +157,67 @@
     width: 100%;
     min-height: 80px;
     resize: vertical;
+}
+
+.section-article-comments .for-visitor .fake-textarea {
+    width: 100%;
+    height: 80px;
+    border-radius: 4px;
+    box-shadow: 2.12px 2.12px 2px rgba(53, 72, 86, 0.15), inset 1px 1px 2px rgba(0, 0, 0, 0.25);
+    padding: 8px;
+    background: #fafaf9;
+}
+
+.section-article-comments .for-visitor .action-container {
+    width: 350px;
+    height: 100%;
+    margin: auto;
+    left: -20px;
+    position: relative;
+}
+
+.section-article-comments .for-visitor .action-container a {
+    display: block;
+    position: absolute;
+}
+
+.section-article-comments .for-visitor .action-container .log-up {
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 10px 20px;
+    border-right: 1px solid #ccc;
+    text-align: right;
+    text-decoration: none;
+    width: 205px;
+}
+
+.section-article-comments .for-visitor .action-container .log-in {
+    color: #89a;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.section-article-comments .for-visitor .action-container img {
+    float: right;
+    width: 46px;
+    margin-left: 10px;
+}
+
+.section-article-comments .for-visitor .action-container h4 {
+    margin: 0 0 5px;
+    font-weight: normal;
+    line-height: 15px;
+}
+
+.section-article-comments .for-visitor .action-container h3 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: normal;
+    line-height: 22px;
+}
+
+.section-article-comments .for-visitor .action-container a:hover h3 {
+    text-decoration: underline;
 }

@@ -39,7 +39,7 @@
                 <point-link ng-repeat="point in point.MinorPlatformPoints" type="'point'" id-code="point.IdCode" point-name="'「' + utils.getPointFirstName(point) + '」'"></point-link>
             </p>
         </div>
-        <div class="info-review">
+        <div ng-if="union.$localStorage.user" class="info-review">
             <img class="point-cover" webp-src="{{point.CoverImage | coverUrl}}">
             <p ng-if="point.hoursPlayed" class="play-time">{{point.hoursPlayed}} 小时在档</p>
             <point-review on-click-review="showShortReviewWindow(vote)" is-hollow="true"></point-review>
@@ -49,6 +49,13 @@
             </div>
             <a href="" ng-click="showPointEdit(true)" class="edit-info">编辑资料</a>
         </div>
+        <div ng-if="!union.$localStorage.user" class="info-review">
+            <img class="point-cover" webp-src="{{point.CoverImage | coverUrl}}">
+            <p class="join-review">
+                <span>参与评价</span>
+                <point-review no-string="true" on-click-review="showRegistrationWindow()" is-hollow="true"></point-review>
+            </p>
+        </div>
     </div>
     <div ng-if="union.point.Type !== 'Game'" class="info-actions clearfix">
         <span class="related-list" ng-if="point.GameCountAsGenre"><a ng-click="showRelatedGames($event, 'Genre', point.GameCountAsGenre)">此流派的游戏</a>（{{point.GameCountAsGenre}}）</span>
@@ -56,6 +63,6 @@
         <span class="related-list" ng-if="point.GameCountAsSeries"><a ng-click="showRelatedGames($event, 'Series', point.GameCountAsSeries)">此系列的游戏</a>（{{point.GameCountAsSeries}}）</span>
         <span class="related-list" ng-if="point.GameCountAsPublisher"><a ng-click="showRelatedGames($event, 'Publisher', point.GameCountAsPublisher)">历代发行游戏</a>（{{point.GameCountAsPublisher}}）</span>
         <span class="related-list" ng-if="point.GameCountAsDeveloper"><a ng-click="showRelatedGames($event, 'Developer', point.GameCountAsDeveloper)">历代开发游戏</a>（{{point.GameCountAsDeveloper}}）</span>
-        <a href="" ng-click="showPointEdit(false)" class="edit-info">编辑资料</a>
+        <a ng-if="union.$localStorage.user" href="" ng-click="showPointEdit(false)" class="edit-info">编辑资料</a>
     </div>
 </div>

@@ -77,7 +77,7 @@
                 }).then(function (response) {
 
                     var user = response.data;
-                    if (user.IdCode != union.$localStorage.user.IdCode) {
+                    if (union.$localStorage.user && user.IdCode != union.$localStorage.user.IdCode) {
                         summary.subscribed = user.Subscribed;
                     }
                     utils.addRecentBroswe("ProfilePoint", user.UserName, user.IdCode);
@@ -276,13 +276,15 @@
                     union.associatedPoints = point.AssociatedPoints;
                     if (point.Type === "Game") {
                         $scope.hasVote = true;
-                        $http.get(apiEndpoint + "user-game-record/" + union.$localStorage.user.Id + "/" + point.SteamAppId).then(function (response) {
-                            unionPoint.hoursPlayed = response.data;
-                        }, function (response) {
-                            if(response.status !== 404){
-                                notification.error("发生未知错误，请重试或与站务职员联系", response);
-                            }
-                        });
+                        if(union.$localStorage.user){
+                            $http.get(apiEndpoint + "user-game-record/" + union.$localStorage.user.Id + "/" + point.SteamAppId).then(function (response) {
+                                unionPoint.hoursPlayed = response.data;
+                            }, function (response) {
+                                if(response.status !== 404){
+                                    notification.error("发生未知错误，请重试或与站务职员联系", response);
+                                }
+                            });
+                        }
                     }
 
                     point.totalEvaluate = 0;

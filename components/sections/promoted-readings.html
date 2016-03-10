@@ -3,7 +3,7 @@
     <div ng-repeat="article in articles track by article.Id" class="article">
         <h2>
             <svg xmlns="http://www.w3.org/2000/svg">
-                <circle cx="3" cy="3"></circle>
+                <circle cx="3" cy="3" r="3"></circle>
             </svg><!--
             --><a ng-href="article/{{article.AuthorIdCode}}/{{article.SequenceNumberForAuthor}}">{{article.Title}}</a>
         </h2>

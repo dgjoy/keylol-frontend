@@ -269,6 +269,10 @@
     top: 6px;
 }
 
+.window-settings .tips p a {
+    color: #89a;
+}
+
 .window-settings .window .window-confirm-button {
     margin-right: -24px;
 }

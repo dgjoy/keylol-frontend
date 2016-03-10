@@ -1,11 +1,11 @@
 ﻿<div class="section-action-hub box-shadowed" ng-controller="ActionHubController">
     <div class="not-logged-in" ng-if="!union.$localStorage.login">
-        <button class="border-button top-border" ng-click="showLoginSteamWindow()">登录</button>
-        <a href="" ng-click="showRegistrationWindow()">
+        <a class="log-up" href="" ng-click="showRegistrationWindow()">
             <img src="assets/images/steam-logo.png">
             <h4>通过 Steam 账户</h4>
-            <h3 class="font-myriad-keylol">注册其乐会员</h3>
+            <h3 class="font-myriad-keylol">加入其乐社区</h3>
         </a>
+        <a href="" class="log-in" ng-click="showLoginSteamWindow()">已注册用户登录</a>
     </div>
     <div ng-if="union.$localStorage.login">
         <div class="actions">

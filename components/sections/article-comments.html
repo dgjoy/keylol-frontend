@@ -8,9 +8,11 @@
                 <point-link class="name" type="'user'" point-name="'@' + comment.Commentator.UserName" id-code="comment.Commentator.IdCode"></point-link>
                 <span class="as-author" ng-if="comment.Commentator.isAuthor">[文章作者]</span>
                 <span class="time" am-time-ago="comment.PublishTime"></span>
-                <a href="" class="action" ng-click="reply(comment.SequenceNumberForArticle)">回复</a>
-                <a href="" class="action" ng-if="!comment.cannotLike" ng-click="acknowledge(comment)" ng-switch-when="false">认可</a>
-                <a href="" class="action" ng-if="!comment.cannotLike" ng-click="cancelAcknowledge(comment)" ng-switch-when="true">取消认可</a>
+                <span ng-if="union.$localStorage.user">
+                    <a href="" class="action" ng-click="reply(comment.SequenceNumberForArticle)">回复</a>
+                    <a href="" class="action" ng-if="!comment.cannotLike" ng-click="acknowledge(comment)" ng-switch-when="false">认可</a>
+                    <a href="" class="action" ng-if="!comment.cannotLike" ng-click="cancelAcknowledge(comment)" ng-switch-when="true">取消认可</a>
+                </span>
             </div>
             <div class="content"><span bind-html-compile="comment.Content"></span><span class="hot-signal">HOT</span><span class="like-count" ng-if="comment.hasLike">+{{comment.LikeCount}}</span></div>
         </article>
@@ -24,17 +26,36 @@
                 <point-link class="name" type="'user'" point-name="'@' + comment.Commentator.UserName" id-code="comment.Commentator.IdCode"></point-link>
                 <span class="as-author" ng-if="comment.Commentator.isAuthor">[文章作者]</span>
                 <span class="time" am-time-ago="comment.PublishTime"></span>
-                <a href="" class="action" ng-click="reply(comment.SequenceNumberForArticle)">回复</a>
-                <a href="" class="action" ng-if="!comment.cannotLike" ng-click="acknowledge(comment)" ng-switch-when="false">认可</a>
-                <a href="" class="action" ng-if="!comment.cannotLike" ng-click="cancelAcknowledge(comment)" ng-switch-when="true">取消认可</a>
+                <span ng-if="union.$localStorage.user">
+                    <a href="" class="action" ng-click="reply(comment.SequenceNumberForArticle)">回复</a>
+                    <a href="" class="action" ng-if="!comment.cannotLike" ng-click="acknowledge(comment)" ng-switch-when="false">认可</a>
+                    <a href="" class="action" ng-if="!comment.cannotLike" ng-click="cancelAcknowledge(comment)" ng-switch-when="true">取消认可</a>
+                </span>
             </div>
             <div class="content"><span bind-html-compile="comment.Content"></span><span class="like-count" ng-if="comment.hasLike">+{{comment.LikeCount}}</span></div>
         </article>
     </div>
     <pagination total="pageElements.totalPages" current="pageElements.currPage" on-page-changed="pageElements.changePage(oldPage, newPage)" page-href=""></pagination>
-    <form ng-submit="doComment()">
+    <form ng-if="union.$localStorage.user" ng-submit="doComment()">
         <point-link type="'user'" avatar-url="user.AvatarImage" id-code="user.IdCode"></point-link>
         <button type="submit" class="border-button right-border" ng-disabled="submitLock">发表评论</button>
         <span class="textarea-container"><textarea placeholder="对作者的见解有什么见解？" ng-model="currentComment" focus-me="textFocus"></textarea></span>
     </form>
+    <div class="for-visitor" ng-if="!union.$localStorage.user">
+        <div class="avatar-anchor">
+            <img class="avatar-small" webp-src="{{avatarUrl|avatarUrl}}" alt="头像">
+        </div>
+        <span class="textarea-container">
+            <div class="fake-textarea">
+                <div class="action-container">
+                    <a class="log-up" href="" ng-click="showRegistrationWindow()">
+                        <img src="assets/images/steam-logo.png">
+                        <h4>通过 Steam 账户</h4>
+                        <h3 class="font-myriad-keylol">加入其乐社区</h3>
+                    </a>
+                    <a href="" class="log-in" ng-click="showLoginSteamWindow()">已注册用户登录</a>
+                </div>
+            </div>
+        </span>
+    </div>
 </div>
