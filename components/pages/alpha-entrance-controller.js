@@ -6,13 +6,22 @@
         function (pageTitle, $scope, $timeout, $rootScope, window, $window, union, $location) {
             pageTitle.set("其乐 - 一个交流评测感悟的玩家社区");
 
-            $scope.$watch(function () {
-                return union.$localStorage.login;
-            }, function (newValue) {
-                if (newValue) {
-                    $location.url("home");
-                }
-            });
+            $scope.showRegistrationWindow = function () {
+                window.show({
+                    templateUrl: "components/windows/registration.html",
+                    controller: "RegistrationController",
+                    inputs: {
+                        options: {}
+                    }
+                });
+            };
+
+            $scope.showLoginSteamWindow = function () {
+                window.show({
+                    templateUrl: "components/windows/login-steam.html",
+                    controller: "LoginSteamController"
+                });
+            };
 
             $scope.showInvitationWindow = function () {
                 window.show({

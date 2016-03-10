@@ -25,7 +25,7 @@
             <div class="reputation-stat" ng-repeat="(stat, statCount) in point.VoteStats track by stat" ng-class="{active: stat === point.highlight}">
                 <div class="left-content">
                     <svg xmlns="http://www.w3.org/2000/svg" class="reputation-circle" ng-repeat="circle in circles[$index] track by $index">
-                        <circle cx="4" cy="6"></circle>
+                        <circle cx="4" cy="6" r="4"></circle>
                     </svg>
                     <span ng-if="point.totalEvaluate">{{statCount / point.totalEvaluate * 100 | number: 0}}%</span>
                     <span ng-if="!point.totalEvaluate">0%</span>

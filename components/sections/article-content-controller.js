@@ -4,6 +4,7 @@
     keylolApp.controller("ArticleContentController", [
         "$scope", "union", "$http", "notification",
         function ($scope, union, $http, notification) {
+            $scope.union = union;
             $scope.article = union.article;
             $scope.acknowledge = function () {
                 $http.post(apiEndpoint + "like", {

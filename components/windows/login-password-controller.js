@@ -2,8 +2,8 @@
     "use strict";
 
     keylolApp.controller("LoginPasswordController", [
-        "$scope", "close", "$http", "utils", "union", "apiEndpoint", "window", "notification", "$element", "$timeout",
-        function ($scope, close, $http, utils, union, apiEndpoint, window, notification, $element, $timeout) {
+        "$scope", "close", "$http", "utils", "union", "apiEndpoint", "window", "notification", "$element", "$timeout", "$location",
+        function ($scope, close, $http, utils, union, apiEndpoint, window, notification, $element, $timeout, $location) {
             $scope.error = {};
             $scope.errorDetect = utils.modelErrorDetect;
 
@@ -67,6 +67,7 @@
                     .then(function (response) {
                         union.$localStorage.login = response.data;
                         notification.success("登录成功，欢迎回到其乐");
+                        $location.url("/home");
                         close();
                     }, function (response) {
                         switch (response.status) {

@@ -2,8 +2,12 @@
     "use strict";
 
     keylolApp.controller("HomeController", [
-        "pageTitle", "$scope", "union", "$http", "notification", "window", "utils", "$timeout",
-        function (pageTitle, $scope, union, $http, notification, window, utils, $timeout) {
+        "pageTitle", "$scope", "union", "$http", "notification", "window", "utils", "$timeout", "$location",
+        function (pageTitle, $scope, union, $http, notification, window, utils, $timeout, $location) {
+            if(!union.$localStorage.login){
+                $location.url("/");
+                return;
+            }
             pageTitle.set("其乐 - 请无视游戏与艺术之间的空隙");
             $scope.union = union;
             var timeline = {

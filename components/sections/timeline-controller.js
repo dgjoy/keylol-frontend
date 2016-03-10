@@ -12,6 +12,7 @@
             };
             $scope.data = union.timeline;
             $scope.utils = utils;
+            $scope.union = union;
 
             $scope.clickToSearch = function () {
                 var $searchInput = $(".search-box input");

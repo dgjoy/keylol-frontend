@@ -1,14 +1,14 @@
 ﻿<div class="section-timeline" ng-controller="TimelineController">
-    <div class="heading inverse" ng-class="{hasRightButton: data.rightButton}">
-        <a href="" ng-click="data.rightButton.clickAction()" class="right-button box-shadowed" ng-if="data.rightButton">
+    <div class="heading inverse" ng-class="{hasRightButton: union.$localStorage.user && data.rightButton}">
+        <a href="" ng-click="data.rightButton.clickAction()" class="right-button box-shadowed" ng-if="union.$localStorage.user && data.rightButton">
             <img ng-src="{{data.rightButton.avatar}}" alt="{{data.rightButton.alt}}">
             <span class="font-myriad-keylol">文</span>
         </a>
         <div class="left-info box-shadowed card" popup="showFilter">
             <svg xmlns="http://www.w3.org/2000/svg" class="card-line">
                 <rect x="6" width="5" height="100%"></rect>
-                <circle cx="8.5" cy="50%" class="inverse"></circle>
-                <circle cx="8.5" cy="50%"></circle>
+                <circle cx="8.5" cy="50%" r="6.5" class="inverse"></circle>
+                <circle cx="8.5" cy="50%" r="4"></circle>
             </svg>
             <div class="title">
                 <h1 class="font-myriad-keylol">{{data.title.mainTitle}}</h1>
@@ -59,8 +59,8 @@
         <div class="card box-shadowed">
             <svg xmlns="http://www.w3.org/2000/svg" class="card-line">
                 <rect x="6" width="5" height="100%"></rect>
-                <circle cx="8.5" cy="42" class="inverse"></circle>
-                <circle cx="8.5" cy="42"></circle>
+                <circle cx="8.5" cy="42" r="6.5" class="inverse"></circle>
+                <circle cx="8.5" cy="42" r="4"></circle>
             </svg>
             <div class="entry-source" ng-if="entry.sources">
                 <span ng-switch="entry.sources.type">
@@ -99,7 +99,7 @@
                             <span ng-if="entry.types[0] !== '简评'">{{entry.title}}</span>
                             <div class="vote-circle" ng-if="entry.vote">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="{{entry.voteColor}}" ng-repeat="circle in circles(entry.vote) track by $index">
-                                    <circle cx="4" cy="4"></circle>
+                                    <circle cx="4" cy="4" r="4"></circle>
                                 </svg>
                             </div>
                         </h3>
@@ -109,7 +109,7 @@
                         <img class="avatar-big" webp-src="{{entry.pointAvatar|avatarUrl}}" alt="头像">
                     </div>
                 </a>
-                <div class="action" ng-switch="entry.subscribed">
+                <div ng-if="union.$localStorage.user" class="action" ng-switch="entry.subscribed">
                     <a ng-switch-when="false" ng-disabled="subscribeDisabled" ng-click="subscribe(entry)">订阅</a>
                     <a ng-switch-when="true" class="subscribed" ng-disabled="subscribeDisabled" ng-click="unsubscribe(entry)">已订阅</a>
                 </div>

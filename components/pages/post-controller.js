@@ -5,8 +5,12 @@
     "use strict";
 
     keylolApp.controller("PostController", [
-        "pageTitle", "$scope", "union",
-        function (pageTitle, $scope, union) {
+        "pageTitle", "$scope", "union", "$location",
+        function (pageTitle, $scope, union, $location) {
+            if(!union.$localStorage.user){
+                $location.url("/");
+                return;
+            }
             pageTitle.set("邮政 - 其乐");
             $scope.union = union;
             union.summary = {

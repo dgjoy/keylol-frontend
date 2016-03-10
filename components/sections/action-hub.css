@@ -14,29 +14,33 @@
 
 .section-action-hub .not-logged-in button {
     position: absolute;
-    right: 0;
-    top: -17px;
+    bottom: 0;
 }
 
-.section-action-hub .not-logged-in a {
+.section-action-hub .not-logged-in .log-up {
     padding: 10px;
     display: block;
     position: absolute;
-    top: 50%;
+    top: calc(50% - 5px);
     width: 72%;
     left: 48%;
     transform: translate(-50%, -50%);
     text-align: right;
+    text-decoration: none;
 }
 
-.section-action-hub .not-logged-in a {
-    text-decoration: none;
+.section-action-hub .not-logged-in .log-in {
+    display: block;
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translate(-50%);
+    color: #bbb;
 }
 
 .section-action-hub .not-logged-in img {
     float: right;
-    width: 49px;
-    height: 42px;
+    width: 46px;
     margin-left: 10px;
 }
 
@@ -44,7 +48,6 @@
     margin: 0 0 5px;
     font-weight: normal;
     line-height: 15px;
-    color: #333;
 }
 
 .section-action-hub .not-logged-in h3 {

@@ -7,6 +7,7 @@
     keylolApp.controller("SummaryController", [
         "$scope", "union", "$http", "notification",
         function ($scope, union, $http, notification) {
+            $scope.union = union;
             $scope.data = union.summary;
             $scope.subscribeDisabled = false;
             $scope.subscribe = function (id) {

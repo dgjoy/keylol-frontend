@@ -2,8 +2,8 @@
     "use strict";
 
     keylolApp.controller("ArticleCommentsController", [
-        "$scope", "union", "$http", "utils", "getAndFlushComments", "notification",
-        function ($scope, union, $http, utils, getAndFlushComments, notification) {
+        "$scope", "union", "$http", "utils", "getAndFlushComments", "notification", "window",
+        function ($scope, union, $http, utils, getAndFlushComments, notification, window) {
             $scope.union = union;
             $scope.comments = union.comments;
             $scope.article = union.article;
@@ -12,6 +12,22 @@
             $scope.pageElements = union.pageElements;
             $scope.textFocus = false;
             $scope.submitLock = false;
+            $scope.showRegistrationWindow = function () {
+                window.show({
+                    templateUrl: "components/windows/registration.html",
+                    controller: "RegistrationController",
+                    inputs: {
+                        options: {}
+                    }
+                });
+            };
+
+            $scope.showLoginSteamWindow = function () {
+                window.show({
+                    templateUrl: "components/windows/login-steam.html",
+                    controller: "LoginSteamController"
+                });
+            };
             $scope.doComment = function () {
                 if ($scope.currentComment) {
                     $scope.submitLock = true;

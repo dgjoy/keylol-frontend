@@ -2,8 +2,8 @@
     "use strict";
 
     keylolApp.controller("RootController", [
-        "$scope", "pageTitle", "union", "$http", "apiEndpoint", "notification", "$location", "$rootScope",
-        function ($scope, pageTitle, union, $http, apiEndpoint, notification, $location, $rootScope) {
+        "$scope", "pageTitle", "union", "$http", "apiEndpoint", "notification", "$location", "$rootScope", "$route",
+        function ($scope, pageTitle, union, $http, apiEndpoint, notification, $location, $rootScope, $route) {
             pageTitle.loading();
 
             function getUserInfo() {
@@ -41,7 +41,7 @@
                         if (union.$sessionStorage.hasOwnProperty(j) && j.indexOf("$") !== 0)
                             delete union.$sessionStorage[j];
                     }
-                    $location.url("/");
+                    $route.reload();
                 }
             });
 

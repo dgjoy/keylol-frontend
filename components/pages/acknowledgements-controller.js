@@ -5,8 +5,12 @@
     "use strict";
 
     keylolApp.controller("AcknowledgementsController", [
-        "pageTitle", "$scope", "union", "$http", "notification", "utils", "$timeout",
-        function (pageTitle, $scope, union, $http, notification, utils, $timeout) {
+        "pageTitle", "$scope", "union", "$http", "notification", "utils", "$timeout", "$location",
+        function (pageTitle, $scope, union, $http, notification, utils, $timeout, $location) {
+            if(!union.$localStorage.user){
+                $location.url("/");
+                return;
+            }
             pageTitle.set("认可 - 其乐");
             $scope.union = union;
             function changeActive(activeObject) {

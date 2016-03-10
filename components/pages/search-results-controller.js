@@ -244,7 +244,7 @@
                                 isUser: true,
                                 id: user.Id
                             });
-                            if (user.IdCode != union.$localStorage.user.IdCode) {
+                            if (union.$localStorage.user && user.IdCode != union.$localStorage.user.IdCode) {
                                 timeline.entries[0].subscribed = user.Subscribed;
                             }
                         }

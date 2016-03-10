@@ -4,6 +4,7 @@
     keylolApp.controller("PointInfoController", [
         "$scope", "union", "window", "utils", "notification",
         function ($scope, union, window, utils, notification) {
+            $scope.union = union;
             $scope.utils = utils;
             $scope.point = union.point;
             $scope.showShortReviewWindow = function (vote) {
@@ -22,6 +23,18 @@
                                 Vote: vote
                             },
                             hoursPlayed: $scope.point.hoursPlayed
+                        }
+                    }
+                });
+                return true;
+            };
+            $scope.showRegistrationWindow = function () {
+                window.show({
+                    templateUrl: "components/windows/registration.html",
+                    controller: "RegistrationController",
+                    inputs: {
+                        options: {
+                            whenReviewing: true
                         }
                     }
                 });

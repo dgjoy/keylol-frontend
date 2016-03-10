@@ -40,6 +40,7 @@
 </style>
 <style>
     .first {
+        height: 700px;
         background: no-repeat center;
         background-size: cover;
         color: white;
@@ -62,32 +63,70 @@
 
     .first .entrance {
         position: absolute;
+        width: 350px;
+        height: 48px;
         bottom: 60px;
-        left: 50%;
+        left: calc(50% - 15px);
         text-align: right;
         -webkit-transform: translateX(-50%);
         -ms-transform: translateX(-50%);
         transform: translateX(-50%);
+    }
+
+    .first .entrance div {
+        position: absolute;
         cursor: pointer;
     }
 
-    .first .entrance:hover h1 {
+    .first .entrance .log-up {
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        padding: 0 20px;
+        border-right: 1px solid #ccc;
+        text-align: right;
+        text-decoration: none;
+        width: 205px;
+    }
+
+    .first .entrance .log-in {
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .first .entrance .log-in:hover {
         text-decoration: underline;
     }
 
-    .first .keylol img, .first .steamCN img, .first .entrance img {
+    .first .entrance img {
+        float: right;
+        width: 46px;
+        margin-left: 10px;
+    }
+
+    .first .entrance h3 {
+        margin: 0 0 5px;
+        line-height: 15px;
+    }
+
+    .first .entrance h1 {
+        font-size: 22px;
+        line-height: 22px;
+    }
+
+    .first .entrance div:hover h1 {
+        text-decoration: underline;
+    }
+
+    .first .keylol img, .first .steamCN img {
         display: inline-block;
         width: 55px;
         height: 55px;
         vertical-align: middle;
     }
 
-    .first .entrance img {
-        width: 48px;
-        height: 48px;
-    }
-
-    .first .keylol div, .first .steamCN div, .first .entrance div {
+    .first .keylol div, .first .steamCN div {
         display: inline-block;
         vertical-align: middle;
     }
@@ -104,22 +143,19 @@
         font-size: 24px;
     }
 
-    .first .entrance div h1 {
-        font-size: 22px;
-    }
-
     .first .keylol div h3, .first .steamCN div h3 {
         font-size: 14px;
     }
 
-    .first .entrance div h3 {
-        font-size: 13px;
-    }
-
     .first .description {
-        padding-top: 335px;
+        padding-top: 301px;
         text-align: right;
         display: inline-block;
+    }
+
+    .first .description h3 {
+        position: relative;
+        right: -60px;
     }
 </style>
 <div class="screen first" webp-background="/assets/images/alpha/bg-1.jpg">
@@ -133,20 +169,21 @@
     <div class="steamCN">
         <div>
             <h1 class="font-myriad-keylol">蒸汽动力</h1>
-            <h3>独立社区</h3>
+            <h3>旗下社区</h3>
         </div>
         <img webp-src="/assets/images/alpha/SteamCN.png">
     </div>
     <div class="description">
-        <h1>请无视游戏与艺术之间的空隙</h1>
-        <h3>其乐是一个交流评测感悟的玩家社区</h3>
+        <h1>发现&nbsp;&nbsp;&nbsp;解读&nbsp;&nbsp;&nbsp;分享</h1>
+        <h3>交流评测感悟的玩家社区</h3>
     </div>
-    <div class="entrance" ng-click="showInvitationWindow()">
-        <div>
-            <h3>通过 Steam 账号</h3>
-            <h1>进入其乐社区</h1>
+    <div class="entrance">
+        <div class="log-up" ng-click="showRegistrationWindow()">
+            <img webp-src="/assets/images/alpha/Steam.png">
+            <h3>通过 Steam 账户</h3>
+            <h1 class="font-myriad-keylol">加入其乐社区</h1>
         </div>
-        <img webp-src="/assets/images/alpha/Steam.png">
+        <div class="log-in" ng-click="showLoginSteamWindow()">已注册用户登录</div>
     </div>
 </div>
 <style>
@@ -796,34 +833,60 @@
 
     .sixth .entrance {
         position: absolute;
-        top: 98px;
-        right: 4%;
-        cursor: pointer;
+        width: 350px;
+        height: 48px;
+        bottom: 60px;
+        left: calc(50% - 15px);
         text-align: right;
+        -webkit-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+        transform: translateX(-50%);
     }
 
-    .sixth .entrance:hover h1 {
+    .sixth .entrance div {
+         position: absolute;
+        cursor: pointer;
+    }
+
+    .sixth .entrance .log-up {
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        padding: 0 20px;
+        border-right: 1px solid #ccc;
+        text-align: right;
+        text-decoration: none;
+        width: 205px;
+    }
+
+    .sixth .entrance .log-in {
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .sixth .entrance .log-in:hover {
         text-decoration: underline;
     }
 
     .sixth .entrance img {
-        display: inline-block;
-        vertical-align: middle;
-        width: 48px;
-        height: 48px;
+        float: right;
+        width: 46px;
+        margin-left: 10px;
     }
 
-    .sixth .entrance div {
-        display: inline-block;
-        vertical-align: middle;
+    .sixth .entrance h3 {
+        margin: 0 0 5px;
+        line-height: 15px;
     }
 
-    .sixth .entrance div h1 {
+    .sixth .entrance h1 {
         font-size: 22px;
+        line-height: 22px;
     }
 
-    .sixth .entrance div h3 {
-        font-size: 13px;
+    .sixth .entrance div:hover h1 {
+        text-decoration: underline;
     }
 
     .sixth .activity {
@@ -888,31 +951,16 @@
 </style>
 <div id="get-invitation-code" class="screen sixth" webp-background="/assets/images/alpha/bg-3.jpg">
     <div class="description">
-        <h1>即日内测</h1>
-        <h3>多种参与渠道，为不同类型的玩家提供体验机会</h3>
+        <h1>即日开放公测</h1>
+        <h3>无邀请限制，直接通过 Steam 账号进入社区</h3>
     </div>
-    <div class="entrance" ng-click="showInvitationWindow()">
-        <div>
-            <h3>通过 Steam 账号</h3>
-            <h1>进入其乐社区</h1>
+    <div class="entrance">
+        <div class="log-up" ng-click="showRegistrationWindow()">
+            <img webp-src="/assets/images/alpha/Steam.png">
+            <h3>通过 Steam 账户</h3>
+            <h1 class="font-myriad-keylol">加入其乐社区</h1>
         </div>
-        <img webp-src="/assets/images/alpha/Steam.png">
-    </div>
-    <div class="activity">
-        <a class="steamCN" href="/" style="display: none;">
-            <span webp-background="/assets/images/alpha/today-buttons.png"></span>
-            <div>
-                <h3>蒸汽动力活动</h3>
-                <h5>用论坛积分抽取内测邀请码</h5>
-            </div>
-        </a>
-        <a class="mail" href="mailto:alpha.application@keylol.com?subject=其乐游戏社区 内测用户申请" style="margin-top: 86px;">
-            <span webp-background="/assets/images/alpha/today-buttons.png"></span>
-            <div>
-                <h3>邮件申请</h3>
-                <h5>向我们介绍你的游戏生涯</h5>
-            </div>
-        </a>
+        <div class="log-in" ng-click="showLoginSteamWindow()">已注册用户登录</div>
     </div>
 </div>
 <style>
@@ -972,15 +1020,15 @@
 <div class="screen seventh">
     <div class="description">
         <h1>欲知测情</h1>
-        <h3>欢迎订阅邮件提醒，了解其他邀请码发放活动和公测信息</h3>
+        <h3>欢迎订阅邮件提醒，了解其他活动和公测信息</h3>
     </div>
     <iframe style="width:483px;height:430px;border:none;overflow:auto;" scrolling="no" src="//form.mikecrm.com/f.php?t=iwPvNK"></iframe>
     <footer>
         <img webp-src="/assets/images/alpha/Keylol-Logo.png">
         <div class="details">
             <h4>其乐是一个专注于 Steam 游戏的深度交流社区，以玩家的兴趣为核心提供订阅式的一页流阅读体验</h4>
-            <p>SteamCN 蒸汽动力 ©2004-2015 Chinese Steam Users' Fan Site</p>
-            <p>冀 ICP 备 05004600 号</p>
+            <p>蒸汽动力旗下社区 | A Subsidiary Community of SteamCN</p>
+            <p>晋 ICP 备 13004301 - 2</p>
         </div>
     </footer>
 </div>

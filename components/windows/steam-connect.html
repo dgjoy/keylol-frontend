@@ -4,9 +4,14 @@
             <div ng-include="'assets/images/exit.svg'"></div>
         </div>
         <div class="content">
-            <div class="heading">
+            <div ng-if="!options.whenReviewing" class="heading">
                 <h1 class="font-myriad-lisong">平台连接向导</h1>
                 <h2>绑定 Steam 账户只需轻松两步</h2>
+            </div>
+            <div ng-if="options.whenReviewing" class="heading">
+                <h1 class="font-myriad-lisong">加入其乐社区</h1>
+                <h2>通过 Steam注册并参与游戏评价</h2>
+                <a href="" ng-if="options.whenReviewing" ng-click="showLoginSteamWindow()">已注册用户登录</a>
             </div>
             <div class="steps clearfix box-shadowed">
                 <div class="step">

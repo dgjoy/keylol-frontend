@@ -41,4 +41,21 @@
         <button type="submit" class="border-button right-border" ng-disabled="submitLock">发表评论</button>
         <span class="textarea-container"><textarea placeholder="对作者的见解有什么见解？" ng-model="currentComment" focus-me="textFocus"></textarea></span>
     </form>
+    <div class="for-visitor" ng-if="!union.$localStorage.user">
+        <div class="avatar-anchor">
+            <img class="avatar-small" webp-src="{{avatarUrl|avatarUrl}}" alt="头像">
+        </div>
+        <span class="textarea-container">
+            <div class="fake-textarea">
+                <div class="action-container">
+                    <a class="log-up" href="" ng-click="showRegistrationWindow()">
+                        <img src="assets/images/steam-logo.png">
+                        <h4>通过 Steam 账户</h4>
+                        <h3 class="font-myriad-keylol">加入其乐社区</h3>
+                    </a>
+                    <a href="" class="log-in" ng-click="showLoginSteamWindow()">已注册用户登录</a>
+                </div>
+            </div>
+        </span>
+    </div>
 </div>

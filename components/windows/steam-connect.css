@@ -12,7 +12,7 @@
 }
 
 .window-steam-connect.ng-leave {
-    transition: 0.35s;
+    transition: 0.30s;
 }
 
 .window-steam-connect.ng-leave .window {
@@ -27,6 +27,15 @@
 
 .window-steam-connect .heading {
     padding: 20px 0 30px 20px;
+    position: relative;
+}
+
+.window-steam-connect .heading a {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-75%);
+    color: #89a;
 }
 
 .window-steam-connect .steps {
