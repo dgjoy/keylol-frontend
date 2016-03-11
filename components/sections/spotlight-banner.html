@@ -1,11 +1,11 @@
-﻿<div class="section-spotlight-banner">
-    <a href="article/LEEEE/8" class="left banner box-shadowed">
-        <img src="assets/images/spotlight-left.png">
+﻿<div class="section-spotlight-banner" ng-controller="SpolightBannerController">
+    <a ng-href="{{banner[0].link}}" class="left banner box-shadowed">
+        <img webp-src="{{banner[0].imageSrc}}">
     </a><!--
-    --><a href="https://form.mikecrm.com/f.php?t=nPm9VO" class="center banner box-shadowed">
-        <img src="assets/images/spotlight-middle.png">
+    --><a ng-href="{{banner[1].link}}" class="center banner box-shadowed">
+        <img webp-src="{{banner[1].imageSrc}}">
     </a><!--
-    --><a href="article/LEEEE/4" class="right banner box-shadowed">
-        <img src="assets/images/spotlight-right-player-group.png">
+    --><a ng-href="{{banner[2].link}}" class="right banner box-shadowed">
+        <img webp-src="{{banner[2].imageSrc}}">
     </a>
 </div>

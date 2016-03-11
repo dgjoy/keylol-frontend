@@ -35,7 +35,7 @@
             </div>
         </div>
     </div>
-    <div class="external-links" ng-if="point.StoreLink">
-        <a ng-href="{{point.StoreLink}}">Steam 商店</a><span class="divider">|</span><a ng-href="{{point.StoreLink | storeUrlToSteamDB}}">SteamDB</a>
+    <div class="external-links" ng-if="point.SteamAppId">
+        <a ng-href="{{point.SteamAppId | storeUrlToSteamStore}}">Steam 商店</a><span class="divider">|</span><a ng-href="{{point.SteamAppId | storeUrlToSteamDB}}">SteamDB</a>
     </div>
 </div>
