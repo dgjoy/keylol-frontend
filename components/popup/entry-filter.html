@@ -5,10 +5,20 @@
             <button class="border-button bottom-border" ng-click="confirm()">过滤</button>
             <form>
                 <ul>
-                    <li ng-click="selectedIndexes[$index] = !selectedIndexes[$index]" ng-repeat="type in entryTypes track by type.name">
-                        <input type="checkbox" ng-checked="selectedIndexes[$index]"><!--
-                    --><span ng-class="{active: selectedIndexes[$index]}" class="font-myriad-keylol">{{type.name}}</span><!--
-                    --><p>{{type.description}}</p>
+                    <li>
+                        <span class="font-myriad-keylol part">简评</span><p>只显示以下来源的简评</p>
+                        <div class="checkbox-group">
+                            <input id="subscribe-user" type="checkbox"><label for="subscribe-user">关注用户与其认可</label>
+                            <input id="subscribe-point" type="checkbox"><label for="subscribe-point">手动据点订阅</label>
+                            <input id="synchronization" type="checkbox"><label for="synchronization">同步订阅列表</label>
+                        </div>
+                    </li>
+                    <li ng-repeat="type in entryTypes track by type.name">
+                        <span ng-class="{active: selectedIndexes[$index]}" class="font-myriad-keylol">{{type.name}}</span><!--
+                        --><p>
+                            <input id="{{type.name}}-show" type="radio" ng-value="true" ng-model="selectedIndexes[$index]"><label for="{{type.name}}-show">显示</label>
+                            <input id="{{type.name}}-hide" type="radio" ng-value="false" ng-model="selectedIndexes[$index]"><label for="{{type.name}}-hide">隐藏</label>
+                        </p>
                     </li>
                 </ul>
             </form>
