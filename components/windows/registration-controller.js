@@ -80,38 +80,40 @@
                     return;
                 $scope.submitLock = true;
                 $scope.error = {};
-                $scope.vm.IdCode = $scope.vm.IdCode.toUpperCase();
-                utils.modelValidate.steamBindingTokenId($scope.vm.SteamBindingTokenId, $scope.error, "vm.SteamBindingTokenId");
-                utils.modelValidate.idCode($scope.vm.IdCode, $scope.error, "vm.IdCode");
-                utils.modelValidate.username($scope.vm.UserName, $scope.error, "vm.UserName");
-                utils.modelValidate.password($scope.vm.Password, $scope.error, "vm.Password");
-                if (!geetestResult) {
-                    $scope.error.authCode = true;
-                }
-                if (!$.isEmptyObject($scope.error)) {
-                    $scope.submitLock = false;
-                    return;
-                }
-                $http.post(apiEndpoint + "user", $scope.vm)
-                    .then(function (response) {
-                        union.$localStorage.firstOpenKeylol = true;
-                        union.$localStorage.login = response.data;
-                        $location.url("/home");
-                        close();
-                        if (consumeBindingToken)
-                            consumeBindingToken.resolve();
-                    }, function (response) {
-                        switch (response.status) {
-                            case 400:
-                                $scope.error = response.data.ModelState;
-                                geetestResult = null;
-                                geetest.refresh().then(useGeetestResult);
-                                break;
-                            default:
-                                notification.error("发生未知错误，请重试或与站务职员联系", response);
-                        }
+                $timeout(function(){
+                    $scope.vm.IdCode = $scope.vm.IdCode.toUpperCase();
+                    utils.modelValidate.steamBindingTokenId($scope.vm.SteamBindingTokenId, $scope.error, "vm.SteamBindingTokenId");
+                    utils.modelValidate.idCode($scope.vm.IdCode, $scope.error, "vm.IdCode");
+                    utils.modelValidate.username($scope.vm.UserName, $scope.error, "vm.UserName");
+                    utils.modelValidate.password($scope.vm.Password, $scope.error, "vm.Password");
+                    if (!geetestResult) {
+                        $scope.error.authCode = true;
+                    }
+                    if (!$.isEmptyObject($scope.error)) {
                         $scope.submitLock = false;
-                    });
+                        return;
+                    }
+                    $http.post(apiEndpoint + "user", $scope.vm)
+                        .then(function (response) {
+                            union.$localStorage.firstOpenKeylol = true;
+                            union.$localStorage.login = response.data;
+                            $location.url("/home");
+                            close();
+                            if (consumeBindingToken)
+                                consumeBindingToken.resolve();
+                        }, function (response) {
+                            switch (response.status) {
+                                case 400:
+                                    $scope.error = response.data.ModelState;
+                                    geetestResult = null;
+                                    geetest.refresh().then(useGeetestResult);
+                                    break;
+                                default:
+                                    notification.error("发生未知错误，请重试或与站务职员联系", response);
+                            }
+                            $scope.submitLock = false;
+                        });
+                });
             };
         }
     ]);

@@ -30,7 +30,6 @@
                 });
             };
             $scope.doComment = function () {
-                console.log("aaa");
                 if ($scope.comment.currentComment) {
                     $scope.submitLock = true;
                     var replyArray = dealWithReply($scope.comment.currentComment);
