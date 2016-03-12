@@ -189,103 +189,105 @@
                     return;
                 $scope.submitLock = true;
                 $scope.error = {};
-                utils.modelValidate.gamerTag($scope.vm.GamerTag, $scope.error, "vm.GamerTag");
-                if (isVMDirty("NewPassword") || isVMDirty("LockoutEnabled")) {
-                    if (!$scope.vm.Password) {
-                        $scope.error["vm.Password"] = "Password cannot be empty.";
-                    }
-                    if (!geetestResult) {
-                        $scope.error.authCode = true;
-                    }
-                    if ($scope.vm.NewPassword) {
-                        if (utils.modelValidate.password($scope.vm.NewPassword, $scope.error, "vm.NewPassword")) {
-                            if ($scope.vm.NewPassword !== $scope.vm.ConfirmPassword) {
-                                $scope.error["vm.ConfirmPassword"] = "not match";
+                $timeout(function(){
+                    utils.modelValidate.gamerTag($scope.vm.GamerTag, $scope.error, "vm.GamerTag");
+                    if (isVMDirty("NewPassword") || isVMDirty("LockoutEnabled")) {
+                        if (!$scope.vm.Password) {
+                            $scope.error["vm.Password"] = "Password cannot be empty.";
+                        }
+                        if (!geetestResult) {
+                            $scope.error.authCode = true;
+                        }
+                        if ($scope.vm.NewPassword) {
+                            if (utils.modelValidate.password($scope.vm.NewPassword, $scope.error, "vm.NewPassword")) {
+                                if ($scope.vm.NewPassword !== $scope.vm.ConfirmPassword) {
+                                    $scope.error["vm.ConfirmPassword"] = "not match";
+                                }
                             }
                         }
                     }
-                }
-                if (isVMDirty("Email")) {
-                    if (form.email.$invalid) {
-                        $scope.error["vm.Email"] = "Email is invalid.";
-                    } else if (!$scope.vm.Email) {
-                        $scope.error["vm.Email"] = "Email cannot be empty.";
+                    if (isVMDirty("Email")) {
+                        if (form.email.$invalid) {
+                            $scope.error["vm.Email"] = "Email is invalid.";
+                        } else if (!$scope.vm.Email) {
+                            $scope.error["vm.Email"] = "Email cannot be empty.";
+                        }
                     }
-                }
-                if (!$.isEmptyObject($scope.error)) {
-                    focusErrorPage();
-                    $scope.submitLock = false;
-                    return;
-                }
-
-                // Only submit dirty fields
-                var dirtyFields = {};
-                for (var key in $scope.vm) {
-                    if ($scope.vm.hasOwnProperty(key) && isVMDirty(key)) {
-                        dirtyFields[key] = $scope.vm[key];
+                    if (!$.isEmptyObject($scope.error)) {
+                        focusErrorPage();
+                        $scope.submitLock = false;
+                        return;
                     }
-                }
-                if (!$scope.files.avatarImage && !$scope.files.profilePointBackgroundImage
-                    && $.isEmptyObject(dirtyFields)) { // Nothing changed
-                    notification.success("个人设定已更新");
-                    close();
-                    return;
-                }
 
-                var submit = function () {
-                    $http.put(apiEndpoint + "user/" + union.$localStorage.login.UserId, dirtyFields)
-                        .then(function () {
-                            $.extend(union.$localStorage.user, dirtyFields);
-                            notification.success("个人设定已更新");
-                            close();
-                        }, function (response) {
-                            switch (response.status) {
-                                case 400:
-                                    $scope.error = response.data.ModelState;
-                                    geetestResult = null;
-                                    geetest.refresh().then(useGeetestResult);
-                                    focusErrorPage();
-                                    break;
-                                default:
-                                    notification.error("发生未知错误，请重试或与站务职员联系", response);
+                    // Only submit dirty fields
+                    var dirtyFields = {};
+                    for (var key in $scope.vm) {
+                        if ($scope.vm.hasOwnProperty(key) && isVMDirty(key)) {
+                            dirtyFields[key] = $scope.vm[key];
+                        }
+                    }
+                    if (!$scope.files.avatarImage && !$scope.files.profilePointBackgroundImage
+                        && $.isEmptyObject(dirtyFields)) { // Nothing changed
+                        notification.success("个人设定已更新");
+                        close();
+                        return;
+                    }
+
+                    var submit = function () {
+                        $http.put(apiEndpoint + "user/" + union.$localStorage.login.UserId, dirtyFields)
+                            .then(function () {
+                                $.extend(union.$localStorage.user, dirtyFields);
+                                notification.success("个人设定已更新");
+                                close();
+                            }, function (response) {
+                                switch (response.status) {
+                                    case 400:
+                                        $scope.error = response.data.ModelState;
+                                        geetestResult = null;
+                                        geetest.refresh().then(useGeetestResult);
+                                        focusErrorPage();
+                                        break;
+                                    default:
+                                        notification.error("发生未知错误，请重试或与站务职员联系", response);
+                                }
+                                $scope.submitLock = false;
+                            });
+                    };
+
+                    if ($scope.files.avatarImage || $scope.files.profilePointBackgroundImage) {
+                        notification.process("图像正在上传");
+                        var policy = upyun.policy();
+                        upyun.signature(policy).then(function (signature) {
+                            var uploads = {};
+                            if ($scope.files.avatarImage) {
+                                uploads.avatarImage = upyun.upload($scope.files.avatarImage, policy, signature);
+                                uploads.avatarImage.then(function (response) {
+                                    dirtyFields.AvatarImage = "keylol://" + response.data.url;
+                                }, function () {
+                                    notification.error("头像上传失败");
+                                    $scope.submitLock = false;
+                                });
                             }
+                            if ($scope.files.profilePointBackgroundImage) {
+                                uploads.profilePointBackgroundImage = upyun.upload($scope.files.profilePointBackgroundImage, policy, signature);
+                                uploads.profilePointBackgroundImage.then(function (response) {
+                                    dirtyFields.ProfilePointBackgroundImage = "keylol://" + response.data.url;
+                                }, function () {
+                                    notification.error("个人据点横幅上传失败");
+                                    $scope.submitLock = false;
+                                });
+                            }
+                            $q.all(uploads).then(function () {
+                                submit();
+                            });
+                        }, function () {
+                            notification.error("文件上传验证失效");
                             $scope.submitLock = false;
                         });
-                };
-
-                if ($scope.files.avatarImage || $scope.files.profilePointBackgroundImage) {
-                    notification.process("图像正在上传");
-                    var policy = upyun.policy();
-                    upyun.signature(policy).then(function (signature) {
-                        var uploads = {};
-                        if ($scope.files.avatarImage) {
-                            uploads.avatarImage = upyun.upload($scope.files.avatarImage, policy, signature);
-                            uploads.avatarImage.then(function (response) {
-                                dirtyFields.AvatarImage = "keylol://" + response.data.url;
-                            }, function () {
-                                notification.error("头像上传失败");
-                                $scope.submitLock = false;
-                            });
-                        }
-                        if ($scope.files.profilePointBackgroundImage) {
-                            uploads.profilePointBackgroundImage = upyun.upload($scope.files.profilePointBackgroundImage, policy, signature);
-                            uploads.profilePointBackgroundImage.then(function (response) {
-                                dirtyFields.ProfilePointBackgroundImage = "keylol://" + response.data.url;
-                            }, function () {
-                                notification.error("个人据点横幅上传失败");
-                                $scope.submitLock = false;
-                            });
-                        }
-                        $q.all(uploads).then(function () {
-                            submit();
-                        });
-                    }, function () {
-                        notification.error("文件上传验证失效");
-                        $scope.submitLock = false;
-                    });
-                } else {
-                    submit();
-                }
+                    } else {
+                        submit();
+                    }
+                });
             };
 
             $scope.logout = function () {
