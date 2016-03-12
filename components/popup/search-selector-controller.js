@@ -5,6 +5,7 @@
         "$scope", "union", "$location", "options", "$http", "notification", "utils", "window",
         function ($scope, union, $location, options, $http, notification, utils, window) {
             $scope.onSearching = options.onSearching;
+            $scope.union = union;
             $scope.filterArray = union.searchFilter;
             var getSearchResult = function (filterTxt) {
                 if (options.searchText) {

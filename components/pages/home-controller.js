@@ -3,7 +3,9 @@
 
     keylolApp.controller("HomeController", [
         "pageTitle", "$scope", "union", "$http", "notification", "window", "utils", "$timeout", "$location",
-        function (pageTitle, $scope, union, $http, notification, window, utils, $timeout, $location) {
+        "$rootScope",
+        function (pageTitle, $scope, union, $http, notification, window, utils, $timeout, $location,
+                  $rootScope) {
             if(!union.$localStorage.login){
                 $location.url("/");
                 return;
@@ -93,6 +95,10 @@
                     notification.error("发生未知错误，请重试或与站务职员联系", response);
                 });
             }
+
+            $rootScope.$on("homeRefresh", function(){
+                getSubscription();
+            });
 
             function getSubscription() {
                 timeline.entries = [];
