@@ -50,37 +50,39 @@
                     return;
                 $scope.submitLock = true;
                 $scope.error = {};
-                if (!$scope.vm.EmailOrIdCode) {
-                    $scope.error["vm.EmailOrIdCode"] = "Email or UIC cannot be empty.";
-                }
-                if (!$scope.vm.Password) {
-                    $scope.error["vm.Password"] = "Password cannot be empty.";
-                }
-                if (!geetestResult) {
-                    $scope.error.authCode = true;
-                }
-                if (!$.isEmptyObject($scope.error)) {
-                    $scope.submitLock = false;
-                    return;
-                }
-                $http.post(apiEndpoint + "login", $scope.vm)
-                    .then(function (response) {
-                        union.$localStorage.login = response.data;
-                        notification.success("登录成功，欢迎回到其乐");
-                        $location.url("/home");
-                        close();
-                    }, function (response) {
-                        switch (response.status) {
-                            case 400:
-                                $scope.error = response.data.ModelState;
-                                geetestResult = null;
-                                geetest.refresh().then(useGeetestResult);
-                                break;
-                            default:
-                                notification.error("发生未知错误，请重试或与站务职员联系", response);
-                        }
+                $timeout(function(){
+                    if (!$scope.vm.EmailOrIdCode) {
+                        $scope.error["vm.EmailOrIdCode"] = "Email or UIC cannot be empty.";
+                    }
+                    if (!$scope.vm.Password) {
+                        $scope.error["vm.Password"] = "Password cannot be empty.";
+                    }
+                    if (!geetestResult) {
+                        $scope.error.authCode = true;
+                    }
+                    if (!$.isEmptyObject($scope.error)) {
                         $scope.submitLock = false;
-                    });
+                        return;
+                    }
+                    $http.post(apiEndpoint + "login", $scope.vm)
+                        .then(function (response) {
+                            union.$localStorage.login = response.data;
+                            notification.success("登录成功，欢迎回到其乐");
+                            $location.url("/home");
+                            close();
+                        }, function (response) {
+                            switch (response.status) {
+                                case 400:
+                                    $scope.error = response.data.ModelState;
+                                    geetestResult = null;
+                                    geetest.refresh().then(useGeetestResult);
+                                    break;
+                                default:
+                                    notification.error("发生未知错误，请重试或与站务职员联系", response);
+                            }
+                            $scope.submitLock = false;
+                        });
+                });
             };
         }
     ]);
