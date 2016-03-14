@@ -24,7 +24,7 @@
 
 .section-point-votes .point-info .heading point-link a {
     margin: 0;
-    font-size: 14px;
+    font-size: 15px;
     display: block;
     color: #159;
     font-weight: bold;
@@ -32,11 +32,12 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    line-height: 16px;
 }
 
 .section-point-votes .point-info .heading h2 {
     margin: 0;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: normal;
     max-width: 200px;
     white-space: nowrap;

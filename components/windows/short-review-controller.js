@@ -34,7 +34,7 @@
                                     vm: {
                                         Id: $scope.vm.Id,
                                         TypeName: "评",
-                                        Title: $scope.vm.Title,
+                                        Title: "",
                                         Content: $scope.vm.Content,
                                         Vote: $scope.vm.Vote,
                                         Summary: "",
