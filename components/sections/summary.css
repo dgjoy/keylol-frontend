@@ -72,9 +72,6 @@
     right: 15px;
     left: 8px;
     text-align: right;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
 }
 
 .section-summary .actions .ng-leave {
