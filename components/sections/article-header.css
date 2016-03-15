@@ -103,6 +103,10 @@
     line-height: 15px;
 }
 
+.section-article-header .review-info .review-detail .user-info point-link {
+    font-weight: bold;
+}
+
 .section-article-header .review-info .review-detail .user-info .review-count {
     margin: 7px 0 20px;
     color: #BBB;
