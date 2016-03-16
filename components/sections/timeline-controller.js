@@ -96,30 +96,58 @@
 
             $scope.expanded = false;
 
+            $scope.articleTypes = $.extend([], articleTypes);
             var filterOptions = [];
-            for (var i = 0; i < articleTypes.length; ++i) {
+            for (var i = 0; i < $scope.articleTypes.length; ++i) {
                 filterOptions.push(true);
+            }
+            var shortReviewFilter = 1;
+
+            var url = $location.url().substr(1, 4);
+            var currPage;
+            if(url === "home"){
+                currPage = "home";
+                if(union.$localStorage.homeFilter){
+                    filterOptions = union.$localStorage.homeFilter.filterOptions;
+                    shortReviewFilter = union.$localStorage.homeFilter.shortReviewFilter;
+                }
+            }else if(url === "user"){
+                currPage = "user";
+                $scope.articleTypes.unshift({
+                    name: "简评"
+                });
+            }else {
+                currPage = "point";
+                $scope.articleTypes.unshift({
+                    name: "简评"
+                });
             }
 
             $scope.expand = function ($event) {
                 $scope.expanded = !$scope.expanded;
                 $scope.showFilter({
                     templateUrl: "components/popup/entry-filter.html",
-                    controller: "EntryFilterController",
+                    controller: "EntryFilterController as entryFilter",
                     event: $event,
                     attachSide: "bottom",
                     align: "right",
                     offsetX: 5,
                     inputs: {
-                        types: articleTypes,
-                        selectedIndexes: filterOptions
+                        types: $scope.articleTypes,
+                        selectedIndexes: filterOptions,
+                        currPage: currPage,
+                        shortReviewFilter: shortReviewFilter
                     }
                 }).then(function (popup) {
                     return popup.close;
                 }).then(function (result) {
                     $scope.expanded = !$scope.expanded;
                     if (result) {
-                        filterOptions = result;
+                        filterOptions = result.filterOptions;
+                        shortReviewFilter = result.shortReviewFilter;
+                        if(currPage === "home"){
+                            union.$localStorage.homeFilter = result;
+                        }
                         requestWhenFiltering();
                     }
                 });
@@ -129,13 +157,13 @@
                 $scope.data.loadingLock = true;
                 var filters = "";
                 var filterCount = 0;
-                for (var i = 0; i < articleTypes.length; i++) {
+                for (var i = 0; i < $scope.articleTypes.length; i++) {
                     if (filterOptions[i]) {
                         filterCount++;
                         if (filters.length !== 0) {
                             filters += ",";
                         }
-                        filters += articleTypes[i].name;
+                        filters += $scope.articleTypes[i].name;
                     }
                 }
                 if (!filters) {
@@ -152,6 +180,7 @@
                     $scope.data.loadAction({
                         idType: "IdCode",
                         articleTypeFilter: filters,
+                        shortReviewFilter: shortReviewFilter,
                         publishOnly: $scope.data.publishOnly,
                         take: utils.timelineLoadCount,
                         beforeSN: beforeSN
@@ -263,19 +292,19 @@
                 }
 
                 var text;
-                if (optionsTrue.length == articleTypes.length) {
+                if (optionsTrue.length == $scope.articleTypes.length) {
                     text = "全部";
-                } else if (optionsTrue.length >= Math.floor(articleTypes.length / 2) + 1) {
+                } else if (optionsTrue.length >= Math.floor($scope.articleTypes.length / 2) + 1) {
                     text = "不看";
                     for (var falseIndex in optionsFalse) {
-                        text += ("『" + articleTypes[optionsFalse[falseIndex]].name + "』");
+                        text += ("『" + $scope.articleTypes[optionsFalse[falseIndex]].name + "』");
                     }
-                } else if (optionsFalse.length == articleTypes.length) {
+                } else if (optionsFalse.length == $scope.articleTypes.length) {
                     text = "全部不看";
                 } else {
                     text = "只看";
                     for (var trueIndex in optionsTrue) {
-                        text += ("『" + articleTypes[optionsTrue[trueIndex]].name + "』");
+                        text += ("『" + $scope.articleTypes[optionsTrue[trueIndex]].name + "』");
                     }
                 }
                 return text;
