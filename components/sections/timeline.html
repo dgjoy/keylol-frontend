@@ -31,10 +31,10 @@
         </div>
         <ul class="clearfix">
             <li ng-repeat="activePoint in data.activePoints track by activePoint.Id">
-                <point-link type="'point'" avatar-url="activePoint.AvatarImage" id-code="activePoint.IdCode" ></point-link>
+                <point-link type="'point'" avatar-url="activePoint.AvatarImage" id-code="activePoint.IdCode" new-page="true" ></point-link>
                 <div class="title">
                     <p>
-                        <point-link type="'point'" point-name="activePoint.mainName" id-code="activePoint.IdCode" ></point-link>
+                        <point-link type="'point'" point-name="activePoint.mainName" id-code="activePoint.IdCode" new-page="true" ></point-link>
                     </p>
                     <p>
                         <span ng-if="activePoint.type">[{{activePoint.type}}]</span>
@@ -64,11 +64,11 @@
             </svg>
             <div class="entry-source" ng-if="entry.sources">
                 <span ng-switch="entry.sources.type">
-                    <span ng-switch-when="point"><point-link ng-repeat="point in entry.sources.points" type="'point'" id-code="point.IdCode" point-name="'「' + utils.getPointFirstName(point) + '」'"></point-link>收到了新的投稿</span>
-                    <span ng-switch-when="publish"><point-link type="'user'" point-name="'@' + entry.author.username" id-code="entry.author.idCode"></point-link> 发布了这篇文章</span>
+                    <span ng-switch-when="point"><point-link ng-repeat="point in entry.sources.points" type="'point'" id-code="point.IdCode" point-name="'「' + utils.getPointFirstName(point) + '」'" new-page="true"></point-link>收到了新的投稿</span>
+                    <span ng-switch-when="publish"><point-link type="'user'" point-name="'@' + entry.author.username" id-code="entry.author.idCode" new-page="true"></point-link> 发布了这篇文章</span>
                     <span ng-switch-when="like">
                         <span ng-repeat="user in entry.sources.userArray">
-                            <point-link type="'user'" point-name="'@' + user.name" id-code="user.idCode"></point-link>
+                            <point-link type="'user'" point-name="'@' + user.name" id-code="user.idCode" new-page="true"></point-link>
                             <span ng-if="!$last">、</span>
                         </span>认可这篇文章</span>
                 </span>
@@ -76,9 +76,9 @@
             <div class="entry-main" ng-class="{'has-sources': entry.sources}">
                 <div class="entry-heading">
                     <div class="entry-author" ng-if="entry.author">
-                        <point-link type="'user'" avatar-url="entry.author.avatarUrl" id-code="entry.author.idCode"></point-link>
+                        <point-link type="'user'" avatar-url="entry.author.avatarUrl" id-code="entry.author.idCode" new-page="true"></point-link>
                         <h4>
-                            <point-link type="'user'" point-name="'@' + entry.author.username" id-code="entry.author.idCode"></point-link>
+                            <point-link type="'user'" point-name="'@' + entry.author.username" id-code="entry.author.idCode" new-page="true"></point-link>
                         </h4>
                     </div>
                     <h3>
@@ -86,12 +86,12 @@
                         <svg xmlns="http://www.w3.org/2000/svg" class="entry-new" ng-if="entry.isNew">
                             <circle cx="3.5" cy="3.5" r="3.5"></circle>
                         </svg>
-                        <point-link ng-if="entry.voteForPoint" type="'point'" id-code="entry.voteForPoint.IdCode" point-name="'「' + utils.getPointFirstName(entry.voteForPoint) + '」'"></point-link>
+                        <point-link ng-if="entry.voteForPoint" type="'point'" id-code="entry.voteForPoint.IdCode" point-name="'「' + utils.getPointFirstName(entry.voteForPoint) + '」'" new-page="true"></point-link>
                         <span ng-if="entry.fromArticle"><a href="{{entry.fromArticle.href}}">《{{entry.fromArticle.text|maxLength:14}}》</a><span ng-if="entry.fromArticle.fromComment">中的评论</span></span>
                         <span ng-if="entry.pointInfo">{{entry.pointInfo.reader}} 名读者 / {{entry.pointInfo.article}} 篇文章</span>
                     </h3>
                 </div>
-                <a ng-href="{{entry.url}}" class="entry-content clearfix" ng-class="{'one-line': !entry.hasThumbnail && !entry.isPoint && !entry.isUser, 'for-point': entry.isPoint || entry.isUser, 'free-height': entry.types[0] == '简评'}">
+                <a ng-href="{{entry.url}}" target="_blank" class="entry-content clearfix" ng-class="{'one-line': !entry.hasThumbnail && !entry.isPoint && !entry.isUser, 'for-point': entry.isPoint || entry.isUser, 'free-height': entry.types[0] == '简评'}">
                     <div ng-if="entry.hasThumbnail" class="thumbnail" webp-background="{{entry.thumbnail|timelineThumbnailUrl}}"></div>
                     <div ng-if="entry.hasBackground" class="background" webp-background="{{entry.background|backgroundUrl}}"></div>
                     <div class="summary">
