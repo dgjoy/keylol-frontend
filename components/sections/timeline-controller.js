@@ -313,7 +313,7 @@
                     } else if (optionsTrue.length == $scope.articleTypes.length && shortReviewFilter === 7) {
                         text = "关闭过滤";
                     } else {
-                        text = "自定义";
+                        text = "自定义过滤";
                     }
                 }else if(currPage === "user") {
                     if (optionsTrue.length == $scope.articleTypes.length) {
@@ -321,13 +321,13 @@
                     } else if (optionsTrue.length == $scope.articleTypes.length) {
                         text = "关闭过滤";
                     } else {
-                        text = "自定义";
+                        text = "自定义过滤";
                     }
                 } else {
                     if (optionsTrue.length == $scope.articleTypes.length) {
                         text = "默认过滤";
                     } else {
-                        text = "自定义";
+                        text = "自定义过滤";
                     }
                 }
                 return text;
