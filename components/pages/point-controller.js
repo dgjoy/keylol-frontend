@@ -32,7 +32,6 @@
                         });
                     }
                 },
-                publishOnly: /\/user\/.+\/publications/i.test($location.url()),
                 datetime: "outBlock",
                 hasExpand: true,
                 loadingLock: true,
@@ -106,7 +105,6 @@
                     $http.get(apiEndpoint + "article/user/" + $routeParams.userIdCode, {
                         params: {
                             idType: "IdCode",
-                            publishOnly: timeline.publishOnly,
                             take: utils.timelineLoadCount
                         }
                     }).then(function (response) {

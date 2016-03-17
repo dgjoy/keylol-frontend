@@ -96,30 +96,68 @@
 
             $scope.expanded = false;
 
+            $scope.articleTypes = $.extend([], articleTypes);
             var filterOptions = [];
-            for (var i = 0; i < articleTypes.length; ++i) {
-                filterOptions.push(true);
+            var shortReviewFilter = 1;
+            var sourceFilter = 1;
+
+            var url = $location.url().substr(1, 4);
+            var currPage;
+            if(url === "home"){
+                currPage = "home";
+                if(union.$localStorage.homeFilter){
+                    filterOptions = union.$localStorage.homeFilter.filterOptions.slice();
+                    shortReviewFilter = union.$localStorage.homeFilter.shortReviewFilter;
+                } else {
+                    for (var i = 0; i < $scope.articleTypes.length; ++i) {
+                        filterOptions.push(true);
+                    }
+                }
+            }else if(url === "user"){
+                currPage = "user";
+                $scope.articleTypes.unshift({
+                    name: "简评"
+                });
+                for (var i = 0; i < $scope.articleTypes.length; ++i) {
+                    filterOptions.push(true);
+                }
+            }else {
+                currPage = "point";
+                $scope.articleTypes.unshift({
+                    name: "简评"
+                });
+                for (var i = 0; i < $scope.articleTypes.length; ++i) {
+                    filterOptions.push(true);
+                }
             }
 
             $scope.expand = function ($event) {
                 $scope.expanded = !$scope.expanded;
                 $scope.showFilter({
                     templateUrl: "components/popup/entry-filter.html",
-                    controller: "EntryFilterController",
+                    controller: "EntryFilterController as entryFilter",
                     event: $event,
                     attachSide: "bottom",
                     align: "right",
                     offsetX: 5,
                     inputs: {
-                        types: articleTypes,
-                        selectedIndexes: filterOptions
+                        types: $scope.articleTypes,
+                        selectedIndexes: filterOptions,
+                        currPage: currPage,
+                        shortReviewFilter: shortReviewFilter,
+                        sourceFilter: sourceFilter
                     }
                 }).then(function (popup) {
                     return popup.close;
                 }).then(function (result) {
                     $scope.expanded = !$scope.expanded;
                     if (result) {
-                        filterOptions = result;
+                        filterOptions = result.filterOptions.slice();
+                        shortReviewFilter = result.shortReviewFilter;
+                        sourceFilter = result.sourceFilter;
+                        if(currPage === "home"){
+                            union.$localStorage.homeFilter = result;
+                        }
                         requestWhenFiltering();
                     }
                 });
@@ -128,31 +166,40 @@
             function requestWhenFiltering(isLoadingMore) {
                 $scope.data.loadingLock = true;
                 var filters = "";
-                var filterCount = 0;
-                for (var i = 0; i < articleTypes.length; i++) {
+                for (var i = 0; i < $scope.articleTypes.length; i++) {
                     if (filterOptions[i]) {
-                        filterCount++;
                         if (filters.length !== 0) {
                             filters += ",";
                         }
-                        filters += articleTypes[i].name;
+                        filters += $scope.articleTypes[i].name;
                     }
                 }
-                if (!filters) {
+                var notLoad = false;
+                switch (currPage){
+                    case "home":
+                        notLoad = !filters && !shortReviewFilter;
+                        break;
+                    case "user":
+                        notLoad = !filters || !sourceFilter;
+                        break;
+                    case "point":
+                        notLoad = !filters;
+                        break;
+                }
+                if (notLoad) {
                     $scope.data.entries.length = 0;
                     $scope.data.noMoreArticle = true;
+                    $scope.data.loadingLock = false;
                 } else {
                     var beforeSN = 2147483647;
                     if (isLoadingMore) {
                         beforeSN = $scope.data.entries[$scope.data.entries.length - 1].sequenceNumber;
                     }
-                    if(filterCount === 5){
-                        filters = undefined;
-                    }
                     $scope.data.loadAction({
                         idType: "IdCode",
-                        articleTypeFilter: filters,
-                        publishOnly: $scope.data.publishOnly,
+                        articleTypeFilter: filters?filters:"hack",
+                        shortReviewFilter: shortReviewFilter,
+                        source: sourceFilter,
                         take: utils.timelineLoadCount,
                         beforeSN: beforeSN
                     }, function (response) {
@@ -253,29 +300,34 @@
 
             $scope.filterText = function () {
                 var optionsTrue = [];
-                var optionsFalse = [];
                 for (var i = 0; i < filterOptions.length; i++) {
                     if (filterOptions[i]) {
                         optionsTrue.push(i);
-                    } else {
-                        optionsFalse.push(i);
                     }
                 }
 
                 var text;
-                if (optionsTrue.length == articleTypes.length) {
-                    text = "全部";
-                } else if (optionsTrue.length >= Math.floor(articleTypes.length / 2) + 1) {
-                    text = "不看";
-                    for (var falseIndex in optionsFalse) {
-                        text += ("『" + articleTypes[optionsFalse[falseIndex]].name + "』");
+                if(currPage === "home") {
+                    if (optionsTrue.length == $scope.articleTypes.length && shortReviewFilter === 1) {
+                        text = "默认过滤";
+                    } else if (optionsTrue.length == $scope.articleTypes.length && shortReviewFilter === 7) {
+                        text = "关闭过滤";
+                    } else {
+                        text = "自定义";
                     }
-                } else if (optionsFalse.length == articleTypes.length) {
-                    text = "全部不看";
+                }else if(currPage === "user") {
+                    if (optionsTrue.length == $scope.articleTypes.length) {
+                        text = "默认过滤";
+                    } else if (optionsTrue.length == $scope.articleTypes.length) {
+                        text = "关闭过滤";
+                    } else {
+                        text = "自定义";
+                    }
                 } else {
-                    text = "只看";
-                    for (var trueIndex in optionsTrue) {
-                        text += ("『" + articleTypes[optionsTrue[trueIndex]].name + "』");
+                    if (optionsTrue.length == $scope.articleTypes.length) {
+                        text = "默认过滤";
+                    } else {
+                        text = "自定义";
                     }
                 }
                 return text;
