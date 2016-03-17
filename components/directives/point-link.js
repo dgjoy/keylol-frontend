@@ -10,7 +10,8 @@
                     idCode: "=",
                     pointName: "=",
                     type: "=",
-                    avatarUrl: "="
+                    avatarUrl: "=",
+                    newPage: "="
                 },
                 link: function (scope, element) {
                     scope.funcs = {};
