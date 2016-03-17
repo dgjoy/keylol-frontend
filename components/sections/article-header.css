@@ -56,10 +56,14 @@
 .section-article-header .actions a {
     color: #89A;
     margin-right: 9px;
+    padding-right: 9px;
+    border-right: 1px #89A solid;
 }
 
 .section-article-header .actions a:last-of-type {
     margin-right: 0;
+    padding-right: 0;
+    border-right: none;
 }
 
 .section-article-header .review-info {

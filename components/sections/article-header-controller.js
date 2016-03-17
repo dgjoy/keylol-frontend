@@ -54,6 +54,18 @@
                     });
                 }
             };
+            $scope.archiveArticle = function (e) {
+                $scope.showModerationPopup({
+                    templateUrl: "components/popup/archive-article.html",
+                    controller: "ArchiveArticleController",
+                    event: e,
+                    attachSide: "left",
+                    align: "top",
+                    offsetX: 710,
+                    offsetY: 32,
+                    inputs: {}
+                });
+            };
         }
     ]);
 })();

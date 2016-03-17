@@ -1,0 +1,24 @@
+﻿<popup class="popup-archive-article">
+    <div class="wrapper clearfix box-shadowed-deeper">
+        <div class="heading">
+            <h2>封存后只有作者与站务职员可以看到文章内容</h2>
+            <h1 class="labeled-heading">封存文章</h1>
+        </div>
+        <form>
+            <span>操作缘由</span>
+            <p class="checkbox-group">
+                <input id="" type="checkbox" ng-true-value="1" ng-false-value="0" ng-model="entryFilter.subscribeUser"><label for="subscribe-user">政治敏感信息</label>
+                <input id="" type="checkbox" ng-true-value="2" ng-false-value="0" ng-model="entryFilter.subscribePoint"><label for="subscribe-point">淫秽信息或引起生理反感</label>
+                <input id="" type="checkbox" ng-true-value="4" ng-false-value="0" ng-model="entryFilter.synchronization"><label for="synchronization">不友善言行</label><br>
+                <input id="" type="checkbox" ng-true-value="1" ng-false-value="0" ng-model="entryFilter.subscribeUser"><label for="subscribe-user">未经许可的推广</label>
+                <input id="" type="checkbox" ng-true-value="2" ng-false-value="0" ng-model="entryFilter.subscribePoint"><label for="subscribe-point">言论不尊重版权</label>
+            </p>
+            <span>其他缘由</span>
+            <p class="checkbox-group">
+                <input id="" type="checkbox" ng-true-value="1" ng-false-value="0" ng-model="entryFilter.subscribeUser"><label for="subscribe-user">通知作者</label>
+                <input id="" type="checkbox" ng-true-value="2" ng-false-value="0" ng-model="entryFilter.subscribePoint"><label for="subscribe-point">退还发文扣除的积分</label>
+            </p>
+        </form>
+        <button class="border-button right-border" ng-disabled="submitLock">发表评论</button>
+    </div>
+</popup>
