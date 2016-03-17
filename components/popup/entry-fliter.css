@@ -40,14 +40,12 @@
 }
 
 .popup-entry-filter .arrow-down {
-    margin: 0 0 9px 194px;
-}
-
-.popup-entry-filter .in-home .arrow-down {
-    margin: 0 0 9px 420px;
+    float: right;
+    margin: 0 30px 9px 0;
 }
 
 .popup-entry-filter .filter-main {
+    clear: both;
     background-color: white;
     position: relative;
 }
