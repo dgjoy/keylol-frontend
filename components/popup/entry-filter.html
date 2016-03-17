@@ -6,8 +6,7 @@
             <form>
                 <ul>
                     <li ng-if="currPage === 'home'">
-                        <span class="font-myriad-keylol" ng-class="{active: entryFilter.subscribeUser && entryFilter.subscribePoint && entryFilter.synchronization,
-                                                                        part: entryFilter.subscribeUser || entryFilter.subscribePoint || entryFilter.synchronization && !(entryFilter.subscribeUser && entryFilter.subscribePoint && entryFilter.synchronization)}">简评</span><p>只显示以下来源的简评</p>
+                        <span class="font-myriad-keylol" ng-class="{active: entryFilter.subscribeUser && entryFilter.subscribePoint && entryFilter.synchronization,part: entryFilter.subscribeUser || entryFilter.subscribePoint || entryFilter.synchronization && !(entryFilter.subscribeUser && entryFilter.subscribePoint && entryFilter.synchronization)}">简评</span><p>只显示以下来源的简评</p>
                         <div class="checkbox-group">
                             <input id="subscribe-user" type="checkbox" ng-true-value="1" ng-false-value="0" ng-model="entryFilter.subscribeUser"><label for="subscribe-user">关注用户与其认可</label>
                             <input id="subscribe-point" type="checkbox" ng-true-value="2" ng-false-value="0" ng-model="entryFilter.subscribePoint"><label for="subscribe-point">手动据点订阅</label>
@@ -22,6 +21,13 @@
                         </p>
                     </li>
                 </ul>
+                <div ng-if="currPage === 'user'" class="source">
+                    <span class="font-myriad-keylol">来源</span><p>只显示以下来源的文章</p>
+                    <div class="checkbox-group">
+                        <input id="source-publication" type="checkbox" ng-true-value="1" ng-false-value="0" ng-model="entryFilter.sourcePublication"><label for="source-publication">发布投稿</label>
+                        <input id="source-like" type="checkbox" ng-true-value="2" ng-false-value="0" ng-model="entryFilter.sourceLike"><label for="source-like">认可过的文章</label>
+                    </div>
+                </div>
             </form>
         </div>
     </div>

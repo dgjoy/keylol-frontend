@@ -58,10 +58,14 @@
     bottom: -5px;
 }
 
+.popup-entry-filter .filter-main form {
+    padding: 20px 15px 15px;
+}
+
 .popup-entry-filter .filter-main ul {
     list-style: none;
-    margin: 0;
-    padding: 20px 55px 15px 15px;
+    margin: 0 0 20px 0;
+    padding: 0 30px 0 0;
 }
 
 .popup-entry-filter .filter-main ul li {
@@ -76,6 +80,7 @@
 
 .popup-entry-filter .filter-main ul li div {
     margin-top: 7px;
+    padding-left: 10px;
 }
 
 .popup-entry-filter .filter-main ul li input {
@@ -122,4 +127,43 @@
 
 .popup-entry-filter .in-home .filter-main ul li:first-of-type p {
     color: #bbb;
+}
+
+.popup-entry-filter .filter-main .source {
+    position: relative;
+    cursor: default;
+    margin-bottom: 20px;
+    padding-right: 45px;
+    padding-top: 20px;
+    border-top: solid #ccc 1px;
+}
+
+.popup-entry-filter .filter-main .source div {
+    margin-top: 7px;
+    padding-left: 10px;
+}
+
+.popup-entry-filter .filter-main .source input {
+    margin-right: 8px;
+}
+
+.popup-entry-filter .filter-main .source label {
+    margin-right: 20px;
+}
+
+.popup-entry-filter .filter-main .source p {
+    color: #bbb;
+    display: inline-block;
+    margin: 0;
+}
+
+.popup-entry-filter .filter-main .source span {
+    display: inline-block;
+    background: transparent;
+    color: #159;
+    text-align: center;
+    font-size: 15px;
+    padding: 2px 0;
+    margin: 0 15px 0 0;
+    width: 35px;
 }

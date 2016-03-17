@@ -114,24 +114,23 @@
                     filterOptions.push(true);
                 }
                 if(union.$localStorage.homeFilter){
-                    filterOptions = union.$localStorage.homeFilter.filterOptions;
+                    filterOptions = union.$localStorage.homeFilter.filterOptions.slice();
                     params.shortReviewFilter =  union.$localStorage.homeFilter.shortReviewFilter;
                 }
-                var filterCount = 0;
                 for (var i = 0; i < articleTypes.length; i++) {
                     if (filterOptions[i]) {
-                        filterCount++;
                         if (params.articleTypeFilter.length !== 0) {
                             params.articleTypeFilter += ",";
                         }
                         params.articleTypeFilter += articleTypes[i].name;
                     }
                 }
-                if (!params.articleTypeFilter && params.shortReviewFilter === 1) {
+                if (!params.articleTypeFilter && params.shortReviewFilter === 0) {
                     timeline.noMoreArticle = true;
+                    timeline.loadingLock = false;
                 } else {
-                    if (filterCount === 5) {
-                        params.articleTypeFilter = undefined;
+                    if(!params.articleTypeFilter) {
+                        params.articleTypeFilter = "hack";
                     }
 
                     $http.get(apiEndpoint + "article/subscription", {
