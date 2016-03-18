@@ -3,7 +3,7 @@
 
 .popup-archive-article .wrapper {
     background-color: white;
-    width: 550px;
+    width: 600px;
     padding: 6px 0 44px 0;
 }
 
@@ -31,7 +31,7 @@
 
 .popup-archive-article form .checkbox-group {
     margin: 0;
-    padding: 0 0 14px 15px;
+    padding: 0 0 14px 10px;
     line-height: 28px;
 }
 

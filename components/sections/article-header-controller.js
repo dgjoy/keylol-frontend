@@ -4,6 +4,7 @@
     keylolApp.controller("ArticleHeaderController", [
         "$scope", "union", "window", "utils",
         function ($scope, union, window, utils) {
+            var vm = this;
             $scope.utils = utils;
             $scope.article = union.article;
             $scope.point = union.point;
@@ -55,7 +56,7 @@
                 }
             };
             $scope.archiveArticle = function (e) {
-                $scope.showModerationPopup({
+                vm.showModerationPopup({
                     templateUrl: "components/popup/archive-article.html",
                     controller: "ArchiveArticleController",
                     event: e,

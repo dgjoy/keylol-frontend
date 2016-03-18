@@ -1,11 +1,11 @@
-﻿<div class="section-article-header box-shadowed" ng-class="{archive: article.TypeName === '封'}" ng-controller="ArticleHeaderController">
+﻿<div class="section-article-header box-shadowed" ng-class="{archive: article.TypeName === '封'}" ng-controller="ArticleHeaderController as articleHeader">
     <h1 class="labeled-heading" ng-class="{archive: article.TypeName === '封'}">
         <span ng-if="article.TypeName !== '封'" class="time" am-time-ago="article.PublishTime"></span>
         <span ng-if="article.TypeName === '封'" class="time" >N/A</span>
         <span class="entry-type font-myriad-keylol">{{article.TypeName}}</span>
         <span class="title">{{article.TypeName !== '封'?article.Title:"文章已被封存"}}</span>
     </h1>
-    <div ng-if="article.TypeName !== '封'" popup="showModerationPopup" class="related-info clearfix">
+    <div ng-if="article.TypeName !== '封'" popup="articleHeader.showModerationPopup" class="related-info clearfix">
         <span class="actions">
             <a href="" ng-click="archiveArticle($event)">封存</a><a href="" ng-click="editArticle()">退稿</a><a href="" ng-click="editArticle()">警告</a><a href="" ng-click="editArticle()">萃选</a><a href="" ng-click="editArticle()" ng-if="article.canEdit">编辑</a>
         </span>
