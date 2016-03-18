@@ -47,6 +47,9 @@
             }).when("/post", {
                 templateUrl: "components/pages/post.html",
                 controller: "PostController"
+            }).when("/activities", {
+                templateUrl: "components/pages/activities.html",
+                controller: "ActivitiesController"
             }).when("/comments", {
                 templateUrl: "components/pages/comments.html",
                 controller: "CommentsController"
