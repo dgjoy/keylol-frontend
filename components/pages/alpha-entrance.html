@@ -672,10 +672,19 @@
         height: 96px;
     }
 
+    @keyframes cartoon-move {
+        from {background-position:left;}
+        to { background-position:right;}
+    }
+
     .forth .cartoon {
         position: absolute;
         top: 85px;
         right: 9%;
+        width: 543px;
+        height: 606px;
+        background: left url('/assets/images/alpha/Cartoon.png') no-repeat;
+        animation: cartoon-move 850ms steps(16) infinite;
     }
 </style>
 <div class="screen forth">
@@ -706,7 +715,7 @@
         </div>
         <h3>* 道具将通过与其乐机器人中转交易给文章作者，赠赏功能预计在公测中期上线</h3>
     </div>
-    <img src="/assets/images/alpha/Cartoon.gif" class="cartoon">
+    <div class="cartoon"></div>
 </div>
 <style>
     .fifth .description {
