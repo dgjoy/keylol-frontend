@@ -1,10 +1,11 @@
-﻿<div class="section-article-header box-shadowed" ng-controller="ArticleHeaderController">
-    <h1 class="labeled-heading">
-        <span class="time" am-time-ago="article.PublishTime"></span>
+﻿<div class="section-article-header box-shadowed" ng-class="{archive: article.TypeName === '封'}" ng-controller="ArticleHeaderController">
+    <h1 class="labeled-heading" ng-class="{archive: article.TypeName === '封'}">
+        <span ng-if="article.TypeName !== '封'" class="time" am-time-ago="article.PublishTime"></span>
+        <span ng-if="article.TypeName === '封'" class="time" >N/A</span>
         <span class="entry-type font-myriad-keylol">{{article.TypeName}}</span>
-        <span class="title">{{article.Title}}</span>
+        <span class="title">{{article.TypeName !== '封'?article.Title:"文章已被封存"}}</span>
     </h1>
-    <div popup="showModerationPopup" class="related-info clearfix">
+    <div ng-if="article.TypeName !== '封'" popup="showModerationPopup" class="related-info clearfix">
         <span class="actions">
             <a href="" ng-click="archiveArticle($event)">封存</a><a href="" ng-click="editArticle()">退稿</a><a href="" ng-click="editArticle()">警告</a><a href="" ng-click="editArticle()">萃选</a><a href="" ng-click="editArticle()" ng-if="article.canEdit">编辑</a>
         </span>
@@ -15,7 +16,7 @@
             <point-link type="'point'" id-code="article.VoteForPoint.IdCode" point-name="'「' + utils.getPointFirstName(article.VoteForPoint) + '」'"></point-link>
         </span>
     </div>
-    <div class="review-info clearfix" ng-if="article.TypeName === '评'">
+    <div class="review-info clearfix" ng-if="article.TypeName === '评' && article.TypeName !== '封'">
         <div class="info-attribute">
             <div class="info-attribute">
                 <p ng-if="point.DeveloperPoints.length > 0">

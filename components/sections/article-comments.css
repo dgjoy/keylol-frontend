@@ -14,8 +14,21 @@
     min-width: 300px;
 }
 
+.section-article-comments.archive {
+    padding: 20px 0;
+}
+
 .section-article-comments .labeled-heading {
     margin-left: 0;
+}
+
+.section-article-comments.archive .labeled-heading {
+    margin: 0;
+    color: #ccc;
+}
+
+.section-article-comments.archive .labeled-heading::after {
+    background-color: #ccc;
 }
 
 .section-article-comments .avatar-anchor {

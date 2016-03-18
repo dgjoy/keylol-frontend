@@ -1,6 +1,14 @@
-﻿<div class="section-article-content box-shadowed" ng-controller="ArticleContentController">
-    <article bind-html-compile="article.Content" class="editor-style" ng-class="{'is-short': article.TypeName === '简评'}"></article>
-    <div class="share-actions" ng-switch="article.Liked">
+﻿<div class="section-article-content box-shadowed" ng-class="{archive: article.TypeName === '封'}" ng-controller="ArticleContentController">
+    <div ng-if="article.TypeName === '封'" class="archive-left">
+        <h1 class="font-myriad-keylol">这篇文章已被封存</h1>
+        <h3>封存后只有作者和站务人员可以看到文章内容</h3>
+    </div><div ng-if="article.TypeName === '封'" class="archive-middle"></div><div ng-if="article.TypeName === '封'" class="archive-right">
+        <img src="assets/images/proofread.png">
+        <h1 class="font-myriad-keylol">编辑科</h1>
+        <h3>Proofreading Services Section</h3>
+    </div>
+    <article ng-if="article.TypeName !== '封'" bind-html-compile="article.Content" class="editor-style" ng-class="{'is-short': article.TypeName === '简评'}"></article>
+    <div ng-if="article.TypeName !== '封'" class="share-actions" ng-switch="article.Liked">
         <p class="like-count">{{article.LikeCount}}</p>
         <a href="" ng-click="acknowledge()" ng-if="!article.isMyArticle && union.$localStorage.user" ng-switch-when="false">认可文章+1</a>
         <a href="" ng-click="cancelAcknowledge()" ng-if="!article.isMyArticle && union.$localStorage.user" ng-switch-when="true">取消认可-1</a>
