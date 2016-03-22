@@ -27,7 +27,7 @@ var buildConfigs = {
     },
     dev: {
         bundle: false,
-        apiEndpoint: "https://gay-api.keylol.com/"
+        apiEndpoint: "https://lgbt-api.keylol.com/"
     },
     prod: {
         bundle: true,
