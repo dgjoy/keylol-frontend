@@ -1,14 +1,9 @@
 .window-missive .window {
-    padding: 20px 0;
+    padding: 0 0;
     width: 800px;
 }
 
-.window-missive .labeled-heading {
-    margin: 0;
-}
-
 .window-missive .missive-header {
-    margin-top: 30px;
     text-align: center;
     background-color: #159;
     padding: 10px 0;

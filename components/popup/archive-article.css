@@ -2,7 +2,8 @@
 }
 
 .popup-archive-article .wrapper {
-    background-color: white;
+    background: white no-repeat center;
+    background-size: 256px;
     width: 600px;
     padding: 6px 0 44px 0;
 }
