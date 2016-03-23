@@ -79,6 +79,7 @@
                         union.article.totalComments = response.headers("X-Total-Record-Count");
                         union.pageElements.totalPages = union.article.totalComments <= 17 ? 1 : parseInt((union.article.totalComments - 18) / 20) + 2;
                         union.pageElements.currPage = pageNum;
+                        $(".section-article-comments .comment.highlight").removeClass("highlight");
                         union.comments.length = 0;
                         $.extend(union.comments, comments);
                     }, function (response) {
@@ -109,6 +110,7 @@
                         union.article.totalComments = response.headers("X-Total-Record-Count");
                         union.pageElements.totalPages = union.article.totalComments <= 17 ? 1 : parseInt((union.article.totalComments - 18) / 20) + 2;
                         union.pageElements.currPage = sqNum <= 17 ? 1 : parseInt((sqNum - 17) / 20) + 2;
+                        $(".section-article-comments .comment.highlight").removeClass("highlight");
                         union.comments.length = 0;
                         $.extend(union.comments, comments);
                         callback();

@@ -2,8 +2,8 @@
     "use strict";
 
     keylolApp.controller("ArticleController", [
-        "pageTitle", "$scope", "union", "$routeParams", "$http", "getAndFlushComments", "notification", "$location", "$timeout",
-        function (pageTitle, $scope, union, $routeParams, $http, getAndFlushComments, notification, $location, $timeout) {
+        "pageTitle", "$scope", "union", "$routeParams", "$http", "getAndFlushComments", "notification", "$location", "$timeout", "$rootScope",
+        function (pageTitle, $scope, union, $routeParams, $http, getAndFlushComments, notification, $location, $timeout, $rootScope) {
             $scope.articleExist = true;
             $scope.union = union;
             pageTitle.set("文章 - 其乐");
@@ -78,6 +78,25 @@
                                 });
                             });
                         }
+                        var cancelListenLocationChangeStart = $rootScope.$on("$locationChangeStart", function (e, newUrl, oldUrl) {
+                            var newSplit = newUrl.split("#");
+                            var oldSplit = oldUrl.split("#");
+                            if(newSplit[0] === oldSplit[0] && newSplit[1] && oldSplit[1] && newSplit[1] !== oldSplit[1]){
+                                var hashNumber = parseInt(newSplit[1]);
+                                getAndFlushComments(article, hashNumber, "sequence", function () {
+                                    $timeout(function () {
+                                        $("body").animate({
+                                            scrollTop: $("#comment-" + hashNumber).offset().top
+                                        }, function () {
+                                            $("#comment-" + hashNumber).addClass("highlight");
+                                        });
+                                    });
+                                });
+                                e.preventDefault();
+                            }else {
+                                cancelListenLocationChangeStart();
+                            }
+                        });
                         pageElements.changePage = function (oldPage, newPage) {
                             getAndFlushComments(article, newPage, "page");
                         };
