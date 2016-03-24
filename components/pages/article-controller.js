@@ -81,7 +81,7 @@
                         var cancelListenLocationChangeStart = $rootScope.$on("$locationChangeStart", function (e, newUrl, oldUrl) {
                             var newSplit = newUrl.split("#");
                             var oldSplit = oldUrl.split("#");
-                            if(newSplit[0] === oldSplit[0] && newSplit[1] && oldSplit[1] && newSplit[1] !== oldSplit[1]){
+                            if(newSplit[0] === oldSplit[0] && newSplit[1] && newSplit[1] !== oldSplit[1]){
                                 var hashNumber = parseInt(newSplit[1]);
                                 getAndFlushComments(article, hashNumber, "sequence", function () {
                                     $timeout(function () {

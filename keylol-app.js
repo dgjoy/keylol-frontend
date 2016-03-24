@@ -18,11 +18,12 @@
     ]);
     app.config([
         "$routeProvider", "$locationProvider", "utilsProvider", "pageTitleProvider", "$localStorageProvider",
-        "$httpProvider", "$compileProvider", "$analyticsProvider",
+        "$httpProvider", "$compileProvider", "$analyticsProvider", "$anchorScrollProvider",
         function ($routeProvider, $locationProvider, utilsProvider, pageTitleProvider, $localStorageProvider,
-                  $httpProvider, $compileProvider, $analyticsProvider) {
+                  $httpProvider, $compileProvider, $analyticsProvider, $anchorScrollProvider) {
             $locationProvider.html5Mode(true);
 
+            $anchorScrollProvider.disableAutoScrolling();
             $routeProvider.when("/home", {
                 templateUrl: "components/pages/home.html",
                 controller: "HomeController"
