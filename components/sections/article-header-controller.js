@@ -6,6 +6,7 @@
         function ($scope, union, window, utils) {
             var vm = this;
             $scope.utils = utils;
+            $scope.union = union;
             $scope.article = union.article;
             $scope.point = union.point;
             $scope.summary = union.summary;
@@ -57,14 +58,16 @@
             };
             $scope.archiveArticle = function (e) {
                 vm.showModerationPopup({
-                    templateUrl: "components/popup/archive-article.html",
-                    controller: "ArchiveArticleController",
+                    templateUrl: "../popup/moderation.html",
+                    controller: "ModerationController",
                     event: e,
                     attachSide: "left",
                     align: "top",
                     offsetX: 710,
                     offsetY: 32,
-                    inputs: {}
+                    inputs: {
+                        type: "archive"
+                    }
                 });
             };
         }

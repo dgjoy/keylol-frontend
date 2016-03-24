@@ -6,8 +6,8 @@
         <span class="title">{{article.TypeName !== '封'?article.Title:"文章已被封存"}}</span>
     </h1>
     <div ng-if="article.TypeName !== '封'" popup="articleHeader.showModerationPopup" class="related-info clearfix">
-        <span class="actions">
-            <a href="" ng-click="archiveArticle($event)">封存</a><a href="" ng-click="editArticle()">退稿</a><a href="" ng-click="editArticle()">警告</a><a href="" ng-click="editArticle()">萃选</a><a href="" ng-click="editArticle()" ng-if="article.canEdit">编辑</a>
+        <span class="actions" ng-if="article.canEdit">
+            <a href="" ng-click="archiveArticle($event)">封存</a><a href="" ng-if="union.$localStorage.user.StaffClaim" ng-click="archiveArticle($event)">退稿</a><a href="" ng-if="union.$localStorage.user.StaffClaim" ng-click="archiveArticle($event)">警告</a><a href="" ng-if="union.$localStorage.user.StaffClaim" ng-click="archiveArticle($event)">萃选</a><a href="" ng-click="editArticle()">编辑</a>
         </span>
         <span class="points" ng-if="article.TypeName != '评' && article.TypeName != '简评'">
             <point-link ng-repeat="point in article.AttachedPoints track by point.Id" type="'point'" id-code="point.IdCode" point-name="'「' + utils.getPointFirstName(point) + '」'"></point-link>
