@@ -58,15 +58,19 @@
             };
             $scope.archiveArticle = function (e) {
                 vm.showModerationPopup({
-                    templateUrl: "../popup/moderation.html",
-                    controller: "ModerationController",
+                    templateUrl: "components/popup/moderation.html",
+                    controller: "ModerationController as moderation",
                     event: e,
                     attachSide: "left",
                     align: "top",
                     offsetX: 710,
                     offsetY: 32,
                     inputs: {
-                        type: "archive"
+                        targetId: $scope.article.Id,
+                        type: {
+                            action: "Archived",
+                            target: "Article"
+                        }
                     }
                 });
             };
