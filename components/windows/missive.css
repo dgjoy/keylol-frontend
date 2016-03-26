@@ -1,0 +1,57 @@
+.window-missive .window {
+    padding: 0 0;
+    width: 800px;
+}
+
+.window-missive .missive-header {
+    text-align: center;
+    background-color: #159;
+    padding: 10px 0;
+}
+
+.window-missive .missive-header h1,
+.window-missive .missive-footer h1,
+.window-missive .missive-header h3,
+.window-missive .missive-footer h3 {
+    font-weight: normal;
+    color: #fff;
+    margin: 0;
+}
+
+.window-missive .missive-header h1,
+.window-missive .missive-footer h1 {
+    font-size: 24px;
+}
+
+.window-missive .missive-header h3 {
+    font-size: 18px;
+}
+
+.window-missive .content {
+    background-color: white;
+    padding: 30px 20px 20px;
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+.window-missive .missive-footer {
+    margin-bottom: 30px;
+    background-color: #159;
+    padding: 10px 40px;
+}
+
+.window-missive .missive-footer img {
+    width: 64px;
+    float: right;
+}
+
+.window-missive .missive-footer .administration {
+    margin-left: 15px;
+    width: 200px;
+    float: right;
+    padding: 7px 0;
+}
+
+.window-missive .missive-footer h3 {
+    font-size: 16px;
+}

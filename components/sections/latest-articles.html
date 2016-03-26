@@ -2,10 +2,7 @@
     <h1 class="labeled-heading">最新投稿</h1>
     <div ng-repeat="article in articles track by article.Id" class="article">
         <h2>
-            <svg xmlns="http://www.w3.org/2000/svg">
-                <circle cx="3" cy="3" r="3"></circle>
-            </svg><!--
-            --><a ng-href="article/{{article.AuthorIdCode}}/{{article.SequenceNumberForAuthor}}">{{article.Title}}</a>
+            <a ng-href="article/{{article.AuthorIdCode}}/{{article.SequenceNumberForAuthor}}">{{article.Title}}</a>
         </h2>
         <p>{{article.Content}}</p>
         <footer>

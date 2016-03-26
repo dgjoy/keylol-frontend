@@ -1,0 +1,36 @@
+vote-circle {
+    display: inline-block;
+    width: 50px;
+    vertical-align: top;
+}
+
+vote-circle svg {
+    display: inline-block;
+    width: 10px;
+    height: 8px;
+    transform: translateY(-2px);
+}
+
+vote-circle svg.disabled {
+    fill: #ccc !important;
+}
+
+vote-circle svg.awesome {
+    fill: #00ab4e !important;
+}
+
+vote-circle svg.good {
+    fill: #71bf44 !important;
+}
+
+vote-circle svg.not-bad {
+    fill: #f7943e !important;
+}
+
+vote-circle svg.bad {
+    fill: #e30613 !important;
+}
+
+vote-circle svg.terrible {
+    fill: #541912 !important;
+}

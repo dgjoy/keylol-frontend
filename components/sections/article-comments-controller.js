@@ -13,6 +13,26 @@
             $scope.textFocus = false;
             $scope.submitLock = false;
             $scope.comment = {};
+            $scope.moderateComment = function (event, comment, type, isCancel) {
+                comment.showModerationPopup({
+                    templateUrl: "components/popup/moderation.html",
+                    controller: "ModerationController as moderation",
+                    event: event,
+                    attachSide: "left",
+                    align: "top",
+                    offsetX: 710,
+                    offsetY: 25,
+                    inputs: {
+                        targetId: comment.Id,
+                        type: {
+                            action: type,
+                            target: "Comment",
+                            isCancel: isCancel,
+                            comment: comment
+                        }
+                    }
+                });
+            };
             $scope.showRegistrationWindow = function () {
                 window.show({
                     templateUrl: "components/windows/registration.html",

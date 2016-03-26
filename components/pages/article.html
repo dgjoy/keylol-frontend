@@ -10,7 +10,7 @@
                 </div>
             </div>
             <section ng-include="'components/sections/article-header.html'"></section>
-            <section ng-include="'components/sections/article-content.html'"></section>
+            <section ng-if="union.article.TypeName !== '封'" ng-include="'components/sections/article-content.html'"></section>
             <section ng-include="'components/sections/article-comments.html'"></section>
         </div>
         <div class="col-right">
