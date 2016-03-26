@@ -15,6 +15,7 @@
                 $http.get(apiEndpoint + "article/" + $routeParams.author + "/" + $routeParams.article)
                     .then(function (response) {
                         var article = response.data;
+                        console.log(article);
                         article.authorIdCode = $routeParams.author;
                         article.sqNumberForAuthor = $routeParams.article;
                         pageTitle.set(article.Title + " - 其乐");
@@ -103,6 +104,9 @@
                     }, function (error) {
                         if (error.status === 404) {
                             $scope.articleExist = false;
+                            return;
+                        } else if(error.status === 401) {
+                            unionArticle.TypeName = "封";
                             return;
                         }
                         notification.error("发生未知错误，请重试或与站务职员联系", error)

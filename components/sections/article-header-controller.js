@@ -10,6 +10,9 @@
             $scope.article = union.article;
             $scope.point = union.point;
             $scope.summary = union.summary;
+            $scope.circles = function(i){
+                return new Array(i);
+            };
             $scope.editArticle = function () {
                 if($scope.article.TypeName === "简评"){
                     window.show({
@@ -56,7 +59,7 @@
                     });
                 }
             };
-            $scope.archiveArticle = function (e) {
+            $scope.archiveArticle = function (e, isCancel) {
                 vm.showModerationPopup({
                     templateUrl: "components/popup/moderation.html",
                     controller: "ModerationController as moderation",
@@ -69,7 +72,8 @@
                         targetId: $scope.article.Id,
                         type: {
                             action: "Archived",
-                            target: "Article"
+                            target: "Article",
+                            isCancel: isCancel
                         }
                     }
                 });

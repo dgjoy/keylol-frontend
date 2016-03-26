@@ -472,45 +472,13 @@
     background-color: rgba(255,255,255,0.95);
 }
 
-.section-timeline .entry-content .summary .vote-circle {
-    display: inline-block;
-    width: 50px;
-    vertical-align: top;
-}
-
-.section-timeline .entry-content .summary .vote-circle svg {
-    display: inline-block;
-    width: 10px;
-    height: 8px;
-    transform: translateY(-2px);
-}
-
-.section-timeline .entry-content .summary .vote-circle svg.awesome {
-    fill: #00ab4e !important;
-}
-
-.section-timeline .entry-content .summary .vote-circle svg.good {
-    fill: #71bf44 !important;
-}
-
-.section-timeline .entry-content .summary .vote-circle svg.not-bad {
-    fill: #f7943e !important;
-}
-
-.section-timeline .entry-content .summary .vote-circle svg.bad {
-    fill: #e30613 !important;
-}
-
-.section-timeline .entry-content .summary .vote-circle svg.terrible {
-    fill: #541912 !important;
-}
-
 .section-timeline .entry-content h3 span {
     display: inline-block;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 494px;
+    margin-right: 5px;
 }
 
 .section-timeline .entry-content h3 {

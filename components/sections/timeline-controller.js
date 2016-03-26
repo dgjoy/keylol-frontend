@@ -23,10 +23,6 @@
                 $searchInput.addClass("highlight");
             };
 
-            $scope.circles = function(i){
-                return new Array(i);
-            };
-
             $scope.clickTheBox = function (entry) {
                 $location.url(entry.url);
             };
@@ -230,7 +226,6 @@
                                 summary: article.Content,
                                 hasBackground: false,
                                 vote: article.Vote,
-                                voteColor: article.Vote?utils.getVoteColor(article.Vote -1):null,
                                 thumbnail: article.ThumbnailImage,
                                 hasThumbnail: true,
                                 url: "/article/" + article.Author.IdCode + "/" + article.SequenceNumberForAuthor,

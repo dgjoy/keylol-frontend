@@ -43,23 +43,17 @@
     display: inline-block;
     max-width: 80%;
     vertical-align: top;
+    margin-right: 5px;
 }
 
-.section-article-header h1 .vote {
-    float: right;
-    margin-left: 6px;
-    color: #89A;
+.section-article-header h1 .error {
+    color: #e30613;
 }
 
 .section-article-header .related-info {
     padding: 0 13px 0 8px;
     line-height: 20px;
     margin-top: 10px;
-}
-
-.section-article-header .related-info .actions {
-    float: right;
-    margin-left: 20px;
 }
 
 .section-article-header .related-info .points {
@@ -69,17 +63,15 @@
     display: block;
 }
 
-.section-article-header .actions a {
-    color: #89A;
-    margin-right: 9px;
-    padding-right: 9px;
-    border-right: 1px #89A solid;
+.section-article-header .related-info .actions {
+    color: #ccc;
+    float: right;
+    margin-left: 20px;
 }
 
-.section-article-header .actions a:last-of-type {
-    margin-right: 0;
-    padding-right: 0;
-    border-right: none;
+.section-article-header .actions a {
+    color: #89A;
+    margin: 9px;
 }
 
 .section-article-header .review-info {

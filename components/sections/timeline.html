@@ -97,11 +97,7 @@
                     <div class="summary">
                         <h3 ng-if="entry.title">
                             <span ng-if="entry.types[0] !== '简评'">{{entry.title}}</span>
-                            <div class="vote-circle" ng-if="entry.vote">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="{{entry.voteColor}}" ng-repeat="circle in circles(entry.vote) track by $index">
-                                    <circle cx="4" cy="4" r="4"></circle>
-                                </svg>
-                            </div>
+                            <vote-circle ng-if="entry.vote" vote="entry.vote" ></vote-circle>
                         </h3>
                         <p>{{entry.summary}}</p>
                     </div>
