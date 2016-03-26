@@ -4,10 +4,15 @@
     keylolApp.controller("ArticleHeaderController", [
         "$scope", "union", "window", "utils",
         function ($scope, union, window, utils) {
+            var vm = this;
             $scope.utils = utils;
+            $scope.union = union;
             $scope.article = union.article;
             $scope.point = union.point;
             $scope.summary = union.summary;
+            $scope.circles = function(i){
+                return new Array(i);
+            };
             $scope.editArticle = function () {
                 if($scope.article.TypeName === "简评"){
                     window.show({
@@ -53,6 +58,25 @@
                         }
                     });
                 }
+            };
+            $scope.moderateArticle = function (e, type, isCancel) {
+                vm.showModerationPopup({
+                    templateUrl: "components/popup/moderation.html",
+                    controller: "ModerationController as moderation",
+                    event: e,
+                    attachSide: "left",
+                    align: "top",
+                    offsetX: 710,
+                    offsetY: 32,
+                    inputs: {
+                        targetId: $scope.article.Id,
+                        type: {
+                            action: type,
+                            target: "Article",
+                            isCancel: isCancel
+                        }
+                    }
+                });
             };
         }
     ]);

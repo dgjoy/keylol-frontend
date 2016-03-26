@@ -13,7 +13,7 @@
                 <point-review bind-review="vm.Vote"></point-review>
             </div>
             <textarea ng-model="vm.Content" class="short-content" placeholder="用一段话让其他玩家认可你的评价观点"></textarea>
-            <span class="char-count" ng-class="{error: vm.Content.length > 199}">{{vm.Content.length}}/199</span>
+            <span class="char-count" ng-class="{error: vm.Content.length > 99}">{{vm.Content.length}}/99</span>
             <button type="submit" class="window-confirm-button" ng-disabled="submitLock">
                 <img class="arrow-right" src="assets/images/arrow-right.png" alt="下一步">
                 <img class="signature-pen" src="assets/images/signature-pen.png" alt="提交">
