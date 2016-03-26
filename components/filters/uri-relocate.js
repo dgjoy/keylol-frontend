@@ -12,7 +12,12 @@
             if (input.indexOf("keylol://") !== 0)
                 return input;
 
-            var suffix = customVersion ? "!" + customVersion : "";
+            var suffix;
+            if (/\.svg$/i.test(input)) {
+                suffix = "";
+            } else {
+                suffix = customVersion ? "!" + customVersion : "";
+            }
             var match;
             if (match = input.match(/^keylol:\/\/([^\/]*)$/i))
                 return "//storage.keylol.com/" + match[1] + suffix;
