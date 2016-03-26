@@ -23,7 +23,9 @@ moderation-result .moderation-left {
     vertical-align: middle;
     display: inline-block;
     padding: 20px 17px;
-    width: 344px;
+    width: 378px;
+    height: 86px;
+    box-sizing: border-box;
 }
 
 moderation-result .moderation-left h1 {
@@ -44,9 +46,11 @@ moderation-result .moderation-right {
     display: inline-block;
     padding: 11px 17px;
     background-color: #159;
-    width: 344px;
+    width: 378px;
     text-align: right;
     color: #fff;
+    height: 86px;
+    box-sizing: border-box;
 }
 
 moderation-result .moderation-right img {
