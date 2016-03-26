@@ -12,7 +12,7 @@
                 <span ng-if="comment.Warned" class="moderated">受到警告</span>
                 <span ng-switch-default class="time" am-time-ago="comment.PublishTime"></span>
                 <span ng-switch-default class="action" ng-if="union.$localStorage.user">
-                    <span ng-if="!comment.cannotLike" ng-switch="comment.Liked">
+                    <span ng-if="!comment.cannotLike && article.Archived === 'None' && comment.Archived === 'None'" ng-switch="comment.Liked">
                         <a href="" ng-click="acknowledge(comment)" ng-switch-when="false">认可</a>
                         <a href="" ng-click="cancelAcknowledge(comment)" ng-switch-when="true">取消认可</a>
                         |
@@ -42,7 +42,7 @@
                 <span ng-if="comment.Warned" class="moderated">受到警告</span>
                 <span ng-switch-default class="time" am-time-ago="comment.PublishTime"></span>
                 <span ng-switch-default class="action" ng-if="union.$localStorage.user">
-                    <span ng-if="!comment.cannotLike" ng-switch="comment.Liked">
+                    <span ng-if="!comment.cannotLike && article.Archived === 'None' && comment.Archived === 'None'" ng-switch="comment.Liked">
                         <a href="" ng-click="acknowledge(comment)" ng-switch-when="false">认可</a>
                         <a href="" ng-click="cancelAcknowledge(comment)" ng-switch-when="true">取消认可</a>
                         |
