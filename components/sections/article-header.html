@@ -10,10 +10,10 @@
         </h1>
         <div ng-if="article.TypeName !== '封'" popup="articleHeader.showModerationPopup" class="related-info clearfix">
         <span class="actions" ng-if="article.canEdit">
-            <a href="" ng-if="article.Archived === 'None'" ng-click="archiveArticle($event)">封存</a><a ng-if="article.Archived === 'User' || (article.Archived === 'Operator' && union.$localStorage.user.StaffClaim)" href="" ng-click="archiveArticle($event, true)">撤销封存</a>|<!--
-            --><span ng-if="union.$localStorage.user.StaffClaim"><a href="" ng-click="archiveArticle($event)">退稿</a>|</span><!--
-            --><span ng-if="union.$localStorage.user.StaffClaim"><a href="" ng-click="archiveArticle($event)">警告</a>|</span><!--
-            --><span ng-if="union.$localStorage.user.StaffClaim"><a href="" ng-click="archiveArticle($event)">萃选</a>|</span><!--
+            <a href="" ng-if="article.Archived === 'None'" ng-click="moderateArticle($event, 'Archived')">封存</a><a ng-if="article.Archived === 'User' || (article.Archived === 'Operator' && union.$localStorage.user.StaffClaim)" href="" ng-click="archiveArticle($event, 'Archived', true)">撤销封存</a>|<!--
+            --><span ng-if="union.$localStorage.user.StaffClaim"><a href="" ng-click="moderateArticle($event, 'Rejected', article.Rejected)">{{article.Rejected?"撤销":""}}退稿</a>|</span><!--
+            --><span ng-if="union.$localStorage.user.StaffClaim"><a href="" ng-click="moderateArticle($event, 'Warned', article.Warned)">{{article.Warned?"撤销":""}}警告</a>|</span><!--
+            --><span ng-if="union.$localStorage.user.StaffClaim"><a href="" ng-click="moderateArticle($event, 'Spotlight', article.Spotlight)">{{article.Spotlight?"撤销":""}}萃选</a>|</span><!--
             --><a href="" ng-click="editArticle()">编辑</a>
         </span>
         <span class="points" ng-if="article.TypeName != '评' && article.TypeName != '简评'">
@@ -84,4 +84,7 @@
         </div>
     </div>
     <moderation-result ng-if="article.Archived && article.Archived !== 'None'" type="'Archived'"></moderation-result>
+    <moderation-result ng-if="article.Rejected" type="'Rejected'"></moderation-result>
+    <moderation-result ng-if="article.Warned" type="'Warned'"></moderation-result>
+    <moderation-result ng-if="article.Spotlight" type="'Spotlight'"></moderation-result>
 </div>

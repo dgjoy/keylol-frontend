@@ -11,7 +11,6 @@
                     type: "="
                 },
                 link: function (scope) {
-                    console.log(scope.type);
                     scope.text = moderationResult[scope.type];
                 }
             };

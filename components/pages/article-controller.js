@@ -15,7 +15,6 @@
                 $http.get(apiEndpoint + "article/" + $routeParams.author + "/" + $routeParams.article)
                     .then(function (response) {
                         var article = response.data;
-                        console.log(article);
                         article.authorIdCode = $routeParams.author;
                         article.sqNumberForAuthor = $routeParams.article;
                         pageTitle.set(article.Title + " - 其乐");

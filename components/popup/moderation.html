@@ -14,7 +14,7 @@
             <span>其他缘由</span>
             <p class="checkbox-group">
                 <input id="notify-author" type="checkbox" ng-model="moderation.notifyAuthor"><label for="notify-author">通知作者</label>
-                <input ng-if="!type.isCancel" id="return-coupon" type="checkbox" ng-model="moderation.returnCoupon"><label ng-if="!type.isCancel" for="return-coupon">退还发文扣除的积分</label>
+                <input ng-if="!type.isCancel && type.action === 'Archived'" id="return-coupon" type="checkbox" ng-model="moderation.returnCoupon"><label ng-if="!type.isCancel && type.action === 'Archived'" for="return-coupon">退还发文扣除的积分</label>
             </p>
         </form>
         <button ng-click="submit()" class="border-button right-border" ng-disabled="submitLock">执行操作</button>

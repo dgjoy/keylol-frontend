@@ -59,7 +59,7 @@
                     });
                 }
             };
-            $scope.archiveArticle = function (e, isCancel) {
+            $scope.moderateArticle = function (e, type, isCancel) {
                 vm.showModerationPopup({
                     templateUrl: "components/popup/moderation.html",
                     controller: "ModerationController as moderation",
@@ -71,7 +71,7 @@
                     inputs: {
                         targetId: $scope.article.Id,
                         type: {
-                            action: "Archived",
+                            action: type,
                             target: "Article",
                             isCancel: isCancel
                         }
