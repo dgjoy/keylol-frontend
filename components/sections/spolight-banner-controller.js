@@ -2,19 +2,25 @@
     "use strict";
 
     keylolApp.controller("SpolightBannerController", [
-        "$scope", "window", "$http", "notification", "$location",
-        function ($scope, window, $http, notification, $location) {
-            if($location.url().substr(1,10) === "activities"){
+        "$scope", "window", "$http", "notification", "$location", "union",
+        function ($scope, window, $http, notification, $location, union) {
+            if($location.url().substr(1,11) === "post-office"){
                 $scope.banner = [{
-                    imageSrc: "assets/images/spotlight/activities-l-active.png",
+                    imageSrc: "assets/images/spotlight/post-office-l.png",
+                    imageSrcActive: "assets/images/spotlight/post-office-l-active.png",
+                    link: "post-office/acknowledgements"
+                },{
+                    imageSrc: "assets/images/spotlight/post-office-m.png",
+                    imageSrcActive: "assets/images/spotlight/post-office-m-active.png",
                     link: "article/LEEEE/8"
                 },{
-                    imageSrc: "assets/images/spotlight/activities-m.png",
-                    link: "article/LEEEE/8"
-                },{
-                    imageSrc: "assets/images/spotlight/activities-r.png",
+                    imageSrc: "assets/images/spotlight/post-office-r.png",
+                    imageSrcActive: "assets/images/spotlight/post-office-r-active.png",
                     link: "article/LEEEE/8"
                 }];
+                if(typeof union.spolightActive === "number"){
+                    $scope.banner[union.spolightActive].imageSrc = $scope.banner[union.spolightActive].imageSrcActive;
+                }
             } else {
                 var originBanner = [
                     {

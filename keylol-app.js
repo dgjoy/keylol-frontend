@@ -45,11 +45,11 @@
             }).when("/readers", {
                 templateUrl: "components/pages/search-results.html",
                 controller: "ReadersController"
-            }).when("/post", {
-                templateUrl: "components/pages/post.html",
-                controller: "PostController"
+            }).when("/post-office", {
+                templateUrl: "components/pages/post-office.html",
+                controller: "PostOfficeController"
             }).when("/activities", {
-                templateUrl: "components/pages/activities.html",
+                templateUrl: "components/pages/post-office.html",
                 controller: "ActivitiesController"
             }).when("/comments", {
                 templateUrl: "components/pages/comments.html",
