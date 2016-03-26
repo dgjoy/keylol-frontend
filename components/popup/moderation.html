@@ -1,10 +1,10 @@
 ﻿<popup class="popup-moderation">
     <div class="wrapper clearfix box-shadowed-deeper" style="background-image: url('assets/images/Syuusouretsujitsu.png');">
         <div class="heading">
-            <h2>{{text.subTitle?text.subTitle:text["subTitleFor" + type.target]}}</h2>
+            <h2>{{text.subTitle || text["subTitleFor" + type.target]}}</h2>
             <h1 class="labeled-heading">{{text.mainTitle}}</h1>
         </div>
-        <form ng-if="union.$localStorage.user.StaffClaim">
+        <form ng-if="union.$localStorage.user.StaffClaim === 'operator'">
             <span ng-if="text.reasonTexts" ng-class="{'error-flash': reasonEmpty}">操作缘由 {{reasonEmpty?"- 需要勾选至少一个操作缘由":""}}</span>
             <p ng-if="text.reasonTexts" class="checkbox-group">
                 <span ng-repeat="reason in text.reasonTexts">

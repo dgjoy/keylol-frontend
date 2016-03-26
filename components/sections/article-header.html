@@ -6,22 +6,22 @@
             <span class="entry-type font-myriad-keylol">{{article.TypeName}}</span>
             <span class="title">{{article.TypeName !== '封'?article.Title:"文章已被封存"}}</span>
             <vote-circle ng-if="article.Vote" vote="article.Vote" disabled="article.Archived !== 'None'"></vote-circle>
-            <span class="error" ng-if="article.Archived !== 'None'">[封存中]</span>
+            <span class="error" ng-if="article.Archived && article.TypeName !== '封' && article.Archived !== 'None'">[封存中]</span>
         </h1>
         <div ng-if="article.TypeName !== '封'" popup="articleHeader.showModerationPopup" class="related-info clearfix">
-        <span class="actions" ng-if="article.canEdit">
-            <a href="" ng-if="article.Archived === 'None'" ng-click="moderateArticle($event, 'Archived')">封存</a><a ng-if="article.Archived === 'User' || (article.Archived === 'Operator' && union.$localStorage.user.StaffClaim)" href="" ng-click="archiveArticle($event, 'Archived', true)">撤销封存</a>|<!--
-            --><span ng-if="union.$localStorage.user.StaffClaim"><a href="" ng-click="moderateArticle($event, 'Rejected', article.Rejected)">{{article.Rejected?"撤销":""}}退稿</a>|</span><!--
-            --><span ng-if="union.$localStorage.user.StaffClaim"><a href="" ng-click="moderateArticle($event, 'Warned', article.Warned)">{{article.Warned?"撤销":""}}警告</a>|</span><!--
-            --><span ng-if="union.$localStorage.user.StaffClaim"><a href="" ng-click="moderateArticle($event, 'Spotlight', article.Spotlight)">{{article.Spotlight?"撤销":""}}萃选</a>|</span><!--
-            --><a href="" ng-click="editArticle()">编辑</a>
-        </span>
-        <span class="points" ng-if="article.TypeName != '评' && article.TypeName != '简评'">
-            <point-link ng-repeat="point in article.AttachedPoints track by point.Id" type="'point'" id-code="point.IdCode" point-name="'「' + utils.getPointFirstName(point) + '」'"></point-link>
-        </span>
-        <span class="points" ng-if="(article.TypeName === '评' || article.TypeName === '简评') && article.VoteForPoint">
-            <point-link type="'point'" id-code="article.VoteForPoint.IdCode" point-name="'「' + utils.getPointFirstName(article.VoteForPoint) + '」'"></point-link>
-        </span>
+            <span class="actions" ng-if="article.canEdit">
+                <a href="" ng-if="article.Archived === 'None'" ng-click="moderateArticle($event, 'Archived')">封存</a><a ng-if="article.Archived === 'User' || (article.Archived === 'Operator' && union.$localStorage.user.StaffClaim === 'operator')" href="" ng-click="moderateArticle($event, 'Archived', true)">撤销封存</a>|<!--
+                --><span ng-if="union.$localStorage.user.StaffClaim === 'operator'"><a href="" ng-click="moderateArticle($event, 'Rejected', article.Rejected)">{{article.Rejected?"撤销":""}}退稿</a>|</span><!--
+                --><span ng-if="union.$localStorage.user.StaffClaim === 'operator'"><a href="" ng-click="moderateArticle($event, 'Warned', article.Warned)">{{article.Warned?"撤销":""}}警告</a>|</span><!--
+                --><span ng-if="union.$localStorage.user.StaffClaim === 'operator'"><a href="" ng-click="moderateArticle($event, 'Spotlight', article.Spotlight)">{{article.Spotlight?"撤销":""}}萃选</a>|</span><!--
+                --><a href="" ng-click="editArticle()">编辑</a>
+            </span>
+            <span class="points" ng-if="article.TypeName != '评' && article.TypeName != '简评'">
+                <point-link ng-repeat="point in article.AttachedPoints track by point.Id" type="'point'" id-code="point.IdCode" point-name="'「' + utils.getPointFirstName(point) + '」'"></point-link>
+            </span>
+            <span class="points" ng-if="(article.TypeName === '评' || article.TypeName === '简评') && article.VoteForPoint">
+                <point-link type="'point'" id-code="article.VoteForPoint.IdCode" point-name="'「' + utils.getPointFirstName(article.VoteForPoint) + '」'"></point-link>
+            </span>
         </div>
         <div class="review-info clearfix" ng-if="article.TypeName === '评' && article.TypeName !== '封'">
             <div class="info-attribute">
@@ -83,7 +83,7 @@
             </div>
         </div>
     </div>
-    <moderation-result ng-if="article.Archived && article.Archived !== 'None'" type="'Archived'"></moderation-result>
+    <moderation-result ng-if="(article.Archived && article.Archived !== 'None') || article.TypeName === '封'" type="'Archived'"></moderation-result>
     <moderation-result ng-if="article.Rejected" type="'Rejected'"></moderation-result>
     <moderation-result ng-if="article.Warned" type="'Warned'"></moderation-result>
     <moderation-result ng-if="article.Spotlight" type="'Spotlight'"></moderation-result>
