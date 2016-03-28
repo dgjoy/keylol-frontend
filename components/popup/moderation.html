@@ -5,7 +5,7 @@
             <h1 class="labeled-heading">{{text.mainTitle}}</h1>
         </div>
         <form ng-if="union.$localStorage.user.StaffClaim === 'operator'">
-            <span ng-if="text.reasonTexts" ng-class="{'error-flash': reasonEmpty}">操作缘由 {{reasonEmpty?"- 需要勾选至少一个操作缘由":""}}</span>
+            <span ng-if="text.reasonTexts">操作缘由</span>
             <p ng-if="text.reasonTexts" class="checkbox-group">
                 <span ng-repeat="reason in text.reasonTexts">
                     <input id="reason-{{$index}}" type="checkbox" ng-model="moderation.reasons[$index]"><label for="reason-{{$index}}">{{reason}}</label>

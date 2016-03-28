@@ -133,7 +133,7 @@
                 <span class="counts" ng-if="entry.count"><span>[+1] {{entry.count.like}}</span><span>(···) {{entry.count.comment}}</span></span>
                 <span class="datetime" am-time-ago="entry.datetime" ng-if="entry.datetime"></span>
                 <a class="delete" ng-if="data.hasDeleteButton && !entry.isMissive" href="" ng-click="ignore(entry)">移除</a>
-                <a class="delete" ng-if="data.hasDeleteButton && !entry.isMissive" href="" ng-click="noMoreRemind(entry)">屏蔽</a>
+                <a class="delete" ng-if="data.hasDeleteButton && !entry.isMissive && !(entry.fromArticle.fromComment && entry.types[0] === '评论')" href="" ng-click="noMoreRemind(entry)">不再提醒</a>
             </footer>
         </div>
     </div>

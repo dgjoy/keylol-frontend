@@ -2,8 +2,8 @@
     "use strict";
 
     keylolApp.directive("moderationResult", [
-        "union", "moderationResult",
-        function (union, moderationResult) {
+        "moderationResult",
+        function (moderationResult) {
             return {
                 restrict: "E",
                 templateUrl: "components/directives/moderation-result.html",

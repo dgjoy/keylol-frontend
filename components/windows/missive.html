@@ -4,11 +4,20 @@
             <div ng-include="'assets/images/exit.svg'"></div>
         </div>
         <div class="missive-header">
-            <h1 class="font-myriad-keylol">封存通告</h1>
-            <h3>Archives Receipt</h3>
+            <h1 class="font-myriad-keylol">{{missiveName}}</h1>
+            <h3>{{missiveEnglishName}}</h3>
         </div>
         <div class="content">
-            <p>好厉害的封存通告好厉害的封存通告好厉害的封存通告好厉害的封存通告好厉害的封存通告好厉害的封存通告好厉害的封存通告好厉害的封存通告好厉害的封存通告好厉害的封存通告好厉害的封存通告</p>
+            <article class="editor-style">
+                <p bind-html-compile="header"></p>
+                <p ng-if="isSpotlight">这篇文章将由立函时间起至 <u>{{startTime|amAdd: 14: "d"|amDateFormat: "YYYY-M-D HH:MM:SS"}}</u> 持续展示于上述场合。</p>
+                <missive-quote ng-repeat="reason in reasons track by $index" reason-text="totalReasons[reason]" ></missive-quote>
+                <p bind-html-compile="footer"></p>
+            </article>
+            <div class="content-footer">
+                <span>公函编号：{{messageId|uppercase}}</span>
+                <span>立函时间：{{startTime|amDateFormat: "YYYY-M-D HH:MM:SS"}}</span>
+            </div>
         </div>
         <div class="missive-footer clearfix">
             <div class="administration">

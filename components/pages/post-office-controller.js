@@ -5,15 +5,34 @@
     "use strict";
 
     keylolApp.controller("PostOfficeController", [
-        "pageTitle", "$scope", "union", "$http", "notification", "utils", "$timeout", "$location", "messageTypes",
+        "pageTitle", "$scope", "union", "$http", "notification", "$routeParams", "utils", "$timeout", "$location", "messageTypes",
         "window",
-        function (pageTitle, $scope, union, $http, notification, utils, $timeout, $location, messageTypes,
+        function (pageTitle, $scope, union, $http, notification, $routeParams, utils, $timeout, $location, messageTypes,
         window) {
             if(!union.$localStorage.user){
                 $location.url("/");
                 return;
             }
-            pageTitle.set("邮政中心 - 其乐");
+            var filter;
+            if($routeParams.type){
+                if($routeParams.type === "acknowledgement"){
+                    pageTitle.set("邮政中心 - 认可 - 其乐");
+                    filter = "Like";
+                    union.spolightActive = 0;
+                }else if($routeParams.type === "comment"){
+                    pageTitle.set("邮政中心 - 评论 - 其乐");
+                    filter = "Comment";
+                    union.spolightActive = 1;
+                }else if($routeParams.type === "missive"){
+                    pageTitle.set("邮政中心 - 公函 - 其乐");
+                    filter = "Missive";
+                    union.spolightActive = 2;
+                }else {
+                    $scope.notFound = true;
+                }
+            }else {
+                pageTitle.set("邮政中心 - 其乐");
+            }
 
             var timeline = {
                 title: {
@@ -40,26 +59,29 @@
                 }
                 $http.get(apiEndpoint + "message", {
                     params: {
+                        filter: filter,
                         skip: skip,
                         take: utils.timelineLoadCount
                     }
                 }).then(function (response) {
                     timeline.noMoreArticle = response.data.length < utils.timelineLoadCount;
                     var timelineTimeout;
-                    console.log(response.data);
                     for (var i in response.data) {
                         var message = response.data[i];
+                        console.log(message);
                         var entryType = messageTypes[message.Type];
                         var entry = {
                             id: message.Id,
                             isNew: message.Unread,
-                            disabled: !message.Unread,
+                            disabled: !message.Unread && !$routeParams.type,
                             types: [entryType.type],
                             fromArticle: {
-                                fromComment: message.Comment?true:false,
+                                id: message.Article.Id,
+                                fromComment: (message.Type === 'CommentLike') || (message.Type === 'CommentReply'),
                                 text: message.Article.Title,
                                 href: "article/" + message.Article.AuthorIdCode + "/" + message.Article.SequenceNumberForAuthor
                             },
+                            targetCommentId: message.Comment?message.Comment.Id:undefined,
                             datetime: message.CreateTime,
                             author: message.Operator?{
                                 username: message.Operator.UserName,
@@ -74,7 +96,7 @@
                             background: entryType.backgroundUrl,
                             isMissive: entryType.type === "公函",
                             missiveName: entryType.name,
-                            summary: entryType.getContent(message)
+                            summary: entryType.getSummary(message)
                         };
                         if (entryType.type === "公函") {
                             (function (message) {

@@ -12,21 +12,21 @@
     font-family: "Keylol Rail Sung";
     font-style: normal;
     font-weight: normal;
-    src: url("../fonts/keylol-rail-sung-subset-da06e705d6.eot"); /* IE9 */
-    src: url("../fonts/keylol-rail-sung-subset-da06e705d6.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
-    url("../fonts/keylol-rail-sung-subset-a70571c27f.woff") format("woff"), /* chrome, firefox */
-    url("../fonts/keylol-rail-sung-subset-0147e032b2.ttf") format("truetype"), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
-    url("../fonts/keylol-rail-sung-subset-8521876078.svg#Keylol Rail Sung") format("svg"); /* iOS 4.1- */
+    src: url("../fonts/keylol-rail-sung-subset-9c143865d9.eot"); /* IE9 */
+    src: url("../fonts/keylol-rail-sung-subset-9c143865d9.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    url("../fonts/keylol-rail-sung-subset-c33417d827.woff") format("woff"), /* chrome, firefox */
+    url("../fonts/keylol-rail-sung-subset-2855054f7f.ttf") format("truetype"), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+    url("../fonts/keylol-rail-sung-subset-73e194edbe.svg#Keylol Rail Sung") format("svg"); /* iOS 4.1- */
 }
 
 @font-face {
     font-family: "LiSong";
     font-style: normal;
     font-weight: normal;
-    src: url("../fonts/lisong-subset-aefa58f9ac.eot"); /* IE9 */
-    src: url("../fonts/lisong-subset-aefa58f9ac.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
-    url("../fonts/lisong-subset-49db6f8b07.woff") format("woff"), /* chrome, firefox */
-    url("../fonts/lisong-subset-acf638afb4.ttf") format("truetype"), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+    src: url("../fonts/lisong-subset-d640444720.eot"); /* IE9 */
+    src: url("../fonts/lisong-subset-d640444720.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    url("../fonts/lisong-subset-42d129b1b2.woff") format("woff"), /* chrome, firefox */
+    url("../fonts/lisong-subset-1f6a322be6.ttf") format("truetype"), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
     url("../fonts/lisong-subset-7626cd7b8e.svg#LiSong") format("svg"); /* iOS 4.1- */
 }
 

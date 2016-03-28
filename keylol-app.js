@@ -48,15 +48,9 @@
             }).when("/post-office", {
                 templateUrl: "components/pages/post-office.html",
                 controller: "PostOfficeController"
-            }).when("/activities", {
+            }).when("/post-office/:type", {
                 templateUrl: "components/pages/post-office.html",
-                controller: "ActivitiesController"
-            }).when("/comments", {
-                templateUrl: "components/pages/comments.html",
-                controller: "CommentsController"
-            }).when("/acknowledgements", {
-                templateUrl: "components/pages/acknowledgements.html",
-                controller: "AcknowledgementsController"
+                controller: "PostOfficeController"
             }).when("/search/:searchType/:keyword", {
                 templateUrl: "components/pages/search-results.html",
                 controller: "SearchResultsController"

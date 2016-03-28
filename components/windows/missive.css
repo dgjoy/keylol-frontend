@@ -18,7 +18,10 @@
     margin: 0;
 }
 
-.window-missive .missive-header h1,
+.window-missive .missive-header h1 {
+    font-size: 32px;
+}
+
 .window-missive .missive-footer h1 {
     font-size: 24px;
 }
@@ -30,8 +33,35 @@
 .window-missive .content {
     background-color: white;
     padding: 30px 20px 20px;
-    word-wrap: break-word;
-    white-space: normal;
+}
+
+.window-missive .content .editor-style > p {
+    text-indent: 2em;
+}
+
+.window-missive .content .editor-style missive-quote blockquote > div > p:not(:first-of-type) {
+    text-indent: 2em;
+    margin: 0;
+    padding: 0;
+}
+
+.window-missive .content .editor-style missive-quote blockquote > div > ul {
+    margin: 0 0 16px 0;
+    padding: 0;
+    list-style: none;
+}
+
+.window-missive .content .editor-style missive-quote blockquote > div > ul > li {
+    text-indent: 4em;
+}
+
+.window-missive .content .content-footer {
+    margin-top: 20px;
+    color: #bbb;
+}
+
+.window-missive .content .content-footer span:first-of-type {
+  float: right;
 }
 
 .window-missive .missive-footer {
