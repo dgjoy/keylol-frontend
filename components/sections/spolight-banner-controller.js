@@ -8,15 +8,15 @@
                 $scope.banner = [{
                     imageSrc: "assets/images/spotlight/post-office-l.png",
                     imageSrcActive: "assets/images/spotlight/post-office-l-active.png",
-                    link: "post-office/acknowledgements"
+                    link: "post-office/acknowledgement"
                 },{
                     imageSrc: "assets/images/spotlight/post-office-m.png",
                     imageSrcActive: "assets/images/spotlight/post-office-m-active.png",
-                    link: "article/LEEEE/8"
+                    link: "post-office/comment"
                 },{
                     imageSrc: "assets/images/spotlight/post-office-r.png",
                     imageSrcActive: "assets/images/spotlight/post-office-r-active.png",
-                    link: "article/LEEEE/8"
+                    link: "post-office/missive"
                 }];
                 if(typeof union.spolightActive === "number"){
                     $scope.banner[union.spolightActive].imageSrc = $scope.banner[union.spolightActive].imageSrcActive;

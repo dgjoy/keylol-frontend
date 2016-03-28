@@ -7,7 +7,10 @@
             $scope.showArchiveWindow = function () {
                 window.show({
                     templateUrl: "components/windows/missive.html",
-                    controller: "MissiveController"
+                    controller: "MissiveController",
+                    inputs: {
+                        message: {}
+                    }
                 });
             };
             $scope.showPointListWindow = function () {

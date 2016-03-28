@@ -33,11 +33,7 @@
                     {action: "取消"}
                 ]).then(function (result) {
                     if (result) {
-                        $http.put(apiEndpoint + "like/" + entry.id, {}, {
-                            params: {
-                                ignore: true
-                            }
-                        }).then(function () {
+                        $http.delete(apiEndpoint + "message/" + entry.id).then(function () {
                             notification.success("移除记录成功");
                             $scope.data.entries.splice($scope.data.entries.indexOf(entry), 1);
                         }, function (response) {
@@ -47,6 +43,7 @@
                 });
             };
 
+            //todo 缺少接口
             $scope.noMoreRemind = function (entry) {
                 if (entry.commentId) {
                     $http.put(apiEndpoint + "comment/" + entry.commentId + "/ignore", {}, {
