@@ -68,7 +68,6 @@
                     var timelineTimeout;
                     for (var i in response.data) {
                         var message = response.data[i];
-                        console.log(message);
                         var entryType = messageTypes[message.Type];
                         var entry = {
                             id: message.Id,
