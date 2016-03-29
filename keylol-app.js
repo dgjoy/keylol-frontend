@@ -57,6 +57,9 @@
             }).when("/related/:idCode/:type", {
                 templateUrl: "components/pages/search-results.html",
                 controller: "RelatedController"
+            }).when("/coupon", {
+                templateUrl: "components/pages/coupon.html",
+                controller: "CouponController"
             }).otherwise({
                 templateUrl: "components/pages/not-found.html",
                 controller: "NotFoundController"
