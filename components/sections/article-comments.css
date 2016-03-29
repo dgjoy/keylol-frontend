@@ -14,8 +14,21 @@
     min-width: 300px;
 }
 
+.section-article-comments.archive {
+    padding: 20px 0;
+}
+
 .section-article-comments .labeled-heading {
     margin-left: 0;
+}
+
+.section-article-comments.archive .labeled-heading {
+    margin: 0;
+    color: #ccc;
+}
+
+.section-article-comments.archive .labeled-heading::after {
+    background-color: #ccc;
 }
 
 .section-article-comments .avatar-anchor {
@@ -84,18 +97,37 @@
     font-weight: bold;
 }
 
+.section-article-comments .archived .header .name a {
+    color: #bbb;
+}
+
 .section-article-comments .header .as-author {
     color: #89A;
+}
+
+.section-article-comments .archived .header .title {
+    color: #bbb;
+    font-weight: bold;
 }
 
 .section-article-comments .header .time {
     color: #BBB;
 }
 
+.section-article-comments .header .moderated {
+    color: white;
+    background-color: #e30613;
+    padding: 0 3px;
+}
+
 .section-article-comments .header .action {
-    color: #89A;
-    margin-left: 12px;
+    color: #ccc;
     display: none;
+}
+
+.section-article-comments .header .action a {
+    color: #89A;
+    margin: 5px;
 }
 
 .section-article-comments .content {
@@ -103,8 +135,18 @@
     white-space: pre-wrap;
 }
 
+.section-article-comments .archived .content,
+.section-article-comments .archived  .content a {
+    color: #bbb;
+}
+
 .section-article-comments .content a{
     color: #89A;
+}
+
+.section-article-comments .archived .content .like-count,
+.section-article-comments .archived .content .hot-signal {
+    background: #ccc;
 }
 
 .section-article-comments .content .like-count {

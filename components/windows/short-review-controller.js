@@ -57,7 +57,7 @@
                 return null;
             };
             $scope.submit = function(){
-                if ($scope.submitLock || $scope.vm.Content.length > 199)
+                if ($scope.submitLock || $scope.vm.Content.length > 99)
                     return;
                 var emptyString = checkEmpty();
                 if(emptyString){

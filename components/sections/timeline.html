@@ -52,11 +52,11 @@
             </li>
         </ul>
     </div>
-    <div class="entry" ng-repeat="entry in data.entries" ng-class="{'show': entry.show}">
+    <div class="entry" ng-repeat="entry in data.entries" ng-class="{'show': entry.show, 'disabled': entry.disabled}">
         <svg xmlns="http://www.w3.org/2000/svg" class="card-line-background">
             <rect x="6" width="5" height="100%"></rect>
         </svg>
-        <div class="card box-shadowed">
+        <div class="card box-shadowed" webp-background="{{entry.isMissive?'assets/images/Syuusouretsujitsu.png':''}}">
             <svg xmlns="http://www.w3.org/2000/svg" class="card-line">
                 <rect x="6" width="5" height="100%"></rect>
                 <circle cx="8.5" lol-cy="{{entry.sources?70:27}}" r="6.5" class="inverse"></circle>
@@ -76,9 +76,13 @@
             <div class="entry-main" ng-class="{'has-sources': entry.sources}">
                 <div class="entry-heading">
                     <div class="entry-author" ng-if="entry.author">
-                        <point-link type="'user'" avatar-url="entry.author.avatarUrl" id-code="entry.author.idCode" new-page="true"></point-link>
+                        <point-link ng-if="!entry.author.isStaffTeam" type="'user'" avatar-url="entry.author.avatarUrl" id-code="entry.author.idCode" new-page="true"></point-link>
+                        <span ng-if="entry.author.isStaffTeam" class="avatar-anchor">
+                            <img class="avatar-small" alt="头像" webp-src="{{entry.author.avatarUrl|avatarUrl}}">
+                        </span>
                         <h4>
-                            <point-link type="'user'" point-name="'@' + entry.author.username" id-code="entry.author.idCode" new-page="true"></point-link>
+                            <point-link ng-if="!entry.author.isStaffTeam" type="'user'" point-name="'@' + entry.author.username" id-code="entry.author.idCode" new-page="true"></point-link>
+                            <span ng-if="entry.author.isStaffTeam">其乐职员团队</span>
                         </h4>
                     </div>
                     <h3>
@@ -87,21 +91,32 @@
                             <circle cx="3.5" cy="3.5" r="3.5"></circle>
                         </svg>
                         <point-link ng-if="entry.voteForPoint" type="'point'" id-code="entry.voteForPoint.IdCode" point-name="'「' + utils.getPointFirstName(entry.voteForPoint) + '」'" new-page="true"></point-link>
-                        <span ng-if="entry.fromArticle"><a href="{{entry.fromArticle.href}}">《{{entry.fromArticle.text|maxLength:14}}》</a><span ng-if="entry.fromArticle.fromComment">中的评论</span></span>
+                        <span ng-if="entry.fromArticle && !entry.isMissive"><a href="{{entry.fromArticle.href}}">《{{entry.fromArticle.text|maxLength:14}}》</a><span ng-if="entry.fromArticle.fromComment">中的评论</span></span>
+                        <span ng-if="entry.isMissive">{{entry.missiveName}}</span>
                         <span ng-if="entry.pointInfo">{{entry.pointInfo.reader}} 名读者 / {{entry.pointInfo.article}} 篇文章</span>
                     </h3>
                 </div>
-                <a ng-href="{{entry.url}}" target="_blank" class="entry-content clearfix" ng-class="{'one-line': !entry.hasThumbnail && !entry.isPoint && !entry.isUser, 'for-point': entry.isPoint || entry.isUser, 'free-height': entry.types[0] == '简评'}">
+                <a ng-if="entry.url && !entry.clickAction" ng-href="{{entry.url}}" target="_blank" class="entry-content clearfix" ng-class="{'one-line': !entry.hasThumbnail && !entry.isPoint && !entry.isUser, 'for-point': entry.isPoint || entry.isUser, 'free-height': entry.types[0] == '简评'}">
                     <div ng-if="entry.hasThumbnail" class="thumbnail" webp-background="{{entry.thumbnail|timelineThumbnailUrl}}"></div>
                     <div ng-if="entry.hasBackground" class="background" webp-background="{{entry.background|backgroundUrl}}"></div>
                     <div class="summary">
                         <h3 ng-if="entry.title">
                             <span ng-if="entry.types[0] !== '简评'">{{entry.title}}</span>
-                            <div class="vote-circle" ng-if="entry.vote">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="{{entry.voteColor}}" ng-repeat="circle in circles(entry.vote) track by $index">
-                                    <circle cx="4" cy="4" r="4"></circle>
-                                </svg>
-                            </div>
+                            <vote-circle ng-if="entry.vote" vote="entry.vote" ></vote-circle>
+                        </h3>
+                        <p>{{entry.summary}}</p>
+                    </div>
+                    <div class="point-avatar" ng-if="entry.isPoint || entry.isUser">
+                        <img class="avatar-big" webp-src="{{entry.pointAvatar|avatarUrl}}" alt="头像">
+                    </div>
+                </a>
+                <a ng-if="entry.clickAction && !entry.url" href="" ng-click="entry.clickAction()" class="entry-content clearfix" ng-class="{'one-line': !entry.hasThumbnail && !entry.isPoint && !entry.isUser, 'for-point': entry.isPoint || entry.isUser, 'free-height': entry.types[0] == '简评'}">
+                    <div ng-if="entry.hasThumbnail" class="thumbnail" webp-background="{{entry.thumbnail|timelineThumbnailUrl}}"></div>
+                    <div ng-if="entry.hasBackground" class="background" webp-background="{{entry.background|backgroundUrl}}"></div>
+                    <div class="summary">
+                        <h3 ng-if="entry.title">
+                            <span ng-if="entry.types[0] !== '简评'">{{entry.title}}</span>
+                            <vote-circle ng-if="entry.vote" vote="entry.vote" ></vote-circle>
                         </h3>
                         <p>{{entry.summary}}</p>
                     </div>
@@ -117,8 +132,8 @@
             <footer ng-if="(entry.datetime || entry.count) || data.hasDeleteButton">
                 <span class="counts" ng-if="entry.count"><span>[+1] {{entry.count.like}}</span><span>(···) {{entry.count.comment}}</span></span>
                 <span class="datetime" am-time-ago="entry.datetime" ng-if="entry.datetime"></span>
-                <a class="delete" ng-if="data.hasDeleteButton" href="" ng-click="ignore(entry)">移除纪录</a>
-                <a class="delete" ng-if="data.hasDeleteButton" href="" ng-click="noMoreRemind(entry)">不再提醒</a>
+                <a class="delete" ng-if="data.hasDeleteButton && !entry.isMissive" href="" ng-click="ignore(entry)">移除</a>
+                <a class="delete" ng-if="data.hasDeleteButton && !entry.isMissive && !(entry.fromArticle.fromComment && entry.types[0] === '评论')" href="" ng-click="noMoreRemind(entry)">不再提醒</a>
             </footer>
         </div>
     </div>

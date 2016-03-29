@@ -5,9 +5,17 @@
     min-width: 870px;
 }
 
+.section-article-header.archive {
+    padding: 20px 0;
+}
+
 .section-article-header h1 {
     margin: 0;
     padding-right: 13px;
+}
+
+.section-article-header.archive h1::after {
+    background-color: #ccc;
 }
 
 .section-article-header h1 .time {
@@ -15,9 +23,17 @@
     margin-left: 34px;
 }
 
+.section-article-header.archive h1 {
+    color: #ccc;
+}
+
 .section-article-header h1 .entry-type {
     margin-right: 5px;
     vertical-align: top;
+}
+
+.section-article-header.archive h1 .entry-type {
+    background-color: #ccc;
 }
 
 .section-article-header h1 .title {
@@ -27,23 +43,17 @@
     display: inline-block;
     max-width: 80%;
     vertical-align: top;
+    margin-right: 5px;
 }
 
-.section-article-header h1 .vote {
-    float: right;
-    margin-left: 6px;
-    color: #89A;
+.section-article-header h1 .error {
+    color: #e30613;
 }
 
 .section-article-header .related-info {
     padding: 0 13px 0 8px;
     line-height: 20px;
     margin-top: 10px;
-}
-
-.section-article-header .related-info .actions {
-    float: right;
-    margin-left: 20px;
 }
 
 .section-article-header .related-info .points {
@@ -53,13 +63,15 @@
     display: block;
 }
 
-.section-article-header .actions a {
-    color: #89A;
-    margin-right: 9px;
+.section-article-header .related-info .actions {
+    color: #ccc;
+    float: right;
+    margin-left: 20px;
 }
 
-.section-article-header .actions a:last-of-type {
-    margin-right: 0;
+.section-article-header .actions a {
+    color: #89A;
+    margin: 9px;
 }
 
 .section-article-header .review-info {

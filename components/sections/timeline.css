@@ -21,6 +21,14 @@
     fill: #159;
 }
 
+.section-timeline .disabled .card .card-line {
+    fill: #ccc;
+}
+
+.section-timeline .disabled .card .card-line circle.inverse {
+    fill: #ccc;
+}
+
 /* ------- */
 /* Heading */
 /* ------- */
@@ -297,8 +305,9 @@
 }
 
 .section-timeline .entry .card {
+    background: white no-repeat center;
+    background-size: 256px;
     position: relative;
-    background-color: white;
     padding-left: 31px;
     padding-right: 13px;
     padding-bottom: 10px;
@@ -359,6 +368,10 @@
     margin-right: 5px;
 }
 
+.section-timeline .disabled .entry-heading .entry-type {
+    background-color: #ccc;
+}
+
 .section-timeline .entry-heading .entry-new {
     width: 7px;
     height: 7px;
@@ -392,6 +405,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    color: #159;
 }
 
 /* Content */
@@ -472,45 +486,13 @@
     background-color: rgba(255,255,255,0.95);
 }
 
-.section-timeline .entry-content .summary .vote-circle {
-    display: inline-block;
-    width: 50px;
-    vertical-align: top;
-}
-
-.section-timeline .entry-content .summary .vote-circle svg {
-    display: inline-block;
-    width: 10px;
-    height: 8px;
-    transform: translateY(-2px);
-}
-
-.section-timeline .entry-content .summary .vote-circle svg.awesome {
-    fill: #00ab4e !important;
-}
-
-.section-timeline .entry-content .summary .vote-circle svg.good {
-    fill: #71bf44 !important;
-}
-
-.section-timeline .entry-content .summary .vote-circle svg.not-bad {
-    fill: #f7943e !important;
-}
-
-.section-timeline .entry-content .summary .vote-circle svg.bad {
-    fill: #e30613 !important;
-}
-
-.section-timeline .entry-content .summary .vote-circle svg.terrible {
-    fill: #541912 !important;
-}
-
 .section-timeline .entry-content h3 span {
     display: inline-block;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 494px;
+    margin-right: 5px;
 }
 
 .section-timeline .entry-content h3 {
@@ -576,6 +558,11 @@
     float: right;
     color: #748a97;
     margin-left: 10px;
+    visibility: hidden;
+}
+
+.section-timeline .entry:hover footer .delete {
+    visibility: visible;
 }
 
 .section-timeline .entry footer .likes {

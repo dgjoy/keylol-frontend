@@ -158,7 +158,6 @@
                                     sources: {},
                                     voteForPoint: article.VoteForPoint,
                                     vote: article.Vote,
-                                    voteColor: article.Vote?utils.getVoteColor(article.Vote -1):null,
                                     datetime: article.PublishTime,
                                     title: article.Title,
                                     summary: article.Content,
