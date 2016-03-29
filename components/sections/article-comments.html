@@ -19,9 +19,12 @@
                     </span>
                     <a href="" ng-click="reply(comment.SequenceNumberForArticle)">回复</a>
                     <span ng-if="union.$localStorage.user.StaffClaim === 'operator' || comment.cannotLike">
-                        |<a href="" ng-if="comment.Archived === 'None'" ng-click="moderateComment($event, comment, 'Archived')">封存</a>
+                        |
+                        <a href="" ng-if="comment.Archived === 'None'" ng-click="moderateComment($event, comment, 'Archived')">封存</a>
                         <a ng-if="comment.Archived === 'User' || (comment.Archived === 'Operator' && union.$localStorage.user.StaffClaim === 'operator')" href="" ng-click="moderateComment($event, comment, 'Archived', true)">撤销封存</a>
-                        <span ng-if="union.$localStorage.user.StaffClaim === 'operator'">|<a href="" ng-click="moderateComment($event, comment, 'Warned', comment.Warned)">{{comment.Warned?"撤销":""}}警告</a></span>
+                        <span ng-if="union.$localStorage.user.StaffClaim === 'operator'">
+                            |
+                            <a href="" ng-click="moderateComment($event, comment, 'Warned', comment.Warned)">{{comment.Warned?"撤销":""}}警告</a></span>
                     </span>
                 </span>
             </div>
@@ -49,9 +52,13 @@
                     </span>
                     <a href="" ng-click="reply(comment.SequenceNumberForArticle)">回复</a>
                     <span ng-if="union.$localStorage.user.StaffClaim === 'operator' || comment.cannotLike">
-                        |<a href="" ng-if="comment.Archived === 'None'" ng-click="moderateComment($event, comment, 'Archived')">封存</a>
+                        |
+                        <a href="" ng-if="comment.Archived === 'None'" ng-click="moderateComment($event, comment, 'Archived')">封存</a>
                         <a ng-if="comment.Archived === 'User' || (comment.Archived === 'Operator' && union.$localStorage.user.StaffClaim === 'operator')" href="" ng-click="moderateComment($event, comment, 'Archived', true)">撤销封存</a>
-                        <span ng-if="union.$localStorage.user.StaffClaim === 'operator'">|<a href="" ng-click="moderateComment($event, comment, 'Warned', comment.Warned)">{{comment.Warned?"撤销":""}}警告</a></span>
+                        <span ng-if="union.$localStorage.user.StaffClaim === 'operator'">
+                            |
+                            <a href="" ng-click="moderateComment($event, comment, 'Warned', comment.Warned)">{{comment.Warned?"撤销":""}}警告</a>
+                        </span>
                     </span>
                 </span>
             </div>

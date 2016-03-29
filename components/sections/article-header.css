@@ -19,6 +19,7 @@
 }
 
 .section-article-header h1 .time {
+    color: #bbb;
     float: right;
     margin-left: 34px;
 }
@@ -72,6 +73,10 @@
 .section-article-header .actions a {
     color: #89A;
     margin: 9px;
+}
+
+.section-article-header .actions>a:last-of-type {
+    margin-right: 0;
 }
 
 .section-article-header .review-info {
