@@ -9,8 +9,7 @@
     </div>
     <div ng-if="union.$localStorage.login">
         <div class="actions">
-            <a href="acknowledgements" class="border-button top-border" ng-class="{active: union.$localStorage.user.HasNewLike}">[+]</a>
-            <a href="comments" class="border-button top-border" ng-class="{active: union.$localStorage.user.HasNewComment}">(···)</a>
+            <a href="post-office" class="border-button top-border" ng-class="{active: newMessages[0] || newMessages[1] || newMessages[2]}">{{(newMessages[0] || newMessages[1] || newMessages[2])?(newMessages[0]?"+"+newMessages[0]:"")+((newMessages[0]&&(newMessages[1]||newMessages[2]))?"　":"")+(newMessages[1]?"···"+newMessages[1]:"")+((newMessages[1]&&newMessages[2])?"　":"")+(newMessages[2]?"!!"+newMessages[2]:""):"O"}}</a>
         </div>
         <div class="clearfix">
             <a class="avatar-anchor" href="user/{{union.$localStorage.user.IdCode}}">

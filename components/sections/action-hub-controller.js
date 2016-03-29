@@ -5,6 +5,9 @@
         "$scope", "union", "window",
         function ($scope, union, window) {
             $scope.union = union;
+            $scope.newMessages = union.$localStorage.user.MessageCount?union.$localStorage.user.MessageCount.split(',').map(function (element) {
+                return parseInt(element);
+            }):[0,0,0];
 
             $scope.showRegistrationWindow = function () {
                 window.show({

@@ -30,11 +30,6 @@
                 }
                 $scope.reasonEmpty = false;
                 $timeout(function () {
-                    if(union.$localStorage.user.StaffClaim === "operator" && $scope.text.reasonTexts && dto.Reasons.length === 0){
-                        $scope.reasonEmpty = true;
-                        return;
-                    }
-
                     $scope.submitLock = true;
                     if(type.target === "Article"){
                         $http.put(apiEndpoint + "article/" + targetId + "/moderation", dto).then(function () {

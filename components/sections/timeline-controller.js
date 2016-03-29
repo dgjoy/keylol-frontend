@@ -33,11 +33,7 @@
                     {action: "取消"}
                 ]).then(function (result) {
                     if (result) {
-                        $http.put(apiEndpoint + "like/" + entry.id, {}, {
-                            params: {
-                                ignore: true
-                            }
-                        }).then(function () {
+                        $http.delete(apiEndpoint + "message/" + entry.id).then(function () {
                             notification.success("移除记录成功");
                             $scope.data.entries.splice($scope.data.entries.indexOf(entry), 1);
                         }, function (response) {
@@ -48,26 +44,82 @@
             };
 
             $scope.noMoreRemind = function (entry) {
-                if (entry.commentId) {
-                    $http.put(apiEndpoint + "comment/" + entry.commentId + "/ignore", {}, {
-                        params: {
-                            ignore: true
-                        }
-                    }).then(function () {
-                        notification.success("评论认可不再提醒成功");
-                    }, function (response) {
-                        notification.error("评论认可不再提醒失败", response);
-                    });
+                if (entry.fromArticle.fromComment) {
+                    if(entry.types[0] === "评论"){
+                        // notification.attention("忽略这则评论收到回复的邮政信息", [
+                        //     {action: "不再提醒", value: true},
+                        //     {action: "取消"}
+                        // ]).then(function (result) {
+                        //     if (result) {
+                        //         $http.put(apiEndpoint + "comment/" + entry.targetCommentId + "/ignore", {}, {
+                        //             params: {
+                        //                 ignore: true,
+                        //                 type: "Comment"
+                        //             }
+                        //         }).then(function () {
+                        //             notification.success("已忽略这则评论的回复信息");
+                        //         }, function (response) {
+                        //             notification.error("忽略这则评论的回复信息失败", response);
+                        //         });
+                        //     }
+                        // });
+                    }else if(entry.types[0] === "认可"){
+                        notification.attention("忽略这则评论获得认可的邮政信息", [
+                            {action: "不再提醒", value: true},
+                            {action: "取消"}
+                        ]).then(function (result) {
+                            if (result) {
+                                $http.put(apiEndpoint + "comment/" + entry.targetCommentId + "/ignore", {}, {
+                                    params: {
+                                        ignore: true,
+                                        type: "Like"
+                                    }
+                                }).then(function () {
+                                    notification.success("已忽略这则评论的认可信息");
+                                }, function (response) {
+                                    notification.error("忽略这则评论的认可信息失败", response);
+                                });
+                            }
+                        });
+                    }
                 } else {
-                    $http.put(apiEndpoint + "article/" + entry.fromArticle.id + "/ignore", {}, {
-                        params: {
-                            ignore: true
-                        }
-                    }).then(function () {
-                        notification.success("文章认可不再提醒成功");
-                    }, function (response) {
-                        notification.error("文章认可不再提醒失败", response);
-                    });
+                    if(entry.types[0] === "评论"){
+                        notification.attention("忽略这篇文章收到评论的邮政信息", [
+                            {action: "不再提醒", value: true},
+                            {action: "取消"}
+                        ]).then(function (result) {
+                            if (result) {
+                                $http.put(apiEndpoint + "article/" + entry.fromArticle.id + "/ignore", {}, {
+                                    params: {
+                                        ignore: true,
+                                        type: "Comment"
+                                    }
+                                }).then(function () {
+                                    notification.success("已忽略这篇文章的回复信息");
+                                }, function (response) {
+                                    notification.error("忽略这篇文章的回复信息失败", response);
+                                });
+                            }
+                        });
+                    }else if(entry.types[0] === "认可"){
+                        notification.attention("忽略这篇文章获得认可的邮政信息", [
+                            {action: "不再提醒", value: true},
+                            {action: "取消"}
+                        ]).then(function (result) {
+                            if (result) {
+                                $http.put(apiEndpoint + "article/" + entry.fromArticle.id + "/ignore", {}, {
+                                    params: {
+                                        ignore: true,
+                                        type: "Like"
+                                    }
+                                }).then(function () {
+                                    notification.success("已忽略这篇文章的认可信息");
+                                }, function (response) {
+                                    notification.error("忽略这篇文章的认可信息失败", response);
+                                });
+                            }
+                        });
+                    }
                 }
             };
 

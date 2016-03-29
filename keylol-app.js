@@ -45,15 +45,12 @@
             }).when("/readers", {
                 templateUrl: "components/pages/search-results.html",
                 controller: "ReadersController"
-            }).when("/post", {
-                templateUrl: "components/pages/post.html",
-                controller: "PostController"
-            }).when("/comments", {
-                templateUrl: "components/pages/comments.html",
-                controller: "CommentsController"
-            }).when("/acknowledgements", {
-                templateUrl: "components/pages/acknowledgements.html",
-                controller: "AcknowledgementsController"
+            }).when("/post-office", {
+                templateUrl: "components/pages/post-office.html",
+                controller: "PostOfficeController"
+            }).when("/post-office/:type", {
+                templateUrl: "components/pages/post-office.html",
+                controller: "PostOfficeController"
             }).when("/search/:searchType/:keyword", {
                 templateUrl: "components/pages/search-results.html",
                 controller: "SearchResultsController"

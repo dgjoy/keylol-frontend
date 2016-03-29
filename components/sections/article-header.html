@@ -13,7 +13,7 @@
                 <a href="" ng-if="article.Archived === 'None'" ng-click="moderateArticle($event, 'Archived')">封存</a><a ng-if="article.Archived === 'User' || (article.Archived === 'Operator' && union.$localStorage.user.StaffClaim === 'operator')" href="" ng-click="moderateArticle($event, 'Archived', true)">撤销封存</a>|<!--
                 --><span ng-if="union.$localStorage.user.StaffClaim === 'operator'"><a href="" ng-click="moderateArticle($event, 'Rejected', article.Rejected)">{{article.Rejected?"撤销":""}}退稿</a>|</span><!--
                 --><span ng-if="union.$localStorage.user.StaffClaim === 'operator'"><a href="" ng-click="moderateArticle($event, 'Warned', article.Warned)">{{article.Warned?"撤销":""}}警告</a>|</span><!--
-                --><span ng-if="union.$localStorage.user.StaffClaim === 'operator'"><a href="" ng-click="moderateArticle($event, 'Spotlight', article.Spotlight)">{{article.Spotlight?"撤销":""}}萃选</a>|</span><!--
+                --><span ng-if="union.$localStorage.user.StaffClaim === 'operator' || article.Spotlight"><a href="" ng-click="moderateArticle($event, 'Spotlight', article.Spotlight)">{{article.Spotlight?"撤销":""}}萃选</a>|</span><!--
                 --><a href="" ng-click="editArticle()">编辑</a>
             </span>
             <span class="points" ng-if="article.TypeName != '评' && article.TypeName != '简评'">
