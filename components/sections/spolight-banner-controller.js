@@ -32,6 +32,9 @@
                     },{
                         imageSrc: "assets/images/spotlight/player-group.png",
                         link: "article/LEEEE/4"
+                    },{
+                        imageSrc: "assets/images/spotlight/cool-t-shirt.png",
+                        link: "article/LEEEE/10"
                     }
                 ];
                 $scope.banner = [];
