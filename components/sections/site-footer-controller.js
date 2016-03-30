@@ -5,7 +5,7 @@
         "$scope", "$element", "$window",
         function ($scope, $element, $window) {
             $scope.scrollToTop = function () {
-                $("body").animate({
+                $("html,body").animate({
                     scrollTop: 0
                 });
             };

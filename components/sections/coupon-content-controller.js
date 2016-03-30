@@ -14,6 +14,7 @@
             $scope.setPage = function (page) {
                 $scope.page = page;
             }
+            $scope.inviteLink = "https://www.keylol.com/?i=10101";
         }
     ]);
 })();

@@ -101,6 +101,117 @@
     text-align: left;
 }
 
+.section-coupon-content .ranks tr td:nth-of-type(1),
+.section-coupon-content .ranks tr th:nth-of-type(1) {
+    width: 80px;
+    text-align: left;
+}
+
+.section-coupon-content .ranks tr td:nth-of-type(2),
+.section-coupon-content .ranks tr th:nth-of-type(2) {
+    width: 410px;
+    text-align: left;
+}
+
+.section-coupon-content .ranks tr td:nth-of-type(3),
+.section-coupon-content .ranks tr th:nth-of-type(3) {
+    width: 90px;
+    text-align: right;
+}
+
+.section-coupon-content .ranks tr td:nth-of-type(4),
+.section-coupon-content .ranks tr th:nth-of-type(4) {
+    text-align: left;
+    padding-left: 90px;
+}
+
+.section-coupon-content .ranks tr td:nth-of-type(2) .avatar-anchor {
+    float: left;
+}
+
+.section-coupon-content .ranks tr td:nth-of-type(2) .avatar-anchor img {
+    width: 32px;
+    height: 32px;
+}
+
+.section-coupon-content .ranks tr td:nth-of-type(2) .title {
+    float: left;
+    margin-left: 14px;
+}
+
+.section-coupon-content .ranks tr td:nth-of-type(2) .title p {
+    margin: 0;
+    line-height: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100px;
+}
+
+.section-coupon-content .ranks tr td:nth-of-type(2) .title p:first-of-type a {
+    color: #159;
+}
+
+.section-coupon-content .ranks tbody tr:nth-of-type(1) td:nth-of-type(1),
+.section-coupon-content .ranks tbody tr:nth-of-type(2) td:nth-of-type(1),
+.section-coupon-content .ranks tbody tr:nth-of-type(3) td:nth-of-type(1) {
+    font-weight: bold;
+    color: #159;
+}
+
+.section-coupon-content .ranks tbody tr:nth-of-type(1) td:nth-of-type(2) .title p:first-of-type a,
+.section-coupon-content .ranks tbody tr:nth-of-type(2) td:nth-of-type(2) .title p:first-of-type a,
+.section-coupon-content .ranks tbody tr:nth-of-type(3) td:nth-of-type(2) .title p:first-of-type a {
+    font-weight: bold;
+}
+
+.section-coupon-content .ranks tbody tr:nth-of-type(1) td:nth-of-type(3),
+.section-coupon-content .ranks tbody tr:nth-of-type(2) td:nth-of-type(3),
+.section-coupon-content .ranks tbody tr:nth-of-type(3) td:nth-of-type(3) {
+    color: #159;
+}
+
+.section-coupon-content .ranks tr td:nth-of-type(2) .title p span {
+    color: #748a97;
+}
+
+.section-coupon-content .invite p {
+    text-indent: 2em;
+}
+
+.section-coupon-content .invite .invite-rule {
+    display: flex;
+    margin: 30px -20px;
+}
+
+.section-coupon-content .invite .invite-rule div {
+    padding: 15px 95px;
+    flex: 1;
+}
+
+.section-coupon-content .invite .invite-rule div .rule-result {
+    float: right;
+}
+
+.section-coupon-content .invite .invite-rule div:first-of-type {
+    border-right: 1px solid #ccc;
+}
+
+.section-coupon-content .invite .invite-rule div:first-of-type .rule-result {
+    color: #159;
+}
+
+.section-coupon-content .invite .invite-rule div:last-of-type .rule-result {
+    color: #00ab4e;
+}
+
+.section-coupon-content .invite input {
+    margin: 20px auto 0 auto;
+    padding: 0 20px;
+    display: block;
+    width: 200px;
+}
+
 .section-coupon-content .bottom-sawtooth {
     position: absolute;
     bottom: -20px;

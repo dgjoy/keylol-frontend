@@ -70,7 +70,7 @@
                         } else {
                             getAndFlushComments(article, $location.hash(), "sequence", function () {
                                 $timeout(function () {
-                                    $("body").animate({
+                                    $("html,body").animate({
                                         scrollTop: $("#comment-" + $location.hash()).offset().top
                                     }, function () {
                                         $("#comment-" + $location.hash()).addClass("highlight");
@@ -85,7 +85,7 @@
                                 var hashNumber = parseInt(newSplit[1]);
                                 getAndFlushComments(article, hashNumber, "sequence", function () {
                                     $timeout(function () {
-                                        $("body").animate({
+                                        $("html,body").animate({
                                             scrollTop: $("#comment-" + hashNumber).offset().top
                                         }, function () {
                                             $("#comment-" + hashNumber).addClass("highlight");
