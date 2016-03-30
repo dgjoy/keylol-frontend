@@ -13,7 +13,8 @@
             });
             $scope.setPage = function (page) {
                 $scope.page = page;
-            }
+            };
+            union.coupon.setPage = $scope.setPage;
             $scope.inviteLink = "https://www.keylol.com/?i=10101";
         }
     ]);

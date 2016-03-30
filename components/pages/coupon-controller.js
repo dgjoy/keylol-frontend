@@ -28,6 +28,7 @@
                 id: union.$localStorage.user.Id,
                 url: "user/" + union.$localStorage.user.IdCode
             };
+            union.coupon = {}
         }
     ]);
 })();

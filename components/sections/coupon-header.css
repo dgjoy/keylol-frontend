@@ -41,6 +41,10 @@
     color: #bbb;
 }
 
+.section-coupon-header .coupon-rule ul li .rule-content a {
+    color: #89A;
+}
+
 .section-coupon-header .coupon-rule ul li .rule-result {
     float: right;
 }
