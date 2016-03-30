@@ -1,0 +1,76 @@
+﻿
+<div ng-controller="CouponContentController as couponContent" class="section-coupon-content box-shadowed">
+    <div class="heading">
+        <div class="menu-right">
+            <ul class="list-inline">
+                <li ng-class="{current: page === 'records'}">
+                    <a href="" ng-click="setPage('records')">积分记录</a>
+                    |
+                </li>
+                <li ng-class="{current: page === 'ranks'}">
+                    <a href="" ng-click="setPage('ranks')">社区排行</a>
+                    |
+                </li>
+                <li ng-class="{current: page === 'invite'}">
+                    <a href="" ng-click="setPage('invite')">邀请注册</a>
+                </li>
+            </ul>
+        </div>
+        <p>当前文券</p>
+        <h1>7 ◆</h1>
+    </div>
+    <div ng-show="page === 'records'" class="records clearfix">
+        <table>
+            <thead>
+            <tr>
+                <th>事件</th>
+                <th>变更明细</th>
+                <th>文券余额</th>
+                <th>时间</th>
+                <th>详细描述</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>收到认可</td>
+                <td class="plus">＋ 1 ◆</td>
+                <td>7 ◆</td>
+                <td>2016-03-27 07:42</td>
+                <td><point-link type="'user'" id-code="10101" point-name="'@ZenDay'"></point-link> 认可你的文章<a href="/article/10101/1">《该怎么定义》</a></td>
+            </tr>
+            <tr>
+                <td>收到认可</td>
+                <td class="minus">－ 1 ◆</td>
+                <td>7 ◆</td>
+                <td>2016-03-27 07:42</td>
+                <td><point-link type="'user'" id-code="10101" point-name="'@ZenDay'"></point-link> 认可你的文章<a href="/article/10101/1">《该怎么定义》</a></td>
+            </tr>
+            </tbody>
+        </table>
+        <pagination total="3" current="1"></pagination>
+    </div>
+    <div ng-show="page === 'ranks'" class="ranks clearfix">
+        <table>
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>用户</th>
+                <th>文券</th>
+                <th>获得认可</th>
+                <th>详细描述</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>1</td>
+                <td>＋ 1 ◆</td>
+                <td>7 ◆</td>
+                <td>2016-03-27 07:42</td>
+                <td><point-link type="'user'" id-code="10101" point-name="'@ZenDay'"></point-link> 认可你的文章<a href="/article/10101/1">《该怎么定义》</a></td>
+            </tr>
+            </tbody>
+        </table>
+        <pagination total="3" current="1"></pagination>
+    </div>
+    <div class="bottom-sawtooth" style="background-image: url('assets/images/sawtooth.png')"></div>
+</div>

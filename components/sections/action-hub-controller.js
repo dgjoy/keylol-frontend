@@ -6,9 +6,11 @@
         function ($scope, union, window) {
             $scope.union = union;
             if(union.$localStorage.user){
-                $scope.newMessages = union.$localStorage.user.MessageCount?union.$localStorage.user.MessageCount.split(',').map(function (element) {
-                    return parseInt(element);
-                }):[0,0,0];
+                $scope.$watch('union.$localStorage.user.MessageCount', function (newValue) {
+                    $scope.newMessages = typeof newValue === "string"?newValue.split(',').map(function (element) {
+                        return parseInt(element);
+                    }):[0,0,0];
+                });
             }
 
             $scope.showRegistrationWindow = function () {

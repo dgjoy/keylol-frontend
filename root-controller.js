@@ -11,6 +11,7 @@
                     params: {
                         claims: true,
                         stats: true,
+                        profilePointBackgroundImage: true,
                         subscribeCount: true,
                         commentLike: true
                     }
