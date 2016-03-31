@@ -11,9 +11,13 @@
                     TargetId: $scope.article.Id,
                     Type: "ArticleLike"
                 }).then(function (response) {
-                    notification.success("认可已生效");
+                    notification.success("认可已生效，每日发出的前 5 个认可不会消耗文券");
                 }, function (response) {
-                    notification.error("认可失败", response);
+                    if (response.status === 401) {
+                        notification.error("现有文券数量不足，无法发出认可");
+                    } else {
+                        notification.error("认可失败", response);
+                    }
                 });
                 $scope.article.Liked = true;
                 $scope.article.hasLike = true;

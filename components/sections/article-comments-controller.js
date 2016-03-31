@@ -84,9 +84,13 @@
                     TargetId: comment.Id,
                     Type: "CommentLike"
                 }).then(function () {
-                    notification.success("认可已生效");
+                    notification.success("认可已生效，每日发出的前 5 个认可不会消耗文券");
                 }, function (response) {
-                    notification.error("认可评论失败", response);
+                    if (response.status === 401) {
+                        notification.error("现有文券数量不足，无法发出认可");
+                    } else {
+                        notification.error("认可评论失败", response);
+                    }
                 });
                 comment.Liked = true;
                 comment.hasLike = true;
