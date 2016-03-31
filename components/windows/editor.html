@@ -52,7 +52,7 @@
             <div class="save-draft">
                 <button type="button" class="border-button left-border" ng-click="saveDraft()">保存草稿</button>
                 <span ng-if="lastSaveTime">自动保存于<span am-time-ago="lastSaveTime"></span></span>
-                <p>草稿将保存在本地浏览器缓存中，并在下次打开编辑框时自动加载。</p>
+                <p>每发布一篇文章需要使用 5 ◆ 文券，当前有 {{union.$localStorage.user.Coupon}} ◆ 文券。<a href="coupon" target="_blank">（为什么要消耗文券？）</a></p>
             </div>
         </form>
     </div>

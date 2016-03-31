@@ -1,0 +1,104 @@
+﻿
+<div ng-controller="CouponContentController as couponContent" class="section-coupon-content box-shadowed">
+    <div class="heading">
+        <div class="menu-right">
+            <ul class="list-inline">
+                <li ng-class="{current: page === 'records'}">
+                    <a href="" ng-click="setPage('records')">积分记录</a>
+                    |
+                </li>
+                <li ng-class="{current: page === 'ranks'}">
+                    <a href="" ng-click="setPage('ranks')">社区排行</a>
+                    |
+                </li>
+                <li ng-class="{current: page === 'invite'}">
+                    <a href="" ng-click="setPage('invite')">邀请注册</a>
+                </li>
+            </ul>
+        </div>
+        <p ng-show="page === 'records'">当前文券</p>
+        <h1 ng-show="page === 'records'">{{union.$localStorage.user.Coupon}} ◆</h1>
+        <p ng-show="page === 'ranks'">{{myRank?"当前社区排名":"尚未进入社区排名"}}</p>
+        <h1 ng-show="page === 'ranks'"># {{myRank||"101＋"}}</h1>
+        <p ng-show="page === 'invite'">邀请注册人数</p>
+        <h1 ng-show="page === 'invite'">{{inviteCount}}</h1>
+    </div>
+    <div ng-show="page === 'records'" class="records clearfix">
+        <table>
+            <thead>
+            <tr>
+                <th>事件</th>
+                <th>变更明细</th>
+                <th>文券余额</th>
+                <th>时间</th>
+                <th>详细描述</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="record in records">
+                <td>{{record.Event}}</td>
+                <td ng-class="{plus: record.Change > 0, minus: record.Change < 0}">{{record.Change<0?"－":"＋"}} {{record.Change<0?-record.Change:record.Change}} ◆</td>
+                <td>{{record.Balance}} ◆</td>
+                <td>{{record.Time|amDateFormat: "YYYY-MM-DD HH:mm:ss"}}</td>
+                <td ng-switch="record.Event">
+                    <span ng-switch-when="新注册">欢迎来到其乐游戏社区</span>
+                    <span ng-switch-when="应邀注册">受 <point-link ng-if="record.Description.Inviter" type="'user'" point-name="'@'+record.Description.Inviter.UserName" id-code="record.Description.Inviter.IdCode"></point-link> 引荐而准备迎新文券</span>
+                    <span ng-switch-when="发表文章">发布文章<a ng-if="record.Description.Article" ng-href="article/{{record.Description.Article.AuthorIdCode}}/{{record.Description.Article.SequenceNumberForAuthor}}">《{{record.Description.Article.Title|maxLength: 9}}》</a></span>
+                    <span ng-switch-when="发表简评">发布简评<a ng-if="record.Description.Article" ng-href="article/{{record.Description.Article.AuthorIdCode}}/{{record.Description.Article.SequenceNumberForAuthor}}">《{{record.Description.Article.Title|maxLength: 9}}》</a></span>
+                    <span ng-switch-when="发出认可">认可<a ng-if="record.Description.Article" ng-href="article/{{record.Description.Article.AuthorIdCode}}/{{record.Description.Article.SequenceNumberForAuthor}}">《{{record.Description.Article.Title|maxLength: 9}}》</a><a ng-if="record.Description.Comment" ng-href="article/{{record.Description.Comment.ArticleAuthorIdCode}}/{{record.Description.Comment.ArticleSequenceNumberForAuthor}}#{{record.Description.Comment.SequenceNumberForArticle}}">「{{record.Description.Comment.Content|maxLength: 9}}」</a></span>
+                    <span ng-switch-when="获得认可"><a ng-if="record.Description.Article" ng-href="article/{{record.Description.Article.AuthorIdCode}}/{{record.Description.Article.SequenceNumberForAuthor}}">《{{record.Description.Article.Title|maxLength: 9}}》</a><a ng-if="record.Description.Comment" ng-href="article/{{record.Description.Comment.ArticleAuthorIdCode}}/{{record.Description.Comment.ArticleSequenceNumberForAuthor}}#{{record.Description.Comment.SequenceNumberForArticle}}">「{{record.Description.Comment.Content|maxLength: 9}}」</a>获得 <point-link ng-if="record.Description.Operotor" type="'user'" point-name="'@'+record.Description.Operotor.UserName" id-code="record.Description.Operotor.IdCode"></point-link> 的认可</span>
+                    <span ng-switch-when="每日访问">每日访问其乐社区</span>
+                    <span ng-switch-when="邀请注册">邀请 <point-link ng-if="record.Description.User" type="'user'" point-name="'@'+record.Description.User.UserName" id-code="record.Description.User.IdCode"></point-link> 加入其乐</span>
+                    <span ng-switch-default>{{record.Description}}</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <pagination total="recordPage.total" current="recordPage.curr" on-page-changed="recordPage.change(oldPage, newPage)" page-href=""></pagination>
+    </div>
+    <div ng-show="page === 'records'" class="bottom-sawtooth" style="background-image: url('assets/images/sawtooth.png')"></div>
+    <div ng-show="page === 'ranks'" class="ranks clearfix">
+        <table>
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>用户</th>
+                <th>文券</th>
+                <th>获得认可</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="rank in ranks" ng-class="{'best-three': rankPage.curr === 1 && $index < 3}">
+                <td>{{(rankPage.curr-1)*20 + $index + 1}}</td>
+                <td>
+                    <point-link type="'user'" avatar-url="rank.AvatarImage" id-code="rank.IdCode" ></point-link>
+                    <div class="title">
+                        <p>
+                            <point-link type="'user'" point-name="rank.UserName" id-code="rank.IdCode" ></point-link>
+                        </p>
+                        <p>{{rank.GamerTag}}</p>
+                    </div>
+                </td>
+                <td>{{rank.Coupon}} ◆</td>
+                <td>{{rank.LikeCount}}</td>
+            </tr>
+            </tbody>
+        </table>
+        <pagination total="rankPage.total" current="rankPage.curr" on-page-changed="rankPage.change(oldPage, newPage)" page-href=""></pagination>
+    </div>
+    <div ng-show="page === 'invite'" class="invite">
+        <p>每当游客在<b>阅读你的文章时</b>加入其乐社区并成为会员，你会自动获得一定数量的文券作为邀请注册奖励。我们格外推荐用户将自己的评测转载至其他友善的游戏社区，比如知乎、豆瓣或是 Steam 个人评测，并附上文章在其乐的原始链接，来自这些社区的用户不仅能助我们培养更理想的社区氛围，还能在加入其乐时获得额外的应邀注册奖励。</p>
+        <div class="invite-rule">
+            <div>
+                <span class="rule-result">＝ 15 ◆</span>
+                <span class="rule-content">应邀注册用户的初始积分</span>
+            </div>
+            <div>
+                <span class="rule-result">＋ 3 ◆</span>
+                <span class="rule-content">每邀请 1 名玩家注册获得文券</span>
+            </div>
+        </div>
+        <p>或者，你可以分享以下链接给你的好友，当他们通过这个链接访问其乐并注册后，你会获得同样的文券奖励。</p>
+        <input selected-on-click type="text" ng-model="inviteLink">
+    </div>
+</div>

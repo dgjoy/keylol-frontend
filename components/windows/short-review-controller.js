@@ -81,7 +81,11 @@
                             $location.url("article/" + union.$localStorage.user.IdCode + "/" + response.data.SequenceNumberForAuthor);
                             notification.success("简评已发布");
                         }, function (response) {
-                            notification.error("发生未知错误，请重试或与站务职员联系", response);
+                            if (response.status === 401) {
+                                notification.error("现有文券数量不足，无法发文");
+                            } else {
+                                notification.error("发生未知错误，请重试或与站务职员联系", response);
+                            }
                             $scope.submitLock = false;
                         });
                 }

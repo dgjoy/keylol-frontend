@@ -5,7 +5,7 @@
         "$scope", "$http", "apiEndpoint", "union",
         function ($scope, $http, apiEndpoint, union) {
             $scope.articles = union.$localStorage.promotedReadings;
-            $http.get(apiEndpoint + "article/hot").then(function (response) {
+            $http.get(apiEndpoint + "article/spotlight").then(function (response) {
                 union.$localStorage.promotedReadings = $scope.articles = response.data;
             });
         }

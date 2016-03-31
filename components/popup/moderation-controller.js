@@ -3,13 +3,18 @@
 
     keylolApp.controller("ModerationController", [
         "$scope", "close", "$http", "notification", "$route", "$timeout", "type",
-        "targetId", "moderationText", "union", "getAndFlushComments",
+        "targetId", "moderationText", "union",
         function ($scope, close, $http, notification, $route, $timeout, type,
-                  targetId, moderationText, union, getAndFlushComments) {
+                  targetId, moderationText, union) {
             var vm = this;
             $scope.union = union;
             $scope.text = type.isCancel?moderationText["Un" + type.action]:moderationText[type.action];
             $scope.type = type;
+            if(union.$localStorage.user.StaffClaim === 'operator'){
+                $scope.backgroundStyle = {
+                    "background-image": "url('assets/images/Syuusouretsujitsu.png')"
+                }
+            }
             vm.reasons = [];
             vm.notifyAuthor = true;
 

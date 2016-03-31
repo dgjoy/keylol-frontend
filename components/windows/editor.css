@@ -145,3 +145,7 @@
 .window-editor .save-draft p {
     margin: 14px 14px 0;
 }
+
+.window-editor .save-draft p a {
+    color: #8899aa;
+}

@@ -39,6 +39,9 @@
             }).when("/user/:userIdCode", {
                 templateUrl: "components/pages/point.html",
                 controller: "PointController"
+            }).when("/latest", {
+                templateUrl: "components/pages/search-results.html",
+                controller: "AllArticlesController"
             }).when("/subscriptions", {
                 templateUrl: "components/pages/search-results.html",
                 controller: "SubscriptionsController"
@@ -57,6 +60,9 @@
             }).when("/related/:idCode/:type", {
                 templateUrl: "components/pages/search-results.html",
                 controller: "RelatedController"
+            }).when("/coupon", {
+                templateUrl: "components/pages/coupon.html",
+                controller: "CouponController"
             }).otherwise({
                 templateUrl: "components/pages/not-found.html",
                 controller: "NotFoundController"
