@@ -239,9 +239,9 @@
                     $scope.data.noMoreArticle = true;
                     $scope.data.loadingLock = false;
                 } else {
-                    var beforeSN = 2147483647;
+                    var beforeSn;
                     if (isLoadingMore) {
-                        beforeSN = $scope.data.entries[$scope.data.entries.length - 1].sequenceNumber;
+                        beforeSn = $scope.data.entries[$scope.data.entries.length - 1].sequenceNumber;
                     }
                     $scope.data.loadAction({
                         idType: "IdCode",
@@ -249,7 +249,8 @@
                         shortReviewFilter: shortReviewFilter,
                         source: sourceFilter,
                         take: utils.timelineLoadCount,
-                        beforeSN: beforeSN
+                        beforeSn: beforeSn,
+                        titleOnly: false
                     }, function (response) {
                         var articleList = response.data;
                         if (!isLoadingMore) {

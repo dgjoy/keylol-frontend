@@ -56,7 +56,7 @@
                     $http.post(apiEndpoint + "comment", {
                         Content: $scope.comment.currentComment,
                         ArticleId: union.article.Id,
-                        ReplyToCommentsSN: replyArray
+                        ReplyToCommentsSn: replyArray
                     }).then(function (response) {
                         notification.success("评论已发出");
                         $scope.submitLock = false;

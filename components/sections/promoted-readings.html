@@ -6,7 +6,7 @@
         </h2>
         <p>{{article.Content}}</p>
         <footer>
-            <span class="datetime" am-time-ago="article.PublishTime"></span>
+            <span ng-if="article.LikeCount">+{{article.LikeCount}}</span><span ng-if="article.CommentCount">　···{{article.CommentCount}}</span>
         </footer>
     </div>
 </div>

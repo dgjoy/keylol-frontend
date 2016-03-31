@@ -2,18 +2,24 @@
     "use strict";
 
     keylolApp.controller("CouponContentController", [
-        "$scope", "union", "window", "utils", "$location", "$http",
-        function ($scope, union, window, utils, $location, $http) {
+        "$scope", "union", "window", "utils", "$location", "$http", "notification",
+        function ($scope, union, window, utils, $location, $http, notification) {
             $scope.union = union;
             $scope.page = $location.hash();
             $scope.$watch("page", function (newPage) {
                 //noinspection JSValidateTypes
                 if(newPage !== "records" && newPage !== "ranks" && newPage !== "invite" ){
                     $scope.page = "records";
-                }else if(newPage === "records"){
-                    getCouponLog();
-                }else if(newPage === "ranks"){
-                    getCouponRank();
+                }else {
+                    //noinspection JSValidateTypes
+                    if(newPage === "records")
+                        getCouponLog();
+                    //noinspection JSValidateTypes
+                    if(newPage === "ranks")
+                        getCouponRank();
+                    //noinspection JSValidateTypes
+                    if(newPage === "invite")
+                        getInviteCount();
                 }
             });
             $scope.setPage = function (page) {
@@ -33,6 +39,15 @@
                 }
             };
 
+            function getInviteCount() {
+
+                $http.get(apiEndpoint + "user/invited-user-count").then(function (response) {
+                    $scope.inviteCount = response.data;
+                }, function (response) {
+                    notification.error("发生未知错误，请重试或与站务职员联系", response);
+                });
+            }
+
             function getCouponRank(page) {
                 var skip = 0;
                 if(page){
@@ -50,9 +65,8 @@
                         skip: skip
                     }
                 }).then(function (response) {
-                    console.log(response.data);
                     $scope.ranks = response.data;
-                    $scope.myRank = response.headers("X-Total-Record-Count");
+                    $scope.myRank = response.headers("X-My-Rank");
                     $scope.rankPage.total = 5;
                     $scope.rankPage.curr = page || 1;
                 }, function (response) {

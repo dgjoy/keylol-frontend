@@ -39,6 +39,9 @@
             }).when("/user/:userIdCode", {
                 templateUrl: "components/pages/point.html",
                 controller: "PointController"
+            }).when("/latest", {
+                templateUrl: "components/pages/search-results.html",
+                controller: "AllArticlesController"
             }).when("/subscriptions", {
                 templateUrl: "components/pages/search-results.html",
                 controller: "SubscriptionsController"

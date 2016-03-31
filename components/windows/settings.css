@@ -50,6 +50,7 @@
 .window-settings .heading .menu-right ul li.current a {
     color: #333;
     text-decoration: none;
+    cursor: default;
 }
 
 .window-settings .avatar-box-left-spacing {
