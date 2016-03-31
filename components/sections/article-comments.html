@@ -39,7 +39,7 @@
         <article ng-switch="comment.Commentator" ng-class="{archived: !comment.Commentator || comment.Archived !== 'None'}">
             <div class="header">
                 <point-link ng-switch-default class="name" type="'user'" point-name="'@' + comment.Commentator.UserName" id-code="comment.Commentator.IdCode"></point-link>
-                <!--<span class="as-author" ng-if="comment.Commentator.isAuthor">[文章作者]</span>-->
+                <span class="as-author" ng-if="comment.Commentator.isAuthor">[文章作者]</span>
                 <span ng-switch-when="undefined" class="title">这则评论已被封存</span>
                 <span ng-switch-default ng-if="comment.Archived !== 'None'" class="moderated">封存中</span>
                 <span ng-if="comment.Warned" class="moderated">受到警告</span>

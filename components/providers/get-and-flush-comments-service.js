@@ -37,16 +37,20 @@
                         for (var i in preHotComments) {
                             if (preHotComments[i].LikeCount >= 5) {
                                 var hotComment = preHotComments[i];
-                                if (hotComment.Commentator.IdCode == article.AuthorIdCode) {
-                                    hotComment.Commentator.isAuthor = true;
+                                if(hotComment.Commentator) {
+                                    if (hotComment.Commentator.IdCode == article.authorIdCode) {
+                                        hotComment.Commentator.isAuthor = true;
+                                    }
+                                    if (union.$localStorage.user && hotComment.Commentator.IdCode == union.$localStorage.user.IdCode) {
+                                        hotComment.cannotLike = true;
+                                    }
                                 }
                                 if (hotComment.LikeCount > 0) {
                                     hotComment.hasLike = true;
                                 }
-                                if (hotComment.Commentator.IdCode == union.$localStorage.user.IdCode) {
-                                    hotComment.cannotLike = true;
+                                if(hotComment.Content){
+                                    hotComment.Content = parseComments(hotComment.Content, hotComment.SequenceNumberForArticle);
                                 }
-                                hotComment.Content = parseComments(hotComment.Content, hotComment.SequenceNumberForArticle);
                                 hotComments.push(hotComment);
                             }
                         }
@@ -65,16 +69,21 @@
                     }).then(function (response) {
                         var comments = response.data;
                         for (var i in comments) {
-                            if (comments[i].Commentator.IdCode == article.AuthorIdCode) {
-                                comments[i].Commentator.isAuthor = true;
+                            if(comments[i].Commentator){
+                                if (comments[i].Commentator.IdCode == article.authorIdCode) {
+                                    comments[i].Commentator.isAuthor = true;
+                                }
+
+                                if (union.$localStorage.user && comments[i].Commentator.IdCode == union.$localStorage.user.IdCode) {
+                                    comments[i].cannotLike = true;
+                                }
                             }
                             if (comments[i].LikeCount > 0) {
                                 comments[i].hasLike = true;
                             }
-                            if (union.$localStorage.user && comments[i].Commentator.IdCode == union.$localStorage.user.IdCode) {
-                                comments[i].cannotLike = true;
+                            if(comments[i].Content){
+                                comments[i].Content = parseComments(comments[i].Content, comments[i].SequenceNumberForArticle);
                             }
-                            comments[i].Content = parseComments(comments[i].Content, comments[i].SequenceNumberForArticle);
                         }
                         union.article.totalComments = response.headers("X-Total-Record-Count");
                         union.pageElements.totalPages = union.article.totalComments <= 17 ? 1 : parseInt((union.article.totalComments - 18) / 20) + 2;
@@ -96,16 +105,21 @@
                     }).then(function (response) {
                         var comments = response.data;
                         for (var i in comments) {
-                            if (comments[i].Commentator.IdCode == article.AuthorIdCode) {
-                                comments[i].Commentator.isAuthor = true;
+                            if(comments[i].Commentator){
+                                if (comments[i].Commentator.IdCode == article.authorIdCode) {
+                                    comments[i].Commentator.isAuthor = true;
+                                }
+
+                                if (union.$localStorage.user && comments[i].Commentator.IdCode == union.$localStorage.user.IdCode) {
+                                    comments[i].cannotLike = true;
+                                }
                             }
                             if (comments[i].LikeCount > 0) {
                                 comments[i].hasLike = true;
                             }
-                            if (union.$localStorage.user && comments[i].Commentator.IdCode == union.$localStorage.user.IdCode) {
-                                comments[i].cannotLike = true;
+                            if(comments[i].Content){
+                                comments[i].Content = parseComments(comments[i].Content, comments[i].SequenceNumberForArticle);
                             }
-                            comments[i].Content = parseComments(comments[i].Content, comments[i].SequenceNumberForArticle);
                         }
                         union.article.totalComments = response.headers("X-Total-Record-Count");
                         union.pageElements.totalPages = union.article.totalComments <= 17 ? 1 : parseInt((union.article.totalComments - 18) / 20) + 2;
