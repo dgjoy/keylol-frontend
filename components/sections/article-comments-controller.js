@@ -86,6 +86,11 @@
                 }).then(function () {
                     notification.success("认可已生效，每日发出的前 5 个认可不会消耗文券");
                 }, function (response) {
+                    comment.Liked = false;
+                    comment.LikeCount -= 1;
+                    if (comment.LikeCount <= 0) {
+                        comment.hasLike = false;
+                    }
                     if (response.status === 401) {
                         notification.error("现有文券数量不足，无法发出认可");
                     } else {
