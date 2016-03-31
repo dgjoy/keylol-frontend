@@ -74,6 +74,7 @@
 
                         var closeDeferred = $q.defer();
                         var close = function (result) {
+                            cancelListen();
                             //  Resolve the 'close' promise.
                             closeDeferred.resolve(result);
                             $animate.leave($element).then(function () {
@@ -83,6 +84,10 @@
                                     adjustScrollBar();
                             });
                         };
+
+                        var cancelListen = $rootScope.$on("$locationChangeSuccess", function(){
+                            close();
+                        });
 
                         var inputs = {
                             $scope: scope,

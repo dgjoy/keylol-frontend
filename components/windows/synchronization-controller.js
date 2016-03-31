@@ -59,10 +59,6 @@
                 }
             }
             $scope.utils = utils;
-            var cancelListen = $rootScope.$on("$locationChangeSuccess", function(){
-                close();
-                cancelListen();
-            });
         }
     ]);
 })();
