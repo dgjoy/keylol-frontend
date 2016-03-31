@@ -26,7 +26,7 @@
                 $scope.page = page;
             };
             union.coupon.setPage = $scope.setPage;
-            $scope.inviteLink = "https://www.keylol.com/?i=" + union.$localStorage.user.IdCode;
+            $scope.inviteLink = "https://www.keylol.com/?aff=" + union.$localStorage.user.IdCode;
 
             $scope.recordPage = {
                 change: function (oldPage, newPage) {

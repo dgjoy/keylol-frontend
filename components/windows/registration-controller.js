@@ -95,8 +95,8 @@
                         $scope.submitLock = false;
                         return;
                     }
-                    if($location.search().i){
-                        $scope.vm.Inviter = $location.search().i;
+                    if($location.search().aff){
+                        $scope.vm.Inviter = $location.search().aff;
                     }else if($location.url().substr(1, 7) === "article"){
                         $scope.vm.Inviter = $routeParams.author;
                     }
