@@ -1,6 +1,5 @@
 .section-action-hub {
     width: 300px;
-    height: 134px;
     background-color: white;
     padding: 12px;
     position: relative;
@@ -8,7 +7,7 @@
 
 .section-action-hub .not-logged-in {
     width: 100%;
-    height: 100%;
+    height: 110px;
     position: relative;
 }
 
@@ -136,4 +135,17 @@
 .section-action-hub .links a {
     font-size: 17px;
     font-style: italic;
+}
+
+.section-action-hub .coupon-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+    padding: 12px 5px 0;
+    border-top: 1px solid #ccc;
+}
+
+.section-action-hub .coupon-container a {
+    font-size: 17px;
 }

@@ -22,7 +22,7 @@
 
             $scope.getInvitationCode = function () {
                 close();
-                $("body").animate({
+                $("html,body").animate({
                     scrollTop: $("#get-invitation-code").offset().top
                 }, 3000);
             };

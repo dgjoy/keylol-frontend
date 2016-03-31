@@ -3,14 +3,42 @@
 }
 
 .section-new-point .new-main {
-    padding: 20px 10px;
+    padding: 20px 15px;
 }
 
-.section-new-point .new-main img {
-    width: 28px;
-    margin-right: 5px;
+.section-new-point .new-main a {
+    display: block;
+    margin-bottom: 20px;
+}
+
+.section-new-point .new-main a:last-of-type {
+    margin-bottom: 0;
+}
+
+.section-new-point .new-main .image {
+    display: inline-block;
+    height: 24px;
+    width: 24px;
+    margin-right: 10px;
+    background-size: cover;
 }
 
 .section-new-point .new-main a * {
     vertical-align: middle;
+}
+
+.section-new-point .new-main a.new-point .image {
+    background-image: url('../../assets/images/point-marker.png');
+}
+
+.section-new-point .new-main a.new-point:hover .image {
+    background-image: url('../../assets/images/point-marker-hover.png');
+}
+
+.section-new-point .new-main a.invitation .image {
+    background-image: url('../../assets/images/invitation.png');
+}
+
+.section-new-point .new-main a.invitation:hover .image {
+    background-image: url('../../assets/images/invitation-hover.png');
 }

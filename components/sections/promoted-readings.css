@@ -40,6 +40,7 @@
     overflow: hidden;
     line-height: 18px;
     word-wrap: break-word;
+    color: #bbb;
 }
 
 .section-promoted-readings .article footer {
@@ -47,8 +48,4 @@
     color: #BBB;
     height: 16px;
     line-height: 16px;
-}
-
-.section-promoted-readings .article footer span {
-    margin-left: 15px;
 }
