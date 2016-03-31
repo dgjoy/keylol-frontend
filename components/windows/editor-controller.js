@@ -10,6 +10,7 @@
             $scope.editorOptions = {
                 scrollableContainer: $element
             };
+            $scope.union = union;
             $scope.articleTypes = articleTypes;
             $scope.expanded = false;
             $scope.lastSaveTime = null;
