@@ -1,10 +1,9 @@
 ﻿<div class="section-latest-articles box-shadowed" ng-controller="LatestArticlesController">
-    <h1 class="labeled-heading">最新投稿</h1>
+    <h1 class="labeled-heading">最新投稿 <a href="">全部</a></h1>
     <div ng-repeat="article in articles track by article.Id" class="article">
         <h2>
             <a ng-href="article/{{article.AuthorIdCode}}/{{article.SequenceNumberForAuthor}}">{{article.Title}}</a>
         </h2>
-        <p>{{article.Content}}</p>
         <footer>
             <span class="datetime" am-time-ago="article.PublishTime"></span>
         </footer>

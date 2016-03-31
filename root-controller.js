@@ -13,7 +13,8 @@
                         stats: true,
                         profilePointBackgroundImage: true,
                         subscribeCount: true,
-                        commentLike: true
+                        commentLike: true,
+                        coupon: true
                     }
                 }).then(function (response) {
                     union.$localStorage.user = response.data;

@@ -143,32 +143,22 @@
 .section-coupon-content .ranks tr td:nth-of-type(2) .title p {
     margin: 0;
     line-height: 16px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    width: 100px;
 }
 
 .section-coupon-content .ranks tr td:nth-of-type(2) .title p:first-of-type a {
     color: #159;
 }
 
-.section-coupon-content .ranks tbody tr:nth-of-type(1) td:nth-of-type(1),
-.section-coupon-content .ranks tbody tr:nth-of-type(2) td:nth-of-type(1),
-.section-coupon-content .ranks tbody tr:nth-of-type(3) td:nth-of-type(1) {
+.section-coupon-content .ranks tbody tr.best-three td:nth-of-type(1) {
     font-weight: bold;
     color: #159;
 }
 
-.section-coupon-content .ranks tbody tr:nth-of-type(1) td:nth-of-type(2) .title p:first-of-type a,
-.section-coupon-content .ranks tbody tr:nth-of-type(2) td:nth-of-type(2) .title p:first-of-type a,
-.section-coupon-content .ranks tbody tr:nth-of-type(3) td:nth-of-type(2) .title p:first-of-type a {
+.section-coupon-content .ranks tbody tr.best-three td:nth-of-type(2) .title p:first-of-type a{
     font-weight: bold;
 }
 
-.section-coupon-content .ranks tbody tr:nth-of-type(1) td:nth-of-type(3),
-.section-coupon-content .ranks tbody tr:nth-of-type(2) td:nth-of-type(3),
-.section-coupon-content .ranks tbody tr:nth-of-type(3) td:nth-of-type(3) {
+.section-coupon-content .ranks tbody tr.best-three td:nth-of-type(3) {
     color: #159;
 }
 

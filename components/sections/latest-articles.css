@@ -10,6 +10,13 @@
     padding: 12px 15px;
 }
 
+.section-latest-articles h1 a {
+    color: #89a;
+    float: right;
+    font-size: 13px;
+    margin-right: 12px;
+}
+
 .section-latest-articles .article h2 {
     font-size: 13px;
     margin: 0;
