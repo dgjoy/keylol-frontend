@@ -281,7 +281,7 @@
                                     idCode: article.Author.IdCode
                                 },
                                 sequenceNumber: article.SequenceNumber,
-                                sources: article.TimelineReason ? {} : null,
+                                sources: {},
                                 voteForPoint: article.VoteForPoint,
                                 datetime: article.PublishTime,
                                 title: article.Title,
@@ -314,17 +314,16 @@
                                         });
                                     }
                                     break;
-                                case "Point":
-                                    if (article.AttachedPoints) {
+                                case "Publish":
+                                    entry.sources.type = "publish";
+                                    break;
+                                default:
+                                    if (article.AttachedPoints && article.AttachedPoints.length > 0) {
                                         entry.sources.type = "point";
                                         entry.sources.points = article.AttachedPoints;
                                     } else {
                                         entry.sources = null;
                                     }
-                                    break;
-
-                                case "Publish":
-                                    entry.sources.type = "publish";
                                     break;
                             }
                             $scope.data.entries.push(entry);
