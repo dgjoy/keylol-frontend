@@ -101,7 +101,7 @@
                                     entry.summary = utils.getPointSecondName(point);
                                     timeline.entries.push(entry);
                                     (function (entry) {
-                                        $timeout(function() {
+                                        $timeout(function () {
                                             if (!timelineTimeout) {
                                                 entry.show = true;
                                                 timelineTimeout = $timeout(function () {
@@ -178,7 +178,7 @@
                                     };
                                     timeline.entries.push(entry);
                                     (function (entry) {
-                                        $timeout(function() {
+                                        $timeout(function () {
                                             if (!timelineTimeout) {
                                                 entry.show = true;
                                                 timelineTimeout = $timeout(function () {
@@ -211,7 +211,8 @@
                     timeline.loadAction();
                     break;
                 case "user":
-                    timeline.loadAction = function () {};
+                    timeline.loadAction = function () {
+                    };
                     timeline.loadingLock = true;
                     timeline.noMoreArticle = true;
                     timeline.actions[2].active = true;

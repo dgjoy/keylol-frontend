@@ -7,7 +7,7 @@
     keylolApp.controller("CouponController", [
         "pageTitle", "$scope", "union", "$http", "notification", "$location",
         function (pageTitle, $scope, union, $http, notification, $location) {
-            if(!union.$localStorage.user){
+            if (!union.$localStorage.user) {
                 $location.url("/");
                 return;
             }

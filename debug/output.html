@@ -14,6 +14,10 @@
             font-size: 16px;
         }
 
+        a {
+            color: #D5D5D5;
+        }
+
         .cursor {
             display: inline-block;
             border-bottom: 3px solid;
@@ -77,6 +81,7 @@
 <div id="float">
     <div class="float-container">
         <input type="checkbox" id="scroll-checkbox" checked><label for="scroll-checkbox">Auto Scroll</label>
+        <a href="javascript:void(0);" onclick="$('#debug-info').empty();">Clear</a>
     </div>
 </div>
 <script>

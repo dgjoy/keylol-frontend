@@ -103,7 +103,7 @@
                                             type: scope.type || 'Unspecified'
                                         }
                                     }).then(function (response) {
-                                        var pointArray = response.data.length?response.data:[];
+                                        var pointArray = response.data.length ? response.data : [];
                                         scope.nowPopup = scope.showSelector({
                                             templateUrl: "components/popup/point-selector.html",
                                             controller: "PointSelectorController",

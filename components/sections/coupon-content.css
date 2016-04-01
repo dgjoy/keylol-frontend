@@ -1,9 +1,43 @@
 .section-coupon-content {
-    background: white;
-    padding: 30px 20px;
     width: 100%;
     min-width: 870px;
     position: relative;
+}
+
+.coupon-page {
+    position: absolute;
+    width: 100%;
+    box-sizing: border-box;
+    background: white;
+    padding: 30px 20px;
+}
+
+.coupon-page.ng-hide-add {
+    transition: 0.2s linear all;
+}
+
+.coupon-page.ng-hide-remove {
+    transition: 0.15s 0.2s linear all;
+}
+
+.coupon-page.ng-hide-add {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.coupon-page.ng-hide-add.ng-hide-add-active {
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.coupon-page.ng-hide-remove {
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.coupon-page.ng-hide-remove.ng-hide-remove-active {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .section-coupon-content .heading p {
@@ -154,7 +188,7 @@
     color: #159;
 }
 
-.section-coupon-content .ranks tbody tr.best-three td:nth-of-type(2) .title p:first-of-type a{
+.section-coupon-content .ranks tbody tr.best-three td:nth-of-type(2) .title p:first-of-type a {
     font-weight: bold;
 }
 

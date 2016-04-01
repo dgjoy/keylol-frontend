@@ -82,7 +82,7 @@
                     return;
                 $scope.submitLock = true;
                 $scope.error = {};
-                $timeout(function(){
+                $timeout(function () {
                     $scope.vm.IdCode = $scope.vm.IdCode.toUpperCase();
                     utils.modelValidate.steamBindingTokenId($scope.vm.SteamBindingTokenId, $scope.error, "vm.SteamBindingTokenId");
                     utils.modelValidate.idCode($scope.vm.IdCode, $scope.error, "vm.IdCode");
@@ -95,9 +95,9 @@
                         $scope.submitLock = false;
                         return;
                     }
-                    if($location.search().aff){
+                    if ($location.search().aff) {
                         $scope.vm.Inviter = $location.search().aff;
-                    }else if($location.url().substr(1, 7) === "article"){
+                    } else if ($location.url().substr(1, 7) === "article") {
                         $scope.vm.Inviter = $routeParams.author;
                     }
                     $http.post(apiEndpoint + "user", $scope.vm)

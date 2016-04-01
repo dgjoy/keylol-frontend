@@ -8,19 +8,20 @@ input-point {
     background: white;
     cursor: text;
     padding: 8px 8px 0 8px;
-    zoom:1;
+    zoom: 1;
 }
+
 input-point.disabled {
     background: #EEE;
 }
 
 input-point:before, input-point:after {
-    content:"";
-    display:table;
+    content: "";
+    display: table;
 }
 
 input-point:after {
-    clear:both;
+    clear: both;
 }
 
 input-point .point-title {

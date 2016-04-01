@@ -298,7 +298,7 @@
     left: 13px;
     top: 0;
     fill: #CCC;
-    transform: scale(1,0);
+    transform: scale(1, 0);
     transform-origin: left top;
     transition-duration: 150ms;
     transition-timing-function: linear;
@@ -318,7 +318,7 @@
 }
 
 .section-timeline .entry.show .card-line-background {
-    transform: scale(1,1);
+    transform: scale(1, 1);
 }
 
 .section-timeline .entry.show .card {
@@ -331,6 +331,7 @@
     padding-top: 15px;
     padding-bottom: 10px;
 }
+
 .section-timeline .entry-source a,
 .section-timeline .entry-source span {
     color: #BBB;
@@ -462,7 +463,7 @@
 .section-timeline .entry-content .summary {
     position: relative;
     top: 112px;
-    background-color: rgba(256,256,256,0.85);
+    background-color: rgba(256, 256, 256, 0.85);
     transition: background-color 100ms ease-in-out;
     padding: 8px 10px;
 }
@@ -483,7 +484,7 @@
 }
 
 .section-timeline .entry-content:hover .summary {
-    background-color: rgba(255,255,255,0.95);
+    background-color: rgba(255, 255, 255, 0.95);
 }
 
 .section-timeline .entry-content h3 span {
@@ -537,7 +538,7 @@
     top: 80px;
 }
 
-.section-timeline .action a{
+.section-timeline .action a {
     cursor: pointer;
     color: #89A;
 }

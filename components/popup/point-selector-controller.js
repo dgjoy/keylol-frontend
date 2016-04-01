@@ -22,10 +22,10 @@
                 $scope.pointArray[newSelected].selected = true;
             };
             $scope.selectPoint = function () {
-                if(selected !== $scope.pointArray.length - 1){
+                if (selected !== $scope.pointArray.length - 1) {
                     $scope.pointArray[selected].selected = false;
                     close($scope.pointArray[selected]);
-                }else {
+                } else {
                     window.show({
                         templateUrl: "components/windows/shop-link.html",
                         controller: "ShopLinkController"

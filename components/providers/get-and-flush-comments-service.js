@@ -37,7 +37,7 @@
                         for (var i in preHotComments) {
                             if (preHotComments[i].LikeCount >= 5) {
                                 var hotComment = preHotComments[i];
-                                if(hotComment.Commentator) {
+                                if (hotComment.Commentator) {
                                     if (hotComment.Commentator.IdCode == article.authorIdCode) {
                                         hotComment.Commentator.isAuthor = true;
                                     }
@@ -48,7 +48,7 @@
                                 if (hotComment.LikeCount > 0) {
                                     hotComment.hasLike = true;
                                 }
-                                if(hotComment.Content){
+                                if (hotComment.Content) {
                                     hotComment.Content = parseComments(hotComment.Content, hotComment.SequenceNumberForArticle);
                                 }
                                 hotComments.push(hotComment);
@@ -69,7 +69,7 @@
                     }).then(function (response) {
                         var comments = response.data;
                         for (var i in comments) {
-                            if(comments[i].Commentator){
+                            if (comments[i].Commentator) {
                                 if (comments[i].Commentator.IdCode == article.authorIdCode) {
                                     comments[i].Commentator.isAuthor = true;
                                 }
@@ -81,7 +81,7 @@
                             if (comments[i].LikeCount > 0) {
                                 comments[i].hasLike = true;
                             }
-                            if(comments[i].Content){
+                            if (comments[i].Content) {
                                 comments[i].Content = parseComments(comments[i].Content, comments[i].SequenceNumberForArticle);
                             }
                         }
@@ -105,7 +105,7 @@
                     }).then(function (response) {
                         var comments = response.data;
                         for (var i in comments) {
-                            if(comments[i].Commentator){
+                            if (comments[i].Commentator) {
                                 if (comments[i].Commentator.IdCode == article.authorIdCode) {
                                     comments[i].Commentator.isAuthor = true;
                                 }
@@ -117,7 +117,7 @@
                             if (comments[i].LikeCount > 0) {
                                 comments[i].hasLike = true;
                             }
-                            if(comments[i].Content){
+                            if (comments[i].Content) {
                                 comments[i].Content = parseComments(comments[i].Content, comments[i].SequenceNumberForArticle);
                             }
                         }

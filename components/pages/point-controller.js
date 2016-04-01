@@ -184,7 +184,7 @@
                                 }
                                 timeline.entries.push(entry);
                                 (function (entry) {
-                                    $timeout(function() {
+                                    $timeout(function () {
                                         if (!timelineTimeout) {
                                             entry.show = true;
                                             timelineTimeout = $timeout(function () {
@@ -273,11 +273,11 @@
                     union.associatedPoints = point.AssociatedPoints;
                     if (point.Type === "Game") {
                         $scope.hasVote = true;
-                        if(union.$localStorage.user){
+                        if (union.$localStorage.user) {
                             $http.get(apiEndpoint + "user-game-record/" + union.$localStorage.user.Id + "/" + point.SteamAppId).then(function (response) {
                                 unionPoint.hoursPlayed = response.data;
                             }, function (response) {
-                                if(response.status !== 404){
+                                if (response.status !== 404) {
                                     notification.error("发生未知错误，请重试或与站务职员联系", response);
                                 }
                             });
@@ -286,10 +286,10 @@
 
                     point.totalEvaluate = 0;
                     var totalVote = 0;
-                    for(var i in point.VoteStats){
+                    for (var i in point.VoteStats) {
                         point.totalEvaluate += point.VoteStats[i];
                         totalVote += point.VoteStats[i] * 2 * i;
-                        if(point.VoteStats[i] > 0 && (!point.highlight || point.VoteStats[i] >= point.VoteStats[point.highlight])){
+                        if (point.VoteStats[i] > 0 && (!point.highlight || point.VoteStats[i] >= point.VoteStats[point.highlight])) {
                             point.highlight = i;
                         }
                     }
@@ -364,7 +364,7 @@
                             };
                             timeline.entries.push(entry);
                             (function (entry) {
-                                $timeout(function() {
+                                $timeout(function () {
                                     if (!timelineTimeout) {
                                         entry.show = true;
                                         timelineTimeout = $timeout(function () {

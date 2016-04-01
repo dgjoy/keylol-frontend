@@ -2,7 +2,7 @@
     "use strict";
 
     function missiveTextReduce(text, n) {
-        return text.length > n?text.substr(0,n) + "…":text;
+        return text.length > n ? text.substr(0, n) + "…" : text;
     }
 
     keylolApp.constant("messageTypes", {

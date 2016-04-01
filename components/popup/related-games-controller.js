@@ -39,24 +39,24 @@
                 });
                 var rowCount = 1;
                 var nowYear = $scope.gameYears[0];
-                for(var i = 1;i < points.length;i++){
-                    if($filter('date')(points[i].ReleaseDate, "yyyy") === nowYear.year){
+                for (var i = 1; i < points.length; i++) {
+                    if ($filter('date')(points[i].ReleaseDate, "yyyy") === nowYear.year) {
                         nowYear.games.push(points[i]);
-                        if(nowYear.games.length % 3 === 1){
+                        if (nowYear.games.length % 3 === 1) {
                             rowCount++;
                         }
-                        if(rowCount === 3 && nowYear.games.length % 3 === 0){
+                        if (rowCount === 3 && nowYear.games.length % 3 === 0) {
                             break;
                         }
-                    }else {
-                        if(rowCount !== 3){
+                    } else {
+                        if (rowCount !== 3) {
                             nowYear = {
                                 year: $filter('date')(points[i].ReleaseDate, "yyyy"),
                                 games: [points[i]]
                             };
                             $scope.gameYears.push(nowYear);
                             rowCount++;
-                        }else {
+                        } else {
                             break;
                         }
                     }

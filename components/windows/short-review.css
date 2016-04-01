@@ -79,3 +79,7 @@
 .window-short-review .change-to-long p {
     margin: 14px 14px 0;
 }
+
+.window-short-review .change-to-long p a {
+    color: #89A;
+}

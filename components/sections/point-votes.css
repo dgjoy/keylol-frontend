@@ -5,7 +5,7 @@
 }
 
 .section-point-votes .point-info {
-    padding: 25px  0;
+    padding: 25px 0;
 }
 
 .section-point-votes .point-info .avatar-anchor {
@@ -146,7 +146,7 @@
 
 .section-point-votes .reputation-stat .reputation-level {
     transform: translateY(-50%);
-    background: #CCC ;
+    background: #CCC;
     height: 2px;
     display: inline-block;
     vertical-align: middle;

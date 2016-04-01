@@ -75,7 +75,7 @@
     margin: 9px;
 }
 
-.section-article-header .actions>a:last-of-type {
+.section-article-header .actions > a:last-of-type {
     margin-right: 0;
 }
 
@@ -90,7 +90,8 @@
 }
 
 .section-article-header .review-info .info-attribute p {
-    margin: 6px 0;
+    margin: 3px 0;
+    line-height: 23px;
 }
 
 .section-article-header .review-info .info-attribute .title {

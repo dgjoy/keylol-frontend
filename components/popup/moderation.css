@@ -25,12 +25,12 @@
     padding: 0 10px;
 }
 
-.popup-moderation form>span {
+.popup-moderation form > span {
     color: #bbb;
     margin-bottom: 6px;
 }
 
-.popup-moderation form>span.error-flash {
+.popup-moderation form > span.error-flash {
     animation: error-text-flash 150ms ease-in-out 6 alternate;
     color: red;
 }

@@ -4,7 +4,7 @@
     keylolApp.controller("AlphaEntranceController", [
         "pageTitle", "$scope", "$timeout", "$rootScope", "window", "$window", "union", "$location",
         function (pageTitle, $scope, $timeout, $rootScope, window, $window, union, $location) {
-            if(union.$localStorage.login){
+            if (union.$localStorage.login) {
                 $location.url("/home");
                 return;
             }

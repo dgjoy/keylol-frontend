@@ -83,8 +83,15 @@
                 $http.post(apiEndpoint + "like", {
                     TargetId: comment.Id,
                     Type: "CommentLike"
-                }).then(function () {
-                    notification.success("认可已生效，每日发出的前 5 个认可不会消耗文券");
+                }).then(function (response) {
+                    if (response.data === "Free") {
+                        notification.success("认可已生效，每日发出的前 5 个认可不会消耗文券");
+                    } else {
+                        notification.success("认可已生效");
+                        if (union.getUnreadLogs) {
+                            union.getUnreadLogs();
+                        }
+                    }
                 }, function (response) {
                     comment.Liked = false;
                     comment.LikeCount -= 1;
