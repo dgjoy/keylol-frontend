@@ -92,6 +92,14 @@
                                 comment: article.CommentCount
                             }
                         };
+                        if (article.AttachedPoints && article.AttachedPoints.length > 0) {
+                            entry.sources = {
+                                type: "point",
+                                points: article.AttachedPoints
+                            };
+                        } else {
+                            entry.sources = null;
+                        }
                         timeline.entries.push(entry);
                         (function (entry) {
                             $timeout(function () {
