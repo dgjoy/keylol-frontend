@@ -23,7 +23,8 @@
 }
 
 .section-point-info .info-details .info-attribute p {
-    margin: 6px 0;
+    margin: 3px 0;
+    line-height: 23px;
 }
 
 .section-point-info .info-details .info-attribute .title {

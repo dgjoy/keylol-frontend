@@ -90,7 +90,8 @@
 }
 
 .section-article-header .review-info .info-attribute p {
-    margin: 6px 0;
+    margin: 3px 0;
+    line-height: 23px;
 }
 
 .section-article-header .review-info .info-attribute .title {

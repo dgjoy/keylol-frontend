@@ -171,7 +171,7 @@
     width: 110%;
     height: 100%;
     overflow: hidden;
-    transform: translateX(100%);
+    transform: translateX(110%);
     transition: transform 0.4s 1.3s;
 }
 
@@ -211,11 +211,11 @@
     background-color: #e30613;
 }
 
-.section-action-hub .coupon-change-animation.ng-enter .event-container {
+.section-action-hub  .coupon-change-animation.ng-enter .event-container {
     transform: translateX(-100%) skew(45deg);
 }
 
-.section-action-hub .coupon-change-animation.ng-enter-active .event-container {
+.section-action-hub  .coupon-change-animation.ng-enter-active .event-container {
     transform: translateX(0) skew(0deg);
     transition: transform 0.4s;
 }
@@ -224,11 +224,11 @@
     color: white;
 }
 
-.section-action-hub .coupon-change-animation.ng-enter .event-container * {
+.section-action-hub  .coupon-change-animation.ng-enter .event-container * {
     transform: translateY(200%);
 }
 
-.section-action-hub .coupon-change-animation.ng-enter-active .event-container * {
+.section-action-hub  .coupon-change-animation.ng-enter-active .event-container * {
     transform: translateY(0);
     transition: transform 0.4s 0.4s;
 }
