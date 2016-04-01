@@ -26,7 +26,7 @@
                     scrollTop: $("#get-invitation-code").offset().top
                 }, 3000);
             };
-            
+
             $scope.submitLock = false;
             $scope.submit = function () {
                 if ($scope.submitLock)

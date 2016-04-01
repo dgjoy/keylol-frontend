@@ -55,7 +55,7 @@
                     ngModel.$render = function () {
                         simditor.setValue(ngModel.$viewValue);
                         $compile(element.find(".simditor-body").find("img"))(scope);
-                        $timeout(function(){
+                        $timeout(function () {
                             simditor.trigger("valuechanged");
                         });
                     };

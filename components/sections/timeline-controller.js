@@ -45,7 +45,7 @@
 
             $scope.noMoreRemind = function (entry) {
                 if (entry.fromArticle.fromComment) {
-                    if(entry.types[0] === "评论"){
+                    if (entry.types[0] === "评论") {
                         // notification.attention("忽略这则评论收到回复的邮政信息", [
                         //     {action: "不再提醒", value: true},
                         //     {action: "取消"}
@@ -63,7 +63,7 @@
                         //         });
                         //     }
                         // });
-                    }else if(entry.types[0] === "认可"){
+                    } else if (entry.types[0] === "认可") {
                         notification.attention("忽略这则评论获得认可的邮政信息", [
                             {action: "不再提醒", value: true},
                             {action: "取消"}
@@ -83,7 +83,7 @@
                         });
                     }
                 } else {
-                    if(entry.types[0] === "评论"){
+                    if (entry.types[0] === "评论") {
                         notification.attention("忽略这篇文章收到评论的邮政信息", [
                             {action: "不再提醒", value: true},
                             {action: "取消"}
@@ -101,7 +101,7 @@
                                 });
                             }
                         });
-                    }else if(entry.types[0] === "认可"){
+                    } else if (entry.types[0] === "认可") {
                         notification.attention("忽略这篇文章获得认可的邮政信息", [
                             {action: "不再提醒", value: true},
                             {action: "取消"}
@@ -151,9 +151,9 @@
 
             var url = $location.url().substr(1, 4);
             var currPage;
-            if(url === "home"){
+            if (url === "home") {
                 currPage = "home";
-                if(union.$localStorage.homeFilter){
+                if (union.$localStorage.homeFilter) {
                     filterOptions = union.$localStorage.homeFilter.filterOptions.slice();
                     shortReviewFilter = union.$localStorage.homeFilter.shortReviewFilter;
                 } else {
@@ -161,7 +161,7 @@
                         filterOptions.push(true);
                     }
                 }
-            }else if(url === "user"){
+            } else if (url === "user") {
                 currPage = "user";
                 $scope.articleTypes.unshift({
                     name: "简评"
@@ -169,7 +169,16 @@
                 for (var i = 0; i < $scope.articleTypes.length; ++i) {
                     filterOptions.push(true);
                 }
-            }else {
+            } else if (url === "late") {
+                currPage = "latest";
+                $scope.articleTypes.unshift({
+                    name: "简评"
+                });
+                filterOptions.push(false);
+                for (var i = 1; i < $scope.articleTypes.length; ++i) {
+                    filterOptions.push(true);
+                }
+            } else {
                 currPage = "point";
                 $scope.articleTypes.unshift({
                     name: "简评"
@@ -203,7 +212,7 @@
                         filterOptions = result.filterOptions.slice();
                         shortReviewFilter = result.shortReviewFilter;
                         sourceFilter = result.sourceFilter;
-                        if(currPage === "home"){
+                        if (currPage === "home") {
                             union.$localStorage.homeFilter = result;
                         }
                         requestWhenFiltering();
@@ -223,14 +232,14 @@
                     }
                 }
                 var notLoad = false;
-                switch (currPage){
+                switch (currPage) {
                     case "home":
                         notLoad = !filters && !shortReviewFilter;
                         break;
                     case "user":
                         notLoad = !filters || !sourceFilter;
                         break;
-                    case "point":
+                    default:
                         notLoad = !filters;
                         break;
                 }
@@ -245,7 +254,7 @@
                     }
                     $scope.data.loadAction({
                         idType: "IdCode",
-                        articleTypeFilter: filters?filters:"hack",
+                        articleTypeFilter: filters ? filters : "hack",
                         shortReviewFilter: shortReviewFilter,
                         source: sourceFilter,
                         take: utils.timelineLoadCount,
@@ -272,7 +281,7 @@
                                     idCode: article.Author.IdCode
                                 },
                                 sequenceNumber: article.SequenceNumber,
-                                sources: {},
+                                sources: article.TimelineReason ? {} : null,
                                 voteForPoint: article.VoteForPoint,
                                 datetime: article.PublishTime,
                                 title: article.Title,
@@ -320,7 +329,7 @@
                             }
                             $scope.data.entries.push(entry);
                             (function (entry) {
-                                $timeout(function() {
+                                $timeout(function () {
                                     if (!timelineTimeout) {
                                         entry.show = true;
                                         timelineTimeout = $timeout(function () {
@@ -355,24 +364,32 @@
                 }
 
                 var text;
-                if(currPage === "home") {
-                    if (optionsTrue.length == $scope.articleTypes.length && shortReviewFilter === 1) {
+                if (currPage === "home") {
+                    if (optionsTrue.length === $scope.articleTypes.length && shortReviewFilter === 1) {
                         text = "默认过滤";
-                    } else if (optionsTrue.length == $scope.articleTypes.length && shortReviewFilter === 7) {
+                    } else if (optionsTrue.length === $scope.articleTypes.length && shortReviewFilter === 7) {
                         text = "关闭过滤";
                     } else {
                         text = "自定义过滤";
                     }
-                }else if(currPage === "user") {
-                    if (optionsTrue.length == $scope.articleTypes.length) {
+                } else if (currPage === "user") {
+                    if (optionsTrue.length === $scope.articleTypes.length && sourceFilter === 1) {
                         text = "默认过滤";
-                    } else if (optionsTrue.length == $scope.articleTypes.length) {
+                    } else if (optionsTrue.length === $scope.articleTypes.length && sourceFilter === 3) {
+                        text = "关闭过滤";
+                    } else {
+                        text = "自定义过滤";
+                    }
+                } else if (currPage === "latest") {
+                    if (optionsTrue.length === $scope.articleTypes.length - 1 && !filterOptions[0]) {
+                        text = "默认过滤";
+                    } else if (optionsTrue.length === $scope.articleTypes.length) {
                         text = "关闭过滤";
                     } else {
                         text = "自定义过滤";
                     }
                 } else {
-                    if (optionsTrue.length == $scope.articleTypes.length) {
+                    if (optionsTrue.length === $scope.articleTypes.length) {
                         text = "默认过滤";
                     } else {
                         text = "自定义过滤";

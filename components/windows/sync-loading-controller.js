@@ -52,7 +52,7 @@
                                 }
                             }
                         });
-                    }else if (response.status === 404) {
+                    } else if (response.status === 404) {
                         notification.error("距离上次同步间隔不足 1 分钟，如有需要请在冷却时间过后再次同步", response);
                     } else {
                         notification.error("发生未知错误，请重试或与站务职员联系", response);

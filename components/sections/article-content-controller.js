@@ -11,7 +11,14 @@
                     TargetId: $scope.article.Id,
                     Type: "ArticleLike"
                 }).then(function (response) {
-                    notification.success("认可已生效，每日发出的前 5 个认可不会消耗文券");
+                    if (response.data === "Free") {
+                        notification.success("认可已生效，每日发出的前 5 个认可不会消耗文券");
+                    } else {
+                        notification.success("认可已生效");
+                        if (union.getUnreadLogs) {
+                            union.getUnreadLogs();
+                        }
+                    }
                 }, function (response) {
                     $scope.article.LikeCount -= 1;
                     $scope.article.Liked = false;

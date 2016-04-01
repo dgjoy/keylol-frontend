@@ -33,7 +33,7 @@
                     };
 
                     ngModel.$render = function () {
-                        if(ngModel.$viewValue){
+                        if (ngModel.$viewValue) {
                             for (var k = 0; k < scope.length; k++) {
                                 scope.text[k] = ngModel.$viewValue[k];
                             }

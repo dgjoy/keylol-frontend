@@ -58,7 +58,8 @@
             $http.get(apiEndpoint + "article/latest", {
                 params: {
                     titleOnly: false,
-                    take: utils.timelineLoadCount
+                    take: utils.timelineLoadCount,
+                    articleTypeFilter: "评,研,讯,谈,档"
                 }
             }).then(function (response) {
                 var articleList = response.data;
@@ -93,7 +94,7 @@
                         };
                         timeline.entries.push(entry);
                         (function (entry) {
-                            $timeout(function() {
+                            $timeout(function () {
                                 if (!timelineTimeout) {
                                     entry.show = true;
                                     timelineTimeout = $timeout(function () {

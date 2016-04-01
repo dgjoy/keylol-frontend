@@ -12,9 +12,9 @@
 
             var $$window = $($window);
             $$window.scroll(function () {
-                if(!$scope.canScrollTop && $$window.scrollTop() + $$window.height() > $element.offset().top + $element.height() + 100){
+                if (!$scope.canScrollTop && $$window.scrollTop() + $$window.height() > $element.offset().top + $element.height() + 100) {
                     $scope.canScrollTop = true;
-                }else if($scope.canScrollTop && $$window.scrollTop() + $$window.height() <= $element.offset().top + $element.height() + 100){
+                } else if ($scope.canScrollTop && $$window.scrollTop() + $$window.height() <= $element.offset().top + $element.height() + 100) {
                     $scope.canScrollTop = false;
                 }
             });

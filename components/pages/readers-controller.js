@@ -7,7 +7,7 @@
     keylolApp.controller("ReadersController", [
         "pageTitle", "$scope", "union", "$http", "notification", "utils", "$timeout", "$location",
         function (pageTitle, $scope, union, $http, notification, utils, $timeout, $location) {
-            if(!union.$localStorage.user){
+            if (!union.$localStorage.user) {
                 $location.url("/");
                 return;
             }
@@ -76,7 +76,7 @@
                                 };
                                 timeline.entries.push(entry);
                                 (function (entry) {
-                                    $timeout(function() {
+                                    $timeout(function () {
                                         if (!timelineTimeout) {
                                             entry.show = true;
                                             timelineTimeout = $timeout(function () {

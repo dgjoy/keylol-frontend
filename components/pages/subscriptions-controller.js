@@ -46,7 +46,7 @@
                         text: "同步订阅列表",
                         onClick: function () {
                             var that = this;
-                            if(!that.lock){
+                            if (!that.lock) {
                                 that.lock = true;
                                 $http.get(apiEndpoint + "user-point-subscription/my/auto").then(function (response) {
                                     that.lock = false;
@@ -121,7 +121,7 @@
                                 }
                                 timeline.entries.push(entry);
                                 (function (entry) {
-                                    $timeout(function() {
+                                    $timeout(function () {
                                         if (!timelineTimeout) {
                                             entry.show = true;
                                             timelineTimeout = $timeout(function () {

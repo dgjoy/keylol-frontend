@@ -14,13 +14,13 @@
             $scope.currentStation = 0;
             $scope.options = options;
 
-            $scope.showLoginSteamWindow = function() {
+            $scope.showLoginSteamWindow = function () {
                 window.show({
                     templateUrl: "components/windows/login-steam.html",
                     controller: "LoginSteamController"
                 });
                 $scope.cancel();
-                if(typeof options.registrationClose === "function"){
+                if (typeof options.registrationClose === "function") {
                     options.registrationClose();
                 }
             };

@@ -10,11 +10,11 @@
             $scope.article = union.article;
             $scope.point = union.point;
             $scope.summary = union.summary;
-            $scope.circles = function(i){
+            $scope.circles = function (i) {
                 return new Array(i);
             };
             $scope.editArticle = function () {
-                if($scope.article.TypeName === "简评"){
+                if ($scope.article.TypeName === "简评") {
                     window.show({
                         templateUrl: "components/windows/short-review.html",
                         controller: "ShortReviewController",
@@ -22,7 +22,7 @@
                             options: {
                                 point: {
                                     Id: $scope.point.Id,
-                                    IdCode:  $scope.point.IdCode,
+                                    IdCode: $scope.point.IdCode,
                                     CoverImage: $scope.point.CoverImage,
                                     Name: utils.getPointFirstName($scope.point)
                                 },
@@ -35,7 +35,7 @@
                             }
                         }
                     });
-                }else {
+                } else {
                     window.show({
                         templateUrl: "components/windows/editor.html",
                         controller: "EditorController",

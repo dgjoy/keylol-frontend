@@ -163,7 +163,7 @@
             $scope.submit = function () {
                 if ($scope.submitLock)
                     return;
-                if ($scope.vm.Description.length > 399){
+                if ($scope.vm.Description.length > 399) {
                     notification.error("部分文字内容超出字数限制，请酌情删改后再次提交");
                     return;
                 }
@@ -174,12 +174,12 @@
                 var submit = function () {
                     $http.put(apiEndpoint + "normal-point/" + point.Id, $scope.vm)
                         .then(function () {
-                            if(!isGame || !isJustCreated){
+                            if (!isGame || !isJustCreated) {
                                 notification.success("据点信息已更新");
-                            }else {
+                            } else {
                                 if (union.inEditor) {
                                     notification.success("据点已开设，可以随时接收文章投稿");
-                                }else {
+                                } else {
                                     notification.success("据点已开设");
                                 }
                             }

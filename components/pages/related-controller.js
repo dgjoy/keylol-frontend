@@ -108,7 +108,7 @@
                                 };
                                 timeline.entries.push(entry);
                                 (function (entry) {
-                                    $timeout(function() {
+                                    $timeout(function () {
                                         if (!timelineTimeout) {
                                             entry.show = true;
                                             timelineTimeout = $timeout(function () {

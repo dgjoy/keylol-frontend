@@ -15,7 +15,7 @@
                 if (!$scope.submitLock) {
                     $scope.submitLock = true;
                     $scope.shopLinkError = false;
-                    $timeout(function(){
+                    $timeout(function () {
                         var appId = checkShopLink($scope.vm.shopLink);
                         if (appId) {
                             notification.process("正在抓取商店信息，可能需要几秒的时间");

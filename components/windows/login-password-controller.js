@@ -50,7 +50,7 @@
                     return;
                 $scope.submitLock = true;
                 $scope.error = {};
-                $timeout(function(){
+                $timeout(function () {
                     if (!$scope.vm.EmailOrIdCode) {
                         $scope.error["vm.EmailOrIdCode"] = "Email or UIC cannot be empty.";
                     }

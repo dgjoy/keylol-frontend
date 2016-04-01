@@ -1,7 +1,7 @@
 @keyframes current-light-blink {
     0% {
-         background-position: 0 -180px;
-     }
+        background-position: 0 -180px;
+    }
     0.001% {
         background-position: 0 -216px;
     }
