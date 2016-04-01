@@ -18,7 +18,7 @@
             $scope.cancel = function () {
                 close();
             };
-            
+
             $scope.changeToLong = function () {
                 notification.attention("切换为长评时会覆盖之前未发布的草稿", [
                     {action: "覆盖", value: true},
@@ -51,16 +51,16 @@
             };
 
             $scope.submitLock = false;
-            var checkEmpty = function(){
-                if(!$scope.vm.Content) return "简评内容";
-                if(!$scope.vm.Vote) return "简评评分";
+            var checkEmpty = function () {
+                if (!$scope.vm.Content) return "简评内容";
+                if (!$scope.vm.Vote) return "简评评分";
                 return null;
             };
-            $scope.submit = function(){
+            $scope.submit = function () {
                 if ($scope.submitLock || $scope.vm.Content.length > 99)
                     return;
                 var emptyString = checkEmpty();
-                if(emptyString){
+                if (emptyString) {
                     return notification.error(emptyString + "不能为空");
                 }
                 $scope.submitLock = true;

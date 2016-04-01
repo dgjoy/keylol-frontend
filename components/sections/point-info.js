@@ -15,7 +15,7 @@
                         options: {
                             point: {
                                 Id: $scope.point.Id,
-                                IdCode:  $scope.point.IdCode,
+                                IdCode: $scope.point.IdCode,
                                 CoverImage: $scope.point.CoverImage,
                                 Name: utils.getPointFirstName($scope.point)
                             },

@@ -13,7 +13,7 @@
                     $http.get(apiEndpoint + "normal-point/" + idCode, {
                         params: {
                             stats: true,
-                            subscribed: union.$localStorage.user?true:false,
+                            subscribed: union.$localStorage.user ? true : false,
                             idType: "IdCode"
                         }
                     }).then(function (response) {

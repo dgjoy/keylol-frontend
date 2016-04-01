@@ -40,14 +40,14 @@
         </ul>
         <div class="coupon-container">
             <span>文券</span>
-            <a href="coupon">{{fakeCoupon || union.$localStorage.user.Coupon}} ◆</a>
+            <a href="coupon">{{union.$localStorage.user.fakeCoupon || union.$localStorage.user.Coupon}} ◆</a>
         </div>
         <div class="coupon-change-animation-container" ng-if="!hideAnimate">
             <div class="coupon-change-animation" ng-repeat="couponChange in couponChanges track by $index">
-                <a href="coupon" class="fake-coupon">{{couponChange.beforeChange}} ◆</a>
-                <div class="event-container" ng-class="{plus: couponChange.changeCount >= 0, minus: couponChange.changeCount < 0}">
-                    <span>文券</span>
-                    <a href="coupon">{{couponChange.changeCount<0?"－":"＋"}} {{couponChange.changeCount<0?-couponChange.changeCount:couponChange.changeCount}} ◆</a>
+                <a href="coupon" class="fake-coupon">{{couponChange.Before}} ◆</a>
+                <div class="event-container" ng-class="{plus: couponChange.Change >= 0, minus: couponChange.Change < 0}">
+                    <span>{{couponChange.Event}}</span>
+                    <a href="coupon">{{couponChange.Change<0?"－":"＋"}} {{couponChange.Change<0?-couponChange.Change:couponChange.Change}} ◆</a>
                 </div>
             </div>
         </div>

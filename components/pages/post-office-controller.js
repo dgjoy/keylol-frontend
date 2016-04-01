@@ -8,29 +8,29 @@
         "pageTitle", "$scope", "union", "$http", "notification", "$routeParams", "utils", "$timeout", "$location", "messageTypes",
         "window",
         function (pageTitle, $scope, union, $http, notification, $routeParams, utils, $timeout, $location, messageTypes,
-        window) {
-            if(!union.$localStorage.user){
+                  window) {
+            if (!union.$localStorage.user) {
                 $location.url("/");
                 return;
             }
             var filter;
-            if($routeParams.type){
-                if($routeParams.type === "acknowledgement"){
+            if ($routeParams.type) {
+                if ($routeParams.type === "acknowledgement") {
                     pageTitle.set("邮政中心 - 认可 - 其乐");
                     filter = "Like";
                     union.spolightActive = 0;
-                }else if($routeParams.type === "comment"){
+                } else if ($routeParams.type === "comment") {
                     pageTitle.set("邮政中心 - 评论 - 其乐");
                     filter = "Comment";
                     union.spolightActive = 1;
-                }else if($routeParams.type === "missive"){
+                } else if ($routeParams.type === "missive") {
                     pageTitle.set("邮政中心 - 公函 - 其乐");
                     filter = "Missive";
                     union.spolightActive = 2;
-                }else {
+                } else {
                     $scope.notFound = true;
                 }
-            }else {
+            } else {
                 pageTitle.set("邮政中心 - 其乐");
             }
 
@@ -80,13 +80,13 @@
                                 text: message.Article.Title,
                                 href: "article/" + message.Article.AuthorIdCode + "/" + message.Article.SequenceNumberForAuthor
                             },
-                            targetCommentId: message.Comment?message.Comment.Id:undefined,
+                            targetCommentId: message.Comment ? message.Comment.Id : undefined,
                             datetime: message.CreateTime,
-                            author: message.Operator?{
+                            author: message.Operator ? {
                                 username: message.Operator.UserName,
                                 avatarUrl: message.Operator.AvatarImage,
                                 idCode: message.Operator.IdCode
-                            }:{
+                            } : {
                                 username: "其乐职员团队",
                                 avatarUrl: "keylol://1f414be0769957946950b073d468ce77.png",
                                 isStaffTeam: true
@@ -110,11 +110,11 @@
                                 }
                             })(message);
                         } else {
-                            entry.url = "article/" + message.Article.AuthorIdCode + "/" + message.Article.SequenceNumberForAuthor + (message.Comment? "#" + message.Comment.SequenceNumberForArticle:"");
+                            entry.url = "article/" + message.Article.AuthorIdCode + "/" + message.Article.SequenceNumberForAuthor + (message.Comment ? "#" + message.Comment.SequenceNumberForArticle : "");
                         }
                         timeline.entries.push(entry);
                         (function (entry) {
-                            $timeout(function() {
+                            $timeout(function () {
                                 if (!timelineTimeout) {
                                     entry.show = true;
                                     timelineTimeout = $timeout(function () {

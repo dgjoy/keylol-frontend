@@ -16,7 +16,7 @@
             $scope.header = messageType.getHeader(message);
             $scope.footer = messageType.getFooter(message);
             $scope.reasons = message.Reasons;
-            switch (message.Type){
+            switch (message.Type) {
                 case "ArticleArchive":
                 case "CommentArchive":
                     $scope.totalReasons = moderationText.Archived.reasonTexts;

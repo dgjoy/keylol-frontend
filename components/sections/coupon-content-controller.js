@@ -8,17 +8,17 @@
             $scope.page = $location.hash();
             $scope.$watch("page", function (newPage) {
                 //noinspection JSValidateTypes
-                if(newPage !== "records" && newPage !== "ranks" && newPage !== "invite" ){
+                if (newPage !== "records" && newPage !== "ranks" && newPage !== "invite") {
                     $scope.page = "records";
-                }else {
+                } else {
                     //noinspection JSValidateTypes
-                    if(newPage === "records")
+                    if (newPage === "records")
                         getCouponLog();
                     //noinspection JSValidateTypes
-                    if(newPage === "ranks")
+                    if (newPage === "ranks")
                         getCouponRank();
                     //noinspection JSValidateTypes
-                    if(newPage === "invite")
+                    if (newPage === "invite")
                         getInviteCount();
                 }
             });
@@ -50,10 +50,10 @@
 
             function getCouponRank(page) {
                 var skip = 0;
-                if(page){
+                if (page) {
                     skip = (page - 1) * 20
                 }
-                if($scope.ranks){
+                if ($scope.ranks) {
                     $scope.ranks.length = 0;
                 }
                 $scope.rankPage.total = 1;
@@ -76,10 +76,10 @@
 
             function getCouponLog(page) {
                 var skip = 0;
-                if(page){
+                if (page) {
                     skip = (page - 1) * 20
                 }
-                if($scope.records){
+                if ($scope.records) {
                     $scope.records.length = 0;
                 }
                 $scope.recordPage.total = 1;
@@ -92,7 +92,7 @@
                     }
                 }).then(function (response) {
                     $scope.records = response.data;
-                    $scope.recordPage.total = Math.ceil(response.headers("X-Total-Record-Count")/20);
+                    $scope.recordPage.total = Math.ceil(response.headers("X-Total-Record-Count") / 20);
                     $scope.recordPage.curr = page || 1;
                 }, function (response) {
                     notification.error("发生未知错误，请重试或与站务职员联系", response);

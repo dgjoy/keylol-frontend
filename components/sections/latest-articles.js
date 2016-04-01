@@ -7,7 +7,8 @@
             $scope.articles = union.$localStorage.latestArticles;
             $http.get(apiEndpoint + "article/latest", {
                 params: {
-                    take: 5
+                    take: 5,
+                    articleTypeFilter: "评,研,讯,谈,档"
                 }
             }).then(function (response) {
                 union.$localStorage.latestArticles = $scope.articles = response.data;

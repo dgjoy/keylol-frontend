@@ -1,8 +1,8 @@
-(function() {
+(function () {
     "use strict";
 
     keylolApp.directive("flashingFigure", [
-        function() {
+        function () {
             return {
                 restrict: "E",
                 templateUrl: "components/directives/flashing-figure.html",

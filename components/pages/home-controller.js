@@ -6,7 +6,7 @@
         "$rootScope", "articleTypes",
         function (pageTitle, $scope, union, $http, notification, window, utils, $timeout, $location,
                   $rootScope, articleTypes) {
-            if(!union.$localStorage.login){
+            if (!union.$localStorage.login) {
                 $location.url("/");
                 return;
             }
@@ -49,7 +49,7 @@
                 entries: []
             };
 
-            if(union.$localStorage.firstOpenKeylol){
+            if (union.$localStorage.firstOpenKeylol) {
                 union.$localStorage.firstOpenKeylol = false;
                 window.show({
                     templateUrl: "components/windows/sync-loading.html",
@@ -61,7 +61,7 @@
                         }
                     }
                 });
-            }else {
+            } else {
                 getSubscription();
 
                 $http.put(apiEndpoint + "user-game-record/my", {}).then(function (response) {
@@ -77,8 +77,8 @@
                         }
                     });
                 }, function (response) {
-                    if(response.status === 404) return;
-                    if(response.status === 401) {
+                    if (response.status === 404) return;
+                    if (response.status === 401) {
                         window.show({
                             templateUrl: "components/windows/synchronization.html",
                             controller: "SynchronizationController",
@@ -96,7 +96,7 @@
                 });
             }
 
-            $rootScope.$on("homeRefresh", function(){
+            $rootScope.$on("homeRefresh", function () {
                 getSubscription();
             });
 
@@ -113,9 +113,9 @@
                 for (var i = 0; i < articleTypes.length; ++i) {
                     filterOptions.push(true);
                 }
-                if(union.$localStorage.homeFilter){
+                if (union.$localStorage.homeFilter) {
                     filterOptions = union.$localStorage.homeFilter.filterOptions.slice();
-                    params.shortReviewFilter =  union.$localStorage.homeFilter.shortReviewFilter;
+                    params.shortReviewFilter = union.$localStorage.homeFilter.shortReviewFilter;
                 }
                 for (var i = 0; i < articleTypes.length; i++) {
                     if (filterOptions[i]) {
@@ -129,7 +129,7 @@
                     timeline.noMoreArticle = true;
                     timeline.loadingLock = false;
                 } else {
-                    if(!params.articleTypeFilter) {
+                    if (!params.articleTypeFilter) {
                         params.articleTypeFilter = "hack";
                     }
 
@@ -206,7 +206,7 @@
                                 }
                                 timeline.entries.push(entry);
                                 (function (entry) {
-                                    $timeout(function() {
+                                    $timeout(function () {
                                         if (!timelineTimeout) {
                                             entry.show = true;
                                             timelineTimeout = $timeout(function () {

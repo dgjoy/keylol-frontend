@@ -87,9 +87,9 @@
                 var loadDraft = function () {
                     $scope.vm = draft.vm;
                     $scope.lastSaveTime = draft.time;
-                    if(articleTypes[draft.selectedTypeIndex].allowVote){
+                    if (articleTypes[draft.selectedTypeIndex].allowVote) {
                         $scope.inline.voteForPoints = draft.voteForPoints;
-                    }else {
+                    } else {
                         $scope.inline.attachedPoints = draft.attachedPoints;
                     }
                     $scope.selectedTypeIndex = draft.selectedTypeIndex;
@@ -118,9 +118,9 @@
                 autoSaveTimeout = $timeout($scope.saveDraft, autoSaveInterval);
             }
 
-            var getAttachedPointsFromVoteForPoint = function(){
+            var getAttachedPointsFromVoteForPoint = function () {
                 $scope.inline.attachedPoints = [];
-                if($scope.vm.VoteForPointId){
+                if ($scope.vm.VoteForPointId) {
                     $http.get(apiEndpoint + "/normal-point/" + $scope.vm.VoteForPointId + "/related")
                         .then(function (response) {
                             $scope.inline.attachedPoints = response.data;
@@ -140,17 +140,17 @@
 
             $scope.$watchCollection("inline.voteForPoints", function (newValue) {
                 $scope.vm.VoteForPointId = null;
-                if (newValue && newValue.length > 0){
+                if (newValue && newValue.length > 0) {
                     $scope.vm.VoteForPointId = newValue[0].Id;
                 }
-                if($scope.vm.TypeName === "评"){
+                if ($scope.vm.TypeName === "评") {
                     getAttachedPointsFromVoteForPoint();
                 }
             });
 
             $scope.$watch("selectedTypeIndex", function (newValue, oldValue) {
                 $scope.vm.TypeName = articleTypes[newValue].name;
-                if(articleTypes[newValue].allowVote && !articleTypes[oldValue].allowVote){
+                if (articleTypes[newValue].allowVote && !articleTypes[oldValue].allowVote) {
                     getAttachedPointsFromVoteForPoint();
                 }
             });
@@ -190,12 +190,12 @@
                 });
             };
 
-            var findNotCompleteVm = function(){
-                if(!$scope.vm.Title) return "标题";
-                if(!$scope.vm.Content) return "内容";
-                if(articleTypes[$scope.selectedTypeIndex].allowVote){
-                    if(!$scope.vm.Vote) return "评分";
-                    if(!$scope.vm.VoteForPointId) return "评价的游戏";
+            var findNotCompleteVm = function () {
+                if (!$scope.vm.Title) return "标题";
+                if (!$scope.vm.Content) return "内容";
+                if (articleTypes[$scope.selectedTypeIndex].allowVote) {
+                    if (!$scope.vm.Vote) return "评分";
+                    if (!$scope.vm.VoteForPointId) return "评价的游戏";
                 }
                 return null;
             };
@@ -206,7 +206,7 @@
                     return;
                 $scope.submitLock = true;
                 var notComplete = findNotCompleteVm();
-                if(!notComplete){
+                if (!notComplete) {
                     if ($scope.vm.Id) {
 
                         $http.put(apiEndpoint + "article/" + $scope.vm.Id, $scope.vm)
@@ -241,7 +241,7 @@
                                 $scope.submitLock = false;
                             });
                     }
-                }else {
+                } else {
                     notification.error(notComplete + "不能为空");
                     $scope.submitLock = false;
                 }

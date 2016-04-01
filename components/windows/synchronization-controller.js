@@ -5,14 +5,14 @@
         "$scope", "close", "condition", "autoSubscribed", "options", "utils", "$http", "notification", "window",
         "$location", "$rootScope",
         function ($scope, close, condition, autoSubscribed, options, utils, $http, notification, window,
-        $location, $rootScope) {
+                  $location, $rootScope) {
             $scope.cancel = function () {
-                if($location.url() === "/home" && typeof options.getSubscription === "function" && condition !== "fetchFailed"){
+                if ($location.url() === "/home" && typeof options.getSubscription === "function" && condition !== "fetchFailed") {
                     options.getSubscription();
                 }
                 close();
             };
-            $scope.deleteAuto = function(point){
+            $scope.deleteAuto = function (point) {
                 point.deleteDisabled = true;
                 $http.delete(apiEndpoint + "user-point-subscription", {
                     params: {
@@ -32,7 +32,7 @@
                     controller: "SyncLoadingController",
                     inputs: {
                         options: {
-                            getSubscription : options.getSubscription
+                            getSubscription: options.getSubscription
                         }
                     }
                 });
@@ -53,8 +53,8 @@
             $scope.condition = condition;
             $scope.autoSubscribed = autoSubscribed;
             $scope.subscribeEmpty = true;
-            for(var i in $scope.autoSubscribed){
-                if($scope.autoSubscribed[i].length > 0){
+            for (var i in $scope.autoSubscribed) {
+                if ($scope.autoSubscribed[i].length > 0) {
                     $scope.subscribeEmpty = false;
                 }
             }

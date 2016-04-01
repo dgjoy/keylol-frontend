@@ -11,7 +11,7 @@
                 },
                 require: "ngModel",
                 link: function (scope, element, attrs, ngModel) {
-                    scope.proConString = scope.isNegative?"缺":"亮";
+                    scope.proConString = scope.isNegative ? "缺" : "亮";
                     scope.valueArray = [];
 
                     ngModel.$render = function () {
@@ -28,13 +28,13 @@
                     };
 
                     scope.addValue = function () {
-                        if(scope.valueArray.length < 5){
+                        if (scope.valueArray.length < 5) {
                             scope.valueArray.push("");
                         }
                     };
 
                     scope.deleteValue = function (i) {
-                        if(scope.valueArray.length > 1){
+                        if (scope.valueArray.length > 1) {
                             scope.valueArray.splice(i, 1);
                             scope.setValue();
                         }
@@ -43,7 +43,7 @@
                     scope.setValue = function () {
                         var clearEmptyValue = [];
                         for (var i = 0; i < scope.valueArray.length; i++) {
-                            if(scope.valueArray[i] && scope.valueArray[i] !== ""){
+                            if (scope.valueArray[i] && scope.valueArray[i] !== "") {
                                 clearEmptyValue.push(scope.valueArray[i]);
                             }
                         }

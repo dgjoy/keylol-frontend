@@ -146,7 +146,7 @@
     justify-content: space-between;
     align-items: center;
     margin-top: 12px;
-    padding: 8px 5px 0;
+    padding: 12px 5px 0;
     border-top: 1px solid #ccc;
 }
 
@@ -157,22 +157,22 @@
 
 .section-action-hub .coupon-change-animation-container {
     position: absolute;
-    bottom: 4px;
+    bottom: 0;
     left: 0;
     width: 100%;
-    height: 38px;
+    height: 47px;
     overflow: hidden;
 }
 
 .section-action-hub .coupon-change-animation {
     position: absolute;
     top: 0;
-    left: 0;
-    width: 100%;
+    right: 0;
+    width: 110%;
     height: 100%;
     overflow: hidden;
     transform: translateX(100%);
-    transition: transform 0.5s 1.5s;
+    transition: transform 0.4s 1.3s;
 }
 
 .section-action-hub .coupon-change-animation.ng-enter {
@@ -180,7 +180,7 @@
 }
 
 .section-action-hub .coupon-change-animation.ng-enter-active {
-    transform: translateX(100%);
+    transform: translateX(110%);
 }
 
 .section-action-hub .coupon-change-animation-container .fake-coupon {
@@ -199,7 +199,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 8px 16px;
+    padding: 13px 17px 12px 47px;
     overflow: hidden;
 }
 
@@ -211,24 +211,24 @@
     background-color: #e30613;
 }
 
-.section-action-hub  .coupon-change-animation.ng-enter .event-container {
+.section-action-hub .coupon-change-animation.ng-enter .event-container {
     transform: translateX(-100%) skew(45deg);
 }
 
-.section-action-hub  .coupon-change-animation.ng-enter-active .event-container {
+.section-action-hub .coupon-change-animation.ng-enter-active .event-container {
     transform: translateX(0) skew(0deg);
-    transition: transform 0.5s;
+    transition: transform 0.4s;
 }
 
 .section-action-hub .coupon-change-animation-container .event-container * {
     color: white;
 }
 
-.section-action-hub  .coupon-change-animation.ng-enter .event-container * {
+.section-action-hub .coupon-change-animation.ng-enter .event-container * {
     transform: translateY(200%);
 }
 
-.section-action-hub  .coupon-change-animation.ng-enter-active .event-container * {
+.section-action-hub .coupon-change-animation.ng-enter-active .event-container * {
     transform: translateY(0);
-    transition: transform 0.5s 0.5s;
+    transition: transform 0.4s 0.4s;
 }

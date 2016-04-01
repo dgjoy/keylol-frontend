@@ -18,7 +18,7 @@
                         article.authorIdCode = $routeParams.author;
                         article.sqNumberForAuthor = $routeParams.article;
                         pageTitle.set(article.Title + " - 其乐");
-                        if(union.$localStorage.user){
+                        if (union.$localStorage.user) {
                             article.isMyArticle = union.$localStorage.user.IdCode === $routeParams.author;
                             article.canEdit = article.isMyArticle || union.$localStorage.user.StaffClaim === "operator";
                         }
@@ -41,17 +41,17 @@
                                 }).then(function (response) {
                                     unionPoint.hoursPlayed = response.data;
                                 }, function (response) {
-                                    if(response.status !== 404){
+                                    if (response.status !== 404) {
                                         notification.error("发生未知错误，请重试或与站务职员联系", response);
                                     }
                                 });
 
                                 point.totalEvaluate = 0;
                                 var totalVote = 0;
-                                for(var i in point.VoteStats){
+                                for (var i in point.VoteStats) {
                                     point.totalEvaluate += point.VoteStats[i];
                                     totalVote += point.VoteStats[i] * 2 * i;
-                                    if(article.Vote == i){
+                                    if (article.Vote == i) {
                                         point.highlight = i;
                                     }
                                 }
@@ -81,7 +81,7 @@
                         var cancelListenLocationChangeStart = $rootScope.$on("$locationChangeStart", function (e, newUrl, oldUrl) {
                             var newSplit = newUrl.split("#");
                             var oldSplit = oldUrl.split("#");
-                            if(newSplit[0] === oldSplit[0] && newSplit[1] && newSplit[1] !== oldSplit[1]){
+                            if (newSplit[0] === oldSplit[0] && newSplit[1] && newSplit[1] !== oldSplit[1]) {
                                 var hashNumber = parseInt(newSplit[1]);
                                 getAndFlushComments(article, hashNumber, "sequence", function () {
                                     $timeout(function () {
@@ -93,7 +93,7 @@
                                     });
                                 });
                                 e.preventDefault();
-                            }else {
+                            } else {
                                 cancelListenLocationChangeStart();
                             }
                         });
@@ -104,7 +104,7 @@
                         if (error.status === 404) {
                             $scope.articleExist = false;
                             return;
-                        } else if(error.status === 401) {
+                        } else if (error.status === 401) {
                             unionArticle.TypeName = "封";
                             return;
                         }
@@ -112,7 +112,7 @@
                     });
                 $http.get(apiEndpoint + "user/" + $routeParams.author, {
                     params: {
-                        subscribed: union.$localStorage.user?$routeParams.author != union.$localStorage.user.IdCode:false,
+                        subscribed: union.$localStorage.user ? $routeParams.author != union.$localStorage.user.IdCode : false,
                         stats: true,
                         profilePointBackgroundImage: true,
                         reviewStats: true,

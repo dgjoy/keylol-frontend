@@ -85,7 +85,7 @@
                             });
                         };
 
-                        var cancelListen = $rootScope.$on("$locationChangeSuccess", function(){
+                        var cancelListen = $rootScope.$on("$locationChangeSuccess", function () {
                             close();
                         });
 

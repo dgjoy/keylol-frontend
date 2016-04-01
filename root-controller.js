@@ -17,7 +17,9 @@
                         coupon: true
                     }
                 }).then(function (response) {
+                    var beforeCoupon = union.$localStorage.user?union.$localStorage.user.Coupon:undefined;
                     union.$localStorage.user = response.data;
+                    union.$localStorage.user.fakeCoupon = beforeCoupon;
                     _czc.push(["_setCustomVar", "登录用户", response.data.IdCode + "-" + response.data.UserName, 1]);
                 }, function (response) {
                     $http.delete(apiEndpoint + "login/current");

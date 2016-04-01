@@ -189,7 +189,7 @@
                     return;
                 $scope.submitLock = true;
                 $scope.error = {};
-                $timeout(function(){
+                $timeout(function () {
                     utils.modelValidate.gamerTag($scope.vm.GamerTag, $scope.error, "vm.GamerTag");
                     if (isVMDirty("NewPassword") || isVMDirty("LockoutEnabled")) {
                         if (!$scope.vm.Password) {
