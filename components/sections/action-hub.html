@@ -7,7 +7,7 @@
         </a>
         <a href="" class="log-in" ng-click="showLoginSteamWindow()">已注册用户登录</a>
     </div>
-    <div ng-if="union.$localStorage.login">
+    <div class="has-logged-in" ng-if="union.$localStorage.login">
         <div class="actions">
             <a href="post-office" class="border-button top-border" ng-class="{active: newMessages[0] || newMessages[1] || newMessages[2]}">{{(newMessages[0] || newMessages[1] || newMessages[2])?(newMessages[0]?"+"+newMessages[0]:"")+((newMessages[0]&&(newMessages[1]||newMessages[2]))?"　":"")+(newMessages[1]?"···"+newMessages[1]:"")+((newMessages[1]&&newMessages[2])?"　":"")+(newMessages[2]?"!!"+newMessages[2]:""):"O"}}</a>
         </div>
@@ -40,7 +40,16 @@
         </ul>
         <div class="coupon-container">
             <span>文券</span>
-            <a href="coupon">{{union.$localStorage.user.Coupon}} ◆</a>
+            <a href="coupon">{{fakeCoupon || union.$localStorage.user.Coupon}} ◆</a>
+        </div>
+        <div class="coupon-change-animation-container" ng-if="!hideAnimate">
+            <div class="coupon-change-animation" ng-repeat="couponChange in couponChanges track by $index">
+                <a href="coupon" class="fake-coupon">{{couponChange.beforeChange}} ◆</a>
+                <div class="event-container" ng-class="{plus: couponChange.changeCount >= 0, minus: couponChange.changeCount < 0}">
+                    <span>文券</span>
+                    <a href="coupon">{{couponChange.changeCount<0?"－":"＋"}} {{couponChange.changeCount<0?-couponChange.changeCount:couponChange.changeCount}} ◆</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
