@@ -5,6 +5,7 @@
         "$scope", "union", "window", "$timeout", "$http",
         function ($scope, union, window, $timeout, $http) {
             $scope.union = union;
+            $scope.hideAnimate = true;
             if (union.$localStorage.user) {
                 $scope.$watch('union.$localStorage.user.MessageCount', function (newValue) {
                     $scope.newMessages = typeof newValue === "string" ? newValue.split(',').map(function (element) {
