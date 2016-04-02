@@ -135,6 +135,11 @@
     white-space: pre-wrap;
 }
 
+.section-article-comments .content point-link {
+    white-space: nowrap;
+    margin-right: 10px;
+}
+
 .section-article-comments .archived .content,
 .section-article-comments .archived .content a {
     color: #bbb;

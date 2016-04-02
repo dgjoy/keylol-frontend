@@ -15,6 +15,8 @@
                         }
                         return m;
                     });
+                }).replace(/@Lee/gi, function (match) {
+                    return '<point-link type="user" point-name="\'' + match + '\'" id-code="\'LEEEE\'"></point-link>';
                 });
             };
 
