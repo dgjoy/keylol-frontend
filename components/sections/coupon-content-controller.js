@@ -2,14 +2,18 @@
     "use strict";
 
     keylolApp.controller("CouponContentController", [
-        "$scope", "union", "window", "utils", "$location", "$http", "notification",
-        function ($scope, union, window, utils, $location, $http, notification) {
+        "$scope", "union", "window", "utils", "$location", "$http", "notification", "$timeout",
+        function ($scope, union, window, utils, $location, $http, notification, $timeout) {
             $scope.union = union;
-            $scope.page = $location.hash();
+            $timeout(function () {
+                $scope.page = $location.hash();
+            });
             $scope.$watch("page", function (newPage) {
                 //noinspection JSValidateTypes
                 if (newPage !== "records" && newPage !== "ranks" && newPage !== "invite") {
-                    $scope.page = "records";
+                    $timeout(function () {
+                        $scope.page = "records";
+                    });
                 } else {
                     //noinspection JSValidateTypes
                     if (newPage === "records")
