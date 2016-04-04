@@ -1,7 +1,7 @@
 ﻿(function () {
     "use strict";
 
-    keylolApp.controller("SpolightBannerController", [
+    keylolApp.controller("SpotlightBannerController", [
         "$scope", "window", "$http", "notification", "$location", "union",
         function ($scope, window, $http, notification, $location, union) {
             if ($location.url().substr(1, 11) === "post-office") {
@@ -35,6 +35,9 @@
                     }, {
                         imageSrc: "assets/images/spotlight/cool-t-shirt.png",
                         link: "article/LEEEE/10"
+                    }, {
+                        imageSrc: "assets/images/spotlight/zhihu.png",
+                        link: "article/HILOA/15"
                     }
                 ];
                 $scope.banner = [];
