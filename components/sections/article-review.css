@@ -34,11 +34,15 @@
     margin-left: 10px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .section-article-review .review-detail .user-info .info-details .title p {
     margin: 0;
+}
+
+.section-article-review .review-detail .user-info .info-details .title .review-count {
+    color: #bbb;
 }
 
 .section-article-review .review-detail .user-info .info-details .title span {
@@ -72,6 +76,7 @@
 }
 
 .section-article-review .review-detail .pros-cons ul li {
+    line-height: 24px;
     width: 270px;
     white-space: nowrap;
     overflow: hidden;
