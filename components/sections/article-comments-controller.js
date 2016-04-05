@@ -8,7 +8,6 @@
             $scope.comments = union.comments;
             $scope.article = union.article;
             $scope.hotComments = union.hotComments;
-            $scope.user = union.$localStorage.user;
             $scope.pageElements = union.pageElements;
             $scope.textFocus = false;
             $scope.submitLock = false;

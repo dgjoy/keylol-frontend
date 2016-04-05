@@ -36,7 +36,7 @@
                         imageSrc: "assets/images/spotlight/cool-t-shirt.png",
                         link: "article/LEEEE/10"
                     }, {
-                        imageSrc: "assets/images/spotlight/zhihu.png",
+                        imageSrc: "assets/images/spotlight/zhihu-keylol.png",
                         link: "article/HILOA/15"
                     }
                 ];

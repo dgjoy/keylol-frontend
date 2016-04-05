@@ -68,7 +68,7 @@
     </div>
     <pagination ng-if="article.TypeName !== '封'" total="pageElements.totalPages" current="pageElements.currPage" on-page-changed="pageElements.changePage(oldPage, newPage)" page-href=""></pagination>
     <form ng-if="union.$localStorage.user && article.TypeName !== '封'" ng-submit="doComment()">
-        <point-link type="'user'" avatar-url="user.AvatarImage" id-code="user.IdCode"></point-link>
+        <point-link type="'user'" avatar-url="union.$localStorage.user.AvatarImage" id-code="union.$localStorage.user.IdCode"></point-link>
         <button type="submit" class="border-button right-border" ng-disabled="submitLock">发表评论</button>
         <div class="textarea-container"><textarea placeholder="对作者的见解有什么见解？" ng-model="comment.currentComment" focus-me="textFocus"></textarea></div>
     </form>

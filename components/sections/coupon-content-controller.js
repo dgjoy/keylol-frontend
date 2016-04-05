@@ -7,24 +7,22 @@
             $scope.union = union;
             $timeout(function () {
                 $scope.page = $location.hash();
-            });
-            $scope.$watch("page", function (newPage) {
-                //noinspection JSValidateTypes
-                if (newPage !== "records" && newPage !== "ranks" && newPage !== "invite") {
-                    $timeout(function () {
+                $scope.$watch("page", function (newPage) {
+                    //noinspection JSValidateTypes
+                    if (newPage !== "records" && newPage !== "ranks" && newPage !== "invite") {
                         $scope.page = "records";
-                    });
-                } else {
-                    //noinspection JSValidateTypes
-                    if (newPage === "records")
-                        getCouponLog();
-                    //noinspection JSValidateTypes
-                    if (newPage === "ranks")
-                        getCouponRank();
-                    //noinspection JSValidateTypes
-                    if (newPage === "invite")
-                        getInviteCount();
-                }
+                    } else {
+                        //noinspection JSValidateTypes
+                        if (newPage === "records")
+                            getCouponLog();
+                        //noinspection JSValidateTypes
+                        if (newPage === "ranks")
+                            getCouponRank();
+                        //noinspection JSValidateTypes
+                        if (newPage === "invite")
+                            getInviteCount();
+                    }
+                });
             });
             $scope.setPage = function (page) {
                 $scope.page = page;
