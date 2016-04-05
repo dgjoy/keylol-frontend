@@ -21,6 +21,10 @@
     justify-content: space-between;
 }
 
+.section-article-review .review-detail .user-info>span {
+    padding-top: 5px;
+}
+
 .section-article-review .review-detail .user-info .info-details .avatar-anchor {
     display: block;
 }
