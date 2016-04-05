@@ -11,8 +11,16 @@ vote-circle svg {
     transform: translateY(-2px);
 }
 
+vote-circle svg:last-of-type {
+    width: 8px;
+}
+
 vote-circle svg.disabled {
     fill: #ccc !important;
+}
+
+vote-circle svg.whole-white {
+    fill: white !important;
 }
 
 vote-circle svg.awesome {

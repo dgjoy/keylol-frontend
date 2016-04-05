@@ -64,23 +64,6 @@
                     </p>
                 </div>
             </div>
-            <div class="divider"></div>
-            <div class="review-detail">
-                <div class="user-info">
-                    <span ng-if="point.hoursPlayed" class="game-hours">游戏在档 {{point.hoursPlayed}} 小时</span>
-                    <point-link ng-if="summary.idCode" type="'user'" point-name="summary.userName" id-code="summary.idCode"></point-link>
-                    <p class="review-count">{{summary.reviewCount}} 篇评测 / {{summary.shortReviewCount}} 段简评</p>
-                </div>
-                <blockquote>{{article.Summary}}</blockquote>
-                <div class="pros-cons">
-                    <ul class="pros">
-                        <li ng-repeat="pro in article.Pros track by $index">{{pro}}</li>
-                    </ul><!--
-             --><ul class="cons">
-                    <li ng-repeat="con in article.Cons track by $index">{{con}}</li>
-                </ul>
-                </div>
-            </div>
         </div>
     </div>
     <moderation-result ng-if="(article.Archived && article.Archived !== 'None') || article.TypeName === '封'" type="'Archived'"></moderation-result>

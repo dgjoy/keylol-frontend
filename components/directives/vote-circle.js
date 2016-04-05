@@ -9,7 +9,8 @@
                 templateUrl: "components/directives/vote-circle.html",
                 scope: {
                     vote: "=",
-                    disabled: "="
+                    disabled: "=",
+                    wholeWhite: "="
                 },
                 link: function (scope) {
                     scope.circles = new Array(scope.vote);
