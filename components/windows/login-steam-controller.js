@@ -2,8 +2,8 @@
     "use strict";
 
     keylolApp.controller("LoginSteamController", [
-        "$scope", "close", "$http", "apiEndpoint", "window", "union", "$timeout", "notification", "utils", "$location",
-        function ($scope, close, $http, apiEndpoint, window, union, $timeout, notification, utils, $location) {
+        "$scope", "close", "$http", "apiEndpoint", "window", "union", "$timeout", "notification", "utils", "$route",
+        function ($scope, close, $http, apiEndpoint, window, union, $timeout, notification, utils, $route) {
             var connection = $.connection.new();
             var steamLoginHubProxy = connection.steamLoginHub;
             var tokenId;
@@ -34,7 +34,7 @@
                             connection.stop();
                             $timeout(function () {
                                 notification.success("登录成功，欢迎回到其乐");
-                                $location.url("/home");
+                                $route.reload();
                                 close();
                             }, 1500);
                         }, function (response) {

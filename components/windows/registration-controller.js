@@ -3,9 +3,9 @@
 
     keylolApp.controller("RegistrationController", [
         "$scope", "close", "$http", "utils", "union", "apiEndpoint", "window", "notification", "$element", "$timeout", "$location", "options",
-        "$routeParams",
+        "$routeParams", "$route",
         function ($scope, close, $http, utils, union, apiEndpoint, window, notification, $element, $timeout, $location, options,
-                  $routeParams) {
+                  $routeParams, $route) {
             $scope.vm = {
                 IdCode: "",
                 UserName: "",
@@ -104,7 +104,7 @@
                         .then(function (response) {
                             union.$localStorage.firstOpenKeylol = true;
                             union.$localStorage.login = response.data;
-                            $location.url("/home");
+                            $route.reload();
                             close();
                             if (consumeBindingToken)
                                 consumeBindingToken.resolve();
