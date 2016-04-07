@@ -8,5 +8,5 @@ else
   echo "Use API endpoint: $API_ENDPOINT"
 fi
 cd /prerender
+nginx
 screen node server.js
-nginx -g 'daemon off;'
