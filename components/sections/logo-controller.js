@@ -6,7 +6,7 @@
         function ($scope, $http, apiEndpoint, union, $rootScope, $location) {
             $scope.union = union;
             $scope.emitRefresh = function () {
-                if ($location.url() === "/home") {
+                if ($location.url() === "/") {
                     $rootScope.$emit("homeRefresh");
                 }
             }

@@ -7,7 +7,7 @@
         function ($scope, close, condition, autoSubscribed, options, utils, $http, notification, window,
                   $location, $rootScope) {
             $scope.cancel = function () {
-                if ($location.url() === "/home" && typeof options.getSubscription === "function" && condition !== "fetchFailed") {
+                if ($location.url() === "/" && typeof options.getSubscription === "function" && condition !== "fetchFailed") {
                     options.getSubscription();
                 }
                 close();

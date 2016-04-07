@@ -1,4 +1,4 @@
-﻿<div class="container">
+﻿<div ng-if="!notLogin" class="container">
     <div class="row">
         <div class="col-left">
             <section ng-include="'components/sections/logo.html'" style="height: 92px"></section>
@@ -20,3 +20,4 @@
         </div>
     </div>
 </div>
+<div ng-if="notLogin" ng-include="'components/pages/alpha-entrance.html'" ng-controller="AlphaEntranceController"></div>
