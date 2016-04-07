@@ -27,9 +27,6 @@
                         imageSrc: "assets/images/spotlight/welcome.png",
                         link: "article/LEEEE/8"
                     }, {
-                        imageSrc: "assets/images/spotlight/questionaire.png",
-                        link: "https://form.mikecrm.com/f.php?t=nPm9VO"
-                    }, {
                         imageSrc: "assets/images/spotlight/player-group.png",
                         link: "article/LEEEE/4"
                     }, {

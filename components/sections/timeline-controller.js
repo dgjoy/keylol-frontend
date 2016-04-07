@@ -151,7 +151,7 @@
 
             var url = $location.url().substr(1, 4);
             var currPage;
-            if (url === "home") {
+            if (url === "") {
                 currPage = "home";
                 if (union.$localStorage.homeFilter) {
                     filterOptions = union.$localStorage.homeFilter.filterOptions.slice();

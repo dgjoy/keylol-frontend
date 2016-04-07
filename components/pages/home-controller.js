@@ -7,10 +7,10 @@
         function (pageTitle, $scope, union, $http, notification, window, utils, $timeout, $location,
                   $rootScope, articleTypes) {
             if (!union.$localStorage.login) {
-                $location.url("/");
+                $scope.notLogin = true;
                 return;
             }
-            pageTitle.set("其乐 - 请无视游戏与艺术之间的空隙");
+            pageTitle.set("其乐 Keylol");
             $scope.union = union;
             var timeline = {
                 title: {

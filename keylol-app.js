@@ -24,12 +24,9 @@
             $locationProvider.html5Mode(true);
 
             $anchorScrollProvider.disableAutoScrolling();
-            $routeProvider.when("/home", {
+            $routeProvider.when("/", {
                 templateUrl: "components/pages/home.html",
                 controller: "HomeController"
-            }).when("/", {
-                templateUrl: "components/pages/alpha-entrance.html",
-                controller: "AlphaEntranceController"
             }).when("/article/:author/:article", {
                 templateUrl: "components/pages/article.html",
                 controller: "ArticleController"
@@ -68,7 +65,7 @@
                 controller: "NotFoundController"
             });
 
-            pageTitleProvider.setLoadingTitle("载入中 - 其乐");
+            pageTitleProvider.setLoadingTitle("其乐 - 甄选并传递游戏的价值");
 
             utilsProvider.config({
                 geetestId: "accdaf35b04e4ad5bf4980c7d30edf87"
