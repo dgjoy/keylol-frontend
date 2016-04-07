@@ -7,4 +7,6 @@ else
   sed -i 's/'"$OLD"'/'"$NEW"'/g' /usr/share/nginx/html/bundles/app-*.js
   echo "Use API endpoint: $API_ENDPOINT"
 fi
+cd /prerender
+screen node server.js
 nginx -g 'daemon off;'
