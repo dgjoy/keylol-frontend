@@ -20,7 +20,7 @@ COPY *.ejs ./
 COPY components components/
 COPY assets assets/
 
-ENV GULP_TASK_NAME dev
+ENV GULP_TASK_NAME prod
 RUN COPY_TARGET=/usr/share/nginx/html keylol-frontend build
 
 COPY nginx-site.conf /etc/nginx/conf.d/default.conf

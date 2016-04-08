@@ -30,6 +30,9 @@ case ${ACTION} in
     esac
     ;;
   start)
+    if [ ${GULP_TASK_NAME} != 'prod' ]; then
+      keylol-frontend build ${GULP_TASK_NAME}
+    fi
     nginx -g 'daemon off;'
     ;;
 esac
