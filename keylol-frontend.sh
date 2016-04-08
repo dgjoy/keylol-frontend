@@ -8,5 +8,3 @@ else
   echo "Use API endpoint: $API_ENDPOINT"
 fi
 nginx
-cd /prerender
-node server.js

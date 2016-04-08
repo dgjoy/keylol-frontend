@@ -11,9 +11,6 @@ RUN apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 573BFD6B3D8FBC64107
 
 ENV NPM_CONFIG_LOGLEVEL warn
 
-COPY prerender prerender/
-RUN cd prerender && npm install
-
 COPY package.json .
 RUN npm install
 
