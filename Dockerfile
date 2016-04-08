@@ -17,12 +17,13 @@ RUN chmod +x /usr/local/bin/keylol-frontend
 
 COPY *.js ./
 COPY *.ejs ./
+COPY *.pdf ./
 COPY components components/
 COPY assets assets/
 
 ENV BUILD_TASK prod
 ENV BUILD_COPY_TARGET /usr/share/nginx/html
-RUN keylol-frontend build
+RUN keylol-frontend build ${BUILD_TASK}
 
 COPY nginx-site.conf /etc/nginx/conf.d/default.conf
 

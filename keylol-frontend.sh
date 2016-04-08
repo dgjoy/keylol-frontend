@@ -30,10 +30,12 @@ case ${ACTION} in
     esac
     ;;
   start)
-    if [ ! -f /rebuild.lock ] && [ ${BUILD_TASK} -ne 'prod' ]; then
+    if [ ! -f /rebuild.lock ] && [ ${BUILD_TASK} != 'prod' ]; then
       keylol-frontend build ${BUILD_TASK}
       touch /rebuild.lock
     fi
+    PRERENDER_AUTHORIZATION=$(echo ${PRERENDER_AUTHORIZATION} | sed -e 's/[]\/$*.^|[]/\\&/g')
+    sed -i 's/__PRERENDER_AUTHORIZATION__/'"${PRERENDER_AUTHORIZATION}"'/g' /etc/nginx/conf.d/default.conf
     nginx -g 'daemon off;'
     ;;
 esac
