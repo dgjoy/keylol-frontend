@@ -9,7 +9,7 @@
                 priority: 98,
                 link: function (scope, element, attrs) {
                     attrs.$observe("webpSrc", function (value) {
-                        if (/\.svg$/i.test(value)) {
+                        if (/\.svg|gif$/i.test(value)) {
                             attrs.$set("src", value);
                             return;
                         }
