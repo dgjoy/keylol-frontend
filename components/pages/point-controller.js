@@ -2,8 +2,8 @@
     "use strict";
 
     keylolApp.controller("PointController", [
-        "pageTitle", "$scope", "union", "$routeParams", "$http", "utils", "notification", "window", "$location", "$timeout",
-        function (pageTitle, $scope, union, $routeParams, $http, utils, notification, window, $location, $timeout) {
+        "pageHead", "$scope", "union", "$routeParams", "$http", "utils", "notification", "window", "$location", "$timeout",
+        function (pageHead, $scope, union, $routeParams, $http, utils, notification, window, $location, $timeout) {
             /**
              * 初始化union的一些属性
              */
@@ -80,7 +80,7 @@
                         summary.subscribed = user.Subscribed;
                     }
                     utils.addRecentBroswe("ProfilePoint", user.UserName, user.IdCode);
-                    pageTitle.set(user.UserName + " - 其乐");
+                    pageHead.setTitle(user.UserName + " - 其乐");
                     $.extend(unionUser, user);
                     $.extend(summary, {
                         head: {
@@ -297,7 +297,7 @@
 
                     var mainName = utils.getPointFirstName(point);
 
-                    pageTitle.set(mainName + " - 其乐");
+                    pageHead.setTitle(mainName + " - 其乐");
 
                     utils.addRecentBroswe("NormalPoint", mainName, point.IdCode);
                     $.extend(unionPoint, point);

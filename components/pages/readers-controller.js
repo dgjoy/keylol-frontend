@@ -5,8 +5,8 @@
     "use strict";
 
     keylolApp.controller("ReadersController", [
-        "pageTitle", "$scope", "union", "$http", "notification", "utils", "$timeout", "$location",
-        function (pageTitle, $scope, union, $http, notification, utils, $timeout, $location) {
+        "pageHead", "$scope", "union", "$http", "notification", "utils", "$timeout", "$location",
+        function (pageHead, $scope, union, $http, notification, utils, $timeout, $location) {
             if (!union.$localStorage.user) {
                 $location.url("/");
                 return;
@@ -25,7 +25,7 @@
                     articleNum: union.$localStorage.user.ArticleCount
                 }
             };
-            pageTitle.set(union.$localStorage.user.UserName + " 的读者 - 其乐");
+            pageHead.setTitle(union.$localStorage.user.UserName + " 的读者 - 其乐");
 
             $http.get(apiEndpoint + "user/" + union.$localStorage.user.IdCode, {
                 params: {

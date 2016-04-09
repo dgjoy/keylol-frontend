@@ -2,15 +2,15 @@
     "use strict";
 
     keylolApp.controller("HomeController", [
-        "pageTitle", "$scope", "union", "$http", "notification", "window", "utils", "$timeout", "$location",
+        "pageHead", "$scope", "union", "$http", "notification", "window", "utils", "$timeout", "$location",
         "$rootScope", "articleTypes",
-        function (pageTitle, $scope, union, $http, notification, window, utils, $timeout, $location,
+        function (pageHead, $scope, union, $http, notification, window, utils, $timeout, $location,
                   $rootScope, articleTypes) {
             if (!union.$localStorage.login) {
                 $scope.notLogin = true;
                 return;
             }
-            pageTitle.set("其乐 Keylol");
+            pageHead.setTitle("其乐 Keylol");
             $scope.union = union;
             var timeline = {
                 title: {

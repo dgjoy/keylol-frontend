@@ -2,11 +2,13 @@
     "use strict";
 
     keylolApp.controller("ArticleController", [
-        "pageTitle", "$scope", "union", "$routeParams", "$http", "getAndFlushComments", "notification", "$location", "$timeout", "$rootScope",
-        function (pageTitle, $scope, union, $routeParams, $http, getAndFlushComments, notification, $location, $timeout, $rootScope) {
+        "pageHead", "$scope", "union", "$routeParams", "$http", "getAndFlushComments", "notification", "$location", "$timeout", "$rootScope",
+        "utils",
+        function (pageHead, $scope, union, $routeParams, $http, getAndFlushComments, notification, $location, $timeout, $rootScope,
+                  utils) {
             $scope.articleExist = true;
             $scope.union = union;
-            pageTitle.set("文章 - 其乐");
+            pageHead.setTitle("文章 - 其乐");
             var unionArticle = {};
             var unionPoint = {};
             var summary = {};
@@ -17,7 +19,16 @@
                         var article = response.data;
                         article.authorIdCode = $routeParams.author;
                         article.sqNumberForAuthor = $routeParams.article;
-                        pageTitle.set(article.Title + " - 其乐");
+                        pageHead.setTitle(article.Title + " - 其乐");
+                        pageHead.setDescription(article.Summary);
+                        var keywords = [];
+                        if (article.VoteForPoint) {
+                            keywords.push(utils.getPointFirstName(article.VoteForPoint));
+                        }
+                        for (var i = 0; i < article.AttachedPoints.length; i++) {
+                            keywords.push(utils.getPointFirstName(article.AttachedPoints[i]));
+                        }
+                        pageHead.setKeywords(keywords);
                         if (union.$localStorage.user) {
                             article.isMyArticle = union.$localStorage.user.IdCode === $routeParams.author;
                             article.canEdit = article.isMyArticle || union.$localStorage.user.StaffClaim === "operator";

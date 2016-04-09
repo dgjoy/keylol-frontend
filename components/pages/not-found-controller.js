@@ -2,9 +2,10 @@
     "use strict";
 
     keylolApp.controller("NotFoundController", [
-        "pageTitle",
-        function (pageTitle) {
-            pageTitle.set("404 Not Found - 其乐");
+        "pageHead",
+        function (pageHead) {
+            pageHead.setTitle("404 Not Found - 其乐");
+            pageHead.setDescription("你不小心来到了一片荒芜之地……");
         }
     ]);
 })();

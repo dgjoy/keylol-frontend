@@ -17,7 +17,7 @@
         "angulartics"
     ]);
     app.config([
-        "$routeProvider", "$locationProvider", "utilsProvider", "pageTitleProvider", "$localStorageProvider",
+        "$routeProvider", "$locationProvider", "utilsProvider", "pageHeadProvider", "$localStorageProvider",
         "$httpProvider", "$compileProvider", "$analyticsProvider", "$anchorScrollProvider",
         function ($routeProvider, $locationProvider, utilsProvider, pageTitleProvider, $localStorageProvider,
                   $httpProvider, $compileProvider, $analyticsProvider, $anchorScrollProvider) {
@@ -67,7 +67,9 @@
                 controller: "NotFoundController"
             });
 
-            pageTitleProvider.setLoadingTitle("其乐 - 甄选并传递游戏的价值");
+            pageTitleProvider.setLoadingHead({
+                title: "其乐 - 甄选并传递游戏的价值"
+            });
 
             utilsProvider.config({
                 geetestId: "accdaf35b04e4ad5bf4980c7d30edf87"

@@ -307,6 +307,11 @@
                                                 idCode: article.LikeByUsers[j].IdCode
                                             });
                                         }
+                                    } else if (union.user) {
+                                        entry.sources.userArray.push({
+                                            name: union.user.UserName,
+                                            idCode: union.user.IdCode
+                                        });
                                     } else {
                                         entry.sources.userArray.push({
                                             name: union.$localStorage.user.UserName,
