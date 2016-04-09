@@ -5,6 +5,7 @@
         "$scope", "selectedIndexes", "close", "types", "currPage", "shortReviewFilter", "sourceFilter",
         function ($scope, selectedIndexes, close, types, currPage, shortReviewFilter, sourceFilter) {
             var vm = this;
+            console.log(vm);
             $scope.currPage = currPage;
             vm.subscribeUser = shortReviewFilter & 1;
             vm.subscribePoint = shortReviewFilter & 2;

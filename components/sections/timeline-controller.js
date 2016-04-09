@@ -153,7 +153,7 @@
             var currPage;
             if (url === "") {
                 currPage = "home";
-                if (union.$localStorage.homeFilter) {
+                if (union.$localStorage.homeFilter && union.$localStorage.homeFilter.filterOptions && union.$localStorage.homeFilter.shortReviewFilter) {
                     filterOptions = union.$localStorage.homeFilter.filterOptions.slice();
                     shortReviewFilter = union.$localStorage.homeFilter.shortReviewFilter;
                 } else {
@@ -190,6 +190,7 @@
 
             $scope.expand = function ($event) {
                 $scope.expanded = !$scope.expanded;
+                console.log(filterOptions, shortReviewFilter, sourceFilter);
                 $scope.showFilter({
                     templateUrl: "components/popup/entry-filter.html",
                     controller: "EntryFilterController as entryFilter",
