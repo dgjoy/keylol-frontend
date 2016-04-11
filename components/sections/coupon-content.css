@@ -136,6 +136,64 @@
     text-align: left;
 }
 
+.section-coupon-content .shop ul {
+    margin: 0;
+    padding: 0 10px;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.section-coupon-content .shop li {
+    width: 250px;
+    margin: 30px 30px 0 0;
+}
+
+.section-coupon-content .shop li:nth-of-type(3n) {
+    margin-right: 0;
+}
+
+.section-coupon-content .shop li a {
+    height: 150px;
+    display: block;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.section-coupon-content .shop li a div {
+    position: absolute;
+    box-sizing: border-box;
+    bottom: 0;
+    width: 100%;
+    height: 45px;
+    background-color: rgba(256, 256, 256, 0.85);
+    transition: background-color 100ms ease-in-out;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.section-coupon-content .shop li a div span {
+    font-size: 15px;
+    color: #159;
+}
+
+.section-coupon-content .shop li a:hover div span:first-of-type {
+    text-decoration: underline;
+}
+
+.section-coupon-content .shop li a:hover div {
+    background-color: rgba(256, 256, 256, 0.95);
+}
+
+.section-coupon-content .shop li > p {
+    margin: 10px 0 0;
+    text-align: right;
+    color: #bbb;
+}
+
 .section-coupon-content .ranks tr td:nth-of-type(1),
 .section-coupon-content .ranks tr th:nth-of-type(1) {
     width: 80px;

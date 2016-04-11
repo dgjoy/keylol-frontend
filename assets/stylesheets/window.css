@@ -188,6 +188,7 @@ window[position=right]::after {
 }
 
 .window table input[type=text],
+.window table input[type=number],
 .window table input[type=password],
 .window table input[type=email],
 .window table textarea {
@@ -262,6 +263,11 @@ window[position=right]::after {
 }
 
 .window .window-confirm-button .new-point {
+    height: 40px;
+    top: 4px;
+}
+
+.window .window-confirm-button .basket {
     height: 40px;
     top: 4px;
 }
