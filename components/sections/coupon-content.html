@@ -86,7 +86,7 @@
         <div class="shop clearfix">
             <ul>
                 <li ng-repeat="item in shopItems">
-                    <a href="" class="item-content clearfix" webp-background="{{item.ThumbnailImage|backgroundUrl}}" ng-click="showShopWindow(item.Id)">
+                    <a href="" class="item-content clearfix" webp-background="{{item.ThumbnailImage|couponShopUrl}}" ng-click="showShopWindow(item.Id)">
                         <div>
                             <span>{{item.Name}}</span>
                             <span>{{item.Price}} ◆</span>
