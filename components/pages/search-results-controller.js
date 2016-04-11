@@ -5,14 +5,14 @@
     "use strict";
 
     keylolApp.controller("SearchResultsController", [
-        "pageTitle", "$scope", "union", "$http", "notification", "$routeParams", "$location", "utils", "$timeout",
-        function (pageTitle, $scope, union, $http, notification, $routeParams, $location, utils, $timeout) {
+        "pageHead", "$scope", "union", "$http", "notification", "$routeParams", "$location", "utils", "$timeout",
+        function (pageHead, $scope, union, $http, notification, $routeParams, $location, utils, $timeout) {
             $scope.searchExist = true;
             $scope.union = union;
             if (!$routeParams.searchType || !$routeParams.keyword) {
                 $scope.searchExist = false;
             }
-            pageTitle.set($routeParams.keyword + " 的搜索结果 - 其乐");
+            pageHead.setTitle($routeParams.keyword + " 的搜索结果 - 其乐");
             var summary = {
                 actions: [],
                 head: {

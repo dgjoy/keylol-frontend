@@ -5,8 +5,8 @@
     "use strict";
 
     keylolApp.controller("RelatedController", [
-        "pageTitle", "$scope", "union", "$http", "notification", "$routeParams", "utils", "$timeout",
-        function (pageTitle, $scope, union, $http, notification, $routeParams, utils, $timeout) {
+        "pageHead", "$scope", "union", "$http", "notification", "$routeParams", "utils", "$timeout",
+        function (pageHead, $scope, union, $http, notification, $routeParams, utils, $timeout) {
             $scope.searchExist = true;
             $scope.union = union;
             if (!$routeParams.idCode || !$routeParams.type) {
@@ -43,7 +43,7 @@
 
                 var point = response.data;
 
-                pageTitle.set(utils.getPointFirstName(point) + " - " + typeText + " 的游戏 - 其乐");
+                pageHead.setTitle(utils.getPointFirstName(point) + " - " + typeText + " 的游戏 - 其乐");
                 $.extend(summary, {
                     head: {
                         mainHead: utils.getPointFirstName(point),

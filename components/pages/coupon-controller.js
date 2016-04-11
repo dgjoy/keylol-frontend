@@ -5,13 +5,13 @@
     "use strict";
 
     keylolApp.controller("CouponController", [
-        "pageTitle", "$scope", "union", "$http", "notification", "$location",
-        function (pageTitle, $scope, union, $http, notification, $location) {
+        "pageHead", "$scope", "union", "$http", "notification", "$location",
+        function (pageHead, $scope, union, $http, notification, $location) {
             if (!union.$localStorage.user) {
                 $location.url("/");
                 return;
             }
-            pageTitle.set("文券 - 其乐");
+            pageHead.setTitle("文券 - 其乐");
 
             union.summary = {
                 head: {

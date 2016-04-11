@@ -9,7 +9,7 @@
                 priority: 98,
                 link: function (scope, element, attrs) {
                     attrs.$observe("webpBackground", function (value) {
-                        if (/\.svg$/i.test(value)) {
+                        if (/\.svg|gif$/i.test(value)) {
                             element.css("background-image", "url(" + value + ")");
                             return;
                         }

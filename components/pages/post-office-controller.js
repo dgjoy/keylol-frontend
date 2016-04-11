@@ -5,9 +5,9 @@
     "use strict";
 
     keylolApp.controller("PostOfficeController", [
-        "pageTitle", "$scope", "union", "$http", "notification", "$routeParams", "utils", "$timeout", "$location", "messageTypes",
+        "pageHead", "$scope", "union", "$http", "notification", "$routeParams", "utils", "$timeout", "$location", "messageTypes",
         "window",
-        function (pageTitle, $scope, union, $http, notification, $routeParams, utils, $timeout, $location, messageTypes,
+        function (pageHead, $scope, union, $http, notification, $routeParams, utils, $timeout, $location, messageTypes,
                   window) {
             if (!union.$localStorage.user) {
                 $location.url("/");
@@ -16,22 +16,22 @@
             var filter;
             if ($routeParams.type) {
                 if ($routeParams.type === "acknowledgement") {
-                    pageTitle.set("邮政中心 - 认可 - 其乐");
+                    pageHead.setTitle("邮政中心 - 认可 - 其乐");
                     filter = "Like";
                     union.spolightActive = 0;
                 } else if ($routeParams.type === "comment") {
-                    pageTitle.set("邮政中心 - 评论 - 其乐");
+                    pageHead.setTitle("邮政中心 - 评论 - 其乐");
                     filter = "Comment";
                     union.spolightActive = 1;
                 } else if ($routeParams.type === "missive") {
-                    pageTitle.set("邮政中心 - 公函 - 其乐");
+                    pageHead.setTitle("邮政中心 - 公函 - 其乐");
                     filter = "Missive";
                     union.spolightActive = 2;
                 } else {
                     $scope.notFound = true;
                 }
             } else {
-                pageTitle.set("邮政中心 - 其乐");
+                pageHead.setTitle("邮政中心 - 其乐");
             }
 
             var timeline = {

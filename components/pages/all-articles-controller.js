@@ -5,11 +5,11 @@
     "use strict";
 
     keylolApp.controller("AllArticlesController", [
-        "pageTitle", "$scope", "union", "$http", "notification", "$location", "utils", "$timeout", "window",
-        function (pageTitle, $scope, union, $http, notification, $location, utils, $timeout, window) {
+        "pageHead", "$scope", "union", "$http", "notification", "$location", "utils", "$timeout", "window",
+        function (pageHead, $scope, union, $http, notification, $location, utils, $timeout, window) {
             $scope.searchExist = true;
             $scope.union = union;
-            pageTitle.set("最新文章 - 其乐");
+            pageHead.setTitle("最新文章 - 其乐");
             var summary = {
                 actions: [],
                 head: {

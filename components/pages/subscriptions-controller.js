@@ -5,8 +5,8 @@
     "use strict";
 
     keylolApp.controller("SubscriptionsController", [
-        "pageTitle", "$scope", "union", "$http", "notification", "$location", "utils", "$timeout", "window",
-        function (pageTitle, $scope, union, $http, notification, $location, utils, $timeout, window) {
+        "pageHead", "$scope", "union", "$http", "notification", "$location", "utils", "$timeout", "window",
+        function (pageHead, $scope, union, $http, notification, $location, utils, $timeout, window) {
             $scope.union = union;
             $scope.searchExist = true;
             var summary = {
@@ -21,7 +21,7 @@
                     articleNum: union.$localStorage.user.ArticleCount
                 }
             };
-            pageTitle.set(union.$localStorage.user.UserName + " 的订阅 - 其乐");
+            pageHead.setTitle(union.$localStorage.user.UserName + " 的订阅 - 其乐");
 
             $http.get(apiEndpoint + "user/" + union.$localStorage.user.IdCode, {
                 params: {

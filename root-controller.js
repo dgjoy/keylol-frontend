@@ -2,9 +2,9 @@
     "use strict";
 
     keylolApp.controller("RootController", [
-        "$scope", "pageTitle", "union", "$http", "apiEndpoint", "notification", "$location", "$rootScope", "$route",
-        function ($scope, pageTitle, union, $http, apiEndpoint, notification, $location, $rootScope, $route) {
-            pageTitle.loading();
+        "$scope", "pageHead", "union", "$http", "apiEndpoint", "notification", "$location", "$rootScope", "$route",
+        function ($scope, pageHead, union, $http, apiEndpoint, notification, $location, $rootScope, $route) {
+            pageHead.loading();
 
             function getUserInfo() {
                 $http.get(apiEndpoint + "user/" + union.$localStorage.login.UserId, {

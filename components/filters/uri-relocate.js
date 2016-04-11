@@ -13,7 +13,7 @@
                 return input;
 
             var suffix;
-            if (/\.svg$/i.test(input)) {
+            if (/\.svg|gif$/i.test(input)) {
                 suffix = "";
             } else {
                 suffix = customVersion ? "!" + customVersion : "";

@@ -153,7 +153,7 @@
             var currPage;
             if (url === "") {
                 currPage = "home";
-                if (union.$localStorage.homeFilter) {
+                if (union.$localStorage.homeFilter && union.$localStorage.homeFilter.filterOptions && union.$localStorage.homeFilter.shortReviewFilter) {
                     filterOptions = union.$localStorage.homeFilter.filterOptions.slice();
                     shortReviewFilter = union.$localStorage.homeFilter.shortReviewFilter;
                 } else {
@@ -307,6 +307,11 @@
                                                 idCode: article.LikeByUsers[j].IdCode
                                             });
                                         }
+                                    } else if (union.user) {
+                                        entry.sources.userArray.push({
+                                            name: union.user.UserName,
+                                            idCode: union.user.IdCode
+                                        });
                                     } else {
                                         entry.sources.userArray.push({
                                             name: union.$localStorage.user.UserName,
