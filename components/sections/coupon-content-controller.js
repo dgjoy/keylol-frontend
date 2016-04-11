@@ -101,7 +101,7 @@
                     }
                 }).then(function (response) {
                     $scope.ranks = response.data;
-                    $scope.myRank = response.headers("X-My-Rank");
+                    $scope.myRank = parseInt(response.headers("X-My-Rank"));
                     $scope.rankPage.total = 5;
                     $scope.rankPage.curr = page || 1;
                 }, function (response) {

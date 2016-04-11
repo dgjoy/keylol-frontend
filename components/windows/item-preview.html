@@ -38,7 +38,7 @@
             </hgroup>
         </button>
         <div class="comment">
-            <p>兑换价格为 <span>{{item.Price}} ◆</span> 文券，当前持有 <span ng-class="{error: item.Price > union.$localStorage.user.Coupon}">{{union.$localStorage.user.Coupon}} ◆</span> 文券。</p>
+            <p>兑换价格为 <span>{{item.Price}} ◆</span> 文券，当前{{item.Price > union.$localStorage.user.Coupon?"":"持有"}} <span ng-class="{error: item.Price > union.$localStorage.user.Coupon}">{{union.$localStorage.user.Coupon}} ◆</span> 文券{{item.Price > union.$localStorage.user.Coupon?"不足":""}}。</p>
         </div>
     </div>
 </window>
