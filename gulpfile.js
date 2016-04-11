@@ -23,20 +23,17 @@ var buildConfigs = {
     local: {
         bundle: false,
         apiEndpoint: "https://localhost:44300/",
-        urlCanonical: false,
-        baseUrl: "/"
+        urlCanonical: false
     },
     dev: {
         bundle: false,
         apiEndpoint: "https://lgbt-api.keylol.com/",
-        urlCanonical: false,
-        baseUrl: "/"
+        urlCanonical: false
     },
     prod: {
         bundle: true,
         apiEndpoint: "https://api.keylol.com/",
-        urlCanonical: true,
-        baseUrl: "https://www.keylol.com/"
+        urlCanonical: true
     }
 };
 
@@ -176,8 +173,7 @@ var getBuildTask = function (configName) {
             .pipe(template({
                 scripts: scriptFiles,
                 stylesheets: stylesheetFiles,
-                urlCanonical: config.urlCanonical,
-                baseUrl: config.baseUrl
+                urlCanonical: config.urlCanonical
             }))
             .pipe(rename("index.html"));
         if (config.bundle) {
