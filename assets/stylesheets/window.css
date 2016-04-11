@@ -188,6 +188,7 @@ window[position=right]::after {
 }
 
 .window table input[type=text],
+.window table input[type=number],
 .window table input[type=password],
 .window table input[type=email],
 .window table textarea {

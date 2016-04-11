@@ -43,6 +43,7 @@
                     <td ng-switch="record.Event">
                         <span ng-switch-when="新注册">欢迎来到其乐游戏社区</span>
                         <span ng-switch-when="应邀注册">受 <point-link ng-if="record.Description.Inviter" type="'user'" point-name="'@'+record.Description.Inviter.UserName" id-code="record.Description.Inviter.IdCode"></point-link> 引荐而准备迎新文券</span>
+                        <span ng-switch-when="兑换商品">兑换商品「{{record.Description.CouponGift.Name}}」</span>
                         <span ng-switch-when="发布文章">发布文章<a ng-if="record.Description.Article" ng-href="article/{{record.Description.Article.AuthorIdCode}}/{{record.Description.Article.SequenceNumberForAuthor}}">《{{record.Description.Article.Title|maxLength: 9}}》</a></span>
                         <span ng-switch-when="发布简评">发布简评<a ng-if="record.Description.Article" ng-href="article/{{record.Description.Article.AuthorIdCode}}/{{record.Description.Article.SequenceNumberForAuthor}}">《{{record.Description.Article.Title|maxLength: 9}}》</a></span>
                         <span ng-switch-when="发出认可">认可<a ng-if="record.Description.Article" ng-href="article/{{record.Description.Article.AuthorIdCode}}/{{record.Description.Article.SequenceNumberForAuthor}}">《{{record.Description.Article.Title|maxLength: 9}}》</a><a ng-if="record.Description.Comment" ng-href="article/{{record.Description.Comment.ArticleAuthorIdCode}}/{{record.Description.Comment.ArticleSequenceNumberForAuthor}}#{{record.Description.Comment.SequenceNumberForArticle}}">「{{record.Description.Comment.Content|maxLength: 9}}」</a></span>

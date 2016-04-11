@@ -29,7 +29,7 @@
                 </td>
             </tr>
         </table>
-        <button class="window-confirm-button" ng-click="redeem()">
+        <button class="window-confirm-button" ng-disabled="item.Price > union.$localStorage.user.Coupon" ng-click="redeem()">
             <img class="arrow-right" src="assets/images/arrow-right.png" alt="下一步">
             <img class="basket" src="assets/images/basket.png" alt="提交">
             <hgroup class="font-myriad-keylol">
@@ -38,7 +38,7 @@
             </hgroup>
         </button>
         <div class="comment">
-            <p>兑换价格为 <span>{{item.Price}} ◆</span> 文券，当前持有 <span>{{union.$localStorage.user.Coupon}} ◆</span> 文券。</p>
+            <p>兑换价格为 <span>{{item.Price}} ◆</span> 文券，当前持有 <span ng-class="{error: item.Price > union.$localStorage.user.Coupon}">{{union.$localStorage.user.Coupon}} ◆</span> 文券。</p>
         </div>
     </div>
 </window>
