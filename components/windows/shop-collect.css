@@ -1,0 +1,51 @@
+.window-shop-collect .window {
+    padding: 14px;
+    width: 900px;
+}
+
+.window-shop-collect .heading {
+    margin: 16px 0 28px;
+}
+
+.window-shop-collect .heading a {
+    float: right;
+    margin-top: 15px;
+    color: #89A;
+}
+
+.window-shop-collect table {
+    margin: 28px auto;
+    width: 100%;
+}
+
+.window-shop-collect .item-preview-image {
+    margin: 14px 0;
+    text-align: center;
+    position: relative;
+    display: block;
+}
+
+.window-shop-collect .item-preview-image .image {
+    width: 640px;
+    height: 92px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.window-shop-collect .window .window-confirm-button {
+    margin-right: -24px;
+}
+
+.window-shop-collect .comment {
+    max-width: 570px;
+    padding-top: 6px;
+}
+
+.window-shop-collect .comment p {
+    margin: 37px 0 14px;
+}
+
+.window-shop-collect .comment p span {
+    color: #159;
+    font-weight: bold;
+}

@@ -1,0 +1,42 @@
+<window position="center" class="window-shop-collect">
+    <div class="window">
+        <div class="window-exit-button" ng-click="cancel()">
+            <div ng-include="'assets/images/exit.svg'"></div>
+        </div>
+        <img class="secret-barcode" src="assets/images/secret-barcode.png" alt="条形码">
+        <div class="heading">
+            <h1 class="font-myriad-lisong">乐抚其鳞</h1>
+            <h2>蒸汽动力论坛的限定勋章，其乐初测期间活跃作者的证明。</h2>
+        </div>
+        <form class="clearfix" ng-submit="submit()">
+            <table>
+                <colgroup>
+                    <col style="width: 30%">
+                    <col style="width: 70%">
+                </colgroup>
+                <tbody>
+                <tr>
+                    <td>
+                        <h3 class="font-myriad-lisong">蒸汽动力用户编号</h3>
+                        <h4>论坛用户码（UID），在资料中可以找到。</h4>
+                    </td>
+                    <td>
+                        <input type="text" tabindex="1" ng-model="vm.steamCNUID">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <button type="submit" class="window-confirm-button">
+                <img class="arrow-right" src="assets/images/arrow-right.png" alt="下一步">
+                <img class="basket" src="assets/images/basket.png" alt="提交">
+                <hgroup class="font-myriad-keylol">
+                    <h1>兌換商品</h1>
+                    <h2>Redeem this item</h2>
+                </hgroup>
+            </button>
+            <div class="comment">
+                <p>勋章会在兑换后的 48 小时内发放，以上信息提交后无法更改。</p>
+            </div>
+        </form>
+    </div>
+</window>

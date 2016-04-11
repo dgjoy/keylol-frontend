@@ -8,6 +8,10 @@
                         |
                     </li>
                     <li>
+                        <a href="" ng-click="setPage('shop')">文券商店</a>
+                        |
+                    </li>
+                    <li>
                         <a href="" ng-click="setPage('ranks')">社区排行</a>
                         |
                     </li>
@@ -54,12 +58,57 @@
         </div>
         <div class="bottom-sawtooth" style="background-image: url('assets/images/sawtooth.png')"></div>
     </div>
+    <div ng-show="page === 'shop'" class="coupon-page box-shadowed">
+        <div class="heading">
+            <div class="menu-right">
+                <ul class="list-inline">
+                    <li>
+                        <a href="" ng-click="setPage('records')">积分记录</a>
+                        |
+                    </li>
+                    <li class="current">
+                        <a href="" ng-click="setPage('shop')">文券商店</a>
+                        |
+                    </li>
+                    <li>
+                        <a href="" ng-click="setPage('ranks')">社区排行</a>
+                        |
+                    </li>
+                    <li>
+                        <a href="" ng-click="setPage('invite')">邀请注册</a>
+                    </li>
+                </ul>
+            </div>
+            <p>当前文券</p>
+            <h1>{{union.$localStorage.user.Coupon}} ◆</h1>
+        </div>
+        <div class="shop clearfix">
+            <ul>
+                <li ng-repeat="item in shopItems">
+                    <a href="" class="item-content clearfix" webp-background="{{item.background}}" ng-click="item.clickAction()">
+                        <div>
+                            <span>{{item.name}}</span>
+                            <span>{{item.price}} ◆</span>
+                        </div>
+                    </a>
+                    <p class="item-footer">
+                        已兑换 {{item.count}} 次
+                    </p>
+                </li>
+            </ul>
+            <!--<pagination total="recordPage.total" current="recordPage.curr" on-page-changed="recordPage.change(oldPage, newPage)" page-href=""></pagination>-->
+        </div>
+    </div>
     <div ng-show="page === 'ranks'" class="coupon-page box-shadowed">
         <div class="heading">
             <div class="menu-right">
                 <ul class="list-inline">
                     <li>
                         <a href="" ng-click="setPage('records')">积分记录</a>
+                        |
+                    </li>
+                    <li>
+                        <a href="" ng-click="setPage('shop')">文券商店</a>
                         |
                     </li>
                     <li class="current">
@@ -110,6 +159,10 @@
                 <ul class="list-inline">
                     <li>
                         <a href="" ng-click="setPage('records')">积分记录</a>
+                        |
+                    </li>
+                    <li>
+                        <a href="" ng-click="setPage('shop')">文券商店</a>
                         |
                     </li>
                     <li>

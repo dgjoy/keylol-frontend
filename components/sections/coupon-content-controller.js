@@ -9,7 +9,7 @@
                 $scope.page = $location.hash();
                 $scope.$watch("page", function (newPage) {
                     //noinspection JSValidateTypes
-                    if (newPage !== "records" && newPage !== "ranks" && newPage !== "invite") {
+                    if (newPage !== "records" && newPage !== "shop" && newPage !== "ranks" && newPage !== "invite") {
                         $scope.page = "records";
                     } else {
                         //noinspection JSValidateTypes
@@ -29,6 +29,21 @@
             };
             union.coupon.setPage = $scope.setPage;
             $scope.inviteLink = "https://www.keylol.com/?aff=" + union.$localStorage.user.IdCode;
+            $scope.shopItems = [
+                {
+                    background: "assets/images/Thumbnail_SteamCN.jpg",
+                    name: "冷杉",
+                    price: 127,
+                    count: 50,
+                    clickAction: function () {
+                        window.show({
+                            templateUrl: "components/windows/item-preview.html",
+                            controller: "ItemPreviewController",
+                            inputs: {}
+                        });
+                    }
+                }
+            ];
 
             $scope.recordPage = {
                 change: function (oldPage, newPage) {

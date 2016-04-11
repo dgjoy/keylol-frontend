@@ -441,8 +441,7 @@
     width: 100%;
     height: 100%;
     background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
+    background: no-repeat center;
 }
 
 .section-timeline .entry-content .point-avatar {
