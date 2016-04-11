@@ -1,0 +1,42 @@
+<window position="center" class="window-shop-collect">
+    <div class="window">
+        <div class="window-exit-button" ng-click="cancel()">
+            <div ng-include="'assets/images/exit.svg'"></div>
+        </div>
+        <img class="secret-barcode" src="assets/images/secret-barcode.png" alt="条形码">
+        <div class="heading">
+            <h1 class="font-myriad-lisong">{{item.Name}}</h1>
+            <h2>{{item.Descriptions[0]}}</h2>
+        </div>
+        <form class="clearfix" ng-submit="submit()">
+            <table>
+                <colgroup>
+                    <col style="width: 30%">
+                    <col style="width: 70%">
+                </colgroup>
+                <tbody>
+                <tr ng-repeat="field in item.AcceptedFields">
+                    <td>
+                        <h3 class="font-myriad-lisong">{{field.Title}}</h3>
+                        <h4>{{field.Description}}</h4>
+                    </td>
+                    <td>
+                        <input ng-disabled="disabled" type="{{field.Id === 'UID'?'number':'text'}}" tabindex="1" ng-model="vm[field.Id]">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <button type="submit" ng-disabled="disabled || submitLock" ng-class="{disabled: disabled && !submitLock}" class="window-confirm-button">
+                <img class="arrow-right" src="assets/images/arrow-right.png" alt="下一步">
+                <img class="basket" src="assets/images/basket.png" alt="提交">
+                <hgroup class="font-myriad-keylol">
+                    <h1>{{disabled?"已兌換":"兌換商品"}}</h1>
+                    <h2>{{disabled?"Redeemed":"Redeem this item"}}</h2>
+                </hgroup>
+            </button>
+            <div class="comment">
+                <p>{{item.Descriptions[2]}}</p>
+            </div>
+        </form>
+    </div>
+</window>
