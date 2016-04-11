@@ -190,7 +190,6 @@
 
             $scope.expand = function ($event) {
                 $scope.expanded = !$scope.expanded;
-                console.log(filterOptions, shortReviewFilter, sourceFilter);
                 $scope.showFilter({
                     templateUrl: "components/popup/entry-filter.html",
                     controller: "EntryFilterController as entryFilter",

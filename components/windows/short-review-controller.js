@@ -5,11 +5,6 @@
         "$scope", "close", "window", "notification", "$http", "options", "$location", "$route", "union",
         function ($scope, close, window, notification, $http, options, $location, $route, union) {
             $scope.options = options;
-            
-            var hey = this;
-            console.log(hey);
-
-            hey.hhh = "k";
 
             $scope.vm = $.extend({
                 TypeName: "简评",

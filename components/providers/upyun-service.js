@@ -12,7 +12,7 @@
                     var options = {
                         bucket: "keylol",
                         "save-key": "{filemd5}{.suffix}",
-                        expiration: Math.round(new Date().getTime() / 1000) + 300,
+                        expiration: Math.round(new Date().getTime() / 1000) + 120,
                         "content-length-range": "0,5242880"
                     };
                     return base64.encode(JSON.stringify(options));

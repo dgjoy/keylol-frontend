@@ -45,7 +45,7 @@
                     };
 
                     updatePolicy();
-                    var updatePolicyTimer = $interval(updatePolicy, 270000);
+                    var updatePolicyTimer = $interval(updatePolicy, 100000);
 
                     scope.$on("$destroy", function () {
                         $interval.cancel(updatePolicyTimer);
