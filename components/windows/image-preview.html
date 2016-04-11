@@ -2,5 +2,5 @@
     <div ng-hide="true" class="window-exit-button" ng-click="cancel()">
         <div ng-include="'assets/images/exit.svg'"></div>
     </div>
-    <img webp-src="{{imageSrc}}" alt="预览图">
+    <img webp-src="{{imageSrc|uriRelocate}}" alt="预览图">
 </window>

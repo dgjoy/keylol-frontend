@@ -5,8 +5,8 @@
         </div>
         <img class="secret-barcode" src="assets/images/secret-barcode.png" alt="条形码">
         <div class="heading">
-            <h1 class="font-myriad-lisong">乐抚其鳞</h1>
-            <h2>蒸汽动力论坛的限定勋章，其乐初测期间活跃作者的证明。</h2>
+            <h1 class="font-myriad-lisong">{{item.Name}}</h1>
+            <h2>{{item.Descriptions[0]}}</h2>
         </div>
         <table>
             <tr>
@@ -15,7 +15,7 @@
                     <h4>点击商品可预览大图。</h4>
                     <div class="item-preview-image">
                         <a href="" ng-click="preview()">
-                            <img class="image" webp-src="assets/images/Preview_SteamCN Medal.jpg" alt="商品预览图">
+                            <img class="image" webp-src="{{item.PreviewImage | backgroundUrl}}" alt="商品预览图">
                         </a>
                     </div>
                 </td>
@@ -25,7 +25,7 @@
             <tr>
                 <td>
                     <h3 class="font-myriad-lisong">说明</h3>
-                    <h4>兑换后需要提供蒸汽动力的用户编号（UID），勋章会在兑换后的 48 小时内发放到位。</h4>
+                    <h4>{{item.Descriptions[1]}}</h4>
                 </td>
             </tr>
         </table>
@@ -38,7 +38,7 @@
             </hgroup>
         </button>
         <div class="comment">
-            <p>兑换价格为 <span>77 ◆</span> 文券，当前持有 <span>{{union.$localStorage.user.Coupon}} ◆</span> 文券。</p>
+            <p>兑换价格为 <span>{{item.Price}} ◆</span> 文券，当前持有 <span>{{union.$localStorage.user.Coupon}} ◆</span> 文券。</p>
         </div>
     </div>
 </window>

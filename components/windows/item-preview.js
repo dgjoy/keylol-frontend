@@ -2,9 +2,10 @@
     "use strict";
 
     keylolApp.controller("ItemPreviewController", [
-        "$scope", "close", "window", "$http", "apiEndpoint", "notification", "union",
-        function ($scope, close, window, $http, apiEndpoint, notification, union) {
+        "$scope", "close", "window", "$http", "apiEndpoint", "notification", "union", "item",
+        function ($scope, close, window, $http, apiEndpoint, notification, union, item) {
             $scope.union = union;
+            $scope.item = item;
 
             $scope.cancel = function () {
                 close();
@@ -15,7 +16,7 @@
                     templateUrl: "components/windows/image-preview.html",
                     controller: "ImagePreviewController",
                     inputs: {
-                        imageSrc: "assets/images/Preview_SteamCN Medal.jpg"
+                        imageSrc: item.PreviewImage
                     }
                 });
             };
@@ -25,7 +26,9 @@
                 window.show({
                     templateUrl: "components/windows/shop-collect.html",
                     controller: "ShopCollectController",
-                    inputs: {}
+                    inputs: {
+                        item: item
+                    }
                 });
             }
         }
