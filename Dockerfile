@@ -1,4 +1,4 @@
-FROM node:4.3.2
+FROM node:5.10.1
 MAINTAINER Stackie Jia <stackia@keylol.com>
 
 ENV NGINX_VERSION 1.9.11-1~jessie

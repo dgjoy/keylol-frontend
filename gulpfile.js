@@ -22,15 +22,21 @@ var fontmin = require('gulp-fontmin');
 var buildConfigs = {
     local: {
         bundle: false,
-        apiEndpoint: "https://localhost:44300/"
+        apiEndpoint: "https://localhost:44300/",
+        urlCanonical: false,
+        baseUrl: "/"
     },
     dev: {
         bundle: false,
-        apiEndpoint: "https://lgbt-api.keylol.com/"
+        apiEndpoint: "https://lgbt-api.keylol.com/",
+        urlCanonical: false,
+        baseUrl: "/"
     },
     prod: {
         bundle: true,
-        apiEndpoint: "https://api.keylol.com/"
+        apiEndpoint: "https://api.keylol.com/",
+        urlCanonical: true,
+        baseUrl: "https://www.keylol.com/"
     }
 };
 
@@ -49,9 +55,9 @@ var vendorScripts = [
     "node_modules/ng-file-upload/dist/ng-file-upload.js",
     "node_modules/angular-utf8-base64/angular-utf8-base64.js",
     "node_modules/angulartics/src/angulartics.js",
-    "node_modules/simditor/node_modules/simple-module/lib/module.js",
-    "node_modules/simditor/node_modules/simple-hotkeys/lib/hotkeys.js",
-    "node_modules/simditor/node_modules/simple-uploader/lib/uploader.js",
+    "node_modules/simple-module/lib/module.js",
+    "node_modules/simple-hotkeys/lib/hotkeys.js",
+    "node_modules/simple-uploader/lib/uploader.js",
     "node_modules/simditor/lib/simditor.js"
 ];
 
@@ -170,7 +176,8 @@ var getBuildTask = function (configName) {
             .pipe(template({
                 scripts: scriptFiles,
                 stylesheets: stylesheetFiles,
-                urlCanonical: config.urlCanonical
+                urlCanonical: config.urlCanonical,
+                baseUrl: config.baseUrl
             }))
             .pipe(rename("index.html"));
         if (config.bundle) {
