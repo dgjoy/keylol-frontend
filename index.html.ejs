@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=1240">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <% if (urlCanonical) { %><script>
-        if (window.location.hostname !== "www.keylol.com")
-            window.location = "https://www.keylol.com" + window.location.pathname;
-        document.write('<base href="' + window.location.protocol + '//www.keylol.com/">');
+    <% if (urlCanonical) { %><base href="https://www.keylol.com/">
+    <script>
+        (function() {
+            if (window.location.hostname !== "www.keylol.com")
+                window.location = "https://www.keylol.com" + window.location.pathname;
+            document.getElementsByTagName("base")[0].href = window.location.protocol + "//www.keylol.com/";
+        })();
     </script>
     <% } else { %><base href="/">
     <% } %><title ng-bind="pageHead.title">其乐 - 甄选并传递游戏的价值</title>
