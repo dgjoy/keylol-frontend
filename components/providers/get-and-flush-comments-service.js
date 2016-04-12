@@ -2,8 +2,8 @@
     "use strict";
 
     keylolApp.factory("getAndFlushComments", [
-        "$http", "union", "notification", "utils", "$timeout",
-        function ($http, union, notification, utils, $timeout) {
+        "$http", "union", "notification", "utils",
+        function ($http, union, notification, utils) {
             var parseComments = function (str, index) {
                 var regExpForComment = /^((?:#\d+[ \t]*)+)(?:$|[ \t]+)/gm;
                 var regExpForEachLine = /#(\d+)/g;
@@ -16,7 +16,9 @@
                         return m;
                     });
                 }).replace(/@Lee/gi, function (match) {
-                    return '<point-link type="' + "'user'" + '" point-name="\'' + match + '\'" id-code="\'LEEEE\'"></point-link>';
+                    return '<point-link type="\'user\'" point-name="\'' + match + '\'" id-code="\'LEEEE\'"></point-link>';
+                }).replace(/@stackia/gi, function (match) {
+                    return '<point-link type="\'user\'" point-name="\'' + match + '\'" id-code="\'STACK\'"></point-link>';
                 });
             };
 

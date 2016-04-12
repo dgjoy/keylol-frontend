@@ -21,7 +21,7 @@
                         <h4>{{field.Description}}</h4>
                     </td>
                     <td>
-                        <input ng-disabled="disabled" type="{{field.Id === 'UID'?'number':'text'}}" tabindex="1" ng-model="vm[field.Id]">
+                        <input ng-disabled="disabled" type="{{field.InputType}}" tabindex="1" ng-model="vm[field.Id]">
                     </td>
                 </tr>
                 </tbody>

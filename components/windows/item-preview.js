@@ -6,9 +6,6 @@
         function ($scope, close, window, $http, apiEndpoint, notification, union, item) {
             $scope.union = union;
             $scope.item = item;
-            $scope.item.StartTime = new Date();
-            $scope.item.EndTime = new Date();
-
             $scope.cancel = function () {
                 close();
             };
