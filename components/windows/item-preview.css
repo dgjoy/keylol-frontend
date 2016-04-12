@@ -18,6 +18,10 @@
     width: 100%;
 }
 
+.window-item-preview table tr td {
+    border: 0;
+}
+
 .window-item-preview .item-preview-image {
     margin: 14px 0;
     text-align: center;
