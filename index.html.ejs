@@ -4,12 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=1240">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title ng-bind="pageHead.title">其乐 - 甄选并传递游戏的价值</title>
-    <meta name="keywords" content="{{pageHead.keywords}}">
-    <meta name="description" content="{{pageHead.description}}">
+    <% if (urlCanonical) { %><base href="https://www.keylol.com/">
+    <script>
+        (function() {
+            if (window.location.hostname !== "www.keylol.com")
+                window.location = "https://www.keylol.com" + window.location.pathname;
+            document.getElementsByTagName("base")[0].href = window.location.protocol + "//www.keylol.com/";
+        })();
+    </script>
+    <% } else { %><base href="/">
+    <% } %><title ng-bind="pageHead.title">其乐 - 甄选并传递游戏的价值</title>
+    <meta name="keywords" content="{{pageHead.keywords}}" ng-if="pageHead.keywords">
+    <meta name="description" content="{{pageHead.description}}" ng-if="pageHead.description">
     <link rel="apple-touch-icon" href="assets/images/apple-touch-icon-180.png">
     <link rel="icon" href="assets/images/favicon.ico">
-    <base href="/">
     <% _.forEach(stylesheets, function(stylesheet) { %><link rel="stylesheet" href="<%= stylesheet %>">
     <% }); %></head>
 <body>

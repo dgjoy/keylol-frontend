@@ -11,13 +11,16 @@
                 return _config;
             },
             $get: [
-                "$q", "union", "upyun",
-                function ($q, union, upyun) {
+                "$q", "union",
+                function ($q, union) {
                     function Utils() {
                         var self = this;
                         var uniqueId = 1;
+                        
+                        self.isPhantom = !!window.callPhantom;
 
                         self.supportWebp = $q(function (resolve, reject) {
+                            if (self.isPhantom) reject();
                             var img = new Image();
                             img.onload = function () {
                                 if (img.width > 0 && img.height > 0) {
