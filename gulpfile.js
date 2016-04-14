@@ -11,6 +11,7 @@ var glob = require("glob");
 var concat = require("gulp-concat");
 var uglify = require("gulp-uglify");
 var rev = require("gulp-rev");
+var revCollector = require("gulp-rev-collector");
 var del = require("del");
 var sass = require('gulp-sass');
 var babel = require('gulp-babel');
@@ -96,35 +97,52 @@ var getFiles = function (arr) {
     }));
 };
 
-gulp.task("clean-font", function () {
-    return del(["assets/fonts/keylol-rail-sung-subset-*", "assets/fonts/lisong-subset-*"]);
+function fontKeylol() {
+    return gulp.series(function cleanFontKeylol() {
+        return del("assets/fonts/keylol-rail-sung-subset-*");
+    }, function generateFontKeylol() {
+        return gulp.src("assets/fonts/keylol-rail-sung-full.ttf")
+            .pipe(rename("keylol-rail-sung-subset.ttf"))
+            .pipe(fontmin({
+                text: keylolTextList
+            }))
+            .pipe(rev())
+            .pipe(gulp.dest("assets/fonts"))
+            .pipe(rev.manifest("keylol.manifest.json"))
+            .pipe(gulp.dest('assets/fonts'));
+    });
+}
+
+function fontLisong() {
+    return gulp.series(function cleanFontLisong() {
+        return del("assets/fonts/lisong-subset-*");
+    }, function generateFontLisong() {
+        return gulp.src("assets/fonts/lisong-full.ttf")
+            .pipe(rename("lisong-subset.ttf"))
+            .pipe(fontmin({
+                text: lisongTextList
+            }))
+            .pipe(rev())
+            .pipe(gulp.dest("assets/fonts"))
+            .pipe(rev.manifest("lisong.manifest.json"))
+            .pipe(gulp.dest('assets/fonts'));
+    })
+}
+
+gulp.task("store-font", function () {
+    return gulp.src(['assets/fonts/*.json', 'assets/scss/common.template.scss'])
+        .pipe(revCollector({
+            replaceReved: true
+        }))
+        .pipe(rename("common.scss"))
+        .pipe(gulp.dest('assets/scss/'));
 });
 
-gulp.task("font-keylol", gulp.series(function cleanFontKeylol() {
-    return del("assets/fonts/keylol-rail-sung-subset-*");
-}, function generateFontKeylol() {
-    return gulp.src("assets/fonts/keylol-rail-sung-full.ttf")
-        .pipe(rename("keylol-rail-sung-subset.ttf"))
-        .pipe(fontmin({
-            text: keylolTextList
-        }))
-        .pipe(rev())
-        .pipe(gulp.dest("assets/fonts"))
-        .pipe(rev.manifest("keylol.manifest.json"))
-        .pipe(gulp.dest('assets/fonts'));
-}));
+gulp.task("font-keylol", gulp.series(fontKeylol(), "store-font"));
 
-gulp.task("font-lisong", function () {
-    return gulp.src("assets/fonts/lisong-full.ttf")
-        .pipe(rename("lisong-subset.ttf"))
-        .pipe(fontmin({
-            text: lisongTextList
-        }))
-        .pipe(rev())
-        .pipe(gulp.dest("assets/fonts"))
-});
+gulp.task("font-lisong", gulp.series(fontLisong(), "store-font"));
 
-gulp.task("font", gulp.series("clean-font", "font-keylol", "font-lisong"));
+gulp.task("font", gulp.series(gulp.parallel(fontKeylol(), fontLisong()), "store-font"));
 
 gulp.task("clean", function () {
     return del(["bundles/!(web.config)", "index.html", "temporary/*"]);

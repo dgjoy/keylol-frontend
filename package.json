@@ -27,6 +27,7 @@
     "gulp-minify-inline": "~0.2.0",
     "gulp-rename": "~1.2.2",
     "gulp-rev": "~7.0.0",
+    "gulp-rev-collector": "^1.0.3",
     "gulp-sass": "^2.2.0",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-template": "~3.1.0",
