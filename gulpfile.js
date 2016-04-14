@@ -12,6 +12,9 @@ var concat = require("gulp-concat");
 var uglify = require("gulp-uglify");
 var rev = require("gulp-rev");
 var del = require("del");
+var sass = require('gulp-sass');
+var babel = require('gulp-babel');
+var sourcemaps = require('gulp-sourcemaps');
 var autoprefixer = require("gulp-autoprefixer");
 var minifyInline = require("gulp-minify-inline");
 var minifyCss = require("gulp-minify-css");
@@ -58,20 +61,29 @@ var vendorScripts = [
     "node_modules/simditor/lib/simditor.js"
 ];
 
-var appSrcipts = [
+var babelScripts = [
     "keylol-app.js",
-    "environment-config.js",
     "root-controller.js",
     "components/**/*.js"
+];
+
+var appScripts = [
+    "temporary/keylol-app.js",
+    "temporary/environment-config.js",
+    "temporary/root-controller.js",
+    "temporary/**/*.js"
 ];
 
 var stylesheets = [
     "assets/stylesheets/normalize.css",
     "node_modules/simditor/styles/simditor.css",
-    "assets/stylesheets/common.css",
-    "assets/stylesheets/window.css",
-    "assets/stylesheets/popup.css",
-    "components/**/*.css"
+    "temporary/*.css",
+    "temporary/**/*.css"
+];
+
+var sassStylesheets = [
+    "assets/scss/!(common.template).scss",
+    "components/**/*.scss"
 ];
 
 var keylolTextList = "`{}>▾▴其乐推荐据点客务中心讯息轨道评测好资差模组感悟请无视游戏与艺术之间的空隙提交注册申登入发布文章由你筛选变更函会员研谈档邮政服私信蒸汽动力进社区噪音零死角讨论独特鼓励机制志同合琴瑟曲即日内欲知情关联意成功错误认可索取表单开设此阅读搜结果传送装置已就位个人从兴趣始慢搭建一条收到出未能撞到处理这位用户尚或任何当前投稿厂商类型平台剧透警告简完编辑确料定太瞎了获不态了跳过步正在生首页并立案稍候糕块里如也连蛋都没有需验证陆加现解分享放公篇被封存科退通职团队惩教萃撤销录兌換品";
@@ -88,7 +100,9 @@ gulp.task("clean-font", function () {
     return del(["assets/fonts/keylol-rail-sung-subset-*", "assets/fonts/lisong-subset-*"]);
 });
 
-gulp.task("font-keylol", function () {
+gulp.task("font-keylol", gulp.series(function cleanFontKeylol() {
+    return del("assets/fonts/keylol-rail-sung-subset-*");
+}, function generateFontKeylol() {
     return gulp.src("assets/fonts/keylol-rail-sung-full.ttf")
         .pipe(rename("keylol-rail-sung-subset.ttf"))
         .pipe(fontmin({
@@ -96,7 +110,9 @@ gulp.task("font-keylol", function () {
         }))
         .pipe(rev())
         .pipe(gulp.dest("assets/fonts"))
-});
+        .pipe(rev.manifest("keylol.manifest.json"))
+        .pipe(gulp.dest('assets/fonts'));
+}));
 
 gulp.task("font-lisong", function () {
     return gulp.src("assets/fonts/lisong-full.ttf")
@@ -111,7 +127,42 @@ gulp.task("font-lisong", function () {
 gulp.task("font", gulp.series("clean-font", "font-keylol", "font-lisong"));
 
 gulp.task("clean", function () {
-    return del(["bundles/!(web.config)", "index.html", "environment-config.js"]);
+    return del(["bundles/!(web.config)", "index.html", "temporary/*"]);
+});
+
+function compileSass() {
+    return gulp.src(sassStylesheets)
+        .pipe(sourcemaps.init())
+        .pipe(sass().on('error', sass.logError))
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest('temporary'));
+}
+function compileES6() {
+    return gulp.src(babelScripts)
+        .pipe(sourcemaps.init())
+        .pipe(babel({
+            presets: ['es2015']
+        }))
+        .pipe(sourcemaps.write('.'))
+        .pipe(gulp.dest('temporary'));
+}
+
+gulp.task("sass", compileSass);
+
+gulp.task("scss:bundle", function compileSassBundle() {
+    return gulp.src(sassStylesheets)
+        .pipe(sass())
+        .pipe(gulp.dest('temporary'));
+});
+
+gulp.task("babel", compileES6);
+
+gulp.task("babel:bundle", function compileES6Bundle() {
+    return gulp.src(babelScripts)
+        .pipe(babel({
+            presets: ['es2015']
+        }))
+        .pipe(gulp.dest('temporary'));
 });
 
 var getBuildTask = function (configName) {
@@ -120,15 +171,16 @@ var getBuildTask = function (configName) {
         return gulp.src("environment-config.js.ejs")
             .pipe(template(config))
             .pipe(rename("environment-config.js"))
-            .pipe(gulp.dest("./"));
-    }, config.bundle ? gulp.parallel(function buildVendorScriptBundle() {
+            .pipe(gulp.dest("temporary/"));
+    }, config.bundle ? gulp.parallel("scss:bundle", "babel:bundle") : gulp.parallel("sass", "babel"),
+        config.bundle ? gulp.parallel(function buildVendorScriptBundle() {
         return gulp.src(vendorScripts)
             .pipe(concat("vendor.min.js"))
             .pipe(uglify())
             .pipe(rev())
             .pipe(gulp.dest("bundles"));
     }, function buildAppScriptBundle() {
-        return gulp.src(appSrcipts)
+        return gulp.src(appScripts)
             .pipe(concat("app.min.js"))
             .pipe(uglify())
             .pipe(rev())
@@ -166,7 +218,7 @@ var getBuildTask = function (configName) {
             scriptFiles = getFiles(["bundles/vendor-*.min.js", "bundles/app-*.min.js", "bundles/templates-*.min.js"]);
             stylesheetFiles = getFiles(["bundles/stylesheets-*.min.css"]);
         } else {
-            scriptFiles = getFiles(vendorScripts.concat(appSrcipts));
+            scriptFiles = getFiles(vendorScripts.concat(appScripts));
             stylesheetFiles = getFiles(stylesheets);
         }
         var stream = gulp.src("index.html.ejs")
@@ -194,3 +246,8 @@ gulp.task("dev", getBuildTask("dev"));
 gulp.task("local", getBuildTask("local"));
 
 gulp.task("default", getBuildTask("dev"));
+
+gulp.task("dev:watch", gulp.series("dev", function () {
+    gulp.watch(sassStylesheets, compileSass);
+    gulp.watch(babelScripts, compileES6);
+}));

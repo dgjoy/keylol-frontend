@@ -5,3 +5,4 @@ bower_components/
 /index.html
 /environment-config.js
 /bundles/*
+/temporary/*
