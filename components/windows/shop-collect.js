@@ -10,6 +10,11 @@
             if(item.Redeemed){
                 $scope.disabled = true;
                 $scope.vm = item.Extra;
+                for (var i = 0;i < item.AcceptedFields.length;i++){
+                    if(item.AcceptedFields[i].InputType === "number"){
+                        $scope.vm[item.AcceptedFields[i].Id] = parseInt($scope.vm[item.AcceptedFields[i].Id]);
+                    }
+                }
             }
 
             $scope.cancel = function () {

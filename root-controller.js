@@ -22,9 +22,11 @@
                     union.$localStorage.user.fakeCoupon = beforeCoupon;
                     _czc.push(["_setCustomVar", "登录用户", response.data.IdCode + "-" + response.data.UserName, 1]);
                 }, function (response) {
-                    $http.delete(apiEndpoint + "login/current");
-                    delete union.$localStorage.login;
-                    notification.error("登录失效，请重新登录。");
+                    if (response.status === 401) {
+                        $http.delete(apiEndpoint + "login/current");
+                        delete union.$localStorage.login;
+                        notification.error("登录失效，请重新登录。");
+                    }
                 });
             }
 

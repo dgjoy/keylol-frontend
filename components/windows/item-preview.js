@@ -6,7 +6,6 @@
         function ($scope, close, window, $http, apiEndpoint, notification, union, item) {
             $scope.union = union;
             $scope.item = item;
-
             $scope.cancel = function () {
                 close();
             };

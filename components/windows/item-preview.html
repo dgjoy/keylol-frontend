@@ -29,6 +29,14 @@
                 </td>
             </tr>
         </table>
+        <table>
+            <tr>
+                <td>
+                    <h3 class="font-myriad-lisong">上架时间</h3>
+                    <h4>{{item.CreateTime|amDateFormat: "YYYY-MM-DD"}} 至 {{item.EndTime|amDateFormat: "YYYY-MM-DD"}}</h4>
+                </td>
+            </tr>
+        </table>
         <button class="window-confirm-button" ng-disabled="item.Price > union.$localStorage.user.Coupon" ng-click="redeem()">
             <img class="arrow-right" src="assets/images/arrow-right.png" alt="下一步">
             <img class="basket" src="assets/images/basket.png" alt="提交">

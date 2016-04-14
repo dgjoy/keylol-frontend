@@ -2,8 +2,8 @@
     "use strict";
 
     keylolApp.controller("ActionHubController", [
-        "$scope", "union", "window", "$timeout", "$http",
-        function ($scope, union, window, $timeout, $http) {
+        "$scope", "union", "window", "$timeout", "$http", "notification",
+        function ($scope, union, window, $timeout, $http, notification) {
             $scope.union = union;
             $scope.hideAnimate = true;
             if (union.$localStorage.user) {

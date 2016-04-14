@@ -27,7 +27,7 @@
                         imageSrc: "assets/images/spotlight/welcome.png",
                         link: "article/LEEEE/8"
                     }, {
-                        imageSrc: "assets/images/spotlight/player-group.png",
+                        imageSrc: "assets/images/spotlight/touch-fish-community.png",
                         link: "article/LEEEE/4"
                     }, {
                         imageSrc: "assets/images/spotlight/cool-t-shirt.png",

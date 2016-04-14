@@ -77,6 +77,7 @@
                         }
                     });
                 }, function (response) {
+                    if (!union.$localStorage.login) return;
                     if (response.status === 404) return;
                     if (response.status === 401) {
                         window.show({
