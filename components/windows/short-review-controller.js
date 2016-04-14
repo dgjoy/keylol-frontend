@@ -19,36 +19,36 @@
                 close();
             };
 
-            $scope.changeToLong = function () {
-                notification.attention("切换为长评时会覆盖之前未发布的草稿", [
-                    {action: "覆盖", value: true},
-                    {action: "取消"}
-                ]).then(function (result) {
-                    if (result) {
-                        window.show({
-                            templateUrl: "components/windows/editor.html",
-                            controller: "EditorController",
-                            inputs: {
-                                options: {
-                                    doNotLoadDraft: true,
-                                    vm: {
-                                        Id: $scope.vm.Id,
-                                        TypeName: "评",
-                                        Title: "",
-                                        Content: $scope.vm.Content,
-                                        Vote: $scope.vm.Vote,
-                                        Summary: "",
-                                        Pros: [],
-                                        Cons: []
-                                    },
-                                    voteForPoint: options.point
-                                }
-                            }
-                        });
-                        close();
-                    }
-                });
-            };
+            // $scope.changeToLong = function () {
+            //     notification.attention("切换为长评时会覆盖之前未发布的草稿", [
+            //         {action: "覆盖", value: true},
+            //         {action: "取消"}
+            //     ]).then(function (result) {
+            //         if (result) {
+            //             window.show({
+            //                 templateUrl: "components/windows/editor.html",
+            //                 controller: "EditorController",
+            //                 inputs: {
+            //                     options: {
+            //                         doNotLoadDraft: true,
+            //                         vm: {
+            //                             Id: $scope.vm.Id,
+            //                             TypeName: "评",
+            //                             Title: "",
+            //                             Content: $scope.vm.Content,
+            //                             Vote: $scope.vm.Vote,
+            //                             Summary: "",
+            //                             Pros: [],
+            //                             Cons: []
+            //                         },
+            //                         voteForPoint: options.point
+            //                     }
+            //                 }
+            //             });
+            //             close();
+            //         }
+            //     });
+            // };
 
             $scope.submitLock = false;
             var checkEmpty = function () {
