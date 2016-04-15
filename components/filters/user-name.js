@@ -1,13 +1,11 @@
 (function () {
-    "use strict";
-
-    keylolApp.filter("userName", function () {
-        return function (input, showAt) {
+    keylolApp.filter("userName", () => {
+        return (input, showAt) => {
             if (showAt) {
-                return "@" + input;
+                return `@${input}`;
             } else {
                 return input;
             }
         };
     });
-})();
+}());

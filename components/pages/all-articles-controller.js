@@ -2,80 +2,87 @@
  * Created by Rex on 15/9/23.
  */
 (function () {
-    "use strict";
-
     keylolApp.controller("AllArticlesController", [
         "pageHead", "$scope", "union", "$http", "notification", "$location", "utils", "$timeout", "window",
-        function (pageHead, $scope, union, $http, notification, $location, utils, $timeout, window) {
+        (pageHead, $scope, union, $http, notification, $location, utils, $timeout, window) => {
             $scope.searchExist = true;
             $scope.union = union;
             pageHead.setTitle("最新文章 - 其乐");
-            var summary = {
+            const summary = {
                 actions: [],
                 head: {
                     mainHead: "最新投稿",
-                    subHead: "Recent Submissions"
+                    subHead: "Recent Submissions",
                 },
                 background: "keylol://989df8e508510f8447aaf06ddadcac5f.jpg",
                 defaultSum: {
-                    text: "所有近日发布的投稿文章"
-                }
+                    text: "所有近日发布的投稿文章",
+                },
             };
-            var timeline = {
+            const timeline = {
                 title: {
                     mainTitle: "讯息轨道",
-                    subTitle: "Timeline"
+                    subTitle: "Timeline",
                 },
                 rightButton: {
                     avatar: "assets/images/edit-pen.png",
                     alt: "发表新文章",
                     text: "文",
-                    clickAction: function () {
+                    clickAction () {
                         window.show({
                             templateUrl: "components/windows/editor.html",
                             controller: "EditorController",
-                            inputs: {
-                                options: null
-                            }
+                            inputs: { options: null },
                         });
-                    }
+                    },
                 },
-                loadAction: function (params, callback) {
-                    $http.get(apiEndpoint + "article/latest", {
-                        params: params
-                    }).then(function (response) {
+                loadAction (params, callback) {
+                    $http.get(`${apiEndpoint}article/latest`, { params }).then(response => {
                         callback(response);
-                    }, function (response) {
+                    }, response => {
                         notification.error("发生未知错误，请重试或与站务职员联系", response);
                     });
                 },
                 datetime: "outBlock",
                 hasExpand: true,
                 loadingLock: true,
-                entries: []
+                entries: [],
             };
 
-            $http.get(apiEndpoint + "article/latest", {
+            $http.get(`${apiEndpoint}article/latest`, {
                 params: {
                     titleOnly: false,
                     take: utils.timelineLoadCount,
-                    articleTypeFilter: "评,研,讯,谈,档"
-                }
-            }).then(function (response) {
-                var articleList = response.data;
+                    articleTypeFilter: "评,研,讯,谈,档",
+                },
+            }).then(response => {
+                const articleList = response.data;
                 timeline.noMoreArticle = articleList.length < utils.timelineLoadCount;
                 if (articleList.length > 0) {
-                    var timelineTimeout;
+                    let timelineTimeout;
+                    function createTimeoutFunction (entry) {
+                        return () => {
+                            if (!timelineTimeout) {
+                                entry.show = true;
+                                timelineTimeout = $timeout(() => {
+                                }, utils.timelineShowDelay);
+                            } else {
+                                timelineTimeout = timelineTimeout.then(() => {
+                                    entry.show = true;
+                                    return $timeout(() => {}, utils.timelineShowDelay);
+                                });
+                            }
+                        };
+                    }
 
-
-                    for (var i in articleList) {
-                        var article = articleList[i];
-                        var entry = {
+                    for (let i = 0; i < articleList.length; i++) {
+                        const article = articleList[i];
+                        const entry = {
                             types: [article.TypeName],
                             author: {
                                 username: article.Author.UserName,
                                 avatarUrl: article.Author.AvatarImage,
-                                idCode: article.Author.IdCode
+                                idCode: article.Author.IdCode,
                             },
                             voteForPoint: article.VoteForPoint,
                             vote: article.Vote,
@@ -86,52 +93,38 @@
                             hasBackground: false,
                             thumbnail: article.ThumbnailImage,
                             hasThumbnail: true,
-                            url: "/article/" + article.Author.IdCode + "/" + article.SequenceNumberForAuthor,
+                            url: `/article/${article.Author.IdCode}/${article.SequenceNumberForAuthor}`,
                             count: {
                                 like: article.LikeCount,
-                                comment: article.CommentCount
-                            }
+                                comment: article.CommentCount,
+                            },
                         };
                         if (article.AttachedPoints && article.AttachedPoints.length > 0) {
                             entry.sources = {
                                 type: "point",
-                                points: article.AttachedPoints
+                                points: article.AttachedPoints,
                             };
                         } else {
                             entry.sources = null;
                         }
                         timeline.entries.push(entry);
-                        (function (entry) {
-                            $timeout(function () {
-                                if (!timelineTimeout) {
-                                    entry.show = true;
-                                    timelineTimeout = $timeout(function () {
-                                    }, utils.timelineShowDelay);
-                                } else {
-                                    timelineTimeout = timelineTimeout.then(function () {
-                                        entry.show = true;
-                                        return $timeout(function () {
-                                        }, utils.timelineShowDelay);
-                                    });
-                                }
-                            });
-                        })(entry);
+                        $timeout(createTimeoutFunction(entry));
                     }
                     if (timelineTimeout) {
-                        timelineTimeout.then(function () {
+                        timelineTimeout.then(() => {
                             timeline.loadingLock = false;
                         });
                     } else {
                         timeline.loadingLock = false;
                     }
                 }
-            }, function (response) {
+            }, response => {
                 notification.error("发生未知错误，请重试或与站务职员联系", response);
                 timeline.loadingLock = false;
             });
 
             union.timeline = timeline;
             union.summary = summary;
-        }
+        },
     ]);
-})();
+}());

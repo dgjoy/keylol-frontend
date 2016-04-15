@@ -1,52 +1,46 @@
 ﻿(function () {
-    "use strict";
-
     keylolApp.controller("HomeController", [
         "pageHead", "$scope", "union", "$http", "notification", "window", "utils", "$timeout", "$location",
         "$rootScope", "articleTypes",
-        function (pageHead, $scope, union, $http, notification, window, utils, $timeout, $location,
-                  $rootScope, articleTypes) {
+        (pageHead, $scope, union, $http, notification, window, utils, $timeout, $location,
+        $rootScope, articleTypes) => {
             if (!union.$localStorage.login) {
                 $scope.notLogin = true;
                 return;
             }
             pageHead.setTitle("其乐 Keylol");
             $scope.union = union;
-            var timeline = {
+            const timeline = {
                 title: {
                     mainTitle: "讯息轨道",
-                    subTitle: "Timeline"
+                    subTitle: "Timeline",
                 },
                 rightButton: {
                     avatar: "assets/images/edit-pen.png",
                     alt: "发表新文章",
                     text: "文",
-                    clickAction: function () {
+                    clickAction () {
                         window.show({
                             templateUrl: "components/windows/editor.html",
                             controller: "EditorController",
-                            inputs: {
-                                options: null
-                            }
+                            inputs: { options: null },
                         });
-                    }
+                    },
                 },
                 noArticleText: {
                     main: "从你的游戏兴趣开始，慢慢搭建一条讯息轨道",
-                    sub: "订阅一个据点后，其收到的文章投稿会推送到这里。"
+                    sub: "订阅一个据点后，其收到的文章投稿会推送到这里。",
                 },
                 hasExpand: true,
                 loadingLock: true,
-                loadAction: function (params, callback) {
-                    $http.get(apiEndpoint + "article/subscription", {
-                        params: params
-                    }).then(function (response) {
+                loadAction (params, callback) {
+                    $http.get(`${apiEndpoint}article/subscription`, { params }).then(response => {
                         callback(response);
-                    }, function (response) {
+                    }, response => {
                         notification.error("发生未知错误，请重试或与站务职员联系", response);
                     });
                 },
-                entries: []
+                entries: [],
             };
 
             if (union.$localStorage.firstOpenKeylol) {
@@ -57,26 +51,24 @@
                     inputs: {
                         options: {
                             isFirstTime: true,
-                            getSubscription: getSubscription
-                        }
-                    }
+                            getSubscription,
+                        },
+                    },
                 });
             } else {
                 getSubscription();
 
-                $http.put(apiEndpoint + "user-game-record/my", {}).then(function (response) {
+                $http.put(`${apiEndpoint}user-game-record/my`, {}).then(response => {
                     window.show({
                         templateUrl: "components/windows/synchronization.html",
                         controller: "SynchronizationController",
                         inputs: {
                             condition: "subsequential",
                             autoSubscribed: response.data,
-                            options: {
-                                getSubscription: getSubscription
-                            }
-                        }
+                            options: { getSubscription },
+                        },
                     });
-                }, function (response) {
+                }, response => {
                     if (!union.$localStorage.login) return;
                     if (response.status === 404) return;
                     if (response.status === 401) {
@@ -86,10 +78,8 @@
                             inputs: {
                                 condition: "fetchFailed",
                                 autoSubscribed: {},
-                                options: {
-                                    getSubscription: getSubscription
-                                }
-                            }
+                                options: { getSubscription },
+                            },
                         });
                         return;
                     }
@@ -97,7 +87,7 @@
                 });
             }
 
-            $rootScope.$on("homeRefresh", function () {
+            $rootScope.$on("homeRefresh", () => {
                 getSubscription();
             });
 
@@ -105,20 +95,20 @@
                 timeline.entries = [];
                 timeline.loadingLock = true;
                 timeline.activePoints = null;
-                var params = {
+                const params = {
                     take: utils.timelineLoadCount,
                     articleTypeFilter: "",
-                    shortReviewFilter: 1
+                    shortReviewFilter: 1,
                 };
-                var filterOptions = [];
-                for (var i = 0; i < articleTypes.length; ++i) {
+                let filterOptions = [];
+                for (let i = 0; i < articleTypes.length; ++i) {
                     filterOptions.push(true);
                 }
                 if (union.$localStorage.homeFilter) {
                     filterOptions = union.$localStorage.homeFilter.filterOptions.slice();
                     params.shortReviewFilter = union.$localStorage.homeFilter.shortReviewFilter;
                 }
-                for (var i = 0; i < articleTypes.length; i++) {
+                for (let i = 0; i < articleTypes.length; i++) {
                     if (filterOptions[i]) {
                         if (params.articleTypeFilter.length !== 0) {
                             params.articleTypeFilter += ",";
@@ -134,26 +124,39 @@
                         params.articleTypeFilter = "hack";
                     }
 
-                    $http.get(apiEndpoint + "article/subscription", {
-                        params: params
-                    }).then(function (response) {
-                        var articleList = response.data;
+                    $http.get(`${apiEndpoint}article/subscription`, { params }).then(response => {
+                        const articleList = response.data;
                         timeline.noMoreArticle = articleList.length < utils.timelineLoadCount;
 
                         if (articleList.length > 0) {
-                            var timelineTimeout;
+                            let timelineTimeout;
+                            function createTimeoutFunction (entry) {
+                                return () => {
+                                    if (!timelineTimeout) {
+                                        entry.show = true;
+                                        timelineTimeout = $timeout(() => {
+                                        }, utils.timelineShowDelay);
+                                    } else {
+                                        timelineTimeout = timelineTimeout.then(() => {
+                                            entry.show = true;
+                                            return $timeout(() => {}, utils.timelineShowDelay);
+                                        });
+                                    }
+                                };
+                            }
 
                             /**
                              * 对于请求回来的文章列表做一系列处理并按照用户据点的文章格式储存在 union.timeline.entries 中
                              */
-                            for (var i in articleList) {
-                                var article = articleList[i];
-                                var entry = {
+
+                            for (let i = 0; i < articleList.length; i++) {
+                                const article = articleList[i];
+                                const entry = {
                                     types: [article.TypeName],
                                     author: {
                                         username: article.Author.UserName,
                                         avatarUrl: article.Author.AvatarImage,
-                                        idCode: article.Author.IdCode
+                                        idCode: article.Author.IdCode,
                                     },
                                     sequenceNumber: article.SequenceNumber,
                                     sources: {},
@@ -165,11 +168,11 @@
                                     hasBackground: false,
                                     thumbnail: article.ThumbnailImage,
                                     hasThumbnail: true,
-                                    url: "/article/" + article.Author.IdCode + "/" + article.SequenceNumberForAuthor,
+                                    url: `/article/${article.Author.IdCode}/${article.SequenceNumberForAuthor}`,
                                     count: {
                                         like: article.LikeCount,
-                                        comment: article.CommentCount
-                                    }
+                                        comment: article.CommentCount,
+                                    },
                                 };
                                 if (article.TimelineReason) {
                                     switch (article.TimelineReason) {
@@ -177,16 +180,16 @@
                                             entry.sources.type = "like";
                                             entry.sources.userArray = [];
                                             if (article.LikeByUsers) {
-                                                for (var j in article.LikeByUsers) {
+                                                for (let j = 0;j < article.LikeByUsers.length;j++) {
                                                     entry.sources.userArray.push({
                                                         name: article.LikeByUsers[j].UserName,
-                                                        idCode: article.LikeByUsers[j].IdCode
+                                                        idCode: article.LikeByUsers[j].IdCode,
                                                     });
                                                 }
                                             } else {
                                                 entry.sources.userArray.push({
                                                     name: union.$localStorage.user.UserName,
-                                                    idCode: "/user/" + union.$localStorage.user.IdCode
+                                                    idCode: `/user/${union.$localStorage.user.IdCode}`,
                                                 });
                                             }
                                             break;
@@ -206,54 +209,37 @@
                                     }
                                 }
                                 timeline.entries.push(entry);
-                                (function (entry) {
-                                    $timeout(function () {
-                                        if (!timelineTimeout) {
-                                            entry.show = true;
-                                            timelineTimeout = $timeout(function () {
-                                            }, utils.timelineShowDelay);
-                                        } else {
-                                            timelineTimeout = timelineTimeout.then(function () {
-                                                entry.show = true;
-                                                return $timeout(function () {
-                                                }, utils.timelineShowDelay);
-                                            });
-                                        }
-                                    });
-                                })(entry);
+                                $timeout(createTimeoutFunction(entry));
                             }
                             if (timelineTimeout) {
-                                timelineTimeout.then(function () {
+                                timelineTimeout.then(() => {
                                     timeline.loadingLock = false;
                                 });
                             } else {
                                 timeline.loadingLock = false;
                             }
                         } else {
-                            $http.get(apiEndpoint + "normal-point/active").then(function (response) {
+                            $http.get(`${apiEndpoint}normal-point/active`).then(response => {
                                 timeline.activePoints = response.data;
-                                for (var i in timeline.activePoints) {
-                                    var point = timeline.activePoints[i];
+                                for (let i = 0;i < timeline.activePoints.length;i++) {
+                                    const point = timeline.activePoints[i];
                                     timeline.activePoints[i].mainName = utils.getPointFirstName(point);
                                     timeline.activePoints[i].subName = utils.getPointSecondName(point);
                                     timeline.activePoints[i].type = utils.getPointType(point.Type);
                                 }
-                            }, function (response) {
+                            }, response => {
                                 notification.error("发生未知错误，请重试或与站务职员联系", response);
                             });
                             timeline.loadingLock = false;
                         }
-
-                    }, function (response) {
+                    }, response => {
                         notification.error("发生未知错误，请重试或与站务职员联系", response);
                         timeline.loadingLock = false;
                     });
                 }
-
-
             }
 
             union.timeline = timeline;
-        }
+        },
     ]);
-})();
+}());

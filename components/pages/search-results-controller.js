@@ -2,131 +2,126 @@
  * Created by Rex on 15/9/23.
  */
 (function () {
-    "use strict";
-
     keylolApp.controller("SearchResultsController", [
         "pageHead", "$scope", "union", "$http", "notification", "$routeParams", "$location", "utils", "$timeout",
-        function (pageHead, $scope, union, $http, notification, $routeParams, $location, utils, $timeout) {
+        (pageHead, $scope, union, $http, notification, $routeParams, $location, utils, $timeout) => {
             $scope.searchExist = true;
             $scope.union = union;
             if (!$routeParams.searchType || !$routeParams.keyword) {
                 $scope.searchExist = false;
             }
-            pageHead.setTitle($routeParams.keyword + " 的搜索结果 - 其乐");
-            var summary = {
+            pageHead.setTitle(`${$routeParams.keyword} 的搜索结果 - 其乐`);
+            const summary = {
                 actions: [],
                 head: {
                     mainHead: $routeParams.keyword,
-                    subHead: "的搜索结果"
+                    subHead: "的搜索结果",
                 },
                 background: "keylol://18714f31d985cb8e8b59661cabd9d23a.jpg",
-                defaultSum: {
-                    text: ""
-                }
+                defaultSum: { text: "" },
             };
-            var timeline = {
+            const timeline = {
                 title: {
                     mainTitle: "搜索结果",
-                    subTitle: "Search Result"
+                    subTitle: "Search Result",
                 },
                 actions: [
                     {
                         active: false,
                         text: "据点",
-                        onClick: function () {
-                            $location.url("search/point/" + encodeURIComponent($routeParams.keyword));
-                        }
+                        onClick () {
+                            $location.url(`search/point/${encodeURIComponent($routeParams.keyword)}`);
+                        },
                     },
                     {
                         active: false,
                         text: "文章",
-                        onClick: function () {
-                            $location.url("search/article/" + encodeURIComponent($routeParams.keyword));
-                        }
+                        onClick () {
+                            $location.url(`search/article/${encodeURIComponent($routeParams.keyword)}`);
+                        },
                     },
                     {
                         active: false,
                         text: "用户",
-                        onClick: function () {
-                            $location.url("search/user/" + encodeURIComponent($routeParams.keyword));
-                        }
+                        onClick () {
+                            $location.url(`search/user/${encodeURIComponent($routeParams.keyword)}`);
+                        },
                     },
                     {
                         active: false,
                         text: "全站",
-                        onClick: function () {
-                        }
-                    }
+                        onClick () {},
+                    },
                 ],
-                entries: []
+                entries: [],
             };
             switch ($routeParams.searchType) {
                 case "point":
                     timeline.actions[0].active = true;
                     timeline.loadAction = function () {
                         timeline.loadingLock = true;
-                        var skip = timeline.entries.length;
-                        $http.get(apiEndpoint + "normal-point/keyword/" + encodeURIComponent($routeParams.keyword), {
+                        const skip = timeline.entries.length;
+                        $http.get(`${apiEndpoint}normal-point/keyword/${encodeURIComponent($routeParams.keyword)}`, {
                             params: {
+                                skip,
                                 full: true,
-                                skip: skip,
-                                take: utils.timelineLoadCount
-                            }
-                        }).then(function (response) {
-                            var totalRecordCount = response.headers("X-Total-Record-Count");
-                            summary.defaultSum.text = "找到 " + totalRecordCount + " 个符合的项目";
+                                take: utils.timelineLoadCount,
+                            },
+                        }).then(response => {
+                            const totalRecordCount = response.headers("X-Total-Record-Count");
+                            summary.defaultSum.text = `找到 ${totalRecordCount} 个符合的项目`;
                             timeline.noMoreArticle = response.data.length < utils.timelineLoadCount;
-                            var timelineTimeout;
+                            let timelineTimeout;
+                            function createTimeoutFunction (entry) {
+                                return () => {
+                                    if (!timelineTimeout) {
+                                        entry.show = true;
+                                        timelineTimeout = $timeout(() => {
+                                        }, utils.timelineShowDelay);
+                                    } else {
+                                        timelineTimeout = timelineTimeout.then(() => {
+                                            entry.show = true;
+                                            return $timeout(() => {}, utils.timelineShowDelay);
+                                        });
+                                    }
+                                };
+                            }
                             if (totalRecordCount > 0) {
                                 if (!skip)
                                     summary.background = response.data[0].BackgroundImage;
                                 timeline.searchNotFound = false;
-                                for (var i in response.data) {
-                                    var point = response.data[i];
-                                    var entry = {
+                                for (let i = 0; i < response.data.length; i++) {
+                                    const point = response.data[i];
+                                    const entry = {
                                         types: [utils.getPointType(point.Type)],
                                         pointInfo: {
                                             reader: point.SubscriberCount,
-                                            article: point.ArticleCount
+                                            article: point.ArticleCount,
                                         },
                                         hasBackground: true,
                                         background: point.BackgroundImage,
                                         pointAvatar: point.AvatarImage,
-                                        url: "point/" + point.IdCode,
+                                        url: `point/${point.IdCode}`,
                                         isPoint: true,
                                         subscribed: point.Subscribed,
-                                        id: point.Id
+                                        id: point.Id,
                                     };
                                     entry.title = utils.getPointFirstName(point);
                                     entry.summary = utils.getPointSecondName(point);
                                     timeline.entries.push(entry);
-                                    (function (entry) {
-                                        $timeout(function () {
-                                            if (!timelineTimeout) {
-                                                entry.show = true;
-                                                timelineTimeout = $timeout(function () {
-                                                }, utils.timelineShowDelay);
-                                            } else {
-                                                timelineTimeout = timelineTimeout.then(function () {
-                                                    entry.show = true;
-                                                    return $timeout(function () {
-                                                    }, utils.timelineShowDelay);
-                                                });
-                                            }
-                                        });
-                                    })(entry);
+                                    $timeout(createTimeoutFunction(entry));
                                 }
                             } else {
                                 timeline.searchNotFound = true;
                             }
                             if (timelineTimeout) {
-                                timelineTimeout.then(function () {
+                                timelineTimeout.then(() => {
                                     timeline.loadingLock = false;
                                 });
                             } else {
                                 timeline.loadingLock = false;
                             }
-                        }, function (response) {
+                        }, response => {
                             notification.error("发生未知错误，请重试或与站务职员联系", response);
                             timeline.loadingLock = false;
                         });
@@ -137,30 +132,44 @@
                     timeline.actions[1].active = true;
                     timeline.loadAction = function () {
                         timeline.loadingLock = true;
-                        var skip = timeline.entries.length;
-                        $http.get(apiEndpoint + "article/keyword/" + encodeURIComponent($routeParams.keyword), {
+                        const skip = timeline.entries.length;
+                        $http.get(`${apiEndpoint}article/keyword/${encodeURIComponent($routeParams.keyword)}`, {
                             params: {
+                                skip,
                                 full: true,
-                                skip: skip,
-                                take: utils.timelineLoadCount
-                            }
-                        }).then(function (response) {
-                            var totalRecordCount = response.headers("X-Total-Record-Count");
-                            summary.defaultSum.text = "找到 " + totalRecordCount + " 个符合的项目";
+                                take: utils.timelineLoadCount,
+                            },
+                        }).then(response => {
+                            const totalRecordCount = response.headers("X-Total-Record-Count");
+                            summary.defaultSum.text = `找到 ${totalRecordCount} 个符合的项目`;
                             timeline.noMoreArticle = response.data.length < utils.timelineLoadCount;
                             if (totalRecordCount > 0) {
                                 if (!skip)
                                     summary.background = response.data[0].ThumbnailImage;
                                 timeline.searchNotFound = false;
-                                var timelineTimeout;
-                                for (var i in response.data) {
-                                    var article = response.data[i];
-                                    var entry = {
+                                let timelineTimeout;
+                                function createTimeoutFunction (entry) {
+                                    return () => {
+                                        if (!timelineTimeout) {
+                                            entry.show = true;
+                                            timelineTimeout = $timeout(() => {
+                                            }, utils.timelineShowDelay);
+                                        } else {
+                                            timelineTimeout = timelineTimeout.then(() => {
+                                                entry.show = true;
+                                                return $timeout(() => {}, utils.timelineShowDelay);
+                                            });
+                                        }
+                                    };
+                                }
+                                for (let i = 0; i < response.data.length; i++) {
+                                    const article = response.data[i];
+                                    const entry = {
                                         types: [article.TypeName],
                                         author: {
                                             username: article.Author.UserName,
                                             avatarUrl: article.Author.AvatarImage,
-                                            idCode: article.Author.IdCode
+                                            idCode: article.Author.IdCode,
                                         },
                                         voteForPoint: article.VoteForPoint,
                                         sequenceNumber: article.SequenceNumber,
@@ -170,40 +179,26 @@
                                         hasBackground: false,
                                         thumbnail: article.ThumbnailImage,
                                         hasThumbnail: true,
-                                        url: "/article/" + article.Author.IdCode + "/" + article.SequenceNumberForAuthor,
+                                        url: `/article/${article.Author.IdCode}/${article.SequenceNumberForAuthor}`,
                                         count: {
                                             like: article.LikeCount,
-                                            comment: article.CommentCount
-                                        }
+                                            comment: article.CommentCount,
+                                        },
                                     };
                                     timeline.entries.push(entry);
-                                    (function (entry) {
-                                        $timeout(function () {
-                                            if (!timelineTimeout) {
-                                                entry.show = true;
-                                                timelineTimeout = $timeout(function () {
-                                                }, utils.timelineShowDelay);
-                                            } else {
-                                                timelineTimeout = timelineTimeout.then(function () {
-                                                    entry.show = true;
-                                                    return $timeout(function () {
-                                                    }, utils.timelineShowDelay);
-                                                });
-                                            }
-                                        });
-                                    })(entry);
+                                    $timeout(createTimeoutFunction(entry));
                                 }
                             } else {
                                 timeline.searchNotFound = true;
                             }
                             if (timelineTimeout) {
-                                timelineTimeout.then(function () {
+                                timelineTimeout.then(() => {
                                     timeline.loadingLock = false;
                                 });
                             } else {
                                 timeline.loadingLock = false;
                             }
-                        }, function (response) {
+                        }, response => {
                             notification.error("发生未知错误，请重试或与站务职员联系", response);
                             timeline.loadingLock = false;
                         });
@@ -216,16 +211,16 @@
                     timeline.loadingLock = true;
                     timeline.noMoreArticle = true;
                     timeline.actions[2].active = true;
-                    $http.get(apiEndpoint + "user/" + encodeURIComponent($routeParams.keyword), {
+                    $http.get(`${apiEndpoint}user/${encodeURIComponent($routeParams.keyword)}`, {
                         params: {
                             idType: "UserName",
                             stats: true,
                             subscribed: true,
-                            profilePointBackgroundImage: true
-                        }
-                    }).then(function (response) {
+                            profilePointBackgroundImage: true,
+                        },
+                    }).then(response => {
                         if (response.data) {
-                            var user = response.data;
+                            const user = response.data;
                             summary.background = user.ProfilePointBackgroundImage;
                             timeline.searchNotFound = false;
                             summary.defaultSum.text = "找到 1 个符合的项目";
@@ -233,7 +228,7 @@
                                 types: ["个人"],
                                 pointInfo: {
                                     reader: user.SubscriberCount,
-                                    article: user.ArticleCount
+                                    article: user.ArticleCount,
                                 },
                                 show: true,
                                 hasBackground: true,
@@ -241,16 +236,16 @@
                                 title: user.UserName,
                                 summary: user.GamerTag,
                                 pointAvatar: user.AvatarImage,
-                                url: "user/" + user.IdCode,
+                                url: `user/${user.IdCode}`,
                                 isUser: true,
-                                id: user.Id
+                                id: user.Id,
                             });
-                            if (union.$localStorage.user && user.IdCode != union.$localStorage.user.IdCode) {
+                            if (union.$localStorage.user && user.IdCode !== union.$localStorage.user.IdCode) {
                                 timeline.entries[0].subscribed = user.Subscribed;
                             }
                         }
                         timeline.loadingLock = false;
-                    }, function (response) {
+                    }, response => {
                         if (response.status === 404) {
                             summary.defaultSum.text = "找到 0 个符合的项目";
                         } else {
@@ -264,6 +259,6 @@
 
             union.timeline = timeline;
             union.summary = summary;
-        }
+        },
     ]);
-})();
+}());

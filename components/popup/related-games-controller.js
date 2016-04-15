@@ -1,6 +1,4 @@
 ﻿(function () {
-    "use strict";
-
     keylolApp.controller("RelatedGamesController", [
         "$scope", "close", "type", "count", "idCode", "$http", "notification", "$filter", "utils",
         function ($scope, close, type, count, idCode, $http, notification, $filter, utils) {
@@ -26,21 +24,21 @@
                     $scope.typeText = "历代开发";
                     break;
             }
-            $http.get(apiEndpoint + "normal-point/" + idCode + "/games", {
+            $http.get(`${apiEndpoint}normal-point/${idCode}/games`, {
                 params: {
                     relationship: type,
-                    idType: "IdCode"
-                }
-            }).then(function (response) {
-                var points = response.data;
+                    idType: "IdCode",
+                },
+            }).then(response => {
+                const points = response.data;
                 $scope.gameYears.push({
-                    year: $filter('date')(points[0].ReleaseDate, "yyyy"),
-                    games: [points[0]]
+                    year: $filter("date")(points[0].ReleaseDate, "yyyy"),
+                    games: [points[0]],
                 });
-                var rowCount = 1;
-                var nowYear = $scope.gameYears[0];
-                for (var i = 1; i < points.length; i++) {
-                    if ($filter('date')(points[i].ReleaseDate, "yyyy") === nowYear.year) {
+                let rowCount = 1;
+                let nowYear = $scope.gameYears[0];
+                for (let i = 1; i < points.length; i++) {
+                    if ($filter("date")(points[i].ReleaseDate, "yyyy") === nowYear.year) {
                         nowYear.games.push(points[i]);
                         if (nowYear.games.length % 3 === 1) {
                             rowCount++;
@@ -51,8 +49,8 @@
                     } else {
                         if (rowCount !== 3) {
                             nowYear = {
-                                year: $filter('date')(points[i].ReleaseDate, "yyyy"),
-                                games: [points[i]]
+                                year: $filter("date")(points[i].ReleaseDate, "yyyy"),
+                                games: [points[i]],
                             };
                             $scope.gameYears.push(nowYear);
                             rowCount++;
@@ -61,9 +59,9 @@
                         }
                     }
                 }
-            }, function (response) {
+            }, response => {
                 notification.error("游戏据点列表获取失败", response);
             });
-        }
+        },
     ]);
-})();
+}());

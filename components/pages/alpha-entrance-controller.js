@@ -1,42 +1,38 @@
 ﻿(function () {
-    "use strict";
-
     keylolApp.controller("AlphaEntranceController", [
-        "pageHead", "$scope", "$timeout", "$rootScope", "window", "$window", "union", "$location",
-        function (pageHead, $scope, $timeout, $rootScope, window, $window, union, $location) {
+        "pageHead", "$scope", "$timeout", "$rootScope", "window", "$window",
+        (pageHead, $scope, $timeout, $rootScope, window, $window) => {
             pageHead.setTitle("其乐 - 一个交流评测感悟的玩家社区");
 
             $scope.showRegistrationWindow = function () {
                 window.show({
                     templateUrl: "components/windows/registration.html",
                     controller: "RegistrationController",
-                    inputs: {
-                        options: {}
-                    }
+                    inputs: { options: {} },
                 });
             };
 
             $scope.showLoginSteamWindow = function () {
                 window.show({
                     templateUrl: "components/windows/login-steam.html",
-                    controller: "LoginSteamController"
+                    controller: "LoginSteamController",
                 });
             };
 
             $scope.showInvitationWindow = function () {
                 window.show({
                     templateUrl: "components/windows/alpha-invitation.html",
-                    controller: "AlphaInvitationController"
+                    controller: "AlphaInvitationController",
                 });
             };
 
             $scope.secondAnimate = false;
-            var activeLock = 0;
             $scope.active = 0;
-            var activeTimeout;
-            $($window).scroll(function () {
-                $scope.$apply(function () {
-                    if ($scope.secondAnimate == false) {
+            let activeLock = 0;
+            let activeTimeout;
+            $($window).scroll(() => {
+                $scope.$apply(() => {
+                    if ($scope.secondAnimate === false) {
                         if ($($window).scrollTop() >= 538) {
                             $scope.secondAnimate = true;
                         }
@@ -63,22 +59,22 @@
                 });
             });
 
-            var cancelListenRoute = $scope.$on("$destroy", function () {
+            const cancelListenRoute = $scope.$on("$destroy", () => {
                 $($window).unbind("scroll");
                 cancelListenRoute();
             });
 
-            var changeActive = function (index) {
-                if (activeLock != index) {
+            function changeActive (index) {
+                if (activeLock !== index) {
                     activeLock = index;
                     if (activeTimeout) {
                         $timeout.cancel(activeTimeout);
                     }
-                    activeTimeout = $timeout(function () {
+                    activeTimeout = $timeout(() => {
                         $scope.active = index;
                     }, 100);
                 }
             }
-        }
+        },
     ]);
-})();
+}());

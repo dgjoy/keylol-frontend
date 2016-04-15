@@ -1,9 +1,7 @@
 (function () {
-    "use strict";
-
-    keylolApp.filter("storeUrlToSteamDB", function () {
+    keylolApp.filter("storeUrlToSteamDB", () => {
         return function (input) {
-            return "https://steamdb.info/app/" + input + "/";
+            return `https://steamdb.info/app/${input}/`;
         };
     });
-})();
+}());
