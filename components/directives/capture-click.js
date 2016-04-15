@@ -1,22 +1,17 @@
 (function () {
-    "use strict";
-
-    keylolApp.directive('captureClick', [
-        "$parse",
-        function ($parse) {
-            return {
-                restrict: 'A',
-                compile: function (element, attrs) {
-                    var fn = $parse(attrs.captureClick, null, true);
-                    return function (scope, element) {
-                        element[0].addEventListener('click', function (event) {
-                            scope.$apply(function () {
-                                fn(scope, {$event: event});
-                            });
-                        }, true);
-                    };
-                }
-            }
-        }
-    ]);
-})();
+    keylolApp.directive("captureClick", ["$parse", $parse => {
+        return {
+            restrict: "A",
+            compile (element, attrs) {
+                const fn = $parse(attrs.captureClick, null, true);
+                return function (scope, element) {
+                    element[0].addEventListener("click", event => {
+                        scope.$apply(() => {
+                            fn(scope, { $event: event });
+                        });
+                    }, true);
+                };
+            },
+        };
+    }]);
+}());

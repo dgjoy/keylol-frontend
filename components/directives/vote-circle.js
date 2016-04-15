@@ -1,22 +1,17 @@
 ﻿(function () {
-    "use strict";
-
-    keylolApp.directive("voteCircle", [
-        "utils",
-        function (utils) {
-            return {
-                restrict: "E",
-                templateUrl: "components/directives/vote-circle.html",
-                scope: {
-                    vote: "=",
-                    disabled: "=",
-                    wholeWhite: "="
-                },
-                link: function (scope) {
-                    scope.circles = new Array(scope.vote);
-                    scope.voteColor = utils.getVoteColor(scope.vote - 1);
-                }
-            };
-        }
-    ]);
-})();
+    keylolApp.directive("voteCircle", ["utils", utils => {
+        return {
+            restrict: "E",
+            templateUrl: "components/directives/vote-circle.html",
+            scope: {
+                vote: "=",
+                disabled: "=",
+                wholeWhite: "=",
+            },
+            link (scope) {
+                scope.circles = new Array(scope.vote);
+                scope.voteColor = utils.getVoteColor(scope.vote - 1);
+            },
+        };
+    }]);
+}());

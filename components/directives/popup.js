@@ -1,25 +1,21 @@
 (function () {
-    "use strict";
-
     keylolApp.directive("popup", [
         "window", "$timeout",
-        function (window, $timeout) {
+        (window, $timeout) => {
             return {
                 restrict: "A",
-                scope: {
-                    showFn: "=popup"
-                },
-                link: function (scope, element) {
-                    var contexts = {};
-                    var objectReferences = [];
+                scope: { showFn: "=popup" },
+                link (scope, element) {
+                    const contexts = {};
+                    const objectReferences = [];
                     scope.showFn = function (optionsOverride) {
-                        var options = {
+                        const options = {
                             attachSide: "top",
                             align: "center",
                             offsetX: 0,
                             offsetY: 0,
                             showDelay: 0,
-                            closeDelay: 0
+                            closeDelay: 0,
                         };
                         if (optionsOverride && optionsOverride.event) {
                             // Copy the event object because it may be changed.
@@ -34,36 +30,36 @@
                         $.extend(options, optionsOverride);
 
                         if (options.event) {
-                            var contextId = objectReferences.indexOf(options.event.currentTarget);
+                            const contextId = objectReferences.indexOf(options.event.currentTarget);
                             if (contexts[contextId]) {
                                 contexts[contextId].show(true);
                                 return;
                             }
                         }
 
-                        var windowPromise, showTimeout, closeTimeout;
+                        let windowPromise, showTimeout, closeTimeout;
 
-                        var close = function () {
+                        function close () {
                             if (showTimeout) {
                                 $timeout.cancel(showTimeout);
                             } else {
-                                closeTimeout = $timeout(function () {
+                                closeTimeout = $timeout(() => {
                                     closeTimeout = null;
 
-                                    windowPromise.then(function (window) {
+                                    windowPromise.then(window => {
                                         window.closeNow();
                                     });
                                 }, options.closeDelay);
                             }
-                        };
+                        }
 
-                        var show = function (cancelCloseOnly) {
+                        function show (cancelCloseOnly) {
                             if (closeTimeout) {
                                 $timeout.cancel(closeTimeout);
                             } else if (!cancelCloseOnly) {
-                                var onTriggerMouseLeave, contextId;
+                                let onTriggerMouseLeave, contextId;
 
-                                showTimeout = $timeout(function () {
+                                showTimeout = $timeout(() => {
                                     showTimeout = null;
 
                                     if (!$.contains(document, element[0])) {
@@ -80,16 +76,16 @@
                                         controller: options.controller,
                                         adjustScrollBar: false,
                                         delayAppend: true,
-                                        inputs: options.inputs
+                                        inputs: options.inputs,
                                     });
 
-                                    windowPromise.then(function (window) {
-                                        var popupWidth = window.$element.innerWidth();
-                                        var popupHeight = window.$element.innerHeight();
+                                    windowPromise.then(window => {
+                                        const popupWidth = window.$element.innerWidth();
+                                        const popupHeight = window.$element.innerHeight();
                                         window.$element.hide();
-                                        var position = element.offset();
-                                        var width = element.innerWidth();
-                                        var height = element.innerHeight();
+                                        const position = element.offset();
+                                        const width = element.innerWidth();
+                                        const height = element.innerHeight();
 
                                         if (options.attachSide === "left" || options.attachSide === "right") {
                                             switch (options.align) {
@@ -135,9 +131,9 @@
                                     });
 
                                     if (options.event) {
-                                        var onBodyClick;
+                                        let onBodyClick;
                                         if (options.event.type === "click") {
-                                            windowPromise.then(function (window) {
+                                            windowPromise.then(window => {
                                                 onBodyClick = function (e) {
                                                     if (e.target === options.event.currentTarget ||
                                                         $.contains(options.event.currentTarget, e.target)) {
@@ -150,24 +146,24 @@
                                                 };
                                                 document.body.addEventListener("click", onBodyClick, true);
                                                 return window.close;
-                                            }).then(function () {
+                                            }).then(() => {
                                                 document.body.removeEventListener("click", onBodyClick, true);
                                             });
                                         } else if (options.event.type === "mouseenter") {
-                                            var onPopupMouseEnter = function () {
+                                            function onPopupMouseEnter () {
                                                 show(true);
-                                            };
-                                            var onPopupMouseLeave = function () {
+                                            }
+                                            function onPopupMouseLeave () {
                                                 close();
-                                            };
-                                            windowPromise.then(function (window) {
+                                            }
+                                            windowPromise.then(window => {
                                                 onBodyClick = function (e) {
                                                     if (e.target !== window.$element[0] && !$.contains(window.$element[0], e.target))
                                                         window.closeNow();
                                                 };
                                                 document.body.addEventListener("click", onBodyClick, true);
                                                 window.$element.hover(onPopupMouseEnter, onPopupMouseLeave);
-                                                window.close.then(function () {
+                                                window.close.then(() => {
                                                     delete contexts[contextId];
                                                     document.body.removeEventListener("click", onBodyClick, true);
                                                     $(options.event.currentTarget).off("mouseleave", onTriggerMouseLeave);
@@ -188,25 +184,23 @@
                                     contextId = objectReferences.indexOf(options.event.currentTarget);
                                     if (contextId === -1)
                                         contextId = objectReferences.push(options.event.currentTarget) - 1;
-                                    contexts[contextId] = {
-                                        show: show
-                                    };
-                                    showTimeout.catch(function () {
+                                    contexts[contextId] = { show };
+                                    showTimeout.catch(() => {
                                         delete contexts[contextId];
                                         $(options.event.currentTarget).off("mouseleave", onTriggerMouseLeave);
                                     });
                                 }
 
-                                return showTimeout.then(function (windowPromise) {
+                                return showTimeout.then(windowPromise => {
                                     return windowPromise;
                                 });
                             }
-                        };
+                        }
 
                         return show();
                     };
-                }
+                },
             };
-        }
+        },
     ]);
-})();
+}());
