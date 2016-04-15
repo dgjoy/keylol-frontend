@@ -1,39 +1,36 @@
 (function () {
-    "use strict";
-
     keylolApp.factory("window", [
         "$compile", "$controller", "$rootScope", "$q", "$window", "$templateRequest", "$timeout", "$animate",
-        function ($compile, $controller, $rootScope, $q, $window, $templateRequest, $timeout, $animate) {
-
+        ($compile, $controller, $rootScope, $q, $window, $templateRequest, $timeout, $animate) => {
             function WindowService() {
-                var self = this;
+                const self = this;
 
-                var bodyOriginalPaddingRight;
-                var scrollBarWidth = function () {
-                    var scrollDiv = document.createElement("div");
+                let bodyOriginalPaddingRight;
+                function scrollBarWidth () {
+                    const scrollDiv = document.createElement("div");
                     scrollDiv.className = "scrollbar-measure";
                     $(document.body).append(scrollDiv);
-                    var width = scrollDiv.offsetWidth - scrollDiv.clientWidth;
+                    const width = scrollDiv.offsetWidth - scrollDiv.clientWidth;
                     $(scrollDiv).remove();
                     return width;
-                };
+                }
 
-                var adjustScrollBar = function () {
-                    var $body = $(document.body);
+                function adjustScrollBar () {
+                    const $body = $(document.body);
                     if ($body.find("main[ng-view] > window").length > 0) {
                         if (!$body.hasClass("body-window-open")) {
                             bodyOriginalPaddingRight = document.body.style.paddingRight || "";
 
                             // Test if body is overflowing
-                            var fullWindowWidth = $window.innerWidth;
+                            let fullWindowWidth = $window.innerWidth;
                             if (!fullWindowWidth) { // workaround for missing window.innerWidth in IE8
-                                var documentElementRect = document.documentElement.getBoundingClientRect();
+                                const documentElementRect = document.documentElement.getBoundingClientRect();
                                 fullWindowWidth = documentElementRect.right - Math.abs(documentElementRect.left);
                             }
                             if (document.body.clientWidth < fullWindowWidth) { // Body is overflowing
                                 // Set body padding-right
-                                var bodyPaddingRight = parseInt(($body.css("padding-right") || 0), 10);
-                                $body.css("padding-right", bodyPaddingRight + scrollBarWidth() + "px");
+                                const bodyPaddingRight = parseInt(($body.css("padding-right") || 0), 10);
+                                $body.css("padding-right", `${bodyPaddingRight + scrollBarWidth()}px`);
                             }
 
                             $body.addClass("body-window-open");
@@ -44,55 +41,55 @@
                             $body.removeClass("body-window-open");
                         }
                     }
-                };
+                }
 
-                self.show = function (options) {
-                    options = $.extend({
+                self.show = preOptions => {
+                    const options = $.extend({
                         adjustScrollBar: true,
                         global: false,
-                        delayAppend: false
-                    }, options);
+                        delayAppend: false,
+                    }, preOptions);
 
                     //  Create a deferred we'll resolve when the window is ready.
-                    var deferred = $q.defer();
+                    const deferred = $q.defer();
 
                     //  If a 'controllerAs' option has been provided, we change the controller
                     //  name to use 'as' syntax. $controller will automatically handle this.
-                    var controllerName = options.controller;
+                    let controllerName = options.controller;
                     if (options.controllerAs) {
-                        controllerName = controllerName + " as " + options.controllerAs;
+                        controllerName = `${controllerName} as ${options.controllerAs}`;
                     }
 
-                    var create = function (template) {
-                        var scope = $rootScope.$new();
-                        var linkFn = $compile(template);
-                        var $element = linkFn(scope);
+                    function create (template) {
+                        const scope = $rootScope.$new();
+                        const linkFn = $compile(template);
+                        const $element = linkFn(scope);
 
                         if (options.styles) {
                             $element.css(options.styles);
                         }
 
-                        var closeDeferred = $q.defer();
-                        var close = function (result) {
+                        const closeDeferred = $q.defer();
+                        function close (result) {
                             cancelListen();
                             //  Resolve the 'close' promise.
                             closeDeferred.resolve(result);
-                            $animate.leave($element).then(function () {
+                            $animate.leave($element).then(() => {
                                 //  We can now clean up the scope and remove the element from the DOM.
                                 scope.$destroy();
                                 if (options.adjustScrollBar)
                                     adjustScrollBar();
                             });
-                        };
+                        }
 
-                        var cancelListen = $rootScope.$on("$locationChangeSuccess", function () {
+                        const cancelListen = $rootScope.$on("$locationChangeSuccess", () => {
                             close();
                         });
 
-                        var inputs = {
+                        const inputs = {
+                            $element,
+                            close,
                             $scope: scope,
-                            $element: $element,
-                            close: close
                         };
 
                         //  If we have provided any inputs, pass them to the controller.
@@ -101,36 +98,36 @@
                         }
 
                         //  Create the controller, explicitly specifying the scope to use.
-                        var controller;
+                        let controller;
                         if (controllerName)
                             controller = $controller(controllerName, inputs);
 
                         // Append
-                        var appendWindow = function () {
-                            var main = options.global ? document.body : $("main[ng-view]")[0];
+                        function appendWindow () {
+                            const main = options.global ? document.body : $("main[ng-view]")[0];
                             $animate.enter($element, main, main.lastChild);
                             if (options.adjustScrollBar)
                                 adjustScrollBar();
 
                             deferred.resolve({
-                                controller: controller,
-                                scope: scope,
-                                $element: $element,
+                                controller,
+                                $element,
+                                scope,
                                 close: closeDeferred.promise,
-                                closeNow: close
+                                closeNow: close,
                             });
-                        };
+                        }
 
                         if (options.delayAppend)
                             $timeout(appendWindow);
                         else
                             appendWindow();
-                    };
+                    }
 
                     if (options.template) {
-                        create(options.template)
+                        create(options.template);
                     } else if (options.templateUrl) {
-                        $templateRequest(options.templateUrl).then(function (result) {
+                        $templateRequest(options.templateUrl).then(result => {
                             create(result);
                         });
                     }
@@ -140,6 +137,6 @@
             }
 
             return new WindowService();
-        }
+        },
     ]);
-})();
+}());

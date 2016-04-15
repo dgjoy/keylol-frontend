@@ -79,7 +79,7 @@
                             }
                         };
                     }
-                    for (let i = 0; i < response.data; i++) {
+                    for (let i = 0; i < response.data.length; i++) {
                         const message = response.data[i];
                         const entryType = messageTypes[message.Type];
                         const entry = {

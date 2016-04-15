@@ -1,17 +1,15 @@
 ﻿(function () {
-    "use strict";
-
-    keylolApp.provider("apiEndpoint", function () {
-        var _apiEndpoint = "";
+    keylolApp.provider("apiEndpoint", () => {
+        let _apiEndpoint = "";
         return {
-            setEndPoint: function (endpoint) {
+            setEndPoint (endpoint) {
                 _apiEndpoint = endpoint;
             },
             $get: [
                 function () {
                     return _apiEndpoint;
-                }
-            ]
+                },
+            ],
         };
     });
-})();
+}());

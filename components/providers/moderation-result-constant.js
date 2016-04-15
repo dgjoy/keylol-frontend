@@ -1,6 +1,4 @@
 (function () {
-    "use strict";
-
     keylolApp.constant("moderationResult", {
         Archived: {
             mainTitle: "这篇文章已被封存",
@@ -8,8 +6,8 @@
             fromSection: {
                 chineseName: "编辑科",
                 englishName: "Proofreading Services Section",
-                logo: "assets/images/proofread.png"
-            }
+                logo: "assets/images/proofread.png",
+            },
         },
         Rejected: {
             mainTitle: "这篇文章已被退稿",
@@ -17,8 +15,8 @@
             fromSection: {
                 chineseName: "编辑科",
                 englishName: "Proofreading Services Section",
-                logo: "assets/images/proofread.png"
-            }
+                logo: "assets/images/proofread.png",
+            },
         },
         Warned: {
             mainTitle: "这篇文章已被警告",
@@ -26,8 +24,8 @@
             fromSection: {
                 chineseName: "惩教科",
                 englishName: "Correctional Services Section",
-                logo: "assets/images/correction.png"
-            }
+                logo: "assets/images/correction.png",
+            },
         },
         Spotlight: {
             mainTitle: "萃选文章",
@@ -35,8 +33,8 @@
             fromSection: {
                 chineseName: "编辑科",
                 englishName: "Proofreading Services Section",
-                logo: "assets/images/proofread.png"
-            }
-        }
+                logo: "assets/images/proofread.png",
+            },
+        },
     });
-})();
+}());

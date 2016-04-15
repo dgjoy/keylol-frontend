@@ -1,51 +1,47 @@
 ﻿(function () {
-    "use strict";
-
     keylolApp.factory("getAndFlushComments", [
         "$http", "union", "notification", "utils",
         function ($http, union, notification, utils) {
-            var parseComments = function (str, index) {
-                var regExpForComment = /^((?:#\d+[ \t]*)+)(?:$|[ \t]+)/gm;
-                var regExpForEachLine = /#(\d+)/g;
-                return utils.escapeHtml(str).replace(regExpForComment, function (match) {
-                    return match.replace(regExpForEachLine, function (m) {
-                        var sqNumber = parseInt(m.slice(1, m.length));
+            function parseComments (str, index) {
+                const regExpForComment = /^((?:#\d+[ \t]*)+)(?:$|[ \t]+)/gm;
+                const regExpForEachLine = /#(\d+)/g;
+                return utils.escapeHtml(str).replace(regExpForComment, match => {
+                    return match.replace(regExpForEachLine, m => {
+                        const sqNumber = parseInt(m.slice(1, m.length));
                         if (sqNumber < index) {
-                            return '<a href="article/' + union.article.authorIdCode + "/" + union.article.sqNumberForAuthor + "#" + sqNumber + '">' + m + '</a>';
+                            return `<a href="article/${union.article.authorIdCode}/${union.article.sqNumberForAuthor}#${sqNumber}">${m}</a>`;
                         }
                         return m;
                     });
-                }).replace(/@Lee/gi, function (match) {
-                    return '<point-link type="\'user\'" point-name="\'' + match + '\'" id-code="\'LEEEE\'"></point-link>';
-                }).replace(/@stackia/gi, function (match) {
-                    return '<point-link type="\'user\'" point-name="\'' + match + '\'" id-code="\'STACK\'"></point-link>';
+                })
+                    .replace(/@Lee/gi, match => {
+                    return `<point-link type="'user'" point-name="'${match}'" id-code="'LEEEE'"></point-link>`;
+                })
+                    .replace(/@stackia/gi, match => {
+                    return `<point-link type="'user'" point-name="'${match}'" id-code="'STACK'"></point-link>`;
                 });
-            };
+            }
 
-            return function getAndFlushComments(article, pageNumOrSqNum, getCommentsType, callback) {
-                if (!callback) {
-                    callback = function () {
-                    };
-                }
-                if (getCommentsType == "hot") {
-                    $http.get(apiEndpoint + "comment", {
+            return function getAndFlushComments(article, pageNumOrSqNum, getCommentsType, callback = () => {}) {
+                if (getCommentsType === "hot") {
+                    $http.get(`${apiEndpoint}comment`, {
                         params: {
                             articleId: article.Id,
                             orderBy: "LikeCount",
                             desc: true,
-                            take: 3
-                        }
-                    }).then(function (response) {
-                        var preHotComments = response.data;
-                        var hotComments = [];
-                        for (var i in preHotComments) {
+                            take: 3,
+                        },
+                    }).then(response => {
+                        const preHotComments = response.data;
+                        const hotComments = [];
+                        for (let i = 0;i < preHotComments.length;i++) {
                             if (preHotComments[i].LikeCount >= 5) {
-                                var hotComment = preHotComments[i];
+                                const hotComment = preHotComments[i];
                                 if (hotComment.Commentator) {
-                                    if (hotComment.Commentator.IdCode == article.authorIdCode) {
+                                    if (hotComment.Commentator.IdCode === article.authorIdCode) {
                                         hotComment.Commentator.isAuthor = true;
                                     }
-                                    if (union.$localStorage.user && hotComment.Commentator.IdCode == union.$localStorage.user.IdCode) {
+                                    if (union.$localStorage.user && hotComment.Commentator.IdCode === union.$localStorage.user.IdCode) {
                                         hotComment.cannotLike = true;
                                     }
                                 }
@@ -59,26 +55,26 @@
                             }
                         }
                         $.extend(union.hotComments, hotComments);
-                    }, function (response) {
+                    }, response => {
                         notification.error("发生未知错误，请重试或与站务职员联系", response);
                     });
-                } else if (getCommentsType == "page") {
-                    var pageNum = pageNumOrSqNum;
-                    $http.get(apiEndpoint + "comment", {
+                } else if (getCommentsType === "page") {
+                    const pageNum = pageNumOrSqNum;
+                    $http.get(`${apiEndpoint}comment`, {
                         params: {
                             articleId: article.Id,
-                            skip: pageNum == 1 ? 0 : (17 + (pageNum - 2) * 20),
-                            take: pageNum == 1 ? 17 : 20
-                        }
-                    }).then(function (response) {
-                        var comments = response.data;
-                        for (var i in comments) {
+                            skip: pageNum === 1 ? 0 : (17 + (pageNum - 2) * 20),
+                            take: pageNum === 1 ? 17 : 20,
+                        },
+                    }).then(response => {
+                        const comments = response.data;
+                        for (let i = 0;i < comments.length;i++) {
                             if (comments[i].Commentator) {
-                                if (comments[i].Commentator.IdCode == article.authorIdCode) {
+                                if (comments[i].Commentator.IdCode === article.authorIdCode) {
                                     comments[i].Commentator.isAuthor = true;
                                 }
 
-                                if (union.$localStorage.user && comments[i].Commentator.IdCode == union.$localStorage.user.IdCode) {
+                                if (union.$localStorage.user && comments[i].Commentator.IdCode === union.$localStorage.user.IdCode) {
                                     comments[i].cannotLike = true;
                                 }
                             }
@@ -95,26 +91,26 @@
                         $(".section-article-comments .comment.highlight").removeClass("highlight");
                         union.comments.length = 0;
                         $.extend(union.comments, comments);
-                    }, function (response) {
+                    }, response => {
                         notification.error("发生未知错误，请重试或与站务职员联系", response);
                     });
                 } else {
-                    var sqNum = pageNumOrSqNum;
-                    $http.get(apiEndpoint + "comment", {
+                    const sqNum = pageNumOrSqNum;
+                    $http.get(`${apiEndpoint}comment`, {
                         params: {
                             articleId: article.Id,
                             skip: sqNum <= 17 ? 0 : parseInt((sqNum - 17) / 20) * 20 + 17,
-                            take: sqNum <= 17 ? 17 : 20
-                        }
-                    }).then(function (response) {
-                        var comments = response.data;
-                        for (var i in comments) {
+                            take: sqNum <= 17 ? 17 : 20,
+                        },
+                    }).then(response => {
+                        const comments = response.data;
+                        for (let i = 0;i < comments.length;i++) {
                             if (comments[i].Commentator) {
-                                if (comments[i].Commentator.IdCode == article.authorIdCode) {
+                                if (comments[i].Commentator.IdCode === article.authorIdCode) {
                                     comments[i].Commentator.isAuthor = true;
                                 }
 
-                                if (union.$localStorage.user && comments[i].Commentator.IdCode == union.$localStorage.user.IdCode) {
+                                if (union.$localStorage.user && comments[i].Commentator.IdCode === union.$localStorage.user.IdCode) {
                                     comments[i].cannotLike = true;
                                 }
                             }
@@ -132,11 +128,11 @@
                         union.comments.length = 0;
                         $.extend(union.comments, comments);
                         callback();
-                    }, function (response) {
+                    }, response => {
                         notification.error("评论刷新失败", response);
                     });
                 }
-            }
-        }
+            };
+        },
     ]);
-})();
+}());

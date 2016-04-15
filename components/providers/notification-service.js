@@ -1,109 +1,102 @@
 (function () {
-    "use strict";
-
-    keylolApp.factory("notification", [
-        "window",
-        function (window) {
+    keylolApp.factory("notification", ["window", window => {
             function NotificationService() {
-                var self = this;
+                const self = this;
 
-                var windowPromise;
+                let windowPromise;
 
-                self.show = function (options) {
-
-                    var windowOptions = {
+                self.show = options => {
+                    const windowOptions = {
                         templateUrl: "components/popup/operation-feedback.html",
                         controller: "OperationFeedbackController",
                         adjustScrollBar: false,
                         global: true,
-                        inputs: {
-                            options: options
-                        }
+                        inputs: { options },
                     };
 
                     if (windowPromise) {
-                        windowPromise = windowPromise.then(function (window) {
+                        windowPromise = windowPromise.then(window => {
                             return window.close;
-                        }).then(function () {
+                        }).then(() => {
                             return window.show(windowOptions);
                         });
                     } else {
                         windowPromise = window.show(windowOptions);
                     }
 
-                    var onBodyClick;
-                    windowPromise.then(function (window) {
+                    let onBodyClick;
+                    windowPromise.then(window => {
                         onBodyClick = function (e) {
                             if (e.target !== window.$element[0] && !$.contains(window.$element[0], e.target))
                                 window.closeNow();
                         };
                         document.body.addEventListener("click", onBodyClick, true);
                         return window.close;
-                    }).then(function () {
+                    }).then(() => {
                         document.body.removeEventListener("click", onBodyClick, true);
                     });
 
-                    return windowPromise.then(function (window) {
+                    return windowPromise.then(window => {
                         return window.close;
                     });
                 };
 
-                self.success = function (message) {
+                self.success = message => {
                     return self.show({
+                        message,
                         type: "success",
                         title: "成功",
                         subtitle: "Success",
-                        message: message
                     });
                 };
 
-                self.process = function (message) {
+                self.process = message => {
                     return self.show({
+                        message,
                         type: "process",
                         title: "处理中",
                         subtitle: "Processing",
-                        message: message
                     });
                 };
 
-                self.error = function (message, errorResponse) {
+                self.error = (message, errorResponse) => {
                     if (errorResponse) {
                         console.error(errorResponse);
                     }
                     if (errorResponse && errorResponse.status === 400) {
                         // Is model state error
-                        for (var error in errorResponse.data.ModelState) {
+                        for (const error in errorResponse.data.ModelState) {
                             if (errorResponse.data.ModelState.hasOwnProperty(error) && typeof(error) !== "function") {
                                 return self.show({
                                     type: "error",
                                     title: "错误",
                                     subtitle: "Error",
-                                    message: errorResponse.data.ModelState[error][0]
+                                    message: errorResponse.data.ModelState[error][0],
                                 });
                             }
                         }
                     } else {
                         return self.show({
+                            message,
                             type: "error",
                             title: "错误",
                             subtitle: "Error",
-                            message: message
                         });
                     }
                 };
 
                 self.attention = function (message, actions) {
                     return self.show({
+                        message,
+                        actions,
                         type: "attention",
                         title: "注意",
                         subtitle: "Attention",
-                        message: message,
-                        actions: actions
                     });
                 };
             }
 
             return new NotificationService();
-        }
+        },
     ]);
-})();
+}());
