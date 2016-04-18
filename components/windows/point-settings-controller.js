@@ -1,20 +1,18 @@
 ﻿(function () {
-    "use strict";
-
     keylolApp.controller("PointSettingsController", [
         "$scope", "close", "utils", "$http", "apiEndpoint", "base64", "upyun", "$q", "notification", "$timeout",
         "point", "isGame", "isJustCreated", "$filter", "$location", "union", "$route",
-        function ($scope, close, utils, $http, apiEndpoint, base64, upyun, $q, notification, $timeout,
-                  point, isGame, isJustCreated, $filter, $location, union, $route) {
+        ($scope, close, utils, $http, apiEndpoint, base64, upyun, $q, notification, $timeout,
+        point, isGame, isJustCreated, $filter, $location, union, $route) => {
             $scope.page = "basic";
             $scope.uniqueIds = {};
             $scope.isGame = isGame;
-            for (var i = 0; i < 2; ++i) {
+            for (let i = 0; i < 2; ++i) {
                 $scope.uniqueIds[i] = utils.uniqueId();
             }
             $scope.files = {};
 
-            var originalVM = {};
+            const originalVM = {};
             if (isGame) {
                 $scope.vm = {
                     ChineseName: point.ChineseName,
@@ -33,7 +31,7 @@
 
                     AvatarImage: point.AvatarImage,
                     BackgroundImage: point.BackgroundImage,
-                    CoverImage: point.CoverImage
+                    CoverImage: point.CoverImage,
                 };
             } else {
                 $scope.vm = {
@@ -43,11 +41,11 @@
                     Description: point.Description,
 
                     AvatarImage: point.AvatarImage,
-                    BackgroundImage: point.BackgroundImage
+                    BackgroundImage: point.BackgroundImage,
                 };
             }
 
-            if (union.$localStorage.user.StaffClaim === 'operator') {
+            if (union.$localStorage.user.StaffClaim === "operator") {
                 $scope.isOperator = true;
                 $scope.vm.EnglishName = point.EnglishName;
                 if (isGame) {
@@ -70,41 +68,38 @@
                     TagPoints: point.TagPoints,
                     MajorPlatformPoints: point.MajorPlatformPoints,
                     MinorPlatformPoints: point.MinorPlatformPoints,
-                    SeriesPoints: point.SeriesPoints
+                    SeriesPoints: point.SeriesPoints,
                 };
-                for (var attr in $scope.inline) {
+                for (const attr in $scope.inline) {
                     if ($scope.inline.hasOwnProperty(attr)) {
-                        (function (relatedName) {
-                            $scope.$watchCollection("inline." + relatedName, function (newValue) {
-                                $scope.vm[relatedName + "Id"] = [];
-                                if (newValue)
-                                    for (var i = 0; i < newValue.length; ++i) {
-                                        $scope.vm[relatedName + "Id"].push(newValue[i].Id);
-                                    }
-                            });
-                        })(attr);
-                        var thisAttr = $scope.inline[attr];
-                        originalVM[attr + "Id"] = [];
-                        for (var j = 0; j < thisAttr.length; ++j) {
-                            originalVM[attr + "Id"].push(thisAttr[j].Id);
+                        $scope.$watchCollection(`inline.${attr}`, newValue => {
+                            $scope.vm[`${attr}Id`] = [];
+                            if (newValue)
+                                for (let i = 0; i < newValue.length; ++i) {
+                                    $scope.vm[`${attr}Id`].push(newValue[i].Id);
+                                }
+                        });
+                        const thisAttr = $scope.inline[attr];
+                        originalVM[`${attr}Id`] = [];
+                        for (let j = 0; j < thisAttr.length; ++j) {
+                            originalVM[`${attr}Id`].push(thisAttr[j].Id);
                         }
                     }
                 }
             }
 
-            var isVMDirty = function (key) {
+            function isVMDirty (key) {
                 if (typeof $scope.vm[key] !== "object") {
                     return $scope.vm[key] !== originalVM[key];
-                }
-                else {
-                    for (var attr in $scope.vm[key]) {
-                        if ($scope.vm[key][attr] !== originalVM[key][attr]) {
+                } else {
+                    for (const attr in $scope.vm[key]) {
+                        if ($scope.vm[key].hasOwnProperty(attr) && $scope.vm[key][attr] !== originalVM[key][attr]) {
                             return true;
                         }
                     }
                     return false;
                 }
-            };
+            }
 
             $scope.cancel = function () {
                 close();
@@ -115,7 +110,7 @@
             };
 
             $scope.optionsInPageChanged = function (page) {
-                var keys = [];
+                let keys = [];
                 switch (page) {
                     case "basic":
                         keys = [
@@ -125,7 +120,7 @@
                             "EnglishAliases",
                             "ChineseAliases",
                             "Description",
-                            "ReleaseDate"
+                            "ReleaseDate",
                         ];
                         break;
                     case "relationship":
@@ -136,25 +131,25 @@
                             "TagPointsId",
                             "MajorPlatformPointsId",
                             "MinorPlatformPointsId",
-                            "SeriesPointsId"
+                            "SeriesPointsId",
                         ];
                         break;
                     case "images":
                         keys = [
                             "AvatarImage",
                             "BackgroundImage",
-                            "CoverImage"
+                            "CoverImage",
                         ];
                         break;
                     case "preferences":
                         keys = [
                             "IdCode",
                             "NameInSteamStore",
-                            "PreferredName"
+                            "PreferredName",
                         ];
                         break;
                 }
-                return keys.some(function (key) {
+                return keys.some(key => {
                     return isVMDirty(key);
                 });
             };
@@ -171,9 +166,9 @@
 
                 if ($scope.vm.IdCode)
                     $scope.vm.IdCode = $scope.vm.IdCode.toUpperCase();
-                var submit = function () {
-                    $http.put(apiEndpoint + "normal-point/" + point.Id, $scope.vm)
-                        .then(function () {
+                function submit () {
+                    $http.put(`${apiEndpoint}normal-point/${point.Id}`, $scope.vm)
+                        .then(() => {
                             if (!isGame || !isJustCreated) {
                                 notification.success("据点信息已更新");
                             } else {
@@ -185,58 +180,58 @@
                             }
                             close();
                             if (!union.inEditor) {
-                                var idCode = $scope.vm.IdCode || point.IdCode;
-                                if ($location.url() === "/point/" + idCode) {
+                                const idCode = $scope.vm.IdCode || point.IdCode;
+                                if ($location.url() === `/point/${idCode}`) {
                                     $route.reload();
                                 } else {
-                                    $location.url("point/" + idCode);
+                                    $location.url(`point/${idCode}`);
                                 }
                             }
-                        }, function (response) {
+                        }, response => {
                             notification.error("发生未知错误，请重试或与站务职员联系", response);
                             $scope.submitLock = false;
                         });
-                };
+                }
 
                 if ($scope.files.avatarImage || $scope.files.backgroundImage || $scope.files.coverImage) {
                     notification.process("图像正在上传");
-                    var policy = upyun.policy();
-                    upyun.signature(policy).then(function (signature) {
-                        var uploads = {};
+                    const policy = upyun.policy();
+                    upyun.signature(policy).then(signature => {
+                        const uploads = {};
                         if ($scope.files.avatarImage) {
                             uploads.avatarImage = upyun.upload($scope.files.avatarImage, policy, signature);
-                            uploads.avatarImage.then(function (response) {
-                                $scope.vm.AvatarImage = "keylol://" + response.data.url;
+                            uploads.avatarImage.then(response => {
+                                $scope.vm.AvatarImage = `keylol://${response.data.url}`;
                                 $scope.files.avatarImage = null;
-                            }, function () {
+                            }, () => {
                                 notification.error("据点图标上传失败");
                                 $scope.submitLock = false;
                             });
                         }
                         if ($scope.files.backgroundImage) {
                             uploads.backgroundImage = upyun.upload($scope.files.backgroundImage, policy, signature);
-                            uploads.backgroundImage.then(function (response) {
-                                $scope.vm.BackgroundImage = "keylol://" + response.data.url;
+                            uploads.backgroundImage.then(response => {
+                                $scope.vm.BackgroundImage = `keylol://${response.data.url}`;
                                 $scope.files.backgroundImage = null;
-                            }, function () {
+                            }, () => {
                                 notification.error("据点大图上传失败");
                                 $scope.submitLock = false;
                             });
                         }
                         if ($scope.files.coverImage) {
                             uploads.coverImage = upyun.upload($scope.files.coverImage, policy, signature);
-                            uploads.coverImage.then(function (response) {
-                                $scope.vm.CoverImage = "keylol://" + response.data.url;
+                            uploads.coverImage.then(response => {
+                                $scope.vm.CoverImage = `keylol://${response.data.url}`;
                                 $scope.files.coverImage = null;
-                            }, function () {
+                            }, () => {
                                 notification.error("据点封面上传失败");
                                 $scope.submitLock = false;
                             });
                         }
-                        $q.all(uploads).then(function () {
+                        $q.all(uploads).then(() => {
                             submit();
                         });
-                    }, function () {
+                    }, () => {
                         notification.error("文件上传验证失效");
                         $scope.submitLock = false;
                     });
@@ -244,6 +239,6 @@
                     submit();
                 }
             };
-        }
+        },
     ]);
-})();
+}());

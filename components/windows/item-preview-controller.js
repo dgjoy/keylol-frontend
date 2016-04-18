@@ -1,35 +1,29 @@
 (function () {
-    "use strict";
-
     keylolApp.controller("ItemPreviewController", [
         "$scope", "close", "window", "$http", "apiEndpoint", "notification", "union", "item",
-        function ($scope, close, window, $http, apiEndpoint, notification, union, item) {
+        ($scope, close, window, $http, apiEndpoint, notification, union, item) => {
             $scope.union = union;
             $scope.item = item;
-            $scope.cancel = function () {
+            $scope.cancel = () => {
                 close();
             };
 
-            $scope.preview = function () {
+            $scope.preview = () => {
                 window.show({
                     templateUrl: "components/windows/image-preview.html",
                     controller: "ImagePreviewController",
-                    inputs: {
-                        imageSrc: item.PreviewImage
-                    }
+                    inputs: { imageSrc: item.PreviewImage },
                 });
             };
 
-            $scope.redeem = function () {
+            $scope.redeem = () => {
                 close();
                 window.show({
                     templateUrl: "components/windows/shop-collect.html",
                     controller: "ShopCollectController",
-                    inputs: {
-                        item: item
-                    }
+                    inputs: { item },
                 });
-            }
-        }
+            };
+        },
     ]);
-})();
+}());

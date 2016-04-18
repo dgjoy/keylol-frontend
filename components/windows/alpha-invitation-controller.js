@@ -1,12 +1,8 @@
 (function () {
-    "use strict";
-
     keylolApp.controller("AlphaInvitationController", [
         "$scope", "close", "window", "$http", "apiEndpoint", "notification", "union",
-        function ($scope, close, window, $http, apiEndpoint, notification, union) {
-            $scope.vm = {
-                InvitationCode: ""
-            };
+        ($scope, close, window, $http, apiEndpoint, notification, union) => {
+            $scope.vm = { InvitationCode: "" };
 
             $scope.cancel = function () {
                 close();
@@ -15,16 +11,14 @@
             $scope.switchToLoginWindow = function () {
                 window.show({
                     templateUrl: "components/windows/login-steam.html",
-                    controller: "LoginSteamController"
+                    controller: "LoginSteamController",
                 });
                 close();
             };
 
             $scope.getInvitationCode = function () {
                 close();
-                $("html,body").animate({
-                    scrollTop: $("#get-invitation-code").offset().top
-                }, 3000);
+                $("html,body").animate({ scrollTop: $("#get-invitation-code").offset().top }, 3000);
             };
 
             $scope.submitLock = false;
@@ -39,14 +33,14 @@
                     $scope.submitLock = false;
                     return;
                 }
-                $http.get(apiEndpoint + "invitation-code/" + $scope.vm.InvitationCode).then(function () {
+                $http.get(`${apiEndpoint}invitation-code/${$scope.vm.InvitationCode}`).then(() => {
                     union.invitationCode = $scope.vm.InvitationCode;
                     window.show({
                         templateUrl: "components/windows/registration.html",
-                        controller: "RegistrationController"
+                        controller: "RegistrationController",
                     });
                     close();
-                }, function (response) {
+                }, response => {
                     if (response.status === 404) {
                         $scope.invitationCodeError = "invalid";
                     } else {
@@ -55,6 +49,6 @@
                     $scope.submitLock = false;
                 });
             };
-        }
+        },
     ]);
-})();
+}());

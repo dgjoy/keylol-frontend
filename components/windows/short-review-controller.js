@@ -1,6 +1,4 @@
 ﻿(function () {
-    "use strict";
-
     keylolApp.controller("ShortReviewController", [
         "$scope", "close", "window", "notification", "$http", "options", "$location", "$route", "union",
         function ($scope, close, window, notification, $http, options, $location, $route, union) {
@@ -8,10 +6,10 @@
 
             $scope.vm = $.extend({
                 TypeName: "简评",
-                Title: options.point.Name + " 的简评",
+                Title: `${options.point.Name} 的简评`,
                 Content: "",
                 Vote: null,
-                VoteForPointId: options.point.Id
+                VoteForPointId: options.point.Id,
             }, options.vm);
             $scope.count = $scope.vm.Content.length;
 
@@ -51,36 +49,36 @@
             // };
 
             $scope.submitLock = false;
-            var checkEmpty = function () {
+            function checkEmpty () {
                 if (!$scope.vm.Content) return "简评内容";
                 if (!$scope.vm.Vote) return "简评评分";
                 return null;
-            };
+            }
             $scope.submit = function () {
                 if ($scope.submitLock || $scope.vm.Content.length > 99)
                     return;
-                var emptyString = checkEmpty();
+                const emptyString = checkEmpty();
                 if (emptyString) {
-                    return notification.error(emptyString + "不能为空");
+                    return notification.error(`${emptyString}不能为空`);
                 }
                 $scope.submitLock = true;
                 if ($scope.vm.Id) {
-                    $http.put(apiEndpoint + "article/" + $scope.vm.Id, $scope.vm)
-                        .then(function (response) {
+                    $http.put(`${apiEndpoint}article/${$scope.vm.Id}`, $scope.vm)
+                        .then(() => {
                             close();
                             $route.reload();
                             notification.success("简评已发布");
-                        }, function (response) {
+                        }, response => {
                             notification.error("发生未知错误，请重试或与站务职员联系", response);
                             $scope.submitLock = false;
                         });
                 } else {
-                    $http.post(apiEndpoint + "article", $scope.vm)
-                        .then(function (response) {
+                    $http.post(`${apiEndpoint}article`, $scope.vm)
+                        .then(response => {
                             close();
-                            $location.url("article/" + union.$localStorage.user.IdCode + "/" + response.data.SequenceNumberForAuthor);
+                            $location.url(`article/${union.$localStorage.user.IdCode}/${response.data.SequenceNumberForAuthor}`);
                             notification.success("简评已发布");
-                        }, function (response) {
+                        }, response => {
                             if (response.status === 401) {
                                 notification.error("现有文券数量不足，无法发文");
                             } else {
@@ -89,7 +87,7 @@
                             $scope.submitLock = false;
                         });
                 }
-            }
-        }
+            };
+        },
     ]);
-})();
+}());

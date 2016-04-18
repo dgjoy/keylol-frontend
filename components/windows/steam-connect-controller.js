@@ -1,14 +1,11 @@
 ﻿(function () {
-    "use strict";
-
     keylolApp.controller("SteamConnectController", [
         "$scope", "close", "$timeout", "$q", "notification", "utils", "options", "window",
-        function ($scope, close, $timeout, $q, notification, utils, options, window) {
-            var tokenId;
-            var result;
-            var closed = false;
-            var connection = $.connection.new();
-            var steamBindingHubProxy = connection.steamBindingHub;
+        ($scope, close, $timeout, $q, notification, utils, options, window) => {
+            let tokenId, result;
+            let closed = false;
+            const connection = $.connection.new();
+            const steamBindingHubProxy = connection.steamBindingHub;
 
             $scope.utils = utils;
             $scope.currentStation = 0;
@@ -17,7 +14,7 @@
             $scope.showLoginSteamWindow = function () {
                 window.show({
                     templateUrl: "components/windows/login-steam.html",
-                    controller: "LoginSteamController"
+                    controller: "LoginSteamController",
                 });
                 $scope.cancel();
                 if (typeof options.registrationClose === "function") {
@@ -33,30 +30,31 @@
             };
 
             steamBindingHubProxy.client.NotifySteamFriendAdded = function () {
-                $scope.$apply(function () {
+                $scope.$apply(() => {
                     if ($scope.currentStation === 0)
                         $scope.currentStation = 1;
                 });
             };
 
-            steamBindingHubProxy.client.NotifyCodeReceived = function (steamProfileName, steamAvatarHash) {
-                $scope.$apply(function () {
+            steamBindingHubProxy.client.NotifyCodeReceived = function (steamProfileName, steamAH) {
+                $scope.$apply(() => {
                     $scope.currentStation = 2;
-                    var consume = $q.defer();
-                    consume.promise.finally(function () {
+                    const consume = $q.defer();
+                    consume.promise.finally(() => {
                         connection.stop();
                     });
+                    let steamAvatarHash = steamAH;
                     if (steamAvatarHash === "0000000000000000000000000000000000000000")
                         steamAvatarHash = "fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb";
                     result = {
-                        tokenId: tokenId,
-                        steamProfileName: steamProfileName,
-                        steamAvatarHash: steamAvatarHash,
-                        consume: consume
+                        tokenId,
+                        steamProfileName,
+                        steamAvatarHash,
+                        consume,
                     };
-                    $timeout(function () {
+                    $timeout(() => {
                         $scope.currentStation = 3;
-                        $timeout(function () {
+                        $timeout(() => {
                             if (!closed) {
                                 close(result);
                                 closed = true;
@@ -66,9 +64,9 @@
                 });
             };
 
-            connection.start().then(function () {
-                steamBindingHubProxy.server.createToken().then(function (token) {
-                    $scope.$apply(function () {
+            connection.start().then(() => {
+                steamBindingHubProxy.server.createToken().then(token => {
+                    $scope.$apply(() => {
                         if (token) {
                             tokenId = token.Id;
                             $scope.botSteamId64 = token.BotSteamId64;
@@ -79,10 +77,10 @@
                         }
                     });
                 });
-            }, function () {
+            }, () => {
                 notification.error("连接失败。");
                 $scope.cancel();
             });
-        }
+        },
     ]);
-})();
+}());

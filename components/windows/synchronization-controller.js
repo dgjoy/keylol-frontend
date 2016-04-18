@@ -1,11 +1,9 @@
 ﻿(function () {
-    "use strict";
-
     keylolApp.controller("SynchronizationController", [
         "$scope", "close", "condition", "autoSubscribed", "options", "utils", "$http", "notification", "window",
-        "$location", "$rootScope",
-        function ($scope, close, condition, autoSubscribed, options, utils, $http, notification, window,
-                  $location, $rootScope) {
+        "$location",
+        ($scope, close, condition, autoSubscribed, options, utils, $http, notification, window,
+        $location) => {
             $scope.cancel = function () {
                 if ($location.url() === "/" && typeof options.getSubscription === "function" && condition !== "fetchFailed") {
                     options.getSubscription();
@@ -14,14 +12,14 @@
             };
             $scope.deleteAuto = function (point) {
                 point.deleteDisabled = true;
-                $http.delete(apiEndpoint + "user-point-subscription", {
+                $http.delete(`${apiEndpoint}user-point-subscription`, {
                     params: {
                         pointId: point.Id,
-                        isAutoSubscription: true
-                    }
-                }).then(function (response) {
+                        isAutoSubscription: true,
+                    },
+                }).then(() => {
                     notification.success("据点已退订");
-                }, function (response) {
+                }, response => {
                     notification.error("发生未知错误，请重试或与站务职员联系", response);
                     point.deleteDisabled = false;
                 });
@@ -31,10 +29,8 @@
                     templateUrl: "components/windows/sync-loading.html",
                     controller: "SyncLoadingController",
                     inputs: {
-                        options: {
-                            getSubscription: options.getSubscription
-                        }
-                    }
+                        options: { getSubscription: options.getSubscription },
+                    },
                 });
                 close();
             };
@@ -43,22 +39,20 @@
                     templateUrl: "components/windows/settings.html",
                     controller: "SettingsController",
                     inputs: {
-                        options: {
-                            page: "preferences"
-                        }
-                    }
+                        options: { page: "preferences" },
+                    },
                 });
                 close();
             };
             $scope.condition = condition;
             $scope.autoSubscribed = autoSubscribed;
             $scope.subscribeEmpty = true;
-            for (var i in $scope.autoSubscribed) {
-                if ($scope.autoSubscribed[i].length > 0) {
+            for (const i in $scope.autoSubscribed) {
+                if ($scope.autoSubscribed.hasOwnProperty(i) && $scope.autoSubscribed[i].length > 0) {
                     $scope.subscribeEmpty = false;
                 }
             }
             $scope.utils = utils;
-        }
+        },
     ]);
-})();
+}());

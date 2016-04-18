@@ -1,13 +1,11 @@
 ﻿(function () {
-    "use strict";
-
     keylolApp.controller("MissiveController", [
         "$scope", "close", "$timeout", "$http", "notification", "messageTypes", "message", "moderationText",
-        function ($scope, close, $timeout, $http, notification, messageTypes, message, moderationText) {
+        ($scope, close, $timeout, $http, notification, messageTypes, message, moderationText) => {
             $scope.cancel = function () {
                 close();
             };
-            var messageType = messageTypes[message.Type];
+            const messageType = messageTypes[message.Type];
             $scope.messageId = message.Id;
             $scope.startTime = message.CreateTime;
             $scope.isSpotlight = message.Type === "Spotlight";
@@ -32,6 +30,6 @@
                     $scope.totalReasons = [];
                     break;
             }
-        }
+        },
     ]);
-})();
+}());

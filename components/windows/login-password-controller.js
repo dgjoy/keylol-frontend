@@ -1,9 +1,7 @@
 ﻿(function () {
-    "use strict";
-
     keylolApp.controller("LoginPasswordController", [
         "$scope", "close", "$http", "utils", "union", "apiEndpoint", "window", "notification", "$element", "$timeout", "$route",
-        function ($scope, close, $http, utils, union, apiEndpoint, window, notification, $element, $timeout, $route) {
+        ($scope, close, $http, utils, union, apiEndpoint, window, notification, $element, $timeout, $route) => {
             $scope.error = {};
             $scope.errorDetect = utils.modelErrorDetect;
 
@@ -12,24 +10,24 @@
                 Password: "",
                 GeetestChallenge: "",
                 GeetestSeccode: "",
-                GeetestValidate: ""
+                GeetestValidate: "",
             };
 
-            var geetestResult;
-            var geetest = utils.createGeetest("float");
+            let geetestResult;
+            const geetest = utils.createGeetest("float");
             $scope.geetestId = geetest.id;
-            geetest.ready.then(function (gee) {
-                $timeout(function () {
-                    var geetestDom = $("#geetest-" + geetest.id, $element);
+            geetest.ready.then(gee => {
+                $timeout(() => {
+                    const geetestDom = $(`#geetest-${geetest.id}`, $element);
                     gee.appendTo(geetestDom);
                 });
             });
-            var useGeetestResult = function (gee) {
+            function useGeetestResult (gee) {
                 geetestResult = gee.getValidate();
                 $scope.vm.GeetestChallenge = geetestResult.geetest_challenge;
                 $scope.vm.GeetestSeccode = geetestResult.geetest_seccode;
                 $scope.vm.GeetestValidate = geetestResult.geetest_validate;
-            };
+            }
             geetest.success.then(useGeetestResult);
 
             $scope.cancel = function () {
@@ -39,7 +37,7 @@
             $scope.switchToLoginSteamWindow = function () {
                 window.show({
                     templateUrl: "components/windows/login-steam.html",
-                    controller: "LoginSteamController"
+                    controller: "LoginSteamController",
                 });
                 close();
             };
@@ -50,7 +48,7 @@
                     return;
                 $scope.submitLock = true;
                 $scope.error = {};
-                $timeout(function () {
+                $timeout(() => {
                     if (!$scope.vm.EmailOrIdCode) {
                         $scope.error["vm.EmailOrIdCode"] = "Email or UIC cannot be empty.";
                     }
@@ -64,13 +62,13 @@
                         $scope.submitLock = false;
                         return;
                     }
-                    $http.post(apiEndpoint + "login", $scope.vm)
-                        .then(function (response) {
+                    $http.post(`${apiEndpoint}login`, $scope.vm)
+                        .then(response => {
                             union.$localStorage.login = response.data;
                             notification.success("登录成功，欢迎回到其乐");
                             $route.reload();
                             close();
-                        }, function (response) {
+                        }, response => {
                             switch (response.status) {
                                 case 400:
                                     $scope.error = response.data.ModelState;
@@ -84,6 +82,6 @@
                         });
                 });
             };
-        }
+        },
     ]);
-})();
+}());
