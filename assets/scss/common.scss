@@ -1,46 +1,3 @@
-/* --------- */
-/* Font Face */
-/* --------- */
-@font-face {
-  font-family: "Myriad Pro";
-  font-style: normal;
-  font-weight: normal;
-  src: url(../assets/fonts/myriadpro-regular.woff) format("woff");
-}
-
-@font-face {
-  font-family: "Keylol Rail Sung";
-  font-style: normal;
-  font-weight: normal;
-  src: url("../assets/fonts/keylol-rail-sung-subset-dc316a8ce6.eot"); /* IE9 */
-  src: url("../assets/fonts/keylol-rail-sung-subset-dc316a8ce6.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
-  url("../assets/fonts/keylol-rail-sung-subset-ab2c18e91a.woff") format("woff"), /* chrome, firefox */
-  url("../assets/fonts/keylol-rail-sung-subset-f7556846a1.ttf") format("truetype"), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
-  url("../assets/fonts/keylol-rail-sung-subset-e5bd4432f1.svg#Keylol Rail Sung") format("svg"); /* iOS 4.1- */
-}
-
-@font-face {
-  font-family: "LiSong";
-  font-style: normal;
-  font-weight: normal;
-  src: url("../assets/fonts/lisong-subset-6a14621a37.eot"); /* IE9 */
-  src: url("../assets/fonts/lisong-subset-6a14621a37.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
-  url("../assets/fonts/lisong-subset-f6f979f72e.woff") format("woff"), /* chrome, firefox */
-  url("../assets/fonts/lisong-subset-e7a2ee9e02.ttf") format("truetype"), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
-  url("../assets/fonts/lisong-subset-35ca874b35.svg#LiSong") format("svg"); /* iOS 4.1- */
-}
-
-/* ------------------- */
-/* Font Family Presets */
-/* ------------------- */
-.font-myriad-keylol {
-  font-family: "Myriad Pro", "Keylol Rail Sung", sans-serif;
-}
-
-.font-myriad-lisong {
-  font-family: "Myriad Pro", LiSong, sans-serif;
-}
-
 /* -------------------- */
 /* Common HTML Elements */
 /* -------------------- */
@@ -54,7 +11,7 @@ body {
 }
 
 a {
-  color: #159;
+  color: $keylol-main;
   text-decoration: none;
 }
 
@@ -139,6 +96,8 @@ textarea,
 }
 
 [class^=section-] {
+  margin-top: 20px;
+  margin-bottom: 20px;
   box-sizing: border-box;
 }
 
@@ -166,7 +125,7 @@ textarea,
   line-height: 22px;
   padding-left: 8px;
   font-size: 15px;
-  color: #159;
+  color: $keylol-main;
   font-weight: normal;
 }
 
@@ -178,7 +137,7 @@ textarea,
   left: -5px;
   width: 8px;
   height: 22px;
-  background-color: #159;
+  background-color: $keylol-main;
 }
 
 .labeled-heading::before {
@@ -215,7 +174,7 @@ textarea,
 .entry-type {
   font-size: 15px;
   color: white;
-  background-color: #159;
+  background-color: $keylol-main;
   padding: 2px 3px 1px;
 }
 
@@ -236,7 +195,7 @@ textarea,
   padding: 3px 7px;
   color: white;
   position: relative;
-  background: #89A no-repeat;
+  background: $keylol-highlight no-repeat;
   background-size: contain;
   transition: background-color 100ms ease-in-out;
 }
@@ -251,9 +210,8 @@ textarea,
 
 .border-button.subscribed .is-subscribed {
   padding-left: 22px;
-  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOnAAADpwBB5RT3QAAABx0RVh0U29mdHdhcmUAQWRvYmUgRmlyZXdvcmtzIENTNui8sowAAAKqSURBVGiB7Zk7aBRRFIZnU0ViTCRaWFmojSKKUfGtnYW1TUAsBPFNogYsbC0U7SwVCb6iJlrZWYidltFEJQbRTraRFCbZzPk/i8yGzT5m7mx2c3dhfziwzM6c+313ZmeGuxkgaOa0+QZYbloCvtMS8J2WgO80m8AdYOuSLUDDl5mtAu4DOeBV4Xfe4ZJK0k5gjKW53iwCZ4EZShNK2tWwAmEYrgaGyoAXZkzS5gw01ssc0BsEwVAmk9nmsO+w99kuqvPAbMLMAwjoN7MO38D5S6YTeOIADjAl6Wj+WO/wkvYAE47wr81sfeHxvgUuAXMO4CZpsFwPL+Bm1iXpuQM4wA9JRyr1KrfxJPBB0tp6wEvaD3xzhB+R1BPXb/FDNpvNALcLDh6tA3w/MO8AHkq65tIz33gj8L64i6SLtQA3s27ghQM4wKSkQ669A0kDwJ8KzeYk7VgOvKSDwKQj/EszS3XpBpJOAf9imk5Iaq9S4CoQOoDPAwPVjJGfpTMJAzxM09TMeoARB3CA78CBauAXBaIaTRioz6VhdMubcoQfjn4fVV+ihQN3A79iBpuWtCmh4SBgDuA54MpywEsEIonDLLwoVcrHXC7XVtxE0jrgjQM4wFdJ+2oBXyIQwdyMG13S3aL9jwE/HeGfmllXreDLCkT1LgHkeLTfDeLPWD45SZdrCR4rIGkDlZ8NAL+Btw7gAOOS9tYDvqJAJHHCETAuj81sTb3gYwUiiXtVgs8CF+oJ7iQQ3XE+pYT/Imn3SsAnCrBwFrYA047wQ5I6VwreSSCqvgTwGeDcSoKnFQiABxXgP0vq9QGfSsDM2oHxIvhHYRh2+IJPewYCSduBv0BW0mmf4PmqZmXuVhAE40EQPKti4a3mabilxbRptj84StIS8J2WgO+0BHznP4HExNlZ+gI5AAAAAElFTkSuQmCC);
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOnAAADpwBB5RT3QAAABx0RVh0U29mdHdhcmUAQWRvYmUgRmlyZXdvcmtzIENTNui8sowAAAKqSURBVGiB7Zk7aBRRFIZnU0ViTCRaWFmojSKKUfGtnYW1TUAsBPFNogYsbC0U7SwVCb6iJlrZWYidltFEJQbRTraRFCbZzPk/i8yGzT5m7mx2c3dhfziwzM6c+313ZmeGuxkgaOa0+QZYbloCvtMS8J2WgO80m8AdYOuSLUDDl5mtAu4DOeBV4Xfe4ZJK0k5gjKW53iwCZ4EZShNK2tWwAmEYrgaGyoAXZkzS5gw01ssc0BsEwVAmk9nmsO+w99kuqvPAbMLMAwjoN7MO38D5S6YTeOIADjAl6Wj+WO/wkvYAE47wr81sfeHxvgUuAXMO4CZpsFwPL+Bm1iXpuQM4wA9JRyr1KrfxJPBB0tp6wEvaD3xzhB+R1BPXb/FDNpvNALcLDh6tA3w/MO8AHkq65tIz33gj8L64i6SLtQA3s27ghQM4wKSkQ669A0kDwJ8KzeYk7VgOvKSDwKQj/EszS3XpBpJOAf9imk5Iaq9S4CoQOoDPAwPVjJGfpTMJAzxM09TMeoARB3CA78CBauAXBaIaTRioz6VhdMubcoQfjn4fVV+ihQN3A79iBpuWtCmh4SBgDuA54MpywEsEIonDLLwoVcrHXC7XVtxE0jrgjQM4wFdJ+2oBXyIQwdyMG13S3aL9jwE/HeGfmllXreDLCkT1LgHkeLTfDeLPWD45SZdrCR4rIGkDlZ8NAL+Btw7gAOOS9tYDvqJAJHHCETAuj81sTb3gYwUiiXtVgs8CF+oJ7iQQ3XE+pYT/Imn3SsAnCrBwFrYA047wQ5I6VwreSSCqvgTwGeDcSoKnFQiABxXgP0vq9QGfSsDM2oHxIvhHYRh2+IJPewYCSduBv0BW0mmf4PmqZmXuVhAE40EQPKti4a3mabilxbRptj84StIS8J2WgO+0BHznP4HExNlZ+gI5AAAAAElFTkSuQmCC) no-repeat;
   background-size: contain;
-  background-repeat: no-repeat;
   display: inline-block;
   box-sizing: border-box;
 }

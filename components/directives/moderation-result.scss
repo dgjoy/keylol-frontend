@@ -29,14 +29,14 @@ moderation-result .moderation-left {
 }
 
 moderation-result .moderation-left h1 {
-    color: #159;
+    color: $keylol-main;
 }
 
 moderation-result .moderation-middle {
     vertical-align: middle;
     display: inline-block;
-    border-right: #159 57px solid;
-    border-bottom: #159 43px solid;
+    border-right: $keylol-main 57px solid;
+    border-bottom: $keylol-main 43px solid;
     border-left: transparent 57px solid;
     border-top: transparent 43px solid;
 }
@@ -45,7 +45,7 @@ moderation-result .moderation-right {
     vertical-align: middle;
     display: inline-block;
     padding: 11px 17px;
-    background-color: #159;
+    background-color: $keylol-main;
     width: 378px;
     text-align: right;
     color: #fff;

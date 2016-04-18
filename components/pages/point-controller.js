@@ -257,7 +257,6 @@
                 }).then(response => {
                     const point = response.data;
 
-                    union.associatedPoints = point.AssociatedPoints;
                     if (point.Type === "Game") {
                         $scope.hasVote = true;
                         if (union.$localStorage.user) {

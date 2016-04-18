@@ -58,7 +58,7 @@
 
 .window-registration .generate-id-code {
     float: right;
-    color: #89A;
+    color: $keylol-highlight;
     margin: 5px 5px 0;
 }
 
@@ -84,7 +84,7 @@
 }
 
 .window-registration .declaration p a {
-    color: #89A;
+    color: $keylol-highlight;
 }
 
 .window-registration .window .window-confirm-button {

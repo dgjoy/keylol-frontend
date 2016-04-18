@@ -40,7 +40,7 @@
 }
 
 .window-settings .heading .menu-right ul li a {
-    color: #89A;
+    color: $keylol-highlight;
 }
 
 .window-settings .heading .menu-right ul li.current {
@@ -122,7 +122,7 @@
     box-sizing: border-box;
     margin-left: auto;
     margin-right: auto;
-    border: 1px dashed #89A;
+    border: 1px dashed $keylol-highlight;
 }
 
 .window-settings .profile-point-background.no-image h4 {
@@ -163,7 +163,7 @@
 }
 
 .window-settings .platform-status.right-border {
-    border-right: 1px solid #89A;
+    border-right: 1px solid $keylol-highlight;
 }
 
 .window-settings .platform-status .text-block {
@@ -172,7 +172,7 @@
 }
 
 .window-settings .platform-status .bot-steam-profile-anchor {
-    color: #89A;
+    color: $keylol-highlight;
 }
 
 .window-settings .platform-status .pasted-card {
@@ -184,7 +184,7 @@
 
 .window-settings .resync {
     float: right;
-    color: #89A;
+    color: $keylol-highlight;
     margin: 5px 5px 0;
 }
 
@@ -271,7 +271,7 @@
 }
 
 .window-settings .tips p a {
-    color: #89a;
+    color: $keylol-highlight;
 }
 
 .window-settings .window .window-confirm-button {

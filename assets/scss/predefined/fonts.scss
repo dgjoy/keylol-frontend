@@ -1,0 +1,42 @@
+/* --------- */
+/* Font Face */
+/* --------- */
+@font-face {
+  font-family: "Myriad Pro";
+  font-style: normal;
+  font-weight: normal;
+  src: url(../assets/fonts/myriadpro-regular.woff) format("woff");
+}
+
+@font-face {
+  font-family: "Keylol Rail Sung";
+  font-style: normal;
+  font-weight: normal;
+  src: url("../assets/fonts/keylol-rail-sung-subset-c33925fbed.eot"); /* IE9 */
+  src: url("../assets/fonts/keylol-rail-sung-subset-c33925fbed.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+  url("../assets/fonts/keylol-rail-sung-subset-a114b00708.woff") format("woff"), /* chrome, firefox */
+  url("../assets/fonts/keylol-rail-sung-subset-497aba57b3.ttf") format("truetype"), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+  url("../assets/fonts/keylol-rail-sung-subset-e5bd4432f1.svg#Keylol Rail Sung") format("svg"); /* iOS 4.1- */
+}
+
+@font-face {
+  font-family: "LiSong";
+  font-style: normal;
+  font-weight: normal;
+  src: url("../assets/fonts/lisong-subset-6a14621a37.eot"); /* IE9 */
+  src: url("../assets/fonts/lisong-subset-6a14621a37.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+  url("../assets/fonts/lisong-subset-f6f979f72e.woff") format("woff"), /* chrome, firefox */
+  url("../assets/fonts/lisong-subset-e7a2ee9e02.ttf") format("truetype"), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+  url("../assets/fonts/lisong-subset-35ca874b35.svg#LiSong") format("svg"); /* iOS 4.1- */
+}
+
+/* ------------------- */
+/* Font Family Presets */
+/* ------------------- */
+.font-myriad-keylol {
+  font-family: "Myriad Pro", "Keylol Rail Sung", sans-serif;
+}
+
+.font-myriad-lisong {
+  font-family: "Myriad Pro", LiSong, sans-serif;
+}

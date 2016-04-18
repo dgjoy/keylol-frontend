@@ -60,10 +60,6 @@
     text-decoration: underline;
 }
 
-.section-action-hub .has-logged-in {
-
-}
-
 .section-action-hub .name-settings {
     margin-left: 62px;
 }
@@ -84,7 +80,7 @@
 }
 
 .section-action-hub .actions a.active {
-    background-color: #159;
+    background-color: $keylol-main;
     color: #f3d92a;
 }
 

@@ -12,7 +12,7 @@ popup .arrow-down {
     height: 0;
     border-left: 7px solid transparent;
     border-right: 7px solid transparent;
-    border-top: 7px solid #159;
+    border-top: 7px solid $keylol-main;
 }
 
 popup .arrow-up {
@@ -20,7 +20,7 @@ popup .arrow-up {
     height: 0;
     border-left: 7px solid transparent;
     border-right: 7px solid transparent;
-    border-bottom: 7px solid #159;
+    border-bottom: 7px solid $keylol-main;
 }
 
 popup .arrow-left {
@@ -28,7 +28,7 @@ popup .arrow-left {
     height: 0;
     border-top: 7px solid transparent;
     border-bottom: 7px solid transparent;
-    border-right: 7px solid #159;
+    border-right: 7px solid $keylol-main;
 }
 
 popup .arrow-right {
@@ -36,5 +36,5 @@ popup .arrow-right {
     height: 0;
     border-top: 7px solid transparent;
     border-bottom: 7px solid transparent;
-    border-left: 7px solid #159;
+    border-left: 7px solid $keylol-main;
 }

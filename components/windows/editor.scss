@@ -20,7 +20,7 @@
 
 .window-editor .article-type {
     font-size: 19px;
-    background: #89A no-repeat;
+    background: $keylol-highlight no-repeat;
     color: white;
     position: absolute;
     height: 100%;
@@ -35,7 +35,7 @@
 }
 
 .window-editor .article-type.expanded, .window-editor .article-type.expanded:hover {
-    background-color: #159;
+    background-color: $keylol-main;
 }
 
 .window-editor .article-type::after {

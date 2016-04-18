@@ -11,7 +11,7 @@
 }
 
 .section-latest-articles h1 a {
-    color: #89a;
+    color: $keylol-highlight;
     float: right;
     font-size: 13px;
     margin-right: 12px;
@@ -33,7 +33,7 @@
 }
 
 .section-latest-articles .article h2 svg circle {
-    fill: #159;
+    fill: $keylol-main;
 }
 
 .section-latest-articles .article h2 a {

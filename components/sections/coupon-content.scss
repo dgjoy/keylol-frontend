@@ -46,7 +46,7 @@
 }
 
 .section-coupon-content .heading h1 {
-    color: #159;
+    color: $keylol-main;
     font-size: 28px;
     font-weight: normal;
     margin: 0;
@@ -61,7 +61,7 @@
 }
 
 .section-coupon-content .heading .menu-right ul li a {
-    color: #89A;
+    color: $keylol-highlight;
     margin: 0 5px;
 }
 
@@ -86,7 +86,7 @@
 }
 
 .section-coupon-content a {
-    color: #89A;
+    color: $keylol-highlight;
 }
 
 .section-coupon-content table tr {
@@ -177,7 +177,7 @@
 
 .section-coupon-content .shop li a div span {
     font-size: 15px;
-    color: #159;
+    color: $keylol-main;
 }
 
 .section-coupon-content .shop li a:hover div span:first-of-type {
@@ -238,12 +238,12 @@
 }
 
 .section-coupon-content .ranks tr td:nth-of-type(2) .title p:first-of-type a {
-    color: #159;
+    color: $keylol-main;
 }
 
 .section-coupon-content .ranks tbody tr.best-three td:nth-of-type(1) {
     font-weight: bold;
-    color: #159;
+    color: $keylol-main;
 }
 
 .section-coupon-content .ranks tbody tr.best-three td:nth-of-type(2) .title p:first-of-type a {
@@ -251,7 +251,7 @@
 }
 
 .section-coupon-content .ranks tbody tr.best-three td:nth-of-type(3) {
-    color: #159;
+    color: $keylol-main;
 }
 
 .section-coupon-content .ranks tr td:nth-of-type(2) .title p span {
@@ -281,7 +281,7 @@
 }
 
 .section-coupon-content .invite .invite-rule div:first-of-type .rule-result {
-    color: #159;
+    color: $keylol-main;
 }
 
 .section-coupon-content .invite .invite-rule div:last-of-type .rule-result {

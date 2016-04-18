@@ -35,7 +35,7 @@
     right: 20px;
     top: 50%;
     transform: translateY(-75%);
-    color: #89a;
+    color: $keylol-highlight;
 }
 
 .window-steam-connect .steps {
@@ -67,7 +67,7 @@
 }
 
 .window-steam-connect .step-description a {
-    color: #89A;
+    color: $keylol-highlight;
 }
 
 .window-steam-connect .step-description .auth-code {

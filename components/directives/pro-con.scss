@@ -28,7 +28,7 @@ pro-con div a {
     float: right;
     margin-right: 14px;
     margin-top: 5px;
-    color: #89A;
+    color: $keylol-highlight;
     display: none;
 }
 
@@ -42,5 +42,5 @@ pro-con p {
 }
 
 pro-con p a {
-    color: #89A;
+    color: $keylol-highlight;
 }

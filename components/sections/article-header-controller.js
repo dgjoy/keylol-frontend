@@ -1,7 +1,7 @@
 ﻿(function () {
     keylolApp.controller("ArticleHeaderController", [
         "$scope", "union", "window", "utils",
-        ($scope, union, window, utils) => {
+        function ($scope, union, window, utils) {
             const vm = this;
             $scope.utils = utils;
             $scope.union = union;

@@ -78,12 +78,12 @@ var appScripts = [
 var stylesheets = [
     "assets/stylesheets/normalize.css",
     "node_modules/simditor/styles/simditor.css",
-    "temporary/*.css",
-    "temporary/**/*.css"
+    "temporary/*.css"
 ];
 
 var sassStylesheets = [
-    "assets/scss/!(common.template).scss",
+    "assets/scss/predefined/!(fonts.template).scss",
+    "assets/scss/!(style).scss",
     "components/**/*.scss"
 ];
 
@@ -130,12 +130,12 @@ function fontLisong() {
 }
 
 gulp.task("store-font", function () {
-    return gulp.src(['assets/fonts/*.json', 'assets/scss/common.template.scss'])
+    return gulp.src(['assets/fonts/*.json', 'assets/scss/predefined/fonts.template.scss'])
         .pipe(revCollector({
             replaceReved: true
         }))
-        .pipe(rename("common.scss"))
-        .pipe(gulp.dest('assets/scss/'));
+        .pipe(rename("fonts.scss"))
+        .pipe(gulp.dest('assets/scss/predefined/'));
 });
 
 gulp.task("font-keylol", gulp.series(fontKeylol(), "store-font"));
@@ -148,40 +148,50 @@ gulp.task("clean", function () {
     return del(["bundles/!(web.config)", "index.html", "temporary/*"]);
 });
 
-function compileSass() {
-    return gulp.src(sassStylesheets)
-        .pipe(sourcemaps.init())
-        .pipe(sass().on('error', sass.logError))
-        .pipe(sourcemaps.write())
-        .pipe(gulp.dest('temporary'));
+function compileSass(bundle) {
+    return gulp.series(function importSass () {
+        var stylesheetFiles = getFiles(sassStylesheets);
+        return gulp.src("assets/scss/style.scss.ejs")
+            .pipe(template({ stylesheets: stylesheetFiles }))
+            .pipe(rename("style.scss"))
+            .pipe(gulp.dest("assets/scss/"))
+    }, function compileFromStyle () {
+        var stream = gulp.src("assets/scss/style.scss");
+        if(!bundle){
+            stream = stream.pipe(sourcemaps.init())
+                .pipe(sass().on('error', sass.logError))
+                .pipe(sourcemaps.write());
+        } else {
+            stream = stream.pipe(sass().on('error', sass.logError));
+        }
+        return stream.pipe(gulp.dest('temporary'));
+    });
 }
-function compileES6() {
-    return gulp.src(babelScripts)
-        .pipe(sourcemaps.init())
-        .pipe(babel({
-            presets: ['es2015']
-        }))
-        .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest('temporary'));
+function compileES6(bundle) {
+    return function compile () {
+        var stream = gulp.src(babelScripts);
+        if(!bundle){
+            stream = stream.pipe(sourcemaps.init())
+                .pipe(babel({
+                    presets: ['es2015']
+                }))
+                .pipe(sourcemaps.write('.'))
+        } else {
+            stream = stream.pipe(babel({
+                presets: ['es2015']
+            }));
+        }
+        return stream.pipe(gulp.dest('temporary'));
+    }
 }
 
-gulp.task("sass", compileSass);
+gulp.task("sass", compileSass());
 
-gulp.task("scss:bundle", function compileSassBundle() {
-    return gulp.src(sassStylesheets)
-        .pipe(sass())
-        .pipe(gulp.dest('temporary'));
-});
+gulp.task("scss:bundle", compileSass(true));
 
-gulp.task("babel", compileES6);
+gulp.task("babel", compileES6());
 
-gulp.task("babel:bundle", function compileES6Bundle() {
-    return gulp.src(babelScripts)
-        .pipe(babel({
-            presets: ['es2015']
-        }))
-        .pipe(gulp.dest('temporary'));
-});
+gulp.task("babel:bundle", compileES6(true));
 
 var getBuildTask = function (configName) {
     var config = buildConfigs[configName];
@@ -265,7 +275,7 @@ gulp.task("local", getBuildTask("local"));
 
 gulp.task("default", getBuildTask("dev"));
 
-gulp.task("dev:watch", gulp.series("dev", function () {
-    gulp.watch(sassStylesheets, compileSass);
-    gulp.watch(babelScripts, compileES6);
+gulp.task("dev:watch", gulp.series("dev", function watch () {
+    gulp.watch(sassStylesheets, compileSass());
+    gulp.watch(babelScripts, compileES6());
 }));

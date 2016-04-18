@@ -26,7 +26,7 @@
     margin: 0;
     font-size: 15px;
     display: block;
-    color: #159;
+    color: $keylol-main;
     font-weight: bold;
     max-width: 200px;
     white-space: nowrap;
@@ -60,7 +60,7 @@
 .section-point-votes .reputation p {
     float: right;
     margin: 0;
-    color: #89A;
+    color: $keylol-highlight;
 }
 
 .section-point-votes .reputation p.total {
@@ -161,7 +161,7 @@
 }
 
 .section-point-votes .external-links a {
-    color: #89A;
+    color: $keylol-highlight;
 }
 
 .section-point-votes .external-links .divider {

@@ -45,7 +45,7 @@
 }
 
 .popup-point-preview-card .heading h1 {
-    color: #159;
+    color: $keylol-main;
     margin: 3px 0;
     font-size: 16px;
     white-space: nowrap;
@@ -67,7 +67,7 @@
 .popup-point-preview-card .summary {
     width: 100%;
     height: 30px;
-    background-color: #159;
+    background-color: $keylol-main;
 }
 
 .popup-point-preview-card .summary .left-summary {

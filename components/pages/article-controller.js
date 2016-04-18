@@ -82,9 +82,9 @@
                             getAndFlushComments(article, $location.hash(), "sequence", () => {
                                 $timeout(() => {
                                     $("html,body").animate({
-                                        scrollTop: $(`#comment-${location.hash()}`).offset().top,
+                                        scrollTop: $(`#comment-${$location.hash()}`).offset().top,
                                     }, () => {
-                                        $(`#comment-${location.hash()}`).addClass("highlight");
+                                        $(`#comment-${$location.hash()}`).addClass("highlight");
                                     });
                                 });
                             });

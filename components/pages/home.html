@@ -1,7 +1,7 @@
 ﻿<div ng-if="!notLogin" class="container">
     <div class="row">
         <div class="col-left">
-            <section ng-include="'components/sections/logo.html'" style="height: 92px"></section>
+            <logo></logo>
             <section ng-if="union.$localStorage.user" ng-include="'components/sections/reception.html'"></section>
             <section ng-include="'components/sections/main-navigation.html'"></section>
         </div>

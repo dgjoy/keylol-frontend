@@ -42,7 +42,7 @@
 }
 
 .section-coupon-header .coupon-rule ul li .rule-content a {
-    color: #89A;
+    color: $keylol-highlight;
 }
 
 .section-coupon-header .coupon-rule ul li .rule-result {
@@ -50,7 +50,7 @@
 }
 
 .section-coupon-header .coupon-rule .registration-rule li .rule-result {
-    color: #159;
+    color: $keylol-main;
 }
 
 .section-coupon-header .coupon-rule .minus-rule li .rule-result {

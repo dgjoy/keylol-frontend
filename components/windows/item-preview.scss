@@ -10,7 +10,7 @@
 .window-item-preview .heading a {
     float: right;
     margin-top: 15px;
-    color: #89A;
+    color: $keylol-highlight;
 }
 
 .window-item-preview table {
@@ -54,7 +54,7 @@
 }
 
 .window-item-preview .comment p span {
-    color: #159;
+    color: $keylol-main;
     font-weight: bold;
 }
 

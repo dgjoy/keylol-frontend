@@ -16,7 +16,7 @@
 
 .section-site-footer,
 .section-site-footer a {
-    color: #89A;
+    color: $keylol-highlight;
 }
 
 .section-site-footer .scroll-to-top {
@@ -24,7 +24,7 @@
     display: block;
     right: 100px;
     bottom: 50px;
-    background-color: #159;
+    background-color: $keylol-main;
     opacity: 0.5;
 }
 

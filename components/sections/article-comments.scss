@@ -102,7 +102,7 @@
 }
 
 .section-article-comments .header .as-author {
-    color: #89A;
+    color: $keylol-highlight;
 }
 
 .section-article-comments .archived .header .title {
@@ -126,7 +126,7 @@
 }
 
 .section-article-comments .header .action a {
-    color: #89A;
+    color: $keylol-highlight;
     margin: 5px;
 }
 
@@ -146,7 +146,7 @@
 }
 
 .section-article-comments .content a {
-    color: #89A;
+    color: $keylol-highlight;
 }
 
 .section-article-comments .archived .content .like-count,
@@ -156,14 +156,14 @@
 
 .section-article-comments .content .like-count {
     color: white;
-    background: #159;
+    background: $keylol-main;
     padding: 1px 4px;
     margin-left: 7px;
 }
 
 .section-article-comments .content .hot-signal {
     color: white;
-    background: #159;
+    background: $keylol-main;
     padding: 1px 4px;
     margin-left: 7px;
 }
@@ -240,7 +240,7 @@
 }
 
 .section-article-comments .for-visitor .action-container .log-in {
-    color: #89a;
+    color: $keylol-highlight;
     right: 0;
     top: 50%;
     transform: translateY(-50%);

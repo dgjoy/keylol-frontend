@@ -1,13 +1,21 @@
 ﻿(function () {
-    keylolApp.controller("LogoController", [
-        "$scope", "$http", "apiEndpoint", "union", "$rootScope", "$location",
-        ($scope, $http, apiEndpoint, union, $rootScope, $location) => {
-            $scope.union = union;
-            $scope.emitRefresh = function () {
-                if ($location.url() === "/") {
-                    $rootScope.$emit("homeRefresh");
-                }
-            };
-        },
-    ]);
+    class LogoController {
+        constructor ($rootScope, $location) {
+            $.extend(this, {
+                $rootScope,
+                $location,
+            });
+        }
+        emitRefresh () {
+            if (this.$location.url() === "/") {
+                this.$rootScope.$emit("homeRefresh");
+            }
+        };
+    }
+
+    keylolApp.component("logo", {
+        templateUrl: "components/sections/logo.html",
+        controller: LogoController,
+        controllerAs: "logo",
+    });
 }());

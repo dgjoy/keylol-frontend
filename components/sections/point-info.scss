@@ -32,7 +32,7 @@
 }
 
 .section-point-info .info-details .info-attribute a {
-    color: #89A;
+    color: $keylol-highlight;
 }
 
 .section-point-info .info-details .info-review {
@@ -95,7 +95,7 @@
 .section-point-info .info-details .info-review a {
     line-height: 15px;
     display: block;
-    color: #89A;
+    color: $keylol-highlight;
 }
 
 .section-point-info .info-details .info-review .actions a {
@@ -110,7 +110,7 @@
     top: calc(50% + 22.5px);
     left: calc(50% + 7.5px);
     transform: translate(-50%, -50%);
-    color: #159;
+    color: $keylol-main;
 }
 
 .section-point-info .info-details .info-review .join-review point-review div {
@@ -118,7 +118,7 @@
 }
 
 .section-point-info .info-actions a {
-    color: #89A;
+    color: $keylol-highlight;
     cursor: pointer;
 }
 
