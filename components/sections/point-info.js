@@ -1,9 +1,7 @@
 ﻿(function () {
-    "use strict";
-
     keylolApp.controller("PointInfoController", [
         "$scope", "union", "window", "utils", "notification",
-        function ($scope, union, window, utils, notification) {
+        ($scope, union, window, utils, notification) => {
             $scope.union = union;
             $scope.utils = utils;
             $scope.point = union.point;
@@ -17,14 +15,14 @@
                                 Id: $scope.point.Id,
                                 IdCode: $scope.point.IdCode,
                                 CoverImage: $scope.point.CoverImage,
-                                Name: utils.getPointFirstName($scope.point)
+                                Name: utils.getPointFirstName($scope.point),
                             },
                             vm: {
-                                Vote: vote
+                                Vote: vote,
                             },
-                            hoursPlayed: $scope.point.hoursPlayed
-                        }
-                    }
+                            hoursPlayed: $scope.point.hoursPlayed,
+                        },
+                    },
                 });
                 return true;
             };
@@ -33,18 +31,16 @@
                     templateUrl: "components/windows/registration.html",
                     controller: "RegistrationController",
                     inputs: {
-                        options: {
-                            whenReviewing: true
-                        }
-                    }
+                        options: { whenReviewing: true },
+                    },
                 });
                 return true;
             };
             $scope.showEditorWindow = function () {
                 notification.attention("此前尚未发布的草稿会被覆盖", [
-                    {action: "覆盖", value: true},
-                    {action: "取消"}
-                ]).then(function (result) {
+                    { action: "覆盖", value: true },
+                    { action: "取消" },
+                ]).then(result => {
                     if (result) {
                         window.show({
                             templateUrl: "components/windows/editor.html",
@@ -55,11 +51,11 @@
                                     vm: {
                                         TypeName: "评",
                                         Pros: [],
-                                        Cons: []
+                                        Cons: [],
                                     },
-                                    doNotLoadDraft: true
-                                }
-                            }
+                                    doNotLoadDraft: true,
+                                },
+                            },
                         });
                     }
                 });
@@ -74,10 +70,10 @@
                     offsetX: 580,
                     offsetY: 32,
                     inputs: {
+                        type,
+                        count,
                         idCode: union.point.IdCode,
-                        type: type,
-                        count: count
-                    }
+                    },
                 });
             };
             $scope.showPointEdit = function (isGame) {
@@ -85,12 +81,12 @@
                     templateUrl: "components/windows/point-settings.html",
                     controller: "PointSettingsController",
                     inputs: {
+                        isGame,
                         point: $scope.point,
-                        isGame: isGame,
-                        isJustCreated: false
-                    }
+                        isJustCreated: false,
+                    },
                 });
-            }
-        }
+            };
+        },
     ]);
-})();
+}());

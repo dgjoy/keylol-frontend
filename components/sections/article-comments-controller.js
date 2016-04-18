@@ -1,9 +1,7 @@
 ﻿(function () {
-    "use strict";
-
     keylolApp.controller("ArticleCommentsController", [
         "$scope", "union", "$http", "utils", "getAndFlushComments", "notification", "window",
-        function ($scope, union, $http, utils, getAndFlushComments, notification, window) {
+        ($scope, union, $http, utils, getAndFlushComments, notification, window) => {
             $scope.union = union;
             $scope.comments = union.comments;
             $scope.article = union.article;
@@ -12,11 +10,11 @@
             $scope.textFocus = false;
             $scope.submitLock = false;
             $scope.comment = {};
-            $scope.moderateComment = function (event, comment, type, isCancel) {
+            $scope.moderateComment = (event, comment, type, isCancel) => {
                 comment.showModerationPopup({
+                    event,
                     templateUrl: "components/popup/moderation.html",
                     controller: "ModerationController as moderation",
-                    event: event,
                     attachSide: "left",
                     align: "top",
                     offsetX: 710,
@@ -24,65 +22,59 @@
                     inputs: {
                         targetId: comment.Id,
                         type: {
+                            isCancel,
+                            comment,
                             action: type,
                             target: "Comment",
-                            isCancel: isCancel,
-                            comment: comment
-                        }
-                    }
+                        },
+                    },
                 });
             };
-            $scope.showRegistrationWindow = function () {
+            $scope.showRegistrationWindow = () => {
                 window.show({
                     templateUrl: "components/windows/registration.html",
                     controller: "RegistrationController",
-                    inputs: {
-                        options: {}
-                    }
+                    inputs: { options: {} },
                 });
             };
 
-            $scope.showLoginSteamWindow = function () {
+            $scope.showLoginSteamWindow = () => {
                 window.show({
                     templateUrl: "components/windows/login-steam.html",
-                    controller: "LoginSteamController"
+                    controller: "LoginSteamController",
                 });
             };
-            $scope.doComment = function () {
+            $scope.doComment = () => {
                 if ($scope.comment.currentComment) {
                     $scope.submitLock = true;
-                    var replyArray = dealWithReply($scope.comment.currentComment);
-                    $http.post(apiEndpoint + "comment", {
+                    $http.post(`${apiEndpoint}comment`, {
                         Content: $scope.comment.currentComment,
                         ArticleId: union.article.Id,
-                        ReplyToCommentsSn: replyArray
-                    }).then(function (response) {
+                        ReplyToCommentsSn: dealWithReply($scope.comment.currentComment),
+                    }).then(response => {
                         notification.success("评论已发出");
                         $scope.submitLock = false;
                         $scope.comment.currentComment = "";
-                        var sqNumber = response.data.SequenceNumberForArticle;
-                        getAndFlushComments(union.article, sqNumber, "sequence");
-                    }, function (response) {
+                        getAndFlushComments(union.article, response.data.SequenceNumberForArticle, "sequence");
+                    }, response => {
                         notification.error("评论发送失败", response);
                         $scope.submitLock = false;
                     });
                 }
             };
-            $scope.reply = function (sqNumber) {
+            $scope.reply = sqNumber => {
                 if (!$scope.comment.currentComment) {
-                    $scope.comment.currentComment = "#" + sqNumber + " ";
-                } else if ($scope.comment.currentComment == "") {
-                    $scope.comment.currentComment += "#" + sqNumber + " ";
+                    $scope.comment.currentComment = `#${sqNumber} `;
                 } else {
-                    $scope.comment.currentComment += "\n#" + sqNumber + " ";
+                    $scope.comment.currentComment += `\n#${sqNumber} `;
                 }
                 $scope.textFocus = true;
             };
-            $scope.acknowledge = function (comment) {
-                $http.post(apiEndpoint + "like", {
+            $scope.acknowledge = comment => {
+                $http.post(`${apiEndpoint}like`, {
                     TargetId: comment.Id,
-                    Type: "CommentLike"
-                }).then(function (response) {
+                    Type: "CommentLike",
+                }).then(response => {
                     if (response.data === "Free") {
                         notification.success("认可已生效，每日发出的前 5 个认可不会消耗文券");
                     } else {
@@ -91,7 +83,7 @@
                             union.getUnreadLogs();
                         }
                     }
-                }, function (response) {
+                }, response => {
                     comment.Liked = false;
                     comment.LikeCount -= 1;
                     if (comment.LikeCount <= 0) {
@@ -107,15 +99,15 @@
                 comment.hasLike = true;
                 comment.LikeCount += 1;
             };
-            $scope.cancelAcknowledge = function (comment) {
-                $http.delete(apiEndpoint + "like", {
+            $scope.cancelAcknowledge = comment => {
+                $http.delete(`${apiEndpoint}like`, {
                     params: {
                         targetId: comment.Id,
-                        type: "CommentLike"
-                    }
-                }).then(function () {
+                        type: "CommentLike",
+                    },
+                }).then(() => {
                     notification.success("此认可已被撤销");
-                }, function (response) {
+                }, response => {
                     notification.error("取消认可评论失败", response);
                 });
                 comment.Liked = false;
@@ -125,45 +117,47 @@
                 }
             };
 
-            var dealWithReply = function (str) {
-                var regExpForComment = /^((?:#\d+[ \t]*)+)(?:$|[ \t]+)/gm;
-                var regExpForEachLine = /(\d+)/g;
-                var m = str.match(regExpForComment);
-                var replyCommentArray = [];
+            function dealWithReply (str) {
+                const regExpForComment = /^((?:#\d+[ \t]*)+)(?:$|[ \t]+)/gm;
+                const regExpForEachLine = /(\d+)/g;
+                const m = str.match(regExpForComment);
+                let replyCommentArray = [];
                 if (m) {
                     if (m.length > 1) {
-                        replyCommentArray = m.reduce(function (preValue, currValue) {
-                            if (typeof preValue === 'string') {
-                                preValue = preValue.match(regExpForEachLine);
+                        replyCommentArray = m.reduce((preValue, currValue) => {
+                            let preValueTem = preValue;
+                            if (typeof preValue === "string") {
+                                preValueTem = preValue.match(regExpForEachLine);
                             }
-                            currValue = currValue.match(regExpForEachLine);
-                            return preValue.concat(currValue);
+                            const currValueTem = currValue.match(regExpForEachLine);
+                            return preValueTem.concat(currValueTem);
                         });
                     } else {
                         replyCommentArray = m[0].match(regExpForEachLine);
                     }
                 }
-                replyCommentArray = utils.arrayUnique(replyCommentArray).map(function (s) {
+                replyCommentArray = utils.arrayUnique(replyCommentArray).map(s => {
                     return parseInt(s);
                 });
                 if (replyCommentArray.length > 1) {
-                    return replyCommentArray.reduce(function (preValue, currValue) {
+                    return replyCommentArray.reduce((preValue, currValue) => {
+                        let valueArr = preValue;
                         if (typeof preValue == "number") {
-                            preValue = [preValue];
+                            valueArr = [preValue];
                         }
                         if (currValue > union.article.totalComments) {
-                            return preValue;
+                            return valueArr;
                         }
-                        preValue.push(currValue);
-                        return preValue;
+                        valueArr.push(currValue);
+                        return valueArr;
                     });
-                } else if (replyCommentArray.length == 1) {
+                } else if (replyCommentArray.length === 1) {
                     if (replyCommentArray[0] > union.article.totalComments) {
                         return [];
                     }
                 }
                 return replyCommentArray;
-            };
-        }
+            }
+        },
     ]);
-})();
+}());

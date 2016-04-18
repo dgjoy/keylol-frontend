@@ -1,10 +1,8 @@
 ﻿(function () {
-    "use strict";
-
     keylolApp.controller("ArticleHeaderController", [
         "$scope", "union", "window", "utils",
-        function ($scope, union, window, utils) {
-            var vm = this;
+        ($scope, union, window, utils) => {
+            const vm = this;
             $scope.utils = utils;
             $scope.union = union;
             $scope.article = union.article;
@@ -24,16 +22,16 @@
                                     Id: $scope.point.Id,
                                     IdCode: $scope.point.IdCode,
                                     CoverImage: $scope.point.CoverImage,
-                                    Name: utils.getPointFirstName($scope.point)
+                                    Name: utils.getPointFirstName($scope.point),
                                 },
                                 vm: {
                                     Id: $scope.article.Id,
                                     Content: $scope.article.Content,
-                                    Vote: $scope.article.Vote
+                                    Vote: $scope.article.Vote,
                                 },
-                                gameHours: 790.5
-                            }
-                        }
+                                gameHours: $scope.point.hoursPlayed,
+                            },
+                        },
                     });
                 } else {
                     window.show({
@@ -49,13 +47,13 @@
                                     Pros: $scope.article.Pros,
                                     Cons: $scope.article.Cons,
                                     Vote: $scope.article.Vote,
-                                    TypeName: $scope.article.TypeName
+                                    TypeName: $scope.article.TypeName,
                                 },
                                 attachedPoints: $scope.article.AttachedPoints,
                                 voteForPoint: $scope.article.VoteForPoint,
-                                needConfirmLoadingDraft: true
-                            }
-                        }
+                                needConfirmLoadingDraft: true,
+                            },
+                        },
                     });
                 }
             };
@@ -71,13 +69,13 @@
                     inputs: {
                         targetId: $scope.article.Id,
                         type: {
+                            isCancel,
                             action: type,
                             target: "Article",
-                            isCancel: isCancel
-                        }
-                    }
+                        },
+                    },
                 });
             };
-        }
+        },
     ]);
-})();
+}());
