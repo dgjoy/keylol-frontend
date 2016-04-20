@@ -65,7 +65,7 @@ var vendorScripts = [
 var babelScripts = [
     "keylol-app.js",
     "root-controller.js",
-    "components/**/*.js"
+    "src/**/*.js"
 ];
 
 var appScripts = [
@@ -84,7 +84,7 @@ var stylesheets = [
 var sassStylesheets = [
     "assets/scss/predefined/!(fonts.template).scss",
     "assets/scss/!(style).scss",
-    "components/**/*.scss"
+    "src/**/*.scss"
 ];
 
 var keylolTextList = "`{}>▾▴其乐推荐据点客务中心讯息轨道评测好资差模组感悟请无视游戏与艺术之间的空隙提交注册申登入发布文章由你筛选变更函会员研谈档邮政服私信蒸汽动力进社区噪音零死角讨论独特鼓励机制志同合琴瑟曲即日内欲知情关联意成功错误认可索取表单开设此阅读搜结果传送装置已就位个人从兴趣始慢搭建一条收到出未能撞到处理这位用户尚或任何当前投稿厂商类型平台剧透警告简完编辑确料定太瞎了获不态了跳过步正在生首页并立案稍候糕块里如也连蛋都没有需验证陆加现解分享放公篇被封存科退通职团队惩教萃撤销录兌換品";
@@ -214,14 +214,14 @@ var getBuildTask = function (configName) {
             .pipe(rev())
             .pipe(gulp.dest("bundles"));
     }, function buildTemplateBundle() {
-        return gulp.src("components/**/*.html")
+        return gulp.src("src/**/*.html")
             .pipe(minifyInline({
                 css: {
                     keepSpecialComments: 0
                 }
             }))
             .pipe(templateCache("templates.min.js", {
-                root: "components/",
+                root: "src/",
                 module: "KeylolApp"
             }))
             .pipe(uglify())

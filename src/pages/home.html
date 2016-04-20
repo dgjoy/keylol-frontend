@@ -1,0 +1,23 @@
+﻿<div ng-if="!notLogin" class="container">
+    <div class="row">
+        <div class="col-left">
+            <logo></logo>
+            <section ng-if="union.$localStorage.user" ng-include="'src/sections/reception.html'"></section>
+            <section ng-include="'src/sections/main-navigation.html'"></section>
+        </div>
+        <div class="col-middle">
+            <section ng-include="'src/sections/spotlight-banner.html'" style="height: 92px"></section>
+            <section ng-include="'src/sections/timeline.html'"></section>
+        </div>
+        <div class="col-right">
+            <section ng-include="'src/sections/search-box.html'" style="height: 40px"></section>
+            <action-hub></action-hub>
+            <section ng-include="'src/sections/new-point.html'"></section>
+            <section ng-include="'src/sections/promoted-readings.html'"></section>
+            <section ng-include="'src/sections/latest-articles.html'"></section>
+            <section ng-if="union.$localStorage.user.StaffClaim === 'operator'" ng-include="'src/sections/secret-tests.html'"></section>
+            <section ng-include="'src/sections/site-footer.html'"></section>
+        </div>
+    </div>
+</div>
+<div ng-if="notLogin" ng-include="'src/pages/alpha-entrance.html'" ng-controller="AlphaEntranceController"></div>

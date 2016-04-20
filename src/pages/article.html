@@ -1,0 +1,28 @@
+﻿<div class="container" ng-if="articleExist">
+    <div class="row">
+        <div class="col-left-middle">
+            <div class="row as-section">
+                <div class="col-left">
+                    <logo></logo>
+                </div>
+                <div class="col-middle">
+                    <section ng-include="'src/sections/summary.html'" style="height: 92px;"></section>
+                </div>
+            </div>
+            <section ng-include="'src/sections/article-header.html'"></section>
+            <section ng-if="union.article.TypeName !== '封'" ng-include="'src/sections/article-content.html'"></section>
+            <section ng-if="union.article.TypeName === '评'" ng-include="'src/sections/article-review.html'"></section>
+            <section ng-include="'src/sections/article-comments.html'"></section>
+        </div>
+        <div class="col-right">
+            <section ng-include="'src/sections/search-box.html'" style="height: 40px"></section>
+            <action-hub></action-hub>
+            <section ng-include="'src/sections/point-votes.html'" ng-if="hasVote"></section>
+            <section ng-include="'src/sections/promoted-readings.html'"></section>
+            <section ng-include="'src/sections/latest-articles.html'"></section>
+            <section ng-if="union.$localStorage.user.StaffClaim === 'operator'" ng-include="'src/sections/secret-tests.html'"></section>
+            <section ng-include="'src/sections/site-footer.html'"></section>
+        </div>
+    </div>
+</div>
+<div ng-if="!articleExist" ng-include="'src/pages/not-found.html'" ng-controller="NotFoundController"></div>

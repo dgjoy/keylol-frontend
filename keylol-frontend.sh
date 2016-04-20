@@ -11,7 +11,7 @@ case ${ACTION} in
         cp -rf node_modules ${BUILD_COPY_TARGET}/
         cp -rf assets ${BUILD_COPY_TARGET}/
         cp -rf temporary ${BUILD_COPY_TARGET}/
-        cp -rf components ${BUILD_COPY_TARGET}/
+        cp -rf src ${BUILD_COPY_TARGET}/
         cp -f keylol-app.js ${BUILD_COPY_TARGET}/
         cp -f root-controller.js ${BUILD_COPY_TARGET}/
         cp -f user_agreement.pdf ${BUILD_COPY_TARGET}/

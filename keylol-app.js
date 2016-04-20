@@ -23,58 +23,58 @@
 
             $anchorScrollProvider.disableAutoScrolling();
             $routeProvider.when("/", {
-                    templateUrl: "components/pages/home.html",
+                    templateUrl: "src/pages/home.html",
                     controller: "HomeController",
                 })
                 .when("/home", {
                     redirectTo: "/",
                 })
                 .when("/article/:author/:article", {
-                    templateUrl: "components/pages/article.html",
+                    templateUrl: "src/pages/article.html",
                     controller: "ArticleController",
                 })
                 .when("/point/:pointIdCode", {
-                    templateUrl: "components/pages/point.html",
+                    templateUrl: "src/pages/point.html",
                     controller: "PointController",
                 })
                 .when("/user/:userIdCode", {
-                    templateUrl: "components/pages/point.html",
+                    templateUrl: "src/pages/point.html",
                     controller: "PointController",
                 })
                 .when("/latest", {
-                    templateUrl: "components/pages/search-results.html",
+                    templateUrl: "src/pages/search-results.html",
                     controller: "AllArticlesController",
                 })
                 .when("/subscriptions", {
-                    templateUrl: "components/pages/search-results.html",
+                    templateUrl: "src/pages/search-results.html",
                     controller: "SubscriptionsController",
                 })
                 .when("/readers", {
-                    templateUrl: "components/pages/search-results.html",
+                    templateUrl: "src/pages/search-results.html",
                     controller: "ReadersController",
                 })
                 .when("/post-office", {
-                    templateUrl: "components/pages/post-office.html",
+                    templateUrl: "src/pages/post-office.html",
                     controller: "PostOfficeController",
                 })
                 .when("/post-office/:type", {
-                    templateUrl: "components/pages/post-office.html",
+                    templateUrl: "src/pages/post-office.html",
                     controller: "PostOfficeController",
                 })
                 .when("/search/:searchType/:keyword", {
-                    templateUrl: "components/pages/search-results.html",
+                    templateUrl: "src/pages/search-results.html",
                     controller: "SearchResultsController",
                 })
                 .when("/related/:idCode/:type", {
-                    templateUrl: "components/pages/search-results.html",
+                    templateUrl: "src/pages/search-results.html",
                     controller: "RelatedController",
                 })
                 .when("/coupon", {
-                    templateUrl: "components/pages/coupon.html",
+                    templateUrl: "src/pages/coupon.html",
                     controller: "CouponController",
                 })
                 .otherwise({
-                    templateUrl: "components/pages/not-found.html",
+                    templateUrl: "src/pages/not-found.html",
                     controller: "NotFoundController",
                 });
 
