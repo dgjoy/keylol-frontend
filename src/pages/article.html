@@ -12,7 +12,7 @@
             <section ng-include="'src/sections/article-header.html'"></section>
             <section ng-if="union.article.TypeName !== '封'" ng-include="'src/sections/article-content.html'"></section>
             <section ng-if="union.article.TypeName === '评'" ng-include="'src/sections/article-review.html'"></section>
-            <section ng-include="'src/sections/article-comments.html'"></section>
+            <article-comments></article-comments>
         </div>
         <div class="col-right">
             <section ng-include="'src/sections/search-box.html'" style="height: 40px"></section>

@@ -40,32 +40,6 @@
     height: 32px;
 }
 
-.section-article-comments .comment article {
-    margin-left: 40px;
-}
-
-.section-article-comments .comment {
-    padding: 0 100px 0 20px;
-    margin-top: 25px;
-    position: relative;
-}
-
-.section-article-comments .comment.highlight {
-    animation: comment-highlight 5s;
-}
-
-.section-article-comments .comment:hover .action {
-    display: inline;
-}
-
-.section-article-comments .comment:hover .floor {
-    display: block;
-}
-
-.section-article-comments .comment:first-of-type {
-    margin-top: 28px;
-}
-
 .section-article-comments .cut-off {
     margin-top: 25px;
     margin-left: 9px;
@@ -73,99 +47,6 @@
     background-color: #EEE;
     width: 810px;
     height: 1px;
-}
-
-.section-article-comments .floor {
-    width: 47px;
-    height: 32px;
-    position: absolute;
-    right: 0;
-    top: 4px;
-    color: white;
-    background-color: #CCC;
-    text-align: center;
-    line-height: 32px;
-    display: none;
-}
-
-.section-article-comments .header {
-    height: 22px;
-    line-height: 22px;
-}
-
-.section-article-comments .header .name {
-    font-weight: bold;
-}
-
-.section-article-comments .archived .header .name a {
-    color: #bbb;
-}
-
-.section-article-comments .header .as-author {
-    color: $keylol-highlight;
-}
-
-.section-article-comments .archived .header .title {
-    color: #bbb;
-    font-weight: bold;
-}
-
-.section-article-comments .header .time {
-    color: #BBB;
-}
-
-.section-article-comments .header .moderated {
-    color: white;
-    background-color: #e30613;
-    padding: 0 3px;
-}
-
-.section-article-comments .header .action {
-    color: #ccc;
-    display: none;
-}
-
-.section-article-comments .header .action a {
-    color: $keylol-highlight;
-    margin: 5px;
-}
-
-.section-article-comments .content {
-    line-height: 1.6em;
-    white-space: pre-wrap;
-}
-
-.section-article-comments .content point-link {
-    white-space: nowrap;
-    margin-right: 10px;
-}
-
-.section-article-comments .archived .content,
-.section-article-comments .archived .content a {
-    color: #bbb;
-}
-
-.section-article-comments .content a {
-    color: $keylol-highlight;
-}
-
-.section-article-comments .archived .content .like-count,
-.section-article-comments .archived .content .hot-signal {
-    background: #ccc;
-}
-
-.section-article-comments .content .like-count {
-    color: white;
-    background: $keylol-main;
-    padding: 1px 4px;
-    margin-left: 7px;
-}
-
-.section-article-comments .content .hot-signal {
-    color: white;
-    background: $keylol-main;
-    padding: 1px 4px;
-    margin-left: 7px;
 }
 
 .section-article-comments pagination {
