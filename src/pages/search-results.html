@@ -3,7 +3,7 @@
         <div class="col-left">
             <logo></logo>
             <section ng-if="union.$localStorage.user" ng-include="'src/sections/reception.html'"></section>
-            <section ng-include="'src/sections/main-navigation.html'"></section>
+            <main-navigation></main-navigation>
         </div>
         <div class="col-middle">
             <section ng-include="'src/sections/summary.html'" style="height: 92px;"></section>

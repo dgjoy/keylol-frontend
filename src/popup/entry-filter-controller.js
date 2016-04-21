@@ -1,24 +1,25 @@
 ﻿(function () {
-    keylolApp.controller("EntryFilterController", [
-        "$scope", "selectedIndexes", "close", "types", "currPage", "shortReviewFilter", "sourceFilter",
-        ($scope, selectedIndexes, close, types, currPage, shortReviewFilter, sourceFilter) => {
-            const vm = this;
-            $scope.currPage = currPage;
-            vm.subscribeUser = shortReviewFilter & 1;
-            vm.subscribePoint = shortReviewFilter & 2;
-            vm.synchronization = shortReviewFilter & 4;
-            vm.sourcePublication = sourceFilter & 1;
-            vm.sourceLike = sourceFilter & 2;
-            if (selectedIndexes)
-                $scope.selectedIndexes = selectedIndexes.slice();
-            $scope.entryTypes = types;
-            $scope.confirm = function () {
-                close({
-                    shortReviewFilter: vm.subscribeUser + vm.subscribePoint + vm.synchronization,
-                    filterOptions: $scope.selectedIndexes,
-                    sourceFilter: vm.sourcePublication + vm.sourceLike,
-                });
-            };
-        },
-    ]);
+    class EntryFilterController {
+        constructor (selectedIndexes, close, types, currPage, shortReviewFilter, sourceFilter) {
+            $.extend(this, {
+                currPage,
+                close,
+                subscribeUser: shortReviewFilter & 1,
+                subscribePoint: shortReviewFilter & 2,
+                synchronization: shortReviewFilter & 4,
+                sourcePublication: sourceFilter & 1,
+                sourceLike: sourceFilter & 2,
+                selectedIndexes: selectedIndexes ? selectedIndexes.slice() : undefined,
+                entryTypes: types,
+            });
+        }
+        confirm () {
+            this.close({
+                shortReviewFilter: this.subscribeUser + this.subscribePoint + this.synchronization,
+                filterOptions: this.selectedIndexes,
+                sourceFilter: this.sourcePublication + this.sourceLike,
+            });
+        }
+    }
+    keylolApp.controller("EntryFilterController", EntryFilterController);
 }());

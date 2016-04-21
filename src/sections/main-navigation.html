@@ -1,8 +1,8 @@
 ﻿<div class="section-main-navigation box-shadowed">
     <div ng-repeat="(type, points) in mainNavigation.categories">
-        <h1 class="labeled-heading">{{utils.getPointType(type)}}</h1>
+        <h1 class="labeled-heading">{{mainNavigation.utils.getPointType(type)}}</h1>
         <ul>
-            <li ng-repeat="point in points"><point-link id-code="point.IdCode" point-name="utils.getPointFirstName(point)" type="'point'"></point-link></li>
+            <li ng-repeat="point in points"><point-link id-code="point.IdCode" point-name="mainNavigation.utils.getPointFirstName(point)" type="'point'"></point-link></li>
         </ul>
     </div>
 </div>
