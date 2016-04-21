@@ -36,7 +36,7 @@ var buildConfigs = {
     },
     prod: {
         bundle: true,
-        apiEndpoint: "https://api.keylol.com/",
+        apiEndpoint: "https://lgbt-api.keylol.com/",
         urlCanonical: false
     }
 };
