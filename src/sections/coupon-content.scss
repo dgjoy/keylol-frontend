@@ -52,28 +52,8 @@
     margin: 0;
 }
 
-.section-coupon-content .heading .menu-right {
+.section-coupon-content .heading coupon-menu {
     float: right;
-}
-
-.section-coupon-content .heading .menu-right ul li {
-    color: #bbb;
-}
-
-.section-coupon-content .heading .menu-right ul li a {
-    color: $keylol-highlight;
-    margin: 0 5px;
-}
-
-.section-coupon-content .heading .menu-right ul li:last-of-type a {
-    margin-right: 0;
-}
-
-.section-coupon-content .heading .menu-right ul li.current a {
-    font-weight: bold;
-    color: #333;
-    text-decoration: none;
-    cursor: default;
 }
 
 .section-coupon-content pagination {

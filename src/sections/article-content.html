@@ -1,9 +1,9 @@
-﻿<div class="section-article-content box-shadowed" ng-controller="ArticleContentController">
-    <article bind-html-compile="article.Content" class="editor-style" ng-class="{'is-short': article.TypeName === '简评'}"></article>
-    <div class="share-actions" ng-switch="article.Liked">
-        <p class="like-count">{{article.LikeCount}}</p>
-        <a href="" ng-click="acknowledge()" ng-if="!article.isMyArticle && union.$localStorage.user && article.Archived === 'None'" ng-switch-when="false">认可文章+1</a>
-        <a href="" ng-click="cancelAcknowledge()" ng-if="!article.isMyArticle && union.$localStorage.user && article.Archived === 'None'" ng-switch-when="true">取消认可-1</a>
-        <span ng-if="article.isMyArticle || !union.$localStorage.user || article.Archived !== 'None'">认可</span>
+﻿<div class="section-article-content box-shadowed">
+    <article bind-html-compile="articleContent.article.Content" class="editor-style" ng-class="{'is-short': articleContent.article.TypeName === '简评'}"></article>
+    <div class="share-actions" ng-switch="articleContent.article.Liked">
+        <p class="like-count">{{articleContent.article.LikeCount}}</p>
+        <a href="" ng-click="articleContent.acknowledge()" ng-if="!articleContent.article.isMyArticle && articleContent.union.$localStorage.user && articleContent.article.Archived === 'None'" ng-switch-when="false">认可文章+1</a>
+        <a href="" ng-click="articleContent.cancelAcknowledge()" ng-if="!articleContent.article.isMyArticle && articleContent.union.$localStorage.user && articleContent.article.Archived === 'None'" ng-switch-when="true">取消认可-1</a>
+        <span ng-if="articleContent.article.isMyArticle || !articleContent.union.$localStorage.user || articleContent.article.Archived !== 'None'">认可</span>
     </div>
 </div>

@@ -1,8 +1,13 @@
 ﻿(function () {
-    keylolApp.controller("CouponHeaderController", [
-        "$scope", "union",
-        ($scope, union) => {
-            $scope.coupon = union.coupon;
-        },
-    ]);
+    class CouponHeaderController {
+        constructor (union) {
+            this.coupon = union.coupon;
+        }
+    }
+
+    keylolApp.component("couponHeader", {
+        templateUrl: "src/sections/coupon-header.html",
+        controller: CouponHeaderController,
+        controllerAs: "couponHeader",
+    });
 }());

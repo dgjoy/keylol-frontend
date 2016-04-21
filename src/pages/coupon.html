@@ -9,15 +9,15 @@
                     <section ng-include="'src/sections/summary.html'" style="height: 92px;"></section>
                 </div>
             </div>
-            <section ng-include="'src/sections/coupon-header.html'"></section>
-            <section ng-include="'src/sections/coupon-content.html'"></section>
+            <coupon-header></coupon-header>
+            <coupon-content></coupon-content>
         </div>
         <div class="col-right">
             <section ng-include="'src/sections/search-box.html'" style="height: 40px"></section>
             <action-hub></action-hub>
             <section ng-include="'src/sections/new-point.html'"></section>
             <section ng-include="'src/sections/promoted-readings.html'"></section>
-            <section ng-include="'src/sections/latest-articles.html'"></section>
+            <latest-articles></latest-articles>
             <section ng-if="union.$localStorage.user.StaffClaim === 'operator'" ng-include="'src/sections/secret-tests.html'"></section>
             <section ng-include="'src/sections/site-footer.html'"></section>
         </div>

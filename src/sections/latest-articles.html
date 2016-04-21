@@ -1,6 +1,6 @@
-﻿<div class="section-latest-articles box-shadowed" ng-controller="LatestArticlesController">
+﻿<div class="section-latest-articles box-shadowed">
     <h1 class="labeled-heading">最新投稿 <a href="latest">全部</a></h1>
-    <div ng-repeat="article in articles track by article.Id" class="article">
+    <div ng-repeat="article in latestArticles.articles track by article.Id" class="article">
         <h2>
             <a ng-href="article/{{article.AuthorIdCode}}/{{article.SequenceNumberForAuthor}}">{{article.Title}}</a>
         </h2>

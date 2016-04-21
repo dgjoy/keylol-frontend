@@ -1,143 +1,152 @@
 ﻿(function () {
-    keylolApp.controller("CouponContentController", [
-        "$scope", "union", "window", "utils", "$location", "$http", "notification", "$timeout",
-        ($scope, union, window, utils, $location, $http, notification, $timeout) => {
-            $scope.union = union;
+    class CouponContentController {
+        constructor ($scope, union, window, utils, $location, $http, notification, $timeout, apiEndpoint) {
+            $.extend(this, {
+                union,
+                window,
+                utils,
+                $location,
+                $http,
+                notification,
+                $timeout,
+                apiEndpoint,
+                inviteLink: `https://www.keylol.com/?aff=${union.$localStorage.user.IdCode}`,
+                recordPage: {
+                    change: (oldPage, newPage) => {
+                        this.getCouponLog(newPage);
+                    },
+                },
+                rankPage: {
+                    change: (oldPage, newPage) => {
+                        this.getCouponRank(newPage);
+                    },
+                },
+                showLock: false,
+            });
             $timeout(() => {
-                $scope.page = $location.hash();
-                $scope.$watch("page", newPage => {
+                this.page = $location.hash();
+                $scope.$watch(() => {
+                    return this.page;
+                }, newPage => {
                     //noinspection JSValidateTypes
                     if (newPage !== "records" && newPage !== "shop" && newPage !== "ranks" && newPage !== "invite") {
-                        $scope.page = "records";
+                        this.page = "records";
                     } else {
                         //noinspection JSValidateTypes
                         if (newPage === "records")
-                            getCouponLog();
+                            this.getCouponLog();
                         //noinspection JSValidateTypes
                         if (newPage === "ranks")
-                            getCouponRank();
+                            this.getCouponRank();
                         //noinspection JSValidateTypes
                         if (newPage === "invite")
-                            getInviteCount();
+                            this.getInviteCount();
                         //noinspection JSValidateTypes
                         if (newPage === "shop")
-                            getCouponGift();
+                            this.getCouponGift();
                     }
                 });
             });
-            $scope.setPage = function (page) {
-                $scope.page = page;
+            union.coupon.setPage = page => {
+                this.page = page;
             };
-            union.coupon.setPage = $scope.setPage;
-            $scope.inviteLink = `https://www.keylol.com/?aff=${union.$localStorage.user.IdCode}`;
+        }
+        showShopWindow (id) {
+            if (this.showLock) return;
+            this.showLock = true;
+            this.$http.get(`${this.apiEndpoint}coupon-gift/${id}`).then(response => {
+                const item = response.data;
+                if (item.Redeemed) {
+                    this.window.show({
+                        templateUrl: "src/windows/shop-collect.html",
+                        controller: "ShopCollectController",
+                        inputs: { item },
+                    });
+                } else {
+                    this.window.show({
+                        templateUrl: "src/windows/item-preview.html",
+                        controller: "ItemPreviewController",
+                        inputs: { item },
+                    });
+                }
+                this.showLock = false;
+            }, response => {
+                this.showLock = false;
+                this.notification.error("发生未知错误，请重试或与站务职员联系", response);
+            });
+        }
+        getInviteCount () {
+            this.$http.get(`${this.apiEndpoint}user/invited-user-count`).then(response => {
+                this.inviteCount = response.data;
+            }, response => {
+                this.notification.error("发生未知错误，请重试或与站务职员联系", response);
+            });
+        }
+        getCouponRank (page) {
+            let skip = 0;
+            if (page) {
+                skip = (page - 1) * 20;
+            }
+            if (this.ranks) {
+                this.ranks.length = 0;
+            }
+            this.rankPage.total = 1;
+            this.rankPage.curr = 1;
 
-            $scope.recordPage = {
-                change (oldPage, newPage) {
-                    getCouponLog(newPage);
+            this.$http.get(`${this.apiEndpoint}user/coupon-rank`, {
+                params: {
+                    skip,
+                    take: 20,
                 },
-            };
-            $scope.rankPage = {
-                change (oldPage, newPage) {
-                    getCouponRank(newPage);
+            }).then(response => {
+                this.ranks = response.data;
+                this.myRank = parseInt(response.headers("X-My-Rank"));
+                this.rankPage.total = 5;
+                this.rankPage.curr = page || 1;
+            }, response => {
+                this.notification.error("发生未知错误，请重试或与站务职员联系", response);
+            });
+        }
+        getCouponLog(page) {
+            let skip = 0;
+            if (page) {
+                skip = (page - 1) * 20;
+            }
+            if (this.records) {
+                this.records.length = 0;
+            }
+            this.recordPage.total = 1;
+            this.recordPage.curr = 1;
+
+            this.$http.get(`${this.apiEndpoint}coupon-log`, {
+                params: {
+                    skip,
+                    take: 20,
                 },
-            };
-
-            let showLock = false;
-            $scope.showShopWindow = function (id) {
-                if (showLock) return;
-                showLock = true;
-                $http.get(`${apiEndpoint}coupon-gift/${id}`).then(response => {
-                    const item = response.data;
-                    if (item.Redeemed) {
-                        window.show({
-                            templateUrl: "src/windows/shop-collect.html",
-                            controller: "ShopCollectController",
-                            inputs: { item },
-                        });
-                    } else {
-                        window.show({
-                            templateUrl: "src/windows/item-preview.html",
-                            controller: "ItemPreviewController",
-                            inputs: { item },
-                        });
-                    }
-                    showLock = false;
-                }, response => {
-                    showLock = false;
-                    notification.error("发生未知错误，请重试或与站务职员联系", response);
-                });
-            };
-
-            function getInviteCount() {
-                $http.get(`${apiEndpoint}user/invited-user-count`).then(response => {
-                    $scope.inviteCount = response.data;
-                }, response => {
-                    notification.error("发生未知错误，请重试或与站务职员联系", response);
-                });
+            }).then(response => {
+                this.records = response.data;
+                this.recordPage.total = Math.ceil(response.headers("X-Total-Record-Count") / 20);
+                this.recordPage.curr = page || 1;
+            }, response => {
+                this.notification.error("发生未知错误，请重试或与站务职员联系", response);
+            });
+        }
+        getCouponGift() {
+            if (this.shopItems) {
+                this.shopItems.length = 0;
             }
 
-            function getCouponRank(page) {
-                let skip = 0;
-                if (page) {
-                    skip = (page - 1) * 20;
-                }
-                if ($scope.ranks) {
-                    $scope.ranks.length = 0;
-                }
-                $scope.rankPage.total = 1;
-                $scope.rankPage.curr = 1;
+            this.$http.get(`${this.apiEndpoint}coupon-gift`).then(response => {
+                this.shopItems = response.data;
+            }, response => {
+                this.notification.error("发生未知错误，请重试或与站务职员联系", response);
+            });
+        }
+    }
 
-                $http.get(`${apiEndpoint}user/coupon-rank`, {
-                    params: {
-                        skip,
-                        take: 20,
-                    },
-                }).then(response => {
-                    $scope.ranks = response.data;
-                    $scope.myRank = parseInt(response.headers("X-My-Rank"));
-                    $scope.rankPage.total = 5;
-                    $scope.rankPage.curr = page || 1;
-                }, response => {
-                    notification.error("发生未知错误，请重试或与站务职员联系", response);
-                });
-            }
-
-            function getCouponLog(page) {
-                let skip = 0;
-                if (page) {
-                    skip = (page - 1) * 20;
-                }
-                if ($scope.records) {
-                    $scope.records.length = 0;
-                }
-                $scope.recordPage.total = 1;
-                $scope.recordPage.curr = 1;
-
-                $http.get(`${apiEndpoint}coupon-log`, {
-                    params: {
-                        skip,
-                        take: 20,
-                    },
-                }).then(response => {
-                    $scope.records = response.data;
-                    $scope.recordPage.total = Math.ceil(response.headers("X-Total-Record-Count") / 20);
-                    $scope.recordPage.curr = page || 1;
-                }, response => {
-                    notification.error("发生未知错误，请重试或与站务职员联系", response);
-                });
-            }
-
-            function getCouponGift() {
-                if ($scope.shopItems) {
-                    $scope.shopItems.length = 0;
-                }
-
-                $http.get(`${apiEndpoint}coupon-gift`).then(response => {
-                    $scope.shopItems = response.data;
-                }, response => {
-                    notification.error("发生未知错误，请重试或与站务职员联系", response);
-                });
-            }
-        },
-    ]);
+    keylolApp.component("couponContent", {
+        templateUrl: "src/sections/coupon-content.html",
+        controller: CouponContentController,
+        controllerAs: "couponContent",
+    });
 }());

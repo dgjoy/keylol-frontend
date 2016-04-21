@@ -1,5 +1,5 @@
 ﻿<div class="section-article-comments box-shadowed" ng-class="{archive: articleComments.article.TypeName === '封'}">
-    <h1 class="labeled-heading">{{articleComments.article.TypeName !== '封'?"共" + articleComments.article.totalComments + "则讨论":"封存文章的评论会被自动隐藏"}}</h1>
+    <h1 class="labeled-heading">{{articleComments.article.TypeName !== '封'?"共 " + articleComments.article.totalComments + " 则讨论":"封存文章的评论会被自动隐藏"}}</h1>
     <comment-block comment="comment" article-archived="articleComments.article.Archived" on-reply="articleComments.reply(comment)" ng-if="articleComments.pageElements.currPage == 1 && articleComments.hotComments.length > 0 && articleComments.article.TypeName !== '封'" ng-repeat="comment in articleComments.hotComments track by comment.Id"></comment-block>
     <div class="cut-off" ng-if="articleComments.pageElements.currPage == 1 && articleComments.hotComments.length > 0 && articleComments.article.TypeName !== '封'"></div>
     <comment-block comment="comment" article-archived="articleComments.article.Archived" on-reply="articleComments.reply(comment)" ng-if="articleComments.article.TypeName !== '封'" ng-repeat="comment in articleComments.comments track by comment.Id"></comment-block>

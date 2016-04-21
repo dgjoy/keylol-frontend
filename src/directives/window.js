@@ -11,7 +11,7 @@
             },
             compile () {
                 return {
-                    post: function postLink(scope, element) {
+                    post (scope, element) {
                         exitFocus = angular.element(element[0].querySelector(".window-exit-button"));
                         if (!scope.clickOtherToExit) {
                             element.on("click", e => {

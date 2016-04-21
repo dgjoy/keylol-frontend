@@ -8,7 +8,9 @@
                 hideAnimate: true,
             });
             if (union.$localStorage.user) {
-                $scope.$watch("union.$localStorage.user.MessageCount", newValue => {
+                $scope.$watch(() => {
+                    return union.$localStorage.user.MessageCount;
+                }, newValue => {
                     this.newMessages = typeof newValue === "string" ? newValue.split(",").map(element => {
                         return parseInt(element);
                     }) : [0, 0, 0];

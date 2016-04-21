@@ -15,7 +15,7 @@
             <action-hub></action-hub>
             <section ng-include="'src/sections/point-votes.html'" ng-if="hasVote"></section>
             <section ng-include="'src/sections/promoted-readings.html'"></section>
-            <section ng-include="'src/sections/latest-articles.html'"></section>
+            <latest-articles></latest-articles>
             <section ng-if="union.$localStorage.user.StaffClaim === 'operator'" ng-include="'src/sections/secret-tests.html'"></section>
             <section ng-include="'src/sections/site-footer.html'"></section>
         </div>
