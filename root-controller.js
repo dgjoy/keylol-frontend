@@ -1,11 +1,12 @@
 ﻿(function () {
     keylolApp.controller("RootController", [
-        "$scope", "pageHead", "union", "$http", "apiEndpoint",
+        "$scope", "pageHead", "union", "$http", "apiEndpoint", "$window",
         "notification", "$location", "$rootScope", "$route",
-        ($scope, pageHead, union, $http, apiEndpoint,
+        ($scope, pageHead, union, $http, apiEndpoint, $window,
          notification, $location, $rootScope, $route) => {
             pageHead.loading();
 
+            let aNewLogin = false;
             function getUserInfo() {
                 $http.get(`${apiEndpoint}user/${union.$localStorage.login.UserId}`, {
                     params: {
@@ -23,6 +24,9 @@
                     union.$localStorage.user.fakeCoupon = beforeCoupon;
                     _czc.push(["_setCustomVar", "登录用户",
                         `${response.data.IdCode}-${response.data.UserName}`, 1]);
+                    if (aNewLogin) {
+                        $route.reload();
+                    }
                 }, response => {
                     if (response.status === 401) {
                         $http.delete(`${apiEndpoint}login/current`);
@@ -36,6 +40,7 @@
                 return union.$localStorage.login;
             },newLogin => {
                 if (newLogin) {
+                    aNewLogin = true;
                     getUserInfo();
                 } else {
                     _czc.push(["_setCustomVar", "登录用户", "游客", 1]);
@@ -53,12 +58,13 @@
 
             let firstLoad = true;
             $rootScope.$on("$routeChangeSuccess", () => {
-                window.scrollTo(0, 0);
+                $window.scrollTo(0, 0);
                 if (firstLoad) {
                     firstLoad = false;
                     return;
                 }
                 if (union.$localStorage.login) {
+                    aNewLogin = false;
                     getUserInfo();
                 }
             });

@@ -31,7 +31,6 @@
                         connection.stop();
                         $timeout(() => {
                             notification.success("登录成功，欢迎回到其乐");
-                            $route.reload();
                             close();
                         }, 1500);
                     }, response => {

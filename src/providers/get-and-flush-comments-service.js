@@ -51,6 +51,7 @@
                                 if (hotComment.Content) {
                                     hotComment.Content = parseComments(hotComment.Content, hotComment.SequenceNumberForArticle);
                                 }
+                                hotComment.isHot = true;
                                 hotComments.push(hotComment);
                             }
                         }

@@ -2,8 +2,8 @@
     keylolApp.controller("ModerationController", [
         "$scope", "close", "$http", "notification", "$route", "$timeout", "type",
         "targetId", "moderationText", "union",
-        ($scope, close, $http, notification, $route, $timeout, type,
-        targetId, moderationText, union) => {
+        function ($scope, close, $http, notification, $route, $timeout, type,
+        targetId, moderationText, union) {
             const vm = this;
             $scope.union = union;
             $scope.text = type.isCancel ? moderationText[`Un${type.action}`] : moderationText[type.action];

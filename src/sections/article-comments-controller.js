@@ -58,52 +58,6 @@
             }
             this.textFocus = true;
         }
-        acknowledge (comment) {
-            this.$http.post(`${this.apiEndpoint}like`, {
-                TargetId: comment.Id,
-                Type: "CommentLike",
-            }).then(response => {
-                if (response.data === "Free") {
-                    this.notification.success("认可已生效，每日发出的前 5 个认可不会消耗文券");
-                } else {
-                    this.notification.success("认可已生效");
-                    if (this.union.getUnreadLogs) {
-                        this.union.getUnreadLogs();
-                    }
-                }
-            }, response => {
-                comment.Liked = false;
-                comment.LikeCount -= 1;
-                if (comment.LikeCount <= 0) {
-                    comment.hasLike = false;
-                }
-                if (response.status === 401) {
-                    this.notification.error("现有文券数量不足，无法发出认可");
-                } else {
-                    this.notification.error("认可评论失败", response);
-                }
-            });
-            comment.Liked = true;
-            comment.hasLike = true;
-            comment.LikeCount += 1;
-        }
-        cancelAcknowledge (comment) {
-            this.$http.delete(`${this.apiEndpoint}like`, {
-                params: {
-                    targetId: comment.Id,
-                    type: "CommentLike",
-                },
-            }).then(() => {
-                this.notification.success("此认可已被撤销");
-            }, response => {
-                this.notification.error("取消认可评论失败", response);
-            });
-            comment.Liked = false;
-            comment.LikeCount -= 1;
-            if (comment.LikeCount <= 0) {
-                comment.hasLike = false;
-            }
-        }
         dealWithReply (str) {
             const regExpForComment = /^((?:#\d+[ \t]*)+)(?:$|[ \t]+)/gm;
             const regExpForEachLine = /(\d+)/g;
@@ -132,7 +86,7 @@
                     if (typeof preValue == "number") {
                         valueArr = [preValue];
                     }
-                    if (currValue > this.union.article.totalComments) {
+                    if (currValue > this.article.totalComments) {
                         return valueArr;
                     }
                     valueArr.push(currValue);

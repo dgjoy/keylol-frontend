@@ -66,7 +66,6 @@
                         .then(response => {
                             union.$localStorage.login = response.data;
                             notification.success("登录成功，欢迎回到其乐");
-                            $route.reload();
                             close();
                         }, response => {
                             switch (response.status) {

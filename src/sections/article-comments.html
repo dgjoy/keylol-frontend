@@ -1,13 +1,13 @@
 ﻿<div class="section-article-comments box-shadowed" ng-class="{archive: articleComments.article.TypeName === '封'}">
     <h1 class="labeled-heading">{{articleComments.article.TypeName !== '封'?"共" + articleComments.article.totalComments + "则讨论":"封存文章的评论会被自动隐藏"}}</h1>
-    <comment-block comment="comment" is-hot="true" on-reply="articleComments.reply(comment)"  on-acknowledge="articleComments.acknowledge(comment)"  on-cancel-acknowledge="articleComments.cancelAcknowledge(comment)" ng-if="articleComments.pageElements.currPage == 1 && articleComments.hotComments.length > 0 && articleComments.article.TypeName !== '封'" ng-repeat="comment in articleComments.hotComments track by comment.Id"></comment-block>
+    <comment-block comment="comment" article-archived="articleComments.article.Archived" on-reply="articleComments.reply(comment)" ng-if="articleComments.pageElements.currPage == 1 && articleComments.hotComments.length > 0 && articleComments.article.TypeName !== '封'" ng-repeat="comment in articleComments.hotComments track by comment.Id"></comment-block>
     <div class="cut-off" ng-if="articleComments.pageElements.currPage == 1 && articleComments.hotComments.length > 0 && articleComments.article.TypeName !== '封'"></div>
-    <comment-block comment="comment" is-hot="false" on-reply="articleComments.reply(comment)"  on-acknowledge="articleComments.acknowledge(comment)"  on-cancel-acknowledge="articleComments.cancelAcknowledge(comment)" ng-if="articleComments.article.TypeName !== '封'" ng-repeat="comment in articleComments.comments track by comment.Id"></comment-block>
+    <comment-block comment="comment" article-archived="articleComments.article.Archived" on-reply="articleComments.reply(comment)" ng-if="articleComments.article.TypeName !== '封'" ng-repeat="comment in articleComments.comments track by comment.Id"></comment-block>
     <pagination ng-if="articleComments.article.TypeName !== '封'" total="articleComments.pageElements.totalPages" current="articleComments.pageElements.currPage" on-page-changed="articleComments.pageElements.changePage(oldPage, newPage)" page-href=""></pagination>
     <form ng-if="articleComments.union.$localStorage.user && articleComments.article.TypeName !== '封'" ng-submit="articleComments.doComment()">
         <point-link type="'user'" avatar-url="articleComments.union.$localStorage.user.AvatarImage" id-code="articleComments.union.$localStorage.user.IdCode"></point-link>
         <button type="submit" class="border-button right-border" ng-disabled="articleComments.submitLock">发表评论</button>
-        <div class="textarea-container"><textarea placeholder="对作者的见解有什么见解？" ng-model="articleComments.comment.currentComment" focus-me="textFocus"></textarea></div>
+        <div class="textarea-container"><textarea placeholder="对作者的见解有什么见解？" ng-model="articleComments.comment.currentComment" focus-me="articleComments.textFocus"></textarea></div>
     </form>
     <div class="for-visitor" ng-if="!articleComments.union.$localStorage.user && articleComments.article.TypeName !== '封'">
         <div class="avatar-anchor">

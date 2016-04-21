@@ -1,6 +1,6 @@
 ﻿(function () {
     class ActionHubController {
-        constructor ($scope,union, window, $timeout, $http, notification, apiEndpoint) {
+        constructor ($scope, union, window, $timeout, $http, notification, apiEndpoint) {
             $.extend(this, {
                 union,
                 window,

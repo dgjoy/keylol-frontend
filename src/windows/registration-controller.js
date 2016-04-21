@@ -101,7 +101,6 @@
                         .then(response => {
                             union.$localStorage.firstOpenKeylol = true;
                             union.$localStorage.login = response.data;
-                            $route.reload();
                             close();
                             if (consumeBindingToken)
                                 consumeBindingToken.resolve();
