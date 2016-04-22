@@ -38,3 +38,7 @@
 .window-shop-collect .comment p {
     margin: 37px 0 14px;
 }
+
+.window-shop-collect .comment p a {
+    color: #89A;
+}

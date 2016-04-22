@@ -41,6 +41,10 @@
     white-space: normal;
 }
 
+.window-item-preview .item-preview-description a {
+    color: #89A;
+}
+
 .window-item-preview .window .window-confirm-button {
     margin-right: -24px;
 }
