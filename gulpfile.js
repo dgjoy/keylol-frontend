@@ -21,6 +21,7 @@ var minifyInline = require("gulp-minify-inline");
 var minifyCss = require("gulp-minify-css");
 var templateCache = require("gulp-angular-templatecache");
 var fontmin = require('gulp-fontmin');
+var ngAnnotate = require('gulp-ng-annotate');
 
 // apiEndpoint must have the trailing slash
 var buildConfigs = {
@@ -210,6 +211,7 @@ var getBuildTask = function (configName) {
     }, function buildAppScriptBundle() {
         return gulp.src(appScripts)
             .pipe(concat("app.min.js"))
+            .pipe(ngAnnotate())
             .pipe(uglify())
             .pipe(rev())
             .pipe(gulp.dest("bundles"));
