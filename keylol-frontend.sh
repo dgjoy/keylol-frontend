@@ -20,6 +20,8 @@ case ${ACTION} in
       prod)
         cp -rf assets ${BUILD_COPY_TARGET}/
         cp -rf bundles ${BUILD_COPY_TARGET}/
+        mkdir -p ${BUILD_COPY_TARGET}/node_modules/simditor/styles/
+        cp -rf node_modules/simditor/styles/fonts ${BUILD_COPY_TARGET}/node_modules/simditor/styles/
         cp -f index.html ${BUILD_COPY_TARGET}/
         cp -f user_agreement.pdf ${BUILD_COPY_TARGET}/
         rm -rf ${BUILD_COPY_TARGET}/assets/stylesheets
