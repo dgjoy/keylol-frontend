@@ -36,6 +36,11 @@
     vertical-align: middle;
 }
 
+.window-item-preview .item-preview-description {
+    word-break: break-all;
+    white-space: normal;
+}
+
 .window-item-preview .window .window-confirm-button {
     margin-right: -24px;
 }
