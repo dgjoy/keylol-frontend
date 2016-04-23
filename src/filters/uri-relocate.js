@@ -1,20 +1,20 @@
 (function () {
-    keylolApp.filter("uriRelocate", [function () {
+    keylolApp.filter('uriRelocate', [function () {
          function relocate (input, customVersion, fallback) {
-            if (!input || typeof input !== "string") {
+            if (!input || typeof input !== 'string') {
                 if (fallback)
                     return relocate(fallback, customVersion);
                 return null;
             }
 
-            if (input.indexOf("keylol://") !== 0)
+            if (input.indexOf('keylol://') !== 0)
                 return input;
 
             let suffix, match;
             if (/\.svg|gif$/i.test(input)) {
-                suffix = "";
+                suffix = '';
             } else {
-                suffix = customVersion ? `!${customVersion}` : "";
+                suffix = customVersion ? `!${customVersion}` : '';
             }
             if (match = input.match(/^keylol:\/\/([^\/]*)$/i))
                 return `//storage.keylol.com/${match[1]}${suffix}`;

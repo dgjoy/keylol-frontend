@@ -1,6 +1,6 @@
 ﻿(function () {
-    keylolApp.provider("apiEndpoint", () => {
-        let _apiEndpoint = "";
+    keylolApp.provider('apiEndpoint', () => {
+        let _apiEndpoint = '';
         return {
             setEndPoint (endpoint) {
                 _apiEndpoint = endpoint;

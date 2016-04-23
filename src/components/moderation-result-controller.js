@@ -5,10 +5,10 @@
         }
     }
 
-    keylolApp.component("moderationResult", {
-        templateUrl: "src/components/moderation-result.html",
+    keylolApp.component('moderationResult', {
+        templateUrl: 'src/components/moderation-result.html',
         controller: ModerationResultController,
-        controllerAs: "moderationResult",
-        bindings: { type: "@" },
+        controllerAs: 'moderationResult',
+        bindings: { type: '@' },
     });
 }());

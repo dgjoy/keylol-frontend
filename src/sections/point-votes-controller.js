@@ -1,6 +1,6 @@
 ﻿(function () {
-    keylolApp.controller("PointVotesController", [
-        "$scope", "union", "utils",
+    keylolApp.controller('PointVotesController', [
+        '$scope', 'union', 'utils',
         ($scope, union, utils) => {
             $scope.point = union.point;
             $scope.utils = utils;

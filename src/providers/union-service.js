@@ -1,12 +1,12 @@
 ﻿(function () {
-    keylolApp.factory("union", [
-        "$localStorage", "$sessionStorage", "$rootScope",
+    keylolApp.factory('union', [
+        '$localStorage', '$sessionStorage', '$rootScope',
         ($localStorage, $sessionStorage, $rootScope) => {
             const union = {
                 $localStorage,
                 $sessionStorage,
             };
-            $rootScope.$on("$routeChangeSuccess", () => {
+            $rootScope.$on('$routeChangeSuccess', () => {
                 for (const member in union) {
                     delete union[member];
                 }

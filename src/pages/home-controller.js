@@ -1,35 +1,35 @@
 ﻿(function () {
-    keylolApp.controller("HomeController", [
-        "pageHead", "$scope", "union", "$http", "notification", "window", "utils", "$timeout", "$location",
-        "$rootScope", "articleTypes",
+    keylolApp.controller('HomeController', [
+        'pageHead', '$scope', 'union', '$http', 'notification', 'window', 'utils', '$timeout', '$location',
+        '$rootScope', 'articleTypes',
         (pageHead, $scope, union, $http, notification, window, utils, $timeout, $location,
         $rootScope, articleTypes) => {
             if (!union.$localStorage.login) {
                 $scope.notLogin = true;
                 return;
             }
-            pageHead.setTitle("其乐 Keylol");
+            pageHead.setTitle('其乐 Keylol');
             $scope.union = union;
             const timeline = {
                 title: {
-                    mainTitle: "讯息轨道",
-                    subTitle: "Timeline",
+                    mainTitle: '讯息轨道',
+                    subTitle: 'Timeline',
                 },
                 rightButton: {
-                    avatar: "assets/images/edit-pen.png",
-                    alt: "发表新文章",
-                    text: "文",
+                    avatar: 'assets/images/edit-pen.png',
+                    alt: '发表新文章',
+                    text: '文',
                     clickAction () {
                         window.show({
-                            templateUrl: "src/windows/editor.html",
-                            controller: "EditorController",
+                            templateUrl: 'src/windows/editor.html',
+                            controller: 'EditorController',
                             inputs: { options: null },
                         });
                     },
                 },
                 noArticleText: {
-                    main: "从你的游戏兴趣开始，慢慢搭建一条讯息轨道",
-                    sub: "订阅一个据点后，其收到的文章投稿会推送到这里。",
+                    main: '从你的游戏兴趣开始，慢慢搭建一条讯息轨道',
+                    sub: '订阅一个据点后，其收到的文章投稿会推送到这里。',
                 },
                 hasExpand: true,
                 loadingLock: true,
@@ -37,7 +37,7 @@
                     $http.get(`${apiEndpoint}article/subscription`, { params }).then(response => {
                         callback(response);
                     }, response => {
-                        notification.error("发生未知错误，请重试或与站务职员联系", response);
+                        notification.error('发生未知错误，请重试或与站务职员联系', response);
                     });
                 },
                 entries: [],
@@ -46,8 +46,8 @@
             if (union.$localStorage.firstOpenKeylol) {
                 union.$localStorage.firstOpenKeylol = false;
                 window.show({
-                    templateUrl: "src/windows/sync-loading.html",
-                    controller: "SyncLoadingController",
+                    templateUrl: 'src/windows/sync-loading.html',
+                    controller: 'SyncLoadingController',
                     inputs: {
                         options: {
                             isFirstTime: true,
@@ -60,10 +60,10 @@
 
                 $http.put(`${apiEndpoint}user-game-record/my`, {}).then(response => {
                     window.show({
-                        templateUrl: "src/windows/synchronization.html",
-                        controller: "SynchronizationController",
+                        templateUrl: 'src/windows/synchronization.html',
+                        controller: 'SynchronizationController',
                         inputs: {
-                            condition: "subsequential",
+                            condition: 'subsequential',
                             autoSubscribed: response.data,
                             options: { getSubscription },
                         },
@@ -73,21 +73,21 @@
                     if (response.status === 404) return;
                     if (response.status === 401) {
                         window.show({
-                            templateUrl: "src/windows/synchronization.html",
-                            controller: "SynchronizationController",
+                            templateUrl: 'src/windows/synchronization.html',
+                            controller: 'SynchronizationController',
                             inputs: {
-                                condition: "fetchFailed",
+                                condition: 'fetchFailed',
                                 autoSubscribed: {},
                                 options: { getSubscription },
                             },
                         });
                         return;
                     }
-                    notification.error("发生未知错误，请重试或与站务职员联系", response);
+                    notification.error('发生未知错误，请重试或与站务职员联系', response);
                 });
             }
 
-            $rootScope.$on("homeRefresh", () => {
+            $rootScope.$on('homeRefresh', () => {
                 getSubscription();
             });
 
@@ -97,7 +97,7 @@
                 timeline.activePoints = null;
                 const params = {
                     take: utils.timelineLoadCount,
-                    articleTypeFilter: "",
+                    articleTypeFilter: '',
                     shortReviewFilter: 1,
                 };
                 let filterOptions = [];
@@ -111,7 +111,7 @@
                 for (let i = 0; i < articleTypes.length; i++) {
                     if (filterOptions[i]) {
                         if (params.articleTypeFilter.length !== 0) {
-                            params.articleTypeFilter += ",";
+                            params.articleTypeFilter += ',';
                         }
                         params.articleTypeFilter += articleTypes[i].name;
                     }
@@ -121,7 +121,7 @@
                     timeline.loadingLock = false;
                 } else {
                     if (!params.articleTypeFilter) {
-                        params.articleTypeFilter = "hack";
+                        params.articleTypeFilter = 'hack';
                     }
 
                     $http.get(`${apiEndpoint}article/subscription`, { params }).then(response => {
@@ -176,8 +176,8 @@
                                 };
                                 if (article.TimelineReason) {
                                     switch (article.TimelineReason) {
-                                        case "Like":
-                                            entry.sources.type = "like";
+                                        case 'Like':
+                                            entry.sources.type = 'like';
                                             entry.sources.userArray = [];
                                             if (article.LikeByUsers) {
                                                 for (let j = 0;j < article.LikeByUsers.length;j++) {
@@ -193,16 +193,16 @@
                                                 });
                                             }
                                             break;
-                                        case "Point":
+                                        case 'Point':
                                             if (article.AttachedPoints) {
-                                                entry.sources.type = "point";
+                                                entry.sources.type = 'point';
                                                 entry.sources.points = article.AttachedPoints;
                                             } else {
                                                 entry.sources = null;
                                             }
                                             break;
-                                        case "Publish":
-                                            entry.sources.type = "publish";
+                                        case 'Publish':
+                                            entry.sources.type = 'publish';
                                             break;
                                         default :
                                             break;
@@ -228,12 +228,12 @@
                                     timeline.activePoints[i].type = utils.getPointType(point.Type);
                                 }
                             }, response => {
-                                notification.error("发生未知错误，请重试或与站务职员联系", response);
+                                notification.error('发生未知错误，请重试或与站务职员联系', response);
                             });
                             timeline.loadingLock = false;
                         }
                     }, response => {
-                        notification.error("发生未知错误，请重试或与站务职员联系", response);
+                        notification.error('发生未知错误，请重试或与站务职员联系', response);
                         timeline.loadingLock = false;
                     });
                 }

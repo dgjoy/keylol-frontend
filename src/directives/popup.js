@@ -1,17 +1,17 @@
 (function () {
-    keylolApp.directive("popup", [
-        "window", "$timeout",
+    keylolApp.directive('popup', [
+        'window', '$timeout',
         (window, $timeout) => {
             return {
-                restrict: "A",
-                scope: { showFn: "=popup" },
+                restrict: 'A',
+                scope: { showFn: '=popup' },
                 link (scope, element) {
                     const contexts = {};
                     const objectReferences = [];
                     scope.showFn = function (optionsOverride) {
                         const options = {
-                            attachSide: "top",
-                            align: "center",
+                            attachSide: 'top',
+                            align: 'center',
                             offsetX: 0,
                             offsetY: 0,
                             showDelay: 0,
@@ -21,7 +21,7 @@
                             // Copy the event object because it may be changed.
                             // e.g. mouseenter event will be changed to mouseover after the its listener has been excuted.
                             optionsOverride.event = $.extend({}, optionsOverride.event);
-                            if (optionsOverride.event.type === "mouseenter") {
+                            if (optionsOverride.event.type === 'mouseenter') {
                                 // Change default delay for mouseenter trigger type
                                 options.showDelay = 350;
                                 options.closeDelay = 400;
@@ -63,9 +63,9 @@
                                     showTimeout = null;
 
                                     if (!$.contains(document, element[0])) {
-                                        if (options.event && options.event.type === "mouseenter") {
+                                        if (options.event && options.event.type === 'mouseenter') {
                                             delete contexts[contextId];
-                                            $(options.event.currentTarget).off("mouseleave", onTriggerMouseLeave);
+                                            $(options.event.currentTarget).off('mouseleave', onTriggerMouseLeave);
                                         }
                                         return;
                                     }
@@ -87,12 +87,12 @@
                                         const width = element.innerWidth();
                                         const height = element.innerHeight();
 
-                                        if (options.attachSide === "left" || options.attachSide === "right") {
+                                        if (options.attachSide === 'left' || options.attachSide === 'right') {
                                             switch (options.align) {
-                                                case "top":
+                                                case 'top':
                                                     break;
 
-                                                case "bottom":
+                                                case 'bottom':
                                                     position.top = position.top + height - popupHeight;
                                                     break;
 
@@ -100,17 +100,17 @@
                                                     position.top = (2 * position.top + height - popupHeight) / 2;
                                                     break;
                                             }
-                                            if (options.attachSide === "left") { // Left
+                                            if (options.attachSide === 'left') { // Left
                                                 position.left -= popupWidth;
                                             } else { // Right
                                                 position.left += width;
                                             }
                                         } else {
                                             switch (options.align) {
-                                                case "left":
+                                                case 'left':
                                                     break;
 
-                                                case "right":
+                                                case 'right':
                                                     position.left = position.left + width - popupWidth;
                                                     break;
 
@@ -118,7 +118,7 @@
                                                     position.left = (2 * position.left + width - popupWidth) / 2;
                                                     break;
                                             }
-                                            if (options.attachSide === "bottom") { // Bottom
+                                            if (options.attachSide === 'bottom') { // Bottom
                                                 position.top += height;
                                             } else { // Top
                                                 position.top -= popupHeight;
@@ -132,7 +132,7 @@
 
                                     if (options.event) {
                                         let onBodyClick;
-                                        if (options.event.type === "click") {
+                                        if (options.event.type === 'click') {
                                             windowPromise.then(window => {
                                                 onBodyClick = function (e) {
                                                     if (e.target === options.event.currentTarget ||
@@ -144,12 +144,12 @@
                                                     if (e.target !== window.$element[0] && !$.contains(window.$element[0], e.target))
                                                         close();
                                                 };
-                                                document.body.addEventListener("click", onBodyClick, true);
+                                                document.body.addEventListener('click', onBodyClick, true);
                                                 return window.close;
                                             }).then(() => {
-                                                document.body.removeEventListener("click", onBodyClick, true);
+                                                document.body.removeEventListener('click', onBodyClick, true);
                                             });
-                                        } else if (options.event.type === "mouseenter") {
+                                        } else if (options.event.type === 'mouseenter') {
                                             function onPopupMouseEnter () {
                                                 show(true);
                                             }
@@ -161,14 +161,14 @@
                                                     if (e.target !== window.$element[0] && !$.contains(window.$element[0], e.target))
                                                         window.closeNow();
                                                 };
-                                                document.body.addEventListener("click", onBodyClick, true);
+                                                document.body.addEventListener('click', onBodyClick, true);
                                                 window.$element.hover(onPopupMouseEnter, onPopupMouseLeave);
                                                 window.close.then(() => {
                                                     delete contexts[contextId];
-                                                    document.body.removeEventListener("click", onBodyClick, true);
-                                                    $(options.event.currentTarget).off("mouseleave", onTriggerMouseLeave);
-                                                    window.$element.off("mouseenter", onPopupMouseEnter);
-                                                    window.$element.off("mouseleave", onPopupMouseLeave);
+                                                    document.body.removeEventListener('click', onBodyClick, true);
+                                                    $(options.event.currentTarget).off('mouseleave', onTriggerMouseLeave);
+                                                    window.$element.off('mouseenter', onPopupMouseEnter);
+                                                    window.$element.off('mouseleave', onPopupMouseLeave);
                                                 });
                                             });
                                         }
@@ -176,7 +176,7 @@
                                     return windowPromise;
                                 }, options.showDelay);
 
-                                if (options.event && options.event.type === "mouseenter") {
+                                if (options.event && options.event.type === 'mouseenter') {
                                     onTriggerMouseLeave = function () {
                                         close();
                                     };
@@ -187,7 +187,7 @@
                                     contexts[contextId] = { show };
                                     showTimeout.catch(() => {
                                         delete contexts[contextId];
-                                        $(options.event.currentTarget).off("mouseleave", onTriggerMouseLeave);
+                                        $(options.event.currentTarget).off('mouseleave', onTriggerMouseLeave);
                                     });
                                 }
 

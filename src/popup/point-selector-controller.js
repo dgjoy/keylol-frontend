@@ -1,13 +1,13 @@
 ﻿(function () {
-    keylolApp.controller("PointSelectorController", [
-        "$scope", "$window", "close", "union", "selected", "pointArray", "utils", "window",
+    keylolApp.controller('PointSelectorController', [
+        '$scope', '$window', 'close', 'union', 'selected', 'pointArray', 'utils', 'window',
         ($scope, $window, close, union, selected, pointArray, utils, window) => {
             $scope.pointArray = pointArray;
             $scope.pointArray.push({
-                AvatarImage: "assets/images/addition-icon.png",
-                ChineseName: "开设新据点",
-                EnglishName: "没有找到你要的游戏？",
-                PreferredName: "Chinese",
+                AvatarImage: 'assets/images/addition-icon.png',
+                ChineseName: '开设新据点',
+                EnglishName: '没有找到你要的游戏？',
+                PreferredName: 'Chinese',
             });
             $scope.utils = utils;
             for (let i = 0;i < $scope.pointArray.length;i++) {
@@ -26,8 +26,8 @@
                     close($scope.pointArray[selector]);
                 } else {
                     window.show({
-                        templateUrl: "src/windows/shop-link.html",
-                        controller: "ShopLinkController",
+                        templateUrl: 'src/windows/shop-link.html',
+                        controller: 'ShopLinkController',
                     });
                 }
             };
@@ -51,7 +51,7 @@
                     }
                 });
             };
-            $window.addEventListener("keydown", union.keydownCallback, true);
+            $window.addEventListener('keydown', union.keydownCallback, true);
         },
     ]);
 }());

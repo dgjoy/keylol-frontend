@@ -1,9 +1,9 @@
 ﻿(function () {
-    keylolApp.directive("selectedOnClick", () => {
+    keylolApp.directive('selectedOnClick', () => {
         return {
-            restrict: "A",
+            restrict: 'A',
             link (scope, element, attrs) {
-                element.on("click", () => {
+                element.on('click', () => {
                     this.setSelectionRange(0, this.value.length);
                 });
             },

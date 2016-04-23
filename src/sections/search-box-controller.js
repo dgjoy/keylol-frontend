@@ -1,9 +1,9 @@
 ﻿(function () {
-    keylolApp.controller("SearchBoxController", [
-        "$scope", "union", "$timeout", "$location",
+    keylolApp.controller('SearchBoxController', [
+        '$scope', 'union', '$timeout', '$location',
         ($scope, union, $timeout, $location) => {
             $scope.onSearching = function () {
-                let searchType = "";
+                let searchType = '';
                 for (let i = 0;i < union.searchFilter.length;i++) {
                     if (union.searchFilter[i].active) {
                         searchType = union.searchFilter[i].type;
@@ -21,11 +21,11 @@
             function showSearchSelector ($event) {
                 searchSelectorDisplayed = true;
                 $scope.showSearchSelectorPopup({
-                    templateUrl: "src/popup/search-selector.html",
-                    controller: "SearchSelectorController",
-                    attachSide: "bottom",
+                    templateUrl: 'src/popup/search-selector.html',
+                    controller: 'SearchSelectorController',
+                    attachSide: 'bottom',
                     event: $event,
-                    align: "right",
+                    align: 'right',
                     inputs: { options: searchSelectorOptions },
                 }).then(popup => {
                     return popup.close;
@@ -35,16 +35,16 @@
             }
 
             $scope.getSearchResults = function ($event) {
-                let searchText = "";
+                let searchText = '';
                 if ($scope.searchText !== undefined) {
                     searchText = $scope.searchText;
                 }
                 searchSelectorOptions.searchText = searchText;
                 if (!searchSelectorDisplayed)
-                    showSearchSelector($.extend($event, { type: "click", acceptCurrentTarget: true }));
+                    showSearchSelector($.extend($event, { type: 'click', acceptCurrentTarget: true }));
             };
 
-            $scope.$watch("searchText", () => {
+            $scope.$watch('searchText', () => {
                 if ($scope.delayGetResult) {
                     $timeout.cancel($scope.delayGetResult);
                 }
@@ -57,17 +57,17 @@
 
             union.searchFilter = [
                 {
-                    type: "point",
-                    text: "据点",
+                    type: 'point',
+                    text: '据点',
                     active: true,
                 },
                 {
-                    type: "article",
-                    text: "文章",
+                    type: 'article',
+                    text: '文章',
                 },
                 {
-                    type: "user",
-                    text: "用户",
+                    type: 'user',
+                    text: '用户',
                 },
             ];
         },

@@ -1,5 +1,5 @@
 ﻿(function () {
-    keylolApp.directive("focusMe", ["$parse", $parse => {
+    keylolApp.directive('focusMe', ['$parse', $parse => {
         return {
             link (scope, element, attrs) {
                 scope.$watch(attrs.focusMe, value => {

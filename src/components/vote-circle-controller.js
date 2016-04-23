@@ -6,14 +6,14 @@
         }
     }
 
-    keylolApp.component("voteCircle", {
-        templateUrl: "src/components/vote-circle.html",
+    keylolApp.component('voteCircle', {
+        templateUrl: 'src/components/vote-circle.html',
         controller: VoteCircleController,
-        controllerAs: "voteCircle",
+        controllerAs: 'voteCircle',
         bindings: {
-            vote: "<",
-            disabled: "<",
-            wholeWhite: "<",
+            vote: '<',
+            disabled: '<',
+            wholeWhite: '<',
         },
     });
 }());

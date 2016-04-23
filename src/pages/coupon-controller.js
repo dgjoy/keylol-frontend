@@ -2,14 +2,14 @@
  * Created by Rex on 15/9/23.
  */
 (function () {
-    keylolApp.controller("CouponController", [
-        "pageHead", "$scope", "union", "$http", "notification", "$location",
+    keylolApp.controller('CouponController', [
+        'pageHead', '$scope', 'union', '$http', 'notification', '$location',
         (pageHead, $scope, union, $http, notification, $location) => {
             if (!union.$localStorage.user) {
-                $location.url("/");
+                $location.url('/');
                 return;
             }
-            pageHead.setTitle("文券 - 其乐");
+            pageHead.setTitle('文券 - 其乐');
             $scope.union = union;
 
             union.summary = {
@@ -20,7 +20,7 @@
                 avatar: union.$localStorage.user.AvatarImage,
                 background: union.$localStorage.user.ProfilePointBackgroundImage,
                 pointSum: {
-                    type: "个人",
+                    type: '个人',
                     readerNum: union.$localStorage.user.SubscriberCount,
                     articleNum: union.$localStorage.user.ArticleCount,
                 },

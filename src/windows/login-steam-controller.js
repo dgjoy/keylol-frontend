@@ -1,6 +1,6 @@
 ﻿(function () {
-    keylolApp.controller("LoginSteamController", [
-        "$scope", "close", "$http", "apiEndpoint", "window", "union", "$timeout", "notification", "utils", "$route",
+    keylolApp.controller('LoginSteamController', [
+        '$scope', 'close', '$http', 'apiEndpoint', 'window', 'union', '$timeout', 'notification', 'utils', '$route',
         ($scope, close, $http, apiEndpoint, window, union, $timeout, notification, utils, $route) => {
             const connection = $.connection.new();
             const steamLoginHubProxy = connection.steamLoginHub;
@@ -16,8 +16,8 @@
 
             $scope.switchToLoginPasswordWindow = function () {
                 window.show({
-                    templateUrl: "src/windows/login-password.html",
-                    controller: "LoginPasswordController",
+                    templateUrl: 'src/windows/login-password.html',
+                    controller: 'LoginPasswordController',
                 });
                 $scope.cancel();
             };
@@ -30,11 +30,11 @@
                         union.$localStorage.login = response.data;
                         connection.stop();
                         $timeout(() => {
-                            notification.success("登录成功，欢迎回到其乐");
+                            notification.success('登录成功，欢迎回到其乐');
                             close();
                         }, 1500);
                     }, response => {
-                        notification.error("发生未知错误，请重试或与站务职员联系", response);
+                        notification.error('发生未知错误，请重试或与站务职员联系', response);
                     });
                 });
             };
@@ -47,7 +47,7 @@
                     });
                 });
             }, () => {
-                notification.error("连接失败");
+                notification.error('连接失败');
                 $scope.cancel();
             });
         },

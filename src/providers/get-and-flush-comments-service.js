@@ -1,6 +1,6 @@
 ﻿(function () {
-    keylolApp.factory("getAndFlushComments", [
-        "$http", "union", "notification", "utils",
+    keylolApp.factory('getAndFlushComments', [
+        '$http', 'union', 'notification', 'utils',
         function ($http, union, notification, utils) {
             function parseComments (str, index) {
                 const regExpForComment = /^((?:#\d+[ \t]*)+)(?:$|[ \t]+)/gm;
@@ -23,11 +23,11 @@
             }
 
             return function getAndFlushComments(article, pageNumOrSqNum, getCommentsType, callback = () => {}) {
-                if (getCommentsType === "hot") {
+                if (getCommentsType === 'hot') {
                     $http.get(`${apiEndpoint}comment`, {
                         params: {
                             articleId: article.Id,
-                            orderBy: "LikeCount",
+                            orderBy: 'LikeCount',
                             desc: true,
                             take: 3,
                         },
@@ -57,9 +57,9 @@
                         }
                         $.extend(union.hotComments, hotComments);
                     }, response => {
-                        notification.error("发生未知错误，请重试或与站务职员联系", response);
+                        notification.error('发生未知错误，请重试或与站务职员联系', response);
                     });
-                } else if (getCommentsType === "page") {
+                } else if (getCommentsType === 'page') {
                     const pageNum = pageNumOrSqNum;
                     $http.get(`${apiEndpoint}comment`, {
                         params: {
@@ -86,14 +86,14 @@
                                 comments[i].Content = parseComments(comments[i].Content, comments[i].SequenceNumberForArticle);
                             }
                         }
-                        union.article.totalComments = response.headers("X-Total-Record-Count");
+                        union.article.totalComments = response.headers('X-Total-Record-Count');
                         union.pageElements.totalPages = union.article.totalComments <= 17 ? 1 : parseInt((union.article.totalComments - 18) / 20) + 2;
                         union.pageElements.currPage = pageNum;
-                        $(".section-article-comments .comment.highlight").removeClass("highlight");
+                        $('.section-article-comments .comment.highlight').removeClass('highlight');
                         union.comments.length = 0;
                         $.extend(union.comments, comments);
                     }, response => {
-                        notification.error("发生未知错误，请重试或与站务职员联系", response);
+                        notification.error('发生未知错误，请重试或与站务职员联系', response);
                     });
                 } else {
                     const sqNum = pageNumOrSqNum;
@@ -122,15 +122,15 @@
                                 comments[i].Content = parseComments(comments[i].Content, comments[i].SequenceNumberForArticle);
                             }
                         }
-                        union.article.totalComments = response.headers("X-Total-Record-Count");
+                        union.article.totalComments = response.headers('X-Total-Record-Count');
                         union.pageElements.totalPages = union.article.totalComments <= 17 ? 1 : parseInt((union.article.totalComments - 18) / 20) + 2;
                         union.pageElements.currPage = sqNum <= 17 ? 1 : parseInt((sqNum - 17) / 20) + 2;
-                        $(".section-article-comments .comment.highlight").removeClass("highlight");
+                        $('.section-article-comments .comment.highlight').removeClass('highlight');
                         union.comments.length = 0;
                         $.extend(union.comments, comments);
                         callback();
                     }, response => {
-                        notification.error("评论刷新失败", response);
+                        notification.error('评论刷新失败', response);
                     });
                 }
             };

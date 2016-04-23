@@ -1,14 +1,14 @@
 (function () {
-    keylolApp.factory("window", [
-        "$compile", "$controller", "$rootScope", "$q", "$window", "$templateRequest", "$timeout", "$animate",
+    keylolApp.factory('window', [
+        '$compile', '$controller', '$rootScope', '$q', '$window', '$templateRequest', '$timeout', '$animate',
         ($compile, $controller, $rootScope, $q, $window, $templateRequest, $timeout, $animate) => {
             function WindowService() {
                 const self = this;
 
                 let bodyOriginalPaddingRight;
                 function scrollBarWidth () {
-                    const scrollDiv = document.createElement("div");
-                    scrollDiv.className = "scrollbar-measure";
+                    const scrollDiv = document.createElement('div');
+                    scrollDiv.className = 'scrollbar-measure';
                     $(document.body).append(scrollDiv);
                     const width = scrollDiv.offsetWidth - scrollDiv.clientWidth;
                     $(scrollDiv).remove();
@@ -17,9 +17,9 @@
 
                 function adjustScrollBar () {
                     const $body = $(document.body);
-                    if ($body.find("main[ng-view] > window").length > 0) {
-                        if (!$body.hasClass("body-window-open")) {
-                            bodyOriginalPaddingRight = document.body.style.paddingRight || "";
+                    if ($body.find('main[ng-view] > window').length > 0) {
+                        if (!$body.hasClass('body-window-open')) {
+                            bodyOriginalPaddingRight = document.body.style.paddingRight || '';
 
                             // Test if body is overflowing
                             let fullWindowWidth = $window.innerWidth;
@@ -29,16 +29,16 @@
                             }
                             if (document.body.clientWidth < fullWindowWidth) { // Body is overflowing
                                 // Set body padding-right
-                                const bodyPaddingRight = parseInt(($body.css("padding-right") || 0), 10);
-                                $body.css("padding-right", `${bodyPaddingRight + scrollBarWidth()}px`);
+                                const bodyPaddingRight = parseInt(($body.css('padding-right') || 0), 10);
+                                $body.css('padding-right', `${bodyPaddingRight + scrollBarWidth()}px`);
                             }
 
-                            $body.addClass("body-window-open");
+                            $body.addClass('body-window-open');
                         }
                     } else {
-                        if ($body.hasClass("body-window-open")) {
-                            $body.css("padding-right", bodyOriginalPaddingRight);
-                            $body.removeClass("body-window-open");
+                        if ($body.hasClass('body-window-open')) {
+                            $body.css('padding-right', bodyOriginalPaddingRight);
+                            $body.removeClass('body-window-open');
                         }
                     }
                 }
@@ -82,7 +82,7 @@
                             });
                         }
 
-                        const cancelListen = $rootScope.$on("$locationChangeSuccess", () => {
+                        const cancelListen = $rootScope.$on('$locationChangeSuccess', () => {
                             close();
                         });
 
@@ -104,7 +104,7 @@
 
                         // Append
                         function appendWindow () {
-                            const main = options.global ? document.body : $("main[ng-view]")[0];
+                            const main = options.global ? document.body : $('main[ng-view]')[0];
                             $animate.enter($element, main, main.lastChild);
                             if (options.adjustScrollBar)
                                 adjustScrollBar();

@@ -2,36 +2,36 @@
  * Created by Rex on 15/9/23.
  */
 (function () {
-    keylolApp.controller("AllArticlesController", [
-        "pageHead", "$scope", "union", "$http", "notification", "$location", "utils", "$timeout", "window",
+    keylolApp.controller('AllArticlesController', [
+        'pageHead', '$scope', 'union', '$http', 'notification', '$location', 'utils', '$timeout', 'window',
         (pageHead, $scope, union, $http, notification, $location, utils, $timeout, window) => {
             $scope.searchExist = true;
             $scope.union = union;
-            pageHead.setTitle("最新文章 - 其乐");
+            pageHead.setTitle('最新文章 - 其乐');
             const summary = {
                 actions: [],
                 head: {
-                    mainHead: "最新投稿",
-                    subHead: "Recent Submissions",
+                    mainHead: '最新投稿',
+                    subHead: 'Recent Submissions',
                 },
-                background: "keylol://989df8e508510f8447aaf06ddadcac5f.jpg",
+                background: 'keylol://989df8e508510f8447aaf06ddadcac5f.jpg',
                 defaultSum: {
-                    text: "所有近日发布的投稿文章",
+                    text: '所有近日发布的投稿文章',
                 },
             };
             const timeline = {
                 title: {
-                    mainTitle: "讯息轨道",
-                    subTitle: "Timeline",
+                    mainTitle: '讯息轨道',
+                    subTitle: 'Timeline',
                 },
                 rightButton: {
-                    avatar: "assets/images/edit-pen.png",
-                    alt: "发表新文章",
-                    text: "文",
+                    avatar: 'assets/images/edit-pen.png',
+                    alt: '发表新文章',
+                    text: '文',
                     clickAction () {
                         window.show({
-                            templateUrl: "src/windows/editor.html",
-                            controller: "EditorController",
+                            templateUrl: 'src/windows/editor.html',
+                            controller: 'EditorController',
                             inputs: { options: null },
                         });
                     },
@@ -40,10 +40,10 @@
                     $http.get(`${apiEndpoint}article/latest`, { params }).then(response => {
                         callback(response);
                     }, response => {
-                        notification.error("发生未知错误，请重试或与站务职员联系", response);
+                        notification.error('发生未知错误，请重试或与站务职员联系', response);
                     });
                 },
-                datetime: "outBlock",
+                datetime: 'outBlock',
                 hasExpand: true,
                 loadingLock: true,
                 entries: [],
@@ -53,7 +53,7 @@
                 params: {
                     titleOnly: false,
                     take: utils.timelineLoadCount,
-                    articleTypeFilter: "评,研,讯,谈,档",
+                    articleTypeFilter: '评,研,讯,谈,档',
                 },
             }).then(response => {
                 const articleList = response.data;
@@ -101,7 +101,7 @@
                         };
                         if (article.AttachedPoints && article.AttachedPoints.length > 0) {
                             entry.sources = {
-                                type: "point",
+                                type: 'point',
                                 points: article.AttachedPoints,
                             };
                         } else {
@@ -119,7 +119,7 @@
                     }
                 }
             }, response => {
-                notification.error("发生未知错误，请重试或与站务职员联系", response);
+                notification.error('发生未知错误，请重试或与站务职员联系', response);
                 timeline.loadingLock = false;
             });
 

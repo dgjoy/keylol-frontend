@@ -2,11 +2,11 @@
  * Created by Rex on 15/9/23.
  */
 (function () {
-    keylolApp.controller("ReadersController", [
-        "pageHead", "$scope", "union", "$http", "notification", "utils", "$timeout", "$location",
+    keylolApp.controller('ReadersController', [
+        'pageHead', '$scope', 'union', '$http', 'notification', 'utils', '$timeout', '$location',
         (pageHead, $scope, union, $http, notification, utils, $timeout, $location) => {
             if (!union.$localStorage.user) {
-                $location.url("/");
+                $location.url('/');
                 return;
             }
             $scope.union = union;
@@ -18,7 +18,7 @@
                 },
                 avatar: union.$localStorage.user.AvatarImage,
                 pointSum: {
-                    type: "个人",
+                    type: '个人',
                     readerNum: union.$localStorage.user.SubscriberCount,
                     articleNum: union.$localStorage.user.ArticleCount,
                 },
@@ -27,19 +27,19 @@
 
             $http.get(`${apiEndpoint}user/${union.$localStorage.user.IdCode}`, {
                 params: {
-                    idType: "IdCode",
+                    idType: 'IdCode',
                     profilePointBackgroundImage: true,
                 },
             }).then(response => {
                 summary.background = response.data.ProfilePointBackgroundImage;
             }, response => {
-                notification.error("发生未知错误，请重试或与站务职员联系", response);
+                notification.error('发生未知错误，请重试或与站务职员联系', response);
             });
 
             const timeline = {
                 title: {
-                    mainTitle: "搜索结果",
-                    subTitle: "Search Result",
+                    mainTitle: '搜索结果',
+                    subTitle: 'Search Result',
                 },
                 cannotClick: true,
                 loadAction () {
@@ -74,7 +74,7 @@
                                     const user = response.data[i];
                                     timeline.searchNotFound = false;
                                     const entry = {
-                                        types: ["个人"],
+                                        types: ['个人'],
                                         pointInfo: {
                                             reader: user.SubscriberCount,
                                             article: user.ArticleCount,
@@ -102,7 +102,7 @@
                                 timeline.loadingLock = false;
                             }
                         }, response => {
-                            notification.error("发生未知错误，请重试或与站务职员联系", response);
+                            notification.error('发生未知错误，请重试或与站务职员联系', response);
                             timeline.loadingLock = false;
                         });
                     }

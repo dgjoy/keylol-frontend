@@ -11,7 +11,7 @@
                 $scope.$watch(() => {
                     return union.$localStorage.user.MessageCount;
                 }, newValue => {
-                    this.newMessages = typeof newValue === "string" ? newValue.split(",").map(element => {
+                    this.newMessages = typeof newValue === 'string' ? newValue.split(',').map(element => {
                         return parseInt(element);
                     }) : [0, 0, 0];
                 });
@@ -35,7 +35,7 @@
                             union.$localStorage.user.fakeCoupon = undefined;
                         }
                     }, response => {
-                        notification.error("发生未知错误，请重试或与站务职员联系", response);
+                        notification.error('发生未知错误，请重试或与站务职员联系', response);
                         this.hideAnimate = true;
                         union.$localStorage.user.fakeCoupon = undefined;
                     });
@@ -61,29 +61,29 @@
         }
         showRegistrationWindow () {
             this.window.show({
-                templateUrl: "src/windows/registration.html",
-                controller: "RegistrationController",
+                templateUrl: 'src/windows/registration.html',
+                controller: 'RegistrationController',
                 inputs: { options: {} },
             });
         };
         showLoginSteamWindow () {
             this.window.show({
-                templateUrl: "src/windows/login-steam.html",
-                controller: "LoginSteamController",
+                templateUrl: 'src/windows/login-steam.html',
+                controller: 'LoginSteamController',
             });
         };
         showSettingsWindow () {
             this.window.show({
-                templateUrl: "src/windows/settings.html",
-                controller: "SettingsController",
+                templateUrl: 'src/windows/settings.html',
+                controller: 'SettingsController',
                 inputs: { options: {} },
             });
         };
     }
 
-    keylolApp.component("actionHub", {
-        templateUrl: "src/sections/action-hub.html",
+    keylolApp.component('actionHub', {
+        templateUrl: 'src/sections/action-hub.html',
         controller: ActionHubController,
-        controllerAs: "actionHub",
+        controllerAs: 'actionHub',
     });
 }());

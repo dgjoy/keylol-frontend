@@ -2,8 +2,8 @@
  * Created by Rex on 15/9/23.
  */
 (function () {
-    keylolApp.controller("SearchResultsController", [
-        "pageHead", "$scope", "union", "$http", "notification", "$routeParams", "$location", "utils", "$timeout",
+    keylolApp.controller('SearchResultsController', [
+        'pageHead', '$scope', 'union', '$http', 'notification', '$routeParams', '$location', 'utils', '$timeout',
         (pageHead, $scope, union, $http, notification, $routeParams, $location, utils, $timeout) => {
             $scope.searchExist = true;
             $scope.union = union;
@@ -15,48 +15,48 @@
                 actions: [],
                 head: {
                     mainHead: $routeParams.keyword,
-                    subHead: "的搜索结果",
+                    subHead: '的搜索结果',
                 },
-                background: "keylol://18714f31d985cb8e8b59661cabd9d23a.jpg",
-                defaultSum: { text: "" },
+                background: 'keylol://18714f31d985cb8e8b59661cabd9d23a.jpg',
+                defaultSum: { text: '' },
             };
             const timeline = {
                 title: {
-                    mainTitle: "搜索结果",
-                    subTitle: "Search Result",
+                    mainTitle: '搜索结果',
+                    subTitle: 'Search Result',
                 },
                 actions: [
                     {
                         active: false,
-                        text: "据点",
+                        text: '据点',
                         onClick () {
                             $location.url(`search/point/${encodeURIComponent($routeParams.keyword)}`);
                         },
                     },
                     {
                         active: false,
-                        text: "文章",
+                        text: '文章',
                         onClick () {
                             $location.url(`search/article/${encodeURIComponent($routeParams.keyword)}`);
                         },
                     },
                     {
                         active: false,
-                        text: "用户",
+                        text: '用户',
                         onClick () {
                             $location.url(`search/user/${encodeURIComponent($routeParams.keyword)}`);
                         },
                     },
                     {
                         active: false,
-                        text: "全站",
+                        text: '全站',
                         onClick () {},
                     },
                 ],
                 entries: [],
             };
             switch ($routeParams.searchType) {
-                case "point":
+                case 'point':
                     timeline.actions[0].active = true;
                     timeline.loadAction = function () {
                         timeline.loadingLock = true;
@@ -68,7 +68,7 @@
                                 take: utils.timelineLoadCount,
                             },
                         }).then(response => {
-                            const totalRecordCount = response.headers("X-Total-Record-Count");
+                            const totalRecordCount = response.headers('X-Total-Record-Count');
                             summary.defaultSum.text = `找到 ${totalRecordCount} 个符合的项目`;
                             timeline.noMoreArticle = response.data.length < utils.timelineLoadCount;
                             let timelineTimeout;
@@ -122,13 +122,13 @@
                                 timeline.loadingLock = false;
                             }
                         }, response => {
-                            notification.error("发生未知错误，请重试或与站务职员联系", response);
+                            notification.error('发生未知错误，请重试或与站务职员联系', response);
                             timeline.loadingLock = false;
                         });
                     };
                     timeline.loadAction();
                     break;
-                case "article":
+                case 'article':
                     timeline.actions[1].active = true;
                     timeline.loadAction = function () {
                         timeline.loadingLock = true;
@@ -140,7 +140,7 @@
                                 take: utils.timelineLoadCount,
                             },
                         }).then(response => {
-                            const totalRecordCount = response.headers("X-Total-Record-Count");
+                            const totalRecordCount = response.headers('X-Total-Record-Count');
                             summary.defaultSum.text = `找到 ${totalRecordCount} 个符合的项目`;
                             timeline.noMoreArticle = response.data.length < utils.timelineLoadCount;
                             if (totalRecordCount > 0) {
@@ -199,13 +199,13 @@
                                 timeline.loadingLock = false;
                             }
                         }, response => {
-                            notification.error("发生未知错误，请重试或与站务职员联系", response);
+                            notification.error('发生未知错误，请重试或与站务职员联系', response);
                             timeline.loadingLock = false;
                         });
                     };
                     timeline.loadAction();
                     break;
-                case "user":
+                case 'user':
                     timeline.loadAction = function () {
                     };
                     timeline.loadingLock = true;
@@ -213,7 +213,7 @@
                     timeline.actions[2].active = true;
                     $http.get(`${apiEndpoint}user/${encodeURIComponent($routeParams.keyword)}`, {
                         params: {
-                            idType: "UserName",
+                            idType: 'UserName',
                             stats: true,
                             subscribed: true,
                             profilePointBackgroundImage: true,
@@ -223,9 +223,9 @@
                             const user = response.data;
                             summary.background = user.ProfilePointBackgroundImage;
                             timeline.searchNotFound = false;
-                            summary.defaultSum.text = "找到 1 个符合的项目";
+                            summary.defaultSum.text = '找到 1 个符合的项目';
                             timeline.entries.push({
-                                types: ["个人"],
+                                types: ['个人'],
                                 pointInfo: {
                                     reader: user.SubscriberCount,
                                     article: user.ArticleCount,
@@ -247,9 +247,9 @@
                         timeline.loadingLock = false;
                     }, response => {
                         if (response.status === 404) {
-                            summary.defaultSum.text = "找到 0 个符合的项目";
+                            summary.defaultSum.text = '找到 0 个符合的项目';
                         } else {
-                            notification.error("发生未知错误，请重试或与站务职员联系", response);
+                            notification.error('发生未知错误，请重试或与站务职员联系', response);
                         }
                         timeline.loadingLock = false;
                         timeline.searchNotFound = true;

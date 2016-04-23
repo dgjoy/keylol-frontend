@@ -1,6 +1,6 @@
 ﻿(function () {
-    keylolApp.controller("PointListController", [
-        "$scope", "close", "$http", "apiEndpoint", "notification", "window",
+    keylolApp.controller('PointListController', [
+        '$scope', 'close', '$http', 'apiEndpoint', 'notification', 'window',
         function ($scope, close, $http, apiEndpoint, notification, window) {
             $scope.cancel = function () {
                 close();
@@ -15,17 +15,17 @@
                             take: recordPerPage,
                         },
                     }).then(response => {
-                        $scope.inline.totalPages = Math.ceil(response.headers("X-Total-Record-Count") / recordPerPage);
+                        $scope.inline.totalPages = Math.ceil(response.headers('X-Total-Record-Count') / recordPerPage);
                         $scope.inline.currentPage = newPage;
                         $scope.points = response.data;
                     }, response => {
-                        notification.error("发生未知错误，请重试或与站务职员联系", response);
+                        notification.error('发生未知错误，请重试或与站务职员联系', response);
                     });
                 },
                 editPoint (point) {
                     window.show({
-                        templateUrl: "src/windows/create-point.html",
-                        controller: "CreatePointController",
+                        templateUrl: 'src/windows/create-point.html',
+                        controller: 'CreatePointController',
                         inputs: { vm: point },
                     });
                 },

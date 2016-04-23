@@ -7,15 +7,15 @@
             });
         }
         emitRefresh () {
-            if (this.$location.url() === "/") {
-                this.$rootScope.$emit("homeRefresh");
+            if (this.$location.url() === '/') {
+                this.$rootScope.$emit('homeRefresh');
             }
         };
     }
 
-    keylolApp.component("logo", {
-        templateUrl: "src/sections/logo.html",
+    keylolApp.component('logo', {
+        templateUrl: 'src/sections/logo.html',
         controller: LogoController,
-        controllerAs: "logo",
+        controllerAs: 'logo',
     });
 }());

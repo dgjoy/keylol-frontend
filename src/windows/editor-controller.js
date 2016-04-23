@@ -1,7 +1,7 @@
 ﻿(function () {
-    keylolApp.controller("EditorController", [
-        "$scope", "close", "utils", "$http", "union", "$timeout", "$location", "notification", "options",
-        "articleTypes", "$route", "$element",
+    keylolApp.controller('EditorController', [
+        '$scope', 'close', 'utils', '$http', 'union', '$timeout', '$location', 'notification', 'options',
+        'articleTypes', '$route', '$element',
         ($scope, close, utils, $http, union, $timeout, $location, notification, options,
         articleTypes, $route, $element) => {
             union.inEditor = true;
@@ -16,15 +16,15 @@
 
             const editorId = utils.uniqueId();
             $(window).on(`beforeunload.editor${editorId}`, () => {
-                return "未保存的内容将被弃置。";
+                return '未保存的内容将被弃置。';
             });
 
-            $scope.$on("$destroy", () => {
+            $scope.$on('$destroy', () => {
                 $(window).off(`beforeunload.editor${editorId}`);
             });
 
-            const detachLocationListener = $scope.$on("$locationChangeStart", e => {
-                if (confirm("未保存的内容将被弃置，确认离开？")) {
+            const detachLocationListener = $scope.$on('$locationChangeStart', e => {
+                if (confirm('未保存的内容将被弃置，确认离开？')) {
                     detachLocationListener();
                     $(window).off(`beforeunload.editor${editorId}`);
                 } else {
@@ -39,9 +39,9 @@
 
             function setupNewVM () {
                 $scope.vm = $.extend({
-                    Title: "",
-                    Content: "",
-                    Summary: "",
+                    Title: '',
+                    Content: '',
+                    Summary: '',
                     Pros: [],
                     Cons: [],
                     Vote: null,
@@ -77,7 +77,7 @@
             };
 
             if (!union.$localStorage.editorDrafts) union.$localStorage.editorDrafts = {};
-            const draftKey = finalOptions.vm ? finalOptions.vm.Id : "new";
+            const draftKey = finalOptions.vm ? finalOptions.vm.Id : 'new';
             const draft = union.$localStorage.editorDrafts[draftKey];
             if (draft) {
                 const loadDraft = () => {
@@ -89,13 +89,13 @@
                         $scope.inline.attachedPoints = draft.attachedPoints;
                     }
                     $scope.selectedTypeIndex = draft.selectedTypeIndex;
-                    notification.success("本地草稿已加载");
+                    notification.success('本地草稿已加载');
                 };
                 if (finalOptions.needConfirmLoadingDraft) {
                     setupNewVM();
-                    notification.attention("直接编辑上次未完成的草稿", [
-                        { action: "加载草稿", value: true },
-                        { action: "取消" },
+                    notification.attention('直接编辑上次未完成的草稿', [
+                        { action: '加载草稿', value: true },
+                        { action: '取消' },
                     ]).then(result => {
                         if (result) {
                             loadDraft();
@@ -121,12 +121,12 @@
                         .then(response => {
                             $scope.inline.attachedPoints = response.data;
                         }, response => {
-                            notification.error("获取关联据点错误", response);
+                            notification.error('获取关联据点错误', response);
                         });
                 }
             }
 
-            $scope.$watchCollection("inline.attachedPoints", newValue => {
+            $scope.$watchCollection('inline.attachedPoints', newValue => {
                 $scope.vm.AttachedPointsId = [];
                 if (newValue)
                     for (let i = 0; i < newValue.length; ++i) {
@@ -134,17 +134,17 @@
                     }
             });
 
-            $scope.$watchCollection("inline.voteForPoints", newValue => {
+            $scope.$watchCollection('inline.voteForPoints', newValue => {
                 $scope.vm.VoteForPointId = null;
                 if (newValue && newValue.length > 0) {
                     $scope.vm.VoteForPointId = newValue[0].Id;
                 }
-                if ($scope.vm.TypeName === "评") {
+                if ($scope.vm.TypeName === '评') {
                     getAttachedPointsFromVoteForPoint();
                 }
             });
 
-            $scope.$watch("selectedTypeIndex", (newValue, oldValue) => {
+            $scope.$watch('selectedTypeIndex', (newValue, oldValue) => {
                 $scope.vm.TypeName = articleTypes[newValue].name;
                 if (articleTypes[newValue].allowVote && !articleTypes[oldValue].allowVote) {
                     getAttachedPointsFromVoteForPoint();
@@ -154,11 +154,11 @@
             $scope.expand = function ($event) {
                 $scope.expanded = !$scope.expanded;
                 $scope.inline.showSelector({
-                    templateUrl: "src/popup/article-type-selector.html",
-                    controller: "ArticleTypeSelectorController",
+                    templateUrl: 'src/popup/article-type-selector.html',
+                    controller: 'ArticleTypeSelectorController',
                     event: $event,
-                    attachSide: "bottom",
-                    align: "left",
+                    attachSide: 'bottom',
+                    align: 'left',
                     offsetX: -6,
                     inputs: { selectedIndex: $scope.selectedTypeIndex },
                 }).then(popup => {
@@ -172,9 +172,9 @@
             };
 
             $scope.cancel = function () {
-                notification.attention("关闭文章编辑器需要额外确认", [
-                    { action: "关闭", value: true },
-                    { action: "取消" },
+                notification.attention('关闭文章编辑器需要额外确认', [
+                    { action: '关闭', value: true },
+                    { action: '取消' },
                 ]).then(result => {
                     if (result) {
                         $timeout.cancel(autoSaveTimeout);
@@ -185,11 +185,11 @@
             };
 
             function findNotCompleteVm () {
-                if (!$scope.vm.Title) return "标题";
-                if (!$scope.vm.Content) return "内容";
+                if (!$scope.vm.Title) return '标题';
+                if (!$scope.vm.Content) return '内容';
                 if (articleTypes[$scope.selectedTypeIndex].allowVote) {
-                    if (!$scope.vm.Vote) return "评分";
-                    if (!$scope.vm.VoteForPointId) return "评价的游戏";
+                    if (!$scope.vm.Vote) return '评分';
+                    if (!$scope.vm.VoteForPointId) return '评价的游戏';
                 }
                 return null;
             }
@@ -209,9 +209,9 @@
                             close();
                             detachLocationListener();
                             $route.reload();
-                            notification.success("文章已发布");
+                            notification.success('文章已发布');
                         }, response => {
-                            notification.error("发生未知错误，请重试或与站务职员联系", response);
+                            notification.error('发生未知错误，请重试或与站务职员联系', response);
                             $scope.submitLock = false;
                         });
                     } else {
@@ -223,12 +223,12 @@
                                 close();
                                 detachLocationListener();
                                 $location.url(`article/${union.$localStorage.user.IdCode}/${response.data.SequenceNumberForAuthor}`);
-                                notification.success("文章已发布");
+                                notification.success('文章已发布');
                             }, response => {
                                 if (response.status === 401) {
-                                    notification.error("现有文券数量不足，无法发文");
+                                    notification.error('现有文券数量不足，无法发文');
                                 } else {
-                                    notification.error("发生未知错误，请重试或与站务职员联系", response);
+                                    notification.error('发生未知错误，请重试或与站务职员联系', response);
                                 }
                                 $scope.submitLock = false;
                             });

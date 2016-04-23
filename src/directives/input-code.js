@@ -1,10 +1,10 @@
 ﻿(function () {
-    keylolApp.directive("inputCode", () => {
+    keylolApp.directive('inputCode', () => {
         return {
-            restrict: "E",
-            templateUrl: "src/directives/input-code.html",
-            scope: { length: "=" },
-            require: "ngModel",
+            restrict: 'E',
+            templateUrl: 'src/directives/input-code.html',
+            scope: { length: '=' },
+            require: 'ngModel',
             link (scope, element, attrs, ngModel) {
                 scope.repeats = new Array(scope.length); // For ng-repeat
                 scope.text = {};
@@ -38,7 +38,7 @@
                 for (let j = 0; j < scope.length; ++j) {
                     scope.$watch(`text[${j}]`, (newValue, oldValue) => {
                         // Get full text
-                        let fullText = "";
+                        let fullText = '';
                         for (let i = 0; i < scope.length; i++) {
                             if (scope.text[i]) {
                                 fullText += scope.text[i][0];

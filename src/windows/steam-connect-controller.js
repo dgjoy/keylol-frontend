@@ -1,6 +1,6 @@
 ﻿(function () {
-    keylolApp.controller("SteamConnectController", [
-        "$scope", "close", "$timeout", "$q", "notification", "utils", "options", "window",
+    keylolApp.controller('SteamConnectController', [
+        '$scope', 'close', '$timeout', '$q', 'notification', 'utils', 'options', 'window',
         ($scope, close, $timeout, $q, notification, utils, options, window) => {
             let tokenId, result;
             let closed = false;
@@ -13,11 +13,11 @@
 
             $scope.showLoginSteamWindow = function () {
                 window.show({
-                    templateUrl: "src/windows/login-steam.html",
-                    controller: "LoginSteamController",
+                    templateUrl: 'src/windows/login-steam.html',
+                    controller: 'LoginSteamController',
                 });
                 $scope.cancel();
-                if (typeof options.registrationClose === "function") {
+                if (typeof options.registrationClose === 'function') {
                     options.registrationClose();
                 }
             };
@@ -44,8 +44,8 @@
                         connection.stop();
                     });
                     let steamAvatarHash = steamAH;
-                    if (steamAvatarHash === "0000000000000000000000000000000000000000")
-                        steamAvatarHash = "fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb";
+                    if (steamAvatarHash === '0000000000000000000000000000000000000000')
+                        steamAvatarHash = 'fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb';
                     result = {
                         tokenId,
                         steamProfileName,
@@ -72,13 +72,13 @@
                             $scope.botSteamId64 = token.BotSteamId64;
                             $scope.code = token.Code;
                         } else {
-                            notification.error("暂无可用机器人。");
+                            notification.error('暂无可用机器人。');
                             $scope.cancel();
                         }
                     });
                 });
             }, () => {
-                notification.error("连接失败。");
+                notification.error('连接失败。');
                 $scope.cancel();
             });
         },

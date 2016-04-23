@@ -1,5 +1,5 @@
 (function () {
-    keylolApp.filter("maxLength", () => {
+    keylolApp.filter('maxLength', () => {
         return (input, length) => {
             let output = input;
             if (output) {

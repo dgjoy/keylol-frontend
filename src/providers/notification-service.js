@@ -1,5 +1,5 @@
 (function () {
-    keylolApp.factory("notification", ["window", window => {
+    keylolApp.factory('notification', ['window', window => {
             function NotificationService() {
                 const self = this;
 
@@ -7,8 +7,8 @@
 
                 self.show = options => {
                     const windowOptions = {
-                        templateUrl: "src/popup/operation-feedback.html",
-                        controller: "OperationFeedbackController",
+                        templateUrl: 'src/popup/operation-feedback.html',
+                        controller: 'OperationFeedbackController',
                         adjustScrollBar: false,
                         global: true,
                         inputs: { options },
@@ -30,10 +30,10 @@
                             if (e.target !== window.$element[0] && !$.contains(window.$element[0], e.target))
                                 window.closeNow();
                         };
-                        document.body.addEventListener("click", onBodyClick, true);
+                        document.body.addEventListener('click', onBodyClick, true);
                         return window.close;
                     }).then(() => {
-                        document.body.removeEventListener("click", onBodyClick, true);
+                        document.body.removeEventListener('click', onBodyClick, true);
                     });
 
                     return windowPromise.then(window => {
@@ -44,18 +44,18 @@
                 self.success = message => {
                     return self.show({
                         message,
-                        type: "success",
-                        title: "成功",
-                        subtitle: "Success",
+                        type: 'success',
+                        title: '成功',
+                        subtitle: 'Success',
                     });
                 };
 
                 self.process = message => {
                     return self.show({
                         message,
-                        type: "process",
-                        title: "处理中",
-                        subtitle: "Processing",
+                        type: 'process',
+                        title: '处理中',
+                        subtitle: 'Processing',
                     });
                 };
 
@@ -66,11 +66,11 @@
                     if (errorResponse && errorResponse.status === 400) {
                         // Is model state error
                         for (const error in errorResponse.data.ModelState) {
-                            if (errorResponse.data.ModelState.hasOwnProperty(error) && typeof(error) !== "function") {
+                            if (errorResponse.data.ModelState.hasOwnProperty(error) && typeof(error) !== 'function') {
                                 return self.show({
-                                    type: "error",
-                                    title: "错误",
-                                    subtitle: "Error",
+                                    type: 'error',
+                                    title: '错误',
+                                    subtitle: 'Error',
                                     message: errorResponse.data.ModelState[error][0],
                                 });
                             }
@@ -78,9 +78,9 @@
                     } else {
                         return self.show({
                             message,
-                            type: "error",
-                            title: "错误",
-                            subtitle: "Error",
+                            type: 'error',
+                            title: '错误',
+                            subtitle: 'Error',
                         });
                     }
                 };
@@ -89,9 +89,9 @@
                     return self.show({
                         message,
                         actions,
-                        type: "attention",
-                        title: "注意",
-                        subtitle: "Attention",
+                        type: 'attention',
+                        title: '注意',
+                        subtitle: 'Attention',
                     });
                 };
             }

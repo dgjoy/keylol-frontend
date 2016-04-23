@@ -1,5 +1,5 @@
 (function () {
-    keylolApp.filter("storeUrlToSteamDB", () => {
+    keylolApp.filter('storeUrlToSteamDB', () => {
         return function (input) {
             return `https://steamdb.info/app/${input}/`;
         };

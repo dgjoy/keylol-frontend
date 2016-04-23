@@ -1,13 +1,13 @@
 ﻿(function () {
-    keylolApp.controller("ShortReviewController", [
-        "$scope", "close", "window", "notification", "$http", "options", "$location", "$route", "union",
+    keylolApp.controller('ShortReviewController', [
+        '$scope', 'close', 'window', 'notification', '$http', 'options', '$location', '$route', 'union',
         function ($scope, close, window, notification, $http, options, $location, $route, union) {
             $scope.options = options;
 
             $scope.vm = $.extend({
-                TypeName: "简评",
+                TypeName: '简评',
                 Title: `${options.point.Name} 的简评`,
-                Content: "",
+                Content: '',
                 Vote: null,
                 VoteForPointId: options.point.Id,
             }, options.vm);
@@ -18,24 +18,24 @@
             };
 
             // $scope.changeToLong = function () {
-            //     notification.attention("切换为长评时会覆盖之前未发布的草稿", [
-            //         {action: "覆盖", value: true},
-            //         {action: "取消"}
+            //     notification.attention('切换为长评时会覆盖之前未发布的草稿', [
+            //         {action: '覆盖', value: true},
+            //         {action: '取消'}
             //     ]).then(function (result) {
             //         if (result) {
             //             window.show({
-            //                 templateUrl: "src/windows/editor.html",
-            //                 controller: "EditorController",
+            //                 templateUrl: 'src/windows/editor.html',
+            //                 controller: 'EditorController',
             //                 inputs: {
             //                     options: {
             //                         doNotLoadDraft: true,
             //                         vm: {
             //                             Id: $scope.vm.Id,
-            //                             TypeName: "评",
-            //                             Title: "",
+            //                             TypeName: '评',
+            //                             Title: '',
             //                             Content: $scope.vm.Content,
             //                             Vote: $scope.vm.Vote,
-            //                             Summary: "",
+            //                             Summary: '',
             //                             Pros: [],
             //                             Cons: []
             //                         },
@@ -50,8 +50,8 @@
 
             $scope.submitLock = false;
             function checkEmpty () {
-                if (!$scope.vm.Content) return "简评内容";
-                if (!$scope.vm.Vote) return "简评评分";
+                if (!$scope.vm.Content) return '简评内容';
+                if (!$scope.vm.Vote) return '简评评分';
                 return null;
             }
             $scope.submit = function () {
@@ -67,9 +67,9 @@
                         .then(() => {
                             close();
                             $route.reload();
-                            notification.success("简评已发布");
+                            notification.success('简评已发布');
                         }, response => {
-                            notification.error("发生未知错误，请重试或与站务职员联系", response);
+                            notification.error('发生未知错误，请重试或与站务职员联系', response);
                             $scope.submitLock = false;
                         });
                 } else {
@@ -77,12 +77,12 @@
                         .then(response => {
                             close();
                             $location.url(`article/${union.$localStorage.user.IdCode}/${response.data.SequenceNumberForAuthor}`);
-                            notification.success("简评已发布");
+                            notification.success('简评已发布');
                         }, response => {
                             if (response.status === 401) {
-                                notification.error("现有文券数量不足，无法发文");
+                                notification.error('现有文券数量不足，无法发文');
                             } else {
-                                notification.error("发生未知错误，请重试或与站务职员联系", response);
+                                notification.error('发生未知错误，请重试或与站务职员联系', response);
                             }
                             $scope.submitLock = false;
                         });

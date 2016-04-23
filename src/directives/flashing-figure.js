@@ -1,11 +1,11 @@
 (function () {
-    keylolApp.directive("flashingFigure", () => {
+    keylolApp.directive('flashingFigure', () => {
         return {
-            restrict: "E",
-            templateUrl: "src/directives/flashing-figure.html",
+            restrict: 'E',
+            templateUrl: 'src/directives/flashing-figure.html',
             scope: {
-                stations: "=",
-                current: "=",
+                stations: '=',
+                current: '=',
             },
         };
     });

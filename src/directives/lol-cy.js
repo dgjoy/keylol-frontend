@@ -1,11 +1,11 @@
 ﻿(function () {
-    keylolApp.directive("lolCy", () => {
+    keylolApp.directive('lolCy', () => {
         return {
-            restrict: "A",
+            restrict: 'A',
             priority: 98,
             link (scope, element, attrs) {
-                attrs.$observe("lolCy", value => {
-                    attrs.$set("cy", value);
+                attrs.$observe('lolCy', value => {
+                    attrs.$set('cy', value);
                 });
             },
         };

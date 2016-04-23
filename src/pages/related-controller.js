@@ -2,8 +2,8 @@
  * Created by Rex on 15/9/23.
  */
 (function () {
-    keylolApp.controller("RelatedController", [
-        "pageHead", "$scope", "union", "$http", "notification", "$routeParams", "utils", "$timeout",
+    keylolApp.controller('RelatedController', [
+        'pageHead', '$scope', 'union', '$http', 'notification', '$routeParams', 'utils', '$timeout',
         (pageHead, $scope, union, $http, notification, $routeParams, utils, $timeout) => {
             $scope.searchExist = true;
             $scope.union = union;
@@ -13,20 +13,20 @@
             let typeText;
             const summary = {};
             switch ($routeParams.type) {
-                case "Genre":
-                    typeText = "流派";
+                case 'Genre':
+                    typeText = '流派';
                     break;
-                case "Tag":
-                    typeText = "特性";
+                case 'Tag':
+                    typeText = '特性';
                     break;
-                case "Series":
-                    typeText = "系列";
+                case 'Series':
+                    typeText = '系列';
                     break;
-                case "Publisher":
-                    typeText = "历代发行";
+                case 'Publisher':
+                    typeText = '历代发行';
                     break;
-                case "Developer":
-                    typeText = "历代开发";
+                case 'Developer':
+                    typeText = '历代开发';
                     break;
                 default:
                     $scope.searchExist = false;
@@ -36,7 +36,7 @@
                 params: {
                     stats: true,
                     subscribed: true,
-                    idType: "IdCode",
+                    idType: 'IdCode',
                 },
             }).then(response => {
                 const point = response.data;
@@ -60,13 +60,13 @@
                 });
             }, response => {
                 $scope.searchExist = false;
-                notification.error("发生未知错误，请重试或与站务职员联系", response);
+                notification.error('发生未知错误，请重试或与站务职员联系', response);
             });
 
             const timeline = {
                 title: {
-                    mainTitle: "搜索结果",
-                    subTitle: "Search Result",
+                    mainTitle: '搜索结果',
+                    subTitle: 'Search Result',
                 },
                 cannotClick: true,
                 loadAction () {
@@ -76,7 +76,7 @@
                             params: {
                                 take: utils.timelineLoadCount,
                                 skip: timeline.entries.length,
-                                idType: "IdCode",
+                                idType: 'IdCode',
                                 stats: true,
                                 relationship: $routeParams.type,
                             },
@@ -131,7 +131,7 @@
                                 timeline.loadingLock = false;
                             }
                         }, response => {
-                            notification.error("发生未知错误，请重试或与站务职员联系", response);
+                            notification.error('发生未知错误，请重试或与站务职员联系', response);
                             timeline.loadingLock = false;
                         });
                     }

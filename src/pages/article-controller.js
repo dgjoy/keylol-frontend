@@ -1,12 +1,12 @@
 ﻿(function () {
-    keylolApp.controller("ArticleController", [
-        "pageHead", "$scope", "union", "$routeParams", "$http",
-        "getAndFlushComments", "notification", "$location", "$timeout", "$rootScope", "utils",
+    keylolApp.controller('ArticleController', [
+        'pageHead', '$scope', 'union', '$routeParams', '$http',
+        'getAndFlushComments', 'notification', '$location', '$timeout', '$rootScope', 'utils',
         (pageHead, $scope, union, $routeParams, $http,
         getAndFlushComments, notification, $location, $timeout, $rootScope, utils) => {
             $scope.articleExist = true;
             $scope.union = union;
-            pageHead.setTitle("文章 - 其乐");
+            pageHead.setTitle('文章 - 其乐');
             const unionArticle = {};
             const unionPoint = {};
             const summary = {};
@@ -31,7 +31,7 @@
 
                         if (union.$localStorage.user) {
                             article.isMyArticle = union.$localStorage.user.IdCode === $routeParams.author;
-                            article.canEdit = article.isMyArticle || union.$localStorage.user.StaffClaim === "operator";
+                            article.canEdit = article.isMyArticle || union.$localStorage.user.StaffClaim === 'operator';
                         }
                         if (article.Vote) {
                             $scope.hasVote = true;
@@ -46,12 +46,12 @@
 
 
                                 $http.get(`${apiEndpoint}user-game-record/${$routeParams.author}/${point.SteamAppId}`, {
-                                    params: { idType: "IdCode" },
+                                    params: { idType: 'IdCode' },
                                 }).then(response => {
                                     unionPoint.hoursPlayed = response.data;
                                 }, response => {
                                     if (response.status !== 404) {
-                                        notification.error("发生未知错误，请重试或与站务职员联系", response);
+                                        notification.error('发生未知错误，请重试或与站务职员联系', response);
                                     }
                                 });
 
@@ -70,36 +70,36 @@
 
                                 $.extend(unionPoint, point);
                             }, response => {
-                                notification.error("发生未知错误，请重试或与站务职员联系", response);
+                                notification.error('发生未知错误，请重试或与站务职员联系', response);
                             });
                         }
                         $.extend(unionArticle, article);
 
-                        getAndFlushComments(article, null, "hot");
+                        getAndFlushComments(article, null, 'hot');
                         if (!$location.hash()) {
-                            getAndFlushComments(article, 1, "page");
+                            getAndFlushComments(article, 1, 'page');
                         } else {
-                            getAndFlushComments(article, $location.hash(), "sequence", () => {
+                            getAndFlushComments(article, $location.hash(), 'sequence', () => {
                                 $timeout(() => {
-                                    $("html,body").animate({
+                                    $('html,body').animate({
                                         scrollTop: $(`#comment-${$location.hash()}`).offset().top,
                                     }, () => {
-                                        $(`#comment-${$location.hash()}`).addClass("highlight");
+                                        $(`#comment-${$location.hash()}`).addClass('highlight');
                                     });
                                 });
                             });
                         }
-                        const cancelListenLocationChangeStart = $rootScope.$on("$locationChangeStart", (e, newUrl, oldUrl) => {
-                            const newSplit = newUrl.split("#");
-                            const oldSplit = oldUrl.split("#");
+                        const cancelListenLocationChangeStart = $rootScope.$on('$locationChangeStart', (e, newUrl, oldUrl) => {
+                            const newSplit = newUrl.split('#');
+                            const oldSplit = oldUrl.split('#');
                             if (newSplit[0] === oldSplit[0] && newSplit[1] && newSplit[1] !== oldSplit[1]) {
                                 const hashNumber = parseInt(newSplit[1]);
-                                getAndFlushComments(article, hashNumber, "sequence", () => {
+                                getAndFlushComments(article, hashNumber, 'sequence', () => {
                                     $timeout(() => {
-                                        $("html,body").animate({
+                                        $('html,body').animate({
                                             scrollTop: $(`#comment-${hashNumber}`).offset().top,
                                         }, () => {
-                                            $(`#comment-${hashNumber}`).addClass("highlight");
+                                            $(`#comment-${hashNumber}`).addClass('highlight');
                                         });
                                     });
                                 });
@@ -109,17 +109,17 @@
                             }
                         });
                         pageElements.changePage = function (oldPage, newPage) {
-                            getAndFlushComments(article, newPage, "page");
+                            getAndFlushComments(article, newPage, 'page');
                         };
                     }, error => {
                         if (error.status === 404) {
                             $scope.articleExist = false;
                             return;
                         } else if (error.status === 401) {
-                            unionArticle.TypeName = "封";
+                            unionArticle.TypeName = '封';
                             return;
                         }
-                        notification.error("发生未知错误，请重试或与站务职员联系", error);
+                        notification.error('发生未知错误，请重试或与站务职员联系', error);
                     });
                 $http.get(`${apiEndpoint}user/${$routeParams.author}`, {
                     params: {
@@ -127,7 +127,7 @@
                         stats: true,
                         profilePointBackgroundImage: true,
                         reviewStats: true,
-                        idType: "IdCode",
+                        idType: 'IdCode',
                     },
                 }).then(response => {
                     const author = response.data;
@@ -139,7 +139,7 @@
                         avatar: author.AvatarImage,
                         background: author.ProfilePointBackgroundImage,
                         pointSum: {
-                            type: "个人",
+                            type: '个人',
                             readerNum: author.SubscriberCount,
                             articleNum: author.ArticleCount,
                         },
@@ -154,7 +154,7 @@
                         summary.subscribed = author.Subscribed;
                     }
                 }, response => {
-                    notification.error("发生未知错误，请重试或与站务职员联系", response);
+                    notification.error('发生未知错误，请重试或与站务职员联系', response);
                 });
             }
             union.summary = summary;

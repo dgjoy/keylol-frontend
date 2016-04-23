@@ -1,9 +1,9 @@
 ﻿(function () {
-    keylolApp.controller("SiteFooterController", [
-        "$scope", "$element", "$window",
+    keylolApp.controller('SiteFooterController', [
+        '$scope', '$element', '$window',
         function ($scope, $element, $window) {
             $scope.scrollToTop = function () {
-                $("html,body").animate({
+                $('html,body').animate({
                     scrollTop: 0,
                 });
             };
@@ -16,8 +16,8 @@
                     $scope.canScrollTop = false;
                 }
             });
-            const cancelListenRoute = $scope.$on("$destroy", () => {
-                $$window.unbind("scroll");
+            const cancelListenRoute = $scope.$on('$destroy', () => {
+                $$window.unbind('scroll');
                 cancelListenRoute();
             });
         },

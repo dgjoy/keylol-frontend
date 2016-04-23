@@ -1,6 +1,6 @@
 (function () {
-    keylolApp.controller("ImagePreviewController", [
-        "$scope", "close", "imageSrc",
+    keylolApp.controller('ImagePreviewController', [
+        '$scope', 'close', 'imageSrc',
         ($scope, close, imageSrc) => {
             $scope.cancel = () => {
                 close();

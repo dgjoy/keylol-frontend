@@ -20,15 +20,15 @@
         }
         showRegistrationWindow () {
             this.window.show({
-                templateUrl: "src/windows/registration.html",
-                controller: "RegistrationController",
+                templateUrl: 'src/windows/registration.html',
+                controller: 'RegistrationController',
                 inputs: { options: {} },
             });
         }
         showLoginSteamWindow () {
             this.window.show({
-                templateUrl: "src/windows/login-steam.html",
-                controller: "LoginSteamController",
+                templateUrl: 'src/windows/login-steam.html',
+                controller: 'LoginSteamController',
             });
         }
         doComment () {
@@ -39,12 +39,12 @@
                     ArticleId: this.article.Id,
                     ReplyToCommentsSn: this.dealWithReply(this.comment.currentComment),
                 }).then(response => {
-                    this.notification.success("评论已发出");
+                    this.notification.success('评论已发出');
                     this.submitLock = false;
-                    this.comment.currentComment = "";
-                    this.getAndFlushComments(this.article, response.data.SequenceNumberForArticle, "sequence");
+                    this.comment.currentComment = '';
+                    this.getAndFlushComments(this.article, response.data.SequenceNumberForArticle, 'sequence');
                 }, response => {
-                    this.notification.error("评论发送失败", response);
+                    this.notification.error('评论发送失败', response);
                     this.submitLock = false;
                 });
             }
@@ -67,7 +67,7 @@
                 if (m.length > 1) {
                     replyCommentArray = m.reduce((preValue, currValue) => {
                         let preValueTem = preValue;
-                        if (typeof preValue === "string") {
+                        if (typeof preValue === 'string') {
                             preValueTem = preValue.match(regExpForEachLine);
                         }
                         const currValueTem = currValue.match(regExpForEachLine);
@@ -83,7 +83,7 @@
             if (replyCommentArray.length > 1) {
                 return replyCommentArray.reduce((preValue, currValue) => {
                     let valueArr = preValue;
-                    if (typeof preValue == "number") {
+                    if (typeof preValue == 'number') {
                         valueArr = [preValue];
                     }
                     if (currValue > this.article.totalComments) {
@@ -101,9 +101,9 @@
         }
     }
 
-    keylolApp.component("articleComments", {
-        templateUrl: "src/sections/article-comments.html",
+    keylolApp.component('articleComments', {
+        templateUrl: 'src/sections/article-comments.html',
         controller: ArticleCommentsController,
-        controllerAs: "articleComments",
+        controllerAs: 'articleComments',
     });
 }());

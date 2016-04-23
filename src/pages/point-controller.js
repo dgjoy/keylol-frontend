@@ -1,6 +1,6 @@
 ﻿(function () {
-    keylolApp.controller("PointController", [
-        "pageHead", "$scope", "union", "$routeParams", "$http", "utils", "notification", "window", "$location", "$timeout",
+    keylolApp.controller('PointController', [
+        'pageHead', '$scope', 'union', '$routeParams', '$http', 'utils', 'notification', 'window', '$location', '$timeout',
         (pageHead, $scope, union, $routeParams, $http, utils, notification, window, $location, $timeout) => {
             /**
              * 初始化union的一些属性
@@ -13,22 +13,22 @@
             const unionPoint = {};
             const timeline = {
                 title: {
-                    mainTitle: "讯息轨道",
-                    subTitle: "Timeline",
+                    mainTitle: '讯息轨道',
+                    subTitle: 'Timeline',
                 },
                 rightButton: {
-                    avatar: "assets/images/edit-pen.png",
-                    alt: "发表新文章",
-                    text: "文",
+                    avatar: 'assets/images/edit-pen.png',
+                    alt: '发表新文章',
+                    text: '文',
                     clickAction () {
                         window.show({
-                            templateUrl: "src/windows/editor.html",
-                            controller: "EditorController",
+                            templateUrl: 'src/windows/editor.html',
+                            controller: 'EditorController',
                             inputs: { options: null },
                         });
                     },
                 },
-                datetime: "outBlock",
+                datetime: 'outBlock',
                 hasExpand: true,
                 loadingLock: true,
                 entries: [],
@@ -38,8 +38,8 @@
                 $scope.isInPoint = false;
 
                 timeline.noArticleText = {
-                    main: "这位用户尚未发布或认可任何文章",
-                    sub: "订阅并关注即将到来的动态。",
+                    main: '这位用户尚未发布或认可任何文章',
+                    sub: '订阅并关注即将到来的动态。',
                 };
 
                 /**
@@ -51,7 +51,7 @@
                     $http.get(`${apiEndpoint}article/user/${$routeParams.userIdCode}`, { params }).then(response => {
                         callback(response);
                     }, response => {
-                        notification.error("发生未知错误，请重试或与站务职员联系", response);
+                        notification.error('发生未知错误，请重试或与站务职员联系', response);
                     });
                 };
 
@@ -62,7 +62,7 @@
                 $http.get(`${apiEndpoint}user/${$routeParams.userIdCode}`, {
                     params: {
                         stats: true,
-                        idType: "IdCode",
+                        idType: 'IdCode',
                         profilePointBackgroundImage: true,
                         subscribed: true,
                     },
@@ -71,7 +71,7 @@
                     if (union.$localStorage.user && user.IdCode !== union.$localStorage.user.IdCode) {
                         summary.subscribed = user.Subscribed;
                     }
-                    utils.addRecentBroswe("ProfilePoint", user.UserName, user.IdCode);
+                    utils.addRecentBroswe('ProfilePoint', user.UserName, user.IdCode);
                     pageHead.setTitle(`${user.UserName} - 其乐`);
                     $.extend(unionUser, user);
                     $.extend(summary, {
@@ -82,7 +82,7 @@
                         avatar: user.AvatarImage,
                         background: user.ProfilePointBackgroundImage,
                         pointSum: {
-                            type: "个人",
+                            type: '个人',
                             readerNum: user.SubscriberCount,
                             articleNum: user.ArticleCount,
                         },
@@ -96,7 +96,7 @@
                      */
                     $http.get(`${apiEndpoint}article/user/${$routeParams.userIdCode}`, {
                         params: {
-                            idType: "IdCode",
+                            idType: 'IdCode',
                             take: utils.timelineLoadCount,
                         },
                     }).then(response => {
@@ -153,8 +153,8 @@
                                 };
                                 if (article.TimelineReason) {
                                     switch (article.TimelineReason) {
-                                        case "Like":
-                                            entry.sources.type = "like";
+                                        case 'Like':
+                                            entry.sources.type = 'like';
                                             entry.sources.userArray = [];
                                             if (article.LikeByUsers) {
                                                 for (let j = 0;j < article.LikeByUsers.length;j++) {
@@ -170,8 +170,8 @@
                                                 });
                                             }
                                             break;
-                                        case "Point":
-                                            entry.sources.type = "point";
+                                        case 'Point':
+                                            entry.sources.type = 'point';
                                             entry.sources.points = [];
                                             for (let j = 0;j < article.AttachedPoints.length;j++) {
                                                 entry.sources.points.push({
@@ -180,8 +180,8 @@
                                                 });
                                             }
                                             break;
-                                        case "Publish":
-                                            entry.sources.type = "publish";
+                                        case 'Publish':
+                                            entry.sources.type = 'publish';
                                             break;
                                         default :
                                             break;
@@ -207,24 +207,24 @@
                                     timeline.activePoints[i].type = utils.getPointType(point.Type);
                                 }
                             }, response => {
-                                notification.error("发生未知错误，请重试或与站务职员联系", response);
+                                notification.error('发生未知错误，请重试或与站务职员联系', response);
                             });
                             timeline.loadingLock = false;
                         }
                     }, response => {
-                        notification.error("发生未知错误，请重试或与站务职员联系", response);
+                        notification.error('发生未知错误，请重试或与站务职员联系', response);
                         timeline.loadingLock = false;
                     });
                 }, response => {
                     $scope.pointExist = false;
-                    notification.error("发生未知错误，请重试或与站务职员联系", response);
+                    notification.error('发生未知错误，请重试或与站务职员联系', response);
                 });
             }
 
             if ($routeParams.pointIdCode) {
                 timeline.noArticleText = {
-                    main: "当前据点尚未收到任何文章投稿",
-                    sub: "考虑成为首篇文章的作者？",
+                    main: '当前据点尚未收到任何文章投稿',
+                    sub: '考虑成为首篇文章的作者？',
                 };
 
                 /**
@@ -236,7 +236,7 @@
                     $http.get(`${apiEndpoint}article/point/${$routeParams.pointIdCode}`, { params }).then(response => {
                         callback(response);
                     }, response => {
-                        notification.error("发生未知错误，请重试或与站务职员联系", response);
+                        notification.error('发生未知错误，请重试或与站务职员联系', response);
                     });
                 };
 
@@ -252,19 +252,19 @@
                         related: true,
                         coverDescription: true,
                         more: true,
-                        idType: "IdCode",
+                        idType: 'IdCode',
                     },
                 }).then(response => {
                     const point = response.data;
 
-                    if (point.Type === "Game") {
+                    if (point.Type === 'Game') {
                         $scope.hasVote = true;
                         if (union.$localStorage.user) {
                             $http.get(`${apiEndpoint}user-game-record/${union.$localStorage.user.Id}/${point.SteamAppId}`).then(response => {
                                 unionPoint.hoursPlayed = response.data;
                             }, response => {
                                 if (response.status !== 404) {
-                                    notification.error("发生未知错误，请重试或与站务职员联系", response);
+                                    notification.error('发生未知错误，请重试或与站务职员联系', response);
                                 }
                             });
                         }
@@ -287,7 +287,7 @@
 
                     pageHead.setTitle(`${mainName} - 其乐`);
 
-                    utils.addRecentBroswe("NormalPoint", mainName, point.IdCode);
+                    utils.addRecentBroswe('NormalPoint', mainName, point.IdCode);
                     $.extend(unionPoint, point);
                     $.extend(summary, {
                         head: {
@@ -307,7 +307,7 @@
                     });
                 }, response => {
                     $scope.pointExist = false;
-                    notification.error("发生未知错误，请重试或与站务职员联系", response);
+                    notification.error('发生未知错误，请重试或与站务职员联系', response);
                 });
 
                 /**
@@ -315,7 +315,7 @@
                  */
                 $http.get(`${apiEndpoint}article/point/${$routeParams.pointIdCode}`, {
                     params: {
-                        idType: "IdCode",
+                        idType: 'IdCode',
                         take: utils.timelineLoadCount,
                     },
                 }).then(response => {
@@ -382,12 +382,12 @@
                                 timeline.activePoints[i].type = utils.getPointType(point.Type);
                             }
                         }, response => {
-                            notification.error("发生未知错误，请重试或与站务职员联系", response);
+                            notification.error('发生未知错误，请重试或与站务职员联系', response);
                         });
                         timeline.loadingLock = false;
                     }
                 }, response => {
-                    notification.error("发生未知错误，请重试或与站务职员联系", response);
+                    notification.error('发生未知错误，请重试或与站务职员联系', response);
                     timeline.loadingLock = false;
                 });
             }

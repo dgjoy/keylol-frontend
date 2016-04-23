@@ -1,6 +1,6 @@
 ﻿(function () {
-    keylolApp.controller("SearchSelectorController", [
-        "$scope", "union", "$location", "options", "$http", "notification", "utils", "window",
+    keylolApp.controller('SearchSelectorController', [
+        '$scope', 'union', '$location', 'options', '$http', 'notification', 'utils', 'window',
         ($scope, union, $location, options, $http, notification, utils, window) => {
             $scope.onSearching = options.onSearching;
             $scope.union = union;
@@ -8,7 +8,7 @@
             function getSearchResult (filterTxt) {
                 if (options.searchText) {
                     switch (filterTxt) {
-                        case "据点":
+                        case '据点':
                             $http.get(`${apiEndpoint}normal-point/keyword/${encodeURIComponent(options.searchText)}`)
                                 .then(response => {
                                     if (response.data.length > 0) {
@@ -29,10 +29,10 @@
                                         $scope.notFound = true;
                                     }
                                 }, response => {
-                                    notification.error("发生未知错误，请重试或与站务职员联系", response);
+                                    notification.error('发生未知错误，请重试或与站务职员联系', response);
                                 });
                             break;
-                        case "文章":
+                        case '文章':
                             $http.get(`${apiEndpoint}article/keyword/${encodeURIComponent(options.searchText)}`)
                                 .then(response => {
                                     if (response.data.length > 0) {
@@ -53,12 +53,12 @@
                                         $scope.notFound = true;
                                     }
                                 }, response => {
-                                    notification.error("发生未知错误，请重试或与站务职员联系", response);
+                                    notification.error('发生未知错误，请重试或与站务职员联系', response);
                                 });
                             break;
-                        case "用户":
+                        case '用户':
                             $http.get(`${apiEndpoint}user/${encodeURIComponent(options.searchText)}`, {
-                                params: { idType: "UserName" },
+                                params: { idType: 'UserName' },
                             }).then(response => {
                                 if (response.data) {
                                     $scope.resultArray = [];
@@ -67,8 +67,8 @@
                                         mainTitle: user.UserName,
                                         subTitle: user.GamerTag,
                                         avatar: user.AvatarImage,
-                                        type: "个人",
-                                        url: `user/"${user.IdCode}`,
+                                        type: '个人',
+                                        url: `user/'${user.IdCode}`,
                                         isUser: true,
                                     });
                                 }
@@ -77,7 +77,7 @@
                                     $scope.resultArray = undefined;
                                     $scope.notFound = true;
                                 } else {
-                                    notification.error("发生未知错误，请重试或与站务职员联系", response);
+                                    notification.error('发生未知错误，请重试或与站务职员联系', response);
                                 }
                             });
                             break;
@@ -99,8 +99,8 @@
             });
             $scope.showPointAppealWindow = function () {
                 window.show({
-                    templateUrl: "src/windows/shop-link.html",
-                    controller: "ShopLinkController",
+                    templateUrl: 'src/windows/shop-link.html',
+                    controller: 'ShopLinkController',
                 });
             };
             $scope.changeFilter = function ($index) {

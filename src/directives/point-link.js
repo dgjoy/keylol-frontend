@@ -1,14 +1,14 @@
 ﻿(function () {
-    keylolApp.directive("pointLink",  () => {
+    keylolApp.directive('pointLink',  () => {
         return {
-            restrict: "E",
-            templateUrl: "src/directives/point-link.html",
+            restrict: 'E',
+            templateUrl: 'src/directives/point-link.html',
             scope: {
-                idCode: "=",
-                pointName: "=",
-                type: "=",
-                avatarUrl: "=",
-                newPage: "=",
+                idCode: '=',
+                pointName: '=',
+                type: '=',
+                avatarUrl: '=',
+                newPage: '=',
             },
             link (scope, element) {
                 scope.funcs = {};
@@ -16,11 +16,11 @@
                     if (scope.avatarUrl) {
                         const avatarWidth = element.children().children().width();
                         scope.cardPopup = scope.funcs.showPointCard({
-                            templateUrl: "src/popup/point-preview-card.html",
-                            controller: "PointPreviewCardController",
+                            templateUrl: 'src/popup/point-preview-card.html',
+                            controller: 'PointPreviewCardController',
                             event: $event,
-                            attachSide: "bottom",
-                            align: "left",
+                            attachSide: 'bottom',
+                            align: 'left',
                             offsetX: avatarWidth / 2 - 39,
                             inputs: {
                                 idCode: scope.idCode,
@@ -29,11 +29,11 @@
                         });
                     } else {
                         scope.cardPopup = scope.funcs.showPointCard({
-                            templateUrl: "src/popup/point-preview-card.html",
-                            controller: "PointPreviewCardController",
+                            templateUrl: 'src/popup/point-preview-card.html',
+                            controller: 'PointPreviewCardController',
                             event: $event,
-                            attachSide: "bottom",
-                            align: "left",
+                            attachSide: 'bottom',
+                            align: 'left',
                             inputs: {
                                 idCode: scope.idCode,
                                 type: scope.type,

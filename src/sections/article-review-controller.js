@@ -10,9 +10,9 @@
         }
     }
 
-    keylolApp.component("articleReview", {
-        templateUrl: "src/sections/article-review.html",
+    keylolApp.component('articleReview', {
+        templateUrl: 'src/sections/article-review.html',
         controller: ArticleReviewController,
-        controllerAs: "articleReview",
+        controllerAs: 'articleReview',
     });
 }());

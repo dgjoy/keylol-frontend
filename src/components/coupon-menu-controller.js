@@ -5,12 +5,12 @@
         }
     }
 
-    keylolApp.component("couponMenu", {
-        templateUrl: "src/components/coupon-menu.html",
+    keylolApp.component('couponMenu', {
+        templateUrl: 'src/components/coupon-menu.html',
         controller: CouponMenuController,
-        controllerAs: "couponMenu",
+        controllerAs: 'couponMenu',
         bindings: {
-            active: "@",
+            active: '@',
         },
     });
 }());

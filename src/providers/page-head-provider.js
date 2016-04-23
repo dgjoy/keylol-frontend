@@ -1,5 +1,5 @@
 ﻿(function () {
-    keylolApp.provider("pageHead", () => {
+    keylolApp.provider('pageHead', () => {
         let _loadingHead = {};
         return {
             setLoadingHead (head) {
@@ -8,15 +8,15 @@
                 }
                 return _loadingHead;
             },
-            $get: ["$rootScope", $rootScope => {
+            $get: ['$rootScope', $rootScope => {
                 return {
                     setTitle (title) {
                         $rootScope.pageHead.title = title;
                     },
                     setKeywords (keywords) {
-                        if (typeof keywords === "string") {
+                        if (typeof keywords === 'string') {
                             $rootScope.pageHead.keywords = keywords;
-                        } else if (typeof keywords === "object") {
+                        } else if (typeof keywords === 'object') {
                             $rootScope.pageHead.keywords = keywords.toString();
                         }
                     },

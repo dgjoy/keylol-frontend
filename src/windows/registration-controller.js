@@ -1,23 +1,23 @@
 ﻿(function () {
-    keylolApp.controller("RegistrationController", [
-        "$scope", "close", "$http", "utils", "union", "apiEndpoint", "window", "notification", "$element", "$timeout", "$location", "options",
-        "$routeParams", "$route",
+    keylolApp.controller('RegistrationController', [
+        '$scope', 'close', '$http', 'utils', 'union', 'apiEndpoint', 'window', 'notification', '$element', '$timeout', '$location', 'options',
+        '$routeParams', '$route',
         ($scope, close, $http, utils, union, apiEndpoint, window, notification, $element, $timeout, $location, options,
         $routeParams, $route) => {
             $scope.vm = {
-                IdCode: "",
-                UserName: "",
-                Password: "",
-                SteamBindingTokenId: "",
-                AvatarImage: "",
-                SteamProfileName: "",
-                GeetestChallenge: "",
-                GeetestSeccode: "",
-                GeetestValidate: "",
+                IdCode: '',
+                UserName: '',
+                Password: '',
+                SteamBindingTokenId: '',
+                AvatarImage: '',
+                SteamProfileName: '',
+                GeetestChallenge: '',
+                GeetestSeccode: '',
+                GeetestValidate: '',
                 InvitationCode: union.invitationCode,
             };
             let consumeBindingToken, geetestResult;
-            const geetest = utils.createGeetest("float");
+            const geetest = utils.createGeetest('float');
             $scope.geetestId = geetest.id;
             geetest.ready.then(gee => {
                 $timeout(() => {
@@ -44,8 +44,8 @@
 
             $scope.showSteamConnectWindow = () => {
                 window.show({
-                    templateUrl: "src/windows/steam-connect.html",
-                    controller: "SteamConnectController",
+                    templateUrl: 'src/windows/steam-connect.html',
+                    controller: 'SteamConnectController',
                     inputs: {
                         options: {
                             registrationClose: $scope.cancel,
@@ -60,7 +60,7 @@
                             $scope.vm.SteamProfileName = result.steamProfileName;
                             $scope.vm.AvatarImage = `keylol://steam/avatars/${result.steamAvatarHash}`;
                         } else {
-                            $scope.vm.SteamBindingTokenId = "";
+                            $scope.vm.SteamBindingTokenId = '';
                         }
                     });
                 });
@@ -68,7 +68,7 @@
             $timeout($scope.showSteamConnectWindow, 500);
 
             $scope.discardBinding = function () {
-                $scope.vm.SteamBindingTokenId = "";
+                $scope.vm.SteamBindingTokenId = '';
                 if (consumeBindingToken)
                     consumeBindingToken.resolve();
             };
@@ -81,10 +81,10 @@
                 $scope.error = {};
                 $timeout(() => {
                     $scope.vm.IdCode = $scope.vm.IdCode.toUpperCase();
-                    utils.modelValidate.steamBindingTokenId($scope.vm.SteamBindingTokenId, $scope.error, "vm.SteamBindingTokenId");
-                    utils.modelValidate.idCode($scope.vm.IdCode, $scope.error, "vm.IdCode");
-                    utils.modelValidate.username($scope.vm.UserName, $scope.error, "vm.UserName");
-                    utils.modelValidate.password($scope.vm.Password, $scope.error, "vm.Password");
+                    utils.modelValidate.steamBindingTokenId($scope.vm.SteamBindingTokenId, $scope.error, 'vm.SteamBindingTokenId');
+                    utils.modelValidate.idCode($scope.vm.IdCode, $scope.error, 'vm.IdCode');
+                    utils.modelValidate.username($scope.vm.UserName, $scope.error, 'vm.UserName');
+                    utils.modelValidate.password($scope.vm.Password, $scope.error, 'vm.Password');
                     if (!geetestResult) {
                         $scope.error.authCode = true;
                     }
@@ -94,7 +94,7 @@
                     }
                     if ($location.search().aff) {
                         $scope.vm.Inviter = $location.search().aff;
-                    } else if ($location.url().substr(1, 7) === "article") {
+                    } else if ($location.url().substr(1, 7) === 'article') {
                         $scope.vm.Inviter = $routeParams.author;
                     }
                     $http.post(`${apiEndpoint}user`, $scope.vm)
@@ -112,7 +112,7 @@
                                     geetest.refresh().then(useGeetestResult);
                                     break;
                                 default:
-                                    notification.error("发生未知错误，请重试或与站务职员联系", response);
+                                    notification.error('发生未知错误，请重试或与站务职员联系', response);
                             }
                             $scope.submitLock = false;
                         });

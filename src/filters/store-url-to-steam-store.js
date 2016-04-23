@@ -1,5 +1,5 @@
 (function () {
-    keylolApp.filter("storeUrlToSteamStore", () => {
+    keylolApp.filter('storeUrlToSteamStore', () => {
         return function (input) {
             return `http://store.steampowered.com/app/${input}/`;
         };

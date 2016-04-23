@@ -1,5 +1,5 @@
 ﻿(function () {
-    keylolApp.provider("utils", () => {
+    keylolApp.provider('utils', () => {
         let _config = {};
         return {
             config (config) {
@@ -9,7 +9,7 @@
                 return _config;
             },
             $get: [
-                "$q", "union",
+                '$q', 'union',
                 ($q, union) => {
                     function Utils() {
                         const self = this;
@@ -30,7 +30,7 @@
                             img.onerror = function () {
                                 reject();
                             };
-                            img.src = "data:image/webp;base64,UklGRiIAAABXRUJQVlA4IBYAAAAwAQCdASoBAAEADsD+JaQAA3AAAAAA"; // detect lossy webp
+                            img.src = 'data:image/webp;base64,UklGRiIAAABXRUJQVlA4IBYAAAAwAQCdASoBAAEADsD+JaQAA3AAAAAA'; // detect lossy webp
                         });
 
                         self.byteLength = function (str) {
@@ -48,7 +48,7 @@
                         };
 
                         self.createGeetest = function (product, onSuccess) {
-                            if (typeof window.activateGeetest === "undefined") {
+                            if (typeof window.activateGeetest === 'undefined') {
                                 window.activateGeetest = {};
                             }
                             const id = self.uniqueId();
@@ -59,7 +59,7 @@
                                 const gee = new Geetest({
                                     product,
                                     gt: _config.geetestId,
-                                    https: location.protocol === "https:",
+                                    https: location.protocol === 'https:',
                                 });
                                 gee.onSuccess(() => {
                                     successDeferred.resolve(gee);
@@ -68,8 +68,8 @@
                                 });
                                 readyDeferred.resolve(gee);
                             };
-                            if (typeof window.Geetest === "undefined") {
-                                const s = document.createElement("script");
+                            if (typeof window.Geetest === 'undefined') {
+                                const s = document.createElement('script');
                                 s.src = `//api.geetest.com/get.php?callback=activateGeetest[${id}]`;
                                 document.body.appendChild(s);
                             } else {
@@ -108,17 +108,17 @@
                         };
 
                         self.getPointType = function (type) {
-                            if (type === "Game") {
-                                return "游戏";
+                            if (type === 'Game') {
+                                return '游戏';
                             }
-                            if (type === "Genre") {
-                                return "类型";
+                            if (type === 'Genre') {
+                                return '类型';
                             }
-                            if (type === "Manufacturer") {
-                                return "厂商";
+                            if (type === 'Manufacturer') {
+                                return '厂商';
                             }
-                            if (type === "Platform") {
-                                return "平台";
+                            if (type === 'Platform') {
+                                return '平台';
                             }
                         };
 
@@ -127,9 +127,9 @@
                         };
 
                         self.getPointSecondName = function (point) {
-                            if (point.PreferredName === "Chinese")
+                            if (point.PreferredName === 'Chinese')
                                 return point.EnglishName;
-                            else if (point.PreferredName === "English")
+                            else if (point.PreferredName === 'English')
                                 return point.ChineseName;
                         };
 
@@ -161,14 +161,14 @@
                         self.modelValidate = {
                             steamBindingTokenId(str, errorObj, modelName) {
                                 if (!str) {
-                                    errorObj[modelName] = "SteamBindingTokenId cannot be empty.";
+                                    errorObj[modelName] = 'SteamBindingTokenId cannot be empty.';
                                     return false;
                                 }
                                 return true;
                             },
                             idCode (str, errorObj, modelName) {
                                 if (!/^[A-Z0-9]{5}$/.test(str)) {
-                                    errorObj[modelName] = "Only 5 uppercase letters and digits are allowed in IdCode.";
+                                    errorObj[modelName] = 'Only 5 uppercase letters and digits are allowed in IdCode.';
                                     return false;
                                 }
                                 return true;
@@ -176,25 +176,25 @@
                             username (str, errorObj, modelName) {
                                 const usernameLength = self.byteLength(str);
                                 if (usernameLength < 3 || usernameLength > 16) {
-                                    errorObj[modelName] = "UserName should be 3-16 bytes.";
+                                    errorObj[modelName] = 'UserName should be 3-16 bytes.';
                                     return false;
                                 }
                                 if (!/^[0-9A-Za-z\u4E00-\u9FCC]+$/.test(str)) {
-                                    errorObj[modelName] = "Only digits, letters and Chinese characters are allowed in UserName.";
+                                    errorObj[modelName] = 'Only digits, letters and Chinese characters are allowed in UserName.';
                                     return false;
                                 }
                                 return true;
                             },
                             password (str, errorObj, modelName) {
                                 if (str.length < 6) {
-                                    errorObj[modelName] = "Passwords must be at least 6 characters.";
+                                    errorObj[modelName] = 'Passwords must be at least 6 characters.';
                                     return false;
                                 }
                                 return true;
                             },
                             gamerTag (str, errorObj, modelName) {
                                 if (self.byteLength(str) > 40) {
-                                    errorObj[modelName] = "GamerTag should not be longer than 40 bytes.";
+                                    errorObj[modelName] = 'GamerTag should not be longer than 40 bytes.';
                                     return false;
                                 }
                                 return true;
@@ -204,63 +204,63 @@
                         self.modelErrorDetect = {
                             steamBindingTokenId (message) {
                                 if (/cannot be empty/.test(message))
-                                    return "empty";
-                                return "unknown";
+                                    return 'empty';
+                                return 'unknown';
                             },
                             idCode (message) {
                                 if (/Only.*allowed/.test(message))
-                                    return "format";
+                                    return 'format';
                                 else if (/already used/.test(message))
-                                    return "used";
-                                return "unknown";
+                                    return 'used';
+                                return 'unknown';
                             },
                             username (message) {
                                 if (/should.*bytes/.test(message))
-                                    return "length";
+                                    return 'length';
                                 else if (/Only.*allowed/.test(message))
-                                    return "format";
+                                    return 'format';
                                 else if (/already.*used/.test(message))
-                                    return "used";
-                                return "unknown";
+                                    return 'used';
+                                return 'unknown';
                             },
                             password (message) {
                                 if (/least.*characters/.test(message))
-                                    return "length";
+                                    return 'length';
                                 else if (/not correct/.test(message))
-                                    return "incorrect";
+                                    return 'incorrect';
                                 else if (/cannot be empty/.test(message))
-                                    return "empty";
-                                return "unknown";
+                                    return 'empty';
+                                return 'unknown';
                             },
                             email (message) {
                                 if (/already taken/.test(message))
-                                    return "used";
+                                    return 'used';
                                 else if (/is invalid/.test(message))
-                                    return "malformed";
+                                    return 'malformed';
                                 else if (/cannot be empty/.test(message))
-                                    return "empty";
+                                    return 'empty';
                                 else if (/doesn't exist/.test(message))
-                                    return "inexistent";
+                                    return 'inexistent';
                                 else if (/locked out/.test(message))
-                                    return "lockedout";
+                                    return 'lockedout';
                                 else if (/Login failed/.test(message))
-                                    return "failed";
-                                return "unknown";
+                                    return 'failed';
+                                return 'unknown';
                             },
                             gamerTag (message) {
                                 if (/not be longer than/.test(message))
-                                    return "length";
-                                return "unknown";
+                                    return 'length';
+                                return 'unknown';
                             },
                         };
 
                         self.escapeHtml = function (unsafe) {
                             return unsafe
-                                .replace(/&/g, "&amp;")
-                                .replace(/</g, "&lt;")
-                                .replace(/>/g, "&gt;")
-                                .replace(/"/g, "&quot;")
-                                .replace(/'/g, "&#039;");
+                                .replace(/&/g, '&amp;')
+                                .replace(/</g, '&lt;')
+                                .replace(/>/g, '&gt;')
+                                .replace(/"/g, '&quot;')
+                                .replace(/'/g, '&#039;');
                         };
 
                         self.timelineLoadCount = 20;
@@ -268,15 +268,15 @@
                         self.timelineShowDelay = 150;
 
                         self.firefoxLinkFix = function (event) {
-                            if (navigator.userAgent.toLowerCase().indexOf("firefox") > -1) {
-                                const newWindow = window.open($(event.currentTarget).attr("href"), "newwindow", "width=300, height=250");
+                            if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
+                                const newWindow = window.open($(event.currentTarget).attr('href'), 'newwindow', 'width=300, height=250');
                                 newWindow.close();
                                 event.preventDefault();
                             }
                         };
 
                         self.getVoteColor = function (i) {
-                            return ["terrible", "bad", "not-bad", "good", "awesome"][i];
+                            return ['terrible', 'bad', 'not-bad', 'good', 'awesome'][i];
                         };
                     }
 

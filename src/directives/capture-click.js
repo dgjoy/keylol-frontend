@@ -1,11 +1,11 @@
 (function () {
-    keylolApp.directive("captureClick", ["$parse", $parse => {
+    keylolApp.directive('captureClick', ['$parse', $parse => {
         return {
-            restrict: "A",
+            restrict: 'A',
             compile (element, attrs) {
                 const fn = $parse(attrs.captureClick, null, true);
                 return function (scope, element) {
-                    element[0].addEventListener("click", event => {
+                    element[0].addEventListener('click', event => {
                         scope.$apply(() => {
                             fn(scope, { $event: event });
                         });

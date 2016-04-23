@@ -21,5 +21,5 @@
             });
         }
     }
-    keylolApp.controller("EntryFilterController", EntryFilterController);
+    keylolApp.controller('EntryFilterController', EntryFilterController);
 }());

@@ -1,28 +1,28 @@
 ﻿(function () {
-    keylolApp.controller("AlphaEntranceController", [
-        "pageHead", "$scope", "$timeout", "$rootScope", "window", "$window",
+    keylolApp.controller('AlphaEntranceController', [
+        'pageHead', '$scope', '$timeout', '$rootScope', 'window', '$window',
         (pageHead, $scope, $timeout, $rootScope, window, $window) => {
-            pageHead.setTitle("其乐 - 一个交流评测感悟的玩家社区");
+            pageHead.setTitle('其乐 - 一个交流评测感悟的玩家社区');
 
             $scope.showRegistrationWindow = function () {
                 window.show({
-                    templateUrl: "src/windows/registration.html",
-                    controller: "RegistrationController",
+                    templateUrl: 'src/windows/registration.html',
+                    controller: 'RegistrationController',
                     inputs: { options: {} },
                 });
             };
 
             $scope.showLoginSteamWindow = function () {
                 window.show({
-                    templateUrl: "src/windows/login-steam.html",
-                    controller: "LoginSteamController",
+                    templateUrl: 'src/windows/login-steam.html',
+                    controller: 'LoginSteamController',
                 });
             };
 
             $scope.showInvitationWindow = function () {
                 window.show({
-                    templateUrl: "src/windows/alpha-invitation.html",
-                    controller: "AlphaInvitationController",
+                    templateUrl: 'src/windows/alpha-invitation.html',
+                    controller: 'AlphaInvitationController',
                 });
             };
 
@@ -59,8 +59,8 @@
                 });
             });
 
-            const cancelListenRoute = $scope.$on("$destroy", () => {
-                $($window).unbind("scroll");
+            const cancelListenRoute = $scope.$on('$destroy', () => {
+                $($window).unbind('scroll');
                 cancelListenRoute();
             });
 

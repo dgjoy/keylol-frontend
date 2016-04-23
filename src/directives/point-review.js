@@ -1,22 +1,22 @@
 ﻿(function () {
-    keylolApp.directive("pointReview", () => {
+    keylolApp.directive('pointReview', () => {
         return {
-            restrict: "E",
-            templateUrl: "src/directives/point-review.html",
+            restrict: 'E',
+            templateUrl: 'src/directives/point-review.html',
             scope: {
-                noString: "=",
-                onClickReview: "&",
-                bindReview: "=",
-                isHollow: "=",
+                noString: '=',
+                onClickReview: '&',
+                bindReview: '=',
+                isHollow: '=',
             },
             link (scope) {
-                scope.levelString = ["terrible", "bad", "not-bad", "good", "awesome"];
+                scope.levelString = ['terrible', 'bad', 'not-bad', 'good', 'awesome'];
                 scope.reviewCircles = [{}, {}, {}, {}, {}];
                 scope.reviewLevel = -1;
-                scope.reviewString = "";
+                scope.reviewString = '';
                 scope.changeReview = i => {
                     for (let j = 0; j <= scope.reviewCircles.length; j++) {
-                        scope.reviewCircles[j].type = j <= i ? scope.levelString[i] : "";
+                        scope.reviewCircles[j].type = j <= i ? scope.levelString[i] : '';
                     }
                 };
                 scope.returnDefault = () => {

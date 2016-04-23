@@ -1,14 +1,14 @@
 ﻿(function () {
-    keylolApp.controller("PointInfoController", [
-        "$scope", "union", "window", "utils", "notification",
+    keylolApp.controller('PointInfoController', [
+        '$scope', 'union', 'window', 'utils', 'notification',
         ($scope, union, window, utils, notification) => {
             $scope.union = union;
             $scope.utils = utils;
             $scope.point = union.point;
             $scope.showShortReviewWindow = function (vote) {
                 window.show({
-                    templateUrl: "src/windows/short-review.html",
-                    controller: "ShortReviewController",
+                    templateUrl: 'src/windows/short-review.html',
+                    controller: 'ShortReviewController',
                     inputs: {
                         options: {
                             point: {
@@ -28,8 +28,8 @@
             };
             $scope.showRegistrationWindow = function () {
                 window.show({
-                    templateUrl: "src/windows/registration.html",
-                    controller: "RegistrationController",
+                    templateUrl: 'src/windows/registration.html',
+                    controller: 'RegistrationController',
                     inputs: {
                         options: { whenReviewing: true },
                     },
@@ -37,19 +37,19 @@
                 return true;
             };
             $scope.showEditorWindow = function () {
-                notification.attention("此前尚未发布的草稿会被覆盖", [
-                    { action: "覆盖", value: true },
-                    { action: "取消" },
+                notification.attention('此前尚未发布的草稿会被覆盖', [
+                    { action: '覆盖', value: true },
+                    { action: '取消' },
                 ]).then(result => {
                     if (result) {
                         window.show({
-                            templateUrl: "src/windows/editor.html",
-                            controller: "EditorController",
+                            templateUrl: 'src/windows/editor.html',
+                            controller: 'EditorController',
                             inputs: {
                                 options: {
                                     voteForPoint: $scope.point,
                                     vm: {
-                                        TypeName: "评",
+                                        TypeName: '评',
                                         Pros: [],
                                         Cons: [],
                                     },
@@ -62,11 +62,11 @@
             };
             $scope.showRelatedGames = function ($event, type, count) {
                 $scope.showRelatedPopup({
-                    templateUrl: "src/popup/related-games.html",
-                    controller: "RelatedGamesController",
+                    templateUrl: 'src/popup/related-games.html',
+                    controller: 'RelatedGamesController',
                     event: $event,
-                    attachSide: "left",
-                    align: "top",
+                    attachSide: 'left',
+                    align: 'top',
                     offsetX: 580,
                     offsetY: 32,
                     inputs: {
@@ -78,8 +78,8 @@
             };
             $scope.showPointEdit = function (isGame) {
                 window.show({
-                    templateUrl: "src/windows/point-settings.html",
-                    controller: "PointSettingsController",
+                    templateUrl: 'src/windows/point-settings.html',
+                    controller: 'PointSettingsController',
                     inputs: {
                         isGame,
                         point: $scope.point,

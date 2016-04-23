@@ -1,16 +1,16 @@
 (function () {
-    keylolApp.directive("pagination", ["$location", $location => {
+    keylolApp.directive('pagination', ['$location', $location => {
         return {
-            restrict: "E",
-            templateUrl: "src/directives/pagination.html",
+            restrict: 'E',
+            templateUrl: 'src/directives/pagination.html',
             scope: {
-                total: "=",
-                current: "=",
-                onPageChanged: "&",
-                pageHref: "&",
+                total: '=',
+                current: '=',
+                onPageChanged: '&',
+                pageHref: '&',
             },
             link (scope) {
-                scope.$watchGroup(["current", "total"], () => {
+                scope.$watchGroup(['current', 'total'], () => {
                     scope.newPage = scope.current;
                     scope.hasLeftEllipsis = scope.current > 4;
                     scope.hasRightEllipsis = scope.total - scope.current > 4;

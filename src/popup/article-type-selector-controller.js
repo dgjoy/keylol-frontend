@@ -1,6 +1,6 @@
 ﻿(function () {
-    keylolApp.controller("ArticleTypeSelectorController", [
-        "$scope", "close", "selectedIndex", "articleTypes",
+    keylolApp.controller('ArticleTypeSelectorController', [
+        '$scope', 'close', 'selectedIndex', 'articleTypes',
         ($scope, close, selectedIndex, articleTypes) => {
             $scope.articleTypes = articleTypes;
             $scope.selectedIndex = selectedIndex;

@@ -9,9 +9,9 @@
         }
     }
 
-    keylolApp.component("mainNavigation", {
-        templateUrl: "src/sections/main-navigation.html",
+    keylolApp.component('mainNavigation', {
+        templateUrl: 'src/sections/main-navigation.html',
         controller: MainNavigationController,
-        controllerAs: "mainNavigation",
+        controllerAs: 'mainNavigation',
     });
 }());

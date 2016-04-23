@@ -1,12 +1,12 @@
 ﻿(function () {
-    keylolApp.controller("SettingsController", [
-        "$scope", "close", "utils", "$http", "union", "apiEndpoint", "base64", "Upload", "$q", "notification", "$element",
-        "$timeout", "upyun", "window", "options",
+    keylolApp.controller('SettingsController', [
+        '$scope', 'close', 'utils', '$http', 'union', 'apiEndpoint', 'base64', 'Upload', '$q', 'notification', '$element',
+        '$timeout', 'upyun', 'window', 'options',
         ($scope, close, utils, $http, union, apiEndpoint, base64, Upload, $q, notification, $element,
         $timeout, upyun, window, options) => {
             $scope.error = {};
             $scope.errorDetect = utils.modelErrorDetect;
-            $scope.page = options.page || "profiles";
+            $scope.page = options.page || 'profiles';
             $scope.uniqueIds = {};
             for (let i = 0; i < 22; ++i) {
                 $scope.uniqueIds[i] = utils.uniqueId();
@@ -16,18 +16,18 @@
 
             $scope.resync = function () {
                 window.show({
-                    templateUrl: "src/windows/sync-loading.html",
-                    controller: "SyncLoadingController",
+                    templateUrl: 'src/windows/sync-loading.html',
+                    controller: 'SyncLoadingController',
                     inputs: { options: {} },
                 });
                 close();
             };
 
             $scope.vm = {
-                ProfilePointBackgroundImage: "",
-                Password: "",
-                NewPassword: "",
-                ConfirmPassword: "",
+                ProfilePointBackgroundImage: '',
+                Password: '',
+                NewPassword: '',
+                ConfirmPassword: '',
             };
             const originalVM = {};
             function updateVM (user) {
@@ -76,7 +76,7 @@
             });
 
             let geetestResult;
-            const geetest = utils.createGeetest("float");
+            const geetest = utils.createGeetest('float');
             $scope.geetestId = geetest.id;
             geetest.ready.then(gee => {
                 $timeout(() => {
@@ -103,37 +103,37 @@
             $scope.optionsInPageChanged = function (page) {
                 let keys = [];
                 switch (page) {
-                    case "profiles":
+                    case 'profiles':
                         keys = [
-                            "GamerTag",
-                            "Email",
-                            "AvatarImage",
-                            "ProfilePointBackgroundImage",
+                            'GamerTag',
+                            'Email',
+                            'AvatarImage',
+                            'ProfilePointBackgroundImage',
                         ];
                         break;
-                    case "platform":
+                    case 'platform':
                         keys = [
-                            "SteamNotifyOnArticleReplied",
-                            "SteamNotifyOnCommentReplied",
-                            "SteamNotifyOnArticleLiked",
-                            "SteamNotifyOnCommentLiked",
+                            'SteamNotifyOnArticleReplied',
+                            'SteamNotifyOnCommentReplied',
+                            'SteamNotifyOnArticleLiked',
+                            'SteamNotifyOnCommentLiked',
                         ];
                         break;
-                    case "security":
+                    case 'security':
                         keys = [
-                            "LockoutEnabled",
-                            "EmailNotifyOnAdvertisement",
-                            "EmailNotifyOnArticleReplied",
-                            "EmailNotifyOnCommentReplied",
-                            "EmailNotifyOnEditorRecommended",
-                            "EmailNotifyOnMessageReceived",
-                            "NewPassword",
+                            'LockoutEnabled',
+                            'EmailNotifyOnAdvertisement',
+                            'EmailNotifyOnArticleReplied',
+                            'EmailNotifyOnCommentReplied',
+                            'EmailNotifyOnEditorRecommended',
+                            'EmailNotifyOnMessageReceived',
+                            'NewPassword',
                         ];
                         break;
-                    case "preferences":
+                    case 'preferences':
                         keys = [
-                            "AutoSubscribeEnabled",
-                            "AutoSubscribeDaySpan",
+                            'AutoSubscribeEnabled',
+                            'AutoSubscribeDaySpan',
                         ];
                         break;
                 }
@@ -145,23 +145,23 @@
             $scope.optionsInPageError = function (page) {
                 let keys = [];
                 switch (page) {
-                    case "profiles":
+                    case 'profiles':
                         keys = [
-                            "vm.GamerTag",
-                            "vm.Email",
+                            'vm.GamerTag',
+                            'vm.Email',
                         ];
                         break;
-                    case "platform":
+                    case 'platform':
                         break;
-                    case "security":
+                    case 'security':
                         keys = [
-                            "vm.Password",
-                            "vm.NewPassword",
-                            "vm.ConfirmPassword",
-                            "authCode",
+                            'vm.Password',
+                            'vm.NewPassword',
+                            'vm.ConfirmPassword',
+                            'authCode',
                         ];
                         break;
-                    case "preferences":
+                    case 'preferences':
                         break;
                 }
                 return keys.some(key => {
@@ -170,7 +170,7 @@
             };
 
             function focusErrorPage () {
-                const pages = ["profiles", "platform", "security", "preferences"];
+                const pages = ['profiles', 'platform', 'security', 'preferences'];
                 for (const pi in pages) {
                     if (pages.hasOwnProperty(pi) && $scope.optionsInPageError(pages[pi])) {
                         $scope.page = pages[pi];
@@ -186,27 +186,27 @@
                 $scope.submitLock = true;
                 $scope.error = {};
                 $timeout(() => {
-                    utils.modelValidate.gamerTag($scope.vm.GamerTag, $scope.error, "vm.GamerTag");
-                    if (isVMDirty("NewPassword") || isVMDirty("LockoutEnabled")) {
+                    utils.modelValidate.gamerTag($scope.vm.GamerTag, $scope.error, 'vm.GamerTag');
+                    if (isVMDirty('NewPassword') || isVMDirty('LockoutEnabled')) {
                         if (!$scope.vm.Password) {
-                            $scope.error["vm.Password"] = "Password cannot be empty.";
+                            $scope.error['vm.Password'] = 'Password cannot be empty.';
                         }
                         if (!geetestResult) {
                             $scope.error.authCode = true;
                         }
                         if ($scope.vm.NewPassword) {
-                            if (utils.modelValidate.password($scope.vm.NewPassword, $scope.error, "vm.NewPassword")) {
+                            if (utils.modelValidate.password($scope.vm.NewPassword, $scope.error, 'vm.NewPassword')) {
                                 if ($scope.vm.NewPassword !== $scope.vm.ConfirmPassword) {
-                                    $scope.error["vm.ConfirmPassword"] = "not match";
+                                    $scope.error['vm.ConfirmPassword'] = 'not match';
                                 }
                             }
                         }
                     }
-                    if (isVMDirty("Email")) {
+                    if (isVMDirty('Email')) {
                         if (form.email.$invalid) {
-                            $scope.error["vm.Email"] = "Email is invalid.";
+                            $scope.error['vm.Email'] = 'Email is invalid.';
                         } else if (!$scope.vm.Email) {
-                            $scope.error["vm.Email"] = "Email cannot be empty.";
+                            $scope.error['vm.Email'] = 'Email cannot be empty.';
                         }
                     }
                     if (!$.isEmptyObject($scope.error)) {
@@ -224,7 +224,7 @@
                     }
                     if (!$scope.files.avatarImage && !$scope.files.profilePointBackgroundImage
                         && $.isEmptyObject(dirtyFields)) { // Nothing changed
-                        notification.success("个人设定已更新");
+                        notification.success('个人设定已更新');
                         close();
                         return;
                     }
@@ -232,7 +232,7 @@
                     function submit () {
                         $http.put(`${apiEndpoint}user/${union.$localStorage.login.UserId}`, dirtyFields).then(() => {
                             $.extend(union.$localStorage.user, dirtyFields);
-                            notification.success("个人设定已更新");
+                            notification.success('个人设定已更新');
                             close();
                         }, response => {
                             switch (response.status) {
@@ -243,14 +243,14 @@
                                     focusErrorPage();
                                     break;
                                 default:
-                                    notification.error("发生未知错误，请重试或与站务职员联系", response);
+                                    notification.error('发生未知错误，请重试或与站务职员联系', response);
                             }
                             $scope.submitLock = false;
                         });
                     }
 
                     if ($scope.files.avatarImage || $scope.files.profilePointBackgroundImage) {
-                        notification.process("图像正在上传");
+                        notification.process('图像正在上传');
                         const policy = upyun.policy();
                         upyun.signature(policy).then(signature => {
                             const uploads = {};
@@ -259,7 +259,7 @@
                                 uploads.avatarImage.then(response => {
                                     dirtyFields.AvatarImage = `keylol://${response.data.url}`;
                                 }, () => {
-                                    notification.error("头像上传失败");
+                                    notification.error('头像上传失败');
                                     $scope.submitLock = false;
                                 });
                             }
@@ -268,7 +268,7 @@
                                 uploads.profilePointBackgroundImage.then(response => {
                                     dirtyFields.ProfilePointBackgroundImage = `keylol://${response.data.url}`;
                                 }, () => {
-                                    notification.error("个人据点横幅上传失败");
+                                    notification.error('个人据点横幅上传失败');
                                     $scope.submitLock = false;
                                 });
                             }
@@ -276,7 +276,7 @@
                                 submit();
                             });
                         }, () => {
-                            notification.error("文件上传验证失效");
+                            notification.error('文件上传验证失效');
                             $scope.submitLock = false;
                         });
                     } else {
@@ -286,17 +286,17 @@
             };
 
             $scope.logout = function () {
-                notification.attention("从当前账户登出", [
-                    { action: "登出", value: true },
-                    { action: "取消" },
+                notification.attention('从当前账户登出', [
+                    { action: '登出', value: true },
+                    { action: '取消' },
                 ]).then(result => {
                     if (result) {
                         delete union.$localStorage.login;
                         $http.delete(`${apiEndpoint}login/current`).then(() => {
-                            notification.success("已登出当前账户");
+                            notification.success('已登出当前账户');
                             close();
                         }, response => {
-                            notification.error("发生未知错误，请重试或与站务职员联系", response);
+                            notification.error('发生未知错误，请重试或与站务职员联系', response);
                         });
                     }
                 });

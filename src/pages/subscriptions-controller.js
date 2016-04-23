@@ -2,8 +2,8 @@
  * Created by Rex on 15/9/23.
  */
 (function () {
-    keylolApp.controller("SubscriptionsController", [
-        "pageHead", "$scope", "union", "$http", "notification", "$location", "utils", "$timeout", "window",
+    keylolApp.controller('SubscriptionsController', [
+        'pageHead', '$scope', 'union', '$http', 'notification', '$location', 'utils', '$timeout', 'window',
         (pageHead, $scope, union, $http, notification, $location, utils, $timeout, window) => {
             $scope.union = union;
             $scope.searchExist = true;
@@ -14,7 +14,7 @@
                 },
                 avatar: union.$localStorage.user.AvatarImage,
                 pointSum: {
-                    type: "个人",
+                    type: '个人',
                     readerNum: union.$localStorage.user.SubscriberCount,
                     articleNum: union.$localStorage.user.ArticleCount,
                 },
@@ -23,25 +23,25 @@
 
             $http.get(`${apiEndpoint}user/${union.$localStorage.user.IdCode}`, {
                 params: {
-                    idType: "IdCode",
+                    idType: 'IdCode',
                     profilePointBackgroundImage: true,
                 },
             }).then(response => {
                 summary.background = response.data.ProfilePointBackgroundImage;
             }, response => {
-                notification.error("发生未知错误，请重试或与站务职员联系", response);
+                notification.error('发生未知错误，请重试或与站务职员联系', response);
             });
 
             const timeline = {
                 title: {
-                    mainTitle: "搜索结果",
-                    subTitle: "Search Result",
+                    mainTitle: '搜索结果',
+                    subTitle: 'Search Result',
                 },
                 cannotClick: true,
                 actions: [
                     {
                         active: false,
-                        text: "同步订阅列表",
+                        text: '同步订阅列表',
                         onClick () {
                             const that = this;
                             if (!that.lock) {
@@ -49,16 +49,16 @@
                                 $http.get(`${apiEndpoint}user-point-subscription/my/auto`).then(response => {
                                     that.lock = false;
                                     window.show({
-                                        templateUrl: "src/windows/synchronization.html",
-                                        controller: "SynchronizationController",
+                                        templateUrl: 'src/windows/synchronization.html',
+                                        controller: 'SynchronizationController',
                                         inputs: {
-                                            condition: "review",
+                                            condition: 'review',
                                             autoSubscribed: response.data,
                                             options: {},
                                         },
                                     });
                                 }, response => {
-                                    notification.error("发生未知错误，请重试或与站务职员联系", response);
+                                    notification.error('发生未知错误，请重试或与站务职员联系', response);
                                     that.lock = false;
                                 });
                             }
@@ -116,7 +116,7 @@
                                         const user = response.data[i].User;
                                         timeline.searchNotFound = false;
                                         entry = {
-                                            types: ["个人"],
+                                            types: ['个人'],
                                             pointInfo: {
                                                 reader: response.data[i].SubscriberCount,
                                                 article: response.data[i].ArticleCount,
@@ -146,7 +146,7 @@
                                 timeline.loadingLock = false;
                             }
                         }, response => {
-                            notification.error("发生未知错误，请重试或与站务职员联系", response);
+                            notification.error('发生未知错误，请重试或与站务职员联系', response);
                             timeline.loadingLock = false;
                         });
                     }

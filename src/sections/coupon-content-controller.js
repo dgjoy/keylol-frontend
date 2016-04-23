@@ -29,20 +29,20 @@
                     return this.page;
                 }, newPage => {
                     //noinspection JSValidateTypes
-                    if (newPage !== "records" && newPage !== "shop" && newPage !== "ranks" && newPage !== "invite") {
-                        this.page = "records";
+                    if (newPage !== 'records' && newPage !== 'shop' && newPage !== 'ranks' && newPage !== 'invite') {
+                        this.page = 'records';
                     } else {
                         //noinspection JSValidateTypes
-                        if (newPage === "records")
+                        if (newPage === 'records')
                             this.getCouponLog();
                         //noinspection JSValidateTypes
-                        if (newPage === "ranks")
+                        if (newPage === 'ranks')
                             this.getCouponRank();
                         //noinspection JSValidateTypes
-                        if (newPage === "invite")
+                        if (newPage === 'invite')
                             this.getInviteCount();
                         //noinspection JSValidateTypes
-                        if (newPage === "shop")
+                        if (newPage === 'shop')
                             this.getCouponGift();
                     }
                 });
@@ -58,28 +58,28 @@
                 const item = response.data;
                 if (item.Redeemed) {
                     this.window.show({
-                        templateUrl: "src/windows/shop-collect.html",
-                        controller: "ShopCollectController",
+                        templateUrl: 'src/windows/shop-collect.html',
+                        controller: 'ShopCollectController',
                         inputs: { item },
                     });
                 } else {
                     this.window.show({
-                        templateUrl: "src/windows/item-preview.html",
-                        controller: "ItemPreviewController",
+                        templateUrl: 'src/windows/item-preview.html',
+                        controller: 'ItemPreviewController',
                         inputs: { item },
                     });
                 }
                 this.showLock = false;
             }, response => {
                 this.showLock = false;
-                this.notification.error("发生未知错误，请重试或与站务职员联系", response);
+                this.notification.error('发生未知错误，请重试或与站务职员联系', response);
             });
         }
         getInviteCount () {
             this.$http.get(`${this.apiEndpoint}user/invited-user-count`).then(response => {
                 this.inviteCount = response.data;
             }, response => {
-                this.notification.error("发生未知错误，请重试或与站务职员联系", response);
+                this.notification.error('发生未知错误，请重试或与站务职员联系', response);
             });
         }
         getCouponRank (page) {
@@ -100,11 +100,11 @@
                 },
             }).then(response => {
                 this.ranks = response.data;
-                this.myRank = parseInt(response.headers("X-My-Rank"));
+                this.myRank = parseInt(response.headers('X-My-Rank'));
                 this.rankPage.total = 5;
                 this.rankPage.curr = page || 1;
             }, response => {
-                this.notification.error("发生未知错误，请重试或与站务职员联系", response);
+                this.notification.error('发生未知错误，请重试或与站务职员联系', response);
             });
         }
         getCouponLog(page) {
@@ -125,10 +125,10 @@
                 },
             }).then(response => {
                 this.records = response.data;
-                this.recordPage.total = Math.ceil(response.headers("X-Total-Record-Count") / 20);
+                this.recordPage.total = Math.ceil(response.headers('X-Total-Record-Count') / 20);
                 this.recordPage.curr = page || 1;
             }, response => {
-                this.notification.error("发生未知错误，请重试或与站务职员联系", response);
+                this.notification.error('发生未知错误，请重试或与站务职员联系', response);
             });
         }
         getCouponGift() {
@@ -139,14 +139,14 @@
             this.$http.get(`${this.apiEndpoint}coupon-gift`).then(response => {
                 this.shopItems = response.data;
             }, response => {
-                this.notification.error("发生未知错误，请重试或与站务职员联系", response);
+                this.notification.error('发生未知错误，请重试或与站务职员联系', response);
             });
         }
     }
 
-    keylolApp.component("couponContent", {
-        templateUrl: "src/sections/coupon-content.html",
+    keylolApp.component('couponContent', {
+        templateUrl: 'src/sections/coupon-content.html',
         controller: CouponContentController,
-        controllerAs: "couponContent",
+        controllerAs: 'couponContent',
     });
 }());

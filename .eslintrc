@@ -15,7 +15,7 @@
     "quote-props": ["warn", "as-needed", { "keywords": true, "unnecessary": false }],
     "no-array-constructor": ["warn"],
     "array-callback-return": ["warn"],
-    "quotes": ["warn"],
+    "quotes": ["warn", "single"],
     "prefer-template": ["warn"],
     "template-curly-spacing": ["warn"],
     "no-useless-escape": ["warn"],

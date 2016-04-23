@@ -1,5 +1,5 @@
 (function () {
-    keylolApp.filter("userName", () => {
+    keylolApp.filter('userName', () => {
         return (input, showAt) => {
             if (showAt) {
                 return `@${input}`;

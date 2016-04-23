@@ -1,7 +1,7 @@
 (function () {
-    keylolApp.directive("bindHtmlCompile", ["$compile", $compile => {
+    keylolApp.directive('bindHtmlCompile', ['$compile', $compile => {
         return {
-            restrict: "A",
+            restrict: 'A',
             link (scope, element, attrs) {
                 scope.$watch(() => {
                     return scope.$eval(attrs.bindHtmlCompile);

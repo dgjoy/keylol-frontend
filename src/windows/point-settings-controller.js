@@ -1,10 +1,10 @@
 ﻿(function () {
-    keylolApp.controller("PointSettingsController", [
-        "$scope", "close", "utils", "$http", "apiEndpoint", "base64", "upyun", "$q", "notification", "$timeout",
-        "point", "isGame", "isJustCreated", "$filter", "$location", "union", "$route",
+    keylolApp.controller('PointSettingsController', [
+        '$scope', 'close', 'utils', '$http', 'apiEndpoint', 'base64', 'upyun', '$q', 'notification', '$timeout',
+        'point', 'isGame', 'isJustCreated', '$filter', '$location', 'union', '$route',
         ($scope, close, utils, $http, apiEndpoint, base64, upyun, $q, notification, $timeout,
         point, isGame, isJustCreated, $filter, $location, union, $route) => {
-            $scope.page = "basic";
+            $scope.page = 'basic';
             $scope.uniqueIds = {};
             $scope.isGame = isGame;
             for (let i = 0; i < 2; ++i) {
@@ -45,11 +45,11 @@
                 };
             }
 
-            if (union.$localStorage.user.StaffClaim === "operator") {
+            if (union.$localStorage.user.StaffClaim === 'operator') {
                 $scope.isOperator = true;
                 $scope.vm.EnglishName = point.EnglishName;
                 if (isGame) {
-                    $scope.vm.ReleaseDate = $filter("date")(point.ReleaseDate, "yyyy-MM-dd");
+                    $scope.vm.ReleaseDate = $filter('date')(point.ReleaseDate, 'yyyy-MM-dd');
                 }
 
                 $scope.vm.IdCode = point.IdCode;
@@ -89,7 +89,7 @@
             }
 
             function isVMDirty (key) {
-                if (typeof $scope.vm[key] !== "object") {
+                if (typeof $scope.vm[key] !== 'object') {
                     return $scope.vm[key] !== originalVM[key];
                 } else {
                     for (const attr in $scope.vm[key]) {
@@ -112,40 +112,40 @@
             $scope.optionsInPageChanged = function (page) {
                 let keys = [];
                 switch (page) {
-                    case "basic":
+                    case 'basic':
                         keys = [
-                            "EnglishName",
-                            "ChineseName",
-                            "DisplayAliases",
-                            "EnglishAliases",
-                            "ChineseAliases",
-                            "Description",
-                            "ReleaseDate",
+                            'EnglishName',
+                            'ChineseName',
+                            'DisplayAliases',
+                            'EnglishAliases',
+                            'ChineseAliases',
+                            'Description',
+                            'ReleaseDate',
                         ];
                         break;
-                    case "relationship":
+                    case 'relationship':
                         keys = [
-                            "DeveloperPointsId",
-                            "PublisherPointsId",
-                            "GenrePointsId",
-                            "TagPointsId",
-                            "MajorPlatformPointsId",
-                            "MinorPlatformPointsId",
-                            "SeriesPointsId",
+                            'DeveloperPointsId',
+                            'PublisherPointsId',
+                            'GenrePointsId',
+                            'TagPointsId',
+                            'MajorPlatformPointsId',
+                            'MinorPlatformPointsId',
+                            'SeriesPointsId',
                         ];
                         break;
-                    case "images":
+                    case 'images':
                         keys = [
-                            "AvatarImage",
-                            "BackgroundImage",
-                            "CoverImage",
+                            'AvatarImage',
+                            'BackgroundImage',
+                            'CoverImage',
                         ];
                         break;
-                    case "preferences":
+                    case 'preferences':
                         keys = [
-                            "IdCode",
-                            "NameInSteamStore",
-                            "PreferredName",
+                            'IdCode',
+                            'NameInSteamStore',
+                            'PreferredName',
                         ];
                         break;
                 }
@@ -159,7 +159,7 @@
                 if ($scope.submitLock)
                     return;
                 if ($scope.vm.Description.length > 399) {
-                    notification.error("部分文字内容超出字数限制，请酌情删改后再次提交");
+                    notification.error('部分文字内容超出字数限制，请酌情删改后再次提交');
                     return;
                 }
                 $scope.submitLock = true;
@@ -170,12 +170,12 @@
                     $http.put(`${apiEndpoint}normal-point/${point.Id}`, $scope.vm)
                         .then(() => {
                             if (!isGame || !isJustCreated) {
-                                notification.success("据点信息已更新");
+                                notification.success('据点信息已更新');
                             } else {
                                 if (union.inEditor) {
-                                    notification.success("据点已开设，可以随时接收文章投稿");
+                                    notification.success('据点已开设，可以随时接收文章投稿');
                                 } else {
-                                    notification.success("据点已开设");
+                                    notification.success('据点已开设');
                                 }
                             }
                             close();
@@ -188,13 +188,13 @@
                                 }
                             }
                         }, response => {
-                            notification.error("发生未知错误，请重试或与站务职员联系", response);
+                            notification.error('发生未知错误，请重试或与站务职员联系', response);
                             $scope.submitLock = false;
                         });
                 }
 
                 if ($scope.files.avatarImage || $scope.files.backgroundImage || $scope.files.coverImage) {
-                    notification.process("图像正在上传");
+                    notification.process('图像正在上传');
                     const policy = upyun.policy();
                     upyun.signature(policy).then(signature => {
                         const uploads = {};
@@ -204,7 +204,7 @@
                                 $scope.vm.AvatarImage = `keylol://${response.data.url}`;
                                 $scope.files.avatarImage = null;
                             }, () => {
-                                notification.error("据点图标上传失败");
+                                notification.error('据点图标上传失败');
                                 $scope.submitLock = false;
                             });
                         }
@@ -214,7 +214,7 @@
                                 $scope.vm.BackgroundImage = `keylol://${response.data.url}`;
                                 $scope.files.backgroundImage = null;
                             }, () => {
-                                notification.error("据点大图上传失败");
+                                notification.error('据点大图上传失败');
                                 $scope.submitLock = false;
                             });
                         }
@@ -224,7 +224,7 @@
                                 $scope.vm.CoverImage = `keylol://${response.data.url}`;
                                 $scope.files.coverImage = null;
                             }, () => {
-                                notification.error("据点封面上传失败");
+                                notification.error('据点封面上传失败');
                                 $scope.submitLock = false;
                             });
                         }
@@ -232,7 +232,7 @@
                             submit();
                         });
                     }, () => {
-                        notification.error("文件上传验证失效");
+                        notification.error('文件上传验证失效');
                         $scope.submitLock = false;
                     });
                 } else {
