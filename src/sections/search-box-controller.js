@@ -1,56 +1,24 @@
 ﻿(function () {
-    keylolApp.controller('SearchBoxController', [
-        '$scope', 'union', '$timeout', '$location',
-        ($scope, union, $timeout, $location) => {
-            $scope.onSearching = function () {
-                let searchType = '';
-                for (let i = 0;i < union.searchFilter.length;i++) {
-                    if (union.searchFilter[i].active) {
-                        searchType = union.searchFilter[i].type;
-                    }
-                }
-                if ($scope.searchText) {
-                    $location.url(`search/${searchType}/${encodeURIComponent($scope.searchText)}`);
-                }
-            };
+    class SearchBoxController {
+        constructor ($scope, union, $timeout, $location) {
+            $.extend(this, {
+                union,
+                $location,
+                searchSelectorDisplayed: false,
+                searchSelectorOptions: {
+                    onSearching: this.onSearching,
+                },
+            });
 
-            let searchSelectorDisplayed = false;
-            const searchSelectorOptions = {
-                onSearching: $scope.onSearching,
-            };
-            function showSearchSelector ($event) {
-                searchSelectorDisplayed = true;
-                $scope.showSearchSelectorPopup({
-                    templateUrl: 'src/popup/search-selector.html',
-                    controller: 'SearchSelectorController',
-                    attachSide: 'bottom',
-                    event: $event,
-                    align: 'right',
-                    inputs: { options: searchSelectorOptions },
-                }).then(popup => {
-                    return popup.close;
-                }).then(() => {
-                    searchSelectorDisplayed = false;
-                });
-            }
-
-            $scope.getSearchResults = function ($event) {
-                let searchText = '';
-                if ($scope.searchText !== undefined) {
-                    searchText = $scope.searchText;
+            $scope.$watch(() => {
+                return this.searchText;
+            }, () => {
+                if (this.delayGetResult) {
+                    $timeout.cancel(this.delayGetResult);
                 }
-                searchSelectorOptions.searchText = searchText;
-                if (!searchSelectorDisplayed)
-                    showSearchSelector($.extend($event, { type: 'click', acceptCurrentTarget: true }));
-            };
-
-            $scope.$watch('searchText', () => {
-                if ($scope.delayGetResult) {
-                    $timeout.cancel($scope.delayGetResult);
-                }
-                if ($scope.searchText !== undefined) {
-                    $scope.delayGetResult = $timeout(() => {
-                        searchSelectorOptions.searchText = $scope.searchText;
+                if (this.searchText !== undefined) {
+                    this.delayGetResult = $timeout(() => {
+                        this.searchSelectorOptions.searchText = this.searchText;
                     }, 200);
                 }
             });
@@ -70,6 +38,47 @@
                     text: '用户',
                 },
             ];
-        },
-    ]);
+        }
+        onSearching  () {
+            let searchType = '';
+            for (let i = 0;i < this.union.searchFilter.length;i++) {
+                if (this.union.searchFilter[i].active) {
+                    searchType = this.union.searchFilter[i].type;
+                }
+            }
+            if (this.searchText) {
+                this.$location.url(`search/${searchType}/${encodeURIComponent(this.searchText)}`);
+            }
+        }
+        showSearchSelector ($event) {
+            this.searchSelectorDisplayed = true;
+            this.showSearchSelectorPopup({
+                templateUrl: 'src/popup/search-selector.html',
+                controller: 'SearchSelectorController',
+                attachSide: 'bottom',
+                event: $event,
+                align: 'right',
+                inputs: { options: this.searchSelectorOptions },
+            }).then(popup => {
+                return popup.close;
+            }).then(() => {
+                this.searchSelectorDisplayed = false;
+            });
+        }
+        getSearchResults ($event) {
+            let searchText = '';
+            if (this.searchText !== undefined) {
+                searchText = this.searchText;
+            }
+            this.searchSelectorOptions.searchText = searchText;
+            if (!this.searchSelectorDisplayed)
+                this.showSearchSelector($.extend($event, { type: 'click', acceptCurrentTarget: true }));
+        }
+    }
+
+    keylolApp.component('searchBox', {
+        templateUrl: 'src/sections/search-box.html',
+        controller: SearchBoxController,
+        controllerAs: 'searchBox',
+    });
 }());

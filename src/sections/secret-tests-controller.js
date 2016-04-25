@@ -1,13 +1,22 @@
 ﻿(function () {
-    keylolApp.controller('SecretTestsController', [
-        '$scope', 'window', '$http', 'notification',
-        ($scope, window, $http, notification) => {
-            $scope.showPointListWindow = function () {
-                window.show({
-                    templateUrl: 'src/windows/point-list.html',
-                    controller: 'PointListController',
-                });
-            };
-        },
-    ]);
+    class SecretTestsController {
+        constructor (window, $http, notification) {
+            $.extend(this, {
+                window,
+            });
+        }
+        showPointListWindow () {
+            this.window.show({
+                templateUrl: 'src/windows/point-list.html',
+                controller: 'PointListController',
+            });
+        }
+
+    }
+
+    keylolApp.component('secretTests', {
+        templateUrl: 'src/sections/secret-tests.html',
+        controller: SecretTestsController,
+        controllerAs: 'secretTests',
+    });
 }());

@@ -1,6 +1,6 @@
-﻿<div class="section-promoted-readings box-shadowed" ng-controller="PromotedReadingsController">
+﻿<div class="section-promoted-readings box-shadowed">
     <h1 class="labeled-heading">萃选文章</h1>
-    <div ng-repeat="article in articles track by article.Id" class="article">
+    <div ng-repeat="article in promotedReadings.articles track by article.Id" class="article">
         <h2>
             <a ng-href="article/{{article.AuthorIdCode}}/{{article.SequenceNumberForAuthor}}">{{article.Title}}</a>
         </h2>

@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-left">
             <logo></logo>
-            <section ng-if="union.$localStorage.user" ng-include="'src/sections/reception.html'"></section>
+            <reception ng-if="union.$localStorage.user"></reception>
             <main-navigation></main-navigation>
         </div>
         <div class="col-middle">
@@ -10,12 +10,12 @@
             <section ng-include="'src/sections/timeline.html'"></section>
         </div>
         <div class="col-right">
-            <section ng-include="'src/sections/search-box.html'" style="height: 40px"></section>
+            <search-box></search-box>
             <action-hub></action-hub>
-            <section ng-include="'src/sections/promoted-readings.html'"></section>
+            <promoted-readings></promoted-readings>
             <latest-articles></latest-articles>
-            <section ng-if="union.$localStorage.user.StaffClaim === 'operator'" ng-include="'src/sections/secret-tests.html'"></section>
-            <section ng-include="'src/sections/site-footer.html'"></section>
+            <secret-tests ng-if="union.$localStorage.user.StaffClaim === 'operator'"></secret-tests>
+            <site-footer></site-footer>
         </div>
     </div>
 </div>

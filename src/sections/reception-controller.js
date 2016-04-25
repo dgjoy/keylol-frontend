@@ -1,104 +1,115 @@
 ﻿(function () {
-    keylolApp.controller('ReceptionController', [
-        '$scope', '$http', 'notification', 'union', '$routeParams', 'utils',
-        ($scope, $http, notification, union, $routeParams, utils) => {
-            $scope.quickLinks = [];
-            $scope.recentLinks = [];
-            $.extend($scope.recentLinks, union.$localStorage.recentBrowse);
-
-            function setupQuickLinks (quickLinks) {
-                $.extend($scope.quickLinks, quickLinks);
-                $scope.canBeAdd = $scope.quickLinks.length < 5;
-                for (const i in $scope.quickLinks) {
-                    if ($scope.quickLinks.hasOwnProperty(i)) {
-                        switch ($scope.quickLinks[i].Type) {
-                            case 'Unknown':
-                                break;
-                            case 'NormalPoint':
-                                if ($routeParams.pointIdCode === $scope.quickLinks[i].IdCode) {
-                                    $scope.canBeAdd = false;
-                                }
-                                break;
-                            case 'ProfilePoint':
-                                if ($routeParams.userIdCode === $scope.quickLinks[i].IdCode) {
-                                    $scope.canBeAdd = false;
-                                }
-                                break;
-                        }
-                    }
-                }
-            }
-
+    class ReceptionController {
+        constructor ($http, notification, union, $routeParams, utils, apiEndpoint) {
+            $.extend(this, {
+                $http,
+                notification,
+                union,
+                $routeParams,
+                utils,
+                apiEndpoint,
+                quickLinks: [],
+                recentLinks: [],
+            });
+            $.extend(this.recentLinks, union.$localStorage.recentBrowse);
             if (union.$localStorage.favorites) {
-                setupQuickLinks(union.$localStorage.favorites);
+                this.setupQuickLinks(union.$localStorage.favorites);
             }
 
             $http.get(`${apiEndpoint}favorite`).then(response => {
                 union.$localStorage.favorites = response.data;
-                setupQuickLinks(response.data);
+                this.setupQuickLinks(response.data);
             }, response => {
                 notification.error('发生未知错误，请重试或与站务职员联系', response);
             });
-
-            $scope.deleteFavorite = function (index) {
-                const deleteLink = $scope.quickLinks[index];
-                notification.attention('将此据点由收藏夹移除', [
-                    { action: '移除', value: true },
-                    { action: '取消' },
-                ]).then(result => {
-                    if (result) {
-                        $http.delete(`${apiEndpoint}favorite/${deleteLink.Id}`).then(() => {
-                            if (deleteLink.Type !== 'Unknown' &&
-                                ($routeParams.pointIdCode === deleteLink.IdCode || $routeParams.userIdCode === deleteLink.IdCode)) {
-                                $scope.canBeAdd = true;
+        }
+        setupQuickLinks (quickLinks) {
+            $.extend(this.quickLinks, quickLinks);
+            this.canBeAdd = this.quickLinks.length < 5;
+            for (const i in this.quickLinks) {
+                if (this.quickLinks.hasOwnProperty(i)) {
+                    switch (this.quickLinks[i].Type) {
+                        case 'Unknown':
+                            break;
+                        case 'NormalPoint':
+                            if (this.$routeParams.pointIdCode === this.quickLinks[i].IdCode) {
+                                this.canBeAdd = false;
                             }
-                            $scope.quickLinks.splice(index, 1);
-                        }, response => {
-                            notification.error('发生未知错误，请重试或与站务职员联系', response);
-                        });
+                            break;
+                        case 'ProfilePoint':
+                            if (this.$routeParams.userIdCode === this.quickLinks[i].IdCode) {
+                                this.canBeAdd = false;
+                            }
+                            break;
                     }
-                });
-            };
-
-            $scope.addFavorite = function () {
-                if ($routeParams.pointIdCode && union.point.Id) {
-                    $scope.canBeAdd = false;
-                    $http.post(`${apiEndpoint}favorite`, {}, {
-                        params: { pointId: union.point.Id },
-                    }).then(response => {
-                        $scope.quickLinks.push({
-                            Id: response.data,
-                            Type: 'NormalPoint',
-                            IdCode: union.point.IdCode,
-                            Name: utils.getPointFirstName(union.point),
-                        });
-                        notification.success('当前据点已添加到收藏夹');
+                }
+            }
+        }
+        deleteFavorite (index) {
+            const deleteLink = this.quickLinks[index];
+            this.notification.attention('将此据点由收藏夹移除', [
+                { action: '移除', value: true },
+                { action: '取消' },
+            ]).then(result => {
+                if (result) {
+                    this.$http.delete(`${this.apiEndpoint}favorite/${deleteLink.Id}`).then(() => {
+                        if (deleteLink.Type !== 'Unknown' &&
+                            (this.$routeParams.pointIdCode === deleteLink.IdCode || this.$routeParams.userIdCode === deleteLink.IdCode)) {
+                            this.canBeAdd = true;
+                        }
+                        this.quickLinks.splice(index, 1);
                     }, response => {
-                        notification.error('发生未知错误，请重试或与站务职员联系', response);
-                        $scope.canBeAdd = true;
-                    });
-                } else if ($routeParams.userIdCode && union.user.Id) {
-                    $scope.canBeAdd = false;
-                    $http.post(`${apiEndpoint}favorite`, {}, {
-                        params: { pointId: union.user.Id },
-                    }).then(response => {
-                        $scope.quickLinks.push({
-                            Id: response.data,
-                            Type: 'ProfilePoint',
-                            IdCode: union.user.IdCode,
-                            Name: union.user.UserName,
-                        });
-                    }, response => {
-                        notification.error('发生未知错误，请重试或与站务职员联系', response);
-                        $scope.canBeAdd = true;
+                        this.notification.error('发生未知错误，请重试或与站务职员联系', response);
                     });
                 }
-            };
+            });
+        }
+        addFavorite  () {
+            if (this.$routeParams.pointIdCode && this.union.point.Id) {
+                this.canBeAdd = false;
+                this.$http.post(`${this.apiEndpoint}favorite`, {}, {
+                    params: { pointId: this.union.point.Id },
+                }).then(response => {
+                    this.quickLinks.push({
+                        Id: response.data,
+                        Type: 'NormalPoint',
+                        IdCode: this.union.point.IdCode,
+                        Name: this.utils.getPointFirstName(this.union.point),
+                    });
+                    this.notification.success('当前据点已添加到收藏夹');
+                }, response => {
+                    this.notification.error('发生未知错误，请重试或与站务职员联系', response);
+                    this.canBeAdd = true;
+                });
+            } else if (this.$routeParams.userIdCode && this.union.user.Id) {
+                this.canBeAdd = false;
+                this.$http.post(`${this.apiEndpoint}favorite`, {}, {
+                    params: { pointId: this.union.user.Id },
+                }).then(response => {
+                    this.quickLinks.push({
+                        Id: response.data,
+                        Type: 'ProfilePoint',
+                        IdCode: this.union.user.IdCode,
+                        Name: this.union.user.UserName,
+                    });
+                }, response => {
+                    this.notification.error('发生未知错误，请重试或与站务职员联系', response);
+                    this.canBeAdd = true;
+                });
+            }
+        }
+        deleteRecentBroswe () {
+            this.union.$localStorage.recentBrowse = [];
+            this.recentLinks = [];
+        }
+    }
 
-            $scope.deleteRecentBroswe = function () {
-                union.$localStorage.recentBrowse = [];
-                $scope.recentLinks = [];
-            };
+    keylolApp.component('reception', {
+        templateUrl: 'src/sections/reception.html',
+        controller: ReceptionController,
+        controllerAs: 'reception',
+        bindings: {
+            isInPoint: '<',
         },
-    ]);
+    });
 }());

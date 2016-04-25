@@ -1,21 +1,21 @@
-.section-new-point {
+.section-home-operation {
     background: white;
 }
 
-.section-new-point .new-main {
+.section-home-operation .new-main {
     padding: 20px 15px;
 }
 
-.section-new-point .new-main a {
+.section-home-operation .new-main a {
     display: block;
     margin-bottom: 20px;
 }
 
-.section-new-point .new-main a:last-of-type {
+.section-home-operation .new-main a:last-of-type {
     margin-bottom: 0;
 }
 
-.section-new-point .new-main .image {
+.section-home-operation .new-main .image {
     display: inline-block;
     height: 24px;
     width: 24px;
@@ -23,22 +23,22 @@
     background-size: cover;
 }
 
-.section-new-point .new-main a * {
+.section-home-operation .new-main a * {
     vertical-align: middle;
 }
 
-.section-new-point .new-main a.new-point .image {
+.section-home-operation .new-main a.new-point .image {
     background-image: url('../../assets/images/point-marker.png');
 }
 
-.section-new-point .new-main a.new-point:hover .image {
+.section-home-operation .new-main a.new-point:hover .image {
     background-image: url('../../assets/images/point-marker-hover.png');
 }
 
-.section-new-point .new-main a.invitation .image {
+.section-home-operation .new-main a.invitation .image {
     background-image: url('../../assets/images/invitation.png');
 }
 
-.section-new-point .new-main a.invitation:hover .image {
+.section-home-operation .new-main a.invitation:hover .image {
     background-image: url('../../assets/images/invitation-hover.png');
 }
