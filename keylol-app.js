@@ -73,6 +73,10 @@
                     templateUrl: 'src/pages/coupon.html',
                     controller: 'CouponController',
                 })
+                .when('/discovery', {
+                    templateUrl: 'src/pages/discovery.html',
+                    controller: 'DiscoveryController',
+                })
                 .otherwise({
                     templateUrl: 'src/pages/not-found.html',
                     controller: 'NotFoundController',

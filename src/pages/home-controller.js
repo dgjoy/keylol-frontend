@@ -4,10 +4,10 @@
         '$rootScope', 'articleTypes',
         (pageHead, $scope, union, $http, notification, window, utils, $timeout, $location,
         $rootScope, articleTypes) => {
-            if (!union.$localStorage.login) {
-                $scope.notLogin = true;
+            if (!union.$localStorage.Authorization) {
                 return;
             }
+            $scope.hasLogin = true;
             pageHead.setTitle('其乐 Keylol');
             $scope.union = union;
             const timeline = {
@@ -69,7 +69,7 @@
                         },
                     });
                 }, response => {
-                    if (!union.$localStorage.login) return;
+                    if (!union.$localStorage.Authorization) return;
                     if (response.status === 404) return;
                     if (response.status === 401) {
                         window.show({

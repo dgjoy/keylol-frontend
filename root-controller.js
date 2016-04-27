@@ -8,7 +8,7 @@
 
             let aNewLogin = false;
             function getUserInfo() {
-                $http.get(`${apiEndpoint}user/${union.$localStorage.login.UserId}`, {
+                $http.get(`${apiEndpoint}user/current`, {
                     params: {
                         claims: true,
                         stats: true,
@@ -37,10 +37,11 @@
             }
 
             $scope.$watch(() => {
-                return union.$localStorage.login;
-            },newLogin => {
-                if (newLogin) {
+                return union.$localStorage.Authorization;
+            },newToken => {
+                if (newToken) {
                     aNewLogin = true;
+                    $http.defaults.headers.common.Authorization = `Bearer ${newToken}`;
                     getUserInfo();
                 } else {
                     _czc.push(['_setCustomVar', '登录用户', '游客', 1]);
@@ -63,7 +64,7 @@
                     firstLoad = false;
                     return;
                 }
-                if (union.$localStorage.login) {
+                if (union.$localStorage.Authorization) {
                     aNewLogin = false;
                     getUserInfo();
                 }

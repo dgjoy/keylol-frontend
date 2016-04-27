@@ -60,7 +60,7 @@
             }
             updateVM(union.$localStorage.user);
 
-            $http.get(`${apiEndpoint}user/${union.$localStorage.login.UserId}`, {
+            $http.get(`${apiEndpoint}user/${union.$localStorage.user.Id}`, {
                 params: {
                     claims: true,
                     security: true,
@@ -230,7 +230,7 @@
                     }
 
                     function submit () {
-                        $http.put(`${apiEndpoint}user/${union.$localStorage.login.UserId}`, dirtyFields).then(() => {
+                        $http.put(`${apiEndpoint}user/${union.$localStorage.user.Id}`, dirtyFields).then(() => {
                             $.extend(union.$localStorage.user, dirtyFields);
                             notification.success('个人设定已更新');
                             close();
@@ -291,13 +291,8 @@
                     { action: '取消' },
                 ]).then(result => {
                     if (result) {
-                        delete union.$localStorage.login;
-                        $http.delete(`${apiEndpoint}login/current`).then(() => {
-                            notification.success('已登出当前账户');
-                            close();
-                        }, response => {
-                            notification.error('发生未知错误，请重试或与站务职员联系', response);
-                        });
+                        delete union.$localStorage.Authorization;
+                        close();
                     }
                 });
             };

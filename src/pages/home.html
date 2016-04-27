@@ -1,4 +1,4 @@
-﻿<div ng-if="!notLogin" class="container">
+﻿<div ng-if="hasLogin" class="container">
     <div class="row">
         <div class="col-left">
             <logo></logo>
@@ -20,4 +20,4 @@
         </div>
     </div>
 </div>
-<div ng-if="notLogin" ng-include="'src/pages/alpha-entrance.html'" ng-controller="AlphaEntranceController"></div>
+<div ng-if="!hasLogin" ng-include="'src/pages/alpha-entrance.html'" ng-controller="AlphaEntranceController"></div>

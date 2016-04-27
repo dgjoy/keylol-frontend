@@ -1,5 +1,5 @@
 ﻿<div class="section-action-hub box-shadowed">
-    <div class="not-logged-in" ng-if="!actionHub.union.$localStorage.login">
+    <div class="not-logged-in" ng-if="!actionHub.union.$localStorage.Authorization">
         <a class="log-up" href="" ng-click="actionHub.showRegistrationWindow()">
             <img src="assets/images/steam-logo.png">
             <h4>通过 Steam 账户</h4>
@@ -7,7 +7,7 @@
         </a>
         <a href="" class="log-in" ng-click="actionHub.showLoginSteamWindow()">已注册用户登录</a>
     </div>
-    <div class="has-logged-in" ng-if="actionHub.union.$localStorage.login">
+    <div class="has-logged-in" ng-if="actionHub.union.$localStorage.Authorization">
         <div class="actions">
             <a href="post-office" class="border-button top-border" ng-class="{active: actionHub.newMessages[0] || actionHub.newMessages[1] || actionHub.newMessages[2]}">{{(actionHub.newMessages[0] || actionHub.newMessages[1] || actionHub.newMessages[2])?(actionHub.newMessages[0]?"+"+actionHub.newMessages[0]:"")+((actionHub.newMessages[0]&&(actionHub.newMessages[1]||actionHub.newMessages[2]))?"　":"")+(actionHub.newMessages[1]?"···"+actionHub.newMessages[1]:"")+((actionHub.newMessages[1]&&actionHub.newMessages[2])?"　":"")+(actionHub.newMessages[2]?"!!"+actionHub.newMessages[2]:""):"O"}}</a>
         </div>
