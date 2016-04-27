@@ -1,9 +1,10 @@
 ﻿(function () {
-    keylolApp.controller('SpotlightBannerController', [
-        '$scope', 'window', '$http', 'notification', '$location', 'union',
-        ($scope, window, $http, notification, $location, union) => {
+    
+    class spotlightBannerController {
+        constructor($scope,window,$http,notification,$location,union) {
+
             if ($location.url().substr(1, 11) === 'post-office') {
-                $scope.banner = [{
+                this.banner = [{
                     imageSrc: 'assets/images/spotlight/post-office-l.png',
                     imageSrcActive: 'assets/images/spotlight/post-office-l-active.png',
                     link: 'post-office/acknowledgement',
@@ -17,7 +18,7 @@
                     link: 'post-office/missive',
                 }];
                 if (typeof union.spolightActive === 'number') {
-                    $scope.banner[union.spolightActive].imageSrc = $scope.banner[union.spolightActive].imageSrcActive;
+                    this.banner[union.spolightActive].imageSrc = this.banner[union.spolightActive].imageSrcActive;
                 }
             } else {
                 const originBanner = [
@@ -35,11 +36,19 @@
                         link: 'article/HILOA/15',
                     },
                 ];
-                $scope.banner = [];
+
+                this.banner = [];
                 for (let i = 0; i < 3; i++) {
-                    $scope.banner = $scope.banner.concat(originBanner.splice(Math.floor(Math.random() * originBanner.length), 1));
+                    this.banner = this.banner.concat(originBanner.splice(Math.floor(Math.random() * originBanner.length), 1));
                 }
             }
-        },
-    ]);
+            
+        }
+    }
+
+    keylolApp.component('spotlightBanner', {
+        templateUrl: 'src/sections/spotlight-banner.html',
+        controller: spotlightBannerController,
+        controllerAs: 'spotlightBanner',
+    });
 }());

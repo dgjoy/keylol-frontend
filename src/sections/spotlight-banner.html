@@ -1,11 +1,5 @@
-﻿<div class="section-spotlight-banner" ng-controller="SpotlightBannerController">
-    <a ng-href="{{banner[0].link}}" class="left banner box-shadowed">
-        <img webp-src="{{banner[0].imageSrc}}">
-    </a><!--
-    --><a ng-href="{{banner[1].link}}" class="center banner box-shadowed">
-        <img webp-src="{{banner[1].imageSrc}}">
-    </a><!--
-    --><a ng-href="{{banner[2].link}}" class="right banner box-shadowed">
-        <img webp-src="{{banner[2].imageSrc}}">
-    </a>
+﻿<div class="section-spotlight-banner" style="height:92px;">
+    <spotlight info="spotlightBanner.banner[0]" class="box-shadowed"></spotlight><!--
+    --><spotlight info="spotlightBanner.banner[1]" class="box-shadowed"></spotlight><!--
+    --><spotlight info="spotlightBanner.banner[2]" class="box-shadowed"></spotlight>
 </div>
