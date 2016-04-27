@@ -1,7 +1,7 @@
 ﻿(function () {
-    keylolApp.controller("RootController", [
-        "$scope", "pageHead", "union", "$http", "apiEndpoint", "$window",
-        "notification", "$location", "$rootScope", "$route",
+    keylolApp.controller('RootController', [
+        '$scope', 'pageHead', 'union', '$http', 'apiEndpoint', '$window',
+        'notification', '$location', '$rootScope', '$route',
         ($scope, pageHead, union, $http, apiEndpoint, $window,
          notification, $location, $rootScope, $route) => {
             pageHead.loading();
@@ -22,7 +22,7 @@
                     const beforeCoupon = user ? user.Coupon : undefined;
                     union.$localStorage.user = response.data;
                     union.$localStorage.user.fakeCoupon = beforeCoupon;
-                    _czc.push(["_setCustomVar", "登录用户",
+                    _czc.push(['_setCustomVar', '登录用户',
                         `${response.data.IdCode}-${response.data.UserName}`, 1]);
                     if (aNewLogin) {
                         $route.reload();
@@ -31,7 +31,7 @@
                     if (response.status === 401) {
                         $http.delete(`${apiEndpoint}login/current`);
                         delete union.$localStorage.login;
-                        notification.error("登录失效，请重新登录。");
+                        notification.error('登录失效，请重新登录。');
                     }
                 });
             }
@@ -43,13 +43,13 @@
                     aNewLogin = true;
                     getUserInfo();
                 } else {
-                    _czc.push(["_setCustomVar", "登录用户", "游客", 1]);
+                    _czc.push(['_setCustomVar', '登录用户', '游客', 1]);
                     for (const i in union.$localStorage) {
-                        if (union.$localStorage.hasOwnProperty(i) && i.indexOf("$") !== 0)
+                        if (union.$localStorage.hasOwnProperty(i) && i.indexOf('$') !== 0)
                             delete union.$localStorage[i];
                     }
                     for (const i in union.$sessionStorage) {
-                        if (union.$sessionStorage.hasOwnProperty(i) && i.indexOf("$") !== 0)
+                        if (union.$sessionStorage.hasOwnProperty(i) && i.indexOf('$') !== 0)
                             delete union.$sessionStorage[i];
                     }
                     $route.reload();
@@ -57,7 +57,7 @@
             });
 
             let firstLoad = true;
-            $rootScope.$on("$routeChangeSuccess", () => {
+            $rootScope.$on('$routeChangeSuccess', () => {
                 $window.scrollTo(0, 0);
                 if (firstLoad) {
                     firstLoad = false;
