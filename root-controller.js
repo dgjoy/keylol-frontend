@@ -1,9 +1,9 @@
 ﻿(function () {
     keylolApp.controller('RootController', [
         '$scope', 'pageHead', 'union', '$http', 'apiEndpoint', '$window',
-        'notification', '$location', '$rootScope', '$route',
+        'notification', '$location', '$rootScope', '$state',
         ($scope, pageHead, union, $http, apiEndpoint, $window,
-         notification, $location, $rootScope, $route) => {
+         notification, $location, $rootScope, $state) => {
             pageHead.loading();
 
             let aNewLogin = false;
@@ -25,7 +25,7 @@
                     _czc.push(['_setCustomVar', '登录用户',
                         `${response.data.IdCode}-${response.data.UserName}`, 1]);
                     if (aNewLogin) {
-                        $route.reload();
+                        $state.reload();
                     }
                 }, response => {
                     if (response.status === 401) {
@@ -53,12 +53,12 @@
                         if (union.$sessionStorage.hasOwnProperty(i) && i.indexOf('$') !== 0)
                             delete union.$sessionStorage[i];
                     }
-                    $route.reload();
+                    $state.reload();
                 }
             });
 
             let firstLoad = true;
-            $rootScope.$on('$routeChangeSuccess', () => {
+            $rootScope.$on('$stateChangeSuccess', () => {
                 $window.scrollTo(0, 0);
                 if (firstLoad) {
                     firstLoad = false;

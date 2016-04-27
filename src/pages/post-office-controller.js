@@ -3,9 +3,9 @@
  */
 (function () {
     keylolApp.controller('PostOfficeController', [
-        'pageHead', '$scope', 'union', '$http', 'notification', '$routeParams', 'utils',
+        'pageHead', '$scope', 'union', '$http', 'notification', '$stateParams', 'utils',
         '$timeout', '$location', 'messageTypes', 'window',
-        (pageHead, $scope, union, $http, notification, $routeParams, utils,
+        (pageHead, $scope, union, $http, notification, $stateParams, utils,
         $timeout, $location, messageTypes, window) => {
             if (!union.$localStorage.user) {
                 $location.url('/');
@@ -13,16 +13,16 @@
             }
             $scope.union = union;
             let filter;
-            if ($routeParams.type) {
-                if ($routeParams.type === 'acknowledgement') {
+            if ($stateParams.type) {
+                if ($stateParams.type === 'acknowledgement') {
                     pageHead.setTitle('邮政中心 - 认可 - 其乐');
                     filter = 'Like';
                     union.spolightActive = 0;
-                } else if ($routeParams.type === 'comment') {
+                } else if ($stateParams.type === 'comment') {
                     pageHead.setTitle('邮政中心 - 评论 - 其乐');
                     filter = 'Comment';
                     union.spolightActive = 1;
-                } else if ($routeParams.type === 'missive') {
+                } else if ($stateParams.type === 'missive') {
                     pageHead.setTitle('邮政中心 - 公函 - 其乐');
                     filter = 'Missive';
                     union.spolightActive = 2;
@@ -86,7 +86,7 @@
                         const entry = {
                             id: message.Id,
                             isNew: message.Unread,
-                            disabled: !message.Unread && !$routeParams.type,
+                            disabled: !message.Unread && !$stateParams.type,
                             types: [entryType.type],
                             fromArticle: {
                                 id: message.Article.Id,

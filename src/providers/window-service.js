@@ -17,7 +17,7 @@
 
                 function adjustScrollBar () {
                     const $body = $(document.body);
-                    if ($body.find('main[ng-view] > window').length > 0) {
+                    if ($body.find('main[ui-view] > window').length > 0) {
                         if (!$body.hasClass('body-window-open')) {
                             bodyOriginalPaddingRight = document.body.style.paddingRight || '';
 
@@ -104,7 +104,7 @@
 
                         // Append
                         function appendWindow () {
-                            const main = options.global ? document.body : $('main[ng-view]')[0];
+                            const main = options.global ? document.body : $('main[ui-view]')[0];
                             $animate.enter($element, main, main.lastChild);
                             if (options.adjustScrollBar)
                                 adjustScrollBar();

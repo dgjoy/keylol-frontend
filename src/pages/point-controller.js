@@ -1,7 +1,7 @@
 ﻿(function () {
     keylolApp.controller('PointController', [
-        'pageHead', '$scope', 'union', '$routeParams', '$http', 'utils', 'notification', 'window', '$location', '$timeout',
-        (pageHead, $scope, union, $routeParams, $http, utils, notification, window, $location, $timeout) => {
+        'pageHead', '$scope', 'union', '$stateParams', '$http', 'utils', 'notification', 'window', '$location', '$timeout',
+        (pageHead, $scope, union, $stateParams, $http, utils, notification, window, $location, $timeout) => {
             /**
              * 初始化union的一些属性
              */
@@ -34,7 +34,7 @@
                 entries: [],
             };
 
-            if ($routeParams.userIdCode) {
+            if ($stateParams.userIdCode) {
                 $scope.isInPoint = false;
 
                 timeline.noArticleText = {
@@ -48,7 +48,7 @@
                  * @param callback 加载后的回调
                  */
                 timeline.loadAction = function (params, callback) {
-                    $http.get(`${apiEndpoint}article/user/${$routeParams.userIdCode}`, { params }).then(response => {
+                    $http.get(`${apiEndpoint}article/user/${$stateParams.userIdCode}`, { params }).then(response => {
                         callback(response);
                     }, response => {
                         notification.error('发生未知错误，请重试或与站务职员联系', response);
@@ -59,7 +59,7 @@
                  * 请求用户信息，用户的信息会被存储在 unionUser 里。
                  * 同时对用户部分信息做处理后，用于 summary 中。
                  */
-                $http.get(`${apiEndpoint}user/${$routeParams.userIdCode}`, {
+                $http.get(`${apiEndpoint}user/${$stateParams.userIdCode}`, {
                     params: {
                         stats: true,
                         idType: 'IdCode',
@@ -94,7 +94,7 @@
                     /**
                      * 请求文章列表，放于请求用户信息之后
                      */
-                    $http.get(`${apiEndpoint}article/user/${$routeParams.userIdCode}`, {
+                    $http.get(`${apiEndpoint}article/user/${$stateParams.userIdCode}`, {
                         params: {
                             idType: 'IdCode',
                             take: utils.timelineLoadCount,
@@ -221,7 +221,7 @@
                 });
             }
 
-            if ($routeParams.pointIdCode) {
+            if ($stateParams.pointIdCode) {
                 timeline.noArticleText = {
                     main: '当前据点尚未收到任何文章投稿',
                     sub: '考虑成为首篇文章的作者？',
@@ -233,7 +233,7 @@
                  * @param callback 加载后的回调
                  */
                 timeline.loadAction = (params, callback) => {
-                    $http.get(`${apiEndpoint}article/point/${$routeParams.pointIdCode}`, { params }).then(response => {
+                    $http.get(`${apiEndpoint}article/point/${$stateParams.pointIdCode}`, { params }).then(response => {
                         callback(response);
                     }, response => {
                         notification.error('发生未知错误，请重试或与站务职员联系', response);
@@ -244,7 +244,7 @@
                  * 请求据点信息，储存在 unionPoint 中。
                  * 以 summary 的格式对于 unionPoint 做一些处理, 存储到 summary 中。
                  */
-                $http.get(`${apiEndpoint}normal-point/${$routeParams.pointIdCode}`, {
+                $http.get(`${apiEndpoint}normal-point/${$stateParams.pointIdCode}`, {
                     params: {
                         stats: true,
                         votes: true,
@@ -313,7 +313,7 @@
                 /**
                  * 请求据点对应的文章
                  */
-                $http.get(`${apiEndpoint}article/point/${$routeParams.pointIdCode}`, {
+                $http.get(`${apiEndpoint}article/point/${$stateParams.pointIdCode}`, {
                     params: {
                         idType: 'IdCode',
                         take: utils.timelineLoadCount,

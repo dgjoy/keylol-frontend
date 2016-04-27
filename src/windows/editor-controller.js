@@ -1,9 +1,9 @@
 ﻿(function () {
     keylolApp.controller('EditorController', [
         '$scope', 'close', 'utils', '$http', 'union', '$timeout', '$location', 'notification', 'options',
-        'articleTypes', '$route', '$element',
+        'articleTypes', '$state', '$element',
         ($scope, close, utils, $http, union, $timeout, $location, notification, options,
-        articleTypes, $route, $element) => {
+        articleTypes, $state, $element) => {
             union.inEditor = true;
             $scope.editorOptions = { scrollableContainer: $element };
             $scope.union = union;
@@ -208,7 +208,7 @@
                             union.inEditor = false;
                             close();
                             detachLocationListener();
-                            $route.reload();
+                            $state.reload();
                             notification.success('文章已发布');
                         }, response => {
                             notification.error('发生未知错误，请重试或与站务职员联系', response);

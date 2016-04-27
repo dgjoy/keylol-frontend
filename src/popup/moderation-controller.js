@@ -1,8 +1,8 @@
 ﻿(function () {
     keylolApp.controller('ModerationController', [
-        '$scope', 'close', '$http', 'notification', '$route', '$timeout', 'type',
+        '$scope', 'close', '$http', 'notification', '$state', '$timeout', 'type',
         'targetId', 'moderationText', 'union',
-        function ($scope, close, $http, notification, $route, $timeout, type,
+        function ($scope, close, $http, notification, $state, $timeout, type,
         targetId, moderationText, union) {
             const vm = this;
             $scope.union = union;
@@ -36,7 +36,7 @@
                         $http.put(`${apiEndpoint}article/${targetId}/moderation`, dto).then(() => {
                             notification.success('操作成功');
                             $scope.submitLock = false;
-                            $route.reload();
+                            $state.reload();
                         }, response => {
                             notification.error('发生未知错误，请重试或与站务职员联系', response);
                             $scope.submitLock = false;

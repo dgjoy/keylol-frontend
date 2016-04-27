@@ -3,16 +3,16 @@
  */
 (function () {
     keylolApp.controller('RelatedController', [
-        'pageHead', '$scope', 'union', '$http', 'notification', '$routeParams', 'utils', '$timeout',
-        (pageHead, $scope, union, $http, notification, $routeParams, utils, $timeout) => {
+        'pageHead', '$scope', 'union', '$http', 'notification', '$stateParams', 'utils', '$timeout',
+        (pageHead, $scope, union, $http, notification, $stateParams, utils, $timeout) => {
             $scope.searchExist = true;
             $scope.union = union;
-            if (!$routeParams.idCode || !$routeParams.type) {
+            if (!$stateParams.idCode || !$stateParams.type) {
                 $scope.searchExist = false;
             }
             let typeText;
             const summary = {};
-            switch ($routeParams.type) {
+            switch ($stateParams.type) {
                 case 'Genre':
                     typeText = '流派';
                     break;
@@ -32,7 +32,7 @@
                     $scope.searchExist = false;
             }
 
-            $http.get(`${apiEndpoint}normal-point/${$routeParams.idCode}`, {
+            $http.get(`${apiEndpoint}normal-point/${$stateParams.idCode}`, {
                 params: {
                     stats: true,
                     subscribed: true,
@@ -72,13 +72,13 @@
                 loadAction () {
                     if (timeline) {
                         timeline.loadingLock = true;
-                        $http.get(`${apiEndpoint}normal-point/${$routeParams.idCode}/games`, {
+                        $http.get(`${apiEndpoint}normal-point/${$stateParams.idCode}/games`, {
                             params: {
                                 take: utils.timelineLoadCount,
                                 skip: timeline.entries.length,
                                 idType: 'IdCode',
                                 stats: true,
-                                relationship: $routeParams.type,
+                                relationship: $stateParams.type,
                             },
                         }).then(response => {
                             timeline.noMoreArticle = response.data.length < utils.timelineLoadCount;

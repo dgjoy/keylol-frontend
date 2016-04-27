@@ -3,18 +3,18 @@
  */
 (function () {
     keylolApp.controller('SearchResultsController', [
-        'pageHead', '$scope', 'union', '$http', 'notification', '$routeParams', '$location', 'utils', '$timeout',
-        (pageHead, $scope, union, $http, notification, $routeParams, $location, utils, $timeout) => {
+        'pageHead', '$scope', 'union', '$http', 'notification', '$stateParams', '$location', 'utils', '$timeout',
+        (pageHead, $scope, union, $http, notification, $stateParams, $location, utils, $timeout) => {
             $scope.searchExist = true;
             $scope.union = union;
-            if (!$routeParams.searchType || !$routeParams.keyword) {
+            if (!$stateParams.searchType || !$stateParams.keyword) {
                 $scope.searchExist = false;
             }
-            pageHead.setTitle(`${$routeParams.keyword} 的搜索结果 - 其乐`);
+            pageHead.setTitle(`${$stateParams.keyword} 的搜索结果 - 其乐`);
             const summary = {
                 actions: [],
                 head: {
-                    mainHead: $routeParams.keyword,
+                    mainHead: $stateParams.keyword,
                     subHead: '的搜索结果',
                 },
                 background: 'keylol://18714f31d985cb8e8b59661cabd9d23a.jpg',
@@ -30,21 +30,21 @@
                         active: false,
                         text: '据点',
                         onClick () {
-                            $location.url(`search/point/${encodeURIComponent($routeParams.keyword)}`);
+                            $location.url(`search/point/${encodeURIComponent($stateParams.keyword)}`);
                         },
                     },
                     {
                         active: false,
                         text: '文章',
                         onClick () {
-                            $location.url(`search/article/${encodeURIComponent($routeParams.keyword)}`);
+                            $location.url(`search/article/${encodeURIComponent($stateParams.keyword)}`);
                         },
                     },
                     {
                         active: false,
                         text: '用户',
                         onClick () {
-                            $location.url(`search/user/${encodeURIComponent($routeParams.keyword)}`);
+                            $location.url(`search/user/${encodeURIComponent($stateParams.keyword)}`);
                         },
                     },
                     {
@@ -55,13 +55,13 @@
                 ],
                 entries: [],
             };
-            switch ($routeParams.searchType) {
+            switch ($stateParams.searchType) {
                 case 'point':
                     timeline.actions[0].active = true;
                     timeline.loadAction = function () {
                         timeline.loadingLock = true;
                         const skip = timeline.entries.length;
-                        $http.get(`${apiEndpoint}normal-point/keyword/${encodeURIComponent($routeParams.keyword)}`, {
+                        $http.get(`${apiEndpoint}normal-point/keyword/${encodeURIComponent($stateParams.keyword)}`, {
                             params: {
                                 skip,
                                 full: true,
@@ -133,7 +133,7 @@
                     timeline.loadAction = function () {
                         timeline.loadingLock = true;
                         const skip = timeline.entries.length;
-                        $http.get(`${apiEndpoint}article/keyword/${encodeURIComponent($routeParams.keyword)}`, {
+                        $http.get(`${apiEndpoint}article/keyword/${encodeURIComponent($stateParams.keyword)}`, {
                             params: {
                                 skip,
                                 full: true,
@@ -211,7 +211,7 @@
                     timeline.loadingLock = true;
                     timeline.noMoreArticle = true;
                     timeline.actions[2].active = true;
-                    $http.get(`${apiEndpoint}user/${encodeURIComponent($routeParams.keyword)}`, {
+                    $http.get(`${apiEndpoint}user/${encodeURIComponent($stateParams.keyword)}`, {
                         params: {
                             idType: 'UserName',
                             stats: true,

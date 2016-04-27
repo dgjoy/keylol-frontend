@@ -1,9 +1,9 @@
 ﻿(function () {
     keylolApp.controller('PointSettingsController', [
         '$scope', 'close', 'utils', '$http', 'apiEndpoint', 'base64', 'upyun', '$q', 'notification', '$timeout',
-        'point', 'isGame', 'isJustCreated', '$filter', '$location', 'union', '$route',
+        'point', 'isGame', 'isJustCreated', '$filter', '$location', 'union', '$state',
         ($scope, close, utils, $http, apiEndpoint, base64, upyun, $q, notification, $timeout,
-        point, isGame, isJustCreated, $filter, $location, union, $route) => {
+        point, isGame, isJustCreated, $filter, $location, union, $state) => {
             $scope.page = 'basic';
             $scope.uniqueIds = {};
             $scope.isGame = isGame;
@@ -182,7 +182,7 @@
                             if (!union.inEditor) {
                                 const idCode = $scope.vm.IdCode || point.IdCode;
                                 if ($location.url() === `/point/${idCode}`) {
-                                    $route.reload();
+                                    $state.reload();
                                 } else {
                                     $location.url(`point/${idCode}`);
                                 }

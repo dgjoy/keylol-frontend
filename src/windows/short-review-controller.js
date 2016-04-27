@@ -1,7 +1,7 @@
 ﻿(function () {
     keylolApp.controller('ShortReviewController', [
-        '$scope', 'close', 'window', 'notification', '$http', 'options', '$location', '$route', 'union',
-        function ($scope, close, window, notification, $http, options, $location, $route, union) {
+        '$scope', 'close', 'window', 'notification', '$http', 'options', '$location', '$state', 'union',
+        function ($scope, close, window, notification, $http, options, $location, $state, union) {
             $scope.options = options;
 
             $scope.vm = $.extend({
@@ -66,7 +66,7 @@
                     $http.put(`${apiEndpoint}article/${$scope.vm.Id}`, $scope.vm)
                         .then(() => {
                             close();
-                            $route.reload();
+                            $state.reload();
                             notification.success('简评已发布');
                         }, response => {
                             notification.error('发生未知错误，请重试或与站务职员联系', response);

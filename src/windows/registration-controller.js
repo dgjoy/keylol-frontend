@@ -1,9 +1,9 @@
 ﻿(function () {
     keylolApp.controller('RegistrationController', [
         '$scope', 'close', '$http', 'utils', 'union', 'apiEndpoint', 'window', 'notification', '$element', '$timeout', '$location', 'options',
-        '$routeParams', '$route',
+        '$stateParams', '$state',
         ($scope, close, $http, utils, union, apiEndpoint, window, notification, $element, $timeout, $location, options,
-        $routeParams, $route) => {
+         $stateParams, $state) => {
             $scope.vm = {
                 IdCode: '',
                 UserName: '',
@@ -95,7 +95,7 @@
                     if ($location.search().aff) {
                         $scope.vm.Inviter = $location.search().aff;
                     } else if ($location.url().substr(1, 7) === 'article') {
-                        $scope.vm.Inviter = $routeParams.author;
+                        $scope.vm.Inviter = $stateParams.author;
                     }
                     $http.post(`${apiEndpoint}user`, $scope.vm)
                         .then(response => {
