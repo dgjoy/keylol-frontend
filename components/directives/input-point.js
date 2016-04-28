@@ -100,7 +100,7 @@
                                 if (newValue) {
                                     $http.get(apiEndpoint + "normal-point/keyword/" + encodeURIComponent(newValue), {
                                         params: {
-                                            type: scope.type || 'Unspecified'
+                                            typeFilter: scope.type || ''
                                         }
                                     }).then(function (response) {
                                         var pointArray = response.data.length ? response.data : [];

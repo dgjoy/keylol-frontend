@@ -1,6 +1,6 @@
 ﻿<div class="section-point-info box-shadowed" ng-controller="PointInfoController">
     <p class="main-description" ng-class="{'has-description': point.Description}" popup="showRelatedPopup" >{{point.Description}}</p>
-    <div ng-if="union.point.Type === 'Game'" class="info-details">
+    <div ng-if="union.point.Type === 'Game' || union.point.Type === 'Hardware'" class="info-details">
         <div class="info-attribute">
             <p ng-if="point.DeveloperPoints.length > 0">
                 <span class="title">开发厂 ：</span>
