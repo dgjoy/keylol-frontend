@@ -6,7 +6,7 @@
                 $localStorage,
                 $sessionStorage,
             };
-            $rootScope.$on('$routeChangeSuccess', () => {
+            $rootScope.$on('$stateChangeSuccess', () => {
                 for (const member in union) {
                     delete union[member];
                 }

@@ -1,7 +1,7 @@
 (function () {
     keylolApp.controller('ShopCollectController', [
-        '$scope', 'close', 'window', '$http', 'apiEndpoint', 'notification', 'union', 'item', '$route',
-        ($scope, close, window, $http, apiEndpoint, notification, union, item, $route) => {
+        '$scope', 'close', 'window', '$http', 'apiEndpoint', 'notification', 'union', 'item', '$state',
+        ($scope, close, window, $http, apiEndpoint, notification, union, item, $state) => {
             $scope.union = union;
             $scope.item = item;
             $scope.vm = {};
@@ -28,7 +28,7 @@
                     params: { giftId: item.Id },
                 }).then(() => {
                     close();
-                    $route.reload();
+                    $state.reload();
                     notification.success('商品兑换成功，文券已被扣除。');
                 }, response => {
                     if (response.status === 404) {

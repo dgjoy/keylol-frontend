@@ -1,8 +1,8 @@
 ﻿(function () {
     keylolApp.controller('ArticleController', [
-        'pageHead', '$scope', 'union', '$routeParams', '$http',
+        'pageHead', '$scope', 'union', '$stateParams', '$http',
         'getAndFlushComments', 'notification', '$location', '$timeout', '$rootScope', 'utils',
-        (pageHead, $scope, union, $routeParams, $http,
+        (pageHead, $scope, union, $stateParams, $http,
         getAndFlushComments, notification, $location, $timeout, $rootScope, utils) => {
             $scope.articleExist = true;
             $scope.union = union;
@@ -11,12 +11,12 @@
             const unionPoint = {};
             const summary = {};
             const pageElements = {};
-            if ($routeParams.author && $routeParams.article) {
-                $http.get(`${apiEndpoint}article/${$routeParams.author}/${$routeParams.article}`)
+            if ($stateParams.author && $stateParams.article) {
+                $http.get(`${apiEndpoint}article/${$stateParams.author}/${$stateParams.article}`)
                     .then(response => {
                         const article = response.data;
-                        article.authorIdCode = $routeParams.author;
-                        article.sqNumberForAuthor = $routeParams.article;
+                        article.authorIdCode = $stateParams.author;
+                        article.sqNumberForAuthor = $stateParams.article;
 
                         pageHead.setTitle(`${article.Title} - 其乐`);
                         pageHead.setDescription(article.Summary);
@@ -30,7 +30,7 @@
                         pageHead.setKeywords(keywords);
 
                         if (union.$localStorage.user) {
-                            article.isMyArticle = union.$localStorage.user.IdCode === $routeParams.author;
+                            article.isMyArticle = union.$localStorage.user.IdCode === $stateParams.author;
                             article.canEdit = article.isMyArticle || union.$localStorage.user.StaffClaim === 'operator';
                         }
                         if (article.Vote) {
@@ -45,7 +45,7 @@
                                 const point = response.data;
 
 
-                                $http.get(`${apiEndpoint}user-game-record/${$routeParams.author}/${point.SteamAppId}`, {
+                                $http.get(`${apiEndpoint}user-game-record/${$stateParams.author}/${point.SteamAppId}`, {
                                     params: { idType: 'IdCode' },
                                 }).then(response => {
                                     unionPoint.hoursPlayed = response.data;
@@ -121,9 +121,9 @@
                         }
                         notification.error('发生未知错误，请重试或与站务职员联系', error);
                     });
-                $http.get(`${apiEndpoint}user/${$routeParams.author}`, {
+                $http.get(`${apiEndpoint}user/${$stateParams.author}`, {
                     params: {
-                        subscribed: union.$localStorage.user ? $routeParams.author !== union.$localStorage.user.IdCode : false,
+                        subscribed: union.$localStorage.user ? $stateParams.author !== union.$localStorage.user.IdCode : false,
                         stats: true,
                         profilePointBackgroundImage: true,
                         reviewStats: true,

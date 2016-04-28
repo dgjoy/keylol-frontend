@@ -21,7 +21,8 @@
     <% _.forEach(stylesheets, function(stylesheet) { %><link rel="stylesheet" href="<%= stylesheet %>">
     <% }); %></head>
 <body>
-<main ng-view></main>
+<nav></nav>
+<main ui-view></main>
 <% _.forEach(scripts, function(script) { %><script src="<%= script %>"></script>
 <% }); %><script>angular.bootstrap(document, ["KeylolApp"]);</script>
 <script async src="//w.cnzz.com/q_stat.php?id=1256746604"></script>

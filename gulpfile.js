@@ -50,7 +50,7 @@ var vendorScripts = [
     "node_modules/moment-timezone/builds/moment-timezone-with-data.js",
     "node_modules/angular/angular.js",
     "node_modules/angular-i18n/angular-locale_zh.js",
-    "node_modules/angular-route/angular-route.js",
+    "node_modules/angular-ui-router/release/angular-ui-router.js",
     "node_modules/angular-animate/angular-animate.js",
     "node_modules/angular-moment/angular-moment.js",
     "node_modules/ngstorage/ngStorage.js",

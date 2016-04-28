@@ -1,11 +1,11 @@
 ﻿(function () {
     class ReceptionController {
-        constructor ($http, notification, union, $routeParams, utils, apiEndpoint) {
+        constructor ($http, notification, union, $stateParams, utils, apiEndpoint) {
             $.extend(this, {
                 $http,
                 notification,
                 union,
-                $routeParams,
+                $stateParams,
                 utils,
                 apiEndpoint,
                 quickLinks: [],
@@ -32,12 +32,12 @@
                         case 'Unknown':
                             break;
                         case 'NormalPoint':
-                            if (this.$routeParams.pointIdCode === this.quickLinks[i].IdCode) {
+                            if (this.$stateParams.pointIdCode === this.quickLinks[i].IdCode) {
                                 this.canBeAdd = false;
                             }
                             break;
                         case 'ProfilePoint':
-                            if (this.$routeParams.userIdCode === this.quickLinks[i].IdCode) {
+                            if (this.$stateParams.userIdCode === this.quickLinks[i].IdCode) {
                                 this.canBeAdd = false;
                             }
                             break;
@@ -54,7 +54,7 @@
                 if (result) {
                     this.$http.delete(`${this.apiEndpoint}favorite/${deleteLink.Id}`).then(() => {
                         if (deleteLink.Type !== 'Unknown' &&
-                            (this.$routeParams.pointIdCode === deleteLink.IdCode || this.$routeParams.userIdCode === deleteLink.IdCode)) {
+                            (this.$stateParams.pointIdCode === deleteLink.IdCode || this.$stateParams.userIdCode === deleteLink.IdCode)) {
                             this.canBeAdd = true;
                         }
                         this.quickLinks.splice(index, 1);
@@ -65,7 +65,7 @@
             });
         }
         addFavorite  () {
-            if (this.$routeParams.pointIdCode && this.union.point.Id) {
+            if (this.$stateParams.pointIdCode && this.union.point.Id) {
                 this.canBeAdd = false;
                 this.$http.post(`${this.apiEndpoint}favorite`, {}, {
                     params: { pointId: this.union.point.Id },
@@ -81,7 +81,7 @@
                     this.notification.error('发生未知错误，请重试或与站务职员联系', response);
                     this.canBeAdd = true;
                 });
-            } else if (this.$routeParams.userIdCode && this.union.user.Id) {
+            } else if (this.$stateParams.userIdCode && this.union.user.Id) {
                 this.canBeAdd = false;
                 this.$http.post(`${this.apiEndpoint}favorite`, {}, {
                     params: { pointId: this.union.user.Id },
