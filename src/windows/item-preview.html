@@ -1,12 +1,12 @@
 <window position="center" class="window-item-preview">
     <div class="window">
-        <div class="window-exit-button" ng-click="cancel()">
+        <div class="window-exit-button" ng-click="ItemPreview.cancel()">
             <div ng-include="'assets/images/exit.svg'"></div>
         </div>
         <img class="secret-barcode" src="assets/images/secret-barcode.png" alt="条形码">
         <div class="heading">
-            <h1 class="font-myriad-lisong">{{item.Name}}</h1>
-            <h2>{{item.Descriptions[0]}}</h2>
+            <h1 class="font-myriad-lisong">{{ItemPreview.item.Name}}</h1>
+            <h2>{{ItemPreview.item.Descriptions[0]}}</h2>
         </div>
         <table>
             <tr>
@@ -14,8 +14,8 @@
                     <h3 class="font-myriad-lisong">商品预览</h3>
                     <h4>点击商品可预览大图。</h4>
                     <div class="item-preview-image">
-                        <a href="" ng-click="preview()">
-                            <img class="image" webp-src="{{item.PreviewImage | backgroundUrl}}" alt="商品预览图">
+                        <a href="" ng-click="ItemPreview.preview()">
+                            <img class="image" webp-src="{{ItemPreview.item.PreviewImage | backgroundUrl}}" alt="商品预览图">
                         </a>
                     </div>
                 </td>
@@ -25,7 +25,7 @@
             <tr>
                 <td>
                     <h3 class="font-myriad-lisong">说明</h3>
-                    <h4 class="item-preview-description" bind-html-compile="item.Descriptions[1]"></h4>
+                    <h4 class="item-preview-description" bind-html-compile="ItemPreview.item.Descriptions[1]"></h4>
                 </td>
             </tr>
         </table>
@@ -33,11 +33,11 @@
             <tr>
                 <td>
                     <h3 class="font-myriad-lisong">上架时间</h3>
-                    <h4>{{item.CreateTime|amDateFormat: "YYYY-MM-DD"}} 至 {{item.EndTime|amDateFormat: "YYYY-MM-DD"}}</h4>
+                    <h4>{{ItemPreview.item.CreateTime|amDateFormat: "YYYY-MM-DD"}} 至 {{ItemPreview.item.EndTime|amDateFormat: "YYYY-MM-DD"}}</h4>
                 </td>
             </tr>
         </table>
-        <button class="window-confirm-button" ng-disabled="item.Price > union.$localStorage.user.Coupon" ng-click="redeem()">
+        <button class="window-confirm-button" ng-disabled="ItemPreview.item.Price > ItemPreview.union.$localStorage.user.Coupon" ng-click="ItemPreview.redeem()">
             <img class="arrow-right" src="assets/images/arrow-right.png" alt="下一步">
             <img class="basket" src="assets/images/basket.png" alt="提交">
             <hgroup class="font-myriad-keylol">
@@ -46,7 +46,7 @@
             </hgroup>
         </button>
         <div class="comment">
-            <p>兑换价格为 <span>{{item.Price}} ◆</span> 文券，当前{{item.Price > union.$localStorage.user.Coupon?"":"持有"}} <span ng-class="{error: item.Price > union.$localStorage.user.Coupon}">{{union.$localStorage.user.Coupon}} ◆</span> 文券{{item.Price > union.$localStorage.user.Coupon?"不足":""}}。</p>
+            <p>兑换价格为 <span>{{ItemPreview.item.Price}} ◆</span> 文券，当前{{ItemPreview.item.Price > ItemPreview.union.$localStorage.user.Coupon?"":"持有"}} <span ng-class="{error: ItemPreview.item.Price > ItemPreview.union.$localStorage.user.Coupon}">{{ItemPreview.union.$localStorage.user.Coupon}} ◆</span> 文券{{ItemPreview.item.Price > ItemPreview.union.$localStorage.user.Coupon?"不足":""}}。</p>
         </div>
     </div>
 </window>

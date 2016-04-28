@@ -1,29 +1,45 @@
 (function () {
-    keylolApp.controller('ItemPreviewController', [
-        '$scope', 'close', 'window', '$http', 'apiEndpoint', 'notification', 'union', 'item',
-        ($scope, close, window, $http, apiEndpoint, notification, union, item) => {
-            $scope.union = union;
-            $scope.item = item;
-            $scope.cancel = () => {
-                close();
-            };
+    class ItemPreviewController {
+        constructor(close, window, union, item) {
+            $.extend(this,{
+                close,
+                window,
+            });
 
-            $scope.preview = () => {
-                window.show({
-                    templateUrl: 'src/windows/image-preview.html',
-                    controller: 'ImagePreviewController',
-                    inputs: { imageSrc: item.PreviewImage },
-                });
-            };
+            this.union = union;
+            this.item = item;
+        }
 
-            $scope.redeem = () => {
-                close();
-                window.show({
-                    templateUrl: 'src/windows/shop-collect.html',
-                    controller: 'ShopCollectController',
-                    inputs: { item },
-                });
-            };
-        },
-    ]);
+        cancel() {
+            const close = this.close;
+
+            close();
+        }
+
+        preview() {
+            const window = this.window;
+
+            window.show({
+                templateUrl: 'src/windows/image-preview.html',
+                controller: 'ImagePreviewController',
+                controllerAs: 'ImagePreview',
+                inputs: { imageSrc: this.item.PreviewImage },
+            });
+        }
+
+        redeem() {
+            const close = this.close;
+            const window = this.window;
+
+            close();
+            window.show({
+                templateUrl: 'src/windows/shop-collect.html',
+                controller: 'ShopCollectController',
+                controllerAs: 'ShopCollect',
+                inputs: { item: this.item },
+            });
+        }
+    }
+
+    keylolApp.controller('ItemPreviewController', ItemPreviewController);
 }());

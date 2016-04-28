@@ -1,44 +1,62 @@
 (function () {
-    keylolApp.controller('ShopCollectController', [
-        '$scope', 'close', 'window', '$http', 'apiEndpoint', 'notification', 'union', 'item', '$state',
-        ($scope, close, window, $http, apiEndpoint, notification, union, item, $state) => {
-            $scope.union = union;
-            $scope.item = item;
-            $scope.vm = {};
+    class ShopCollectController {
+        constructor(close, $http, apiEndpoint, notification, union, item, $state) {
+            $.extend(this,{
+                close,
+                $http,
+                apiEndpoint,
+                notification,
+                $state,
+            });
+
+            this.item = item;
+            this.vm = {};
+
             if (item.Redeemed) {
-                $scope.disabled = true;
-                $scope.vm = item.Extra;
+                this.disabled = true;
+                this.vm = item.Extra;
                 for (let i = 0;i < item.AcceptedFields.length;i++) {
                     if (item.AcceptedFields[i].InputType === 'number') {
-                        $scope.vm[item.AcceptedFields[i].Id] = parseInt($scope.vm[item.AcceptedFields[i].Id]);
+                        this.vm[item.AcceptedFields[i].Id] = parseInt(this.vm[item.AcceptedFields[i].Id]);
                     }
                 }
             }
 
-            $scope.cancel = function () {
+            this.submitLock = false;
+        }
+
+        cancel() {
+            const close = this.close;
+
+            close();
+        }
+
+        submit() {
+            const $http = this.$http;
+            const apiEndpoint = this.apiEndpoint;
+            const close = this.close;
+            const $state = this.$state;
+            const notification = this.notification;
+
+            if (this.submitLock || this.disabled) return;
+
+            this.submitLock = true;
+            $http.post(`${apiEndpoint}coupon-gift-order`, this.vm, {
+                params: { giftId: this.item.Id },
+            }).then(() => {
                 close();
-            };
+                $state.reload();
+                notification.success('商品兑换成功，文券已被扣除。');
+            }, response => {
+                if (response.status === 404) {
+                    notification.error('指定文券礼品不存在');
+                } else {
+                    notification.error('发生未知错误，请重试或与站务职员联系', response);
+                }
+                this.submitLock = false;
+            });
+        }
+    }
 
-            $scope.submitLock = false;
-            $scope.submit = function () {
-                if ($scope.submitLock || $scope.disabled) return;
-
-                $scope.submitLock = true;
-                $http.post(`${apiEndpoint}coupon-gift-order`, $scope.vm, {
-                    params: { giftId: item.Id },
-                }).then(() => {
-                    close();
-                    $state.reload();
-                    notification.success('商品兑换成功，文券已被扣除。');
-                }, response => {
-                    if (response.status === 404) {
-                        notification.error('指定文券礼品不存在');
-                    } else {
-                        notification.error('发生未知错误，请重试或与站务职员联系', response);
-                    }
-                    $scope.submitLock = false;
-                });
-            };
-        },
-    ]);
+    keylolApp.controller('ShopCollectController', ShopCollectController);
 }());

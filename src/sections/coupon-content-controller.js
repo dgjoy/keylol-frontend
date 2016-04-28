@@ -60,12 +60,14 @@
                     this.window.show({
                         templateUrl: 'src/windows/shop-collect.html',
                         controller: 'ShopCollectController',
+                        controllerAs: 'ShopCollect',
                         inputs: { item },
                     });
                 } else {
                     this.window.show({
                         templateUrl: 'src/windows/item-preview.html',
                         controller: 'ItemPreviewController',
+                        controllerAs: 'ItemPreview',
                         inputs: { item },
                     });
                 }

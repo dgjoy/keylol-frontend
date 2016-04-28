@@ -1,12 +1,18 @@
 (function () {
-    keylolApp.controller('ImagePreviewController', [
-        '$scope', 'close', 'imageSrc',
-        ($scope, close, imageSrc) => {
-            $scope.cancel = () => {
-                close();
-            };
-
-            $scope.imageSrc = imageSrc;
-        },
-    ]);
+    class ImagePreviewController {
+        constructor(close, imageSrc) {
+            $.extend(this,{
+                close,
+            });
+            
+            this.imageSrc = imageSrc;
+        }
+        
+        cancel() {
+            const close = this.close;
+            
+            close();
+        }
+    }
+    keylolApp.controller('ImagePreviewController', ImagePreviewController);
 }());
