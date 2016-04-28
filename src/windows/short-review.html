@@ -1,20 +1,20 @@
 ﻿<window position="center" class="window-short-review">
     <div class="window clearfix">
-        <div class="window-exit-button" ng-click="cancel()">
+        <div class="window-exit-button" ng-click="ShortReview.cancel()">
             <div ng-include="'assets/images/exit.svg'"></div>
         </div>
-        <form name="form" ng-submit="submit()">
+        <form name="form" ng-submit="ShortReview.submit()">
             <div class="short-header">
-                <point-review bind-review="vm.Vote"></point-review>
-                <img class="point-cover" webp-src="{{options.point.CoverImage | coverUrl}}">
+                <point-review bind-review="ShortReview.vm.Vote"></point-review>
+                <img class="point-cover" webp-src="{{ShortReview.options.point.CoverImage | coverUrl}}">
                 <div class="title">
-                    <h4>简评 <span>{{options.point.Name}}</span></h4>
-                    <p ng-if="options.hoursPlayed">在档 {{options.hoursPlayed}} 小时</p>
+                    <h4>简评 <span>{{ShortReview.options.point.Name}}</span></h4>
+                    <p ng-if="ShortReview.options.hoursPlayed">在档 {{ShortReview.options.hoursPlayed}} 小时</p>
                 </div>
             </div>
-            <textarea ng-model="vm.Content" class="short-content" placeholder="用一段话让其他玩家认可你的评价观点"></textarea>
-            <span class="char-count" ng-class="{error: vm.Content.length > 99}">{{vm.Content.length}}/99</span>
-            <button type="submit" class="window-confirm-button" ng-disabled="submitLock">
+            <textarea ng-model="ShortReview.vm.Content" class="short-content" placeholder="用一段话让其他玩家认可你的评价观点"></textarea>
+            <span class="char-count" ng-class="{error: ShortReview.vm.Content.length > 99}">{{ShortReview.vm.Content.length}}/99</span>
+            <button type="submit" class="window-confirm-button" ng-disabled="ShortReview.submitLock">
                 <img class="arrow-right" src="assets/images/arrow-right.png" alt="下一步">
                 <img class="signature-pen" src="assets/images/signature-pen.png" alt="提交">
                 <hgroup class="font-myriad-keylol">

@@ -13,6 +13,7 @@
             this.window.show({
                 templateUrl: 'src/windows/short-review.html',
                 controller: 'ShortReviewController',
+                controllerAs: 'ShortReview',
                 inputs: {
                     options: {
                         point: {

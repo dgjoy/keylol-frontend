@@ -1,6 +1,6 @@
 ﻿<window position="center" class="window-point-list">
     <div class="window">
-        <div class="window-exit-button" ng-click="cancel()">
+        <div class="window-exit-button" ng-click="PointList.cancel()">
             <div ng-include="'assets/images/exit.svg'"></div>
         </div>
         <img class="secret-barcode" src="assets/images/secret-barcode.png" alt="条形码">
@@ -17,15 +17,15 @@
                 <td><h3>读者数</h3></td>
                 <td><h3>操作</h3></td>
             </tr>
-            <tr ng-repeat="point in points track by point.Id">
+            <tr ng-repeat="point in PointList.points track by point.Id">
                 <td>{{point.IdCode}}</td>
                 <td>{{point.ChineseName}}</td>
                 <td>{{point.EnglishName}}</td>
                 <td>{{point.ArticleCount}}</td>
                 <td>{{point.SubscriberCount}}</td>
-                <td><a href="" ng-click="inline.editPoint(point)">编辑</a></td>
+                <td><a href="" ng-click="PointList.inline.editPoint(point)">编辑</a></td>
             </tr>
         </table>
-        <pagination total="inline.totalPages" current="inline.currentPage" on-page-changed="inline.onPageChange(newPage)" page-href=""></pagination>
+        <pagination total="PointList.inline.totalPages" current="PointList.inline.currentPage" on-page-changed="PointList.inline.onPageChange(newPage)" page-href=""></pagination>
     </div>
 </window>

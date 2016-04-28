@@ -9,6 +9,7 @@
             this.window.show({
                 templateUrl: 'src/windows/point-list.html',
                 controller: 'PointListController',
+                controllerAs: 'PointList',
             });
         }
 

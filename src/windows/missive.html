@@ -1,22 +1,22 @@
 ﻿<window position="center" class="window-missive">
     <div class="window">
-        <div class="window-exit-button" ng-click="cancel()">
+        <div class="window-exit-button" ng-click="Missive.cancel()">
             <div ng-include="'assets/images/exit.svg'"></div>
         </div>
         <div class="missive-header font-myriad-keylol">
-            <h1>{{missiveName}}</h1>
-            <h3>{{missiveEnglishName}}</h3>
+            <h1>{{Missive.missiveName}}</h1>
+            <h3>{{Missive.missiveEnglishName}}</h3>
         </div>
         <div class="content">
             <article class="editor-style">
                 <p bind-html-compile="header"></p>
-                <p ng-if="isSpotlight">这篇文章将由立函时间起至 <u>{{startTime|amAdd: 14: "d"|amDateFormat: "YYYY-MM-DD HH:mm:ss"}}</u> 持续展示于上述场合。</p>
-                <missive-quote ng-repeat="reason in reasons track by $index" reason-text="totalReasons[reason]" ></missive-quote>
+                <p ng-if="Missive.isSpotlight">这篇文章将由立函时间起至 <u>{{Missive.startTime|amAdd: 14: "d"|amDateFormat: "YYYY-MM-DD HH:mm:ss"}}</u> 持续展示于上述场合。</p>
+                <missive-quote ng-repeat="reason in Missive.reasons track by $index" reason-text="Missive.totalReasons[reason]" ></missive-quote>
                 <p bind-html-compile="footer"></p>
             </article>
             <div class="content-footer">
-                <span>公函编号：{{messageId|uppercase}}</span>
-                <span>立函时间：{{startTime|amDateFormat: "YYYY-MM-DD HH:mm:ss"}}</span>
+                <span>公函编号：{{Missive.messageId|uppercase}}</span>
+                <span>立函时间：{{Missive.startTime|amDateFormat: "YYYY-MM-DD HH:mm:ss"}}</span>
             </div>
         </div>
         <div class="missive-footer clearfix">

@@ -116,6 +116,7 @@
                                 window.show({
                                     templateUrl: 'src/windows/missive.html',
                                     controller: 'MissiveController',
+                                    controllerAs: 'Missive',
                                     inputs: { message },
                                 });
                             };
