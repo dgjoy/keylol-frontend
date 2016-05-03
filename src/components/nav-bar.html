@@ -17,15 +17,15 @@
         </form>
     </div>
     <div class="action-hub">
-        <a href="post-office">
+        <a href="post-office" ng-class="{active: navBar.newMessages}" ripple>
             <p>邮政</p>
             <p>{{navBar.newMessages || "O" | numberAbbreviation}}</p>
         </a>
-        <a href="coupon">
+        <a href="coupon" ripple>
             <p>文券</p>
             <p>{{navBar.union.$localStorage.user.Coupon | numberAbbreviation}} ◆</p>
         </a>
-        <a href="user/{{actionHub.union.$localStorage.user.IdCode}}">
+        <a href="user/{{navBar.union.$localStorage.user.IdCode}}">
             <img class="avatar" webp-src="{{navBar.union.$localStorage.user.AvatarImage | avatarUrl}}" alt="{{navBar.union.$localStorage.user.UserName}}">
         </a>
     </div>

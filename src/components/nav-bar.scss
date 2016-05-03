@@ -51,11 +51,11 @@ nav-bar {
       width: 240px;
       padding: 0 6px;
       margin-right: 8px;
-      background-color: rgba(256, 256, 256, 0.1);
+      background-color: rgba(255, 255, 255, 0.1);
       color: $keylol-inverted-text;
 
       &:focus {
-        background-color: rgba(256, 256, 256, 0.2);
+        background-color: rgba(255, 255, 255, 0.2);
       }
     }
 
@@ -71,12 +71,34 @@ nav-bar {
   }
 
   .action-hub {
-    display: flex;
 
     a {
       color: $keylol-inverted-text;
       text-decoration: none;
-      margin-left: 30px;
+
+      &.active {
+        color: $keylol-logo;
+      }
+
+      &:not(:last-of-type) {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 0 15px;
+        height: 64px;
+
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.1);
+        }
+      }
+
+      &:last-of-type {
+        margin-left: 15px;
+      }
+
+      .ripple {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
 
       p {
         font-size: 16px;

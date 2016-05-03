@@ -13,7 +13,7 @@
                 }, newValue => {
                     this.newMessages = typeof newValue === 'string' ? newValue.split(',').reduce((previous, current) => {
                         return parseInt(previous) + parseInt(current);
-                    }) : 'O';
+                    }) : null;
                 });
             }
         }
