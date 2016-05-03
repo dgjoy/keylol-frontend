@@ -1,0 +1,26 @@
+flat-button {
+  button {
+    padding: 10px 15px;
+    border-radius: 2px;
+    font-weight: bold;
+    border: none;
+    background: transparent;
+    -webkit-appearance: none;
+
+    &:focus {
+      outline: 0;
+    }
+
+    &:hover {
+      background-color: rgba(#000, 0.05);
+    }
+
+    &.theme {
+      color: $keylol-theme;
+
+      .ripple {
+        background-color: rgba($keylol-theme, 0.1);
+      }
+    }
+  }
+}
