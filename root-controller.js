@@ -36,6 +36,7 @@
                 });
             }
 
+            let firstLoad = true;
             $scope.$watch(() => {
                 return union.$localStorage.Authorization;
             },newToken => {
@@ -53,11 +54,12 @@
                         if (union.$sessionStorage.hasOwnProperty(i) && i.indexOf('$') !== 0)
                             delete union.$sessionStorage[i];
                     }
-                    $state.reload();
+                    if (!firstLoad) {
+                        $state.reload();
+                    }
                 }
             });
 
-            let firstLoad = true;
             $rootScope.$on('$stateChangeSuccess', () => {
                 $window.scrollTo(0, 0);
                 if (firstLoad) {

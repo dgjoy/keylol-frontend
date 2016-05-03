@@ -22,6 +22,7 @@ var minifyCss = require("gulp-minify-css");
 var templateCache = require("gulp-angular-templatecache");
 var fontmin = require('gulp-fontmin');
 var ngAnnotate = require('gulp-ng-annotate');
+var changed = require('gulp-changed');
 
 // apiEndpoint must have the trailing slash
 var buildConfigs = {
@@ -173,6 +174,7 @@ function compileES6(bundle) {
         var stream = gulp.src(babelScripts);
         if(!bundle){
             stream = stream.pipe(sourcemaps.init())
+                .pipe(changed('temporary'))
                 .pipe(babel({
                     presets: ['es2015']
                 }))
