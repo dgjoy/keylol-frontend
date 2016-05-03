@@ -15,6 +15,7 @@
                 window.show({
                     templateUrl: 'src/windows/login-steam.html',
                     controller: 'LoginSteamController',
+                    controllerAs: 'LoginSteam',
                 });
                 $scope.cancel();
                 if (typeof options.registrationClose === 'function') {

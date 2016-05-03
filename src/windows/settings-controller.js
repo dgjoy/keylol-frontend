@@ -18,6 +18,7 @@
                 window.show({
                     templateUrl: 'src/windows/sync-loading.html',
                     controller: 'SyncLoadingController',
+                    controllerAs: 'SyncLoading',
                     inputs: { options: {} },
                 });
                 close();

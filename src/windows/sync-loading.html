@@ -5,16 +5,16 @@
         </div>
         <div class="loading">
             <div class="loading-animate">
-                <div class="switch" ng-if="changeFlag && animateIndex > -1">
+                <div class="switch" ng-if="SyncLoading.changeFlag && SyncLoading.animateIndex > -1">
                     <div class="wrapper">
-                        <img class="icon" src="assets/images/sync-loading/{{animateGroup[animateIndex]}}1.png">
-                        <img class="text" src="assets/images/sync-loading/{{animateGroup[animateIndex]}}2.png">
+                        <img class="icon" src="assets/images/sync-loading/{{SyncLoading.animateGroup[SyncLoading.animateIndex]}}1.png">
+                        <img class="text" src="assets/images/sync-loading/{{SyncLoading.animateGroup[SyncLoading.animateIndex]}}2.png">
                     </div>
                 </div>
-                <div class="switch" ng-if="!changeFlag && animateIndex > -1">
+                <div class="switch" ng-if="!SyncLoading.changeFlag && SyncLoading.animateIndex > -1">
                     <div class="wrapper">
-                        <img class="icon" src="assets/images/sync-loading/{{animateGroup[animateIndex]}}1.png">
-                        <img class="text" src="assets/images/sync-loading/{{animateGroup[animateIndex]}}2.png">
+                        <img class="icon" src="assets/images/sync-loading/{{SyncLoading.animateGroup[SyncLoading.animateIndex]}}1.png">
+                        <img class="text" src="assets/images/sync-loading/{{SyncLoading.animateGroup[SyncLoading.animateIndex]}}2.png">
                     </div>
                 </div>
             </div>

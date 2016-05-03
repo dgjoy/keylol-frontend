@@ -1,11 +1,22 @@
 ﻿(function () {
-    keylolApp.controller('LoginPasswordController', [
-        '$scope', 'close', '$http', 'utils', 'union', 'apiEndpoint', 'window', 'notification', '$element', '$timeout', '$httpParamSerializerJQLike',
-        ($scope, close, $http, utils, union, apiEndpoint, window, notification, $element, $timeout, $httpParamSerializerJQLike) => {
-            $scope.error = {};
-            $scope.errorDetect = utils.modelErrorDetect;
+    class LoginPasswordController {
+        constructor($scope, close, $http, utils, union, apiEndpoint, window, notification,
+                    $element, $timeout, $httpParamSerializerJQLike) {
+            $.extend(this,{
+                close,
+                $http,
+                union,
+                apiEndpoint,
+                window,
+                notification,
+                $timeout,
+                $httpParamSerializerJQLike,
+            });
 
-            $scope.vm = {
+            this.error = {};
+            this.errorDetect = utils.modelErrorDetect;
+
+            this.vm = {
                 grant_type: 'password_captcha',
                 client_id: 'keylol-website',
                 id_code: '',
@@ -15,88 +26,111 @@
                 geetest_validate: '',
             };
 
-            let geetestResult;
+            this.geetestResult = null;
             const geetest = utils.createGeetest('float');
-            $scope.geetestId = geetest.id;
+            this.geetestId = geetest.id;
             geetest.ready.then(gee => {
                 $timeout(() => {
                     const geetestDom = $(`#geetest-${geetest.id}`, $element);
                     gee.appendTo(geetestDom);
                 });
             });
-            function useGeetestResult (gee) {
-                geetestResult = gee.getValidate();
-                $scope.vm.geetest_challenge = geetestResult.geetest_challenge;
-                $scope.vm.geetest_seccode = geetestResult.geetest_seccode;
-                $scope.vm.geetest_validate = geetestResult.geetest_validate;
-            }
-            geetest.success.then(useGeetestResult);
-
-            $scope.cancel = function () {
-                close();
+            this.useGeetestResult = gee => {
+                this.geetestResult = gee.getValidate();
+                this.vm.geetest_challenge = this.geetestResult.geetest_challenge;
+                this.vm.geetest_seccode = this.geetestResult.geetest_seccode;
+                this.vm.geetest_validate = this.geetestResult.geetest_validate;
             };
+            geetest.success.then(this.useGeetestResult);
 
-            $scope.switchToLoginSteamWindow = function () {
-                window.show({
-                    templateUrl: 'src/windows/login-steam.html',
-                    controller: 'LoginSteamController',
-                });
-                close();
-            };
+            this.submitLock = false;
 
-            $scope.submitLock = false;
-            $scope.submit = function () {
-                if ($scope.submitLock)
+            $.extend(this,{
+                geetest,
+            });
+        }
+
+        cancel() {
+            const close = this.close;
+
+            close();
+        }
+
+        switchToLoginSteamWindow() {
+            const window = this.window;
+            const close = this.close;
+
+            window.show({
+                templateUrl: 'src/windows/login-steam.html',
+                controller: 'LoginSteamController',
+                controllerAs: 'LoginSteam',
+            });
+            close();
+        }
+
+        submit() {
+            const $timeout = this.$timeout;
+            const apiEndpoint = this.apiEndpoint;
+            const $httpParamSerializerJQLike = this.$httpParamSerializerJQLike;
+            const $http = this.$http;
+            const union = this.union;
+            const notification = this.notification;
+            const close = this.close;
+
+            const geetest = this.geetest;
+
+            if (this.submitLock)
+                return;
+            this.submitLock = true;
+            this.error = {};
+            $timeout(() => {
+                if (!this.vm.id_code) {
+                    this.error['vm.id_code'] = 'Email or UIC cannot be empty.';
+                }
+                if (!this.vm.password) {
+                    this.error['vm.password'] = 'Password cannot be empty.';
+                }
+                if (!this.geetestResult) {
+                    this.error.authCode = true;
+                }
+                if (!$.isEmptyObject(this.error)) {
+                    this.submitLock = false;
                     return;
-                $scope.submitLock = true;
-                $scope.error = {};
-                $timeout(() => {
-                    if (!$scope.vm.id_code) {
-                        $scope.error['vm.id_code'] = 'Email or UIC cannot be empty.';
-                    }
-                    if (!$scope.vm.password) {
-                        $scope.error['vm.password'] = 'Password cannot be empty.';
-                    }
-                    if (!geetestResult) {
-                        $scope.error.authCode = true;
-                    }
-                    if (!$.isEmptyObject($scope.error)) {
-                        $scope.submitLock = false;
-                        return;
-                    }
-                    $http.post(`${apiEndpoint}oauth/token`, $httpParamSerializerJQLike($scope.vm), {
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded',
-                        },
-                    }).then(response => {
-                        union.$localStorage.Authorization = response.data.access_token;
-                        notification.success('登录成功，欢迎回到其乐');
-                        close();
-                    }, response => {
-                        if (response.status === 400 && response.data.error) {
-                            switch (response.data.error) {
-                                case 'invalid_captcha':
-                                    $scope.error.authCode = true;
-                                    break;
-                                case 'user_nonexistent':
-                                    $scope.error['vm.id_code'] = 'user doesn\'t exist';
-                                    break;
-                                case 'invalid_password':
-                                    $scope.error['vm.password'] = 'password is not correct';
-                                    break;
-                                default:
-                                    notification.error('发生未知错误，请重试或与站务职员联系');
-                            }
-                        } else {
-                            console.log(124);
-                            notification.error('发生未知错误，请重试或与站务职员联系', response);
+                }
+                $http.post(`${apiEndpoint}oauth/token`, $httpParamSerializerJQLike(this.vm), {
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                }).then(response => {
+                    union.$localStorage.Authorization = response.data.access_token;
+                    notification.success('登录成功，欢迎回到其乐');
+                    close();
+                }, response => {
+                    if (response.status === 400 && response.data.error) {
+                        switch (response.data.error) {
+                            case 'invalid_captcha':
+                                this.error.authCode = true;
+                                break;
+                            case 'user_non_existent':
+                                this.error['vm.id_code'] = 'user doesn\'t exist';
+                                break;
+                            case 'invalid_password':
+                                this.error['vm.password'] = 'password is not correct';
+                                break;
+                            default:
+                                notification.error('发生未知错误，请重试或与站务职员联系');
                         }
-                        geetestResult = null;
-                        geetest.refresh().then(useGeetestResult);
-                        $scope.submitLock = false;
-                    });
+                    } else {
+                        console.log(124);
+                        notification.error('发生未知错误，请重试或与站务职员联系', response);
+                    }
+                    this.geetestResult = null;
+                    geetest.refresh().then(this.useGeetestResult);
+                    this.submitLock = false;
                 });
-            };
-        },
-    ]);
+            });
+        };
+    }
+
+    keylolApp.controller('LoginPasswordController', LoginPasswordController);
 }());

@@ -1,33 +1,35 @@
 ﻿(function () {
-    keylolApp.controller('SyncLoadingController', [
-        '$scope', 'close', '$timeout', 'window', '$http', 'options', 'notification',
-        function ($scope, close, $timeout, window, $http, options, notification) {
+    class SyncLoadingController {
+        constructor($scope, close, $timeout, window, $http, options, notification) {
             const staticGroup = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'O', 'P', 'Q'];
-            $scope.animateGroup = staticGroup.slice();
-            $scope.animateIndex = -1;
-            $scope.changeFlag = true;
-            function timeoutFunction () {
-                $scope.changeFlag = !$scope.changeFlag;
-                $scope.animateGroup.splice($scope.animateIndex, 1);
-                if ($scope.animateGroup.length === 0) {
-                    $scope.animateGroup = staticGroup.slice();
+            this.animateGroup = staticGroup.slice();
+            this.animateIndex = -1;
+            this.changeFlag = true;
+            
+            const timeoutFunction = () => {
+                this.changeFlag = !this.changeFlag;
+                this.animateGroup.splice(this.animateIndex, 1);
+                if (this.animateGroup.length === 0) {
+                    this.animateGroup = staticGroup.slice();
                 }
-                $scope.animateIndex = Math.floor(Math.random() * $scope.animateGroup.length);
+                this.animateIndex = Math.floor(Math.random() * this.animateGroup.length);
                 $timeout(timeoutFunction, 2000);
-            }
+            };
+
             $timeout(timeoutFunction, 100);
             const fetch = $http.put(`${apiEndpoint}user-game-record/my`, {}, {
-                params: { manual: !options.isFirstTime },
+                params: {manual: !options.isFirstTime},
             });
             $timeout(() => {
                 fetch.then(response => {
                     window.show({
                         templateUrl: 'src/windows/synchronization.html',
                         controller: 'SynchronizationController',
+                        controllerAs: 'Synchronization',
                         inputs: {
                             condition: options.isFirstTime ? 'firstTime' : 'subsequential',
                             autoSubscribed: response.data,
-                            options: { getSubscription: options.getSubscription },
+                            options: {getSubscription: options.getSubscription},
                         },
                     });
                     close();
@@ -36,10 +38,11 @@
                         window.show({
                             templateUrl: 'src/windows/synchronization.html',
                             controller: 'SynchronizationController',
+                            controllerAs: 'Synchronization',
                             inputs: {
                                 condition: 'fetchFailed',
                                 autoSubscribed: {},
-                                options: { getSubscription: options.getSubscription },
+                                options: {getSubscription: options.getSubscription},
                             },
                         });
                     } else if (response.status === 404) {
@@ -50,6 +53,8 @@
                     close();
                 });
             }, 3000);
-        },
-    ]);
+        }
+    }
+    
+    keylolApp.controller('SyncLoadingController', SyncLoadingController);
 }());

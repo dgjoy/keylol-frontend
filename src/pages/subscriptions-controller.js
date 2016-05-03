@@ -51,6 +51,7 @@
                                     window.show({
                                         templateUrl: 'src/windows/synchronization.html',
                                         controller: 'SynchronizationController',
+                                        controllerAs: 'Synchronization',
                                         inputs: {
                                             condition: 'review',
                                             autoSubscribed: response.data,

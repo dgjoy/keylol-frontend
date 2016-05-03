@@ -48,6 +48,7 @@
                 window.show({
                     templateUrl: 'src/windows/sync-loading.html',
                     controller: 'SyncLoadingController',
+                    controllerAs: 'SyncLoading',
                     inputs: {
                         options: {
                             isFirstTime: true,
@@ -62,6 +63,7 @@
                     window.show({
                         templateUrl: 'src/windows/synchronization.html',
                         controller: 'SynchronizationController',
+                        controllerAs: 'Synchronization',
                         inputs: {
                             condition: 'subsequential',
                             autoSubscribed: response.data,
