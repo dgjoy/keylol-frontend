@@ -1,6 +1,6 @@
 ﻿<window position="center" class="window-shop-link">
     <div class="window">
-        <div class="window-exit-button" ng-click="cancel()">
+        <div class="window-exit-button" ng-click="ShopLink.cancel()">
             <div ng-include="'assets/images/exit.svg'"></div>
         </div>
         <img class="secret-barcode" src="assets/images/secret-barcode.png" alt="条形码">
@@ -8,7 +8,7 @@
             <h1 class="font-myriad-lisong">开设游戏据点</h1>
             <h2>输入 Steam 商店的页面链接，以便获得据点资料信息</h2>
         </div>
-        <form class="clearfix" ng-submit="submit()">
+        <form class="clearfix" ng-submit="ShopLink.submit()">
             <flashing-figure stations='[
                 {
                     cnName: "输入链接",
@@ -26,27 +26,27 @@
                     cnName: "完成开设",
                     enName: "Finish"
                 }
-            ]' current="currentStation"></flashing-figure>
+            ]' current="ShopLink.currentStation"></flashing-figure>
             <table>
                 <colgroup>
                     <col style="width: 38%">
                     <col style="width: 62%">
                 </colgroup>
                 <tbody>
-                <tr ng-class="{'error-flash': shopLinkError}">
+                <tr ng-class="{'error-flash': ShopLink.shopLinkError}">
                     <td>
                         <h3 class="font-myriad-lisong">商店链接</h3>
                         <h4>
-                            <span ng-class="{error: shopLinkError}">例如：store.steampowered.com/app/255710</span>
+                            <span ng-class="{error: ShopLink.shopLinkError}">例如：store.steampowered.com/app/255710</span>
                         </h4>
                     </td>
                     <td>
-                        <input name="shopLink" type="text" tabindex="4" ng-model="vm.shopLink">
+                        <input name="shopLink" type="text" tabindex="4" ng-model="ShopLink.vm.shopLink">
                     </td>
                 </tr>
                 </tbody>
             </table>
-            <button ng-disabled="submitLock" type="submit" class="window-confirm-button">
+            <button ng-disabled="ShopLink.submitLock" type="submit" class="window-confirm-button">
                 <img class="arrow-right" src="assets/images/arrow-right.png" alt="下一步">
                 <img class="new-point" src="assets/images/new-point.png" alt="提交">
                 <hgroup class="font-myriad-keylol">

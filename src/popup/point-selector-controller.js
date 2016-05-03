@@ -28,6 +28,7 @@
                     window.show({
                         templateUrl: 'src/windows/shop-link.html',
                         controller: 'ShopLinkController',
+                        controllerAs: 'ShopLink',
                     });
                 }
             };

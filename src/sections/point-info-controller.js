@@ -85,6 +85,7 @@
             this.window.show({
                 templateUrl: 'src/windows/point-settings.html',
                 controller: 'PointSettingsController',
+                controllerAs: 'PointSettings',
                 inputs: {
                     isGame,
                     point: this.point,

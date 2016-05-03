@@ -1,23 +1,23 @@
 ﻿<window position="center" class="window-point-settings">
 <div class="window">
-<div class="window-exit-button" ng-click="cancel()">
+<div class="window-exit-button" ng-click="PointSettings.cancel()">
     <div ng-include="'assets/images/exit.svg'"></div>
 </div>
 <img class="secret-barcode" src="assets/images/secret-barcode.png" alt="条形码">
 <div class="heading">
     <div class="menu-right">
         <ul class="list-inline">
-            <li ng-class="{current: page === 'basic'}">
-                <a href="" ng-class="{'tab-changed': optionsInPageChanged('basic')}" ng-click="setPage('basic')">基础资料</a>
+            <li ng-class="{current: PointSettings.page === 'basic'}">
+                <a href="" ng-class="{'tab-changed': PointSettings.optionsInPageChanged('basic')}" ng-click="PointSettings.setPage('basic')">基础资料</a>
             </li>
-            <li ng-if="isGame" ng-class="{current: page === 'relationship'}">
-                <a href="" ng-class="{'tab-changed': optionsInPageChanged('relationship')}" ng-click="setPage('relationship')">关联据点</a>
+            <li ng-if="PointSettings.isGame" ng-class="{current: PointSettings.page === 'relationship'}">
+                <a href="" ng-class="{'tab-changed': PointSettings.optionsInPageChanged('relationship')}" ng-click="PointSettings.setPage('relationship')">关联据点</a>
             </li>
-            <li ng-class="{current: page === 'images'}">
-                <a href="" ng-class="{'tab-changed': optionsInPageChanged('images')}" ng-click="setPage('images')">图像信息</a>
+            <li ng-class="{current: PointSettings.page === 'images'}">
+                <a href="" ng-class="{'tab-changed': PointSettings.optionsInPageChanged('images')}" ng-click="PointSettings.setPage('images')">图像信息</a>
             </li>
-            <li ng-if="isOperator" ng-class="{current: page === 'preferences'}">
-                <a href="" ng-class="{'tab-changed': optionsInPageChanged('preferences')}" ng-click="setPage('preferences')">进阶选项</a>
+            <li ng-if="PointSettings.isOperator" ng-class="{current: PointSettings.page === 'preferences'}">
+                <a href="" ng-class="{'tab-changed': PointSettings.optionsInPageChanged('preferences')}" ng-click="PointSettings.setPage('preferences')">进阶选项</a>
             </li>
         </ul>
     </div>
@@ -26,8 +26,8 @@
         <h2>补充完善关于游戏的信息资料</h2>
     </div>
 </div>
-<form name="form" class="clearfix" ng-submit="submit(form)">
-<div ng-show="page === 'basic'">
+<form name="form" class="clearfix" ng-submit="PointSettings.submit(form)">
+<div ng-show="PointSettings.page === 'basic'">
     <table>
         <colgroup>
             <col style="width: 36%">
@@ -38,13 +38,13 @@
             <td>
                 <h3 class="font-myriad-lisong">英文名</h3>
                 <h4>
-                    <span ng-if="isGame">Steam 商店中的游戏名称。</span>
-                    <span ng-if="!isGame">Steam 商店中的官方名称。</span>
+                    <span ng-if="PointSettings.isGame">Steam 商店中的游戏名称。</span>
+                    <span ng-if="!PointSettings.isGame">Steam 商店中的官方名称。</span>
                 </h4>
             </td>
             <td>
-                <input ng-if="isOperator" name="englishName" type="text" tabindex="4" ng-model="vm.EnglishName">
-                <input ng-if="!isOperator" disabled name="englishName" type="text" tabindex="4" value="{{point.EnglishName}}">
+                <input ng-if="PointSettings.isOperator" name="englishName" type="text" tabindex="4" ng-model="PointSettings.vm.EnglishName">
+                <input ng-if="!PointSettings.isOperator" disabled name="englishName" type="text" tabindex="4" value="{{point.EnglishName}}">
             </td>
         </tr>
         <tr>
@@ -55,10 +55,10 @@
                 </h4>
             </td>
             <td>
-                <input name="chineseName" type="text" tabindex="4" ng-model="vm.ChineseName">
+                <input name="chineseName" type="text" tabindex="4" ng-model="PointSettings.vm.ChineseName">
             </td>
         </tr>
-        <tr ng-if="isGame">
+        <tr ng-if="PointSettings.isGame">
             <td>
                 <h3 class="font-myriad-lisong">别名</h3>
                 <h4>
@@ -66,7 +66,7 @@
                 </h4>
             </td>
             <td>
-                <input name="displayAliases" type="text" tabindex="4" ng-model="vm.DisplayAliases">
+                <input name="displayAliases" type="text" tabindex="4" ng-model="PointSettings.vm.DisplayAliases">
             </td>
         </tr>
         <tr>
@@ -77,7 +77,7 @@
                 </h4>
             </td>
             <td>
-                <input name="englishAliases" type="text" tabindex="4" ng-model="vm.EnglishAliases">
+                <input name="englishAliases" type="text" tabindex="4" ng-model="PointSettings.vm.EnglishAliases">
             </td>
         </tr>
         <tr>
@@ -88,30 +88,30 @@
                 </h4>
             </td>
             <td>
-                <input name="chineseAliases" type="text" tabindex="4" ng-model="vm.ChineseAliases">
+                <input name="chineseAliases" type="text" tabindex="4" ng-model="PointSettings.vm.ChineseAliases">
             </td>
         </tr>
         </tbody>
     </table>
     <table>
         <tr>
-            <td ng-if="isGame">
+            <td ng-if="PointSettings.isGame">
                 <h3 class="font-myriad-lisong">游戏介绍</h3>
                 <h4>默认抓取自 Steam 商店页面，推荐重新撰写或润色翻译，游戏介绍会显示再据点页面的顶部和悬浮卡片中。</h4>
             </td>
-            <td ng-if="!isGame">
+            <td ng-if="!PointSettings.isGame">
                 <h3 class="font-myriad-lisong">据点介绍</h3>
                 <h4>对这个据点对象的简介，介绍会显示在据点页面的顶部和悬浮卡片中。</h4>
             </td>
         </tr>
         <tr>
             <td class="description">
-                <textarea name="description" ng-model="vm.Description"></textarea>
-                <span class="char-count" ng-class="{error: vm.Description.length > 399}">{{vm.Description.length}}/399</span>
+                <textarea name="description" ng-model="PointSettings.vm.Description"></textarea>
+                <span class="char-count" ng-class="{error: PointSettings.vm.Description.length > 399}">{{PointSettings.vm.Description.length}}/399</span>
             </td>
         </tr>
     </table>
-    <table ng-if="isGame">
+    <table ng-if="PointSettings.isGame">
         <colgroup>
             <col style="width: 36%">
             <col style="width: 64%">
@@ -125,14 +125,14 @@
                 </h4>
             </td>
             <td>
-                <input ng-if="isOperator" name="releaseDate" type="text" tabindex="4" ng-model="vm.ReleaseDate">
-                <input ng-if="!isOperator" disabled name="releaseDate" type="text" tabindex="4" value="{{point.ReleaseDate | date: 'yyyy-MM-dd'}}">
+                <input ng-if="PointSettings.isOperator" name="releaseDate" type="text" tabindex="4" ng-model="PointSettings.vm.ReleaseDate">
+                <input ng-if="!PointSettings.isOperator" disabled name="releaseDate" type="text" tabindex="4" value="{{point.ReleaseDate | date: 'yyyy-MM-dd'}}">
             </td>
         </tr>
         </tbody>
     </table>
 </div>
-<div ng-if="isGame" ng-show="page === 'relationship'">
+<div ng-if="PointSettings.isGame" ng-show="PointSettings.page === 'relationship'">
     <table>
         <colgroup>
             <col style="width: 36%">
@@ -147,7 +147,7 @@
                 </h4>
             </td>
             <td>
-                <input-point type="'Manufacturer'" ng-model="inline.DeveloperPoints"></input-point>
+                <input-point type="'Manufacturer'" ng-model="PointSettings.inline.DeveloperPoints"></input-point>
             </td>
         </tr>
         <tr>
@@ -158,7 +158,7 @@
                 </h4>
             </td>
             <td>
-                <input-point type="'Manufacturer'" ng-model="inline.PublisherPoints"></input-point>
+                <input-point type="'Manufacturer'" ng-model="PointSettings.inline.PublisherPoints"></input-point>
             </td>
         </tr>
         </tbody>
@@ -177,7 +177,7 @@
                 </h4>
             </td>
             <td>
-                <input-point type="'Genre'" ng-model="inline.GenrePoints"></input-point>
+                <input-point type="'Genre'" ng-model="PointSettings.inline.GenrePoints"></input-point>
             </td>
         </tr>
         <tr>
@@ -188,7 +188,7 @@
                 </h4>
             </td>
             <td>
-                <input-point type="'Genre'" ng-model="inline.TagPoints"></input-point>
+                <input-point type="'Genre'" ng-model="PointSettings.inline.TagPoints"></input-point>
             </td>
         </tr>
         <tr>
@@ -199,7 +199,7 @@
                 </h4>
             </td>
             <td>
-                <input-point type="'Genre'" ng-model="inline.SeriesPoints"></input-point>
+                <input-point type="'Genre'" ng-model="PointSettings.inline.SeriesPoints"></input-point>
             </td>
         </tr>
         </tbody>
@@ -218,7 +218,7 @@
                 </h4>
             </td>
             <td>
-                <input-point type="'Platform'" ng-model="inline.MajorPlatformPoints"></input-point>
+                <input-point type="'Platform'" ng-model="PointSettings.inline.MajorPlatformPoints"></input-point>
             </td>
         </tr>
         <tr>
@@ -229,13 +229,13 @@
                 </h4>
             </td>
             <td>
-                <input-point type="'Platform'" ng-model="inline.MinorPlatformPoints"></input-point>
+                <input-point type="'Platform'" ng-model="PointSettings.inline.MinorPlatformPoints"></input-point>
             </td>
         </tr>
         </tbody>
     </table>
 </div>
-<div ng-show="page === 'images'">
+<div ng-show="PointSettings.page === 'images'">
     <table>
         <colgroup>
             <col style="width: 38%">
@@ -248,35 +248,35 @@
                 <h4>
                     <span>据点顶部与列表中的头像。</span>
                 </h4>
-                <div class="upload-avatar" ng-if="vm.AvatarImage">
-                    <div class="clear-button" ng-click="vm.AvatarImage = ''"></div>
-                    <img class="avatar-big" webp-src="{{vm.AvatarImage | avatarUrl:'big' }}">
+                <div class="upload-avatar" ng-if="PointSettings.vm.AvatarImage">
+                    <div class="clear-button" ng-click="PointSettings.vm.AvatarImage = ''"></div>
+                    <img class="avatar-big" webp-src="{{PointSettings.vm.AvatarImage | avatarUrl:'big' }}">
                 </div>
-                <div class="upload-avatar" ng-if="files.avatarImage">
-                    <div class="clear-button" ng-click="files.avatarImage = null"></div>
-                    <div class="avatar-big" ngf-background="files.avatarImage"></div>
+                <div class="upload-avatar" ng-if="PointSettings.files.avatarImage">
+                    <div class="clear-button" ng-click="PointSettings.files.avatarImage = null"></div>
+                    <div class="avatar-big" ngf-background="PointSettings.files.avatarImage"></div>
                 </div>
-                <div class="upload-avatar no-image" ng-if="!vm.AvatarImage && !files.avatarImage">
+                <div class="upload-avatar no-image" ng-if="!PointSettings.vm.AvatarImage && !PointSettings.files.avatarImage">
                     <h4>用胶水贴上一张照片</h4>
-                    <button type="button" tabindex="5" ngf-select ngf-fix-orientation="true" ng-model="files.avatarImage" accept="image/*">胶水</button>
+                    <button type="button" tabindex="5" ngf-select ngf-fix-orientation="true" ng-model="PointSettings.files.avatarImage" accept="image/*">胶水</button>
                 </div>
             </td>
-            <td ng-if="isGame">
+            <td ng-if="PointSettings.isGame">
                 <h3 class="font-myriad-lisong">封面</h3>
                 <h4>
                     <span>评测页面中的长方形头像。</span>
                 </h4>
-                <div class="upload-cover" ng-if="vm.CoverImage">
-                    <div class="clear-button" ng-click="vm.CoverImage = ''"></div>
-                    <img class="cover" webp-src="{{vm.CoverImage | coverUrl: 'big' }}">
+                <div class="upload-cover" ng-if="PointSettings.vm.CoverImage">
+                    <div class="clear-button" ng-click="PointSettings.vm.CoverImage = ''"></div>
+                    <img class="cover" webp-src="{{PointSettings.vm.CoverImage | coverUrl: 'big' }}">
                 </div>
-                <div class="upload-cover" ng-if="files.coverImage">
-                    <div class="clear-button" ng-click="files.coverImage = null"></div>
-                    <div class="cover" ngf-background="files.coverImage"></div>
+                <div class="upload-cover" ng-if="PointSettings.files.coverImage">
+                    <div class="clear-button" ng-click="PointSettings.files.coverImage = null"></div>
+                    <div class="cover" ngf-background="PointSettings.files.coverImage"></div>
                 </div>
-                <div class="upload-cover no-image" ng-if="!vm.CoverImage && !files.coverImage">
+                <div class="upload-cover no-image" ng-if="!PointSettings.vm.CoverImage && !PointSettings.files.coverImage">
                     <h4>用胶水贴上一张照片</h4>
-                    <button type="button" tabindex="5" ngf-select ngf-fix-orientation="true" ng-model="files.coverImage" accept="image/*">胶水</button>
+                    <button type="button" tabindex="5" ngf-select ngf-fix-orientation="true" ng-model="PointSettings.files.coverImage" accept="image/*">胶水</button>
                 </div>
             </td>
         </tr>
@@ -287,35 +287,35 @@
             <td>
                 <h3 class="font-myriad-lisong">据点大图</h3>
                 <h4>据点顶部横幅、悬浮卡片以及默认文章预览的背景图片。</h4>
-                <div class="profile-point-background" ng-if="vm.BackgroundImage">
-                    <div class="clear-button" ng-click="vm.BackgroundImage = ''"></div>
-                    <img class="image" webp-src="{{vm.BackgroundImage | backgroundUrl}}" alt="据点横幅">
+                <div class="profile-point-background" ng-if="PointSettings.vm.BackgroundImage">
+                    <div class="clear-button" ng-click="PointSettings.vm.BackgroundImage = ''"></div>
+                    <img class="image" webp-src="{{PointSettings.vm.BackgroundImage | backgroundUrl}}" alt="据点横幅">
                 </div>
-                <div class="profile-point-background" ng-if="files.backgroundImage">
-                    <div class="clear-button" ng-click="files.backgroundImage = null"></div>
-                    <div class="image as-background" ngf-background="files.backgroundImage"></div>
+                <div class="profile-point-background" ng-if="PointSettings.files.backgroundImage">
+                    <div class="clear-button" ng-click="PointSettings.files.backgroundImage = null"></div>
+                    <div class="image as-background" ngf-background="PointSettings.files.backgroundImage"></div>
                 </div>
-                <div class="profile-point-background no-image" ng-if="!vm.BackgroundImage && !files.backgroundImage">
+                <div class="profile-point-background no-image" ng-if="!PointSettings.vm.BackgroundImage && !PointSettings.files.backgroundImage">
                     <h4>用胶水贴上一张照片</h4>
-                    <button type="button" tabindex="6" ngf-select ngf-fix-orientation="true" ng-model="files.backgroundImage" accept="image/*">胶水</button>
+                    <button type="button" tabindex="6" ngf-select ngf-fix-orientation="true" ng-model="PointSettings.files.backgroundImage" accept="image/*">胶水</button>
                 </div>
             </td>
         </tr>
     </table>
 </div>
-<div ng-show="page === 'preferences'" ng-if="isOperator">
+<div ng-show="PointSettings.page === 'preferences'" ng-if="PointSettings.isOperator">
     <table>
         <tr>
             <td>
                 <h3 class="font-myriad-lisong">据点识别码</h3>
                 <h4>5 位长度的自定义代码，据点链接和操作凭证。</h4>
                 <div class="id-code">
-                    <input-code length="5" ng-model="vm.IdCode"></input-code>
+                    <input-code length="5" ng-model="PointSettings.vm.IdCode"></input-code>
                 </div>
             </td>
         </tr>
     </table>
-    <table ng-if="!isGame">
+    <table ng-if="!PointSettings.isGame">
         <colgroup>
             <col style="width: 36%">
             <col style="width: 64%">
@@ -329,7 +329,7 @@
                 </h4>
             </td>
             <td>
-                <input ng-model="vm.NameInSteamStore" type="text" tabindex="4">
+                <input ng-model="PointSettings.vm.NameInSteamStore" type="text" tabindex="4">
             </td>
         </tr>
         </tbody>
@@ -341,19 +341,19 @@
                 <h4>据点在界面中使用的主要语言，没有被选中的语言会作为次要语言显示。</h4>
                 <div class="checkbox-group more clearfix">
                     <div>
-                        <input type="radio" id="radio-{{uniqueIds[0]}}" name="preferred" ng-model="vm.PreferredName" ng-value="'Chinese'">
-                        <label for="radio-{{uniqueIds[0]}}">中文</label>
+                        <input type="radio" id="radio-{{PointSettings.uniqueIds[0]}}" name="preferred" ng-model="PointSettings.vm.PreferredName" ng-value="'Chinese'">
+                        <label for="radio-{{PointSettings.uniqueIds[0]}}">中文</label>
                     </div>
                     <div>
-                        <input type="radio" id="radio-{{uniqueIds[1]}}" name="preferred" ng-model="vm.PreferredName" ng-value="'English'">
-                        <label for="radio-{{uniqueIds[1]}}">英文</label>
+                        <input type="radio" id="radio-{{PointSettings.uniqueIds[1]}}" name="preferred" ng-model="PointSettings.vm.PreferredName" ng-value="'English'">
+                        <label for="radio-{{PointSettings.uniqueIds[1]}}">英文</label>
                     </div>
                 </div>
             </td>
         </tr>
     </table>
 </div>
-    <button ng-if="isGame" type="submit" class="window-confirm-button" ng-disabled="submitLock">
+    <button ng-if="PointSettings.isGame" type="submit" class="window-confirm-button" ng-disabled="PointSettings.submitLock">
         <img class="arrow-right" src="assets/images/arrow-right.png" alt="下一步">
         <img class="new-point" src="assets/images/new-point.png" alt="提交">
         <hgroup class="font-myriad-keylol">
@@ -361,7 +361,7 @@
             <h2>Submit the Editing</h2>
         </hgroup>
     </button>
-    <button ng-if="!isGame" type="submit" class="window-confirm-button" ng-disabled="submitLock">
+    <button ng-if="!PointSettings.isGame" type="submit" class="window-confirm-button" ng-disabled="PointSettings.submitLock">
         <img class="arrow-right" src="assets/images/arrow-right.png" alt="下一步">
         <img class="new-point" src="assets/images/signature-pen.png" alt="提交">
         <hgroup class="font-myriad-keylol">
@@ -369,7 +369,7 @@
             <h2>Edit the Point</h2>
         </hgroup>
     </button>
-<div class="tips" ng-switch="page">
+<div class="tips" ng-switch="PointSettings.page">
     <div ng-switch-when="basic">
         <h3 class="single-line font-myriad-lisong">提示</h3>
         <h4>Tips</h4>
