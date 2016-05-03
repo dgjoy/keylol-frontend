@@ -44,7 +44,7 @@
             </li>
             <li class="search">
                 <a href="" class="avatar-anchor" ng-click="clickToSearch()">
-                    <img src="assets/images/search-inverse.png" class="avatar-small">
+                    <img src="assets/images/search-inverse.png" class="avatar">
                 </a>
                 <div class="title">
                     <span class="fake-input" ng-click="clickToSearch()">探索更多</span>
@@ -78,7 +78,7 @@
                     <div class="entry-author" ng-if="entry.author">
                         <point-link ng-if="!entry.author.isStaffTeam" type="'user'" avatar-url="entry.author.avatarUrl" id-code="entry.author.idCode" new-page="true"></point-link>
                         <span ng-if="entry.author.isStaffTeam" class="avatar-anchor">
-                            <img class="avatar-small" alt="头像" webp-src="{{entry.author.avatarUrl|avatarUrl}}">
+                            <img class="avatar" alt="头像" webp-src="{{entry.author.avatarUrl|avatarUrl}}">
                         </span>
                         <h4>
                             <point-link ng-if="!entry.author.isStaffTeam" type="'user'" point-name="'@' + entry.author.username" id-code="entry.author.idCode" new-page="true"></point-link>
@@ -107,7 +107,7 @@
                         <p>{{entry.summary}}</p>
                     </div>
                     <div class="point-avatar" ng-if="entry.isPoint || entry.isUser">
-                        <img class="avatar-big" webp-src="{{entry.pointAvatar|avatarUrl}}" alt="头像">
+                        <img class="avatar" webp-src="{{entry.pointAvatar|avatarUrl}}" alt="头像">
                     </div>
                 </a>
                 <a ng-if="entry.clickAction && !entry.url" href="" ng-click="entry.clickAction()" class="entry-content clearfix" ng-class="{'one-line': !entry.hasThumbnail && !entry.isPoint && !entry.isUser, 'for-point': entry.isPoint || entry.isUser, 'free-height': entry.types[0] == '简评'}">
@@ -121,7 +121,7 @@
                         <p>{{entry.summary}}</p>
                     </div>
                     <div class="point-avatar" ng-if="entry.isPoint || entry.isUser">
-                        <img class="avatar-big" webp-src="{{entry.pointAvatar|avatarUrl}}" alt="头像">
+                        <img class="avatar" webp-src="{{entry.pointAvatar|avatarUrl}}" alt="头像">
                     </div>
                 </a>
                 <div ng-if="union.$localStorage.user" class="action" ng-switch="entry.subscribed">

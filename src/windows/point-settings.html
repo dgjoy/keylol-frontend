@@ -250,11 +250,11 @@
                 </h4>
                 <div class="upload-avatar" ng-if="PointSettings.vm.AvatarImage">
                     <div class="clear-button" ng-click="PointSettings.vm.AvatarImage = ''"></div>
-                    <img class="avatar-big" webp-src="{{PointSettings.vm.AvatarImage | avatarUrl:'big' }}">
+                    <img class="avatar" webp-src="{{PointSettings.vm.AvatarImage | avatarUrl:'big' }}">
                 </div>
                 <div class="upload-avatar" ng-if="PointSettings.files.avatarImage">
                     <div class="clear-button" ng-click="PointSettings.files.avatarImage = null"></div>
-                    <div class="avatar-big" ngf-background="PointSettings.files.avatarImage"></div>
+                    <div class="avatar" ngf-background="PointSettings.files.avatarImage"></div>
                 </div>
                 <div class="upload-avatar no-image" ng-if="!PointSettings.vm.AvatarImage && !PointSettings.files.avatarImage">
                     <h4>用胶水贴上一张照片</h4>

@@ -18,8 +18,8 @@ input-code span::before {
     height: 10px;
     bottom: 0;
     box-sizing: border-box;
-    border-right: 1px solid $keylol-main;
-    border-bottom: 1px solid $keylol-main;
+    border-right: 1px solid $keylol-theme;
+    border-bottom: 1px solid $keylol-theme;
 }
 
 input-code span:first-of-type {
@@ -27,7 +27,7 @@ input-code span:first-of-type {
 }
 
 input-code span:first-of-type::before {
-    border-left: 1px solid $keylol-main;
+    border-left: 1px solid $keylol-theme;
     left: 0;
     width: 34px;
 }

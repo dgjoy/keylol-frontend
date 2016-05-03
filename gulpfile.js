@@ -23,6 +23,7 @@ var templateCache = require("gulp-angular-templatecache");
 var fontmin = require('gulp-fontmin');
 var ngAnnotate = require('gulp-ng-annotate');
 var changed = require('gulp-changed');
+var svgSprite = require('gulp-svg-sprite');
 
 // apiEndpoint must have the trailing slash
 var buildConfigs = {
@@ -46,6 +47,7 @@ var buildConfigs = {
 var vendorScripts = [
     "node_modules/jquery/dist/jquery.js",
     "node_modules/ms-signalr-client/jquery.signalr-2.2.0.js",
+    "node_modules/svgxuse/svgxuse.js",
     "node_modules/moment/moment.js",
     "node_modules/moment/locale/zh-cn.js",
     "node_modules/moment-timezone/builds/moment-timezone-with-data.js",
@@ -149,6 +151,27 @@ gulp.task("font", gulp.series(gulp.parallel(fontKeylol(), fontLisong()), "store-
 gulp.task("clean", function () {
     return del(["bundles/!(web.config)", "index.html", "temporary/*"]);
 });
+
+gulp.task('build-svg', gulp.series(
+    function cleanSVGSprite() {
+        return del("assets/images/sprite-*.svg");
+    }, function generateSVGSprite() {
+        return gulp.src('assets/icons/*.svg')
+            .pipe(svgSprite({
+                mode: {
+                    symbol: {
+                        dest: '.',
+                        sprite: 'sprite.svg'
+                    }
+                },
+                shape: {
+                    id: {separator: '-'},
+                    transform: ['svgo']
+                }
+            }))
+            .pipe(rev())
+            .pipe(gulp.dest('assets/images'));
+    }));
 
 function compileSass(bundle) {
     return gulp.series(function importSass () {

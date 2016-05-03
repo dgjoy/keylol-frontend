@@ -22,7 +22,7 @@
     margin: 0;
     font-weight: bold;
     font-size: 17px;
-    color: $keylol-main;
+    color: $keylol-theme;
 }
 
 .section-article-content .share-actions a {
@@ -51,14 +51,14 @@
 }
 
 .section-article-content .archive-left h1 {
-    color: $keylol-main;
+    color: $keylol-theme;
 }
 
 .section-article-content .archive-middle {
     vertical-align: middle;
     display: inline-block;
-    border-right: $keylol-main 57px solid;
-    border-bottom: $keylol-main 43px solid;
+    border-right: $keylol-theme 57px solid;
+    border-bottom: $keylol-theme 43px solid;
     border-left: transparent 57px solid;
     border-top: transparent 43px solid;
 }
@@ -67,7 +67,7 @@
     vertical-align: middle;
     display: inline-block;
     padding: 11px 17px;
-    background-color: $keylol-main;
+    background-color: $keylol-theme;
     width: 344px;
     text-align: right;
     color: #fff;

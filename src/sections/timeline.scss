@@ -10,7 +10,7 @@
     width: 17px;
     left: 13px;
     top: 0;
-    fill: $keylol-main;
+    fill: $keylol-theme;
 }
 
 .section-timeline .card .card-line circle {
@@ -18,7 +18,7 @@
 }
 
 .section-timeline .card .card-line circle.inverse {
-    fill: $keylol-main;
+    fill: $keylol-theme;
 }
 
 .section-timeline .disabled .card .card-line {
@@ -35,7 +35,7 @@
 
 /* Title */
 .section-timeline .heading .title {
-    color: $keylol-main;
+    color: $keylol-theme;
     padding: 7px 0 6px;
     margin-left: 2px;
 }
@@ -58,11 +58,11 @@
 
 /* Card Line */
 .section-timeline .heading .card-line rect {
-    fill: $keylol-main;
+    fill: $keylol-theme;
 }
 
 .section-timeline .heading.inverse .card-line circle {
-    fill: $keylol-main;
+    fill: $keylol-theme;
 }
 
 .section-timeline .heading.inverse .card-line circle.inverse {
@@ -89,7 +89,7 @@
 
 .section-timeline .heading.inverse .left-info,
 .section-timeline .heading.inverse .right-button {
-    background-color: $keylol-main;
+    background-color: $keylol-theme;
 }
 
 .section-timeline .heading .left-info {
@@ -211,7 +211,7 @@
 
 .section-timeline .default .description h1 {
     margin: 20px 0 0 0;
-    color: $keylol-main;
+    color: $keylol-theme;
     font-size: 24px;
     font-weight: normal;
 }
@@ -261,7 +261,7 @@
 }
 
 .section-timeline .default li .title p:first-of-type {
-    color: $keylol-main;
+    color: $keylol-theme;
     font-weight: bold;
 }
 
@@ -406,7 +406,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: $keylol-main;
+    color: $keylol-theme;
 }
 
 /* Content */
@@ -496,7 +496,7 @@
 }
 
 .section-timeline .entry-content h3 {
-    color: $keylol-main;
+    color: $keylol-theme;
     font-size: 15px;
     font-weight: bold;
     margin: 0 0 5px 0;

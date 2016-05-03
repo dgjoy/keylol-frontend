@@ -1,5 +1,32 @@
 ﻿<div class="wrapper">
     <div>
-
+        <a href="/" class="logo">
+            <img src="assets/images/logo.svg" alt="其乐 Keylol.com">
+            <div class="logo-content font-myriad-keylol">
+                <p>其乐</p>
+                <p>Keylol.com</p>
+            </div>
+        </a>
+        <form class="search-box">
+            <input type="search">
+            <a href="" aria-label="搜索">
+                <svg aria-hidden="true">
+                    <use ng-href="{{'Search' | iconSvgUrl }}" xlink:href="/path/to/icons.svg#newspaper"></use>
+                </svg>
+            </a>
+        </form>
+    </div>
+    <div class="action-hub">
+        <a href="post-office">
+            <p>邮政</p>
+            <p>{{navBar.newMessages || "O" | numberAbbreviation}}</p>
+        </a>
+        <a href="coupon">
+            <p>文券</p>
+            <p>{{navBar.union.$localStorage.user.Coupon | numberAbbreviation}} ◆</p>
+        </a>
+        <a href="user/{{actionHub.union.$localStorage.user.IdCode}}">
+            <img class="avatar" webp-src="{{navBar.union.$localStorage.user.AvatarImage | avatarUrl}}" alt="{{navBar.union.$localStorage.user.UserName}}">
+        </a>
     </div>
 </div>

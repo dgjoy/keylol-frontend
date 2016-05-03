@@ -51,11 +51,11 @@
             <td rowspan="3" class="upload-avatar">
                 <div ng-if="vm.AvatarImage">
                     <div class="clear-button" ng-click="vm.AvatarImage = ''"></div>
-                    <img class="avatar-big" webp-src="{{vm.AvatarImage | avatarUrl:'big' }}">
+                    <img class="avatar" webp-src="{{vm.AvatarImage | avatarUrl:'big' }}">
                 </div>
                 <div ng-if="files.avatarImage">
                     <div class="clear-button" ng-click="files.avatarImage = null"></div>
-                    <div class="avatar-big" ngf-background="files.avatarImage"></div>
+                    <div class="avatar" ngf-background="files.avatarImage"></div>
                 </div>
                 <div ng-if="!vm.AvatarImage && !files.avatarImage">
                     <h3 class="font-myriad-lisong">账户头像</h3>

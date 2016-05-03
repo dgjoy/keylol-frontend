@@ -214,7 +214,7 @@ window[position=right]::after {
 /* Confirm Button */
 .window .window-confirm-button {
     float: right;
-    background-color: $keylol-main;
+    background-color: $keylol-theme;
     border: none;
     text-align: right;
     padding: 6px 19px;
@@ -344,7 +344,7 @@ window[position=right]::after {
 /* Headings */
 .window h1 {
     font-size: 19px;
-    color: $keylol-main;
+    color: $keylol-theme;
     margin: 3px 0;
     font-weight: bold;
 }
@@ -356,7 +356,7 @@ window[position=right]::after {
 }
 
 .window h3 {
-    color: $keylol-main;
+    color: $keylol-theme;
     font-size: 15px;
     margin: 3px 0;
     font-weight: bold;
