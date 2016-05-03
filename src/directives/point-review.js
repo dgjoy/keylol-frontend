@@ -15,7 +15,7 @@
                 scope.reviewLevel = -1;
                 scope.reviewString = '';
                 scope.changeReview = i => {
-                    for (let j = 0; j <= scope.reviewCircles.length; j++) {
+                    for (let j = 0; j < scope.reviewCircles.length; j++) {
                         scope.reviewCircles[j].type = j <= i ? scope.levelString[i] : '';
                     }
                 };
