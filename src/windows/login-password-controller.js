@@ -10,9 +10,9 @@
                 client_id: 'keylol-website',
                 id_code: '',
                 password: '',
-                captcha_challenge: '',
-                captcha_seccode: '',
-                captcha_validate: '',
+                geetest_challenge: '',
+                geetest_seccode: '',
+                geetest_validate: '',
             };
 
             let geetestResult;
@@ -26,9 +26,9 @@
             });
             function useGeetestResult (gee) {
                 geetestResult = gee.getValidate();
-                $scope.vm.captcha_challenge = geetestResult.geetest_challenge;
-                $scope.vm.captcha_seccode = geetestResult.geetest_seccode;
-                $scope.vm.captcha_validate = geetestResult.geetest_validate;
+                $scope.vm.geetest_challenge = geetestResult.geetest_challenge;
+                $scope.vm.geetest_seccode = geetestResult.geetest_seccode;
+                $scope.vm.geetest_validate = geetestResult.geetest_validate;
             }
             geetest.success.then(useGeetestResult);
 

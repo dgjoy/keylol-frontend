@@ -1,0 +1,13 @@
+nav-bar {
+  display: block;
+  width: 100%;
+  height: 64px;
+  background-color: $keylol-main;
+}
+
+nav-bar .wrapper {
+  width: 1060px;
+  display: flex;
+  margin: auto;
+  height: 100%;
+}
