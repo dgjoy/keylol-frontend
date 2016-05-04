@@ -40,3 +40,11 @@ $keylol-kwun-tong-line : #00ab4e;
 @mixin keylol-shadow-5 {
   box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
 }
+
+// button
+@mixin keylol-button {
+  padding: 10px 15px;
+  border-radius: 2px;
+  font-weight: bold;
+  border: none;
+}

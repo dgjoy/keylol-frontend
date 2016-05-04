@@ -2,7 +2,7 @@
  * Created by ZenDay on 2016/5/3.
  */
 (function () {
-    keylolApp.directive('ripple', () => {
+    keylolApp.directive('ripple', ($timeout) => {
         return {
             restrict: 'A',
             link (scope, element) {
@@ -66,6 +66,10 @@
 
                     // Add animation effect
                     ripple.className += ' animate';
+
+                    $timeout(() => {
+                        $(ripple).remove();
+                    }, 350);
                 }
 
                 element.on('touchend mouseup', func);

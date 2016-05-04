@@ -1,11 +1,7 @@
 flat-button {
   button {
-    padding: 10px 15px;
-    border-radius: 2px;
-    font-weight: bold;
-    border: none;
+    @include keylol-button;
     background: transparent;
-    -webkit-appearance: none;
 
     &:focus {
       outline: 0;
