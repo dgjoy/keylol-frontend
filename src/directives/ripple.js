@@ -9,23 +9,20 @@
                 let x, y, size, offsets;
 
                 function func (e) {
-                    let ripple = this.querySelector('.ripple');
                     const eventType = e.type;
                     // Ripple
-                    if (ripple === null) {
                         // Create ripple
-                        ripple = document.createElement('span');
-                        ripple.className += ' ripple';
+                    const ripple = document.createElement('span');
+                    ripple.className += ' ripple';
 
-                        // Prepend ripple to element
-                        this.insertBefore(ripple, this.firstChild);
+                    // Prepend ripple to element
+                    this.insertBefore(ripple, this.firstChild);
 
-                        // Set ripple size
-                        if (!ripple.offsetHeight && !ripple.offsetWidth) {
-                            size = Math.max(element[0].offsetWidth, element[0].offsetHeight);
-                            ripple.style.width = `${size}px`;
-                            ripple.style.height = `${size}px`;
-                        }
+                    // Set ripple size
+                    if (!ripple.offsetHeight && !ripple.offsetWidth) {
+                        size = Math.max(element[0].offsetWidth, element[0].offsetHeight);
+                        ripple.style.width = `${size}px`;
+                        ripple.style.height = `${size}px`;
                     }
 
                     // Remove animation effect
