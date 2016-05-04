@@ -1,0 +1,2 @@
+<a ng-repeat="tab in tabs.tabArray" href="{{tab.href}}" ng-class="{'link__selected':$index == tabs.curTab}" class="link font-myriad-keylol" ng-click="tabs.moveBar($index)" ripple>{{tab.name}}</a>
+<div class="move-bar"></div>
