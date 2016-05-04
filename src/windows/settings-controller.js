@@ -49,7 +49,7 @@
                     AutoSubscribeDaySpan: user.AutoSubscribeDaySpan,
 
                     SteamId: user.SteamId,
-                    SteamId64: user.SteamId64,
+                    SteamId64: user.SteamId ? utils.getSteamId64(user.SteamId) : null,
                     SteamProfileName: user.SteamProfileName,
                     StatusClaim: user.StatusClaim,
                     StaffClaim: user.StaffClaim,
@@ -72,6 +72,10 @@
                 },
             }).then(response => {
                 const user = response.data;
+                user.SteamId64 = user.SteamId ? utils.getSteamId64(user.SteamId) : null;
+                if (user.SteamBot) {
+                    user.SteamBot.SteamId64 = user.SteamBot.SteamId ? utils.getSteamId64(user.SteamBot.SteamId) : null;
+                }
                 updateVM(user);
                 $.extend(union.$localStorage.user, user);
             });

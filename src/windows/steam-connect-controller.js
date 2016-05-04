@@ -30,14 +30,22 @@
                     connection.stop();
             };
 
-            steamBindingHubProxy.client.NotifySteamFriendAdded = function () {
+            steamBindingHubProxy.client.onCode = function (token, code, botSteamId) {
+                $scope.$apply(() => {
+                    tokenId = token;
+                    $scope.botSteamId64 = utils.getSteamId64(botSteamId);
+                    $scope.code = code;
+                });
+            };
+
+            steamBindingHubProxy.client.onFriend = function () {
                 $scope.$apply(() => {
                     if ($scope.currentStation === 0)
                         $scope.currentStation = 1;
                 });
             };
 
-            steamBindingHubProxy.client.NotifyCodeReceived = function (steamProfileName, steamAH) {
+            steamBindingHubProxy.client.onBind = function (steamProfileName, steamAH) {
                 $scope.$apply(() => {
                     $scope.currentStation = 2;
                     const consume = $q.defer();
@@ -65,20 +73,7 @@
                 });
             };
 
-            connection.start().then(() => {
-                steamBindingHubProxy.server.createToken().then(token => {
-                    $scope.$apply(() => {
-                        if (token) {
-                            tokenId = token.Id;
-                            $scope.botSteamId64 = token.BotSteamId64;
-                            $scope.code = token.Code;
-                        } else {
-                            notification.error('暂无可用机器人。');
-                            $scope.cancel();
-                        }
-                    });
-                });
-            }, () => {
+            connection.start().fail(() => {
                 notification.error('连接失败。');
                 $scope.cancel();
             });

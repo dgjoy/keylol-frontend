@@ -278,6 +278,14 @@
                         self.getVoteColor = function (i) {
                             return ['terrible', 'bad', 'not-bad', 'good', 'awesome'][i];
                         };
+
+                        self.getSteamId64 = function (steamId3) {
+                            const matches = steamId3.match(/^\[([a-zA-Z]):([0-5]):([0-9]+)(:[0-9]+)?\]$/);
+                            if (matches[3]) {
+                                return `76561${197960265728 + parseInt(matches[3])}`;
+                            }
+                            return false;
+                        };
                     }
 
                     return new Utils();

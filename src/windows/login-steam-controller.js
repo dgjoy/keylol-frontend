@@ -1,25 +1,25 @@
 ﻿(function () {
     class LoginSteamController {
         constructor($scope, close, $http, apiEndpoint, window, union, $timeout, notification, utils, $httpParamSerializerJQLike) {
+            const connection = $.connection.new();
+            const steamLoginHubProxy = connection.steamLoginHub;
+
             $.extend(this,{
                 close,
                 window,
+                utils,
+                connection,
+                currentStation: 0,
             });
-            
-            const connection = $.connection.new();
-            const steamLoginHubProxy = connection.steamLoginHub;
-            let tokenId;
 
-            this.currentStation = 0;
-            this.utils = utils;
-
-            steamLoginHubProxy.client.NotifyCodeReceived = () => {
+            steamLoginHubProxy.client.onLoginOneTimeToken = token => {
+                // 用户在 Steam 输入验证码并输入正确后，服务器会通过这个方法通知浏览器，token 是登录用的 one-time token
                 $scope.$apply(() => {
                     this.currentStation = 1;
                     $http.post(`${apiEndpoint}oauth/token`, $httpParamSerializerJQLike({
-                        grant_type: 'steam_login_token',
+                        token,
+                        grant_type: 'one_time_token',
                         client_id: 'keylol-website',
-                        token_id: tokenId,
                     }), {
                         headers: {
                             'Content-Type': 'application/x-www-form-urlencoded',
@@ -38,7 +38,7 @@
                                 case 'invalid_token':
                                     notification.error('Steam Id 无效');
                                     break;
-                                case 'user_nonexistent':
+                                case 'user_non_existent':
                                     notification.error('用户不存在');
                                     break;
                                 case 'account_locked_out':
@@ -55,35 +55,26 @@
                 });
             };
 
-            connection.start().then(() => {
-                steamLoginHubProxy.server.createToken().then(token => {
-                    $scope.$apply(() => {
-                        tokenId = token.Id;
-                        this.code = token.Code;
-                    });
+            steamLoginHubProxy.client.onCode = code => {
+                // code 是收到的四位数字 Steam 登录验证码
+                $scope.$apply(() => {
+                    this.code = code;
                 });
-            }, () => {
+            };
+
+            connection.start().fail(() => {
                 notification.error('连接失败');
                 this.cancel();
-            });
-
-            $.extend(this,{
-                connection,
             });
         }
 
         cancel() {
-            const close = this.close;
-            const connection = this.connection;
-
-            close();
-            connection.stop();
+            this.close();
+            this.connection.stop();
         };
 
         switchToLoginPasswordWindow() {
-            const window = this.window;
-
-            window.show({
+            this.window.show({
                 templateUrl: 'src/windows/login-password.html',
                 controller: 'LoginPasswordController',
                 controllerAs: 'LoginPassword',

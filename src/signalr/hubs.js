@@ -78,24 +78,19 @@
             registerHubProxies(proxies, false);
         });
 
-        proxies['debugInfoHub'] = this.createHubProxy('debugInfoHub');
-        proxies['debugInfoHub'].client = {};
-        proxies['debugInfoHub'].server = {};
+        proxies['logHub'] = this.createHubProxy('logHub');
+        proxies['logHub'].client = { };
+        proxies['logHub'].server = {
+        };
 
         proxies['steamBindingHub'] = this.createHubProxy('steamBindingHub');
-        proxies['steamBindingHub'].client = {};
+        proxies['steamBindingHub'].client = { };
         proxies['steamBindingHub'].server = {
-            createToken: function () {
-                return proxies['steamBindingHub'].invoke.apply(proxies['steamBindingHub'], $.merge(["CreateToken"], $.makeArray(arguments)));
-            }
         };
 
         proxies['steamLoginHub'] = this.createHubProxy('steamLoginHub');
-        proxies['steamLoginHub'].client = {};
+        proxies['steamLoginHub'].client = { };
         proxies['steamLoginHub'].server = {
-            createToken: function () {
-                return proxies['steamLoginHub'].invoke.apply(proxies['steamLoginHub'], $.merge(["CreateToken"], $.makeArray(arguments)));
-            }
         };
 
         return proxies;
