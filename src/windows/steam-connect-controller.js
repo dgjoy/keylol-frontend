@@ -31,11 +31,16 @@
             };
 
             steamBindingHubProxy.client.onCode = function (token, code, botSteamId) {
-                $scope.$apply(() => {
-                    tokenId = token;
-                    $scope.botSteamId64 = utils.getSteamId64(botSteamId);
-                    $scope.code = code;
-                });
+                if (!botSteamId) {
+                    notification.error('没有可用的机器人。');
+                    $scope.cancel();
+                } else {
+                    $scope.$apply(() => {
+                        tokenId = token;
+                        $scope.botSteamId64 = utils.getSteamId64(botSteamId);
+                        $scope.code = code;
+                    });
+                }
             };
 
             steamBindingHubProxy.client.onFriend = function () {

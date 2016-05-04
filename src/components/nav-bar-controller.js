@@ -7,15 +7,19 @@
                 apiEndpoint,
                 notification,
             });
-            if (union.$localStorage.user) {
-                $scope.$watch(() => {
+            $scope.$watch(() => {
+                if (union.$localStorage.user) {
                     return union.$localStorage.user.MessageCount;
-                }, newValue => {
+                } else {
+                    return null;
+                }
+            }, newValue => {
+                if (newValue) {
                     this.newMessages = typeof newValue === 'string' ? newValue.split(',').reduce((previous, current) => {
                         return parseInt(previous) + parseInt(current);
                     }) : null;
-                });
-            }
+                }
+            });
         }
     }
 

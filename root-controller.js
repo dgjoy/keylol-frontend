@@ -10,7 +10,6 @@
             function getUserInfo() {
                 $http.get(`${apiEndpoint}user/current`, {
                     params: {
-                        claims: true,
                         stats: true,
                         profilePointBackgroundImage: true,
                         subscribeCount: true,
@@ -29,8 +28,7 @@
                     }
                 }, response => {
                     if (response.status === 401) {
-                        $http.delete(`${apiEndpoint}login/current`);
-                        delete union.$localStorage.login;
+                        delete union.$localStorage.Authorization;
                         notification.error('登录失效，请重新登录。');
                     }
                 });
@@ -41,7 +39,9 @@
                 return union.$localStorage.Authorization;
             },newToken => {
                 if (newToken) {
-                    aNewLogin = true;
+                    if (!firstLoad) {
+                        aNewLogin = true;
+                    }
                     $http.defaults.headers.common.Authorization = `Bearer ${newToken}`;
                     getUserInfo();
                 } else {

@@ -1,9 +1,9 @@
 ﻿(function () {
     keylolApp.controller('RegistrationController', [
         '$scope', 'close', '$http', 'utils', 'union', 'apiEndpoint', 'window', 'notification', '$element', '$timeout', '$location', 'options',
-        '$stateParams', '$state',
+        '$stateParams', '$httpParamSerializerJQLike',
         ($scope, close, $http, utils, union, apiEndpoint, window, notification, $element, $timeout, $location, options,
-         $stateParams, $state) => {
+         $stateParams, $httpParamSerializerJQLike) => {
             $scope.vm = {
                 IdCode: '',
                 UserName: '',
@@ -100,8 +100,39 @@
                     $http.post(`${apiEndpoint}user`, $scope.vm)
                         .then(response => {
                             union.$localStorage.firstOpenKeylol = true;
-                            union.$localStorage.login = response.data;
-                            close();
+
+                            $http.post(`${apiEndpoint}oauth/token`, $httpParamSerializerJQLike({
+                                token: response.data,
+                                grant_type: 'one_time_token',
+                                client_id: 'keylol-website',
+                            }), {
+                                headers: {
+                                    'Content-Type': 'application/x-www-form-urlencoded',
+                                },
+                            }).then(response => {
+                                union.$localStorage.Authorization = response.data.access_token;
+                                notification.success('登录成功，欢迎回到其乐');
+                                close();
+                            }, response => {
+                                if (response.status === 400 && response.data.error) {
+                                    switch (response.data.error) {
+                                        case 'invalid_token':
+                                            notification.error('Steam Id 无效');
+                                            break;
+                                        case 'user_non_existent':
+                                            notification.error('用户不存在');
+                                            break;
+                                        case 'account_locked_out':
+                                            notification.error('用户登录次数过多，暂时被锁定');
+                                            break;
+                                        default:
+                                            notification.error('发生未知错误，请重试或与站务职员联系');
+                                    }
+                                } else {
+                                    notification.error('发生未知错误，请重试或与站务职员联系', response);
+                                }
+                                close();
+                            });
                             if (consumeBindingToken)
                                 consumeBindingToken.resolve();
                         }, response => {
