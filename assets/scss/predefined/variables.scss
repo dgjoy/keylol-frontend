@@ -69,4 +69,26 @@ $keylol-kwun-tong-line : #00ab4e;
   @include keylol-button;
   border-radius: 2px;
   font-weight: bold;
+<<<<<<< Updated upstream
+=======
+  border: none;
+}
+
+// text protection
+@mixin text-protection ($position: bottom) {
+  position: relative;
+
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    @if $position == bottom or $position == top {
+      left: 0;
+      top: 50%;
+      height: 50%;
+      width: 100%;
+    }
+    background: linear-gradient(to $position, rgba(#000,0), rgba(#000,.5) 67.7%, #000);
+  }
+>>>>>>> Stashed changes
 }
