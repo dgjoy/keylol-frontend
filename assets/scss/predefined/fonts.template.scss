@@ -29,14 +29,3 @@
   url("../assets/fonts/lisong-subset.ttf") format("truetype"), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
   url("../assets/fonts/lisong-subset.svg#LiSong") format("svg"); /* iOS 4.1- */
 }
-
-/* ------------------- */
-/* Font Family Presets */
-/* ------------------- */
-.font-myriad-keylol {
-  font-family: "Myriad Pro", "Keylol Rail Sung", sans-serif;
-}
-
-.font-myriad-lisong {
-  font-family: "Myriad Pro", LiSong, sans-serif;
-}

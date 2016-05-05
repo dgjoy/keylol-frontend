@@ -1,0 +1,17 @@
+menu {
+  display: flex;
+  width: 300px;
+  background-color: $keylol-card;
+  padding: 0;
+  margin: 0;
+
+  ul {
+    margin: 20px 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+      padding: 0;
+    }
+  }
+}
