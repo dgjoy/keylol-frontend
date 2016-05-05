@@ -12,11 +12,11 @@ $keylol-background : #eee;
 $keylol-card : #f5f6f7;
 $keylol-libraried : #a3cf06;
 $keylol-user-theme : #df9a35;
-$keylol-lr-route-610 : #5c170f;
-$keylol-tsuen-wan-line : #ed1d24;
-$keylol-tung-chung-line : #f7943e;
-$keylol-tin-shui-wai-loop : #6fb92b;
-$keylol-kwun-tong-line : #00ab4e;
+$keylol-review-terrible: #5c170f;
+$keylol-review-bad: #ed1d24;
+$keylol-review-not-bad: #f7943e;
+$keylol-review-good: #6fb92b;
+$keylol-review-awesome: #00ab4e;
 
 /* ------------------- */
 /* Font Family Presets */
@@ -86,5 +86,12 @@ $keylol-kwun-tong-line : #00ab4e;
       width: 100%;
     }
     background: linear-gradient(to $position, rgba(#000,0), rgba(#000,.5) 67.7%, #000);
+  }
+}
+
+// hover
+@mixin hover-background($color: #000) {
+  &:hover {
+    background-color: rgba($color, 0.05);
   }
 }

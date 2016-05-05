@@ -2,7 +2,7 @@
  * Created by ZenDay on 2016/5/3.
  */
 (function () {
-    keylolApp.directive('ripple', ($timeout) => {
+    keylolApp.directive('ripple', $timeout => {
         return {
             restrict: 'A',
             link (scope, element) {
@@ -29,10 +29,10 @@
                     ripple.className = ripple.className.replace(/ ?(animate)/g, '');
 
                     // get click coordinates by event type
-                    if (eventType === 'mouseup') {
+                    if (eventType === 'mousedown') {
                         x = e.pageX;
                         y = e.pageY;
-                    } else if (eventType === 'touchend') {
+                    } else if (eventType === 'touchstart') {
                         try {
                             let origEvent;
 
@@ -65,18 +65,28 @@
                     ripple.style.top = `${y - offsets.top - size / 2}px`;
 
                     // Add animation effect
-                    ripple.className += ' animate';
+                    ripple.className += ' animate-appear';
 
-                    $timeout(() => {
-                        $(ripple).remove();
-                    }, 400);
+                    const waitTimeOut = $timeout();
+
+                    function removeAndUnbind() {
+                        waitTimeOut.then(() => {
+                            ripple.className += ' animate-disappear';
+                            $timeout(() => {
+                                $(ripple).remove();
+                            }, 400);
+                        });
+                        element.off('touchend touchleave mouseup mouseleave', removeAndUnbind);
+                    }
+
+                    element.on('touchend touchleave mouseup mouseleave', removeAndUnbind);
                 }
 
-                element.on('touchend mouseup', func);
+                element.on('touchstart mousedown', func);
 
                 //remove the event listener on scope destroy
                 scope.$on('$destroy',() => {
-                    element.off('touchend mouseup', func);
+                    element.off('touchstart mousedown', func);
                 });
             },
         };

@@ -1,44 +1,40 @@
 vote-circle {
-    display: inline-block;
-    width: 50px;
-    vertical-align: top;
-}
+    display: flex;
 
-vote-circle svg {
-    display: inline-block;
-    width: 10px;
-    height: 8px;
-    transform: translateY(-2px);
-}
+    svg {
+        width: 8px;
+        height: 6px;
 
-vote-circle svg:last-of-type {
-    width: 8px;
-}
+        &:last-of-type {
+            width: 6px;
+        }
 
-vote-circle svg.disabled {
-    fill: #ccc !important;
-}
+        &.disabled {
+            fill: $keylol-inertia-shape !important;
+        }
 
-vote-circle svg.whole-white {
-    fill: white !important;
-}
+        &.whole-white {
+            fill: white !important;
+        }
 
-vote-circle svg.awesome {
-    fill: #00ab4e !important;
-}
+        &.awesome {
+            fill: $keylol-review-awesome !important;
+        }
 
-vote-circle svg.good {
-    fill: #71bf44 !important;
-}
+        &.good {
+            fill: $keylol-review-good !important;
+        }
 
-vote-circle svg.not-bad {
-    fill: #f7943e !important;
-}
+        &.not-bad {
+            fill: $keylol-review-not-bad !important;
+        }
 
-vote-circle svg.bad {
-    fill: #e30613 !important;
-}
+        &.bad {
+            fill: $keylol-review-bad !important;
+        }
 
-vote-circle svg.terrible {
-    fill: #541912 !important;
+        &.terrible {
+            fill: $keylol-review-terrible !important;
+        }
+    }
 }

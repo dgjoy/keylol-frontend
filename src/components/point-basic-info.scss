@@ -1,0 +1,25 @@
+point-basic-info {
+  display: flex;
+  align-items: center;
+
+  .avatar {
+    margin-right: 10px;
+    width: 32px;
+    height: 32px;
+  }
+
+  .name-group {
+    p {
+      margin: 0;
+
+      &:first-of-type {
+        font-weight: bold;
+      }
+
+      &:last-of-type {
+        color: $keylol-inertia-text;
+        font-size: 12px;
+      }
+    }
+  }
+}

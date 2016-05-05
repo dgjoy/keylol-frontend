@@ -1,14 +1,11 @@
 flat-button {
   button {
     @include keylol-button-single;
+    @include hover-background();
     background: transparent;
 
     &:focus {
       outline: 0;
-    }
-
-    &:hover {
-      background-color: rgba(#000, 0.05);
     }
 
     &.theme {

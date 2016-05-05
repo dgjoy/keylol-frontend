@@ -2,6 +2,7 @@ menu-item {
   display: block;
   button {
     @include keylol-button;
+    @include hover-background();
     width: 100%;
     box-sizing: border-box;
     display: flex;
@@ -10,10 +11,6 @@ menu-item {
 
     &:focus {
       outline: 0;
-    }
-
-    &:hover {
-      background-color: rgba(#000, 0.05);
     }
 
     .ripple {
