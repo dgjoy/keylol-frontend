@@ -7,7 +7,7 @@ $keylol-main-text : #444;
 $keylol-light-text : #888;
 $keylol-inertia-text : #bbb;
 $keylol-inverted-text : #fff;
-$keylol-shape-inertia : #ccc;
+$keylol-inertia-shape: #ccc;
 $keylol-background : #eee;
 $keylol-card : #f5f6f7;
 $keylol-libraried : #a3cf06;
@@ -29,11 +29,14 @@ $keylol-kwun-tong-line : #00ab4e;
   font-family: "Myriad Pro", LiSong, sans-serif;
 }
 
-.font-consolas {
-  font-family: "Consolas Regular", Arial, sans-serif;
+// font family mixins
+@mixin font-myriad-keylol {
+  font-family: "Myriad Pro", "Keylol Rail Sung", sans-serif;
 }
 
-// font type
+@mixin font-consolas {
+  font-family: "Consolas Regular", "Consolas", Arial, sans-serif;
+}
 
 // shadow
 @mixin keylol-shadow-1 {
@@ -59,7 +62,11 @@ $keylol-kwun-tong-line : #00ab4e;
 // button
 @mixin keylol-button {
   padding: 10px 15px;
+  border: none;
+}
+
+@mixin keylol-button-single {
+  @include keylol-button;
   border-radius: 2px;
   font-weight: bold;
-  border: none;
 }

@@ -1,3 +1,14 @@
+<div class="menu-header">
+    <a href="user/{{menu.union.$localStorage.user.IdCode}}">
+        <img class="avatar" webp-src="{{menu.union.$localStorage.user.AvatarImage | avatarUrl}}" alt="{{menu.union.$localStorage.user.UserName}}">
+    </a>
+    <div class="header-text">
+        <p>{{menu.union.$localStorage.user.UserName}}</p>
+        <p>{{menu.union.$localStorage.user.IdCode}}</p>
+    </div>
+</div>
 <ul>
-    <li>hhh</li>
+    <li><menu-item type="item"></menu-item></li>
+    <li><menu-item type="horizon"></menu-item></li>
+    <li><menu-item type="item"></menu-item></li>
 </ul>

@@ -1,6 +1,6 @@
 raised-button {
   button {
-    @include keylol-button;
+    @include keylol-button-single;
     @include keylol-shadow-1;
     color: $keylol-inverted-text;
 

@@ -1,13 +1,69 @@
 menu {
-  display: flex;
-  width: 300px;
+  @include keylol-shadow-1;
   background-color: $keylol-card;
   padding: 0;
   margin: 0;
+  border-radius: 2px;
+
+  &.popover {
+    border-radius: 0;
+    @include keylol-shadow-2;
+  }
+
+  .menu-header {
+    display: flex;
+    padding: 20px 15px 0;
+
+    a {
+      margin-right: 15px;
+
+      .avatar {
+        width: 48px;
+        height: 48px;
+      }
+    }
+
+    .header-text {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      p {
+        margin: 0;
+
+        &:first-of-type {
+          margin-bottom: 2px;
+          font-size: 16px;
+        }
+
+        &:last-of-type {
+          color: $keylol-inertia-text;
+          font-size: 12px;
+        }
+      }
+
+      &.for-user {
+        margin-top: 0;
+        p {
+          &:first-of-type {
+            font-size: 14px;
+            font-weight: bold;
+          }
+
+          &:last-of-type {
+            @include font-consolas;
+            font-size: 16px;
+          }
+        }
+      }
+    }
+  }
 
   ul {
-    margin: 20px 0;
-    padding: 0;
+    margin: 0;
+    width: 100%;
+    padding: 20px 0;
     list-style: none;
 
     li {

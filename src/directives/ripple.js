@@ -69,7 +69,7 @@
 
                     $timeout(() => {
                         $(ripple).remove();
-                    }, 350);
+                    }, 400);
                 }
 
                 element.on('touchend mouseup', func);

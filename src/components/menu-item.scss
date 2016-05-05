@@ -1,0 +1,50 @@
+menu-item {
+  display: block;
+  button {
+    @include keylol-button;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    background: transparent;
+    align-items: center;
+
+    &:focus {
+      outline: 0;
+    }
+
+    &:hover {
+      background-color: rgba(#000, 0.05);
+    }
+
+    .ripple {
+      background-color: rgba(#000, 0.1);
+    }
+
+    svg {
+      width: 24px;
+      height: 24px;
+      fill: $keylol-light-text;
+      margin-right: 15px;
+    }
+
+    &[disabled] {
+      cursor: default;
+      color: $keylol-inertia-text;
+
+      &:hover {
+        background: transparent;
+      }
+
+      svg {
+        fill: $keylol-inertia-shape;
+      }
+    }
+  }
+  span.horizon {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    height: 1px;
+    background-color: $keylol-inertia-shape;
+  }
+}

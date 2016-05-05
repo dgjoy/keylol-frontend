@@ -1,6 +1,6 @@
 flat-button {
   button {
-    @include keylol-button;
+    @include keylol-button-single;
     background: transparent;
 
     &:focus {
