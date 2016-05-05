@@ -2,17 +2,27 @@
     class tabsController {
         constructor ($scope, union, $http, apiEndpoint, notification, $timeout) {
 
-            $timeout(() => {
+            const jResizeHandler = () => {
                 const curElement = $('.link').eq(this.curTab);
                 this.pWidth = curElement.parent().width();
+
                 $('.move-bar').css({
                     'left': curElement.position().left ,
-                    'right': this.pWidth - curElement.position().left - curElement.width() ,
+                    'right': this.pWidth - curElement.position().left - curElement.get(0).clientWidth ,
                 });
+            };
+
+            $timeout(jResizeHandler);
+            const jWindow = $(window).resize();
+            $scope.$on('$destroy',() => {
+                jWindow.unbind('resize',jResizeHandler);
             });
         }
 
         moveBar(index) {
+            if (this.curTab === index)
+                return ;
+            
             this.curTab = index;
 
             const jLinks = $('.link');
@@ -22,7 +32,7 @@
             const oldLeft = jMoveBar.css('left').replace('px','');
             const oldRight = jMoveBar.css('right').replace('px','');
             const newLeft = curElement.position().left;
-            const newRight = this.pWidth - curElement.position().left - curElement.width();
+            const newRight = this.pWidth - curElement.position().left - curElement.get(0).clientWidth;
 
             if (oldLeft < newLeft) {
                 jMoveBar.animate({'right': newRight,},{duration:150, queue:false,});
