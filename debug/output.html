@@ -97,12 +97,6 @@
     };
     if ($.connection.logHub) {
         $.connection.logHub.client.onWrite = write;
-        $.connection.steamLoginHub.client.onCode = function (code) {
-            write("New code: " + code);
-        };
-        $.connection.steamLoginHub.client.onLoginOneTimeToken = function (token) {
-            write("New login token: " + token);
-        };
         $.connection.hub.qs = { 'bearer_token': prompt("Bearer Token:") };
         $.connection.hub.start().then(function () {
             write("Connected.");
