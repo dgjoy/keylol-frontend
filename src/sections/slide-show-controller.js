@@ -7,36 +7,37 @@
 
 
             const tmp_slides = [{
-                cname: '中文名中文名中文名中文名中文名中文名中文名中文名中文名中文名中文名中文名中文名中文名中文名中文名中文名中文名',
-                ename: 'englishenglishenglishenglishenglishenglishenglishenglishenglishenglish',
-                author: '作者',
-                date: '4月7号',
-                img: 'http://pic.sc.chinaz.com/files/pic/pic9/201508/apic14052.jpg',
-                desc: '描述文字描述文字描述文字描述文字描述文字描述文字描述文字描述文字描述文字描述文字描述文字' +
-                '描述文字描述文字描述文字描述文字描述文字描述文字描述文字' +
-                '描述文字描述文字描述文字描述文字描述文字描述文字描述文字描述文字描述文字描述文字描述' +
-                '文字描述文字描述文字描述文字描述文字描述文字',
+                title: 'Rogue Stormer（恶棍风暴兵团） Boss攻略与成就指南',
+                cname: '恶棍风暴兵团',
+                ename: 'Rogue Stormers',
+                author: '@Xxxxxxx',
+                date: '5月6号',
+                img: '//storage.keylol.com/39b7d020df471d6c0e3fa593802000bc.jpg!timeline.thumbnail.new',
+                desc: '《恶棍风暴兵团》 是一款现代版Contra／/Metal Slug 游戏，它结合了 这种roguelike 类型的混搭游戏，并包括和 RPG 角色扮演的元素，游戏中有着、加上疯狂的3D 图形与可支持一至四人的多人游戏合作模式。',
             },{
-                cname: '中文名',
-                ename: 'english',
-                author: '作者',
-                date: '4月7号',
-                img: 'http://pics.sc.chinaz.com/files/pic/pic9/201509/apic14816.jpg',
-                desc: '描述文字',
+                title: 'Rogue Stormer（恶棍风暴兵团） Boss攻略与成就指南',
+                cname: '恶棍风暴兵团',
+                ename: 'Rogue Stormers',
+                author: '@Xxxxxxx',
+                date: '5月6号',
+                img: '//storage.keylol.com/39b7d020df471d6c0e3fa593802000bc.jpg!timeline.thumbnail.new',
+                desc: '《恶棍风暴兵团》 是一款现代版Contra／/Metal Slug 游戏，它结合了 这种roguelike 类型的混搭游戏，并包括和 RPG 角色扮演的元素，游戏中有着、加上疯狂的3D 图形与可支持一至四人的多人游戏合作模式。',
             },{
-                cname: '中文名',
-                ename: 'english',
-                author: '作者',
-                date: '4月7号',
-                img: 'http://pic.sc.chinaz.com/files/pic/pic9/201508/apic14052.jpg',
-                desc: '描述文字',
+                title: 'Rogue Stormer（恶棍风暴兵团） Boss攻略与成就指南',
+                cname: '恶棍风暴兵团',
+                ename: 'Rogue Stormers',
+                author: '@Xxxxxxx',
+                date: '5月6号',
+                img: '//storage.keylol.com/39b7d020df471d6c0e3fa593802000bc.jpg!timeline.thumbnail.new',
+                desc: '《恶棍风暴兵团》 是一款现代版Contra／/Metal Slug 游戏，它结合了 这种roguelike 类型的混搭游戏，并包括和 RPG 角色扮演的元素，游戏中有着、加上疯狂的3D 图形与可支持一至四人的多人游戏合作模式。',
             },{
-                cname: '中文名',
-                ename: 'english',
-                author: '作者',
-                date: '4月7号',
-                img: 'http://pics.sc.chinaz.com/files/pic/pic9/201509/apic14816.jpg',
-                desc: '描述文字',
+                title: 'Rogue Stormer（恶棍风暴兵团） Boss攻略与成就指南',
+                cname: '恶棍风暴兵团',
+                ename: 'Rogue Stormers',
+                author: '@Xxxxxxx',
+                date: '5月6号',
+                img: '//storage.keylol.com/39b7d020df471d6c0e3fa593802000bc.jpg!timeline.thumbnail.new',
+                desc: '《恶棍风暴兵团》 是一款现代版Contra／/Metal Slug 游戏，它结合了 这种roguelike 类型的混搭游戏，并包括和 RPG 角色扮演的元素，游戏中有着、加上疯狂的3D 图形与可支持一至四人的多人游戏合作模式。',
             }];
 
             this.slides = tmp_slides;
@@ -59,7 +60,7 @@
                 this.$timeout.cancel(this.timer);
             }
             this.timer = this.$timeout(() => {
-                if (this.index < this.indexCount - 1){
+                if (this.index < this.indexCount - 1) {
                     this.slideTo(this.index + 1);
                 } else {
                     this.slideTo(0);

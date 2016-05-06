@@ -1,0 +1,46 @@
+switch-pagination {
+  button {
+    @include keylol-button-card;
+    @include hover-background;
+    width: 40px;
+    background-color: $keylol-card;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .ripple {
+      background-color: rgba(#000, 0.1);
+    }
+
+    svg {
+      width: 24px;
+      height: 24px;
+      fill: $keylol-light-text;
+    }
+  }
+
+  .previous {
+    position: absolute;
+    height: 100%;
+    top: 0;
+    left: -60px;
+    display: flex;
+    flex-direction: column;
+
+    &>span {
+      color: $keylol-inertia-text;
+      height: 45px;
+      width: 100%;
+      text-align: center;
+      line-height: 45px;
+    }
+
+    button {
+      height: calc(100% - 55px);
+    }
+  }
+
+  .next {
+    height: 100%;
+  }
+}

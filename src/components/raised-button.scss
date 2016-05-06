@@ -4,10 +4,6 @@ raised-button {
     @include keylol-shadow-1;
     color: $keylol-inverted-text;
 
-    &:focus {
-      outline: 0;
-    }
-
     &:active {
       @include keylol-shadow-2;
     }

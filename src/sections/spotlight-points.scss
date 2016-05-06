@@ -1,0 +1,34 @@
+spotlight-points {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+
+  .points {
+    overflow: hidden;
+    width: 900px;
+    height: 280px;
+    position: relative;
+
+    .pages-wrapper {
+      position: absolute;
+      display: flex;
+
+      .cards-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        width: 900px;
+        height: 270px;
+        margin-right: 20px;
+
+        store-game-card {
+          margin-right: 20px;
+          margin-bottom: 20px;
+        }
+      }
+    }
+  }
+
+  switch-pagination {
+    height: 270px;
+  }
+}

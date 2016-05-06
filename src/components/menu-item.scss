@@ -1,17 +1,13 @@
 menu-item {
   display: block;
   button {
-    @include keylol-button;
+    @include keylol-button-default;
     @include hover-background();
     width: 100%;
     box-sizing: border-box;
     display: flex;
     background: transparent;
     align-items: center;
-
-    &:focus {
-      outline: 0;
-    }
 
     .ripple {
       background-color: rgba(#000, 0.1);

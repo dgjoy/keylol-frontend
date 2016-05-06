@@ -61,12 +61,26 @@ $keylol-review-awesome: #00ab4e;
 
 // button
 @mixin keylol-button {
-  padding: 10px 15px;
   border: none;
+
+  &:focus {
+    outline: 0;
+  }
+}
+
+@mixin keylol-button-default {
+  @include keylol-button;
+  padding: 10px 15px;
+}
+
+@mixin keylol-button-card {
+  @include keylol-button;
+  @include keylol-shadow-1;
+  border-radius: 2px;
 }
 
 @mixin keylol-button-single {
-  @include keylol-button;
+  @include keylol-button-default;
   border-radius: 2px;
   font-weight: bold;
 }
