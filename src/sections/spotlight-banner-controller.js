@@ -1,6 +1,6 @@
 ﻿(function () {
     
-    class spotlightBannerController {
+    class SpotlightBannerController {
         constructor($scope,window,$http,notification,$location,union) {
 
             if ($location.url().substr(1, 11) === 'post-office') {
@@ -48,7 +48,7 @@
 
     keylolApp.component('spotlightBanner', {
         templateUrl: 'src/sections/spotlight-banner.html',
-        controller: spotlightBannerController,
+        controller: SpotlightBannerController,
         controllerAs: 'spotlightBanner',
     });
 }());

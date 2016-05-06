@@ -78,6 +78,11 @@ nav-bar {
 
       &.active {
         color: $keylol-accent;
+
+        p:nth-of-type(2) {
+          opacity: 1;
+          font-weight: bold;
+        }
       }
 
       &:not(:last-of-type) {

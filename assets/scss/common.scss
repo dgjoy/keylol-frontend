@@ -38,13 +38,33 @@ textarea,
 }
 
 /* ----------- */
-/* Grid System */
+/* flex System */
 /* ----------- */
 .container {
   width: 940px;
   margin-left: auto;
   margin-right: auto;
 }
+
+.flex-row {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.left-middle-lg {
+  width: 700px;
+}
+
+.right-lg {
+  width: 220px;
+}
+
+
+
+/* ----------- */
+/* Grid System */
+/* ----------- */
 
 .row {
   margin-left: -15px;

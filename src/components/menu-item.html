@@ -1,7 +1,7 @@
-<button ripple ng-if="menuItem.type === 'item'">
-    <svg aria-hidden="true">
-        <use ng-href="{{'Map' | iconSvgUrl }}" xlink:href=""></use>
+<button ripple ng-if="menuItem.data.type === 'item'">
+    <svg ng-if="menuItem.data.icon" aria-hidden="true">
+        <use ng-href="{{menuItem.data.icon | iconSvgUrl }}" xlink:href=""></use>
     </svg>
-    <span>开设新据点</span>
+    <span>{{menuItem.data.text}}</span>
 </button>
-<span class="horizon" ng-if="menuItem.type === 'horizon'"></span>
+<span class="horizon" ng-if="menuItem.data.type === 'horizon'"></span>

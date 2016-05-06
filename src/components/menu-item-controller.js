@@ -6,7 +6,7 @@
         controller: MenuItemController,
         controllerAs: 'menuItem',
         bindings: {
-            type: '@',
+            data: '<',
         },
     });
 }());

@@ -1,5 +1,5 @@
 ﻿(function () {
-    class slideShowController {
+    class SlideShowController {
         constructor($timeout) {
             $.extend(this,{
                 $timeout,
@@ -71,7 +71,7 @@
 
     keylolApp.component('slideShow', {
         templateUrl: 'src/sections/slide-show.html',
-        controller: slideShowController,
+        controller: SlideShowController,
         controllerAs: 'slideShow',
     });
 }());

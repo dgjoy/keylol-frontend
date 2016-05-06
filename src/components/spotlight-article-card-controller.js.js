@@ -1,9 +1,9 @@
 ﻿(function () {
-    class spotlightArticleCardController {}
+    class SpotlightArticleCardController {}
 
     keylolApp.component('spotlightArticleCard', {
         templateUrl: 'src/components/spotlight-article-card.html',
-        controller: spotlightArticleCardController,
+        controller: SpotlightArticleCardController,
         controllerAs: 'spotlightArticleCard',
         bindings: {
             text: '@',

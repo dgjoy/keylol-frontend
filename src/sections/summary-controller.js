@@ -2,11 +2,8 @@
  * Created by Rex on 15/9/23.
  */
 (function () {
-    
-    
-    class summaryController {
+    class SummaryController {
         constructor($scope, union, $http, notification) {
-
             $.extend(this,{
                 $scope,
                 $http,
@@ -16,7 +13,6 @@
             this.union = union;
             this.data = union.summary;
             this.subscribeDisabled = false;
-            
         }
         
         subscribe(pointId) {
@@ -63,7 +59,7 @@
 
     keylolApp.component('summary', {
         templateUrl: 'src/sections/summary.html',
-        controller: summaryController,
+        controller: SummaryController,
         controllerAs: 'summary',
     });
 }());

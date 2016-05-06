@@ -1,5 +1,5 @@
 ﻿(function () {
-    class tabsController {
+    class TabsController {
         changeTab(index) {
             if (this.curTab === index)
                 return ;
@@ -10,7 +10,7 @@
 
     keylolApp.component('tabs', {
         templateUrl: 'src/components/tabs.html',
-        controller: tabsController,
+        controller: TabsController,
         controllerAs: 'tabs',
         bindings:{
             tabArray: '<',

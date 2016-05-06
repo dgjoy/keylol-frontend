@@ -1,21 +1,15 @@
 /**
  * Created by guihong on 4/27/16.
  */
-(function(){
-    class spotlightController {
-        constructor() {
-            
-        }
-
-    }
+(function() {
+    class SpotlightController {}
 
     keylolApp.component('spotlight',{
-        templateUrl:'src/components/spotlight.html',
-        controller:spotlightController,
-        controllerAs:'spotlight',
-        bindings:{
-            info:'<',
+        templateUrl: 'src/components/spotlight.html',
+        controller: SpotlightController,
+        controllerAs: 'spotlight',
+        bindings: {
+            info: '<',
         },
     });
-    
 }());

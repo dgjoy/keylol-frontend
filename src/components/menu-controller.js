@@ -15,7 +15,7 @@
         controller: MenuController,
         controllerAs: 'menu',
         bindings: {
-            text: '@',
+            object: '<',
         },
     });
 }());
