@@ -9,10 +9,13 @@ point-basic-info {
   }
 
   .name-group {
+    max-width: calc(100% - 42px);
     p {
+      @include ellipsis;
       margin: 0;
 
       &:first-of-type {
+        color: $keylol-main-text;
         font-weight: bold;
       }
 

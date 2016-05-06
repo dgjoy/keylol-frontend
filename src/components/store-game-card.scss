@@ -13,6 +13,10 @@ store-game-card {
     height: 52px;
     padding-left: 15px;
     margin: 10px 0;
+
+    point-basic-info {
+      max-width: calc(100% - 64px);
+    }
     
     .review {
       width: 64px;

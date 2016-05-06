@@ -95,3 +95,10 @@ $keylol-review-awesome: #00ab4e;
     background-color: rgba($color, 0.05);
   }
 }
+
+// one-line with ellipsis
+@mixin ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
