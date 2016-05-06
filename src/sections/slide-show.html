@@ -10,10 +10,10 @@
 </div>
 <div class="slide-list">
     <div class="wrapper active-{{slideShow.index}}">
-        <a ng-repeat="slide in slideShow.slides">
+        <a ng-repeat="slide in slideShow.slides" href="">
             <div class="background" webp-background="{{slide.img}}">
                 <div class="bottom-text">
-                    <div class="title_author"><span class="title">{{slide.cname}}</span><span class="author">{{slide.author + '/' + slide.date}}</span></div>
+                    <div class="title_author"><span class="title">{{slide.cname}}</span><span class="author">{{slide.author + ' / ' + slide.date}}</span></div>
                     <div class="desc">{{slide.desc}}</div>
                 </div>
             </div>

@@ -90,9 +90,7 @@ slide-show {
 
       .cname,
       .ename {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        @include ellipsis();
 
         transition: color 450ms;
       }
@@ -100,6 +98,7 @@ slide-show {
       .cname {
         margin-bottom: 5px;
         font-weight: bold;
+        color: $keylol-main-text;
 
         &.active {
           color: #fff;

@@ -1,0 +1,38 @@
+header {
+  p {
+    margin: 0;
+  }
+
+  display: flex;
+  align-items: center;
+
+  .logo {
+    height: 32px;
+    width: 16px;
+    fill: $keylol-theme;
+    margin-right: 8px;
+
+    &.orange {
+      fill: $keylol-accent;
+    }
+  }
+
+  .text {
+    .main-title {
+      font-size:20px;
+      color: $keylol-theme;
+
+      margin-bottom: 2px;
+    }
+
+    .sub-title {
+      color: $keylol-inertia-text;
+    }
+
+    &.orange {
+      .main-title {
+        color: $keylol-accent;
+      }
+    }
+  }
+}
