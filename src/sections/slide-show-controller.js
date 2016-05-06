@@ -1,6 +1,11 @@
 ﻿(function () {
     class slideShowController {
-        constructor() {
+        constructor($timeout) {
+            $.extend(this,{
+                $timeout,
+            });
+
+
             const tmp_slides = [{
                 cname: '中文名中文名中文名中文名中文名中文名中文名中文名中文名中文名中文名中文名中文名中文名中文名中文名中文名中文名',
                 ename: 'englishenglishenglishenglishenglishenglishenglishenglishenglishenglish',
@@ -35,11 +40,31 @@
             }];
 
             this.slides = tmp_slides;
+            this.indexCount = this.slides.length;
             this.index = 0;
+            this.isMoveUp = false;
+
+            this.resetTimer();
         }
         
         slideTo(index) {
+            this.isMoveUp = (index < this.index);
             this.index = index;
+
+            this.resetTimer();
+        }
+
+        resetTimer() {
+            if (this.timer !== undefined) {
+                this.$timeout.cancel(this.timer);
+            }
+            this.timer = this.$timeout(() => {
+                if (this.index < this.indexCount - 1){
+                    this.slideTo(this.index + 1);
+                } else {
+                    this.slideTo(0);
+                }
+            },15000);
         }
     }
 

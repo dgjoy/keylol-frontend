@@ -1,5 +1,5 @@
 ﻿<div class="slide-selector">
-    <div class="moveBackground active-{{slideShow.index}}"></div>
+    <div class="moveBackground active-{{slideShow.index}}" ng-class="{'move-up':slideShow.isMoveUp,'move-down':!slideShow.isMoveUp}"></div>
     <div class="moveBackground-triangle active-{{slideShow.index}}"></div>
     <div ng-repeat="slide in slideShow.slides" class="slide-shortcut" ng-click="slideShow.slideTo($index)">
         <div class="cname" ng-class="{'active':slideShow.index == $index}">{{slide.cname}}</div>
@@ -9,8 +9,10 @@
 <div class="slide-list">
     <div class="wrapper active-{{slideShow.index}}">
         <div ng-repeat="slide in slideShow.slides" class="slide" webp-background="{{slide.img}}">
-            <div class="title_author"><a class="title">{{slide.cname}}</a><span class="author">{{slide.author + '/' + slide.date}}</span></div>
-            <div class="desc">{{slide.desc}}</div>
+            <a href="#">
+                <div class="title_author"><a class="title">{{slide.cname}}</a><span class="author">{{slide.author + '/' + slide.date}}</span></div>
+                <div class="desc">{{slide.desc}}</div>
+            </a>
         </div>
     </div>
 </div>
