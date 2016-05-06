@@ -1,20 +1,10 @@
-﻿<div class="points">
-    <div class="pages-wrapper">
-        <div class="cards-wrapper">
-            <store-game-card></store-game-card>
-            <store-game-card></store-game-card>
-            <store-game-card></store-game-card>
-            <store-game-card></store-game-card>
-            <store-game-card></store-game-card>
-            <store-game-card></store-game-card>
-        </div>
-        <div class="cards-wrapper">
-            <store-game-card></store-game-card>
-            <store-game-card></store-game-card>
-            <store-game-card></store-game-card>
-            <store-game-card></store-game-card>
-            <store-game-card></store-game-card>
-        </div>
+﻿<div class="pages-wrapper">
+    <div class="cards-wrapper" ng-class="{
+        'left-hidden': $index + 1 < spotlightPoints.activePage,
+        active: $index + 1 === spotlightPoints.activePage,
+        'right-hidden': $index + 1 > spotlightPoints.activePage,
+        }" ng-repeat="page in spotlightPoints.pages track by $index">
+        <store-game-card ng-repeat="card in page track by $index"></store-game-card>
     </div>
 </div>
-<switch-pagination></switch-pagination>
+<switch-pagination next="spotlightPoints.nextPage()" previous="spotlightPoints.previousPage()" current="spotlightPoints.activePage" total="spotlightPoints.pages.length"></switch-pagination>

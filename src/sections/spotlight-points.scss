@@ -3,22 +3,45 @@ spotlight-points {
   justify-content: space-between;
   position: relative;
 
-  .points {
-    overflow: hidden;
-    width: 900px;
-    height: 280px;
-    position: relative;
-
     .pages-wrapper {
-      position: absolute;
-      display: flex;
+      overflow: hidden;
+      position: relative;
+      width: 900px;
+      height: 280px;
 
       .cards-wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
         display: flex;
         flex-wrap: wrap;
         width: 900px;
-        height: 270px;
         margin-right: 20px;
+        visibility: hidden;
+        transition: 300ms;
+
+        &.active {
+          visibility: visible;
+        }
+
+        &.left-hidden-add, &.right-hidden-add {
+          transition-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+        }
+
+        &.left-hidden-remove, &.right-hidden-remove {
+          transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+          transition-delay: 300ms;
+        }
+
+        &.left-hidden {
+          transform: translateX(-100%);
+          opacity: 0;
+        }
+
+        &.right-hidden {
+          transform: translateX(100%);
+          opacity: 0;
+        }
 
         store-game-card {
           margin-right: 20px;
@@ -26,7 +49,6 @@ spotlight-points {
         }
       }
     }
-  }
 
   switch-pagination {
     height: 270px;

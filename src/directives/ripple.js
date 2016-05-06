@@ -74,7 +74,7 @@
                             ripple.className += ' animate-disappear';
                             $timeout(() => {
                                 $(ripple).remove();
-                            }, 50000);
+                            }, 500);
                         });
                         element.off('touchend touchleave mouseup mouseleave', removeAndUnbind);
                     }

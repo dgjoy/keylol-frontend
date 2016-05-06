@@ -1,12 +1,14 @@
-<div class="previous">
-    <span>2 / 5</span>
-    <button ripple>
-        <svg aria-hidden="true">
-            <use ng-href="{{'chevron-left' | iconSvgUrl }}" xlink:href=""></use>
-        </svg>
-    </button>
+<div ng-show="switchPagination.current !== 1" class="previous">
+    <span>{{switchPagination.current}} / {{switchPagination.total}}</span>
+    <div class="wrapper">
+        <button ripple ng-click="switchPagination.previous()">
+            <svg aria-hidden="true">
+                <use ng-href="{{'chevron-left' | iconSvgUrl }}" xlink:href=""></use>
+            </svg>
+        </button>
+    </div>
 </div>
-<button class="next" ripple>
+<button ng-hide="switchPagination.current === switchPagination.total" class="next" ripple ng-click="switchPagination.next()">
     <svg aria-hidden="true">
         <use ng-href="{{'chevron-right' | iconSvgUrl }}" xlink:href=""></use>
     </svg>
