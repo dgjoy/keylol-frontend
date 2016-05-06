@@ -126,13 +126,10 @@ slide-show {
     background-color: $keylol-card;
 
     .wrapper {
-      width: 100%;
-      height: 100%;
-
-      .slide {
-        @include text-protection();
+      .background {
         width: 100%;
         height: 240px;
+        
         background-repeat: no-repeat;
         background-size: cover;
 
@@ -140,47 +137,48 @@ slide-show {
         flex-direction: column;
         justify-content: flex-end;
 
-        a {
-          display: flex;
-        }
-
         &:hover {
           .title {
             text-decoration: underline;
           }
         }
 
-        .title_author,
-        .desc
-        {
-          padding: 0 15px;
-          z-index: 2;
-        }
+        .bottom-text {
+          @include text-protection();
 
-        .title_author {
-          margin-bottom: 10px;
-        }
+          .title_author,
+          .desc
+          {
+            padding: 0 15px;
+            position: relative;
+            z-index: 2;
+          }
 
-        .title {
-          color: #fff;
-          font-size: 20px;
-          font-weight: bold;
+          .title_author {
+            margin-top: 20px;
+            margin-bottom: 10px;
+          }
 
-          margin-right: 15px;
-        }
+          .title {
+            color: #fff;
+            font-size: 20px;
+            font-weight: bold;
 
-        .author {
-          color: #fff;
-          font-size: 12px;
-        }
+            margin-right: 15px;
+          }
 
-        .desc {
-          color: #fff;
-          margin-bottom: 20px;
+          .author {
+            color: #fff;
+            font-size: 12px;
+          }
 
-          max-height: 40px;
-          overflow: hidden;
-          text-overflow: ellipsis;
+          .desc {
+            color: #fff;
+            margin-bottom: 20px;
+
+            max-height: 40px;
+            overflow: hidden;
+          }
         }
       }
 

@@ -1,8 +1,13 @@
 ﻿(function () {
     class VoteCircleController {
         constructor (utils) {
-            this.circles = new Array(this.vote);
-            this.voteColor = utils.getVoteColor(this.vote - 1);
+            if (this.grayBackground === true) {
+                this.circles = new Array(5);
+                this.voteColor = utils.getVoteColor(this.vote - 1);
+            } else {
+                this.circles = new Array(this.vote);
+                this.voteColor = utils.getVoteColor(this.vote - 1);
+            }
         }
     }
 
@@ -14,6 +19,7 @@
             vote: '<',
             disabled: '<',
             wholeWhite: '<',
+            grayBackground: '<',
         },
     });
 }());
