@@ -6,15 +6,16 @@
             });
 
             const $$window = $($window);
-            $$window.scroll(() => {
+            const scrollCallback = () => {
                 if (!this.canScrollTop && $$window.scrollTop() + $$window.height() > $element.offset().top + $element.height() + 100) {
                     this.canScrollTop = true;
                 } else if (this.canScrollTop && $$window.scrollTop() + $$window.height() <= $element.offset().top + $element.height() + 100) {
                     this.canScrollTop = false;
                 }
-            });
+            };
+            $$window.scroll(scrollCallback);
             const cancelListenRoute = $scope.$on('$destroy', () => {
-                $$window.unbind('scroll');
+                $$window.unbind('scroll', scrollCallback);
                 cancelListenRoute();
             });
         }

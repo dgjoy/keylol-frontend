@@ -31,7 +31,7 @@
             $scope.active = 0;
             let activeLock = 0;
             let activeTimeout;
-            $($window).scroll(() => {
+            const scrollCallback = () => {
                 $scope.$apply(() => {
                     if ($scope.secondAnimate === false) {
                         if ($($window).scrollTop() >= 538) {
@@ -58,10 +58,11 @@
                         }
                     }
                 });
-            });
+            };
+            $($window).scroll(scrollCallback);
 
             const cancelListenRoute = $scope.$on('$destroy', () => {
-                $($window).unbind('scroll');
+                $($window).unbind('scroll', scrollCallback);
                 cancelListenRoute();
             });
 

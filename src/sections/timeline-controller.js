@@ -122,7 +122,7 @@
             };
 
             $scope.loadingLock = false;
-            $($window).scroll(() => {
+            const scrollCallback = () => {
                 const $windowBottomY = $($window).scrollTop() + $($window).height();
                 const $timelineBottomY = $element.offset().top + $element.height();
                 $scope.$apply(() => {
@@ -134,9 +134,10 @@
                         }
                     }
                 });
-            });
+            };
+            $($window).scroll(scrollCallback);
             const cancelListenRoute = $scope.$on('$destroy', () => {
-                $($window).unbind('scroll');
+                $($window).unbind('scroll', scrollCallback);
                 cancelListenRoute();
             });
 
