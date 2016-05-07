@@ -87,16 +87,9 @@ $keylol-review-awesome: #00ab4e;
 
 // text protection
 @mixin text-protection ($position: bottom) {
-  position: relative;
+  padding: 20px 15px;
+  background: linear-gradient(to $position, rgba(#000,0), rgba(#000, .3) 67.7%, rgba(#000, .6));
 
-  &::before {
-    content: '';
-    display: block;
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    background: linear-gradient(to $position, rgba(#000,0), rgba(#000,.5) 67.7%, #000);
-  }
 }
 
 // hover
