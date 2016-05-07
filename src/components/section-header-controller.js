@@ -6,9 +6,7 @@
         controller: SectionHeaderController,
         controllerAs: 'sectionHeader',
         bindings: {
-            isOrange: '<',
-            mainTitle: '<',
-            subTitle: '<',
+            header: '<',
         },
     });
 }());

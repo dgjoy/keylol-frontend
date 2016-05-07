@@ -2,36 +2,50 @@ section-header {
   p {
     margin: 0;
   }
-
   display: flex;
-  align-items: center;
+  margin-top: -10px;
+  margin-bottom: 10px;
 
-  .logo {
-    height: 32px;
-    width: 16px;
-    fill: $keylol-theme;
-    margin-right: 8px;
+  a {
+    display: flex;
+    align-items: center;
 
-    &.orange {
-      fill: $keylol-accent;
-    }
-  }
-
-  .text {
-    .main-title {
-      font-size:20px;
-      color: $keylol-theme;
-
-      margin-bottom: 2px;
-    }
-
-    .sub-title {
-      color: $keylol-inertia-text;
-    }
-
-    &.orange {
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    &:hover {
       .main-title {
-        color: $keylol-accent;
+        text-decoration: underline;
+      }
+    }
+
+    .logo {
+      height: 32px;
+      width: 16px;
+      fill: $keylol-theme;
+      margin-right: 8px;
+
+      &.orange {
+        fill: $keylol-accent;
+      }
+    }
+
+    .text {
+      .main-title {
+        font-size:20px;
+        color: $keylol-theme;
+
+        margin-bottom: 2px;
+      }
+
+      .sub-title {
+        color: $keylol-inertia-text;
+      }
+
+      &.orange {
+        .main-title {
+          color: $keylol-accent;
+        }
       }
     }
   }

@@ -1,7 +1,9 @@
-<svg aria-hidden="true" class="logo" ng-class="{'orange':sectionHeader.isOrange}">
-    <use ng-href="{{'keylol-logo-arrow' | iconSvgUrl }}" xlink:href=""></use>
-</svg>
-<div class="text" ng-class="{'orange':sectionHeader.isOrange}">
-    <p class="main-title font-myriad-keylol">{{sectionHeader.mainTitle}}</p>
-    <p class="sub-title">{{sectionHeader.subTitle}}</p>
-</div>
+<a href="">
+    <svg aria-hidden="true" class="logo" ng-class="{'orange':sectionHeader.header.isOrange}">
+        <use ng-href="{{'keylol-logo-arrow' | iconSvgUrl }}" xlink:href=""></use>
+    </svg>
+    <div class="text" ng-class="{'orange':sectionHeader.header.isOrange}">
+        <p class="main-title font-myriad-keylol">{{sectionHeader.header.mainTitle}}</p>
+        <p class="sub-title">{{sectionHeader.header.subTitle}}</p>
+    </div>
+</a>
