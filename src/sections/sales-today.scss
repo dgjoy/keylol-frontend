@@ -1,0 +1,13 @@
+sales-today {
+  @include keylol-shadow-1;
+  display: block;
+  background-color: $keylol-card;
+  border-radius: 2px;
+
+  .header {
+
+    .header-text {
+      @include text-protection();
+    }
+  }
+}
