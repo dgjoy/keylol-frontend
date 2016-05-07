@@ -1,6 +1,6 @@
 <div ng-show="switchPagination.current !== 1" class="previous">
-    <span>{{switchPagination.current}} / {{switchPagination.total}}</span>
-    <div class="wrapper">
+    <span ng-if="!switchPagination.noPageCount">{{switchPagination.current}} / {{switchPagination.total}}</span>
+    <div class="wrapper" ng-class="{'max-height': switchPagination.noPageCount}">
         <button ripple ng-click="switchPagination.previous()">
             <svg aria-hidden="true">
                 <use ng-href="{{'chevron-left' | iconSvgUrl }}" xlink:href=""></use>

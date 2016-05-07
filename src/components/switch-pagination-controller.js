@@ -6,6 +6,7 @@
         controller: SwitchPaginationController,
         controllerAs: 'switchPagination',
         bindings: {
+            noPageCount: '<',
             current: '<',
             total: '<',
             next: '&',

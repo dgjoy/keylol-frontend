@@ -47,6 +47,10 @@ switch-pagination {
       align-items: center;
       height: calc(100% - 45px);
 
+      &.max-height {
+        height: 100%;
+      }
+
       button {
         height: 100%;
       }
