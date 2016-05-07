@@ -1,0 +1,12 @@
+right-menus {
+  .wrapper {
+    width: 100%;
+
+    &.fixed-top {
+      width: 220px;
+      position: fixed;
+      top: 129px;
+      z-index: 999;
+    }
+  }
+}

@@ -41,6 +41,7 @@ textarea,
 /* flex System */
 /* ----------- */
 .container {
+  padding-top: 99px;
   width: 940px;
   margin-left: auto;
   margin-right: auto;
@@ -50,6 +51,7 @@ textarea,
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+  align-items: flex-start;
 }
 
 .left-middle-lg {

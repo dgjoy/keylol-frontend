@@ -8,6 +8,17 @@ menu-item {
     display: flex;
     background: transparent;
     align-items: center;
+    justify-content: space-between;
+
+    &>span {
+      display: flex;
+      align-items: center;
+
+      &.sub-text {
+        color: $keylol-inertia-text;
+        margin-right: 15px;
+      }
+    }
 
     .ripple {
       background-color: rgba(#000, 0.1);
