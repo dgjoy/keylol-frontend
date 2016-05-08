@@ -1,11 +1,13 @@
 nav {
   width: 100%;
   min-width: 1060px;
-  position: fixed;
-  top: 0;
-  z-index: 999;
+  padding-top: 64px;
 
-  tabs {
+  nav-bar {
+    position: fixed;
+    top: 0;
+    z-index: 999;
+
     &.shadowed-add, &.shadowed-remove {
       transition: .5s;
     }

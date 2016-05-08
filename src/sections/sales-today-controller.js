@@ -5,21 +5,103 @@
                 $rootScope,
                 $location,
             });
-            this.cards = [1, 2, 3, 4];
-            this.types = {
-                reviews: {
-                    mainTitle: '评',
-                    subTitle: '解读 · 分析 · 导购',
+            this.list = [
+                {
+                    link: 'point/DOTA2',
+                    coverImg: '//steamcdn.keylol.com/steam/apps/570/capsule_231x87.jpg!cover.image.small',
+                    title: '刀塔',
+                    subTitle: 'Dota 2',
+                    review: 9.5,
+                    price: 68,
+                    oldPrice: 34,
+                    discount: '50%',
                 },
-                studies: {
-                    mainTitle: '研',
-                    subTitle: '攻略 · 探讨 · 教程',
+                {
+                    link: 'point/DOTA2',
+                    coverImg: '//steamcdn.keylol.com/steam/apps/570/capsule_231x87.jpg!cover.image.small',
+                    title: '刀塔',
+                    subTitle: 'Dota 2',
+                    review: 9.5,
+                    price: 68,
+                    oldPrice: 34,
+                    discount: '50%',
                 },
-                stories: {
-                    mainTitle: '谈',
-                    subTitle: '故事 · 感想 · 随想',
+                {
+                    link: 'point/DOTA2',
+                    coverImg: '//steamcdn.keylol.com/steam/apps/570/capsule_231x87.jpg!cover.image.small',
+                    title: '刀塔',
+                    subTitle: 'Dota 2',
+                    review: 9.5,
+                    price: 68,
+                    oldPrice: 34,
+                    discount: '50%',
                 },
-            };
+                {
+                    link: 'point/DOTA2',
+                    coverImg: '//steamcdn.keylol.com/steam/apps/570/capsule_231x87.jpg!cover.image.small',
+                    title: '刀塔',
+                    subTitle: 'Dota 2',
+                    review: 9.5,
+                    price: 68,
+                    oldPrice: 34,
+                    discount: '50%',
+                },
+                {
+                    link: 'point/DOTA2',
+                    coverImg: '//steamcdn.keylol.com/steam/apps/570/capsule_231x87.jpg!cover.image.small',
+                    title: '刀塔',
+                    subTitle: 'Dota 2',
+                    review: 9.5,
+                    price: 68,
+                    oldPrice: 34,
+                    discount: '50%',
+                },
+                {
+                    link: 'point/DOTA2',
+                    coverImg: '//steamcdn.keylol.com/steam/apps/570/capsule_231x87.jpg!cover.image.small',
+                    title: '刀塔',
+                    subTitle: 'Dota 2',
+                    review: 9.5,
+                    price: 68,
+                    oldPrice: 34,
+                    discount: '50%',
+                },
+                {
+                    link: 'point/DOTA2',
+                    coverImg: '//steamcdn.keylol.com/steam/apps/570/capsule_231x87.jpg!cover.image.small',
+                    title: '刀塔',
+                    subTitle: 'Dota 2',
+                    review: 9.5,
+                    price: 68,
+                    oldPrice: 34,
+                    discount: '50%',
+                },
+                {
+                    link: 'point/DOTA2',
+                    coverImg: '//steamcdn.keylol.com/steam/apps/570/capsule_231x87.jpg!cover.image.small',
+                    title: '刀塔',
+                    subTitle: 'Dota 2',
+                    review: 9.5,
+                    price: 68,
+                    oldPrice: 34,
+                    discount: '50%',
+                },
+                {
+                    link: 'point/DOTA2',
+                    coverImg: '//steamcdn.keylol.com/steam/apps/570/capsule_231x87.jpg!cover.image.small',
+                    title: '刀塔',
+                    subTitle: 'Dota 2',
+                    review: 9.5,
+                    price: 68,
+                    oldPrice: 34,
+                    discount: '50%',
+                },
+            ];
+            this.wrapperHeight = 'auto';
+        }
+
+        expandMore () {
+            this.hasBeenExpanded = true;
         }
     }
 

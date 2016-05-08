@@ -1,6 +1,6 @@
 tabs {
   position: relative;
-
+  height: 35px;
   display: flex;
   justify-content: center;
 
@@ -33,7 +33,7 @@ tabs {
   }
 
   .move-bar {
-    position:absolute;
+    position: absolute;
     bottom: 0;
     height: 2px;
 

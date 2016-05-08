@@ -9,14 +9,6 @@ vote-circle {
             width: 6px;
         }
 
-        &.disabled {
-            fill: $keylol-inertia-shape !important;
-        }
-
-        &.whole-white {
-            fill: white !important;
-        }
-
         &.awesome {
             fill: $keylol-review-awesome !important;
         }
@@ -35,6 +27,14 @@ vote-circle {
 
         &.terrible {
             fill: $keylol-review-terrible !important;
+        }
+
+        &.whole-white {
+            fill: white !important;
+        }
+
+        &.disabled {
+            fill: $keylol-inertia-shape !important;
         }
     }
 }

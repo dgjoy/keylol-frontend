@@ -5,7 +5,7 @@
             const noFixedTopOffset = $element.offset();
             const scrollCallback = () => {
                 $scope.$apply(() => {
-                    this.isFixedTop = $$window.scrollTop() >= noFixedTopOffset.top - 129;
+                    this.isFixedTop = $$window.scrollTop() + 94 >= noFixedTopOffset.top;
                 });
             };
             $$window.scroll(scrollCallback);

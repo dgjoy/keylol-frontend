@@ -1,5 +1,11 @@
 ﻿(function () {
-    class FlatButtonController {}
+    class FlatButtonController {
+        constructor () {
+            if (!this.type) {
+                this.type = 'theme';
+            }
+        }
+    }
 
     keylolApp.component('flatButton', {
         templateUrl: 'src/components/flat-button.html',
@@ -7,6 +13,8 @@
         controllerAs: 'flatButton',
         bindings: {
             text: '@',
+            type: '@',
+            click: '&',
         },
     });
 }());

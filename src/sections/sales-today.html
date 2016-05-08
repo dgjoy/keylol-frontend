@@ -1,6 +1,33 @@
-﻿<div class="header" webp-background="//storage.keylol.com/39b7d020df471d6c0e3fa593802000bc.jpg!timeline.thumbnail.new">
+﻿<div class="header" webp-background="//steamcdn.keylol.com/steam/apps/570/capsule_231x87.jpg!cover.image.big">
     <div class="header-text">
         <p class="title">是日优惠</p>
         <p class="sub-title">理性加一，入坑前先摸好评价和口碑</p>
     </div>
+</div>
+<div class="sales-wrapper" ng-style="{height: (salesToday.list.length > 5 && !salesToday.hasBeenExpanded) ? 424 : salesToday.list.length * 85}">
+    <ul class="sales-list">
+        <li ng-repeat="point in salesToday.list">
+            <a ng-href="{{point.link}}" ripple>
+                <img class="cover" webp-src="{{point.coverImg}}">
+                <div class="point">
+                    <div class="name">
+                        <p>{{point.title}}</p>
+                        <p>{{point.subTitle}}</p>
+                    </div>
+                    <div class="info">
+                        <review-with-text review="point.review"></review-with-text>
+                        <div class="price">
+                            <span ng-if="point.oldPrice" class="old">¥ {{point.oldPrice}}</span>
+                            <span>¥ {{point.price}}</span>
+                            <span ng-if="point.discount" class="discount">-{{point.discount}}</span>
+                        </div>
+                    </div>
+                    <span class="horizon"></span>
+                </div>
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="footer clearfix">
+    <flat-button ng-if="salesToday.list.length > 5 && !salesToday.hasBeenExpanded" text="展开更多" type="light-text" click="salesToday.expandMore()"></flat-button>
 </div>

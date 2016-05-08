@@ -16,7 +16,7 @@
                     good: pointVotes.point.votePercent >= 6 && pointVotes.point.votePercent < 8,
                     'not-bad': pointVotes.point.votePercent >= 4 && pointVotes.point.votePercent < 6,
                     bad: pointVotes.point.votePercent >= 2 && pointVotes.point.votePercent < 4,
-                    terrible: point.votePercent < 2
+                    terrible: pointVotes.point.votePercent < 2
                 }">{{pointVotes.point.votePercent}}</span> / 10
             </span>
             <p class="total">{{pointVotes.point.totalEvaluate}} 篇评测</p>

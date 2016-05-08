@@ -11,5 +11,19 @@ flat-button {
         background-color: rgba($keylol-theme, 0.1);
       }
     }
+    &.inertia {
+      color: $keylol-inertia-text;
+
+      .ripple {
+        background-color: rgba($keylol-inertia-text, 0.1);
+      }
+    }
+    &.light-text {
+      color: $keylol-light-text;
+
+      .ripple {
+        background-color: rgba($keylol-light-text, 0.1);
+      }
+    }
   }
 }

@@ -5,9 +5,150 @@ sales-today {
   border-radius: 2px;
 
   .header {
+    background: center no-repeat;
+    background-size: cover;
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 
     .header-text {
       @include text-protection();
+
+      p {
+        margin: 0;
+        color: $keylol-inverted-text;
+
+        &:first-of-type {
+          font-weight: bold;
+          font-size: 20px;
+          margin-bottom: 4px;
+        }
+      }
+    }
+  }
+
+  .sales-wrapper {
+    overflow: hidden;
+    transition: height .5s;
+
+    .sales-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+
+      li {
+        a {
+          padding: 0 15px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          &:hover {
+            background-color: rgba(#000, 0.05);
+          }
+
+          .ripple {
+            background-color: rgba(#000, 0.1);
+          }
+        }
+
+        .cover {
+          width: 120px;
+          height: 45px;
+        }
+
+        .point {
+          position: relative;
+          width: 530px;
+          height: 85px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          .name {
+            p {
+              margin: 0;
+
+              &:first-of-type {
+                color: $keylol-main-text;
+                font-weight: bold;
+              }
+
+              &:last-of-type {
+                color: $keylol-inertia-text;
+                font-size: 12px;
+              }
+            }
+          }
+
+          .info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 268px;
+
+            .price {
+              width: 64px;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+              position: relative;
+
+              span {
+                color: $keylol-main-text;
+                font-size: 16px;
+
+                &.old {
+                  color: $keylol-inertia-text;
+                  font-size: 12px;
+                  text-decoration: line-through;
+                }
+
+                &.discount {
+                  position: absolute;
+                  left: -48px;
+                  top: 50%;
+                  transform: translateY(-50%);
+                  background-color: #4c6b22;
+                  color: #a4d007;
+                  width: 48px;
+                  height: 24px;
+                  text-align: center;
+                  line-height: 24px;
+                }
+              }
+
+            }
+          }
+
+          .horizon {
+            position: absolute;
+            bottom: 0;
+            left: -5px;
+            height: 1px;
+            width: 100%;
+            background-color: $keylol-inertia-shape;
+          }
+        }
+
+        &:last-of-type {
+          .point {
+            .horizon {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .footer {
+    flat-button {
+      display: block;
+      text-align: center;
+      margin-bottom: 10px;
     }
   }
 }
