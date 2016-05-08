@@ -25,7 +25,7 @@
             <p>文券</p>
             <p>{{navBar.union.$localStorage.user.Coupon | numberAbbreviation}} ◆</p>
         </a>
-        <a href="user/{{navBar.union.$localStorage.user.IdCode}}">
+        <a href="" ng-click="navBar.showUserHub($event)" popup="navBar.showUserHubPopup">
             <img class="avatar" webp-src="{{navBar.union.$localStorage.user.AvatarImage | avatarUrl}}" alt="{{navBar.union.$localStorage.user.UserName}}">
         </a>
     </div>

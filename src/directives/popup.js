@@ -1,7 +1,7 @@
 (function () {
     keylolApp.directive('popup', [
-        'window', '$timeout',
-        (window, $timeout) => {
+        'window', '$timeout', '$window',
+        (window, $timeout, $window) => {
             return {
                 restrict: 'A',
                 scope: { showFn: '=popup' },
@@ -16,6 +16,7 @@
                             offsetY: 0,
                             showDelay: 0,
                             closeDelay: 0,
+                            fixedPosition: false,
                         };
                         if (optionsOverride && optionsOverride.event) {
                             // Copy the event object because it may be changed.
@@ -86,6 +87,12 @@
                                         const position = element.offset();
                                         const width = element.innerWidth();
                                         const height = element.innerHeight();
+                                        
+                                        if (options.fixedPosition) {
+                                            position.position = 'fixed';
+                                            position.top -= $($window).scrollTop();
+                                            position.left -= $($window).scrollLeft();
+                                        }
 
                                         if (options.attachSide === 'left' || options.attachSide === 'right') {
                                             switch (options.align) {

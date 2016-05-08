@@ -1,11 +1,12 @@
 ﻿(function () {
     class NavBarController {
-        constructor ($scope, union, $http, apiEndpoint, notification) {
+        constructor ($scope, union, $http, apiEndpoint, notification, $element) {
             $.extend(this, {
                 union,
                 $http,
                 apiEndpoint,
                 notification,
+                $element,
             });
             $scope.$watch(() => {
                 if (union.$localStorage.user) {
@@ -19,6 +20,19 @@
                         return parseInt(previous) + parseInt(current);
                     }) : null;
                 }
+            });
+        }
+        showUserHub ($event) {
+            this.showUserHubPopup({
+                templateUrl: 'src/popup/user-hub.html',
+                controller: 'UserHubController as userHub',
+                event: $event,
+                attachSide: 'left',
+                align: 'top',
+                offsetX: 50,
+                offsetY: -5,
+                fixedPosition: true,
+                inputs: {},
             });
         }
     }
