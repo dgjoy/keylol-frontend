@@ -11,15 +11,21 @@ menu {
   }
 
   .menu-header {
-    display: flex;
-    padding: 20px 15px 0;
+    padding: 10px 0 0;
+    margin-bottom: -10px;
 
     a {
-      margin-right: 15px;
+      padding: 10px 15px;
+      display: flex;
+
+      &:hover {
+        background-color: rgba(#000, 0.1);
+      }
 
       .avatar {
         width: 48px;
         height: 48px;
+        margin-right: 15px;
       }
     }
 
@@ -33,6 +39,7 @@ menu {
         margin: 0;
 
         &:first-of-type {
+          color: $keylol-main-text;
           margin-bottom: 2px;
           font-size: 16px;
         }
@@ -57,13 +64,17 @@ menu {
           }
         }
       }
+
+      &.no-image {
+        padding: 0 15px;
+      }
     }
   }
 
   ul {
-    margin: 0;
     width: 100%;
     padding: 20px 0;
+    margin: 0;
     list-style: none;
 
     li {
