@@ -2,10 +2,9 @@
     class RightMenusController {
         constructor ($scope, $element, $window) {
             const $$window = $($window);
-            const noFixedTopOffset = $element.offset();
             const scrollCallback = () => {
                 $scope.$apply(() => {
-                    this.isFixedTop = $$window.scrollTop() + 94 >= noFixedTopOffset.top;
+                    this.isFixedTop = $$window.scrollTop() + 94 >= $element.offset().top;
                 });
             };
             $$window.scroll(scrollCallback);
