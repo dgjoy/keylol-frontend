@@ -3,7 +3,7 @@
         <p>{{ menu.object.header.main }}</p>
         <p>{{ menu.object.header.sub }}</p>
     </div>
-    <a ng-if="menu.object.header.isUser" href="user/{{menu.union.$localStorage.user.IdCode}}">
+    <a ng-if="menu.object.header.isUser" ripple href="user/{{menu.union.$localStorage.user.IdCode}}">
         <img class="avatar" webp-src="{{menu.union.$localStorage.user.AvatarImage | avatarUrl}}" alt="{{menu.union.$localStorage.user.UserName}}">
         <div class="header-text for-user">
             <p>{{ menu.union.$localStorage.user.UserName }}</p>

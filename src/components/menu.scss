@@ -19,7 +19,11 @@ menu {
       display: flex;
 
       &:hover {
-        background-color: rgba(#000, 0.1);
+        background-color: rgba(#000, 0.05);
+      }
+
+      .ripple {
+        background-color: rgba(#000, 0.05);
       }
 
       .avatar {
