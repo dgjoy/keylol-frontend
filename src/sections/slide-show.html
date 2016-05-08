@@ -1,16 +1,17 @@
 ﻿<div class="slide-selector">
     <div class="moveBackground active-{{slideShow.index}}" ng-class="{'move-up':slideShow.isMoveUp,'move-down':!slideShow.isMoveUp}"></div>
     <div class="moveBackground-triangle active-{{slideShow.index}}"></div>
-    <a ng-repeat="slide in slideShow.slides" href="">
-        <div class="slide-shortcut" ng-click="slideShow.slideTo($index)">
-            <div class="cname" ng-class="{'active':slideShow.index == $index}">{{slide.cname}}</div>
-            <div class="ename" ng-class="{'active':slideShow.index == $index}">{{slide.ename}}</div>
-        </div>
+    <a ripple class="slide-shortcut" ng-repeat="slide in slideShow.slides" href="" ng-click="slideShow.slideTo($index)">
+        <div class="cname" ng-class="{'active':slideShow.index == $index}">{{slide.cname}}</div>
+        <div class="ename" ng-class="{'active':slideShow.index == $index}">{{slide.ename}}</div>
     </a>
 </div>
 <div class="slide-list">
-    <div class="wrapper active-{{slideShow.index}}">
-        <a ng-repeat="slide in slideShow.slides" href="">
+    <div class="wrapper active-{{slideShow.index}}" ng-class="{
+        'to-down' : slideShow.isMoveUp && slideShow.oldIndex !== -1,
+        'to-up' : !slideShow.isMoveUp && slideShow.oldIndex !== -1,
+        }">
+        <a class="slide" ng-repeat="slide in slideShow.slides" href="" ng-show="$index === slideShow.index || $index === slideShow.oldIndex ">
             <div class="background" webp-background="{{slide.img}}">
                 <div class="bottom-text">
                     <div class="title_author"><span class="title">{{slide.cname}}</span><span class="author">{{slide.author + ' / ' + slide.date}}</span></div>
