@@ -11,8 +11,12 @@ spotlight-article-card {
     justify-content: space-between;
     align-items: center;
     height: 52px;
-    padding-left: 15px;
+    padding: 0 15px;
     margin: 10px 0;
+
+    point-basic-info {
+      flex-grow: 1;
+    }
   }
 
   .user {
