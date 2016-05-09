@@ -1,4 +1,4 @@
-<a class="user" href="user/{{spotlightArticleCard.union.$localStorage.user.IdCode}}">
+<a class="user" href="user/{{spotlightArticleCard.union.$localStorage.user.IdCode}}" ripple>
     <img class="avatar" webp-src="{{spotlightArticleCard.union.$localStorage.user.AvatarImage | avatarUrl}}"  alt="{{spotlightArticleCard.union.$localStorage.user.UserName}}">
     <span class="username">{{spotlightArticleCard.union.$localStorage.user.UserName}}</span>
     <span class="date">5 月 7 号</span>
@@ -11,6 +11,6 @@
             </div>
     </div>
 </a>
-<a class="point" href="point/DOTA2">
+<a class="point" href="point/DOTA2" ripple>
     <point-basic-info></point-basic-info>
 </a>

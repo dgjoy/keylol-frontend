@@ -12,11 +12,11 @@
   font-family: "Keylol Rail Sung";
   font-style: normal;
   font-weight: normal;
-  src: url("../assets/fonts/keylol-rail-sung-subset-dbd5f18aeb.eot"); /* IE9 */
-  src: url("../assets/fonts/keylol-rail-sung-subset-dbd5f18aeb.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
-  url("../assets/fonts/keylol-rail-sung-subset-d7aaaa09e8.woff") format("woff"), /* chrome, firefox */
-  url("../assets/fonts/keylol-rail-sung-subset-75a7589f3b.ttf") format("truetype"), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
-  url("../assets/fonts/keylol-rail-sung-subset-0ee83b2313.svg#Keylol Rail Sung") format("svg"); /* iOS 4.1- */
+  src: url("../assets/fonts/keylol-rail-sung-subset-dd54053285.eot"); /* IE9 */
+  src: url("../assets/fonts/keylol-rail-sung-subset-dd54053285.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+  url("../assets/fonts/keylol-rail-sung-subset-2a4dc7c7e9.woff") format("woff"), /* chrome, firefox */
+  url("../assets/fonts/keylol-rail-sung-subset-8535427cb7.ttf") format("truetype"), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+  url("../assets/fonts/keylol-rail-sung-subset-8a46db8d4c.svg#Keylol Rail Sung") format("svg"); /* iOS 4.1- */
 }
 
 @font-face {
@@ -28,15 +28,4 @@
   url("../assets/fonts/lisong-subset-0b76035cdd.woff") format("woff"), /* chrome, firefox */
   url("../assets/fonts/lisong-subset-7d5bc3c2fe.ttf") format("truetype"), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
   url("../assets/fonts/lisong-subset-805637911c.svg#LiSong") format("svg"); /* iOS 4.1- */
-}
-
-/* ------------------- */
-/* Font Family Presets */
-/* ------------------- */
-.font-myriad-keylol {
-  font-family: "Myriad Pro", "Keylol Rail Sung", sans-serif;
-}
-
-.font-myriad-lisong {
-  font-family: "Myriad Pro", LiSong, sans-serif;
 }

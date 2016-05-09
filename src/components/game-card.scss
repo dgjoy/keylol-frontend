@@ -12,7 +12,12 @@ game-card {
     align-items: center;
     height: 52px;
     padding-left: 15px;
+
     margin: 10px 0;
+
+    .ripple {
+      background-color: rgba(#000, .1);
+    }
   }
 
   .point-img {

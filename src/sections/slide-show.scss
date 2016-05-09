@@ -129,38 +129,42 @@ slide-show {
     background-color: $keylol-card;
 
     .wrapper {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+
       @keyframes slideDown-0 {
-        from { transform: translateY(-240px); }
+        from { transform: translateY(-100%); }
         to { transform: translateY(0); }
       }
       @keyframes slideDown-1 {
-        from { transform: translateY(-240px); }
+        from { transform: translateY(-100%); }
         to { transform: translateY(0); }
       }
       @keyframes slideDown-2 {
-        from { transform: translateY(-240px); }
+        from { transform: translateY(-100%); }
         to { transform: translateY(0); }
       }
       @keyframes slideDown-3 {
-        from { transform: translateY(-240px); }
+        from { transform: translateY(-100%); }
         to { transform: translateY(0); }
       }
 
       @keyframes slideUp-0 {
         from { transform: translateY(0); }
-        to { transform: translateY(-240px); }
+        to { transform: translateY(-100%); }
       }
       @keyframes slideUp-1 {
         from { transform: translateY(0); }
-        to { transform: translateY(-240px); }
+        to { transform: translateY(-100%); }
       }
       @keyframes slideUp-2 {
         from { transform: translateY(0); }
-        to { transform: translateY(-240px); }
+        to { transform: translateY(-100%); }
       }
       @keyframes slideUp-3 {
         from { transform: translateY(0); }
-        to { transform: translateY(-240px); }
+        to { transform: translateY(-100%); }
       }
 
       &.to-down {
@@ -181,7 +185,7 @@ slide-show {
       }
 
       &.to-up {
-        transform: translateY(-240px);
+        transform: translateY(-100%);
         &.active-0 {
           animation: slideUp-0 450ms cubic-bezier(0.19, 1, 0.22, 1);
         }
@@ -198,6 +202,7 @@ slide-show {
       }
 
       .slide {
+        flex-shrink: 0;
         width: 100%;
 
         .background {
@@ -219,13 +224,6 @@ slide-show {
 
           .bottom-text {
             @include text-protection();
-
-            .title_author,
-            .desc
-            {
-              position: relative;
-              z-index: 2;
-            }
 
             .title_author {
               margin-bottom: 6px;

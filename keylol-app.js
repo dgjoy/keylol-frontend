@@ -88,6 +88,11 @@
                 templateUrl: 'src/pages/discovery.html',
                 controller: 'DiscoveryController',
             })
+            .state('points', {
+                url: '/points',
+                templateUrl: 'src/pages/points.html',
+                controller: 'PointsController',
+            })
             .state('not-found', {
                 url: '404',
                 templateUrl: 'src/pages/not-found.html',
