@@ -16,6 +16,8 @@
                     if (nValue[0] === '#') {
                         type = 'color';
                         value = utils.hexToRgb(nValue).join();
+                    } else if (nValue === 'disabled') {
+                        type = 'disabled';
                     } else {
                         type = 'class';
                         value = nValue;
@@ -100,7 +102,7 @@
                     if (type === 'class') {
                         $rippleContainer.addClass(value);
                         $circle.addClass(value);
-                    } else {
+                    } else if (type === 'color') {
                         $rippleContainer.css('background-color', `rgba(${value}, 0.1)`);
                         $circle.css('background-color', `rgba(${value}, 0.1)`);
                     }

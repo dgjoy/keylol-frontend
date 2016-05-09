@@ -1,0 +1,62 @@
+pagination {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+
+    li {
+      margin: 0 3px;
+
+      &:first-of-type {
+        margin-left: 0;
+        margin-right: 12px;
+
+        a {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+
+      &:last-of-type {
+        margin-left: 12px;
+        margin-right: 0;
+
+        a {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+
+      &.active {
+        a, a:hover {
+          background-color: $keylol-light-theme;
+          color: $keylol-inverted-text;
+        }
+      }
+
+      a {
+        display: block;
+        border-radius: 2px;
+        width: 32px;
+        height: 32px;
+        color: $keylol-light-text;
+        text-align: center;
+        line-height: 32px;
+        font-size: 16px;
+
+        &:hover {
+          background-color: rgba(#000, 0.1);
+        }
+
+        svg {
+          width: 24px;
+          height: 24px;
+          fill: $keylol-light-text;
+        }
+      }
+    }
+  }
+}

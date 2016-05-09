@@ -30,4 +30,5 @@
 </div>
 <div class="footer clearfix">
     <flat-button ng-if="salesToday.list.length > 5 && !salesToday.hasBeenExpanded" text="展开更多" type="light-text" click="salesToday.expandMore()"></flat-button>
+    <pagination ng-if="salesToday.hasBeenExpanded" total="8" current="1"></pagination>
 </div>

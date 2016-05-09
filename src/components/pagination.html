@@ -1,0 +1,19 @@
+<ul ng-show="pagination.current > 0">
+    <li>
+        <a href="" ripple>
+            <svg aria-hidden="true">
+                <use ng-href="{{'chevron-left' | iconSvgUrl }}" xlink:href=""></use>
+            </svg>
+        </a>
+    </li>
+    <li ng-repeat="i in pagination.visiblePages" ng-class="{active: i === pagination.current}">
+        <a href="" ripple="{{i === pagination.current ? 'disabled': ''}}">{{i}}</a>
+    </li>
+    <li>
+        <a href="" ripple>
+            <svg aria-hidden="true">
+                <use ng-href="{{'chevron-right' | iconSvgUrl }}" xlink:href=""></use>
+            </svg>
+        </a>
+    </li>
+</ul>

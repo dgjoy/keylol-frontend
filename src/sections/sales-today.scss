@@ -29,6 +29,7 @@ sales-today {
   }
 
   .sales-wrapper {
+    margin: 20px 0;
     overflow: hidden;
     transition: height .5s;
 
@@ -149,6 +150,12 @@ sales-today {
       display: block;
       text-align: center;
       margin-bottom: 10px;
+    }
+
+    pagination {
+      float: right;
+      margin-bottom: 20px;
+      margin-right: 20px;
     }
   }
 }
