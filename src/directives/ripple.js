@@ -104,7 +104,7 @@
                         $circle.addClass(value);
                     } else if (type === 'color') {
                         $rippleContainer.css('background-color', `rgba(${value}, 0.03)`);
-                        $circle.css('background-color', `rgba(${value}, 0.06)`);
+                        $circle.css('background-color', `rgba(${value}, 0.08)`);
                     }
                     $circle.addClass('animate-appear');
 
