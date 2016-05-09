@@ -63,7 +63,11 @@ sales-today {
           align-items: center;
 
           .name {
+            flex-grow: 1;
+            max-width: calc(100% - 268px);
+
             p {
+              @include ellipsis;
               margin: 0;
 
               &:first-of-type {

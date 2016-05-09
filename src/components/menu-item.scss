@@ -5,26 +5,29 @@ menu-item {
     @include hover-background();
     width: 100%;
     box-sizing: border-box;
-    display: flex;
     background: transparent;
-    align-items: center;
-    justify-content: space-between;
 
-    &>span {
+    .wrapper {
       display: flex;
       align-items: center;
+      justify-content: space-between;
 
-      &.sub-text {
-        color: $keylol-inertia-text;
-        margin-right: 5px;
+      >span {
+        display: flex;
+        align-items: center;
+
+        &.sub-text {
+          color: $keylol-inertia-text;
+          margin-right: 5px;
+        }
       }
-    }
 
-    svg {
-      width: 24px;
-      height: 24px;
-      fill: $keylol-light-text;
-      margin-right: 15px;
+      svg {
+        width: 24px;
+        height: 24px;
+        fill: $keylol-light-text;
+        margin-right: 15px;
+      }
     }
 
     &[disabled] {
@@ -40,6 +43,7 @@ menu-item {
       }
     }
   }
+
   span.horizon {
     display: block;
     width: 100%;

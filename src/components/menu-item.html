@@ -1,10 +1,12 @@
 <button ripple ng-if="menuItem.data.type === 'item'">
-    <span>
-        <svg ng-if="menuItem.data.icon" aria-hidden="true">
-            <use ng-href="{{menuItem.data.icon | iconSvgUrl }}" xlink:href=""></use>
-        </svg>
-        <span>{{menuItem.data.text}}</span>
-    </span>
-    <span class="sub-text" ng-if="menuItem.data.subText">{{menuItem.data.subText}}</span>
+    <div class="wrapper">
+        <span>
+            <svg ng-if="menuItem.data.icon" aria-hidden="true">
+                <use ng-href="{{menuItem.data.icon | iconSvgUrl }}" xlink:href=""></use>
+            </svg>
+            <span>{{menuItem.data.text}}</span>
+        </span>
+        <span class="sub-text" ng-if="menuItem.data.subText">{{menuItem.data.subText}}</span>
+    </div>
 </button>
 <span class="horizon" ng-if="menuItem.data.type === 'horizon'"></span>

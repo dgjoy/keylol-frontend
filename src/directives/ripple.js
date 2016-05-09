@@ -98,7 +98,7 @@
                     function removeAndUnbind() {
                         waitTimeOut.then(() => {
                             if (type === 'class') {
-                                $rippleContainer.remove(value);
+                                $rippleContainer.removeClass(value);
                             } else {
                                 $rippleContainer.css('background-color', 'transparent');
                             }

@@ -15,6 +15,7 @@ store-game-card {
     margin: 10px 0;
 
     point-basic-info {
+      flex-grow: 1;
       max-width: calc(100% - 64px);
     }
   }

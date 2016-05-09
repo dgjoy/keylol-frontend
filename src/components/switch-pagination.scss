@@ -8,11 +8,16 @@ switch-pagination {
     background-color: $keylol-card;
     position: relative;
 
-    svg {
+    >.wrapper {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
+      width: 24px;
+      height: 24px;
+    }
+
+    svg {
       width: 24px;
       height: 24px;
       fill: $keylol-light-text;
@@ -30,7 +35,7 @@ switch-pagination {
     align-items: center;
 
 
-    &>span {
+    >span {
       color: $keylol-inertia-text;
       height: 45px;
       width: 100%;
@@ -38,7 +43,7 @@ switch-pagination {
       line-height: 45px;
     }
 
-    .wrapper {
+    >.wrapper {
       display: flex;
       align-items: center;
       height: calc(100% - 45px);
