@@ -88,10 +88,6 @@ slide-show {
       height:60px;
       padding:0 15px;
 
-      .ripple {
-        background-color: rgba($keylol-theme, 0.1);
-      }
-
       .cname,
       .ename {
         @include ellipsis();

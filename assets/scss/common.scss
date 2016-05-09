@@ -317,28 +317,3 @@ textarea,
 .gt_holder {
   display: inline-block;
 }
-
-/* --------------- */
-/* ripple style */
-/* --------------- */
-[ripple] {
-  position: relative;
-  overflow: hidden;
-}
-
-.ripple {
-  display: block;
-  position: absolute;
-  border-radius: 50%;
-  transform: scale(0);
-  cursor: pointer;
-  transition: 0.5s;
-}
-
-.ripple.animate-appear {
-  transform: scale(2.5);
-}
-
-.ripple.animate-disappear {
-  opacity: 0;
-}

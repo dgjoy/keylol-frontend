@@ -1,7 +1,7 @@
 ﻿<div class="slide-selector">
     <div class="moveBackground active-{{slideShow.index}}" ng-class="{'move-up':slideShow.isMoveUp,'move-down':!slideShow.isMoveUp}"></div>
     <div class="moveBackground-triangle active-{{slideShow.index}}"></div>
-    <a ripple class="slide-shortcut" ng-repeat="slide in slideShow.slides" href="" ng-click="slideShow.slideTo($index)">
+    <a ripple="theme" class="slide-shortcut" ng-repeat="slide in slideShow.slides" href="" ng-click="slideShow.slideTo($index)">
         <div class="cname" ng-class="{'active':slideShow.index == $index}">{{slide.cname}}</div>
         <div class="ename" ng-class="{'active':slideShow.index == $index}">{{slide.ename}}</div>
     </a>

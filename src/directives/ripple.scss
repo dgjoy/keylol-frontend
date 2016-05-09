@@ -1,0 +1,45 @@
+
+
+/* --------------- */
+/* ripple style */
+/* --------------- */
+[ripple] {
+    position: relative;
+    overflow: hidden;
+
+    .theme {
+        background-color: rgba($keylol-theme, 0.1);
+    }
+
+    .topic {
+        background-color: rgba($keylol-topic, 0.1);
+    }
+
+    .ripple-container {
+        display: block;
+        pointer-events: none;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        transition: all .3s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+        .ripple {
+            display: block;
+            position: absolute;
+            border-radius: 50%;
+            transform: scale(0);
+            pointer-events: none;
+            transition: opacity .9s cubic-bezier(.25,.8,.25,1), transform .9s cubic-bezier(.25,.8,.25,1);
+
+            &.animate-appear {
+                transform: scale(2.5);
+            }
+
+            &.animate-disappear {
+                opacity: 0;
+            }
+        }
+    }
+}

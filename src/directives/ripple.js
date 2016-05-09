@@ -2,21 +2,40 @@
  * Created by ZenDay on 2016/5/3.
  */
 (function () {
-    keylolApp.directive('ripple', $timeout => {
+    keylolApp.directive('ripple', ($timeout, utils) => {
         return {
+            scope : {
+                type: '@ripple',
+            },
             restrict: 'A',
             link (scope, element) {
-                let x, y, size, offsets;
+                let x, y, size, offsets, type, value;
+                scope.$watch('type', newValue => {
+                    const nValue = newValue || '#000';
+
+                    if (nValue[0] === '#') {
+                        type = 'color';
+                        value = utils.hexToRgb(nValue).join();
+                    } else {
+                        type = 'class';
+                        value = nValue;
+                    }
+                });
+                const rippleContainer = document.createElement('div');
+                rippleContainer.className += ' ripple-container';
+                const $rippleContainer = $(rippleContainer);
+                element.append(rippleContainer);
 
                 function func (e) {
                     const eventType = e.type;
                     // Ripple
-                        // Create ripple
+                    // Create ripple
                     const ripple = document.createElement('span');
                     ripple.className += ' ripple';
+                    const $ripple = $(ripple);
 
                     // Prepend ripple to element
-                    this.insertBefore(ripple, this.firstChild);
+                    rippleContainer.insertBefore(ripple, rippleContainer.firstChild);
 
                     // Set ripple size
                     if (!ripple.offsetHeight && !ripple.offsetWidth) {
@@ -65,15 +84,27 @@
                     ripple.style.top = `${y - offsets.top - size / 2}px`;
 
                     // Add animation effect
+                    if (type === 'class') {
+                        $rippleContainer.addClass(value);
+                        $ripple.addClass(value);
+                    } else {
+                        $rippleContainer.css('background-color', `rgba(${value}, 0.1)`);
+                        $ripple.css('background-color', `rgba(${value}, 0.1)`);
+                    }
                     ripple.className += ' animate-appear';
 
                     const waitTimeOut = $timeout();
 
                     function removeAndUnbind() {
                         waitTimeOut.then(() => {
+                            if (type === 'class') {
+                                $rippleContainer.remove(value);
+                            } else {
+                                $rippleContainer.css('background-color', 'transparent');
+                            }
                             ripple.className += ' animate-disappear';
                             $timeout(() => {
-                                $(ripple).remove();
+                                $ripple.remove();
                             }, 500);
                         });
                         element.off('touchend touchleave mouseup mouseleave', removeAndUnbind);

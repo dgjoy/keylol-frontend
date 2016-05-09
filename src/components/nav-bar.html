@@ -17,11 +17,11 @@
         </form>
     </div>
     <div class="action-hub">
-        <a href="post-office" ng-class="{active: navBar.newMessages}" ripple>
+        <a href="post-office" ng-class="{active: navBar.newMessages}" ripple="#fff">
             <p>邮政</p>
             <p>{{navBar.newMessages || "O" | numberAbbreviation}}</p>
         </a>
-        <a href="coupon" ripple>
+        <a href="coupon" ripple="#fff">
             <p>文券</p>
             <p>{{navBar.union.$localStorage.user.Coupon | numberAbbreviation}} ◆</p>
         </a>

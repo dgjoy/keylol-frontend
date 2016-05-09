@@ -91,10 +91,6 @@ spotlight-topics {
           flex-direction: column;
           justify-content: center;
 
-          .ripple {
-            background-color: rgba($keylol-topic, 0.1);
-          }
-
           .main-title,
           .sub-title {
             transition: color 450ms;

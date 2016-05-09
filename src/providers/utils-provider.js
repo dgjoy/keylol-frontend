@@ -289,6 +289,24 @@
                             }
                             return false;
                         };
+
+                        /**
+                         * convert hex color to rgb color
+                         * @param hex
+                         * @returns Array[r, g, b]
+                         *          or null if hex is not correct.
+                         */
+                        self.hexToRgb = function (hex) {
+                            const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i
+                                .exec(hex.replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i, (m, r, g, b) => {
+                                    return r + r + g + g + b + b;
+                                }));
+                            return result ? [
+                                parseInt(result[1], 16),
+                                parseInt(result[2], 16),
+                                parseInt(result[3], 16),
+                            ] : null;
+                        };
                     }
 
                     return new Utils();
