@@ -1,0 +1,37 @@
+<a class="info" href="" ripple>
+    <point-basic-info></point-basic-info>
+    <review-with-text review="9.5"></review-with-text>
+</a>
+<img class="point-img" webp-src="//storage.keylol.com/39b7d020df471d6c0e3fa593802000bc.jpg!timeline.thumbnail.new" />
+<div class="characteristic-container">
+    <a href="" ng-mouseenter="gameGuideCard.showTooltip($event,$index)" popup="gameGuideCard.showTooltipPopup[$index]" class="characteristic" ng-repeat="characteristic in gameGuideCard.characteristics">
+        <svg aria-hidden="true">
+            <use ng-href="{{'3DS' | iconSvgUrl }}" xlink:href=""></use>
+        </svg>
+    </a>
+</div>
+<div class="category-container">
+    <span class="repeat-wrapper" ng-repeat="category in gameGuideCard.categories">
+        <a href="" class="category">
+            角色扮演
+        </a>
+        <span class="slash" ng-show="$index !== gameGuideCard.categories.length-1"> / </span>
+    </span>
+</div>
+<div class="actions">
+    <div class="platforms">
+        <a href="">
+            <svg aria-hidden="true">
+                <use ng-href="{{'Steam' | iconSvgUrl }}" xlink:href=""></use>
+            </svg>
+            <span class="discount">-30%</span>
+            <span>¥48</span>
+        </a>
+        <a href="">
+            <svg aria-hidden="true">
+                <use ng-href="{{'PlayStation' | iconSvgUrl }}" xlink:href=""></use>
+            </svg>
+        </a>
+    </div>
+    <flat-button text="订阅"></flat-button>
+</div>
