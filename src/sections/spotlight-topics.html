@@ -2,8 +2,8 @@
     <div class="topic-selector">
         <div class="moveBackground active-{{spotlightTopics.index}}" ng-class="{'move-up':spotlightTopics.isMoveUp,'move-down':!spotlightTopics.isMoveUp}"></div>
         <div class="moveBackground-triangle active-{{spotlightTopics.index}}"></div>
-        <div class="shortcuts-wrapper" ng-c>
-            <a href="" class="shortcut" ng-repeat="topic in spotlightTopics.topics" ng-click="spotlightTopics.slideTo($index)" ripple>
+        <div class="shortcuts-wrapper">
+            <a href="" class="shortcut" ng-repeat="topic in spotlightTopics.topics" ng-click="spotlightTopics.slideTo($index)" ripple="topic">
                 <p class="main-title" ng-class="{'active':spotlightTopics.index == $index}">四月</p>
                 <p class="sub-title" ng-class="{'active':spotlightTopics.index == $index}">二战的是是非非</p>
             </a>

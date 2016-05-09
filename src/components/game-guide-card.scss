@@ -1,0 +1,116 @@
+game-guide-card {
+  @include keylol-shadow-1;
+  background-color: $keylol-card;
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+
+  .info {
+    @include hover-background();
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 52px;
+    padding-left: 15px;
+    margin: 10px 0;
+
+    point-basic-info {
+      max-width: calc(100% - 64px);
+    }
+  }
+
+  .point-img {
+    width: 100%;
+  }
+
+  .characteristic-container {
+    background-color: $keylol-light-theme;
+
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+
+    padding: 10px 10px;
+    margin: 10px 0;
+  }
+
+  .category-container {
+    padding: 0 10px;
+    margin: 10px 0;
+
+    @include ellipsis();
+    color: $keylol-main-text;
+
+    .category {
+      color: $keylol-main-text;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    .slash {
+      color: $keylol-inertia-shape;
+    }
+  }
+
+  .characteristic {
+    width: 30px;
+    height: 18px;
+    margin: 0 5px;
+
+    svg {
+      fill: $keylol-inverted-text;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .platforms {
+      height: 52px;
+      padding-left: 10px;
+      display: flex;
+      align-items: center;
+
+      a {
+        display: flex;
+        align-items: center;
+        margin-left: 10px;
+
+        svg {
+          width: 24px;
+          height: 24px;
+          fill: $keylol-inertia-shape;
+        }
+
+        span {
+          margin-left: 6px;
+          color: $keylol-inertia-text;
+
+          &.discount {
+            color: #a4d007;
+          }
+
+          &:last-of-type {
+            margin-right: 5px;
+          }
+        }
+
+        &:hover {
+          svg {
+            fill: $keylol-light-text;
+          }
+        }
+      }
+    }
+
+    flat-button {
+      margin-right: 5px;
+    }
+  }
+}

@@ -1,0 +1,13 @@
+.popup-tooltip {
+  p {
+    margin: 0;
+  }
+
+  position:absolute;
+  background-color: rgba(0,0,0,0.54);
+  border-radius: 4px;
+  line-height: 22px;
+  padding-left: 8px;
+  padding-right: 8px;
+  color: $keylol-inverted-text;
+}
