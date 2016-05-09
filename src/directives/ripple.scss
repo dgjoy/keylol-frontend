@@ -15,6 +15,14 @@
         background-color: rgba($keylol-topic, 0.1);
     }
 
+    .inertia {
+        background-color: rgba($keylol-inertia-text, 0.1);
+    }
+
+    .light-text {
+        background-color: rgba($keylol-light-text, 0.1);
+    }
+
     .ripple-container {
         pointer-events: none;
         position: absolute;

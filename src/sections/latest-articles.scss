@@ -1,61 +1,121 @@
-.section-latest-articles {
-    width: 100%;
-    min-width: 206px;
-    background-color: white;
-    padding-top: 6px;
-    padding-bottom: 9px;
-}
+latest-articles {
+  @include keylol-shadow-1;
+  display: block;
+  background-color: $keylol-card;
+  border-radius: 2px;
 
-.section-latest-articles .article {
-    padding: 12px 15px;
-}
+  .header {
+    background: center no-repeat;
+    background-size: cover;
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    position: relative;
 
-.section-latest-articles h1 a {
-    color: $keylol-highlight;
-    float: right;
-    font-size: 13px;
-    margin-right: 12px;
-}
+    .header-text {
+      @include text-protection();
 
-.section-latest-articles .article h2 {
-    font-size: 13px;
-    margin: 0;
-    white-space: nowrap;
+      p {
+        margin: 0;
+        color: $keylol-inverted-text;
+
+        &:first-of-type {
+          font-weight: bold;
+          font-size: 20px;
+          margin-bottom: 4px;
+        }
+      }
+    }
+
+    fab {
+      position: absolute;
+      right: 30px;
+      bottom: -28px;
+    }
+  }
+
+  .latest-wrapper {
+    margin: 20px 0;
     overflow: hidden;
-    text-overflow: ellipsis;
-}
+    transition: height .5s;
 
-.section-latest-articles .article h2 svg {
-    vertical-align: middle;
-    width: 11px;
-    height: 6px;
-    display: inline-block;
-}
+    .latest-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
 
-.section-latest-articles .article h2 svg circle {
-    fill: $keylol-theme;
-}
+      li {
+        height: 86px;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid $keylol-inertia-shape;
 
-.section-latest-articles .article h2 a {
-    vertical-align: middle;
-    color: #333;
-}
+        .count {
+          width: 106px;
+          margin-right: 6px;
+          display: flex;
+          justify-content: center;
+          color: $keylol-light-theme;
 
-.section-latest-articles .article p {
-    margin: 0 0;
-    max-height: 36px;
-    overflow: hidden;
-    line-height: 18px;
-    word-wrap: break-word;
-}
+          span:first-of-type {
+            margin-right: 15px;
+          }
+        }
 
-.section-latest-articles .article footer {
-    text-align: right;
-    color: #BBB;
-    height: 16px;
-    line-height: 16px;
-}
+        .article {
+          flex-grow: 1;
 
-.section-latest-articles .article footer span {
-    margin-left: 15px;
+          p {
+            margin: 0;
+
+            &:first-of-type {
+              margin-bottom: 6px;
+
+              a {
+                color: $keylol-main-text;
+                font-weight: bold;
+                font-size: 16px;
+
+                &:hover {
+                  text-decoration: underline;
+                }
+              }
+            }
+
+            &:last-of-type {
+              color: $keylol-inertia-text;
+              display: flex;
+
+              a {
+                color: $keylol-inertia-text;
+                display: flex;
+                margin-left: 10px;
+
+                .avatar {
+                  border-radius: 0;
+                  width: 18px;
+                  height: 18px;
+                  margin-right: 6px;
+                }
+              }
+            }
+          }
+        }
+
+
+        &:last-of-type {
+          border-bottom: none;
+        }
+      }
+    }
+  }
+
+  .footer {
+    flat-button {
+      display: block;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+  }
 }

@@ -1,11 +1,33 @@
-﻿<div class="section-latest-articles box-shadowed">
-    <h1 class="labeled-heading">最新投稿 <a href="latest">全部</a></h1>
-    <div ng-repeat="article in latestArticles.articles track by article.Id" class="article">
-        <h2>
-            <a ng-href="article/{{article.AuthorIdCode}}/{{article.SequenceNumberForAuthor}}">{{article.Title}}</a>
-        </h2>
-        <footer>
-            <span class="datetime" am-time-ago="article.PublishTime"></span>
-        </footer>
+﻿<div class="header" webp-background="//steamcdn.keylol.com/steam/apps/570/capsule_231x87.jpg!cover.image.big">
+    <div class="header-text">
+        <p class="title">是日优惠</p>
+        <p class="sub-title">理性加一，入坑前先摸好评价和口碑</p>
     </div>
+    <fab icon="New_Article" type="accent"></fab>
+</div>
+<div class="latest-wrapper" ng-style="{height: (latestArticles.articles.length > 5 && !latestArticles.hasBeenExpanded) ? 434 : latestArticles.articles.length * 87}">
+    <ul class="latest-list">
+        <li ng-repeat="article in latestArticles.articles track by $index">
+            <div class="count">
+                <span>+{{article.LikeCount || 0}}</span><span>···{{article.CommentCount || 0}}</span>
+            </div>
+            <div class="article">
+                <p><a ng-href="article/{{article.AuthorIdCode}}/{{article.SequenceNumberForAuthor}}">{{article.Title}}</a></p>
+                <p>
+                    <span class="datetime" am-time-ago="article.PublishTime"></span>
+                    <a ng-href="user/{{menu.union.$localStorage.user.IdCode}}">
+                        <img class="avatar" webp-src="{{latestArticles.union.$localStorage.user.AvatarImage | avatarUrl}}" alt="{{latestArticles.union.$localStorage.user.UserName}}">
+                        <span>{{latestArticles.union.$localStorage.user.UserName}}</span>
+                    </a>
+                    <a ng-href="point/DOTA2">
+                        <img class="avatar" webp-src="//storage.keylol.com/37ba4e25767b3b4c1417f4c625e88492.jpg!avatar.medium" alt="Dota 2">
+                        <span>Dota 2</span>
+                    </a>
+                </p>
+            </div>
+        </li>
+    </ul>
+</div>
+<div class="footer clearfix">
+    <flat-button ng-if="latestArticles.articles.length > 5 && !latestArticles.hasBeenExpanded" text="展开更多" type="light-text" click="latestArticles.expandMore()"></flat-button>
 </div>
