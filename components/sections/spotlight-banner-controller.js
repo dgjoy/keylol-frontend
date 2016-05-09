@@ -31,7 +31,7 @@
                         link: "article/LEEEE/4"
                     }, {
                         imageSrc: "assets/images/spotlight/cool-t-shirt.png",
-                        link: "article/LEEEE/10"
+                        link: "article/23333/6"
                     }, {
                         imageSrc: "assets/images/spotlight/zhihu-keylol.png",
                         link: "article/HILOA/15"
