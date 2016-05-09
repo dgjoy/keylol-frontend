@@ -74,7 +74,7 @@
                                 $window.removeEventListener('keydown', union.keydownCallback, true);
                                 if (newValue) {
                                     $http.get(`${apiEndpoint}normal-point/keyword/${encodeURIComponent(newValue)}`, {
-                                        params: { type: scope.type || 'Unspecified' },
+                                        params: { typeFilter: scope.type || '' },
                                     }).then(response => {
                                         const pointArray = response.data.length ? response.data : [];
                                         scope.nowPopup = scope.showSelector({

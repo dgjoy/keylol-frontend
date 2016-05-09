@@ -111,6 +111,9 @@
                             if (type === 'Game') {
                                 return '游戏';
                             }
+                            if (type === 'Hardware') {
+                                return '硬件';
+                            }
                             if (type === 'Genre') {
                                 return '类型';
                             }
