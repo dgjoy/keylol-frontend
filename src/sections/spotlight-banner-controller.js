@@ -29,7 +29,7 @@
                         imageSrc: 'assets/images/spotlight/touch-fish-community.png',
                         link: 'article/LEEEE/4',
                     }, {
-                        imageSrc: 'assets/images/spotlight/cool-t-shirt-on-line.png',
+                        imageSrc: 'assets/images/spotlight/cool-on-line.png',
                         link: 'article/23333/6',
                     }, {
                         imageSrc: 'assets/images/spotlight/zhihu-keylol.png',
