@@ -37,13 +37,6 @@
                     // Prepend ripple to element
                     rippleContainer.insertBefore(ripple, rippleContainer.firstChild);
 
-                    // Set ripple size
-                    if (!ripple.offsetHeight && !ripple.offsetWidth) {
-                        size = Math.max(element[0].offsetWidth, element[0].offsetHeight);
-                        ripple.style.width = `${size}px`;
-                        ripple.style.height = `${size}px`;
-                    }
-
                     // Remove animation effect
                     ripple.className = ripple.className.replace(/ ?(animate)/g, '');
 
@@ -80,8 +73,22 @@
                     }
 
                     offsets = getPos(element[0]);
-                    ripple.style.left = `${x - offsets.left - size / 2}px`;
-                    ripple.style.top = `${y - offsets.top - size / 2}px`;
+                    const pointOffset = {
+                        left: x - offsets.left,
+                        top: y - offsets.top,
+                    };
+
+                    // Set ripple size
+                    if (!ripple.offsetHeight && !ripple.offsetWidth) {
+                        size = Math.sqrt(
+                            Math.pow(Math.max(Math.abs(element[0].offsetWidth - pointOffset.left), pointOffset.left) * 2, 2)
+                            + Math.pow(Math.max(Math.abs(element[0].offsetHeight - pointOffset.top), pointOffset.top) * 2, 2));
+                        ripple.style.width = `${size}px`;
+                        ripple.style.height = `${size}px`;
+                    }
+
+                    ripple.style.left = `${pointOffset.left - size / 2}px`;
+                    ripple.style.top = `${pointOffset.top - size / 2}px`;
 
                     // Add animation effect
                     if (type === 'class') {
