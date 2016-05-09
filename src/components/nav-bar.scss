@@ -72,6 +72,18 @@ nav-bar {
 
   .action-hub {
 
+    flat-button {
+      &:first-of-type {
+        margin-right: 15px;
+      }
+
+      &:last-of-type {
+        button {
+          background-color: $keylol-inverted-text;
+        }
+      }
+    }
+
     a {
       color: $keylol-inverted-text;
       text-decoration: none;

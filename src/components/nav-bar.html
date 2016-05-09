@@ -16,7 +16,7 @@
             </a>
         </form>
     </div>
-    <div class="action-hub">
+    <div class="action-hub" ng-if="navBar.union.$localStorage.Authorization">
         <a href="post-office" ng-class="{active: navBar.newMessages}" ripple="#fff">
             <p>邮政</p>
             <p>{{navBar.newMessages || "O" | numberAbbreviation}}</p>
@@ -28,5 +28,9 @@
         <a href="" ng-click="navBar.showUserHub($event)" popup="navBar.showUserHubPopup">
             <img class="avatar" webp-src="{{navBar.union.$localStorage.user.AvatarImage | avatarUrl}}" alt="{{navBar.union.$localStorage.user.UserName}}">
         </a>
+    </div>
+    <div class="action-hub" ng-if="!navBar.union.$localStorage.Authorization">
+        <flat-button text="登录" type="invert"></flat-button>
+        <flat-button text="注册" type="theme"></flat-button>
     </div>
 </div>

@@ -15,5 +15,9 @@ flat-button {
     &.light-text {
       color: $keylol-light-text;
     }
+
+    &.invert {
+      color: $keylol-inverted-text;
+    }
   }
 }
