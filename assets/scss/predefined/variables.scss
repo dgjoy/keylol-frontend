@@ -17,6 +17,7 @@ $keylol-review-bad: #ed1d24;
 $keylol-review-not-bad: #f7943e;
 $keylol-review-good: #6fb92b;
 $keylol-review-awesome: #00ab4e;
+$keylol-topic: #7976b1;
 
 /* ------------------- */
 /* Font Family Presets */
@@ -87,7 +88,7 @@ $keylol-review-awesome: #00ab4e;
 
 // text protection
 @mixin text-protection ($position: bottom) {
-  padding: 20px 15px;
+  padding: 15px 15px;
   background: linear-gradient(to $position, rgba(#000,0), rgba(#000, .3) 67.7%, rgba(#000, .6));
 
 }
