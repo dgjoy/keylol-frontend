@@ -9,7 +9,7 @@
             },
             restrict: 'A',
             link (scope, element) {
-                let x, y, size, offsets, type, value;
+                let type, value;
                 scope.$watch('type', newValue => {
                     const nValue = newValue || '#000';
 
@@ -21,103 +21,125 @@
                         value = nValue;
                     }
                 });
-                const rippleContainer = document.createElement('div');
-                rippleContainer.className += ' ripple-container';
-                const $rippleContainer = $(rippleContainer);
-                element.append(rippleContainer);
+                const $rippleContainer = $('<div class="ripple-container"></div>');
+                element.append($rippleContainer);
 
                 function func (e) {
-                    const eventType = e.type;
+                    let containerBgRestoreTimeout;
+
                     // Ripple
                     // Create ripple
-                    const ripple = document.createElement('span');
-                    ripple.className += ' ripple';
-                    const $ripple = $(ripple);
+                    const $ripple = $('<span class="ripple"><span class="circle"></span></span>');
+                    const $circle = $ripple.find('.circle');
 
                     // Prepend ripple to element
-                    rippleContainer.insertBefore(ripple, rippleContainer.firstChild);
+                    $rippleContainer.prepend($ripple);
 
-                    // Remove animation effect
-                    ripple.className = ripple.className.replace(/ ?(animate)/g, '');
+                    function getPointOffset(e) {
+                        let x, y;
+                        const eventType = e.type;
 
-                    // get click coordinates by event type
-                    if (eventType === 'mousedown') {
-                        x = e.pageX;
-                        y = e.pageY;
-                    } else if (eventType === 'touchstart') {
-                        try {
-                            let origEvent;
+                        // get click coordinates by event type
+                        if (eventType.lastIndexOf('mouse', 0) === 0) {
+                            x = e.pageX;
+                            y = e.pageY;
+                        } else if (eventType.lastIndexOf('touch', 0) === 0) {
+                            try {
+                                let origEvent;
 
-                            if (typeof e.changedTouches !== 'undefined') {
-                                origEvent = e.changedTouches[0];
-                            } else {
-                                origEvent = e.originalEvent;
+                                if (typeof e.changedTouches !== 'undefined') {
+                                    origEvent = e.changedTouches[0];
+                                } else {
+                                    origEvent = e.originalEvent;
+                                }
+
+                                x = origEvent.pageX;
+                                y = origEvent.pageY;
+                            } catch (e) {
+                                // fall back to center of el
+                                x = ripple.offsetWidth / 2;
+                                y = ripple.offsetHeight / 2;
                             }
-
-                            x = origEvent.pageX;
-                            y = origEvent.pageY;
-                        } catch (e) {
-                            // fall back to center of el
-                            x = ripple.offsetWidth / 2;
-                            y = ripple.offsetHeight / 2;
                         }
+
+                        // set new ripple position by click or touch position
+                        function getPos(element) {
+                            const de = document.documentElement;
+                            const box = element.getBoundingClientRect();
+                            const top = box.top + window.pageYOffset - de.clientTop;
+                            const left = box.left + window.pageXOffset - de.clientLeft;
+                            return { top, left };
+                        }
+
+                        const offsets = getPos(element[0]);
+                        return {
+                            left: x - offsets.left,
+                            top: y - offsets.top,
+                        };
                     }
 
-                    // set new ripple position by click or touch position
-                    function getPos(element) {
-                        const de = document.documentElement;
-                        const box = element.getBoundingClientRect();
-                        const top = box.top + window.pageYOffset - de.clientTop;
-                        const left = box.left + window.pageXOffset - de.clientLeft;
-                        return { top, left };
-                    }
-
-                    offsets = getPos(element[0]);
-                    const pointOffset = {
-                        left: x - offsets.left,
-                        top: y - offsets.top,
-                    };
-
-                    // Set ripple size
-                    if (!ripple.offsetHeight && !ripple.offsetWidth) {
-                        size = Math.sqrt(
+                    function rippleSize(pointOffset) {
+                        return Math.sqrt(
                             Math.pow(Math.max(Math.abs(element[0].offsetWidth - pointOffset.left), pointOffset.left) * 2, 2)
                             + Math.pow(Math.max(Math.abs(element[0].offsetHeight - pointOffset.top), pointOffset.top) * 2, 2));
-                        ripple.style.width = `${size}px`;
-                        ripple.style.height = `${size}px`;
                     }
 
-                    ripple.style.left = `${pointOffset.left - size / 2}px`;
-                    ripple.style.top = `${pointOffset.top - size / 2}px`;
+                    const pointOffset = getPointOffset(e);
+
+                    // Set ripple size
+                    const size = rippleSize(pointOffset);
+
+                    $ripple.css({
+                        width: `${size}px`,
+                        height: `${size}px`,
+                        left: `${pointOffset.left - size / 2}px`,
+                        top: `${pointOffset.top - size / 2}px`,
+                    });
 
                     // Add animation effect
                     if (type === 'class') {
                         $rippleContainer.addClass(value);
-                        $ripple.addClass(value);
+                        $circle.addClass(value);
                     } else {
                         $rippleContainer.css('background-color', `rgba(${value}, 0.1)`);
-                        $ripple.css('background-color', `rgba(${value}, 0.1)`);
+                        $circle.css('background-color', `rgba(${value}, 0.1)`);
                     }
-                    ripple.className += ' animate-appear';
+                    $circle.addClass('animate-appear');
 
                     const waitTimeOut = $timeout();
 
                     function removeAndUnbind() {
                         waitTimeOut.then(() => {
-                            if (type === 'class') {
-                                $rippleContainer.removeClass(value);
-                            } else {
-                                $rippleContainer.css('background-color', 'transparent');
-                            }
-                            ripple.className += ' animate-disappear';
+                            $circle.addClass('animate-disappear');
+                            if (containerBgRestoreTimeout)
+                                $timeout.cancel(containerBgRestoreTimeout);
+                            containerBgRestoreTimeout = $timeout(() => {
+                                if (type === 'class') {
+                                    $rippleContainer.removeClass(value);
+                                } else {
+                                    $rippleContainer.css('background-color', 'transparent');
+                                }
+                            }, 645);
                             $timeout(() => {
                                 $ripple.remove();
-                            }, 500);
+                            }, 900);
                         });
                         element.off('touchend touchleave mouseup mouseleave', removeAndUnbind);
+                        element.off('touchmove mousemove', move);
+                    }
+
+                    let currentScale = 1;
+
+                    function move(e) {
+                        const newPointOffset = getPointOffset(e);
+                        const newSize = rippleSize(newPointOffset);
+                        if (newSize > size)
+                            currentScale = newSize / size;
+                        $ripple.css('transform', `translate(${newPointOffset.left - pointOffset.left}px, ${newPointOffset.top - pointOffset.top}px) scale(${currentScale})`);
                     }
 
                     element.on('touchend touchleave mouseup mouseleave', removeAndUnbind);
+                    element.on('touchmove mousemove', move);
                 }
 
                 element.on('touchstart mousedown', func);
