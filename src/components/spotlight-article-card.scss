@@ -25,15 +25,13 @@ spotlight-article-card {
     justify-content: flex-start;
     align-items: center;
     height: 52px;
-    padding:0 15px;
+    padding: 0 15px;
     margin: 10px 0;
 
     .avatar {
       flex-grow: 0;
-
       background-repeat: no-repeat;
       background-size: cover;
-
       width: 32px;
       height: 32px;
       border-radius: 16px;
@@ -42,13 +40,11 @@ spotlight-article-card {
     }
     .username {
       flex-grow: 1;
-
       font-weight: bold;
       color: $keylol-main-text;
     }
     .date {
       flex-grow: 0;
-
       font-size: 12px;
       color: $keylol-inertia-text;
     }
@@ -73,11 +69,11 @@ spotlight-article-card {
       }
 
       .bottom-text{
-        @include  text-protection();
+        @include text-protection();
 
         .title,
         .desc{
-          position:relative;
+          position: relative;
           z-index: 2;
         }
 

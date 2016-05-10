@@ -21,24 +21,35 @@ game-guide-card {
 
   .point-img {
     width: 100%;
+    height: 130px;
   }
 
   .characteristic-container {
     background-color: $keylol-light-theme;
-
     display: flex;
     justify-content: center;
     overflow: hidden;
-
-    padding: 10px 10px;
+    padding: 9px 15px;
     margin: 10px 0;
+
+    .characteristic {
+      width: 30px;
+      height: 18px;
+      margin: 0 5px;
+
+      svg {
+        fill: $keylol-inverted-text;
+        width: 100%;
+        height: 100%;
+      }
+    }
   }
 
   .category-container {
-    padding: 0 10px;
-    margin: 10px 0;
-
     @include ellipsis();
+    padding: 0 10px;
+    height: 40px;
+    line-height: 40px;
     color: $keylol-main-text;
 
     .category {
@@ -51,18 +62,6 @@ game-guide-card {
 
     .slash {
       color: $keylol-inertia-shape;
-    }
-  }
-
-  .characteristic {
-    width: 30px;
-    height: 18px;
-    margin: 0 5px;
-
-    svg {
-      fill: $keylol-inverted-text;
-      width: 100%;
-      height: 100%;
     }
   }
 
@@ -82,6 +81,12 @@ game-guide-card {
         align-items: center;
         margin-left: 10px;
 
+        &:hover {
+          svg {
+            fill: $keylol-light-text;
+          }
+        }
+
         svg {
           width: 24px;
           height: 24px;
@@ -98,12 +103,6 @@ game-guide-card {
 
           &:last-of-type {
             margin-right: 5px;
-          }
-        }
-
-        &:hover {
-          svg {
-            fill: $keylol-light-text;
           }
         }
       }

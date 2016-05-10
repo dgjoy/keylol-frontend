@@ -17,14 +17,16 @@ game-card {
 
   .point-img {
     width: 100%;
+    height: 100px;
   }
 
   .actions {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     margin: 10px 0;
+    height: 38px;
+
 
     vote-circle {
       margin-left: 20px;

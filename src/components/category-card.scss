@@ -1,24 +1,23 @@
 category-card {
-  p {
-    margin: 0;
-  }
-
   @include keylol-shadow-1;
   background-color: $keylol-card;
   width: 220px;
-
   display: flex;
   flex-direction: column;
+
+  p {
+    margin: 0;
+  }
 
   .info {
     @include hover-background();
     display: flex;
     justify-content: flex-start;
     align-items: center;
-
     height: 68px;
     padding-left: 15px;
     margin: 10px 0;
+
     point-basic-info {
       .avatar {
         width: 48px;
@@ -38,10 +37,8 @@ category-card {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height: 51px;
 
-    height: 52px;
-
-    //to-modify font
     .count {
       margin-left: 25px;
       color: $keylol-inertia-text;

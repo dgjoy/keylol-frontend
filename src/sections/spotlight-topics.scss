@@ -12,7 +12,6 @@ spotlight-topics {
 
     .topic-selector {
       @include keylol-shadow-1();
-
       position: relative;
       width: 420px;
       height: 100%;
@@ -21,16 +20,15 @@ spotlight-topics {
       .moveBackground {
         position: absolute;
         background-color: $keylol-topic;
-
         height: 100%;
         left: 0;
         right: 280px;
-
         z-index: 1;
 
         &.move-up {
           transition: left 300ms, right 450ms;
         }
+
         &.move-down {
           transition: left 450ms, right 300ms;
         }
@@ -59,8 +57,8 @@ spotlight-topics {
         border-left: 10px solid transparent;
         border-top: 10px solid $keylol-topic;
         border-right: 10px solid transparent;
-
         transition: transform 300ms;
+
         &.active-0 {
           transform: translateX(0);
         }
@@ -80,12 +78,9 @@ spotlight-topics {
         .shortcut {
           position: relative;
           z-index: 2;
-
           width: 140px;
           height: 65px;
-
           padding: 0 15px;
-
           display: flex;
           flex-direction: column;
           justify-content: center;
@@ -94,20 +89,22 @@ spotlight-topics {
           .sub-title {
             transition: color 450ms;
           }
+
           .main-title {
+            @include ellipsis();
             color: $keylol-main-text;
             font-weight: bold;
             margin-bottom: 2px;
-            @include ellipsis();
 
             &.active {
               color: $keylol-inverted-text;
             }
           }
+
           .sub-title {
+            @include ellipsis();
             color: $keylol-inertia-text;
             font-size: 12px;
-            @include ellipsis();
 
             &.active {
               color: rgba($keylol-inverted-text, .6);
@@ -124,12 +121,19 @@ spotlight-topics {
       justify-content: center;
       align-items: flex-end;
 
+      &:hover {
+        .main-title {
+          text-decoration: underline;
+        }
+      }
+
       .main-title {
         text-align: right;
         color: $keylol-topic;
         font-size: 20px;
         margin-bottom: 2px;
       }
+
       .sub-title {
         color: $keylol-inertia-text;
       }
@@ -138,13 +142,11 @@ spotlight-topics {
 
   .topic-list {
     @include keylol-shadow-1();
-
     position: relative;
     width: 700px;
     height: 240px;
     overflow: hidden;
     margin-top: 20px;
-
     background-color: $keylol-card;
 
     .wrapper {
@@ -171,6 +173,7 @@ spotlight-topics {
 
       &.to-down {
         transform: translateX(0);
+
         &.active-0-add,
         &.active-1-add,
         &.active-2-add,
@@ -181,6 +184,7 @@ spotlight-topics {
 
       &.to-up {
         transform: translateX(-100%);
+
         &.active-0-add,
         &.active-1-add,
         &.active-2-add,
@@ -196,10 +200,8 @@ spotlight-topics {
         .background {
           width: 100%;
           height: 240px;
-
           background-repeat: no-repeat;
           background-size: cover;
-
           display: flex;
           flex-direction: column;
           justify-content: flex-end;
@@ -215,23 +217,20 @@ spotlight-topics {
             flex-direction: column;
             justify-content: center;
             align-items: flex-start;
-
             padding: 15px 15px;
             background-color: $keylol-topic;
 
             .title {
+              @include ellipsis();
               color: $keylol-inverted-text;
               font-size: 20px;
               font-weight: bold;
               margin-bottom: 6px;
-
-              @include ellipsis();
             }
 
             .desc {
-              color: rgba($keylol-inverted-text, .6);
-
               @include ellipsis();
+              color: rgba($keylol-inverted-text, .6);
             }
           }
         }
