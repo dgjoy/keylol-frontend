@@ -7,6 +7,8 @@
         controllerAs: 'raisedButton',
         bindings: {
             text: '@',
+            type: '@',
+            invert: '<',
         },
     });
 }());

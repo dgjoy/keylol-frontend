@@ -1,1 +1,1 @@
-<button class="theme" ripple="#fff">{{raisedButton.text}}</button>
+<button class="{{raisedButton.type}}" ng-class="{invert: raisedButton.invert}" ripple="{{raisedButton.invert ? raisedButton.type : '#fff'}}">{{raisedButton.text}}</button>

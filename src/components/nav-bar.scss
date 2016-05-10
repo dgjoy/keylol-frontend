@@ -76,12 +76,6 @@ nav-bar {
       &:first-of-type {
         margin-right: 15px;
       }
-
-      &:last-of-type {
-        button {
-          background-color: $keylol-inverted-text;
-        }
-      }
     }
 
     a {
