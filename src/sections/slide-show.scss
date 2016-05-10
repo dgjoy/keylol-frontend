@@ -1,11 +1,9 @@
 slide-show {
-
   display: flex;
   justify-content: space-between;
 
   .slide-selector {
     @include keylol-shadow-1();
-
     position:relative;
     width: 160px;
     height: 240px;
@@ -14,11 +12,9 @@ slide-show {
     .moveBackground {
       position: absolute;
       background-color: $keylol-theme;
-
       width:100%;
       top: 0;
       bottom: 180px;
-
       z-index: 1;
 
       &.move-up {
@@ -58,8 +54,8 @@ slide-show {
       border-top: 10px solid transparent;
       border-left: 10px solid $keylol-theme;
       border-bottom: 10px solid transparent;
-
       transition: transform 300ms;
+
       &.active-0 {
         transform: translateY(0);
       }
@@ -80,11 +76,9 @@ slide-show {
     .slide-shortcut {
       position: relative;
       z-index: 2;
-
       display: flex;
       flex-direction: column;
       justify-content: center;
-
       height:60px;
       padding:0 15px;
 
@@ -116,12 +110,10 @@ slide-show {
 
   .slide-list {
     @include keylol-shadow-1();
-
     position: relative;
     width: 760px;
     height: 240px;
     overflow: hidden;
-
     background-color: $keylol-card;
 
     .wrapper {
@@ -170,10 +162,7 @@ slide-show {
         .background {
           width: 100%;
           height: 240px;
-
-          background-repeat: no-repeat;
           background-size: cover;
-
           display: flex;
           flex-direction: column;
           justify-content: flex-end;
@@ -195,7 +184,6 @@ slide-show {
               color: #fff;
               font-size: 20px;
               font-weight: bold;
-
               margin-right: 15px;
             }
 
@@ -206,7 +194,6 @@ slide-show {
 
             .desc {
               color: #fff;
-
               max-height: 40px;
               overflow: hidden;
             }
