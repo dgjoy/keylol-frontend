@@ -92,6 +92,10 @@ latest-articles {
                 display: flex;
                 margin-left: 10px;
 
+                &:hover {
+                  text-decoration: underline;
+                }
+
                 .avatar {
                   border-radius: 0;
                   width: 18px;

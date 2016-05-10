@@ -27,6 +27,14 @@ raised-button {
 
     &.theme {
       background-color: $keylol-theme;
+
+      &.invert {
+        color: $keylol-theme;
+      }
+    }
+
+    &.invert {
+      background-color: $keylol-inverted-text;
     }
   }
 }
