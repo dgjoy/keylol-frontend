@@ -22,7 +22,7 @@
         <a class="topic" ng-repeat="topic in spotlightTopics.topics" href="" ng-show="$index === spotlightTopics.index || $index === spotlightTopics.oldIndex ">
             <div class="background" webp-background="//storage.keylol.com/39b7d020df471d6c0e3fa593802000bc.jpg!timeline.thumbnail.new">
                 <div class="bottom-text">
-                    <p class="title">标题</p>
+                    <p class="title">标题{{$index}}</p>
                     <p class="desc">这是一段描述.</p>
                 </div>
             </div>

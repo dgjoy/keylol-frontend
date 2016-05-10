@@ -140,8 +140,8 @@ spotlight-topics {
     @include keylol-shadow-1();
 
     position: relative;
-    width: 100%;
-    height: auto;
+    width: 700px;
+    height: 240px;
     overflow: hidden;
     margin-top: 20px;
 
@@ -151,23 +151,7 @@ spotlight-topics {
       display: flex;
       width: 100%;
 
-      @keyframes slideRight-0 {
-        from {
-          transform: translateX(-100%);
-        }
-        to {
-          transform: translateX(0);
-        }
-      }
-      @keyframes slideRight-1 {
-        from {
-          transform: translateX(-100%);
-        }
-        to {
-          transform: translateX(0);
-        }
-      }
-      @keyframes slideRight-2 {
+      @keyframes slideRight {
         from {
           transform: translateX(-100%);
         }
@@ -176,23 +160,7 @@ spotlight-topics {
         }
       }
 
-      @keyframes slideLeft-0 {
-        from {
-          transform: translateX(0);
-        }
-        to {
-          transform: translateX(-100%);
-        }
-      }
-      @keyframes slideLeft-1 {
-        from {
-          transform: translateX(0);
-        }
-        to {
-          transform: translateX(-100%);
-        }
-      }
-      @keyframes slideLeft-2 {
+      @keyframes slideLeft {
         from {
           transform: translateX(0);
         }
@@ -203,27 +171,21 @@ spotlight-topics {
 
       &.to-down {
         transform: translateX(0);
-        &.active-0 {
-          animation: slideRight-0 450ms cubic-bezier(0.19, 1, 0.22, 1);
-        }
-        &.active-1 {
-          animation: slideRight-1 450ms cubic-bezier(0.19, 1, 0.22, 1);
-        }
-        &.active-2 {
-          animation: slideRight-2 450ms cubic-bezier(0.19, 1, 0.22, 1);
+        &.active-0-add,
+        &.active-1-add,
+        &.active-2-add,
+        &.active-3-add {
+          animation: slideRight 450ms cubic-bezier(0.19, 1, 0.22, 1);
         }
       }
 
       &.to-up {
         transform: translateX(-100%);
-        &.active-0 {
-          animation: slideLeft-0 450ms cubic-bezier(0.19, 1, 0.22, 1);
-        }
-        &.active-1 {
-          animation: slideLeft-1 450ms cubic-bezier(0.19, 1, 0.22, 1);
-        }
-        &.active-2 {
-          animation: slideLeft-2 450ms cubic-bezier(0.19, 1, 0.22, 1);
+        &.active-0-add,
+        &.active-1-add,
+        &.active-2-add,
+        &.active-3-add {
+          animation: slideLeft 450ms cubic-bezier(0.19, 1, 0.22, 1);
         }
       }
 
