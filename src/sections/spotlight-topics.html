@@ -14,20 +14,18 @@
         <p class="sub-title">游戏文化的轻量级讲坛</p>
     </a>
 </div>
-<div class="topic-list">
-    <div class="wrapper active-{{spotlightTopics.index}}" ng-class="{
+<div class="topic-list" ng-class="{
         'to-down' : spotlightTopics.isMoveUp && spotlightTopics.oldIndex !== -1,
         'to-up' : !spotlightTopics.isMoveUp && spotlightTopics.oldIndex !== -1,
         }">
-        <a class="topic" ng-repeat="topic in spotlightTopics.topics" href="" ng-show="$index === spotlightTopics.index || $index === spotlightTopics.oldIndex ">
-            <div class="background" webp-background="//storage.keylol.com/39b7d020df471d6c0e3fa593802000bc.jpg!timeline.thumbnail.new">
-                <div class="bottom-text">
-                    <p class="title">标题{{$index}}</p>
-                    <p class="desc">这是一段描述.</p>
-                </div>
+    <a class="common-article common-article__topic topic swap-animation" ng-animate-swap="spotlightTopics.index" href="">
+        <div class="background" webp-background="//storage.keylol.com/39b7d020df471d6c0e3fa593802000bc.jpg!timeline.thumbnail.new">
+            <div class="bottom-text">
+                <p class="first-line underline">标题{{spotlightTopics.index}}</p>
+                <p class="second-line">这是一段描述.</p>
             </div>
-        </a>
-    </div>
+        </div>
+    </a>
 </div>
 
 

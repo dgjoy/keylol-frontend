@@ -149,91 +149,45 @@ spotlight-topics {
     margin-top: 20px;
     background-color: $keylol-card;
 
-    .wrapper {
-      display: flex;
+    .topic {
+      position: absolute;
+      height: 100%;
       width: 100%;
+    }
 
-      @keyframes slideRight {
-        from {
-          transform: translateX(-100%);
-        }
-        to {
-          transform: translateX(0);
-        }
+    &.to-up {
+      .swap-animation.ng-enter, .swap-animation.ng-leave {
+        transition: transform 450ms cubic-bezier(0.19, 1, 0.22, 1);
       }
-
-      @keyframes slideLeft {
-        from {
-          transform: translateX(0);
-        }
-        to {
-          transform: translateX(-100%);
-        }
+      .swap-animation.ng-enter {
+        transform: translateX(100%);
       }
-
-      &.to-down {
+      .swap-animation.ng-enter-active {
         transform: translateX(0);
-
-        &.active-0-add,
-        &.active-1-add,
-        &.active-2-add,
-        &.active-3-add {
-          animation: slideRight 450ms cubic-bezier(0.19, 1, 0.22, 1);
-        }
       }
-
-      &.to-up {
+      .swap-animation.ng-leave {
+        transform: translateX(0);
+      }
+      .swap-animation.ng-leave-active {
         transform: translateX(-100%);
-
-        &.active-0-add,
-        &.active-1-add,
-        &.active-2-add,
-        &.active-3-add {
-          animation: slideLeft 450ms cubic-bezier(0.19, 1, 0.22, 1);
-        }
       }
+    }
 
-      .topic {
-        flex-shrink: 0;
-        width: 100%;
-
-        .background {
-          width: 100%;
-          height: 240px;
-          background-repeat: no-repeat;
-          background-size: cover;
-          display: flex;
-          flex-direction: column;
-          justify-content: flex-end;
-
-          &:hover {
-            .title {
-              text-decoration: underline;
-            }
-          }
-
-          .bottom-text {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: flex-start;
-            padding: 15px 15px;
-            background-color: $keylol-topic;
-
-            .title {
-              @include ellipsis();
-              color: $keylol-inverted-text;
-              font-size: 20px;
-              font-weight: bold;
-              margin-bottom: 6px;
-            }
-
-            .desc {
-              @include ellipsis();
-              color: rgba($keylol-inverted-text, .6);
-            }
-          }
-        }
+    &.to-down {
+      .swap-animation.ng-enter, .swap-animation.ng-leave {
+        transition: transform 450ms cubic-bezier(0.19, 1, 0.22, 1);
+      }
+      .swap-animation.ng-enter {
+        transform: translateX(-100%);
+      }
+      .swap-animation.ng-enter-active {
+        transform: translateX(0);
+      }
+      .swap-animation.ng-leave {
+        transform: translateX(0);
+      }
+      .swap-animation.ng-leave-active {
+        transform: translateX(100%);
       }
     }
   }

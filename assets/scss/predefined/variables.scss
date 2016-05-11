@@ -90,7 +90,6 @@ $keylol-topic: #7976b1;
 @mixin text-protection ($position: bottom) {
   padding: 15px 15px;
   background: linear-gradient(to $position, rgba(#000,0), rgba(#000, .3) 67.7%, rgba(#000, .6));
-
 }
 
 // hover
@@ -105,4 +104,64 @@ $keylol-topic: #7976b1;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+
+// common article style
+// .background { height:; } span { ... }
+.common-article {
+  .background {
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    &:hover {
+      .underline {
+        text-decoration: underline;
+      }
+    }
+
+    .bottom-text{
+      @include text-protection();
+
+      .first-line,
+      .second-line {
+        position: relative;
+        z-index: 2;
+      }
+
+      .first-line {
+        color: $keylol-inverted-text;
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 6px;
+      }
+
+      .second-line {
+        color: $keylol-inverted-text;
+        max-height: 40px;
+        overflow: hidden;
+      }
+    }
+  }
+
+  &.common-article__topic {
+    .bottom-text {
+      padding: 15px 15px;
+      background: none;
+      background-color: $keylol-topic;
+
+      .first-line {
+        @include ellipsis();
+      }
+
+      .second-line {
+        @include ellipsis();
+      }
+    }
+  }
 }

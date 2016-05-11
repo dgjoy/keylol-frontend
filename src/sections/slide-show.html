@@ -6,18 +6,16 @@
         <div class="ename" ng-class="{'active':slideShow.index == $index}">{{slide.ename}}</div>
     </a>
 </div>
-<div class="slide-list">
-    <div class="wrapper active-{{slideShow.index}}" ng-class="{
-        'to-down' : slideShow.isMoveUp && slideShow.oldIndex !== -1,
-        'to-up' : !slideShow.isMoveUp && slideShow.oldIndex !== -1,
-        }">
-        <a class="slide" ng-repeat="slide in slideShow.slides" href="" ng-show="$index === slideShow.index || $index === slideShow.oldIndex ">
-            <div class="background" webp-background="{{slide.img}}">
-                <div class="bottom-text">
-                    <div class="title_author"><span class="title">{{slide.cname}}</span><span class="author">{{slide.author + ' / ' + slide.date}}</span></div>
-                    <div class="desc">{{slide.desc}}</div>
-                </div>
+<div class="slide-list" ng-class="{
+    'to-down' : slideShow.isMoveUp && slideShow.oldIndex !== -1,
+    'to-up' : !slideShow.isMoveUp && slideShow.oldIndex !== -1
+    }">
+    <a class="common-article slide swap-animation" ng-animate-swap="slideShow.index" href="">
+        <div class="background" webp-background="{{slideShow.slides[slideShow.index].img}}">
+            <div class="bottom-text">
+                <div class="first-line"><span class="underline title">{{slideShow.slides[slideShow.index].cname}}</span><span class="author">{{slideShow.slides[slideShow.index].author + ' / ' + slideShow.slides[slideShow.index].date}}</span></div>
+                <div class="second-line">{{slideShow.slides[slideShow.index].desc}}</div>
             </div>
-        </a>
-    </div>
+        </div>
+    </a>
 </div>
