@@ -26,7 +26,7 @@ section-header {
       margin-right: 8px;
 
       &.orange {
-        fill: $keylol-accent;
+        fill: $keylol-user-theme;
       }
     }
 
@@ -44,7 +44,7 @@ section-header {
 
       &.orange {
         .main-title {
-          color: $keylol-accent;
+          color: $keylol-user-theme;
         }
       }
     }

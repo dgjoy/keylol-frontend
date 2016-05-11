@@ -1,0 +1,56 @@
+spotlight-users {
+  display: block;
+  overflow-x: hidden;
+  
+  .stretch-background {
+    background-color: $keylol-user-theme;
+  }
+
+  section-header {
+    width: 940px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .wrapper {
+    padding: 30px 0;
+    width: 700px;
+    padding-right: 240px;
+    margin: auto;
+
+    .first-line {
+      display: flex;
+
+      .part1 {
+        display: flex;
+        width: 100%;
+        flex-direction: row-reverse;
+        user-card {
+          flex-shrink: 0;
+          margin-left: 20px;
+        }
+      }
+      .part2 {
+        display: flex;
+        width: 0;
+
+        user-card {
+          flex-shrink: 0;
+          margin-right: 20px;
+
+          &:first-of-type {
+            margin-left: 260px;
+          }
+        }
+      }
+    }
+    .second-line {
+      display: flex;
+      user-card {
+        flex-shrink: 0;
+        margin-top: 20px;
+        margin-right: 20px;
+      }
+    }
+  }
+}
