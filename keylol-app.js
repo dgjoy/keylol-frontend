@@ -106,35 +106,43 @@
             // })
             // state after refactoring
             .state('entrance', {
-                url: '/',
                 templateUrl: 'src/pages/entrance.html',
-                controller ($state,union) {
-                    if (union.$localStorage.Authorization) {
-                        $state.go('entrance.loggedIn');
-                    } else {
-                        $state.go('entrance.public');
-                    }
-                },
             })
             .state('entrance.discovery', {
-                url: 'discovery',
-                templateUrl: 'src/pages/discovery.html',
-                controller: 'DiscoveryController',
-            })
-            .state('entrance.public', {
-                url: '',
-                templateUrl: 'src/pages/discovery.html',
-                controller: 'DiscoveryController',
-            })
-            .state('entrance.loggedIn', {
-                url: '',
+                url: '/discovery',
                 templateUrl: 'src/pages/discovery.html',
                 controller: 'DiscoveryController',
             })
             .state('entrance.points', {
-                url: 'points',
+                url: '/points',
                 templateUrl: 'src/pages/points.html',
                 controller: 'PointsController',
+            })
+            .state('entrance.timeline', {
+                url: '/timeline',
+                templateUrl: 'src/pages/page-timeline.html',
+                controller: 'PageTimelineController',
+            })
+            .state('home', {
+                url: '/',
+                templateUrl: 'src/pages/entrance.html',
+                controller ($state,union) {
+                    if (union.$localStorage.Authorization) {
+                        $state.go('home.loggedIn');
+                    } else {
+                        $state.go('home.public');
+                    }
+                },
+            })
+            .state('home.public', {
+                url: '',
+                templateUrl: 'src/pages/discovery.html',
+                controller: 'DiscoveryController',
+            })
+            .state('home.loggedIn', {
+                url: '',
+                templateUrl: 'src/pages/discovery.html',
+                controller: 'DiscoveryController',
             })
         ;
 

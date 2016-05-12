@@ -14,7 +14,7 @@
         controllerAs: 'tabs',
         bindings:{
             tabArray: '<',
-            curTab: '@',
+            curTab: '<',
         },
     });
 }());

@@ -3,9 +3,12 @@
         constructor ($scope, $element, $window) {
             const $$window = $($window);
             const scrollCallback = () => {
-                $scope.$apply(() => {
-                    this.isFixedTop = $$window.scrollTop() + 94 >= $element.offset().top;
-                });
+                const newIsFixedTop = $$window.scrollTop() + 94 >= $element.offset().top;
+                if (this.hasShadow !== newIsFixedTop) {
+                    $scope.$apply(() => {
+                        this.isFixedTop = newIsFixedTop;
+                    });
+                }
             };
             $$window.scroll(scrollCallback);
 
