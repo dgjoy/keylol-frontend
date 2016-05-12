@@ -22,6 +22,7 @@
                 this.currentPage = 0;
                 this.tabArray = [{ href:'discovery',name:'广场' },{ href:'points',name:'据点' },{ href:'timeline',name:'轨道' }];
             } else if (currentStateName.substr(0, 8) === 'entrance') {
+                this.tabArray = [{ href:'discovery',name:'广场' },{ href:'points',name:'据点' },{ href:'timeline',name:'轨道' }];
                 const subState = currentStateName.substr(9);
                 switch (subState) {
                     case 'discovery' :
