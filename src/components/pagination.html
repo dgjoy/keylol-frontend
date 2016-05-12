@@ -1,19 +1,19 @@
-<ul ng-show="pagination.current > 0">
-    <li>
-        <a href="" ripple>
-            <svg aria-hidden="true">
-                <use ng-href="{{'chevron-left' | iconSvgUrl }}" xlink:href=""></use>
-            </svg>
-        </a>
-    </li>
-    <li ng-repeat="i in pagination.visiblePages" ng-class="{active: i === pagination.current}">
-        <a href="" ripple="{{i === pagination.current ? 'disabled': ''}}">{{i}}</a>
-    </li>
-    <li>
-        <a href="" ripple>
-            <svg aria-hidden="true">
-                <use ng-href="{{'chevron-right' | iconSvgUrl }}" xlink:href=""></use>
-            </svg>
-        </a>
-    </li>
-</ul>
+<a href="" ng-click="pagination.previousPage()" ripple="{{0 === pagination.visibleIndex ? 'disabled': ''}}" ng-show="pagination.current > 0" ng-class="{disabled: 0 === pagination.visibleIndex, over: pagination.current <= pagination.visibleIndex * 5}">
+    <svg aria-hidden="true">
+        <use ng-href="{{'chevron-left' | iconSvgUrl }}" xlink:href=""></use>
+    </svg>
+</a>
+<div class="wrapper" ng-style="{width: 38 * pagination.pages[pagination.visibleIndex].length}" ng-class="{
+    'to-next' : pagination.isToNext,
+    'to-previous' : !pagination.isToNext
+    }">
+    <div class="page" ng-animate-swap="pagination.visibleIndex">
+        <span class="active-background {{'active-' + (pagination.current - 1) % 5}}" ng-hide="pagination.current < pagination.pages[pagination.visibleIndex][0] || pagination.current > pagination.pages[pagination.visibleIndex][pagination.pages[pagination.visibleIndex].length - 1]"></span>
+        <a href="" ng-click="pagination.changePage(i)" ripple="{{i === pagination.current ? 'disabled': ''}}" ng-repeat="i in pagination.pages[pagination.visibleIndex]" ng-class="{active: i === pagination.current}">{{i}}</a>
+    </div>
+</div>
+<a href="" ng-click="pagination.nextPage()" ripple="{{pagination.pages.length - 1 === pagination.visibleIndex ? 'disabled': ''}}" ng-show="pagination.current > 0" ng-class="{disabled: pagination.pages.length - 1 === pagination.visibleIndex, over: pagination.current > pagination.visibleIndex * 5 + 5}">
+    <svg aria-hidden="true">
+        <use ng-href="{{'chevron-right' | iconSvgUrl }}" xlink:href=""></use>
+    </svg>
+</a>

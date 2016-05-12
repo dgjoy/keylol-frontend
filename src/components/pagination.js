@@ -1,45 +1,59 @@
 (function () {
     class PaginationController {
         constructor ($scope) {
-            $scope.$watchGroup([() => {
-                return this.current;
-            }, () => {
+            $scope.$watch(() => {
                 return this.total;
-            }], () => {
-                this.newPage = this.current;
-                this.hasLeftEllipsis = this.current > 4;
-                this.hasRightEllipsis = this.total - this.current > 4;
-
-
-                this.leftPages = [];
-                if (!this.hasLeftEllipsis) {
-                    for (let i = 1; i < this.current; i++) {
-                        this.leftPages.push(i);
-                    }
-                } else {
-                    this.leftPages.push($scope.current - 1);
+            }, newTotal => {
+                if (!this.pages) {
+                    this.pages = [];
+                }
+                let pageNumber = 0;
+                if (newTotal &&  newTotal > 0) {
+                    pageNumber = parseInt((newTotal - 1) / 5) + 1;
                 }
 
-                this.rightPages = [];
-                if (!this.hasRightEllipsis) {
-                    for (let j = this.current + 1; j <= $scope.total; j++) {
-                        this.rightPages.push(j);
+                if (pageNumber > this.pages.length) {
+                    if (this.pages[this.pages.length - 1] && this.pages[this.pages.length - 1].length < 5) {
+                        const notFullPage = this.pages[this.pages.length - 1];
+                        for (let i = notFullPage.length;i < 5;i++) {
+                            notFullPage.push(notFullPage[notFullPage.length - 1]);
+                        }
                     }
-                } else {
-                    this.rightPages.push(this.current + 1);
-                    this.rightPages.push(this.current + 2);
+                    for (let i = this.pages.length;i < pageNumber;i++) {
+                        const insertArray = [];
+                        for (let j = i * 5 + 1;j <= newTotal && insertArray.length < 5;j++) {
+                            insertArray.push(j);
+                        }
+                        this.pages.push(insertArray);
+                    }
                 }
             });
 
-            this.visiblePages = [1, 2, 3, 4, 5];
+            $scope.$watch(() => {
+                return this.current;
+            }, (newCurrent, oldCurrent) => {
+                this.visibleIndex = parseInt((newCurrent - 1) / 5);
+                this.isToNext = newCurrent > oldCurrent || this.visibleIndex === this.pages.length - 1;
+            });
         }
+
         changePage (newPage) {
-            if (newPage > this.total) {
-                this.onPageChanged({ oldPage: this.current, newPage: this.total });
-            } else if (newPage < 1) {
-                this.onPageChanged({ oldPage: this.current, newPage: 1 });
-            } else {
-                this.onPageChanged({ oldPage: this.current, newPage });
+            if (!this.onPageChanged({ newPage, oldPage: this.current })) {
+                this.current = newPage;
+            }
+        }
+
+        previousPage () {
+            if (this.visibleIndex > 0) {
+                this.isToNext = false;
+                this.visibleIndex--;
+            }
+        }
+
+        nextPage () {
+            if (this.visibleIndex < this.pages.length - 1) {
+                this.isToNext = true;
+                this.visibleIndex++;
             }
         }
     }
@@ -52,7 +66,6 @@
             total: '<',
             current: '<',
             onPageChanged: '&',
-            pageHref: '&',
         },
     });
 }());
