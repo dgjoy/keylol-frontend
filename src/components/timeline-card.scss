@@ -1,0 +1,171 @@
+timeline-card {
+  @include keylol-shadow-1;
+  width: 340px;
+  display: block;
+  background-color: $keylol-inverted-text;
+
+  .display-card {
+    @include keylol-shadow-1;
+    background-color: $keylol-card;
+
+    .user-with-date {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 72px;
+      padding: 0 15px;
+
+      .user {
+        flex-shrink: 1;
+        display: flex;
+        align-items: center;
+
+        &:hover {
+          > .username {
+            text-decoration: underline;
+          }
+        }
+        .avatar {
+          flex-shrink: 0;
+          width: 32px;
+          height: 32px;
+          border-radius: 16px;
+          margin-right: 10px;
+        }
+        .username {
+          flex-shrink: 1;
+          font-weight: bold;
+          color: $keylol-main-text;
+        }
+      }
+
+      .date {
+        flex-shrink: 0;
+        font-size: 12px;
+        color: $keylol-inertia-text;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .simple {
+      vote-circle {
+        padding: 0 15px;
+        margin-bottom: 20px;
+      }
+      p {
+        margin: 0;
+        padding: 0 15px;
+        margin-bottom: 20px;
+        -webkit-mask: -webkit-gradient(linear,0% 0%,0% 100%,from(rgba(222,187,71,0.8)),to(rgba(36,142,36,0.2)));
+      }
+      img {
+        width: 100%;
+      }
+    }
+
+    .point-with-source {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 72px;
+      padding: 0 15px;
+
+      .point {
+        flex-shrink: 1;
+
+        &:hover {
+          point-basic-info {
+            .name-group {
+              p:first-of-type {
+                text-decoration: underline;
+              }
+            }
+          }
+        }
+      }
+      .source {
+        flex-shrink: 0;
+        font-size: 12px;
+        color: $keylol-inertia-text;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .indirect-sources {
+      margin-left: 35px;
+      padding-bottom: 5px;
+      display: flex;
+      flex-direction: column;
+
+      .indirect-source {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+
+        .picture {
+          width: 18px;
+          height: 18px;
+          margin-right: 10px;
+        }
+
+        .desc {
+          color: $keylol-main-text;
+        }
+
+        &:hover {
+          .desc {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+
+  .communicate-card {
+    .reviews {
+      transition: max-height 1000ms;//待处理-曲线
+      max-height: 0;
+      padding: 0 15px;
+      overflow: hidden;
+
+      &.open {
+        max-height: 1024px;
+      }
+
+      .count {
+        padding-top: 20px;
+        color: $keylol-inertia-text;
+      }
+
+      .scroller {
+        height: 100px;
+        overflow-y: hidden;
+
+        .review {
+          height: 50px;
+        }
+      }
+    }
+
+    .operation {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 0 10px;
+      height: 50px;
+
+      flat-button {
+        .inertia {
+            color: $keylol-inertia-text;
+            font-weight: normal;
+        }
+      }
+    }
+  }
+}

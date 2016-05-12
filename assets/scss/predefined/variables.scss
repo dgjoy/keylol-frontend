@@ -108,44 +108,39 @@ $keylol-topic: #7976b1;
 
 
 // common article style
-// .background { height:; } span { ... }
 .common-article {
-  .background {
-    height: 100%;
-    width: 100%;
-    background-size: cover;
+  background-size: cover;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 
-    &:hover {
-      .underline {
-        text-decoration: underline;
-      }
+  &:hover {
+    .underline {
+      text-decoration: underline;
+    }
+  }
+
+  .bottom-text{
+    @include text-protection();
+
+    .first-line,
+    .second-line {
+      position: relative;
+      z-index: 2;
     }
 
-    .bottom-text{
-      @include text-protection();
+    .first-line {
+      color: $keylol-inverted-text;
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
 
-      .first-line,
-      .second-line {
-        position: relative;
-        z-index: 2;
-      }
-
-      .first-line {
-        color: $keylol-inverted-text;
-        font-size: 20px;
-        font-weight: bold;
-        margin-bottom: 6px;
-      }
-
-      .second-line {
-        color: $keylol-inverted-text;
-        max-height: 40px;
-        overflow: hidden;
-      }
+    .second-line {
+      color: $keylol-inverted-text;
+      max-height: 40px;
+      overflow: hidden;
     }
   }
 

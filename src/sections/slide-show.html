@@ -10,12 +10,10 @@
     'to-down' : slideShow.isMoveUp && slideShow.oldIndex !== -1,
     'to-up' : !slideShow.isMoveUp && slideShow.oldIndex !== -1
     }">
-    <a class="common-article slide swap-animation" ng-animate-swap="slideShow.index" href="">
-        <div class="background" webp-background="{{slideShow.slides[slideShow.index].img}}">
-            <div class="bottom-text">
-                <div class="first-line"><span class="underline title">{{slideShow.slides[slideShow.index].cname}}</span><span class="author">{{slideShow.slides[slideShow.index].author + ' / ' + slideShow.slides[slideShow.index].date}}</span></div>
-                <div class="second-line">{{slideShow.slides[slideShow.index].desc}}</div>
-            </div>
+    <a class="common-article slide swap-animation" ng-animate-swap="slideShow.index" webp-background="{{slideShow.slides[slideShow.index].img}}" href="">
+        <div class="bottom-text">
+            <div class="first-line"><span class="underline title">{{slideShow.slides[slideShow.index].cname}}</span><span class="author">{{slideShow.slides[slideShow.index].author + ' / ' + slideShow.slides[slideShow.index].date}}</span></div>
+            <div class="second-line">{{slideShow.slides[slideShow.index].desc}}</div>
         </div>
     </a>
 </div>

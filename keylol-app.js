@@ -93,6 +93,11 @@
                 templateUrl: 'src/pages/points.html',
                 controller: 'PointsController',
             })
+            .state('timeline', {
+                url: '/timeline',
+                templateUrl: 'src/pages/page-timeline.html',
+                controller: 'PageTimelineController',
+            })
             .state('not-found', {
                 url: '404',
                 templateUrl: 'src/pages/not-found.html',

@@ -18,12 +18,10 @@
         'to-down' : spotlightTopics.isMoveUp && spotlightTopics.oldIndex !== -1,
         'to-up' : !spotlightTopics.isMoveUp && spotlightTopics.oldIndex !== -1,
         }">
-    <a class="common-article common-article__topic topic swap-animation" ng-animate-swap="spotlightTopics.index" href="">
-        <div class="background" webp-background="//storage.keylol.com/39b7d020df471d6c0e3fa593802000bc.jpg!timeline.thumbnail.new">
-            <div class="bottom-text">
-                <p class="first-line underline">标题{{spotlightTopics.index}}</p>
-                <p class="second-line">这是一段描述.</p>
-            </div>
+    <a class="common-article common-article__topic topic swap-animation" ng-animate-swap="spotlightTopics.index" webp-background="//storage.keylol.com/39b7d020df471d6c0e3fa593802000bc.jpg!timeline.thumbnail.new" href="">
+        <div class="bottom-text">
+            <p class="first-line underline">标题{{spotlightTopics.index}}</p>
+            <p class="second-line">这是一段描述.</p>
         </div>
     </a>
 </div>

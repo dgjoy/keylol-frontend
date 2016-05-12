@@ -1,0 +1,12 @@
+﻿<div class="wrapper" ng-switch="sectionTimeline.columnCount">
+    <div class="first-column" ng-switch-when="two">
+        <timeline-card ng-repeat="card in sectionTimeline.leftCards track by $index"></timeline-card>
+    </div>
+    <div class="second-column" ng-switch-when="two">
+        <timeline-card ng-repeat="card in sectionTimeline.rightCards track by $index"></timeline-card>
+    </div>
+    <div class="only-column" ng-switch-when="one">
+        <timeline-card ng-repeat="card in sectionTimeline.cards track by $index"></timeline-card>
+    </div>
+</div>
+<raised-button text="展开更多" type="theme" ng-click="sectionTimeline.load()"></raised-button>

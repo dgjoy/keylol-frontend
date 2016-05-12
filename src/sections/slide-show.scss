@@ -134,37 +134,37 @@ slide-show {
 
     &.to-up {
       .swap-animation.ng-enter, .swap-animation.ng-leave {
-        transition: top 450ms cubic-bezier(0.19, 1, 0.22, 1);
+        transition: transform 450ms cubic-bezier(0.19, 1, 0.22, 1);
       }
       .swap-animation.ng-enter {
-        top: 240px;
+        transform: translateY(100%);
       }
       .swap-animation.ng-enter-active {
-        top: 0;
+        transform: translateY(0);
       }
       .swap-animation.ng-leave {
-        top: 0;
+        transform: translateY(0);
       }
       .swap-animation.ng-leave-active {
-        top: -240px;
+        transform: translateY(-100%);
       }
     }
 
     &.to-down {
       .swap-animation.ng-enter, .swap-animation.ng-leave {
-        transition: top 450ms cubic-bezier(0.19, 1, 0.22, 1);
+        transition: transform 450ms cubic-bezier(0.19, 1, 0.22, 1);
       }
       .swap-animation.ng-enter {
-        top: -240px;
+        transform: translateY(-100%);
       }
       .swap-animation.ng-enter-active {
-        top: 0;
+        transform: translateY(0);
       }
       .swap-animation.ng-leave {
-        top: 0;
+        transform: translateY(0);
       }
       .swap-animation.ng-leave-active {
-        top: 240px;
+        transform: translateY(100%);
       }
     }
   }
