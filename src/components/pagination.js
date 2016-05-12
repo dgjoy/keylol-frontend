@@ -38,8 +38,10 @@
         }
 
         changePage (newPage) {
-            if (!this.onPageChanged({ newPage, oldPage: this.current })) {
-                this.current = newPage;
+            if (newPage !== this.current) {
+                if (!this.onPageChanged({ newPage, oldPage: this.current })) {
+                    this.current = newPage;
+                }
             }
         }
 
