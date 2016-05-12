@@ -20,89 +20,123 @@
 
         $anchorScrollProvider.disableAutoScrolling();
         $urlRouterProvider.otherwise('/404');
-        $stateProvider.state('home', {
-                url: '/',
-                templateUrl: 'src/pages/home.html',
-                controller: 'HomeController',
-            })
-            // .when('/home', {
-            //     redirectTo: '/',
+        $stateProvider
+            // .state('home', {
+            //     url: '/',
+            //     templateUrl: 'src/pages/home.html',
+            //     controller: 'HomeController',
             // })
-            .state('article', {
-                url: '/article/:author/:article',
-                templateUrl: 'src/pages/article.html',
-                controller: 'ArticleController',
+            // // .when('/home', {
+            // //     redirectTo: '/',
+            // // })
+            // .state('article', {
+            //     url: '/article/:author/:article',
+            //     templateUrl: 'src/pages/article.html',
+            //     controller: 'ArticleController',
+            // })
+            // .state('point', {
+            //     url: '/point/:pointIdCode',
+            //     templateUrl: 'src/pages/point.html',
+            //     controller: 'PointController',
+            // })
+            // .state('user', {
+            //     url: '/user/:userIdCode',
+            //     templateUrl: 'src/pages/point.html',
+            //     controller: 'PointController',
+            // })
+            // .state('latest', {
+            //     url: '/latest',
+            //     templateUrl: 'src/pages/search-results.html',
+            //     controller: 'AllArticlesController',
+            // })
+            // .state('subscriptions', {
+            //     url: '/subscriptions',
+            //     templateUrl: 'src/pages/search-results.html',
+            //     controller: 'SubscriptionsController',
+            // })
+            // .state('readers', {
+            //     url: '/readers',
+            //     templateUrl: 'src/pages/search-results.html',
+            //     controller: 'ReadersController',
+            // })
+            // .state('post-office', {
+            //     url: '/post-office',
+            //     templateUrl: 'src/pages/post-office.html',
+            //     controller: 'PostOfficeController',
+            // })
+            // .state('post-office-type', {
+            //     url: '/post-office/:type',
+            //     templateUrl: 'src/pages/post-office.html',
+            //     controller: 'PostOfficeController',
+            // })
+            // .state('search', {
+            //     url: '/search/:searchType/:keyword',
+            //     templateUrl: 'src/pages/search-results.html',
+            //     controller: 'SearchResultsController',
+            // })
+            // .state('related', {
+            //     url: '/related/:idCode/:type',
+            //     templateUrl: 'src/pages/search-results.html',
+            //     controller: 'RelatedController',
+            // })
+            // .state('coupon', {
+            //     url: '/coupon',
+            //     templateUrl: 'src/pages/coupon.html',
+            //     controller: 'CouponController',
+            // })
+            // .state('discovery', {
+            //     url: '/discovery',
+            //     templateUrl: 'src/pages/discovery.html',
+            //     controller: 'DiscoveryController',
+            // })
+            // .state('points', {
+            //     url: '/points',
+            //     templateUrl: 'src/pages/points.html',
+            //     controller: 'PointsController',
+            // })
+            // .state('timeline', {
+            //     url: '/timeline',
+            //     templateUrl: 'src/pages/page-timeline.html',
+            //     controller: 'PageTimelineController',
+            // })
+            // .state('not-found', {
+            //     url: '404',
+            //     templateUrl: 'src/pages/not-found.html',
+            //     controller: 'NotFoundController',
+            // })
+            // state after refactoring
+            .state('entrance', {
+                url: '/',
+                templateUrl: 'src/pages/entrance.html',
+                controller ($state,union) {
+                    if (union.$localStorage.Authorization) {
+                        $state.go('entrance.loggedIn');
+                    } else {
+                        $state.go('entrance.public');
+                    }
+                },
             })
-            .state('point', {
-                url: '/point/:pointIdCode',
-                templateUrl: 'src/pages/point.html',
-                controller: 'PointController',
-            })
-            .state('user', {
-                url: '/user/:userIdCode',
-                templateUrl: 'src/pages/point.html',
-                controller: 'PointController',
-            })
-            .state('latest', {
-                url: '/latest',
-                templateUrl: 'src/pages/search-results.html',
-                controller: 'AllArticlesController',
-            })
-            .state('subscriptions', {
-                url: '/subscriptions',
-                templateUrl: 'src/pages/search-results.html',
-                controller: 'SubscriptionsController',
-            })
-            .state('readers', {
-                url: '/readers',
-                templateUrl: 'src/pages/search-results.html',
-                controller: 'ReadersController',
-            })
-            .state('post-office', {
-                url: '/post-office',
-                templateUrl: 'src/pages/post-office.html',
-                controller: 'PostOfficeController',
-            })
-            .state('post-office-type', {
-                url: '/post-office/:type',
-                templateUrl: 'src/pages/post-office.html',
-                controller: 'PostOfficeController',
-            })
-            .state('search', {
-                url: '/search/:searchType/:keyword',
-                templateUrl: 'src/pages/search-results.html',
-                controller: 'SearchResultsController',
-            })
-            .state('related', {
-                url: '/related/:idCode/:type',
-                templateUrl: 'src/pages/search-results.html',
-                controller: 'RelatedController',
-            })
-            .state('coupon', {
-                url: '/coupon',
-                templateUrl: 'src/pages/coupon.html',
-                controller: 'CouponController',
-            })
-            .state('discovery', {
-                url: '/discovery',
+            .state('entrance.discovery', {
+                url: 'discovery',
                 templateUrl: 'src/pages/discovery.html',
                 controller: 'DiscoveryController',
             })
-            .state('points', {
-                url: '/points',
+            .state('entrance.public', {
+                url: '',
+                templateUrl: 'src/pages/discovery.html',
+                controller: 'DiscoveryController',
+            })
+            .state('entrance.loggedIn', {
+                url: '',
+                templateUrl: 'src/pages/discovery.html',
+                controller: 'DiscoveryController',
+            })
+            .state('entrance.points', {
+                url: 'points',
                 templateUrl: 'src/pages/points.html',
                 controller: 'PointsController',
             })
-            .state('timeline', {
-                url: '/timeline',
-                templateUrl: 'src/pages/page-timeline.html',
-                controller: 'PageTimelineController',
-            })
-            .state('not-found', {
-                url: '404',
-                templateUrl: 'src/pages/not-found.html',
-                controller: 'NotFoundController',
-            });
+        ;
 
         pageHeadProvider.setLoadingHead({
             title: '其乐 - 甄选并传递游戏的价值',

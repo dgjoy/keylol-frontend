@@ -97,7 +97,6 @@
                     discount: '50%',
                 },
             ];
-            this.wrapperHeight = 'auto';
         }
 
         expandMore () {
@@ -109,8 +108,6 @@
         templateUrl: 'src/sections/sales-today.html',
         controller: SalesTodayController,
         controllerAs: 'salesToday',
-        bindings: {
-            type: '@',
-        },
+        bindings: {},
     });
 }());

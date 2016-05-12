@@ -137,7 +137,8 @@
                         const newSize = rippleSize(newPointOffset);
                         if (newSize > size)
                             currentScale = newSize / size;
-                        $ripple.css('transform', `translate(${newPointOffset.left - pointOffset.left}px, ${newPointOffset.top - pointOffset.top}px) scale(${currentScale})`);
+                        $ripple.css('transform', `translate(${newPointOffset.left - pointOffset.left}px,` +
+                         `${newPointOffset.top - pointOffset.top}px) scale(${currentScale})`);
                     }
 
                     element.on('touchend touchleave mouseup mouseleave', removeAndUnbind);
