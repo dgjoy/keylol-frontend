@@ -1,4 +1,6 @@
 right-menus {
+  position: relative;
+
   .wrapper {
     width: 100%;
 
@@ -7,6 +9,12 @@ right-menus {
       position: fixed;
       top: 94px;
       z-index: 999;
+    }
+
+    &.absolute-bottom {
+      width: 220px;
+      position: absolute;
+      bottom: 50px;
     }
   }
 }

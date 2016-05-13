@@ -5,11 +5,19 @@
                 stateTree,
             });
             const $$window = $($window);
+            const $wrapper = $element.children('.wrapper');
             const scrollCallback = () => {
-                const newIsFixedTop = $$window.scrollTop() + 94 >= $element.offset().top;
-                if (this.hasShadow !== newIsFixedTop) {
+                let newPosition = '';
+                const shouldWindowScrollTop = $$window.scrollTop() + 94;
+                const elementOffsetTop = $element.offset().top;
+                if (shouldWindowScrollTop + $wrapper.height() + 50 >= elementOffsetTop + $element.height()) {
+                    newPosition = 'absolute-bottom';
+                } else if (shouldWindowScrollTop >= elementOffsetTop) {
+                    newPosition = 'fixed-top';
+                }
+                if (this.position !== newPosition) {
                     $scope.$apply(() => {
-                        this.isFixedTop = newIsFixedTop;
+                        this.position = newPosition;
                     });
                 }
             };
@@ -62,18 +70,25 @@
                 items: [
                     {
                         type: 'item',
-                        icon: 'Map',
-                        text: '开设新据点',
+                        icon: 'Steam',
+                        text: 'Steam',
                     },
                     {
                         type: 'item',
-                        icon: 'User',
-                        text: '邀请好友加入其乐',
+                        icon: 'PlayStation',
+                        text: 'PSN（暂未开放）',
+                        disabled: true,
                     },
                     {
                         type: 'item',
-                        icon: 'CuC',
-                        text: '客务中心',
+                        icon: 'Google_Store',
+                        text: 'Xbox Live（暂未开放）',
+                        disabled: true,
+                    },
+                    {
+                        type: 'item',
+                        icon: 'Register',
+                        text: '无平台注册',
                     },
                 ],
             };
@@ -85,17 +100,17 @@
                 items: [
                     {
                         type: 'item',
-                        icon: 'Map',
+                        icon: 'Login_Steam_BOT',
                         text: 'Steam 机器人',
                     },
                     {
                         type: 'item',
-                        icon: 'User',
+                        icon: 'Login_Steam_Web_API',
                         text: 'Steam 网页 API',
                     },
                     {
                         type: 'item',
-                        icon: 'CuC',
+                        icon: 'Login_Passcode',
                         text: '口令组合',
                     },
                 ],

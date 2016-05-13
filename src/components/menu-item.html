@@ -1,4 +1,4 @@
-<button ripple ng-if="::(menuItem.data.type === 'item')">
+<button ng-disabled="::menuItem.data.disabled" ripple="{{::(menuItem.data.disabled? 'disabled' : '')}}" ng-if="::(menuItem.data.type === 'item')">
     <div class="wrapper">
         <span>
             <svg ng-if="::menuItem.data.icon" aria-hidden="true">
