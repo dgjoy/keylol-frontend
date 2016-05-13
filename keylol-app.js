@@ -106,6 +106,7 @@
             // })
             // state after refactoring
             .state('entrance', {
+                'abstract': true,
                 templateUrl: 'src/pages/entrance.html',
             })
             .state('entrance.discovery', {
@@ -140,36 +141,14 @@
             })
             .state('home', {
                 url: '/',
-                templateUrl: 'src/pages/entrance.html',
-                controller ($state,union) {
+                onEnter ($state,union) {
                     if (union.$localStorage.Authorization) {
-                        $state.go('home.loggedIn');
+                        $state.go('entrance.timeline', {}, { location: false });
                     } else {
-                        $state.go('home.public');
+                        $state.go('entrance.discovery', {}, { location: false });
                     }
                 },
-            })
-            .state('home.public', {
-                url: '',
-                resolve: {
-                    loadResult: pageLoad => {
-                        return pageLoad('entrance.discovery');
-                    },
-                },
-                templateUrl: 'src/pages/discovery.html',
-                controller: 'DiscoveryController',
-            })
-            .state('home.loggedIn', {
-                url: '',
-                resolve: {
-                    loadResult: pageLoad => {
-                        return pageLoad('entrance.discovery');
-                    },
-                },
-                templateUrl: 'src/pages/discovery.html',
-                controller: 'DiscoveryController',
-            })
-        ;
+            });
 
         pageHeadProvider.setLoadingHead({
             title: '其乐 - 甄选并传递游戏的价值',
