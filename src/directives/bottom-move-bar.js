@@ -46,7 +46,6 @@
                         jWindow.unbind('resize',jResizeHandler);
                     });
                 });
-
             },
         };
     });

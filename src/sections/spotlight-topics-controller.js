@@ -23,6 +23,6 @@
         controllerAs: 'spotlightTopics',
         bindings: {
             topics: '<',
-        }
+        },
     });
 }());

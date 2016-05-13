@@ -31,7 +31,7 @@
                         type: 'item',
                         icon: 'File',
                         text: '草稿',
-                        subText: stateTree.currentUser.draftCount,
+                        subText: stateTree.currentUser ? stateTree.currentUser.draftCount : undefined,
                     },
                 ],
             };
