@@ -16,20 +16,20 @@
             </a>
         </form>
     </div>
-    <div class="action-hub" ng-if="navBar.union.$localStorage.Authorization">
-        <a href="post-office" ng-class="{active: navBar.newMessages}" ripple="#fff">
+    <div class="action-hub" ng-if="navBar.stateTree.currentUser">
+        <a href="post-office" ng-class="{active: navBar.stateTree.currentUser.messageCount}" ripple="#fff">
             <p>邮政</p>
-            <p>{{navBar.newMessages || "O" | numberAbbreviation}}</p>
+            <p>{{navBar.stateTree.currentUser.messageCount || "O" | numberAbbreviation}}</p>
         </a>
         <a href="coupon" ripple="#fff">
             <p>文券</p>
-            <p>{{navBar.union.$localStorage.user.Coupon | numberAbbreviation}} ◆</p>
+            <p>{{navBar.stateTree.currentUser.coupon | numberAbbreviation}} ◆</p>
         </a>
         <a href="" ng-click="navBar.showUserHub($event)" popup="navBar.showUserHubPopup">
-            <img class="avatar" webp-src="{{navBar.union.$localStorage.user.AvatarImage | avatarUrl}}" alt="{{navBar.union.$localStorage.user.UserName}}">
+            <img class="avatar" webp-src="{{navBar.stateTree.currentUser.avatarImage | avatarUrl}}" alt="{{navBar.stateTree.currentUser.userName}}">
         </a>
     </div>
-    <div class="action-hub" ng-if="!navBar.union.$localStorage.Authorization">
+    <div class="action-hub" ng-if="!navBar.stateTree.currentUser">
         <flat-button text="登录" type="invert"></flat-button>
         <raised-button text="注册" type="theme" invert="true"></raised-button>
     </div>

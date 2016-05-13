@@ -1,6 +1,9 @@
 ﻿(function () {
     class RightMenusController {
-        constructor ($scope, $element, $window) {
+        constructor ($scope, $element, $window, stateTree) {
+            $.extend(this, {
+                stateTree,
+            });
             const $$window = $($window);
             const scrollCallback = () => {
                 const newIsFixedTop = $$window.scrollTop() + 94 >= $element.offset().top;
@@ -28,7 +31,7 @@
                         type: 'item',
                         icon: 'File',
                         text: '草稿',
-                        subText: '5',
+                        subText: stateTree.currentUser.draftCount,
                     },
                 ],
             };

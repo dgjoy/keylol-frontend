@@ -1,8 +1,8 @@
 ﻿(function () {
     class MenuController {
-        constructor (union, $http, apiEndpoint, notification) {
+        constructor (stateTree, $http, apiEndpoint, notification) {
             $.extend(this, {
-                union,
+                stateTree,
                 $http,
                 apiEndpoint,
                 notification,

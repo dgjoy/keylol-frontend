@@ -6,7 +6,7 @@
         controller: StoreGameCardController,
         controllerAs: 'storeGameCard',
         bindings: {
-            text: '@',
+            card: '<',
         },
     });
 }());

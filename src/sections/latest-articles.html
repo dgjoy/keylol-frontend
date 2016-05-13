@@ -1,27 +1,27 @@
 ﻿<div class="header" webp-background="//steamcdn.keylol.com/steam/apps/570/capsule_231x87.jpg!cover.image.big">
     <div class="header-text">
-        <p class="title">是日优惠</p>
-        <p class="sub-title">理性加一，入坑前先摸好评价和口碑</p>
+        <p class="title">即刻投稿</p>
+        <p class="sub-title">让你的文章展现于此</p>
     </div>
     <fab icon="New_Article" type="accent"></fab>
 </div>
 <div class="latest-wrapper" ng-style="{height: (latestArticles.articles.length > 5 && !latestArticles.hasBeenExpanded) ? 434 : latestArticles.articles.length * 87}">
     <ul class="latest-list">
-        <li ng-repeat="article in latestArticles.articles track by $index">
+        <li ng-repeat="article in ::latestArticles.articles track by $index">
             <div class="count">
-                <span>+{{article.LikeCount || 0}}</span><span>···{{article.CommentCount || 0}}</span>
+                <span>+{{::article.likeCount}}</span><span>···{{::article.commentCount}}</span>
             </div>
             <div class="article">
-                <p><a ng-href="article/{{article.AuthorIdCode}}/{{article.SequenceNumberForAuthor}}">{{article.Title}}</a></p>
+                <p><a ng-href="article/{{::article.authorIdCode}}/{{::article.sidForAuthor}}">{{::article.title}}</a></p>
                 <p>
-                    <span class="datetime" am-time-ago="article.PublishTime"></span>
-                    <a ng-href="user/{{menu.union.$localStorage.user.IdCode}}">
-                        <img class="avatar" webp-src="{{latestArticles.union.$localStorage.user.AvatarImage | avatarUrl}}" alt="{{latestArticles.union.$localStorage.user.UserName}}">
-                        <span>{{latestArticles.union.$localStorage.user.UserName}}</span>
+                    <span class="datetime" am-time-ago="article.publishTime"></span>
+                    <a href="" ng-href="user/{{::article.authorIdCode}}">
+                        <img class="avatar" src="" webp-src="{{::article.authorAvatarImage | avatarUrl}}" alt="{{::article.authorUserName}}">
+                        <span>{{::article.authorUserName}}</span>
                     </a>
-                    <a ng-href="point/DOTA2">
-                        <img class="avatar" webp-src="//storage.keylol.com/37ba4e25767b3b4c1417f4c625e88492.jpg!avatar.medium" alt="Dota 2">
-                        <span>Dota 2</span>
+                    <a href="" ng-href="point/{{::article.pointIdCode}}">
+                        <img class="avatar" src="" webp-src="{{::article.pointAvatarImage | avatarUrl}}" alt="{{::article.pointChineseName}}">
+                        <span>{{::article.pointChineseName}}</span>
                     </a>
                 </p>
             </div>

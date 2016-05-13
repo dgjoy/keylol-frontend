@@ -110,16 +110,31 @@
             })
             .state('entrance.discovery', {
                 url: '/discovery',
+                resolve: {
+                    loadResult: pageLoad => {
+                        return pageLoad('entrance.discovery');
+                    },
+                },
                 templateUrl: 'src/pages/discovery.html',
                 controller: 'DiscoveryController',
             })
             .state('entrance.points', {
                 url: '/points',
+                resolve: {
+                    loadResult: pageLoad => {
+                        return pageLoad('entrance.points');
+                    },
+                },
                 templateUrl: 'src/pages/points.html',
                 controller: 'PointsController',
             })
             .state('entrance.timeline', {
                 url: '/timeline',
+                resolve: {
+                    loadResult: pageLoad => {
+                        return pageLoad('entrance.timeline');
+                    },
+                },
                 templateUrl: 'src/pages/page-timeline.html',
                 controller: 'PageTimelineController',
             })
@@ -136,11 +151,21 @@
             })
             .state('home.public', {
                 url: '',
+                resolve: {
+                    loadResult: pageLoad => {
+                        return pageLoad('entrance.discovery');
+                    },
+                },
                 templateUrl: 'src/pages/discovery.html',
                 controller: 'DiscoveryController',
             })
             .state('home.loggedIn', {
                 url: '',
+                resolve: {
+                    loadResult: pageLoad => {
+                        return pageLoad('entrance.discovery');
+                    },
+                },
                 templateUrl: 'src/pages/discovery.html',
                 controller: 'DiscoveryController',
             })

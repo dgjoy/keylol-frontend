@@ -110,6 +110,7 @@ $keylol-topic: #7976b1;
 // common article style
 .common-article {
   background-size: cover;
+  background-position: center;
 
   display: flex;
   flex-direction: column;
@@ -147,8 +148,7 @@ $keylol-topic: #7976b1;
   &.common-article__topic {
     .bottom-text {
       padding: 15px 15px;
-      background: none;
-      background-color: $keylol-topic;
+      background: none $keylol-topic;
 
       .first-line {
         @include ellipsis();

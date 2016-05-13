@@ -5,7 +5,6 @@
                 $rootScope,
                 $location,
             });
-            this.cards = [1, 2, 3, 4];
             this.types = {
                 reviews: {
                     mainTitle: '评',
@@ -29,6 +28,7 @@
         controllerAs: 'spotlightArticles',
         bindings: {
             type: '@',
+            cards: '<',
         },
     });
 }());

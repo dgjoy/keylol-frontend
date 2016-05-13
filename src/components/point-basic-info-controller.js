@@ -6,7 +6,7 @@
         controller: PointBasicInfoController,
         controllerAs: 'pointBasicInfo',
         bindings: {
-            text: '@',
+            point: '<',
         },
     });
 }());

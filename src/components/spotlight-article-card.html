@@ -1,14 +1,14 @@
-<a class="user" href="user/{{spotlightArticleCard.union.$localStorage.user.IdCode}}" ripple>
-    <img class="avatar" webp-src="{{spotlightArticleCard.union.$localStorage.user.AvatarImage | avatarUrl}}"  alt="{{spotlightArticleCard.union.$localStorage.user.UserName}}">
-    <span class="username">{{spotlightArticleCard.union.$localStorage.user.UserName}}</span>
-    <span class="date">5 月 7 号</span>
+<a class="user" href="" ng-href="user/{{::spotlightArticleCard.card.authorIdCode}}" ripple>
+    <img src="" class="avatar" webp-src="{{::spotlightArticleCard.card.authorAvatarImage | avatarUrl}}"  alt="{{::spotlightArticleCard.card.authorUserName}}">
+    <span class="username">{{::spotlightArticleCard.card.authorUserName}}</span>
+    <span class="date" am-time-ago="::spotlightArticleCard.card.publishTime"></span>
 </a>
-<a class="common-article article" webp-background="//storage.keylol.com/39b7d020df471d6c0e3fa593802000bc.jpg!timeline.thumbnail.new" href="point/DOTA2">
+<a class="common-article article" webp-background="{{::spotlightArticleCard.card.coverImage | backgroundUrl}}" href="" ng-href="article/{{::spotlightArticleCard.card.authorIdCode}}/{{::spotlightArticleCard.card.sidForAuthor}}">
     <div class="bottom-text">
-        <div class="first-line underline">Rogue Stormer（恶棍风暴兵团） Boss攻略与成就指南</div>
-        <div class="second-line">《恶棍风暴兵团》 是一款现代版Contra／/Metal Slug 游戏，它结合了 这种roguelike 类型的混搭游戏，并包括和 RPG 角色扮演的元素，游戏中有着、加上疯狂的3D 图形与可支持一至四人的多人游戏合作模式。</div>
+        <div class="first-line underline">{{::spotlightArticleCard.card.title}}</div>
+        <div class="second-line">{{::spotlightArticleCard.card.subtitle}}</div>
     </div>
 </a>
-<a class="point" href="point/DOTA2" ripple>
-    <point-basic-info></point-basic-info>
+<a class="point" href="" ng-href="point/{{::spotlightArticleCard.card.pointIdCode}}" ripple>
+    <point-basic-info point="::{avatarImage: spotlightArticleCard.card.pointAvatarImage, chineseName: spotlightArticleCard.card.pointChineseName, englishName: spotlightArticleCard.card.pointEnglishName}"></point-basic-info>
 </a>

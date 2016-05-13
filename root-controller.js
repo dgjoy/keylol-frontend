@@ -7,32 +7,6 @@
             pageHead.loading();
 
             let aNewLogin = false;
-            function getUserInfo() {
-                $http.get(`${apiEndpoint}user/current`, {
-                    params: {
-                        stats: true,
-                        profilePointBackgroundImage: true,
-                        subscribeCount: true,
-                        commentLike: true,
-                        coupon: true,
-                    },
-                }).then(response => {
-                    const user = union.$localStorage.user;
-                    const beforeCoupon = user ? user.Coupon : undefined;
-                    union.$localStorage.user = response.data;
-                    union.$localStorage.user.fakeCoupon = beforeCoupon;
-                    _czc.push(['_setCustomVar', '登录用户',
-                        `${response.data.IdCode}-${response.data.UserName}`, 1]);
-                    if (aNewLogin) {
-                        $state.reload();
-                    }
-                }, response => {
-                    if (response.status === 401) {
-                        delete union.$localStorage.Authorization;
-                        notification.error('登录失效，请重新登录。');
-                    }
-                });
-            }
 
             let firstLoad = true;
             $scope.$watch(() => {
@@ -43,7 +17,6 @@
                         aNewLogin = true;
                     }
                     $http.defaults.headers.common.Authorization = `Bearer ${newToken}`;
-                    getUserInfo();
                 } else {
                     _czc.push(['_setCustomVar', '登录用户', '游客', 1]);
                     for (const i in union.$localStorage) {
@@ -68,7 +41,6 @@
                 }
                 if (union.$localStorage.Authorization) {
                     aNewLogin = false;
-                    getUserInfo();
                 }
             });
         }]);

@@ -1,4 +1,6 @@
 ﻿<div class="wrapper" ng-class="{'fixed-top': rightMenus.isFixedTop}">
-    <menu style="margin-bottom: 20px" object="rightMenus.writtingMenu"></menu>
-    <menu object="rightMenus.personalMenu"></menu>
+    <menu ng-if="::rightMenus.stateTree.currentUser" style="margin-bottom: 20px" object="::rightMenus.writtingMenu"></menu>
+    <menu ng-if="::rightMenus.stateTree.currentUser" object="::rightMenus.personalMenu"></menu>
+    <menu ng-if="::!rightMenus.stateTree.currentUser" style="margin-bottom: 20px" object="::rightMenus.registerMenu"></menu>
+    <menu ng-if="::!rightMenus.stateTree.currentUser" object="::rightMenus.loginMenu"></menu>
 </div>

@@ -3,11 +3,11 @@
         <p>{{ menu.object.header.main }}</p>
         <p>{{ menu.object.header.sub }}</p>
     </div>
-    <a ng-if="menu.object.header.isUser" ripple ng-href="user/{{menu.union.$localStorage.user.IdCode}}">
-        <img class="avatar" webp-src="{{menu.union.$localStorage.user.AvatarImage | avatarUrl}}" alt="{{menu.union.$localStorage.user.UserName}}">
+    <a ng-if="menu.object.header.isUser" ripple ng-href="user/{{menu.stateTree.currentUser.idCode}}">
+        <img class="avatar" webp-src="{{menu.stateTree.currentUser.avatarImage | avatarUrl}}" alt="{{menu.stateTree.currentUser.userName}}">
         <div class="header-text for-user">
-            <p>{{ menu.union.$localStorage.user.UserName }}</p>
-            <p>{{ menu.union.$localStorage.user.IdCode }}</p>
+            <p>{{ menu.stateTree.currentUser.userName }}</p>
+            <p>{{ menu.stateTree.currentUser.idCode }}</p>
         </div>
     </a>
 </div>

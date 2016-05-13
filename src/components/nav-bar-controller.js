@@ -1,25 +1,11 @@
 ﻿(function () {
     class NavBarController {
-        constructor ($scope, union, $http, apiEndpoint, notification, $element) {
+        constructor (stateTree, $http, apiEndpoint, notification) {
             $.extend(this, {
-                union,
+                stateTree,
                 $http,
                 apiEndpoint,
                 notification,
-                $element,
-            });
-            $scope.$watch(() => {
-                if (union.$localStorage.user) {
-                    return union.$localStorage.user.MessageCount;
-                } else {
-                    return null;
-                }
-            }, newValue => {
-                if (newValue) {
-                    this.newMessages = typeof newValue === 'string' ? newValue.split(',').reduce((previous, current) => {
-                        return parseInt(previous) + parseInt(current);
-                    }) : null;
-                }
             });
         }
         showUserHub ($event) {

@@ -1,7 +1,6 @@
 ﻿(function () {
     class SpotlightTopicsController {
         constructor() {
-            this.topics = [1,2,3];
             this.index = 0;
             this.oldIndex = -1;
             this.isMoveUp = false;
@@ -22,5 +21,8 @@
         templateUrl: 'src/sections/spotlight-topics.html',
         controller: SpotlightTopicsController,
         controllerAs: 'spotlightTopics',
+        bindings: {
+            topics: '<',
+        }
     });
 }());
