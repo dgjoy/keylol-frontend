@@ -5,6 +5,9 @@
                 return ;
             
             this.curTab = index;
+            if (this.tabArray[index].click) {
+                this.tabArray[index].click();
+            }
         }
     }
 

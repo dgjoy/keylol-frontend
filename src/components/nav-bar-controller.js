@@ -1,11 +1,9 @@
 ﻿(function () {
     class NavBarController {
-        constructor (stateTree, $http, apiEndpoint, notification) {
+        constructor (stateTree, window) {
             $.extend(this, {
                 stateTree,
-                $http,
-                apiEndpoint,
-                notification,
+                window,
             });
         }
         showUserHub ($event) {
@@ -19,6 +17,13 @@
                 offsetY: -5,
                 fixedPosition: true,
                 inputs: {},
+            });
+        }
+        showLoginWindow () {
+            this.window.show({
+                templateUrl: 'src/windows/login.html',
+                controller: 'LoginController',
+                controllerAs: 'login',
             });
         }
     }

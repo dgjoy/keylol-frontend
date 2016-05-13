@@ -1,0 +1,13 @@
+﻿<window position="center" class="window-login"  click-other-to-exit="::true">
+    <button ng-hide="::true" class="window-exit-button" ng-click="login.close()"></button>
+    <div class="window">
+        <div class="header">
+            <div class="text">
+                <p>回到社区</p>
+                <p>在下方选择一种登录方式</p>
+            </div>
+            <img src="assets/images/key-and-locker.png">
+        </div>
+        <tabs tab-array="::login.tabArray" cur-tab="login.currentPage"></tabs>
+    </div>
+</window>

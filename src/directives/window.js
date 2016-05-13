@@ -6,8 +6,8 @@
             transclude: true,
             templateUrl: 'src/directives/window.html',
             scope: {
-                position: '@position',
-                clickOtherToExit: '=',
+                position: '@',
+                clickOtherToExit: '<',
             },
             compile () {
                 return {
