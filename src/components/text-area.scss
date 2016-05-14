@@ -1,0 +1,67 @@
+text-area {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    color: $keylol-inertia-text;
+    margin-bottom: 8px;
+    transform: translateY(22px);
+    font-size: 14px;
+    line-height: 14px;
+    transition: transform 1000ms,font-size 1000ms;//待处理 - 动画时间
+
+    &.active,
+    &.filled {
+      transform: translateY(0);
+      font-size: 12px;
+      line-height: 14px;
+    }
+    &.active {
+      color: $keylol-theme;
+    }
+    &.warn {
+      color: $keylol-review-bad;
+    }
+  }
+
+  .input {
+    width: 100%;
+    height: 16px;
+    border-radius: 0;
+    outline: none;
+    background-color: transparent;
+    padding: 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid $keylol-inertia-shape;
+
+    &.active {
+      padding-bottom: 9px;
+      border-color: $keylol-theme;
+      border-bottom-width: 2px;
+    }
+    &.warn {
+      padding-bottom: 9px;
+      border-color: $keylol-review-bad;
+      border-bottom-width: 2px;
+    }
+
+    &[disabled] {
+      border-bottom-style: dotted;
+    }
+  }
+
+  .tip {
+    margin-top: 6px;
+    font-size: 12px;
+    visibility: hidden;
+    color: $keylol-inertia-text;
+
+    &.show {
+      visibility: visible;
+    }
+
+    &.warn {
+      color: $keylol-review-bad;
+    }
+  }
+}

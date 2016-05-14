@@ -1,0 +1,4 @@
+<label ng-class="{'active':textArea.active,'filled':textArea.filled,'warn':textArea.localWarn}">昵称</label>
+<input class="input" ng-model="textArea.value" type="text" ng-change="textArea.localCheck()" ng-focus="textArea.focus()" ng-blur="textArea.blur()"
+       ng-class="{'active':textArea.active,'warn':textArea.localWarn}" ng-disabled="textArea.locked"/>
+<div class="tip" ng-class="{'show':textArea.active||textArea.localWarn,'warn':textArea.localWarn}">{{textArea.tip}}</div>
