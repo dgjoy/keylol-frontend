@@ -1,7 +1,6 @@
 ﻿(function () {
     class TimelineCardController {
-        constructor() {
-            this.cards = [[1,1,1,1], [], [1,1,1], [1,1], [1]];
+        constructor($element) {
             // this.type = 'article';
             this.type = 'simple';
             this.state = 'close';

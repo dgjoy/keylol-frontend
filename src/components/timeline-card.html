@@ -42,15 +42,24 @@
             全部 16 个评论
         </div>
         <div class="scroller">
-            <div class="review">
-                评论占位
+            <div class="review" href="" ng-repeat="reviews in [0,1,2,3]">
+                <img src="//storage.keylol.com/39b7d020df471d6c0e3fa593802000bc.jpg!timeline.thumbnail.new" alt="" class="avatar" />
+                <div class="content">
+                    <div class="info">
+                        <div class="user">Stark<a href="">+16</a></div>
+                        <div class="date">05-03</div>
+                        <div class="actions"><a href="">认可</a><a href="">回复</a></div>
+                    </div>
+                    <div class="text">
+                        这是一段文本.
+                    </div>
+                </div>
             </div>
-            <div class="review">
-                评论占位
-            </div>
-            <div class="review">
-                评论占位
-            </div>
+        </div>
+        <div class="hr"></div>
+        <div class="review-area">
+            <img src="//storage.keylol.com/39b7d020df471d6c0e3fa593802000bc.jpg!timeline.thumbnail.new" alt="" class="avatar">
+            <div class="textarea" contenteditable="true"><br /></div>
         </div>
     </div>
     <div class="operation" ng-switch="timelineCard.state">

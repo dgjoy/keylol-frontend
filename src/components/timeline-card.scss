@@ -128,27 +128,124 @@ timeline-card {
   }
 
   .communicate-card {
+    .hr {
+      height: 1px;
+      background-color: $keylol-inertia-shape;
+    }
+
+    .review-area {
+      display: flex;
+      margin-top: 25px;
+      margin-bottom: 10px;
+      padding: 0 15px;
+
+      .avatar {
+        flex-grow: 0;
+        width: 32px;
+        height: 32px;
+        margin-right: 10px;
+      }
+      .textarea {
+        flex-grow: 1;
+        border: 0;
+        padding: 0;
+        outline: 0;
+        overflow-x: hidden;
+        overflow-y: auto;
+      }
+    }
+
     .reviews {
       transition: max-height 1000ms;//待处理-曲线
       max-height: 0;
-      padding: 0 15px;
       overflow: hidden;
 
       &.open {
-        max-height: 1024px;
+        max-height: 1000px; //尽量大
       }
 
       .count {
-        padding-top: 20px;
+        padding-top: 18px;
+        padding-left: 15px;
+        padding-right: 15px;
         color: $keylol-inertia-text;
       }
 
       .scroller {
-        height: 100px;
-        overflow-y: hidden;
+        margin: 10px 0;
+        max-height: 300px; //待处理 - 滚动阈值
+        overflow: auto;
 
         .review {
-          height: 50px;
+          @include hover-background();
+          padding: 15px 15px;
+          display: flex;
+          
+          
+          .avatar {
+            flex-grow: 0;
+            width: 32px;
+            height:32px;
+            margin-right: 10px;
+          }
+          
+          .content {
+            flex-grow: 1;
+            
+            .info {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              height: 20px; //待处理 - info高度
+              
+              .user {
+                font-weight: bold;
+                color: $keylol-main-text;
+                a {
+                  color: $keylol-inertia-text;
+                  font-weight: normal;
+                  margin-left: 6px;
+
+                  &:hover {
+                    text-decoration: underline;
+                  }
+                }
+              }
+              
+              .date {
+                color: $keylol-inertia-text;
+              }
+
+              .actions {
+                display: none;
+              }
+            }
+
+            .text {
+              color: $keylol-main-text;
+            }
+          }
+
+          &:hover {
+            .content {
+              .info {
+                .date {
+                  display: none;
+                }
+
+                .actions {
+                  display: block;
+                  a {
+                    margin-left: 15px;
+                    color: $keylol-highlight;
+                    &:hover {
+                      text-decoration: underline;
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }

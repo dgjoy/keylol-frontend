@@ -9,6 +9,17 @@ section-timeline {
 
     timeline-card {
       margin-bottom: 20px;
+
+      &.ng-enter {
+        transition: all 1000ms;
+        transform: translateY(20px);
+        opacity: .1;
+      }
+
+      &.ng-enter-active {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   }
 

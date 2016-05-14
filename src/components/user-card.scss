@@ -37,12 +37,6 @@ user-card {
       justify-content: center;
       align-items: center;
 
-      &:hover {
-        .nickname {
-          text-decoration: underline;
-        }
-      }
-
       .nickname {
         padding-top: 2px;
         margin-bottom: -2px;
@@ -53,6 +47,15 @@ user-card {
       .remark {
         color: $keylol-inertia-text;
         font-size: 12px;
+      }
+    }
+
+
+    &:hover {
+      .bundle {
+        .nickname {
+          text-decoration: underline;
+        }
       }
     }
   }

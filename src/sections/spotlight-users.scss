@@ -23,23 +23,23 @@ spotlight-users {
 
       .part1 {
         display: flex;
-        width: 100%;
+        width: 50%;
         flex-direction: row-reverse;
         user-card {
           flex-shrink: 0;
-          margin-left: 20px;
+          margin: 0 10px;
         }
       }
       .part2 {
         display: flex;
-        width: 0;
+        width: 50%;
 
         user-card {
           flex-shrink: 0;
-          margin-right: 20px;
+          margin: 0 10px;
 
-          &:first-of-type {
-            margin-left: 260px;
+          &:nth-of-type(3) {
+            margin-left: 250px;
           }
         }
       }
