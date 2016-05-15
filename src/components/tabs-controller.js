@@ -18,6 +18,7 @@
         bindings:{
             tabArray: '<',
             curTab: '<',
+            invert: '<',
         },
     });
 }());

@@ -7,13 +7,13 @@
 </div>
 <ul class="subscribe-list">
     <li ng-repeat="game in [1,2,3,4,5]">
-        <a ng-href="" ripple>
+        <div class="wrapper">
             <img class="cover" webp-src="//steamcdn.keylol.com/steam/apps/570/capsule_231x87.jpg!cover.image.big">
             <div class="point">
-                <div class="name">
+                <a href="" class="name">
                     <p>游戏中文名</p>
                     <p>游戏英文名</p>
-                </div>
+                </a>
                 <div class="info">
                     <review-with-text review=""></review-with-text>
                     <div class="game-time">
@@ -24,6 +24,6 @@
                 </div>
                 <span class="horizon"></span>
             </div>
-        </a>
+        </div>
     </li>
 </ul>

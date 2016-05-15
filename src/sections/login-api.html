@@ -1,0 +1,19 @@
+﻿<phase phases="['在威乐页面登录授权','登录成功']" index="loginApi.phaseIndex"></phase>
+<div class="inner" ng-switch on="loginApi.phaseIndex" ng-style="{
+justifyContent:loginApi.phaseIndex === 0?'space-between':'center'}">
+    <div class="left" ng-switch-when="0">
+        <p>点击<span class="highlight">右侧按钮</span>,跳转至威乐官方页面并登录 Steam 账户</p>
+        <p>验证在官方接口完成,其乐不会接触密码与敏感信息</p>
+    </div>
+    <a class="right" ng-switch-when="0" href=""><img src="assets/images/sits_large_noborder_sc.png" /></a>
+    <div class="user" ng-switch-when="1">
+        <img webp-src="//storage.keylol.com/4ed8e4862422e8a584fb6bee9f32fedd.jpg!avatar.medium" />
+        <div>
+            <p>用户名</p>
+            <p>欢迎回来</p>
+        </div>
+    </div>
+</div>
+<div class="action">
+    <flat-button text="放弃" type="inertia"></flat-button>
+</div>

@@ -1,38 +1,61 @@
 tabs {
-  position: relative;
-  height: 35px;
-  display: flex;
-  justify-content: center;
-
-  background-color: $keylol-light-theme;
-
-  .link {
+  .wrapper {
+    position: relative;
     height: 35px;
-    line-height: 35px;
-    font-size: 16px;
-    color: rgba(#fff, .6);
-    text-decoration: none;
+    display: flex;
+    justify-content: center;
 
-    padding: 0 15px;
+    background-color: $keylol-light-theme;
 
-    &:not(:last-of-type) {
-      margin-right: 10px;
+    .link {
+      height: 35px;
+      line-height: 35px;
+      font-size: 16px;
+      color: rgba(#fff, .6);
+      text-decoration: none;
+
+      padding: 0 15px;
+
+      &:not(:last-of-type) {
+        margin-right: 10px;
+      }
+
+      &:hover {
+        color: #fff;
+      }
+
+      &.link__selected {
+        color: #fff;
+      }
     }
 
-    &:hover {
-      color: #fff;
+    .move-bar {
+      position: absolute;
+      bottom: 0;
+      height: 2px;
+
+      background-color: #fff;
     }
 
-    &.link__selected {
-      color: #fff;
+    &.invert {
+      background-color: transparent;
+      border-bottom: 1px solid $keylol-inertia-shape;
+
+      .link {
+        font-family: "Helvetica Neue", "Segoe UI", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", Arial, sans-serif;
+        font-size: 14px;
+        color: $keylol-inertia-text;
+
+        &:hover {
+          color: $keylol-main-text;
+        }
+        &.link__selected {
+          color: $keylol-main-text;
+        }
+      }
+      .move-bar {
+        background-color: #000;
+      }
     }
-  }
-
-  .move-bar {
-    position: absolute;
-    bottom: 0;
-    height: 2px;
-
-    background-color: #fff;
   }
 }

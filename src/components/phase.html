@@ -1,0 +1,5 @@
+<div class="repeat-wrapper" ng-class="{'completed':$index < phase.index,'current':$index === phase.index}" ng-repeat="p in phase.phases">
+    <span class="order">{{$index >= phase.index?$index+1:'√'}}</span>
+    <span class="text">{{p}}</span>
+    <span ng-if="$index !== phase.phases.length-1" class="gap"></span>
+</div>

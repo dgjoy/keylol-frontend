@@ -1,0 +1,63 @@
+login-steam-robot {
+  display: block;
+
+  .inner {
+    height: 100px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16) inset,0 -2px 5px rgba(0, 0, 0, 0.16) inset;
+    background-color: $keylol-inverted-text;
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+
+    .left {
+      p {
+        margin: 0;
+      }
+
+      p:last-of-type {
+        color:$keylol-inertia-text;
+      }
+
+      .highlight {
+
+      }
+    }
+
+    .right {
+      color: $keylol-theme;
+      font-size: 24px;
+    }
+
+    .user {
+      display: flex;
+      img {
+        height: 50px;
+        width: 50px;
+        border-radius: 25px;
+        margin-right: 10px;
+      }
+
+      div {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        p {
+          margin: 0;
+        }
+
+        p:last-of-type {
+          color: $keylol-inertia-text;
+        }
+      }
+    }
+  }
+
+  .action {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 75px;
+    padding-right: 10px;
+  }
+}

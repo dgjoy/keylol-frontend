@@ -1,0 +1,46 @@
+phase {
+  height: 72px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .repeat-wrapper {
+    display: flex;
+    align-items: center;
+
+    .order {
+      width: 24px;
+      height: 24px;
+      line-height: 24px;
+      text-align: center;
+      display: block;
+      background-color: $keylol-inertia-shape;
+      color: $keylol-inverted-text;
+      border-radius: 12px;
+      margin-right: 10px;
+    }
+
+    .gap {
+      height: 1px;
+      width: 100px;
+      margin: 0 10px;
+      background-color: $keylol-inertia-shape;
+    }
+
+    &.completed {
+      .order {
+        background-color: $keylol-light-theme;
+      }
+    }
+
+    &.current {
+      .order {
+        background-color: $keylol-theme;
+      }
+
+      .text {
+        font-weight: bold;
+      }
+    }
+  }
+}

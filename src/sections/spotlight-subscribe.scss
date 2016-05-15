@@ -45,15 +45,11 @@ spotlight-subscribe {
     list-style: none;
 
     li {
-      a {
+      .wrapper {
         padding: 0 15px;
         display: flex;
         justify-content: space-between;
         align-items: center;
-
-        &:hover {
-          background-color: rgba(#000, 0.05);
-        }
       }
 
       .cover {
@@ -72,6 +68,12 @@ spotlight-subscribe {
         .name {
           flex-grow: 1;
           max-width: calc(100% - 268px);
+
+          &:hover {
+            p:first-of-type {
+              text-decoration: underline;
+            }
+          }
 
           p {
             @include ellipsis;
