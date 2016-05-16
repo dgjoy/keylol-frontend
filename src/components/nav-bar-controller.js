@@ -19,8 +19,9 @@
                 inputs: {},
             });
         }
-        showLoginWindow () {
+        showLoginWindow (event) {
             this.window.show({
+                event,
                 templateUrl: 'src/windows/login.html',
                 controller: 'LoginController',
                 controllerAs: 'login',

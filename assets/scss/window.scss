@@ -83,6 +83,16 @@
   }
 }
 
+@keyframes window-enter {
+  from {
+    background-color: rgba(0, 0, 0, 0);
+  }
+
+  to {
+    background-color: rgba(0, 0, 0, 0.45);
+  }
+}
+
 .body-window-open {
   overflow: hidden;
 }
@@ -172,6 +182,14 @@ window[position=right]::after {
   background-color: $keylol-card;
   position: relative;
   box-sizing: border-box;
+}
+
+window.window-hidden {
+  opacity: 0;
+}
+
+window.window-hidden .window {
+  //opacity: 0;
 }
 
 /* Secret Barcode */
