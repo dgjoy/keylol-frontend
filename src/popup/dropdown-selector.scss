@@ -1,0 +1,32 @@
+.popup-dropdown-selector {
+  @include keylol-shadow-1();
+  background-color: $keylol-card;
+  z-index: 1000;
+  width: 230px;
+
+  &.ng-enter {
+    transition: opacity 1000ms;//待处理
+    opacity: 0;
+  }
+
+  &.ng-enter-active {
+    opacity: 1;
+  }
+
+  .tip,
+  .item {
+    display: block;
+    height: 42px;
+    line-height: 42px;
+    padding: 0 15px;
+  }
+
+  .tip {
+    color: $keylol-inertia-text;
+  }
+
+  .item {
+    @include hover-background();
+    color: $keylol-main-text;
+  }
+}

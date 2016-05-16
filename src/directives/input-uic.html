@@ -1,4 +1,4 @@
-﻿<span ng-repeat="i in repeats track by $index">
-    <input class="code-input-textbox" type="text" maxlength="1" ng-model="text[$index]" ng-trim="false" ng-focus="$index > 0 && focusFirstIfEmpty()" focus-me="focus[$index]" ng-keydown="keydown($index, $event)">
-    <div class="bottom {{type}}"></div>
+﻿<span ng-repeat="i in repeats track by $index" class="{{state}}">
+    <input ng-disabled="state === 'disabled'" class="code-input-textbox" type="text" maxlength="1" ng-model="text[$index]" ng-trim="false" ng-focus="$index > 0 && focusFirstIfEmpty()" focus-me="focus[$index]" ng-keydown="keydown($index, $event)">
+    <div class="bottom"></div>
 </span>

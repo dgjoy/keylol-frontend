@@ -1,6 +1,6 @@
 ﻿(function () {
     class LoginPasscodeController {
-        constructor() {
+        constructor($scope) {
             this.tabArray = [{
                 name:'识别码',
                 href:'',
@@ -13,6 +13,16 @@
             }];
 
             this.curTab = 0;
+            this.swapDirection = 'init';
+        }
+        changeTab(index) {
+            if (index > this.curTab) {
+                this.swapDirection = 'left';
+                this.curTab = index;
+            } else if (index < this.curTab) {
+                this.swapDirection = 'right';
+                this.curTab = index;
+            }
         }
     }
 

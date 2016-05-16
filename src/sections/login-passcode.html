@@ -1,21 +1,23 @@
-﻿<tabs tab-array="loginPasscode.tabArray" cur-tab="loginPasscode.curTab" invert="true"></tabs>
-<div class="inputs">
-    <text-area style="width: 300px;margin-right: 30px;"></text-area>
-    <text-area style="width: 240px;"></text-area>
-</div>
+﻿<tabs tab-array="loginPasscode.tabArray" cur-tab="loginPasscode.curTab" invert="true" click-handler="loginPasscode.changeTab(index)"></tabs>
 
-<div class="inputs">
-    <text-area style="width: 300px;margin-right: 30px;"></text-area>
-    <text-area style="width: 240px;"></text-area>
-</div>
+<div class="passcode-wrapper {{loginPasscode.swapDirection}}">
+    <div class="swap-helper swap-animation" ng-animate-swap="loginPasscode.curTab">
+        <div class="inputs" ng-show="loginPasscode.curTab == 0">
+            <text-area type="uic" label="用户识别码" model="''" style="margin-right: 30px;"></text-area>
+            <text-area type="text" label="登录口令" model="''" style="width: 240px;"></text-area>
+        </div>
+        <div class="inputs" ng-show="loginPasscode.curTab == 1">
+            <text-area type="text" label="昵称" model="''" style="width: 300px;margin-right: 30px;"></text-area>
+            <text-area type="text" label="登录口令" model="''" style="width: 240px;"></text-area>
+        </div>
+        <div class="inputs" ng-show="loginPasscode.curTab == 2">
+            <text-area type="text" label="电邮地址" model="''" style="width: 300px;margin-right: 30px;"></text-area>
+            <text-area type="text" label="登录口令" model="''" style="width: 240px;"></text-area>
+        </div>
 
-
-<div class="inputs">
-    <input-uic length="5" ng-model="loginPasscode.uic"></input-uic>
-    <text-area style="width: 240px;"></text-area>
-</div>
-
-<div class="action">
-    <flat-button text="放弃" type="inertia"></flat-button>
-    <raised-button text="注册"></raised-button>
+        <div class="action">
+            <flat-button text="放弃" type="inertia"></flat-button>
+            <raised-button text="注册"></raised-button>
+        </div>
+    </div>
 </div>

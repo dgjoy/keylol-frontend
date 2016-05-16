@@ -5,13 +5,27 @@
             templateUrl: 'src/directives/input-uic.html',
             scope: {
                 length: '=',
-                type: '@',
+                state: '@',
+                blurHandler: '&',
             },
             require: 'ngModel',
             link (scope, element, attrs, ngModel) {
                 scope.repeats = new Array(scope.length); // For ng-repeat
                 scope.text = {};
-                scope.focus = {};
+                scope.focus = new Array(length);
+
+
+                const $uicBlur = $(document).click(e => {
+                    const _con = $(element);   // 设置目标区域
+                    if (!_con.is(e.target) && _con.has(e.target).length === 0) {
+                        scope.blurHandler();
+                        scope.$apply();
+                    }
+                });
+
+                scope.$on('$destroy',() => {
+                    $(document).unbind('click',$uicBlur);
+                });
 
                 scope.keydown = function (index, event) {
                     if (event.keyCode === 8) { // backspace

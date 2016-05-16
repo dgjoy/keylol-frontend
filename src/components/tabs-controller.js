@@ -5,6 +5,8 @@
                 return ;
             
             this.curTab = index;
+            this.clickHandler({ index });
+
             if (this.tabArray[index].click) {
                 this.tabArray[index].click();
             }
@@ -19,6 +21,7 @@
             tabArray: '<',
             curTab: '<',
             invert: '<',
+            clickHandler: '&',
         },
     });
 }());

@@ -1,0 +1,7 @@
+﻿<popup class="popup-dropdown-selector">
+    <div class="tip">{{dropdownSelector.content[0]}}</div>
+    <a class="item" ng-click="dropdownSelector.select($index)" ng-repeat="item in dropdownSelector.content" ng-if="$index !== 0&&$index !== dropdownSelector.content.length - 1" ripple>
+        {{item}}
+    </a>
+    <a class="item" ng-click="dropdownSelector.cancel()">{{dropdownSelector.content[dropdownSelector.content.length - 1]}}</a>
+</popup>

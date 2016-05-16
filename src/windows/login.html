@@ -8,7 +8,14 @@
             </div>
             <img src="assets/images/key-and-locker.png">
         </div>
-        <tabs tab-array="::login.tabArray" cur-tab="login.currentPage"></tabs>
-        <login-passcode></login-passcode>
+
+        <tabs tab-array="::login.tabArray" cur-tab="login.currentPage" click-handler="login.changeTab(index)"></tabs>
+        <div class="login-wrapper {{login.swapDirection}}" ng-class="{'low':login.currentPage == 2,'high':login.currentPage<2}">
+            <div class="swap-helper swap-animation" ng-animate-swap="login.currentPage">
+                <login-steam-robot ng-show="login.currentPage == 0"></login-steam-robot>
+                <login-api ng-show="login.currentPage == 1"></login-api>
+                <login-passcode ng-show="login.currentPage == 2"></login-passcode>
+            </div>
+        </div>
     </div>
 </window>

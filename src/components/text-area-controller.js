@@ -1,41 +1,44 @@
 ﻿(function () {
     class TextAreaController {
-        constructor (stateTree, $http, apiEndpoint, notification) {
+        constructor (stateTree, $http, apiEndpoint, notification, $scope) {
             $.extend(this, {
                 stateTree,
                 $http,
                 apiEndpoint,
                 notification,
+                $scope,
             });
-
-            this.active = false;
-            this.value = '';
-            if (this.value.length !== 0){
-                this.filled = true;
+            this.model = '';
+            if (this.model.length === 0) {
+                this.fillState = false;
             }
+            this.warnState = false;
+            this.activeState = false;
 
-            this.defaultTip = '日常界面展示的称呼';
-            this.tip = this.defaultTip;
-            this.localWarn = false;
-            this.locked = false;
+            this.tip = '识唔识得啊';
+            if (this.type === 'uic') {
+                $scope.$watch(() => {
+                    return this.model;
+                },() => {
+                    this.check();
+                });
+            }
         }
 
         focus() {
-            this.active = true;
+            this.activeState = true;
         }
 
         blur() {
-            this.active = false;
-            this.filled = (this.value.length !== 0);
+            this.activeState = false;
+            this.fillState = (this.model.length !== 0);
         }
 
-        localCheck() {
-            if (this.value.length > 5) {
-                this.localWarn = true;
-                this.tip = '不得超过5个字符';
+        check() {
+            if (this.model.length === 0) {
+                this.warnState = false;
             } else {
-                this.localWarn = false;
-                this.tip = this.defaultTip;
+                this.warnState = true;
             }
         }
     }
@@ -44,5 +47,10 @@
         templateUrl: 'src/components/text-area.html',
         controller: TextAreaController,
         controllerAs: 'textArea',
+        bindings: {
+            type:'@',
+            label:'@',
+            model:'=',
+        },
     });
 }());

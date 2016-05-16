@@ -11,8 +11,8 @@ section-timeline {
       margin-bottom: 20px;
 
       &.ng-enter {
-        transition: all 1000ms;
-        transform: translateY(20px);
+        transition: all 500ms cubic-bezier(0.0, 0.0, 0.2, 1);
+        transform: translateY(100px);
         opacity: .1;
       }
 

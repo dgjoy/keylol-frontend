@@ -24,6 +24,17 @@
                 },
             ];
             this.currentPage = 0;
+            this.swapDirection = 'init';
+        }
+
+        changeTab(index) {
+            if (index > this.currentPage) {
+                this.swapDirection = 'left';
+                this.currentPage = index;
+            } else if (index < this.currentPage) {
+                this.swapDirection = 'right';
+                this.currentPage = index;
+            }
         }
 
         submit() {
