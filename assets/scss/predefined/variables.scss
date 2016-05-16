@@ -63,6 +63,7 @@ $keylol-topic: #7976b1;
 // button
 @mixin keylol-button {
   border: none;
+  padding: 0;
 
   &:focus {
     outline: 0;

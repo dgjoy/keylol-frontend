@@ -1,64 +1,51 @@
 .popup-moderation {
-}
+    width: 220px;
+    z-index: 1000;
 
-.popup-moderation .wrapper {
-    background: white no-repeat center;
-    background-size: 256px;
-    width: 600px;
-    padding: 6px 0 44px 0;
-}
+    &.ng-enter {
+        transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+        opacity: 0;
+        transform-origin: top right 0;
+        transform: scale(0, 0);
 
-.popup-moderation h1 {
-    margin-bottom: 20px;
-}
+        menu > * {
+            transition: opacity 100ms cubic-bezier(.55, 0, .55, .2) 75ms;
+            opacity: 0;
+        }
 
-.popup-moderation h2 {
-    float: right;
-    font-size: 13px;
-    font-weight: normal;
-    color: #bbb;
-    margin: 3px 10px;
-}
+        &.ng-enter-active {
+            opacity: 1;
+            transform: scale(1, 1);
 
-.popup-moderation form {
-    margin-top: 20px;
-    padding: 0 10px;
-}
+            menu > * {
+                opacity: 1;
+            }
+        }
+    }
 
-.popup-moderation form > span {
-    color: #bbb;
-    margin-bottom: 6px;
-}
+    &.ng-leave {
+        transition: all 0.15s cubic-bezier(0.95, 0.05, 0.795, 0.035);
+        opacity: 1;
+        transform-origin: top right 0;
+        transform: scale(1, 1);
 
-.popup-moderation form > span.error-flash {
-    animation: error-text-flash 150ms ease-in-out 6 alternate;
-    color: red;
-}
+        menu > * {
+            transition: opacity 75ms cubic-bezier(0.95, 0.05, 0.795, 0.035);
+            opacity: 1;
+        }
 
-.popup-moderation form .checkbox-group {
-    margin: 0;
-    padding: 0 0 14px 10px;
-    line-height: 28px;
-}
+        &.ng-leave-active {
+            opacity: 0;
+            transform: scale(0, 0);
 
-.popup-moderation form .checkbox-group input {
-    margin-right: 10px;
-}
+            menu > * {
+                opacity: 0;
+            }
+        }
+    }
 
-.popup-moderation form .checkbox-group label {
-    margin-right: 30px;
-    margin-bottom: 12px;
-}
-
-.popup-moderation button.right-border {
-    position: absolute;
-    right: -5px;
-    bottom: 22px;
-    padding-right: 23px;
-    background-position: 100% 1px;
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAAHlBMVEX///////////////////////////////////////8V2MxSAAAACXRSTlMAESIzRGZ3iLtU0KdmAAAAOUlEQVR42u3HuREAIAwDMEL4vP/CXKBz4QmsTs3M7MuRMmwD2CIsUEKEdJQuwg6Ao8JirhkiZmbPBS/FAnGzq3lQAAAAAElFTkSuQmCC);
-}
-
-.popup-moderation button.right-border:disabled {
-    background-color: #CCC;
+    menu {
+        @include keylol-shadow-3;
+        border-radius: 0;
+    }
 }

@@ -1,8 +1,14 @@
 spotlight-topics {
   display: block;
+  position: relative;
 
   p {
     margin: 0;
+  }
+
+  .moderation-wrapper {
+    position: absolute;
+    left: -44px;
   }
 
   .header {

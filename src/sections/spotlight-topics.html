@@ -1,4 +1,7 @@
-﻿<div class="header">
+﻿<div class="moderation-wrapper" popup="spotlightTopics.showModerationPopup">
+    <icon-button icon="dots-vertical" type="light-text" click="::spotlightTopics.showModeration(event)"></icon-button>
+</div>
+<div class="header">
     <div class="topic-selector">
         <div class="moveBackground active-{{spotlightTopics.index}}" ng-class="{'move-up':spotlightTopics.isMoveUp,'move-down':!spotlightTopics.isMoveUp}"></div>
         <div class="moveBackground-triangle active-{{spotlightTopics.index}}"></div>

@@ -6,6 +6,7 @@
         return {
             scope : {
                 type: '@ripple',
+                position: '@ripplePosition',
             },
             restrict: 'A',
             link (scope, element) {
@@ -38,6 +39,13 @@
                     $rippleContainer.prepend($ripple);
 
                     function getPointOffset(e) {
+                        if (scope.position === 'center') {
+                            return {
+                                left: element[0].offsetWidth / 2,
+                                top: element[0].offsetHeight / 2,
+                            };
+                        }
+
                         let x, y;
                         const eventType = e.type;
 

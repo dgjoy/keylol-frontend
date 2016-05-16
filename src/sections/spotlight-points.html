@@ -8,3 +8,6 @@
     </div>
 </div>
 <switch-pagination next="spotlightPoints.nextPage()" previous="spotlightPoints.previousPage()" current="spotlightPoints.activePage" total="::spotlightPoints.pages.length"></switch-pagination>
+<div class="moderation-wrapper" popup="spotlightPoints.showModerationPopup">
+    <icon-button icon="dots-vertical" type="light-text" click="::spotlightPoints.showModeration(event)"></icon-button>
+</div>

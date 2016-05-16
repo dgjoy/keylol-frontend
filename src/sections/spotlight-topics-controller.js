@@ -14,7 +14,19 @@
             this.oldIndex = this.index;
             this.index = index;
         }
-
+        
+        showModeration ($event) {
+            this.showModerationPopup({
+                templateUrl: 'src/popup/moderation.html',
+                controller: 'ModerationController as moderation',
+                event: $event,
+                attachSide: 'left',
+                align: 'top',
+                offsetX: 29,
+                offsetY: -5,
+                inputs: {},
+            });
+        }
     }
 
     keylolApp.component('spotlightTopics', {

@@ -3,7 +3,7 @@ spotlight-points {
   justify-content: space-between;
   position: relative;
 
-    .pages-wrapper {
+  .pages-wrapper {
       overflow: hidden;
       position: relative;
       width: 900px;
@@ -52,5 +52,10 @@ spotlight-points {
 
   switch-pagination {
     height: 270px;
+  }
+
+  .moderation-wrapper {
+    position: absolute;
+    right: -44px;
   }
 }

@@ -17,6 +17,7 @@
 
                 function adjustScrollBar () {
                     const $body = $(document.body);
+                    const $navBar = $('nav-bar');
                     if ($body.find('main[ui-view] > window').length > 0) {
                         if (!$body.hasClass('body-window-open')) {
                             bodyOriginalPaddingRight = document.body.style.paddingRight || '';
@@ -31,6 +32,7 @@
                                 // Set body padding-right
                                 const bodyPaddingRight = parseInt(($body.css('padding-right') || 0), 10);
                                 $body.css('padding-right', `${bodyPaddingRight + scrollBarWidth()}px`);
+                                $navBar.css('padding-right', `${bodyPaddingRight + scrollBarWidth()}px`);
                             }
 
                             $body.addClass('body-window-open');
@@ -39,6 +41,7 @@
                         if ($body.hasClass('body-window-open')) {
                             $body.css('padding-right', bodyOriginalPaddingRight);
                             $body.removeClass('body-window-open');
+                            $navBar.css('padding-right', 0);
                         }
                     }
                 }
