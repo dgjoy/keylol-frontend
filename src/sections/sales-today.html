@@ -1,11 +1,14 @@
-﻿<div class="header" webp-background="//steamcdn.keylol.com/steam/apps/570/capsule_231x87.jpg!cover.image.big">
+﻿<div class="header" webp-background="{{::salesToday.headerImage | uriRelocate}}">
     <div class="header-text">
         <p class="title">是日优惠</p>
         <p class="sub-title">理性加一，入坑前先摸好评价和口碑</p>
     </div>
 </div>
-<div class="sales-wrapper" ng-style="{height: (salesToday.list.length > 5 && !salesToday.hasBeenExpanded) ? 424 : salesToday.list.length * 85}">
-    <ul class="sales-list">
+<div class="sales-wrapper" ng-style="{height: (salesToday.list.length > 5 && !salesToday.hasBeenExpanded) ? 424 : salesToday.list.length * 85}" ng-class="{
+    'to-next' : salesToday.isToNext,
+    'to-previous' : !salesToday.isToNext
+    }">
+    <ul class="sales-list" ng-animate-swap="salesToday.currentPage">
         <li ng-repeat="point in salesToday.list">
             <a ng-href="{{point.link}}" ripple>
                 <img class="cover" webp-src="{{point.coverImg}}">
@@ -29,6 +32,6 @@
     </ul>
 </div>
 <div class="footer clearfix">
-    <flat-button ng-if="salesToday.list.length > 5 && salesToday.hasBeenExpanded" text="展开更多" type="light-text" click="salesToday.expandMore()"></flat-button>
-    <pagination ng-if="!salesToday.hasBeenExpanded" total="23" current="1"></pagination>
+    <flat-button ng-if="salesToday.list.length > 5 && !salesToday.hasBeenExpanded" text="展开更多" type="light-text" click="salesToday.expandMore()"></flat-button>
+    <pagination ng-if="salesToday.hasBeenExpanded" on-page-changed="::salesToday.changePage(newPage, oldPage)" total="::salesToday.totalPage" current="salesToday.currentPage"></pagination>
 </div>

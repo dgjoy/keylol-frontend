@@ -1,12 +1,15 @@
-﻿<div class="header" webp-background="//steamcdn.keylol.com/steam/apps/570/capsule_231x87.jpg!cover.image.big">
+﻿<div class="header" webp-background="{{::latestArticles.headerImage | uriRelocate}}">
     <div class="header-text">
         <p class="title">即刻投稿</p>
         <p class="sub-title">让你的文章展现于此</p>
     </div>
     <fab icon="New_Article" type="accent"></fab>
 </div>
-<div class="latest-wrapper" ng-style="{height: (latestArticles.articles.length > 5 && !latestArticles.hasBeenExpanded) ? 434 : latestArticles.articles.length * 87}">
-    <ul class="latest-list">
+<div class="latest-wrapper" ng-style="{height: (latestArticles.articles.length > 5 && !latestArticles.hasBeenExpanded) ? 434 : latestArticles.articles.length * 87}" ng-class="{
+    'to-next' : latestArticles.isToNext,
+    'to-previous' : !latestArticles.isToNext
+    }">
+    <ul class="latest-list" ng-animate-swap="latestArticles.currentPage">
         <li ng-repeat="article in ::latestArticles.articles track by $index">
             <div class="count">
                 <span>+{{::article.likeCount}}</span><span>···{{::article.commentCount}}</span>
@@ -30,4 +33,5 @@
 </div>
 <div class="footer clearfix">
     <flat-button ng-if="latestArticles.articles.length > 5 && !latestArticles.hasBeenExpanded" text="展开更多" type="light-text" click="latestArticles.expandMore()"></flat-button>
+    <pagination ng-if="latestArticles.hasBeenExpanded" on-page-changed="::latestArticles.changePage(newPage, oldPage)" total="::latestArticles.totalPage" current="latestArticles.currentPage"></pagination>
 </div>

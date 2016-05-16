@@ -38,12 +38,17 @@ latest-articles {
   .latest-wrapper {
     margin: 20px 0;
     overflow: hidden;
+    position: relative;
     transition: height .5s;
 
     .latest-list {
       margin: 0;
       padding: 0;
       list-style: none;
+      width: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
 
       li {
         height: 86px;
@@ -113,6 +118,46 @@ latest-articles {
         }
       }
     }
+
+    &.to-next {
+      .latest-list {
+        &.ng-enter, &.ng-leave {
+          transition: transform .5s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        &.ng-enter {
+          transform: translateX(100%);
+        }
+
+        &.ng-enter-active, &.ng-leave {
+          transform: translateX(0);
+        }
+
+        &.ng-leave-active {
+          transform: translateX(-100%);
+        }
+      }
+    }
+
+    &.to-previous {
+      .latest-list {
+        &.ng-enter, &.ng-leave {
+          transition: transform .5s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        &.ng-enter {
+          transform: translateX(-100%);
+        }
+
+        &.ng-enter-active, &.ng-leave {
+          transform: translateX(0);
+        }
+
+        &.ng-leave-active {
+          transform: translateX(100%);
+        }
+      }
+    }
   }
 
   .footer {
@@ -120,6 +165,12 @@ latest-articles {
       display: block;
       text-align: center;
       margin-bottom: 10px;
+    }
+
+    pagination {
+      float: right;
+      margin-bottom: 20px;
+      margin-right: 20px;
     }
   }
 }

@@ -1,14 +1,14 @@
 ﻿<div ng-if="stateTree.discoveryPage">
-    <slide-show slides="::stateTree.discoveryPage.slideshowEntries" style="margin-bottom: 40px;"></slide-show>
-    <spotlight-points cards="::stateTree.discoveryPage.spotlightPoints" style="margin-bottom: 30px"></spotlight-points>
+    <slide-show ng-if="::(stateTree.discoveryPage.slideshowEntries.length > 0)" slides="::stateTree.discoveryPage.slideshowEntries" style="margin-bottom: 40px;"></slide-show>
+    <spotlight-points ng-if="::(stateTree.discoveryPage.spotlightPoints.length > 0)" cards="::stateTree.discoveryPage.spotlightPoints" style="margin-bottom: 30px"></spotlight-points>
     <div class="flex-row">
         <div class="left-middle-lg row-sm">
-            <spotlight-articles cards="::stateTree.discoveryPage.spotlightReviews" style="margin-bottom: 30px" type="reviews"></spotlight-articles>
-            <spotlight-topics topics="::stateTree.discoveryPage.spotlightConferences" style="margin-bottom: 50px;"></spotlight-topics>
-            <spotlight-articles cards="::stateTree.discoveryPage.spotlightStudies" style="margin-bottom: 30px" type="studies"></spotlight-articles>
-            <sales-today style="margin-bottom: 40px"></sales-today>
-            <spotlight-articles cards="::stateTree.discoveryPage.spotlightStories" style="margin-bottom: 30px" type="stories" ></spotlight-articles>
-            <latest-articles articles="::stateTree.discoveryPage.latestArticles" style="margin-bottom: 50px"></latest-articles>
+            <spotlight-articles ng-if="::(stateTree.discoveryPage.spotlightReviews.length > 0)" cards="::stateTree.discoveryPage.spotlightReviews" style="margin-bottom: 30px" type="reviews"></spotlight-articles>
+            <spotlight-topics ng-if="::(stateTree.discoveryPage.spotlightConferences.length > 0)" topics="::stateTree.discoveryPage.spotlightConferences" style="margin-bottom: 50px;"></spotlight-topics>
+            <spotlight-articles ng-if="::(stateTree.discoveryPage.spotlightStudies.length > 0)" cards="::stateTree.discoveryPage.spotlightStudies" style="margin-bottom: 30px" type="studies"></spotlight-articles>
+            <sales-today ng-if="::(stateTree.discoveryPage.onSalePoints.length > 0)" articles="::stateTree.discoveryPage.onSalePoints" header-image="::stateTree.discoveryPage.onSalePointsHeaderImage" total-page="::stateTree.discoveryPage.onSalePointsPageCount" style="margin-bottom: 40px"></sales-today>
+            <spotlight-articles ng-if="::(stateTree.discoveryPage.spotlightStories.length > 0)" cards="::stateTree.discoveryPage.spotlightStories" style="margin-bottom: 30px" type="stories" ></spotlight-articles>
+            <latest-articles ng-if="::(stateTree.discoveryPage.latestArticles.length > 0)" articles="::stateTree.discoveryPage.latestArticles" header-image="::stateTree.discoveryPage.latestArticleHeaderImage" total-page="::stateTree.discoveryPage.latestArticlePageCount" style="margin-bottom: 50px"></latest-articles>
         </div>
         <right-menus class="right-lg hidden-sm"></right-menus>
     </div>
