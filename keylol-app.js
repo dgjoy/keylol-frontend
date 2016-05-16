@@ -99,11 +99,11 @@
             //     templateUrl: 'src/pages/page-timeline.html',
             //     controller: 'PageTimelineController',
             // })
-            // .state('not-found', {
-            //     url: '404',
-            //     templateUrl: 'src/pages/not-found.html',
-            //     controller: 'NotFoundController',
-            // })
+            .state('not-found', {
+                url: '404',
+                templateUrl: 'src/pages/not-found.html',
+                controller: 'NotFoundController',
+            })
             // state after refactoring
             .state('entrance', {
                 'abstract': true,

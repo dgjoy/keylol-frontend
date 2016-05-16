@@ -10,19 +10,19 @@
     }">
     <ul class="sales-list" ng-animate-swap="salesToday.currentPage">
         <li ng-repeat="point in salesToday.list">
-            <a ng-href="{{point.link}}" ripple>
-                <img class="cover" webp-src="{{point.coverImg}}">
+            <a ng-href="point/{{point.idCode}}" ripple>
+                <img class="cover" webp-src="{{point.thumbnailImage | uriRelocate}}">
                 <div class="point">
                     <div class="name">
-                        <p>{{point.title}}</p>
-                        <p>{{point.subTitle}}</p>
+                        <p>{{point.chineseName}}</p>
+                        <p>{{point.englishName}}</p>
                     </div>
                     <div class="info">
-                        <review-with-text review="point.review"></review-with-text>
+                        <review-with-text review="point.averageRating"></review-with-text>
                         <div class="price">
-                            <span ng-if="point.oldPrice" class="old">¥ {{point.oldPrice}}</span>
-                            <span>¥ {{point.price}}</span>
-                            <span ng-if="point.discount" class="discount">-{{point.discount}}</span>
+                            <span ng-if="point.steamPrice" class="old">¥ {{point.steamPrice}}</span>
+                            <span>¥ {{point.steamDiscountedPrice}}</span>
+                            <span class="discount">-{{(point.steamPrice - point.steamDiscountedPrice) / point.steamPrice | calculatePercentage}}</span>
                         </div>
                     </div>
                     <span class="horizon"></span>

@@ -1,0 +1,29 @@
+﻿<div class="header" webp-background="{{recentPlayed.headerImage}}">
+    <raised-button text="全部订阅" type="subscribe-all"></raised-button>
+    <div class="header-text">
+        <p class="title">订阅</p>
+        <p class="sub-title">最近接触的游戏</p>
+    </div>
+</div>
+<ul class="subscribe-list">
+    <li ng-repeat="game in recentPlayed.list">
+        <div class="wrapper">
+            <img class="cover" webp-src="{{game.thumbnailImage}}">
+            <div class="point">
+                <a href="" ng-href="point/{{game.idCode}}" class="name">
+                    <p>{{game.chineseName}}</p>
+                    <p>{{game.englishName}}</p>
+                </a>
+                <div class="info">
+                    <review-with-text review="game.averageRating"></review-with-text>
+                    <div class="game-time">
+                        <p>{{game.twoWeekPlayedTime}} 小时</p>
+                        <p>二周在档记录</p>
+                    </div>
+                    <flat-button text="订阅"></flat-button>
+                </div>
+                <span class="horizon"></span>
+            </div>
+        </div>
+    </li>
+</ul>

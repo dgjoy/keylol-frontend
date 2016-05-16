@@ -1,12 +1,12 @@
-<a class="info" href="" ripple>
-    <point-basic-info></point-basic-info>
-    <review-with-text review="9.5"></review-with-text>
+<a class="info" href="" ng-href="point/{{gameGuideCard.card.idCode}}" ripple>
+    <point-basic-info point="gameGuideCard.card"></point-basic-info>
+    <review-with-text review="gameGuideCard.card.averageRating"></review-with-text>
 </a>
-<div class="point-img" webp-background="//storage.keylol.com/39b7d020df471d6c0e3fa593802000bc.jpg!timeline.thumbnail.new"></div>
+<div class="point-img" webp-background="{{gameGuideCard.card.titleCoverImage | uriRelocate}}"></div>
 <div class="characteristic-container">
     <a href="" ng-mouseenter="gameGuideCard.showTooltip($event,$index)" popup="gameGuideCard.showTooltipPopup[$index]" class="characteristic" ng-repeat="characteristic in gameGuideCard.characteristics">
         <svg aria-hidden="true">
-            <use ng-href="{{'3DS' | iconSvgUrl }}" xlink:href=""></use>
+            <use ng-href="{{characteristic.icon | iconSvgUrl }}" xlink:href=""></use>
         </svg>
     </a>
 </div>

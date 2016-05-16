@@ -1,0 +1,13 @@
+﻿<section-header header="{mainTitle: '哨所',subTitle: '近期热点观察',}"></section-header>
+<div class="wrapper">
+    <div class="pages-wrapper">
+        <div class="cards-wrapper" ng-class="{
+        'left-hidden': $index + 1 < outpostPoints.activePage,
+        active: $index + 1 === outpostPoints.activePage,
+        'right-hidden': $index + 1 > outpostPoints.activePage,
+        }" ng-repeat="page in outpostPoints.pages track by $index">
+            <game-guide-card ng-repeat="card in page track by $index" card="card"></game-guide-card>
+        </div>
+    </div>
+    <switch-pagination next="outpostPoints.nextPage()" previous="outpostPoints.previousPage()" current="outpostPoints.activePage" total="outpostPoints.pages.length"></switch-pagination>
+</div>
