@@ -1,3 +1,3 @@
 ﻿<nav-bar theme="::nav.theme" ng-class="{shadowed: nav.hasShadow}" style="{{::(nav.theme.main ? 'background-color: ' + nav.theme.main + ';' : '')}}"></nav-bar>
 <point-header ng-if="nav.inPoint" theme="::nav.theme"></point-header>
-<tabs ng-class="{'in-page': nav.inPoint}" theme="::nav.theme" tab-array="::nav.tabArray" cur-tab="nav.currentPage"></tabs>
+<tabs ng-class="{'in-page': nav.inPoint}"  style="{{::(nav.theme.light ? 'background-color: ' + nav.theme.light + ';' : '')}}" tab-array="::nav.tabArray" cur-tab="nav.currentPage"></tabs>

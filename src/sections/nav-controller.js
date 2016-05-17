@@ -34,7 +34,7 @@
                 }
             } else if (currentStateName.substr(0, 17) === 'aggregation.point') {
                 this.inPoint = true;
-                this.tabArray = [{ href:'',name:'扉页' },{ href:'',name:'情报' },{ href:'',name:'轨道' },{ href:'',name:'编辑' }];
+                this.tabArray = [{ href:'',name:'扉页' },{ href:'',name:'情报' },{ href:'',name:'轨道' },{ href:'',name:'编辑', 'float':'right' }];
                 const subState = currentStateName.substr(18);
                 switch (subState) {
                     case 'frontpage' :
