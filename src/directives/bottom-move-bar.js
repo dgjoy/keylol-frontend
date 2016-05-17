@@ -3,47 +3,34 @@
         return {
             restrict: 'E',
             scope: {
-              curTab: '@',
+              curTab: '<',
             },
             link (scope, element) {
-                const jResizeHandler = () => {
-                    const curElement = element.siblings().eq(scope.curTab);
+                $timeout(() => {
                     const pWidth = element.parent().width();
 
-                    element.css({
-                        'left': curElement.position().left ,
-                        'right': pWidth - curElement.position().left - curElement.get(0).clientWidth ,
+                    const tabs = [];
+                    element.siblings().each(function() {
+                        tabs.push({
+                            right: pWidth - $(this).position().left - $(this).outerWidth(),
+                            left: $(this).position().left,
+                        });
                     });
-                };
 
-                $timeout(() => {
-                    jResizeHandler();
-                    const jWindow = $(window).resize(jResizeHandler);
-
-                    element.siblings().click(function() {
-                        if ($(this).index() === scope.curTab)
-                            return ;
-                        
-                        const curElement = $(this);
-                        const pWidth = element.parent().width();
-
-                        const oldLeft = element.css('left').replace('px','');
-                        const oldRight = element.css('right').replace('px','');
-                        const newLeft = curElement.position().left;
-                        const newRight = pWidth - curElement.position().left - curElement.outerWidth();
-
-                        if (oldLeft < newLeft) {
-                            element.animate({ 'right': newRight },{ duration:150, queue:false });
-                            element.animate({ 'left': newLeft },{ duration:250, queue:false });
-                        } else if (oldLeft > newLeft) {
-                            element.animate({ 'left': newLeft },{ duration:150, queue:false });
-                            element.animate({ 'right': newRight },{ duration:250, queue:false });
+                    scope.$watch(() => {
+                        return scope.curTab;
+                    },(newValue, oldValue) => {
+                        if (newValue > oldValue) {
+                            element.addClass('to-right');
+                            element.removeClass('to-left');
+                        } else {
+                            element.addClass('to-left');
+                            element.removeClass('to-right');
                         }
-                    });
-
-                    //remove the event listener on scope destroy
-                    scope.$on('$destroy',() => {
-                        jWindow.unbind('resize',jResizeHandler);
+                        element.css({
+                            'right': tabs[newValue].right,
+                            'left': tabs[newValue].left,
+                        });
                     });
                 });
             },
