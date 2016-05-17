@@ -1,6 +1,6 @@
 <div class="display-card">
     <div class="user-with-date">
-        <a class="user" href="" ripple>
+        <a class="user" href="">
             <img class="avatar" webp-src="{{'' | avatarUrl}}"  alt="{{timelineCard.union.$localStorage.user.UserName}}">
             <span class="username">程晓峰</span>
         </a>
@@ -63,7 +63,7 @@
         </div>
     </div>
     <div class="operation" ng-switch="timelineCard.state">
-        <flat-button type="inertia" text="+1"></flat-button>
+        <div ng-click="timelineCard.showApproverList($event)" popup="timelineCard.showApproverListPopup"><flat-button type="inertia" text="+1"></flat-button></div>
         <flat-button ng-switch-when="open" text="评论"></flat-button>
         <flat-button ng-switch-when="close" type="inertia" text="..." ng-click="timelineCard.open()"></flat-button>
     </div>

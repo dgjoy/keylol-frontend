@@ -9,4 +9,4 @@
         <timeline-card ng-repeat="card in sectionTimeline.cards track by $index"></timeline-card>
     </div>
 </div>
-<raised-button text="展开更多" type="theme" ng-click="sectionTimeline.load()"></raised-button>
+<raised-button text="展开更多" type="theme" ng-click="sectionTimeline.load()" ng-if="sectionTimeline.firstLoad"></raised-button>
