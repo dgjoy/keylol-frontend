@@ -69,6 +69,28 @@ menu {
         padding: 0 15px;
       }
     }
+
+    .for-point {
+      margin-top: -10px;
+
+      .cover {
+        width: 100%;
+        height: 105px;
+        display: block;
+      }
+
+      .time-info {
+        padding: 20px 15px;
+
+        p {
+          margin: 0;
+
+          &:first-of-type {
+            color: $keylol-libraried;
+          }
+        }
+      }
+    }
   }
 
   ul {

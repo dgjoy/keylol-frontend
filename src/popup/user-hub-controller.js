@@ -6,7 +6,7 @@
             });
             this.userHubMenu = {
                 header: {
-                    isUser: true,
+                    type: 'user',
                 },
                 items: [
                     {

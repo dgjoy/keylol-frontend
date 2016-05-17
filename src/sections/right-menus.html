@@ -1,4 +1,5 @@
 ﻿<div class="wrapper {{rightMenus.position}}">
+    <menu ng-if="rightMenus.specialMenu" style="margin-bottom: 20px" object="::rightMenus.specialMenu"></menu>
     <menu ng-if="::rightMenus.stateTree.currentUser" style="margin-bottom: 20px" object="::rightMenus.writtingMenu"></menu>
     <menu ng-if="::rightMenus.stateTree.currentUser" object="::rightMenus.personalMenu"></menu>
     <menu ng-if="::!rightMenus.stateTree.currentUser" style="margin-bottom: 20px" object="::rightMenus.registerMenu"></menu>

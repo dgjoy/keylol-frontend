@@ -122,5 +122,8 @@
         templateUrl: 'src/sections/right-menus.html',
         controller: RightMenusController,
         controllerAs: 'rightMenus',
+        bindings: {
+            specialMenu: '<',
+        },
     });
 }());

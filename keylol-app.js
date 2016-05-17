@@ -101,65 +101,50 @@
             // })
             // state after refactoring
             .state('entrance', {
-                'abstract': true,
+                url: '/',
                 templateUrl: 'src/pages/entrance.html',
+                onEnter ($location, pageLoad) {
+                    if ($location.url() === '/') {
+                        pageLoad('entrance');
+                    }
+                },
+                onExit (stateTree) {
+                    delete stateTree.entrance;
+                },
             })
             .state('entrance.discovery', {
-                url: '/discovery',
-                resolve: {
-                    loadResult: pageLoad => {
-                        return pageLoad('entrance.discovery');
-                    },
+                url: 'discovery',
+                onEnter (pageLoad) {
+                    pageLoad('entrance.discovery');
+                },
+                onExit (stateTree) {
+                    delete stateTree.entrance.discovery;
                 },
                 templateUrl: 'src/pages/discovery.html',
                 controller: 'DiscoveryController',
             })
             .state('entrance.points', {
-                url: '/points',
-                resolve: {
-                    loadResult: pageLoad => {
-                        return pageLoad('entrance.points');
-                    },
-                },
+                url: 'points',
                 templateUrl: 'src/pages/points.html',
                 controller: 'PointsController',
             })
             .state('entrance.timeline', {
-                url: '/timeline',
-                resolve: {
-                    loadResult: pageLoad => {
-                        return pageLoad('entrance.timeline');
-                    },
-                },
+                url: 'timeline',
                 templateUrl: 'src/pages/page-timeline.html',
                 controller: 'PageTimelineController',
-            })
-            .state('home', {
-                url: '/',
-                onEnter ($state,union) {
-                    if (union.$localStorage.Authorization) {
-                        $state.go('entrance.timeline', {}, { location: false });
-                    } else {
-                        $state.go('entrance.discovery', {}, { location: false });
-                    }
-                },
             })
             .state('aggregation', {
                 'abstract': true,
                 template: '<div ui-view></div>',
             })
             .state('aggregation.point', {
+                'abstract': true,
                 url: '/point/:pointIdCode',
                 templateUrl: 'src/pages/point.html',
                 controller: 'PointController as point',
             })
             .state('aggregation.point.frontpage', {
                 url: '',
-                resolve: {
-                    loadResult: pageLoad => {
-                        return pageLoad('entrance.frontpage');
-                    },
-                },
                 templateUrl: 'src/pages/frontpage.html',
                 controller: 'FrontpageController',
             });

@@ -1,15 +1,45 @@
-<div ng-if="menu.object.header" class="menu-header">
-    <div ng-if="!menu.object.header.isUser" class="header-text no-image" >
+<div ng-if="menu.object.header" class="menu-header" ng-switch="menu.object.header.type">
+    <div ng-switch-default class="header-text no-image" >
         <p>{{ menu.object.header.main }}</p>
         <p>{{ menu.object.header.sub }}</p>
     </div>
-    <a ng-if="menu.object.header.isUser" ripple ng-href="user/{{menu.stateTree.currentUser.idCode}}">
+    <a ng-switch-when="user" ripple ng-href="user/{{menu.stateTree.currentUser.idCode}}">
         <img class="avatar" webp-src="{{menu.stateTree.currentUser.avatarImage | avatarUrl}}" alt="{{menu.stateTree.currentUser.userName}}">
         <div class="header-text for-user">
             <p>{{ menu.stateTree.currentUser.userName }}</p>
             <p>{{ menu.stateTree.currentUser.idCode }}</p>
         </div>
     </a>
+    <div ng-switch-when="point" class="for-point">
+        <img class="cover" webp-src="{{'//steamcdn.keylol.com/steam/apps/570/capsule_231x87.jpg' | coverUrl}}" alt="Dota 2">
+        <div class="time-info">
+            <p>已在档 203 小时</p>
+            <p>玩家平均在档 175.4 小时</p>
+        </div>
+        <div>
+            <div class="reputation-stat" ng-repeat="(stat, statCount) in menu.object.header.voteStats track by stat">
+                <div class="left-content">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="reputation-circle" ng-repeat="circle in menu.circles[$index] track by $index">
+                        <circle cx="4" cy="6" r="4"></circle>
+                    </svg>
+                    <span ng-if="menu.object.header.totalEvaluate">{{statCount / menu.object.header.totalEvaluate * 100 | number: 0}}%</span>
+                    <span ng-if="!menu.object.header.totalEvaluate">0%</span>
+                </div>
+                <div class="reputation-level" ng-style="{width: statCount / menu.object.header.totalEvaluate * 100}"></div>
+            </div>
+        </div>
+        <div class="reputation-info">
+            <span>
+                <span class="reputation-number" ng-class="{
+                    awesome: menu.object.header.votePercent >= 8,
+                    good: menu.object.header.votePercent >= 6 && menu.object.header.votePercent < 8,
+                    'not-bad': menu.object.header.votePercent >= 4 && menu.object.header.votePercent < 6,
+                    bad: menu.object.header.votePercent >= 2 && menu.object.header.votePercent < 4,
+                    terrible: menu.object.header.votePercent < 2
+                }">{{menu.object.header.votePercent}}</span> / 10
+            </span>
+        </div>
+    </div>
 </div>
 <ul>
     <li ng-repeat="item in menu.object.items"><menu-item data="item"></menu-item></li>

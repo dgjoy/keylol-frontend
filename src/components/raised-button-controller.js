@@ -1,7 +1,6 @@
 ﻿(function () {
     class RaisedButtonController {
         constructor () {
-            console.log(this.themeColor);
         }
     }
 

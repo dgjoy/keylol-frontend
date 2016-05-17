@@ -34,7 +34,7 @@
         },
         localCoop: {
             icon: '3DS',
-            text: '本地多人',
+            text: '同机多人',
         },
         steamTradingCards: {
             icon: '3DS',
@@ -43,6 +43,10 @@
         steamWorkshop: {
             icon: '3DS',
             text: 'Steam 创意工坊',
+        },
+        inAppPurchases: {
+            icon: '3DS',
+            text: '内购',
         },
     });
 }());
