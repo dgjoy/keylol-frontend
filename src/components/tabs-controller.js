@@ -22,6 +22,7 @@
             curTab: '<',
             invert: '<',
             clickHandler: '&',
+            theme: '<',
         },
     });
 }());

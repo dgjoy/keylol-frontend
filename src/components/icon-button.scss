@@ -1,4 +1,6 @@
 icon-button {
+  display: flex;
+
   button {
     @include keylol-button;
     @include hover-background();

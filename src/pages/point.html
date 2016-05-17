@@ -1,24 +1,3 @@
-﻿<div class="container" ng-if="pointExist">
-    <div class="row">
-        <div class="col-left">
-            <logo></logo>
-            <reception is-in-point="isInPoint" ng-if="union.$localStorage.user"></reception>
-            <main-navigation></main-navigation>
-        </div>
-        <div class="col-middle">
-            <summary></summary>
-            <point-info ng-if="isInPoint"></point-info>
-            <section ng-include="'src/sections/timeline.html'"></section>
-        </div>
-        <div class="col-right">
-            <search-box></search-box>
-            <action-hub></action-hub>
-            <point-votes ng-if="hasVote"></point-votes>
-            <promoted-readings></promoted-readings>
-            <latest-articles></latest-articles>
-            <secret-tests ng-if="union.$localStorage.user.StaffClaim === 'operator'"></secret-tests>
-            <site-footer></site-footer>
-        </div>
-    </div>
-</div>
-<div ng-if="!pointExist" ng-include="'src/pages/not-found.html'" ng-controller="NotFoundController"></div>
+﻿<nav theme="point.stateTree.pointTheme"></nav>
+<div class="container" style="margin-top: 30px" ui-view></div>
+<footer theme="point.stateTree.pointTheme"></footer>

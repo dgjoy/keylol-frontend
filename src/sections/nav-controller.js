@@ -32,6 +32,15 @@
                         this.currentPage = 2;
                         break;
                 }
+            } else if (currentStateName.substr(0, 17) === 'aggregation.point') {
+                this.inPoint = true;
+                this.tabArray = [{ href:'',name:'扉页' },{ href:'',name:'情报' },{ href:'',name:'轨道' },{ href:'',name:'编辑' }];
+                const subState = currentStateName.substr(18);
+                switch (subState) {
+                    case 'frontpage' :
+                        this.currentPage = 0;
+                        break;
+                }
             }
         }
     }
@@ -40,5 +49,8 @@
         templateUrl: 'src/sections/nav.html',
         controller: NavController,
         controllerAs: 'nav',
+        bindings: {
+            theme: '<',
+        },
     });
 }());

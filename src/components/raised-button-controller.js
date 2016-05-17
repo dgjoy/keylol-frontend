@@ -1,5 +1,9 @@
 ﻿(function () {
-    class RaisedButtonController {}
+    class RaisedButtonController {
+        constructor () {
+            console.log(this.themeColor);
+        }
+    }
 
     keylolApp.component('raisedButton', {
         templateUrl: 'src/components/raised-button.html',
@@ -9,6 +13,7 @@
             text: '@',
             type: '@',
             invert: '<',
+            themeColor: '<',
         },
     });
 }());

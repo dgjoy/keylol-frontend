@@ -7,5 +7,8 @@
         templateUrl: 'src/sections/footer.html',
         controller: FooterController,
         controllerAs: 'footer',
+        bindings: {
+            theme: '<',
+        },
     });
 }());

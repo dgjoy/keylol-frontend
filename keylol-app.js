@@ -34,11 +34,6 @@
             //     templateUrl: 'src/pages/article.html',
             //     controller: 'ArticleController',
             // })
-            // .state('point', {
-            //     url: '/point/:pointIdCode',
-            //     templateUrl: 'src/pages/point.html',
-            //     controller: 'PointController',
-            // })
             // .state('user', {
             //     url: '/user/:userIdCode',
             //     templateUrl: 'src/pages/point.html',
@@ -99,11 +94,11 @@
             //     templateUrl: 'src/pages/page-timeline.html',
             //     controller: 'PageTimelineController',
             // })
-            .state('not-found', {
-                url: '404',
-                templateUrl: 'src/pages/not-found.html',
-                controller: 'NotFoundController',
-            })
+            // .state('not-found', {
+            //     url: '404',
+            //     templateUrl: 'src/pages/not-found.html',
+            //     controller: 'NotFoundController',
+            // })
             // state after refactoring
             .state('entrance', {
                 'abstract': true,
@@ -148,6 +143,25 @@
                         $state.go('entrance.discovery', {}, { location: false });
                     }
                 },
+            })
+            .state('aggregation', {
+                'abstract': true,
+                template: '<div ui-view></div>',
+            })
+            .state('aggregation.point', {
+                url: '/point/:pointIdCode',
+                templateUrl: 'src/pages/point.html',
+                controller: 'PointController as point',
+            })
+            .state('aggregation.point.frontpage', {
+                url: '',
+                resolve: {
+                    loadResult: pageLoad => {
+                        return pageLoad('entrance.frontpage');
+                    },
+                },
+                templateUrl: 'src/pages/frontpage.html',
+                controller: 'FrontpageController',
             });
 
         pageHeadProvider.setLoadingHead({

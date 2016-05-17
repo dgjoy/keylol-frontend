@@ -33,5 +33,8 @@
         templateUrl: 'src/components/nav-bar.html',
         controller: NavBarController,
         controllerAs: 'navBar',
+        bindings: {
+            theme: '<',
+        }
     });
 }());

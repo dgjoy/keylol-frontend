@@ -1,4 +1,4 @@
-<div class="wrapper" ng-class="{invert:tabs.invert}">
+<div class="wrapper" ng-class="{invert:tabs.invert}" style="{{::(tabs.theme.light ? 'background-color: ' + tabs.theme.light + ';' : '')}}">
     <a ng-repeat="tab in tabs.tabArray" href="{{tab.href}}" ng-class="{'link__selected':$index == tabs.curTab}" class="link font-myriad-keylol" ng-click="::tabs.changeTab($index)" ripple="{{tabs.invert?'':'#fff'}}">{{::tab.name}}</a>
     <bottom-move-bar class="move-bar" cur-tab="{{tabs.curTab}}"></bottom-move-bar>
 </div>
