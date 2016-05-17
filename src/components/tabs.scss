@@ -1,21 +1,19 @@
 tabs {
-  display: block;
+  display: flex;
+  justify-content: center;
+  background-color: $keylol-light-theme;
 
-  .wrapper {
+  >.wrapper {
     position: relative;
     height: 35px;
     display: flex;
-    justify-content: center;
 
-    background-color: $keylol-light-theme;
-
-    .link {
+    >.link {
       height: 35px;
       line-height: 35px;
       font-size: 16px;
       color: rgba(#fff, .6);
       text-decoration: none;
-
       padding: 0 15px;
 
       &:not(:last-of-type) {
@@ -31,33 +29,39 @@ tabs {
       }
     }
 
-    .move-bar {
+    >.move-bar {
       position: absolute;
+      left: 0;
       bottom: 0;
       height: 2px;
-
       background-color: #fff;
+      transform: translate(0,0);
+      &.to-right {
+        transition: left 250ms,right 150ms;
+      }
+      &.to-left {
+        transition: left 150ms,right 250ms;
+      }
     }
-
-    &.invert {
+  }
+  &.invert {
       background-color: transparent;
       border-bottom: 1px solid $keylol-inertia-shape;
 
-      .link {
-        font-family: "Helvetica Neue", "Segoe UI", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", Arial, sans-serif;
-        font-size: 14px;
-        color: $keylol-inertia-text;
+    >.wrapper>.link {
+      font-family: "Helvetica Neue", "Segoe UI", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", Arial, sans-serif;
+      font-size: 14px;
+      color: $keylol-inertia-text;
 
-        &:hover {
-          color: $keylol-main-text;
-        }
-        &.link__selected {
-          color: $keylol-main-text;
-        }
+      &:hover {
+        color: $keylol-main-text;
       }
-      .move-bar {
-        background-color: #000;
+      &.link__selected {
+        color: $keylol-main-text;
       }
+    }
+    >.wrapper>.move-bar {
+      background-color: #000;
     }
   }
 }
