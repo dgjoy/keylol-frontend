@@ -20,6 +20,7 @@
         bindings:{
             tabArray: '<',
             curTab: '<',
+            invert: '<',
             clickHandler: '&',
             theme: '<',
         },
