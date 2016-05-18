@@ -6,16 +6,11 @@
          notification, $location, $rootScope, $state) => {
             pageHead.loading();
 
-            let aNewLogin = false;
-
             let firstLoad = true;
             $scope.$watch(() => {
                 return union.$localStorage.Authorization;
             },newToken => {
                 if (newToken) {
-                    if (!firstLoad) {
-                        aNewLogin = true;
-                    }
                     $http.defaults.headers.common.Authorization = `Bearer ${newToken}`;
                 } else {
                     _czc.push(['_setCustomVar', '登录用户', '游客', 1]);
@@ -27,9 +22,9 @@
                         if (union.$sessionStorage.hasOwnProperty(i) && i.indexOf('$') !== 0)
                             delete union.$sessionStorage[i];
                     }
-                    if (!firstLoad) {
-                        $state.reload();
-                    }
+                }
+                if (!firstLoad) {
+                    $state.reload();
                 }
             });
 
@@ -37,10 +32,6 @@
                 $window.scrollTo(0, 0);
                 if (firstLoad) {
                     firstLoad = false;
-                    return;
-                }
-                if (union.$localStorage.Authorization) {
-                    aNewLogin = false;
                 }
             });
         }]);

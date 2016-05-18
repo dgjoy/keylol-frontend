@@ -1,11 +1,11 @@
 ﻿<div ng-if="stateTree.entrance.points">
-    <outpost-points style="margin-top: 20px;margin-bottom: 40px;" cards="::stateTree.entrance.points.outpostPoints" ></outpost-points>
+    <outpost-points style="margin-top: 20px;margin-bottom: 40px;" ng-if="::stateTree.entrance.points.outpostPoints" cards="::stateTree.entrance.points.outpostPoints" ></outpost-points>
     <div class="flex-row">
         <div class="left-middle-lg row-sm">
-            <recent-played style="margin-bottom: 30px" list="::stateTree.entrance.points.recentPlayedPoints" header-image="::stateTree.entrance.points.recentPlayedPointHeaderImage"></recent-played>
-            <spotlight-categories style="margin-bottom: 30px"></spotlight-categories>
-            <spotlight-users style="position: absolute;width: 100%;left: 0;"></spotlight-users>
-            <spotlight-games style="margin-top: 475px;margin-bottom: 20px"></spotlight-games>
+            <recent-played style="margin-bottom: 30px" ng-if="::stateTree.entrance.points.recentPlayedPoints" list="::stateTree.entrance.points.recentPlayedPoints" header-image="::stateTree.entrance.points.recentPlayedPointHeaderImage"></recent-played>
+            <interested-categories ng-if="::stateTree.entrance.points.interestedPoints" cards="::stateTree.entrance.points.interestedPoints" style="margin-bottom: 30px"></interested-categories>
+            <spotlight-users ng-if="::stateTree.entrance.points.spotlightUsers" cards="::stateTree.entrance.points.spotlightUsers" style="position: absolute;width: 100%;left: 0;"></spotlight-users>
+            <recent-games ng-if="::stateTree.entrance.points.recentPoints" list="::stateTree.entrance.points.recentPoints" total-page="::stateTree.entrance.points.recentPointPageCount"  style="margin-top: 475px;margin-bottom: 20px"></recent-games>
         </div>
         <right-menus class="right-lg hidden-sm"></right-menus>
     </div>

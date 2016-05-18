@@ -9,7 +9,7 @@
     'to-previous' : !salesToday.isToNext
     }">
     <ul class="sales-list" ng-animate-swap="salesToday.currentPage">
-        <li ng-repeat="point in salesToday.list">
+        <li ng-repeat="point in ::salesToday.list track by $index">
             <a ng-href="point/{{point.idCode}}" ripple>
                 <img class="cover" webp-src="{{point.thumbnailImage | uriRelocate}}">
                 <div class="point">

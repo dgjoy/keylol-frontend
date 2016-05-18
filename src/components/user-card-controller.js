@@ -1,6 +1,10 @@
 ﻿(function () {
     class UserCardController {
-
+        constructor (stateTree) {
+            $.extend(this, {
+                stateTree,
+            });
+        }
     }
 
     keylolApp.component('userCard', {
@@ -8,7 +12,7 @@
         controller: UserCardController,
         controllerAs: 'userCard',
         bindings: {
-            text: '@',
+            user: '<',
         },
     });
 }());

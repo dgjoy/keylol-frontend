@@ -6,7 +6,7 @@
         controller: CategoryCardController,
         controllerAs: 'categoryCard',
         bindings: {
-            text: '@',
+            card: '<',
         },
     });
 }());

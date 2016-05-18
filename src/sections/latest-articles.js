@@ -15,7 +15,7 @@
         changePage (newPage, oldPage) {
             if (!this.changePageLock) {
                 this.changePageLock = true;
-                this.$http.get(`${this.apiEndpoint}states/discovery-page/latest-articles/?page=${newPage}`).then(response => {
+                this.$http.get(`${this.apiEndpoint}states/entrance/discovery/latest-articles/?page=${newPage}`).then(response => {
                     this.currentPage = newPage;
                     this.isToNext = newPage > oldPage;
                     this.articles = response.data;

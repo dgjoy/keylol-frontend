@@ -16,7 +16,7 @@
                 </a>
                 <div class="info">
                     <review-with-text review="game.averageRating"></review-with-text>
-                    <div class="game-time">
+                    <div ng-if="game.twoWeekPlayedTime" class="game-time">
                         <p>{{game.twoWeekPlayedTime}} 小时</p>
                         <p>二周在档记录</p>
                     </div>

@@ -1,8 +1,8 @@
-<a class="info" href="point/DOTA2" ripple>
-    <point-basic-info></point-basic-info>
+<a class="info" href="" ng-href="point/{{gameCard.card.idCode}}" ripple>
+    <point-basic-info point="gameCard.card"></point-basic-info>
 </a>
-<div class="point-img" webp-background="http://pic.sc.chinaz.com/files/pic/pic9/201508/apic14052.jpg"></div>
+<div class="point-img" webp-background="{{gameCard.card.titleCoverImage || uriRelocate}}"></div>
 <div class="actions">
-    <vote-circle vote="3" gray-background="true"></vote-circle>
+    <vote-circle review="::gameCard.card.averageRating" gray-background="true"></vote-circle>
     <flat-button text="订阅"></flat-button>
 </div>

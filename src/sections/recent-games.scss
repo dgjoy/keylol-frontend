@@ -1,0 +1,69 @@
+recent-games {
+  display: block;
+
+  .pages-wrapper {
+    overflow: hidden;
+    position: relative;
+    width: 720px;
+    height: 1000px;
+
+    .cards-wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: flex;
+      flex-wrap: wrap;
+      width: 720px;
+
+      game-card {
+        margin-right: 20px;
+        margin-bottom: 20px;
+      }
+    }
+
+    &.to-next {
+      .cards-wrapper {
+        &.ng-enter, &.ng-leave {
+          transition: transform .5s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        &.ng-enter {
+          transform: translateX(100%);
+        }
+
+        &.ng-enter-active, &.ng-leave {
+          transform: translateX(0);
+        }
+
+        &.ng-leave-active {
+          transform: translateX(-100%);
+        }
+      }
+    }
+
+    &.to-previous {
+      .cards-wrapper {
+        &.ng-enter, &.ng-leave {
+          transition: transform .5s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        &.ng-enter {
+          transform: translateX(-100%);
+        }
+
+        &.ng-enter-active, &.ng-leave {
+          transform: translateX(0);
+        }
+
+        &.ng-leave-active {
+          transform: translateX(100%);
+        }
+      }
+    }
+  }
+
+  .pagination-wrapper {
+    display: flex;
+    justify-content: flex-end;
+  }
+}

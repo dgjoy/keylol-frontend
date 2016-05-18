@@ -1,8 +1,8 @@
-<a class="info" href="" ripple>
-    <point-basic-info></point-basic-info>
+<a class="info" href="" ng-href="point/{{categoryCard.card.idCode}}" ripple>
+    <point-basic-info point="categoryCard.card"></point-basic-info>
 </a>
 <div class="hr"></div>
 <div class="actions">
-    <span class="count">580 款游戏</span>
+    <span class="count">{{categoryCard.card.gameCount}} 款游戏</span>
     <flat-button text="订阅"></flat-button>
 </div>

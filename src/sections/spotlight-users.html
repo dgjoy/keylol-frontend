@@ -3,14 +3,14 @@
     <div class="wrapper">
         <div class="first-line">
             <div class="part1">
-                <user-card ng-repeat="card in spotlightUsers.steamFriendCardsPart1"></user-card>
+                <user-card user="card" ng-repeat="card in spotlightUsers.steamFriendCardsPart1"></user-card>
             </div>
             <div class="part2">
-                <user-card ng-repeat="card in spotlightUsers.steamFriendCardsPart2"></user-card>
+                <user-card user="card" ng-repeat="card in spotlightUsers.steamFriendCardsPart2"></user-card>
             </div>
         </div>
         <div class="second-line">
-            <user-card ng-repeat="card in spotlightUsers.sameFriendCards"></user-card>
+            <user-card user="card" ng-repeat="card in spotlightUsers.sameFriendCards"></user-card>
         </div>
     </div>
 </div>
