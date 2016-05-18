@@ -22,7 +22,10 @@ text-area {
 
   .text {
     transform: translateY(0);
-    input[type="text"] {
+    width: 300px; // default width
+
+    input[type="text"],
+    input[type="password"] {
       width: 100%;
       height: 16px;
       border-radius: 0;

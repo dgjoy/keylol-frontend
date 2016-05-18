@@ -9,12 +9,35 @@
             <img src="assets/images/key-and-locker.png">
         </div>
 
-        <tabs tab-array="::login.tabArray" cur-tab="login.currentPage" click-handler="login.changeTab(index)"></tabs>
-        <div class="login-wrapper {{login.swapDirection}}" ng-class="{'low':login.currentPage == 2,'high':login.currentPage<2}">
-            <div class="swap-helper swap-animation" ng-animate-swap="login.currentPage">
-                <login-steam-robot ng-show="login.currentPage == 0"></login-steam-robot>
-                <login-api ng-show="login.currentPage == 1"></login-api>
-                <login-passcode ng-show="login.currentPage == 2"></login-passcode>
+        <tabs tab-array="::login.tabArray" cur-tab="0" click-handler="login.changeWay(index)"></tabs>
+        <div class="login-wrapper {{login.swapDirection}}" ng-class="{'low':login.currentWay == 2,'high':login.currentWay<2}">
+            <div class="swap-helper swap-animation" ng-animate-swap="login.currentWay">
+                <login-steam-robot ng-if="login.currentWay == 0"></login-steam-robot>
+                <login-api ng-if="login.currentWay == 1"></login-api>
+                <!-- 口令方式 -->
+                <div class="login-passcode" ng-if="login.currentWay == 2">
+                    <tabs class="invert" invert="true" tab-array="login.passcodeWayManager.tabArray" cur-tab="0" click-handler="login.changePasscodeWay(index)"></tabs>
+                    <!--<div class="error">{{login.passcodeWayManager.error['vm.id_code']}}{{login.passcodeWayManager.error['vm.password']}}</div>-->
+                    <div class="passcode-wrapper {{login.passcodeWayManager.swapDirection}}">
+                        <div class="swap-helper swap-animation" ng-animate-swap="login.passcodeWayManager.curPage">
+                            <div class="inputs">
+                                <text-area type="{{login.passcodeWayManager.forms[login.passcodeWayManager.curPage][0].type}}"
+                                           label="{{login.passcodeWayManager.forms[login.passcodeWayManager.curPage][0].label}}"
+                                           model="login.passcodeWayManager.vm.id_code" style="margin-right: 30px;"
+                                ></text-area>
+                                <text-area type="{{login.passcodeWayManager.forms[login.passcodeWayManager.curPage][1].type}}"
+                                           label="{{login.passcodeWayManager.forms[login.passcodeWayManager.curPage][1].label}}"
+                                           model="login.passcodeWayManager.vm.password" style="width: 240px;"
+                                ></text-area>
+                            </div>
+                            <div class="action">
+                                <flat-button text="放弃" type="inertia"></flat-button>
+                                <raised-button text="登录" id="popup-geetest-{{login.passcodeWayManager.geetestId}}"></raised-button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="geetest-{{login.passcodeWayManager.geetestId}}" style="display:none;"></div>
+                </div>
             </div>
         </div>
     </div>

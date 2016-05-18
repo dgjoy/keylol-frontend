@@ -1,9 +1,16 @@
 ﻿(function () {
     class LoginController {
-        constructor(close, $http) {
+        constructor($scope, $http, close, utils, union, apiEndpoint, window,
+                    $element, $timeout, $httpParamSerializerJQLike) {
             $.extend(this,{
-                close,
                 $http,
+                union,
+                apiEndpoint,
+                window,
+                $timeout,
+                $httpParamSerializerJQLike,
+                close,
+                utils,
             });
 
             this.tabArray = [
@@ -23,82 +30,143 @@
                     },
                 },
             ];
-            this.currentPage = 0;
+            this.currentWay = 0;
             this.swapDirection = 'init';
+
+            //passcode 方式
+            this.passcodeWayManager = {
+                swapDirection: 'init',
+                tabArray: [{
+                    name: '识别码',
+                }, {
+                    name: '昵称',
+                }, {
+                    name: '电邮',
+                }],
+                curPage: 0,
+                forms: [[
+                    { label: '用户识别码', type: 'uic' },
+                    { label: '登录口令', type: 'password' },
+                ], [
+                    { label: '昵称', type: 'text' },
+                    { label: '登录口令', type: 'password' },
+                ], [
+                    { label: '电邮地址', type: 'text' },
+                    { label: '登录口令', type: 'password' },
+                ]],
+                errorDetect: utils.modelErrorDetect,
+            };
         }
 
-        changeTab(index) {
-            if (index > this.currentPage) {
+        changeWay(index) {
+            if (index > this.currentWay) {
                 this.swapDirection = 'left';
-                this.currentPage = index;
-            } else if (index < this.currentPage) {
+            } else if (index < this.currentWay) {
                 this.swapDirection = 'right';
-                this.currentPage = index;
+            }
+
+            this.currentWay = index;
+            switch (this.currentWay) {
+                case 0:
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    this.passcodeWayManager.swapDirection = 'init';
+                    this.passcodeWayManager.curPage = 0;
+                    this.resetPasscode();
+                    break;
+                default:
+                    break;
             }
         }
 
-        submit() {
-            const $timeout = this.$timeout;
-            const apiEndpoint = this.apiEndpoint;
-            const $httpParamSerializerJQLike = this.$httpParamSerializerJQLike;
-            const $http = this.$http;
-            const union = this.union;
-            const notification = this.notification;
-            const close = this.close;
+        changePasscodeWay(index) {
+            if (index > this.passcodeWayManager.curPage) {
+                this.passcodeWayManager.swapDirection = 'left';
+            } else if (index < this.passcodeWayManager.curPage) {
+                this.passcodeWayManager.swapDirection = 'right';
+            }
 
-            const geetest = this.geetest;
+            // 切换 passcode 的内部方式时
+            this.passcodeWayManager.curPage = index;
+            this.resetPasscode();
+        }
 
-            if (this.submitLock)
-                return;
-            this.submitLock = true;
-            this.error = {};
-            $timeout(() => {
-                if (!this.vm.id_code) {
-                    this.error['vm.id_code'] = 'Email or UIC cannot be empty.';
-                }
-                if (!this.vm.password) {
-                    this.error['vm.password'] = 'Password cannot be empty.';
-                }
-                if (!this.geetestResult) {
-                    this.error.authCode = true;
-                }
-                if (!$.isEmptyObject(this.error)) {
-                    this.submitLock = false;
-                    return;
-                }
-                $http.post(`${apiEndpoint}oauth/token`, $httpParamSerializerJQLike(this.vm), {
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                }).then(response => {
-                    union.$localStorage.Authorization = response.data.access_token;
-                    notification.success('登录成功，欢迎回到其乐');
-                    close();
-                }, response => {
-                    if (response.status === 400 && response.data.error) {
-                        switch (response.data.error) {
-                            case 'invalid_captcha':
-                                this.error.authCode = true;
-                                break;
-                            case 'user_non_existent':
-                                this.error['vm.id_code'] = 'user doesn\'t exist';
-                                break;
-                            case 'invalid_password':
-                                this.error['vm.password'] = 'password is not correct';
-                                break;
-                            default:
-                                notification.error('发生未知错误，请重试或与站务职员联系');
-                        }
-                    } else {
-                        console.log(124);
-                        notification.error('发生未知错误，请重试或与站务职员联系', response);
-                    }
-                    this.geetestResult = null;
-                    geetest.refresh().then(this.useGeetestResult);
-                    this.submitLock = false;
+        resetPasscode() {
+            const pwm = this.passcodeWayManager;
+            pwm.vm = {
+                grant_type: 'password_captcha',
+                client_id: 'keylol-website',
+                id_code: '',
+                password: '',
+                geetest_challenge: '',
+                geetest_seccode: '',
+                geetest_validate: '',
+            };
+            pwm.error = {};
+
+            const geetest = this.utils.createGeetest('popup');
+            geetest.ready.then(gee => {
+                this.$timeout(() => {
+                    gee.bindOn(`#popup-geetest-${geetest.id}`);
+                    gee.appendTo(`#geetest-${geetest.id}`);
                 });
             });
-        };
+            pwm.geetestResult = null;
+            pwm.geetestId = geetest.id;
+
+            const useGeetestResult = gee => {
+                pwm.geetestResult = gee.getValidate();
+                pwm.vm.geetest_challenge = pwm.geetestResult.geetest_challenge;
+                pwm.vm.geetest_seccode = pwm.geetestResult.geetest_seccode;
+                pwm.vm.geetest_validate = pwm.geetestResult.geetest_validate;
+
+                pwm.error = {};
+                this.$timeout(() => {
+                    if (!pwm.vm.id_code) {
+                        pwm.error['vm.id_code'] = 'Email or UIC cannot be empty.';
+                    }
+                    if (!pwm.vm.password) {
+                        pwm.error['vm.password'] = 'Password cannot be empty.';
+                    }
+                    if (!pwm.geetestResult) {
+                        pwm.error.authCode = true;
+                    }
+                    this.$http.post(`${this.apiEndpoint}oauth/token`, this.$httpParamSerializerJQLike(pwm.vm), {
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                    }).then(response => {
+                        this.union.$localStorage.Authorization = response.data.access_token;
+                        console.log('登录成功');
+                        this.close();
+                    }, response => {
+                        if (response.status === 400 && response.data.error) {
+                            switch (response.data.error) {
+                                case 'invalid_captcha':
+                                    pwm.error.authCode = true;
+                                    break;
+                                case 'user_non_existent':
+                                    pwm.error['vm.id_code'] = 'user doesn\'t exist';
+                                    break;
+                                case 'invalid_password':
+                                    pwm.error['vm.password'] = 'password is not correct';
+                                    break;
+                                default:
+                                    console.log('发生未知错误，请重试或与站务职员联系');
+                            }
+                            console.log(response.data.error);
+                        } else {
+                            console.log(124);
+                        }
+                        pwm.geetestResult = null;
+                        geetest.refresh().then(useGeetestResult);
+                    });
+                });
+            };
+            geetest.success.then(useGeetestResult);
+        }
     }
 
     keylolApp.controller('LoginController', LoginController);

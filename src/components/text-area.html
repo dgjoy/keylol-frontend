@@ -9,7 +9,15 @@
     'active': textArea.activeState && !textArea.warnState,
     'warn': textArea.warnState,
 }">
-    <input class="input" ng-model="textArea.model" type="text" ng-change="textArea.check()" ng-focus="textArea.focus()" ng-blur="textArea.blur()"
+    <input ng-model="textArea.model" type="text" ng-change="textArea.check()" ng-focus="textArea.focus()" ng-blur="textArea.blur()"
+           ng-class="{'active':textArea.active,'warn':textArea.localWarn}" ng-disabled="textArea.locked"/>
+</div>
+
+<div class="text" ng-if="textArea.type === 'password'" ng-class="{
+    'active': textArea.activeState && !textArea.warnState,
+    'warn': textArea.warnState,
+}">
+    <input ng-model="textArea.model" type="password" ng-change="textArea.check()" ng-focus="textArea.focus()" ng-blur="textArea.blur()"
            ng-class="{'active':textArea.active,'warn':textArea.localWarn}" ng-disabled="textArea.locked"/>
 </div>
 
