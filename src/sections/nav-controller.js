@@ -24,6 +24,7 @@
                     { state:'entrance.points',name:'据点' },
                     { state:'entrance.timeline',name:'轨道' },
                 ];
+                this.canResize = true;
                 $scope.$watch(() => {
                     return $state.current.name;
                 }, () => {
