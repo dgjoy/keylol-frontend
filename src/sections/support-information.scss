@@ -1,0 +1,63 @@
+support-information {
+  @include keylol-shadow-2();
+  >.bundle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 54px;
+    padding: 0 15px;
+
+    >.stations {
+      display: flex;
+      >.link-black {
+        margin-right: 15px;
+        display: flex;
+        align-items: center;
+        >span {
+          color: $keylol-main-text;
+        }
+        >svg {
+          height: 16px;//待处理
+          width: 16px;
+          margin-right: 10px;
+          fill: $keylol-main-text;
+        }
+        &:hover>span{
+          text-decoration: underline;
+        }
+      }
+    }
+
+    >.chinese-support {
+      color: $keylol-inertia-text;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+  >.characteristics {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    background-color: $keylol-inertia-shape;
+
+    >.link-white {
+      margin: 0 10px;
+      display: flex;
+      align-items: center;
+      >span {
+        color: $keylol-inverted-text;
+      }
+      >svg {
+        height: 16px;
+        width: 16px;
+        margin-right: 10px;
+        fill: $keylol-inverted-text;
+      }
+      &:hover>span{
+        text-decoration: underline;
+      }
+    }
+  }
+}
