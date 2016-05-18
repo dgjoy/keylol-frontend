@@ -90,6 +90,65 @@ menu {
           }
         }
       }
+
+      .reputation-stat {
+        padding: 0 15px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .left-content {
+          display: flex;
+          align-items: center;
+
+          svg {
+            height: 8px;
+            width: 8px;
+            fill: $keylol-inertia-text;
+            margin-right: 2px;
+          }
+
+          span {
+            color: $keylol-inertia-text;
+            margin-left: 5px;
+          }
+        }
+
+        .right-content {
+          display: flex;
+          width: 100px;
+
+          .reputation-level {
+            background-color: $keylol-inertia-text;
+            height: 5px;
+          }
+        }
+      }
+
+      .reputation-info {
+        padding: 0 15px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .reputation-number {
+          margin-top: -2px;
+          @include keylol-review();
+          font-size: 20px;
+          font-weight: bold;
+        }
+
+        vote-circle {
+          position: relative;
+          top: 2px;
+        }
+      }
+
+      .horizon {
+        margin: 14px 20px 0;
+        height: 1px;
+        background-color: $keylol-inertia-shape;
+      }
     }
   }
 

@@ -16,15 +16,15 @@
             <p>已在档 203 小时</p>
             <p>玩家平均在档 175.4 小时</p>
         </div>
-        <div>
-            <div class="reputation-stat" ng-repeat="(stat, statCount) in menu.object.header.voteStats track by stat">
-                <div class="left-content">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="reputation-circle" ng-repeat="circle in menu.circles[$index] track by $index">
-                        <circle cx="4" cy="6" r="4"></circle>
-                    </svg>
-                    <span ng-if="menu.object.header.totalEvaluate">{{statCount / menu.object.header.totalEvaluate * 100 | number: 0}}%</span>
-                    <span ng-if="!menu.object.header.totalEvaluate">0%</span>
-                </div>
+        <div class="reputation-stat" ng-repeat="(stat, statCount) in menu.object.header.voteStats track by stat">
+            <div class="left-content">
+                <svg xmlns="http://www.w3.org/2000/svg" class="reputation-circle" ng-repeat="circle in menu.circles[$index] track by $index">
+                    <circle cx="4" cy="4" r="4"></circle>
+                </svg>
+                <span ng-if="menu.object.header.totalEvaluate">{{statCount / menu.object.header.totalEvaluate * 100 | number: 0}}%</span>
+                <span ng-if="!menu.object.header.totalEvaluate">0%</span>
+            </div>
+            <div class="right-content">
                 <div class="reputation-level" ng-style="{width: statCount / menu.object.header.totalEvaluate * 100}"></div>
             </div>
         </div>
@@ -38,7 +38,9 @@
                     terrible: menu.object.header.votePercent < 2
                 }">{{menu.object.header.votePercent}}</span> / 10
             </span>
+            <vote-circle vote="5" gray-background="true"></vote-circle>
         </div>
+        <div class="horizon"></div>
     </div>
 </div>
 <ul>
