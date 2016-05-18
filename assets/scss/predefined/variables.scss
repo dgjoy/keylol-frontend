@@ -60,6 +60,29 @@ $keylol-topic: #7976b1;
   box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
 }
 
+// review color
+@mixin keylol-review($type: color) {
+  &.awesome {
+    #{$type}: $keylol-review-awesome;
+  }
+
+  &.good {
+    #{$type}: $keylol-review-good;
+  }
+
+  &.not-bad {
+    #{$type}: $keylol-review-not-bad;
+  }
+
+  &.bad {
+    #{$type}: $keylol-review-bad;
+  }
+
+  &.terrible {
+    #{$type}: $keylol-review-terrible;
+  }
+}
+
 // button
 @mixin keylol-button {
   border: none;

@@ -1,5 +1,9 @@
-support-information {
-  @include keylol-shadow-2();
+point-associations {
+  @include keylol-shadow-1;
+  background-color: $keylol-card;
+  display: block;
+  border-radius: 2px;
+
   >.bundle {
     display: flex;
     justify-content: space-between;
