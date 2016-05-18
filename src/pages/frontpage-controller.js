@@ -15,7 +15,6 @@
                     },
                     totalEvaluate: 20,
                     votePercent: 9.5,
-                    evaluate: 5,
                 },
                 items: [
                     {

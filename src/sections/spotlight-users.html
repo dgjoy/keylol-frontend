@@ -1,7 +1,7 @@
 ﻿<section-header header="spotlightUsers.type"></section-header>
 <div class="stretch-background">
     <div class="wrapper">
-        <div class="first-line">
+        <div class="line">
             <div class="part1">
                 <user-card user="card" ng-repeat="card in spotlightUsers.steamFriendCardsPart1"></user-card>
             </div>
@@ -9,8 +9,13 @@
                 <user-card user="card" ng-repeat="card in spotlightUsers.steamFriendCardsPart2"></user-card>
             </div>
         </div>
-        <div class="second-line">
-            <user-card user="card" ng-repeat="card in spotlightUsers.sameFriendCards"></user-card>
+        <div class="line">
+            <div class="part1">
+                <user-card user="card" ng-repeat="card in spotlightUsers.sameFriendCards"></user-card>
+            </div>
+            <div class="part2">
+                <img src="assets/images/friends-strip-background.png">
+            </div>
         </div>
     </div>
 </div>

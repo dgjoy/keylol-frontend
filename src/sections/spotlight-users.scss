@@ -13,43 +13,43 @@ spotlight-users {
   }
 
   .wrapper {
-    padding: 30px 0;
+    padding: 30px 240px 30px 0;
     width: 700px;
-    padding-right: 240px;
     margin: auto;
 
-    .first-line {
+    user-card {
+      flex-shrink: 0;
+      margin: 0 10px;
+    }
+
+    .line {
       display: flex;
+
+      &:nth-of-type(2) {
+        margin-top: 20px;
+      }
 
       .part1 {
         display: flex;
         width: 50%;
         flex-direction: row-reverse;
-        user-card {
-          flex-shrink: 0;
-          margin: 0 10px;
-        }
       }
       .part2 {
         display: flex;
+        position: relative;
         width: 50%;
 
-        user-card {
-          flex-shrink: 0;
-          margin: 0 10px;
-
-          &:nth-of-type(3) {
-            margin-left: 250px;
-          }
+        user-card:nth-of-type(3) {
+          margin-left: 250px;
         }
-      }
-    }
-    .second-line {
-      display: flex;
-      user-card {
-        flex-shrink: 0;
-        margin-top: 20px;
-        margin-right: 20px;
+
+        >img {
+          bottom: -30px;
+          position: absolute;
+          height: auto;
+          width: 750px;
+          opacity: 0.1;
+        }
       }
     }
   }
