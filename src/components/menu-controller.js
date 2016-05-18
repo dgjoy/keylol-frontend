@@ -7,7 +7,7 @@
                 apiEndpoint,
                 notification,
             });
-            if (this.object.header.type = 'point') {
+            if (this.object.header && this.object.header.type === 'point') {
                 this.circles = [new Array(1), new Array(2), new Array(3), new Array(4), new Array(5)];
             }
         }

@@ -25,14 +25,16 @@
             } else {
                 let target = stateTree;
                 let urlParams = '';
-                for (let i = 0;i < result.length - 1;i++) {
+                for (let i = 0;i < result.length;i++) {
                     urlParams += `/${result[i]}`;
-                    if (!target[result[i]]) {
-                        target[result[i]] = {};
+                    if (i !== result.length - 1) {
+                        if (!target[result[i]]) {
+                            target[result[i]] = {};
+                        }
+                        target = target[result[i]];
                     }
-                    target = target[result[i]];
                 }
-                console.log(target, result, urlParams);
+                console.log(stateTree, result, urlParams);
                 if (target.current === result[result.length - 1]) {
                     delete target.current;
                 } else {

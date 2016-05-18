@@ -19,19 +19,27 @@
 
             const currentStateName = $state.current.name;
             if (currentStateName.substr(0, 8) === 'entrance') {
-                this.tabArray = [{ state:'entrance.discovery',name:'广场' },{ state:'entrance.points',name:'据点' },{ state:'entrance.timeline',name:'轨道' }];
-                const subState = currentStateName.substr(9);
-                switch (subState) {
-                    case 'discovery' :
-                        this.currentPage = 0;
-                        break;
-                    case 'points' :
-                        this.currentPage = 1;
-                        break;
-                    case 'timeline' :
-                        this.currentPage = 2;
-                        break;
-                }
+                this.tabArray = [
+                    { state:'entrance.discovery',name:'广场' },
+                    { state:'entrance.points',name:'据点' },
+                    { state:'entrance.timeline',name:'轨道' },
+                ];
+                $scope.$watch(() => {
+                    return $state.current.name;
+                }, () => {
+                    const subState = $state.current.name.substr(9);
+                    switch (subState) {
+                        case 'discovery' :
+                            this.currentPage = 0;
+                            break;
+                        case 'points' :
+                            this.currentPage = 1;
+                            break;
+                        case 'timeline' :
+                            this.currentPage = 2;
+                            break;
+                    }
+                });
             } else if (currentStateName.substr(0, 17) === 'aggregation.point') {
                 this.inPoint = true;
                 this.tabArray = [{ href:'',name:'扉页' },{ href:'',name:'情报' },{ href:'',name:'轨道' },{ href:'',name:'编辑', 'float':'right' }];

@@ -125,6 +125,12 @@
             })
             .state('entrance.points', {
                 url: 'points',
+                onEnter (pageLoad) {
+                    pageLoad('entrance.points');
+                },
+                onExit (stateTree) {
+                    delete stateTree.entrance.points;
+                },
                 templateUrl: 'src/pages/points.html',
                 controller: 'PointsController',
             })
