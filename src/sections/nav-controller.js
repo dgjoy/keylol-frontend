@@ -19,7 +19,7 @@
 
             const currentStateName = $state.current.name;
             if (currentStateName.substr(0, 8) === 'entrance') {
-                this.tabArray = [{ href:'discovery',name:'广场' },{ href:'points',name:'据点' },{ href:'timeline',name:'轨道' }];
+                this.tabArray = [{ state:'entrance.discovery',name:'广场' },{ state:'entrance.points',name:'据点' },{ state:'entrance.timeline',name:'轨道' }];
                 const subState = currentStateName.substr(9);
                 switch (subState) {
                     case 'discovery' :

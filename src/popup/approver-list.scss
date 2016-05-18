@@ -29,11 +29,11 @@
     &.left {
       >.page.swap-animation.ng-enter,
       >.page.swap-animation.ng-leave {
-        transition: transform 200ms, opacity 180ms;
+        transition: transform 150ms, opacity 120ms;
       }
       >.page.swap-animation.ng-enter {
         transition-timing-function: cubic-bezier(0.0, 0.0, 0.2, 1);
-        transition-delay: 300ms;
+        transition-delay: 150ms;
         position: relative;
         opacity: 0;
         transform: translateX(100%);
@@ -58,12 +58,12 @@
     &.right {
       >.page.swap-animation.ng-enter,
       >.page.swap-animation.ng-leave {
-        transition: transform 200ms, opacity 180ms;
+        transition: transform 150ms, opacity 120ms;
       }
 
       >.page.swap-animation.ng-enter {
         transition-timing-function: cubic-bezier(0.0, 0.0, 0.2, 1);
-        transition-delay: 300ms;
+        transition-delay: 150ms;
         position: relative;
         opacity: 0;
         transform: translateX(-100%);

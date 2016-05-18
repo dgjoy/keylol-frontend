@@ -22,7 +22,7 @@
                     const firstTab = tabs[0];
                     element.css({
                         width: firstTab.width,
-                        transform: `translateX(${firstTab.begin}px)`,
+                        transform: `translateX(${tabs[scope.curTab].begin}px) scaleX(${tabs[scope.curTab].width / firstTab.width})`,
                     });
 
                     const trans = {};
