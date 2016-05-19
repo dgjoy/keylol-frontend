@@ -64,27 +64,27 @@ $keylol-topic: #7976b1;
 @mixin keylol-review($type: color, $no-stroke: false) {
   &.awesome {
     #{$type}: $keylol-review-awesome;
-    @if $no-stroke == true {stroke-width: 0;}
+    @if $no-stroke == true { circle { stroke-width: 0; } }
   }
 
   &.good {
     #{$type}: $keylol-review-good;
-    @if $no-stroke == true {stroke-width: 0;}
+    @if $no-stroke == true { circle { stroke-width: 0; } }
   }
 
   &.not-bad {
     #{$type}: $keylol-review-not-bad;
-    @if $no-stroke == true {stroke-width: 0;}
+    @if $no-stroke == true { circle { stroke-width: 0; } }
   }
 
   &.bad {
     #{$type}: $keylol-review-bad;
-    @if $no-stroke == true {stroke-width: 0;}
+    @if $no-stroke == true { circle { stroke-width: 0; } }
   }
 
   &.terrible {
     #{$type}: $keylol-review-terrible;
-    @if $no-stroke == true {stroke-width: 0;}
+    @if $no-stroke == true { circle { stroke-width: 0; } }
   }
 }
 

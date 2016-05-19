@@ -12,15 +12,17 @@ point-review {
 
   .review-circle.hollow{
     fill: transparent;
-    stroke: #CCC;
-    stroke-width: 1;
+    circle {
+      stroke: #CCC;
+      stroke-width: 1;
+    }
   }
 
   .review-circle {
     @include keylol-review(fill, true);
     margin-right: 2px;
-    width: 8px;
-    height: 8px;
+    width: 9px;
+    height: 9px;
     cursor: pointer;
     fill: #CCC;
   }
