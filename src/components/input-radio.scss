@@ -1,0 +1,60 @@
+input-radio {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  >.item {
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+
+    >.outer {
+      position: relative;
+      width: 20px;
+      height: 20px;
+      border-radius: 10px;
+      margin-right: 10px;
+
+      &.focus>.hole {
+        border-color: $keylol-theme;
+      }
+
+      &.focus>.object {
+        transform: scale(0.5);
+      }
+
+      >.ripple-container {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+      }
+
+      >.hole {
+        position: absolute;
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
+        border: 2px solid $keylol-light-text;
+        border-radius: 10px;
+      }
+
+      >.object {
+        width: 100%;
+        height: 100%;
+        background-color: $keylol-theme;
+        border-radius: 10px;
+
+        transform-origin: center;
+        transform: scale(0);
+        transition: transform ease .28s;
+      }
+    }
+
+    >.text {
+      line-height: 20px;
+      flex-grow: 0;
+      margin: 0;
+      color: $keylol-main-text;
+    }
+  }
+}

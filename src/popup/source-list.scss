@@ -1,0 +1,32 @@
+.popup-source-list {
+    @include keylol-shadow-3();
+    background-color: $keylol-card;
+    width: 340px;
+    padding: 15px 0;
+
+    p {
+        margin: 0;
+    }
+
+    >.title {
+        padding: 15px 15px;
+        >p:first-of-type {
+            font-size: 20px;
+            color: $keylol-main-text;
+        }
+        >p:last-of-type {
+            color: $keylol-inertia-text;
+        }
+    }
+
+    >a>point-basic-info {
+        @include hover-background();
+        padding:15px 15px;
+    }
+
+    .hr {
+        margin:10px 20px;
+        height: 1px;
+        background-color: $keylol-inertia-shape;
+    }
+}
