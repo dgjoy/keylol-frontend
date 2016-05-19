@@ -15,6 +15,7 @@
             icon: '@',
             type: '@',
             click: '&',
+            themeColor: '<',
         },
     });
 }());

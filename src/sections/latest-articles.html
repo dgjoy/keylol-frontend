@@ -1,9 +1,9 @@
 ﻿<div class="header" webp-background="{{::latestArticles.headerImage | uriRelocate}}">
     <div class="header-text">
-        <p class="title">即刻投稿</p>
-        <p class="sub-title">让你的文章展现于此</p>
+        <p class="title">{{::latestArticles.headers[latestArticles.type].title}}</p>
+        <p class="sub-title">{{::latestArticles.headers[latestArticles.type].subTitle}}</p>
     </div>
-    <fab icon="New_Article" type="accent"></fab>
+    <fab icon="New_Article" type="accent" theme-color="latestArticles.theme.main"></fab>
 </div>
 <div class="latest-wrapper" ng-style="{height: (latestArticles.articles.length > 5 && !latestArticles.hasBeenExpanded) ? 434 : latestArticles.articles.length * 87}" ng-class="{
     'to-next' : latestArticles.isToNext,
@@ -11,7 +11,7 @@
     }">
     <ul class="latest-list" ng-animate-swap="latestArticles.currentPage">
         <li ng-repeat="article in ::latestArticles.articles track by $index">
-            <div class="count">
+            <div class="count" style="{{::(latestArticles.theme.light ? 'background-color: ' + latestArticles.theme.light + ';' : '')}}">
                 <span>+{{::article.likeCount}}</span><span>···{{::article.commentCount}}</span>
             </div>
             <div class="article">

@@ -1,11 +1,27 @@
 ﻿(function () {
     class LatestArticlesController {
-        constructor ($http, apiEndpoint) {
+        constructor ($http, apiEndpoint, $state) {
             $.extend(this, {
                 $http,
                 apiEndpoint,
             });
             this.currentPage = 1;
+            this.headers = {
+                entrance: {
+                    title: '即刻投稿',
+                    subTitle: '让你的文章展现于此',
+                },
+                point: {
+                    title: '收稿箱',
+                    subTitle: '投递至这个据点的最新文章',
+                },
+            };
+            const stateName = $state.current.name;
+            if (stateName.substr(0,8) === 'entrance') {
+                this.type = 'entrance';
+            } else {
+                this.type = 'point';
+            }
         }
 
         expandMore () {
@@ -36,6 +52,7 @@
             articles: '<',
             headerImage: '<',
             totalPage: '<',
+            theme: '<',
         },
     });
 }());
