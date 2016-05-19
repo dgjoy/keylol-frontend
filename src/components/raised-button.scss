@@ -36,5 +36,15 @@ raised-button {
     &.invert {
       background-color: $keylol-inverted-text;
     }
+
+    &[disabled] {
+      background-color: $keylol-inertia-shape;
+      &:hover {
+        &::after {
+          visibility: hidden;
+        }
+      }
+      color: rgba($keylol-inverted-text, 0.6);
+    }
   }
 }

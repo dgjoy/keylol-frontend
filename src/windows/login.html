@@ -24,15 +24,19 @@
                                 <text-area type="{{login.passcodeWayManager.forms[login.passcodeWayManager.curPage][0].type}}"
                                            label="{{login.passcodeWayManager.forms[login.passcodeWayManager.curPage][0].label}}"
                                            model="login.passcodeWayManager.vm.id_code" style="margin-right: 30px;"
+                                           state="login.passcodeWayManager.state['id_code']"
+                                           tip="login.passcodeWayManager.tip['id_code']"
                                 ></text-area>
                                 <text-area type="{{login.passcodeWayManager.forms[login.passcodeWayManager.curPage][1].type}}"
                                            label="{{login.passcodeWayManager.forms[login.passcodeWayManager.curPage][1].label}}"
                                            model="login.passcodeWayManager.vm.password" style="width: 240px;"
+                                           state="login.passcodeWayManager.state['password']"
+                                           tip="login.passcodeWayManager.tip['password']"
                                 ></text-area>
                             </div>
                             <div class="action">
                                 <flat-button text="放弃" type="inertia"></flat-button>
-                                <raised-button text="登录" id="popup-geetest-{{login.passcodeWayManager.geetestId}}"></raised-button>
+                                <raised-button text="登录" type="theme" id="popup-geetest-{{login.passcodeWayManager.geetestId}}" disabled="false"></raised-button>
                             </div>
                         </div>
                     </div>

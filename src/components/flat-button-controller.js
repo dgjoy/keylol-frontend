@@ -16,6 +16,7 @@
             type: '@',
             click: '&',
             themeColor: '<',
+            disabled: '<',
         },
     });
 }());

@@ -1,1 +1,2 @@
-<button class="{{flatButton.type}}" style="{{::(flatButton.themeColor ? 'color: ' + flatButton.themeColor + ';' : '')}}" ng-click="flatButton.click({event: $event})" ripple="{{flatButton.themeColor || flatButton.type}}">{{flatButton.text}}</button>
+<button class="{{flatButton.type}}" style="{{::(flatButton.themeColor ? 'color: ' + flatButton.themeColor + ';' : '')}}" ng-click="flatButton.click({event: $event})" ripple="{{flatButton.themeColor || flatButton.type}}" ng-disabled="flatButton.disabled">{{flatButton.text}}</button>
+

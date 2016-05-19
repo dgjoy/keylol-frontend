@@ -15,14 +15,11 @@
             this.warnState = false;
             this.activeState = false;
 
-            this.tip = '识唔识得啊';
-            if (this.type === 'uic') {
-                $scope.$watch(() => {
-                    return this.model;
-                },() => {
-                    this.check();
-                });
-            }
+            $scope.$watch(() => {
+                return this.state;
+            },() => {
+                this.warnState = (this.state === 'warn');
+            });
         }
 
         focus() {
@@ -32,14 +29,6 @@
         blur() {
             this.activeState = false;
             this.fillState = (this.model.length !== 0);
-        }
-
-        check() {
-            if (this.model.length === 0) {
-                this.warnState = false;
-            } else {
-                this.warnState = true;
-            }
         }
     }
 
@@ -51,6 +40,8 @@
             type:'@',
             label:'@',
             model:'=',
+            state:'<',//normal,warn,locked
+            tip:'<',
         },
     });
 }());

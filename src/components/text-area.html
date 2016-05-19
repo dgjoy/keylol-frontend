@@ -22,8 +22,9 @@
 </div>
 
 <input-uic ng-if="textArea.type === 'uic'" length="5" ng-model="textArea.model" ng-click="textArea.focus()" blur-handler="textArea.blur()"
-           state="{textArea.activeState&&!textArea.warnState?'active':textArea.warnState?'warn':''}"
+           state="{{textArea.activeState&&!textArea.warnState?'active':textArea.warnState?'warn':''}}"
 ></input-uic>
+
 <dropdown ng-if="textArea.type === 'dropdown'" items="['请选择游戏平台','Steam','暂不选择游戏平台']" model="textArea.model"></dropdown>
 
 

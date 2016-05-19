@@ -13,6 +13,7 @@
             type: '@',
             invert: '<',
             themeColor: '<',
+            disabled: '<',
         },
     });
 }());

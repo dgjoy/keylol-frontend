@@ -23,5 +23,12 @@ flat-button {
     &.user-theme {
       color: $keylol-user-theme;
     }
+
+    &[disabled] {
+      color: rgba($keylol-inertia-text, 0.6);
+      &:hover {
+        background-color: transparent;
+      }
+    }
   }
 }

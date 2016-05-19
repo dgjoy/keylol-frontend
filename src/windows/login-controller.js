@@ -55,7 +55,95 @@
                     { label: '登录口令', type: 'password' },
                 ]],
                 errorDetect: utils.modelErrorDetect,
+                vm : {
+                    grant_type: 'password_captcha',
+                    client_id: 'keylol-website',
+                    id_code: '',
+                    password: '',
+                    geetest_challenge: '',
+                    geetest_seccode: '',
+                    geetest_validate: '',
+                },
+                state: {
+                    id_code: 'normal',
+                    password: 'normal',
+                },
+                tip: {
+                    id_code: '',
+                    password: '',
+                },
+                completed: {
+                    id_code: false,
+                    password: false,
+                },
             };
+
+            //监视 vm(id_code, password)
+            $scope.$watch(() => {
+                return this.passcodeWayManager.vm.id_code;
+            },newValue => {
+                 switch (this.passcodeWayManager.curPage) {
+                     case 0:
+                         if (newValue.length === 0) {
+                             this.passcodeWayManager.state.id_code = 'normal';
+                             this.passcodeWayManager.tip.id_code = '注册时定义的五位代码';
+                             this.passcodeWayManager.completed.id_code = false;
+                         } else if (!/^[a-zA-Z0-9]{5}$/.test(newValue)) {
+                             this.passcodeWayManager.state.id_code = 'warn';
+                             this.passcodeWayManager.tip.id_code = 'UIC 只可能是 5 位的字母 / 数字代码';
+                             this.passcodeWayManager.completed.id_code = false;
+                         } else {
+                             this.passcodeWayManager.state.id_code = 'normal';
+                             this.passcodeWayManager.tip.id_code = '注册时定义的五位代码';
+                             this.passcodeWayManager.completed.id_code = true;
+                         }
+                         break;
+                     case 1:
+                         if (newValue.length === 0) {
+                             this.passcodeWayManager.state.id_code = 'normal';
+                             this.passcodeWayManager.tip.id_code = '请输入ID';
+                             this.passcodeWayManager.completed.id_code = false;
+                         } else if (newValue.length > 10) {
+                             this.passcodeWayManager.state.id_code = 'warn';
+                             this.passcodeWayManager.tip.id_code = '还没确定';
+                             this.passcodeWayManager.completed.id_code = false;
+                         } else {
+                             this.passcodeWayManager.state.id_code = 'normal';
+                             this.passcodeWayManager.tip.id_code = '请输入ID';
+                             this.passcodeWayManager.completed.id_code = true;
+                         }
+                         break;
+                     case 2:
+                         if (newValue.length === 0) {
+                             this.passcodeWayManager.state.id_code = 'normal';
+                             this.passcodeWayManager.tip.id_code = '请输入ID';
+                             this.passcodeWayManager.completed.id_code = false;
+                         } else if (!/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(newValue)) {
+                             this.passcodeWayManager.state.id_code = 'warn';
+                             this.passcodeWayManager.tip.id_code = '错误的邮件格式';
+                             this.passcodeWayManager.completed.id_code = false;
+                         } else {
+                             this.passcodeWayManager.state.id_code = 'normal';
+                             this.passcodeWayManager.tip.id_code = '请输入ID';
+                             this.passcodeWayManager.completed.id_code = true;
+                         }
+                         break;
+                 }
+            });
+
+            $scope.$watch(() => {
+                return this.passcodeWayManager.vm.password;
+            },newValue => {
+                if (newValue.length === 0) {
+                    this.passcodeWayManager.state.password = 'normal';
+                    this.passcodeWayManager.tip.password = '';
+                    this.passcodeWayManager.completed.password = false;
+                } else {
+                    this.passcodeWayManager.state.password = 'normal';
+                    this.passcodeWayManager.tip.password = '';
+                    this.passcodeWayManager.completed.password = true;
+                }
+            });
         }
 
         changeWay(index) {
@@ -95,16 +183,18 @@
 
         resetPasscode() {
             const pwm = this.passcodeWayManager;
-            pwm.vm = {
-                grant_type: 'password_captcha',
-                client_id: 'keylol-website',
-                id_code: '',
-                password: '',
-                geetest_challenge: '',
-                geetest_seccode: '',
-                geetest_validate: '',
-            };
-            pwm.error = {};
+            pwm.vm.id_code = '';
+            pwm.vm.password = '';
+            pwm.vm.geetest_challenge = '';
+            pwm.vm.geetest_seccode = '';
+            pwm.vm.geetest_validate = '';
+
+            pwm.state.id_code = 'normal';
+            pwm.state.password = 'normal';
+            pwm.tip.id_code = ['注册时定义的五位代码','请输入ID','请输入ID'][pwm.curPage];
+            pwm.tip.password = '';
+            pwm.completed.id_code = false;
+            pwm.completed.password = false;
 
             const geetest = this.utils.createGeetest('popup');
             geetest.ready.then(gee => {
@@ -122,17 +212,7 @@
                 pwm.vm.geetest_seccode = pwm.geetestResult.geetest_seccode;
                 pwm.vm.geetest_validate = pwm.geetestResult.geetest_validate;
 
-                pwm.error = {};
                 this.$timeout(() => {
-                    if (!pwm.vm.id_code) {
-                        pwm.error['vm.id_code'] = 'Email or UIC cannot be empty.';
-                    }
-                    if (!pwm.vm.password) {
-                        pwm.error['vm.password'] = 'Password cannot be empty.';
-                    }
-                    if (!pwm.geetestResult) {
-                        pwm.error.authCode = true;
-                    }
                     this.$http.post(`${this.apiEndpoint}oauth/token`, this.$httpParamSerializerJQLike(pwm.vm), {
                         headers: {
                             'Content-Type': 'application/x-www-form-urlencoded',
@@ -144,19 +224,19 @@
                     }, response => {
                         if (response.status === 400 && response.data.error) {
                             switch (response.data.error) {
-                                case 'invalid_captcha':
-                                    pwm.error.authCode = true;
-                                    break;
                                 case 'user_non_existent':
-                                    pwm.error['vm.id_code'] = 'user doesn\'t exist';
+                                    pwm.tip.id_code = '没有这个用户的注册记录';
+                                    pwm.state.id_code = 'warn';
+                                    pwm.completed.id_code = false;
                                     break;
                                 case 'invalid_password':
-                                    pwm.error['vm.password'] = 'password is not correct';
+                                    pwm.tip.password = '密码有误，留意大写锁定是否开启';
+                                    pwm.state.password = 'warn';
+                                    pwm.completed.password = false;
                                     break;
                                 default:
                                     console.log('发生未知错误，请重试或与站务职员联系');
                             }
-                            console.log(response.data.error);
                         } else {
                             console.log(124);
                         }
