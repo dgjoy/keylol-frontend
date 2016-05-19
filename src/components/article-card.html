@@ -1,0 +1,14 @@
+<a class="common-article article" webp-background="{{::articleCard.card.coverImage | backgroundUrl}}" href="" ng-href="article/{{::articleCard.card.authorIdCode}}/{{::articleCard.card.sidForAuthor}}">
+    <div class="bottom-text">
+        <div class="first-line underline">{{::articleCard.card.title}}</div>
+        <div class="second-line">{{::articleCard.card.subtitle}}</div>
+    </div>
+</a>
+<a class="user" href="" ng-href="user/{{::articleCard.card.authorIdCode}}" ripple>
+    <img src="" class="avatar" webp-src="{{::articleCard.card.authorAvatarImage | avatarUrl}}"  alt="{{::articleCard.card.authorUserName}}">
+    <span class="username">{{::articleCard.card.authorUserName}}</span>
+    <p class="count">
+        <span>+{{::articleCard.card.likeCount}}</span>
+        <span>···{{::articleCard.card.commentCount}}</span>
+    </p>
+</a>

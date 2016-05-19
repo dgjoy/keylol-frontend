@@ -1,6 +1,10 @@
 ﻿(function () {
     class OutpostPointsController {
         constructor () {
+            this.type = {
+                mainTitle: '哨所',
+                subTitle: '近期热点观察',
+            };
             this.pages = [];
             for (let i = 0;i < this.cards.length;i++) {
                 if (this.pages.length === 0 || this.pages[this.pages.length - 1].length >= 3) {

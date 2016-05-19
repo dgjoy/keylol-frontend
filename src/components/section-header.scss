@@ -1,51 +1,69 @@
 section-header {
-  p {
-    margin: 0;
-  }
   display: flex;
   margin-top: -10px;
   margin-bottom: 10px;
 
+  p {
+    margin: 0;
+  }
+
   a {
     display: flex;
     align-items: center;
-
     padding-right: 10px;
     padding-top: 10px;
     padding-bottom: 10px;
+
     &:hover {
       .main-title {
         text-decoration: underline;
       }
     }
 
+    &.theme {
+      .logo {
+        fill: $keylol-theme;
+      }
+
+      .main-title {
+        color: $keylol-theme;
+      }
+    }
+
+    &.light-theme {
+      .logo {
+        fill: $keylol-light-theme;
+      }
+
+      .main-title {
+        color: $keylol-light-theme;
+      }
+    }
+
+    &.user {
+      .logo {
+        fill: $keylol-user-theme;
+      }
+
+      .main-title {
+        color: $keylol-user-theme;
+      }
+    }
+
     .logo {
       height: 32px;
       width: 16px;
-      fill: $keylol-theme;
       margin-right: 8px;
-
-      &.orange {
-        fill: $keylol-user-theme;
-      }
     }
 
     .text {
       .main-title {
-        font-size:20px;
-        color: $keylol-theme;
-
+        font-size: 20px;
         margin-bottom: 2px;
       }
 
       .sub-title {
         color: $keylol-inertia-text;
-      }
-
-      &.orange {
-        .main-title {
-          color: $keylol-user-theme;
-        }
       }
     }
   }

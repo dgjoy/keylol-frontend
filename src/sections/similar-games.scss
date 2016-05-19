@@ -1,0 +1,43 @@
+similar-games {
+  display: block;
+  overflow-x: hidden;
+
+  section-header {
+    width: 940px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .wrapper {
+    padding: 30px 0;
+    background-color: $keylol-light-theme;
+    display: flex;
+
+    game-card {
+      flex-shrink: 0;
+      margin: 0 10px;
+    }
+    .left-part {
+      display: flex;
+      width: 50%;
+      flex-direction: row-reverse;
+    }
+    .right-part {
+      display: flex;
+      position: relative;
+      width: 50%;
+
+      game-card:nth-of-type(2) {
+        margin-left: 250px;
+      }
+
+      >img {
+        bottom: -30px;
+        position: absolute;
+        height: auto;
+        width: 750px;
+        opacity: 0.1;
+      }
+    }
+  }
+}

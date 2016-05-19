@@ -22,7 +22,7 @@
             this.type = {
                 mainTitle: '玩家',
                 subTitle: '与游戏好友一起在其乐融融',
-                isOrange: true,
+                type: 'user',
             };
         }
     }
