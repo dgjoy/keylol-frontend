@@ -37,6 +37,11 @@ var buildConfigs = {
         apiEndpoint: "https://lgbt-api.keylol.com/",
         urlCanonical: false
     },
+    lgbt: {
+        bundle: true,
+        apiEndpoint: "https://lgbt-api.keylol.com/",
+        urlCanonical: false
+    },
     prod: {
         bundle: true,
         apiEndpoint: "https://api.keylol.com/",
@@ -297,6 +302,8 @@ var getBuildTask = function (configName) {
 gulp.task("prod", getBuildTask("prod"));
 
 gulp.task("dev", getBuildTask("dev"));
+
+gulp.task("lgbt", getBuildTask("lgbt"));
 
 gulp.task("local", getBuildTask("local"));
 
