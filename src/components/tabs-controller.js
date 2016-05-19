@@ -23,7 +23,6 @@
             invert: '<',
             clickHandler: '&',
             theme: '<',
-            canResize: '<',
         },
     });
 }());

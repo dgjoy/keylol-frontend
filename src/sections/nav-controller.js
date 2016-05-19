@@ -19,12 +19,12 @@
 
             const currentStateName = $state.current.name;
             if (currentStateName.substr(0, 8) === 'entrance') {
+                this.inEntrance = true;
                 this.tabArray = [
                     { state:'entrance.discovery',name:'广场' },
                     { state:'entrance.points',name:'据点' },
                     { state:'entrance.timeline',name:'轨道' },
                 ];
-                this.canResize = true;
                 $scope.$watch(() => {
                     return $state.current.name;
                 }, () => {

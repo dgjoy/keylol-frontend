@@ -4,7 +4,6 @@
             restrict: 'E',
             scope: {
                 curTab: '<',
-                canResize: '<',
             },
             link (scope, element) {
                 // 应对高延迟
@@ -13,8 +12,6 @@
                 let tabs = [];
 
                 function calTrans() {
-                    const pWidth = element.parent().parent().width();
-
                     tabs = [];
                     element.siblings().each(function () {
                         tabs.push({
@@ -44,12 +41,12 @@
                     transReady = true;
                 }
 
-                if (scope.canResize) {
-                    const resizeHandler = $(window).on('resize', calTrans);
-                    scope.$on('$destroy', () => {
-                        $(window).unbind('resize', resizeHandler);
-                    });
-                }
+                // if (scope.canResize) {
+                //     const resizeHandler = $(window).on('resize', calTrans);
+                //     scope.$on('$destroy', () => {
+                //         $(window).unbind('resize', resizeHandler);
+                //     });
+                // }
 
                 scope.$watch(() => {
                     return element.parent().width();

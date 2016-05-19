@@ -17,8 +17,10 @@ nav {
     }
   }
 
-  tabs.in-page {
-    width: 940px;
-    margin: auto;
+  .fake-tabs {
+    position: absolute;
+    height: 35px;
+    width: 100%;
+    background-color: $keylol-light-theme;
   }
 }
