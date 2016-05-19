@@ -123,7 +123,6 @@
         controller: RightMenusController,
         controllerAs: 'rightMenus',
         bindings: {
-            specialMenu: '<',
         },
     });
 }());

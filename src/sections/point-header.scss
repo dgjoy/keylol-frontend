@@ -1,18 +1,24 @@
 point-header {
-  display: block;
   margin: auto;
   width: 940px;
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 
-  .wrapper {
+  .background {
+    position: absolute;
+    left: 0;
+    top: 0;
     width: 100%;
-    height: 200px;
+    height: 100%;
     background-size: cover;
     background: center no-repeat;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
+  }
 
-    .info {
+  .info {
       @include text-protection();
       padding: 20px 0;
       position: relative;
@@ -64,5 +70,4 @@ point-header {
         }
       }
     }
-  }
 }

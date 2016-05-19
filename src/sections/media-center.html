@@ -1,0 +1,27 @@
+﻿<div class="header" webp-background="{{'http://cdn.dota2.com/apps/dota2/images/blogfiles/blog_ti6_battle_pass.jpg' | uriRelocate}}">
+    <div class="header-things">
+        <div class="header-text">
+            <p class="title">媒体中心</p>
+            <p class="sub-title">宣传片、截图、原画、粉丝艺术</p>
+        </div>
+        <raised-button text="上传媒体" theme-color="mediaCenter.theme.main"></raised-button>
+    </div>
+</div>
+<div class="wrapper">
+    <ul>
+        <li ng-repeat="item in mediaCenter.list track by $index">
+            <a href="" ng-href="{{item.link}}" webp-background="{{item.image | uriRelocate}}">
+                <p class="text" ng-if="item.isVideo">
+                    <span>{{$index === 0? item.text : ''}}</span>
+                    <svg aria-hidden="true">
+                        <use ng-href="{{'video-play' | iconSvgUrl }}" xlink:href=""></use>
+                    </svg>
+                </p>
+            </a>
+        </li>
+    </ul>
+    <div class="more">
+        <p>2 段视频 / 5 张截图 / 3 幅原画</p>
+        <p><a href="">查看更多</a></p>
+    </div>
+</div>

@@ -52,6 +52,11 @@ textarea,
   flex-wrap: wrap;
 }
 
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
 .left-middle-lg {
   width: 700px;
 }

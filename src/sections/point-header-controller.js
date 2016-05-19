@@ -3,7 +3,29 @@
  */
 (function () {
     class pointHeaderController {
-        constructor($scope, union, $http, notification) {
+        constructor($scope, $window, $timeout) {
+            const $$window = $($window);
+            let scrollTop = $$window.scrollTop();
+            const scrollCallback = () => {
+                scrollTop = $$window.scrollTop();
+                if (scrollTop < 464) {
+                    $scope.$apply(() => {
+                        this.transform = `translateY(${scrollTop / 2}px)`;
+                    });
+                }
+            };
+            $$window.scroll(scrollCallback);
+
+            const cancelListenRoute = $scope.$on('$destroy', () => {
+                $$window.unbind('scroll', scrollCallback);
+                cancelListenRoute();
+            });
+
+            if (scrollTop < 464) {
+                this.transform = `translateY(${scrollTop / 2}px)`;
+            } else {
+                this.transform = 'translateY(132px)';
+            }
         }
     }
 
