@@ -1,0 +1,31 @@
+﻿<section-header header="shortReview.type"></section-header>
+<div class="main-card">
+    <form>
+        <div class="header">
+            <div class="info">
+                <img webp-src="//storage.keylol.com/1ce18b1533d8e0be1d21acc7fb12c1d8.png!avatar.small">
+                <p><span>ZenDay</span> / <span>在档 203 小时</span></p>
+                <point-review no-string="true" is-hollow="true"></point-review>
+            </div>
+            <span ng-if="false" class="like">+7</span>
+        </div>
+        <textarea elastic placeholder="添加一则简评" ng-model="shortReview.text"></textarea>
+        <div class="actions">
+            <flat-button text="发布" type="inertia"></flat-button>
+            <flat-button ng-if="false" theme-color="shortReview.theme.main" text="新简评"></flat-button>
+        </div>
+    </form>
+    <ul>
+        <li ng-repeat="item in shortReview.list">
+            <div class="header">
+                <div class="info">
+                    <img webp-src="{{item.avatarImage | avatarUrl}}">
+                    <p>{{item.username}} / 在档 203 小时</p>
+                    <vote-circle review="item.review"></vote-circle>
+                </div>
+                <span class="like">+{{item.like || ''}}</span>
+            </div>
+            <p>{{item.content}}<a href="">查看</a></p>
+        </li>
+    </ul>
+</div>

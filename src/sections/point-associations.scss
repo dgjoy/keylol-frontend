@@ -13,19 +13,23 @@ point-associations {
 
     >.stations {
       display: flex;
+
       >.link-black {
         margin-right: 15px;
         display: flex;
         align-items: center;
+
         >span {
           color: $keylol-main-text;
         }
+
         >svg {
-          height: 16px;//待处理
-          width: 16px;
-          margin-right: 10px;
+          height: 24px;
+          width: 24px;
+          margin-right: 6px;
           fill: $keylol-main-text;
         }
+
         &:hover>span{
           text-decoration: underline;
         }
@@ -34,6 +38,7 @@ point-associations {
 
     >.chinese-support {
       color: $keylol-inertia-text;
+
       &:hover {
         text-decoration: underline;
       }
@@ -50,15 +55,18 @@ point-associations {
       margin: 0 10px;
       display: flex;
       align-items: center;
+
       >span {
         color: $keylol-inverted-text;
       }
+
       >svg {
-        height: 16px;
-        width: 16px;
-        margin-right: 10px;
+        height: 24px;
+        width: 24px;
+        margin-right: 6px;
         fill: $keylol-inverted-text;
       }
+
       &:hover>span{
         text-decoration: underline;
       }

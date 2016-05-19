@@ -1,0 +1,6 @@
+<h4 ng-if="!pointReview.noString" class="review-text {{pointReview.reviewString}}">你的评价</h4>
+<div ng-mouseleave="pointReview.returnDefault()">
+    <svg xmlns="http://www.w3.org/2000/svg" ng-class="{hollow: pointReview.isHollow}" ng-mouseenter="pointReview.changeReview($index)" ng-click="pointReview.setReview($index)" ng-repeat="reviewCircle in pointReview.reviewCircles" class="review-circle {{reviewCircle.type}}">
+        <circle cx="4" cy="4" r="4"></circle>
+    </svg>
+</div>

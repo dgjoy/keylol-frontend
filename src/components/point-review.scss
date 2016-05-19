@@ -1,0 +1,27 @@
+point-review {
+  display: block;
+
+  .review-text {
+    @include keylol-review();
+    color: $keylol-theme;
+  }
+
+  >div {
+    display: flex;
+  }
+
+  .review-circle.hollow{
+    fill: transparent;
+    stroke: #CCC;
+    stroke-width: 1;
+  }
+
+  .review-circle {
+    @include keylol-review(fill, true);
+    margin-right: 2px;
+    width: 8px;
+    height: 8px;
+    cursor: pointer;
+    fill: #CCC;
+  }
+}
