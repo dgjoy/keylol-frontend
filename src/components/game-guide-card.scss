@@ -29,9 +29,10 @@ game-guide-card {
     background-color: $keylol-light-theme;
     display: flex;
     justify-content: center;
+    align-items: center;
     overflow: hidden;
-    padding: 9px 15px;
-    margin: 10px 0;
+    height: 36px;
+    padding: 0 15px;
 
     .characteristic {
       width: 30px;
@@ -70,9 +71,9 @@ game-guide-card {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height: 52px;
 
     .platforms {
-      height: 52px;
       padding-left: 10px;
       display: flex;
       align-items: center;
