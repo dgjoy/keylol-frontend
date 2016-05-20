@@ -5,23 +5,21 @@
     keylolApp.directive('radioRipple', ($timeout, utils) => {
         return {
             scope : {
-                type: '@radioRipple',
+                index: '<radioRipple',
             },
             restrict: 'A',
+            priority: 1,
             link (scope, element) {
-                const func = () => {
-                    const newEle = $(`<div class="circle-ripple ${scope.type === undefined ? 'inertia' : scope.type}"></div>`).appendTo(element.find('.ripple-container'));
-                    newEle.one('animationend webkitAnimationEnd',() => {
-                       newEle.remove();
-                    });
+                const func = (e, content) => {
+                    if (content.index === scope.index) {
+                        const newEle = $(`<div class="circle-ripple ${content.color}"></div>`).appendTo(element.find('.ripple-container'));
+                        newEle.one('animationend webkitAnimationEnd',() => {
+                            newEle.remove();
+                        });
+                    }
                 };
                 
-                element.on('touchstart mousedown', func);
-
-                //remove the event listener on scope destroy
-                scope.$on('$destroy',() => {
-                    element.off('touchstart mousedown', func);
-                });
+                scope.$on('rippleEvent', func);
             },
         };
     });

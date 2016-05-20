@@ -1,0 +1,54 @@
+.popup-report-abuse {
+  @include keylol-shadow-3();
+  background-color: $keylol-card;
+  width: 340px;
+
+  p {
+    margin: 0;
+  }
+
+  >.head {
+    background-color: $keylol-light-theme;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+
+    >.text {
+      margin-left: 15px;
+      >p:first-of-type {
+        color: $keylol-inverted-text;
+        font-weight: bold;
+        font-size: 20px;
+      }
+
+      >p:last-of-type {
+        color: rgba($keylol-inverted-text,.6);
+      }
+    }
+
+    >img {
+      width: 128px;
+      margin-right: 40px;
+    }
+  }
+
+  >.content {
+    padding: 15px;
+    >p {
+      margin: 5px 0;
+      color: $keylol-inertia-text;
+    }
+
+    >text-area {
+      margin-top: 15px;
+      width: 100%;
+    }
+
+    >.action {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+}

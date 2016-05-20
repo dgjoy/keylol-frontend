@@ -5,7 +5,7 @@
 /* --------------- */
 [radio-ripple] {
   @keyframes circle-ripple-animation {
-    from { transform: scale(0); } to { transform: scale(1.75); }
+    from { transform: scale(0); opacity: 1; } to { transform: scale(1.75); opacity: 0.6; }
   }
 
   .circle-ripple {
@@ -16,7 +16,7 @@
     animation: circle-ripple-animation .55s cubic-bezier(.25,.8,.25,1);
 
     &.theme {
-      background-color: rgba($keylol-theme, .1);
+      background-color: rgba($keylol-light-theme, .1);
     }
 
     &.inertia {

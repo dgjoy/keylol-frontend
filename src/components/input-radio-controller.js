@@ -1,18 +1,17 @@
 (function () {
     class InputRadioController {
-        constructor($element) {
+        constructor($element, $scope) {
             $.extend(this,{
-                $element,
+                $scope,
             });
-            this.rippleColor = 'inertia';
         }
 
         changeRadio(index) {
-            if (this.currentRadio === index) {
-                this.rippleColor = 'theme';
+            if ( this.currentRadio === index ) {
+                this.$scope.$broadcast('rippleEvent',{ index, color:'theme' });
             } else {
-                this.rippleColor = 'inertia';
                 this.currentRadio = index;
+                this.$scope.$broadcast('rippleEvent',{ index, color:'inertia' });
             }
         }
     }
@@ -21,6 +20,9 @@
         templateUrl: 'src/components/input-radio.html',
         controller: InputRadioController,
         controllerAs: 'inputRadio',
-        bindings: {},
+        bindings: {
+            items: '<',
+            currentRadio: '=',
+        },
     });
 }());

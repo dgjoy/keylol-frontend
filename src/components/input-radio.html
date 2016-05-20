@@ -1,8 +1,8 @@
-<a class="item" href="" ng-repeat="i in [1,2,3,4]" ng-click="inputRadio.changeRadio($index)" radio-ripple="{{inputRadio.rippleColor}}">
+<a class="item" href="" ng-repeat="item in inputRadio.items" ng-click="inputRadio.changeRadio($index)" radio-ripple="$index">
     <div class="outer" ng-class="{'focus':inputRadio.currentRadio === $index}">
         <div class="ripple-container"></div>
         <div class="hole"></div>
         <div class="object"></div>
     </div>
-    <p class="text">这是内容</p>
+    <p class="text">{{item}}</p>
 </a>

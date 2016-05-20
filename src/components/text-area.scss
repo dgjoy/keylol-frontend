@@ -1,4 +1,6 @@
 text-area {
+  display: block;
+
   label {
     display: block;
     color: $keylol-inertia-text;
@@ -22,7 +24,7 @@ text-area {
 
   .text {
     transform: translateY(0);
-    width: 300px; // default width
+    width: 100%;
 
     input[type="text"],
     input[type="password"] {
