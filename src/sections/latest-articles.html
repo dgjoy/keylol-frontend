@@ -22,9 +22,9 @@
                         <img class="avatar" src="" webp-src="{{::article.authorAvatarImage | avatarUrl}}" alt="{{::article.authorUserName}}">
                         <span>{{::article.authorUserName}}</span>
                     </a>
-                    <a href="" ng-href="point/{{::article.pointIdCode}}">
-                        <img class="avatar" src="" webp-src="{{::article.pointAvatarImage | avatarUrl}}" alt="{{::article.pointChineseName}}">
-                        <span>{{::article.pointChineseName}}</span>
+                    <a ng-if="::article.pointIdCode" href="" ng-href="point/{{::article.pointIdCode}}">
+                        <img class="avatar" src="" webp-src="{{::article.pointAvatarImage | avatarUrl}}" alt="{{::latestArticles.utils.getPreferredPointNamePrefixPoint(article, latestArticles.stateTree.currentUser)[0]}}">
+                        <span>{{::latestArticles.utils.getPreferredPointNamePrefixPoint(article, latestArticles.stateTree.currentUser)[0]}}</span>
                     </a>
                 </p>
             </div>

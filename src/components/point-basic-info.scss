@@ -19,7 +19,7 @@ point-basic-info {
         font-weight: bold;
       }
 
-      &:last-of-type {
+      &:nth-of-type(2) {
         color: $keylol-inertia-text;
         font-size: 12px;
       }

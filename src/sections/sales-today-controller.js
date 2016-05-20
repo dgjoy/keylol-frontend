@@ -1,9 +1,9 @@
 ﻿(function () {
     class SalesTodayController {
-        constructor ($rootScope, $location) {
+        constructor (utils, stateTree) {
             $.extend(this, {
-                $rootScope,
-                $location,
+                utils,
+                stateTree,
             });
             this.currentPage = 1;
         }

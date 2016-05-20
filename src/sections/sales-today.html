@@ -14,15 +14,15 @@
                 <img class="cover" webp-src="{{point.thumbnailImage | uriRelocate}}">
                 <div class="point">
                     <div class="name">
-                        <p>{{point.chineseName}}</p>
-                        <p>{{point.englishName}}</p>
+                        <p>{{salesToday.utils.getPreferredPointName(point, salesToday.stateTree.currentUser)[0]}}</p>
+                        <p>{{salesToday.utils.getPreferredPointName(point, salesToday.stateTree.currentUser)[1]}}</p>
                     </div>
                     <div class="info">
                         <review-with-text review="point.averageRating"></review-with-text>
                         <div class="price">
-                            <span ng-if="point.steamPrice" class="old">¥ {{point.steamPrice}}</span>
-                            <span>¥ {{point.steamDiscountedPrice}}</span>
-                            <span class="discount">-{{(point.steamPrice - point.steamDiscountedPrice) / point.steamPrice | calculatePercentage}}</span>
+                            <span ng-if="point.steamDiscountedPrice" class="old">¥ {{point.steamPrice}}</span>
+                            <span>¥ {{point.steamDiscountedPrice || point.steamPrice}}</span>
+                            <span ng-if="steamDiscountedPrice" class="discount">-{{(point.steamPrice - point.steamDiscountedPrice) / point.steamPrice | calculatePercentage}}</span>
                         </div>
                     </div>
                     <span class="horizon"></span>
