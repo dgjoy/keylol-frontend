@@ -21,9 +21,9 @@
             if (currentStateName.substr(0, 8) === 'entrance') {
                 this.inEntrance = true;
                 this.tabArray = [
-                    { state:'entrance.discovery',name:'广场' },
-                    { state:'entrance.points',name:'据点' },
-                    { state:'entrance.timeline',name:'轨道' },
+                    { state:'.discovery',name:'广场' },
+                    { state:'.points',name:'据点' },
+                    { state:'.timeline',name:'轨道' },
                 ];
                 $scope.$watch(() => {
                     return $state.current.name;
@@ -43,13 +43,20 @@
                 });
             } else if (currentStateName.substr(0, 17) === 'aggregation.point') {
                 this.inPoint = true;
-                this.tabArray = [{ name:'扉页' },{ name:'情报' },{ name:'轨道' },{ name:'编辑', 'float':'right' }];
-                const subState = currentStateName.substr(18);
-                switch (subState) {
-                    case 'frontpage' :
-                        this.currentPage = 0;
-                        break;
-                }
+                this.tabArray = [{ state:'.frontpage', name:'扉页' },{ state:'.intel', name:'情报' },{ state:'.frontpage', name:'轨道' },{ state:'.frontpage', name:'编辑', 'float':'right' }];
+                $scope.$watch(() => {
+                    return $state.current.name;
+                }, () => {
+                    const subState = $state.current.name.substr(18);
+                    switch (subState) {
+                        case 'frontpage' :
+                            this.currentPage = 0;
+                            break;
+                        case 'intel' :
+                            this.currentPage = 1;
+                            break;
+                    }
+                });
             }
         }
     }

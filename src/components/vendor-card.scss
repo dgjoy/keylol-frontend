@@ -1,0 +1,31 @@
+vendor-card {
+  @include keylol-shadow-1;
+  background-color: $keylol-card;
+  width: 220px;
+  display: flex;
+  flex-direction: column;
+
+  .relations {
+    padding: 15px;
+    color: $keylol-inertia-text;
+  }
+
+  .horizon {
+    margin: 0 20px;
+    height: 1px;
+    background-color: $keylol-inertia-shape;
+  }
+
+  .info {
+    @include hover-background();
+    display: flex;
+    align-items: center;
+    height: 52px;
+    padding: 0 15px;
+    margin: 10px 0;
+
+    point-basic-info {
+      max-width: 100%;
+    }
+  }
+}

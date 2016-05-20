@@ -1,12 +1,11 @@
 ﻿(function () {
     class PointController {
-        constructor (pageHead, stateTree) {
-            $.extend(this, {
-                stateTree,
-            });
+        constructor ($scope, stateTree) {
+            $scope.stateTree = stateTree;
             stateTree.pointTheme = {
                 main: '#813221',
                 light: '#a83f34',
+                icon: '//storage.keylol.com/2ea0474aa5757a04658790f12e144e61.png',
             };
         }
     }

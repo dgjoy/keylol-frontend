@@ -144,15 +144,29 @@
                 template: '<div ui-view></div>',
             })
             .state('aggregation.point', {
-                'abstract': true,
                 url: '/point/:pointIdCode',
                 templateUrl: 'src/pages/point.html',
-                controller: 'PointController as point',
+                controller: 'PointController',
+                onEnter ($location, pageLoad, $state, $timeout) {
+                    if ($location.url().match(/\/point\/[^\/]*\/?$/)) {
+                        $timeout(() => {
+                            console.log($state.current);
+                            $state.go('.frontpage', {}, { location: false });
+                        });
+                    }
+                },
+                onExit (stateTree) {
+                },
             })
             .state('aggregation.point.frontpage', {
-                url: '',
+                url: '/frontpage',
                 templateUrl: 'src/pages/frontpage.html',
                 controller: 'FrontpageController',
+            })
+            .state('aggregation.point.intel', {
+                url: '/intel',
+                templateUrl: 'src/pages/intel.html',
+                controller: 'IntelController',
             });
 
         pageHeadProvider.setLoadingHead({

@@ -1,0 +1,44 @@
+﻿<div class="header" style="{{::(thirdPartyStatistics.theme.main ? 'background-color: ' + thirdPartyStatistics.theme.main + ';' : '')}}">
+    <div class="theme-logo">
+        <img webp-src="{{thirdPartyStatistics.theme.icon | uriRelocate}}">
+    </div>
+    <div class="some-times">
+        <div class="other-times">
+            <div>
+                <p>公开</p>
+                <p>2010-10-13</p>
+            </div>
+            <div>
+                <p>据点成立</p>
+                <p>2015-11-31</p>
+            </div>
+            <div>
+                <p>预售</p>
+                <p>2011-07-05</p>
+            </div>
+        </div>
+        <div class="sale-times">
+            <p>正式发行</p>
+            <p>2013-7-9</p>
+        </div>
+    </div>
+</div>
+<tabs style="{{::(thirdPartyStatistics.theme.light ? 'background-color: ' + thirdPartyStatistics.theme.light + ';' : '')}}" click-handler="thirdPartyStatistics.changeTab(index)" tab-array="::thirdPartyStatistics.tabArray" cur-tab="thirdPartyStatistics.currentPage"></tabs>
+<div class="wrapper">
+    <div class="statistics {{::thirdPartyStatistics.datas[thirdPartyStatistics.currentPage].name}}" ng-animate-swap="thirdPartyStatistics.currentPage">
+        <div class="main">
+            <p>{{::thirdPartyStatistics.datas[thirdPartyStatistics.currentPage].main.name}}</p>
+            <p>{{::thirdPartyStatistics.datas[thirdPartyStatistics.currentPage].main.main}} <span>{{::thirdPartyStatistics.datas[thirdPartyStatistics.currentPage].main.sub}}</span></p>
+        </div>
+        <div class="sub">
+            <div ng-repeat="item in ::thirdPartyStatistics.datas[thirdPartyStatistics.currentPage].sub">
+                <p>{{item.name}}</p>
+                <p>{{item.main}} <span>{{item.sub}}</span></p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="copyright">
+    <p>Corresponding data are provided by SteamSpy with specific authorization that empowers Keylol’s right to demonstrate on its site.</p>
+    <p><span>Copyright © <a href="http://galyonkin.com/">Sergey Galyonkin</a> of <a href="http://steamspy.com/">SteamSpy</a></span><span>Powered by Steam</span></p>
+</div>

@@ -1,0 +1,8 @@
+﻿<section-header header="::staffUsers.types[0]"></section-header>
+<div class="flex-row">
+    <user-card ng-repeat="card in staffUsers.fromVendor" user="card"></user-card>
+</div>
+<section-header header="::staffUsers.types[1]"></section-header>
+<div class="flex-row">
+    <user-card ng-repeat="card in staffUsers.staying" user="card"></user-card>
+</div>

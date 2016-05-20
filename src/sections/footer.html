@@ -16,7 +16,8 @@
                     </div>
                 </div>
             </div>
-            <img src="assets/images/logo-arrow.png">
+            <img ng-if="!footer.theme" src="assets/images/logo-arrow.png">
+            <img ng-if="footer.theme" src="assets/images/logo-arrow-whiteout.png">
         </div>
         <div class="link">
             <ul>
@@ -49,6 +50,6 @@
 <div class="about" style="{{::(footer.theme.main ? 'background-color: ' + footer.theme.main + ';' : '')}}">
     <div class="wrapper">
         <span>© 2016 Keylol.com & SteamCN.com</span>
-        <span>晋 ICP 备 13004301 - 2  ·  粤公网安备 44011302000153</span>
+        <span>晋 ICP 备 13004301　·　粤公网安备 44011302000153</span>
     </div>
 </div>

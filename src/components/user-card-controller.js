@@ -4,6 +4,9 @@
             $.extend(this, {
                 stateTree,
             });
+            if (!this.type) {
+                this.type = 'light-text';
+            }
         }
     }
 
@@ -13,6 +16,7 @@
         controllerAs: 'userCard',
         bindings: {
             user: '<',
+            type: '@',
         },
     });
 }());
