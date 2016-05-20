@@ -32,12 +32,12 @@
                 items: [
                     {
                         type: 'item',
-                        icon: 'New_Article',
+                        icon: 'new-article',
                         text: '新文章',
                     },
                     {
                         type: 'item',
-                        icon: 'File',
+                        icon: 'file',
                         text: '草稿',
                         subText: stateTree.currentUser ? stateTree.currentUser.draftCount : undefined,
                     },
@@ -47,17 +47,17 @@
                 items: [
                     {
                         type: 'item',
-                        icon: 'Map',
+                        icon: 'map',
                         text: '开设新据点',
                     },
                     {
                         type: 'item',
-                        icon: 'User',
+                        icon: 'user',
                         text: '邀请好友加入其乐',
                     },
                     {
                         type: 'item',
-                        icon: 'CuC',
+                        icon: 'cuc',
                         text: '客务中心',
                     },
                 ],
@@ -70,24 +70,24 @@
                 items: [
                     {
                         type: 'item',
-                        icon: 'Steam',
+                        icon: 'dtb-steam',
                         text: 'Steam',
                     },
                     {
                         type: 'item',
-                        icon: 'PlayStation',
+                        icon: 'dtb-playstation',
                         text: 'PSN（暂未开放）',
                         disabled: true,
                     },
                     {
                         type: 'item',
-                        icon: 'Google_Store',
+                        icon: 'dtb-xbox',
                         text: 'Xbox Live（暂未开放）',
                         disabled: true,
                     },
                     {
                         type: 'item',
-                        icon: 'Register',
+                        icon: 'register',
                         text: '无平台注册',
                     },
                 ],
@@ -100,17 +100,17 @@
                 items: [
                     {
                         type: 'item',
-                        icon: 'Login_Steam_BOT',
+                        icon: 'login-steam-bot',
                         text: 'Steam 机器人',
                     },
                     {
                         type: 'item',
-                        icon: 'Login_Steam_Web_API',
+                        icon: 'login-steam-web-api',
                         text: 'Steam 网页 API',
                     },
                     {
                         type: 'item',
-                        icon: 'Login_Passcode',
+                        icon: 'login-passcode',
                         text: '口令组合',
                     },
                 ],

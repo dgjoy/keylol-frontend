@@ -13,7 +13,7 @@
             if (this.characteristics.length > 7) {
                 this.characteristics = this.characteristics.slice(0, 7);
                 this.characteristics.push({
-                    icon: 'More',
+                    icon: 'more',
                     text: '更多',
                 });
             }
