@@ -31,12 +31,18 @@ similar-games {
         margin-left: 250px;
       }
 
-      >img {
-        bottom: -30px;
+      .theme-icon {
+        left: 250px;
+        top: 0;
         position: absolute;
-        height: auto;
-        width: 750px;
-        opacity: 0.1;
+        width: 220px;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+         img {
+           height: 48px;
+         }
       }
     }
   }

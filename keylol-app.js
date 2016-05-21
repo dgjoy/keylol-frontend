@@ -167,6 +167,11 @@
                 url: '/intel',
                 templateUrl: 'src/pages/intel.html',
                 controller: 'IntelController',
+            })
+            .state('aggregation.point.edit', {
+                url: '/edit',
+                templateUrl: 'src/pages/point-edit.html',
+                controller: 'PointEditController',
             });
 
         pageHeadProvider.setLoadingHead({
