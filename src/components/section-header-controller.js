@@ -15,6 +15,7 @@
         controllerAs: 'sectionHeader',
         bindings: {
             header: '<',
+            theme: '<',
         },
     });
 }());

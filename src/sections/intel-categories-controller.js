@@ -5,12 +5,10 @@
                 {
                     mainTitle: '流派',
                     subTitle: '从游戏性质出发的分类方式',
-                    theme: this.theme,
                 },
                 {
                     mainTitle: '特性',
                     subTitle: '游戏中的要素和特色',
-                    theme: this.theme,
                 },
             ];
             this.genre = [

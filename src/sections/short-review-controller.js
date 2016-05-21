@@ -7,7 +7,6 @@
             this.type = {
                 mainTitle: '简评',
                 subTitle: '一共有 19 则附有评价的动态',
-                theme: this.theme,
             };
             this.list = [
                 {

@@ -1,9 +1,6 @@
 ﻿(function () {
     class IconButtonController {
         constructor () {
-            if (!this.type) {
-                this.type = 'theme';
-            }
         }
     }
 

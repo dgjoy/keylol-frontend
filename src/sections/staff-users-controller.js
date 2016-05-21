@@ -5,12 +5,10 @@
                 {
                     mainTitle: '厂商职员',
                     subTitle: '入驻其乐的游戏业者',
-                    theme: this.theme,
                 },
                 {
                     mainTitle: '驻点职员',
                     subTitle: '驻守在此据点的站务职员',
-                    theme: this.theme,
                 },
             ];
             this.fromVendor = [

@@ -172,6 +172,25 @@
                 url: '/edit',
                 templateUrl: 'src/pages/point-edit.html',
                 controller: 'PointEditController',
+                onEnter ($location, pageLoad, $state, $timeout) {
+                    if ($location.url().match(/\/point\/[^\/]*\/edit\/?$/)) {
+                        $timeout(() => {
+                            $state.go('.info', {}, { location: false });
+                        });
+                    }
+                },
+                onExit (stateTree) {
+                },
+            })
+            .state('aggregation.point.edit.info', {
+                url: '/info',
+                templateUrl: 'src/pages/edit-info.html',
+                controller: 'EditInfoController',
+            })
+            .state('aggregation.point.edit.style', {
+                url: '/style',
+                templateUrl: 'src/pages/edit-info.html',
+                controller: 'EditInfoController',
             });
 
         pageHeadProvider.setLoadingHead({

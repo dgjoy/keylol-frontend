@@ -7,7 +7,6 @@
             this.type = {
                 mainTitle: '厂商',
                 subTitle: '编辑艺术的工匠与演绎商品的巨人',
-                theme: this.theme,
             };
             this.cards = [
                 {
