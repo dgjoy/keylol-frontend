@@ -16,7 +16,7 @@ input-radio {
       margin-right: 10px;
 
       &.focus>.hole {
-        border-color: $keylol-theme;
+        border-color: $keylol-light-theme;
       }
 
       &.focus>.object {
@@ -41,7 +41,7 @@ input-radio {
       >.object {
         width: 100%;
         height: 100%;
-        background-color: $keylol-theme;
+        background-color: $keylol-light-theme;
         border-radius: 10px;
 
         transform-origin: center;

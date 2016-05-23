@@ -15,7 +15,7 @@ text-area {
       line-height: 14px;
     }
     &.active {
-      color: $keylol-theme;
+      color: $keylol-light-theme;
     }
     &.warn {
       color: $keylol-review-bad;
@@ -40,7 +40,7 @@ text-area {
 
     &.active input {
       padding-bottom: 9px;
-      border-color: $keylol-theme;
+      border-color: $keylol-light-theme;
       border-bottom-width: 2px;
     }
     &.warn input {

@@ -189,3 +189,22 @@ $keylol-topic: #7976b1;
     }
   }
 }
+
+// 常用动画
+@keyframes popup-grow {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes popup-shrink {
+  from {
+    transform: scaleY(1);
+  }
+  to {
+    transform: scaleY(0);
+  }
+}

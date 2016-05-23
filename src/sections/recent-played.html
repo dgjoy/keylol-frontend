@@ -8,7 +8,7 @@
 <ul class="subscribe-list">
     <li ng-repeat="game in recentPlayed.list">
         <div class="wrapper">
-            <img class="cover" webp-src="{{game.thumbnailImage}}">
+            <a href="" ng-href="point/{{game.idCode}}"><img class="cover" webp-src="{{game.thumbnailImage}}"></a>
             <div class="point">
                 <a href="" ng-href="point/{{game.idCode}}" class="name">
                     <p>{{recentPlayed.utils.getPreferredPointName(game, recentPlayed.stateTree.currentUser)[0]}}</p>

@@ -19,7 +19,7 @@
                 close();
                 origin.popup({
                     templateUrl: 'src/popup/report-abuse.html',
-                    controller: 'ApproverListController as approverList',
+                    controller: 'ReportAbuseController as reportAbuse',
                     event: origin.event,
                     attachSide: 'bottom',
                     align: 'center',

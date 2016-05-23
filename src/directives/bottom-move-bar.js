@@ -24,11 +24,12 @@
                     const firstTab = tabs[0];
                     if (scope.curTab === undefined) {
                         element.css({
-                            transform: `translateX(-${firstTab.width}px)`,
+                            visibility: 'hidden',
                             width: firstTab.width,
                         });
                     } else {
                         element.css({
+                            visibility: 'visible',
                             transform: `translateX(${tabs[scope.curTab].left}px)`,
                             width: firstTab.width,
                         });
@@ -61,6 +62,7 @@
                 scope.$watch('curTab', (newValue, oldValue) => {
                     if (oldValue === undefined && newValue !== undefined) {
                         element.css({
+                            visibility: 'visible',
                             transform: `translateX(${tabs[newValue].left}px)`,
                         });
                         return ;
@@ -70,6 +72,7 @@
                         if (!transReady)
                             return;
                         element.css({
+                            visibility: 'visible',
                             'transform': trans[newValue],
                         });
                     }

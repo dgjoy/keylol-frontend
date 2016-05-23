@@ -1,4 +1,46 @@
 .popup-timeline-card-menu {
   @include keylol-shadow-3();
   width: 220px;
+
+  &.ng-enter {
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    opacity: 0;
+    transform-origin: top right 0;
+    transform: scale(0, 0);
+
+    menu > * {
+      transition: opacity 150ms cubic-bezier(.55, 0, .55, .2) 75ms;
+      opacity: 0;
+    }
+
+    &.ng-enter-active {
+      opacity: 1;
+      transform: scale(1, 1);
+
+      menu > * {
+        opacity: 1;
+      }
+    }
+  }
+
+  &.ng-leave {
+    transition: all 0.2s cubic-bezier(0.95, 0.05, 0.795, 0.035);
+    opacity: 1;
+    transform-origin: top right 0;
+    transform: scale(1, 1);
+
+    menu > * {
+      transition: opacity 100ms cubic-bezier(0.95, 0.05, 0.795, 0.035);
+      opacity: 1;
+    }
+
+    &.ng-leave-active {
+      opacity: 0;
+      transform: scale(0, 0);
+
+      menu > * {
+        opacity: 0;
+      }
+    }
+  }
 }
