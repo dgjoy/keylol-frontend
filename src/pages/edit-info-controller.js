@@ -82,15 +82,15 @@
                     },
                     {
                         title: '流派',
-                        subTitle: '免费游戏、动作、策略',
+                        content: '免费游戏、动作、策略',
                     },
                     {
                         title: '特性',
-                        subTitle: '团队导向、免费游戏、多人、MOBA、策略',
+                        content: '团队导向、免费游戏、多人、MOBA、策略',
                     },
                     {
                         title: '系列',
-                        subTitle: '信仰',
+                        content: '信仰',
                     },
                 ],
             };

@@ -49,7 +49,7 @@ tabs {
     }
   }
   &.invert {
-      background-color: transparent;
+      background-color: $keylol-card;
       border-bottom: 1px solid $keylol-inertia-shape;
 
     >.wrapper>.link {
