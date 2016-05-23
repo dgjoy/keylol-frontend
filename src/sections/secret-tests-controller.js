@@ -3,14 +3,14 @@
         constructor (window, $http, notification) {
             $.extend(this, {
                 window,
+                notification,
             });
         }
-        showPointListWindow () {
-            this.window.show({
-                templateUrl: 'src/windows/point-list.html',
-                controller: 'PointListController',
-                controllerAs: 'PointList',
-            });
+        showNotification (type) {
+            this.notification[type]({
+                message: '测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试',
+                description: '测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试',
+            }, { text: '测试', value: true });
         }
 
     }

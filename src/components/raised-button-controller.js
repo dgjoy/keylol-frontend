@@ -14,6 +14,7 @@
             invert: '<',
             themeColor: '<',
             disabled: '<',
+            click: '&',
         },
     });
 }());

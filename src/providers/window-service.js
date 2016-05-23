@@ -74,7 +74,7 @@
                         const scope = $rootScope.$new();
                         const linkFn = $compile(template);
                         const $element = linkFn(scope);
-                        let fromTransform, $windowElement;
+                        let fromTransform, $windowElement, controller;
                         if (options.styles) {
                             $element.css(options.styles);
                         }
@@ -134,7 +134,6 @@
                         }
 
                         //  Create the controller, explicitly specifying the scope to use.
-                        let controller;
                         if (controllerName)
                             controller = $controller(controllerName, inputs);
 

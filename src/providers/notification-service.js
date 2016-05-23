@@ -13,53 +13,41 @@
                         global: true,
                         inputs: { options },
                     };
-
-                    if (windowPromise) {
-                        windowPromise = windowPromise.then(window => {
-                            return window.close;
-                        }).then(() => {
-                            return window.show(windowOptions);
-                        });
-                    } else {
-                        windowPromise = window.show(windowOptions);
-                    }
-
-                    let onBodyClick;
-                    windowPromise.then(window => {
-                        onBodyClick = function (e) {
-                            if (e.target !== window.$element[0] && !$.contains(window.$element[0], e.target))
-                                window.closeNow();
-                        };
-                        document.body.addEventListener('click', onBodyClick, true);
-                        return window.close;
-                    }).then(() => {
-                        document.body.removeEventListener('click', onBodyClick, true);
-                    });
+                    windowPromise = window.show(windowOptions);
 
                     return windowPromise.then(window => {
                         return window.close;
                     });
                 };
 
-                self.success = message => {
+                self.default = options => {
                     return self.show({
-                        message,
+                        message: options.message,
+                        description: options.description,
+                        type: 'default',
+                        icon: 'check',
+                    });
+                };
+
+                self.success = options => {
+                    return self.show({
+                        message: options.message,
+                        description: options.description,
                         type: 'success',
-                        title: '成功',
-                        subtitle: 'Success',
+                        icon: 'check',
                     });
                 };
 
-                self.process = message => {
+                self.process = options => {
                     return self.show({
-                        message,
+                        message: options.message,
+                        description: options.description,
                         type: 'process',
-                        title: '处理中',
-                        subtitle: 'Processing',
+                        icon: 'check',
                     });
                 };
 
-                self.error = (message, errorResponse) => {
+                self.error = (options, errorResponse) => {
                     if (errorResponse) {
                         console.error(errorResponse);
                     }
@@ -77,21 +65,21 @@
                         }
                     } else {
                         return self.show({
-                            message,
+                            message: options.message,
+                            description: options.description,
                             type: 'error',
-                            title: '错误',
-                            subtitle: 'Error',
+                            icon: 'check',
                         });
                     }
                 };
 
-                self.attention = function (message, actions) {
+                self.attention = function (options, action) {
                     return self.show({
-                        message,
-                        actions,
+                        action,
+                        message: options.message,
+                        description: options.description,
                         type: 'attention',
-                        title: '注意',
-                        subtitle: 'Attention',
+                        icon: 'check',
                     });
                 };
             }

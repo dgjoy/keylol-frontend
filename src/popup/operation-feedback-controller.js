@@ -6,7 +6,11 @@
             if ($scope.options.type !== 'attention') {
                 $timeout(() => {
                     close();
-                }, 3000);
+                }, 2000);
+            } else {
+                $timeout(() => {
+                    close();
+                }, 5000);
             }
             $scope.close = function (result) {
                 close(result);

@@ -1,17 +1,14 @@
-﻿<popup class="popup-operation-feedback" ng-class="options.type">
-    <div class="feedback-content">
-        <div class="right-content">
-            <p class="main-text">{{options.message}}</p>
-            <div class="action-content" ng-if="options.actions">
-                <a class="action" ng-repeat="action in options.actions"
-                   ng-click="close(action.value)" href="">>{{action.action}}</a>
+﻿<popup class="popup-operation-feedback">
+    <div class="feedback-content" ng-class="options.type">
+        <svg aria-hidden="true">
+            <use ng-href="{{ options.icon | iconSvgUrl }}" xlink:href=""></use>
+        </svg>
+        <div class="snack-main">
+            <div class="text">
+                <p class="message">{{options.message}}</p>
+                <p class="description" ng-if="options.description">{{options.description}}</p>
             </div>
-        </div>
-        <div class="left-content clearfix">
-            <div class="image"></div>
-            <div class="title font-myriad-keylol">
-                <span class="main-title">{{options.title}}</span><span class="sub-title">{{options.subtitle}}</span>
-            </div>
+            <flat-button type="invert" ng-if="options.action" click="close(options.action.value)" text="{{options.action.text}}">></flat-button>
         </div>
     </div>
 </popup>
