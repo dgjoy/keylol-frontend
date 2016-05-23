@@ -35,6 +35,6 @@
         controllerAs: 'navBar',
         bindings: {
             theme: '<',
-        }
+        },
     });
 }());

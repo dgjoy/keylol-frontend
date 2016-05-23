@@ -80,11 +80,11 @@
                         }
 
                         const closeDeferred = $q.defer();
-                        function close (result) {
+                        function close (result, isSwitch) {
                             cancelListen();
                             //  Resolve the 'close' promise.
                             closeDeferred.resolve(result);
-                            if (options.event && fromTransform) {
+                            if (options.event && fromTransform && !isSwitch) {
                                 $animateCss($element, {
                                     to: {
                                         opacity: 0,
@@ -104,6 +104,7 @@
                                     elementLeave();
                                 });
                             } else {
+                                $element.addClass('window-no-source');
                                 elementLeave();
                             }
 
@@ -140,6 +141,7 @@
                         // Append
                         function appendWindow () {
                             const main = options.global ? document.body : $('main[ui-view]')[0];
+                            if (!options.event) $element.addClass('window-no-source');
                             const enterPromise = $animate.enter($element, main, main.lastChild);
                             if (options.adjustScrollBar)
                                 adjustScrollBar();
