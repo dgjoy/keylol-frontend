@@ -10,10 +10,13 @@
                 let newPosition = '';
                 const shouldWindowScrollTop = $$window.scrollTop() + 94;
                 const elementOffsetTop = $element.offset().top;
-                if (shouldWindowScrollTop + $wrapper.height() + 50 >= elementOffsetTop + $element.height()) {
-                    newPosition = 'absolute-bottom';
-                } else if (shouldWindowScrollTop >= elementOffsetTop) {
+                const shouldWrapperHeight = $wrapper.height() + 50;
+                const $elementHeight = $element.height();
+                if (shouldWindowScrollTop < elementOffsetTop || shouldWrapperHeight === $elementHeight) {
+                } else if (shouldWindowScrollTop + shouldWrapperHeight < elementOffsetTop + $elementHeight) {
                     newPosition = 'fixed-top';
+                } else {
+                    newPosition = 'absolute-bottom';
                 }
                 if (this.position !== newPosition) {
                     $scope.$apply(() => {

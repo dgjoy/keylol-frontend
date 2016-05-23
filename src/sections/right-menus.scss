@@ -1,7 +1,8 @@
 right-menus {
   position: relative;
 
-  .wrapper {
+  >.wrapper {
+    padding-bottom: 50px;
     width: 100%;
 
     &.fixed-top {
@@ -14,7 +15,7 @@ right-menus {
     &.absolute-bottom {
       width: 220px;
       position: absolute;
-      bottom: 50px;
+      bottom: 0;
     }
   }
 }
