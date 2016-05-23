@@ -125,15 +125,20 @@
                             }
                         };
 
-                        self.getPointFirstName = function (point) {
-                            return point[`${point.PreferredName}Name`];
+                        self.getPreferredPointName = function (point, user) {
+                            if (!point.chineseName || (!(user ? user.preferredPointName === 'chinese' : true) && point.englishName)) {
+                                return [point.englishName, point.chineseName];
+                            } else {
+                                return [point.chineseName, point.englishName];
+                            }
                         };
 
-                        self.getPointSecondName = function (point) {
-                            if (point.PreferredName === 'Chinese')
-                                return point.EnglishName;
-                            else if (point.PreferredName === 'English')
-                                return point.ChineseName;
+                        self.getPreferredPointNamePrefixPoint = function (item, user) {
+                            if (!item.pointChineseName || (!(user ? user.preferredPointName === 'chinese' : true) && item.pointEnglishName)) {
+                                return [item.pointEnglishName, item.pointChineseName];
+                            } else {
+                                return [item.pointChineseName, item.pointEnglishName];
+                            }
                         };
 
                         self.addRecentBroswe = function (type, name, idCode) {

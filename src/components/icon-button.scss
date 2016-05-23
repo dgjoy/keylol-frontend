@@ -3,7 +3,6 @@ icon-button {
 
   button {
     @include keylol-button;
-    @include hover-background();
     border-radius: 50%;
     width: 24px;
     height: 24px;
@@ -19,6 +18,7 @@ icon-button {
       svg {
         width: 24px;
         height: 24px;
+        fill: $keylol-inertia-shape;
       }
     }
 
@@ -28,19 +28,7 @@ icon-button {
       -webkit-mask-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC");
     }
 
-    &.theme {
-      svg {
-        fill: $keylol-theme;
-      }
-    }
-
-    &.inertia {
-      svg {
-        fill: $keylol-inertia-text;
-      }
-    }
-
-    &.light-text {
+    &:hover {
       svg {
         fill: $keylol-light-text;
       }

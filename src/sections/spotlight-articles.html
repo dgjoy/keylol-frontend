@@ -1,6 +1,6 @@
 ﻿<section-header header="::spotlightArticles.types[spotlightArticles.type]"></section-header>
 <div class="moderation-wrapper" popup="spotlightArticles.showModerationPopup">
-    <icon-button icon="dots-vertical" type="light-text" click="::spotlightArticles.showModeration(event)"></icon-button>
+    <icon-button icon="dots-vertical" click="::spotlightArticles.showModeration(event)"></icon-button>
 </div>
 <div class="flex-row">
     <spotlight-article-card ng-repeat="card in ::spotlightArticles.cards" card="::card"></spotlight-article-card>

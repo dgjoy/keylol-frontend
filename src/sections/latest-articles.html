@@ -3,7 +3,7 @@
         <p class="title">{{::latestArticles.headers[latestArticles.type].title}}</p>
         <p class="sub-title">{{::latestArticles.headers[latestArticles.type].subTitle}}</p>
     </div>
-    <fab icon="New_Article" type="accent" theme-color="latestArticles.theme.main"></fab>
+    <fab icon="new-article" type="accent" theme-color="latestArticles.theme.main"></fab>
 </div>
 <div class="latest-wrapper" ng-style="{height: (latestArticles.articles.length > 5 && !latestArticles.hasBeenExpanded) ? 434 : latestArticles.articles.length * 87}" ng-class="{
     'to-next' : latestArticles.isToNext,
@@ -22,9 +22,9 @@
                         <img class="avatar" src="" webp-src="{{::article.authorAvatarImage | avatarUrl}}" alt="{{::article.authorUserName}}">
                         <span>{{::article.authorUserName}}</span>
                     </a>
-                    <a href="" ng-href="point/{{::article.pointIdCode}}">
-                        <img class="avatar" src="" webp-src="{{::article.pointAvatarImage | avatarUrl}}" alt="{{::article.pointChineseName}}">
-                        <span>{{::article.pointChineseName}}</span>
+                    <a ng-if="::article.pointIdCode" href="" ng-href="point/{{::article.pointIdCode}}">
+                        <img class="avatar" src="" webp-src="{{::article.pointAvatarImage | avatarUrl}}" alt="{{::latestArticles.utils.getPreferredPointNamePrefixPoint(article, latestArticles.stateTree.currentUser)[0]}}">
+                        <span>{{::latestArticles.utils.getPreferredPointNamePrefixPoint(article, latestArticles.stateTree.currentUser)[0]}}</span>
                     </a>
                 </p>
             </div>

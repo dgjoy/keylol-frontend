@@ -50,7 +50,6 @@
             this.type = {
                 mainTitle: '据点文集',
                 subTitle: '来稿文章中的热门和精华',
-                theme: this.theme,
             };
         }
     }

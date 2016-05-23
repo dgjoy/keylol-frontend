@@ -1,0 +1,15 @@
+﻿<div class="flex-row">
+    <section-header header="pointEditSection.object.header" theme="::pointEditSection.theme"></section-header>
+    <div class="edit-card">
+        <ul>
+            <li ng-repeat="item in pointEditSection.object.list">
+                <div class="title">
+                    <p>{{item.title}}</p>
+                    <p>{{item.subTitle}}</p>
+                </div>
+                <p class="content" ng-class="{disabled: item.editDisabled}">{{item.content}}</p>
+                <icon-button ng-if="!item.editDisabled" icon="new-article"></icon-button>
+            </li>
+        </ul>
+    </div>
+</div>

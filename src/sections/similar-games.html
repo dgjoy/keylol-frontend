@@ -4,6 +4,9 @@
         <game-card card="card" ng-repeat="card in similarGames.gameLeftPart"></game-card>
     </div>
     <div class="right-part">
+        <div class="theme-icon">
+            <img webp-src="{{similarGames.theme.icon}}">
+        </div>
         <game-card card="card" ng-repeat="card in similarGames.gameRightPart"></game-card>
     </div>
 </div>

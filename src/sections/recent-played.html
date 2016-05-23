@@ -11,8 +11,8 @@
             <img class="cover" webp-src="{{game.thumbnailImage}}">
             <div class="point">
                 <a href="" ng-href="point/{{game.idCode}}" class="name">
-                    <p>{{game.chineseName}}</p>
-                    <p>{{game.englishName}}</p>
+                    <p>{{recentPlayed.utils.getPreferredPointName(game, recentPlayed.stateTree.currentUser)[0]}}</p>
+                    <p>{{recentPlayed.utils.getPreferredPointName(game, recentPlayed.stateTree.currentUser)[1]}}</p>
                 </a>
                 <div class="info">
                     <review-with-text review="game.averageRating"></review-with-text>

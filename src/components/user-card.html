@@ -3,7 +3,8 @@
     <img class="avatar" webp-src="{{userCard.user.avatarImage | avatarUrl}}">
     <div class="bundle">
         <p class="nickname">{{userCard.user.userName}}</p>
-        <p ng-if="userCard.stateTree.currentUser" class="remark">Steam 好友</p>
+        <p ng-if="userCard.user.role" class="remark">{{userCard.user.role}}</p>
+        <p ng-if="false" class="remark">Steam 好友</p>
     </div>
 </a>
-<flat-button type="user-theme" text="关注"></flat-button>
+<flat-button type="{{userCard.type}}" text="关注"></flat-button>

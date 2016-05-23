@@ -1,0 +1,67 @@
+point-edit-section {
+  display: block;
+
+  .flex-row {
+    align-items: flex-start;
+  }
+
+  section-header {
+    max-width: 300px;
+  }
+
+  .edit-card {
+    width: 640px;
+    @include keylol-shadow-1;
+    background-color: $keylol-card;
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 10px 0;
+
+      p {
+        margin: 0;
+      }
+
+      li {
+        border-bottom: 1px solid $keylol-inertia-shape;
+        padding: 30px 15px;
+        display: flex;
+        position: relative;
+
+        &:last-of-type {
+          border-bottom: none;
+        }
+
+        .title {
+          width: 225px;
+
+          p {
+            &:first-of-type {
+              font-size: 16px;
+              font-weight: bold;
+            }
+
+            &:nth-of-type(2) {
+              font-size: 12px;
+              color: $keylol-inertia-text;
+            }
+          }
+        }
+
+        .content {
+          width: 360px;
+
+          &.disabled {
+            color: $keylol-inertia-text;
+          }
+        }
+
+        icon-button {
+          position: absolute;
+          right: 15px;
+        }
+      }
+    }
+  }
+}

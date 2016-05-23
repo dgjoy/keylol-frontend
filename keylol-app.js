@@ -144,15 +144,53 @@
                 template: '<div ui-view></div>',
             })
             .state('aggregation.point', {
-                'abstract': true,
                 url: '/point/:pointIdCode',
                 templateUrl: 'src/pages/point.html',
-                controller: 'PointController as point',
+                controller: 'PointController',
+                onEnter ($location, pageLoad, $state, $timeout) {
+                    if ($location.url().match(/\/point\/[^\/]*\/?$/)) {
+                        $timeout(() => {
+                            console.log($state.current);
+                            $state.go('.frontpage', {}, { location: false });
+                        });
+                    }
+                },
+                onExit (stateTree) {
+                },
             })
             .state('aggregation.point.frontpage', {
-                url: '',
+                url: '/frontpage',
                 templateUrl: 'src/pages/frontpage.html',
                 controller: 'FrontpageController',
+            })
+            .state('aggregation.point.intel', {
+                url: '/intel',
+                templateUrl: 'src/pages/intel.html',
+                controller: 'IntelController',
+            })
+            .state('aggregation.point.edit', {
+                url: '/edit',
+                templateUrl: 'src/pages/point-edit.html',
+                controller: 'PointEditController',
+                onEnter ($location, pageLoad, $state, $timeout) {
+                    if ($location.url().match(/\/point\/[^\/]*\/edit\/?$/)) {
+                        $timeout(() => {
+                            $state.go('.info', {}, { location: false });
+                        });
+                    }
+                },
+                onExit (stateTree) {
+                },
+            })
+            .state('aggregation.point.edit.info', {
+                url: '/info',
+                templateUrl: 'src/pages/edit-info.html',
+                controller: 'EditInfoController',
+            })
+            .state('aggregation.point.edit.style', {
+                url: '/style',
+                templateUrl: 'src/pages/edit-info.html',
+                controller: 'EditInfoController',
             });
 
         pageHeadProvider.setLoadingHead({

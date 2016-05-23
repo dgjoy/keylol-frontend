@@ -19,18 +19,13 @@
                 items: [
                     {
                         type: 'item',
-                        icon: 'Register',
+                        icon: 'dtb-sonkwo',
                         text: '杉果',
                     },
                     {
                         type: 'item',
-                        icon: 'Register',
-                        text: '杉果',
-                    },
-                    {
-                        type: 'item',
-                        icon: 'Register',
-                        text: '杉果',
+                        icon: 'dtb-steam',
+                        text: 'Steam',
                     },
                 ],
             };

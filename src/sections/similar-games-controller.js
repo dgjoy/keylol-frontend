@@ -75,6 +75,7 @@
         controller: SimilarGamesController,
         controllerAs: 'similarGames',
         bindings: {
+            theme: '<',
         },
     });
 }());

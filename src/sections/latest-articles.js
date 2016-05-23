@@ -1,9 +1,11 @@
 ﻿(function () {
     class LatestArticlesController {
-        constructor ($http, apiEndpoint, $state) {
+        constructor ($http, apiEndpoint, $state, stateTree, utils) {
             $.extend(this, {
                 $http,
                 apiEndpoint,
+                stateTree,
+                utils,
             });
             this.currentPage = 1;
             this.headers = {

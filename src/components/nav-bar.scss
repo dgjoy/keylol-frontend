@@ -21,7 +21,6 @@ nav-bar {
   .logo {
     display: flex;
     text-decoration: none;
-    margin-right: 30px;
 
     img {
       width: 48px;
@@ -44,8 +43,21 @@ nav-bar {
     }
   }
 
+  .theme-logo {
+    margin-left: 10px;
+    padding-left: 20px;
+    display: flex;
+    max-width: 200px;
+    overflow: hidden;
+    border-left: 1px solid #fff;
+    img {
+      height: 48px;
+    }
+  }
+
   .search-box {
     display: flex;
+    margin-left: 30px;
 
     input[type=search] {
       height: 25px;

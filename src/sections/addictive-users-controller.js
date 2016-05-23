@@ -4,7 +4,6 @@
             this.types = {
                 mainTitle: '坑中同仁',
                 subTitle: '这些玩家已经不能自拔',
-                theme: this.theme,
             };
             this.cards = [
                 {

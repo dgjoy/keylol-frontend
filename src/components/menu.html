@@ -16,7 +16,7 @@
             <p>已在档 203 小时</p>
             <p>玩家平均在档 175.4 小时</p>
         </div>
-        <div class="reputation-stat" ng-repeat="(stat, statCount) in menu.object.header.voteStats track by stat">
+        <a ripple href="" class="reputation-stat" ng-repeat="(stat, statCount) in menu.object.header.voteStats track by stat">
             <div class="left-content">
                 <svg xmlns="http://www.w3.org/2000/svg" class="reputation-circle" ng-repeat="circle in menu.circles[$index] track by $index">
                     <circle cx="4" cy="4" r="4"></circle>
@@ -27,7 +27,7 @@
             <div class="right-content">
                 <div class="reputation-level" ng-style="{width: statCount / menu.object.header.totalEvaluate * 100}"></div>
             </div>
-        </div>
+        </a>
         <div class="reputation-info">
             <span>
                 <span class="reputation-number" ng-class="{

@@ -1,6 +1,10 @@
 ﻿(function () {
     class RecentPlayedController {
-        constructor () {
+        constructor (utils, stateTree) {
+            $.extend(this, {
+                utils,
+                stateTree,
+            });
         }
     }
 
