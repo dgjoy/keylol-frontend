@@ -4,7 +4,7 @@
             <img class="avatar" webp-src="{{'' | avatarUrl}}"  alt="{{timelineCard.union.$localStorage.user.UserName}}">
             <span class="username">程晓峰</span>
         </a>
-        <a class="date" href="" ng-click="timelineCard.showMenu($event)" popup="timelineCard.showMenuPopup">5 月 7 号</a>
+        <a class="date" href="" ng-click="timelineCard.showMenu($event)" popup="timelineCard.showSharedPopup">5 月 7 号</a>
     </div>
     <div class="shortcut" ng-switch="timelineCard.type">
         <a ng-switch-when="article" class="common-article" webp-background="//storage.keylol.com/39b7d020df471d6c0e3fa593802000bc.jpg!timeline.thumbnail.new" href="point/DOTA2">
@@ -23,7 +23,7 @@
         <a class="point" href="point/DOTA2" ripple>
             <point-basic-info></point-basic-info>
         </a>
-        <a class="source" href="" ng-click="timelineCard.showSourceList($event)" popup="timelineCard.showSourceListPopup">5 个据点来稿</a>
+        <a class="source" href="" ng-click="timelineCard.showSourceList($event)" popup="timelineCard.showSharedPopup">5 个据点来稿</a>
     </div>
     <div class="indirect-sources">
         <a class="indirect-source" href="">
@@ -63,7 +63,7 @@
         </div>
     </div>
     <div class="operation" ng-switch="timelineCard.state">
-        <div ng-click="timelineCard.showApproverList($event)" popup="timelineCard.showApproverListPopup">
+        <div>
             <flat-button type="inertia" text="+1"></flat-button>
         </div>
         <flat-button ng-switch-when="open" text="评论" ng-click="timelineCard.moveToFloor(3)"></flat-button>

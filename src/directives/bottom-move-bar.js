@@ -24,6 +24,7 @@
                     const firstTab = tabs[0];
                     if (scope.curTab === undefined) {
                         element.css({
+                            transform: `translateX(-${firstTab.width}px)`,
                             width: firstTab.width,
                         });
                     } else {

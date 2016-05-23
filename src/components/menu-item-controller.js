@@ -1,5 +1,16 @@
 ﻿(function () {
-    class MenuItemController {}
+    class MenuItemController {
+        constructor($rootScope) {
+            $.extend(this,{
+                $rootScope,
+            });
+        }
+
+        clickAction() {
+            if (this.data.clickAction !== undefined)
+                this.data.clickAction();
+        }
+    }
 
     keylolApp.component('menuItem', {
         templateUrl: 'src/components/menu-item.html',

@@ -3,6 +3,7 @@ tabs {
   display: flex;
   justify-content: center;
   background-color: $keylol-light-theme;
+  overflow: hidden;
 
   >.wrapper {
     height: 35px;

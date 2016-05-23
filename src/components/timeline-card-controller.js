@@ -1,6 +1,6 @@
 ﻿(function () {
     class TimelineCardController {
-        constructor($element, $timeout) {
+        constructor($element, $timeout, $scope, $rootScope) {
             $.extend(this,{
                 $element,
                 $timeout,
@@ -34,45 +34,29 @@
         openReviewArea() {
             this.state = 'open';
         }
-        
-        showApproverList($event) {
-            this.showApproverListPopup({
-                templateUrl: 'src/popup/approver-list.html',
-                controller: 'ApproverListController as approverList',
-                event: $event,
-                attachSide: 'right',
-                align: 'bottom',
-                offsetX: 60,
-                offsetY: 120,
-                showDelay: 0,
-                closeDelay: 0,
-                inputs: { content: 'hello' },
-            });
-        }
 
         showSourceList($event) {
-            this.showMenuPopup({
+            this.showSharedPopup({
                 templateUrl: 'src/popup/source-list.html',
                 controller: 'SourceListController as sourceList',
                 event: $event,
-                attachSide: 'left',
-                align: 'top',
+                attachSide: 'bottom',
+                align: 'center',
                 offsetX: 0,
-                offsetY: 0,
-                inputs: { content: 'hello' },
+                offsetY: 20,
             });
         }
 
         showMenu($event) {
-            this.showMenuPopup({
+            this.showSharedPopup({
                 templateUrl: 'src/popup/timeline-card-menu.html',
                 controller: 'TimelineCardMenuController as timelineCardMenu',
                 event: $event,
-                attachSide: 'left',
+                attachSide: 'right',
                 align: 'top',
-                offsetX: 0,
+                offsetX: -220,
                 offsetY: 0,
-                inputs: { content: 'hello' },
+                inputs: { origin: { popup:this.showSharedPopup, event: $event } },
             });
         }
     }
