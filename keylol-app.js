@@ -19,7 +19,7 @@
         $locationProvider.html5Mode(true);
 
         $anchorScrollProvider.disableAutoScrolling();
-        $urlRouterProvider.otherwise('/404');
+        $urlRouterProvider.otherwise('/not-found');
         $stateProvider
             // .state('home', {
             //     url: '/',
@@ -94,34 +94,29 @@
             //     templateUrl: 'src/pages/page-timeline.html',
             //     controller: 'PageTimelineController',
             // })
-            // .state('not-found', {
-            //     url: '404',
-            //     templateUrl: 'src/pages/not-found.html',
-            //     controller: 'NotFoundController',
-            // })
             // state after refactoring
             .state('entrance', {
                 url: '/',
                 templateUrl: 'src/pages/entrance.html',
                 onEnter ($location, pageLoad) {
                     if ($location.url() === '/') {
+                        console.log('load entrance?');
                         pageLoad('entrance');
                     }
                 },
                 onExit (stateTree) {
+                    console.log('exit entrance');
                     delete stateTree.entrance;
                 },
             })
             .state('entrance.discovery', {
                 url: 'discovery',
-                onEnter (pageLoad) {
-                    pageLoad('entrance.discovery');
-                },
-                onExit (stateTree) {
-                    delete stateTree.entrance.discovery;
-                },
                 templateUrl: 'src/pages/discovery.html',
                 controller: 'DiscoveryController',
+                onExit (stateTree) {
+                    console.log('exit discovery');
+                    delete stateTree.entrance.discovery;
+                },
             })
             .state('entrance.points', {
                 url: 'points',
@@ -129,6 +124,7 @@
                     pageLoad('entrance.points');
                 },
                 onExit (stateTree) {
+                    console.log('exit points');
                     delete stateTree.entrance.points;
                 },
                 templateUrl: 'src/pages/points.html',
@@ -191,6 +187,11 @@
                 url: '/style',
                 templateUrl: 'src/pages/edit-info.html',
                 controller: 'EditInfoController',
+            })
+            .state('not-found', {
+                url: '/not-found',
+                templateUrl: 'src/pages/not-found.html',
+                controller: 'NotFoundController',
             });
 
         pageHeadProvider.setLoadingHead({

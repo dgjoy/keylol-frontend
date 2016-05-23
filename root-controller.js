@@ -1,38 +1,43 @@
 ﻿(function () {
-    keylolApp.controller('RootController', [
-        '$scope', 'pageHead', 'union', '$http', 'apiEndpoint', '$window',
-        'notification', '$location', '$rootScope', '$state',
-        ($scope, pageHead, union, $http, apiEndpoint, $window,
-         notification, $location, $rootScope, $state) => {
-            pageHead.loading();
+    keylolApp.controller('RootController',
+        ($scope, pageHead, union, $http, apiEndpoint, $window, notification, $location, $rootScope, $state, stateTree, $stateParams) => {
+        pageHead.loading();
 
-            let firstLoad = true;
-            $scope.$watch(() => {
-                return union.$localStorage.Authorization;
-            },newToken => {
-                if (newToken) {
-                    $http.defaults.headers.common.Authorization = `Bearer ${newToken}`;
-                } else {
-                    _czc.push(['_setCustomVar', '登录用户', '游客', 1]);
-                    for (const i in union.$localStorage) {
-                        if (union.$localStorage.hasOwnProperty(i) && i.indexOf('$') !== 0)
-                            delete union.$localStorage[i];
-                    }
-                    for (const i in union.$sessionStorage) {
-                        if (union.$sessionStorage.hasOwnProperty(i) && i.indexOf('$') !== 0)
-                            delete union.$sessionStorage[i];
-                    }
+        let firstLoad = true;
+        $scope.$watch(() => {
+            return union.$localStorage.Authorization;
+        },newToken => {
+            if (newToken) {
+                $http.defaults.headers.common.Authorization = `Bearer ${newToken}`;
+            } else {
+                _czc.push(['_setCustomVar', '登录用户', '游客', 1]);
+                for (const i in union.$localStorage) {
+                    if (union.$localStorage.hasOwnProperty(i) && i.indexOf('$') !== 0)
+                        delete union.$localStorage[i];
                 }
-                if (!firstLoad) {
-                    $state.reload();
+                for (const i in union.$sessionStorage) {
+                    if (union.$sessionStorage.hasOwnProperty(i) && i.indexOf('$') !== 0)
+                        delete union.$sessionStorage[i];
                 }
-            });
+                console.log(stateTree);
+                if (stateTree.currentUser) {
+                    delete stateTree.currentUser;
+                    delete $http.defaults.headers.common.Authorization;
+                }
+            }
+            if (!firstLoad) {
+                stateTree.empty = true;
+                $state.transitionTo($state.current, $stateParams, {
+                    reload: true, location: false,
+                });
+            } else {
+                firstLoad = false;
+            }
+        });
 
-            $rootScope.$on('$stateChangeSuccess', () => {
-                $window.scrollTo(0, 0);
-                if (firstLoad) {
-                    firstLoad = false;
-                }
-            });
-        }]);
+        $rootScope.$on('$stateChangeSuccess', () => {
+            $window.scrollTo(0, 0);
+            console.log($state.current);
+        });
+    });
 }());
