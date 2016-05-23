@@ -1,5 +1,5 @@
 ﻿(function () {
-    keylolApp.factory('pageLoad', ($state, $http, stateTree, apiEndpoint) => {
+    keylolApp.factory('pageLoad', ($state, $http, stateTree, apiEndpoint, notification) => {
         return stName => {
             const result = stName.split('.');
             if (stateTree.empty) {
@@ -40,6 +40,10 @@
                 } else {
                     $http.get(`${apiEndpoint}states${urlParams}`).then(response => {
                         target[result[result.length - 1]] = response.data;
+                        target = target[result[result.length - 1]];
+                        if (target.current) {
+                            $state.go(`${stName}.${target.current}`, {}, { location: false });
+                        }
                     }, error => {
                         console.log(error);
                     });

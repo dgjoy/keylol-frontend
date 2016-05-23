@@ -98,7 +98,7 @@
             .state('entrance', {
                 url: '/',
                 templateUrl: 'src/pages/entrance.html',
-                onEnter ($location, pageLoad) {
+                controller ($location, pageLoad) {
                     if ($location.url() === '/') {
                         console.log('load entrance?');
                         pageLoad('entrance');

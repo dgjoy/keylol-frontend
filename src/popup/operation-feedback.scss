@@ -25,6 +25,7 @@
 
   .feedback-content {
     @include keylol-shadow-3;
+    border-radius: 2px;
     width: 280px;
     padding: 20px 10px 10px 15px;
     display: flex;
@@ -64,6 +65,7 @@
       justify-content: flex-end;
       flex-wrap: wrap;
       align-items: center;
+      margin-bottom: 10px;
 
       .text {
         flex-grow: 1;
