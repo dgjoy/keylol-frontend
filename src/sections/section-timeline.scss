@@ -7,6 +7,27 @@ section-timeline {
     display: flex;
     justify-content: space-between;
 
+    .quick-edit {
+      @include keylol-shadow-1();
+      background-color: $keylol-inverted-text;
+      width: 310px;
+      height: 50px;
+      padding: 0 15px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      >p {
+        margin: 0;
+        color: $keylol-inertia-text;
+      }
+      >svg {
+        width: 20px;
+        height: 20px;
+        fill: $keylol-inertia-shape;
+      }
+    }
+
     timeline-card {
       margin-bottom: 20px;
 
@@ -27,11 +48,5 @@ section-timeline {
     text-align: center;
     margin-top: 20px;
     margin-bottom: 30px;
-  }
-
-  raised-button {
-    .theme {
-      background-color: $keylol-theme;
-    }
   }
 }

@@ -13,10 +13,11 @@
                 this.rightCards = ['r'];
             }
 
-            this.firstLoad = true;
+            this.first = true;
+            this.end = false;
 
             const scrollHandler = $(window).on('scroll', () => {
-                if (!this.firstLoad) {
+                if (!this.first && !this.end) {
                     if ($(document).scrollTop() + $(window).height() >= $(document).height()) {
                         $scope.$apply(() => {
                             this.load();
@@ -31,7 +32,8 @@
         }
 
         load() {
-            this.firstLoad = false;
+            this.first = false;
+            this.end = true;
             if (this.columnCount === 'two') {
                 this.leftCards.push(1);
                 this.rightCards.push(1);

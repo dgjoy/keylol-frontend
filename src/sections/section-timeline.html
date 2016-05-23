@@ -1,5 +1,11 @@
 ﻿<div class="wrapper" ng-switch="sectionTimeline.columnCount">
     <div class="first-column" ng-switch-when="two">
+        <div class="quick-edit">
+            <p>刚刚结束的游戏体验如何？</p>
+            <svg aria-hidden="true">
+                <use ng-href="{{'steamcn' | iconSvgUrl }}" xlink:href=""></use>
+            </svg>
+        </div>
         <timeline-card ng-repeat="card in sectionTimeline.leftCards track by $index"></timeline-card>
     </div>
     <div class="second-column" ng-switch-when="two">
@@ -9,4 +15,4 @@
         <timeline-card ng-repeat="card in sectionTimeline.cards track by $index"></timeline-card>
     </div>
 </div>
-<raised-button text="展开更多" type="theme" ng-click="sectionTimeline.load()" ng-if="sectionTimeline.firstLoad"></raised-button>
+<raised-button text="{{sectionTimeline.end?'已无更多':'展开更多'}}" type="theme" ng-click="sectionTimeline.load()" ng-if="sectionTimeline.first||sectionTimeline.end" disabled="sectionTimeline.end" ></raised-button>
