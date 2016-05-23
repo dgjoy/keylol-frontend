@@ -1,0 +1,39 @@
+.window-push-entry {
+  .window {
+    width: 700px;
+
+    >.header {
+      height: 105px;
+      background-color: $keylol-light-theme;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      overflow: hidden;
+
+      >.text {
+        margin-left: 15px;
+
+        >p {
+          margin: 0;
+          padding: 0;
+
+          &:first-of-type {
+            font-weight: bold;
+            font-size: 20px;
+            margin-bottom: 2px;
+            color: $keylol-inverted-text;
+          }
+
+          &:last-of-type {
+            color: rgba($keylol-inverted-text, 0.6);
+          }
+        }
+      }
+
+      >img {
+        height: 85px;
+        margin-right: 30px;
+      }
+    }
+  }
+}

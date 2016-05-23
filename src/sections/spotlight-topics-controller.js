@@ -24,7 +24,9 @@
                 align: 'top',
                 offsetX: 29,
                 offsetY: -5,
-                inputs: {},
+                inputs: {
+                    type: 'slideShow',
+                },
             });
         }
     }
