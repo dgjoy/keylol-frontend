@@ -1,0 +1,11 @@
+<div ng-class="{
+    focus:datepicker.isFocus,
+    warn:datepicker.isError
+    }" popup="datepicker.showSelectorPopup">
+    <input type="text" ng-model="datepicker.model" ng-change="datepicker.check()" ng-focus="datepicker.focus()" ng-blur="datepicker.blur()" />
+    <a href="" ng-click="datepicker.showSelector($event)">
+        <svg aria-hidden="true">
+            <use ng-href="{{'search' | iconSvgUrl }}" xlink:href=""></use>
+        </svg>
+    </a>
+</div>

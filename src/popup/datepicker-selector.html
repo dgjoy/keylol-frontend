@@ -1,0 +1,31 @@
+﻿<popup class="popup-datepicker-selector">
+    <div class="selected-date">
+        {{datepickerSelector.content}}
+    </div>
+    <table class="head">
+        <thead>
+            <tr><th>S</th><th>M</th><th>T</th><th>W</th><th>T</th><th>F</th><th>S</th></tr>
+        </thead>
+    </table>
+    <div class="scroller">
+        <div class="sizer"></div>
+        <div class="wrapper">
+            <div class="calender" ng-repeat="calender in datepickerSelector.calenders">
+                <div class="label">{{calender.ym}}</div>
+                <table>
+                    <tbody>
+                    <tr ng-repeat="week in calender.weeks">
+                        <td ng-repeat="day in week">
+                        <span ng-if="day.span!=='empty'" ng-class="{
+                            selected: datepickerSelector.selected && calender.year ===  datepickerSelector.selected[0] && calender.month === datepickerSelector.selected[1] && day.span == datepickerSelector.selected[2],
+                            today: calender.year ===  datepickerSelector.today[0] && calender.month === datepickerSelector.today[1] && day.span == datepickerSelector.today[2],
+                        }" ng-click="datepickerSelector.select(calender.year,calender.month,day.span)">{{day.span}}</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</popup>

@@ -21,7 +21,8 @@
             }).then(popup => {
                 return popup.close;
             }).then(result => {
-                this.value = result;
+                if (result !== undefined)
+                    this.model = result;
             });
         }
     }

@@ -1,0 +1,99 @@
+.popup-datepicker-selector {
+  @include keylol-shadow-3();
+  background-color: $keylol-card;
+  width: 340px;
+
+  >.selected-date {
+    padding-left: 24px;
+    padding-top: 10px;
+    height: 16px;
+    padding-bottom: 11px;
+  }
+
+  >.head {
+    @include keylol-shadow-1();
+    background-color: $keylol-inertia-shape;
+
+    th {
+      width: 44px;
+      text-align: center;
+      padding: 0;
+      border: none;
+      font-weight: normal;
+      height: 40px;
+
+      &:first-of-type {
+        padding-left: 16px;
+      }
+      &:last-of-type {
+        padding-right: 16px;
+      }
+    }
+  }
+
+  >.scroller {
+    height: 300px;
+    position: relative;
+    overflow: auto;
+
+    >.sizer {
+      display: block;
+      height: 529780px;
+      width: 1px;
+    }
+
+    >.wrapper {
+      position: absolute;
+      top: 0;
+      transform: translateY(264095px);
+
+      >.calender {
+        border-top: 1px solid $keylol-inertia-shape;
+        position: relative;
+        .label {
+          position: absolute;
+          line-height: 44px;
+          font-weight: bold;
+          padding-left: 24px;
+        }
+
+        td {
+          width: 44px;
+          text-align: center;
+          padding: 2px 0;
+          border: none;
+          height: 40px;
+
+          >span {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
+            line-height: 40px;
+
+            &:hover {
+              background-color: $keylol-inertia-shape;
+            }
+
+            &.today {
+              border: 1px solid $keylol-light-theme;
+              border-radius: 50%;
+            }
+
+            &.selected {
+              background-color: $keylol-light-theme;
+              color: $keylol-inverted-text;
+            }
+          }
+
+          &:first-of-type {
+            padding-left: 16px;
+          }
+          &:last-of-type {
+            padding-right: 16px;
+          }
+        }
+      }
+    }
+  }
+}

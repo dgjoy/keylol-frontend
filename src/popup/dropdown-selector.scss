@@ -1,7 +1,6 @@
 .popup-dropdown-selector {
   @include keylol-shadow-1();
   background-color: $keylol-card;
-  z-index: 1000;
   width: 230px;
 
   &.ng-enter {
