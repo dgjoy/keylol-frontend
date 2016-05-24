@@ -150,43 +150,52 @@
                                 enterPromise.then(() => {
                                     $timeout(() => {
                                         $windowElement = angular.element($element[0].querySelector('.window'));
-                                        const targetRect = {
-                                            height: options.event.target.offsetHeight,
-                                            width: options.event.target.offsetWidth,
-                                            left: options.event.target.offsetLeft,
-                                            top: options.event.target.offsetTop,
-                                        };
-                                        const elementRect = {
-                                            height: $windowElement[0].offsetHeight,
-                                            width: $windowElement[0].offsetWidth,
-                                            left: $windowElement[0].offsetLeft,
-                                            top: $windowElement[0].offsetTop,
-                                        };
+                                        if ($windowElement[0]) {
+                                            const targetRect = {
+                                                height: options.event.target.offsetHeight,
+                                                width: options.event.target.offsetWidth,
+                                                left: options.event.target.offsetLeft,
+                                                top: options.event.target.offsetTop,
+                                            };
+                                            const elementRect = {
+                                                height: $windowElement[0].offsetHeight,
+                                                width: $windowElement[0].offsetWidth,
+                                                left: $windowElement[0].offsetLeft,
+                                                top: $windowElement[0].offsetTop,
+                                            };
 
-                                        const dialogCenterPt = centerPointFor(elementRect);
-                                        const targetCenterPt = centerPointFor(targetRect);
+                                            const dialogCenterPt = centerPointFor(elementRect);
+                                            const targetCenterPt = centerPointFor(targetRect);
 
-                                        fromTransform = `translate( ${targetCenterPt.x - dialogCenterPt.x}px,` +
-                                            ` ${targetCenterPt.y - dialogCenterPt.y}px)` +
-                                            ` scale( ${Math.round(100 * Math.min(0.5, targetRect.width / elementRect.width)) / 100},` +
-                                            `${Math.round(100 * Math.min(0.5, targetRect.height / elementRect.height)) / 100} )`;
+                                            fromTransform = `translate( ${targetCenterPt.x - dialogCenterPt.x}px,` +
+                                                ` ${targetCenterPt.y - dialogCenterPt.y}px)` +
+                                                ` scale( ${Math.round(100 * Math.min(0.5, targetRect.width / elementRect.width)) / 100},` +
+                                                `${Math.round(100 * Math.min(0.5, targetRect.height / elementRect.height)) / 100} )`;
 
-                                        $animateCss($element, {
-                                            to: {
-                                                opacity: 1,
-                                            },
-                                            transitionStyle: 'opacity 300ms cubic-bezier(0.4, 0.0, 0.2, 1)',
-                                        }).start();
+                                            $animateCss($element, {
+                                                to: {
+                                                    opacity: 1,
+                                                },
+                                                transitionStyle: 'opacity 300ms cubic-bezier(0.4, 0.0, 0.2, 1)',
+                                            }).start();
 
-                                        $animateCss($windowElement, {
-                                            from: {
-                                                transform: fromTransform,
-                                            },
-                                            to: {
-                                                transform: 'translate(0, 0) scale(1)',
-                                            },
-                                            transitionStyle: 'transform 400ms cubic-bezier(0.25, 0.8, 0.25, 1)',
-                                        }).start();
+                                            $animateCss($windowElement, {
+                                                from: {
+                                                    transform: fromTransform,
+                                                },
+                                                to: {
+                                                    transform: 'translate(0, 0) scale(1)',
+                                                },
+                                                transitionStyle: 'transform 400ms cubic-bezier(0.25, 0.8, 0.25, 1)',
+                                            }).start();
+                                        } else {
+                                            $animateCss($element, {
+                                                to: {
+                                                    opacity: 1,
+                                                },
+                                                transitionStyle: 'opacity 300ms cubic-bezier(0.4, 0.0, 0.2, 1)',
+                                            }).start();
+                                        }
                                     });
                                 });
                             }

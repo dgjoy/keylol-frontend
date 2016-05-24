@@ -135,76 +135,33 @@ $keylol-topic: #7976b1;
   white-space: nowrap;
 }
 
-
-// common article style
-.common-article {
-  background-size: cover;
-  background-position: center;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-
-  &:hover {
-    .underline {
-      text-decoration: underline;
-    }
+//usual angular enter leave animation
+@mixin grow-shrink-self {
+  &.ng-enter {
+    transform-origin: center;
+    animation: scale-y-grow 800ms cubic-bezier(0.19, 1, 0.22, 1);
   }
 
-  .bottom-text{
-    @include text-protection();
-
-    .first-line,
-    .second-line {
-      position: relative;
-      z-index: 2;
-    }
-
-    .first-line {
-      color: $keylol-inverted-text;
-      font-size: 20px;
-      font-weight: bold;
-      margin-bottom: 6px;
-    }
-
-    .second-line {
-      color: $keylol-inverted-text;
-      max-height: 40px;
-      overflow: hidden;
-    }
-  }
-
-  &.common-article__topic {
-    .bottom-text {
-      padding: 15px 15px;
-      background: none $keylol-topic;
-
-      .first-line {
-        @include ellipsis();
-      }
-
-      .second-line {
-        @include ellipsis();
-      }
-    }
+  &.ng-leave {
+    transform-origin: center;
+    animation: scale-y-shrink 500ms cubic-bezier(0.19, 1, 0.22, 1);
   }
 }
 
-// 常用动画
-@keyframes popup-grow {
-  from {
-    transform: scaleY(0);
+@mixin grow-shrink-child ($child: window) {
+  &.ng-enter {
+    transition-duration: 800ms;
+    .#{$child} {
+      transform-origin: center;
+      animation: scale-y-grow 800ms cubic-bezier(0.19, 1, 0.22, 1);
+    }
   }
-  to {
-    transform: scaleY(1);
-  }
-}
 
-@keyframes popup-shrink {
-  from {
-    transform: scaleY(1);
-  }
-  to {
-    transform: scaleY(0);
+  &.ng-leave {
+    transition-duration: 500ms;
+    .#{$child} {
+      transform-origin: center;
+      animation: scale-y-shrink 500ms cubic-bezier(0.19, 1, 0.22, 1);
+    }
   }
 }

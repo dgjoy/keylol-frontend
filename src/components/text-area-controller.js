@@ -8,10 +8,6 @@
                 notification,
                 $scope,
             });
-            this.model = '';
-            if (this.model.length === 0) {
-                this.fillState = false;
-            }
             this.warnState = false;
             this.activeState = false;
 
@@ -19,6 +15,12 @@
                 return this.state;
             },() => {
                 this.warnState = (this.state === 'warn');
+            });
+
+            $scope.$watch(() => {
+                return this.model;
+            },() => {
+                this.fillState = this.model && (this.model.length !== 0);
             });
         }
 
@@ -28,7 +30,6 @@
 
         blur() {
             this.activeState = false;
-            this.fillState = (this.model.length !== 0);
         }
     }
 

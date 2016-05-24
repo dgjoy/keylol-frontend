@@ -1,19 +1,9 @@
 .popup-source-list {
   @include keylol-shadow-3();
+  @include grow-shrink-self;
   background-color: $keylol-card;
   width: 340px;
   padding: 15px 0;
-
-
-  &.ng-enter {
-    transform-origin: center;
-    animation: popup-grow 800ms cubic-bezier(0.19, 1, 0.22, 1);
-  }
-
-  &.ng-leave {
-    transform-origin: center;
-    animation: popup-shrink 500ms cubic-bezier(0.19, 1, 0.22, 1);
-  }
 
   p {
     margin: 0;

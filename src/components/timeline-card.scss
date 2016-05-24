@@ -183,14 +183,6 @@ timeline-card {
         padding: 15px 15px;
         display: flex;
 
-        @keyframes review-blink {
-          from {
-            background-color: $keylol-background;
-          }
-          to {
-            background-color: transparent;
-          }
-        }
         &.blink {
           animation: review-blink 5s;
         }

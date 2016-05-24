@@ -1,98 +1,6 @@
 /* ------------------------------ */
 /* Common Styles for Modal Window */
 /* ------------------------------ */
-
-@keyframes exit-background-flash {
-  from {
-    fill: #009e57;
-  }
-  to {
-    fill: white;
-  }
-}
-
-@keyframes exit-text-flash {
-  from {
-    fill: white;
-  }
-  to {
-    fill: #009e57;
-  }
-}
-
-@keyframes error-text-flash {
-  from {
-    color: red;
-  }
-  to {
-    color: #ccc;
-  }
-}
-
-@keyframes error-border-flash {
-  from {
-    border-color: red;
-  }
-  to {
-    border-color: #ccc;
-  }
-}
-
-@keyframes flipInX {
-  from {
-    transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
-    animation-timing-function: ease-in;
-    opacity: 0;
-  }
-
-  40% {
-    transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
-    animation-timing-function: ease-in;
-  }
-
-  60% {
-    transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
-    opacity: 1;
-  }
-
-  80% {
-    transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
-  }
-
-  to {
-    transform: perspective(400px);
-  }
-}
-
-@keyframes flipOutX {
-  from {
-    -webkit-transform: perspective(400px);
-    transform: perspective(400px);
-  }
-
-  30% {
-    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
-    transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
-    opacity: 1;
-  }
-
-  to {
-    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
-    transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
-    opacity: 0;
-  }
-}
-
-@keyframes window-enter {
-  from {
-    background-color: rgba(0, 0, 0, 0);
-  }
-
-  to {
-    background-color: rgba(0, 0, 0, 0.45);
-  }
-}
-
 .body-window-open {
   overflow: hidden;
 }
@@ -182,14 +90,12 @@ window[position=right]::after {
   background-color: $keylol-card;
   position: relative;
   box-sizing: border-box;
+  border-radius: 2px;
+  overflow: hidden;
 }
 
 window.window-hidden {
   opacity: 0;
-}
-
-window.window-hidden .window {
-  //opacity: 0;
 }
 
 /* Secret Barcode */

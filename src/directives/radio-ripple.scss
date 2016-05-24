@@ -4,10 +4,6 @@
 /* ripple style */
 /* --------------- */
 [radio-ripple] {
-  @keyframes circle-ripple-animation {
-    from { transform: scale(0); opacity: 1; } to { transform: scale(1.75); opacity: 0.6; }
-  }
-
   .circle-ripple {
     position: absolute;
     width: 100%;

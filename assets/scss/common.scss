@@ -303,6 +303,63 @@ textarea,
   background-color: #adafb0;
 }
 
+
+
+
+// common article style
+.common-article {
+  background-size: cover;
+  background-position: center;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  &:hover {
+    .underline {
+      text-decoration: underline;
+    }
+  }
+
+  .bottom-text{
+    @include text-protection();
+
+    .first-line,
+    .second-line {
+      position: relative;
+      z-index: 2;
+    }
+
+    .first-line {
+      color: $keylol-inverted-text;
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    .second-line {
+      color: $keylol-inverted-text;
+      max-height: 40px;
+      overflow: hidden;
+    }
+  }
+
+  &.common-article__topic {
+    .bottom-text {
+      padding: 15px 15px;
+      background: none $keylol-topic;
+
+      .first-line {
+        @include ellipsis();
+      }
+
+      .second-line {
+        @include ellipsis();
+      }
+    }
+  }
+}
+
 /* --------------- */
 /* Geetest Restyle */
 /* --------------- */

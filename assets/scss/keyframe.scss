@@ -1,0 +1,215 @@
+@keyframes exit-background-flash {
+  from {
+    fill: #009e57;
+  }
+  to {
+    fill: white;
+  }
+}
+
+@keyframes exit-text-flash {
+  from {
+    fill: white;
+  }
+  to {
+    fill: #009e57;
+  }
+}
+
+@keyframes error-text-flash {
+  from {
+    color: red;
+  }
+  to {
+    color: #ccc;
+  }
+}
+
+@keyframes error-border-flash {
+  from {
+    border-color: red;
+  }
+  to {
+    border-color: #ccc;
+  }
+}
+
+@keyframes flipInX {
+  from {
+    transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+    animation-timing-function: ease-in;
+    opacity: 0;
+  }
+
+  40% {
+    transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+    animation-timing-function: ease-in;
+  }
+
+  60% {
+    transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
+    opacity: 1;
+  }
+
+  80% {
+    transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
+  }
+
+  to {
+    transform: perspective(400px);
+  }
+}
+
+@keyframes flipOutX {
+  from {
+    -webkit-transform: perspective(400px);
+    transform: perspective(400px);
+  }
+
+  30% {
+    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+    transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+    opacity: 1;
+  }
+
+  to {
+    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+    transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+    opacity: 0;
+  }
+}
+
+@keyframes window-enter {
+  from {
+    background-color: rgba(0, 0, 0, 0);
+  }
+
+  to {
+    background-color: rgba(0, 0, 0, 0.45);
+  }
+}
+
+@keyframes comment-highlight {
+  from {
+    background-color: #f2fbf6;
+  }
+  to {
+    background-color: transparent;
+  }
+}
+
+@keyframes search-box-highlight {
+  from {
+    background-color: #d9f2e5;
+  }
+  to {
+    background-color: white;
+  }
+}
+
+@keyframes phase-blink {
+  from { background-color: $keylol-light-theme; } to { background-color: $keylol-theme; }
+}
+
+@keyframes review-blink {
+  from {
+    background-color: $keylol-background;
+  }
+  to {
+    background-color: transparent;
+  }
+}
+
+@keyframes current-light-blink {
+  0% {
+    background-position: 0 -180px;
+  }
+  0.001% {
+    background-position: 0 -216px;
+  }
+  50% {
+    background-position: 0 -216px;
+  }
+  50.001% {
+    background-position: 0 -180px;
+  }
+  100% {
+    background-position: 0 -180px;
+  }
+}
+
+@keyframes current-light-blink-first {
+  0% {
+    background-position: 0 0;
+  }
+  0.001% {
+    background-position: 0 -36px;
+  }
+  50% {
+    background-position: 0 -36px;
+  }
+  50.001% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+@keyframes next-light-blink {
+  0% {
+    background-position: 0 -108px;
+  }
+  0.001% {
+    background-position: 0 -144px;
+  }
+  50% {
+    background-position: 0 -144px;
+  }
+  50.001% {
+    background-position: 0 -108px;
+  }
+  100% {
+    background-position: 0 -108px;
+  }
+}
+
+@keyframes next-light-blink-last {
+  0% {
+    background-position: -1px -288px;
+  }
+  0.001% {
+    background-position: -1px -324px;
+  }
+  50% {
+    background-position: -1px -324px;
+  }
+  50.001% {
+    background-position: -1px -288px;
+  }
+  100% {
+    background-position: -1px -288px;
+  }
+}
+
+@keyframes circle-ripple-animation {
+  from { transform: scale(0); opacity: 1; } to { transform: scale(1.75); opacity: 0.6; }
+}
+
+@keyframes scale-y-grow {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes scale-y-shrink {
+  from {
+    transform: scaleY(1);
+  }
+  to {
+    transform: scaleY(0);
+  }
+}

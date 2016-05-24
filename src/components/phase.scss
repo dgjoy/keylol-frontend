@@ -39,10 +39,6 @@ phase {
     }
 
     &.current {
-      @keyframes phase-blink {
-        from { background-color: $keylol-light-theme; } to { background-color: $keylol-theme; }
-      }
-
       .order {
         background-color: $keylol-theme;
         animation: phase-blink 1000ms infinite alternate;//待处理
