@@ -150,7 +150,13 @@ $keylol-topic: #7976b1;
 
 @mixin grow-shrink-child ($child: window) {
   &.ng-enter {
-    transition-duration: 800ms;
+    opacity: 0;
+    transition: opacity 800ms cubic-bezier(0.19, 1, 0.22, 1);
+
+    &.ng-enter-active {
+      opacity: 1;
+    }
+
     .#{$child} {
       transform-origin: center;
       animation: scale-y-grow 800ms cubic-bezier(0.19, 1, 0.22, 1);
@@ -158,7 +164,13 @@ $keylol-topic: #7976b1;
   }
 
   &.ng-leave {
-    transition-duration: 500ms;
+    opacity: 1;
+    transition: opacity 500ms cubic-bezier(0.19, 1, 0.22, 1);
+
+    &.ng-leave-active {
+      opacity: 0;
+    }
+
     .#{$child} {
       transform-origin: center;
       animation: scale-y-shrink 500ms cubic-bezier(0.19, 1, 0.22, 1);

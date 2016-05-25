@@ -40,6 +40,10 @@
     >.content {
       padding: 20px 20px 20px 15px;
 
+      raised-button {
+        margin-left: 20px;
+      }
+
       form {
         overflow: hidden;
         height: 69px;
@@ -56,10 +60,6 @@
         .info-init {
           display: flex;
           align-items: center;
-
-          raised-button {
-            margin-left: 20px;
-          }
         }
 
         .info-detail {
@@ -69,6 +69,7 @@
           text-area {
             flex-grow: 0;
             margin-right: 30px;
+            margin-top: 15px;
           }
         }
       }

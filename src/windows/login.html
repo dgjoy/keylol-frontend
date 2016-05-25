@@ -1,5 +1,4 @@
-﻿<window position="center" class="window-login"  click-other-to-exit="::true">
-    <button ng-hide="::true" class="window-exit-button" ng-click="login.close()"></button>
+﻿<window position="center" class="window-login">
     <div class="window">
         <div class="header">
             <div class="text">
@@ -36,7 +35,7 @@
                                 ></text-area>
                             </div>
                             <div class="action">
-                                <flat-button text="放弃" type="inertia"></flat-button>
+                                <flat-button text="放弃" type="inertia" ng-click="login.close()"></flat-button>
                                 <raised-button text="登录" type="theme" id="popup-geetest-{{login.passcodeWayManager.geetestId}}" disabled="false"></raised-button>
                             </div>
                         </div>
