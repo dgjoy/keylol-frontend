@@ -1,0 +1,12 @@
+<a class="item" href="" ng-repeat="item in inputCheckbox.items" ng-click="inputCheckbox.toggle($index)" radio-ripple="$index">
+    <div class="outer" ng-class="{'focus':inputCheckbox.checklist[$index]}">
+        <div class="ripple-container"></div>
+        <div class="hole"></div>
+        <div class="object">
+            <svg aria-hidden="true">
+                <use ng-href="{{'check' | iconSvgUrl }}" xlink:href=""></use>
+            </svg>
+        </div>
+    </div>
+    <p class="text">{{item}}</p>
+</a>
