@@ -1,6 +1,7 @@
 ﻿(function () {
     class IconButtonController {
-        constructor () {
+        constructor ($element) {
+            
         }
     }
 
@@ -12,6 +13,7 @@
             icon: '@',
             type: '@',
             click: '&',
+            showPopup: '=?',
         },
     });
 }());

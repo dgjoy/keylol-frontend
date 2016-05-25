@@ -1,0 +1,12 @@
+.popup-item-editor {
+  @include keylol-shadow-3();
+  @include grow-shrink-top-right();
+  background-color: $keylol-card;
+  width: 385px;
+  padding: 20px 15px;
+
+  raised-button {
+    margin-top: 15px;
+    float: right;
+  }
+}

@@ -1,7 +1,12 @@
 ﻿(function () {
     class PointEditController {
-        constructor ($scope, pageHead, stateTree, $state) {
+        constructor ($scope, pageHead, stateTree, $state, $location, $timeout) {
             pageHead.setTitle('据点 - 编辑 - 其乐');
+            if ($location.url().match(/\/point\/[^\/]*\/edit\/?$/)) {
+                $timeout(() => {
+                    $state.go('.info', {}, { location: false });
+                });
+            }
 
             $scope.tabArray = [
                 { state: '.info', name:'资料' },

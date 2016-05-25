@@ -4,7 +4,7 @@
         (window, $timeout, $window) => {
             return {
                 restrict: 'A',
-                scope: { showFn: '=popup' },
+                scope: { showFn: '=?popup' },
                 link (scope, element) {
                     const contexts = {};
                     const objectReferences = [];
@@ -87,7 +87,7 @@
                                         const position = element.offset();
                                         const width = element.innerWidth();
                                         const height = element.innerHeight();
-                                        
+
                                         if (options.fixedPosition) {
                                             position.position = 'fixed';
                                             position.top -= $($window).scrollTop();

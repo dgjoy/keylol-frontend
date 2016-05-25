@@ -1,7 +1,7 @@
-<button class="{{iconButton.type}}" ng-click="iconButton.click({event: $event})" ripple="{{iconButton.type}}" ripple-position="center">
+<button class="{{iconButton.type}}" ng-click="iconButton.click({event: $event})" ripple="{{iconButton.type}}" ripple-position="center" popup="iconButton.showPopup">
     <div class="icon-wrapper">
         <svg aria-hidden="true">
-        <use ng-href="{{ iconButton.icon | iconSvgUrl }}" xlink:href=""></use>
-    </svg>
+            <use ng-href="{{ iconButton.icon | iconSvgUrl }}" xlink:href=""></use>
+        </svg>
     </div>
 </button>

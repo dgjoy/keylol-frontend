@@ -4,14 +4,10 @@
 (function () {
     keylolApp.directive('ripple', ($timeout, utils) => {
         return {
-            scope : {
-                type: '@ripple',
-                position: '@ripplePosition',
-            },
             restrict: 'A',
-            link (scope, element) {
+            link (scope, element, attrs) {
                 let type, value;
-                scope.$watch('type', newValue => {
+                attrs.$observe('ripple', newValue => {
                     const nValue = newValue || '#000';
 
                     if (nValue[0] === '#') {
@@ -39,7 +35,7 @@
                     $rippleContainer.prepend($ripple);
 
                     function getPointOffset(e) {
-                        if (scope.position === 'center') {
+                        if (attrs.ripplePosition === 'center') {
                             return {
                                 left: element[0].offsetWidth / 2,
                                 top: element[0].offsetHeight / 2,

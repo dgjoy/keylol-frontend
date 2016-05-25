@@ -168,13 +168,6 @@
                 url: '/edit',
                 templateUrl: 'src/pages/point-edit.html',
                 controller: 'PointEditController',
-                onEnter ($location, pageLoad, $state, $timeout) {
-                    if ($location.url().match(/\/point\/[^\/]*\/edit\/?$/)) {
-                        $timeout(() => {
-                            $state.go('.info', {}, { location: false });
-                        });
-                    }
-                },
                 onExit (stateTree) {
                 },
             })
