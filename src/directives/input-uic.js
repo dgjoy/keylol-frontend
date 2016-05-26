@@ -5,8 +5,9 @@
             templateUrl: 'src/directives/input-uic.html',
             scope: {
                 length: '=',
-                state: '@',
+                state: '<',
                 blurHandler: '&',
+                focusHandler: '&',
             },
             require: 'ngModel',
             link (scope, element, attrs, ngModel) {
@@ -38,6 +39,7 @@
                     }
                 };
                 scope.focusFirstIfEmpty = function () {
+                    scope.focusHandler();
                     for (let l = 0; l < scope.length; ++l) {
                         if (scope.text[l])
                             return;

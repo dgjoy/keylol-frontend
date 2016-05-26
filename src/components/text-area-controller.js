@@ -10,17 +10,13 @@
             });
             this.warnState = false;
             this.activeState = false;
+            this.disabledState = (this.state === 'disabled');
 
             $scope.$watch(() => {
                 return this.state;
-            },() => {
-                this.warnState = (this.state === 'warn');
-            });
-
-            $scope.$watch(() => {
-                return this.model;
-            },() => {
-                this.fillState = this.model && (this.model.length !== 0);
+            }, newValue => {
+                this.disabledState = (newValue === 'disabled');
+                this.warnState = (newValue === 'warn');
             });
         }
 
@@ -41,7 +37,7 @@
             type:'@',
             label:'@',
             model:'=',
-            state:'<',//normal,warn,locked
+            state:'<',//normal,warn,disabled
             tip:'<',
         },
     });

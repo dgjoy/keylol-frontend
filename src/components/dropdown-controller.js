@@ -33,7 +33,7 @@
         controllerAs: 'dropdown',
         bindings: {
             items: '<',
-            state: '@',
+            state: '<',//normal,disabled
             model: '=',
         },
     });
