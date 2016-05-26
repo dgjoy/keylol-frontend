@@ -25,7 +25,6 @@
                         message: options.message,
                         description: options.description,
                         type: 'default',
-                        icon: 'check',
                     });
                 };
 
@@ -43,7 +42,7 @@
                         message: options.message,
                         description: options.description,
                         type: 'process',
-                        icon: 'check',
+                        icon: 'clock',
                     });
                 };
 
@@ -57,8 +56,7 @@
                             if (errorResponse.data.ModelState.hasOwnProperty(error) && typeof(error) !== 'function') {
                                 return self.show({
                                     type: 'error',
-                                    title: '错误',
-                                    subtitle: 'Error',
+                                    icon: 'close',
                                     message: errorResponse.data.ModelState[error][0],
                                 });
                             }
@@ -68,7 +66,7 @@
                             message: options.message,
                             description: options.description,
                             type: 'error',
-                            icon: 'check',
+                            icon: 'close',
                         });
                     }
                 };
@@ -79,7 +77,7 @@
                         message: options.message,
                         description: options.description,
                         type: 'attention',
-                        icon: 'check',
+                        icon: 'delta',
                     });
                 };
             }

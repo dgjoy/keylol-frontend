@@ -29,6 +29,7 @@ sales-today {
   }
 
   .sales-wrapper {
+    @include page-change('.sales-list');
     margin: 20px 0;
     overflow: hidden;
     position: relative;
@@ -145,46 +146,6 @@ sales-today {
               display: none;
             }
           }
-        }
-      }
-    }
-
-    &.to-next {
-      .sales-list {
-        &.ng-enter, &.ng-leave {
-          transition: transform .5s cubic-bezier(0.19, 1, 0.22, 1);
-        }
-
-        &.ng-enter {
-          transform: translateX(100%);
-        }
-
-        &.ng-enter-active, &.ng-leave {
-          transform: translateX(0);
-        }
-
-        &.ng-leave-active {
-          transform: translateX(-100%);
-        }
-      }
-    }
-
-    &.to-previous {
-      .sales-list {
-        &.ng-enter, &.ng-leave {
-          transition: transform .5s cubic-bezier(0.19, 1, 0.22, 1);
-        }
-
-        &.ng-enter {
-          transform: translateX(-100%);
-        }
-
-        &.ng-enter-active, &.ng-leave {
-          transform: translateX(0);
-        }
-
-        &.ng-leave-active {
-          transform: translateX(100%);
         }
       }
     }

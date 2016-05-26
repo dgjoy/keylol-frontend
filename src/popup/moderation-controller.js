@@ -7,6 +7,14 @@
                         type: 'item',
                         text: '调整内容',
                         clickAction () {
+                            window.show({
+                                templateUrl: 'src/windows/edit-show-case.html',
+                                controller: 'EditShowCaseController',
+                                controllerAs: 'editShowCase',
+                                inputs: {
+                                    type,
+                                },
+                            });
                             close();
                         },
                     },
@@ -20,6 +28,7 @@
                                 controllerAs: 'pushEntry',
                                 inputs: {
                                     type,
+                                    options: {},
                                 },
                             });
                             close();

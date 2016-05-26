@@ -36,6 +36,7 @@ latest-articles {
   }
 
   .latest-wrapper {
+    @include page-change('.latest-list');
     margin: 20px 0;
     overflow: hidden;
     position: relative;
@@ -115,46 +116,6 @@ latest-articles {
 
         &:last-of-type {
           border-bottom: none;
-        }
-      }
-    }
-
-    &.to-next {
-      .latest-list {
-        &.ng-enter, &.ng-leave {
-          transition: transform .5s cubic-bezier(0.19, 1, 0.22, 1);
-        }
-
-        &.ng-enter {
-          transform: translateX(100%);
-        }
-
-        &.ng-enter-active, &.ng-leave {
-          transform: translateX(0);
-        }
-
-        &.ng-leave-active {
-          transform: translateX(-100%);
-        }
-      }
-    }
-
-    &.to-previous {
-      .latest-list {
-        &.ng-enter, &.ng-leave {
-          transition: transform .5s cubic-bezier(0.19, 1, 0.22, 1);
-        }
-
-        &.ng-enter {
-          transform: translateX(-100%);
-        }
-
-        &.ng-enter-active, &.ng-leave {
-          transform: translateX(0);
-        }
-
-        &.ng-leave-active {
-          transform: translateX(100%);
         }
       }
     }

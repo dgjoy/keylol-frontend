@@ -1,6 +1,6 @@
 ﻿<popup class="popup-operation-feedback">
     <div class="feedback-content" ng-class="options.type">
-        <svg aria-hidden="true">
+        <svg ng-if="options.icon" aria-hidden="true">
             <use ng-href="{{ options.icon | iconSvgUrl }}" xlink:href=""></use>
         </svg>
         <div class="snack-main">

@@ -1,0 +1,38 @@
+﻿<window position="center" class="window-edit-show-case">
+    <div class="window">
+        <div class="header">
+            <div class="text">
+                <p>调整内容</p>
+                <p>{{editShowCase.subTitle}}</p>
+            </div>
+            <img src="assets/images/proofread-eye.png">
+        </div>
+        <div class="content">
+            <table ng-style="{height: editShowCase.list.length * 31 + 25}"  ng-class="{
+            'to-next' : editShowCase.isToNext,
+            'to-previous' : !editShowCase.isToNext
+            }">
+                <thead>
+                    <tr>
+                        <th ng-repeat="(key, attr) in editShowCase.showAttrs">{{attr}}</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody ng-animate-swap="editShowCase.currentPage">
+                    <tr ng-repeat="item in editShowCase.list" ng-class="{highlight: $index < editShowCase.highlightCount && editShowCase.currentPage === 1}">
+                        <td ng-repeat="(key, attr) in editShowCase.showAttrs">{{item[key]}}</td>
+                        <td class="actions">
+                            <a href="" ng-click="editShowCase.topItem(item.feedId)">{{(editShowCase.currentPage === 1 && $index === 0)? '': '置顶'}}</a>
+                            <a href="" ng-click="editShowCase.editItem(item)">编辑</a>
+                            <a href="" ng-click="editShowCase.deleteItem(item.feedId)">删除</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="actions">
+                <pagination total="99" current="editShowCase.currentPage" on-page-changed="editShowCase.getContent(newPage, oldPage)"></pagination>
+                <raised-button text="关闭" type="theme" click="editShowCase.close()"></raised-button>
+            </div>
+        </div>
+    </div>
+</window>

@@ -221,3 +221,45 @@ $keylol-topic: #7976b1;
     }
   }
 }
+
+@mixin page-change ($child) {
+  &.to-next {
+    #{$child} {
+      &.ng-enter, &.ng-leave {
+        transition: transform .5s cubic-bezier(0.19, 1, 0.22, 1);
+      }
+
+      &.ng-enter {
+        transform: translateX(100%);
+      }
+
+      &.ng-enter-active, &.ng-leave {
+        transform: translateX(0);
+      }
+
+      &.ng-leave-active {
+        transform: translateX(-100%);
+      }
+    }
+  }
+
+  &.to-previous {
+    #{$child} {
+      &.ng-enter, &.ng-leave {
+        transition: transform .5s cubic-bezier(0.19, 1, 0.22, 1);
+      }
+
+      &.ng-enter {
+        transform: translateX(-100%);
+      }
+
+      &.ng-enter-active, &.ng-leave {
+        transform: translateX(0);
+      }
+
+      &.ng-leave-active {
+        transform: translateX(100%);
+      }
+    }
+  }
+}

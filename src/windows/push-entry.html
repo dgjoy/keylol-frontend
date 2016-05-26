@@ -11,15 +11,15 @@
             <form ng-style="{height: pushEntry.formHeight}">
                 <div class="info-init">
                     <text-area class="long" type="text" label="文章 / 页面链接" model="pushEntry.vm.link" tip="'如果推送非文章链接，需要补充展示信息'"></text-area>
-                    <raised-button text="抓取" type="theme" disabled="pushEntry.expand" click="pushEntry.capture()"></raised-button>
+                    <raised-button text="抓取" type="theme" disabled="pushEntry.expand || !pushEntry.vm.link" click="pushEntry.capture()"></raised-button>
                 </div>
                 <div class="info-detail">
                     <text-area class="long" type="text" label="主标题" model="pushEntry.vm.title" tip="'概括核心思想，避免包含写作对象，如「这个世界需要暴白和英雄」'"></text-area>
-                    <text-area class="long" type="text" label="副标题" model="pushEntry.vm.subTitle" tip="'直接说明文章本质和写作对象，如「《守望先锋》首测印象」'"></text-area>
+                    <text-area class="long" type="text" label="副标题" model="pushEntry.vm.subtitle" tip="'直接说明文章本质和写作对象，如「《守望先锋》首测印象」'"></text-area>
                     <text-area class="short" type="text" label="作者" model="pushEntry.vm.author"></text-area>
                     <text-area class="short" type="text" label="日期" model="pushEntry.vm.date" tip="'推荐使用「m月d日」的格式'"></text-area>
                     <text-area class="short" type="text" label="滑卡标题" model="pushEntry.vm.minorTitle" tip="'一般为写作对象的中文名'"></text-area>
-                    <text-area class="short" type="text" label="滑卡副标题" model="pushEntry.vm.minorSubTitle" tip="'一般为写作对象的外文名'"></text-area>
+                    <text-area class="short" type="text" label="滑卡副标题" model="pushEntry.vm.minorSubtitle" tip="'一般为写作对象的外文名'"></text-area>
                 </div>
             </form>
             <div class="actions">

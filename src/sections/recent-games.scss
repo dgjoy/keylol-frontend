@@ -2,6 +2,7 @@ recent-games {
   display: block;
 
   .pages-wrapper {
+    @include page-change('.cards-wrapper');
     overflow: hidden;
     position: relative;
     width: 720px;
@@ -18,46 +19,6 @@ recent-games {
       game-card {
         margin-right: 20px;
         margin-bottom: 20px;
-      }
-    }
-
-    &.to-next {
-      .cards-wrapper {
-        &.ng-enter, &.ng-leave {
-          transition: transform .5s cubic-bezier(0.19, 1, 0.22, 1);
-        }
-
-        &.ng-enter {
-          transform: translateX(100%);
-        }
-
-        &.ng-enter-active, &.ng-leave {
-          transform: translateX(0);
-        }
-
-        &.ng-leave-active {
-          transform: translateX(-100%);
-        }
-      }
-    }
-
-    &.to-previous {
-      .cards-wrapper {
-        &.ng-enter, &.ng-leave {
-          transition: transform .5s cubic-bezier(0.19, 1, 0.22, 1);
-        }
-
-        &.ng-enter {
-          transform: translateX(-100%);
-        }
-
-        &.ng-enter-active, &.ng-leave {
-          transform: translateX(0);
-        }
-
-        &.ng-leave-active {
-          transform: translateX(100%);
-        }
       }
     }
   }
