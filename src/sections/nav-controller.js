@@ -46,7 +46,7 @@
                 this.tabArray = [
                     { state:'.frontpage', name:'扉页' },
                     { state:'.intel', name:'情报' },
-                    { state:'.frontpage', name:'轨道' },
+                    { state:'.timeline', name:'轨道' },
                     { state:'.edit', name:'编辑', 'float':'right' },
                 ];
                 $scope.$watch(() => {

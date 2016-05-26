@@ -164,6 +164,11 @@
                 templateUrl: 'src/pages/intel.html',
                 controller: 'IntelController',
             })
+            .state('aggregation.point.timeline', {
+                url: '/timeline',
+                templateUrl: 'src/pages/page-timeline.html',
+                controller: 'PageTimelineController',
+            })
             .state('aggregation.point.edit', {
                 url: '/edit',
                 templateUrl: 'src/pages/point-edit.html',
@@ -178,8 +183,13 @@
             })
             .state('aggregation.point.edit.style', {
                 url: '/style',
-                templateUrl: 'src/pages/edit-info.html',
-                controller: 'EditInfoController',
+                templateUrl: 'src/pages/edit-style.html',
+                controller: 'EditStyleController',
+            })
+            .state('aggregation.point.edit.log', {
+                url: '/log',
+                templateUrl: 'src/pages/edit-log.html',
+                controller: 'EditLogController',
             })
             .state('not-found', {
                 url: '/not-found',

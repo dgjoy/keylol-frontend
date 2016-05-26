@@ -1,6 +1,9 @@
-﻿<div class="flex-row min-height-lg">
+﻿<div class="flex-row min-height-lg" style="margin-top: 30px;">
     <div class="left-middle-lg row-sm">
         <section-timeline></section-timeline>
     </div>
-    <right-menus class="right-lg hidden-sm"></right-menus>
+    <div class="right-lg hidden-sm flex-column">
+        <menu ng-if="stateTree.specialMenu" style="margin-bottom: 20px" object="::stateTree.specialMenu"></menu>
+        <right-menus style="flex-grow: 1;"></right-menus>
+    </div>
 </div>
