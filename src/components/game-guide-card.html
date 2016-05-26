@@ -2,8 +2,8 @@
     <point-basic-info point="gameGuideCard.card"></point-basic-info>
     <review-with-text review="gameGuideCard.card.averageRating"></review-with-text>
 </a>
-<div class="point-img" webp-background="{{gameGuideCard.card.titleCoverImage | uriRelocate}}"></div>
-<div class="characteristic-container">
+<div class="point-img" ng-class="{user:gameGuideCard.bottomType === 'user'}" webp-background="{{gameGuideCard.card.titleCoverImage | uriRelocate}}"></div>
+<div class="characteristic-container" ng-style="{'background-color':stateTree.pointTheme.light}">
     <a href="" ng-mouseenter="gameGuideCard.showTooltip($event,$index)" popup="gameGuideCard.showTooltipPopup[$index]" class="characteristic" ng-repeat="characteristic in gameGuideCard.characteristics">
         <svg aria-hidden="true">
             <use ng-href="{{characteristic.icon | iconSvgUrl }}" xlink:href=""></use>
@@ -18,7 +18,7 @@
         <span class="slash" ng-show="$index !== gameGuideCard.categories.length-1"> / </span>
     </span>
 </div>
-<div class="actions">
+<div class="actions" ng-if="gameGuideCard.bottomType !== 'user'">
     <div class="platforms">
         <a href="">
             <svg aria-hidden="true">
@@ -34,4 +34,11 @@
         </a>
     </div>
     <flat-button text="订阅"></flat-button>
+</div>
+<div class="user-basic-info" ng-if="gameGuideCard.bottomType === 'user'">
+    <img class="avatar" webp-src="//storage.keylol.com/fd0dfd38572adff068251606aa282b3f.jpg!avatar.medium" alt="NPC之舟" />
+    <div class="name-group">
+        <p>hank</p>
+        <p ng-style="{color:stateTree.pointTheme.light}">在档 24 小时</p>
+    </div>
 </div>

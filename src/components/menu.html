@@ -42,7 +42,34 @@
         </div>
         <div class="horizon"></div>
     </div>
+    <div ng-switch-when="dossier" class="for-dossier">
+        <div class="user-basic-info">
+            <img webp-src="//storage.keylol.com/fd0dfd38572adff068251606aa282b3f.jpg!avatar.medium" alt="npc之舟" class="avatar">
+            <div class="name-group">
+                <p>npc之舟</p>
+                <p>互相关注</p>
+            </div>
+        </div>
+        <div class="paragraph">好友 <a href="">2</a> 中 <a href="">0</a> 位是好友</div>
+        <div class="paragraph">关注 <a href="">0</a></div>
+        <div class="paragraph">听众 <a href="">6</a></div>
+        <div class="horizon"></div>
+        <div class="icon-text">
+            <svg aria-hidden="true">
+                <use ng-href="{{'dtb-steam' | iconSvgUrl }}" xlink:href=""></use>
+            </svg>
+            <span>Steam</span>
+        </div>
+        <div class="paragraph"><a href="">Ark</a></div>
+        <div class="icon-text">
+            <svg aria-hidden="true">
+                <use ng-href="{{'steamcn' | iconSvgUrl }}" xlink:href=""></use>
+            </svg>
+            <span>蒸汽动力<span class="is-friend"> (好友)</span></span>
+        </div>
+        <div class="paragraph"><a href="">NPC 的小船</a></div>
+    </div>
 </div>
-<ul>
+<ul ng-if="menu.object.header.type !== 'dossier'">
     <li ng-repeat="item in menu.object.items"><menu-item data="item"></menu-item></li>
 </ul>

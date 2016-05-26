@@ -65,6 +65,26 @@
                             break;
                     }
                 });
+            } else if (currentStateName.substr(0, 16) === 'aggregation.user') {
+                this.inUser = true;
+                this.tabArray = [
+                    { state: '.dossier', name: '档案' },
+                    { state: '.timeline', name: '轨道' },
+                    { state: '.edit', name: '编辑', 'float': 'right' },
+                ];
+                $scope.$watch(() => {
+                    return $state.current.name;
+                }, () => {
+                    const subState = $state.current.name.substr(17);
+                    switch (subState) {
+                        case 'dossier' :
+                            this.currentPage = 0;
+                            break;
+                        case 'edit' :
+                            this.currentPage = 2;
+                            break;
+                    }
+                });
             }
         }
     }

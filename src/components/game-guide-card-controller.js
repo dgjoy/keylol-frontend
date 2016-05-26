@@ -1,6 +1,6 @@
 ﻿(function () {
     class GameGuideCardController {
-        constructor(pointAttributes) {
+        constructor($scope, pointAttributes, stateTree) {
             this.characteristics = [];
             for (const attr in this.card) {
                 if (this.card.hasOwnProperty(attr)) {
@@ -19,6 +19,8 @@
             }
 
             this.categories = [1,2,3,4,5];
+
+            $scope.stateTree = stateTree;
         }
 
         showTooltip($event, $index) {
@@ -43,6 +45,7 @@
         controllerAs: 'gameGuideCard',
         bindings: {
             card: '<',
+            bottomType: '<',
         },
     });
 }());

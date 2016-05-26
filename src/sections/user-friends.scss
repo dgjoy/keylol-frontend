@@ -1,0 +1,17 @@
+user-friends {
+  display: block;
+  position: relative;
+
+  .flex-row {
+    justify-content: flex-start;
+  }
+
+  user-card {
+    margin-right: 20px;
+    margin-bottom: 20px;
+
+    &:nth-of-type(4n) {
+      margin-right: 0;
+    }
+  }
+}

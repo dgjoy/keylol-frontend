@@ -191,6 +191,50 @@
                 templateUrl: 'src/pages/edit-log.html',
                 controller: 'EditLogController',
             })
+            .state('aggregation.user', {
+                url: '/user/:userIdCode',
+                templateUrl: 'src/pages/user.html',
+                controller: 'UserController',
+                onEnter ($location, pageLoad, $state, $timeout) {
+                    if ($location.url().match(/\/user\/[^\/]*\/?$/)) {
+                        $timeout(() => {
+                            console.log($state.current);
+                            $state.go('.dossier', {}, { location: false });
+                        });
+                    }
+                },
+                onExit (stateTree) {
+                },
+            })
+            .state('aggregation.user.dossier', {
+                url: '/dossier',
+                templateUrl: 'src/pages/dossier.html',
+                controller: 'DossierController',
+                onExit (stateTree) {
+                },
+            })
+            .state('aggregation.user.dossier.home', {
+                url: '/home',
+                templateUrl: 'src/pages/dossier-home.html',
+                controller: 'DossierHomeController',
+            })
+            .state('aggregation.user.edit', {
+                url: '/edit',
+                templateUrl: 'src/pages/user-edit.html',
+                controller: 'UserEditController',
+                onExit (stateTree) {
+                },
+            })
+            .state('aggregation.user.edit.info', {
+                url: '/info',
+                templateUrl: 'src/pages/user-edit-info.html',
+                controller: 'UserEditInfoController',
+            })
+            .state('aggregation.user.edit.preference', {
+                url: '/preference',
+                templateUrl: 'src/pages/user-edit-preference.html',
+                controller: 'UserEditPreferenceController',
+            })
             .state('not-found', {
                 url: '/not-found',
                 templateUrl: 'src/pages/not-found.html',

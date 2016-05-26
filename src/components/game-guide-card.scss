@@ -23,6 +23,10 @@ game-guide-card {
     width: 100%;
     height: 130px;
     background-size: cover;
+
+    &.user {
+      height: 160px;
+    }
   }
 
   .characteristic-container {
@@ -33,6 +37,7 @@ game-guide-card {
     overflow: hidden;
     height: 36px;
     padding: 0 15px;
+    margin: 10px 0;
 
     .characteristic {
       width: 30px;
@@ -64,6 +69,37 @@ game-guide-card {
 
     .slash {
       color: $keylol-inertia-shape;
+    }
+  }
+
+  .user-basic-info {
+    display: flex;
+    align-items: center;
+    height: 52px;
+    margin-left: 15px;
+
+    .avatar {
+      margin-right: 10px;
+      width: 32px;
+      height: 32px;
+    }
+
+    .name-group {
+      max-width: calc(100% - 42px);
+      p {
+        @include ellipsis;
+        margin: 0;
+
+        &:first-of-type {
+          color: $keylol-main-text;
+          font-weight: bold;
+        }
+
+        &:last-of-type {
+          color: $keylol-light-text;
+          font-size: 12px;
+        }
+      }
     }
   }
 
