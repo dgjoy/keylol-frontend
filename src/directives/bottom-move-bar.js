@@ -30,7 +30,7 @@
                     } else {
                         element.css({
                             visibility: 'visible',
-                            transform: `translateX(${tabs[scope.curTab].left}px)`,
+                            transform: `translateX(${tabs[scope.curTab].left}px) scaleX(${tabs[scope.curTab].width / firstTab.width}`,
                             width: firstTab.width,
                         });
                     }
@@ -60,20 +60,21 @@
                 });
 
                 scope.$watch('curTab', (newValue, oldValue) => {
+                    if (!transReady)
+                        return;
+
                     if (oldValue === undefined && newValue !== undefined) {
                         element.css({
                             visibility: 'visible',
-                            transform: `translateX(${tabs[newValue].left}px)`,
+                            transform: trans[newValue],
                         });
                         return ;
                     }
 
                     if (oldValue !== undefined && newValue !== undefined && oldValue !== newValue) {
-                        if (!transReady)
-                            return;
                         element.css({
                             visibility: 'visible',
-                            'transform': trans[newValue],
+                            transform: trans[newValue],
                         });
                     }
                 });
