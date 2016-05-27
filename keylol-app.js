@@ -140,7 +140,7 @@
                 template: '<div ui-view></div>',
             })
             .state('aggregation.point', {
-                url: '/point/:pointIdCode',
+                url: '/point/:point_id_code',
                 templateUrl: 'src/pages/point.html',
                 controller: 'PointController',
                 onEnter ($location, pageLoad, $state, $timeout) {
@@ -152,17 +152,27 @@
                     }
                 },
                 onExit (stateTree) {
+                    console.log('exit aggregation.point');
+                    delete stateTree.aggregation.point;
                 },
             })
             .state('aggregation.point.frontpage', {
                 url: '/frontpage',
                 templateUrl: 'src/pages/frontpage.html',
                 controller: 'FrontpageController',
+                onExit (stateTree) {
+                    console.log('exit frontpage');
+                    delete stateTree.aggregation.point.frontpage;
+                },
             })
             .state('aggregation.point.intel', {
                 url: '/intel',
                 templateUrl: 'src/pages/intel.html',
                 controller: 'IntelController',
+                onExit (stateTree) {
+                    console.log('exit intel');
+                    delete stateTree.aggregation.point.intel;
+                },
             })
             .state('aggregation.point.timeline', {
                 url: '/timeline',
