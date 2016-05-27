@@ -1,18 +1,18 @@
 (function () {
     class InputCheckboxController {
-        constructor($element, $scope) {
+        constructor($scope) {
             $.extend(this,{
                 $scope,
             });
         }
 
         toggle(index) {
-            if ( this.checklist[index] ) {
-                this.checklist[index] = false;
-                this.$scope.$broadcast('rippleEvent',{ index, color:'theme' });
+            if ( this.model[index] ) {
+                this.model[index] = false;
+                this.$scope.$broadcast('rippleEvent',{ index, state:'theme' });
             } else {
-                this.checklist[index] = true;
-                this.$scope.$broadcast('rippleEvent',{ index, color:'inertia' });
+                this.model[index] = true;
+                this.$scope.$broadcast('rippleEvent',{ index, state:'normal' });
             }
         }
     }
@@ -22,8 +22,9 @@
         controller: InputCheckboxController,
         controllerAs: 'inputCheckbox',
         bindings: {
-            items: '<',
-            checklist: '=',
+            object: '<',
+            model: '=',
+            theme: '<',
         },
     });
 }());

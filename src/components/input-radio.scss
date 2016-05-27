@@ -15,11 +15,10 @@ input-radio {
       border-radius: 10px;
       margin-right: 10px;
 
-      &.focus>.hole {
+      &.theme>.hole {
         border-color: $keylol-light-theme;
       }
-
-      &.focus>.object {
+      &.theme>.object {
         transform: scale(0.5);
       }
 

@@ -15,6 +15,7 @@
                 offsetY: -40,
                 inputs: {
                     type: 'text',
+                    theme: this.theme,
                 },
             });
         }

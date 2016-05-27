@@ -1,9 +1,10 @@
 ﻿(function () {
     class ItemEditorController {
-        constructor(type, close, $http) {
+        constructor(type, close, $http, theme) {
             $.extend(this, {
                 $http,
                 close,
+                theme,
             });
         }
     }

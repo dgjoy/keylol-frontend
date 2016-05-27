@@ -1,7 +1,6 @@
 ﻿(function () {
     class DatepickerController {
-        constructor() {
-            this.model = '2016-5-24';
+        constructor($scope) {
             this.isFocus = false;
             this.isError = false;
         }
@@ -64,8 +63,8 @@
         controller: DatepickerController,
         controllerAs: 'datepicker',
         bindings: {
-            items: '<',
-            state: '@',
+            model: '=',
+            theme: '<',
         },
     });
 }());

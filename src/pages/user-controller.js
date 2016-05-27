@@ -3,8 +3,8 @@
         constructor ($scope, stateTree) {
             $scope.stateTree = stateTree;
             stateTree.pointTheme = {
-                main: 'rgb(39,134,73)',
-                light: 'rgb(140,171,87)',
+                main: '#278649',
+                light: '#8cab57',
             };
         }
     }

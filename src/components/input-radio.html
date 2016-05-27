@@ -1,8 +1,9 @@
-<a class="item" href="" ng-repeat="item in inputRadio.items" ng-click="inputRadio.changeRadio($index)" radio-ripple="$index">
-    <div class="outer" ng-class="{'focus':inputRadio.currentRadio === $index}">
+<a class="item" href="" ng-repeat="item in inputRadio.object" ng-click="inputRadio.changeRadio($index)"
+   circle-ripple="$index" ripple-theme="::inputRadio.theme.light">
+    <div class="outer" ng-class="{'theme':inputRadio.model === $index}">
         <div class="ripple-container"></div>
-        <div class="hole"></div>
-        <div class="object"></div>
+        <div class="hole" style="{{inputRadio.theme.light&&inputRadio.model === $index?'border-color:'+inputRadio.theme.light+';':'' }}"></div>
+        <div class="object" style="{{inputRadio.theme.light?'background-color:'+inputRadio.theme.light+';':'' }}"></div>
     </div>
     <p class="text">{{item}}</p>
 </a>

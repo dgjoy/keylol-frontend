@@ -3,7 +3,7 @@
 /* --------------- */
 /* ripple style */
 /* --------------- */
-[radio-ripple] {
+[circle-ripple] {
   .circle-ripple {
     position: absolute;
     width: 100%;
@@ -14,8 +14,7 @@
     &.theme {
       background-color: rgba($keylol-light-theme, .1);
     }
-
-    &.inertia {
+    &.normal {
       background-color: rgba(#000, .1);
     }
   }

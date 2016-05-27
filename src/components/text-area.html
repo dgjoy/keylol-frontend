@@ -1,24 +1,30 @@
-<label ng-class="{
-    'fill': textArea.activeState || textArea.model && (textArea.model.length !== 0),
-    'active': textArea.activeState && !textArea.warnState,
-    'warn': textArea.activeState && textArea.warnState,
-}">{{textArea.label}}</label>
+<label class="
+        {{ textArea.activeState || textArea.model && (textArea.model.length !== 0)? 'move-up':''}}
+        {{textArea.warnState?'warn':textArea.activeState?'theme':''}}"
+       style="{{textArea.theme.light&&textArea.activeState&&!textArea.warnState?'color:'+textArea.theme.light+';':''}}"
+    >{{textArea.label}}</label>
 
 
-<div class="text {{textArea.disabledState?'disabled':textArea.activeState&&!textArea.warnState?'active':textArea.warnState?'warn':''}}" ng-if="textArea.type === 'text'">
+<div class="text {{textArea.disabledState?'disabled':textArea.warnState?'warn':textArea.activeState?'theme':''}}"
+     ng-if="textArea.type === 'text'"
+     style="{{textArea.theme.light&&textArea.activeState&&!textArea.warnState?'border-color:'+textArea.theme.light+';':''}}"
+    >
     <input ng-model="textArea.model" type="text" ng-change="textArea.check()" ng-focus="textArea.focus()" ng-blur="textArea.blur()"
            ng-disabled="textArea.disabledState"/>
 </div>
 
-<div class="text {{textArea.disabledState?'disabled':textArea.activeState&&!textArea.warnState?'active':textArea.warnState?'warn':''}}" ng-if="textArea.type === 'password'">
+<div class="text {{textArea.disabledState?'disabled':textArea.warnState?'warn':textArea.activeState?'theme':''}}"
+     ng-if="textArea.type === 'password'"
+     style="{{textArea.theme.light&&textArea.activeState&&!textArea.warnState?'border-color:'+textArea.theme.light+';':''}}"
+    >
     <input ng-model="textArea.model" type="password" ng-change="textArea.check()" ng-focus="textArea.focus()" ng-blur="textArea.blur()"
            ng-disabled="textArea.disabledState"/>
 </div>
 
 <input-uic ng-if="textArea.type === 'uic'" length="5" ng-model="textArea.model" focus-handler="textArea.focus()" blur-handler="textArea.blur()"
-           state="textArea.disabledState?'disabled':textArea.activeState&&!textArea.warnState?'active':textArea.warnState?'warn':''"
+           state="textArea.disabledState?'disabled':textArea.warnState?'warn':textArea.activeState?'theme':''"
 ></input-uic>
 
 <dropdown ng-if="textArea.type === 'dropdown'" items="['请选择游戏平台','Steam','暂不选择游戏平台']" model="textArea.model"></dropdown>
 
-<div class="tip" ng-class="{'active':textArea.activeState && !textArea.warnState,'warn':textArea.warnState}">{{textArea.tip}}</div>
+<div class="tip {{textArea.warnState?'warn':textArea.activeState?'theme':''}}">{{textArea.tip}}</div>

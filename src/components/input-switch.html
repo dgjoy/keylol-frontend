@@ -1,5 +1,9 @@
-<a href="" class="outer" ng-class="{'checked': inputSwitch.model}" ng-click="inputSwitch.toggle()" radio-ripple="0">
-    <div class="object">
-        <div class="ripple-container"></div>
+<a href="" class="outer" ng-class="{'theme': inputSwitch.model}" ng-click="inputSwitch.toggle()"
+   style="{{stateTree.pointTheme.light && inputSwitch.model ? 'background-color:' + stateTree.pointTheme.light + ';':''}}"
+   circle-ripple="0" ripple-theme="::stateTree.pointTheme.light">
+    <div class="ripple-container"></div>
+    <div class="object"
+         style="{{stateTree.pointTheme.main && inputSwitch.model ? 'background-color:' + stateTree.pointTheme.main + ';':''}}"
+        >
     </div>
 </a>

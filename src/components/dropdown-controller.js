@@ -32,8 +32,8 @@
         controller: DropdownController,
         controllerAs: 'dropdown',
         bindings: {
-            items: '<',
-            state: '<',//normal,disabled
+            object: '<',
+            state: '<',//theme,disabled
             model: '=',
         },
     });

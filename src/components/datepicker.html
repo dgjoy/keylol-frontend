@@ -1,9 +1,14 @@
-<div ng-class="{
-    focus:datepicker.isFocus,
-    warn:datepicker.isError
-    }" popup="datepicker.showSelectorPopup">
-    <input type="text" ng-model="datepicker.model" ng-change="datepicker.check()" ng-focus="datepicker.focus()" ng-blur="datepicker.blur()" />
-    <a href="" ng-click="datepicker.showSelector($event)">
+<div class="{{ datepicker.isError?'warn':datepicker.isFocus?'theme':'' }}"
+     popup="datepicker.showSelectorPopup"
+     style="{{datepicker.theme.light&&datepicker.isFocus&&!datepicker.isError?'border-color:' + datepicker.theme.light + ';' : '' }}"
+    >
+    <input type="text"
+           ng-model="datepicker.model"
+           ng-change="datepicker.check()"
+           ng-focus="datepicker.focus()"
+           ng-blur="datepicker.blur()"
+    />
+    <a ng-click="datepicker.showSelector($event)">
         <svg aria-hidden="true">
             <use ng-href="{{'search' | iconSvgUrl }}" xlink:href=""></use>
         </svg>

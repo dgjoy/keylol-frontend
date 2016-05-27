@@ -1,17 +1,17 @@
 (function () {
     class InputRadioController {
-        constructor($element, $scope) {
+        constructor($scope) {
             $.extend(this,{
                 $scope,
             });
         }
 
         changeRadio(index) {
-            if ( this.currentRadio === index ) {
-                this.$scope.$broadcast('rippleEvent',{ index, color:'theme' });
+            if ( this.model === index ) {
+                this.$scope.$broadcast('rippleEvent',{ index, state:'theme' });
             } else {
-                this.currentRadio = index;
-                this.$scope.$broadcast('rippleEvent',{ index, color:'inertia' });
+                this.model = index;
+                this.$scope.$broadcast('rippleEvent',{ index, state:'normal' });
             }
         }
     }
@@ -21,8 +21,9 @@
         controller: InputRadioController,
         controllerAs: 'inputRadio',
         bindings: {
-            items: '<',
-            currentRadio: '=',
+            object: '<',
+            model: '=',
+            theme: '<',
         },
     });
 }());

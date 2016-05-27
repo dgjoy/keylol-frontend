@@ -1,8 +1,8 @@
-<a class="item" href="" ng-repeat="item in inputCheckbox.items" ng-click="inputCheckbox.toggle($index)" radio-ripple="$index">
-    <div class="outer" ng-class="{'focus':inputCheckbox.checklist[$index]}">
+<a class="item" href="" ng-repeat="item in inputCheckbox.object" ng-click="inputCheckbox.toggle($index)" circle-ripple="$index" ripple-theme="inputCheckbox.theme.light">
+    <div class="outer" ng-class="{'theme':inputCheckbox.model[$index]}">
         <div class="ripple-container"></div>
         <div class="hole"></div>
-        <div class="object">
+        <div class="object" style="{{inputCheckbox.theme.light?'background-color:'+inputCheckbox.theme.light+';':'' }}">
             <svg aria-hidden="true">
                 <use ng-href="{{'check' | iconSvgUrl }}" xlink:href=""></use>
             </svg>

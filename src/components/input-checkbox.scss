@@ -14,12 +14,10 @@ input-checkbox {
       height: 20px;
       border-radius: 10px;
       margin-right: 10px;
-
-      &.focus>.hole {
+      &.theme>.hole {
         border: 0;
       }
-
-      &.focus>.object {
+      &.theme>.object {
         opacity: 1;
       }
 

@@ -1,18 +1,20 @@
 (function () {
     class InputSwitchController {
-        constructor($scope) {
+        constructor($scope, stateTree) {
             $.extend(this,{
                 $scope,
             });
+
+            $scope.stateTree = stateTree;
         }
 
         toggle() {
             if ( this.model === false ) {
                 this.model = true;
-                this.$scope.$broadcast('rippleEvent',{ index: 0, color:'theme' });
+                this.$scope.$broadcast('rippleEvent',{ index: 0, state:'normal' });
             } else {
                 this.model = false;
-                this.$scope.$broadcast('rippleEvent',{ index: 0, color:'inertia' });
+                this.$scope.$broadcast('rippleEvent',{ index: 0, state:'theme' });
             }
         }
     }
