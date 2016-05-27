@@ -151,18 +151,8 @@
                                     $timeout(() => {
                                         $windowElement = angular.element($element[0].querySelector('.window'));
                                         if ($windowElement[0]) {
-                                            const targetRect = {
-                                                height: options.event.target.offsetHeight,
-                                                width: options.event.target.offsetWidth,
-                                                left: options.event.target.offsetLeft,
-                                                top: options.event.target.offsetTop,
-                                            };
-                                            const elementRect = {
-                                                height: $windowElement[0].offsetHeight,
-                                                width: $windowElement[0].offsetWidth,
-                                                left: $windowElement[0].offsetLeft,
-                                                top: $windowElement[0].offsetTop,
-                                            };
+                                            const targetRect = options.event.currentTarget.getBoundingClientRect();
+                                            const elementRect = $windowElement[0].getBoundingClientRect();
 
                                             const dialogCenterPt = centerPointFor(elementRect);
                                             const targetCenterPt = centerPointFor(targetRect);
