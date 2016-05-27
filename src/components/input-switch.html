@@ -1,9 +1,9 @@
 <a href="" class="outer" ng-class="{'theme': inputSwitch.model}" ng-click="inputSwitch.toggle()"
-   style="{{stateTree.pointTheme.light && inputSwitch.model ? 'background-color:' + stateTree.pointTheme.light + ';':''}}"
-   circle-ripple="0" ripple-theme="::stateTree.pointTheme.light">
+   style="{{inputSwitch.theme.light && inputSwitch.model ? 'background-color:' + inputSwitch.theme.light + ';':''}}"
+   circle-ripple="0" ripple-theme="::inputSwitch.theme.light">
     <div class="ripple-container"></div>
     <div class="object"
-         style="{{stateTree.pointTheme.main && inputSwitch.model ? 'background-color:' + stateTree.pointTheme.main + ';':''}}"
+         style="{{inputSwitch.theme.main && inputSwitch.model ? 'background-color:' + inputSwitch.theme.main + ';':''}}"
         >
     </div>
 </a>

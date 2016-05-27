@@ -1,11 +1,9 @@
 (function () {
     class InputSwitchController {
-        constructor($scope, stateTree) {
+        constructor($scope) {
             $.extend(this,{
                 $scope,
             });
-
-            $scope.stateTree = stateTree;
         }
 
         toggle() {
@@ -25,6 +23,7 @@
         controllerAs: 'inputSwitch',
         bindings: {
             model: '=',
+            theme: '<',
         },
     });
 }());
