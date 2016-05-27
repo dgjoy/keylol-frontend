@@ -17,18 +17,12 @@
             this.tabArray = [
                 {
                     name: 'Steam 机器人',
-                    click: () => {
-                    },
                 },
                 {
                     name: '网页 API',
-                    click: () => {
-                    },
                 },
                 {
                     name: '口令组合',
-                    click: () => {
-                    },
                 },
             ];
             this.currentWay = 0;
