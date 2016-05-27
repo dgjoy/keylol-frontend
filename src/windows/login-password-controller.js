@@ -121,7 +121,6 @@
                                 notification.error('发生未知错误，请重试或与站务职员联系');
                         }
                     } else {
-                        console.log(124);
                         notification.error('发生未知错误，请重试或与站务职员联系', response);
                     }
                     this.geetestResult = null;

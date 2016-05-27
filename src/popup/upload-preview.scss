@@ -1,0 +1,30 @@
+.popup-upload-preview {
+  @include keylol-shadow-3;
+  @include grow-shrink-self;
+  min-width: 416px;
+  z-index: 1000;
+  background-color: $keylol-card;
+  border-radius: 2px;
+  padding: 20px;
+  box-sizing: border-box;
+
+  .images {
+    margin-bottom: 20px;
+
+    .as-background {
+      width: 400px;
+      height: 126px;
+      background: no-repeat center;
+      background-size: cover;
+    }
+  }
+
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+
+    raised-button {
+      margin-left: 20px;
+    }
+  }
+}

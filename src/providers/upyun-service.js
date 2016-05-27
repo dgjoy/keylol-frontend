@@ -29,6 +29,7 @@
                             policy,
                             signature,
                         },
+                        headers: { Authorization: undefined },
                         withCredentials: false,
                     });
                 };

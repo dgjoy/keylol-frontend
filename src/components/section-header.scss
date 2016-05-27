@@ -7,18 +7,12 @@ section-header {
     margin: 0;
   }
 
-  a {
+  .wrapper {
     display: flex;
     align-items: center;
     padding-right: 10px;
     padding-top: 10px;
     padding-bottom: 10px;
-
-    &:hover {
-      .main-title {
-        text-decoration: underline;
-      }
-    }
 
     &.theme {
       .logo {
@@ -66,5 +60,9 @@ section-header {
         color: $keylol-inertia-text;
       }
     }
+  }
+
+  a:hover  .main-title {
+    text-decoration: underline;
   }
 }

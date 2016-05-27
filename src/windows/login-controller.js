@@ -1,12 +1,13 @@
 ﻿(function () {
     class LoginController {
         constructor($scope, $http, close, utils, union, apiEndpoint, window,
-                    $element, $timeout, $httpParamSerializerJQLike) {
+                    notification, $timeout, $httpParamSerializerJQLike) {
             $.extend(this,{
                 $http,
                 union,
                 apiEndpoint,
                 window,
+                notification,
                 $timeout,
                 $httpParamSerializerJQLike,
                 close,
@@ -219,7 +220,7 @@
                         },
                     }).then(response => {
                         this.union.$localStorage.Authorization = response.data.access_token;
-                        console.log('登录成功');
+                        this.notification.success({ message: '登录成功' });
                         this.close();
                     }, response => {
                         if (response.status === 400 && response.data.error) {
@@ -235,10 +236,8 @@
                                     pwm.completed.password = false;
                                     break;
                                 default:
-                                    console.log('发生未知错误，请重试或与站务职员联系');
+                                    this.notification.error({ message: '发生未知错误，请重试或与站务职员联系' });
                             }
-                        } else {
-                            console.log(124);
                         }
                         pwm.geetestResult = null;
                         geetest.refresh().then(useGeetestResult);

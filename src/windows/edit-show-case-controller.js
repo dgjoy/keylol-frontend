@@ -72,6 +72,12 @@
                         item,
                     },
                 },
+            }).then(window => {
+                return window.close;
+            }).then(result => {
+                if (result) {
+                    $.extend(item, result);
+                }
             });
         }
     }

@@ -139,7 +139,7 @@ $keylol-topic: #7976b1;
 @mixin grow-shrink-self {
   &.ng-enter {
     transform-origin: center;
-    animation: scale-y-grow 800ms cubic-bezier(0.19, 1, 0.22, 1);
+    animation: scale-y-grow 600ms cubic-bezier(0.19, 1, 0.22, 1);
   }
 
   &.ng-leave {
@@ -151,7 +151,7 @@ $keylol-topic: #7976b1;
 @mixin grow-shrink-child ($child: window) {
   &.ng-enter {
     opacity: 0;
-    transition: opacity 800ms cubic-bezier(0.19, 1, 0.22, 1);
+    transition: opacity 600ms cubic-bezier(0.19, 1, 0.22, 1);
 
     &.ng-enter-active {
       opacity: 1;
@@ -159,7 +159,7 @@ $keylol-topic: #7976b1;
 
     .#{$child} {
       transform-origin: center;
-      animation: scale-y-grow 800ms cubic-bezier(0.19, 1, 0.22, 1);
+      animation: scale-y-grow 600ms cubic-bezier(0.19, 1, 0.22, 1);
     }
   }
 
@@ -194,7 +194,7 @@ $keylol-topic: #7976b1;
       opacity: 1;
       transform: scale(1, 1);
 
-      menu > * {
+      #{$card} > * {
         opacity: 1;
       }
     }
