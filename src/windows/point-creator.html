@@ -1,0 +1,37 @@
+﻿<window position="center" class="window-point-creator">
+    <div class="window">
+        <div class="header">
+            <div class="text">
+                <p>开设新据点</p>
+                <p>按照主题选择据点类型</p>
+            </div>
+            <img src="assets/images/point-creating-bulb.png">
+        </div>
+        <tabs tab-array="::pointCreator.tabArray" cur-tab="pointCreator.currentType" click-handler="pointCreator.changeType(index)"></tabs>
+        <div class="point-creator-wrapper" ng-class="{'to-next' : pointCreator.isToNext,'to-previous' : !pointCreator.isToNext}">
+            <div class="swap-animation" ng-animate-swap="pointCreator.currentType">
+                <div ng-if="pointCreator.currentType === 0">
+                    <tabs class="invert" invert="true" tab-array="pointCreator.gameTabArray" cur-tab="pointCreator.currentGameType" click-handler="pointCreator.changeType(index, true)"></tabs>
+                    <div class="swap-animation game-wrapper" ng-animate-swap="pointCreator.currentGameType">
+                        <form ng-if="pointCreator.currentGameType === 0">
+                            <div class="steam-game">
+                                <text-area class="app-id" state="pointCreator.steamExpanded? 'disabled': 'normal'" type="text" label="Steam 商店地址" tip="'也可以只填商店的数字 App ID'"></text-area>
+                            </div>
+                            <div class="actions">
+                                <flat-button type="inertia" text="放弃" click="pointCreator.close()"></flat-button>
+                                <raised-button ng-if="!pointCreator.steamExpanded" type="theme" text="抓取" click="pointCreator.steamCapture()"></raised-button>
+                                <raised-button ng-if="pointCreator.steamExpanded" type="theme" text="开设"></raised-button>
+                            </div>
+                        </form>
+                        <form ng-if="pointCreator.currentGameType === 1">
+                            <div class="actions">
+                                <flat-button type="inertia" text="放弃" click="pointCreator.close()"></flat-button>
+                                <raised-button type="theme" text="开设"></raised-button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</window>

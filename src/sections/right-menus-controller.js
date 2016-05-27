@@ -1,6 +1,6 @@
 ﻿(function () {
     class RightMenusController {
-        constructor ($scope, $element, $window, stateTree) {
+        constructor ($scope, $element, $window, stateTree, window) {
             $.extend(this, {
                 stateTree,
             });
@@ -52,6 +52,14 @@
                         type: 'item',
                         icon: 'map',
                         text: '开设新据点',
+                        clickAction (event) {
+                            window.show({
+                                event,
+                                templateUrl: 'src/windows/point-creator.html',
+                                controller: 'PointCreatorController',
+                                controllerAs: 'pointCreator',
+                            });
+                        },
                     },
                     {
                         type: 'item',

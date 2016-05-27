@@ -6,9 +6,9 @@
             });
         }
 
-        clickAction() {
+        clickAction($event) {
             if (this.data.clickAction !== undefined)
-                this.data.clickAction();
+                this.data.clickAction($event);
         }
     }
 
