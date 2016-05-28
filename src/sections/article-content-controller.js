@@ -6,49 +6,19 @@
                 union,
                 $http,
                 notification,
-                article: union.article,
             });
-        }
-        acknowledge () {
-            this.$http.post(`${this.apiEndpoint}like`, {
-                TargetId: this.article.Id,
-                Type: 'ArticleLike',
-            }).then(response => {
-                if (response.data === 'Free') {
-                    this.notification.success('认可已生效，每日发出的前 5 个认可不会消耗文券');
-                } else {
-                    this.notification.success('认可已生效');
-                    if (this.union.getUnreadLogs) {
-                        this.union.getUnreadLogs();
-                    }
-                }
-            }, response => {
-                this.article.LikeCount -= 1;
-                this.article.Liked = false;
-                if (response.status === 401) {
-                    this.notification.error('现有文券数量不足，无法发出认可');
-                } else {
-                    this.notification.error('认可失败', response);
-                }
-            });
-            this.article.Liked = true;
-            this.article.LikeCount += 1;
-        }
-        cancelAcknowledge () {
-            this.$http.delete(`${this.apiEndpoint}like`, {
-                params: {
-                    targetId: this.article.Id,
-                    type: 'ArticleLike',
-                },
-            }).then(() => {
-                this.notification.success('此认可已被撤销');
-            }, response => {
-                this.article.Liked = true;
-                this.article.LikeCount += 1;
-                this.notification.error('取消认可失败', response);
-            });
-            this.article.Liked = false;
-            this.article.LikeCount -= 1;
+
+            this.article = {
+                content: `<h1><b>标题1</b></h1>
+                <p>头一次接触步行模拟类型的游戏是无意间玩到的Dear Esther。大概两个小时的游戏流程完结后，我满脑子只充斥着一个问题：我到底玩了个啥？尽管贴图精致、场景氛围上佳，但没有任何互动、从头到尾就是男主角一边用低沉的嗓音念着大段大段令人昏昏欲睡的独白一边在某小岛上散步……Dear Esther让我对这个类型的游戏产生了先入为主的排斥：连一点代入感都找不到的游戏，我干嘛不花两个小时去看场电影？</p>
+                <p><img webp-src="//storage.keylol.com/51864f55bb59dc9c96401e88a240b7e7.jpg"><br></p>
+                <p style="text-align: center"><i>剧情中通过字条表现的另一条暗线</i></p>
+                <blockquote><p>英雄设计的矫枉过正</p></blockquote>
+                <spoiler>
+                    <div class="content"><p>剧透内容</p></div>
+                </spoiler>
+                <p>总而言之</p>`,
+            };
         }
     }
 

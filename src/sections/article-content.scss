@@ -1,84 +1,58 @@
-.section-article-content {
-    background: white;
-    padding: 26px 26px 18px;
-    width: 100%;
-    min-width: 300px;
-}
+article-content {
+  @include keylol-shadow-1();
+  display: block;
+  padding: 15px;
+  background-color: $keylol-card;
 
-.section-article-content.archive {
-    padding: 0;
-}
+  article {
+    h1 {
+      margin: 25px 0 10px;
+      font-size: 20px;
+      font-weight: bold;
+      color: $keylol-theme;
+      &::before {
+        content: ">";
+        font-family: "Keylol Rail Sung", serif;
+        margin-right: 6px;
+        font-size: 20px;
+      }
+    }
 
-.section-article-content .editor-style.is-short {
-    white-space: pre-wrap;
-}
+    p {
+      margin:0 0 16px;
+      word-wrap: break-word;
+      line-height: 1.6em;
+      font-size: 16px;
+      color: $keylol-main-text;
+    }
 
-.section-article-content .share-actions {
-    text-align: center;
-    padding: 20px 0 2px;
-}
+    img {
+      vertical-align: middle;
+      margin-left:-15px;
+      width: calc(100% + 30px);
+    }
 
-.section-article-content .share-actions p {
-    margin: 0;
-    font-weight: bold;
-    font-size: 17px;
-    color: $keylol-theme;
-}
+    i {
+      position: relative;
+      top: -16px;
+      
+      color: $keylol-inertia-text;
+      font-size: 14px;
+      font-style: italic;
+    }
 
-.section-article-content .share-actions a {
-    color: $keylol-highlight;
-}
+    blockquote {
+      @include keylol-shadow-1();
+      background-color: $keylol-inverted-text;
+      padding: 20px 15px;
+      margin: 0 0 16px;
+      &>:last-child {
+        margin-bottom: 0 !important;
+      }
+    }
 
-.section-article-content.archive h1,
-.section-article-content.archive h3 {
-    margin: 0;
-    font-weight: normal;
-}
-
-.section-article-content.archive h1 {
-    font-size: 24px;
-}
-
-.section-article-content.archive h3 {
-    font-size: 13px;
-}
-
-.section-article-content .archive-left {
-    vertical-align: middle;
-    display: inline-block;
-    padding: 20px 17px;
-    width: 344px;
-}
-
-.section-article-content .archive-left h1 {
-    color: $keylol-theme;
-}
-
-.section-article-content .archive-middle {
-    vertical-align: middle;
-    display: inline-block;
-    border-right: $keylol-theme 57px solid;
-    border-bottom: $keylol-theme 43px solid;
-    border-left: transparent 57px solid;
-    border-top: transparent 43px solid;
-}
-
-.section-article-content .archive-right {
-    vertical-align: middle;
-    display: inline-block;
-    padding: 11px 17px;
-    background-color: $keylol-theme;
-    width: 344px;
-    text-align: right;
-    color: #fff;
-}
-
-.section-article-content .archive-right img {
-    float: right;
-    width: 64px;
-    padding-left: 10px;
-}
-
-.section-article-content .archive-right h1 {
-    margin-top: 8px;
+    spoiler {
+      margin-bottom: 16px;
+    }
+  }
 }

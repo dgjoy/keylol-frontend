@@ -1,47 +1,78 @@
 spoiler {
-    white-space: normal;
-}
+  white-space: normal;
 
-spoiler.actionable {
+  &.actionable {
+    @include keylol-shadow-1();
     cursor: pointer;
-    background: #fafaf9;
-}
+    display: block;
+    background: $keylol-inverted-text;
 
-spoiler.actionable:hover .simditor-icon-eye-slash:before {
-    content: "\f028";
-}
+    &:hover .simditor-icon-eye-slash:before {
+      content: "\f028";
+    }
 
-spoiler.actionable.expanded {
-    cursor: auto;
-    background: transparent;
-    transition: 2s ease-in-out;
-}
+    &.expanded {
+      cursor: auto;
+      border-left: 5px solid $keylol-light-theme;
+      border-right: 5px solid $keylol-light-theme;
+      padding: 20px 10px;
 
-spoiler .content {
-    display: none;
-}
+      &>:last-child {
+        margin-bottom: 0 !important;
+      }
+    }
 
-spoiler .hint {
-    margin: 0;
-}
+    .content {
+      display: none;
+    }
 
-spoiler .hint h2 {
-    color: #e30613;
-    font-weight: normal;
-    margin: 6px 0px 2px;
-    font-size: 22px;
-}
+    .hint {
+      display: flex;
+      height: 80px;
 
-spoiler .hint h3 {
-    color: #333;
-    font-weight: normal;
-    margin: 0 0 3px;
-    font-size: 15px;
-}
+      .text {
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
 
-spoiler .hint span {
-    float: right;
-    font-size: 43px;
-    margin-top: 2px;
-    color: #e30613;
+        h2 {
+          color: $keylol-light-theme;
+          margin: 0;
+          font-weight: normal;
+          font-size: 20px;
+        }
+
+        h3 {
+          color: $keylol-main-text;
+          margin: 0;
+          font-size: 14px;
+          font-weight: normal;
+        }
+      }
+
+      .icons {
+        padding: 20px 10px;
+        background-color: $keylol-light-theme;
+        flex-grow: 0;
+        display: flex;
+
+        .simditor-icon,
+        .simditor-icon-eye-slash {
+          font-size: 43px;
+          padding: 0 20px;
+          color: $keylol-inverted-text;
+        }
+
+        .point-icon {
+          height: 40px;
+          width: auto;
+          margin: 0;
+          border-left: 1px solid $keylol-inverted-text;
+          padding: 0 20px;
+        }
+      }
+    }
+  }
 }
