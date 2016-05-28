@@ -46,6 +46,7 @@
         bindings: {
             card: '<',
             bottomType: '<',
+            theme: '<',
         },
     });
 }());

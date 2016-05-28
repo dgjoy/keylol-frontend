@@ -27,4 +27,4 @@
 
 <dropdown ng-if="textArea.type === 'dropdown'" items="['请选择游戏平台','Steam','暂不选择游戏平台']" model="textArea.model"></dropdown>
 
-<div class="tip {{textArea.warnState?'warn':textArea.activeState?'theme':''}}">{{textArea.tip}}</div>
+<div class="tip {{textArea.warnState?'warn':textArea.activeState?'theme':''}}">{{textArea.warnState?textArea.error:textArea.tip}}</div>

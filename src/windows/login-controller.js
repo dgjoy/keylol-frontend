@@ -1,7 +1,7 @@
 ﻿(function () {
     class LoginController {
         constructor($scope, $http, close, utils, union, apiEndpoint, window,
-                    notification, $timeout, $httpParamSerializerJQLike) {
+                    notification, $timeout, $httpParamSerializerJQLike, startPage) {
             $.extend(this,{
                 $http,
                 union,
@@ -12,6 +12,7 @@
                 $httpParamSerializerJQLike,
                 close,
                 utils,
+                startPage,
             });
 
             this.tabArray = [
@@ -25,8 +26,18 @@
                     name: '口令组合',
                 },
             ];
-            this.currentWay = 0;
+            this.currentWay = startPage;
             this.swapDirection = 'init';
+
+            //robot
+            this.steamRobotWayManager = {
+                phaseIndex: 1,
+            };
+
+            //api
+            this.apiWayManager = {
+                phaseIndex: 0,
+            };
 
             //passcode 方式
             this.passcodeWayManager = {
@@ -40,13 +51,13 @@
                 }],
                 curPage: 0,
                 forms: [[
-                    { label: '用户识别码', type: 'uic' },
+                    { label: '用户识别码', type: 'uic' ,tip:'注册时定义的五位代码' },
                     { label: '登录口令', type: 'password' },
                 ], [
-                    { label: '昵称', type: 'text' },
+                    { label: '昵称', type: 'text', tip:'请输入昵称' },
                     { label: '登录口令', type: 'password' },
                 ], [
-                    { label: '电邮地址', type: 'text' },
+                    { label: '电邮地址', type: 'text', tip:'请输入邮件' },
                     { label: '登录口令', type: 'password' },
                 ]],
                 errorDetect: utils.modelErrorDetect,
@@ -59,17 +70,19 @@
                     geetest_seccode: '',
                     geetest_validate: '',
                 },
+                id_code: {
+                    state: 'normal',
+                    error: '',
+                    completed: '',
+                },
+                password: {
+                    state: 'normal',
+                    error: '',
+                    completed: '',
+                },
                 state: {
                     id_code: 'normal',
                     password: 'normal',
-                },
-                tip: {
-                    id_code: '',
-                    password: '',
-                },
-                completed: {
-                    id_code: false,
-                    password: false,
                 },
             };
 
@@ -80,46 +93,40 @@
                  switch (this.passcodeWayManager.curPage) {
                      case 0:
                          if (newValue.length === 0) {
-                             this.passcodeWayManager.state.id_code = 'normal';
-                             this.passcodeWayManager.tip.id_code = '注册时定义的五位代码';
-                             this.passcodeWayManager.completed.id_code = false;
+                             this.passcodeWayManager.id_code.state = 'normal';
+                             this.passcodeWayManager.id_code.completed = false;
                          } else if (!/^[a-zA-Z0-9]{5}$/.test(newValue)) {
-                             this.passcodeWayManager.state.id_code = 'warn';
-                             this.passcodeWayManager.tip.id_code = 'UIC 只可能是 5 位的字母 / 数字代码';
-                             this.passcodeWayManager.completed.id_code = false;
+                             this.passcodeWayManager.id_code.state = 'warn';
+                             this.passcodeWayManager.id_code.error = 'UIC 只可能是 5 位的字母 / 数字代码';
+                             this.passcodeWayManager.id_code.completed = false;
                          } else {
-                             this.passcodeWayManager.state.id_code = 'normal';
-                             this.passcodeWayManager.tip.id_code = '注册时定义的五位代码';
-                             this.passcodeWayManager.completed.id_code = true;
+                             this.passcodeWayManager.id_code.state = 'normal';
+                             this.passcodeWayManager.id_code.completed = true;
                          }
                          break;
                      case 1:
                          if (newValue.length === 0) {
-                             this.passcodeWayManager.state.id_code = 'normal';
-                             this.passcodeWayManager.tip.id_code = '请输入ID';
-                             this.passcodeWayManager.completed.id_code = false;
+                             this.passcodeWayManager.id_code.state = 'normal';
+                             this.passcodeWayManager.id_code.completed = false;
                          } else if (newValue.length > 10) {
-                             this.passcodeWayManager.state.id_code = 'warn';
-                             this.passcodeWayManager.tip.id_code = '还没确定';
-                             this.passcodeWayManager.completed.id_code = false;
+                             this.passcodeWayManager.id_code.state = 'warn';
+                             this.passcodeWayManager.id_code.error = '还没确定';
+                             this.passcodeWayManager.id_code.completed = false;
                          } else {
                              this.passcodeWayManager.state.id_code = 'normal';
-                             this.passcodeWayManager.tip.id_code = '请输入ID';
                              this.passcodeWayManager.completed.id_code = true;
                          }
                          break;
                      case 2:
                          if (newValue.length === 0) {
-                             this.passcodeWayManager.state.id_code = 'normal';
-                             this.passcodeWayManager.tip.id_code = '请输入ID';
-                             this.passcodeWayManager.completed.id_code = false;
+                             this.passcodeWayManager.id_code.state = 'normal';
+                             this.passcodeWayManager.id_code.completed = false;
                          } else if (!/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(newValue)) {
-                             this.passcodeWayManager.state.id_code = 'warn';
-                             this.passcodeWayManager.tip.id_code = '错误的邮件格式';
-                             this.passcodeWayManager.completed.id_code = false;
+                             this.passcodeWayManager.id_code.state = 'warn';
+                             this.passcodeWayManager.id_code.error = '还没确定';
+                             this.passcodeWayManager.id_code.completed = false;
                          } else {
                              this.passcodeWayManager.state.id_code = 'normal';
-                             this.passcodeWayManager.tip.id_code = '请输入ID';
                              this.passcodeWayManager.completed.id_code = true;
                          }
                          break;
@@ -130,13 +137,11 @@
                 return this.passcodeWayManager.vm.password;
             },newValue => {
                 if (newValue.length === 0) {
-                    this.passcodeWayManager.state.password = 'normal';
-                    this.passcodeWayManager.tip.password = '';
-                    this.passcodeWayManager.completed.password = false;
+                    this.passcodeWayManager.password.state = 'normal';
+                    this.passcodeWayManager.password.completed = false;
                 } else {
-                    this.passcodeWayManager.state.password = 'normal';
-                    this.passcodeWayManager.tip.password = '';
-                    this.passcodeWayManager.completed.password = true;
+                    this.passcodeWayManager.password.state = 'normal';
+                    this.passcodeWayManager.password.completed = true;
                 }
             });
         }
@@ -184,12 +189,10 @@
             pwm.vm.geetest_seccode = '';
             pwm.vm.geetest_validate = '';
 
-            pwm.state.id_code = 'normal';
-            pwm.state.password = 'normal';
-            pwm.tip.id_code = ['注册时定义的五位代码','请输入ID','请输入ID'][pwm.curPage];
-            pwm.tip.password = '';
-            pwm.completed.id_code = false;
-            pwm.completed.password = false;
+            pwm.id_code.state = 'normal';
+            pwm.password.state = 'normal';
+            pwm.id_code.completed = false;
+            pwm.password.completed = false;
 
             const geetest = this.utils.createGeetest('popup');
             geetest.ready.then(gee => {
@@ -220,14 +223,14 @@
                         if (response.status === 400 && response.data.error) {
                             switch (response.data.error) {
                                 case 'user_non_existent':
-                                    pwm.tip.id_code = '没有这个用户的注册记录';
-                                    pwm.state.id_code = 'warn';
-                                    pwm.completed.id_code = false;
+                                    pwm.id_code.error = '没有这个用户的注册记录';
+                                    pwm.id_code.state = 'warn';
+                                    pwm.id_code.completed = false;
                                     break;
                                 case 'invalid_password':
-                                    pwm.tip.password = '密码有误，留意大写锁定是否开启';
-                                    pwm.state.password = 'warn';
-                                    pwm.completed.password = false;
+                                    pwm.password.error = '密码有误，留意大写锁定是否开启';
+                                    pwm.password.state = 'warn';
+                                    pwm.password.completed = false;
                                     break;
                                 default:
                                     this.notification.error({ message: '发生未知错误，请重试或与站务职员联系' });

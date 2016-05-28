@@ -25,6 +25,7 @@
                 templateUrl: 'src/windows/login.html',
                 controller: 'LoginController',
                 controllerAs: 'login',
+                inputs: { startPage: 2 },
             });
         }
     }

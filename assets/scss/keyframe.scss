@@ -199,17 +199,21 @@
 @keyframes scale-y-grow {
   from {
     transform: scaleY(0);
+    opacity: 0;
   }
   to {
     transform: scaleY(1);
+    opacity: 1;
   }
 }
 
 @keyframes scale-y-shrink {
   from {
     transform: scaleY(1);
+    opacity: 1;
   }
   to {
     transform: scaleY(0);
+    opacity: 0;
   }
 }

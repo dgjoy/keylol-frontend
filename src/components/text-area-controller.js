@@ -39,6 +39,7 @@
             model:'=',
             state:'<',//normal,warn,disabled
             tip:'<',
+            error:'<',
             theme:'<',
         },
     });

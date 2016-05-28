@@ -3,7 +3,7 @@
     <review-with-text review="gameGuideCard.card.averageRating"></review-with-text>
 </a>
 <div class="point-img" ng-class="{user:gameGuideCard.bottomType === 'user'}" webp-background="{{gameGuideCard.card.titleCoverImage | uriRelocate}}"></div>
-<div class="characteristic-container" ng-style="{'background-color':stateTree.pointTheme.light}">
+<div class="characteristic-container" ng-style="{'background-color':gameGuideCard.theme.light}">
     <a href="" ng-mouseenter="gameGuideCard.showTooltip($event,$index)" popup="gameGuideCard.showTooltipPopup[$index]" class="characteristic" ng-repeat="characteristic in gameGuideCard.characteristics">
         <svg aria-hidden="true">
             <use ng-href="{{characteristic.icon | iconSvgUrl }}" xlink:href=""></use>
@@ -39,6 +39,6 @@
     <img class="avatar" webp-src="//storage.keylol.com/fd0dfd38572adff068251606aa282b3f.jpg!avatar.medium" alt="NPC之舟" />
     <div class="name-group">
         <p>hank</p>
-        <p ng-style="{color:stateTree.pointTheme.light}">在档 24 小时</p>
+        <p ng-style="{color:gameGuideCard.theme.light}">在档 24 小时</p>
     </div>
 </div>
