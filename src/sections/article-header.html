@@ -1,71 +1,26 @@
-﻿<div class="section-article-header box-shadowed" ng-class="{archive: articleHeader.article.TypeName === '封'||articleHeader.article.Archived !== 'None'}">
-    <h1 class="labeled-heading">
-        <span ng-if="articleHeader.article.TypeName !== '封'" class="time" am-time-ago="articleHeader.article.PublishTime"></span>
-        <span ng-if="articleHeader.article.TypeName === '封'" class="time" >N/A</span>
-        <span class="entry-type font-myriad-keylol">{{articleHeader.article.TypeName}}</span>
-        <span class="title">{{articleHeader.article.TypeName !== '封'?articleHeader.article.Title:"文章已被封存"}}</span>
-        <vote-circle ng-if="articleHeader.article.Vote" vote="articleHeader.article.Vote" disabled="articleHeader.article.Archived !== 'None'"></vote-circle>
-        <span class="error" ng-if="articleHeader.article.Archived && articleHeader.article.TypeName !== '封' && articleHeader.article.Archived !== 'None'">[封存中]</span>
-    </h1>
-    <div ng-if="articleHeader.article.TypeName !== '封'" popup="articleHeader.showModerationPopup" class="related-info clearfix">
-        <span class="actions" ng-if="articleHeader.article.canEdit">
-            <a href="" ng-if="articleHeader.article.Archived === 'None'" ng-click="articleHeader.moderateArticle($event, 'Archived')">封存</a><a ng-if="articleHeader.article.Archived === 'User' || (articleHeader.article.Archived === 'Operator' && articleHeader.union.$localStorage.user.StaffClaim === 'operator')" href="" ng-click="articleHeader.moderateArticle($event, 'Archived', true)">撤销封存</a>|<!--
-            --><span ng-if="articleHeader.union.$localStorage.user.StaffClaim === 'operator'"><a href="" ng-click="articleHeader.moderateArticle($event, 'Rejected', articleHeader.article.Rejected)">{{articleHeader.article.Rejected?"撤销":""}}退稿</a>|</span><!--
-            --><span ng-if="articleHeader.union.$localStorage.user.StaffClaim === 'operator'"><a href="" ng-click="articleHeader.moderateArticle($event, 'Warned', articleHeader.article.Warned)">{{articleHeader.article.Warned?"撤销":""}}警告</a>|</span><!--
-            --><span ng-if="articleHeader.union.$localStorage.user.StaffClaim === 'operator' || articleHeader.article.Spotlight"><a href="" ng-click="articleHeader.moderateArticle($event, 'Spotlight', articleHeader.article.Spotlight)">{{articleHeader.article.Spotlight?"撤销":""}}萃选</a>|</span><!--
-            --><a href="" ng-click="articleHeader.editArticle()">编辑</a>
-        </span>
-        <span class="points" ng-if="articleHeader.article.TypeName != '评' && articleHeader.article.TypeName != '简评'">
-            <point-link ng-repeat="point in articleHeader.article.AttachedPoints track by point.Id" type="'point'" id-code="point.IdCode" point-name="'「' + articleHeader.utils.getPointFirstName(point) + '」'"></point-link>
-        </span>
-        <span class="points" ng-if="(articleHeader.article.TypeName === '评' || articleHeader.article.TypeName === '简评') && articleHeader.article.VoteForPoint">
-            <point-link type="'point'" id-code="articleHeader.article.VoteForPoint.IdCode" point-name="'「' + articleHeader.utils.getPointFirstName(articleHeader.article.VoteForPoint) + '」'"></point-link>
-        </span>
+﻿<div class="fake-left"></div>
+<div class="fake-right"></div>
+<div class="title">
+    <div class="name-group">
+        <p>文章的标题</p>
+        <p>文章的副标题</p>
     </div>
-    <div class="review-info clearfix" ng-if="articleHeader.article.TypeName === '评' && articleHeader.article.TypeName !== '封'">
-        <div class="info-attribute">
-            <div class="info-attribute">
-                <p ng-if="articleHeader.point.DeveloperPoints.length > 0">
-                    <span class="title">开发厂 ：</span>
-                    <point-link ng-repeat="point in articleHeader.point.DeveloperPoints" type="'point'" id-code="point.IdCode" point-name="'「' + articleHeader.utils.getPointFirstName(point) + '」'"></point-link>
-                </p>
-                <p ng-if="articleHeader.point.PublisherPoints.length > 0">
-                    <span class="title">发行商 ：</span>
-                    <point-link ng-repeat="point in articleHeader.point.PublisherPoints" type="'point'" id-code="point.IdCode" point-name="'「' + articleHeader.utils.getPointFirstName(point) + '」'"></point-link>
-                </p>
-                <p ng-if="articleHeader.point.SeriesPoints.length > 0">
-                    <span class="title">系列 ：</span>
-                    <point-link ng-repeat="point in articleHeader.point.SeriesPoints" type="'point'" id-code="point.IdCode" point-name="'「' + articleHeader.utils.getPointFirstName(point) + '」'"></point-link>
-                </p>
-                <p ng-if="articleHeader.point.GenrePoints.length > 0">
-                    <span class="title">流派 ：</span>
-                    <point-link ng-repeat="point in articleHeader.point.GenrePoints" type="'point'" id-code="point.IdCode" point-name="'「' + articleHeader.utils.getPointFirstName(point) + '」'"></point-link>
-                </p>
-                <p ng-if="articleHeader.point.TagPoints.length > 0">
-                    <span class="title">特性 ：</span>
-                    <point-link ng-repeat="point in articleHeader.point.TagPoints" type="'point'" id-code="point.IdCode" point-name="'「' + articleHeader.utils.getPointFirstName(point) + '」'"></point-link>
-                </p>
-                <p ng-if="articleHeader.point.DisplayAliases">
-                    <span class="title">别名 ：</span>
-                    <span>{{articleHeader.point.DisplayAliases}}</span>
-                </p>
-                <p ng-if="articleHeader.point.ReleaseDate">
-                    <span class="title">面市 ：</span>
-                    <span>{{articleHeader.point.ReleaseDate | date: 'yyyy-MM-dd'}}</span>
-                </p>
-                <p ng-if="articleHeader.point.MajorPlatformPoints.length > 0">
-                    <span class="title">平台 ：</span>
-                    <point-link ng-repeat="point in articleHeader.point.MajorPlatformPoints" type="'point'" id-code="point.IdCode" point-name="'「' + articleHeader.utils.getPointFirstName(point) + '」'"></point-link>
-                </p>
-                <p ng-if="articleHeader.point.MinorPlatformPoints.length > 0">
-                    <span class="title">次要平台 ：</span>
-                    <point-link ng-repeat="point in articleHeader.point.MinorPlatformPoints" type="'point'" id-code="point.IdCode" point-name="'「' + articleHeader.utils.getPointFirstName(point) + '」'"></point-link>
-                </p>
-            </div>
-        </div>
+    <div class="action">
+        <icon-button icon="dots-vertical"></icon-button>
+        <p>昨天 7:51</p>
     </div>
 </div>
-<moderation-result ng-if="(articleHeader.article.Archived && articleHeader.article.Archived !== 'None') || articleHeader.article.TypeName === '封'" type="Archived"></moderation-result>
-<moderation-result ng-if="articleHeader.article.Rejected" type="Rejected"></moderation-result>
-<moderation-result ng-if="articleHeader.article.Warned" type="Warned"></moderation-result>
-<moderation-result ng-if="articleHeader.article.Spotlight" type="Spotlight"></moderation-result>
+<div class="moderation">
+    <div class="name-group">
+        <p class="font-myriad-lisong">萃选文章</p>
+        <p>由站务职员推荐的文章</p>
+    </div>
+    <img webp-src="assets/images/pss-logo.png">
+</div>
+<div class="moderation">
+    <div class="name-group">
+        <p class="font-myriad-lisong">这篇文章已被封存</p>
+        <p>封存后只有作者和站务职员可以看到文章内容</p>
+    </div>
+    <img webp-src="assets/images/css_logo.png">
+</div>

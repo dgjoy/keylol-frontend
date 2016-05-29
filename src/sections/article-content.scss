@@ -1,10 +1,71 @@
 article-content {
   @include keylol-shadow-1();
+  background-color: $keylol-inverted-text;
   display: block;
-  padding: 15px;
-  background-color: $keylol-card;
+
+  .other {
+    padding: 30px 15px;
+    .repost-declaration {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 25px;
+      border-bottom: 1px solid $keylol-inertia-shape;
+
+      .bundle {
+        p {
+          margin: 0;
+        }
+        p:first-of-type {
+          font-weight: bold;
+          color: $keylol-light-theme;
+        }
+        p:last-of-type {
+          color: $keylol-main-text;
+        }
+      }
+
+      .links {
+        display: flex;
+
+        a {
+          display: block;
+          margin-left: 25px;
+          width: 20px;
+          height: 20px;
+          svg {
+            width: 100%;
+            height: 100%;
+            fill:$keylol-inertia-shape;
+          }
+        }
+      }
+    }
+
+    .agree {
+      .action {
+        padding-top: 20px;
+        padding-bottom: 15px;
+        display: flex;
+        justify-content: center;
+      }
+      .agree-list {
+        display: flex;
+        justify-content: center;
+        img {
+          border-radius: 0;
+          width: 16px;
+          height: 16px;
+          margin: 0 5px;
+        }
+      }
+    }
+  }
 
   article {
+    @include keylol-shadow-1();
+    padding: 15px;
+    background-color: $keylol-card;
     h1 {
       margin: 25px 0 10px;
       font-size: 20px;
@@ -35,7 +96,6 @@ article-content {
     i {
       position: relative;
       top: -16px;
-      
       color: $keylol-inertia-text;
       font-size: 14px;
       font-style: italic;

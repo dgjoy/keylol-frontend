@@ -1,29 +1,45 @@
-﻿<div class="section-article-comments box-shadowed" ng-class="{archive: articleComments.article.TypeName === '封'}">
-    <h1 class="labeled-heading">{{articleComments.article.TypeName !== '封'?"共 " + articleComments.article.totalComments + " 则讨论":"封存文章的评论会被自动隐藏"}}</h1>
-    <comment-block comment="comment" article-archived="articleComments.article.Archived" on-reply="articleComments.reply(comment)" ng-if="articleComments.pageElements.currPage == 1 && articleComments.hotComments.length > 0 && articleComments.article.TypeName !== '封'" ng-repeat="comment in articleComments.hotComments track by comment.Id"></comment-block>
-    <div class="cut-off" ng-if="articleComments.pageElements.currPage == 1 && articleComments.hotComments.length > 0 && articleComments.article.TypeName !== '封'"></div>
-    <comment-block comment="comment" article-archived="articleComments.article.Archived" on-reply="articleComments.reply(comment)" ng-if="articleComments.article.TypeName !== '封'" ng-repeat="comment in articleComments.comments track by comment.Id"></comment-block>
-    <pagination ng-if="articleComments.article.TypeName !== '封'" total="articleComments.pageElements.totalPages" current="articleComments.pageElements.currPage" on-page-changed="articleComments.pageElements.changePage(oldPage, newPage)" page-href=""></pagination>
-    <form ng-if="articleComments.union.$localStorage.user && articleComments.article.TypeName !== '封'" ng-submit="articleComments.doComment()">
-        <point-link type="'user'" avatar-url="articleComments.union.$localStorage.user.AvatarImage" id-code="articleComments.union.$localStorage.user.IdCode"></point-link>
-        <button type="submit" class="border-button right-border" ng-disabled="articleComments.submitLock">发表评论</button>
-        <div class="textarea-container"><textarea placeholder="对作者的见解有什么见解？" ng-model="articleComments.comment.currentComment" focus-me="articleComments.textFocus"></textarea></div>
-    </form>
-    <div class="for-visitor" ng-if="!articleComments.union.$localStorage.user && articleComments.article.TypeName !== '封'">
-        <div class="avatar-anchor">
-            <img class="avatar" webp-src="{{articleComments.avatarUrl|avatarUrl}}" alt="头像">
-        </div>
-        <div class="textarea-container">
-            <div class="fake-textarea">
-                <div class="action-container">
-                    <a class="log-up" href="" ng-click="articleComments.showRegistrationWindow()">
-                        <img src="assets/images/steam-logo.png">
-                        <h4>通过 Steam 账户</h4>
-                        <h3 class="font-myriad-keylol">加入其乐社区</h3>
-                    </a>
-                    <a href="" class="log-in" ng-click="articleComments.showLoginSteamWindow()">已注册用户登录</a>
+﻿<div class="display">
+    <div class="count">
+        <p>共 17 则讨论</p>
+        <p>最后回复于 17 分钟前</p>
+    </div>
+    <div class="comments">
+        <div class="comment" ng-repeat="comment in [1,2,3,4,5]">
+            <div class="basic-info">
+                <img class="avatar" webp-src="//storage.keylol.com/fd0dfd38572adff068251606aa282b3f.jpg!avatar.medium">
+                <div class="name-group">
+                    <p>npc之舟</p>
+                    <p>在档时间 1 小时</p>
+                </div>
+                <div class="action">
+                    <p><a href="">认可</a><a href="">回复</a></p>
+                    <p>昨天 7:51 / #{{comment}}</p>
                 </div>
             </div>
+            <div class="content">
+                你好,世界!
+            </div>
         </div>
+    </div>
+
+    <div class="footer clearfix"><pagination total="5" current="1"></pagination></div>
+</div>
+<div class="sender">
+    <div class="basic-info">
+        <img class="avatar" webp-src="//storage.keylol.com/fd0dfd38572adff068251606aa282b3f.jpg!avatar.medium">
+        <div class="name-group">
+            <p>npc之舟</p>
+            <p>在档时间 1 小时</p>
+        </div>
+        <div class="action">
+            <p>&nbsp</p>
+            <p>#18+</p>
+        </div>
+    </div>
+    <div class="editor">
+        富文本编辑器
+    </div>
+    <div class="clearfix">
+        <raised-button text="回复" type="theme"></raised-button>
     </div>
 </div>

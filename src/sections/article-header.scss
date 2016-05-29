@@ -1,98 +1,69 @@
-.section-article-header {
-    background: white;
-    padding: 15px 0;
-    width: 100%;
-    min-width: 870px;
-}
+article-header {
+  display: block;
+  margin-bottom: 30px;
+  .fake-left {
+    position: absolute;
+    left: 0;
+    width: calc(50% + 230px);
+    height: 80px;
+    background-color: $keylol-theme;
+  }
+  .fake-right {
+    position: absolute;
+    right: 0;
+    width: calc(50% - 490px);
+    height: 80px;
+    background-color: $keylol-theme;
+  }
 
-.section-article-header.archive {
-    padding: 20px 0;
-}
+  .name-group {
+    p {
+      margin: 0;
+      color: $keylol-inverted-text;
+    }
+    p:first-of-type {
+      font-size: 20px;
+    }
+  }
 
-.section-article-header h1 {
-    margin: 0;
-    padding-right: 13px;
-}
-
-.section-article-header.archive h1::after {
-    background-color: #ccc;
-}
-
-.section-article-header h1 .time {
-    color: #bbb;
-    float: right;
-    margin-left: 34px;
-}
-
-.section-article-header.archive h1 {
-    color: #ccc;
-}
-
-.section-article-header h1 .entry-type {
-    margin-right: 5px;
-    vertical-align: top;
-}
-
-.section-article-header.archive h1 .entry-type {
-    background-color: #ccc;
-}
-
-.section-article-header h1 .title {
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    display: inline-block;
-    max-width: 80%;
-    vertical-align: top;
-    margin-right: 5px;
-}
-
-.section-article-header h1 .error {
-    color: #e30613;
-}
-
-.section-article-header .related-info {
-    padding: 0 13px 0 8px;
-    line-height: 20px;
-    margin-top: 10px;
-}
-
-.section-article-header .related-info .points {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    display: block;
-}
-
-.section-article-header .related-info .actions {
-    color: #ccc;
-    float: right;
-    margin-left: 20px;
-}
-
-.section-article-header .actions a {
-    color: $keylol-highlight;
-    margin: 9px;
-}
-
-.section-article-header .actions > a:last-of-type {
-    margin-right: 0;
-}
-
-.section-article-header .review-info {
+  .title {
     position: relative;
-    margin: 19px 15px 0 19px;
-}
+    margin-bottom: 30px;
+    left: 0;
+    height: 80px;
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-.section-article-header .review-info .info-attribute p {
-    margin: 3px 0;
-    line-height: 23px;
-}
+    .name-group p:first-of-type {
+      font-weight: bold;
+    }
 
-.section-article-header .review-info .info-attribute .title {
-    font-weight: bold;
-}
+    .action {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      p {
+        margin: 0;
+        color: $keylol-inverted-text;
+      }
+    }
+  }
 
-.section-article-header .review-info .info-attribute a {
-    color: $keylol-highlight;
+  .moderation {
+    @include keylol-shadow-1();
+    background-color: $keylol-light-theme;
+    margin-bottom: 20px;
+    height: 80px;
+    padding: 0 15px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    img {
+      width: 180px;
+    }
+  }
 }

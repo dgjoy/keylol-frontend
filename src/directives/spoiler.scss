@@ -7,8 +7,12 @@ spoiler {
     display: block;
     background: $keylol-inverted-text;
 
-    &:hover .simditor-icon-eye-slash:before {
-      content: "\f028";
+    &:hover>.hint>.icons>.eye-off{
+      display: none;
+    }
+
+    &:hover>.hint>.icons>.eye{
+      display: block;
     }
 
     &.expanded {
@@ -58,11 +62,19 @@ spoiler {
         flex-grow: 0;
         display: flex;
 
-        .simditor-icon,
-        .simditor-icon-eye-slash {
-          font-size: 43px;
+        .eye,
+        .eye-off {
+          width: 40px;
+          height: 40px;
           padding: 0 20px;
-          color: $keylol-inverted-text;
+          fill: $keylol-inverted-text;
+        }
+
+        .eye-off {
+          display: block;
+        }
+        .eye {
+          display: none;
         }
 
         .point-icon {
