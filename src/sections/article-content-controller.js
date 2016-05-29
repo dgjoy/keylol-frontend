@@ -15,7 +15,7 @@
                 <p style="text-align: center"><i>剧情中通过字条表现的另一条暗线</i></p>
                 <blockquote><p>英雄设计的矫枉过正</p></blockquote>
                 <spoiler>
-                    <div class="content"><p>剧透内容</p></div>
+                    <p>剧透内容</p>
                 </spoiler>
                 <p>总而言之</p>`,
             };

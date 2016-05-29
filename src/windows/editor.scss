@@ -1,151 +1,200 @@
-.window-editor .window {
-    padding: 20px 0 30px;
-    width: 884px;
-}
+.window-editor {
+  background-color: $keylol-background;
 
-.window-editor div[simditor] {
-    margin: 19px 14px 11px;
-}
+  .editor {
+    width: 1060px;
 
-.window-editor input[type=text],
-.window-editor input-point {
-    width: calc(100% - 28px);
-    box-sizing: border-box;
-    margin-left: 14px;
-}
+    .poster {
+      width: 100%;
+      height: 300px;
+      margin-bottom: 30px;
+      background: linear-gradient(to right, $keylol-inertia-shape 50%,$keylol-inertia-text 50%);
+      background-size: 100px 100%;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
 
-.window-editor .type-title {
-    position: relative;
-}
+      .titles {
+        position: relative;
+        padding: 20px 15px;
+        background-color: rgba($keylol-inverted-text, .85);
+        display: flex;
+        justify-content: space-between;
 
-.window-editor .article-type {
-    font-size: 19px;
-    background: $keylol-highlight no-repeat;
-    color: white;
-    position: absolute;
-    height: 100%;
-    width: 70px;
-    left: -5px;
-    cursor: pointer;
-    transition: background-color 100ms ease-in-out;
-}
+        .main-title {
+          width: 450px;
+        }
+        .sub-title {
+          width: 550px;
+        }
+      }
 
-.window-editor .article-type:hover {
-    background-color: #9AA8B7;
-}
+      raised-button {
+        position: absolute;
+        right: 20px;
+        top: 20px;
+      }
+    }
 
-.window-editor .article-type.expanded, .window-editor .article-type.expanded:hover {
-    background-color: $keylol-theme;
-}
+    .related-points {
+      padding: 0 15px;
+      margin-bottom: 30px;
+      .fake {
+        @include keylol-shadow-1();
+        position: absolute;
+        height: 150px;
+        left: 0;
+        width: 100%;
+        background-color: $keylol-card;
+      }
 
-.window-editor .article-type::after {
-    content: "";
-    display: block;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 8px;
-    height: 4px;
-    z-index: -1;
-    box-shadow: 0 0 2px #B8BABB;
-    transform: rotate(45deg);
-    transform-origin: bottom left;
-    background-color: #d9d9d9;
-}
+      .main-points {
+        position: relative;
+        padding-top: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
 
-.window-editor .article-type .expand-button {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
+        text-area {
+          width: 890px;
+        }
+      }
 
-.window-editor .article-type .expand-button a {
-    color: white;
-}
+      .sub-points {
+        position: relative;
+        text-area {
+          width: 100%;
+        }
+      }
 
-.window-editor .article-type + span {
-    display: block;
-    overflow: hidden;
-    padding: 2px 28px 2px 65px;
-}
+    }
 
-.window-editor .article-type + span input {
-    width: 100%;
-}
+    .edit-tools {
+      display: flex;
+      justify-content: space-between;
 
-.window-editor form h3 {
-    margin: 19px 0 11px 14px;
-    font-weight: normal;
-}
+      .main {
+        @include keylol-shadow-1();
+        background-color: $keylol-inverted-text;
+        width: 700px;
+        height: 100px;
+      }
 
-.window-editor .pad-right .left-content {
-    float: left;
-    width: calc(100% - 129px);
-}
+      .other {
+        width: 340px;
+        .card {
+          @include keylol-shadow-1();
+          background-color: $keylol-card;
+          padding: 20px 15px;
+          margin-bottom: 20px;
 
-.window-editor .pad-right .right-content {
-    float: right;
-    width: 129px;
-}
+          .toggle {
+            height: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
 
-.window-editor .pad-right .right-content point-review {
-    margin-left: 14px;
-    height: 31px;
-    position: relative;
-}
+            p {
+              margin: 0;
+              line-height: 16px;
+              color: $keylol-main-text;
+            }
+            svg {
+              width: 16px;
+              height: 16px;
+              transform: rotate(270deg);
+              transition: transform .3s ease-in;
+              fill: $keylol-inertia-shape;
 
-.window-editor .pad-right .right-content point-review div {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-}
+              &.opened {
+                transform: rotate(90deg);
+              }
+            }
+          }
 
-.window-editor .centre-parting .left-content {
-    float: left;
-    width: 50%;
-}
+          .good-bads {
+            height: 0;
+            overflow: hidden;
+            transition: height .3s ease-in;
 
-.window-editor .centre-parting .right-content {
-    float: right;
-    width: 50%;
-}
+            &.opened {
+              height: 542px;
+            }
 
-.window-editor .summary {
-    position: relative;
-}
+            .good-bad {
+              padding: 10px 0;
+              width: 100%;
+              &:first-of-type {
+                padding-top: 30px;
+              }
+            }
+          }
 
-.window-editor .summary span {
-    position: absolute;
-    top: 15px;
-    right: 14px;
-    color: #BBB;
-}
+          .repost-options {
+            height: 0;
+            overflow: hidden;
+            transition: height .3s ease-in;
 
-.window-editor .window-confirm-button {
-    margin-top: 40px;
-}
+            &.opened {
+              height: 200px;
+            }
 
-.window-editor .save-draft {
-    max-width: 570px;
-    padding-top: 44px;
-}
+            .hr {
+              height: 1px;
+              background-color: $keylol-inertia-shape;
+              margin-top: 9px;
+              margin-bottom: 10px;
+            }
 
-.window-editor .save-draft button {
-    margin-left: -5px;
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAAIVBMVEUAAAD////////////////+/v7+/v7+/v7+/v7+/v7///92EJ5ZAAAACnRSTlMAFCBAgI+fq7ffnxGb6AAAAEpJREFUeNrt0rEKACAIRdGyeqX//8G1BTZITQ3vDELCXaREFFMzq0nWlL2s66kMfJAB5JvAiYITAwZvQRenBQFuf+soDn69ElFoAjToFA1LQoTVAAAAAElFTkSuQmCC);
-    padding-left: 22px;
-}
+            .repost-option {
+              height: 20px;
+              padding: 10px 0;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
 
-.window-editor .save-draft span {
-    color: #bbb;
-    margin-left: 6px;
-}
+              &:first-of-type {
+                padding-top: 35px;
+              }
+              &:last-of-type {
+                padding-bottom: 5px;
+              }
 
-.window-editor .save-draft p {
-    margin: 14px 14px 0;
-}
+              p {
+                margin: 0;
+                color: $keylol-main-text;
+              }
+            }
+          }
 
-.window-editor .save-draft p a {
-    color: #8899aa;
+          &.send-card {
+            p {
+              margin: 0;
+            }
+            p:first-of-type {
+              color: $keylol-inertia-text;
+              font-style: italic;
+              a {
+                color: $keylol-highlight;
+                font-style: normal;
+                &:hover { text-decoration: underline; }
+              }
+            }
+            p:last-of-type {
+              color: $keylol-main-text;
+              .theme {
+                color: $keylol-light-theme;
+              }
+            }
+
+            raised-button {
+              float: right;
+              margin-top: 20px;
+            }
+          }
+        }
+      }
+    }
+  }
 }

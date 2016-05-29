@@ -66,6 +66,7 @@ article-content {
     @include keylol-shadow-1();
     padding: 15px;
     background-color: $keylol-card;
+
     h1 {
       margin: 25px 0 10px;
       font-size: 20px;
@@ -94,8 +95,6 @@ article-content {
     }
 
     i {
-      position: relative;
-      top: -16px;
       color: $keylol-inertia-text;
       font-size: 14px;
       font-style: italic;

@@ -31,12 +31,22 @@
                 cancelListenRoute();
             });
 
+
+            function showEditor() {
+                window.show({
+                    templateUrl: 'src/windows/editor.html',
+                    controller: 'EditorController',
+                    controllerAs: 'editor',
+                });
+            }
+
             this.writtingMenu = {
                 items: [
                     {
                         type: 'item',
                         icon: 'new-article',
                         text: '新文章',
+                        clickAction: showEditor,
                     },
                     {
                         type: 'item',
