@@ -26,8 +26,12 @@
                 return `//steamcdn.keylol.com/steam/apps/${match[1]}/header.jpg${suffix}`;
             if (match = input.match(/^keylol:\/\/steam\/app-capsules\/([^\/]*)$/i))
                 return `//steamcdn.keylol.com/steam/apps/${match[1]}/capsule_231x87.jpg${suffix}`;
-            if (match = input.match(/^keylol:\/\/steam\/app-icons\/(\d+)-([^\/]*)$/i))
-                return `//steamcdn.keylol.com/steamcommunity/public/images/apps/${match[1]}/${match[2]}.jpg${suffix}`;
+             if (match = input.match(/^keylol:\/\/steam\/app-icons\/(\d+)-([^\/]*)$/i))
+                 return `//steamcdn.keylol.com/steamcommunity/public/images/apps/${match[1]}/${match[2]}.jpg${suffix}`;
+             if (match = input.match(/^keylol:\/\/steam\/app-thumbnails\/(\d+)-([^\/]*)$/i))
+                 return `//steamcdn.keylol.com/steamcommunity/public/images/apps/${match[1]}/${match[2]}.jpg${suffix}`;
+            if (match = input.match(/^keylol:\/\/steam\/app-screenshots\/(\d+)-([^\/]*)$/i))
+                return `//steamcdn.keylol.com/steam/apps/${match[1]}/ss_${match[2]}.jpg${suffix}`;
             if (match = input.match(/^keylol:\/\/steam\/avatars\/([^\/]*)$/i))
                 return `//steamcdn.keylol.com/steamcommunity/public/images/avatars/${match[1].substring(0, 2)}/${match[1]}_full.jpg${suffix}`;
 

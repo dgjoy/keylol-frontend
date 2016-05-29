@@ -37,30 +37,120 @@
     }
 
     .point-creator-wrapper {
-      @include page-change('.swap-animation');
       position: relative;
-      height: 200px;
+      overflow: visible;
 
       .swap-animation {
         position: absolute;
+        width: 100%;
         top: 0;
         left: 0;
-        width: 100%;
-        height: 200px;
+        transition: transform 0.5s cubic-bezier(0.35, 0, 0.25, 1);
+        transform: translate3d(0, 0, 0);
 
-        &.game-wrapper {
-          top: 36px;
+        &.ng-leave {
+          transition: none;
+        }
+
+        &.swap-active {
+          position: relative;
+        }
+
+        &:not(.swap-active) {
+          animation: 1s swap-hide;
+          opacity: 0;
+
+          &.swap-left {
+            transform: translateX(-100%);
+          }
+
+          &.swap-right {
+            transform: translateX(100%);
+          }
+
+
+          * {
+            transition: visibility linear 0.5s 0s;
+            visibility: hidden;
+          }
         }
       }
 
+      .game-wrapper {
+        position: relative;
+        overflow: visible;
+      }
+
       form {
+        box-sizing: border-box;
         padding: 20px;
 
         .steam-game {
           display: flex;
+          justify-content: space-between;
+          overflow: hidden;
+          transition: max-height 0.5s cubic-bezier(0.35, 0, 0.25, 1);
+
+          .image-content {
+            margin-right: 20px;
+
+            .cover-wrapper {
+              margin-bottom: 30px;
+
+              img {
+                width: 184px;
+                height: 69px;
+              }
+            }
+
+            .avatar-wrapper {
+              > div {
+                height: 96px;
+                width: 70px;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: center;
+                align-content: space-between;
+
+                img {
+                  width: 48px;
+                  height: 48px;
+                  border-radius: 50%;
+                }
+
+                > div {
+                  width: 70px;
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+
+                  img {
+                    &:first-of-type {
+                      width: 32px;
+                      height: 32px;
+                    }
+
+                    &:last-of-type {
+                      width: 18px;
+                      height: 18px;
+                      border-radius: 0;
+                    }
+                  }
+                }
+              }
+            }
+
+            p {
+              color: $keylol-inertia-text;
+              margin: 0 0 10px;
+            }
+          }
         }
 
         text-area {
+          margin-bottom: 12px;
+
           &[type=text] {
             width: 400px;
 

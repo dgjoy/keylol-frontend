@@ -8,28 +8,49 @@
             <img src="assets/images/point-creating-bulb.png">
         </div>
         <tabs tab-array="::pointCreator.tabArray" cur-tab="pointCreator.currentType" click-handler="pointCreator.changeType(index)"></tabs>
-        <div class="point-creator-wrapper" ng-class="{'to-next' : pointCreator.isToNext,'to-previous' : !pointCreator.isToNext}">
-            <div class="swap-animation" ng-animate-swap="pointCreator.currentType">
-                <div ng-if="pointCreator.currentType === 0">
-                    <tabs class="invert" invert="true" tab-array="pointCreator.gameTabArray" cur-tab="pointCreator.currentGameType" click-handler="pointCreator.changeType(index, true)"></tabs>
-                    <div class="swap-animation game-wrapper" ng-animate-swap="pointCreator.currentGameType">
-                        <form ng-if="pointCreator.currentGameType === 0">
-                            <div class="steam-game">
-                                <text-area class="app-id" state="pointCreator.steamExpanded? 'disabled': 'normal'" type="text" label="Steam 商店地址" tip="'也可以只填商店的数字 App ID'"></text-area>
+        <div class="point-creator-wrapper">
+            <div class="swap-animation" ng-class="{'swap-left': pointCreator.currentType > 0, 'swap-active': pointCreator.currentType === 0}">
+                <tabs class="invert" invert="true" tab-array="pointCreator.gameTabArray" cur-tab="pointCreator.currentGameType" click-handler="pointCreator.changeType(index, true)"></tabs>
+                <div class="game-wrapper">
+                    <form class="swap-animation" ng-class="{'swap-left': pointCreator.currentGameType > 0, 'swap-active': pointCreator.currentGameType === 0}">
+                        <div class="steam-game" ng-style="{'max-height': pointCreator.steamHeight}">
+                            <div class="text-content">
+                                <text-area class="app-id" state="pointCreator.steamExpanded? 'disabled': 'normal'" type="text" label="Steam 商店地址" tip="'也可以只填商店的数字 App ID'" model="pointCreator.extra.SteamGame.link"></text-area>
+                                <div ng-show="pointCreator.steamExpanded">
+                                    <text-area type="text" label="外文名" tip="'也可以只填商店的数字 App ID'" model="pointCreator.vm.SteamGame.englishName"></text-area>
+                                    <text-area type="text" label="中文名" tip="'也可以只填商店的数字 App ID'" model="pointCreator.vm.SteamGame.chineseName "></text-area>
+                                    <text-area type="uic" label="据点识别码" tip="'也可以只填商店的数字 App ID'" model="pointCreator.vm.SteamGame.idCode"></text-area>
+                                </div>
                             </div>
-                            <div class="actions">
-                                <flat-button type="inertia" text="放弃" click="pointCreator.close()"></flat-button>
-                                <raised-button ng-if="!pointCreator.steamExpanded" type="theme" text="抓取" click="pointCreator.steamCapture()"></raised-button>
-                                <raised-button ng-if="pointCreator.steamExpanded" type="theme" text="开设"></raised-button>
+                            <div ng-show="pointCreator.steamExpanded" class="image-content">
+                                <div class="cover-wrapper">
+                                    <p>缩略图</p>
+                                    <img webp-src="{{pointCreator.extra.SteamGame.thumbnailImage | uriRelocate}}">
+                                </div>
+                                <div class="avatar-wrapper">
+                                    <p>头像</p>
+                                    <div>
+                                        <img webp-src="{{pointCreator.extra.SteamGame.avatarImage | uriRelocate}}">
+                                        <div>
+                                            <img webp-src="{{pointCreator.extra.SteamGame.avatarImage | uriRelocate}}">
+                                            <img webp-src="{{pointCreator.extra.SteamGame.avatarImage | uriRelocate}}">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </form>
-                        <form ng-if="pointCreator.currentGameType === 1">
-                            <div class="actions">
-                                <flat-button type="inertia" text="放弃" click="pointCreator.close()"></flat-button>
-                                <raised-button type="theme" text="开设"></raised-button>
-                            </div>
-                        </form>
-                    </div>
+                        </div>
+                        <div class="actions">
+                            <flat-button type="inertia" text="放弃" click="pointCreator.close()"></flat-button>
+                            <raised-button ng-if="!pointCreator.steamExpanded" type="theme" text="抓取" click="pointCreator.steamCapture()" disabled="pointCreator.captureLock"></raised-button>
+                            <raised-button ng-if="pointCreator.steamExpanded" type="theme" text="开设"></raised-button>
+                        </div>
+                    </form>
+                    <form class="swap-animation" ng-class="{'swap-right': pointCreator.currentGameType < 1, 'swap-active': pointCreator.currentGameType === 1}">
+                        <div class="actions">
+                            <flat-button type="inertia" text="放弃" click="pointCreator.close()"></flat-button>
+                            <raised-button type="theme" text="开设"></raised-button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
