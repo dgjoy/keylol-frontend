@@ -12,6 +12,9 @@
             this.activeState = false;
             this.disabledState = (this.state === 'disabled');
 
+            //为 point 设定的属性
+            this.pointCache = false;
+
             $scope.$watch(() => {
                 return this.state;
             }, newValue => {
@@ -27,6 +30,10 @@
         blur() {
             this.activeState = false;
         }
+
+        cacheHandler(isEmpty) {
+            this.pointCache = !isEmpty;
+        }
     }
 
     keylolApp.component('textArea', {
@@ -40,6 +47,7 @@
             state:'<',//normal,warn,disabled
             tip:'<',
             error:'<',
+            limit:'<',
             theme:'<',
         },
     });

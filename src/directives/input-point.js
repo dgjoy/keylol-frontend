@@ -6,13 +6,16 @@
                 restrict: 'E',
                 templateUrl: 'src/directives/input-point.html',
                 scope: {
-                    placeholder: '=',
-                    limit: '=',
-                    forbidden: '=',
-                    type: '=',
+                    limit: '<',
+                    state: '<',
+                    focusHandler: '&',
+                    blurHandler: '&',
+                    cacheHandler: '&',
                 },
                 require: 'ngModel',
                 link (scope, element, attrs, ngModel) {
+                    scope.data = '';
+
                     ngModel.$render = function () {
                         scope.pointArray = [];
                         if (ngModel.$viewValue) {
@@ -55,16 +58,30 @@
                     const $input = element.find('.input');
 
                     element.click(e => {
-                        if (e.target === $input[0] || $(e.target).is(element.find('.point-title'))) return;
-                        element.children('input').focus();
+                        if (e.target !== $input[0]) {
+                            $input.focus();
+                        }
+                        scope.focusHandler();
+                        scope.$apply();
                     });
 
                     $input.focus(() => {
                         $window.addEventListener('keydown', deleteKeyCallback, true);
                         scope.disWatchData = scope.$watch('data', newValue => {
+                            if (newValue.length === 0) {
+                                scope.cacheHandler({ isEmpty:true });
+                            } else {
+                                scope.cacheHandler({ isEmpty:false });
+                            }
+
                             if (scope.dataChangeTimeout) {
                                 $timeout.cancel(scope.dataChangeTimeout);
                             }
+
+                            if ( scope.pointArray.length >= scope.limit) {
+                                return;
+                            }
+
                             scope.dataChangeTimeout = $timeout(() => {
                                 if (scope.nowPopup) {
                                     scope.nowPopup.then(popup => {
@@ -73,32 +90,47 @@
                                 }
                                 $window.removeEventListener('keydown', union.keydownCallback, true);
                                 if (newValue) {
-                                    $http.get(`${apiEndpoint}normal-point/keyword/${encodeURIComponent(newValue)}`, {
-                                        params: { typeFilter: scope.type || '' },
-                                    }).then(response => {
-                                        const pointArray = response.data.length ? response.data : [];
-                                        scope.nowPopup = scope.showSelector({
-                                            templateUrl: 'src/popup/point-selector.html',
-                                            controller: 'PointSelectorController',
-                                            attachSide: 'bottom',
-                                            event: {
-                                                type: 'click',
-                                                currentTarget: element,
-                                            },
-                                            align: 'left',
-                                            offsetX: -8,
-                                            inputs: {
-                                                selected: 0,
-                                                pointArray,
-                                            },
-                                        });
-                                        scope.nowPopup.then(popup => {
-                                            return popup.close;
-                                        }).then(result => {
-                                            if (result) {
-                                                addPoint(result);
-                                            }
-                                        });
+                                    const response = {
+                                        data: [{
+                                            avatarImage: '//storage.keylol.com/e68a01e5abdfaf273f06fadf353450e4.jpg',
+                                            chineseName: '刺客信条',
+                                            englishName: 'AC',
+                                            Id: 'AC1',
+                                        },{
+                                            avatarImage: '//storage.keylol.com/e68a01e5abdfaf273f06fadf353450e4.jpg',
+                                            chineseName: '刺客信条2',
+                                            englishName: 'AC2',
+                                            Id: 'AC2',
+                                        },{
+                                            avatarImage: '//storage.keylol.com/e68a01e5abdfaf273f06fadf353450e4.jpg',
+                                            chineseName: '刺客信条3',
+                                            englishName: 'AC3',
+                                            Id: 'AC3',
+                                        }],
+                                    };
+
+                                    const pointArray = response.data.length ? response.data : [];
+                                    scope.nowPopup = scope.showSelector({
+                                        templateUrl: 'src/popup/point-selector.html',
+                                        controller: 'PointSelectorController as pointSelector',
+                                        attachSide: 'bottom',
+                                        event: {
+                                            type: 'click',
+                                            currentTarget: element,
+                                        },
+                                        align: 'left',
+                                        offsetX: -8,
+                                        inputs: {
+                                            selected: 0,
+                                            pointArray,
+                                        },
+                                    });
+                                    scope.nowPopup.then(popup => {
+                                        return popup.close;
+                                    }).then(result => {
+                                        if (result) {
+                                            addPoint(result);
+                                        }
                                     });
                                 }
                             }, 200);
@@ -111,21 +143,9 @@
                         }
                         $window.removeEventListener('keydown', deleteKeyCallback, true);
                         scope.disWatchData();
+                        scope.blurHandler();
+                        scope.$apply();
                     });
-
-                    scope.linkHover = function ($event, $index) {
-                        scope.pointArray[$index].showPointCard({
-                            templateUrl: 'src/popup/point-preview-card.html',
-                            controller: 'PointPreviewCardController',
-                            event: $event,
-                            attachSide: 'bottom',
-                            align: 'left',
-                            inputs: {
-                                idCode: scope.pointArray[$index].IdCode,
-                                type: 'point',
-                            },
-                        });
-                    };
 
                     function addPoint (result) {
                         let hasBeenExist = false;

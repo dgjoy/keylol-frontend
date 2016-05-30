@@ -1,10 +1,16 @@
 ﻿(function () {
     class EditorController {
-        constructor() {
+        constructor(close) {
+            $.extend(this,{
+                close,
+            });
+
             this.isSummaryOpened = false;
             this.isRepostOpened = false;
         }
-
+        exit() {
+            this.close();
+        }
         toggleSummary() {
             this.isSummaryOpened = !this.isSummaryOpened;
         }

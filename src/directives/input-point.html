@@ -1,10 +1,10 @@
-﻿<div ng-if="!forbidden">
-    <div popup="point.showPointCard" ng-mouseenter="linkHover($event, $index)" class="point-title" ng-repeat="point in pointArray track by point.Id"
-         ng-class="{selected: point.selected}" ng-click="selectPoint($index)">「{{point[point.PreferredName+"Name"] | maxLength: 10}}」<a href="" ng-click="deleteSelectorPoint($index)" class="delete">x</a></div>
+﻿<div class="wrapper" class="{{state}}">
+    <div class="point" ng-repeat="point in pointArray">
+        <img webp-src="{{::point.avatarImage | avatarUrl}}" alt="{{::point.names[0]}}">
+        <p>{{::point.chineseName}}</p>
+        <svg aria-hidden="true" ng-click="deleteSelectorPoint($index)">
+            <use ng-href="{{'close' | iconSvgUrl }}" xlink:href=""></use>
+        </svg>
+    </div>
+    <input class="input" type="text" popup="showSelector" ng-model="data">
 </div>
-<div ng-if="forbidden">
-    <div popup="point.showPointCard" ng-mouseenter="linkHover($event, $index)" class="point-title disabled" ng-repeat="point in pointArray track by point.Id"
-    >「{{point[point.PreferredName+"Name"] | maxLength: 10}}」</div>
-</div>
-<input ng-disabled="forbidden" ng-show="!(pointArray.length >= limit)" type="text" placeholder="{{pointArray.length ? '' : placeholder}}" ng-class="{'has-placeholder': !pointArray.length}"
-       class="input" popup="showSelector" ng-model="data">

@@ -15,6 +15,24 @@
       flex-direction: column;
       justify-content: flex-end;
 
+      .close {
+        position: absolute;
+        left: -120px;
+        top: 20px;
+        width: 100px;
+        display: flex;
+        justify-content: flex-end;
+        flat-button {
+          display: none;
+        }
+        
+        @media (min-width:1440px) {
+          flat-button {
+            display: block;
+          }
+        }
+      }
+
       .titles {
         position: relative;
         padding: 20px 15px;
@@ -43,7 +61,7 @@
       .fake {
         @include keylol-shadow-1();
         position: absolute;
-        height: 150px;
+        height: 180px;
         left: 0;
         width: 100%;
         background-color: $keylol-card;

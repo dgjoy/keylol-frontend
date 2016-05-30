@@ -1,6 +1,10 @@
 ﻿<window position="center" class="window-editor">
     <div class="editor">
         <div class="poster">
+            <div class="close">
+                <icon-button icon="chevron-left" ng-click="editor.exit()"></icon-button>
+                <flat-button text="退出写作" ng-click="editor.exit()"></flat-button>
+            </div>
             <raised-button text="设置封面" type="theme"></raised-button>
             <div class="titles">
                 <text-area class="main-title"
@@ -19,15 +23,17 @@
             <div class="fake"></div>
             <div class="main-points">
                 <text-area label="主要投稿"
-                           type="text"
-                           model="''"
+                           type="point"
+                           model="[]"
+                           limit="1"
                 ></text-area>
                 <flat-button type="theme" text="填充关联投稿"></flat-button>
             </div>
             <div class="sub-points">
                 <text-area label="关联投稿"
-                           type="text"
-                           model="''"
+                           type="point"
+                           model="[]"
+                           limit="10"
                 ></text-area>
             </div>
         </div>
