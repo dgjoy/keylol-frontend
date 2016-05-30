@@ -47,7 +47,10 @@ text-area {
     }
 
     &.warn {
-      padding-bottom: 9px;
+      input[type="text"],
+      input[type="password"] {
+        padding-bottom: 9px;
+      }
       border-color: $keylol-review-bad;
       border-bottom-width: 2px;
     }
