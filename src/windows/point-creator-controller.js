@@ -1,6 +1,6 @@
 ﻿(function () {
     class PointCreatorController {
-        constructor(close, $element, $animateCss, $timeout, $http, apiEndpoint, notification) {
+        constructor(close, $element, $animateCss, $timeout, $http, apiEndpoint, notification, window) {
             $.extend(this, {
                 close,
                 $element,
@@ -9,6 +9,7 @@
                 $http,
                 apiEndpoint,
                 notification,
+                window,
             });
 
             this.vm = {
@@ -150,6 +151,21 @@
 
         submit (type) {
             console.log(`${type} submit`);
+            this.close();
+            this.window.show({
+                templateUrl: 'src/windows/point-create-success.html',
+                controller: 'PointCreateSuccessController',
+                controllerAs: 'pointCreateSuccess',
+                inputs: {
+                    pointObject: {
+                        englishName: 'Dota 2',
+                        chineseName: '刀塔',
+                        idCode: 'DOTA2',
+                        avatarImage: '//storage.keylol.com/37ba4e25767b3b4c1417f4c625e88492.jpg',
+                        headerImage: 'http://dota2walls.com/wp-content/uploads/2015/01/shadow-from-the-dire-dota-2-wallpaper.png',
+                    },
+                },
+            });
         }
     }
 

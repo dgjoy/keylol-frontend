@@ -40,7 +40,7 @@
                             </div>
                         </div>
                         <div class="actions">
-                            <raised-button ng-if="!pointCreator.steamExpanded" type="theme" text="抓取" click="pointCreator.steamCapture()" disabled="pointCreator.captureLock"></raised-button>
+                            <raised-button ng-if="!pointCreator.steamExpanded" type="theme" text="抓取" click="pointCreator.steamCapture()" disabled="pointCreator.captureLock || !pointCreator.extra.SteamGame.link"></raised-button>
                             <raised-button ng-if="pointCreator.steamExpanded" click="pointCreator.submit('SteamGame')" disabled="pointCreator.submitLock || !(pointCreator.vm.SteamGame.englishName && pointCreator.vm.SteamGame.idCode.length === 5)" type="theme" text="开设"></raised-button>
                             <flat-button type="inertia" text="放弃" click="pointCreator.close()"></flat-button>
                         </div>
@@ -82,6 +82,7 @@
                             </div>
                         </div>
                         <div class="actions">
+                            <raised-button type="theme" text="开设" click="pointCreator.submit('OtherGame')"></raised-button>
                             <raised-button type="theme" text="开设" click="pointCreator.submit('OtherGame')" disabled="pointCreator.submitLock || !(pointCreator.vm.OtherGame.englishName && pointCreator.vm.OtherGame.headerImage && pointCreator.vm.OtherGame.avatarImage && pointCreator.vm.OtherGame.idCode.length === 5)"></raised-button>
                             <flat-button type="inertia" text="放弃" click="pointCreator.close()"></flat-button>
                         </div>

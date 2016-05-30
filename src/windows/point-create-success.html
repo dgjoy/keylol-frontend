@@ -1,0 +1,20 @@
+﻿<window position="center" class="window-point-create-success">
+    <div class="window">
+        <div class="header" webp-background="{{pointCreateSuccess.pointObject.headerImage | uriRelocate}}">
+            <p class="text">据点已开设</p>
+        </div>
+        <div class="point-create-success-wrapper">
+            <div class="point-info">
+                <point-basic-info point="pointCreateSuccess.pointObject"></point-basic-info>
+                <flat-button type="theme" text="订阅"></flat-button>
+            </div>
+            <div class="actions">
+                <div class="links">
+                    <a href="" ng-href="point/{{pointCreateSuccess.pointObject.idCode}}">前往据点</a>
+                    <a href="" ng-href="point/{{pointCreateSuccess.pointObject.idCode}}/edit">完善信息</a>
+                </div>
+                <raised-button text="完成" type="theme" click="pointCreateSuccess.close()"></raised-button>
+            </div>
+        </div>
+    </div>
+</window>
