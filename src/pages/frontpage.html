@@ -9,7 +9,7 @@
         <latest-articles ng-if="false" theme="stateTree.pointTheme"></latest-articles>
     </div>
     <div class="right-lg hidden-sm flex-column">
-        <menu ng-if="stateTree.specialMenu" style="margin-bottom: 20px" object="::stateTree.specialMenu"></menu>
+        <point-menu ng-if="stateTree.aggregation.point.basicInfo" style="margin-bottom: 20px" object="::stateTree.aggregation.point.basicInfo"></point-menu>
         <right-menus style="flex-grow: 1;"></right-menus>
     </div>
 </div>

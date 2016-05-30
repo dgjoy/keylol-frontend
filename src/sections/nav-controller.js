@@ -1,6 +1,6 @@
 ﻿(function () {
     class NavController {
-        constructor ($scope, $window, $state) {
+        constructor ($scope, $window, $state, stateTree) {
             const $$window = $($window);
             const scrollCallback = () => {
                 const newHasShadow = $$window.scrollTop() > 0;
@@ -98,6 +98,8 @@
                 ];
                 this.currentPage = 0;
             }
+
+            $scope.stateTree = stateTree;
         }
     }
 

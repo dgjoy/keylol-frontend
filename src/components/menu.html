@@ -3,6 +3,7 @@
         <p>{{ menu.object.header.main }}</p>
         <p>{{ menu.object.header.sub }}</p>
     </div>
+
     <a ng-switch-when="user" ripple ng-href="user/{{menu.stateTree.currentUser.idCode}}">
         <img class="avatar" webp-src="{{menu.stateTree.currentUser.avatarImage | avatarUrl}}" alt="{{menu.stateTree.currentUser.userName}}">
         <div class="header-text for-user">
@@ -10,11 +11,13 @@
             <p>{{ menu.stateTree.currentUser.idCode }}</p>
         </div>
     </a>
+
     <div ng-switch-when="point" class="for-point">
-        <img class="cover" webp-src="{{'//steamcdn.keylol.com/steam/apps/570/capsule_231x87.jpg' | coverUrl}}" alt="Dota 2">
+        <point-basic-info ng-if="!menu.object.header.titleCoverImage" point="menu.object.header.point"></point-basic-info>
+        <img ng-if="menu.object.header.titleCoverImage" class="cover" webp-src="{{ menu.object.header.titleCoverImage | coverUrl}}" alt="Dota 2">
         <div class="time-info">
-            <p>已在档 203 小时</p>
-            <p>玩家平均在档 175.4 小时</p>
+            <p>已在档 203(!) 小时</p>
+            <p>玩家平均在档 175.4(!) 小时</p>
         </div>
         <a ripple href="" class="reputation-stat" ng-repeat="(stat, statCount) in menu.object.header.voteStats track by stat">
             <div class="left-content">
@@ -42,6 +45,7 @@
         </div>
         <div class="horizon"></div>
     </div>
+
     <div ng-switch-when="dossier" class="for-dossier">
         <div class="user-basic-info">
             <img webp-src="//storage.keylol.com/fd0dfd38572adff068251606aa282b3f.jpg!avatar.medium" alt="npc之舟" class="avatar">
@@ -69,7 +73,8 @@
         </div>
         <div class="paragraph"><a href="">NPC 的小船</a></div>
     </div>
+
 </div>
-<ul ng-if="menu.object.header.type !== 'dossier'">
+<ul>
     <li ng-repeat="item in menu.object.items"><menu-item data="item"></menu-item></li>
 </ul>
