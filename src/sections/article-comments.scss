@@ -30,11 +30,16 @@ article-comments {
       }
     }
 
-    .action {
+    .action-date {
       flex-grow: 0;
       display: flex;
       flex-direction: column;
       align-items: flex-end;
+
+      .action{
+        visibility: hidden;
+      }
+
       a {
         margin-left: 15px;
         color: $keylol-highlight;
@@ -77,6 +82,10 @@ article-comments {
       border-bottom: 1px solid $keylol-inertia-shape;
       &:last-of-type {
         border-bottom: 0;
+      }
+
+      &:hover .action{
+        visibility: visible;
       }
     }
 

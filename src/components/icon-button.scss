@@ -39,5 +39,15 @@ icon-button {
         fill: $keylol-inverted-text;
       }
     }
+
+    &.half-invert {
+      svg {
+        fill: rgba($keylol-inverted-text, .6);
+      }
+
+      &:hover svg {
+        fill: $keylol-inverted-text;
+      }
+    }
   }
 }

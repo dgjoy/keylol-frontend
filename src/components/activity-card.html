@@ -1,0 +1,67 @@
+<div class="display-card">
+    <div class="user-with-date">
+        <a class="user" href="">
+            <img class="avatar" webp-src="{{'' | avatarUrl}}"  alt="{{activityCard.union.$localStorage.user.UserName}}">
+            <div class="name-group">
+                <p class="username">程晓峰</p>
+                <p>2015-01</p>
+            </div>
+        </a>
+        <div ng-click="activityCard.showMenu($event)" popup="activityCard.showSharedPopup"><icon-button icon="dots-vertical">5 月 7 号</icon-button></div>
+    </div>
+    <div class="simple">
+        <vote-circle vote="3" gray-background="true"></vote-circle>
+        <p>这是一段非常长的文字这是一段非常长的文字这是一段非常长的文字这是一段非常长的文字<span></span></p>
+        <img webp-src="//storage.keylol.com/39b7d020df471d6c0e3fa593802000bc.jpg!timeline.thumbnail.new">
+    </div>
+    <div class="point-with-source">
+        <a class="point" href="point/DOTA2" ripple>
+            <point-basic-info></point-basic-info>
+        </a>
+        <a class="source" href="" ng-click="activityCard.showSourceList($event)" popup="activityCard.showSharedPopup">5 个据点来稿</a>
+    </div>
+    <div class="indirect-sources">
+        <a class="indirect-source" href="">
+            <img webp-src="{{'' | avatarUrl}}" class="picture" />
+            <span class="desc">角色扮演</span>
+        </a>
+        <a class="indirect-source" href="">
+            <img webp-src="{{'' | avatarUrl}}" class="picture" />
+            <span class="desc">角色扮演</span>
+        </a>
+    </div>
+</div>
+<div class="communicate-card">
+    <div class="review-area">
+        <div class="review-count">
+            全部 16 个评论
+        </div>
+        <div class="review-list clearfix" ng-class="{scroller:activityCard.hasScroller}">
+            <div class="review" href="" data-floor-id="#{{$index+1}}" ng-repeat="reviews in [0,1,2,3,4,5,6,7,8,9]" ng-class="{'blink':activityCard.currentFloor === ($index+1)}">
+                <img src="//storage.keylol.com/39b7d020df471d6c0e3fa593802000bc.jpg!timeline.thumbnail.new" alt="" class="avatar" />
+                <div class="content">
+                    <div class="info">
+                        <div class="user">Stark<a href="">+16</a></div>
+                        <div class="date">05-03 / #0</div>
+                        <div class="actions"><a href="">认可</a><a href="">回复</a></div>
+                    </div>
+                    <div class="text">
+                        这是一段文本.
+                    </div>
+                </div>
+            </div>
+            <pagination total="5" current="1"></pagination>
+        </div>
+        <div class="hr"></div>
+        <div class="review-sender">
+            <img src="//storage.keylol.com/39b7d020df471d6c0e3fa593802000bc.jpg!timeline.thumbnail.new" alt="" class="avatar">
+            <textarea elastic placeholder="发表见解..." ng-model="activityCard.comment"></textarea>
+        </div>
+    </div>
+    <div class="operation" ng-switch="activityCard.state">
+        <div>
+            <flat-button type="inertia" text="+1"></flat-button>
+        </div>
+        <flat-button text="评论"></flat-button>
+    </div>
+</div>

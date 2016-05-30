@@ -64,7 +64,7 @@ article-content {
 
   article {
     @include keylol-shadow-1();
-    padding: 15px;
+    padding: 5px 15px 15px 15px;
     background-color: $keylol-card;
 
     h1 {

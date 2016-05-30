@@ -1,14 +1,14 @@
 ﻿(function () {
-    class ArticleController {
+    class ActivityController {
         constructor ($scope, stateTree) {
             $scope.stateTree = stateTree;
             stateTree.pointTheme = {
-                main: '#1BB676',
-                light: '#299EC4',
+                main: '#A80E27',
+                light: '#9A9B55',
                 icon: '//storage.keylol.com/2ea0474aa5757a04658790f12e144e61.png',
             };
         }
     }
 
-    keylolApp.controller('ArticleController', ArticleController);
+    keylolApp.controller('ActivityController', ActivityController);
 }());

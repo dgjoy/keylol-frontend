@@ -245,6 +245,24 @@
                 templateUrl: 'src/pages/user-edit-preference.html',
                 controller: 'UserEditPreferenceController',
             })
+            .state('article', {
+                url: '/article/:article_id_code',
+                templateUrl: 'src/pages/article.html',
+                controller: 'ArticleController',
+                onExit (stateTree) {
+                    console.log('exit article');
+                    delete stateTree.article;
+                },
+            })
+            .state('activity', {
+                url: '/activity/:activity_id_code',
+                templateUrl: 'src/pages/activity.html',
+                controller: 'ActivityController',
+                onExit (stateTree) {
+                    console.log('exit activity');
+                    delete stateTree.activity;
+                },
+            })
             .state('not-found', {
                 url: '/not-found',
                 templateUrl: 'src/pages/not-found.html',

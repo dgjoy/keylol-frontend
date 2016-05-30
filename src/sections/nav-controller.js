@@ -85,6 +85,18 @@
                             break;
                     }
                 });
+            } else if (currentStateName.substr(0,7) === 'article') {
+                this.inPoint = true;
+                this.tabArray = [
+                    { name:'文章' },
+                ];
+                this.currentPage = 0;
+            } else if (currentStateName.substr(0,8) === 'activity') {
+                this.inPoint = true;
+                this.tabArray = [
+                    { name:'动态' },
+                ];
+                this.currentPage = 0;
             }
         }
     }
