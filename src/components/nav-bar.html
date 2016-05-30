@@ -20,7 +20,7 @@
             </a>
         </form>
     </div>
-    <div class="action-hub" ng-if="navBar.stateTree.currentUser">
+    <div class="action-hub" ng-if="navBar.stateTree.currentUser && !navBar.stateTree.empty">
         <a href="post-office" ng-class="{active: navBar.stateTree.currentUser.messageCount}" ripple="#fff">
             <p>邮政</p>
             <p>{{navBar.stateTree.currentUser.messageCount || "O" | numberAbbreviation}}</p>
@@ -33,7 +33,7 @@
             <img class="avatar" webp-src="{{navBar.stateTree.currentUser.avatarImage | avatarUrl}}" alt="{{navBar.stateTree.currentUser.userName}}">
         </a>
     </div>
-    <div class="action-hub" ng-if="!navBar.stateTree.currentUser">
+    <div class="action-hub" ng-if="!navBar.stateTree.currentUser && !navBar.stateTree.empty">
         <flat-button text="登录" type="invert" click="navBar.showLoginWindow(event)"></flat-button>
         <raised-button text="注册" type="theme" invert="true" click="" theme-color="::navBar.theme.main"></raised-button>
     </div>

@@ -1,10 +1,14 @@
 ﻿(function () {
     keylolApp.factory('pageLoad', ($state, $http, stateTree, apiEndpoint, notification) => {
-        return stName => {
+        return (stName, extraParams) => {
             const result = stName.split('.');
+            const params = $state.params;
+            if (extraParams) {
+                $.extend(params, extraParams);
+            }
 
             if (stateTree.empty) {
-                $http.get(`${apiEndpoint}states/[${stName}]/`,{ params:$state.params }).then(response => {
+                return $http.get(`${apiEndpoint}states/[${stName}]/`,{ params }).then(response => {
                     console.log(response.data);
                     if (response.data.currentUser) {
                         _czc.push(['_setCustomVar', '登录用户',
@@ -21,8 +25,10 @@
                     if (target.current) {
                         $state.go(`.${target.current}`, {}, { location: false });
                     }
+
+                    return target;
                 }, error => {
-                    console.log(error);
+                    notification.error({ message: '未知错误' });
                 });
             } else {
                 let target = stateTree;
@@ -40,14 +46,16 @@
                 if (target.current === result[result.length - 1]) {
                     delete target.current;
                 } else {
-                    $http.get(`${apiEndpoint}states${urlParams}`,{ params:$state.params }).then(response => {
+                    return $http.get(`${apiEndpoint}states${urlParams}`,{ params }).then(response => {
                         target[result[result.length - 1]] = response.data;
                         target = target[result[result.length - 1]];
                         if (target.current) {
                             $state.go(`.${target.current}`, {}, { location: false });
                         }
+
+                        return target;
                     }, error => {
-                        console.log(error);
+                        notification.error({ message: '未知错误' });
                     });
                 }
             }

@@ -1,7 +1,16 @@
 ﻿(function () {
     class PointController {
-        constructor ($scope, stateTree) {
+        constructor ($scope, stateTree, $location, pageLoad, $state) {
             $scope.stateTree = stateTree;
+
+            if ($location.url().match(/\/point\/[^\/]*\/?$/)) {
+                pageLoad('aggregation.point', { entrance: 'auto' }).then(result => {
+                    if (result) {
+                        result.idCode = $state.params.point_id_code;
+                    }
+                });
+            }
+            
             stateTree.pointTheme = {
                 main: '#813221',
                 light: '#a83f34',

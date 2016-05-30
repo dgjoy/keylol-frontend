@@ -143,14 +143,6 @@
                 url: '/point/:point_id_code',
                 templateUrl: 'src/pages/point.html',
                 controller: 'PointController',
-                onEnter ($location, pageLoad, $state, $timeout) {
-                    if ($location.url().match(/\/point\/[^\/]*\/?$/)) {
-                        $timeout(() => {
-                            console.log($state.current);
-                            $state.go('.frontpage', {}, { location: false });
-                        });
-                    }
-                },
                 onExit (stateTree) {
                     console.log('exit aggregation.point');
                     delete stateTree.aggregation.point;
