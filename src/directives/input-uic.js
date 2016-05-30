@@ -38,8 +38,11 @@
                         scope.focus[index + 1] = true;
                     }
                 };
-                scope.focusFirstIfEmpty = function () {
-                    scope.focusHandler();
+                scope.focusFirstIfEmpty = function (index) {
+                    if (index === 0) {
+                        scope.focusHandler();
+                        return;
+                    }
                     for (let l = 0; l < scope.length; ++l) {
                         if (scope.text[l])
                             return;
