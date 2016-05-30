@@ -1,9 +1,27 @@
 ﻿<popup class="popup-upload-preview">
-    <div class="images">
-        <div class="as-background" ngf-background="uploadPreview.file"></div>
+    <div ng-if="uploadPreview.options.type !== 'avatarImage'" class="images">
+        <div class="as-background {{uploadPreview.options.type}}" ngf-background="uploadPreview.file"></div>
+    </div>
+    <div ng-if="uploadPreview.options.type === 'avatarImage'" class="images">
+        <div class="size">
+            <p>96px</p>
+            <div class="as-background {{uploadPreview.options.type}}" ngf-background="uploadPreview.file"></div>
+        </div>
+        <div class="size">
+            <p>48px</p>
+            <div class="as-background {{uploadPreview.options.type}}" ngf-background="uploadPreview.file"></div>
+        </div>
+        <div class="size">
+            <p>32px</p>
+            <div class="as-background {{uploadPreview.options.type}}" ngf-background="uploadPreview.file"></div>
+        </div>
+        <div class="size">
+            <p>18px</p>
+            <div class="as-background {{uploadPreview.options.type}}" ngf-background="uploadPreview.file"></div>
+        </div>
     </div>
     <div class="actions">
         <flat-button text="取消" type="inertia" click="uploadPreview.close()"></flat-button>
-        <raised-button text="应用" type="theme" click="uploadPreview.upload()"></raised-button>
+        <raised-button text="应用" type="theme" click="uploadPreview.upload()" disabled="uploadPreview.uploadLock"></raised-button>
     </div>
 </popup>

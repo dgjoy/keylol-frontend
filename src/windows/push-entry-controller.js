@@ -123,7 +123,7 @@
                     inputs: {
                         file: $file,
                         options: {
-                            type: 'normal',
+                            type: 'cover',
                         },
                     },
                 }).then(popup => {

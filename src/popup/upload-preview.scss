@@ -9,13 +9,64 @@
   box-sizing: border-box;
 
   .images {
+    display: flex;
     margin-bottom: 20px;
 
     .as-background {
-      width: 400px;
-      height: 126px;
       background: no-repeat center;
       background-size: cover;
+
+      &.cover {
+        width: 400px;
+        height: 126px;
+      }
+
+      &.headerImage {
+        width: 670px;
+        height: 142px;
+      }
+
+      &.avatarImage {
+        border-radius: 50%;
+      }
+    }
+
+    .size {
+      margin-right: 30px;
+
+      &:first-of-type {
+        .avatarImage {
+          width: 96px;
+          height: 96px;
+        }
+      }
+
+      &:nth-of-type(2) {
+        .avatarImage {
+          width: 48px;
+          height: 48px;
+        }
+      }
+
+      &:nth-of-type(3) {
+        .avatarImage {
+          width: 32px;
+          height: 32px;
+        }
+      }
+
+      &:last-of-type {
+        .avatarImage {
+          width: 18px;
+          height: 18px;
+          border-radius: 0;
+        }
+      }
+
+      p {
+        color: $keylol-inertia-text;
+        margin: 0 0 10px;
+      }
     }
   }
 

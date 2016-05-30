@@ -6,9 +6,8 @@
                 close,
                 upyun,
                 notification,
+                options,
             });
-
-            this.uploadLock = false;
         }
 
         upload () {

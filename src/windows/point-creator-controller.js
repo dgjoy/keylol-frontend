@@ -21,6 +21,10 @@
 
             this.extra = {
                 SteamGame: {},
+                OtherGame: {},
+                Hardware: {},
+                Vendor: {},
+                Category: {},
             };
 
             this.tabArray = [
@@ -85,9 +89,12 @@
         }
 
         steamCapture () {
+            if (this.captureLock) return;
+
             const link = this.extra.SteamGame.link || '';
             const matches = link.match(/^(?:(?:https?:\/\/)?store\.steampowered\.com\/app\/)?(\d+)\/*$/i);
             if (!matches) {
+                this.extra.SteamGame.linkError = '商店地址格式错误';
                 return;
             }
 
@@ -101,12 +108,48 @@
                     this.vm.SteamGame.englishName = response.data.englishName;
                     this.steamExpanded = true;
                     this.steamHeight = 500;
+                } else {
+                    this.extra.SteamGame.linkError = response.data.failReason;
                 }
                 this.captureLock = false;
             }, error => {
                 this.notification.error({ message: '发生未知错误，请重试或与站务职员联系' });
                 this.captureLock = false;
             });
+        }
+
+        uploadImage ($file, $event, modelType, imageType) {
+            if ($file) {
+                this.extra[modelType][imageType]({
+                    templateUrl: 'src/popup/upload-preview.html',
+                    controller: 'UploadPreviewController as uploadPreview',
+                    attachSide: 'left',
+                    event: {
+                        type: 'click',
+                        currentTarget: $event.currentTarget,
+                    },
+                    align: 'top',
+                    offsetX: 45,
+                    offsetY: -20,
+                    inputs: {
+                        file: $file,
+                        options: {
+                            type: imageType,
+                        },
+                    },
+                }).then(popup => {
+                    return popup.close;
+                }).then(result => {
+                    if (result) {
+                        console.log(modelType, imageType, this.vm[modelType], result);
+                        this.vm[modelType][imageType] = result;
+                    }
+                });
+            }
+        }
+
+        submit (type) {
+            console.log(`${type} submit`);
         }
     }
 
