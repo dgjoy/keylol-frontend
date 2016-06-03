@@ -1,9 +1,8 @@
 ﻿(function () {
     class ActivityEditorController {
-        constructor(close, type) {
+        constructor(close) {
             $.extend(this,{
                 close,
-                type,
             });
 
             this.score = 1;

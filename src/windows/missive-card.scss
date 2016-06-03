@@ -1,0 +1,154 @@
+.window-missive-card {
+
+  .window {
+    @include keylol-shadow-3();
+    padding: 30px 15px;
+    width: 910px;
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 40px;
+
+      .receiver {
+        padding: 8px 10px;
+        width: 320px;
+        position: relative;
+
+
+        .border-1,
+        .border-2,
+        .border-3,
+        .border-4 {
+          position: absolute;
+          width: 20px;
+          height: 20px;
+        }
+
+        .border-1 {
+          top:0;
+          left: 0;
+          border-top: 1px solid $keylol-inertia-shape;
+          border-left: 1px solid $keylol-inertia-shape;
+        }
+        .border-2 {
+          top:0;
+          right: 0;
+          border-top: 1px solid $keylol-inertia-shape;
+          border-right: 1px solid $keylol-inertia-shape;
+        }
+        .border-3 {
+          bottom: 0;
+          right: 0;
+          border-bottom: 1px solid $keylol-inertia-shape;
+          border-right: 1px solid $keylol-inertia-shape;
+        }
+        .border-4 {
+          bottom: 0;
+          left: 0;
+          border-bottom: 1px solid $keylol-inertia-shape;
+          border-left: 1px solid $keylol-inertia-shape;
+        }
+
+        p { margin: 0; }
+        p:first-of-type {
+          color: $keylol-main-text;
+        }
+        p:nth-of-type(2) {
+          text-align: center;
+          color: $keylol-main-text;
+        }
+        p:nth-of-type(3) {
+          @include font-consolas();
+          text-align: center;
+          color: $keylol-inertia-text;
+        }
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+
+        img {
+          width: 72px;
+          height: 72px;
+          margin-right: 20px;
+        }
+
+        .name-group {
+          p { margin: 0; }
+          p:first-of-type {
+            font-size: 24px;
+            color: $keylol-theme;
+          }
+          p:last-of-type {
+            font-size: 20px;
+            color: $keylol-light-theme;
+          }
+        }
+      }
+    }
+
+    .title {
+      font-weight:bold;
+      font-size: 20px;
+      text-decoration: underline;
+    }
+
+    .text {
+      p {
+        margin: 25px 0;
+        color: $keylol-main-text;
+        font-size: 16px;
+      }
+
+      blockquote {
+        @include keylol-shadow-1();
+        overflow: hidden;
+        margin: 0;
+        padding: 0 15px;
+        background-color: $keylol-inverted-text;
+        p { margin: 15px 0; }
+      }
+
+      a {
+        color: $keylol-highlight;
+        a:hover { text-decoration: underline; }
+      }
+    }
+
+    .signature {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 50px;
+
+      img {
+        height: 46px;
+      }
+    }
+
+
+    .params {
+      display: flex;
+      position: relative;
+
+      .name-group {
+        margin-right: 50px;
+
+        p { margin: 0; }
+        p:first-of-type {
+          color: $keylol-inertia-text;
+        }
+        p:last-of-type {
+          @include font-consolas();
+          color: $keylol-main-text;
+        }
+      }
+
+      raised-button {
+        position: absolute;
+        right: 0;
+      }
+    }
+  }
+}

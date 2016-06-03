@@ -37,6 +37,10 @@ raised-button {
       background-color: $keylol-inverted-text;
     }
 
+    &.black {
+      background-color: $keylol-main-text;
+    }
+
     &[disabled] {
       background-color: $keylol-inertia-shape;
       &:hover {

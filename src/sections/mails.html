@@ -1,4 +1,4 @@
-﻿<div>
+﻿<div class="page">
     <div class="mail" ng-repeat="mail in [1,2,3,4,5]">
         <div class="fake-background" webp-background="assets/images/css_logo-theme.png"></div>
         <div ng-if="false" class="fake-background" webp-background="assets/images/pss-logo-theme.png"></div>
@@ -21,9 +21,9 @@
             <div class="brief">
                 萃选录入函<a href="">欢迎来到其乐</a>
             </div>
-            <div class="detail">
+            <a href="" class="detail" ng-click="mails.showMissiveCard($index)">
                 感谢你对其乐社区质量的认可和贡献!
-            </div>
+            </a>
         </div>
     </div>
     <div class="clearfix">

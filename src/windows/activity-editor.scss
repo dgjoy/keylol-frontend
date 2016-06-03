@@ -1,18 +1,22 @@
 .window-activity-editor {
   .window {
     @include keylol-shadow-3();
-    padding: 20px 15px;
+    padding: 15px 15px 20px;
     width: 640px;
     background-color: $keylol-card;
 
     .related {
       display: flex;
       align-items: center;
-      flex-wrap: wrap;
 
-      text-area { margin-right: 25px; }
+      text-area {
+        flex-grow: 0;
+        width: 300px;
+        margin-right: 25px;
+      }
 
       point-review {
+        flex-grow: 0;
         width: 85px;
         text-align: right;
         >div {
@@ -21,6 +25,7 @@
       }
 
       .user-info {
+        flex-grow: 1;
         display: flex;
         align-items: center;
         width: 230px;
@@ -54,7 +59,7 @@
       textarea {
         box-sizing: border-box;
         width: 100%;
-        padding: 15px;
+        padding: 25px 15px;
         background-color: transparent;
         outline: 0;
         resize: none;
@@ -63,14 +68,20 @@
 
     .actions {
       display: flex;
-      justify-content: space-between;
       align-items: center;
 
       a {
+        flex-grow: 1;
         color: $keylol-highlight;
         &:hover {
           text-decoration: underline;
         }
+      }
+
+      flat-button,
+      raised-button {
+        flex-grow: 0;
+        margin-left: 20px;
       }
     }
   }

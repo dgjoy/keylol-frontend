@@ -1,8 +1,7 @@
 ﻿<window position="center" class="window-activity-editor">
-    <div class="window" ng-switch="activityEditor.type">
-        <div class="related" ng-switch-default>
-            <text-area style="width: 350px;"
-                       type="point"
+    <div class="window">
+        <div class="related">
+            <text-area type="point"
                        label="选择一个据点" model="''">
             </text-area>
             <div class="user-info">
@@ -12,27 +11,15 @@
                     <p>14 篇文章 / 3 篇动态</p>
                 </div>
             </div>
-        </div>
-        <div class="related" ng-switch-when="short-review">
-            <text-area style="width: 500px;"
-                       type="point"
-                       label="投稿据点" model="''">
-            </text-area>
             <point-review review-bind="activityEditor.score" is-hollow="true"></point-review>
-            <div class="user-info">
-                <img class="avatar" webp-src="//storage.keylol.com/4ed8e4862422e8a584fb6bee9f32fedd.jpg!avatar.medium">
-                <div class="name-group">
-                    <p>用户名</p>
-                    <p>在档 1.2 小时</p>
-                </div>
-            </div>
         </div>
         <div class="edit">
-            <textarea rows="1" elastic ng-model="activityEditor.content"></textarea>
+            <textarea placeholder="谈谈最近的心得..." rows="4" elastic ng-model="activityEditor.content"></textarea>
         </div>
         <div class="actions">
             <a href="">上传一张附图</a>
-            <raised-button text="发布动态" type="theme"></raised-button>
+            <flat-button text="放弃" type="inertia" ng-click="activityEditor.exit()"></flat-button>
+            <raised-button text="贴出动态" type="theme"></raised-button>
         </div>
     </div>
 </window>

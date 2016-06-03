@@ -54,9 +54,6 @@
                                 templateUrl: 'src/windows/activity-editor.html',
                                 controller: 'ActivityEditorController',
                                 controllerAs: 'activityEditor',
-                                inputs: {
-                                    type: 'short-review',
-                                },
                             });
                         },
                     },
