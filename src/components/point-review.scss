@@ -3,7 +3,7 @@ point-review {
 
   .review-text {
     @include keylol-review();
-    color: $keylol-theme;
+    color: $keylol-inertia-text;
   }
 
   >div {

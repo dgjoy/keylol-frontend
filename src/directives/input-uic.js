@@ -67,7 +67,7 @@
                                 fullText += scope.text[i][0];
                             }
                         }
-                        ngModel.$setViewValue(fullText);
+                        ngModel.$setViewValue(fullText.toUpperCase());
                         if (newValue && (!oldValue || newValue.length >= oldValue.length))
                             scope.focus[j + 1] = true;
                     });

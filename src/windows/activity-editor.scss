@@ -1,0 +1,77 @@
+.window-activity-editor {
+  .window {
+    @include keylol-shadow-3();
+    padding: 20px 15px;
+    width: 640px;
+    background-color: $keylol-card;
+
+    .related {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+
+      text-area { margin-right: 25px; }
+
+      point-review {
+        width: 85px;
+        text-align: right;
+        >div {
+          justify-content: flex-end;
+        }
+      }
+
+      .user-info {
+        display: flex;
+        align-items: center;
+        width: 230px;
+
+        .avatar {
+          width: 32px;
+          height: 32px;
+          margin-right: 10px;
+        }
+
+        .name-group {
+          p {
+            margin: 0;
+          }
+          p:first-of-type {
+            color: $keylol-main-text;
+          }
+          p:last-of-type {
+            color: $keylol-inertia-text;
+            font-size: 12px;
+          }
+        }
+      }
+    }
+
+    .edit {
+      background-color: $keylol-inverted-text;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16) inset, 0 -2px 5px rgba(0, 0, 0, 0.16) inset;
+      margin: 15px -15px 20px;
+
+      textarea {
+        box-sizing: border-box;
+        width: 100%;
+        padding: 15px;
+        background-color: transparent;
+        outline: 0;
+        resize: none;
+      }
+    }
+
+    .actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      a {
+        color: $keylol-highlight;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}

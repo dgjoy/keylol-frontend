@@ -1,5 +1,5 @@
 <label class="
-        {{ textArea.activeState || (textArea.model.length !== 0 || textArea.pointCache) ? 'move-up':''}}
+        {{ textArea.activeState || ((textArea.model !== undefined && textArea.model.length !== 0) || textArea.pointCache) ? 'move-up':''}}
         {{ textArea.warnState?'warn':textArea.activeState?'theme':''}}"
        style="{{textArea.theme.light&&textArea.activeState&&!textArea.warnState?'color:'+textArea.theme.light+';':''}}"
     >{{textArea.label}}</label>

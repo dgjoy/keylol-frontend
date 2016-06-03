@@ -85,6 +85,9 @@
                     password: 'normal',
                 },
             };
+            if (this.currentWay === 2) {
+                this.resetPasscode();
+            }
 
             //监视 vm(id_code, password)
             $scope.$watch(() => {
@@ -113,8 +116,8 @@
                              this.passcodeWayManager.id_code.error = '还没确定';
                              this.passcodeWayManager.id_code.completed = false;
                          } else {
-                             this.passcodeWayManager.state.id_code = 'normal';
-                             this.passcodeWayManager.completed.id_code = true;
+                             this.passcodeWayManager.id_code.state = 'normal';
+                             this.passcodeWayManager.id_code.state = true;
                          }
                          break;
                      case 2:
@@ -126,8 +129,8 @@
                              this.passcodeWayManager.id_code.error = '还没确定';
                              this.passcodeWayManager.id_code.completed = false;
                          } else {
-                             this.passcodeWayManager.state.id_code = 'normal';
-                             this.passcodeWayManager.completed.id_code = true;
+                             this.passcodeWayManager.id_code.state = 'normal';
+                             this.passcodeWayManager.id_code.completed = true;
                          }
                          break;
                  }

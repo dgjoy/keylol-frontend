@@ -31,22 +31,34 @@
                 cancelListenRoute();
             });
 
-
-            function showEditor() {
-                window.show({
-                    templateUrl: 'src/windows/editor.html',
-                    controller: 'EditorController',
-                    controllerAs: 'editor',
-                });
-            }
-
             this.writtingMenu = {
                 items: [
                     {
                         type: 'item',
                         icon: 'new-article',
                         text: '新文章',
-                        clickAction: showEditor,
+                        clickAction() {
+                            window.show({
+                                templateUrl: 'src/windows/editor.html',
+                                controller: 'EditorController',
+                                controllerAs: 'editor',
+                            });
+                        },
+                    },
+                    {
+                        type: 'item',
+                        icon: 'coffe',
+                        text: '发表动态',
+                        clickAction() {
+                            window.show({
+                                templateUrl: 'src/windows/activity-editor.html',
+                                controller: 'ActivityEditorController',
+                                controllerAs: 'activityEditor',
+                                inputs: {
+                                    type: 'short-review',
+                                },
+                            });
+                        },
                     },
                     {
                         type: 'item',
@@ -133,6 +145,16 @@
                         type: 'item',
                         icon: 'login-passcode',
                         text: '口令组合',
+                        clickAction () {
+                            window.show({
+                                templateUrl: 'src/windows/login.html',
+                                controller: 'LoginController',
+                                controllerAs: 'login',
+                                inputs: {
+                                    startPage: 2,
+                                },
+                            });
+                        },
                     },
                 ],
             };
