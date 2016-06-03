@@ -7,13 +7,7 @@
         }
 
         toggle() {
-            if ( this.model === false ) {
-                this.model = true;
-                this.$scope.$broadcast('rippleEvent',{ index: 0, state:'normal' });
-            } else {
-                this.model = false;
-                this.$scope.$broadcast('rippleEvent',{ index: 0, state:'theme' });
-            }
+            this.model = !this.model;
         }
     }
 

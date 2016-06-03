@@ -9,6 +9,7 @@ input-radio {
     margin: 5px 0;
 
     >.outer {
+      @include child-ripple-container-overflow(15);
       position: relative;
       width: 20px;
       height: 20px;
@@ -20,12 +21,6 @@ input-radio {
       }
       &.theme>.object {
         transform: scale(0.5);
-      }
-
-      >.ripple-container {
-        position: absolute;
-        width: 100%;
-        height: 100%;
       }
 
       >.hole {

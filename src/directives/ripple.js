@@ -24,7 +24,7 @@
                 element.append($rippleContainer);
 
                 function func (e) {
-                    let containerBgRestoreTimeout;
+                    let containerBgRestoreTimeout, deleteContainerStyle;
 
                     // Ripple
                     // Create ripple
@@ -37,8 +37,8 @@
                     function getPointOffset(e) {
                         if (attrs.ripplePosition === 'center') {
                             return {
-                                left: element[0].offsetWidth / 2,
-                                top: element[0].offsetHeight / 2,
+                                left: $rippleContainer[0].offsetWidth / 2,
+                                top: $rippleContainer[0].offsetHeight / 2,
                             };
                         }
 
@@ -86,8 +86,8 @@
 
                     function rippleSize(pointOffset) {
                         return Math.sqrt(
-                            Math.pow(Math.max(Math.abs(element[0].offsetWidth - pointOffset.left), pointOffset.left) * 2, 2)
-                            + Math.pow(Math.max(Math.abs(element[0].offsetHeight - pointOffset.top), pointOffset.top) * 2, 2));
+                            Math.pow(Math.max(Math.abs($rippleContainer[0].offsetWidth - pointOffset.left), pointOffset.left) * 2, 2)
+                            + Math.pow(Math.max(Math.abs($rippleContainer[0].offsetHeight - pointOffset.top), pointOffset.top) * 2, 2));
                     }
 
                     const pointOffset = getPointOffset(e);
@@ -104,32 +104,35 @@
 
                     // Add animation effect
                     if (type === 'class') {
-                        $rippleContainer.addClass(value);
+                        if (!attrs.rippleNoBackground) {
+                            $rippleContainer.addClass(value);
+                            const nowValue = value;
+                            deleteContainerStyle = () => {
+                                $rippleContainer.removeClass(nowValue);
+                            };
+                        }
                         $circle.addClass(value);
                     } else if (type === 'color') {
-                        $rippleContainer.css('background-color', `rgba(${value}, 0.03)`);
-                        $circle.css('background-color', `rgba(${value}, 0.08)`);
+                        if (!attrs.rippleNoBackground) {
+                            $rippleContainer.css('background-color', `rgba(${value}, 0.03)`);
+                            deleteContainerStyle = () => {
+                                $rippleContainer.css('background-color', '');
+                            };
+                            $circle.css('background-color', `rgba(${value}, 0.08)`);
+                        } else {
+                            $circle.css('background-color', `rgba(${value}, 0.11)`);
+                        }
                     }
                     $circle.addClass('animate-appear');
 
-                    const waitTimeOut = $timeout();
-
                     function removeAndUnbind() {
-                        waitTimeOut.then(() => {
-                            $circle.addClass('animate-disappear');
-                            if (containerBgRestoreTimeout)
-                                $timeout.cancel(containerBgRestoreTimeout);
-                            containerBgRestoreTimeout = $timeout(() => {
-                                if (type === 'class') {
-                                    $rippleContainer.removeClass(value);
-                                } else {
-                                    $rippleContainer.css('background-color', 'transparent');
-                                }
-                            }, 645);
-                            $timeout(() => {
-                                $ripple.remove();
-                            }, 900);
-                        });
+                        $circle.addClass('animate-disappear');
+                        if (containerBgRestoreTimeout)
+                            $timeout.cancel(containerBgRestoreTimeout);
+                        containerBgRestoreTimeout = $timeout(deleteContainerStyle, 645);
+                        $timeout(() => {
+                            $ripple.remove();
+                        }, 900);
                         element.off('touchend touchleave mouseup mouseleave', removeAndUnbind);
                         element.off('touchmove mousemove', move);
                     }

@@ -7,11 +7,8 @@
         }
 
         changeRadio(index) {
-            if ( this.model === index ) {
-                this.$scope.$broadcast('rippleEvent',{ index, state:'theme' });
-            } else {
+            if (this.model !== index ) {
                 this.model = index;
-                this.$scope.$broadcast('rippleEvent',{ index, state:'normal' });
             }
         }
     }

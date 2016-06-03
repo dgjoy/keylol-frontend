@@ -22,7 +22,7 @@
         controller: InputCheckboxController,
         controllerAs: 'inputCheckbox',
         bindings: {
-            object: '<',
+            names: '<',
             model: '=',
             theme: '<',
         },

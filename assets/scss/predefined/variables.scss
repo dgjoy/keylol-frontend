@@ -121,6 +121,27 @@ $keylol-topic: #7976b1;
   background: linear-gradient(to $position, rgba(#000,0), rgba(#000, .3) 67.7%, rgba(#000, .6));
 }
 
+// circle ripple-container
+@mixin circle-ripple-container {
+  border-radius: 50%;
+  background-clip: padding-box;
+  -webkit-mask-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC");
+}
+
+@mixin child-ripple-container-overflow ($overflow: 12) {
+  overflow: visible;
+
+  .ripple-container {
+    @include circle-ripple-container;
+    width: auto;
+    height: auto;
+    top: -#{$overflow}px;
+    left: -#{$overflow}px;
+    bottom: -#{$overflow}px;
+    right: -#{$overflow}px;
+  }
+}
+
 // hover
 @mixin hover-background($color: #000) {
   &:hover {

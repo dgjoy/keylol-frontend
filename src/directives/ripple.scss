@@ -9,6 +9,10 @@
     background-color: rgba($keylol-theme, 0.1);
   }
 
+  .light {
+    background-color: rgba($keylol-light-theme, 0.1);
+  }
+
   .topic {
     background-color: rgba($keylol-topic, 0.1);
   }
@@ -69,6 +73,46 @@
           opacity: 0;
         }
       }
+    }
+  }
+
+  &[ripple-no-background] .ripple-container {
+
+    .theme {
+      background-color: rgba($keylol-theme, 0.2);
+    }
+
+    .light {
+      background-color: rgba($keylol-light-theme, 0.2);
+    }
+
+    .topic {
+      background-color: rgba($keylol-topic, 0.2);
+    }
+
+    .inertia {
+      background-color: rgba($keylol-inertia-text, 0.2);
+    }
+
+    .inertia-shape {
+      background-color: rgba($keylol-inertia-shape, 0.2);
+    }
+
+    .invert,
+    .half-invert{
+      background-color: rgba($keylol-inverted-text, 0.2);
+    }
+
+    .light-text {
+      background-color: rgba($keylol-light-text, 0.2);
+    }
+
+    .user-theme {
+      background-color: rgba($keylol-user-theme, 0.2);
+    }
+
+    .ripple .circle.animate-disappear {
+      transition: opacity .9s cubic-bezier(.25,.8,.25,1), transform .6s cubic-bezier(.25,.8,.25,1);
     }
   }
 }
