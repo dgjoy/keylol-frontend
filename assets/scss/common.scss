@@ -44,6 +44,7 @@ textarea,
   width: 940px;
   margin-left: auto;
   margin-right: auto;
+  min-height: 768px;
 }
 
 .flex-row {
@@ -63,10 +64,6 @@ textarea,
 
 .right-lg {
   width: 220px;
-}
-
-.min-height-lg {
-  min-height: 768px;
 }
 
 

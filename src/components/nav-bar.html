@@ -1,6 +1,6 @@
 ﻿<div class="wrapper">
     <div>
-        <a href="/" class="logo">
+        <a href="/" class="logo" ripple="#fff">
             <img ng-if="!navBar.theme" src="assets/images/logo.svg" alt="其乐 Keylol.com">
             <img ng-if="navBar.theme" src="assets/images/logo-whiteout.svg" alt="其乐 Keylol.com">
             <div ng-if="!navBar.theme" class="logo-content font-myriad-keylol">
@@ -9,7 +9,9 @@
             </div>
         </a>
         <div ng-if="navBar.theme" class="theme-logo">
-            <img webp-src="{{navBar.theme.icon}}">
+            <a href="/" ripple="#fff">
+                <img webp-src="{{navBar.theme.icon}}">
+            </a>
         </div>
         <form class="search-box">
             <input type="search">

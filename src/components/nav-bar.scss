@@ -21,37 +21,62 @@ nav-bar {
   .logo {
     display: flex;
     text-decoration: none;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+    height: 64px;
+
+    &:hover {
+      background-color: rgba(#fff, 0.1);
+    }
 
     img {
       width: 48px;
       height: 48px;
-      margin-right: 10px;
     }
 
-    .logo-content p {
-      font-size: 24px;
-      margin: 0;
-      display: flex;
-      justify-content: space-between;
-      flex-direction: column;
-      color: $keylol-inverted-text;
+    .logo-content {
+      margin-left: 10px;
 
-      &:nth-of-type(2) {
-        font-size: 14px;
-        opacity: 0.6;
+      p {
+        font-size: 24px;
+        margin: 0;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        color: $keylol-inverted-text;
+
+        &:nth-of-type(2) {
+          font-size: 14px;
+          opacity: 0.6;
+        }
       }
     }
   }
 
   .theme-logo {
-    margin-left: 10px;
-    padding-left: 20px;
     display: flex;
-    max-width: 200px;
-    overflow: hidden;
+    align-items: center;
+    margin-left: 10px;
+    padding-left: 10px;
     border-left: 1px solid #fff;
-    img {
-      height: 48px;
+    height: 48px;
+
+    a {
+      display: flex;
+      overflow: hidden;
+      height: 64px;
+      align-items: center;
+      max-width: 200px;
+      padding: 0 10px;
+
+      &:hover {
+        background-color: rgba(#fff, 0.1);
+      }
+
+      img {
+        height: 48px;
+      }
     }
   }
 

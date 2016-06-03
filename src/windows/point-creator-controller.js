@@ -44,7 +44,7 @@
             ];
             this.gameTabArray = [
                 {
-                    name: 'steam 游戏',
+                    name: 'Steam 游戏',
                 },
                 {
                     name: '其他游戏',

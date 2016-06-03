@@ -31,7 +31,7 @@
                 attachSide: 'bottom',
                 align: 'center',
                 offsetX: 0,
-                offsetY: 0,
+                offsetY: 15,
                 showDelay: 0,
                 closeDelay: 0,
                 inputs: { content: this.characteristics[$index].text },

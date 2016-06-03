@@ -30,7 +30,7 @@
                     {
                         type: 'item',
                         icon: 'human-greeting',
-                        text: '好友',
+                        text: '人脉',
                     },
                     {
                         type: 'horizon',
