@@ -10,7 +10,7 @@
 
             $scope.tabArray = [
                 { state: '.articles', name: '19 篇文章' },
-                { state: '.dongtai', name: '54 则动态' },
+                { state: '.activity', name: '54 则动态' },
                 { state: '.shoucang', name: '54 目收藏' },
             ];
             $scope.$watch(() => {
@@ -21,11 +21,11 @@
                     case 'articles' :
                         $scope.currentPage = 0;
                         break;
-                    case 'dongtai' :
+                    case 'activity' :
                         $scope.currentPage = 1;
                         break;
-                    case 'shoucang' :
-                        $scope.currentPage = 1;
+                    case 'star' :
+                        $scope.currentPage = 2;
                         break;
                 }
             });

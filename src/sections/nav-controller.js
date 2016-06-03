@@ -97,6 +97,25 @@
                     { name:'动态' },
                 ];
                 this.currentPage = 0;
+            } else if (currentStateName.substr(0,10) === 'postOffice') {
+                this.inEntrance = true;
+                this.tabArray = [
+                    { state: '.socialActivity',name:'社交' },
+                    { state: '.missive',name:'公函' },
+                ];
+                $scope.$watch(() => {
+                    return $state.current.name;
+                }, () => {
+                    const subState = $state.current.name.substr(11);
+                    switch (subState) {
+                        case 'socialActivity' :
+                            this.currentPage = 0;
+                            break;
+                        case 'missive' :
+                            this.currentPage = 1;
+                            break;
+                    }
+                });
             }
 
             $scope.stateTree = stateTree;

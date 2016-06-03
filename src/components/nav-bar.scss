@@ -80,6 +80,22 @@ nav-bar {
     }
   }
 
+  .theme-alt {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 48px;
+    margin-left: 10px;
+    padding-left: 10px;
+    border-left: 1px solid #fff;
+    p {
+      margin: 0;
+      color: $keylol-inverted-text;
+    }
+    p:first-of-type { font-weight: bold; }
+    p:last-of-type { font-size: 12px;}
+  }
+
   .search-box {
     display: flex;
     margin-left: 30px;

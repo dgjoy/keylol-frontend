@@ -135,6 +135,41 @@
                 templateUrl: 'src/pages/page-timeline.html',
                 controller: 'PageTimelineController',
             })
+            .state('postOffice',{
+                url: '/post-office',
+                templateUrl: 'src/pages/post-office.html',
+                controller: 'PostOfficeController',
+            })
+            .state('postOffice.socialActivity',{
+                url: '/social-activity',
+                templateUrl: 'src/pages/social-activity.html',
+                controller: 'SocialActivityController',
+            })
+            .state('postOffice.socialActivity.approve',{
+                url: '/approve',
+                templateUrl: 'src/pages/social-activity-approve.html',
+                controller: 'SocialActivityApproveController',
+            })
+            .state('postOffice.socialActivity.follower',{
+                url: '/follower',
+                templateUrl: 'src/pages/social-activity-follower.html',
+                controller: 'SocialActivityFollowerController',
+            })
+            .state('postOffice.socialActivity.invitation',{
+                url: '/invitation',
+                templateUrl: 'src/pages/social-activity-invitation.html',
+                controller: 'SocialActivityInvitationController',
+            })
+            .state('postOffice.socialActivity.reply',{
+                url: '/reply',
+                templateUrl: 'src/pages/social-activity-reply.html',
+                controller: 'SocialActivityReplyController',
+            })
+            .state('postOffice.missive',{
+                url: '/missive',
+                templateUrl: 'src/pages/missive.html',
+                controller: 'MissiveController',
+            })
             .state('aggregation', {
                 'abstract': true,
                 template: '<div ui-view></div>',
