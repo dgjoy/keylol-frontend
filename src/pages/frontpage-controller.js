@@ -3,8 +3,8 @@
         constructor ($scope, pageHead, stateTree, pageLoad, $location, $state) {
             pageHead.setTitle('据点 - 扉页 - 其乐');
             if (!$location.url().match(/\/point\/[^\/]*\/?$/)) {
-                if (stateTree.aggregation && stateTree.aggregation.point
-                    && stateTree.aggregation.point.idCode === $state.params.point_id_code ) {
+                if (stateTree.empty || (stateTree.aggregation && stateTree.aggregation.point
+                    && stateTree.aggregation.point.idCode === $state.params.point_id_code) ) {
                     pageLoad('aggregation.point.frontpage');
                 } else {
                     pageLoad('aggregation.point', { entrance: 'Frontpage' }).then(result => {

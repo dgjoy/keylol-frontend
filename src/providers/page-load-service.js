@@ -27,8 +27,8 @@
                     }
 
                     return target;
-                }, error => {
-                    notification.error({ message: '未知错误' });
+                }, response => {
+                    notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
                 });
             } else {
                 let target = stateTree;
@@ -54,8 +54,8 @@
                         }
 
                         return target;
-                    }, error => {
-                        notification.error({ message: '未知错误' });
+                    }, response => {
+                        notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
                     });
                 }
             }

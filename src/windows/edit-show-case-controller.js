@@ -35,8 +35,8 @@
                     this.isToNext = newPage > oldPage;
                     this.list = response.data;
                     this.changePageLock = false;
-                }, error => {
-                    this.notification.error({ message: '未知错误' });
+                }, response => {
+                    this.notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
                     this.changePageLock = false;
                 });
             }

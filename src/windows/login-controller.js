@@ -233,7 +233,7 @@
                                     pwm.password.completed = false;
                                     break;
                                 default:
-                                    this.notification.error({ message: '发生未知错误，请重试或与站务职员联系' });
+                                    this.notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
                             }
                         }
                         pwm.geetestResult = null;
