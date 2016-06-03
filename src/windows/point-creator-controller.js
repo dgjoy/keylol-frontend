@@ -1,6 +1,6 @@
 ﻿(function () {
     class PointCreatorController {
-        constructor(close, $element, $animateCss, $timeout, $http, apiEndpoint, notification, window) {
+        constructor(close, $element, $animateCss, $timeout, $http, apiEndpoint, notification, window, $scope) {
             $.extend(this, {
                 close,
                 $element,
@@ -13,11 +13,11 @@
             });
 
             this.vm = {
-                SteamGame: {},
-                OtherGame: {},
-                Hardware: {},
-                Vendor: {},
-                Category: {},
+                SteamGame: { type: 'SteamGame' },
+                OtherGame: { type: 'OtherGame' },
+                Hardware: { type: 'Hardware' },
+                Vendor: { type: 'Vendor' },
+                Category: { type: 'Category' },
             };
 
             this.extra = {
@@ -53,6 +53,10 @@
             this.currentType = 0;
             this.currentGameType = 0;
             this.steamHeight = 82;
+            this.nameOfPlatformPoints = ['Origin','uPlay','战网','PlayStation','XBox','iOS','安卓',
+                'Windows UWP','GBA','NDS','3DS','Wii','WiiU','PSP'];
+            this.idCodeOfPlatformPoints = ['ORGIN','UPLAY','BTNET','PLYSN','MSBOX','APIOS','ANDRD',
+                'MSUWP','GMBYA','NTDDS','NT3DS','NDWII','NWIIU','SYPSP'];
         }
 
         changeType(index, forGame) {
@@ -106,15 +110,17 @@
                 if (!response.data.failed) {
                     this.extra.SteamGame.thumbnailImage = response.data.thumbnailImage;
                     this.extra.SteamGame.avatarImage = response.data.avatarImage;
+                    this.extra.SteamGame.headerImage = response.data.headerImage;
                     this.vm.SteamGame.englishName = response.data.englishName;
+                    this.vm.SteamGame.steamAppId = appId;
                     this.steamExpanded = true;
                     this.steamHeight = 500;
                 } else {
                     this.extra.SteamGame.linkError = response.data.failReason;
                 }
                 this.captureLock = false;
-            }, error => {
-                this.notification.error({ message: '发生未知错误，请重试或与站务职员联系' });
+            }, response => {
+                this.notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
                 this.captureLock = false;
             });
         }
@@ -142,7 +148,6 @@
                     return popup.close;
                 }).then(result => {
                     if (result) {
-                        console.log(modelType, imageType, this.vm[modelType], result);
                         this.vm[modelType][imageType] = result;
                     }
                 });
@@ -150,21 +155,40 @@
         }
 
         submit (type) {
-            console.log(`${type} submit`);
-            this.close();
-            this.window.show({
-                templateUrl: 'src/windows/point-create-success.html',
-                controller: 'PointCreateSuccessController',
-                controllerAs: 'pointCreateSuccess',
-                inputs: {
-                    pointObject: {
-                        englishName: 'Dota 2',
-                        chineseName: '刀塔',
-                        idCode: 'DOTA2',
-                        avatarImage: '//storage.keylol.com/37ba4e25767b3b4c1417f4c625e88492.jpg',
-                        headerImage: 'http://dota2walls.com/wp-content/uploads/2015/01/shadow-from-the-dire-dota-2-wallpaper.png',
+            console.log(`${type} submit`, this.vm[type]);
+            if (this.submitLock) {
+                return;
+            }
+
+            this.submitLock = true;
+            if (type === 'OtherGame') {
+                const platformPoints = [];
+                for (let i = 0;i < this.extra.OtherGame.platformPoints.length;i++) {
+                    const platformIdCode = this.idCodeOfPlatformPoints[this.extra.OtherGame.platformPoints[i]];
+                    if (platformIdCode) {
+                        platformPoints.push(platformIdCode);
+                    }
+                }
+                this.vm.OtherGame.platformPoints = platformPoints;
+            }
+
+            this.$http.post(`${this.apiEndpoint}point`, this.vm[type]).then(response => {
+                const pointObject = this.vm[type];
+                if (type === 'SteamGame') {
+                    $.extend(pointObject, this.extra[type]);
+                }
+                this.window.show({
+                    templateUrl: 'src/windows/point-create-success.html',
+                    controller: 'PointCreateSuccessController',
+                    controllerAs: 'pointCreateSuccess',
+                    inputs: {
+                        pointObject,
                     },
-                },
+                });
+                this.close();
+            }, response => {
+                this.notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
+                this.submitLock = false;
             });
         }
     }

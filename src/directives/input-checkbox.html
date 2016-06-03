@@ -1,0 +1,11 @@
+<a class="item" href="" ng-repeat="name in names" ng-click="toggle($index)">
+    <div class="outer" ng-class="{'theme': exists($index)}" ripple="{{exists($index) ? theme.light || 'light' : ''}}" ripple-position="center" ripple-no-background="true">
+        <div class="hole"></div>
+        <div class="object" ng-style="{'background-color': theme.light || ''}">
+            <svg aria-hidden="true">
+                <use ng-href="{{'check' | iconSvgUrl }}" xlink:href=""></use>
+            </svg>
+        </div>
+    </div>
+    <p class="text">{{name}}</p>
+</a>

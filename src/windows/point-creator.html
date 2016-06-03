@@ -57,7 +57,7 @@
                             </div>
                             <div class="platform">
                                 <label>载体或平台</label>
-                                <input-checkbox object="['Origin','uPlay','战网','PlayStation','XBox','iOS','安卓','Windows UWP','GBA','NDS','3DS','Wii','WiiU','PSP']" model="[]"></input-checkbox>
+                                <input-checkbox names="pointCreator.nameOfPlatformPoints" ng-model="pointCreator.extra.OtherGame.platformPoints"></input-checkbox>
                             </div>
                             <div class="info-detail">
                                 <div class="text-content">
@@ -82,8 +82,7 @@
                             </div>
                         </div>
                         <div class="actions">
-                            <raised-button type="theme" text="开设" click="pointCreator.submit('OtherGame')"></raised-button>
-                            <raised-button type="theme" text="开设" click="pointCreator.submit('OtherGame')" disabled="pointCreator.submitLock || !(pointCreator.vm.OtherGame.englishName && pointCreator.vm.OtherGame.headerImage && pointCreator.vm.OtherGame.avatarImage && pointCreator.vm.OtherGame.idCode.length === 5)"></raised-button>
+                            <raised-button type="theme" text="开设" click="pointCreator.submit('OtherGame')" disabled="pointCreator.submitLock || !(pointCreator.vm.OtherGame.englishName && pointCreator.vm.OtherGame.headerImage && pointCreator.vm.OtherGame.avatarImage && pointCreator.vm.OtherGame.idCode.length === 5 && pointCreator.extra.OtherGame.platformPoints.length > 0)"></raised-button>
                             <flat-button type="inertia" text="放弃" click="pointCreator.close()"></flat-button>
                         </div>
                     </form>
