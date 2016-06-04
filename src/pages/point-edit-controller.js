@@ -3,9 +3,7 @@
         constructor ($scope, pageHead, stateTree, $state, $location, $timeout) {
             pageHead.setTitle('据点 - 编辑 - 其乐');
             if ($location.url().match(/\/point\/[^\/]*\/edit\/?$/)) {
-                $timeout(() => {
-                    $state.go('.info', {}, { location: false });
-                });
+                $state.go('.info', {}, { location: false });
             }
 
             $scope.tabArray = [

@@ -2,15 +2,31 @@
     <section-header header="pointEditSection.object.header" theme="::pointEditSection.theme"></section-header>
     <div class="edit-card">
         <ul>
-            <li ng-repeat="item in pointEditSection.object.list">
+            <li ng-repeat="item in pointEditSection.object.list track by $index">
                 <div class="title">
                     <p>{{item.title}}</p>
                     <p>{{item.subTitle}}</p>
                 </div>
-                <p class="content" ng-class="{disabled: item.editDisabled}">{{item.content}}</p>
+                <p class="content" ng-class="{disabled: item.editDisabled}">{{item.value}}</p>
                 <input-switch ng-if="item.type==='switch'" model="true" theme="::pointEditSection.theme"></input-switch>
                 <icon-button ng-if="!item.editDisabled && item.type !== 'switch'" click="pointEditSection.showEditPopup(event, $index)" show-popup="pointEditSection.showPopups[$index]" icon="new-article"></icon-button>
             </li>
         </ul>
+        <div ng-if="pointEditSection.object.extraList" class="extra" ng-style="{height: pointEditSection.extraHeight}">
+            <ul>
+                <li ng-repeat="item in pointEditSection.object.extraList track by $index">
+                    <div class="title">
+                        <p>{{item.title}}</p>
+                        <p>{{item.subTitle}}</p>
+                    </div>
+                    <p class="content" ng-class="{disabled: item.editDisabled}">{{item.value}}</p>
+                    <input-switch ng-if="item.type==='switch'" model="true" theme="::pointEditSection.theme"></input-switch>
+                    <icon-button ng-if="!item.editDisabled && item.type !== 'switch'" click="pointEditSection.showEditPopup(event, $index + pointEditSection.object.list.length)" show-popup="pointEditSection.showPopups[$index + pointEditSection.object.list.length]" icon="new-article"></icon-button>
+                </li>
+            </ul>
+        </div>
+        <div class="actions">
+            <flat-button ng-if="pointEditSection.object.extraList && !pointEditSection.extraHeight" click="pointEditSection.expand()" type="light" theme-color="pointEditSection.theme.light" text="展开更多"></flat-button>
+        </div>
     </div>
 </div>

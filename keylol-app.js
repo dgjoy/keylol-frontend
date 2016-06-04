@@ -211,22 +211,36 @@
                 templateUrl: 'src/pages/point-edit.html',
                 controller: 'PointEditController',
                 onExit (stateTree) {
+                    console.log('exit point edit');
+                    delete stateTree.aggregation.point.edit;
                 },
             })
             .state('aggregation.point.edit.info', {
                 url: '/info',
                 templateUrl: 'src/pages/edit-info.html',
                 controller: 'EditInfoController',
+                onExit (stateTree) {
+                    console.log('exit point edit style');
+                    delete stateTree.aggregation.point.edit.info;
+                },
             })
             .state('aggregation.point.edit.style', {
                 url: '/style',
                 templateUrl: 'src/pages/edit-style.html',
                 controller: 'EditStyleController',
+                onExit (stateTree) {
+                    console.log('exit point edit info');
+                    delete stateTree.aggregation.point.edit.style;
+                },
             })
             .state('aggregation.point.edit.log', {
                 url: '/log',
                 templateUrl: 'src/pages/edit-log.html',
                 controller: 'EditLogController',
+                onExit (stateTree) {
+                    console.log('exit point edit');
+                    delete stateTree.aggregation.point.edit;
+                },
             })
             .state('aggregation.user', {
                 url: '/user/:userIdCode',

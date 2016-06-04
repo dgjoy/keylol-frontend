@@ -52,12 +52,12 @@
                     }
                     if (errorResponse && errorResponse.status === 400) {
                         // Is model state error
-                        for (const error in errorResponse.data.ModelState) {
-                            if (errorResponse.data.ModelState.hasOwnProperty(error) && typeof(error) !== 'function') {
+                        for (const error in errorResponse.data.modelState) {
+                            if (errorResponse.data.modelState.hasOwnProperty(error) && typeof(error) !== 'function') {
                                 return self.show({
                                     type: 'error',
                                     icon: 'close',
-                                    message: errorResponse.data.ModelState[error][0],
+                                    message: errorResponse.data.modelState[error][0],
                                 });
                             }
                         }

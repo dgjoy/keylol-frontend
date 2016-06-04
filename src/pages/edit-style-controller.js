@@ -1,7 +1,14 @@
 ﻿(function () {
     class EditStyleController {
-        constructor ($scope, pageHead, stateTree) {
+        constructor ($scope, pageHead, stateTree, pageLoad, $state) {
             pageHead.setTitle('据点 - 编辑 - 样式 - 其乐');
+
+            if (stateTree.empty || (stateTree.aggregation && stateTree.aggregation.point
+                && stateTree.aggregation.point.basicInfo && stateTree.aggregation.point.basicInfo.idCode === $state.params.point_id_code) ) {
+                pageLoad('aggregation.point.edit.style');
+            } else {
+                pageLoad('aggregation.point', { entrance: 'EditStyle' });
+            }
 
             $scope.images = {
                 header: {
