@@ -73,6 +73,12 @@ menu {
     .for-point {
       margin-top: -10px;
 
+      .game-count {
+        color: $keylol-inertia-text;
+        font-size: 12px;
+        padding:5px 15px 0;
+      }
+
       point-basic-info {
         margin: 20px 15px 10px 15px;
       }

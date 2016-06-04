@@ -1,12 +1,29 @@
-﻿<div style="margin-top: 30px" class="flex-row" ng-if="stateTree.aggregation.point.frontpage&&stateTree.aggregation.point.basicInfo">
-    <div class="left-middle-lg row-sm">
+﻿<div style="margin-top: 30px" class="flex-row" ng-if="stateTree.aggregation.point.frontpage&&stateTree.aggregation.point.basicInfo" ng-switch="stateTree.aggregation.point.basicInfo.type">
+    <div class="left-middle-lg row-sm" ng-switch-default>
+        <common-collection type="{
+                mainTitle: '开发',
+                subTitle: '旗下 238 部作品中有 145 部为其开发',
+            }" theme="stateTree.pointTheme" style="margin-bottom: 10px;"></common-collection>
+        <common-collection type="{
+                mainTitle: '发行',
+                subTitle: '旗下 238 部作品中有 107 部为其发行',
+            }" theme="stateTree.pointTheme" style="margin-bottom: 30px;"></common-collection>
+        <latest-articles is-empty="true" theme="stateTree.pointTheme"></latest-articles>
+    </div>
+    <div class="left-middle-lg row-sm" ng-switch-when="hardware">
+        <point-associations theme="stateTree.pointTheme" style="margin-bottom: 40px;"></point-associations>
+        <short-review theme="stateTree.pointTheme" style="margin-bottom: 50px;"></short-review>
+        <media-center theme="stateTree.pointTheme" style="margin-bottom: 40px;"></media-center>
+        <latest-articles is-empty="true" theme="stateTree.pointTheme"></latest-articles>
+    </div>
+    <div class="left-middle-lg row-sm" ng-switch-when="game">
         <point-associations theme="stateTree.pointTheme" style="margin-bottom: 40px;"></point-associations>
         <short-review theme="stateTree.pointTheme" style="margin-bottom: 50px;"></short-review>
         <media-center theme="stateTree.pointTheme" style="margin-bottom: 40px;"></media-center>
         <addictive-users theme="stateTree.pointTheme"></addictive-users>
         <similar-games ng-if="::(stateTree.aggregation.point.frontpage.similarPoints.length > 0)" cards="::(stateTree.aggregation.point.frontpage.similarPoints)" theme="stateTree.pointTheme" style="position: absolute;width: 100%;left: 0;"></similar-games>
         <article-collection theme="stateTree.pointTheme" style="margin-top: 435px;margin-bottom: 30px"></article-collection>
-        <latest-articles ng-if="false" theme="stateTree.pointTheme"></latest-articles>
+        <latest-articles is-empty="true" theme="stateTree.pointTheme"></latest-articles>
     </div>
     <div class="right-lg hidden-sm flex-column">
         <point-menu ng-if="stateTree.aggregation.point.basicInfo" style="margin-bottom: 20px" object="::stateTree.aggregation.point.basicInfo"></point-menu>

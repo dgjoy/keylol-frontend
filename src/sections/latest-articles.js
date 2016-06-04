@@ -55,6 +55,7 @@
             headerImage: '<',
             totalPage: '<',
             theme: '<',
+            isEmpty: '<',
         },
     });
 }());

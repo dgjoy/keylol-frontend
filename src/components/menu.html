@@ -46,6 +46,24 @@
         <div class="horizon"></div>
     </div>
 
+    <div ng-switch-when="point-other" class="for-point">
+        <point-basic-info ng-if="!menu.object.header.titleCoverImage" point="menu.object.header.point"></point-basic-info>
+        <img ng-if="menu.object.header.titleCoverImage" class="cover" webp-src="{{ menu.object.header.titleCoverImage | coverUrl}}" alt="Dota 2">
+        <div class="game-count">{{menu.object.header.gameCount}}</div>
+        <div class="reputation-info">
+            <span>
+                <span class="reputation-number" ng-class="{
+                    awesome: menu.object.header.votePercent >= 8,
+                    good: menu.object.header.votePercent >= 6 && menu.object.header.votePercent < 8,
+                    'not-bad': menu.object.header.votePercent >= 4 && menu.object.header.votePercent < 6,
+                    bad: menu.object.header.votePercent >= 2 && menu.object.header.votePercent < 4,
+                    terrible: menu.object.header.votePercent < 2
+                }">{{menu.object.header.votePercent}}</span> / 10
+            </span>
+            <vote-circle review="menu.object.header.votePercent" gray-background="true"></vote-circle>
+        </div>
+    </div>
+
     <div ng-switch-when="dossier" class="for-dossier">
         <div class="user-basic-info">
             <img webp-src="//storage.keylol.com/fd0dfd38572adff068251606aa282b3f.jpg!avatar.medium" alt="npc之舟" class="avatar">

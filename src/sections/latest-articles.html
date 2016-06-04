@@ -5,7 +5,14 @@
     </div>
     <fab icon="new-article" type="accent" theme-color="latestArticles.theme.main"></fab>
 </div>
-<div class="latest-wrapper" ng-style="{height: (latestArticles.articles.length > 5 && !latestArticles.hasBeenExpanded) ? 434 : latestArticles.articles.length * 87}" ng-class="{
+<div ng-if="latestArticles.isEmpty" class="empty">
+    <img src="assets/images/Portal_Cake_icon.png" alt="">
+    <div class="bundle">
+        <p class="font-myriad-keylol">这里空空如也，连块蛋糕都没有。</p>
+        <p>来一发投稿如何？</p>
+    </div>
+</div>
+<div ng-if="!latestArticles.isEmpty" class="latest-wrapper" ng-style="{height: (latestArticles.articles.length > 5 && !latestArticles.hasBeenExpanded) ? 434 : latestArticles.articles.length * 87}" ng-class="{
     'to-next' : latestArticles.isToNext,
     'to-previous' : !latestArticles.isToNext
     }">
@@ -31,7 +38,7 @@
         </li>
     </ul>
 </div>
-<div class="footer clearfix">
+<div ng-if="!latestArticles.isEmpty" class="footer clearfix">
     <flat-button ng-if="latestArticles.articles.length > 5 && !latestArticles.hasBeenExpanded" text="展开更多" type="light-text" click="latestArticles.expandMore()"></flat-button>
     <pagination ng-if="latestArticles.hasBeenExpanded" on-page-changed="::latestArticles.changePage(newPage, oldPage)" total="::latestArticles.totalPage" current="latestArticles.currentPage"></pagination>
 </div>

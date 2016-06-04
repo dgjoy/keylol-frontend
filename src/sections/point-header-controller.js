@@ -34,23 +34,37 @@
                 englishName:this.object.englishName,
             };
 
-            this.categories = '';
-            for (let i = 0;i !== this.object.categories.length;i++) {
-                this.categories += this.object.categories[i].chineseName;
-                if (i !== this.object.categories.length - 1) {
-                    this.categories += ' / ';
+            if (this.object.type === 'game') {
+                this.categories = '';
+                for (let i = 0;i !== this.object.categories.length;i++) {
+                    this.categories += this.object.categories[i].chineseName;
+                    if (i !== this.object.categories.length - 1) {
+                        this.categories += ' / ';
+                    }
                 }
-            }
 
-            this.vendors = '';
-            for (let i = 0;i !== this.object.vendors.length;i++) {
-                const names = utils.getPreferredPointName(this.object.vendors[i]);
-                this.vendors += names[0];
-                if (names[1]) {
-                    this.vendors += ` / ${names[1]}`;
+                this.vendors = '';
+                for (let i = 0;i !== this.object.vendors.length;i++) {
+                    const names = utils.getPreferredPointName(this.object.vendors[i]);
+                    this.vendors += names[0];
+                    if (names[1]) {
+                        this.vendors += ` / ${names[1]}`;
+                    }
+                    if (i !== this.object.vendors.length - 1) {
+                        this.vendors += ' / ';
+                    }
                 }
-                if (i !== this.object.vendors.length - 1) {
-                    this.vendors += ' / ';
+            } else {
+                switch (this.object.type) {
+                    case 'category':
+                        this.gameCount = `此类共 ${this.object.gameCount} 部作品`;
+                        break;
+                    case 'platform':
+                        this.gameCount = `平台上共 ${this.object.gameCount} 部作品`;
+                        break;
+                    case 'vendor':
+                        this.gameCount = `旗下共 ${this.object.gameCount} 部作品`;
+                        break;
                 }
             }
         }

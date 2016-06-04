@@ -1,9 +1,12 @@
 ﻿<div class="background" ng-style="{transform: pointHeader.transform}" webp-background="http://dota2walls.com/wp-content/uploads/2015/01/shadow-from-the-dire-dota-2-wallpaper.png"></div>
-<div class="info">
+<div class="info" ng-switch="pointHeader.object.type">
     <point-basic-info point="pointHeader.point"></point-basic-info>
-    <div class="attributes">
+    <div class="attributes" ng-switch-when="game">
         <p>{{pointHeader.categories}}</p>
         <p>{{pointHeader.vendors}}</p>
+    </div>
+    <div class="attributes" ng-switch-default>
+        <p>{{pointHeader.gameCount}}</p>
     </div>
     <div class="actions">
         <icon-button icon="dots-vertical" type="invert"></icon-button>
