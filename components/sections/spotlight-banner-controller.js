@@ -30,8 +30,8 @@
                         imageSrc: "assets/images/spotlight/touch-fish-community.png",
                         link: "article/LEEEE/4"
                     }, {
-                        imageSrc: "assets/images/spotlight/cool-discount.png",
-                        link: "article/23333/7"
+                        imageSrc: "assets/images/spotlight/refactor-preview.png",
+                        link: "article/LEEEE/12"
                     }, {
                         imageSrc: "assets/images/spotlight/zhihu-keylol.png",
                         link: "article/HILOA/15"
