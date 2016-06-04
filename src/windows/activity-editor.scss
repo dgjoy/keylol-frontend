@@ -1,13 +1,15 @@
 .window-activity-editor {
   .window {
     @include keylol-shadow-3();
-    padding: 15px 15px 20px;
     width: 640px;
-    background-color: $keylol-card;
+    background-color: $keylol-inverted-text;
 
     .related {
+      @include keylol-shadow-1();
+      background-color: $keylol-card;
       display: flex;
       align-items: center;
+      padding: 15px;
 
       text-area {
         flex-grow: 0;
@@ -52,10 +54,6 @@
     }
 
     .edit {
-      background-color: $keylol-inverted-text;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16) inset, 0 -2px 5px rgba(0, 0, 0, 0.16) inset;
-      margin: 15px -15px 20px;
-
       textarea {
         box-sizing: border-box;
         width: 100%;
@@ -69,6 +67,9 @@
     .actions {
       display: flex;
       align-items: center;
+      padding:20px 15px;
+      background-color: $keylol-card;
+      box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.16);
 
       a {
         flex-grow: 1;

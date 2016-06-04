@@ -124,6 +124,7 @@
     overflow: hidden;
     display: block;
     position: relative;
+    background-color: $keylol-inverted-text;
 
     &.left {
       >.swap-helper.swap-animation.ng-enter,
@@ -212,11 +213,10 @@
 
 .login-api {
   display: block;
+  background-color: $keylol-inverted-text;
 
   .inner {
     height: 95px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16) inset,0 -2px 5px rgba(0, 0, 0, 0.16) inset;
-    background-color: $keylol-inverted-text;
     display: flex;
     align-items: center;
     padding: 0 15px;
@@ -260,7 +260,14 @@
     }
   }
 
+  phase {
+    @include keylol-shadow-1();
+    background-color: $keylol-card;
+  }
+
   .action {
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.16);
+    background-color: $keylol-card;
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -272,11 +279,10 @@
 
 .login-steam-robot {
   display: block;
+  background-color: $keylol-inverted-text;
 
   .inner {
     height: 95px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16) inset,0 -2px 5px rgba(0, 0, 0, 0.16) inset;
-    background-color: $keylol-inverted-text;
     display: flex;
     align-items: center;
     padding: 0 15px;
@@ -325,7 +331,14 @@
     }
   }
 
+  phase {
+    @include keylol-shadow-1();
+    background-color: $keylol-card;
+  }
+
   .action {
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.16);
+    background-color: $keylol-card;
     display: flex;
     justify-content: flex-end;
     align-items: center;
