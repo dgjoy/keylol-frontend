@@ -99,6 +99,17 @@
                         }
                     }
                     closeValue = closeValue.toString();
+                    this.item.selects = this.model;
+                    break;
+                case 'point':
+                    closeValue = [];
+                    submitObj[this.item.key] = [];
+                    for (let i = 0;i < this.model.length;i++) {
+                        submitObj[this.item.key].push(this.model[i].id);
+                        closeValue.push(this.utils.getPreferredPointName(this.model[i])[0]);
+                    }
+                    closeValue = closeValue.toString();
+                    this.item.selects = this.model;
                     break;
             }
 
