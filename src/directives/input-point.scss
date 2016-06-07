@@ -3,25 +3,20 @@ input-point {
 }
 
 input-point .wrapper {
-  height: 42px;
   display: flex;
   align-items: flex-end;
+  flex-wrap: wrap;
   border-bottom: 1px solid $keylol-inertia-shape;
+  padding-bottom: 1px;
 
   &.theme {
     border-bottom: 2px solid $keylol-light-theme;
-
-    input[type="text"] {
-      padding-bottom: 9px;
-    }
-    .point {
-      margin-bottom: 9px;
-    }
+    padding-bottom: 0;
   }
 
   input[type="text"] {
     flex-grow: 1;
-    padding: 0 0 10px;
+    padding: 13px 0 9px 0;
     border: 0;
     outline: 0;
     background-color: transparent;
@@ -30,8 +25,8 @@ input-point .wrapper {
   .point {
     flex-grow: 0;
     height: 32px;
-    margin-bottom: 10px;
     border-radius: 16px;
+    margin-bottom: 9px;
     margin-right: 10px;
     background-color: #ddd;
     display: flex;

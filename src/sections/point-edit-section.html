@@ -34,7 +34,7 @@
                 <icon-button ng-if="!item.editDisabled && item.type !== 'switch'" click="pointEditSection.showEditPopup(event, $index)" show-popup="pointEditSection.showPopups[$index]" icon="new-article"></icon-button>
             </li>
         </ul>
-        <div ng-if="pointEditSection.object.extraList" class="extra" ng-style="{height: pointEditSection.extraHeight}">
+        <div ng-if="pointEditSection.object.extraList && pointEditSection.object.extraList.length > 0" class="extra" ng-style="{height: pointEditSection.extraHeight}">
             <ul>
                 <li ng-repeat="item in pointEditSection.object.extraList track by $index">
                     <div class="title">
@@ -48,7 +48,7 @@
             </ul>
         </div>
         <div class="actions">
-            <flat-button ng-if="pointEditSection.object.extraList && !pointEditSection.extraHeight" click="pointEditSection.expand()" type="light" theme-color="pointEditSection.theme.light" text="展开更多"></flat-button>
+            <flat-button ng-if="pointEditSection.object.extraList && pointEditSection.object.extraList.length > 0 && !pointEditSection.extraHeight" click="pointEditSection.expand()" type="light" theme-color="pointEditSection.theme.light" text="展开更多"></flat-button>
         </div>
     </div>
 </div>

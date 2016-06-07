@@ -50,6 +50,7 @@
             error:'<',
             limit:'<',
             theme:'<',
+            whitelist: '<',
         },
     });
 }());

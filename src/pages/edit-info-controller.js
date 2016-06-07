@@ -1,6 +1,6 @@
 ﻿(function () {
     class EditInfoController {
-        constructor ($scope, pageHead, stateTree, pageLoad, $state, utils) {
+        constructor ($scope, pageHead, stateTree, pageLoad, $state, utils, pointAttributes) {
             pageHead.setTitle('据点 - 编辑 - 资料 - 其乐');
 
             let fetchPromise;
@@ -245,7 +245,10 @@
 
                 $scope.ways = ways;
 
-                $scope.relative = {
+                /**
+                 * deal with relative obj
+                 */
+                const relative = {
                     submitLink,
                     header: {
                         mainTitle: '关联',
@@ -254,34 +257,90 @@
                     list: [
                         {
                             title: '要素',
-                            content: '多人游戏、合作',
+                            keys: [],
+                            type: 'checkbox',
+                            value: '',
+                            selects: [],
+                            names: [],
                         },
                         {
                             title: '开发厂',
-                            content: 'Valve',
+                            key: 'developerPoints',
+                            type: 'point',
+                            whitelist: ['vendor'],
+                            value: '',
+                            selects: stateTree.aggregation.point.edit.info.developerPoints,
                         },
                         {
                             title: '发行商',
-                            content: 'Valve',
+                            key: 'publisherPoints',
+                            type: 'point',
+                            whitelist: ['vendor'],
+                            value: '',
+                            selects: stateTree.aggregation.point.edit.info.publisherPoints,
                         },
                         {
                             title: '代理',
-                            content: '完美世界',
+                            key: 'resellerPoints',
+                            type: 'point',
+                            whitelist: ['vendor'],
+                            value: '',
+                            selects: stateTree.aggregation.point.edit.info.resellerPoints,
                         },
                         {
                             title: '流派',
-                            content: '免费游戏、动作、策略',
+                            key: 'genrePoints',
+                            type: 'point',
+                            whitelist: ['category'],
+                            value: '',
+                            selects: stateTree.aggregation.point.edit.info.genrePoints,
                         },
                         {
                             title: '特性',
-                            content: '团队导向、免费游戏、多人、MOBA、策略',
+                            key: 'tagPoints',
+                            type: 'point',
+                            whitelist: ['category'],
+                            value: '',
+                            selects: stateTree.aggregation.point.edit.info.tagPoints,
                         },
                         {
                             title: '系列',
-                            content: '信仰',
+                            key: 'seriesPoints',
+                            type: 'point',
+                            whitelist: ['category'],
+                            value: '',
+                            selects: stateTree.aggregation.point.edit.info.seriesPoints,
                         },
                     ],
                 };
+
+                const attributes = relative.list[0];
+                const attributeNameArray = [];
+                let attributeCount = 0;
+                for (const attr in pointAttributes) {
+                    if (pointAttributes.hasOwnProperty(attr)) {
+                        attributes.keys.push(attr);
+                        attributes.names.push(pointAttributes[attr].text);
+                        if (stateTree.aggregation.point.edit.info[attr]) {
+                            attributes.selects.push(attributeCount);
+                            attributeNameArray.push(pointAttributes[attr].text);
+                        }
+                        attributeCount++;
+                    }
+                }
+                attributes.value = attributeNameArray.toString();
+
+                for (let i = 1;i < relative.list.length;i++) {
+                    const section = relative.list[i];
+                    const nameArray = [];
+                    for (let j = 0;j < stateTree.aggregation.point.edit.info[section.key].length;j++) {
+                        nameArray.push(utils.getPreferredPointName(stateTree.aggregation.point.edit.info[section.key][j])[0]);
+                    }
+                    section.value = nameArray.toString();
+                }
+
+                $scope.relative = relative;
+                
                 $scope.schedule = {
                     submitLink,
                     header: {

@@ -1,7 +1,7 @@
-﻿<div class="wrapper" class="{{state}}">
-    <div class="point" ng-repeat="point in pointArray">
-        <img webp-src="{{::point.avatarImage | avatarUrl}}" alt="{{::point.names[0]}}">
-        <p>{{::point.chineseName}}</p>
+﻿<div class="wrapper {{state}}">
+    <div class="point" ng-repeat="point in pointArray track by point.id">
+        <img webp-src="{{::point.avatarImage | avatarUrl}}" alt="{{utils.getPreferredPointName(point)[0]}}">
+        <p>{{utils.getPreferredPointName(point)[0]}}</p>
         <svg aria-hidden="true" ng-click="deleteSelectorPoint($index)">
             <use ng-href="{{'close' | iconSvgUrl }}" xlink:href=""></use>
         </svg>

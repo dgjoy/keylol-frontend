@@ -61,6 +61,8 @@
                             this.currentPage = 1;
                             break;
                         case 'edit' :
+                        case 'edit.info' :
+                        case 'edit.style' :
                             this.currentPage = 3;
                             break;
                     }

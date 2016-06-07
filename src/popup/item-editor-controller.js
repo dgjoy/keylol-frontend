@@ -16,18 +16,13 @@
                 case 'text':
                 case 'appId':
                 case 'color':
+                case 'avatar':
                     this.model = item.value;
                     break;
                 case 'checkbox':
-                    this.model = [];
-                    for (let i = 0;i < item.selects.length;i++) {
-                        this.model.push(item.selects[i]);
-                    }
+                case 'point':
+                    this.model = item.selects;
                     break;
-                case 'thumbnail':
-                case 'cover':
-                case 'avatar':
-                    this.model = item.value; 
             }
         }
 
@@ -71,21 +66,36 @@
                     closeValue = this.model;
                     break;
                 case 'checkbox':
-                    submitObj[this.item.key] = [];
                     closeValue = [];
-                    for (let i = 0;i < this.model.length;i++) {
-                        const name = this.item.names[this.model[i]];
-                        let value;
-                        if (this.item.values) {
-                            value = this.item.values[this.model[i]];
-                        } else {
-                            value = name;
+                    if (this.item.key) {
+                        submitObj[this.item.key] = [];
+                        for (let i = 0;i < this.model.length;i++) {
+                            const name = this.item.names[this.model[i]];
+                            let value;
+                            if (this.item.values) {
+                                value = this.item.values[this.model[i]];
+                            } else {
+                                value = name;
+                            }
+                            if (name) {
+                                closeValue.push(name);
+                            }
+                            if (value) {
+                                submitObj[this.item.key].push(value);
+                            }
                         }
-                        if (name) {
-                            closeValue.push(name);
-                        }
-                        if (value) {
-                            submitObj[this.item.key].push(value);
+                    } else if (this.item.keys) {
+                        for (let i = 0;i < this.item.keys.length;i++) {
+                            if (this.model.indexOf(i) > -1) {
+                                submitObj[this.item.keys[i]] = true;
+                                let name;
+                                if (name = this.item.names[i]) {
+                                    closeValue.push(name);
+                                }
+                                closeValue.push();
+                            } else {
+                                submitObj[this.item.keys[i]] = false;
+                            }
                         }
                     }
                     closeValue = closeValue.toString();
@@ -102,7 +112,7 @@
         }
 
         colorCheck(str) {
-            return /^#[0-9a-f]{6}$/i.test(str);
+            return /^#[0-9a-f]{3}(?:[0-9a-f]{3})?$/i.test(str);
         }
     }
 

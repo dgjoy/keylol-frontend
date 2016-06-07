@@ -220,7 +220,7 @@
                 templateUrl: 'src/pages/edit-info.html',
                 controller: 'EditInfoController',
                 onExit (stateTree) {
-                    console.log('exit point edit style');
+                    console.log('exit point edit info');
                     delete stateTree.aggregation.point.edit.info;
                 },
             })
@@ -229,7 +229,7 @@
                 templateUrl: 'src/pages/edit-style.html',
                 controller: 'EditStyleController',
                 onExit (stateTree) {
-                    console.log('exit point edit info');
+                    console.log('exit point edit style');
                     delete stateTree.aggregation.point.edit.style;
                 },
             })
@@ -238,7 +238,7 @@
                 templateUrl: 'src/pages/edit-log.html',
                 controller: 'EditLogController',
                 onExit (stateTree) {
-                    console.log('exit point edit');
+                    console.log('exit point edit log');
                     delete stateTree.aggregation.point.edit;
                 },
             })

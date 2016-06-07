@@ -148,8 +148,12 @@
                                                             return;
                                                         e.stopPropagation();
                                                     }
-                                                    if (e.target !== window.$element[0] && !$.contains(window.$element[0], e.target))
-                                                        close();
+                                                    if (e.target !== window.$element[0] && !$.contains(window.$element[0], e.target)) {
+                                                        const popups = $('main[ui-view] > popup');
+                                                        if (window.$element[0] === popups[popups.length - 1]) {
+                                                            close();
+                                                        }
+                                                    }
                                                 };
                                                 document.body.addEventListener('click', onBodyClick, true);
                                                 return window.close;
