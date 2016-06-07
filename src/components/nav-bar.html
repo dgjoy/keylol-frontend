@@ -8,12 +8,12 @@
                 <p>Keylol.com</p>
             </div>
         </a>
-        <div ng-if="navBar.theme" class="theme-logo">
+        <div ng-if="navBar.theme.logo" class="theme-logo">
             <a href="/" ripple="#fff">
                 <img webp-src="{{navBar.theme.icon}}">
             </a>
         </div>
-        <div ng-if="false" class="theme-alt">
+        <div ng-if="navBar.theme && !navBar.theme.logo" class="theme-alt">
             <p>程晓峰</p>
             <p>keylol.com/user/haack</p>
         </div>

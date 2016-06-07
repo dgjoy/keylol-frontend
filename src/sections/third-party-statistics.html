@@ -1,6 +1,6 @@
 ﻿<div class="header" style="{{::(thirdPartyStatistics.theme.main ? 'background-color: ' + thirdPartyStatistics.theme.main + ';' : '')}}">
     <div class="theme-logo">
-        <img webp-src="{{thirdPartyStatistics.theme.icon | uriRelocate}}">
+        <img ng-if="thirdPartyStatistics.theme.logo" webp-src="{{thirdPartyStatistics.theme.logo | uriRelocate}}">
     </div>
     <div class="some-times">
         <div class="other-times">

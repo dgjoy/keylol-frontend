@@ -1,4 +1,4 @@
-﻿<div class="background" ng-style="{transform: pointHeader.transform}" webp-background="http://dota2walls.com/wp-content/uploads/2015/01/shadow-from-the-dire-dota-2-wallpaper.png"></div>
+﻿<div class="background" ng-style="{transform: pointHeader.transform}" webp-background="{{pointHeader.object.headerImage | backgroundUrl}}"></div>
 <div class="info" ng-switch="pointHeader.object.type">
     <point-basic-info point="pointHeader.point"></point-basic-info>
     <div class="attributes" ng-switch-when="game">

@@ -1,7 +1,7 @@
-﻿<nav-bar theme="::nav.theme" ng-class="{shadowed: nav.hasShadow}" style="{{::(nav.theme.main ? 'background-color: ' + nav.theme.main + ';' : '')}}"></nav-bar>
+﻿<nav-bar theme="nav.theme" ng-class="{shadowed: nav.hasShadow}" style="{{nav.theme.main ? 'background-color: ' + nav.theme.main + ';' : ''}}"></nav-bar>
 <point-header ng-if="nav.inPoint&&stateTree.aggregation.point.basicInfo" object="stateTree.aggregation.point.basicInfo" theme="::nav.theme"></point-header>
 <user-header ng-if="nav.inUser" theme="::nav.theme"></user-header>
 <div class="fake-tabs" ng-if="nav.inEntrance"></div>
 <div style="width:940px;margin:auto;">
-    <tabs style="{{::(nav.theme.light ? 'background-color: ' + nav.theme.light + ';' : '')}}" tab-array="::nav.tabArray" cur-tab="nav.currentPage"></tabs>
+    <tabs style="{{nav.theme.light ? 'background-color: ' + nav.theme.light + ';' : ''}}" tab-array="::nav.tabArray" cur-tab="nav.currentPage"></tabs>
 </div>

@@ -9,6 +9,11 @@
             $scope.$watch('stateTree.aggregation.point.basicInfo', newValue => {
                 if (newValue) {
                     newValue.idCode = $state.params.point_id_code;
+                    stateTree.pointTheme = {
+                        main: newValue.themeColor,
+                        light: newValue.lightThemeColor,
+                        logo: newValue.logo,
+                    };
                 }
             });
         }
