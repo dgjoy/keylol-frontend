@@ -10,14 +10,25 @@ point-edit-section {
   }
 
   .edit-card {
-    width: 640px;
     @include keylol-shadow-1;
+    width: 640px;
     background-color: $keylol-card;
+    padding: 10px 0;
+
+    .extra {
+      height: 0;
+      overflow: hidden;
+      transition: height .5s cubic-bezier(0.35, 0, 0.25, 1);
+
+      ul {
+        border-top: 1px solid $keylol-inertia-shape;
+      }
+    }
 
     ul {
       list-style: none;
       margin: 0;
-      padding: 10px 0;
+      padding: 0;
 
       p {
         margin: 0;
@@ -63,6 +74,11 @@ point-edit-section {
           right: 15px;
         }
       }
+    }
+
+    .actions {
+      display: flex;
+      justify-content: center;
     }
   }
 }

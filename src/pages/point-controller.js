@@ -4,18 +4,13 @@
             $scope.stateTree = stateTree;
 
             if ($location.url().match(/\/point\/[^\/]*\/?$/)) {
-                pageLoad('aggregation.point', { entrance: 'auto' }).then(result => {
-                    if (result) {
-                        result.idCode = $state.params.point_id_code;
-                    }
-                });
+                pageLoad('aggregation.point', { entrance: 'auto' });
             }
-            
-            stateTree.pointTheme = {
-                main: '#813221',
-                light: '#a83f34',
-                icon: '//storage.keylol.com/2ea0474aa5757a04658790f12e144e61.png',
-            };
+            $scope.$watch('stateTree.aggregation.point.basicInfo', newValue => {
+                if (newValue) {
+                    newValue.idCode = $state.params.point_id_code;
+                }
+            });
         }
     }
 

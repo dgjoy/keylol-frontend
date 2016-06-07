@@ -1,6 +1,6 @@
 ﻿(function () {
     class PointCreatorController {
-        constructor(close, $element, $animateCss, $timeout, $http, apiEndpoint, notification, window, $scope) {
+        constructor(close, $element, $animateCss, $timeout, $http, apiEndpoint, notification, window, utils) {
             $.extend(this, {
                 close,
                 $element,
@@ -10,6 +10,7 @@
                 apiEndpoint,
                 notification,
                 window,
+                utils,
             });
 
             this.vm = {
@@ -53,10 +54,7 @@
             this.currentType = 0;
             this.currentGameType = 0;
             this.steamHeight = 82;
-            this.nameOfPlatformPoints = ['Origin','uPlay','战网','PlayStation','XBox','iOS','安卓',
-                'Windows UWP','GBA','NDS','3DS','Wii','WiiU','PSP'];
-            this.idCodeOfPlatformPoints = ['ORGIN','UPLAY','BTNET','PLYSN','MSBOX','APIOS','ANDRD',
-                'MSUWP','GMBYA','NTDDS','NT3DS','NDWII','NWIIU','SYPSP'];
+            this.nameOfPlatformPoints = utils.nameOfPlatformPoints.slice(1);
         }
 
         changeType(index, forGame) {
@@ -163,8 +161,9 @@
             this.submitLock = true;
             if (type === 'OtherGame') {
                 const platformPoints = [];
+                const idCodeOfPlatformPoints = this.utils.idCodeOfPlatformPoints.slice(1);
                 for (let i = 0;i < this.extra.OtherGame.platformPoints.length;i++) {
-                    const platformIdCode = this.idCodeOfPlatformPoints[this.extra.OtherGame.platformPoints[i]];
+                    const platformIdCode = idCodeOfPlatformPoints[this.extra.OtherGame.platformPoints[i]];
                     if (platformIdCode) {
                         platformPoints.push(platformIdCode);
                     }

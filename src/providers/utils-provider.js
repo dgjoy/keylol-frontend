@@ -312,6 +312,19 @@
                                 parseInt(result[3], 16),
                             ] : null;
                         };
+
+                        self.pointTypeHash = {
+                            game: '游戏',
+                            hardWare: '硬件',
+                            category: '类型',
+                            vendor: '厂商',
+                            platform: '平台',
+                        };
+
+                        self.nameOfPlatformPoints = ['Steam', 'Origin','uPlay','战网','PlayStation','XBox','iOS','安卓',
+                            'Windows UWP','GBA','NDS','3DS','Wii','WiiU','PSP'];
+                        self.idCodeOfPlatformPoints = ['STEAM', 'ORGIN','UPLAY','BTNET','PLYSN','MSBOX','APIOS','ANDRD',
+                            'MSUWP','GMBYA','NTDDS','NT3DS','NDWII','NWIIU','SYPSP'];
                     }
 
                     return new Utils();

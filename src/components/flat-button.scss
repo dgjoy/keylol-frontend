@@ -8,6 +8,10 @@ flat-button {
       color: $keylol-theme;
     }
 
+    &.light {
+      color: $keylol-light-theme;
+    }
+
     &.inertia {
       color: $keylol-inertia-text;
     }
