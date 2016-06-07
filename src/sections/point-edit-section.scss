@@ -38,6 +38,7 @@ point-edit-section {
         border-bottom: 1px solid $keylol-inertia-shape;
         padding: 30px 15px;
         display: flex;
+        align-items: flex-start;
         position: relative;
 
         &:last-of-type {
@@ -67,6 +68,71 @@ point-edit-section {
           &.disabled {
             color: $keylol-inertia-text;
           }
+        }
+
+        .content-logo {
+          width: 340px;
+          margin-right: 20px;
+          height: 64px;
+          background-color: $keylol-inertia-shape;
+          text-align: center;
+          img {
+            max-width: 340px;
+            height: 100%;
+          }
+        }
+
+        .content-color {
+          width: 340px;
+          margin-right: 20px;
+          height: 64px;
+          display: flex;
+          align-items: center;
+          background-color: $keylol-theme;
+          position: relative;
+
+          .sample {
+            position:absolute;
+            top: 0;
+            right: 0;
+            background-color: rgb(167,167,167);
+            width: 60px;
+            height: 16px;
+            line-height: 16px;
+            color: rgba($keylol-inverted-text,.6);
+            text-align: center;
+          }
+          .left-part {
+            color: $keylol-inverted-text;
+            width: 125px;
+            padding-left: 15px;
+          }
+          .right-part {
+            color: rgba($keylol-inverted-text,.6);
+            width: 185px;
+            padding-right: 15px;
+          }
+        }
+
+        .content-cover {
+          width: 340px;
+          margin-right: 20px;
+        }
+
+        .content-avatar {
+          display: flex;
+          justify-content: space-between;
+          width: 340px;
+          margin-right: 20px;
+          img:nth-of-type(1) { width: 96px; height: 96px; border-radius: 50%; }
+          img:nth-of-type(2) { width: 48px; height: 48px; border-radius: 50%; }
+          img:nth-of-type(3) { width: 32px; height: 32px; border-radius: 50%; }
+          img:nth-of-type(4) { width: 18px; height: 18px; }
+        }
+
+        .content-thumbnail {
+          width: 180px;
+          margin-right: 180px;
         }
 
         icon-button {
