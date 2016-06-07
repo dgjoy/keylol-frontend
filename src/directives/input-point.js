@@ -97,30 +97,31 @@
                                 $http.get(`${apiEndpoint}states/point-query-results`, {
                                     params,
                                 }).then(response => {
-                                    const pointArray = response.data.length ? response.data : [];
-                                    scope.nowPopup = scope.showSelector({
-                                        templateUrl: 'src/popup/point-selector.html',
-                                        controller: 'PointSelectorController as pointSelector',
-                                        attachSide: 'bottom',
-                                        event: {
-                                            type: 'click',
-                                            currentTarget: element,
-                                        },
-                                        align: 'left',
-                                        offsetX: -8,
-                                        inputs: {
-                                            selected: 0,
-                                            pointArray,
-                                        },
-                                    });
-                                    scope.nowPopup.then(popup => {
-                                        return popup.close;
-                                    }).then(result => {
-                                        console.log(result);
-                                        if (result) {
-                                            addPoint(result);
-                                        }
-                                    });
+                                    if (response.data.length > 0) {
+                                        const pointArray = response.data;
+                                        scope.nowPopup = scope.showSelector({
+                                            templateUrl: 'src/popup/point-selector.html',
+                                            controller: 'PointSelectorController as pointSelector',
+                                            attachSide: 'bottom',
+                                            event: {
+                                                type: 'click',
+                                                currentTarget: element,
+                                            },
+                                            align: 'left',
+                                            offsetX: -8,
+                                            inputs: {
+                                                selected: 0,
+                                                pointArray,
+                                            },
+                                        });
+                                        scope.nowPopup.then(popup => {
+                                            return popup.close;
+                                        }).then(result => {
+                                            if (result) {
+                                                addPoint(result);
+                                            }
+                                        });
+                                    }
                                 }, response => {
                                     notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
                                 });

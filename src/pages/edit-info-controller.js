@@ -1,6 +1,6 @@
 ﻿(function () {
     class EditInfoController {
-        constructor ($scope, pageHead, stateTree, pageLoad, $state, utils, pointAttributes) {
+        constructor ($scope, pageHead, stateTree, pageLoad, $state, utils, pointAttributes, moment) {
             pageHead.setTitle('据点 - 编辑 - 资料 - 其乐');
 
             let fetchPromise;
@@ -350,23 +350,36 @@
                     list: [
                         {
                             title: '据点成立',
-                            content: '2015-11-31',
+                            type: 'date',
+                            key: 'pointCreateTime',
+                            value: stateTree.aggregation.point.edit.info.pointCreateTime ? moment(stateTree.aggregation.point.edit.info.pointCreateTime).format('YYYY-MM-DD') : '',
+                            editDisabled: true,
                         },
                         {
                             title: '公开',
-                            content: '2010-10-13',
+                            type: 'date',
+                            key: 'publishDate',
+                            value: stateTree.aggregation.point.edit.info.publishDate ? moment(stateTree.aggregation.point.edit.info.publishDate).format('YYYY-MM-DD') : '',
                         },
                         {
                             title: '预售',
-                            content: '2011-07-05',
+                            type: 'date',
+                            key: 'preOrderDate',
+                            value: stateTree.aggregation.point.edit.info.preOrderDate ? moment(stateTree.aggregation.point.edit.info.preOrderDate).format('YYYY-MM-DD') : '',
                         },
                         {
                             title: '正式发行',
-                            content: '2013-7-9',
+                            type: 'date',
+                            key: 'releaseDate',
+                            value: stateTree.aggregation.point.edit.info.releaseDate ? moment(stateTree.aggregation.point.edit.info.releaseDate).format('YYYY-MM-DD') : '',
                         },
                     ],
                 };
-                $scope.language = {
+
+                /**
+                 * deal with language obj
+                 */
+                const language = {
                     submitLink,
                     header: {
                         mainTitle: '原生语言',
@@ -375,24 +388,73 @@
                     list: [
                         {
                             title: '英语',
-                            content: '界面、字幕、配音',
+                            fromKey: 'englishLanguage',
+                            type: 'checkbox',
+                            value: '',
+                            selects: [],
                         },
                         {
                             title: '日语',
-                            content: '界面、字幕、配音',
+                            fromKey: 'japaneseLanguage',
+                            type: 'checkbox',
+                            value: '',
+                            selects: [],
                         },
                         {
                             title: '简体中文',
-                            content: '界面、字幕、配音',
+                            fromKey: 'simplifiedChineseLanguage',
+                            type: 'checkbox',
+                            value: '',
+                            selects: [],
                         },
                         {
                             title: '繁体中文',
-                            content: '界面、字幕、配音',
+                            fromKey: 'traditionalChineseLanguage',
+                            type: 'checkbox',
+                            value: '',
+                            selects: [],
                         },
                     ],
                 };
-                $scope.chinese = {
+
+                for (let i = 0;i < language.list.length;i++) {
+                    const eachLanguage = language.list[i];
+                    eachLanguage.keys = ['interface', 'subtitles', 'fullAudio'];
+                    eachLanguage.names = ['界面', '字幕', '配音'];
+                    const fromKey = eachLanguage.fromKey.slice(0, -8);
+                    if (stateTree.aggregation.point.edit.info.chineseAvailability[fromKey]) {
+                        const nameArray = [];
+                        for (let j = 0;j < eachLanguage.keys.length;j++) {
+                            if (stateTree.aggregation.point.edit.info.chineseAvailability[fromKey][eachLanguage.keys[j]]) {
+                                nameArray.push(eachLanguage.names[j]);
+                                eachLanguage.selects.push(j);
+                            }
+                        }
+                        eachLanguage.value = nameArray.toString();
+                    }
+                }
+
+                $scope.language = language;
+
+                /**
+                 * deal with chinese obj
+                 */
+                const chinese = {
                     submitLink,
+                    updateObject: {
+                        chineseThirdPartyLinks: stateTree.aggregation.point.edit.info.chineseAvailability.thirdPartyLinks,
+                    },
+                    addAttribute: {
+                        type: 'attribute',
+                        title: '汉化组织名称',
+                        value: '',
+                        text: '添加汉化团体',
+                        itemBasic: {
+                            value: '',
+                            type: 'text',
+                            key: 'link',
+                        },
+                    },
                     header: {
                         mainTitle: '华语可用度',
                         subTitle: '游戏对中文的支持程度',
@@ -400,15 +462,52 @@
                     list: [
                         {
                             title: '天邈汉化链接',
+                            type: 'text',
+                            key: 'link',
+                            value: '',
                         },
                         {
                             title: '蒹葭汉化链接',
+                            type: 'text',
+                            key: 'link',
+                            value: '',
                         },
                         {
                             title: '起源汉化链接',
+                            type: 'text',
+                            key: 'link',
+                            value: '',
                         },
                     ],
                 };
+
+                for (let i = 0;i < stateTree.aggregation.point.edit.info.chineseAvailability.thirdPartyLinks.length;i++) {
+                    const thirdPartyLink = stateTree.aggregation.point.edit.info.chineseAvailability.thirdPartyLinks[i];
+                    switch (thirdPartyLink.title) {
+                        case '天邈汉化链接':
+                            chinese.list[0].value = thirdPartyLink.link;
+                            chinese.list[0].index = i;
+                            break;
+                        case '蒹葭汉化链接':
+                            chinese.list[1].value = thirdPartyLink.link;
+                            chinese.list[1].index = i;
+                            break;
+                        case '起源汉化链接':
+                            chinese.list[2].value = thirdPartyLink.link;
+                            chinese.list[2].index = i;
+                            break;
+                        default:
+                            chinese.list.push({
+                                title: thirdPartyLink.title,
+                                value: thirdPartyLink.link,
+                                type: 'text',
+                                key: 'link',
+                                index: i,
+                            });
+                    }
+                }
+
+                $scope.chinese = chinese;
             });
 
             $scope.stateTree = stateTree;

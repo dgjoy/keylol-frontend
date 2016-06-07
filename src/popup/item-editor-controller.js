@@ -10,19 +10,16 @@
                 item,
                 theme: options.theme,
                 submitLink: options.submitLink,
+                updateObject: options.updateObject,
             });
 
             switch (item.type) {
-                case 'text':
-                case 'appId':
-                case 'color':
-                case 'avatar':
-                    this.model = item.value;
-                    break;
                 case 'checkbox':
                 case 'point':
                     this.model = item.selects;
                     break;
+                default:
+                    this.model = item.value;
             }
         }
 
@@ -32,7 +29,7 @@
             }
 
             this.submitLock = true;
-            const submitObj = {};
+            let submitObj = {};
             let closeValue, matches;
             switch (this.item.type) {
                 case 'color':
@@ -51,6 +48,7 @@
                     submitObj[this.item.key] = this.model;
                     closeValue = this.model;
                     break;
+                case 'date':
                 case 'text':
                     submitObj[this.item.key] = this.model;
                     closeValue = this.model;
@@ -111,6 +109,47 @@
                     closeValue = closeValue.toString();
                     this.item.selects = this.model;
                     break;
+            }
+
+            if (this.item.fromKey) {
+                const newSubmitObj = {};
+                newSubmitObj[this.item.fromKey] = submitObj;
+                submitObj = newSubmitObj;
+            }
+
+            if (this.updateObject) {
+                if (typeof this.item.index === 'number') {
+                    for (const attr in this.updateObject) {
+                        if (this.updateObject.hasOwnProperty(attr) && this.updateObject[attr][this.item.index]) {
+                            $.extend(this.updateObject[attr][this.item.index], submitObj);
+                        }
+                    }
+                } else {
+                    if (this.item.type === 'attribute') {
+                        for (const attr in this.updateObject) {
+                            if (this.updateObject.hasOwnProperty(attr)) {
+                                closeValue = {
+                                    title: this.model,
+                                    index: this.updateObject[attr].length,
+                                };
+                                this.updateObject[attr].push({
+                                    title: this.model,
+                                });
+                            }
+                        }
+                    } else {
+                        submitObj.title = this.item.title;
+                        for (const attr in this.updateObject) {
+                            if (this.updateObject.hasOwnProperty(attr)) {
+                                this.item.index = this.updateObject[attr].length;
+                                this.updateObject[attr].push(submitObj);
+                            }
+                        }
+                    }
+                }
+                submitObj = this.updateObject;
+
+                console.log(submitObj);
             }
 
             this.$http.put(`${this.apiEndpoint}${this.submitLink}`, submitObj).then(response => {

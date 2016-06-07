@@ -1,10 +1,14 @@
 ﻿<popup class="popup-item-editor">
-    <form class="clearfix" ng-if="itemEditor.item.type === 'text' || itemEditor.item.type === 'appId'">
+    <form class="clearfix" ng-if="itemEditor.item.type === 'text' || itemEditor.item.type === 'appId' ||  itemEditor.item.type === 'attribute'">
         <text-area type="text" state="itemEditor.textError ? 'warn' : 'normal'" error="itemEditor.textError" label="{{itemEditor.item.title}}" theme="itemEditor.theme" model="itemEditor.model"></text-area>
         <raised-button click="itemEditor.submit()" text="提交" type="theme" theme-color="itemEditor.theme.main" disabled="itemEditor.model === itemEditor.item.value || itemEditor.submitLock"></raised-button>
     </form>
     <form class="clearfix" ng-if="itemEditor.item.type === 'point'">
         <text-area whitelist="itemEditor.item.whitelist" type="point" state="itemEditor.textError ? 'warn' : 'normal'" error="itemEditor.textError" label="{{itemEditor.item.title}}" theme="itemEditor.theme" model="itemEditor.model"></text-area>
+        <raised-button click="itemEditor.submit()" text="提交" type="theme" theme-color="itemEditor.theme.main" disabled="itemEditor.submitLock"></raised-button>
+    </form>
+    <form class="clearfix" ng-if="itemEditor.item.type === 'date'">
+        <datepicker theme="itemEditor.theme" model="itemEditor.model"></datepicker>
         <raised-button click="itemEditor.submit()" text="提交" type="theme" theme-color="itemEditor.theme.main" disabled="itemEditor.model === itemEditor.item.value || itemEditor.submitLock"></raised-button>
     </form>
     <form class="clearfix" ng-if="itemEditor.item.type === 'checkbox'">

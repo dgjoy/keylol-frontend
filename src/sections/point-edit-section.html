@@ -47,8 +47,9 @@
                 </li>
             </ul>
         </div>
-        <div class="actions">
+        <div class="actions" popup="pointEditSection.showExtraPopup">
             <flat-button ng-if="pointEditSection.object.extraList && pointEditSection.object.extraList.length > 0 && !pointEditSection.extraHeight" click="pointEditSection.expand()" type="light" theme-color="pointEditSection.theme.light" text="展开更多"></flat-button>
+            <flat-button ng-if="pointEditSection.object.addAttribute" click="pointEditSection.showAddPopup(event)" type="light" theme-color="pointEditSection.theme.light" text="{{pointEditSection.object.addAttribute.text}}"></flat-button>
         </div>
     </div>
 </div>
