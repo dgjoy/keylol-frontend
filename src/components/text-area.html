@@ -27,6 +27,6 @@
 <input-point ng-if="textArea.type === 'point'" limit="textArea.limit" ng-model="textArea.model" focus-handler="textArea.focus()" blur-handler="textArea.blur()"
              state="textArea.warnState?'warn':textArea.activeState?'theme':''" cache-handler="textArea.cacheHandler(isEmpty)"></input-point>
 
-<dropdown ng-if="textArea.type === 'dropdown'" items="['请选择游戏平台','Steam','暂不选择游戏平台']" model="textArea.model"></dropdown>
+<dropdown ng-if="textArea.type === 'dropdown'" object="textArea.object" model="textArea.model"></dropdown>
 
 <div class="tip {{textArea.warnState?'warn':textArea.activeState?'theme':''}}">{{textArea.warnState?textArea.error:textArea.tip}}</div>

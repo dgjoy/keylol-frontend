@@ -1,18 +1,14 @@
 ﻿(function () {
     class DropdownSelectorController {
-        constructor(content,close) {
+        constructor(object,close) {
             $.extend(this,{
-                content,
+                object,
                 close,
             });
         }
 
         select(index) {
-            this.close(this.content[index]);
-        }
-
-        cancel() {
-            this.close('');
+            this.close(this.object.items[index]);
         }
     }
 

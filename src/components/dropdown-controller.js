@@ -16,7 +16,7 @@
                 showDelay: 0,
                 closeDelay: 0,
                 inputs: {
-                    content: this.items,
+                    object: this.object,
                 },
             }).then(popup => {
                 return popup.close;

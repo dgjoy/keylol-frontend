@@ -1,7 +1,7 @@
 (function () {
     keylolApp.filter('iconSvgUrl', () => {
         return function (input) {
-            return `assets/images/sprite-14f22a2430.svg#${input}`;
+            return `assets/images/sprite-fd31d3a392.svg#${input}`;
         };
     });
 }());

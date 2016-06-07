@@ -43,6 +43,7 @@
         bindings: {
             type:'@',
             label:'@',
+            object:'<',
             model:'=',
             state:'<',//normal,warn,disabled
             tip:'<',
