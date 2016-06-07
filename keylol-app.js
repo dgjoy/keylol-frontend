@@ -167,8 +167,8 @@
             })
             .state('postOffice.missive',{
                 url: '/missive',
-                templateUrl: 'src/pages/missive.html',
-                controller: 'MissiveController',
+                templateUrl: 'src/pages/missives.html',
+                controller: 'MissivesController',
             })
             .state('aggregation', {
                 'abstract': true,

@@ -1,5 +1,5 @@
 ﻿(function () {
-    class MissiveCardController {
+    class DialogueController {
         constructor(close) {
             $.extend(this,{
                 close,
@@ -13,5 +13,5 @@
         }
         
     }
-    keylolApp.controller('MissiveCardController', MissiveCardController);
+    keylolApp.controller('DialogueController', DialogueController);
 }());

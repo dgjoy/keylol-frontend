@@ -6,14 +6,21 @@
             });
         }
 
-        showMissiveCard() {
+        showMissive() {
             this.window.show({
-                templateUrl: 'src/windows/missive-card.html',
-                controller: 'MissiveCardController',
-                controllerAs: 'missiveCard',
+                templateUrl: 'src/windows/missive.html',
+                controller: 'MissiveController',
+                controllerAs: 'missive',
             });
         }
 
+        // showDialogue() {
+        //     this.window.show({
+        //         templateUrl: 'src/windows/dialogue.html',
+        //         controller: 'DialogueController',
+        //         controllerAs: 'dialogue',
+        //     });
+        // }
         // showCallingInvitation($event) {
         //     this.showPopup({
         //         templateUrl: 'src/popup/calling-invitation.html',

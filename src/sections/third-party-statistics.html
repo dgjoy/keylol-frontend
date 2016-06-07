@@ -10,7 +10,7 @@
             </div>
             <div>
                 <p>据点成立</p>
-                <p>{{::thirdPartyStatistics.intel.pointCreateTime}}</p>
+                <p>{{::thirdPartyStatistics.intel.pointCreateTime | amUtc | amLocal | amDateFormat:'YYYY-MM-DD'}}</p>
             </div>
             <div>
                 <p>预售</p>
@@ -19,7 +19,7 @@
         </div>
         <div class="sale-times">
             <p>正式发行</p>
-            <p>{{::thirdPartyStatistics.intel.releaseDate}}</p>
+            <p>{{::thirdPartyStatistics.intel.releaseDate | amUtc | amLocal | amDateFormat:'YYYY-MM-DD'}}</p>
         </div>
     </div>
 </div>

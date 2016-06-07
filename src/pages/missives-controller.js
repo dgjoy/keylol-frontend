@@ -1,9 +1,9 @@
 ﻿(function () {
-    class MissiveController {
+    class MissivesController {
         constructor ($scope, pageHead, stateTree) {
             pageHead.setTitle('公函 - 邮政 - 其乐');
         }
     }
 
-    keylolApp.controller('MissiveController', MissiveController);
+    keylolApp.controller('MissivesController', MissivesController);
 }());
