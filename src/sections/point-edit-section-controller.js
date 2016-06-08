@@ -8,6 +8,30 @@
         }
 
         showEditPopup ($event, $index) {
+            // 修改图片时,弹出的是菜单
+            if ($.inArray(this.object.list[$index].type,['thumbnail','cover','avatar','logo']) !== -1) {
+                this.showPopups[$index]({
+                    templateUrl: 'src/popup/upload-menu.html',
+                    controller: 'UploadMenuController as uploadMenu',
+                    attachSide: 'left',
+                    align: 'top',
+                    offsetX: 39,
+                    offsetY: -40,
+                    inputs: {
+                        item: this.object.list[$index],
+                        theme: this.theme,
+                        submitLink: this.object.submitLink,
+                    },
+                }).then(popup => {
+                    return popup.close;
+                }).then(result => {
+                    if (result || result === '') {
+                        this.object.list[$index].value = result;
+                    }
+                });
+                return;
+            }
+
             this.showPopups[$index]({
                 templateUrl: 'src/popup/item-editor.html',
                 controller: 'ItemEditorController as itemEditor',

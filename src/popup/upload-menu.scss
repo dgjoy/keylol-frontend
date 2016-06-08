@@ -1,0 +1,9 @@
+.popup-upload-menu {
+    @include grow-shrink-top-right(menu);
+    width: 220px;
+
+    menu {
+        @include keylol-shadow-3;
+        border-radius: 0;
+    }
+}
