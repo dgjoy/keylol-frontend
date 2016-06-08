@@ -4,6 +4,7 @@
             restrict: 'E',
             templateUrl: 'src/directives/input-point.html',
             scope: {
+                theme: '<',
                 typeWhitelist: '<',
                 limit: '<',
                 state: '<',

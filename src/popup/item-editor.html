@@ -12,7 +12,7 @@
         <raised-button click="itemEditor.submit()" text="提交" type="theme" theme-color="itemEditor.theme.main" disabled="itemEditor.model === itemEditor.item.value || itemEditor.submitLock"></raised-button>
     </form>
     <form class="clearfix" ng-if="itemEditor.item.type === 'checkbox'">
-        <input-checkbox names="itemEditor.item.names" ng-model="itemEditor.model"></input-checkbox>
+        <input-checkbox theme="itemEditor.theme" names="itemEditor.item.names" ng-model="itemEditor.model"></input-checkbox>
         <raised-button click="itemEditor.submit()" text="提交" type="theme" theme-color="itemEditor.theme.main" disabled="itemEditor.submitLock"></raised-button>
     </form>
     <form class="clearfix" ng-if="itemEditor.item.type === 'color'">

@@ -1,4 +1,4 @@
-﻿<div class="wrapper {{state}}">
+﻿<div class="wrapper {{state}}" ng-style="{'border-color':state === 'theme'?theme.light:''}">
     <div class="point" ng-repeat="point in pointArray track by point.id">
         <img webp-src="{{::point.avatarImage | avatarUrl}}" alt="{{utils.getPreferredPointName(point)[0]}}">
         <p>{{utils.getPreferredPointName(point)[0]}}</p>
