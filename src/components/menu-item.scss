@@ -15,6 +15,7 @@ menu-item {
       >span {
         display: flex;
         align-items: center;
+        color: $keylol-main-text;
 
         &.sub-text {
           color: $keylol-inertia-text;

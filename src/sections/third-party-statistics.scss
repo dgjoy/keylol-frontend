@@ -18,6 +18,15 @@ third-party-statistics {
       img {
         height: 48px;
       }
+
+      .alt {
+        p {
+          margin: 0;
+          color: $keylol-inverted-text;
+        }
+        p:first-of-type { font-weight: bold; }
+        p:last-of-type { font-size: 12px;}
+      }
     }
 
     .some-times {
@@ -40,6 +49,7 @@ third-party-statistics {
         margin-bottom: 14px;
 
         div {
+          width: 80px;
           margin: 0 15px;
 
           p:first-of-type {
@@ -50,6 +60,7 @@ third-party-statistics {
       }
 
       .sale-times {
+        width: 150px;
         p:last-of-type {
           font-size: 20px;
           font-weight: bold;

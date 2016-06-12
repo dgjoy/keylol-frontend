@@ -31,19 +31,40 @@
                         votePercent: this.object.averageRating.toFixed(1),
                         titleCoverImage: this.object.titleCoverImage,
                     },
-                    items: [
-                        {
-                            type: 'item',
-                            icon: 'dtb-sonkwo',
-                            text: '杉果',
-                        },
-                        {
-                            type: 'item',
-                            icon: 'dtb-steam',
-                            text: 'Steam',
-                        },
-                    ],
+                    items: [],
                 };
+                if (this.object.steamAppId) {
+                    this.specialMenu.items.push({
+                        type: 'item',
+                        icon: 'dtb-steam',
+                        text: 'Steam',
+                        link: `http://store.steampowered.com/app/${this.object.steamAppId}`,
+                    });
+                }
+
+                const platforms = [
+                    ['sonkwo','dtb-sonkwo','杉果'],
+                    ['appStore','dtb-app-store','App Store'],
+                    ['battleNet','dtb-battlenet','战网'],
+                    ['gog','dtb-gogdotcom', 'GOG'],
+                    ['googlePlay','dtb-google-play', 'Google Play'],
+                    ['origin','dtb-origin','Origin'],
+                    ['playStation','dtb-playstation', 'Play Station'],
+                    ['uplay','dtb-uplay', 'Uplay'],
+                    ['windowsStore','dtb-windows-store', 'Windows Store'],
+                    ['xbox','dtb-xbox', 'Xbox'],
+                ];
+                for (let i = 0;i !== platforms.length; i++) {
+                    if (this.object[`${platforms[i][0]}Link`] && this.object[`${platforms[i][0]}Link`] !== '') {
+                        this.specialMenu.items.push(                        {
+                            type: 'item',
+                            icon: platforms[i][1],
+                            text: platforms[i][2],
+                            link: this.object[`${platforms[i][0]}Link`],
+                        });
+                    }
+                }
+
             } else {
                 let gameCount = '';
                 switch (this.object.type) {

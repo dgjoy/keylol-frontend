@@ -38,24 +38,32 @@
             this.previousDate = DatepickerSelectorController.dateOffset(middleDate[0],middleDate[1],-4);
             const scrollHandler = $scroller.on('scroll', () => {
                 if ($scroller.scrollTop() < this.bound[0]) {
-                    $timeout(() => {
-                        this.unshiftCalenders(this.previousDate);
+                    $scope.$apply(() => {
+                        const count =  parseInt((this.bound[0] - $scroller.scrollTop()) / 265) + 1;
 
-                        $scroller.find('.wrapper').css('transform',`translateY(${this.bound[0] - 795}px)`);
-                        this.bound[0] -= 265;
-                        this.bound[1] -= 265;
-                        this.nextDate = DatepickerSelectorController.dateOffset(this.nextDate.year,this.nextDate.month,-1);
-                        this.previousDate = DatepickerSelectorController.dateOffset(this.previousDate.year,this.previousDate.month,-1);
+                        $scroller.find('.wrapper').css('transform',`translateY(${this.bound[0] - 265 * count - 530}px)`);
+                        this.bound[0] -= 265 * count;
+                        this.bound[1] -= 265 * count;
+
+                        for (let i = 0;i !== count; i++) {
+                            this.unshiftCalenders(this.previousDate);
+                            this.nextDate = DatepickerSelectorController.dateOffset(this.nextDate.year, this.nextDate.month, -1);
+                            this.previousDate = DatepickerSelectorController.dateOffset(this.previousDate.year, this.previousDate.month, -1);
+                        }
                     });
                 } else if ($scroller.scrollTop() > this.bound[1]) {
-                    $timeout(() => {
-                        this.shiftCalenders(this.nextDate);
+                    $scope.$apply(() => {
+                        const count =  parseInt(($scroller.scrollTop() - this.bound[1]) / 265) + 1;
 
-                        $scroller.find('.wrapper').css('transform',`translateY(${this.bound[1] - 795}px)`);
-                        this.bound[0] += 265;
-                        this.bound[1] += 265;
-                        this.nextDate = DatepickerSelectorController.dateOffset(this.nextDate.year,this.nextDate.month,1);
-                        this.previousDate = DatepickerSelectorController.dateOffset(this.previousDate.year,this.previousDate.month,1);
+                        $scroller.find('.wrapper').css('transform', `translateY(${this.bound[1] + 265 * count - 1060}px)`);
+                        this.bound[0] += 265 * count;
+                        this.bound[1] += 265 * count;
+
+                        for (let i = 0;i !== count; i++) {
+                            this.shiftCalenders(this.nextDate);
+                            this.nextDate = DatepickerSelectorController.dateOffset(this.nextDate.year, this.nextDate.month, 1);
+                            this.previousDate = DatepickerSelectorController.dateOffset(this.previousDate.year, this.previousDate.month, 1);
+                        }
                     });
                 }
             });
@@ -121,7 +129,7 @@
             let nYear = year;
             let nMonth = month;
             if (month + offset < 0) {
-                nYear -= 1;
+                nYear -= offset;
                 nMonth = 12 + (month + offset);
             } else if (month + offset > 11) {
                 nYear += 1;

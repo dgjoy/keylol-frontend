@@ -11,6 +11,11 @@
                 return `${(num * 100).toFixed(offset)}%`;
             }
 
+            if (this.intel.ownerCount === undefined) {
+                this.datas = null;
+                return;
+            }
+
             this.datas = [
                 {
                     name: 'player-count',

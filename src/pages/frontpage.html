@@ -1,6 +1,6 @@
 ﻿<div style="margin-top: 30px" class="flex-row" ng-if="stateTree.aggregation.point.frontpage&&stateTree.aggregation.point.basicInfo" ng-switch="stateTree.aggregation.point.basicInfo.type">
     <div class="left-middle-lg row-sm" ng-switch-default>
-        <product-collection object="stateTree.aggregation.point.frontpage" type="stateTree.aggregation.point.basicInfo.type" theme="stateTree.pointTheme" style="margin-bottom: 10px;"></product-collection>
+        <product-collection count="stateTree.aggregation.point.frontpage.basicInfo.productCount" object="stateTree.aggregation.point.frontpage" type="stateTree.aggregation.point.basicInfo.type" theme="stateTree.pointTheme" style="margin-bottom: 10px;"></product-collection>
         <latest-articles is-empty="true" theme="stateTree.pointTheme"></latest-articles>
     </div>
 
@@ -20,6 +20,7 @@
         <article-collection theme="stateTree.pointTheme" style="margin-top: 435px;margin-bottom: 30px"></article-collection>
         <latest-articles is-empty="true" theme="stateTree.pointTheme"></latest-articles>
     </div>
+
     <div class="right-lg hidden-sm flex-column">
         <point-menu ng-if="stateTree.aggregation.point.basicInfo" style="margin-bottom: 20px" object="::stateTree.aggregation.point.basicInfo"></point-menu>
         <right-menus style="flex-grow: 1;"></right-menus>

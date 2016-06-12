@@ -49,19 +49,32 @@
                     closeValue = this.model;
                     break;
                 case 'date':
+                    if ( this.model.trim() === '') {
+                        submitObj[this.item.key] = '1989-06-04';
+                        closeValue = '';
+                    } else {
+                        submitObj[this.item.key] = this.model;
+                        closeValue = this.model;
+                    }
+                    break;
                 case 'text':
                     submitObj[this.item.key] = this.model;
                     closeValue = this.model;
                     break;
                 case 'appId':
-                    matches = this.model.match(this.item.regex);
-                    if (!matches) {
-                        this.textError = '商店地址格式错误';
-                        this.submitLock = false;
-                        return;
+                    if (this.model.trim() === '') {
+                        submitObj[this.item.key] = 0;
+                        closeValue = '';
+                    } else {
+                        matches = this.model.match(this.item.regex);
+                        if (!matches) {
+                            this.textError = '商店地址格式错误';
+                            this.submitLock = false;
+                            return;
+                        }
+                        submitObj[this.item.key] = parseInt(matches[1]);
+                        closeValue = this.model;
                     }
-                    submitObj[this.item.key] = parseInt(matches[1]);
-                    closeValue = this.model;
                     break;
                 case 'checkbox':
                     closeValue = [];

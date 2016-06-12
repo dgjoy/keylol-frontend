@@ -1,5 +1,5 @@
 <button ng-click="menuItem.clickAction($event)" ng-disabled="::menuItem.data.disabled" ripple="{{::(menuItem.data.disabled? 'disabled' : '')}}" ng-if="::(menuItem.data.type === 'item')">
-    <div class="wrapper">
+    <a href="{{menuItem.data.link}}" class="wrapper">
         <span>
             <svg ng-if="::menuItem.data.icon" aria-hidden="true">
                 <use ng-href="{{::menuItem.data.icon | iconSvgUrl }}" xlink:href=""></use>
@@ -7,6 +7,6 @@
             <span>{{::menuItem.data.text}}</span>
         </span>
         <span class="sub-text" ng-if="::(menuItem.data.subText !== undefined)">{{::menuItem.data.subText}}</span>
-    </div>
+    </a>
 </button>
 <span class="horizon" ng-if="::(menuItem.data.type === 'horizon')"></span>
