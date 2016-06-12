@@ -1,21 +1,16 @@
 ﻿<div style="margin-top: 30px" class="flex-row" ng-if="stateTree.aggregation.point.frontpage&&stateTree.aggregation.point.basicInfo" ng-switch="stateTree.aggregation.point.basicInfo.type">
     <div class="left-middle-lg row-sm" ng-switch-default>
-        <common-collection type="{
-                mainTitle: '开发',
-                subTitle: '旗下 238 部作品中有 145 部为其开发',
-            }" theme="stateTree.pointTheme" style="margin-bottom: 10px;"></common-collection>
-        <common-collection type="{
-                mainTitle: '发行',
-                subTitle: '旗下 238 部作品中有 107 部为其发行',
-            }" theme="stateTree.pointTheme" style="margin-bottom: 30px;"></common-collection>
+        <product-collection object="stateTree.aggregation.point.frontpage" type="stateTree.aggregation.point.basicInfo.type" theme="stateTree.pointTheme" style="margin-bottom: 10px;"></product-collection>
         <latest-articles is-empty="true" theme="stateTree.pointTheme"></latest-articles>
     </div>
+
     <div class="left-middle-lg row-sm" ng-switch-when="hardware">
         <point-associations theme="stateTree.pointTheme" style="margin-bottom: 40px;"></point-associations>
         <short-review theme="stateTree.pointTheme" style="margin-bottom: 50px;"></short-review>
         <media-center theme="stateTree.pointTheme" style="margin-bottom: 40px;"></media-center>
         <latest-articles is-empty="true" theme="stateTree.pointTheme"></latest-articles>
     </div>
+
     <div class="left-middle-lg row-sm" ng-switch-when="game">
         <point-associations theme="stateTree.pointTheme" style="margin-bottom: 40px;"></point-associations>
         <short-review theme="stateTree.pointTheme" style="margin-bottom: 50px;"></short-review>

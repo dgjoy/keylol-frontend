@@ -48,13 +48,13 @@
                 let gameCount = '';
                 switch (this.object.type) {
                     case 'category': 
-                        gameCount = `此类共 ${this.object.gameCount} 部作品`;
+                        gameCount = `此类共 ${this.object.productCount} 部作品`;
                         break;
                     case 'platform':
-                        gameCount = `平台上共 ${this.object.gameCount} 部作品`;
+                        gameCount = `平台上共 ${this.object.productCount} 部作品`;
                         break;
                     case 'vendor':
-                        gameCount = `旗下共 ${this.object.gameCount} 部作品`;
+                        gameCount = `旗下共 ${this.object.productCount} 部作品`;
                         break;
                 }
 

@@ -1,0 +1,73 @@
+﻿(function () {
+    class ProductCollectionController {
+        constructor () {
+            this.list = [];
+            let count = 0;
+            switch (this.type) {
+                case 'vendor':
+                    count = this.object.developerProductCount + this.object.publisherProductCount;
+                    this.list.push({
+                        header: {
+                            mainTitle: '开发',
+                            subTitle: `旗下 ${count} 部作品中有 ${this.object.developerProductCount} 部为其开发`,
+                        },
+                        cards: this.object.developerProducts,
+                    });
+                    this.list.push({
+                        header: {
+                            mainTitle: '发行',
+                            subTitle: `旗下 ${count} 部作品中有 ${this.object.publisherProductCount} 部为其发行`,
+                        },
+                        cards: this.object.publisherProducts,
+                    });
+                    break;
+                case 'platform':
+                    this.list.push({
+                        header: {
+                            mainTitle: '平台',
+                            subTitle: `共 ! 部作品`,
+                        },
+                        cards: this.object.platformProducts,
+                    });
+                    break;
+                case 'category':
+                    console.log(1);
+                    count = this.object.genreProductCount + this.object.seriesProductCount
+                        + this.object.tagProductCount;
+                    this.list.push({
+                        header: {
+                            mainTitle: '特性',
+                            subTitle: `此类 ${count} 部作品中有 ${this.object.tagProductCount} 部属于此特性`,
+                        },
+                        cards: this.object.tagProducts,
+                    });
+                    this.list.push({
+                        header: {
+                            mainTitle: '系列',
+                            subTitle: `此类 ${count} 部作品中有 ${this.object.seriesProductCount} 部属于此系列`,
+                        },
+                        cards: this.object.seriesProducts,
+                    });
+                    this.list.push({
+                        header: {
+                            mainTitle: '流派',
+                            subTitle: `此类 ${count} 部作品中有 ${this.object.genreProductCount} 部属于此流派`,
+                        },
+                        cards: this.object.genreProducts,
+                    });
+                    break;
+            }
+        }
+    }
+
+    keylolApp.component('productCollection', {
+        templateUrl: 'src/sections/product-collection.html',
+        controller: ProductCollectionController,
+        controllerAs: 'productCollection',
+        bindings: {
+            object: '<',
+            type: '<',
+            theme: '<',
+        },
+    });
+}());

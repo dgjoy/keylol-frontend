@@ -43,12 +43,21 @@
                 });
             } else if (currentStateName.substr(0, 17) === 'aggregation.point') {
                 this.inPoint = true;
-                this.tabArray = [
-                    { state:'.frontpage', name:'扉页' },
-                    { state:'.intel', name:'情报' },
-                    { state:'.timeline', name:'轨道' },
-                    { state:'.edit', name:'编辑', 'float':'right' },
-                ];
+                if (stateTree.aggregation.point.basicInfo.type === 'game' || stateTree.aggregation.point.basicInfo.type === 'hardware') {
+                    this.tabArray = [
+                        { state: '.frontpage', name: '扉页' },
+                        { state: '.intel', name: '情报' },
+                        { state: '.timeline', name: '轨道' },
+                        { state: '.edit', name: '编辑', 'float': 'right' },
+                    ];
+                } else {
+                    this.tabArray = [
+                        { state: '.frontpage', name: '扉页' },
+                        { state: '.product', name: '作品' },
+                        { state: '.timeline', name: '轨道' },
+                        { state: '.edit', name: '编辑', 'float': 'right' },
+                    ];
+                }
                 $scope.$watch(() => {
                     return $state.current.name;
                 }, () => {

@@ -201,6 +201,15 @@
                     delete stateTree.aggregation.point.intel;
                 },
             })
+            .state('aggregation.point.product', {
+                url: '/product',
+                templateUrl: 'src/pages/product.html',
+                controller: 'ProductController',
+                onExit (stateTree) {
+                    console.log('exit product');
+                    delete stateTree.aggregation.point.product;
+                },
+            })
             .state('aggregation.point.timeline', {
                 url: '/timeline',
                 templateUrl: 'src/pages/page-timeline.html',

@@ -57,13 +57,13 @@
             } else {
                 switch (this.object.type) {
                     case 'category':
-                        this.gameCount = `此类共 ${this.object.gameCount} 部作品`;
+                        this.gameCount = `此类共 ${this.object.productCount} 部作品`;
                         break;
                     case 'platform':
-                        this.gameCount = `平台上共 ${this.object.gameCount} 部作品`;
+                        this.gameCount = `平台上共 ${this.object.productCount} 部作品`;
                         break;
                     case 'vendor':
-                        this.gameCount = `旗下共 ${this.object.gameCount} 部作品`;
+                        this.gameCount = `旗下共 ${this.object.productCount} 部作品`;
                         break;
                 }
             }
