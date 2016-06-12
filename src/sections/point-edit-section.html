@@ -7,7 +7,6 @@
                     <p>{{item.title}}</p>
                     <p>{{item.subTitle}}</p>
                 </div>
-                <div class="upload" ng-show="false" ngf-select="pointEditSection.uploadImage($file, $event)" ngf-fix-orientation="true" accept="image/*"></div>
                 <img class="content-cover" webp-src="{{item.value | uriRelocate}}" alt="" ng-switch-when="cover">
                 <img class="content-thumbnail" webp-src="{{item.value | uriRelocate}}" alt="" ng-switch-when="thumbnail">
                 <div class="content-avatar" ng-switch-when="avatar">
@@ -31,6 +30,7 @@
                     </div>
                 </div>
                 <p ng-switch-default="" class="content" ng-class="{disabled: item.editDisabled}">{{item.value}}</p>
+                <div ng-if="item.type==='cover'||item.type==='thumbnail'||item.type==='avatar'||item.type==='logo'" id="upload-{{$index}}" ng-show="false" ngf-select="pointEditSection.uploadImage($index, $file, $event)" ngf-fix-orientation="true" accept="image/*"></div>
                 <input-switch ng-if="item.type==='switch'" model="true" theme="::pointEditSection.theme"></input-switch>
                 <icon-button ng-if="!item.editDisabled && item.type !== 'switch'" click="pointEditSection.showEditPopup(event, $index)" show-popup="pointEditSection.showPopups[$index]" icon="new-article"></icon-button>
             </li>

@@ -17,7 +17,7 @@
     </form>
     <form class="clearfix" ng-if="itemEditor.item.type === 'color'">
         <text-area type="text" state="itemEditor.textError ? 'warn' : 'normal'" error="itemEditor.textError" label="{{itemEditor.item.title}}" theme="itemEditor.theme" model="itemEditor.model" tip="'十六进制颜色码（HEX），例如 #5599DD'"></text-area>
-        <div class="color" ng-style="{backgroundColor:itemEditor.colorCheck(itemEditor.model)?itemEditor.model:''}">这段文字应当比样本 A 更醒目<div class="sample">样本 A</div></div>
+        <div class="color color-{{itemEditor.item.colorType}}" ng-style="{backgroundColor:itemEditor.colorCheck(itemEditor.model)?itemEditor.model:''}">这段文字应当比样本 A 更醒目<div class="sample">样本 A</div></div>
         <raised-button click="itemEditor.submit()" text="提交" type="theme" theme-color="itemEditor.theme.main" disabled="itemEditor.model.length === 0 || itemEditor.submitLock"></raised-button>
     </form>
 </popup>

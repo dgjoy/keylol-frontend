@@ -11,7 +11,6 @@
   }
 
   .color {
-    background-color: $keylol-theme;
     height: 32px;
     width: 290px;
     margin-top: 15px;
@@ -20,6 +19,9 @@
     position: relative;
     line-height: 32px;
     color: rgba($keylol-inverted-text,.6);
+
+    &.color-A { background-color: $keylol-theme; }
+    &.color-B { background-color: $keylol-light-theme; }
 
     .sample {
       position: absolute;

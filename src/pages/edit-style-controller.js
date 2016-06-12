@@ -81,6 +81,7 @@
                             key: 'themeColor',
                             type: 'color',
                             value: stateTree.aggregation.point.basicInfo.themeColor,
+                            colorType: 'A',
                         },
                         {
                             title: '轻主题色',
@@ -88,6 +89,7 @@
                             key: 'lightThemeColor',
                             type: 'color',
                             value: stateTree.aggregation.point.basicInfo.lightThemeColor,
+                            colorType: 'B',
                         },
                     ],
                 };

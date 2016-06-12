@@ -1,8 +1,11 @@
 ﻿(function () {
     class PointEditSectionController {
-        constructor ($element) {
+        constructor ($element, apiEndpoint, $http, notification) {
             $.extend(this, {
                 $element,
+                apiEndpoint,
+                $http,
+                notification,
             });
             this.showPopups = [];
         }
@@ -13,21 +16,21 @@
                 this.showPopups[$index]({
                     templateUrl: 'src/popup/upload-menu.html',
                     controller: 'UploadMenuController as uploadMenu',
+                    event: $event,
                     attachSide: 'left',
                     align: 'top',
                     offsetX: 39,
                     offsetY: -40,
                     inputs: {
-                        item: this.object.list[$index],
-                        theme: this.theme,
-                        submitLink: this.object.submitLink,
+                        actions: [
+                            () => {
+                                this.$element.find(`#upload-${$index}`).click();
+                            },
+                            () => {
+                                this.clearImage($index);
+                            },
+                        ],
                     },
-                }).then(popup => {
-                    return popup.close;
-                }).then(result => {
-                    if (result || result === '') {
-                        this.object.list[$index].value = result;
-                    }
                 });
                 return;
             }
@@ -91,9 +94,12 @@
             });
         }
 
-        uploadImage ($file, $event) {
+        uploadImage ($index, $file, $event) {
+            const item = this.object.list[$index];
+            const submitLink = this.object.submitLink;
+
             if ($file) {
-                this.previewPopup({
+                this.showPopups[$index]({
                     templateUrl: 'src/popup/upload-preview.html',
                     controller: 'UploadPreviewController as uploadPreview',
                     attachSide: 'left',
@@ -107,28 +113,39 @@
                     inputs: {
                         file: $file,
                         options: {
-                            type: this.item.key === 'avatarImage' || this.item.key === 'headerImage' ? this.item.key : 'cover' ,
+                            type: item.key === 'avatarImage' ? item.key : 'cover' ,
                         },
                     },
                 }).then(popup => {
                     return popup.close;
                 }).then(result => {
-                    console.log(result);
                     if (result) {
                         const submitObj = {};
                         let closeValue = '';
-                        submitObj[this.item.key] = result;
+                        submitObj[item.key] = result;
                         closeValue = result;
 
-                        this.$http.put(`${this.apiEndpoint}${this.submitLink}`, submitObj).then(response => {
+                        this.$http.put(`${this.apiEndpoint}${submitLink}`, submitObj).then(response => {
                             this.notification.success({ message: '修改成功' });
-                            this.close(closeValue);
+                            this.object.list[$index].value = closeValue;
                         }, response => {
                             this.notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
                         });
                     }
                 });
             }
+        }
+
+        clearImage($index) {
+            const submitObj = {};
+            submitObj[this.object.list[$index].key] = '';
+
+            this.$http.put(`${this.apiEndpoint}${this.object.submitLink}`, submitObj).then(response => {
+                this.notification.success({ message: '修改成功' });
+                this.object.list[$index].value = '';
+            }, response => {
+                this.notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
+            });
         }
     }
 

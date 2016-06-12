@@ -14,8 +14,8 @@
             </a>
         </div>
         <div ng-if="navBar.theme && !navBar.theme.logo" class="theme-alt">
-            <p>程晓峰</p>
-            <p>keylol.com/user/haack</p>
+            <p>{{navBar.stateTree.aggregation.point.basicInfo.chineseName}}</p>
+            <p>keylol.com/point/{{navBar.stateTree.aggregation.point.basicInfo.idCode}}</p>
         </div>
         <form class="search-box">
             <input type="search">
