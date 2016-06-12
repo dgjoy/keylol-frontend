@@ -300,9 +300,6 @@ textarea,
   background-color: #adafb0;
 }
 
-
-
-
 // common article style
 .common-article {
   background-size: cover;
@@ -353,6 +350,34 @@ textarea,
       .second-line {
         @include ellipsis();
       }
+    }
+  }
+}
+
+// common article style
+.not-found-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 420px;
+
+  img {
+    width: 127px;
+    margin-right: 50px;
+  }
+
+  p {
+    margin: 0;
+
+    &:first-of-type {
+      font-size: 24px;
+      color: $keylol-theme;
+      margin-bottom: 4px;
+    }
+
+    &:last-of-type {
+      font-size: 16px;
+      color: $keylol-light-theme;
     }
   }
 }
