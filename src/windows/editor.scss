@@ -1,6 +1,10 @@
 .window-editor {
   background-color: $keylol-background;
 
+  .window-position-center {
+    vertical-align: top;
+  }
+
   .editor {
     width: 1060px;
 
@@ -8,12 +12,17 @@
       width: 100%;
       height: 300px;
       margin-bottom: 30px;
-      background: linear-gradient(to right, $keylol-inertia-shape 50%,$keylol-inertia-text 50%);
+      background: linear-gradient(to right, $keylol-inertia-shape 50%, $keylol-inertia-text 50%);
       background-size: 100px 100%;
       position: relative;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
+
+      &.has-background {
+        background: no-repeat center;
+        background-size: cover;
+      }
 
       .close {
         position: absolute;
@@ -22,6 +31,8 @@
         width: 100px;
         display: flex;
         justify-content: flex-end;
+        align-items: center;
+
         flat-button {
           display: none;
         }
@@ -96,7 +107,45 @@
         @include keylol-shadow-1();
         background-color: $keylol-inverted-text;
         width: 700px;
-        height: 100px;
+        height: 1024px;
+        margin-bottom: 20px;
+
+        .info-review {
+          padding: 20px 15px 0;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          .info {
+            display: flex;
+            align-items: center;
+
+            .avatar {
+              margin-right: 10px;
+              width: 32px;
+              height: 32px;
+            }
+
+            .name-group {
+              min-height: 32px;
+              max-width: calc(100% - 42px);
+              p {
+                @include ellipsis;
+                margin: 0;
+
+                &:first-of-type {
+                  color: $keylol-main-text;
+                  font-weight: bold;
+                }
+
+                &:nth-of-type(2) {
+                  color: $keylol-inertia-text;
+                  font-size: 12px;
+                }
+              }
+            }
+          }
+        }
       }
 
       .other {

@@ -1,9 +1,12 @@
 point-review {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   .review-text {
     @include keylol-review();
     color: $keylol-inertia-text;
+    margin: 0 0 5px;
   }
 
   >div {
@@ -25,5 +28,9 @@ point-review {
     height: 9px;
     cursor: pointer;
     fill: #CCC;
+
+    &:last-of-type {
+      margin-right: 0;
+    }
   }
 }

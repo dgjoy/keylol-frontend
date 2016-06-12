@@ -6,5 +6,5 @@
             <use ng-href="{{'close' | iconSvgUrl }}" xlink:href=""></use>
         </svg>
     </div>
-    <input class="input" type="text" popup="showSelector" ng-model="data">
+    <input class="input" type="text" popup="showSelector" ng-model="data" ng-disabled="pointArray.length >= limit">
 </div>

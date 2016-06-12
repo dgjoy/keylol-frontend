@@ -15,6 +15,7 @@
             themeColor: '<',
             disabled: '<',
             click: '&',
+            showPopup: '=?',
         },
     });
 }());

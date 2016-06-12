@@ -33,7 +33,13 @@ menu-item {
 
     &[disabled] {
       cursor: default;
-      color: $keylol-inertia-text;
+
+      .wrapper {
+        cursor: default;
+        > span {
+          color: $keylol-inertia-text;
+        }
+      }
 
       &:hover {
         background: transparent;
