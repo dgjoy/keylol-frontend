@@ -149,14 +149,14 @@
                     this.notification.success({ message: '推送成功' });
                     this.close(this.vm);
                 }, error => {
-                    this.notification.error({ message: '推送失败，请重试' });
+                    this.notification.error({ message: '推送失败，请重试' }, error);
                 });
             } else {
                 this.$http.post(`${this.apiEndpoint}feed/${this.postUrl}`, this.vm).then(response => {
                     this.notification.success({ message: '推送成功' });
                     this.close();
                 }, error => {
-                    this.notification.error({ message: '推送失败，请重试' });
+                    this.notification.error({ message: '推送失败，请重试' }, error);
                 });
             }
         }

@@ -4,8 +4,6 @@ spoiler {
   &.actionable {
     @include keylol-shadow-1();
     cursor: pointer;
-    display: block;
-    background: $keylol-inverted-text;
 
     &:hover>.hint>.icons>.eye-off{
       display: none;
@@ -14,77 +12,68 @@ spoiler {
     &:hover>.hint>.icons>.eye{
       display: block;
     }
+  }
 
-    &.expanded {
-      cursor: auto;
-      border-left: 5px solid $keylol-light-theme;
-      border-right: 5px solid $keylol-light-theme;
-      padding: 20px 10px;
-      border-radius: 2px;
+  .content {
+    display: none;
+  }
 
-      &>:last-child {
-        margin-bottom: 0 !important;
-      }
-    }
+  .hint {
+    display: flex;
+    height: 80px;
+    margin: 0;
 
-    .content {
-      display: none;
-    }
-
-    .hint {
+    .text {
+      flex-grow: 1;
       display: flex;
-      height: 80px;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+      margin: 0;
 
-      .text {
-        flex-grow: 1;
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        justify-content: center;
-
-        h2 {
-          color: $keylol-light-theme;
-          margin: 0;
-          font-weight: normal;
-          font-size: 20px;
-        }
-
-        h3 {
-          color: $keylol-main-text;
-          margin: 0;
-          font-size: 14px;
-          font-weight: normal;
-        }
+      h2 {
+        color: $keylol-light-theme;
+        margin: 0;
+        font-weight: normal;
+        font-size: 20px;
       }
 
-      .icons {
-        padding: 20px 10px;
-        background-color: $keylol-light-theme;
-        flex-grow: 0;
-        display: flex;
+      h3 {
+        color: $keylol-main-text;
+        margin: 0;
+        font-size: 14px;
+        font-weight: normal;
+      }
+    }
 
-        .eye,
-        .eye-off {
-          width: 40px;
-          height: 40px;
-          padding: 0 20px;
-          fill: $keylol-inverted-text;
-        }
+    .icons {
+      padding: 20px 10px;
+      background-color: $keylol-light-theme;
+      flex-grow: 0;
+      display: flex;
+      margin: 0;
 
-        .eye-off {
-          display: block;
-        }
-        .eye {
-          display: none;
-        }
+      .eye,
+      .eye-off {
+        width: 40px;
+        height: 40px;
+        padding: 0 20px;
+        fill: $keylol-inverted-text;
+      }
 
-        .point-icon {
-          height: 40px;
-          width: auto;
-          margin: 0;
-          border-left: 1px solid $keylol-inverted-text;
-          padding: 0 20px;
-        }
+      .eye-off {
+        display: block;
+      }
+      .eye {
+        display: none;
+      }
+
+      .point-icon {
+        height: 40px;
+        width: auto;
+        margin: 0;
+        border-left: 1px solid $keylol-inverted-text;
+        padding: 0 20px;
       }
     }
   }

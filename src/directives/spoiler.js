@@ -7,7 +7,7 @@
             link (scope, element) {
                 element.addClass('actionable');
                 element.click(() => {
-                    element.addClass('expanded');
+                    element.removeClass('actionable');
                     element.find('.hint').remove();
                     element.find('.content').children().unwrap();
                     element.off('click');

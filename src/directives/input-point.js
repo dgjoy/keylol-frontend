@@ -6,6 +6,7 @@
             scope: {
                 theme: '<',
                 typeWhitelist: '<',
+                options: '<',
                 limit: '<',
                 state: '<',
                 focusHandler: '&',
@@ -18,20 +19,16 @@
                 scope.data = '';
 
                 ngModel.$render = function () {
-                    scope.pointArray = [];
                     if (ngModel.$viewValue) {
-                        for (let i = 0; i < ngModel.$viewValue.length; i++) {
-                            scope.pointArray.push(ngModel.$viewValue[i]);
-                        }
+                        scope.pointArray = ngModel.$viewValue;
                     }
                 };
 
                 scope.deleteSelectorPoint = function (index) {
                     scope.pointArray.splice(index, 1);
-                    ngModel.$setViewValue(scope.pointArray);
                 };
 
-                scope.selectPoint = function (index) {
+                scope.selectPoint = function (index, $event) {
                     scope.pointArray[index].selected = true;
                     $window.addEventListener('click', clickCallback, true);
                     $window.addEventListener('keydown', keydownCallback, true);
@@ -40,6 +37,13 @@
                             scope.pointArray[index].selected = false;
                             if (e.keyCode === 8) {
                                 scope.deleteSelectorPoint(index);
+                                if (index < scope.pointArray.length) {
+                                    scope.selectPoint(index);
+                                }
+                            } else if (e.keyCode === 37 && index > 0) {
+                                scope.selectPoint(index - 1);
+                            } else if (e.keyCode === 39 && index < scope.pointArray.length - 1) {
+                                scope.selectPoint(index + 1);
                             }
                             $window.removeEventListener('click', clickCallback, true);
                             $window.removeEventListener('keydown', keydownCallback, true);
@@ -53,6 +57,10 @@
                             $window.removeEventListener('click', clickCallback, true);
                             $window.removeEventListener('keydown', keydownCallback, true);
                         });
+                    }
+
+                    if ($event) {
+                        $event.stopPropagation();
                     }
                 };
 
@@ -95,6 +103,7 @@
                                 if (scope.typeWhitelist) {
                                     params.type_whitelist = scope.typeWhitelist.toString();
                                 }
+                                $.extend(params, scope.options);
                                 $http.get(`${apiEndpoint}states/point-query-results`, {
                                     params,
                                 }).then(response => {
@@ -154,14 +163,12 @@
                         scope.pointArray.push(result);
                     }
                     scope.data = '';
-                    ngModel.$setViewValue(scope.pointArray);
                 }
 
                 function deleteKeyCallback (e) {
                     scope.$apply(() => {
                         if (e.keyCode === 8 && scope.pointArray.length > 0 && !scope.data) {
                             scope.pointArray.splice(-1, 1);
-                            ngModel.$setViewValue(scope.pointArray);
                         }
                     });
                 }

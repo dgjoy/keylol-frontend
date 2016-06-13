@@ -46,13 +46,14 @@ point-associations {
   }
   >.characteristics {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    height: 40px;
+    padding: 10px 0 5px;
     background-color: $keylol-inertia-shape;
 
     >.link-white {
-      margin: 0 10px;
+      margin: 0 10px 5px;
       display: flex;
       align-items: center;
 

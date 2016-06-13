@@ -1,6 +1,6 @@
 ﻿(function () {
     class SetHeaderMenuController {
-        constructor (close) {
+        constructor (close, options) {
             this.menu = {
                 items: [
                     {
@@ -15,16 +15,16 @@
                     },
                     {
                         type: 'item',
-                        text: '调用文章首幅图片',
-                        disabled: true,
+                        text: `调用文章首幅图片${options.articleFirstImageDisable ? '（未上传）' : ''}`,
+                        disabled: options.articleFirstImageDisable,
                         clickAction () {
-                            close('ArticleFirstImage');
+                            close('articleFirstImage');
                         },
                     },
                     {
                         type: 'item',
-                        text: '调用投稿据点封面',
-                        disabled: true,
+                        text: `调用投稿据点封面${options.pointHeaderImageDisable ? '（未填写）' : ''}`,
+                        disabled: options.pointHeaderImageDisable,
                         clickAction () {
                             close('pointHeaderImage');
                         },

@@ -29,12 +29,15 @@ input[type=text],
 input[type=number],
 input[type=password],
 input[type=email],
-textarea,
-.simditor {
+textarea {
   border-radius: 2px;
   border: none;
   padding: 8px;
   background: white;
+}
+
+.simditor {
+  padding: 8px 4px;
 }
 
 /* ----------- */

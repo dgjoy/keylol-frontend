@@ -24,7 +24,7 @@
            state="textArea.disabledState?'disabled':textArea.warnState?'warn':textArea.activeState?'theme':''"
 ></input-uic>
 
-<input-point theme="textArea.theme" ng-if="textArea.type === 'point'" type-whitelist="textArea.whitelist" limit="textArea.limit" ng-model="textArea.model" focus-handler="textArea.focus()" blur-handler="textArea.blur()"
+<input-point theme="textArea.theme" ng-if="textArea.type === 'point'" type-whitelist="textArea.whitelist" options="textArea.options" limit="textArea.limit" ng-model="textArea.model" focus-handler="textArea.focus()" blur-handler="textArea.blur()"
              state="textArea.warnState?'warn':textArea.activeState?'theme':''" cache-handler="textArea.cacheHandler(isEmpty)"></input-point>
 
 <dropdown ng-if="textArea.type === 'dropdown'" object="textArea.object" model="textArea.model"></dropdown>

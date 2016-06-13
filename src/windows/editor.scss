@@ -72,7 +72,7 @@
       .fake {
         @include keylol-shadow-1();
         position: absolute;
-        height: 180px;
+        height: 190px;
         left: 0;
         width: 100%;
         background-color: $keylol-card;
@@ -92,6 +92,8 @@
 
       .sub-points {
         position: relative;
+        padding-top: 10px;
+
         text-area {
           width: 100%;
         }
@@ -105,9 +107,9 @@
 
       .main {
         @include keylol-shadow-1();
-        background-color: $keylol-inverted-text;
+        background-color: $keylol-card;
         width: 700px;
-        height: 1024px;
+        min-height: 1024px;
         margin-bottom: 20px;
 
         .info-review {

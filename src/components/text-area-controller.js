@@ -51,6 +51,7 @@
             limit:'<',
             theme:'<',
             whitelist: '<',
+            options: '<',
         },
     });
 }());

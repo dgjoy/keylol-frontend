@@ -64,54 +64,7 @@ article-content {
 
   article {
     @include keylol-shadow-1();
-    padding: 5px 15px 15px 15px;
+    padding: 15px;
     background-color: $keylol-card;
-
-    h1 {
-      margin: 25px 0 10px;
-      font-size: 20px;
-      font-weight: bold;
-      color: $keylol-theme;
-      &::before {
-        content: ">";
-        font-family: "Keylol Rail Sung", serif;
-        margin-right: 6px;
-        font-size: 20px;
-      }
-    }
-
-    p {
-      margin:0 0 16px;
-      word-wrap: break-word;
-      line-height: 1.6em;
-      font-size: 16px;
-      color: $keylol-main-text;
-    }
-
-    img {
-      vertical-align: middle;
-      margin-left:-15px;
-      width: calc(100% + 30px);
-    }
-
-    i {
-      color: $keylol-inertia-text;
-      font-size: 14px;
-      font-style: italic;
-    }
-
-    blockquote {
-      @include keylol-shadow-1();
-      background-color: $keylol-inverted-text;
-      padding: 20px 15px;
-      margin: 0 0 16px;
-      &>:last-child {
-        margin-bottom: 0 !important;
-      }
-    }
-
-    spoiler {
-      margin-bottom: 16px;
-    }
   }
 }

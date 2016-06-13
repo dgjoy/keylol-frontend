@@ -35,17 +35,33 @@ input-point .wrapper {
     background-color: #ddd;
     display: flex;
     align-items: center;
+    cursor: default;
+
+    &.active {
+      background-color: $keylol-light-theme;
+
+      p {
+        color: $keylol-inverted-text;
+      }
+
+      svg {
+        fill: rgba($keylol-inverted-text, 0.6);
+      }
+    }
+
     img {
       width: 32px;
       height: 32px;
       border-radius: 16px;
     }
+
     p {
       @include ellipsis();
       margin: 0 10px;
       color: $keylol-main-text;
       max-width: 80px;
     }
+
     svg {
       cursor: pointer;
       width: 16px;

@@ -9,8 +9,10 @@
             <div class="titles">
                 <text-area class="main-title"
                            label="主标题"
+                           state="(editor.titleEmpty && !editor.vm.title) ? 'warn' : 'normal'"
                            type="text"
                            model="editor.vm.title"
+                           error="'主标题不能为空'"
                 ></text-area>
                 <text-area class="sub-title"
                            label="副标题"
@@ -20,21 +22,13 @@
             </div>
         </div>
         <div class="related-points">
-            <div class="fake"></div>
+            <div class="fake" ng-style="{height: editor.fakeHeight}"></div>
             <div class="main-points">
-                <text-area label="主要投稿"
-                           type="point"
-                           model="editor.extra.targetPointIds"
-                           limit="1"
-                ></text-area>
-                <flat-button disabled="editor.extra.targetPointIds.length <= 0" type="theme" text="填充关联投稿"></flat-button>
+                <text-area label="主要投稿" state="(editor.targetEmpty && editor.vm.targetPoints.length <= 0) ? 'warn' : 'normal'" error="'主要投稿不能为空'" type="point" model="editor.vm.targetPoints" limit="1" options="::{header_image: true, played_time: true}"></text-area>
+                <flat-button disabled="editor.vm.targetPoints.length <= 0 || !editor.canFillRelated" click="editor.getRelatedPoints()" type="theme" text="填充关联投稿"></flat-button>
             </div>
             <div class="sub-points">
-                <text-area label="关联投稿"
-                           type="point"
-                           model="editor.vm.attachedPointIds"
-                           limit="10"
-                ></text-area>
+                <text-area label="关联投稿" type="point" model="editor.vm.attachedPoints" limit="10"></text-area>
             </div>
         </div>
         <div class="edit-tools">
@@ -44,10 +38,10 @@
                         <img class="avatar" webp-src="{{::editor.stateTree.currentUser.avatarImage | avatarUrl}}" alt="{{::editor.stateTree.currentUser.userName}}">
                         <div class="name-group">
                             <p>{{::editor.stateTree.currentUser.userName}}</p>
-                            <p></p>
+                            <p ng-if="editor.totalPlayedTime">在档 {{editor.totalPlayedTime}} 小时</p>
                         </div>
                     </div>
-                    <point-review bind-review="editor.vm.rating" is-hollow="true"></point-review>
+                    <point-review ng-if="editor.hasRating" bind-review="editor.vm.rating" is-hollow="true"></point-review>
                 </div>
                 <div simditor ng-model="editor.vm.content"></div>
             </div>
@@ -120,9 +114,9 @@
                     </div>
                 </div>
                 <div class="card send-card clearfix">
-                    <p>每发布一片文章消耗 1 ◆ 文券<a href="">（这是为什么呢？）</a></p>
+                    <p>每发布一篇文章消耗 1 ◆ 文券<a href="">（这是为什么呢？）</a></p>
                     <p>当前有 <span class="theme">{{editor.stateTree.currentUser.coupon | numberAbbreviation}} ◆</span> 文券</p>
-                    <raised-button click="editor.submit()" text="发布文章" type="theme"></raised-button>
+                    <raised-button disabled="editor.submitLock" click="editor.submit()" text="发布文章" type="theme"></raised-button>
                 </div>
             </div>
         </div>
