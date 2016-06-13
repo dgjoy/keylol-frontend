@@ -66,6 +66,11 @@
                     ],
                 };
 
+                if (stateTree.aggregation.point.basicInfo.type !== 'game' && stateTree.aggregation.point.basicInfo.type !== 'hardware') {
+                    $scope.isOther = true;
+                    return;
+                }
+
                 /**
                  * deal with ways obj
                  */

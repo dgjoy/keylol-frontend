@@ -1,24 +1,24 @@
 ﻿<div style="margin-top: 30px" class="flex-row" ng-if="stateTree.aggregation.point.frontpage&&stateTree.aggregation.point.basicInfo" ng-switch="stateTree.aggregation.point.basicInfo.type">
     <div class="left-middle-lg row-sm" ng-switch-default>
-        <product-collection count="stateTree.aggregation.point.frontpage.basicInfo.productCount" object="stateTree.aggregation.point.frontpage" type="stateTree.aggregation.point.basicInfo.type" theme="stateTree.pointTheme" style="margin-bottom: 10px;"></product-collection>
-        <latest-articles is-empty="true" theme="stateTree.pointTheme"></latest-articles>
+        <product-collection count="::stateTree.aggregation.point.basicInfo.productCount" object="::stateTree.aggregation.point.frontpage" type="::stateTree.aggregation.point.basicInfo.type" theme="::theme" style="margin-bottom: 10px;"></product-collection>
+        <latest-articles is-empty="true" theme="::theme"></latest-articles>
     </div>
 
     <div class="left-middle-lg row-sm" ng-switch-when="hardware">
-        <point-associations theme="stateTree.pointTheme" style="margin-bottom: 40px;"></point-associations>
-        <short-review theme="stateTree.pointTheme" style="margin-bottom: 50px;"></short-review>
-        <media-center theme="stateTree.pointTheme" style="margin-bottom: 40px;"></media-center>
-        <latest-articles is-empty="true" theme="stateTree.pointTheme"></latest-articles>
+        <point-associations theme="::theme" style="margin-bottom: 40px;"></point-associations>
+        <short-review theme="::theme" style="margin-bottom: 50px;"></short-review>
+        <media-center theme="::theme" style="margin-bottom: 40px;"></media-center>
+        <latest-articles is-empty="true" theme="::theme"></latest-articles>
     </div>
 
     <div class="left-middle-lg row-sm" ng-switch-when="game">
-        <point-associations theme="stateTree.pointTheme" style="margin-bottom: 40px;"></point-associations>
-        <short-review theme="stateTree.pointTheme" style="margin-bottom: 50px;"></short-review>
-        <media-center theme="stateTree.pointTheme" style="margin-bottom: 40px;"></media-center>
-        <addictive-users ng-if="::(stateTree.aggregation.point.frontpage.addictedUsers.length > 0)" cards="::(stateTree.aggregation.point.frontpage.addictedUsers)" theme="stateTree.pointTheme"></addictive-users>
-        <similar-games ng-if="::(stateTree.aggregation.point.frontpage.similarPoints.length > 0)" cards="::(stateTree.aggregation.point.frontpage.similarPoints)" theme="stateTree.pointTheme" style="position: absolute;width: 100%;left: 0;"></similar-games>
-        <article-collection theme="stateTree.pointTheme" style="margin-top: 435px;margin-bottom: 30px"></article-collection>
-        <latest-articles is-empty="true" theme="stateTree.pointTheme"></latest-articles>
+        <point-associations theme="::theme" style="margin-bottom: 40px;"></point-associations>
+        <short-review theme="::theme" style="margin-bottom: 50px;"></short-review>
+        <media-center theme="::theme" style="margin-bottom: 40px;"></media-center>
+        <addictive-users ng-if="::(stateTree.aggregation.point.frontpage.addictedUsers.length > 0)" cards="::(stateTree.aggregation.point.frontpage.addictedUsers)" theme="::theme"></addictive-users>
+        <similar-games ng-if="::(stateTree.aggregation.point.frontpage.similarPoints.length > 0)" cards="::(stateTree.aggregation.point.frontpage.similarPoints)" theme="::theme" style="position: absolute;width: 100%;left: 0;"></similar-games>
+        <article-collection theme="::theme" style="margin-top: 435px;margin-bottom: 30px"></article-collection>
+        <latest-articles is-empty="true" theme="::theme"></latest-articles>
     </div>
 
     <div class="right-lg hidden-sm flex-column">

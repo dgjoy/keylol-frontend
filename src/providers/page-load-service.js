@@ -45,19 +45,19 @@
                 console.log(stateTree, result, urlParams);
                 if (target.current === result[result.length - 1]) {
                     delete target.current;
-                } else {
-                    return $http.get(`${apiEndpoint}states${urlParams}`,{ params }).then(response => {
-                        target[result[result.length - 1]] = response.data;
-                        target = target[result[result.length - 1]];
-                        if (target.current) {
-                            $state.go(`.${target.current}`, {}, { location: false });
-                        }
-
-                        return target;
-                    }, response => {
-                        notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
-                    });
                 }
+                
+                return $http.get(`${apiEndpoint}states${urlParams}`,{ params }).then(response => {
+                    target[result[result.length - 1]] = response.data;
+                    target = target[result[result.length - 1]];
+                    if (target.current) {
+                        $state.go(`.${target.current}`, {}, { location: false });
+                    }
+
+                    return target;
+                }, response => {
+                    notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
+                });
             }
         };
     });

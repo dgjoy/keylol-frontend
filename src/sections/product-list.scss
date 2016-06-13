@@ -11,4 +11,15 @@ product-list {
       margin:0 10px 20px 10px;
     }
   }
+
+  .action {
+    display: flex;
+    justify-content: center;
+
+    raised-button {
+      text-align: center;
+      margin-top: 20px;
+      margin-bottom: 30px;
+    }
+  }
 }

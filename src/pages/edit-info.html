@@ -1,8 +1,8 @@
 ﻿<div ng-if="stateTree.aggregation.point.edit.info">
     <point-edit-section object="basicInfo" theme="theme" style="margin-bottom: 50px;"></point-edit-section>
-    <point-edit-section object="ways" theme="theme" style="margin-bottom: 50px;"></point-edit-section>
-    <point-edit-section object="relative" theme="theme" style="margin-bottom: 50px;"></point-edit-section>
-    <point-edit-section object="schedule" theme="theme" style="margin-bottom: 50px;"></point-edit-section>
-    <point-edit-section object="language" theme="theme" style="margin-bottom: 50px;"></point-edit-section>
-    <point-edit-section object="chinese" theme="theme" style="margin-bottom: 50px;"></point-edit-section>
+    <point-edit-section ng-if="!isOther" object="ways" theme="theme" style="margin-bottom: 50px;"></point-edit-section>
+    <point-edit-section ng-if="!isOther" object="relative" theme="theme" style="margin-bottom: 50px;"></point-edit-section>
+    <point-edit-section ng-if="!isOther" object="schedule" theme="theme" style="margin-bottom: 50px;"></point-edit-section>
+    <point-edit-section ng-if="!isOther" object="language" theme="theme" style="margin-bottom: 50px;"></point-edit-section>
+    <point-edit-section ng-if="!isOther" object="chinese" theme="theme" style="margin-bottom: 50px;"></point-edit-section>
 </div>

@@ -83,6 +83,7 @@
             object: '<',
             type: '<',
             theme: '<',
+            count: '<',
         },
     });
 }());

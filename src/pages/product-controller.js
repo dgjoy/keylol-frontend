@@ -46,6 +46,7 @@
                             header: {
                                 mainTitle: '作品',
                                 subTitle: `共 ${this.productCount} 部作品`,
+                                type: 'theme',
                             },
                             cards: stateTree.aggregation.point.product.products,
                         }];
@@ -69,6 +70,7 @@
                 header: {
                     mainTitle: '作品',
                     subTitle: `共 ${this.productCount} 部作品`,
+                    type: 'theme',
                 },
                 cards: arr,
             });
@@ -83,6 +85,7 @@
                             header: {
                                 mainTitle: '开发',
                                 subTitle: `旗下 ${this.productCount} 部作品中有 ${list.length} 部为其开发`,
+                                type: 'theme',
                             },
                             cards: list,
                         });
@@ -98,6 +101,7 @@
                             header: {
                                 mainTitle: '发行',
                                 subTitle: `旗下 ${this.productCount} 部作品中有 ${list.length} 部为其发行`,
+                                type: 'theme',
                             },
                             cards: list,
                         });
@@ -113,6 +117,7 @@
                             header: {
                                 mainTitle: '制造',
                                 subTitle: `旗下 ${this.productCount} 部作品中有 ${list.length} 部为其制造`,
+                                type: 'theme',
                             },
                             cards: list,
                         });
@@ -128,6 +133,7 @@
                             header: {
                                 mainTitle: '代理',
                                 subTitle: `旗下 ${this.productCount} 部作品中有 ${list.length} 部为其代理`,
+                                type: 'theme',
                             },
                             cards: list,
                         });
@@ -143,6 +149,7 @@
                             header: {
                                 mainTitle: '特性',
                                 subTitle: `此类 ${this.productCount} 部作品中有 ${list.length} 部属于此特性`,
+                                type: 'theme',
                             },
                             cards: list,
                         });
@@ -158,6 +165,7 @@
                             header: {
                                 mainTitle: 'series',
                                 subTitle: `此类 ${this.productCount} 部作品中有 ${list.length} 部属于此系列`,
+                                type: 'theme',
                             },
                             cards: list,
                         });
@@ -173,6 +181,7 @@
                             header: {
                                 mainTitle: '流派',
                                 subTitle: `此类 ${this.productCount} 部作品中有 ${list.length} 部属于此流派`,
+                                type: 'theme',
                             },
                             cards: list,
                         });
