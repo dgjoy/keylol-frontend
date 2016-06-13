@@ -2,24 +2,29 @@
     <div class="window">
         <div class="related">
             <text-area type="point"
-                       label="选择一个据点" model="''">
+                       label="选择一个据点" model="[]" limit="1">
             </text-area>
             <div class="user-info">
-                <img class="avatar" webp-src="//storage.keylol.com/4ed8e4862422e8a584fb6bee9f32fedd.jpg!avatar.medium">
+                <img src="" class="avatar" webp-src="{{::activityEditor.stateTree.currentUser.avatarImage | avatarUrl}}">
                 <div class="name-group">
-                    <p>用户名</p>
+                    <p>{{::activityEditor.stateTree.currentUser.userName}}</p>
                     <p>14 篇文章 / 3 篇动态</p>
                 </div>
             </div>
-            <point-review review-bind="activityEditor.score" is-hollow="true"></point-review>
+            <point-review bind-review="activityEditor.vm.score" is-hollow="true"></point-review>
         </div>
         <div class="edit">
-            <textarea placeholder="谈谈最近的心得..." rows="4" elastic ng-model="activityEditor.content"></textarea>
+            <textarea placeholder="谈谈最近的心得..." rows="4" elastic ng-model="activityEditor.vm.content"></textarea>
         </div>
         <div class="actions">
-            <a href="">上传一张附图</a>
-            <flat-button text="放弃" type="inertia" ng-click="activityEditor.exit()"></flat-button>
-            <raised-button text="贴出动态" type="theme"></raised-button>
+            <a href="" ngf-select="activityEditor.uploadImage($file, $event)" ngf-fix-orientation="true" accept="image/*">{{activityEditor.extra.image ? '更换附图' : '上传一张附图'}}</a>
+            <div class="buttons">
+                <flat-button text="放弃" type="inertia" ng-click="activityEditor.close()"></flat-button>
+                <raised-button text="贴出动态" type="theme"></raised-button>
+            </div>
         </div>
+    </div>
+    <div ng-if="activityEditor.extra.image" class="image-preview">
+        <img src="" ngf-src="activityEditor.extra.image">
     </div>
 </window>

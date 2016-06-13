@@ -17,14 +17,20 @@ section-timeline {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      >p {
+
+      p {
         margin: 0;
         color: $keylol-inertia-text;
       }
-      >svg {
-        width: 32px;
-        height: 32px;
-        fill: $keylol-inertia-shape;
+
+      a {
+        display: flex;
+
+        svg {
+          width: 32px;
+          height: 32px;
+          fill: $keylol-inertia-shape;
+        }
       }
     }
 

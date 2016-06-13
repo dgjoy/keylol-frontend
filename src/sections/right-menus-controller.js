@@ -49,11 +49,15 @@
                         type: 'item',
                         icon: 'coffe',
                         text: '发表动态',
-                        clickAction() {
+                        clickAction(event) {
                             window.show({
+                                event,
                                 templateUrl: 'src/windows/activity-editor.html',
                                 controller: 'ActivityEditorController',
                                 controllerAs: 'activityEditor',
+                                inputs: {
+                                    options: {},
+                                },
                             });
                         },
                     },

@@ -1,7 +1,12 @@
 .window-activity-editor {
+  &.window-no-source {
+    @include grow-shrink-child();
+  }
+
   .window {
     @include keylol-shadow-3();
     width: 640px;
+    margin: auto;
     background-color: $keylol-inverted-text;
 
     .related {
@@ -67,23 +72,36 @@
     .actions {
       display: flex;
       align-items: center;
-      padding:20px 15px;
+      justify-content: space-between;
+      padding: 20px 15px;
       background-color: $keylol-card;
       box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.16);
 
       a {
-        flex-grow: 1;
         color: $keylol-highlight;
+
         &:hover {
           text-decoration: underline;
         }
       }
 
-      flat-button,
-      raised-button {
-        flex-grow: 0;
-        margin-left: 20px;
+      .buttons {
+        display: flex;
+
+        raised-button {
+          margin-left: 20px;
+        }
       }
+    }
+  }
+
+  .image-preview {
+    margin-top: 30px;
+    text-align: center;
+
+    img {
+      background-color: $keylol-card;
+      @include keylol-shadow-3();
     }
   }
 }

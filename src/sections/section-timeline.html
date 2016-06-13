@@ -1,10 +1,12 @@
 ﻿<div class="wrapper" ng-switch="sectionTimeline.columnCount">
     <div class="first-column" ng-switch-when="two">
         <div class="quick-edit">
-            <p>刚刚结束的游戏体验如何？</p>
-            <svg aria-hidden="true">
-                <use ng-href="{{'image' | iconSvgUrl }}" xlink:href=""></use>
-            </svg>
+            <p ng-click="sectionTimeline.showActivityEditor($event)">刚刚结束的游戏体验如何？</p>
+            <a href="" ngf-select="sectionTimeline.uploadImage($file, $event)" ngf-fix-orientation="true" accept="image/*">
+                <svg aria-hidden="true">
+                    <use ng-href="{{'image' | iconSvgUrl }}" xlink:href=""></use>
+                </svg>
+            </a>
         </div>
         <timeline-card ng-repeat="card in sectionTimeline.leftCards track by $index"></timeline-card>
     </div>

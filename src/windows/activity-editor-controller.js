@@ -1,15 +1,22 @@
 ﻿(function () {
     class ActivityEditorController {
-        constructor(close) {
-            $.extend(this,{
+        constructor(close, options, stateTree, $http) {
+            $.extend(this, {
                 close,
+                stateTree,
             });
+            this.vm = {};
+            this.extra = {};
 
-            this.score = 1;
-            this.content = '';
+            if (options.file) {
+                this.extra.image = options.file;
+            }
         }
-        exit() {
-            this.close();
+
+        uploadImage($file) {
+            if ($file) {
+                this.extra.image = $file;
+            }
         }
     }
     keylolApp.controller('ActivityEditorController', ActivityEditorController);
