@@ -322,11 +322,14 @@
                         };
 
                         self.nameOfPlatformPoints = ['Steam', 'Origin','uPlay','战网','PlayStation','XBox','iOS',
-                            '安卓', 'Windows UWP 通用应用','GBA','NDS','3DS','Wii','WiiU','PSP', '独立客户端', '网页载体'];
+                            '安卓', 'Windows UWP 通用应用','GBA','NDS','3DS',
+                            'Wii','WiiU','PSP', '独立客户端', '网页载体'];
                         self.idCodeOfPlatformPoints = ['STEAM', 'ORGIN','UPLAY','BTNET','PLYSN','MSBOX','APIOS',
-                            'ANDRD', 'MSUWP','GMBYA','NTDDS','NT3DS','NDWII','NWIIU','SYPSP', 'CLENT', 'WEBBD'];
+                            'ANDRD', 'MSUWP','GMBYA','NTDDS','NT3DS',
+                            'NDWII','NWIIU','SYPSP', 'CLENT', 'WEBBD'];
                         self.iconOfPlatformPoints = ['dtb-steam', 'dtb-origin','dtb-uplay','dtb-battlenet','dtb-playstation','dtb-xbox','dtb-ios',
-                            'dtb-android', 'dtb-windows-store','dtb-gba','dtb-nds','dtb3ds','dtb-wii','dtb-wiiu','dtb-psp', 'dtb-client', 'dtb-browser'];
+                            'dtb-android', 'dtb-windows-store','dtb-gba','dtb-nds','dtb3ds',
+                            'dtb-wii','dtb-wiiu','dtb-psp', 'dtb-client', 'dtb-browser'];
                     }
 
                     return new Utils();

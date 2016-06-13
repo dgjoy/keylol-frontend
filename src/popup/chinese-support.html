@@ -10,59 +10,55 @@
         <div class="header" style="{{chineseSupport.theme.main?'color:'+chineseSupport.theme.main+';':''}}">厂商配置</div>
         <table>
             <thead>
-                <tr><td></td><td>界面</td><td>字幕</td><td>配音</td></tr>
-                <tr class="border"><td></td><td></td><td></td><td></td></tr>
+                <tr>
+                    <td></td>
+                    <td>界面</td>
+                    <td>字幕</td>
+                    <td>配音</td>
+                </tr>
             </thead>
             <tbody>
-                <tr class="space"><td></td><td></td><td></td><td></td></tr>
                 <tr>
                     <td class="left-align">英语</td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                        <svg style="{{chineseSupport.theme.light?'fill:'+chineseSupport.theme.light+';':''}}" aria-hidden="true">
+                    <td ng-repeat="attr in chineseSupport.languageAvailability">
+                        <svg ng-if="chineseSupport.object.english[attr]" style="{{chineseSupport.theme.light?'fill:'+chineseSupport.theme.light+';':''}}" aria-hidden="true">
                             <use ng-href="{{'check' | iconSvgUrl }}" xlink:href=""></use>
                         </svg>
                     </td>
                 </tr>
                 <tr>
                     <td class="left-align">日语</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td ng-repeat="attr in chineseSupport.languageAvailability">
+                        <svg ng-if="chineseSupport.object.japanese[attr]" style="{{chineseSupport.theme.light?'fill:'+chineseSupport.theme.light+';':''}}" aria-hidden="true">
+                            <use ng-href="{{'check' | iconSvgUrl }}" xlink:href=""></use>
+                        </svg>
+                    </td>
                 </tr>
                 <tr>
                     <td class="left-align">简体中文</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td ng-repeat="attr in chineseSupport.languageAvailability">
+                        <svg ng-if="chineseSupport.object.simplifiedChinese[attr]" style="{{chineseSupport.theme.light?'fill:'+chineseSupport.theme.light+';':''}}" aria-hidden="true">
+                            <use ng-href="{{'check' | iconSvgUrl }}" xlink:href=""></use>
+                        </svg>
+                    </td>
                 </tr>
                 <tr>
                     <td class="left-align">繁体中文</td>
-                    <td>
-                        <svg style="{{chineseSupport.theme.light?'fill:'+chineseSupport.theme.light+';':''}}" aria-hidden="true">
+                    <td ng-repeat="attr in chineseSupport.languageAvailability">
+                        <svg ng-if="chineseSupport.object.traditionalChinese[attr]" style="{{chineseSupport.theme.light?'fill:'+chineseSupport.theme.light+';':''}}" aria-hidden="true">
                             <use ng-href="{{'check' | iconSvgUrl }}" xlink:href=""></use>
                         </svg>
                     </td>
-                    <td>
-                        <svg style="{{chineseSupport.theme.light?'fill:'+chineseSupport.theme.light+';':''}}" aria-hidden="true">
-                            <use ng-href="{{'check' | iconSvgUrl }}" xlink:href=""></use>
-                        </svg>
-                    </td>
-                    <td></td>
                 </tr>
             </tbody>
         </table>
         <div class="header" style="{{chineseSupport.theme.main?'color:'+chineseSupport.theme.main+';':''}}">第三方支持</div>
-        <div class="third-party">
-            <p>天藐汉化</p>
-            <a href="">外部页面</a>
-            <svg aria-hidden="true"><use ng-href="{{'open-in-new' | iconSvgUrl }}" xlink:href=""></use></svg>
-        </div>
-        <div class="third-party">
-            <p>蒹葭汉化</p>
-            <a href="">外部页面</a>
-            <svg aria-hidden="true"><use ng-href="{{'open-in-new' | iconSvgUrl }}" xlink:href=""></use></svg>
+        <div class="third-party" ng-repeat="thirdParty in chineseSupport.object.thirdPartyLinks">
+            <p>{{thirdParty.title}}</p>
+            <a href="" ng-href="{{thirdParty.link}}">外部页面</a>
+            <svg aria-hidden="true">
+                <use ng-href="{{'open-in-new' | iconSvgUrl }}" xlink:href=""></use>
+            </svg>
         </div>
     </div>
 </popup>

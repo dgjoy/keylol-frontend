@@ -1,19 +1,19 @@
 ﻿<div class="bundle">
     <div class="stations">
-        <a href="" class="link-black" ng-repeat="i in [1]">
+        <a href="" ng-href="point/{{platform.idCode}}" class="link-black" ng-repeat="platform in pointAssociations.platforms">
             <svg aria-hidden="true">
-                <use ng-href="{{'dtb-steam' | iconSvgUrl }}" xlink:href=""></use>
+                <use ng-href="{{platform.icon | iconSvgUrl }}" xlink:href=""></use>
             </svg>
-            <span>Steam</span>
+            <span>{{platform.name}}</span>
         </a>
     </div>
     <a href="" class="chinese-support" ng-click="pointAssociations.showChineseSupport($event)" popup="pointAssociations.showChineseSupportPopup">华语支持</a>
 </div>
 <div class="characteristics">
-    <a href="" class="link-white" ng-repeat="i in [1]">
+    <a href="" class="link-white" ng-repeat="attribute in pointAssociations.attributes">
         <svg aria-hidden="true">
-            <use ng-href="{{'search' | iconSvgUrl }}" xlink:href=""></use>
+            <use ng-href="{{attribute.icon | iconSvgUrl }}" xlink:href=""></use>
         </svg>
-        <span>多人游戏</span>
+        <span>{{attribute.text}}</span>
     </a>
 </div>

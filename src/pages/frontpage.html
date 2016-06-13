@@ -1,4 +1,4 @@
-﻿<div style="margin-top: 30px" class="flex-row" ng-if="stateTree.aggregation.point.frontpage&&stateTree.aggregation.point.basicInfo" ng-switch="stateTree.aggregation.point.basicInfo.type">
+﻿<div style="margin-top: 30px" class="flex-row" ng-if="stateTree.aggregation.point.frontpage && stateTree.aggregation.point.basicInfo" ng-switch="stateTree.aggregation.point.basicInfo.type">
     <div class="left-middle-lg row-sm" ng-switch-default>
         <product-collection count="::stateTree.aggregation.point.basicInfo.productCount" object="::stateTree.aggregation.point.frontpage" type="::stateTree.aggregation.point.basicInfo.type" theme="::theme" style="margin-bottom: 10px;"></product-collection>
         <latest-articles is-empty="true" theme="::theme"></latest-articles>
@@ -12,7 +12,7 @@
     </div>
 
     <div class="left-middle-lg row-sm" ng-switch-when="game">
-        <point-associations theme="::theme" style="margin-bottom: 40px;"></point-associations>
+        <point-associations ng-if="stateTree.aggregation.point.frontpage" theme="::theme" style="margin-bottom: 40px;" object="::stateTree.aggregation.point.frontpage"></point-associations>
         <short-review theme="::theme" style="margin-bottom: 50px;"></short-review>
         <media-center theme="::theme" style="margin-bottom: 40px;"></media-center>
         <addictive-users ng-if="::(stateTree.aggregation.point.frontpage.addictedUsers.length > 0)" cards="::(stateTree.aggregation.point.frontpage.addictedUsers)" theme="::theme"></addictive-users>

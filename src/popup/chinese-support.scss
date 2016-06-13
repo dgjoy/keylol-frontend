@@ -1,5 +1,6 @@
 .popup-chinese-support {
   @include keylol-shadow-3();
+  @include grow-shrink-self;
   background-color: $keylol-card;
   width: 340px;
   z-index: 1000;
@@ -35,6 +36,7 @@
 
   >.content {
     padding: 15px 15px 20px;
+
     .header {
       line-height: 25px;
       font-size: 16px;
@@ -45,21 +47,22 @@
       width: 100%;
       margin: 10px 0 20px;
 
-      tr {
-        height: 25px;
-      }
-
-      tr.border {
-        height: 10px;
+      thead {
         border-bottom: 1px solid $keylol-inertia-shape;
+
+        tr td {
+          padding-bottom: 9px;
+        }
       }
 
-      tr.space {
-        height: 9px;
+      tbody tr:first-of-type td {
+        padding-top: 9px;
       }
 
       td {
         text-align: center;
+        height: 25px;
+
         svg {
           width: 16px;
           height: 16px;
