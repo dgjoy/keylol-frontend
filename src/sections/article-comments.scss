@@ -58,39 +58,45 @@ article-comments {
     background-color: $keylol-card;
     padding: 20px 15px;
 
-    .count {
+    .header {
+      display: flex;
+      justify-content: space-between;
       padding-top: 10px;
-      p {
-        margin: 0;
-      }
-      p:first-of-type {
-        color: $keylol-main-text;
-        font-size: 20px;
-      }
-      p:last-of-type {
-        color:$keylol-inertia-text;
-        font-size: 12px;
+
+      .count {
+        p {
+          margin: 0;
+        }
+        p:first-of-type {
+          color: $keylol-main-text;
+          font-size: 20px;
+        }
+        p:last-of-type {
+          color:$keylol-inertia-text;
+          font-size: 12px;
+        }
       }
     }
+
     .comments {
       padding: 10px 0;
-    }
 
-    .comment {
-      margin: 0 -15px;
-      padding: 20px 15px;
-      border-bottom: 1px solid $keylol-inertia-shape;
-      &:last-of-type {
-        border-bottom: 0;
+      .comment {
+        margin: 0 -15px;
+        padding: 20px 15px;
+        border-bottom: 1px solid $keylol-inertia-shape;
+        &:last-of-type {
+          border-bottom: 0;
+        }
+
+        &:hover .action{
+          visibility: visible;
+        }
+
+        .content {
+          margin-top: 15px;
+        }
       }
-
-      &:hover .action{
-        visibility: visible;
-      }
-    }
-
-    .comment .content {
-      margin-top: 15px;
     }
 
     .footer pagination {

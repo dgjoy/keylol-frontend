@@ -12,7 +12,8 @@
 
         showEditPopup ($event, $index) {
             // 修改图片时,弹出的是菜单
-            if ($.inArray(this.object.list[$index].type,['thumbnail','cover','avatar','logo']) !== -1) {
+            if ($index < this.object.list.length && $.inArray(this.object.list[$index].type,['thumbnail','cover','avatar','logo']) !== -1) {
+                this.object.list[$index].editActive = true;
                 this.showPopups[$index]({
                     templateUrl: 'src/popup/upload-menu.html',
                     controller: 'UploadMenuController as uploadMenu',
@@ -31,37 +32,52 @@
                             },
                         ],
                     },
+                }).then(popup => {
+                    return popup.close;
+                }).then(result => {
+                    this.object.list[$index].editActive = false;
                 });
-                return;
-            }
-
-            this.showPopups[$index]({
-                templateUrl: 'src/popup/item-editor.html',
-                controller: 'ItemEditorController as itemEditor',
-                event: $event,
-                attachSide: 'left',
-                align: 'top',
-                offsetX: 39,
-                offsetY: -40,
-                inputs: {
-                    item: $index < this.object.list.length ? this.object.list[$index] : this.object.extraList[$index - this.object.list.length],
-                    options: {
-                        theme: this.theme,
-                        submitLink: this.object.submitLink,
-                        updateObject: this.object.updateObject,
-                    },
-                },
-            }).then(popup => {
-                return popup.close;
-            }).then(result => {
-                if (result || result === '') {
-                    if ($index < this.object.list.length) {
-                        this.object.list[$index].value = result;
-                    } else {
-                        this.object.extraList[$index - this.object.list.length].value = result;
-                    }
+            } else {
+                if ($index < this.object.list.length) {
+                    this.object.list[$index].editActive = true;
+                } else {
+                    this.object.extraList[$index - this.object.list.length].editActive = true;
                 }
-            });
+
+                this.showPopups[$index]({
+                    templateUrl: 'src/popup/item-editor.html',
+                    controller: 'ItemEditorController as itemEditor',
+                    event: $event,
+                    attachSide: 'left',
+                    align: 'top',
+                    offsetX: 39,
+                    offsetY: -40,
+                    inputs: {
+                        item: $index < this.object.list.length ? this.object.list[$index] : this.object.extraList[$index - this.object.list.length],
+                        options: {
+                            theme: this.theme,
+                            submitLink: this.object.submitLink,
+                            updateObject: this.object.updateObject,
+                        },
+                    },
+                }).then(popup => {
+                    return popup.close;
+                }).then(result => {
+                    if (result || result === '') {
+                        if ($index < this.object.list.length) {
+                            this.object.list[$index].value = result;
+                        } else {
+                            this.object.extraList[$index - this.object.list.length].value = result;
+                        }
+                    }
+
+                    if ($index < this.object.list.length) {
+                        this.object.list[$index].editActive = false;
+                    } else {
+                        this.object.extraList[$index - this.object.list.length].editActive = false;
+                    }
+                });
+            }
         }
 
         expand() {
@@ -89,7 +105,6 @@
                 if (result) {
                     $.extend(result, this.object.addAttribute.itemBasic);
                     this.object.list.push(result);
-                    console.log(this.object.list);
                 }
             });
         }
@@ -99,6 +114,8 @@
             const submitLink = this.object.submitLink;
 
             if ($file) {
+                this.object.list[$index].editActive = true;
+
                 this.showPopups[$index]({
                     templateUrl: 'src/popup/upload-preview.html',
                     controller: 'UploadPreviewController as uploadPreview',
@@ -108,12 +125,12 @@
                         currentTarget: $event.currentTarget,
                     },
                     align: 'top',
-                    offsetX: 45,
-                    offsetY: -20,
+                    offsetX: 35,
+                    offsetY: item.key === 'avatarImage' ? -49 : -20,
                     inputs: {
                         file: $file,
                         options: {
-                            type: item.key === 'avatarImage' ? item.key : 'cover' ,
+                            type: item.key === 'avatarImage' ? item.key : `edit-image` ,
                         },
                     },
                 }).then(popup => {
@@ -121,17 +138,17 @@
                 }).then(result => {
                     if (result) {
                         const submitObj = {};
-                        let closeValue = '';
                         submitObj[item.key] = result;
-                        closeValue = result;
 
                         this.$http.put(`${this.apiEndpoint}${submitLink}`, submitObj).then(response => {
                             this.notification.success({ message: '修改成功' });
-                            this.object.list[$index].value = closeValue;
+                            this.object.list[$index].value = result;
                         }, response => {
                             this.notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
                         });
                     }
+
+                    this.object.list[$index].editActive = false;
                 });
             }
         }

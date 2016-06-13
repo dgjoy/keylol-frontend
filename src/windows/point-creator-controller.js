@@ -134,8 +134,8 @@
                         currentTarget: $event.currentTarget,
                     },
                     align: 'top',
-                    offsetX: 45,
-                    offsetY: -20,
+                    offsetX: 48,
+                    offsetY: 6,
                     inputs: {
                         file: $file,
                         options: {

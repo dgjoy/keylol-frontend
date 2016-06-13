@@ -4,32 +4,34 @@
         <ul>
             <li ng-repeat="item in pointEditSection.object.list track by $index" ng-switch="item.type">
                 <div class="title">
-                    <p>{{item.title}}</p>
+                    <p style="{{item.editActive && pointEditSection.theme.main ? 'color:' + pointEditSection.theme.main + ';' :''}}">{{item.title}}</p>
                     <p>{{item.subTitle}}</p>
                 </div>
-                <img class="content-cover" webp-src="{{item.value | uriRelocate}}" alt="" ng-switch-when="cover">
-                <img class="content-thumbnail" webp-src="{{item.value | uriRelocate}}" alt="" ng-switch-when="thumbnail">
-                <div class="content-avatar" ng-switch-when="avatar">
-                    <img webp-src="{{item.value | avatarUrl}}" alt="">
-                    <img webp-src="{{item.value | avatarUrl}}" alt="">
-                    <img webp-src="{{item.value | avatarUrl}}" alt="">
-                    <img webp-src="{{item.value | avatarUrl}}" alt="">
-                </div>
-                <div class="content-logo" ng-switch-when="logo">
-                    <img webp-src="{{item.value | uriRelocate}}" alt="">
-                </div>
-                <div class="content-color color-{{item.colorType}}" ng-switch-when="color" ng-style="{backgroundColor:item.value}">
-                    <div class="sample">
-                        样本 {{item.colorType}}
+                <div class="content">
+                    <img class="content-cover" webp-src="{{item.value | uriRelocate}}" alt="" ng-switch-when="cover">
+                    <img class="content-thumbnail" webp-src="{{item.value | uriRelocate}}" alt="" ng-switch-when="thumbnail">
+                    <div class="content-avatar" ng-switch-when="avatar">
+                        <img webp-src="{{item.value | avatarUrl}}" alt="">
+                        <img webp-src="{{item.value | avatarUrl}}" alt="">
+                        <img webp-src="{{item.value | avatarUrl}}" alt="">
+                        <img webp-src="{{item.value | avatarUrl}}" alt="">
                     </div>
-                    <div class="left-part">
-                        {{item.value}}
+                    <div class="content-logo" ng-switch-when="logo">
+                        <img webp-src="{{item.value | uriRelocate}}" alt="">
                     </div>
-                    <div class="right-part">
-                        这段文字应当比样本更清晰
+                    <div class="content-color color-{{item.colorType}}" ng-switch-when="color" ng-style="{backgroundColor:item.value}">
+                        <div class="sample">
+                            样本 {{item.colorType}}
+                        </div>
+                        <div class="left-part">
+                            {{item.value}}
+                        </div>
+                        <div class="right-part">
+                            这段文字应当比样本更清晰
+                        </div>
                     </div>
+                    <p ng-switch-default="" ng-class="{disabled: item.editDisabled}">{{item.value}}</p>
                 </div>
-                <p ng-switch-default="" class="content" ng-class="{disabled: item.editDisabled}">{{item.value}}</p>
                 <div ng-if="item.type==='cover'||item.type==='thumbnail'||item.type==='avatar'||item.type==='logo'" id="upload-{{$index}}" ng-show="false" ngf-select="pointEditSection.uploadImage($index, $file, $event)" ngf-fix-orientation="true" accept="image/*"></div>
                 <input-switch ng-if="item.type==='switch'" model="true" theme="::pointEditSection.theme"></input-switch>
                 <icon-button ng-if="!item.editDisabled && item.type !== 'switch'" click="pointEditSection.showEditPopup(event, $index)" show-popup="pointEditSection.showPopups[$index]" icon="new-article"></icon-button>
@@ -39,7 +41,7 @@
             <ul>
                 <li ng-repeat="item in pointEditSection.object.extraList track by $index">
                     <div class="title">
-                        <p>{{item.title}}</p>
+                        <p style="{{item.editActive && pointEditSection.theme.main ? 'color:' + pointEditSection.theme.main + ';' :''}}">{{item.title}}</p>
                         <p>{{item.subTitle}}</p>
                     </div>
                     <p class="content" ng-class="{disabled: item.editDisabled}">{{item.value}}</p>
