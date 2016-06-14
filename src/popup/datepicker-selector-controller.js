@@ -129,7 +129,7 @@
             let nYear = year;
             let nMonth = month;
             if (month + offset < 0) {
-                nYear -= offset;
+                nYear -= 1;
                 nMonth = 12 + (month + offset);
             } else if (month + offset > 11) {
                 nYear += 1;

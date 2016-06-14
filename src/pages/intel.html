@@ -4,7 +4,7 @@
         <point-vendors ng-if="::(stateTree.aggregation.point.intel.vendorPoints.length > 0)" cards="::(stateTree.aggregation.point.intel.vendorPoints)" theme="::theme" style="margin-bottom: 30px;"></point-vendors>
     </div>
     <div class="left-middle-lg row-sm" ng-switch-when="game">
-        <point-associations theme="::theme" style="margin-bottom: 40px;"></point-associations>
+        <point-associations theme="::theme" style="margin-bottom: 40px;" object="::stateTree.aggregation.point.intel"></point-associations>
         <point-vendors ng-if="::(stateTree.aggregation.point.intel.vendorPoints.length > 0)" cards="::(stateTree.aggregation.point.intel.vendorPoints)" theme="::theme" style="margin-bottom: 30px;"></point-vendors>
         <third-party-statistics basic-info="::(stateTree.aggregation.point.basicInfo)" intel="::(stateTree.aggregation.point.intel)" theme="::theme" style="margin-bottom: 40px;"></third-party-statistics>
         <staff-users from-vendor="::(stateTree.aggregation.point.intel.venderPointStaff)" staying="::(stateTree.aggregation.point.intel.pointStaff)" theme="::theme" style="margin-bottom: 20px"></staff-users>

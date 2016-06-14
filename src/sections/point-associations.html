@@ -9,7 +9,7 @@
     </div>
     <a href="" class="chinese-support" ng-click="pointAssociations.showChineseSupport($event)" popup="pointAssociations.showChineseSupportPopup">华语支持</a>
 </div>
-<div class="characteristics">
+<div class="characteristics" ng-if="pointAssociations.attributes.length > 0">
     <a href="" class="link-white" ng-repeat="attribute in pointAssociations.attributes">
         <svg aria-hidden="true">
             <use ng-href="{{attribute.icon | iconSvgUrl }}" xlink:href=""></use>

@@ -32,6 +32,8 @@
                 if (selected[2] <= getDayCount({ year:selected[0],month:selected[1] })) {
                     this.isError = false;
                 }
+            } else if (this.model === '') {
+                this.isError = false;
             }
         }
 
