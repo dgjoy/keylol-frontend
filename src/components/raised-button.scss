@@ -3,6 +3,66 @@ raised-button {
     @include keylol-button-single;
     @include keylol-shadow-1;
     color: $keylol-inverted-text;
+    fill: $keylol-inverted-text;
+    transition: .5s cubic-bezier(0.4, 0.0, 0.2, 1);
+    transition-property: color, background-color, fill;
+
+    .value {
+      display: flex;
+      align-items: center;
+      visibility: hidden;
+      position: absolute;
+      top: 10px;
+
+      &.active {
+        visibility: visible;
+        position: static;
+      }
+
+      &.active-add, &.active-remove {
+        transition: .4s cubic-bezier(0.4, 0.0, 0.2, 1);
+        transition-property: opacity, transform, visibility;
+      }
+
+      &.active-add {
+        opacity: 0;
+
+        &.false-value {
+          transform: translateY(-150%);
+        }
+
+        &.true-value {
+          transform: translateY(150%);
+        }
+
+        &.active-add-active {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      &.active-remove {
+        opacity: 1;
+
+        &.active-remove-active {
+          opacity: 0;
+
+          &.false-value {
+            transform: translateY(-150%);
+          }
+
+          &.true-value {
+            transform: translateY(150%);
+          }
+        }
+      }
+
+      svg {
+        width: 18px;
+        height: 18px;
+        margin-right: 6px;
+      }
+    }
 
     &:active {
       @include keylol-shadow-2;
@@ -30,6 +90,7 @@ raised-button {
 
       &.invert {
         color: $keylol-theme;
+        fill: $keylol-theme;
       }
     }
 
@@ -39,6 +100,10 @@ raised-button {
 
     &.black {
       background-color: $keylol-main-text;
+    }
+
+    &.light-text {
+      background-color: $keylol-light-text;
     }
 
     &[disabled] {

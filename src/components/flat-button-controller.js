@@ -1,8 +1,16 @@
 ﻿(function () {
     class FlatButtonController {
-        constructor () {
+        constructor ($scope) {
             if (!this.type) {
-                this.type = 'theme';
+                if (!this.binarySet) {
+                    this.type = 'theme';
+                } else {
+                    $scope.$watch(() => {
+                        return this.binaryValue;
+                    }, newValue => {
+                        this.type = newValue ? this.binarySet[1].type : this.binarySet[0].type;
+                    });
+                }
             }
         }
     }
@@ -17,6 +25,8 @@
             click: '&',
             themeColor: '<',
             disabled: '<',
+            binarySet: '<',
+            binaryValue: '<',
         },
     });
 }());

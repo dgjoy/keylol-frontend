@@ -1,6 +1,17 @@
 ﻿(function () {
     class RaisedButtonController {
-        constructor () {
+        constructor ($scope) {
+            if (!this.type) {
+                if (!this.binarySet) {
+                    this.type = 'theme';
+                } else {
+                    $scope.$watch(() => {
+                        return this.binaryValue;
+                    }, newValue => {
+                        this.type = newValue ? this.binarySet[1].type : this.binarySet[0].type;
+                    });
+                }
+            }
         }
     }
 
@@ -16,6 +27,8 @@
             disabled: '<',
             click: '&',
             showPopup: '=?',
+            binarySet: '<',
+            binaryValue: '<',
         },
     });
 }());

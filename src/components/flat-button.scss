@@ -3,33 +3,100 @@ flat-button {
     @include keylol-button-single;
     @include hover-background();
     background: transparent;
+    transition: .5s cubic-bezier(0.4, 0.0, 0.2, 1);
+    transition-property: color, fill;
+
+    .value {
+      display: flex;
+      align-items: center;
+      visibility: hidden;
+      position: absolute;
+      top: 10px;
+
+      &.active {
+        visibility: visible;
+        position: static;
+      }
+
+      &.active-add, &.active-remove {
+        transition: .4s cubic-bezier(0.4, 0.0, 0.2, 1);
+        transition-property: opacity, transform, visibility;
+      }
+
+      &.active-add {
+        opacity: 0;
+
+        &.false-value {
+          transform: translateY(-150%);
+        }
+
+        &.true-value {
+          transform: translateY(150%);
+        }
+
+        &.active-add-active {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      &.active-remove {
+        opacity: 1;
+
+        &.active-remove-active {
+          opacity: 0;
+
+          &.false-value {
+            transform: translateY(-150%);
+          }
+
+          &.true-value {
+            transform: translateY(150%);
+          }
+        }
+      }
+
+      svg {
+        width: 18px;
+        height: 18px;
+        margin-right: 6px;
+      }
+    }
 
     &.theme {
       color: $keylol-theme;
+      fill: $keylol-theme;
     }
 
     &.light {
       color: $keylol-light-theme;
+      fill: $keylol-light-theme;
     }
 
     &.inertia {
       color: $keylol-inertia-text;
+      fill: $keylol-inertia-text;
     }
 
     &.light-text {
       color: $keylol-light-text;
+      fill: $keylol-light-text;
     }
 
     &.invert {
       color: $keylol-inverted-text;
+      fill: $keylol-inverted-text;
     }
 
     &.user-theme {
       color: $keylol-user-theme;
+      fill: $keylol-user-theme;
     }
 
     &[disabled] {
       color: rgba($keylol-inertia-text, 0.6);
+      fill: rgba($keylol-inertia-text, 0.6);
+
       &:hover {
         background-color: transparent;
       }
