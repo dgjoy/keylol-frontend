@@ -1,5 +1,5 @@
 ﻿<div class="header" webp-background="{{recentPlayed.headerImage | uriRelocate}}">
-    <raised-button text="全部订阅" type="subscribe-all"></raised-button>
+    <raised-button text="全部订阅" disabled="recentPlayed.subscribeAllDisable" type="theme" click="recentPlayed.subscribeAll()"></raised-button>
     <div class="header-text">
         <p class="title">订阅</p>
         <p class="sub-title">最近接触的游戏</p>
@@ -8,7 +8,7 @@
 <ul class="subscribe-list">
     <li ng-repeat="game in recentPlayed.list">
         <div class="wrapper">
-            <a href="" ng-href="point/{{game.idCode}}"><img class="cover" webp-src="{{game.thumbnailImage}}"></a>
+            <a href="" ng-href="point/{{game.idCode}}"><img class="cover" webp-src="{{game.thumbnailImage | uriRelocate}}"></a>
             <div class="point">
                 <a href="" ng-href="point/{{game.idCode}}" class="name">
                     <p>{{recentPlayed.utils.getPreferredPointName(game, recentPlayed.stateTree.currentUser)[0]}}</p>
@@ -20,7 +20,8 @@
                         <p>{{game.twoWeekPlayedTime}} 小时</p>
                         <p>二周在档记录</p>
                     </div>
-                    <flat-button text="订阅"></flat-button>
+                    <flat-button binary-set="recentPlayed.subscribeSet" binary-value="game.subscribed"
+                                 click="recentPlayed.utils.subscribe(game.id, game.subscribed, game)"></flat-button>
                 </div>
                 <span class="horizon"></span>
             </div>

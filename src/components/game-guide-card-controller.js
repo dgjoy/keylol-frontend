@@ -1,6 +1,18 @@
 ﻿(function () {
     class GameGuideCardController {
-        constructor($scope, pointAttributes, stateTree) {
+        constructor($scope, pointAttributes, stateTree, utils) {
+            this.subscribeSet = [
+                {
+                    text: '订阅',
+                    type: 'theme',
+                },
+                {
+                    text: '退订',
+                    type: 'light-text',
+                },
+            ];
+            this.subscribe = utils.subscribe;
+
             this.characteristics = [];
             for (const attr in this.card) {
                 if (this.card.hasOwnProperty(attr)) {

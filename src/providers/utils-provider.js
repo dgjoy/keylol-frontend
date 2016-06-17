@@ -9,8 +9,8 @@
                 return _config;
             },
             $get: [
-                '$q', 'union',
-                ($q, union) => {
+                '$q', 'union', '$http', 'apiEndpoint', 'notification',
+                ($q, union, $http, apiEndpoint, notification) => {
                     function Utils() {
                         const self = this;
                         let _uniqueId = 1;
@@ -311,6 +311,34 @@
                                 parseInt(result[2], 16),
                                 parseInt(result[3], 16),
                             ] : null;
+                        };
+
+                        self.subscribe = function (targetId, isUnsubscribe, item, targetType = 'Point', updateValue = 'subscribed') {
+                            if (isUnsubscribe) {
+                                return $http.delete(`${apiEndpoint}subscription`, {
+                                    params: {
+                                        targetId,
+                                        targetType,
+                                    },
+                                }).then(() => {
+                                    notification.success({ message: '已退订' });
+                                    item[updateValue] = false;
+                                }, response => {
+                                    notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
+                                });
+                            } else {
+                                $http.post(`${apiEndpoint}subscription`, {}, {
+                                    params: {
+                                        targetId,
+                                        targetType,
+                                    },
+                                }).then(() => {
+                                    notification.success({ message: '已订阅' });
+                                    item[updateValue] = true;
+                                }, response => {
+                                    notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
+                                });
+                            }
                         };
 
                         self.pointTypeHash = {

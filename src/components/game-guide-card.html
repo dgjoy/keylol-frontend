@@ -33,7 +33,8 @@
             </svg>
         </a>
     </div>
-    <flat-button text="订阅"></flat-button>
+    <flat-button binary-set="gameGuideCard.subscribeSet" binary-value="gameGuideCard.card.subscribed"
+                 click="gameGuideCard.subscribe(gameGuideCard.card.id, gameGuideCard.card.subscribed, gameGuideCard.card)"></flat-button>
 </div>
 <div class="user-basic-info" ng-if="gameGuideCard.bottomType === 'user'">
     <img class="avatar" webp-src="//storage.keylol.com/fd0dfd38572adff068251606aa282b3f.jpg!avatar.medium" alt="NPC之舟" />
