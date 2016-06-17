@@ -27,6 +27,11 @@ spotlight-article-card {
     height: 52px;
     padding: 0 15px;
     margin: 10px 0;
+    z-index: 0;
+
+    img-label {
+      left: 10px;
+    }
 
     .avatar {
       flex-grow: 0;

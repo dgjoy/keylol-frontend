@@ -1,5 +1,6 @@
 <div class="background" webp-background="{{userCard.user.backgroundImage | backgroundUrl}}"></div>
 <a href="" ng-href="user/{{userCard.user.idCode}}">
+    <img-label ng-if="userCard.user.isFriend" type="friended"></img-label>
     <img class="avatar" webp-src="{{userCard.user.avatarImage | avatarUrl}}">
     <div class="bundle">
         <p class="nickname">{{userCard.user.userName}}</p>

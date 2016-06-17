@@ -1,4 +1,5 @@
 <a class="user" href="" ng-href="user/{{::spotlightArticleCard.card.authorIdCode}}" ripple>
+    <img-label ng-if="spotlightArticleCard.card.authorIsFriend" type="friended"></img-label>
     <img src="" class="avatar" webp-src="{{::spotlightArticleCard.card.authorAvatarImage | avatarUrl}}"  alt="{{::spotlightArticleCard.card.authorUserName}}">
     <span class="username">{{::spotlightArticleCard.card.authorUserName}}</span>
     <span class="date" am-time-ago="::spotlightArticleCard.card.publishTime"></span>

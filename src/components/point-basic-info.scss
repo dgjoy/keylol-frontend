@@ -1,6 +1,8 @@
 point-basic-info {
+  position: relative;
   display: flex;
   align-items: center;
+  z-index: 0;
 
   .avatar {
     margin-right: 10px;

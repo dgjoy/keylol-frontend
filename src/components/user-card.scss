@@ -21,6 +21,13 @@ user-card {
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
+    z-index: 0;
+
+    img-label {
+      top: -9px;
+      left: calc(50% - 21px);
+    }
 
     .avatar {
       @include keylol-shadow-1;

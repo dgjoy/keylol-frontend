@@ -1,0 +1,49 @@
+img-label {
+  height: 18px;
+  position: absolute;
+  left: -5px;
+  top: calc(50% - 9px);
+  display: flex;
+
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 10px;
+    height: 4px;
+    z-index: -1;
+    transform: rotate(15deg);
+    transform-origin: bottom left;
+  }
+
+  &[type=libraried] {
+    background-color: $keylol-libraried;
+
+    &::before {
+      background-color: darken($keylol-libraried, 15);
+    }
+  }
+
+  &[type=friended] {
+    background-color: $keylol-user-theme;
+
+    &::before {
+      background-color: darken($keylol-user-theme, 15);
+    }
+  }
+
+  svg {
+    width: 18px;
+    height: 18px;
+    fill: $keylol-inverted-text;
+  }
+
+  span {
+    font-size: 12px;
+    color: $keylol-inverted-text;
+    line-height: 18px;
+    margin-right: 2px;
+  }
+}

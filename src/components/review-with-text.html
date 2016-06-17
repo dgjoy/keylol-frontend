@@ -2,6 +2,6 @@
     good: reviewWithText.review >= 6 && reviewWithText.review < 8,
     'not-bad': reviewWithText.review >= 4 && reviewWithText.review < 6,
     bad: reviewWithText.review >= 2 && reviewWithText.review < 4,
-    terrible: reviewWithText.review < 2}">{{reviewWithText.review}}</span>
+    terrible: reviewWithText.review < 2}">{{reviewWithText.review.toFixed(1)}}</span>
 <vote-circle ng-if="reviewWithText.review" review="reviewWithText.review"></vote-circle>
 <span ng-if="!reviewWithText.review">评价不足</span>

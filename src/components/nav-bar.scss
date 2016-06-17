@@ -75,7 +75,8 @@ nav-bar {
       }
 
       img {
-        height: 48px;
+        max-height: 48px;
+        max-width: 100%;
       }
     }
   }

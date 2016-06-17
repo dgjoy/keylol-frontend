@@ -11,6 +11,7 @@
     <ul class="sales-list" ng-animate-swap="salesToday.currentPage">
         <li ng-repeat="point in ::salesToday.list track by $index">
             <a ng-href="point/{{point.idCode}}" ripple>
+                <img-label ng-if="point.inLibrary" type="libraried" has-text="true"></img-label>
                 <img class="cover" webp-src="{{point.thumbnailImage | uriRelocate}}">
                 <div class="point">
                     <div class="name">

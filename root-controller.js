@@ -37,7 +37,7 @@
 
             $rootScope.$on('$stateChangeStart', (event, toState, toParams, fromState, fromParams) => {
                 // 如果是从子状态跳出至父状态，则阻止其发生
-                if (fromState.name.includes(toState.name)) {
+                if (fromState.name.includes(toState.name) && fromState.name !== toState.name) {
                     let flag = true;
                     for (const attr in toParams) {
                         if (toParams.hasOwnProperty(attr) && toParams[attr] !== fromParams[attr]) {

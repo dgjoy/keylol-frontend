@@ -29,9 +29,10 @@
 
             // object预处理
             this.point = {
-                avatarImage:this.object.avatarImage,
-                chineseName:this.object.chineseName,
-                englishName:this.object.englishName,
+                avatarImage: this.object.avatarImage,
+                chineseName: this.object.chineseName,
+                englishName: this.object.englishName,
+                inLibrary: this.object.inLibrary,
             };
 
             if (this.object.type === 'game') {
