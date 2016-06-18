@@ -1,9 +1,9 @@
 <popup class="popup-source-list">
     <div class="title">
         <p>收稿据点</p>
-        <p>一共 4 个据点来稿</p>
+        <p>一共 {{sourceList.points.length}} 个据点来稿</p>
     </div>
-    <a href=""><point-basic-info></point-basic-info></a>
+    <a href="point/{{sourceList.mainPoint.idCode}}"><point-basic-info point="sourceList.mainPoint"></point-basic-info></a>
     <div class="hr"></div>
-    <a href="" ng-repeat="i in [1,2]"><point-basic-info></point-basic-info></a>
+    <a href="point/{{point.idCode}}" ng-repeat="point in sourceList.points"><point-basic-info point="point"></point-basic-info></a>
 </popup>
