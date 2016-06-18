@@ -29,6 +29,20 @@
                 });
             }
 
+            function showOperationPanel() {
+                close();
+                origin.popup({
+                    templateUrl: 'src/popup/operation-panel.html',
+                    controller: 'OperationPanelController as operationPanel',
+                    event: origin.event,
+                    attachSide: 'bottom',
+                    align: 'center',
+                    offsetX: 0,
+                    offsetY: 20,
+                    inputs: { content: 'hello' },
+                });
+            }
+
             this.menu = {
                 items: [{
                     text: '进入文章',
@@ -48,6 +62,7 @@
                 },{
                     text: '退稿',
                     type: 'item',
+                    clickAction: showOperationPanel,
                 },{
                     text: '封存',
                     type: 'item',

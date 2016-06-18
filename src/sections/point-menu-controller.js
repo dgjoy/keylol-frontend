@@ -1,7 +1,7 @@
 
 (function () {
     class pointMenuController {
-        constructor($scope, $window, $timeout) {
+        constructor($scope, $window, $timeout, stores) {
 
             const arr = [
                 this.object.oneStarCount,
@@ -42,29 +42,16 @@
                     });
                 }
 
-                const platforms = [
-                    ['sonkwo','dtb-sonkwo','杉果'],
-                    ['appStore','dtb-app-store','App Store'],
-                    ['battleNet','dtb-battlenet','战网'],
-                    ['gog','dtb-gogdotcom', 'GOG'],
-                    ['googlePlay','dtb-google-play', 'Google Play'],
-                    ['origin','dtb-origin','Origin'],
-                    ['playStation','dtb-playstation', 'Play Station'],
-                    ['uplay','dtb-uplay', 'Uplay'],
-                    ['windowsStore','dtb-windows-store', 'Windows Store'],
-                    ['xbox','dtb-xbox', 'Xbox'],
-                ];
-                for (let i = 0;i !== platforms.length; i++) {
-                    if (this.object[`${platforms[i][0]}Link`] && this.object[`${platforms[i][0]}Link`] !== '') {
+                for (let i = 1;i !== stores.length; i++) {
+                    if (this.object[`${stores[i].prefix}Link`] && this.object[`${stores[i].prefix}Link`] !== '') {
                         this.specialMenu.items.push(                        {
                             type: 'item',
-                            icon: platforms[i][1],
-                            text: platforms[i][2],
-                            link: this.object[`${platforms[i][0]}Link`],
+                            icon: stores[i].icon,
+                            text: stores[i].name,
+                            link: this.object[`${stores[i].prefix}Link`],
                         });
                     }
                 }
-
             } else {
                 let gameCount = '';
                 switch (this.object.type) {

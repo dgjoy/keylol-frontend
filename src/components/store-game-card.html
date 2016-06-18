@@ -5,10 +5,12 @@
 <span class="horizon"></span>
 <div class="actions">
     <div class="platforms">
-        <a href="" ng-if="::storeGameCard.card.steamAppId">
+        <a href="{{store.link}}" ng-repeat="store in storeGameCard.stores">
             <svg aria-hidden="true">
-                <use ng-href="{{'dtb-steam' | iconSvgUrl }}" xlink:href=""></use>
+                <use ng-href="{{store.icon | iconSvgUrl }}" xlink:href=""></use>
             </svg>
+            <span class="discount" ng-if="store.discount">-{{store.discount}}</span>
+            <span ng-if="store.price">¥ {{store.price}}</span>
         </a>
     </div>
     <flat-button binary-set="storeGameCard.subscribeSet" binary-value="storeGameCard.card.subscribed"

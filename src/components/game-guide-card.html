@@ -11,26 +11,21 @@
     </a>
 </div>
 <div class="category-container">
-    <span class="repeat-wrapper" ng-repeat="category in gameGuideCard.categories">
-        <a href="" class="category">
-            角色扮演
+    <span class="repeat-wrapper" ng-repeat="category in gameGuideCard.card.categories">
+        <a href="point/{{category.idCode}}" class="category">
+            {{category.chineseName}}
         </a>
         <span class="slash" ng-show="$index !== gameGuideCard.categories.length-1"> / </span>
     </span>
 </div>
 <div class="actions" ng-if="gameGuideCard.bottomType !== 'user'">
     <div class="platforms">
-        <a href="">
+        <a href="{{store.link}}" ng-repeat="store in gameGuideCard.stores">
             <svg aria-hidden="true">
-                <use ng-href="{{'dtb-steam' | iconSvgUrl }}" xlink:href=""></use>
+                <use ng-href="{{store.icon | iconSvgUrl }}" xlink:href=""></use>
             </svg>
-            <span class="discount">-30%</span>
-            <span>¥48</span>
-        </a>
-        <a href="">
-            <svg aria-hidden="true">
-                <use ng-href="{{'dtb-playstation' | iconSvgUrl }}" xlink:href=""></use>
-            </svg>
+            <span class="discount" ng-if="store.discount">-{{store.discount}}</span>
+            <span ng-if="store.price">¥ {{store.price}}</span>
         </a>
     </div>
     <flat-button binary-set="gameGuideCard.subscribeSet" binary-value="gameGuideCard.card.subscribed"

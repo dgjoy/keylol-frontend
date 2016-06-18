@@ -10,7 +10,7 @@
 
         <tabs tab-array="::login.tabArray" cur-tab="login.currentWay" click-handler="login.changeWay(index)"></tabs>
         <div class="login-wrapper {{login.swapDirection}}" ng-class="{'low':login.currentWay == 2,'high':login.currentWay<2}">
-            <div class="swap-helper swap-animation" ng-animate-swap="login.currentWay">
+            <div class="swap-helper" ng-animate-swap="login.currentWay">
                 <!-- robot 方式-->
                 <div class="login-steam-robot" ng-if="login.currentWay === 0">
                     <phase phases="['在对话中发送验证码','登录成功']" index="login.steamRobotWayManager.phaseIndex"></phase>
@@ -31,7 +31,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="action">
+                    <div class="actions">
+                        <a href="">尚未注册？点击这里加入其乐！</a>
                         <flat-button text="放弃" type="inertia" ng-click="login.close()"></flat-button>
                     </div>
                 </div>
@@ -53,7 +54,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="action">
+                    <div class="actions">
+                        <a href="">尚未注册？点击这里加入其乐！</a>
                         <flat-button text="放弃" type="inertia" ng-click="login.close()"></flat-button>
                     </div>
                 </div>
@@ -80,9 +82,12 @@
                                            error="login.passcodeWayManager.password.error"
                                 ></text-area>
                             </div>
-                            <div class="action">
-                                <flat-button text="放弃" type="inertia" ng-click="login.close()"></flat-button>
-                                <raised-button text="登录" type="theme" id="popup-geetest-{{login.passcodeWayManager.geetestId}}" disabled="false"></raised-button>
+                            <div class="actions">
+                                <a href="">尚未注册？点击这里加入其乐！</a>
+                                <div class="action">
+                                    <flat-button text="放弃" type="inertia" ng-click="login.close()"></flat-button>
+                                    <raised-button text="登录" type="theme" id="popup-geetest-{{login.passcodeWayManager.geetestId}}" disabled="false"></raised-button>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -14,7 +14,7 @@
 
     <div ng-switch-when="point" class="for-point">
         <point-basic-info ng-if="!menu.object.header.titleCoverImage" point="menu.object.header.point"></point-basic-info>
-        <img ng-if="menu.object.header.titleCoverImage" class="cover" webp-src="{{ menu.object.header.titleCoverImage | coverUrl}}" alt="Dota 2">
+        <img ng-if="menu.object.header.titleCoverImage" class="cover" webp-src="{{ menu.object.header.titleCoverImage | coverUrl}}" alt="">
         <div class="time-info">
             <p>已在档 203(!) 小时</p>
             <p>玩家平均在档 175.4(!) 小时</p>
@@ -48,7 +48,7 @@
 
     <div ng-switch-when="point-other" class="for-point">
         <point-basic-info ng-if="!menu.object.header.titleCoverImage" point="menu.object.header.point"></point-basic-info>
-        <img ng-if="menu.object.header.titleCoverImage" class="cover" webp-src="{{ menu.object.header.titleCoverImage | coverUrl}}" alt="Dota 2">
+        <img ng-if="menu.object.header.titleCoverImage" class="cover" webp-src="{{ menu.object.header.titleCoverImage | coverUrl}}" alt="">
         <div class="game-count">{{menu.object.header.gameCount}}</div>
         <div class="reputation-info">
             <span>

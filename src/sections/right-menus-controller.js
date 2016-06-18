@@ -61,12 +61,12 @@
                             });
                         },
                     },
-                    {
-                        type: 'item',
-                        icon: 'file',
-                        text: '草稿',
-                        subText: stateTree.currentUser ? stateTree.currentUser.draftCount : undefined,
-                    },
+                    // {
+                    //     type: 'item',
+                    //     icon: 'file',
+                    //     text: '草稿',
+                    //     subText: stateTree.currentUser ? stateTree.currentUser.draftCount : undefined,
+                    // },
                 ],
             };
             this.personalMenu = {
@@ -89,11 +89,11 @@
                         icon: 'user',
                         text: '邀请好友加入其乐',
                     },
-                    {
-                        type: 'item',
-                        icon: 'cuc',
-                        text: '客务中心',
-                    },
+                    // {
+                    //     type: 'item',
+                    //     icon: 'cuc',
+                    //     text: '客务中心',
+                    // },
                 ],
             };
             this.registerMenu = {
