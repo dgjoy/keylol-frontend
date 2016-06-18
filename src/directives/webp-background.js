@@ -17,9 +17,9 @@
                     if (/^(?:http:|https:)?\/\/(storage|steamcdn)\.keylol\.com\//i.test(value)) {
                         utils.supportWebp.then(() => {
                             if (value.indexOf('!') === -1) {
-                                element.css('background-image', `url(${value}!webp)`);
+                                element.css('background-image', `url(${value}!/format/webp)`);
                             } else {
-                                element.css('background-image', `url(${value}.webp)`);
+                                element.css('background-image', `url(${value}/format/webp)`);
                             }
                         }, () => {
                             element.css('background-image', `url(${value})`);

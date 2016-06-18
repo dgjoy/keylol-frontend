@@ -37,9 +37,10 @@ user-header {
 
         .avatar {
           margin-right: 10px;
-          width: 40px;
-          height: 40px;
+          width: 32px;
+          height: 32px;
           border: 3px #fff solid;
+          box-sizing: content-box;
         }
 
         .name-group {

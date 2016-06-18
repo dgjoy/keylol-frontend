@@ -12,7 +12,7 @@
         <li ng-repeat="point in ::salesToday.list track by $index">
             <a ng-href="point/{{point.idCode}}" ripple>
                 <img-label ng-if="point.inLibrary" type="libraried" has-text="true"></img-label>
-                <img class="cover" webp-src="{{point.thumbnailImage | uriRelocate}}">
+                <img class="thumbnail" webp-src="{{point.thumbnailImage | thumbnailUrl}}">
                 <div class="point">
                     <div class="name">
                         <p>{{salesToday.utils.getPreferredPointName(point, salesToday.stateTree.currentUser)[0]}}</p>

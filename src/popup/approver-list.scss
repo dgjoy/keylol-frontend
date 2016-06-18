@@ -20,6 +20,7 @@
         color: $keylol-main-text;
         font-size: 20px;//待处理
       }
+
       >p:last-of-type {
         color: $keylol-inertia-text;
       }
@@ -35,6 +36,7 @@
       >.page.swap-animation.ng-leave {
         transition: transform 150ms, opacity 120ms;
       }
+
       >.page.swap-animation.ng-enter {
         transition-timing-function: cubic-bezier(0.0, 0.0, 0.2, 1);
         transition-delay: 150ms;
@@ -42,10 +44,12 @@
         opacity: 0;
         transform: translateX(100%);
       }
+
       >.page.swap-animation.ng-enter-active {
         opacity: 1;
         transform: translateX(0);
       }
+
       >.page.swap-animation.ng-leave {
         transition-timing-function: cubic-bezier(0.4, 0.0, 1, 1);
         position: absolute;
@@ -53,6 +57,7 @@
         opacity: 1;
         transform: translateX(0);
       }
+
       >.page.swap-animation.ng-leave-active {
         opacity: 0;
         transform: translateX(-100%);
@@ -72,10 +77,12 @@
         opacity: 0;
         transform: translateX(-100%);
       }
+
       >.page.swap-animation.ng-enter-active {
         opacity: 1;
         transform: translateX(0);
       }
+
       >.page.swap-animation.ng-leave {
         transition-timing-function: cubic-bezier(0.4, 0.0, 1, 1);
         position: absolute;
@@ -83,6 +90,7 @@
         opacity: 1;
         transform: translateX(0);
       }
+
       >.page.swap-animation.ng-leave-active {
         opacity: 0;
         transform: translateX(100%);
@@ -95,16 +103,19 @@
         display: flex;
         align-items: center;
         padding: 15px;
+
         >.avatar {
           width: 32px;
           height: 32px;
           margin-right: 10px;
         }
+
         >.bundle {
           >p:first-of-type {
             color: $keylol-main-text;
             font-weight: bold;
           }
+
           >p:last-of-type {
             color: $keylol-inertia-text;
             font-size: 12px;

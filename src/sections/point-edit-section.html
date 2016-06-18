@@ -8,16 +8,16 @@
                     <p>{{item.subTitle}}</p>
                 </div>
                 <div class="content">
-                    <img class="content-cover" webp-src="{{item.value | uriRelocate}}" alt="" ng-switch-when="cover">
-                    <img class="content-thumbnail" webp-src="{{item.value | uriRelocate}}" alt="" ng-switch-when="thumbnail">
+                    <img class="content-cover" webp-src="{{item.value | uriRelocate: '/both/340x140'}}" alt="" ng-switch-when="cover">
+                    <img class="content-thumbnail" webp-src="{{item.value | thumbnailUrl}}" alt="" ng-switch-when="thumbnail">
                     <div class="content-avatar" ng-switch-when="avatar">
+                        <img webp-src="{{item.value | avatarUrl: 'large'}}" alt="">
+                        <img webp-src="{{item.value | avatarUrl: 'big'}}" alt="">
                         <img webp-src="{{item.value | avatarUrl}}" alt="">
-                        <img webp-src="{{item.value | avatarUrl}}" alt="">
-                        <img webp-src="{{item.value | avatarUrl}}" alt="">
-                        <img webp-src="{{item.value | avatarUrl}}" alt="">
+                        <img webp-src="{{item.value | avatarUrl: 'small'}}" alt="">
                     </div>
                     <div class="content-logo" ng-switch-when="logo">
-                        <img webp-src="{{item.value | uriRelocate}}" alt="">
+                        <img webp-src="{{item.value | themeLogoUrl}}" alt="">
                     </div>
                     <div class="content-color color-{{item.colorType}}" ng-switch-when="color" ng-style="{backgroundColor:item.value}">
                         <div class="sample">

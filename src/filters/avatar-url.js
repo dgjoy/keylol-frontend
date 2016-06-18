@@ -1,21 +1,26 @@
 (function () {
     keylolApp.filter('avatarUrl', ['$filter', $filter => {
-        return function (input, size) {
+        return function (input, size, noFallback) {
             let sizeVersion;
             switch (size) {
+                case 'large':
+                    sizeVersion = '/sq/96';
+                    break;
+
                 case 'big':
-                    sizeVersion = 'avatar.big';
+                    sizeVersion = '/sq/48';
                     break;
 
                 case 'small':
-                    sizeVersion = 'avatar.small';
+                    sizeVersion = '/sq/18';
                     break;
 
                 default:
-                    sizeVersion = 'avatar.medium';
+                    sizeVersion = '/sq/32';
                     break;
             }
-            return $filter('uriRelocate')(input, sizeVersion, 'keylol://steam/avatars/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb');
+            if (noFallback) return $filter('uriRelocate')(input, sizeVersion);
+            return $filter('uriRelocate')(input, sizeVersion, 'keylol://df33d4fd29761f9a25ba31a991259532.png');
         };
     }]);
 }());

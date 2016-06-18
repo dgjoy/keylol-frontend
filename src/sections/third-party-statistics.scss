@@ -17,7 +17,8 @@ third-party-statistics {
       overflow: hidden;
 
       img {
-        height: 48px;
+        max-height: 48px;
+        max-width: 200px;
       }
 
       .alt {

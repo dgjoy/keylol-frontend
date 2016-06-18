@@ -69,11 +69,13 @@ point-edit-section {
             width: 340px;
             height: 64px;
             background-color: $keylol-inertia-shape;
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
 
             img {
-              max-width: 340px;
-              height: 100%;
+              max-width: 200px;
+              max-height: 48px;
             }
           }
 

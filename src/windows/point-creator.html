@@ -23,17 +23,17 @@
                                 </div>
                             </div>
                             <div ng-show="pointCreator.steamExpanded" class="image-content">
-                                <div class="cover-wrapper">
+                                <div class="thumbnail-wrapper">
                                     <p>缩略图</p>
-                                    <img webp-src="{{pointCreator.extra.SteamGame.thumbnailImage | uriRelocate}}">
+                                    <img webp-src="{{pointCreator.extra.SteamGame.thumbnailImage | thumbnailUrl}}">
                                 </div>
                                 <div class="avatar-wrapper">
                                     <p>头像</p>
                                     <div>
-                                        <img webp-src="{{pointCreator.extra.SteamGame.avatarImage | uriRelocate}}">
+                                        <img webp-src="{{pointCreator.extra.SteamGame.avatarImage | avatarUrl: 'big': true}}">
                                         <div>
-                                            <img webp-src="{{pointCreator.extra.SteamGame.avatarImage | uriRelocate}}">
-                                            <img webp-src="{{pointCreator.extra.SteamGame.avatarImage | uriRelocate}}">
+                                            <img webp-src="{{pointCreator.extra.SteamGame.avatarImage | avatarUrl: '': true}}">
+                                            <img webp-src="{{pointCreator.extra.SteamGame.avatarImage | avatarUrl: 'small': true}}">
                                         </div>
                                     </div>
                                 </div>
@@ -69,12 +69,12 @@
                                     <label>头像</label>
                                     <a href="" popup="pointCreator.extra.OtherGame.avatarImage" ngf-select="pointCreator.uploadImage($file, $event, 'OtherGame', 'avatarImage')" ngf-fix-orientation="true" accept="image/*">{{pointCreator.vm.OtherGame.avatarImage ? '重新' : ''}}上传</a>
                                     <div>
-                                        <span webp-background="{{pointCreator.vm.OtherGame.avatarImage | uriRelocate}}"></span>
+                                        <span webp-background="{{pointCreator.vm.OtherGame.avatarImage | avatarUrl: 'large': true}}"></span>
                                         <div>
-                                            <span webp-background="{{pointCreator.vm.OtherGame.avatarImage | uriRelocate}}"></span>
+                                            <span webp-background="{{pointCreator.vm.OtherGame.avatarImage | avatarUrl: 'big': true}}"></span>
                                             <div>
-                                                <span webp-background="{{pointCreator.vm.OtherGame.avatarImage | uriRelocate}}"></span>
-                                                <span webp-background="{{pointCreator.vm.OtherGame.avatarImage | uriRelocate}}"></span>
+                                                <span webp-background="{{pointCreator.vm.OtherGame.avatarImage | avatarUrl: '': true}}"></span>
+                                                <span webp-background="{{pointCreator.vm.OtherGame.avatarImage | avatarUrl: 'small': true}}"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -123,12 +123,12 @@
                             <label>头像</label>
                             <a href="" popup="pointCreator.extra.Vendor.avatarImage" ngf-select="pointCreator.uploadImage($file, $event, 'Vendor', 'avatarImage')" ngf-fix-orientation="true" accept="image/*">{{pointCreator.vm.Vendor.avatarImage ? '重新' : ''}}上传</a>
                             <div>
-                                <span webp-background="{{pointCreator.vm.Vendor.avatarImage | uriRelocate}}"></span>
+                                <span webp-background="{{pointCreator.vm.OtherGame.avatarImage | avatarUrl: 'large': true}}"></span>
                                 <div>
-                                    <span webp-background="{{pointCreator.vm.Vendor.avatarImage | uriRelocate}}"></span>
+                                    <span webp-background="{{pointCreator.vm.OtherGame.avatarImage | avatarUrl: 'big': true}}"></span>
                                     <div>
-                                        <span webp-background="{{pointCreator.vm.Vendor.avatarImage | uriRelocate}}"></span>
-                                        <span webp-background="{{pointCreator.vm.Vendor.avatarImage | uriRelocate}}"></span>
+                                        <span webp-background="{{pointCreator.vm.OtherGame.avatarImage | avatarUrl: '': true}}"></span>
+                                        <span webp-background="{{pointCreator.vm.OtherGame.avatarImage | avatarUrl: 'small': true}}"></span>
                                     </div>
                                 </div>
                             </div>
@@ -152,12 +152,12 @@
                             <label>头像</label>
                             <a href="" popup="pointCreator.extra.Category.avatarImage" ngf-select="pointCreator.uploadImage($file, $event, 'Category', 'avatarImage')" ngf-fix-orientation="true" accept="image/*">{{pointCreator.vm.Category.avatarImage ? '重新' : ''}}上传</a>
                             <div>
-                                <span webp-background="{{pointCreator.vm.Category.avatarImage | uriRelocate}}"></span>
+                                <span webp-background="{{pointCreator.vm.OtherGame.avatarImage | avatarUrl: 'large': true}}"></span>
                                 <div>
-                                    <span webp-background="{{pointCreator.vm.Category.avatarImage | uriRelocate}}"></span>
+                                    <span webp-background="{{pointCreator.vm.OtherGame.avatarImage | avatarUrl: 'big': true}}"></span>
                                     <div>
-                                        <span webp-background="{{pointCreator.vm.Category.avatarImage | uriRelocate}}"></span>
-                                        <span webp-background="{{pointCreator.vm.Category.avatarImage | uriRelocate}}"></span>
+                                        <span webp-background="{{pointCreator.vm.OtherGame.avatarImage | avatarUrl: '': true}}"></span>
+                                        <span webp-background="{{pointCreator.vm.OtherGame.avatarImage | avatarUrl: 'small': true}}"></span>
                                     </div>
                                 </div>
                             </div>

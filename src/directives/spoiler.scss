@@ -47,10 +47,11 @@ spoiler {
     }
 
     .icons {
-      padding: 20px 10px;
+      padding: 0 10px;
       background-color: $keylol-light-theme;
       flex-grow: 0;
       display: flex;
+      align-items: center;
       margin: 0;
 
       .eye,
@@ -59,21 +60,21 @@ spoiler {
         height: 40px;
         padding: 0 20px;
         fill: $keylol-inverted-text;
+        border-right: 1px solid $keylol-inverted-text;
       }
 
       .eye-off {
         display: block;
       }
+
       .eye {
         display: none;
       }
 
       .point-icon {
-        height: 40px;
-        width: auto;
-        margin: 0;
-        border-left: 1px solid $keylol-inverted-text;
-        padding: 0 20px;
+        max-height: 48px;
+        max-width: 200px;
+        margin: 0 20px;
       }
     }
   }

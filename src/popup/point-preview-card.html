@@ -12,7 +12,7 @@
             </div>
             <div class="loading-gif" ng-switch-when="true" style="background-image: url('assets/images/loading.gif');"></div>
             <div class="avatar-anchor" ng-switch-when="false">
-                <img class="avatar" webp-src="{{data.avatar|avatarUrl}}">
+                <img class="avatar" webp-src="{{data.avatar | avatarUrl}}">
             </div>
             <div class="heading" ng-switch-when="false">
                 <h1>{{data.head.mainHead}}</h1>

@@ -1,6 +1,6 @@
 ﻿<div class="header" style="{{::(thirdPartyStatistics.theme.main ? 'background-color: ' + thirdPartyStatistics.theme.main + ';' : '')}}">
     <div class="theme-logo">
-        <img ng-if="thirdPartyStatistics.theme.logo" webp-src="{{thirdPartyStatistics.theme.logo | uriRelocate}}">
+        <img ng-if="thirdPartyStatistics.theme.logo" webp-src="{{thirdPartyStatistics.theme.logo | themeLogoUrl}}">
         <div ng-if="!thirdPartyStatistics.theme.logo" class="alt">
             <p>{{thirdPartyStatistics.basicInfo.chineseName}}</p>
             <p>keylol.com/point/{{thirdPartyStatistics.basicInfo.idCode}}</p>

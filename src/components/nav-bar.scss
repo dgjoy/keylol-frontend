@@ -78,25 +78,25 @@ nav-bar {
         max-height: 48px;
         max-width: 100%;
       }
-    }
-  }
 
-  .theme-alt {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 48px;
-    margin-left: 10px;
-    padding-left: 10px;
-    border-left: 1px solid #fff;
-    p {
-      margin: 0;
-      color: $keylol-inverted-text;
-    }
-    p:first-of-type { font-weight: bold; }
-    p:last-of-type {
-      font-size: 12px;
-      opacity: 0.6;
+      .theme-alt {
+        max-width: 100%;
+
+        p {
+          @include ellipsis;
+          margin: 0;
+          color: $keylol-inverted-text;
+
+          &:first-of-type {
+            font-weight: bold;
+          }
+
+          &:last-of-type {
+            font-size: 12px;
+            opacity: 0.6;
+          }
+        }
+      }
     }
   }
 
@@ -179,8 +179,8 @@ nav-bar {
       }
 
       .avatar {
-        width: 45px;
-        height: 45px;
+        width: 48px;
+        height: 48px;
         border: 3px solid #fff;
       }
     }

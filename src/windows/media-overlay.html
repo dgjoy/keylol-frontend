@@ -15,7 +15,7 @@
             active: $index + 1 === mediaOverlay.currentPage,
             'right-hidden': $index + 1 > mediaOverlay.currentPage,
             }">
-            <img webp-src="{{media.image}}">
+            <img webp-src="{{media.image | uriRelocate: '/fxfn/1060x474'}}">
         </div>
         <switch-pagination next="mediaOverlay.nextPage()" previous="mediaOverlay.previousPage()" current="mediaOverlay.currentPage" total="mediaOverlay.list.length" no-page-count="true"></switch-pagination></div>
     </div>

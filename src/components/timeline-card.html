@@ -7,7 +7,7 @@
         <a class="date" href="" ng-click="timelineCard.showMenu($event)" popup="timelineCard.showSharedPopup">5 月 7 号</a>
     </div>
     <div class="shortcut" ng-switch="timelineCard.type">
-        <a ng-switch-when="article" class="common-article" webp-background="//storage.keylol.com/39b7d020df471d6c0e3fa593802000bc.jpg!timeline.thumbnail.new" href="point/DOTA2">
+        <a ng-switch-when="article" class="common-article" webp-background="{{'keylol://39b7d020df471d6c0e3fa593802000bc.jpg' | articleCoverUrl}}" href="point/DOTA2">
             <div class="bottom-text">
                 <div class="first-line underline">Rogue Stormer（恶棍风暴兵团） Boss攻略与成就指南</div>
                 <div class="second-line">《恶棍风暴兵团》 是一款现代版Contra／/Metal Slug 游戏，它结合了 这种roguelike 类型的混搭游戏，并包括和 RPG 角色扮演的元素，游戏中有着、加上疯狂的3D 图形与可支持一至四人的多人游戏合作模式。</div>
@@ -16,7 +16,7 @@
         <div ng-switch-when="simple" class="simple">
             <vote-circle vote="3" gray-background="true"></vote-circle>
             <p class="hidden">这是一段非常长的文字这是一段非常长的文字这是一段非常长的文字这是一段非常长的文字<span></span></p>
-            <img webp-src="//storage.keylol.com/39b7d020df471d6c0e3fa593802000bc.jpg!timeline.thumbnail.new">
+            <img webp-src="{{'keylol://39b7d020df471d6c0e3fa593802000bc.jpg' | uriRelocate: '/fw/340'}}">
         </div>
     </div>
     <div class="point-with-source">
@@ -27,11 +27,11 @@
     </div>
     <div class="indirect-sources">
         <a class="indirect-source" href="">
-            <img webp-src="{{'' | avatarUrl}}" class="picture" />
+            <img webp-src="{{'' | avatarUrl: 'small'}}" class="picture" />
             <span class="desc">角色扮演</span>
         </a>
         <a class="indirect-source" href="">
-            <img webp-src="{{'' | avatarUrl}}" class="picture" />
+            <img webp-src="{{'' | avatarUrl: 'small'}}" class="picture" />
             <span class="desc">角色扮演</span>
         </a>
     </div>
@@ -43,7 +43,7 @@
         </div>
         <div class="review-list" ng-class="{scroller:timelineCard.hasScroller}">
             <div class="review" href="" data-floor-id="#{{$index+1}}" ng-repeat="reviews in [0,1,2,3,4,5,6,7,8]" ng-class="{'blink':timelineCard.currentFloor === ($index+1)}">
-                <img src="//storage.keylol.com/39b7d020df471d6c0e3fa593802000bc.jpg!timeline.thumbnail.new" alt="" class="avatar" />
+                <img src="" webp-src="{{'keylol://39b7d020df471d6c0e3fa593802000bc.jpg' | avatarUrl}}" alt="" class="avatar" />
                 <div class="content">
                     <div class="info">
                         <div class="user">Stark<a href="">+16</a></div>
@@ -58,7 +58,7 @@
         </div>
         <div class="hr"></div>
         <div class="review-sender">
-            <img src="//storage.keylol.com/39b7d020df471d6c0e3fa593802000bc.jpg!timeline.thumbnail.new" alt="" class="avatar">
+            <img webp-src="{{'keylol://39b7d020df471d6c0e3fa593802000bc.jpg' | avatarUrl}}" alt="" class="avatar">
             <textarea elastic placeholder="发表见解..." ng-model="timelineCard.comment"></textarea>
         </div>
     </div>

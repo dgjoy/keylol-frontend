@@ -22,11 +22,11 @@
     </div>
     <div class="indirect-sources">
         <a class="indirect-source" href="">
-            <img webp-src="{{'' | avatarUrl}}" class="picture" />
+            <img webp-src="{{'' | avatarUrl: 'small'}}" class="picture" />
             <span class="desc">角色扮演</span>
         </a>
         <a class="indirect-source" href="">
-            <img webp-src="{{'' | avatarUrl}}" class="picture" />
+            <img webp-src="{{'' | avatarUrl: 'small'}}" class="picture" />
             <span class="desc">角色扮演</span>
         </a>
     </div>
@@ -38,7 +38,7 @@
         </div>
         <div class="review-list clearfix" ng-class="{scroller:activityCard.hasScroller}">
             <div class="review" href="" data-floor-id="#{{$index+1}}" ng-repeat="reviews in [0,1,2,3,4,5,6,7,8,9]" ng-class="{'blink':activityCard.currentFloor === ($index+1)}">
-                <img src="//storage.keylol.com/39b7d020df471d6c0e3fa593802000bc.jpg!timeline.thumbnail.new" alt="" class="avatar" />
+                <img src="" webp-src="{{'keylol://39b7d020df471d6c0e3fa593802000bc.jpg' | avatarUrl}}" alt="" class="avatar" />
                 <div class="content">
                     <div class="info">
                         <div class="user">Stark<a href="">+16</a></div>
@@ -54,7 +54,7 @@
         </div>
         <div class="hr"></div>
         <div class="review-sender">
-            <img src="//storage.keylol.com/39b7d020df471d6c0e3fa593802000bc.jpg!timeline.thumbnail.new" alt="" class="avatar">
+            <img src="" webp-src="{{'keylol://39b7d020df471d6c0e3fa593802000bc.jpg' | avatarUrl}}" alt="" class="avatar">
             <textarea elastic placeholder="发表见解..." ng-model="activityCard.comment"></textarea>
         </div>
     </div>

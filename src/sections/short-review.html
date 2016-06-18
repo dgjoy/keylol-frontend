@@ -3,8 +3,8 @@
     <form>
         <div class="header">
             <div class="info">
-                <img webp-src="//storage.keylol.com/1ce18b1533d8e0be1d21acc7fb12c1d8.png!avatar.small">
-                <p><span>ZenDay</span> / <span>在档 203 小时</span></p>
+                <img webp-src="{{shortReview.stateTree.currentUser.avatarImage | avatarUrl: 'small'}}">
+                <p><span>{{shortReview.stateTree.currentUser.userName}}</span> / <span>在档 203 小时</span></p>
                 <point-review no-string="true" is-hollow="true"></point-review>
             </div>
             <span ng-if="false" class="like">+7</span>
@@ -19,7 +19,7 @@
         <li ng-repeat="item in shortReview.list">
             <div class="header">
                 <div class="info">
-                    <img webp-src="{{item.avatarImage | avatarUrl}}">
+                    <img webp-src="{{item.avatarImage | avatarUrl: 'small'}}">
                     <p>{{item.username}} / 在档 203 小时</p>
                     <vote-circle review="item.review"></vote-circle>
                 </div>

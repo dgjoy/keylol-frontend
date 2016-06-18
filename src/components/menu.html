@@ -5,7 +5,7 @@
     </div>
 
     <a ng-switch-when="user" ripple ng-href="user/{{menu.stateTree.currentUser.idCode}}">
-        <img class="avatar" webp-src="{{menu.stateTree.currentUser.avatarImage | avatarUrl}}" alt="{{menu.stateTree.currentUser.userName}}">
+        <img class="avatar" webp-src="{{menu.stateTree.currentUser.avatarImage | avatarUrl: 'big'}}" alt="{{menu.stateTree.currentUser.userName}}">
         <div class="header-text for-user">
             <p>{{ menu.stateTree.currentUser.userName }}</p>
             <p>{{ menu.stateTree.currentUser.idCode }}</p>
@@ -14,7 +14,7 @@
 
     <div ng-switch-when="point" class="for-point">
         <point-basic-info ng-if="!menu.object.header.titleCoverImage" point="menu.object.header.point"></point-basic-info>
-        <img ng-if="menu.object.header.titleCoverImage" class="cover" webp-src="{{ menu.object.header.titleCoverImage | coverUrl}}" alt="">
+        <img ng-if="menu.object.header.titleCoverImage" class="cover" webp-src="{{ menu.object.header.titleCoverImage | uriRelocate: '/both/220x105'}}" alt="">
         <div class="time-info">
             <p>已在档 203(!) 小时</p>
             <p>玩家平均在档 175.4(!) 小时</p>
@@ -48,7 +48,7 @@
 
     <div ng-switch-when="point-other" class="for-point">
         <point-basic-info ng-if="!menu.object.header.titleCoverImage" point="menu.object.header.point"></point-basic-info>
-        <img ng-if="menu.object.header.titleCoverImage" class="cover" webp-src="{{ menu.object.header.titleCoverImage | coverUrl}}" alt="">
+        <img ng-if="menu.object.header.titleCoverImage" class="cover" webp-src="{{ menu.object.header.titleCoverImage | uriRelocate: '/both/220x105'}}" alt="">
         <div class="game-count">{{menu.object.header.gameCount}}</div>
         <div class="reputation-info">
             <span>
@@ -66,7 +66,7 @@
 
     <div ng-switch-when="dossier" class="for-dossier">
         <div class="user-basic-info">
-            <img webp-src="//storage.keylol.com/fd0dfd38572adff068251606aa282b3f.jpg!avatar.medium" alt="npc之舟" class="avatar">
+            <img webp-src="{{'keylol://fd0dfd38572adff068251606aa282b3f.jpg' | avatarUrl}}" alt="npc之舟" class="avatar">
             <div class="name-group">
                 <p>npc之舟</p>
                 <p>互相关注</p>

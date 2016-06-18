@@ -14,7 +14,7 @@
         <ul class="result-list" ng-if="resultArray">
             <li ng-repeat="result in resultArray" class="clearfix" ng-click="jumpTo(result.url)">
                 <div class="avatar-anchor" ng-if="filterText !== '文章'">
-                    <img class="avatar" webp-src="{{result.avatar|avatarUrl}}">
+                    <img class="avatar" webp-src="{{result.avatar | avatarUrl}}">
                 </div>
                 <div class="title">
                     <p>{{result.mainTitle|maxLength:14|userName:result.isUser}}</p>

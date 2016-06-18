@@ -8,14 +8,14 @@
                 <p>Keylol.com</p>
             </div>
         </a>
-        <div ng-if="navBar.theme.logo" class="theme-logo">
-            <a href="" ripple="#fff">
-                <img webp-src="{{navBar.theme.logo | uriRelocate}}">
+        <div ng-if="navBar.theme" class="theme-logo">
+            <a href="" ui-sref=".frontpage" ripple="#fff">
+                <img ng-if="navBar.theme.logo" webp-src="{{navBar.theme.logo | themeLogoUrl}}">
+                <div ng-if="!navBar.theme.logo" class="theme-alt">
+                    <p>{{navBar.stateTree.aggregation.point.basicInfo.chineseName}}</p>
+                    <p>{{navBar.stateTree.aggregation.point.basicInfo.englishName}}</p>
+                </div>
             </a>
-        </div>
-        <div ng-if="navBar.theme && !navBar.theme.logo" class="theme-alt">
-            <p>{{navBar.stateTree.aggregation.point.basicInfo.chineseName}}</p>
-            <p>{{navBar.stateTree.aggregation.point.basicInfo.englishName}}</p>
         </div>
         <form class="search-box">
             <input type="search">
@@ -36,7 +36,7 @@
             <p>{{navBar.stateTree.currentUser.coupon | numberAbbreviation}} ◆</p>
         </a>
         <a href="" ng-click="navBar.showUserHub($event)" popup="navBar.showUserHubPopup">
-            <img class="avatar" webp-src="{{navBar.stateTree.currentUser.avatarImage | avatarUrl}}" alt="{{navBar.stateTree.currentUser.userName}}">
+            <img class="avatar" webp-src="{{navBar.stateTree.currentUser.avatarImage | avatarUrl: 'big'}}" alt="{{navBar.stateTree.currentUser.userName}}">
         </a>
     </div>
     <div class="action-hub" ng-if="!navBar.stateTree.currentUser && !navBar.stateTree.empty">

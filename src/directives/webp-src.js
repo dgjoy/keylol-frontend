@@ -12,9 +12,9 @@
                     if (/^(?:http:|https:)?\/\/(storage|steamcdn)\.keylol\.com\//i.test(value))
                         utils.supportWebp.then(() => {
                             if (value.indexOf('!') === -1)
-                                attrs.$set('src', `${value}!webp`);
+                                attrs.$set('src', `${value}!/format/webp`);
                             else
-                                attrs.$set('src', `${value}.webp`);
+                                attrs.$set('src', `${value}/format/webp`);
                         }, () => {
                             attrs.$set('src', value);
                         });
