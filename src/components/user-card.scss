@@ -5,6 +5,7 @@ user-card {
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-height: 140px;
 
   p {
     margin: 0;
@@ -65,9 +66,5 @@ user-card {
         }
       }
     }
-  }
-
-  flat-button {
-    height: 46px;
   }
 }

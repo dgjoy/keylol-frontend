@@ -4,5 +4,6 @@
 <div class="point-img" webp-background="{{gameCard.card.titleCoverImage | uriRelocate}}"></div>
 <div class="actions">
     <vote-circle review="::gameCard.card.averageRating" gray-background="true"></vote-circle>
-    <flat-button text="订阅"></flat-button>
+    <flat-button binary-set="gameCard.subscribeSet" binary-value="gameCard.card.subscribed"
+                 click="gameCard.subscribe(gameCard.card.id, gameCard.card.subscribed, gameCard.card)"></flat-button>
 </div>

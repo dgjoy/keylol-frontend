@@ -4,5 +4,6 @@
 <div class="hr"></div>
 <div class="actions">
     <span class="count">{{categoryCard.card.gameCount}} 款游戏</span>
-    <flat-button text="订阅"></flat-button>
+    <flat-button binary-set="categoryCard.subscribeSet" binary-value="categoryCard.card.subscribed"
+                 click="categoryCard.subscribe(categoryCard.card.id, categoryCard.card.subscribed, categoryCard.card)"></flat-button>
 </div>

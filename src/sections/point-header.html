@@ -10,6 +10,7 @@
     </div>
     <div class="actions">
         <icon-button icon="dots-vertical" type="invert"></icon-button>
-        <raised-button theme-color="pointHeader.theme.main" text="订阅"></raised-button>
+        <raised-button theme-color="pointHeader.theme.main"  binary-set="pointHeader.subscribeSet" binary-value="pointHeader.object.subscribed"
+                     click="pointHeader.subscribe(pointHeader.object.id, pointHeader.object.subscribed, pointHeader.object)"></raised-button>
     </div>
 </div>

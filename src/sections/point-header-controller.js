@@ -4,6 +4,19 @@
 (function () {
     class pointHeaderController {
         constructor($scope, $window, $timeout, utils) {
+            this.subscribeSet = [
+                {
+                    text: '订阅',
+                    type: 'theme',
+                },
+                {
+                    text: '退订',
+                    type: 'light-text',
+                },
+            ];
+
+            this.subscribe = utils.subscribe;
+
             const $$window = $($window);
             let scrollTop = $$window.scrollTop();
             const scrollCallback = () => {
