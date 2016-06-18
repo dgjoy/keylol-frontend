@@ -7,7 +7,7 @@
             <span>{{platform.name}}</span>
         </a>
     </div>
-    <a href="" class="chinese-support" ng-click="pointAssociations.showChineseSupport($event)" popup="pointAssociations.showChineseSupportPopup">华语支持</a>
+    <a ng-if="pointAssociations.object.chineseAvailability" href="" class="chinese-support" ng-click="pointAssociations.showChineseSupport($event)" popup="pointAssociations.showChineseSupportPopup">华语支持</a>
 </div>
 <div class="characteristics" ng-if="pointAssociations.attributes.length > 0">
     <a href="" class="link-white" ng-repeat="attribute in pointAssociations.attributes">

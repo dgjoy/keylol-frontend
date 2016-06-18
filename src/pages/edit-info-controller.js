@@ -422,6 +422,12 @@
                     ],
                 };
 
+                if (stateTree.aggregation.point.edit.info.chineseAvailability === undefined) {
+                    stateTree.aggregation.point.edit.info.chineseAvailability = {
+                        thirdPartyLinks: [],
+                    };
+                }
+
                 for (let i = 0;i < language.list.length;i++) {
                     const eachLanguage = language.list[i];
                     eachLanguage.keys = ['interface', 'subtitles', 'fullAudio'];

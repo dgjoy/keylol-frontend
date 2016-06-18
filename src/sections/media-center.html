@@ -9,7 +9,7 @@
 </div>
 <div class="wrapper">
     <ul>
-        <li ng-repeat="item in mediaCenter.list track by $index">
+        <li ng-repeat="item in mediaCenter.list track by $index" ng-click="mediaCenter.showMediaOverlayWindow($index+1)">
             <a href="" ng-href="{{item.link}}" webp-background="{{item.image | uriRelocate}}">
                 <p class="text" ng-if="item.isVideo">
                     <span>{{$index === 0? item.text : ''}}</span>
