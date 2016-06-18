@@ -14,10 +14,9 @@
                 <!-- robot 方式-->
                 <div class="login-steam-robot" ng-if="login.currentWay === 0">
                     <phase phases="['在对话中发送验证码','登录成功']" index="login.steamRobotWayManager.phaseIndex"></phase>
-                    <div class="inner" ng-switch on="login.steamRobotWayManager.phaseIndex" ng-style="{
-                        justifyContent:login.steamRobotWayManager.phaseIndex === 0?'space-between':'center'}">
+                    <div class="inner" ng-switch on="login.steamRobotWayManager.phaseIndex">
                         <div class="left" ng-switch-when="0">
-                            <p>在其乐好友中,向其乐机器人发送<span class="highlight">验证码</span></p>
+                            <p>在其乐好友中，向其乐机器人发送<span class="blue">验证码</span></p>
                             <p>机器人已尝试发出对话邀请</p>
                         </div>
                         <div class="right font-consolas" ng-switch-when="0">
@@ -39,11 +38,10 @@
                 <!-- api 方式 -->
                 <div class="login-api" ng-if="login.currentWay === 1">
                     <phase phases="['在威乐页面登录授权','登录成功']" index="login.apiWayManager.phaseIndex"></phase>
-                    <div class="inner" ng-switch on="login.apiWayManager.phaseIndex" ng-style="{
-                        justifyContent:login.apiWayManager.phaseIndex === 0?'space-between':'center'}">
+                    <div class="inner" ng-switch on="login.apiWayManager.phaseIndex">
                         <div class="left" ng-switch-when="0">
-                            <p>点击<span class="highlight">右侧按钮</span>,跳转至威乐官方页面并登录 Steam 账户</p>
-                            <p>验证在官方接口完成,其乐不会接触密码与敏感信息</p>
+                            <p>点击<span class="green">右侧按钮</span>，跳转至威乐官方页面并登录 Steam 账户</p>
+                            <p>验证在官方接口完成，其乐不会接触密码与敏感信息</p>
                         </div>
                         <a class="right" ng-switch-when="0" href=""><img src="assets/images/sits_large_noborder_sc.png" /></a>
                         <div class="user" ng-switch-when="1">

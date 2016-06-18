@@ -132,98 +132,44 @@
         height: 245px;
       }
 
-      .login-api {
-        display: block;
-        background-color: $keylol-inverted-text;
-
-        .inner {
-          height: 95px;
-          display: flex;
-          align-items: center;
-          padding: 0 15px;
-
-          .left {
-            p {
-              margin: 0;
-            }
-
-            p:last-of-type {
-              color:$keylol-inertia-text;
-            }
-
-            .highlight {
-              color: $keylol-review-good;
-            }
-          }
-
-          .user {
-            display: flex;
-            img {
-              height: 50px;
-              width: 50px;
-              border-radius: 25px;
-              margin-right: 10px;
-            }
-
-            div {
-              display: flex;
-              flex-direction: column;
-              justify-content: center;
-
-              p {
-                margin: 0;
-              }
-
-              p:last-of-type {
-                color: $keylol-inertia-text;
-              }
-            }
-          }
-        }
-
-        phase {
-          @include keylol-shadow-1();
-          background-color: $keylol-card;
-        }
-
-        .actions {
-          box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.16);
-          background-color: $keylol-card;
-        }
-      }
-
-
+      .login-api,
       .login-steam-robot {
         display: block;
-        background-color: $keylol-inverted-text;
+        background-color: $keylol-card;
 
         .inner {
+          @include keylol-inset-shadow-1();
           height: 95px;
           display: flex;
           align-items: center;
           padding: 0 15px;
+          justify-content: space-between;
+          background-color: $keylol-inverted-text;
 
           .left {
             p {
               margin: 0;
             }
-
             p:last-of-type {
               color:$keylol-inertia-text;
             }
-
-            .highlight {
-
+            .green {
+              color: $keylol-review-good;
+            }
+            .blue {
+              color: $keylol-light-theme;
             }
           }
 
           .right {
-            color: $keylol-theme;
+            color: $keylol-light-theme;
             font-size: 24px;
           }
 
           .user {
             display: flex;
+            width: 100%;
+            justify-content: center;
             img {
               height: 50px;
               width: 50px;
@@ -246,18 +192,7 @@
             }
           }
         }
-
-        phase {
-          @include keylol-shadow-1();
-          background-color: $keylol-card;
-        }
-
-        .actions {
-          box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.16);
-          background-color: $keylol-card;
-        }
       }
-
 
       .login-passcode {
         display: block;
@@ -266,8 +201,6 @@
           overflow: hidden;
           display: block;
           position: relative;
-          background-color: $keylol-inverted-text;
-
           .inputs {
             padding-left: 15px;
             padding-top: 20px;

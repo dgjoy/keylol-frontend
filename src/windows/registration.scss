@@ -1,92 +1,165 @@
-.window-registration .window {
-    padding: 14px;
-    width: 900px;
-}
+.window-registration {
+  .window {
+    width: 700px;
+    background-color: $keylol-card;
 
-.window-registration .error {
-    color: red;
-}
+    .header {
+      height: 105px;
+      background-color: $keylol-light-theme;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      overflow: hidden;
 
-.window-registration .heading {
-    margin: 28px 0;
-}
+      .text {
+        margin-left: 15px;
 
-.window-registration .heading img {
-    float: right;
-    width: 44px;
-    height: 44px;
-}
+        p {
+          margin: 0;
+          padding: 0;
 
-.window-registration table {
-    margin: 28px 0;
-    width: 100%;
-}
+          &:first-of-type {
+            font-weight: bold;
+            font-size: 20px;
+            margin-bottom: 2px;
+            color: $keylol-inverted-text;
+          }
 
-.window-registration .platform {
-    margin: 11px 0 10px;
-    text-align: center;
-    position: relative;
-}
+          &:last-of-type {
+            color: rgba($keylol-inverted-text, 0.6);
+          }
+        }
+      }
 
-.window-registration .platform .go-binding-anchor {
-    display: inline-block;
-    opacity: 0.25;
-}
+      img {
+        position: relative;
+        transform: rotate(-15deg);
+        width: 100px;
+        margin-right: 30px;
+      }
+    }
 
-.window-registration .platform .go-binding-anchor:hover {
-    text-decoration: none;
-    opacity: 1.0;
-}
+    .content {
+      text-area {
+        margin-right: 30px;
+      }
 
-.window-registration .platform .go-binding-anchor img {
-    width: 35px;
-    height: 35px;
-    vertical-align: middle;
-}
+      .fixed-width {
+        width: 240px;
+      }
 
-.window-registration .platform .go-binding-anchor span {
-    font-size: 15px;
-    color: #333;
-}
+      .input-conn {
+        padding-left: 15px;
+        padding-top: 20px;
+        display: flex;
 
-.window-registration .platform .pasted-card {
-    width: 314px;
-    position: absolute;
-    top: 0;
-    left: -23px;
-}
+        .avatar {
+          width: 32px;
+          height: 32px;
+          margin: 17px 0 0 -20px;
+        }
+      }
 
-.window-registration .generate-id-code {
-    float: right;
-    color: $keylol-highlight;
-    margin: 5px 5px 0;
-}
+      .input-user {
+        padding-left: 15px;
+        display: flex;
+        flex-wrap: wrap;
+      }
+    }
 
-.window-registration .id-code {
-    text-align: center;
-    margin: 10px 0 14px;
-}
+    .conn {
+      @include keylol-inset-shadow-1();
+      background-color: $keylol-inverted-text;
+      height: 95px;
+      display: flex;
+      align-items: center;
+      padding: 0 15px;
+      justify-content: space-between;
+      transition: height 800ms;
+      overflow: hidden;
 
-.window-registration .id-code-left-spacing {
-    border: none;
-}
+      &.ng-enter {
+        height: 0;
+      }
+      &.ng-enter-active {
+        height: 95px;
+      }
+      &.ng-leave-active {
+        height: 0;
+      }
 
-.window-registration [id^=geetest-] {
-    margin: 14px 0;
-}
+      .left {
+        p {
+          margin: 0;
+        }
+        p:last-of-type {
+          color:$keylol-inertia-text;
+        }
+        .blue {
+          color: $keylol-light-theme;
+        }
+        a {
+          color: $keylol-highlight;
+          &:hover { text-decoration: underline; }
+        }
+        svg {
+          width: 20px;
+          height: 20px;
+          fill: $keylol-inertia-shape;
+          vertical-align: top;
+        }
+      }
 
-.window-registration .declaration {
-    max-width: 580px;
-}
+      .right .code {
+        color: $keylol-light-theme;
+        font-size: 20px;
+      }
 
-.window-registration .declaration h3.single-line + h4 {
-    top: 6px;
-}
+      .user {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        img {
+          height: 50px;
+          width: 50px;
+          border-radius: 25px;
+          margin-right: 10px;
+        }
 
-.window-registration .declaration p a {
-    color: $keylol-highlight;
-}
+        div {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
 
-.window-registration .window .window-confirm-button {
-    margin-right: -24px;
+          p {
+            margin: 0;
+          }
+
+          p:last-of-type {
+            color: $keylol-inertia-text;
+          }
+        }
+      }
+    }
+
+    .actions {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 15px;
+      align-items: center;
+      height: 75px;
+      .protocol {
+        color: $keylol-inertia-text;
+      }
+
+      a {
+        color: $keylol-highlight;
+        &:hover { text-decoration: underline; }
+      }
+
+      raised-button {
+        margin-left: 20px;
+      }
+    }
+  }
 }

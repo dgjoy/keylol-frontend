@@ -28,6 +28,14 @@
                 inputs: { startPage: 2 },
             });
         }
+        showRegistrationWindow (event) {
+            this.window.show({
+                event,
+                templateUrl: 'src/windows/registration.html',
+                controller: 'RegistrationController',
+                controllerAs: 'registration',
+            });
+        }
     }
 
     keylolApp.component('navBar', {

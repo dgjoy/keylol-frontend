@@ -94,6 +94,10 @@ raised-button {
       }
     }
 
+    &.light-theme {
+      background-color: $keylol-light-theme;
+    }
+
     &.invert {
       background-color: $keylol-inverted-text;
     }

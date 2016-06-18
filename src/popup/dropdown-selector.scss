@@ -2,9 +2,10 @@
   @include keylol-shadow-1();
   background-color: $keylol-card;
   width: 230px;
+  z-index: 1000;
 
   &.ng-enter {
-    transition: opacity 1000ms;//待处理
+    transition: opacity 100ms;
     opacity: 0;
   }
 

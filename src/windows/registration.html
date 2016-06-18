@@ -1,118 +1,89 @@
 ﻿<window position="center" class="window-registration">
     <div class="window">
-        <div class="window-exit-button" ng-click="cancel()">
-            <div ng-include="'assets/images/exit.svg'"></div>
-        </div>
-        <img class="secret-barcode" src="assets/images/secret-barcode.png" alt="条形码">
-        <div class="heading font-myriad-lisong">
-            <img src="assets/images/logo-mono.svg" alt="Logo">
-            <h1>会员注册表单</h1>
-            <h2>Membership Application Form</h2>
-        </div>
-        <form class="clearfix" ng-submit="submit()">
-            <table>
-                <colgroup>
-                    <col style="width: 38%">
-                    <col style="width: 2%;">
-                    <col style="width: 60%">
-                </colgroup>
-                <tbody>
-                <tr>
-                    <td ng-class="{'error-flash': errorDetect.steamBindingTokenId(error['vm.SteamBindingTokenId']) !== 'unknown'}">
-                        <h3 class="font-myriad-lisong">连接游戏平台</h3>
-                        <h4 ng-switch="errorDetect.steamBindingTokenId(error['vm.SteamBindingTokenId'])">
-                            <span class="error" ng-switch-when="empty">您必须绑定一个 Steam 账户才可以注册成为其乐用户。</span>
-                            <span ng-switch-default>绑定 Steam 平台的有效账户。</span>
-                        </h4>
-                        <div class="platform">
-                            <a class="go-binding-anchor" href="" ng-click="showSteamConnectWindow()">
-                                <img src="assets/images/steam-circle-mono.png" alt="绑定 Steam">
-                                <span>Steam</span>
-                            </a>
-                            <div class="pasted-card box-shadowed" ng-if="vm.SteamBindingTokenId">
-                                <img class="needle" src="assets/images/card-needle.png" alt="订书针">
-                                <div>
-                                    <img class="avatar" webp-src="{{vm.AvatarImage | avatarUrl}}" alt="Steam">
-                                    <div>
-                                        <h5>已连接 <a class="clear-button" href="" ng-click="discardBinding()">×</a></h5>
-                                        <h5>{{vm.SteamProfileName}}</h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                    <td class="id-code-left-spacing"></td>
-                    <td ng-class="{'error-flash': errorDetect.idCode(error['vm.IdCode']) !== 'unknown'}">
-                        <!--<a class="generate-id-code" href="">没兴趣自定义？自动生成！</a>-->
-                        <h3 class="font-myriad-lisong">用户识别码</h3>
-                        <h4 ng-switch="errorDetect.idCode(error['vm.IdCode'])">
-                            <span class="error" ng-switch-when="format">仅限使用字母、数字。</span>
-                            <span class="error" ng-switch-when="used">这个代码已经被别人使用。</span>
-                            <span ng-switch-default>自定义五位长度的用户代码，作为个人页面的链接与登录凭证。</span>
-                        </h4>
-                        <div class="id-code">
-                            <input-code length="5" ng-model="vm.IdCode"></input-code>
-                        </div>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-            <table>
-                <colgroup>
-                    <col style="width: 38%">
-                    <col style="width: 62%">
-                </colgroup>
-                <tbody>
-                <tr ng-class="{'error-flash': errorDetect.username(error['vm.UserName']) !== 'unknown'}">
-                    <td>
-                        <h3 class="font-myriad-lisong">昵称</h3>
-                        <h4 ng-switch="errorDetect.username(error['vm.UserName'])">
-                            <span class="error" ng-switch-when="used">这个昵称已被别人使用。</span>
-                            <span class="error" ng-switch-when="format">仅限使用字母、数字、汉字。</span>
-                            <span class="error" ng-switch-when="length">仅限 3-16 字节。</span>
-                            <span ng-switch-default>展现在日常界面中，不与其他用户重复。</span>
-                        </h4>
-                    </td>
-                    <td>
-                        <input type="text" ng-model="vm.UserName">
-                    </td>
-                </tr>
-                <tr ng-class="{'error-flash': errorDetect.password(error['vm.Password']) !== 'unknown'}">
-                    <td>
-                        <h3 class="font-myriad-lisong">登录口令</h3>
-                        <h4 ng-switch="errorDetect.password(error['vm.Password'])">
-                            <span class="error" ng-switch-when="length">密码需要至少长 6 位。</span>
-                            <span ng-switch-default>由至少 6 位的数字或字母或符号组成。</span>
-                        </h4>
-                    </td>
-                    <td>
-                        <input type="password" ng-model="vm.Password">
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-            <table>
-                <tr ng-class="{'error-flash': error.authCode}">
-                    <td>
-                        <h3 class="font-myriad-lisong">人机验证</h3>
-                        <h4 ng-class="{error: error.authCode}">拖动滑块并完成拼图，协助我们抵御恶意攻击。</h4>
-                        <div id="geetest-{{geetestId}}"></div>
-                    </td>
-                </tr>
-            </table>
-            <button type="submit" class="window-confirm-button" ng-disabled="submitLock">
-                <img class="arrow-right" src="assets/images/arrow-right.png" alt="下一步">
-                <img class="signature-pen" src="assets/images/signature-pen.png" alt="提交">
-                <hgroup class="font-myriad-keylol">
-                    <h1>提交注册申请</h1>
-                    <h2>Submit the Application</h2>
-                </hgroup>
-            </button>
-            <div class="declaration">
-                <h3 class="single-line font-myriad-lisong">守则</h3>
-                <h4>Terms and Conditions</h4>
-                <p>申请人已悉知并同意遵循<a target="_blank" href="user_agreement.pdf">《其乐游戏社区 用户协议》</a>以及所在地区的相关法律。</p>
+        <div class="header">
+            <div class="text">
+                <p>加入其乐游戏社区</p>
+                <p>连接游戏平台，获取量身订造的信息轨道</p>
             </div>
-        </form>
+            <img src="assets/images/logo-arrow.png">
+        </div>
+        <div class="content">
+            <div class="input-conn">
+                <text-area type="dropdown"
+                           label="选择游戏平台"
+                           model="registration.platform"
+                           object="registration.platformsToSelect"
+                           state="registration.connected?'disabled':'normal'"
+                ></text-area>
+                <text-area ng-if="registration.connected"
+                           type="text"
+                           label="已连接 Steam 账户"
+                           model="'steam nickname'"
+                           state="'disabled'"
+                           class="fixed-width"
+                ></text-area>
+                <img ng-if="registration.connected" class="avatar" webp-src="//storage.keylol.com/4ed8e4862422e8a584fb6bee9f32fedd.jpg!avatar.medium" alt="">
+            </div>
+            <div class="input-user" ng-if="registration.connected">
+                <text-area style="width: 200px;"
+                           type="text"
+                           label="昵称"
+                           model="''"
+                           tip="'日常界面展示的社区名称'"
+                ></text-area>
+                <text-area class="fixed-width"
+                           type="text"
+                           label="登录口令"
+                           model="''"
+                ></text-area>
+                <text-area type="uic"
+                           label="用户识别码"
+                           model="''"
+                           tip="'自定义五位代码，作为个人链接和唯一身份凭证，设定后不可更改。'"
+                ></text-area>
+            </div>
+            <phase ng-if="registration.conn" phases="registration.conn.phases" index="registration.conn.index"></phase>
+        </div>
+        <div class="conn" ng-if="registration.conn" ng-switch="registration.conn.index">
+            <div class="left" ng-switch-when="0">
+                <p>在 Steam 中将 <span class="blue">其乐机器人 #43</span> 加为好友</p>
+                <p>
+                    快速添加前需要启动 Steam，你也可以访问机器人的 <a>社区资料页</a>
+                    <svg aria-hidden="true">
+                        <use ng-href="{{'open-in-new' | iconSvgUrl }}" xlink:href=""></use>
+                    </svg>
+                    手动添加
+                </p>
+            </div>
+            <div class="right" ng-switch-when="0">
+                <raised-button type="light-theme" text="快速添加"></raised-button>
+            </div>
+
+            <div class="left" ng-switch-when="1">
+                <p>向其乐机器人发送<span class="blue">验证码</span></p>
+                <p>通过 Steam 对话发送右边的 8 位验证码</p>
+            </div>
+            <div class="right" ng-switch-when="1">
+                <p class="code font-consolas">SDWD2378</p>
+            </div>
+
+            <div class="user" ng-switch-when="2">
+                <img webp-src="//storage.keylol.com/4ed8e4862422e8a584fb6bee9f32fedd.jpg!avatar.medium" />
+                <div>
+                    <p>用户名</p>
+                    <p>欢迎回来</p>
+                </div>
+            </div>
+        </div>
+        <div class="actions">
+            <div>
+                <a href="" ng-if="!registration.connected&&!registration.conn">已注册账号？在这里登录</a>
+                <div class="protocol" ng-if="registration.connected">注册用户需阅读并同意 <a href="">《其乐游戏社区 用户协议》</a></div>
+            </div>
+            <div class="action">
+                <flat-button text="放弃" type="inertia" ng-click="registration.close()"></flat-button>
+                <raised-button text="注册" type="theme" disabled="false"></raised-button>
+            </div>
+        </div>
     </div>
 </window>

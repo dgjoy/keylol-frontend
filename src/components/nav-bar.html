@@ -41,6 +41,6 @@
     </div>
     <div class="action-hub" ng-if="!navBar.stateTree.currentUser && !navBar.stateTree.empty">
         <flat-button text="登录" type="invert" click="navBar.showLoginWindow(event)"></flat-button>
-        <raised-button text="注册" type="theme" invert="true" click="" theme-color="::navBar.theme.main"></raised-button>
+        <raised-button text="注册" type="theme" invert="true" click="navBar.showRegistrationWindow(event)" theme-color="::navBar.theme.main"></raised-button>
     </div>
 </div>

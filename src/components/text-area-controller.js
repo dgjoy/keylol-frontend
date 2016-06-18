@@ -43,12 +43,12 @@
         bindings: {
             type:'@',
             label:'@',
-            object:'<',
+            object:'<',//传入dropdown
             model:'=',
             state:'<',//normal,warn,disabled
-            tip:'<',
-            error:'<',
-            limit:'<',
+            tip:'<',//默认提示信息
+            error:'<',//错误信息
+            limit:'<',//限制据点输入框可输入的据点数
             theme:'<',
             whitelist: '<',
             options: '<',
