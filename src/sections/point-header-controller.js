@@ -3,7 +3,11 @@
  */
 (function () {
     class pointHeaderController {
-        constructor($scope, $window, utils) {
+        constructor($scope, $window, utils, $state, window) {
+            $.extend(this,{
+                $state,
+                window,
+            });
             this.subscribeSet = [
                 {
                     text: '订阅',
@@ -103,6 +107,31 @@
                 // inputs: {
                 //     idCode: this.vendors[$index].idCode,
                 // },
+            });
+        }
+
+        showMenu($event) {
+            this.showMenuPopup({
+                templateUrl: 'src/popup/point-header-menu.html',
+                controller: 'PointHeaderMenuController as pointHeaderMenu',
+                event: $event,
+                attachSide: 'bottom',
+                align: 'right',
+                offsetX: 0,
+                offsetY: -24,
+                inputs: {
+                    actions: [() => {
+                        this.$state.go('aggregation.point.edit.info');
+                    },() => {
+                        this.window.show({
+                            templateUrl: 'src/windows/point-pusher.html',
+                            controller: 'PointPusherController as pointPusher',
+                            inputs: {
+                                pointIdCode: this.object.idCode,
+                            },
+                        });
+                    }],
+                },
             });
         }
     }

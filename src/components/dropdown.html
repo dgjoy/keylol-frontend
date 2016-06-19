@@ -1,5 +1,5 @@
 <a href="" class="dropdown {{dropdown.state}}" ng-click="dropdown.showSelector($event)" popup="dropdown.showSelectorPopup">
-    <input type="text" ng-model="dropdown.model" disabled />
+    <div class="str">{{dropdown.object.items[dropdown.model]}}</div>
     <svg aria-hidden="true">
         <use ng-href="{{'menu-down' | iconSvgUrl }}" xlink:href=""></use>
     </svg>

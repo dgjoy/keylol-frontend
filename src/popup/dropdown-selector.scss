@@ -3,6 +3,7 @@
   background-color: $keylol-card;
   width: 230px;
   z-index: 1000;
+  padding-bottom: 10px;
 
   &.ng-enter {
     transition: opacity 100ms;

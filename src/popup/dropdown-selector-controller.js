@@ -8,11 +8,11 @@
         }
 
         select(index) {
-            this.close(this.object.items[index]);
+            this.close(index);
         }
 
         cancel() {
-            this.close('');
+            this.close(undefined);
         }
     }
 
