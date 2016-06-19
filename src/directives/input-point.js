@@ -17,11 +17,25 @@
             link (scope, element, attrs, ngModel) {
                 scope.utils = utils;
                 scope.data = '';
+                scope.previewPopup = [];
 
                 ngModel.$render = function () {
                     if (ngModel.$viewValue) {
                         scope.pointArray = ngModel.$viewValue;
                     }
+                };
+
+                scope.showPreview = function ($index, $event) {
+                    scope.previewPopup[$index]({
+                        templateUrl: 'src/popup/point-preview-card.html',
+                        controller: 'PointPreviewCardController as pointPreviewCard',
+                        attachSide: 'bottom',
+                        event: $event,
+                        align: 'center',
+                        // inputs: {
+                        //     idCode: scope.pointArray[$index].idCode,
+                        // },
+                    });
                 };
 
                 scope.deleteSelectorPoint = function (index) {

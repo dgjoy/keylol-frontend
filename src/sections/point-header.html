@@ -2,10 +2,10 @@
 <div class="info" ng-switch="pointHeader.object.type">
     <point-basic-info point="pointHeader.point"></point-basic-info>
     <div class="attributes" ng-switch-when="game">
-        <p>{{pointHeader.categories}}</p>
-        <p>{{pointHeader.vendors}}</p>
+        <div class="related"><div class="point" ng-repeat="category in pointHeader.categories"><a href="point/{{category.idCode}}" ng-mouseenter="pointHeader.showCategoryPreview($event,$index)" popup="pointHeader.categoryPopup[$index]">{{category.chineseName}}</a></div></div>
+        <div class="related"><div class="point" ng-repeat="vendor in pointHeader.vendors"><a href="point/{{vendor.idCode}}" ng-mouseenter="pointHeader.showVendorPreview($event,$index)" popup="pointHeader.vendorPopup[$index]">{{vendor.name}}</a></div></div>
     </div>
-    <div class="attributes" ng-switch-default>
+    <div class="count" ng-switch-default>
         <p>{{pointHeader.gameCount}}</p>
     </div>
     <div class="actions">

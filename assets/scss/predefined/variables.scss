@@ -160,6 +160,13 @@ $keylol-topic: #7976b1;
   white-space: nowrap;
 }
 
+// wrap ellipsis
+@mixin wrap-ellipsis {
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+}
+
 //usual angular enter leave animation
 @mixin grow-shrink-self {
   &.ng-enter {

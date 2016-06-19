@@ -53,22 +53,21 @@ game-guide-card {
   }
 
   .category-container {
-    @include ellipsis();
+    @include wrap-ellipsis();
     padding: 0 10px;
     height: 40px;
     line-height: 40px;
-    color: $keylol-main-text;
-
     .category {
+      color: $keylol-inertia-shape;
+      &:not(:first-of-type)::before {
+        content: '\00a0/';
+      }
+    }
+    a {
       color: $keylol-main-text;
-
       &:hover {
         text-decoration: underline;
       }
-    }
-
-    .slash {
-      color: $keylol-inertia-shape;
     }
   }
 

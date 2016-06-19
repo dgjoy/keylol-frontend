@@ -1,111 +1,22 @@
 .popup-point-preview-card {
-    width: 400px;
-}
+  @include keylol-shadow-3();
+  z-index: 1000;
 
-.popup-point-preview-card.loading {
-    width: 77px;
-}
-
-.popup-point-preview-card .arrow-up {
-    margin-left: 32px;
-}
-
-.popup-point-preview-card .card-main {
-    height: 125px;
-    background-color: white;
-    position: relative;
-}
-
-.popup-point-preview-card.loading .card-main {
-    background-color: #EEE;
-}
-
-.popup-point-preview-card .card-main .content {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    padding: 10px 0 27px 0;
-    box-sizing: border-box;
-}
-
-.popup-point-preview-card .loading-gif {
-    width: 48px;
-    height: 48px;
-    margin: 0 auto 10px auto;
-}
-
-.popup-point-preview-card .avatar-anchor {
-    float: left;
-    margin: 0 12px 0 15px;
-}
-
-.popup-point-preview-card .avatar-anchor img {
-    width: 48px;
-    height: 48px;
-}
-
-.popup-point-preview-card .heading h1 {
-    color: $keylol-theme;
-    margin: 3px 0;
-    font-size: 16px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.popup-point-preview-card .heading h2 {
-    color: #333;
-    font-size: 13px;
-    margin: 0 0 13px 0;
-    height: 16px;
-    font-weight: normal;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.popup-point-preview-card .summary {
-    width: 100%;
-    height: 30px;
-    background-color: $keylol-theme;
-}
-
-.popup-point-preview-card .summary .left-summary {
-    float: left;
-    margin-top: 15px;
-    transform: translateY(-50%);
-    color: white;
-    margin-left: 15px;
-}
-
-.popup-point-preview-card .summary .loading-summary {
-    color: white;
-    width: 100%;
-    text-align: center;
-    display: inline-block;
-    margin-top: 15px;
-    transform: translateY(-50%);
-}
-
-.popup-point-preview-card .summary .right-summary {
-    float: right;
-    margin-top: 15px;
-    transform: translateY(-50%);
-    color: white;
-    margin-right: 15px;
-}
-
-.popup-point-preview-card .card-main .background {
-    width: 100%;
-    height: 125px;
-    position: absolute;
-    opacity: 0.2;
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-
-.popup-point-preview-card .card-main .bottom-border {
-    position: absolute;
-    right: 10px;
-    bottom: -5px;
+  .header {
+    width: 280px;
+    height: 80px;
+    background-color: $keylol-light-theme;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    p { margin: 0; }
+    p:first-of-type {
+      font-size: 20px;
+      color: $keylol-inverted-text;
+    }
+    p:last-of-type {
+      color: rgba($keylol-inverted-text,.6);
+    }
+  }
 }

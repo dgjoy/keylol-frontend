@@ -3,7 +3,7 @@
  */
 (function () {
     class pointHeaderController {
-        constructor($scope, $window, $timeout, utils) {
+        constructor($scope, $window, utils) {
             this.subscribeSet = [
                 {
                     text: '订阅',
@@ -49,25 +49,18 @@
             };
 
             if (this.object.type === 'game') {
-                this.categories = '';
-                for (let i = 0;i !== this.object.categories.length;i++) {
-                    this.categories += this.object.categories[i].chineseName;
-                    if (i !== this.object.categories.length - 1) {
-                        this.categories += ' / ';
+                this.categories = this.object.categories;
+                this.vendors = [];
+                for (let i = 0;i !== this.object.vendors.length;i++) {
+                    const names = utils.getPreferredPointName(this.object.vendors[i]);
+                    this.vendors.push({ name: names[0],idCode: this.object.vendors[i].idCode });
+                    if (names[1]) {
+                        this.vendors.push({ name: names[1],idCode: this.object.vendors[i].idCode });
                     }
                 }
 
-                this.vendors = '';
-                for (let i = 0;i !== this.object.vendors.length;i++) {
-                    const names = utils.getPreferredPointName(this.object.vendors[i]);
-                    this.vendors += names[0];
-                    if (names[1]) {
-                        this.vendors += ` / ${names[1]}`;
-                    }
-                    if (i !== this.object.vendors.length - 1) {
-                        this.vendors += ' / ';
-                    }
-                }
+                this.categoryPopup = [];
+                this.vendorPopup = [];
             } else {
                 switch (this.object.type) {
                     case 'category':
@@ -81,6 +74,36 @@
                         break;
                 }
             }
+        }
+
+        showCategoryPreview($event, $index) {
+            this.categoryPopup[$index]({
+                templateUrl: 'src/popup/point-preview-card.html',
+                controller: 'PointPreviewCardController as pointPreviewCard',
+                event: $event,
+                attachSide: 'bottom',
+                align: 'center',
+                offsetX: 0,
+                offsetY: 0,
+                inputs: {
+                    idCode: this.categories[$index].idCode,
+                },
+            });
+        }
+
+        showVendorPreview($event, $index) {
+            this.vendorPopup[$index]({
+                templateUrl: 'src/popup/point-preview-card.html',
+                controller: 'PointPreviewCardController as pointPreviewCard',
+                event: $event,
+                attachSide: 'bottom',
+                align: 'center',
+                offsetX: 0,
+                offsetY: 0,
+                // inputs: {
+                //     idCode: this.vendors[$index].idCode,
+                // },
+            });
         }
     }
 

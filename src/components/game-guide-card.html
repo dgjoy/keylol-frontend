@@ -11,12 +11,11 @@
     </a>
 </div>
 <div class="category-container">
-    <span class="repeat-wrapper" ng-repeat="category in gameGuideCard.card.categories">
-        <a href="point/{{category.idCode}}" class="category">
+    <div class="category" ng-repeat="category in gameGuideCard.card.categories">
+        <a href="point/{{category.idCode}}">
             {{category.chineseName}}
         </a>
-        <span class="slash" ng-show="$index !== gameGuideCard.categories.length-1"> / </span>
-    </span>
+    </div>
 </div>
 <div class="actions" ng-if="gameGuideCard.bottomType !== 'user'">
     <div class="platforms">

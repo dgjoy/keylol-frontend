@@ -49,15 +49,34 @@ point-header {
       }
 
       .attributes {
-        p {
-          margin: 0;
+        .related {
+          @include wrap-ellipsis;
           color: $keylol-inverted-text;
-          text-align: center;
+          justify-content: center;
+
+          &:first-of-type {
+            height: 21px;
+          }
 
           &:last-of-type {
+            height: 14px;
             font-size: 12px;
           }
+
+          .point:not(:first-of-type)::before {
+            content: "\00a0/\00a0";
+          }
+
+          .point a {
+            color: $keylol-inverted-text;
+            &:hover { text-decoration: underline; }
+          }
         }
+      }
+
+      .count {
+        text-align: center;
+        color: $keylol-inverted-text;
       }
 
       .actions {
