@@ -1,67 +1,59 @@
 <div class="display-card">
     <div class="user-with-date">
-        <a class="user" href="">
-            <img class="avatar" webp-src="{{'' | avatarUrl}}"  alt="{{activityCard.union.$localStorage.user.UserName}}">
+        <a class="user" href="user/{{activityCard.object.authorIdCode}}">
+            <img class="avatar" webp-src="{{activityCard.object.authorAvatarImage | avatarUrl}}"  alt="">
             <div class="name-group">
-                <p class="username">程晓峰</p>
-                <p>2015-01</p>
+                <p class="username">{{activityCard.object.authorUserName}}</p>
+                <p am-time-ago="activityCard.object.publishTime"></p>
             </div>
         </a>
         <div ng-click="activityCard.showMenu($event)" popup="activityCard.showSharedPopup"><icon-button icon="dots-vertical">5 月 7 号</icon-button></div>
     </div>
     <div class="simple">
-        <vote-circle vote="3" gray-background="true"></vote-circle>
-        <p>这是一段非常长的文字这是一段非常长的文字这是一段非常长的文字这是一段非常长的文字<span></span></p>
-        <img webp-src="//storage.keylol.com/39b7d020df471d6c0e3fa593802000bc.jpg!timeline.thumbnail.new">
+        <vote-circle ng-if="activityCard.object.rating" review="activityCard.object.rating" gray-background="true"></vote-circle>
+        <p>{{activityCard.object.content}}</p>
+        <img ng-if="activityCard.object.coverImage" webp-src="{{activityCard.object.coverImage | uriRelocate}}">
     </div>
     <div class="point-with-source">
-        <a class="point" href="point/DOTA2" ripple>
-            <point-basic-info></point-basic-info>
+        <a class="point" href="point/{{::activityCard.relatedPoints.mainPoint.idCode}}" ripple>
+            <point-basic-info point="::activityCard.relatedPoints.mainPoint"></point-basic-info>
         </a>
-        <a class="source" href="" ng-click="activityCard.showSourceList($event)" popup="activityCard.showSharedPopup">5 个据点来稿</a>
-    </div>
-    <div class="indirect-sources">
-        <a class="indirect-source" href="">
-            <img webp-src="{{'' | avatarUrl: 'small'}}" class="picture" />
-            <span class="desc">角色扮演</span>
-        </a>
-        <a class="indirect-source" href="">
-            <img webp-src="{{'' | avatarUrl: 'small'}}" class="picture" />
-            <span class="desc">角色扮演</span>
-        </a>
+        <a class="source" href="" ng-click="activityCard.showSourceList($event)" popup="activityCard.showSharedPopup">{{::activityCard.relatedPoints.attachedPoints.length + 1}} 个据点来稿</a>
     </div>
 </div>
 <div class="communicate-card">
     <div class="review-area">
+        <pagination class="float-top" on-page-changed="::activityCard.changePage(newPage, oldPage)" total="activityCard.commentsManager.pageCount" current="activityCard.commentsManager.currentPage"></pagination>
         <div class="review-count">
-            全部 16 个评论
+            全部 {{activityCard.commentsManager.count}} 个评论
         </div>
-        <div class="review-list clearfix" ng-class="{scroller:activityCard.hasScroller}">
-            <div class="review" href="" data-floor-id="#{{$index+1}}" ng-repeat="reviews in [0,1,2,3,4,5,6,7,8,9]" ng-class="{'blink':activityCard.currentFloor === ($index+1)}">
-                <img src="" webp-src="{{'keylol://39b7d020df471d6c0e3fa593802000bc.jpg' | avatarUrl}}" alt="" class="avatar" />
+        <div class="review-list clearfix">
+            <div class="review" href="" ng-repeat="comment in activityCard.commentsManager.pages[activityCard.commentsManager.currentPage - 1]">
+                <img src="" webp-src="{{comment.authorAvatarImage | avatarUrl}}" alt="" class="avatar" />
                 <div class="content">
                     <div class="info">
-                        <div class="user">Stark<a href="">+16</a></div>
-                        <div class="date">05-03 / #0</div>
+                        <div class="user">{{comment.authorUserName}}<a href="">+{{comment.likeCount}}</a></div>
+                        <div class="date"><span am-time-ago="comment.publishTime"></span> / #{{comment.sidForActivity}}</div>
                         <div class="actions"><a href="">认可</a><a href="">回复</a></div>
                     </div>
                     <div class="text">
-                        这是一段文本.
+                        {{comment.content}}
                     </div>
                 </div>
             </div>
-            <pagination total="5" current="1"></pagination>
+            <pagination on-page-changed="::activityCard.changePage(newPage, oldPage)" total="activityCard.commentsManager.pageCount" current="activityCard.commentsManager.currentPage"></pagination>
         </div>
         <div class="hr"></div>
         <div class="review-sender">
-            <img src="" webp-src="{{'keylol://39b7d020df471d6c0e3fa593802000bc.jpg' | avatarUrl}}" alt="" class="avatar">
-            <textarea elastic placeholder="发表见解..." ng-model="activityCard.comment"></textarea>
+            <img webp-src="{{ activityCard.stateTree.currentUser.avatarImage | avatarUrl}}" alt="" class="avatar">
+            <textarea elastic placeholder="发表见解..." ng-model="activityCard.vm.content"></textarea>
         </div>
     </div>
-    <div class="operation" ng-switch="activityCard.state">
+
+    <div class="operation">
         <div>
-            <flat-button type="inertia" text="+1"></flat-button>
+            <flat-button type="inertia" text="+{{activityCard.object.likeCount}}"></flat-button>
         </div>
-        <flat-button text="评论"></flat-button>
+        <flat-button ng-click="activityCard.submit()" text="评论" disabled="activityCard.vm.content.length === 0 || activityCard.submitLock"></flat-button>
     </div>
 </div>

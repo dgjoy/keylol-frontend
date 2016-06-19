@@ -296,21 +296,21 @@
                 controller: 'UserEditPreferenceController',
             })
             .state('article', {
-                url: '/article/:article_id_code',
+                url: '/article/:author_id_code/:sid_for_author',
                 templateUrl: 'src/pages/article.html',
                 controller: 'ArticleController',
                 onExit (stateTree) {
                     console.log('exit article');
-                    delete stateTree.article;
+                    delete stateTree.content;
                 },
             })
             .state('activity', {
-                url: '/activity/:activity_id_code',
+                url: '/activity/:author_id_code/:sid_for_author',
                 templateUrl: 'src/pages/activity.html',
                 controller: 'ActivityController',
                 onExit (stateTree) {
                     console.log('exit activity');
-                    delete stateTree.activity;
+                    delete stateTree.content;
                 },
             })
             .state('not-found', {

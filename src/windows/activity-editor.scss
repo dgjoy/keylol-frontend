@@ -15,6 +15,15 @@
       display: flex;
       align-items: center;
       padding: 15px;
+      position: relative;
+
+      .related-point-count {
+        position: absolute;
+        font-size: 12px;
+        color: $keylol-inertia-text;
+        width: 300px;
+        text-align: right;
+      }
 
       text-area {
         flex-grow: 0;
@@ -35,7 +44,7 @@
         flex-grow: 1;
         display: flex;
         align-items: center;
-        width: 230px;
+        width: 200px;
 
         .avatar {
           width: 32px;

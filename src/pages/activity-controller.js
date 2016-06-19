@@ -1,12 +1,10 @@
 ﻿(function () {
     class ActivityController {
-        constructor ($scope, stateTree) {
+        constructor (pageHead, pageLoad, $scope, stateTree) {
+            pageHead.setTitle('动态 - 其乐');
+            pageLoad('content.activity');
+
             $scope.stateTree = stateTree;
-            stateTree.pointTheme = {
-                main: '#A80E27',
-                light: '#9A9B55',
-                icon: '//storage.keylol.com/2ea0474aa5757a04658790f12e144e61.png',
-            };
         }
     }
 
