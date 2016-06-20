@@ -1,0 +1,20 @@
+﻿<div class="latest-wrapper" ng-style="{height: (pageList.list.length > 5 && !pageList.hasBeenExpanded) ? 434 : pageList.list.length * 87}" ng-class="{
+    'to-next' : pageList.isToNext,
+    'to-previous' : !pageList.isToNext
+    }">
+    <ul class="latest-list" ng-animate-swap="pageList.currentPage">
+        <li ng-repeat="item in ::pageList.list track by $index">
+            <a href="user/{{item.idCode}}">
+                <img class="avatar" webp-src="{{item.avatarImage | avatarUrl}}" alt="">
+            </a>
+            <div class="name-group">
+                <p><a href="user/{{item.idCode}}">{{item.userName}}</a> {{item.gamerTag}}</p>
+                <p>{{item.articleCount}} 份文章 / {{item.activityCount}} 篇动态 / 获得 {{item.likeCount}} 则认可</p>
+            </div>
+        </li>
+    </ul>
+</div>
+<div class="footer clearfix">
+    <flat-button ng-if="pageList.list.length > 5 && !pageList.hasBeenExpanded" text="展开更多" type="light-text" click="pageList.expandMore()"></flat-button>
+    <pagination ng-if="pageList.hasBeenExpanded" on-page-changed="::pageList.changePage(newPage, oldPage)" total="::pageList.totalPage" current="pageList.currentPage"></pagination>
+</div>

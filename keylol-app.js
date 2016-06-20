@@ -269,6 +269,15 @@
                     delete stateTree.aggregation.user.dossier;
                 },
             })
+            .state('aggregation.user.people', {
+                url: '/people',
+                templateUrl: 'src/pages/people.html',
+                controller: 'PeopleController',
+                onExit (stateTree) {
+                    console.log('exit people');
+                    delete stateTree.aggregation.user.people;
+                },
+            })
             .state('aggregation.user.edit', {
                 url: '/edit',
                 templateUrl: 'src/pages/user-edit.html',

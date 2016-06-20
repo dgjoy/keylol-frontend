@@ -1,6 +1,37 @@
 ﻿(function () {
     class DossierController {
-        constructor($scope, pageHead, stateTree, $state, $location, pageLoad) {
+        constructor($scope, pageHead, stateTree, $state, $location, pageLoad, $http, notification) {
+            // $scope.changePage =  index => {
+            //     $scope.currentPage = index;
+            //     switch (index) {
+            //         case 0:
+            //             $scope.templist = null;
+            //             $http.get(`${apiEndpoint}states/aggregation/user/dossier/selected-articles`,{
+            //                 params: {
+            //                     user_id: stateTree.aggregation.user.basicInfo.id,
+            //                     page: 1,
+            //                 },
+            //             }).then(response => {
+            //                 $scope.tempList = response.data;
+            //             }, response => {
+            //                 notification.error('发生未知错误，请重试或与站务职员联系',response);
+            //             });
+            //             break;
+            //         case 1:
+            //             $scope.templist = null;
+            //             $http.get(`${apiEndpoint}states/aggregation/user/subscribed-points`,{
+            //                 params: {
+            //                     user_id: stateTree.aggregation.user.basicInfo.id,
+            //                     page: 1,
+            //                 },
+            //             }).then(response => {
+            //                 $scope.tempList = response.data;
+            //             }, response => {
+            //                 notification.error('发生未知错误，请重试或与站务职员联系',response);
+            //             });
+            //     }
+            // };
+
             pageHead.setTitle('个人 - 档案 - 其乐');
             let fetchPromise;
             if (!$location.url().match(/\/point\/[^\/]*\/?$/)) {
@@ -23,10 +54,13 @@
                             basicInfo: stateTree.aggregation.user.basicInfo,
                         },
                     };
-                    $scope.tabArray = [
-                        { state: '.articles', name:  `${stateTree.aggregation.user.dossier.articleCount} 篇文章` },
-                        { state: '.subscribes', name: `${stateTree.aggregation.user.dossier.subscribedPointCount} 个订阅据点` },
-                    ];
+                    // $scope.tabArray = [
+                    //     { name: `${stateTree.aggregation.user.dossier.articleCount} 篇文章` },
+                    //     { name: `${stateTree.aggregation.user.dossier.subscribedPointCount} 个订阅据点` },
+                    // ];
+
+                    // $scope.articlePageCount = parseInt((stateTree.aggregation.user.dossier.articleCount - 1) / 10) + 1;
+                    // $scope.subscribePageCount = parseInt((stateTree.aggregation.user.dossier.subscribePointCount - 1) / 10) + 1;
                 });
             }
 

@@ -70,15 +70,15 @@
 
     <div ng-switch-when="dossier" class="for-dossier">
         <div class="user-basic-info">
-            <img webp-src="{{'keylol://fd0dfd38572adff068251606aa282b3f.jpg' | avatarUrl}}" alt="npc之舟" class="avatar">
+            <img webp-src="{{ menu.object.header.basicInfo.avatarImage| avatarUrl}}" alt="{{menu.object.header.basicInfo.userName}}" class="avatar">
             <div class="name-group">
                 <p>{{menu.object.header.basicInfo.userName}}</p>
                 <p>{{menu.object.header.basicInfo.isFriend?'互相关注':menu.object.header.basicInfo.subscribed?'单向关注':'&nbsp;'}}</p>
             </div>
         </div>
         <div class="paragraph">好友 <a href="">{{menu.object.header.basicInfo.friendCount}}</a></div>
-        <div class="paragraph">关注 <a href="">{{menu.object.header.basicInfo.subscriberCount}}</a></div>
-        <div class="paragraph">听众 <a href="">{{menu.object.header.basicInfo.subscribedUserCount}}</a></div>
+        <div class="paragraph">关注 <a href="">{{menu.object.header.basicInfo.subscribedUserCount}}</a></div>
+        <div class="paragraph">听众 <a href="">{{menu.object.header.basicInfo.subscriberCount}}</a></div>
         <div class="horizon"></div>
         <div class="icon-text">
             <svg aria-hidden="true">
