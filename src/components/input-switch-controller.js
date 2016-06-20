@@ -5,10 +5,6 @@
                 $scope,
             });
         }
-
-        toggle() {
-            this.model = !this.model;
-        }
     }
 
     keylolApp.component('inputSwitch', {
@@ -18,6 +14,7 @@
         bindings: {
             model: '=',
             theme: '<',
+            toggle: '&',
         },
     });
 }());

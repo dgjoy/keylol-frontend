@@ -1,18 +1,20 @@
 ﻿(function () {
     class PointEditSectionController {
-        constructor ($element, apiEndpoint, $http, notification) {
+        constructor ($element, apiEndpoint, $http, notification, union, $state) {
             $.extend(this, {
                 $element,
                 apiEndpoint,
                 $http,
                 notification,
+                union,
+                $state,
             });
             this.showPopups = [];
         }
 
         showEditPopup ($event, $index) {
-            // 修改图片时,弹出的是菜单
-            if ($index < this.object.list.length && $.inArray(this.object.list[$index].type,['thumbnail','cover','avatar','logo']) !== -1) {
+             if ($index < this.object.list.length && $.inArray(this.object.list[$index].type,['thumbnail','cover','avatar','logo']) !== -1) {
+                // 修改图片时,弹出的是菜单
                 this.object.list[$index].editActive = true;
                 this.showPopups[$index]({
                     templateUrl: 'src/popup/upload-menu.html',
@@ -163,6 +165,23 @@
             }, response => {
                 this.notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
             });
+        }
+        
+        toggle($index) {
+            const submitObj = {};
+            submitObj[this.object.list[$index].key] = !this.object.list[$index].value;
+
+            this.$http.put(`${this.apiEndpoint}${this.object.submitLink}`, submitObj).then(response => {
+                this.notification.success({ message: '修改成功' });
+                this.object.list[$index].value = !this.object.list[$index].value;
+            }, response => {
+                this.notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
+            });
+        }
+
+        logout() {
+            delete this.union.$localStorage.Authorization;
+            this.$state.go('aggregation.user');
         }
     }
 

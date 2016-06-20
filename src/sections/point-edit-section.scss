@@ -166,7 +166,9 @@ point-edit-section {
             }
           }
         }
-        icon-button {
+        icon-button,
+        raised-button,
+        input-switch {
           position: absolute;
           right: 15px;
         }

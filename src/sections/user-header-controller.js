@@ -3,7 +3,22 @@
  */
 (function () {
     class userHeaderController {
-        constructor($scope, $window, $timeout) {
+        constructor($scope, $window) {
+            this.subscribeSet = [
+                {
+                    text: '关注',
+                    type: 'theme',
+                },
+                {
+                    text: '取关',
+                    type: 'light-text',
+                },
+            ];
+
+            this.subscribe = () => {
+                
+            };
+
             const $$window = $($window);
             let scrollTop = $$window.scrollTop();
             const scrollCallback = () => {
@@ -35,6 +50,7 @@
         controllerAs: 'userHeader',
         bindings: {
             theme: '<',
+            object: '<',
         },
     });
 }());

@@ -1,34 +1,36 @@
 ﻿(function () {
     class DossierController {
-        constructor($scope, pageHead, stateTree, $state, $location, $timeout) {
+        constructor($scope, pageHead, stateTree, $state, $location, pageLoad) {
             pageHead.setTitle('个人 - 档案 - 其乐');
-            if ($location.url().match(/\/user\/[^\/]*\/dossier\/?$/)) {
-                $timeout(() => {
-                    $state.go('.home', {}, { location: false });
+            let fetchPromise;
+            if (!$location.url().match(/\/point\/[^\/]*\/?$/)) {
+                if (stateTree.empty || (stateTree.aggregation && stateTree.aggregation.point
+                    && stateTree.aggregation.point.basicInfo && stateTree.aggregation.point.basicInfo.idCode === $state.params.point_id_code) ) {
+                    fetchPromise = pageLoad('aggregation.user.dossier');
+                } else {
+                    fetchPromise = pageLoad('aggregation.user', { entrance: 'Dossier' });
+                }
+                fetchPromise.then(() => {
+                    $scope.theme = {
+                        main: stateTree.aggregation.user.basicInfo.themeColor,
+                        light: stateTree.aggregation.user.basicInfo.lightThemeColor,
+                        logo: stateTree.aggregation.user.basicInfo.logo,
+                    };
+
+                    $scope.specialMenu = {
+                        header: {
+                            type:'dossier',
+                            basicInfo: stateTree.aggregation.user.basicInfo,
+                        },
+                    };
+                    $scope.tabArray = [
+                        { state: '.articles', name:  `${stateTree.aggregation.user.dossier.articleCount} 篇文章` },
+                        { state: '.subscribes', name: `${stateTree.aggregation.user.dossier.subscribedPointCount} 个订阅据点` },
+                    ];
                 });
             }
 
-            $scope.tabArray = [
-                { state: '.articles', name: '19 篇文章' },
-                { state: '.activity', name: '54 则动态' },
-                { state: '.shoucang', name: '54 目收藏' },
-            ];
-            $scope.$watch(() => {
-                return $state.current.name;
-            }, () => {
-                const subState = $state.current.name.substr(25);
-                switch (subState) {
-                    case 'articles' :
-                        $scope.currentPage = 0;
-                        break;
-                    case 'activity' :
-                        $scope.currentPage = 1;
-                        break;
-                    case 'star' :
-                        $scope.currentPage = 2;
-                        break;
-                }
-            });
+            $scope.stateTree = stateTree;
         }
     }
 

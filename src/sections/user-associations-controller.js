@@ -9,6 +9,7 @@
         controllerAs: 'userAssociations',
         bindings: {
             theme: '<',
+            object: '<',
         },
     });
 }());

@@ -7,6 +7,7 @@
         controllerAs: 'spotlightArticleCard',
         bindings: {
             card: '<',
+            noUserHeader: '<',
         },
     });
 }());

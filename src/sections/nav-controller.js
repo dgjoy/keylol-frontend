@@ -80,6 +80,7 @@
                 this.inUser = true;
                 this.tabArray = [
                     { state: '.dossier', name: '档案' },
+                    { state: '.people', name: '人脉' },
                     { state: '.timeline', name: '轨道' },
                     { state: '.edit', name: '编辑', 'float': 'right' },
                 ];
@@ -91,8 +92,13 @@
                         case 'dossier' :
                             this.currentPage = 0;
                             break;
+                        case 'people' :
+                            this.currentPage = 1;
+                            break;
                         case 'edit' :
-                            this.currentPage = 2;
+                        case 'edit.info' :
+                        case 'edit.preference' :
+                            this.currentPage = 3;
                             break;
                     }
                 });

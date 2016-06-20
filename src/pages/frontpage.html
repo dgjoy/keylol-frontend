@@ -12,7 +12,7 @@
     </div>
 
     <div class="left-middle-lg row-sm" ng-switch-when="game">
-        <point-associations ng-if="stateTree.aggregation.point.frontpage" theme="::theme" style="margin-bottom: 40px;" object="::stateTree.aggregation.point.frontpage"></point-associations>
+        <point-associations theme="::theme" style="margin-bottom: 40px;" object="::stateTree.aggregation.point.frontpage"></point-associations>
         <short-review ng-if="::(stateTree.aggregation.point.frontpage.briefReviewCount > 0)" point-id="::(stateTree.aggregation.point.basicInfo.id)" list="::(stateTree.aggregation.point.frontpage.briefReviews)" theme="::theme" style="margin-bottom: 50px;"></short-review>
         <media-center theme="::theme" style="margin-bottom: 40px;"></media-center>
         <addictive-users ng-if="::(stateTree.aggregation.point.frontpage.addictedUsers.length > 0)" cards="::(stateTree.aggregation.point.frontpage.addictedUsers)" theme="::theme"></addictive-users>

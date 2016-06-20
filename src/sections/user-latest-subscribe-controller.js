@@ -3,7 +3,7 @@
         constructor () {
             this.header = {
                 mainTitle:'新订阅',
-                subTitle: '一共订阅 29 个据点',
+                subTitle: `一共订阅 ${this.count} 个据点`,
             };
         }
     }
@@ -14,6 +14,8 @@
         controllerAs: 'userLatestSubscribe',
         bindings: {
             theme: '<',
+            cards: '<',
+            count: '<',
         },
     });
 }());

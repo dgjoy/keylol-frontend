@@ -6,7 +6,7 @@ user-article-collection {
     justify-content: flex-start;
 
     simple-article-card,
-    article-card {
+    spotlight-article-card {
       margin-bottom: 20px;
       margin-right: 20px;
       &:nth-of-type(2n) {

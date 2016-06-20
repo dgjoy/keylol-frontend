@@ -1,17 +1,17 @@
-﻿<div class="background" ng-style="{transform: pointHeader.transform}" webp-background="//storage.keylol.com/8df3ee9f22f95d2c5157aeef8e93a42e.jpg"></div>
+﻿<div class="background" ng-style="{transform: userHeader.transform}" webp-background="{{userHeader.object.headerImage | uriRelocate}}"></div>
 <div class="info">
     <div class="user-basic-info">
-        <img class="avatar" webp-src="{{'keylol://fd0dfd38572adff068251606aa282b3f.jpg' | avatarUrl}}" alt="NPC之舟" />
+        <img class="avatar" webp-src="{{ userHeader.object.avatarImage | avatarUrl}}" alt="{{}}" />
         <div class="name-group">
-            <p>hank</p>
-            <p>用户的签名</p>
+            <p>{{userHeader.object.userName}}</p>
+            <p>{{userHeader.object.gamerTag}}</p>
         </div>
     </div>
     <div class="attributes">
-        <p>2015-11-11 加入其乐</p>
+        <p>{{userHeader.object.registerTime | amUtc | amLocal | amDateFormat:'YYYY-MM-DD'}} 加入其乐</p>
     </div>
     <div class="actions">
         <icon-button icon="dots-vertical" type="invert"></icon-button>
-        <raised-button theme-color="pointHeader.theme.main" text="私信"></raised-button>
+        <raised-button theme-color="userHeader.theme.main" binary-set="userHeader.subscribeSet" binary-value="userHeader.object.subscribed" click="userHeader.subscribe(userHeader.object.id, userHeader.object.subscribed, userHeader.object)"></raised-button>
     </div>
 </div>

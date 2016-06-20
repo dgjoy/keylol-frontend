@@ -7,7 +7,7 @@
                     <p style="{{item.editActive && pointEditSection.theme.main ? 'color:' + pointEditSection.theme.main + ';' :''}}">{{item.title}}</p>
                     <p>{{item.subTitle}}</p>
                 </div>
-                <div class="content">
+                <div class="content" ng-if="item.type !== 'switch' && item.type !== 'password' && item.type !== 'logout'">
                     <img class="content-cover" webp-src="{{item.value | uriRelocate: '/both/340x140'}}" alt="" ng-switch-when="cover">
                     <img class="content-thumbnail" webp-src="{{item.value | thumbnailUrl}}" alt="" ng-switch-when="thumbnail">
                     <div class="content-avatar" ng-switch-when="avatar">
@@ -33,8 +33,9 @@
                     <p ng-switch-default="" ng-class="{disabled: item.editDisabled}">{{item.value}}</p>
                 </div>
                 <div ng-if="item.type==='cover'||item.type==='thumbnail'||item.type==='avatar'||item.type==='logo'" id="upload-{{$index}}" ng-show="false" ngf-select="pointEditSection.uploadImage($index, $file, $event)" ngf-fix-orientation="true" accept="image/*"></div>
-                <input-switch ng-if="item.type==='switch'" model="true" theme="::pointEditSection.theme"></input-switch>
-                <icon-button ng-if="!item.editDisabled && item.type !== 'switch'" click="pointEditSection.showEditPopup(event, $index)" show-popup="pointEditSection.showPopups[$index]" icon="new-article"></icon-button>
+                <input-switch ng-if="item.type==='switch'" model="item.value" theme="::pointEditSection.theme" toggle="pointEditSection.toggle($index)"></input-switch>
+                <raised-button ng-if="item.type==='logout'" theme-color="::pointEditSection.theme.main" text="退出登录" ng-click="pointEditSection.logout()"></raised-button>
+                <icon-button ng-if="!item.editDisabled && item.type !== 'switch' && item.type !== 'logout'" click="pointEditSection.showEditPopup(event, $index)" show-popup="pointEditSection.showPopups[$index]" icon="new-article"></icon-button>
             </li>
         </ul>
         <div ng-if="pointEditSection.object.extraList && pointEditSection.object.extraList.length > 0" class="extra" ng-style="{height: pointEditSection.extraHeight}">

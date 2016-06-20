@@ -252,18 +252,12 @@
                 },
             })
             .state('aggregation.user', {
-                url: '/user/:userIdCode',
+                url: '/user/:user_id_Code',
                 templateUrl: 'src/pages/user.html',
                 controller: 'UserController',
-                onEnter ($location, pageLoad, $state, $timeout) {
-                    if ($location.url().match(/\/user\/[^\/]*\/?$/)) {
-                        $timeout(() => {
-                            console.log($state.current);
-                            $state.go('.dossier', {}, { location: false });
-                        });
-                    }
-                },
                 onExit (stateTree) {
+                    console.log('exit aggregation.user');
+                    delete stateTree.aggregation.user;
                 },
             })
             .state('aggregation.user.dossier', {
@@ -271,29 +265,35 @@
                 templateUrl: 'src/pages/dossier.html',
                 controller: 'DossierController',
                 onExit (stateTree) {
+                    console.log('exit dossier');
+                    delete stateTree.aggregation.user.dossier;
                 },
-            })
-            .state('aggregation.user.dossier.home', {
-                url: '/home',
-                templateUrl: 'src/pages/dossier-home.html',
-                controller: 'DossierHomeController',
             })
             .state('aggregation.user.edit', {
                 url: '/edit',
                 templateUrl: 'src/pages/user-edit.html',
                 controller: 'UserEditController',
                 onExit (stateTree) {
+                    console.log('exit edit');
                 },
             })
             .state('aggregation.user.edit.info', {
                 url: '/info',
                 templateUrl: 'src/pages/user-edit-info.html',
                 controller: 'UserEditInfoController',
+                onExit (stateTree) {
+                    console.log('exit edit info');
+                    delete stateTree.aggregation.user.edit;
+                },
             })
             .state('aggregation.user.edit.preference', {
                 url: '/preference',
                 templateUrl: 'src/pages/user-edit-preference.html',
                 controller: 'UserEditPreferenceController',
+                onExit (stateTree) {
+                    console.log('exit edit preference');
+                    delete stateTree.aggregation.user.edit;
+                },
             })
             .state('article', {
                 url: '/article/:author_id_code/:sid_for_author',

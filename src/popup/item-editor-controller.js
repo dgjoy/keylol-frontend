@@ -18,6 +18,10 @@
                 case 'point':
                     this.model = item.selects;
                     break;
+                case 'password':
+                    this.password = '';
+                    this.newPassword = '';
+                    break;
                 default:
                     this.model = item.value;
             }
@@ -32,6 +36,25 @@
             let submitObj = {};
             let closeValue, matches;
             switch (this.item.type) {
+                case 'password':
+                    if (this.item.needPassword) {
+                        if (submitObj.newPassword.length === 0 || submitObj.password.length === 0) {
+                            this.submitLock = false;
+                            return;
+                        }
+                    } else {
+                        if (submitObj.newPassword.length === 0) {
+                            this.submitLock = false;
+                            return;
+                        }
+                    }
+
+                    submitObj.newPassword = this.newPassword;
+                    if (this.item.needPassword) {
+                        submitObj.password = this.password;
+                    }
+                    closeValue = '';
+                    break;
                 case 'color':
                     if (!this.colorCheck(this.model)) {
                         this.textError = '颜色格式错误';
