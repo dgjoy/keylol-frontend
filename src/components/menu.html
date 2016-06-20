@@ -54,7 +54,7 @@
         <point-basic-info ng-if="!menu.object.header.titleCoverImage" point="menu.object.header.point"></point-basic-info>
         <img ng-if="menu.object.header.titleCoverImage" class="cover" webp-src="{{ menu.object.header.titleCoverImage | uriRelocate: '/both/220x105'}}" alt="">
         <div class="game-count">{{menu.object.header.gameCount}}</div>
-        <div class="reputation-info">
+        <div ng-if="menu.object.header.votePercent !== undefined" class="reputation-info">
             <span>
                 <span class="reputation-number" ng-class="{
                     awesome: menu.object.header.votePercent >= 8,

@@ -1,6 +1,6 @@
 ﻿(function () {
     class NavController {
-        constructor ($scope, $window, $state, stateTree) {
+        constructor ($scope, $window, $state, stateTree, $location) {
             const $$window = $($window);
             const scrollCallback = () => {
                 const newHasShadow = $$window.scrollTop() > 0;
@@ -16,6 +16,8 @@
                 $$window.unbind('scroll', scrollCallback);
                 cancelListenRoute();
             });
+
+            $scope.stateTree = stateTree;
 
             const currentStateName = $state.current.name;
             if (currentStateName.substr(0, 8) === 'entrance') {
@@ -102,18 +104,38 @@
                             break;
                     }
                 });
-            } else if (currentStateName.substr(0,7) === 'article') {
+            } else if (currentStateName.substr(0, 7) === 'content') {
                 this.inPoint = true;
+                let name;
+                if (currentStateName.substr(8, 15) === 'article') {
+                    name = '文章';
+                } else if (currentStateName.substr(8, 16) === 'activity') {
+                    name = '动态';
+                }
+
                 this.tabArray = [
-                    { name:'文章' },
+                    { name, 'float': 'left', href: $location.url() },
                 ];
                 this.currentPage = 0;
-            } else if (currentStateName.substr(0,8) === 'activity') {
-                this.inPoint = true;
-                this.tabArray = [
-                    { name:'动态' },
-                ];
-                this.currentPage = 0;
+                $scope.$watch('stateTree.content.article.pointBasicInfo', newValue => {
+                    if (newValue && newValue.idCode) {
+                        if (newValue.type === 'game' || newValue.type === 'hardware') {
+                            this.tabArray = this.tabArray.concat([
+                                { href: `point/${newValue.idCode}/frontpage`, name: '扉页' },
+                                { href: `point/${newValue.idCode}/intel`, name: '情报' },
+                                { href: `point/${newValue.idCode}/timeline`, name: '轨道' },
+                                { href: `point/${newValue.idCode}/edit`, name: '编辑', 'float': 'right' },
+                            ]);
+                        } else {
+                            this.tabArray = this.tabArray.concat([
+                                { href: `point/${newValue.idCode}/frontpage`, name: '扉页' },
+                                { href: `point/${newValue.idCode}/product`, name: '作品' },
+                                { href: `point/${newValue.idCode}/timeline`, name: '轨道' },
+                                { href: `point/${newValue.idCode}/edit`, name: '编辑', 'float': 'right' },
+                            ]);
+                        }
+                    }
+                });
             } else if (currentStateName.substr(0,10) === 'postOffice') {
                 this.inEntrance = true;
                 this.tabArray = [
@@ -134,8 +156,6 @@
                     }
                 });
             }
-
-            $scope.stateTree = stateTree;
         }
     }
 

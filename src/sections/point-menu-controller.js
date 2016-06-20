@@ -72,7 +72,7 @@
                     header: {
                         type: 'point-other',
                         gameCount,
-                        votePercent: this.object.averageRating.toFixed(1),
+                        votePercent: this.object.averageRating !== undefined ? this.object.averageRating.toFixed(1) : undefined,
                         titleCoverImage: this.object.titleCoverImage,
                     },
                 };

@@ -109,148 +109,152 @@
                     delete stateTree.entrance;
                 },
             })
-            .state('entrance.discovery', {
-                url: 'discovery',
-                templateUrl: 'src/pages/discovery.html',
-                controller: 'DiscoveryController',
-                onExit (stateTree) {
-                    console.log('exit discovery');
-                    delete stateTree.entrance.discovery;
-                },
-            })
-            .state('entrance.points', {
-                url: 'points',
-                onEnter (pageLoad) {
-                    pageLoad('entrance.points');
-                },
-                onExit (stateTree) {
-                    console.log('exit points');
-                    delete stateTree.entrance.points;
-                },
-                templateUrl: 'src/pages/points.html',
-                controller: 'PointsController',
-            })
-            .state('entrance.timeline', {
-                url: 'timeline',
-                templateUrl: 'src/pages/page-timeline.html',
-                controller: 'PageTimelineController',
-            })
+                .state('entrance.discovery', {
+                    url: 'discovery',
+                    templateUrl: 'src/pages/discovery.html',
+                    controller: 'DiscoveryController',
+                    onExit (stateTree) {
+                        console.log('exit discovery');
+                        delete stateTree.entrance.discovery;
+                    },
+                })
+                .state('entrance.points', {
+                    url: 'points',
+                    onEnter (pageLoad) {
+                        pageLoad('entrance.points');
+                    },
+                    onExit (stateTree) {
+                        console.log('exit points');
+                        delete stateTree.entrance.points;
+                    },
+                    templateUrl: 'src/pages/points.html',
+                    controller: 'PointsController',
+                })
+                .state('entrance.timeline', {
+                    url: 'timeline',
+                    templateUrl: 'src/pages/page-timeline.html',
+                    controller: 'PageTimelineController',
+                })
             .state('postOffice',{
                 url: '/post-office',
                 templateUrl: 'src/pages/post-office.html',
                 controller: 'PostOfficeController',
             })
-            .state('postOffice.socialActivity',{
-                url: '/social-activity',
-                templateUrl: 'src/pages/social-activity.html',
-                controller: 'SocialActivityController',
-            })
-            .state('postOffice.socialActivity.approve',{
-                url: '/approve',
-                templateUrl: 'src/pages/social-activity-approve.html',
-                controller: 'SocialActivityApproveController',
-            })
-            .state('postOffice.socialActivity.follower',{
-                url: '/follower',
-                templateUrl: 'src/pages/social-activity-follower.html',
-                controller: 'SocialActivityFollowerController',
-            })
-            .state('postOffice.socialActivity.invitation',{
-                url: '/invitation',
-                templateUrl: 'src/pages/social-activity-invitation.html',
-                controller: 'SocialActivityInvitationController',
-            })
-            .state('postOffice.socialActivity.reply',{
-                url: '/reply',
-                templateUrl: 'src/pages/social-activity-reply.html',
-                controller: 'SocialActivityReplyController',
-            })
-            .state('postOffice.missive',{
-                url: '/missive',
-                templateUrl: 'src/pages/missives.html',
-                controller: 'MissivesController',
-            })
+                .state('postOffice.socialActivity',{
+                    url: '/social-activity',
+                    templateUrl: 'src/pages/social-activity.html',
+                    controller: 'SocialActivityController',
+                })
+                    .state('postOffice.socialActivity.approve',{
+                        url: '/approve',
+                        templateUrl: 'src/pages/social-activity-approve.html',
+                        controller: 'SocialActivityApproveController',
+                    })
+                    .state('postOffice.socialActivity.follower',{
+                        url: '/follower',
+                        templateUrl: 'src/pages/social-activity-follower.html',
+                        controller: 'SocialActivityFollowerController',
+                    })
+                    .state('postOffice.socialActivity.invitation',{
+                        url: '/invitation',
+                        templateUrl: 'src/pages/social-activity-invitation.html',
+                        controller: 'SocialActivityInvitationController',
+                    })
+                    .state('postOffice.socialActivity.reply',{
+                        url: '/reply',
+                        templateUrl: 'src/pages/social-activity-reply.html',
+                        controller: 'SocialActivityReplyController',
+                    })
+                .state('postOffice.missive',{
+                    url: '/missive',
+                    templateUrl: 'src/pages/missives.html',
+                    controller: 'MissivesController',
+                })
             .state('aggregation', {
                 'abstract': true,
                 template: '<div ui-view></div>',
-            })
-            .state('aggregation.point', {
-                url: '/point/:point_id_code',
-                templateUrl: 'src/pages/point.html',
-                controller: 'PointController',
                 onExit (stateTree) {
-                    console.log('exit aggregation.point');
-                    delete stateTree.aggregation.point;
+                    console.log('exit aggregation');
+                    delete stateTree.aggregation;
                 },
             })
-            .state('aggregation.point.frontpage', {
-                url: '/frontpage',
-                templateUrl: 'src/pages/frontpage.html',
-                controller: 'FrontpageController',
-                onExit (stateTree) {
-                    console.log('exit frontpage');
-                    delete stateTree.aggregation.point.frontpage;
-                },
-            })
-            .state('aggregation.point.intel', {
-                url: '/intel',
-                templateUrl: 'src/pages/intel.html',
-                controller: 'IntelController',
-                onExit (stateTree) {
-                    console.log('exit intel');
-                    delete stateTree.aggregation.point.intel;
-                },
-            })
-            .state('aggregation.point.product', {
-                url: '/product',
-                templateUrl: 'src/pages/product.html',
-                controller: 'ProductController',
-                onExit (stateTree) {
-                    console.log('exit product');
-                    delete stateTree.aggregation.point.product;
-                },
-            })
-            .state('aggregation.point.timeline', {
-                url: '/timeline',
-                templateUrl: 'src/pages/page-timeline.html',
-                controller: 'PageTimelineController',
-            })
-            .state('aggregation.point.edit', {
-                url: '/edit',
-                templateUrl: 'src/pages/point-edit.html',
-                controller: 'PointEditController',
-                onExit (stateTree) {
-                    console.log('exit point edit');
-                    delete stateTree.aggregation.point.edit;
-                },
-            })
-            .state('aggregation.point.edit.info', {
-                url: '/info',
-                templateUrl: 'src/pages/edit-info.html',
-                controller: 'EditInfoController',
-                onExit (stateTree) {
-                    console.log('exit point edit info');
-                    delete stateTree.aggregation.point.edit.info;
-                },
-            })
-            .state('aggregation.point.edit.style', {
-                url: '/style',
-                templateUrl: 'src/pages/edit-style.html',
-                controller: 'EditStyleController',
-                onExit (stateTree) {
-                    console.log('exit point edit style');
-                    delete stateTree.aggregation.point.edit.style;
-                },
-            })
-            .state('aggregation.point.edit.log', {
-                url: '/log',
-                templateUrl: 'src/pages/edit-log.html',
-                controller: 'EditLogController',
-                onExit (stateTree) {
-                    console.log('exit point edit log');
-                    delete stateTree.aggregation.point.edit;
-                },
-            })
+                .state('aggregation.point', {
+                    url: '/point/:point_id_code',
+                    templateUrl: 'src/pages/point.html',
+                    controller: 'PointController',
+                    onExit (stateTree) {
+                        console.log('exit aggregation.point');
+                        delete stateTree.aggregation.point;
+                    },
+                })
+                    .state('aggregation.point.frontpage', {
+                        url: '/frontpage',
+                        templateUrl: 'src/pages/frontpage.html',
+                        controller: 'FrontpageController',
+                        onExit (stateTree) {
+                            console.log('exit frontpage');
+                            delete stateTree.aggregation.point.frontpage;
+                        },
+                    })
+                    .state('aggregation.point.intel', {
+                        url: '/intel',
+                        templateUrl: 'src/pages/intel.html',
+                        controller: 'IntelController',
+                        onExit (stateTree) {
+                            console.log('exit intel');
+                            delete stateTree.aggregation.point.intel;
+                        },
+                    })
+                    .state('aggregation.point.product', {
+                        url: '/product',
+                        templateUrl: 'src/pages/product.html',
+                        controller: 'ProductController',
+                        onExit (stateTree) {
+                            console.log('exit product');
+                            delete stateTree.aggregation.point.product;
+                        },
+                    })
+                    .state('aggregation.point.timeline', {
+                        url: '/timeline',
+                        templateUrl: 'src/pages/page-timeline.html',
+                        controller: 'PageTimelineController',
+                    })
+                    .state('aggregation.point.edit', {
+                        url: '/edit',
+                        templateUrl: 'src/pages/point-edit.html',
+                        controller: 'PointEditController',
+                        onExit (stateTree) {
+                            console.log('exit point edit');
+                            delete stateTree.aggregation.point.edit;
+                        },
+                    })
+                        .state('aggregation.point.edit.info', {
+                            url: '/info',
+                            templateUrl: 'src/pages/edit-info.html',
+                            controller: 'EditInfoController',
+                            onExit (stateTree) {
+                                console.log('exit point edit info');
+                                delete stateTree.aggregation.point.edit.info;
+                            },
+                        })
+                        .state('aggregation.point.edit.style', {
+                            url: '/style',
+                            templateUrl: 'src/pages/edit-style.html',
+                            controller: 'EditStyleController',
+                            onExit (stateTree) {
+                                console.log('exit point edit style');
+                                delete stateTree.aggregation.point.edit.style;
+                            },
+                        })
+                        .state('aggregation.point.edit.log', {
+                            url: '/log',
+                            templateUrl: 'src/pages/edit-log.html',
+                            controller: 'EditLogController',
+                            onExit (stateTree) {
+                                console.log('exit point edit log');
+                                delete stateTree.aggregation.point.edit;
+                            },
+                        })
             .state('aggregation.user', {
                 url: '/user/:user_id_Code',
                 templateUrl: 'src/pages/user.html',
@@ -269,59 +273,67 @@
                     delete stateTree.aggregation.user.dossier;
                 },
             })
-            .state('aggregation.user.people', {
-                url: '/people',
-                templateUrl: 'src/pages/people.html',
-                controller: 'PeopleController',
+                .state('aggregation.user.people', {
+                    url: '/people',
+                    templateUrl: 'src/pages/people.html',
+                    controller: 'PeopleController',
+                    onExit (stateTree) {
+                        console.log('exit people');
+                        delete stateTree.aggregation.user.people;
+                    },
+                })
+                .state('aggregation.user.edit', {
+                    url: '/edit',
+                    templateUrl: 'src/pages/user-edit.html',
+                    controller: 'UserEditController',
+                    onExit (stateTree) {
+                        console.log('exit edit');
+                    },
+                })
+                    .state('aggregation.user.edit.info', {
+                        url: '/info',
+                        templateUrl: 'src/pages/user-edit-info.html',
+                        controller: 'UserEditInfoController',
+                        onExit (stateTree) {
+                            console.log('exit edit info');
+                            delete stateTree.aggregation.user.edit;
+                        },
+                    })
+                    .state('aggregation.user.edit.preference', {
+                        url: '/preference',
+                        templateUrl: 'src/pages/user-edit-preference.html',
+                        controller: 'UserEditPreferenceController',
+                        onExit (stateTree) {
+                            console.log('exit edit preference');
+                            delete stateTree.aggregation.user.edit;
+                        },
+                    })
+            .state('content', {
+                'abstract': true,
+                template: '<div ui-view></div>',
                 onExit (stateTree) {
-                    console.log('exit people');
-                    delete stateTree.aggregation.user.people;
-                },
-            })
-            .state('aggregation.user.edit', {
-                url: '/edit',
-                templateUrl: 'src/pages/user-edit.html',
-                controller: 'UserEditController',
-                onExit (stateTree) {
-                    console.log('exit edit');
-                },
-            })
-            .state('aggregation.user.edit.info', {
-                url: '/info',
-                templateUrl: 'src/pages/user-edit-info.html',
-                controller: 'UserEditInfoController',
-                onExit (stateTree) {
-                    console.log('exit edit info');
-                    delete stateTree.aggregation.user.edit;
-                },
-            })
-            .state('aggregation.user.edit.preference', {
-                url: '/preference',
-                templateUrl: 'src/pages/user-edit-preference.html',
-                controller: 'UserEditPreferenceController',
-                onExit (stateTree) {
-                    console.log('exit edit preference');
-                    delete stateTree.aggregation.user.edit;
-                },
-            })
-            .state('article', {
-                url: '/article/:author_id_code/:sid_for_author',
-                templateUrl: 'src/pages/article.html',
-                controller: 'ArticleController',
-                onExit (stateTree) {
-                    console.log('exit article');
+                    console.log('exit content');
                     delete stateTree.content;
                 },
             })
-            .state('activity', {
-                url: '/activity/:author_id_code/:sid_for_author',
-                templateUrl: 'src/pages/activity.html',
-                controller: 'ActivityController',
-                onExit (stateTree) {
-                    console.log('exit activity');
-                    delete stateTree.content;
-                },
-            })
+                .state('content.article', {
+                    url: '/article/:author_id_code/:sid_for_author',
+                    templateUrl: 'src/pages/article.html',
+                    controller: 'ArticleController',
+                    onExit (stateTree) {
+                        console.log('exit article');
+                        delete stateTree.content.article;
+                    },
+                })
+                .state('content.activity', {
+                    url: '/activity/:author_id_code/:sid_for_author',
+                    templateUrl: 'src/pages/activity.html',
+                    controller: 'ActivityController',
+                    onExit (stateTree) {
+                        console.log('exit activity');
+                        delete stateTree.content.activity;
+                    },
+                })
             .state('not-found', {
                 url: '/not-found',
                 templateUrl: 'src/pages/not-found.html',
