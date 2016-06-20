@@ -28,8 +28,10 @@
                             '5': arr[4],
                         },
                         totalEvaluate: total,
-                        votePercent: this.object.averageRating.toFixed(1),
+                        votePercent: this.object.averageRating,
                         titleCoverImage: this.object.titleCoverImage,
+                        keylolAveragePlayedTime: this.object.keylolAveragePlayedTime,
+                        totalPlayedTime: this.object.totalPlayedTime,
                     },
                     items: [],
                 };

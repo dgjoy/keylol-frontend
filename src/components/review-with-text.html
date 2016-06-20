@@ -4,4 +4,7 @@
     bad: reviewWithText.review >= 2 && reviewWithText.review < 4,
     terrible: reviewWithText.review < 2}">{{reviewWithText.review.toFixed(1)}}</span>
 <vote-circle ng-if="reviewWithText.review" review="reviewWithText.review"></vote-circle>
-<span ng-if="!reviewWithText.review">评价不足</span>
+<div class="not-enough" ng-if="!reviewWithText.review">
+    <p>N/A</p>
+    <p>评价不足</p>
+</div>

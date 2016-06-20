@@ -4,13 +4,13 @@
         <div class="header">
             <div class="info">
                 <img webp-src="{{shortReview.stateTree.currentUser.avatarImage | avatarUrl: 'small'}}">
-                <p><span>{{shortReview.stateTree.currentUser.userName}}</span> / <span>在档 ! 小时</span></p>
+                <p><span>{{shortReview.stateTree.currentUser.userName}}</span> / <span>在档 {{shortReview.getPlayedTime(shortReview.playedTime)}} 小时</span></p>
                 <point-review bind-review="shortReview.vm.rating" no-string="true" is-hollow="true"></point-review>
             </div>
         </div>
         <textarea elastic placeholder="添加一则简评" ng-model="shortReview.vm.content"></textarea>
         <div class="actions">
-            <flat-button ng-click="shortReview.submit()" disabled="!shortReview.vm.rating || !shortReview.vm.content || shortReview.submitLock" text="发布" type="inertia"></flat-button>
+            <flat-button click="shortReview.submit()" disabled="!shortReview.vm.rating || !shortReview.vm.content || shortReview.submitLock" text="发布" type="inertia"></flat-button>
         </div>
     </form>
     <ul>
@@ -18,10 +18,10 @@
             <div class="header">
                 <div class="info">
                     <img webp-src="{{item.authorAvatarImage | avatarUrl: 'small'}}">
-                    <p>{{item.authorUserName}} / 在档 ! 小时</p>
+                    <p>{{item.authorUserName}} / 在档 {{shortReview.getPlayedTime(item.totalPlayedTime,item.authorIdCode)}} 小时</p>
                     <vote-circle review="item.rating"></vote-circle>
                 </div>
-                <a href="" class="like">+{{item.likeCount || ''}}</a>
+                <a href="" class="like">+{{item.likeCount || '0'}}</a>
             </div>
             <p>{{item.content}}<a href="activity/{{item.authorIdCode}}/{{item.sidForAuthor}}">查看</a></p>
         </li>

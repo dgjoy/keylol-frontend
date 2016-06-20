@@ -34,7 +34,7 @@
                 </div>
                 <div ng-if="item.type==='cover'||item.type==='thumbnail'||item.type==='avatar'||item.type==='logo'" id="upload-{{$index}}" ng-show="false" ngf-select="pointEditSection.uploadImage($index, $file, $event)" ngf-fix-orientation="true" accept="image/*"></div>
                 <input-switch ng-if="item.type==='switch'" model="item.value" theme="::pointEditSection.theme" toggle="pointEditSection.toggle($index)"></input-switch>
-                <raised-button ng-if="item.type==='logout'" theme-color="::pointEditSection.theme.main" text="退出登录" ng-click="pointEditSection.logout()"></raised-button>
+                <raised-button ng-if="item.type==='logout'" theme-color="::pointEditSection.theme.main" text="退出登录" click="pointEditSection.logout()"></raised-button>
                 <icon-button ng-if="!item.editDisabled && item.type !== 'switch' && item.type !== 'logout'" click="pointEditSection.showEditPopup(event, $index)" show-popup="pointEditSection.showPopups[$index]" icon="new-article"></icon-button>
             </li>
         </ul>

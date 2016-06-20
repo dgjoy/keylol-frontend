@@ -25,10 +25,10 @@
         <div class="actions">
             <a href="" ngf-select="activityEditor.uploadImage($file, $event)" ngf-fix-orientation="true" accept="image/*">{{activityEditor.extra.image ? '更换附图' : '上传一张附图'}}</a>
             <div class="buttons">
-                <flat-button text="放弃" type="inertia" ng-click="activityEditor.close()"></flat-button>
+                <flat-button text="放弃" type="inertia" click="activityEditor.close()"></flat-button>
                 <raised-button text="贴出动态"
                                type="theme"
-                               ng-click="activityEditor.submit()"
+                               click="activityEditor.submit()"
                                disabled="(activityEditor.vm.targetPoints.length !== 1 || activityEditor.vm.content.length === 0) || activityEditor.submitLock">
                 </raised-button>
             </div>

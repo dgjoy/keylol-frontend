@@ -25,12 +25,34 @@
 
             this.$http.post(`${apiEndpoint}activity`,submitObj).then(response => {
                 this.notification.success({ message: '提交成功' });
+                this.$http.get(`${apiEndpoint}${this.moduleApi}`,{
+                    params: {
+                        point_id: this.pointId,
+                        page: 1,
+                    },
+                }).then(response => {
+                    this.list = response.data;
+                },response => {
+                    this.notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
+                });
                 this.vm.content = '';
                 this.submitLock = false;
             },response => {
                 this.notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
                 this.submitLock = false;
             });
+        }
+        
+        getPlayedTime(time,idCode) {
+            if (!idCode) {
+                return time ? time : '0';
+            } else {
+                if (idCode === this.stateTree.currentUser.idCode) {
+                    return this.playedTime ? this.playedTime : '0';
+                } else {
+                    return time ? time : '0';
+                }
+            }
         }
     }
 
@@ -42,6 +64,8 @@
             theme: '<',
             list: '<',
             pointId: '<',
+            moduleApi: '@',
+            playedTime: '<',
         },
     });
 }());

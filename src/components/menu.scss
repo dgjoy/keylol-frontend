@@ -152,6 +152,13 @@ menu {
           position: relative;
           top: 2px;
         }
+
+        &.not-enough {
+          color: $keylol-inertia-text;
+          .reputation-number {
+            color: $keylol-inertia-text;
+          }
+        }
       }
 
       .horizon {

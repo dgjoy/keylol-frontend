@@ -8,7 +8,12 @@
             <spotlight-articles ng-if="::(stateTree.entrance.discovery.spotlightStudies.length > 0)" cards="::stateTree.entrance.discovery.spotlightStudies" style="margin-bottom: 30px" type="studies"></spotlight-articles>
             <sales-today ng-if="::(stateTree.entrance.discovery.onSalePoints.length > 0)" list="::stateTree.entrance.discovery.onSalePoints" header-image="::stateTree.entrance.discovery.onSalePointHeaderImage" total-page="::stateTree.entrance.discovery.onSalePointPageCount" style="margin-bottom: 40px"></sales-today>
             <spotlight-articles ng-if="::(stateTree.entrance.discovery.spotlightStories.length > 0)" cards="::stateTree.entrance.discovery.spotlightStories" style="margin-bottom: 30px" type="stories" ></spotlight-articles>
-            <latest-articles ng-if="::(stateTree.entrance.discovery.latestArticles.length > 0)" articles="::stateTree.entrance.discovery.latestArticles" header-image="::stateTree.entrance.discovery.latestArticleHeaderImage" total-page="::stateTree.entrance.discovery.latestArticlePageCount" style="margin-bottom: 50px"></latest-articles>
+            <latest-articles ng-if="::(stateTree.entrance.discovery.latestArticles.length > 0)"
+                             articles="::stateTree.entrance.discovery.latestArticles"
+                             header-image="::stateTree.entrance.discovery.latestArticleHeaderImage"
+                             total-page="::stateTree.entrance.discovery.latestArticlePageCount"
+                             module-api="states/entrance/discovery/latest-articles"
+                             style="margin-bottom: 50px"></latest-articles>
         </div>
         <right-menus class="right-lg hidden-sm"></right-menus>
     </div>
