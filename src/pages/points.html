@@ -5,7 +5,8 @@
             <recent-played style="margin-bottom: 30px" ng-if="::stateTree.entrance.points.recentPlayedPoints" list="::stateTree.entrance.points.recentPlayedPoints" header-image="::stateTree.entrance.points.recentPlayedPointHeaderImage"></recent-played>
             <interested-categories ng-if="::(stateTree.entrance.points.interestedPoints.length > 0)" cards="::stateTree.entrance.points.interestedPoints" style="margin-bottom: 30px"></interested-categories>
             <spotlight-users ng-if="::(stateTree.entrance.points.spotlightUsers.length > 0)" cards="::stateTree.entrance.points.spotlightUsers" style="position: absolute;width: 100%;left: 0;"></spotlight-users>
-            <recent-games ng-if="::stateTree.entrance.points.recentPoints" list="::stateTree.entrance.points.recentPoints" total-page="::stateTree.entrance.points.recentPointPageCount"  ng-style="{marginTop:(stateTree.entrance.points.spotlightUsers.length > 0)?'475px':'0'}" style="margin-bottom: 20px"></recent-games>
+            <div style="height: 475px;" ng-if="::(stateTree.entrance.points.spotlightUsers.length > 0)"></div>
+            <recent-games ng-if="::stateTree.entrance.points.recentPoints" list="::stateTree.entrance.points.recentPoints" total-page="::stateTree.entrance.points.recentPointPageCount" style="margin-bottom: 20px"></recent-games>
         </div>
         <right-menus class="right-lg hidden-sm"></right-menus>
     </div>
