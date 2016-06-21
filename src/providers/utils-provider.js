@@ -341,6 +341,21 @@
                             }
                         };
 
+                        self.like = function (targetId, item, targetType = 'Article', updateValue = 'liked', addValue = 'likeCount') {
+                            $http.post(`${apiEndpoint}like`, {}, {
+                                params: {
+                                    targetId,
+                                    targetType,
+                                },
+                            }).then(() => {
+                                notification.success({ message: '已认可' });
+                                item[updateValue] = true;
+                                item[addValue]++;
+                            }, response => {
+                                notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
+                            });
+                        };
+
                         self.pointTypeHash = {
                             game: '游戏',
                             hardWare: '硬件',

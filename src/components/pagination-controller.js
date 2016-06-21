@@ -68,6 +68,7 @@
             total: '<',
             current: '<',
             onPageChanged: '&',
+            themeColor: '<',
         },
     });
 }());

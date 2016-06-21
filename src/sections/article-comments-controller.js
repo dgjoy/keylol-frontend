@@ -51,6 +51,7 @@
         controllerAs: 'articleComments',
         bindings: {
             article: '<',
+            theme: '<',
         },
     });
 }());

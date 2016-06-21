@@ -22,9 +22,9 @@
                     <p ng-repeat="text in articleSummary.article.cons">- {{text}}</p>
                 </div>
             </div>
-            <!--<div class="right-part">-->
-                <!--<simple-article-card ng-repeat="card in articleSummary.cards" card="::card"></simple-article-card>-->
-            <!--</div>-->
+            <div class="right-part">
+                <simple-article-card ng-repeat="card in articleSummary.article.recommendedArticles" card="::card"></simple-article-card>
+            </div>
         </div>
     </div>
 </div>
