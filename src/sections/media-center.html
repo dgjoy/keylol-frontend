@@ -1,4 +1,4 @@
-﻿<div class="header" webp-background="{{mediaCenter.headerImage | uriRelocate: '/both/700x180'}}">
+﻿<div class="header" webp-background="{{mediaCenter.headerImage | listHeaderUrl}}">
     <div class="header-things">
         <div class="header-text">
             <p class="title">媒体中心</p>
@@ -11,8 +11,8 @@
 </div>
 <div class="wrapper" ng-if="mediaCenter.list.length > 0">
     <ul>
-        <li ng-repeat="item in mediaCenter.list track by $index" ng-if="$index < 6" ng-click="mediaCenter.showMediaOverlayWindow($index+1)">
-            <a href="" ng-href="" webp-background="{{item.link | uriRelocate}}">
+        <li ng-repeat="item in mediaCenter.list track by $index" ng-if="$index < 6">
+            <a href="" webp-background="{{item.link | uriRelocate: '/sq/' + ($index <= 0 ? '160' : '90')}}" ng-click="mediaCenter.showMediaOverlayWindow($index+1)">
                 <p class="text" ng-if="item.isVideo">
                     <span>{{$index === 0? item.text : ''}}</span>
                     <svg aria-hidden="true">

@@ -9,7 +9,8 @@
                         <p ng-if="articleSummary.article.pointBasicInfo.type === 'game' || articleSummary.article.pointBasicInfo.type === 'hardware'">
                             <vote-circle ng-if="articleSummary.article.rating" review="articleSummary.article.rating * 2 - 1" gray-background="true"></vote-circle>
                             {{articleSummary.article.rating ?'/' : ''}}
-                            <span>在档 {{articleSummary.article.authorPlayedTime || '0'}} 小时</span>
+                            <span ng-if="articleSummary.article.authorPlayedTime">在档 {{articleSummary.article.authorPlayedTime}} 小时</span>
+                            <span ng-if="!articleSummary.article.authorPlayedTime">无在档记录</span>
                         </p>
                         <p></p>
                     </div>
