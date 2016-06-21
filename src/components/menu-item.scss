@@ -21,6 +21,10 @@ menu-item {
           color: $keylol-inertia-text;
           margin-right: 5px;
         }
+
+        >span {
+          line-height: 24px;
+        }
       }
 
       svg {

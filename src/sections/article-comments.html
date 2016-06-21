@@ -1,46 +1,53 @@
 ﻿<div class="display">
     <div class="header">
         <div class="count">
-            <p>共 17 则讨论</p>
-            <p>最后回复于 17 分钟前</p>
+            <p>共 {{articleComments.article.commentCount}} 则讨论</p>
+            <p>最后回复于 <span am-time-ago="articleComments.article.latestCommentTime"></span></p>
         </div>
-        <pagination total="5" current="1"></pagination>
+        <pagination on-page-changed="::articleComments.changePage(newPage, oldPage)" total="articleComments.article.commentPageCount" current="articleComments.currentPage"></pagination>
     </div>
-    <div class="comments">
-        <div class="comment" ng-repeat="comment in [1,2,3,4,5]">
-            <div class="basic-info">
-                <img class="avatar" webp-src="//storage.keylol.com/fd0dfd38572adff068251606aa282b3f.jpg!avatar.medium">
-                <div class="name-group">
-                    <p>npc之舟</p>
-                    <p>在档时间 1 小时</p>
+    <div class="comments" ng-style="{height: articleComments.commentsHeight}" ng-class="{
+    'to-next' : articleComments.isToNext,
+    'to-previous' : !articleComments.isToNext
+    }">
+        <ul ng-animate-swap="articleComments.currentPage">
+            <li class="comment" ng-repeat="comment in articleComments.article.comments">
+                <div class="basic-info">
+                    <img class="avatar" webp-src="{{comment.authorAvatarImage | avatarUrl}}">
+                    <div class="name-group">
+                        <p>{{comment.authorUserName}}</p>
+                        <p ng-if="articleComments.article.pointBasicInfo.type === 'game'">
+                            <span ng-if="comment.authorPlayedTime">在档时间 {{comment.authorPlayedTime}} 小时</span>
+                            <span ng-if="!comment.authorPlayedTime">无在档记录</span>
+                        </p>
+                    </div>
+                    <div class="action-date">
+                        <p class="action"><a href="">认可</a><a href="">回复</a><a href="">封存</a><a href="">警告</a></p>
+                        <p><span am-time-ago="comment.publishTime"></span> / #{{comment.sidForArticle}}</p>
+                    </div>
                 </div>
-                <div class="action-date">
-                    <p class="action"><a href="">认可</a><a href="">回复</a><a href="">封存</a><a href="">警告</a></p>
-                    <p>昨天 7:51 / #{{comment}}</p>
-                </div>
-            </div>
-            <div class="content">
-                你好,世界!
-            </div>
-        </div>
+                <article class="editor-style" bind-html-compile="comment.content"></article>
+            </li>
+        </ul>
     </div>
-    <div class="footer clearfix"><pagination total="5" current="1"></pagination></div>
+    <div class="footer clearfix"><pagination on-page-changed="::articleComments.changePage(newPage, oldPage)" total="articleComments.article.commentPageCount" current="articleComments.currentPage"></pagination></div>
 </div>
 <div class="sender">
     <div class="basic-info">
-        <img class="avatar" webp-src="//storage.keylol.com/fd0dfd38572adff068251606aa282b3f.jpg!avatar.medium">
+        <img class="avatar" webp-src="{{articleComments.stateTree.currentUser.avatarImage | avatarUrl}}">
         <div class="name-group">
-            <p>npc之舟</p>
-            <p>在档时间 1 小时</p>
+            <p>{{articleComments.stateTree.currentUser.userName}}</p>
+            <p ng-if="articleComments.article.pointBasicInfo.type === 'game'">
+                <span ng-if="articleComments.article.pointBasicInfo.totalPlayedTime">在档时间 {{articleComments.article.pointBasicInfo.totalPlayedTime}} 小时</span>
+                <span ng-if="!articleComments.article.pointBasicInfo.totalPlayedTime">无在档记录</span>
+            </p>
         </div>
         <div class="action-date">
             <p>&nbsp</p>
-            <p>#18+</p>
+            <p>#{{articleComments.article.commentCount + 1}}+</p>
         </div>
     </div>
-    <div class="editor">
-        富文本编辑器
-    </div>
+    <div simditor ng-model="articleComments.vm.content"></div>
     <div class="clearfix">
         <raised-button text="回复" type="theme"></raised-button>
     </div>

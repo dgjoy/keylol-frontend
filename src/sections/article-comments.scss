@@ -24,7 +24,7 @@ article-comments {
         font-weight: bold;
         color: $keylol-main-text;
       }
-      p:last-of-type {
+      p:nth-of-type(2) {
         color: $keylol-inertia-text;
         font-size: 12px;
       }
@@ -48,7 +48,7 @@ article-comments {
       p {
         margin: 0;
         color: $keylol-inertia-text;
-        &:last-of-type { font-size: 12px; }
+        &:nth-of-type(2) { font-size: 12px; }
       }
     }
   }
@@ -71,7 +71,7 @@ article-comments {
           color: $keylol-main-text;
           font-size: 20px;
         }
-        p:last-of-type {
+        p:nth-of-type(2) {
           color:$keylol-inertia-text;
           font-size: 12px;
         }
@@ -79,7 +79,21 @@ article-comments {
     }
 
     .comments {
+      @include page-change('ul');
       padding: 10px 0;
+      overflow: hidden;
+      position: relative;
+      transition: height .5s;
+
+      ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        width: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
 
       .comment {
         margin: 0 -15px;
@@ -93,7 +107,7 @@ article-comments {
           visibility: visible;
         }
 
-        .content {
+        .editor-style {
           margin-top: 15px;
         }
       }
@@ -106,6 +120,20 @@ article-comments {
 
   .sender {
     padding: 30px 15px 20px 15px;
+
+    .simditor-wrapper {
+      background-color: #fff;
+
+      .simditor-toolbar {
+        background-color: #fff;
+      }
+
+      .simditor-body {
+        min-height: 30px;
+        padding: 20px 11px;
+      }
+    }
+
     raised-button {
       float: right;
     }

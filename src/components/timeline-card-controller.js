@@ -56,7 +56,12 @@
                 align: 'top',
                 offsetX: -220,
                 offsetY: 0,
-                inputs: { origin: { popup:this.showSharedPopup, event: $event } },
+                inputs: {
+                    origin: {
+                        popup: this.showSharedPopup,
+                        event: $event,
+                    },
+                },
             });
         }
     }
