@@ -1,25 +1,3 @@
-﻿<div class="container">
-    <div class="row">
-        <div class="col-left-middle">
-            <div class="row as-section">
-                <div class="col-left">
-                    <logo></logo>
-                </div>
-                <div class="col-middle">
-                    <summary></summary>
-                </div>
-            </div>
-            <coupon-header></coupon-header>
-            <coupon-content></coupon-content>
-        </div>
-        <div class="col-right">
-            <search-box></search-box>
-            <action-hub></action-hub>
-            <home-operation></home-operation>
-            <promoted-readings></promoted-readings>
-            <latest-articles></latest-articles>
-            <secret-tests ng-if="union.$localStorage.user.StaffClaim === 'operator'"></secret-tests>
-            <site-footer></site-footer>
-        </div>
-    </div>
-</div>
+﻿<nav></nav>
+<div class="container" ui-view style="margin-top: 30px;"></div>
+<footer></footer>

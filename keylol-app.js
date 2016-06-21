@@ -170,6 +170,26 @@
                     templateUrl: 'src/pages/missives.html',
                     controller: 'MissivesController',
                 })
+            .state('coupon',{
+                url: '/coupon',
+                templateUrl: 'src/pages/coupon.html',
+                controller: 'CouponController',
+            })
+                .state('coupon.detail',{
+                    url: '/detail',
+                    templateUrl: 'src/pages/coupon-detail.html',
+                    controller: 'CouponDetailController',
+                })
+                .state('coupon.store',{
+                    url: '/store',
+                    templateUrl: 'src/pages/coupon-store.html',
+                    controller: 'CouponStoreController',
+                })
+                .state('coupon.ranking',{
+                    url: '/ranking',
+                    templateUrl: 'src/pages/coupon-ranking.html',
+                    controller: 'CouponRankingController',
+                })
             .state('aggregation', {
                 'abstract': true,
                 template: '<div ui-view></div>',

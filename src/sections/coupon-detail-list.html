@@ -1,0 +1,33 @@
+﻿<div class="header">
+    <div class="text">
+        <p>143 ◆</p>
+        <p>当前文券数</p>
+    </div>
+    <img src="assets/images/piggy-bank.png">
+</div>
+<div class="list">
+    <div class="title">
+        <div class="cell">事件</div>
+        <div class="cell right">变更明细</div>
+        <div class="cell right">余额</div>
+        <div class="cell">时间</div>
+        <div class="cell">描述</div>
+    </div>
+    <div class="item-list" ng-style="{height: couponDetailList.list.length * 50}" ng-class="{
+    'to-next' : couponDetailList.isToNext,
+    'to-previous' : !couponDetailList.isToNext
+    }">
+        <div class="wrapper">
+            <div class="item" ng-repeat="i in couponDetailList.list">
+                <div class="cell">每日访问</div>
+                <div class="cell right coupon">+ 1 ◆</div>
+                <div class="cell right">143 ◆</div>
+                <div class="cell inertia">{{1466499219142 | amUtc | amLocal | amDateFormat:'YYYY-MM-DD HH:MM:SS'}}</div>
+                <div class="cell"><a href="activity/haack/1">很长很长的名字很长很长的名字很长很长的名字很长很长的名字很长很长的名字</a>获得<a href="user/23333">很长很长的名字很长很长的名字很长很长的名字很长很长的名字</a>的认可</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer clearfix">
+    <pagination on-page-changed="couponDetailList.changePage(newPage, oldPage)" total="couponDetailList.totalPage" current="couponDetailList.currentPage"></pagination>
+</div>

@@ -1,7 +1,6 @@
 ﻿(function () {
     class CouponHeaderController {
-        constructor (union) {
-            this.coupon = union.coupon;
+        constructor () {
         }
     }
 

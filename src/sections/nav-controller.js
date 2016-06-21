@@ -155,6 +155,30 @@
                             break;
                     }
                 });
+            } else if (currentStateName.substr(0,6) === 'coupon') {
+                this.inEntrance = true;
+                this.tabArray = [
+                    { state: '.detail', name:'明细' },
+                    { state: '.store', name:'商店' },
+                    { state: '.ranking', name:'排行' },
+                ];
+
+                $scope.$watch(() => {
+                    return $state.current.name;
+                }, () => {
+                    const subState = $state.current.name.substr(7);
+                    switch (subState) {
+                        case 'detail' :
+                            this.currentPage = 0;
+                            break;
+                        case 'store' :
+                            this.currentPage = 1;
+                            break;
+                        case 'ranking' :
+                            this.currentPage = 2;
+                            break;
+                    }
+                });
             }
         }
     }

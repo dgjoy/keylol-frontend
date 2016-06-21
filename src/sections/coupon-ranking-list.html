@@ -1,0 +1,39 @@
+﻿<div class="header">
+    <div class="text">
+        <p># 12</p>
+        <p>当前社区排名</p>
+    </div>
+    <img src="assets/images/Trophy.png">
+</div>
+<div class="list">
+    <div class="title">
+        <div class="cell">#</div>
+        <div class="cell">用户</div>
+        <div class="cell right">文券</div>
+        <div class="cell">获得认可</div>
+    </div>
+    <div class="item-list" ng-style="{height: couponRankingList.list.length * 50}" ng-class="{
+    'to-next' : couponRankingList.isToNext,
+    'to-previous' : !couponRankingList.isToNext
+    }">
+        <div class="wrapper">
+            <div class="item" ng-repeat="i in couponRankingList.list">
+                <div class="cell">{{$index + 1}}</div>
+                <div class="cell user-info">
+                    <a href="user/haack">
+                        <img class="avatar" webp-src="{{'keylol://steam/app-icons/314970-f59e499005dcfbb2933c3701b9bed27e4ae8b2fd' | avatarUrl}}" alt="">
+                    </a>
+                    <div class="name-group">
+                        <p><a href="user/haack">艾莎</a></p>
+                        <p>用户的签名</p>
+                    </div>
+                </div>
+                <div class="cell right light-theme">143 ◆</div>
+                <div class="cell">285</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer clearfix">
+    <pagination on-page-changed="couponRankingList.changePage(newPage, oldPage)" total="couponRankingList.totalPage" current="couponRankingList.currentPage"></pagination>
+</div>
