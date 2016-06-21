@@ -47,13 +47,6 @@
                         light: stateTree.aggregation.user.basicInfo.lightThemeColor,
                         logo: stateTree.aggregation.user.basicInfo.logo,
                     };
-
-                    $scope.specialMenu = {
-                        header: {
-                            type:'dossier',
-                            basicInfo: stateTree.aggregation.user.basicInfo,
-                        },
-                    };
                     // $scope.tabArray = [
                     //     { name: `${stateTree.aggregation.user.dossier.articleCount} 篇文章` },
                     //     { name: `${stateTree.aggregation.user.dossier.subscribedPointCount} 个订阅据点` },

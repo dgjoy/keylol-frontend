@@ -5,5 +5,9 @@
         templateUrl: 'src/sections/article-header.html',
         controller: ArticleHeaderController,
         controllerAs: 'articleHeader',
+        bindings: {
+            article: '<',
+            theme: '<',
+        },
     });
 }());

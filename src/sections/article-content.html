@@ -1,39 +1,56 @@
-﻿<article class="editor-style" bind-html-compile="articleContent.article.content"></article>
+﻿<style parse-style="">
+    article.editor-style h1 {
+        color: {{articleContent.theme.main}};
+    }
+
+    article.editor-style spoiler:not(.actionable) {
+        border-color: {{articleContent.theme.light}};
+    }
+
+    article.editor-style spoiler .hint .icons {
+        background-color: {{articleContent.theme.light}};
+    }
+
+    article.editor-style spoiler .hint .text h2 {
+        color: {{articleContent.theme.light}};
+    }
+</style>
+<article class="editor-style" bind-html-compile="articleContent.article.content"></article>
 <div class="other">
     <div class="repost-declaration">
         <div class="bundle">
-            <p>作者声明以下转载要求：</p>
-            <p>署名 - 注明出处及链接</p>
+            <p style="color: {{articleContent.theme.light}};">作者声明以下转载要求：</p>
+            <p></p>
         </div>
-        <div class="links">
-            <a href="">
-                <svg aria-hidden="true">
-                    <use ng-href="{{'steamcn' | iconSvgUrl }}" xlink:href=""></use>
-                </svg>
-            </a>
-            <a href="">
-                <svg aria-hidden="true">
-                    <use ng-href="{{'steamcn' | iconSvgUrl }}" xlink:href=""></use>
-                </svg>
-            </a>
-            <a href="">
-                <svg aria-hidden="true">
-                    <use ng-href="{{'steamcn' | iconSvgUrl }}" xlink:href=""></use>
-                </svg>
-            </a>
-            <a href="">
-                <svg aria-hidden="true">
-                    <use ng-href="{{'steamcn' | iconSvgUrl }}" xlink:href=""></use>
-                </svg>
-            </a>
-        </div>
+        <!--<div class="links">-->
+            <!--<a href="">-->
+                <!--<svg aria-hidden="true">-->
+                    <!--<use ng-href="{{'steamcn' | iconSvgUrl }}" xlink:href=""></use>-->
+                <!--</svg>-->
+            <!--</a>-->
+            <!--<a href="">-->
+                <!--<svg aria-hidden="true">-->
+                    <!--<use ng-href="{{'steamcn' | iconSvgUrl }}" xlink:href=""></use>-->
+                <!--</svg>-->
+            <!--</a>-->
+            <!--<a href="">-->
+                <!--<svg aria-hidden="true">-->
+                    <!--<use ng-href="{{'steamcn' | iconSvgUrl }}" xlink:href=""></use>-->
+                <!--</svg>-->
+            <!--</a>-->
+            <!--<a href="">-->
+                <!--<svg aria-hidden="true">-->
+                    <!--<use ng-href="{{'steamcn' | iconSvgUrl }}" xlink:href=""></use>-->
+                <!--</svg>-->
+            <!--</a>-->
+        <!--</div>-->
     </div>
     <div class="agree">
         <div class="action">
-            <raised-button type="theme" text="+12"></raised-button>
+            <raised-button type="theme" text="+{{articleContent.article.likeCount}}"></raised-button>
         </div>
-        <div class="agree-list">
-            <img ng-repeat="i in [1,2,3,4,5]" class="avatar" webp-src="//storage.keylol.com/fd0dfd38572adff068251606aa282b3f.jpg!avatar.medium" />
-        </div>
+        <!--<div class="agree-list">-->
+            <!--<img ng-repeat="i in [1,2,3,4,5]" class="avatar" webp-src="//storage.keylol.com/fd0dfd38572adff068251606aa282b3f.jpg!avatar.medium" />-->
+        <!--</div>-->
     </div>
 </div>

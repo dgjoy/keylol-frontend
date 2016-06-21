@@ -4,74 +4,77 @@ article-summary {
   >.background {
     display: block;
     height: 340px;
+    background: no-repeat center;
     background-size: cover;
-  }
-  >.background>.mask {
-    height: 100%;
-    box-sizing: border-box;
-    padding: 30px 0;
-    background-color: rgba(#fff,.85);
-  }
-  >.background>.mask>.wrapper {
-    margin: auto;
-    width: 940px;
-    height: 100%;
-    display: flex;
-    .left-part {
-      width: 310px;
-      padding: 0 15px;
-      margin-right: 20px;
 
-      .summary {
-        margin-top: 20px;
-        p {
-          margin: 0;
-          line-height: 25px;
-          color: $keylol-main-text;
-        }
-      }
+    >.mask {
+      height: 100%;
+      box-sizing: border-box;
+      padding: 30px 0;
+      background-color: rgba(#fff,.85);
 
-      .author {
+      >.wrapper {
+        margin: auto;
+        width: 940px;
+        height: 100%;
         display: flex;
-        align-items: center;
+        .left-part {
+          width: 310px;
+          padding: 0 15px;
+          margin-right: 20px;
 
-        .avatar {
-          margin-right: 10px;
-          width: 32px;
-          height: 32px;
-        }
+          .summary {
+            margin-top: 20px;
+            p {
+              margin: 0;
+              line-height: 25px;
+              color: $keylol-main-text;
+            }
+          }
 
-        .name-group {
-          max-width: calc(100% - 42px);
+          .author {
+            display: flex;
+            align-items: center;
 
-          p {
-            @include ellipsis;
-            margin: 0;
-
-            vote-circle {
-              display: inline;
+            .avatar {
+              margin-right: 10px;
+              width: 32px;
+              height: 32px;
             }
 
-            &:first-of-type {
-              color: $keylol-main-text;
-              font-weight: bold;
-            }
+            .name-group {
+              max-width: calc(100% - 42px);
 
-            &:nth-of-type(2) {
-              color: $keylol-main-text;
-              font-size: 12px;
+              p {
+                @include ellipsis;
+                margin: 0;
+
+                vote-circle {
+                  display: inline;
+                }
+
+                &:first-of-type {
+                  color: $keylol-main-text;
+                  font-weight: bold;
+                }
+
+                &:nth-of-type(2) {
+                  color: $keylol-main-text;
+                  font-size: 12px;
+                }
+              }
             }
           }
         }
-      }
-    }
-    .right-part {
-      display: flex;
-      flex-direction: column;
-      simple-article-card {
-        margin-bottom: 20px;
-        &:last-of-type {
-          margin-bottom: 0;
+        .right-part {
+          display: flex;
+          flex-direction: column;
+          simple-article-card {
+            margin-bottom: 20px;
+            &:last-of-type {
+              margin-bottom: 0;
+            }
+          }
         }
       }
     }

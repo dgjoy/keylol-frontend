@@ -38,7 +38,7 @@
         ></page-list>
     </div>
     <div class="right-lg hidden-sm flex-column">
-        <menu ng-if="specialMenu" style="margin-bottom: 20px" object="::specialMenu"></menu>
+        <user-menu style="margin-bottom: 20px" ng-if="stateTree.aggregation.user.basicInfo" object="stateTree.aggregation.user.basicInfo"></user-menu>
         <right-menus style="flex-grow: 1;"></right-menus>
     </div>
 </div>

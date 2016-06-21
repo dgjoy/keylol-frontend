@@ -1,11 +1,6 @@
 ﻿(function () {
     class ArticleSummaryController {
         constructor () {
-            this.summary = {
-                good:['好玩','有趣','有意思'],
-                bad:['很差','无聊','没意思'],
-            };
-
             this.cards = [
                 {
                     authorAvatarImage: 'keylol://e81748fb2d4357b8f019368b429dfb61.png',
@@ -50,6 +45,7 @@
         controllerAs: 'articleSummary',
         bindings: {
             theme: '<',
+            article: '<',
         },
     });
 }());

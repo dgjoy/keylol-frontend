@@ -1,24 +1,29 @@
-﻿<div class="background" webp-background="http://dota2walls.com/wp-content/uploads/2015/01/shadow-from-the-dire-dota-2-wallpaper.png">
+﻿<div class="background" webp-background="{{articleSummary.article.coverImage | uriRelocate}}">
     <div class="mask">
         <div class="wrapper">
             <div class="left-part">
                 <div class="author">
-                    <img webp-src="//storage.keylol.com/fd0dfd38572adff068251606aa282b3f.jpg!avatar.medium" alt="npc之舟" class="avatar">
+                    <img webp-src="{{articleSummary.article.authorBasicInfo.avatarImage | avatarUrl}}" alt="{{articleSummary.article.authorBasicInfo.userName}}" class="avatar">
                     <div class="name-group">
-                        <p>npc之舟</p>
-                        <p><vote-circle review="3" gray-background="true"></vote-circle> / 在档 24.0 小时</p>
+                        <p>{{articleSummary.article.authorBasicInfo.userName}}</p>
+                        <p ng-if="articleSummary.article.pointBasicInfo.type === 'game' || articleSummary.article.pointBasicInfo.type === 'hardware'">
+                            <vote-circle ng-if="articleSummary.article.rating" review="articleSummary.article.rating * 2 - 1" gray-background="true"></vote-circle>
+                            {{articleSummary.article.rating ?'/' : ''}}
+                            <span>在档 {{articleSummary.article.authorPlayedTime || '0'}} 小时</span>
+                        </p>
+                        <p></p>
                     </div>
                 </div>
                 <div class="summary">
-                    <p ng-repeat="text in articleSummary.summary.good">+ {{text}}</p>
+                    <p ng-repeat="text in articleSummary.article.pros">+ {{text}}</p>
                 </div>
                 <div class="summary">
-                    <p ng-repeat="text in articleSummary.summary.bad">- {{text}}</p>
+                    <p ng-repeat="text in articleSummary.article.cons">- {{text}}</p>
                 </div>
             </div>
-            <div class="right-part">
-                <simple-article-card ng-repeat="card in articleSummary.cards" card="::card"></simple-article-card>
-            </div>
+            <!--<div class="right-part">-->
+                <!--<simple-article-card ng-repeat="card in articleSummary.cards" card="::card"></simple-article-card>-->
+            <!--</div>-->
         </div>
     </div>
 </div>

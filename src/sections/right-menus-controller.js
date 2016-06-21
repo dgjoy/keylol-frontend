@@ -7,12 +7,13 @@
             const $$window = $($window);
             const $wrapper = $element.children('.wrapper');
             const scrollCallback = () => {
-                let newPosition = '';
+                let newPosition;
                 const shouldWindowScrollTop = $$window.scrollTop() + 94;
                 const elementOffsetTop = $element.offset().top;
                 const shouldWrapperHeight = $wrapper.height() + 50;
                 const $elementHeight = $element.height();
                 if (shouldWindowScrollTop < elementOffsetTop || shouldWrapperHeight === $elementHeight) {
+                    newPosition = '';
                 } else if (shouldWindowScrollTop + shouldWrapperHeight < elementOffsetTop + $elementHeight) {
                     newPosition = 'fixed-top';
                 } else {
@@ -167,6 +168,8 @@
         controller: RightMenusController,
         controllerAs: 'rightMenus',
         bindings: {
+            author: '<',
+            point: '<',
         },
     });
 }());

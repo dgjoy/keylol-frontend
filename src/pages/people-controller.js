@@ -21,12 +21,6 @@
                         logo: stateTree.aggregation.user.basicInfo.logo,
                     };
 
-                    $scope.specialMenu = {
-                        header: {
-                            type:'dossier',
-                            basicInfo: stateTree.aggregation.user.basicInfo,
-                        },
-                    };
                     const object = stateTree.aggregation.user.basicInfo;
                     const people = stateTree.aggregation.user.people;
 

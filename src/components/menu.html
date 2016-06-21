@@ -68,12 +68,12 @@
         </div>
     </div>
 
-    <div ng-switch-when="dossier" class="for-dossier">
+    <div ng-switch-when="user-right" class="user-right">
         <div class="user-basic-info">
             <img webp-src="{{ menu.object.header.basicInfo.avatarImage| avatarUrl}}" alt="{{menu.object.header.basicInfo.userName}}" class="avatar">
             <div class="name-group">
                 <p>{{menu.object.header.basicInfo.userName}}</p>
-                <p>{{menu.object.header.basicInfo.isFriend?'互相关注':menu.object.header.basicInfo.subscribed?'单向关注':'&nbsp;'}}</p>
+                <p>{{menu.object.header.basicInfo.playedTime ? '在档 ' + menu.object.header.basicInfo.playedTime + ' 小时' :menu.object.header.basicInfo.isFriend?'互相关注':menu.object.header.basicInfo.subscribed?'单向关注':'&nbsp;'}}</p>
             </div>
         </div>
         <div class="paragraph">好友 <a href="">{{menu.object.header.basicInfo.friendCount}}</a></div>
