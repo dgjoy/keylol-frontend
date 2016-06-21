@@ -41,7 +41,7 @@
                         {
                             title: '媒体中心封面',
                             subTitle: '媒体中心的封面图片',
-                            key: 'titleCoverImage',
+                            key: 'mediaHeaderImage',
                             type: 'cover',
                             value: stateTree.aggregation.point.edit.style.mediaHeaderImage,
                         },

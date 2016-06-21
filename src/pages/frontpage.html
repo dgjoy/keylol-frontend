@@ -34,15 +34,19 @@
 
     <div class="left-middle-lg row-sm" ng-switch-when="game">
         <point-associations theme="::theme" style="margin-bottom: 40px;" object="::stateTree.aggregation.point.frontpage"></point-associations>
-        <short-review ng-if="::(stateTree.aggregation.point.frontpage.briefReviewCount > 0)"
-                      module-api="states/aggregation/point/frontpage/brief-reviews"
+        <short-review module-api="states/aggregation/point/frontpage/brief-reviews"
                       point-id="::(stateTree.aggregation.point.basicInfo.id)"
                       played-time="::(stateTree.aggregation.point.basicInfo.totalPlayedTime)"
                       list="::(stateTree.aggregation.point.frontpage.briefReviews)"
                       theme="::theme"
                       style="margin-bottom: 50px;">
         </short-review>
-        <media-center theme="::theme" style="margin-bottom: 40px;"></media-center>
+        <media-center theme="::theme" style="margin-bottom: 40px;"
+                      header-image="::(stateTree.aggregation.point.frontpage.mediaHeaderImage)"
+                      init-list="::(stateTree.aggregation.point.frontpage.media)"
+                      point-name="::(stateTree.aggregation.point.basicInfo.chineseName)"
+                      point-id="::(stateTree.aggregation.point.basicInfo.id)">
+        </media-center>
         <addictive-users ng-if="::(stateTree.aggregation.point.frontpage.addictedUsers.length > 0)" cards="::(stateTree.aggregation.point.frontpage.addictedUsers)" theme="::theme"></addictive-users>
         <similar-games ng-if="::(stateTree.aggregation.point.frontpage.similarPoints.length > 0)" cards="::(stateTree.aggregation.point.frontpage.similarPoints)" theme="::theme" style="position: absolute;width: 100%;left: 0;"></similar-games>
         <div ng-if="::(stateTree.aggregation.point.frontpage.similarPoints.length > 0)" style="height: 435px;"></div>

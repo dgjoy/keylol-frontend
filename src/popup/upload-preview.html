@@ -1,4 +1,10 @@
 ﻿<popup class="popup-upload-preview">
+    <text-area type="dropdown"
+               label="请选择媒体类型"
+               model="uploadPreview.media.vm"
+               object="uploadPreview.media.object"
+               ng-if="uploadPreview.options.isMedia"
+    ></text-area>
     <div ng-if="uploadPreview.options.type !== 'avatarImage'" class="images">
         <div class="as-background {{uploadPreview.options.type}}" ngf-background="uploadPreview.file"></div>
     </div>

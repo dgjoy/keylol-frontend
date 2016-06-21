@@ -1,43 +1,107 @@
 ﻿(function () {
     class MediaCenterController {
-        constructor (window) {
+        constructor (window, $http, notification, apiEndpoint) {
             $.extend(this,{
                 window,
+                $http,
+                notification,
+                apiEndpoint,
             });
-            this.list = [
-                {
-                    image: 'http://i0.hdslb.com/bfs/archive/9978c8c1d3235f88fd43ff047138a15e93ce4172.jpg_160x100.jpg',
-                    isVideo: true,
-                    text: '海民你好',
-                    link: 'http://www.bilibili.com/video/av4630731/',
-                },
-                {
-                    image: '//storage.keylol.com/c208aeee8868143d09897ca754d8ef5f.png',
-                    isVideo: true,
-                    text: 'OB 对黑',
-                    link: 'http://dota2.178.com/201605/257640080014.html',
-                },
-                {
-                    image: 'http://img1.gamersky.com/image2016/06/20160611_hc_44_9/gamersky_107origin_213_20166111831A18.jpg',
-                },
-                {
-                    image: 'http://dota2.ru/wp-content/uploads/2011/10/zona-vokrug.jpg',
-                },
-                {
-                    image: 'http://www.anuflora.com/game/wp-content/uploads/game/2015/01/doto-screen.jpg',
-                },
-                {
-                    image: 'http://www.anuflora.com/game/wp-content/uploads/game/2015/01/doto-screen.jpg',
-                },
-            ];
+            this.list = this.initList;
+            this.reCalculate();
+        }
+
+        reCalculate() {
+            if (this.list === undefined || this.list.length === 0) {
+                this.artworkCount = 0;
+                this.screenshotCount = 0;
+                return;
+            }
+            this.artworkCount = this.list.filter(e => {
+                return (e.type === 'artwork');
+            }).length;
+            this.screenshotCount = this.list.filter(e => {
+                return (e.type === 'screenshot');
+            }).length;
         }
 
         showMediaOverlayWindow(index) {
             this.window.show({
                 templateUrl: 'src/windows/media-overlay.html',
                 controller: 'MediaOverlayController as mediaOverlay',
-                inputs: { list: this.list, currentPage: index },
+                inputs: {
+                    list: this.list,
+                    currentPage: index,
+                    point: {
+                        name: this.pointName,
+                        id: this.pointId,
+                    },
+                },
+            }).then(window => {
+                return window.close;
+            }).then(result => {
+                if (result.length > 0) {
+                    for (let i = 0 ; i !== result.length; i++) {
+                        this.list[result[i]] = null;
+                    }
+                    const new_arr = [];
+                    for (let i = 0 ; i !== this.list.length; i++) {
+                        if (this.list[i] !== null) {
+                            new_arr.push(this.list[i]);
+                        }
+                    }
+
+                    const submitObj = {
+                        media: new_arr,
+                    };
+
+                    this.$http.put(`${this.apiEndpoint}point/${this.pointId}`, submitObj).then(response => {
+                        this.notification.success({ message: '更新成功' });
+                        this.list = new_arr;
+                        this.reCalculate();
+                    }, response => {
+                        this.notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
+                    });
+                }
             });
+        }
+
+        uploadImage ($file, $event) {
+            if ($file) {
+                this.uploadImagePopup({
+                    templateUrl: 'src/popup/upload-preview.html',
+                    controller: 'UploadPreviewController as uploadPreview',
+                    attachSide: 'left',
+                    event: $event,
+                    align: 'top',
+                    offsetX: 86,
+                    offsetY: 0,
+                    inputs: {
+                        file: $file,
+                        options: {
+                            type: 'headerImage',
+                            isMedia: true,
+                        },
+                    },
+                }).then(popup => {
+                    return popup.close;
+                }).then(result => {
+                    if (result) {
+                        const new_list = this.list.concat(result);
+
+                        const submitObj = {
+                            media: new_list,
+                        };
+                        this.$http.put(`${this.apiEndpoint}point/${this.pointId}`, submitObj).then(response => {
+                            this.notification.success({ message: '更新成功' });
+                            this.list = new_list;
+                            this.reCalculate();
+                        }, response => {
+                            this.notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
+                        });
+                    }
+                });
+            }
         }
     }
 
@@ -48,6 +112,9 @@
         bindings: {
             headerImage: '<',
             theme: '<',
+            initList: '<',
+            pointId: '<',
+            pointName: '<',
         },
     });
 }());

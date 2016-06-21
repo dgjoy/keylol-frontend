@@ -12,7 +12,6 @@
                     'Play Station Network',
                     'Xbox Live',
                 ],
-                cancel: '暂不连接平台',
             };
             this.connected = false;
             this.conn = null;

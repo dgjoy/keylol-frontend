@@ -10,10 +10,6 @@
         select(index) {
             this.close(index);
         }
-
-        cancel() {
-            this.close(undefined);
-        }
     }
 
     keylolApp.controller('DropdownSelectorController', DropdownSelectorController);

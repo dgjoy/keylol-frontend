@@ -13,7 +13,7 @@
             <flat-button click="shortReview.submit()" disabled="!shortReview.vm.rating || !shortReview.vm.content || shortReview.submitLock" text="发布" type="inertia"></flat-button>
         </div>
     </form>
-    <ul>
+    <ul ng-if="shortReview.list.length > 0">
         <li ng-repeat="item in shortReview.list">
             <div class="header">
                 <div class="info">

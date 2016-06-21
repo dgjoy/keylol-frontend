@@ -1,8 +1,8 @@
 ﻿<window position="center" class="window-media-overlay">
     <div class="header">
         <div class="name-group">
-            <p>原画 1</p>
-            <p>汤姆克兰西之全境封锁</p>
+            <p>{{mediaOverlay.getType(mediaOverlay.list[mediaOverlay.currentPage - 1].type)}}</p>
+            <p>{{mediaOverlay.point.name}}</p>
         </div>
         <div class="page">
             <span>{{mediaOverlay.currentPage}}</span> / {{mediaOverlay.list.length}}
@@ -15,7 +15,7 @@
             active: $index + 1 === mediaOverlay.currentPage,
             'right-hidden': $index + 1 > mediaOverlay.currentPage,
             }">
-            <img webp-src="{{media.image | uriRelocate: '/fxfn/1060x474'}}">
+            <img webp-src="{{media.link | uriRelocate: '/fxfn/1060x474'}}">
         </div>
         <switch-pagination next="mediaOverlay.nextPage()" previous="mediaOverlay.previousPage()" current="mediaOverlay.currentPage" total="mediaOverlay.list.length" no-page-count="true"></switch-pagination></div>
     </div>
