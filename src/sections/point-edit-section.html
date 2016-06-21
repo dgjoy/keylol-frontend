@@ -46,7 +46,7 @@
                         <p>{{item.subTitle}}</p>
                     </div>
                     <p class="content" ng-class="{disabled: item.editDisabled}">{{item.value}}</p>
-                    <input-switch ng-if="item.type==='switch'" model="true" theme="::pointEditSection.theme"></input-switch>
+                    <input-switch ng-if="item.type==='switch'" model="item.value" theme="::pointEditSection.theme" toggle="pointEditSection.toggle($index)"></input-switch>
                     <icon-button ng-if="!item.editDisabled && item.type !== 'switch'" click="pointEditSection.showEditPopup(event, $index + pointEditSection.object.list.length)" show-popup="pointEditSection.showPopups[$index + pointEditSection.object.list.length]" icon="new-article"></icon-button>
                 </li>
             </ul>

@@ -96,20 +96,20 @@
                     <div class="repost-options" ng-class="{opened:editor.isRepostOpened}">
                         <div class="repost-option">
                             <p>允许转载</p>
-                            <input-switch model="false"></input-switch>
+                            <input-switch model="editor.vm.reproductionRequirement.reproduction"></input-switch>
                         </div>
                         <div class="hr"></div>
                         <div class="repost-option">
                             <p>要求署名并标明出处</p>
-                            <input-switch model="false"></input-switch>
+                            <input-switch disabled="!editor.vm.reproductionRequirement.reproduction" model="editor.vm.reproductionRequirement.attribution"></input-switch>
                         </div>
                         <div class="repost-option">
                             <p>禁止商业性使用</p>
-                            <input-switch model="false"></input-switch>
+                            <input-switch disabled="!editor.vm.reproductionRequirement.reproduction" model="editor.vm.reproductionRequirement.nonCommercial"></input-switch>
                         </div>
                         <div class="repost-option">
                             <p>禁止变造改动和衍生创作</p>
-                            <input-switch model="false"></input-switch>
+                            <input-switch disabled="!editor.vm.reproductionRequirement.reproduction" model="editor.vm.reproductionRequirement.noDerivation"></input-switch>
                         </div>
                     </div>
                 </div>

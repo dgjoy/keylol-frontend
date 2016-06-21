@@ -22,6 +22,14 @@ input-switch {
       }
     }
 
+    &.disabled {
+      background-color: $keylol-inertia-shape;
+
+      >.object {
+        background-color: $keylol-inertia-text;
+      }
+    }
+
     >.object {
       @include keylol-shadow-1();
       @include child-ripple-container-overflow(15);

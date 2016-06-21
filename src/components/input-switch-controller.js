@@ -5,6 +5,13 @@
                 $scope,
             });
         }
+
+        switchValue() {
+            if (this.disabled) return;
+            if (!this.toggle()) {
+                this.model = !this.model;
+            }
+        }
     }
 
     keylolApp.component('inputSwitch', {
@@ -15,6 +22,7 @@
             model: '=',
             theme: '<',
             toggle: '&',
+            disabled: '<',
         },
     });
 }());

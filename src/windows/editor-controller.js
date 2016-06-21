@@ -1,6 +1,6 @@
 ﻿(function () {
     class EditorController {
-        constructor($scope, close, $element, stateTree, $http, apiEndpoint, notification, $timeout) {
+        constructor($scope, close, $element, stateTree, $http, apiEndpoint, notification, $timeout, options, $window, utils) {
             $.extend(this,{
                 $scope,
                 close,
@@ -14,13 +14,39 @@
             this.isSummaryOpened = false;
             this.isRepostOpened = false;
             this.canFillRelated = true;
+            this.autoSaveInterval = 30000;
             this.vm = {
                 content: '',
                 attachedPoints: [],
                 targetPoints: [],
                 pros: [],
                 cons: [],
+                reproductionRequirement: {
+                    reproduction: true,
+                    attribution: true,
+                    nonCommercial: true,
+                    noDerivation: false,
+                },
             };
+
+            const $$window = $($window);
+            const eventName = `beforeunload.editor${utils.uniqueId()}`;
+            $$window.on(eventName, () => {
+                return '未保存的内容将被弃置。';
+            });
+
+            $scope.$on('$destroy', () => {
+                $$window.off(eventName);
+            });
+
+            const detachLocationListener = $scope.$on('$locationChangeStart', e => {
+                if (confirm('未保存的内容将被弃置，确认离开？')) {
+                    detachLocationListener();
+                    $$window.off(eventName);
+                } else {
+                    e.preventDefault();
+                }
+            });
 
             $scope.$watch(() => {
                 return this.vm.targetPoints.length;
@@ -224,6 +250,12 @@
                 if (this.vm.cons[i]) {
                     submitObj.cons.push(this.vm.cons[i]);
                 }
+            }
+
+            if (submitObj.reproductionRequirement.reproduction) {
+                delete submitObj.reproductionRequirement.reproduction;
+            } else {
+                delete submitObj.reproductionRequirement;
             }
 
             if (!this.hasRating) {

@@ -57,6 +57,11 @@
                                 templateUrl: 'src/windows/editor.html',
                                 controller: 'EditorController',
                                 controllerAs: 'editor',
+                                inputs: {
+                                    options: {
+                                        article,
+                                    },
+                                },
                             });
                             close();
                         },
