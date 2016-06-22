@@ -1,8 +1,18 @@
 ﻿(function () {
     class MessageController {
-        constructor(window) {
+        constructor($scope, window, messageTypes, $sce) {
             $.extend(this,{
                 window,
+                $sce,
+            });
+
+            $scope.$watch(() => {
+                return this.object;
+            },() => {
+                if (!messageTypes[this.object.type]) {
+                    console.log(this.object);
+                }
+                this.object.messageType = messageTypes[this.object.type];
             });
         }
 
@@ -46,5 +56,8 @@
         templateUrl: 'src/components/message.html',
         controller: MessageController,
         controllerAs: 'message',
+        bindings: {
+          object: '<',
+        },
     });
 }());

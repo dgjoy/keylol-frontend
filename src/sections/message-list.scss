@@ -7,6 +7,30 @@ message-list {
   margin-bottom: 40px;
   margin-top: 30px;
 
+  .latest-wrapper {
+    @include page-change('.latest-list');
+    margin: 20px 0;
+    overflow: hidden;
+    position: relative;
+    transition: height .5s;
+
+    .latest-list {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  }
+
+  message {
+    border-top: 1px solid $keylol-inertia-shape;
+    &:first-of-type {
+      border-top: 0;
+    }
+  }
+
   pagination {
     margin: 20px 0;
     float: right;

@@ -1,36 +1,29 @@
 ﻿(function () {
     class SocialActivityController {
-        constructor($scope, pageHead, stateTree, $state, $location, $timeout) {
+        constructor($scope, pageHead, $state, $location) {
             pageHead.setTitle('社交 - 邮政 - 其乐');
-            console.log($location.url());
             if ($location.url().match(/\/social-activity\/?$/)) {
-                $timeout(() => {
-                    $state.go('.approve', {}, { location: false });
-                });
+                $state.go('.reply');
             }
 
             $scope.tabArray = [
+                { state: '.reply', name: '回复' },
                 { state: '.approve', name: '认可' },
                 { state: '.follower', name: '听众' },
-                { state: '.invitation', name: '邀评' },
-                { state: '.reply', name: '回复' },
             ];
             $scope.$watch(() => {
                 return $state.current.name;
             }, () => {
-                const subState = $state.current.name.substr(26);
+                const subState = $state.current.name.substr(28);
                 switch (subState) {
-                    case 'approve' :
+                    case 'reply' :
                         $scope.currentPage = 0;
                         break;
-                    case 'follower' :
+                    case 'approve' :
                         $scope.currentPage = 1;
                         break;
-                    case 'invitation' :
+                    case 'follower' :
                         $scope.currentPage = 2;
-                        break;
-                    case 'reply' :
-                        $scope.currentPage = 3;
                         break;
                 }
             });

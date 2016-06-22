@@ -97,40 +97,55 @@
                     templateUrl: 'src/pages/page-timeline.html',
                     controller: 'PageTimelineController',
                 })
-            .state('postOffice',{
+            .state('post-office',{
                 url: '/post-office',
                 templateUrl: 'src/pages/post-office.html',
                 controller: 'PostOfficeController',
             })
-                .state('postOffice.socialActivity',{
+                .state('post-office.unread',{
+                    url: '/unread',
+                    templateUrl: 'src/pages/unread.html',
+                    controller: 'UnreadController',
+                    onExit (stateTree) {
+                        delete stateTree.postOffice.unread;
+                    },
+                })
+                .state('post-office.social-activity',{
                     url: '/social-activity',
                     templateUrl: 'src/pages/social-activity.html',
                     controller: 'SocialActivityController',
                 })
-                    .state('postOffice.socialActivity.approve',{
-                        url: '/approve',
-                        templateUrl: 'src/pages/social-activity-approve.html',
-                        controller: 'SocialActivityApproveController',
-                    })
-                    .state('postOffice.socialActivity.follower',{
-                        url: '/follower',
-                        templateUrl: 'src/pages/social-activity-follower.html',
-                        controller: 'SocialActivityFollowerController',
-                    })
-                    .state('postOffice.socialActivity.invitation',{
-                        url: '/invitation',
-                        templateUrl: 'src/pages/social-activity-invitation.html',
-                        controller: 'SocialActivityInvitationController',
-                    })
-                    .state('postOffice.socialActivity.reply',{
+                    .state('post-office.social-activity.reply',{
                         url: '/reply',
                         templateUrl: 'src/pages/social-activity-reply.html',
                         controller: 'SocialActivityReplyController',
+                        onExit (stateTree) {
+                            delete stateTree.postOffice.socialActivity;
+                        },
                     })
-                .state('postOffice.missive',{
+                    .state('post-office.social-activity.approve',{
+                        url: '/approve',
+                        templateUrl: 'src/pages/social-activity-approve.html',
+                        controller: 'SocialActivityApproveController',
+                        onExit (stateTree) {
+                            delete stateTree.postOffice.socialActivity;
+                        },
+                    })
+                    .state('post-office.social-activity.follower',{
+                        url: '/follower',
+                        templateUrl: 'src/pages/social-activity-follower.html',
+                        controller: 'SocialActivityFollowerController',
+                        onExit (stateTree) {
+                            delete stateTree.postOffice.socialActivity;
+                        },
+                    })
+                .state('post-office.missive',{
                     url: '/missive',
                     templateUrl: 'src/pages/missives.html',
                     controller: 'MissivesController',
+                    onExit (stateTree) {
+                        delete stateTree.postOffice.missive;
+                    },
                 })
             .state('coupon',{
                 url: '/coupon',

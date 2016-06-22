@@ -1,5 +1,4 @@
 message {
-  border-top: 1px solid $keylol-inertia-shape;
   padding: 0 15px;
   height: 125px;
   display: flex;
@@ -78,6 +77,4 @@ message {
       color: $keylol-main-text;
     }
   }
-
-  &:first-of-type { border-top: 0; }
 }

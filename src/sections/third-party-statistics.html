@@ -10,7 +10,7 @@
         <div class="other-times">
             <div>
                 <p>公开</p>
-                <p ng-style="{visibility: thirdPartyStatistics.intel.releaseDate?'':'hidden'}">{{::thirdPartyStatistics.intel.releaseDate | amUtc | amLocal | amDateFormat:'YYYY-MM-DD'}}</p>
+                <p ng-style="{visibility: thirdPartyStatistics.intel.publishDate?'':'hidden'}">{{::thirdPartyStatistics.intel.releaseDate | amUtc | amLocal | amDateFormat:'YYYY-MM-DD'}}</p>
             </div>
             <div>
                 <p>据点成立</p>
@@ -23,7 +23,7 @@
         </div>
         <div class="sale-times">
             <p>正式发行</p>
-            <p ng-style="{visibility: thirdPartyStatistics.intel.publishDate?'':'hidden'}">{{::(thirdPartyStatistics.intel.publishDate | amUtc | amLocal | amDateFormat:'YYYY-MM-DD')}}</p>
+            <p ng-style="{visibility: thirdPartyStatistics.intel.releaseDate?'':'hidden'}">{{::(thirdPartyStatistics.intel.publishDate | amUtc | amLocal | amDateFormat:'YYYY-MM-DD')}}</p>
         </div>
     </div>
 </div>

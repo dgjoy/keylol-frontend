@@ -20,7 +20,10 @@
                     console.log(stateTree);
                     let target = response.data;
                     for (let i = 0;i < result.length;i++) {
-                        target = target[result[i]];
+                        const tmp_result = result[i].replace(/(-\w)/ig,str => {
+                            return str[1].toUpperCase();
+                        });
+                        target = target[tmp_result];
                     }
                     if (target.current) {
                         $state.go(`.${target.current}`, {}, { location: false });
@@ -36,10 +39,13 @@
                 for (let i = 0;i < result.length;i++) {
                     urlParams += `/${result[i]}`;
                     if (i !== result.length - 1) {
-                        if (!target[result[i]]) {
-                            target[result[i]] = {};
+                        const tmp_result = result[i].replace(/(-\w)/ig,str => {
+                            return str[1].toUpperCase();
+                        });
+                        if (!target[tmp_result]) {
+                            target[tmp_result] = {};
                         }
-                        target = target[result[i]];
+                        target = target[tmp_result];
                     }
                 }
                 console.log(stateTree, result, urlParams);

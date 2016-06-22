@@ -1,6 +1,13 @@
 ﻿<div class="page">
-    <message ng-repeat="i in [1,2,3,4,5]"></message>
+    <div class="latest-wrapper" ng-style="{height: messageList.messages.length * 125}" ng-class="{
+    'to-next' : messageList.isToNext,
+    'to-previous' : !messageList.isToNext
+    }">
+        <div class="latest-list" ng-animate-swap="messageList.currentPage">
+            <message object="item" ng-repeat="item in messageList.messages"></message>
+        </div>
+    </div>
     <div class="clearfix">
-        <pagination total="5" current="1"></pagination>
+        <pagination ng-if="::(messageList.totalPage > 1)" on-page-changed="::messageList.changePage(newPage, oldPage)" total="::messageList.totalPage" current="messageList.currentPage"></pagination>
     </div>
 </div>
