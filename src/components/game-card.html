@@ -1,7 +1,7 @@
 <a class="info" href="" ng-href="point/{{gameCard.card.idCode}}" ripple>
     <point-basic-info point="gameCard.card"></point-basic-info>
 </a>
-<div class="point-img" webp-background="{{gameCard.card.titleCoverImage | uriRelocate: '/both/220x100'}}"></div>
+<div class="point-img" webp-background="{{gameCard.card.titleCoverImage | defaultFallback | uriRelocate: '/both/220x100'}}"></div>
 <div class="actions">
     <vote-circle review="::gameCard.card.averageRating" gray-background="true"></vote-circle>
     <flat-button binary-set="gameCard.subscribeSet" binary-value="gameCard.card.subscribed"

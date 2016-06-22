@@ -1,4 +1,4 @@
-﻿<div class="background" ng-style="{transform: userHeader.transform}" webp-background="{{userHeader.object.headerImage | pageHeaderUrl}}"></div>
+﻿<div class="background" ng-style="{transform: userHeader.transform}" webp-background="{{userHeader.object.headerImage | headerImageFallback: 'user' | pageHeaderUrl}}"></div>
 <div class="info">
     <div class="user-basic-info">
         <img class="avatar" webp-src="{{ userHeader.object.avatarImage | avatarUrl}}" alt="{{}}" />

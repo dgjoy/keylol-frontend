@@ -18,6 +18,11 @@
                     light: stateTree.aggregation.point.basicInfo.lightThemeColor,
                 };
 
+                $scope.type = stateTree.aggregation.point.basicInfo.type;
+                if ( $scope.type !== 'game' && $scope.type !== 'hardware') {
+                    $scope.type = 'other';
+                }
+
                 $scope.basicInfo = {
                     submitLink,
                     header: {
@@ -66,8 +71,7 @@
                     ],
                 };
 
-                if (stateTree.aggregation.point.basicInfo.type !== 'game' && stateTree.aggregation.point.basicInfo.type !== 'hardware') {
-                    $scope.isOther = true;
+                if ( $scope.type === 'other') {
                     return;
                 }
 
@@ -223,6 +227,9 @@
                     ],
                 };
 
+                if (stateTree.aggregation.point.edit.info.platformPoints === undefined) {
+                    stateTree.aggregation.point.edit.info.platformPoints = [];
+                }
                 const platformPoints = ways.list[0];
                 const nameArray = [];
                 for (let i = 0;i < stateTree.aggregation.point.edit.info.platformPoints.length;i++) {
@@ -259,7 +266,11 @@
                         mainTitle: '关联',
                         subTitle: '厂商、类型和系列信息',
                     },
-                    list: [
+                    list: null,
+                };
+
+                if ($scope.type !== 'hardware') {
+                    relative.list = [
                         {
                             title: '要素',
                             keys: [],
@@ -316,24 +327,43 @@
                             value: '',
                             selects: stateTree.aggregation.point.edit.info.seriesPoints,
                         },
-                    ],
-                };
+                    ];
 
-                const attributes = relative.list[0];
-                const attributeNameArray = [];
-                let attributeCount = 0;
-                for (const attr in pointAttributes) {
-                    if (pointAttributes.hasOwnProperty(attr)) {
-                        attributes.keys.push(attr);
-                        attributes.names.push(pointAttributes[attr].text);
-                        if (stateTree.aggregation.point.edit.info[attr]) {
-                            attributes.selects.push(attributeCount);
-                            attributeNameArray.push(pointAttributes[attr].text);
+                    const attributes = relative.list[0];
+                    const attributeNameArray = [];
+                    let attributeCount = 0;
+                    for (const attr in pointAttributes) {
+                        if (pointAttributes.hasOwnProperty(attr)) {
+                            attributes.keys.push(attr);
+                            attributes.names.push(pointAttributes[attr].text);
+                            if (stateTree.aggregation.point.edit.info[attr]) {
+                                attributes.selects.push(attributeCount);
+                                attributeNameArray.push(pointAttributes[attr].text);
+                            }
+                            attributeCount++;
                         }
-                        attributeCount++;
                     }
+                    attributes.value = attributeNameArray.toString();
+                } else {
+                    relative.list = [
+                        {
+                            title: '制造商',
+                            key: 'publisherPoints',
+                            type: 'point',
+                            whitelist: ['vendor'],
+                            value: '',
+                            selects: stateTree.aggregation.point.edit.info.manufacturerPoints,
+                        },
+                        {
+                            title: '特性',
+                            key: 'tagPoints',
+                            type: 'point',
+                            whitelist: ['category'],
+                            value: '',
+                            selects: stateTree.aggregation.point.edit.info.tagPoints,
+                        },
+                    ];
                 }
-                attributes.value = attributeNameArray.toString();
 
                 for (let i = 1;i < relative.list.length;i++) {
                     const section = relative.list[i];
@@ -381,6 +411,9 @@
                     ],
                 };
 
+                if ($scope.type === 'hardware') {
+                    return;
+                }
                 /**
                  * deal with language obj
                  */

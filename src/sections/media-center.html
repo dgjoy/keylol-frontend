@@ -1,4 +1,4 @@
-﻿<div class="header" webp-background="{{mediaCenter.headerImage | listHeaderUrl}}">
+﻿<div class="header" webp-background="{{mediaCenter.headerImage | defaultFallback: 'media-center' | listHeaderUrl}}">
     <div class="header-things">
         <div class="header-text">
             <p class="title">媒体中心</p>

@@ -1,5 +1,8 @@
 (function () {
     function missiveTextReduce(text, n) {
+        if (text === undefined) {
+            return '';
+        }
         return text.length > n ? `${text.substr(0, n)}…` : text;
     }
 

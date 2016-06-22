@@ -9,7 +9,6 @@
             $scope.$watch(() => {
                 return this.object;
             },() => {
-                console.log(this.object);
                 this.object.messageType = messageTypes[this.object.type];
             });
         }

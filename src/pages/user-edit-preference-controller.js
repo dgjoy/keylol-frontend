@@ -60,8 +60,8 @@
                         {
                             title: '动态收到评论',
                             type: 'switch',
-                            key: 'notifyOnAcitivityReplied',
-                            value: preference.notifyOnAcitivityReplied,
+                            key: 'notifyOnActivityReplied',
+                            value: preference.notifyOnActivityReplied,
                         },
                         {
                             title: '评论被回复',
