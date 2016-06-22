@@ -19,6 +19,7 @@ timeline-card {
         flex-shrink: 1;
         display: flex;
         align-items: center;
+        position: relative;
 
         &:hover {
           >.username {
@@ -50,21 +51,46 @@ timeline-card {
       }
     }
 
-    >.shortcut>.simple {
-      >vote-circle {
-        padding: 0 15px;
-        margin-bottom: 20px;
+    >.shortcut {
+      .common-article {
+        height: 200px;
       }
-      >p {
-        margin: 0;
-        padding: 0 15px;
-        margin-bottom: 20px;
-      }
-      >p.hidden {
-        -webkit-mask: -webkit-gradient(linear,0% 0%,0% 100%,from(rgba(222,187,71,0.8)),to(rgba(36,142,36,0.2)));
-      }
-      >img {
-        width: 100%;
+
+      >.simple {
+        >vote-circle {
+          padding: 0 15px;
+          margin-bottom: 20px;
+        }
+
+        >p {
+          margin: 0 0 20px;
+          padding: 0 15px;
+          white-space: pre-wrap;
+          overflow: hidden;
+          position: relative;
+          transition: height .5s;
+
+          >.expand {
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            background: linear-gradient(to bottom, rgba($keylol-card, .3), rgba($keylol-card, 1) 75%);
+
+            svg {
+              width: 24px;
+              height: 24px;
+              fill: $keylol-light-theme;
+            }
+          }
+        }
+
+        >img {
+          width: 100%;
+        }
       }
     }
 

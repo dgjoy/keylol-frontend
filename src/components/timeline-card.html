@@ -1,45 +1,46 @@
 <div class="display-card">
     <div class="user-with-date">
-        <a class="user" href="">
-            <img class="avatar" webp-src="{{'' | avatarUrl}}"  alt="{{timelineCard.union.$localStorage.user.UserName}}">
-            <span class="username">程晓峰</span>
+        <a class="user" ng-href="user/{{timelineCard.card.author.idCode}}">
+            <img-label ng-if="timelineCard.card.author.isFriend" type="friended"></img-label>
+            <img class="avatar" webp-src="{{timelineCard.card.author.avatarImage | avatarUrl}}"  alt="{{timelineCard.card.author.userName}}">
+            <span class="username">{{timelineCard.card.author.userName}}</span>
         </a>
-        <a class="date" href="" ng-click="timelineCard.showMenu($event)" popup="timelineCard.showSharedPopup">5 月 7 号</a>
+        <a class="date" href="" ng-click="timelineCard.showMenu($event)" popup="timelineCard.showSharedPopup"><span am-time-ago="timelineCard.card.publishTime"></span></a>
     </div>
-    <div class="shortcut" ng-switch="timelineCard.type">
-        <a ng-switch-when="article" class="common-article" webp-background="{{'keylol://39b7d020df471d6c0e3fa593802000bc.jpg' | articleCoverUrl}}" href="point/DOTA2">
+    <div class="shortcut" ng-switch="timelineCard.card.contentType">
+        <a ng-switch-when="article" class="common-article" webp-background="{{timelineCard.card.coverImage | articleCoverUrl}}" ng-href="article/{{timelineCard.card.author.idCode}}/{{timelineCard.card.sidForAuthor}}">
             <div class="bottom-text">
-                <div class="first-line underline">Rogue Stormer（恶棍风暴兵团） Boss攻略与成就指南</div>
-                <div class="second-line">《恶棍风暴兵团》 是一款现代版Contra／/Metal Slug 游戏，它结合了 这种roguelike 类型的混搭游戏，并包括和 RPG 角色扮演的元素，游戏中有着、加上疯狂的3D 图形与可支持一至四人的多人游戏合作模式。</div>
+                <div class="first-line underline">{{timelineCard.card.title}}</div>
+                <div class="second-line">{{timelineCard.card.subtitle}}</div>
             </div>
         </a>
-        <div ng-switch-when="simple" class="simple">
-            <vote-circle vote="3" gray-background="true"></vote-circle>
-            <p class="hidden">这是一段非常长的文字这是一段非常长的文字这是一段非常长的文字这是一段非常长的文字<span></span></p>
-            <img webp-src="{{'keylol://39b7d020df471d6c0e3fa593802000bc.jpg' | uriRelocate: '/fw/340'}}">
+        <div ng-switch-when="activity" class="simple">
+            <vote-circle ng-if="timelineCard.card.rating" review="timelineCard.card.rating * 2 - 1" gray-background="true"></vote-circle>
+            <p ng-style="{height: timelineCard.simpleHidden ? 99 : timelineCard.simpleHeight || ''}">{{timelineCard.card.content}}<a href="" ng-click="timelineCard.simpleExpand()" ng-if="timelineCard.simpleHidden" class="expand">
+                <svg aria-hidden="true">
+                    <use ng-href="{{ 'more' | iconSvgUrl }}" xlink:href=""></use>
+                </svg>
+            </a></p>
+            <img ng-if="timelineCard.card.coverImage" webp-src="{{timelineCard.card.coverImage | uriRelocate: '/fw/340'}}">
         </div>
     </div>
-    <div class="point-with-source">
-        <a class="point" href="point/DOTA2" ripple>
-            <point-basic-info></point-basic-info>
+    <div ng-if="timelineCard.card.attachedPoints[0]" class="point-with-source">
+        <a class="point" ng-href="point/{{timelineCard.card.attachedPoints[0].idCode}}" ripple>
+            <point-basic-info point="timelineCard.card.attachedPoints[0]"></point-basic-info>
         </a>
-        <a class="source" href="" ng-click="timelineCard.showSourceList($event)" popup="timelineCard.showSharedPopup">5 个据点来稿</a>
+        <!--<a class="source" href="" ng-click="timelineCard.showSourceList($event)" popup="timelineCard.showSharedPopup">5 个据点来稿</a>-->
     </div>
     <div class="indirect-sources">
-        <a class="indirect-source" href="">
-            <img webp-src="{{'' | avatarUrl: 'small'}}" class="picture" />
-            <span class="desc">角色扮演</span>
-        </a>
-        <a class="indirect-source" href="">
-            <img webp-src="{{'' | avatarUrl: 'small'}}" class="picture" />
-            <span class="desc">角色扮演</span>
+        <a ng-repeat="point in timelineCard.card.attachedPoints" ng-if="$index > 0" class="indirect-source" ng-href="point/{{point.idCode}}">
+            <img webp-src="{{point.avatarImage | avatarUrl: 'small'}}" class="picture" />
+            <span class="desc">{{timelineCard.utils.getPreferredPointName(point, timelineCard.stateTree.currentUser)[0]}}</span>
         </a>
     </div>
 </div>
 <div class="communicate-card">
     <div class="review-area" ng-class="{'open':timelineCard.state === 'open'}">
         <div class="review-count">
-            全部 16 个评论
+            全部 {{timelineCard.card.commentCount}} 个评论
         </div>
         <div class="review-list" ng-class="{scroller:timelineCard.hasScroller}">
             <div class="review" href="" data-floor-id="#{{$index+1}}" ng-repeat="reviews in [0,1,2,3,4,5,6,7,8]" ng-class="{'blink':timelineCard.currentFloor === ($index+1)}">
@@ -58,15 +59,15 @@
         </div>
         <div class="hr"></div>
         <div class="review-sender">
-            <img webp-src="{{'keylol://39b7d020df471d6c0e3fa593802000bc.jpg' | avatarUrl}}" alt="" class="avatar">
+            <img webp-src="{{timelineCard.stateTree.currentUser.avatarImage | avatarUrl}}" alt="" class="avatar">
             <textarea elastic placeholder="发表见解..." ng-model="timelineCard.comment"></textarea>
         </div>
     </div>
     <div class="operation" ng-switch="timelineCard.state">
         <div>
-            <flat-button type="inertia" text="+1"></flat-button>
+            <flat-button type="inertia" text="+{{timelineCard.card.likeCount}}"></flat-button>
         </div>
         <flat-button ng-switch-when="open" text="评论" click="timelineCard.moveToFloor(3)"></flat-button>
-        <flat-button ng-switch-when="close" type="inertia" text="···" click="timelineCard.openReviewArea()"></flat-button>
+        <flat-button ng-switch-when="close" type="inertia" text="···{{timelineCard.card.commentCount}}" click="timelineCard.openReviewArea()"></flat-button>
     </div>
 </div>

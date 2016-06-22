@@ -1,26 +1,25 @@
 ﻿(function () {
     class SectionTimelineController {
-        constructor ($scope, $rootScope, $location, $window, window) {
+        constructor ($scope, $location, $window, window, $http, apiEndpoint, notification) {
             $.extend(this, {
-                $rootScope,
                 $location,
                 window,
+                $http,
+                apiEndpoint,
+                notification,
             });
             this.columnCount = 'two';
-            this.cards = ['l','l','r'];
-
-            if (this.columnCount === 'two') {
-                this.leftCards = ['l', 'l'];
-                this.rightCards = ['r'];
-            }
-
+            this.leftCards = [];
+            this.rightCards = [];
+            this.preferLeft = false;
+            this.setTwoColumn();
             this.first = true;
             this.end = false;
 
             const $$window = $($window);
 
             const scrollHandler = $$window.bind('scroll', () => {
-                if (!this.first && !this.end) {
+                if (!this.first && !this.end && !this.loadLock) {
                     if ($(document).scrollTop() + $$window.height() >= $(document).height()) {
                         this.load();
                     }
@@ -28,8 +27,20 @@
             });
 
             $scope.$on('$destroy',() => {
-                $$window.unbind('scroll',scrollHandler);
+                $$window.unbind('scroll', scrollHandler);
             });
+        }
+
+        setTwoColumn (start = 0) {
+            console.log(start, this.cards);
+            for (let i = start;i < this.cards.length;i++) {
+                if (this.preferLeft) {
+                    this.leftCards.push(this.cards[i]);
+                } else {
+                    this.rightCards.push(this.cards[i]);
+                }
+                this.preferLeft = !this.preferLeft;
+            }
         }
 
         showActivityEditor (event) {
@@ -62,12 +73,25 @@
 
         load() {
             this.first = false;
-            this.end = true;
-            if (this.columnCount === 'two') {
-                this.leftCards.push(1);
-                this.rightCards.push(1);
-            } else {
-                this.cards.push('l');
+            if (!this.end && !this.loadLock) {
+                this.loadLock = true;
+                const nowLength = this.cards.length;
+                this.$http.get(`${this.apiEndpoint}/states/entrance/timeline/cards`, {
+                    params: {
+                        before: this.cards[nowLength - 1].feedId,
+                        take: 12,
+                    },
+                }).then(response => {
+                    Array.prototype.push.apply(this.cards, response.data);
+                    this.setTwoColumn(nowLength);
+                    if (response.data.length < 12) {
+                        this.end = true;
+                    }
+                    this.loadLock = false;
+                }, response => {
+                    this.notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
+                    this.loadLock = false;
+                });
             }
         }
     }
@@ -76,5 +100,8 @@
         templateUrl: 'src/sections/section-timeline.html',
         controller: SectionTimelineController,
         controllerAs: 'sectionTimeline',
+        bindings: {
+            cards: '<',
+        },
     });
 }());

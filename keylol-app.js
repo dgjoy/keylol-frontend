@@ -21,24 +21,6 @@
         $anchorScrollProvider.disableAutoScrolling();
         $urlRouterProvider.otherwise('/not-found');
         $stateProvider
-            // .state('home', {
-            //     url: '/',
-            //     templateUrl: 'src/pages/home.html',
-            //     controller: 'HomeController',
-            // })
-            // // .when('/home', {
-            // //     redirectTo: '/',
-            // // })
-            // .state('article', {
-            //     url: '/article/:author/:article',
-            //     templateUrl: 'src/pages/article.html',
-            //     controller: 'ArticleController',
-            // })
-            // .state('user', {
-            //     url: '/user/:userIdCode',
-            //     templateUrl: 'src/pages/point.html',
-            //     controller: 'PointController',
-            // })
             // .state('latest', {
             //     url: '/latest',
             //     templateUrl: 'src/pages/search-results.html',
@@ -73,26 +55,6 @@
             //     url: '/related/:idCode/:type',
             //     templateUrl: 'src/pages/search-results.html',
             //     controller: 'RelatedController',
-            // })
-            // .state('coupon', {
-            //     url: '/coupon',
-            //     templateUrl: 'src/pages/coupon.html',
-            //     controller: 'CouponController',
-            // })
-            // .state('discovery', {
-            //     url: '/discovery',
-            //     templateUrl: 'src/pages/discovery.html',
-            //     controller: 'DiscoveryController',
-            // })
-            // .state('points', {
-            //     url: '/points',
-            //     templateUrl: 'src/pages/points.html',
-            //     controller: 'PointsController',
-            // })
-            // .state('timeline', {
-            //     url: '/timeline',
-            //     templateUrl: 'src/pages/page-timeline.html',
-            //     controller: 'PageTimelineController',
             // })
             // state after refactoring
             .state('entrance', {

@@ -1,15 +1,24 @@
 ﻿(function () {
     class TimelineCardController {
-        constructor($element, $timeout, $scope, $rootScope) {
+        constructor($element, $timeout, utils, stateTree) {
             $.extend(this,{
                 $element,
                 $timeout,
+                utils,
+                stateTree,
             });
-            //this.type = 'article';
-            this.type = 'simple';
             this.state = 'close';
             this.hasScroller = true;
             this.currentFloor = 0;
+
+            $timeout(() => {
+                this.simpleHeight = $element.find('.display-card>.shortcut>.simple>p').height();
+                this.simpleHidden = this.simpleHeight > 100;
+            });
+        }
+
+        simpleExpand() {
+            this.simpleHidden = false;
         }
 
         moveToFloor(index) {
@@ -61,6 +70,7 @@
                         popup: this.showSharedPopup,
                         event: $event,
                     },
+                    link: `${this.card.contentType}/${this.card.author.idCode}/${this.card.sidForAuthor}`,
                 },
             });
         }
@@ -70,5 +80,8 @@
         templateUrl: 'src/components/timeline-card.html',
         controller: TimelineCardController,
         controllerAs: 'timelineCard',
+        bindings: {
+            card: '<',
+        },
     });
 }());

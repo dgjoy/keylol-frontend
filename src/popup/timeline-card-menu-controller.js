@@ -1,6 +1,6 @@
 ﻿(function () {
     class TimelineCardMenuController {
-        constructor(origin, close) {
+        constructor(origin, close, link) {
             function showApproverList() {
                 close();
                 origin.popup({
@@ -47,6 +47,7 @@
                 items: [{
                     text: '进入文章',
                     type: 'item',
+                    link,
                 },{
                     text: '点过认可的用户',
                     type: 'item',

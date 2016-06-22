@@ -1,9 +1,8 @@
 ﻿<div class="flex-row" style="margin-top: 30px;">
     <div class="left-middle-lg row-sm">
-        <section-timeline></section-timeline>
+        <section-timeline ng-if="stateTree.entrance.timeline.cards" cards="stateTree.entrance.timeline.cards"></section-timeline>
     </div>
     <div class="right-lg hidden-sm flex-column">
-        <menu ng-if="stateTree.specialMenu" style="margin-bottom: 20px" object="::stateTree.specialMenu"></menu>
         <right-menus style="flex-grow: 1;"></right-menus>
     </div>
 </div>

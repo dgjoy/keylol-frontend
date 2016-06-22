@@ -56,10 +56,7 @@
                 this.$http.post(`${apiEndpoint}activity`,submitObj).then(response => {
                     this.notification.success({ message: '提交成功' });
                     if (this.redirect) {
-                        this.$state.go('activity', {
-                            author_id_code: this.stateTree.currentUser.idCode,
-                            sid_for_author: response.data,
-                        });
+                        this.$location.url(`activity/${this.stateTree.currentUser.idCode}/${response.data}`);
                     }
                     this.close();
                 },response => {
@@ -74,6 +71,7 @@
             submitObj.rating = this.vm.rating;
 
             if (this.extra.image !== undefined) {
+                this.notification.process({ message: '图像正在上传' });
                 const policy = this.upyun.policy();
                 this.upyun.signature(policy).then(signature => {
                     this.upyun.upload(this.extra.image, policy, signature).then(response => {
