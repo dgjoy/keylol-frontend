@@ -58,6 +58,12 @@
                             value: preference.notifyOnArticleReplied,
                         },
                         {
+                            title: '动态收到评论',
+                            type: 'switch',
+                            key: 'notifyOnAcitivityReplied',
+                            value: preference.notifyOnAcitivityReplied,
+                        },
+                        {
                             title: '评论被回复',
                             type: 'switch',
                             key:'notifyOnCommentReplied',
@@ -68,6 +74,12 @@
                             type: 'switch',
                             key:'notifyOnArticleLiked',
                             value: preference.notifyOnArticleLiked,
+                        },
+                        {
+                            title: '动态获得认可',
+                            type: 'switch',
+                            key:'notifyOnAcitivityLiked',
+                            value: preference.notifyOnActivityLiked,
                         },
                         {
                             title: '评论获得认可',
@@ -104,6 +116,12 @@
                             value: preference.steamNotifyOnArticleReplied,
                         },
                         {
+                            title: '动态收到评论',
+                            type: 'switch',
+                            key:'steamNotifyOnActivityReplied',
+                            value: preference.steamNotifyOnActivityReplied,
+                        },
+                        {
                             title: '评论被回复',
                             type: 'switch',
                             key:'steamNotifyOnCommentReplied',
@@ -114,6 +132,12 @@
                             type: 'switch',
                             key:'steamNotifyOnArticleLiked',
                             value: preference.steamNotifyOnArticleLiked,
+                        },
+                        {
+                            title: '动态获得认可',
+                            type: 'switch',
+                            key:'steamNotifyOnActivityLiked',
+                            value: preference.steamNotifyOnActivityLiked,
                         },
                         {
                             title: '评论获得认可',

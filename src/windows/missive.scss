@@ -97,8 +97,13 @@
 
     .text {
       p {
+        white-space: normal;
         margin: 12px 0;
         color: $keylol-main-text;
+
+        &.indent {
+          text-indent: 20px;
+        }
       }
       .italic {
         font-style: italic;
@@ -110,6 +115,15 @@
         margin: 15px 0;
         padding: 0 15px;
         background-color: $keylol-inverted-text;
+
+        ul {
+          margin-top: -12px;
+          margin-left: 20px;
+        }
+
+        p:not(:first-of-type) {
+          text-indent: 20px;
+        }
       }
 
       a {

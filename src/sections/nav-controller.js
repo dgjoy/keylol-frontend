@@ -80,53 +80,41 @@
                 });
             } else if (currentStateName.substr(0, 16) === 'aggregation.user') {
                 this.inUser = true;
-                if (stateTree.currentUser && stateTree.currentUser.idCode === stateTree.aggregation.user.basicInfo.idCode) {
-                    this.tabArray = [
-                        { state: '.dossier', name: '档案' },
-                        { state: '.people', name: '人脉' },
-                        { state: '.timeline', name: '轨道' },
-                        { state: '.edit', name: '编辑', 'float': 'right' },
-                    ];
+                $scope.$watch(() => {
+                    return stateTree.currentUser;
+                },() => {
+                    if ($.inArray('Operator', stateTree.currentUser.roles) !== -1 || (stateTree.currentUser && stateTree.currentUser.idCode === stateTree.aggregation.user.basicInfo.idCode)) {
+                        this.tabArray[3] = { state: '.edit', name: '编辑', 'float': 'right' };
+                    } else {
+                        this.tabArray[3] = undefined;
+                    }
+                });
 
-                    $scope.$watch(() => {
-                        return $state.current.name;
-                    }, () => {
-                        const subState = $state.current.name.substr(17);
-                        switch (subState) {
-                            case 'dossier' :
-                                this.currentPage = 0;
-                                break;
-                            case 'people' :
-                                this.currentPage = 1;
-                                break;
-                            case 'edit' :
-                            case 'edit.info' :
-                            case 'edit.preference' :
-                                this.currentPage = 3;
-                                break;
-                        }
-                    });
-                } else {
-                    this.tabArray = [
-                        { state: '.dossier', name: '档案' },
-                        { state: '.people', name: '人脉' },
-                        { state: '.timeline', name: '轨道' },
-                    ];
 
-                    $scope.$watch(() => {
-                        return $state.current.name;
-                    }, () => {
-                        const subState = $state.current.name.substr(17);
-                        switch (subState) {
-                            case 'dossier' :
-                                this.currentPage = 0;
-                                break;
-                            case 'people' :
-                                this.currentPage = 1;
-                                break;
-                        }
-                    });
-                }
+                this.tabArray = [
+                    { state: '.dossier', name: '档案' },
+                    { state: '.people', name: '人脉' },
+                    { state: '.timeline', name: '轨道' },
+                ];
+
+                $scope.$watch(() => {
+                    return $state.current.name;
+                }, () => {
+                    const subState = $state.current.name.substr(17);
+                    switch (subState) {
+                        case 'dossier' :
+                            this.currentPage = 0;
+                            break;
+                        case 'people' :
+                            this.currentPage = 1;
+                            break;
+                        case 'edit' :
+                        case 'edit.info' :
+                        case 'edit.preference' :
+                            this.currentPage = 3;
+                            break;
+                    }
+                });
             } else if (currentStateName.substr(0, 7) === 'content') {
                 this.inPoint = true;
                 let name, watchName;
@@ -163,34 +151,36 @@
                 });
             } else if (currentStateName.substr(0,11) === 'post-office') {
                 this.inEntrance = true;
-                if (stateTree.currentUser) {
-                    this.tabArray = [
-                        { state: '.unread',name: `未读 ${stateTree.currentUser.messageCount} 则` },
-                        { state: '.social-activity',name:'社交' },
-                        { state: '.missive',name:'公函' },
-                    ];
-                    $scope.$watch(() => {
-                        return $state.current.name;
-                    }, () => {
-                        const subState = $state.current.name.substr(12);
-                        switch (subState) {
-                            case 'unread' :
-                                this.currentPage = 0;
-                                break;
-                            case 'social-activity' :
-                            case 'social-activity.approve':
-                            case 'social-activity.reply':
-                            case 'social-activity.follower':
-                                this.currentPage = 1;
-                                break;
-                            case 'missive' :
-                                this.currentPage = 2;
-                                break;
-                        }
-                    });
-                } else {
-                    $state.go('not-found');
-                }
+                $scope.$watch(() => {
+                    return stateTree.currentUser;
+                },() => {
+                    if (stateTree.currentUser) {
+                        this.tabArray = [
+                            { state: '.unread',name: `未读 ${stateTree.currentUser.messageCount} 则` , float: 'left' },
+                            { state: '.social-activity',name:'社交' },
+                            { state: '.missive',name:'公函' },
+                        ];
+                        $scope.$watch(() => {
+                            return $state.current.name;
+                        }, () => {
+                            const subState = $state.current.name.substr(12);
+                            switch (subState) {
+                                case 'unread' :
+                                    this.currentPage = 0;
+                                    break;
+                                case 'social-activity' :
+                                case 'social-activity.approve':
+                                case 'social-activity.reply':
+                                case 'social-activity.follower':
+                                    this.currentPage = 1;
+                                    break;
+                                case 'missive' :
+                                    this.currentPage = 2;
+                                    break;
+                            }
+                        });
+                    }
+                });
             } else if (currentStateName.substr(0,6) === 'coupon') {
                 this.inEntrance = true;
                 this.tabArray = [

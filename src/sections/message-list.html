@@ -4,7 +4,7 @@
     'to-previous' : !messageList.isToNext
     }">
         <div class="latest-list" ng-animate-swap="messageList.currentPage">
-            <message object="item" ng-repeat="item in messageList.messages"></message>
+            <message ng-class="{unread:item.unread}" object="item" ng-repeat="item in messageList.messages"></message>
         </div>
     </div>
     <div class="clearfix">

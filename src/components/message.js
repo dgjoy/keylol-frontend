@@ -9,9 +9,7 @@
             $scope.$watch(() => {
                 return this.object;
             },() => {
-                if (!messageTypes[this.object.type]) {
-                    console.log(this.object);
-                }
+                console.log(this.object);
                 this.object.messageType = messageTypes[this.object.type];
             });
         }
@@ -21,6 +19,9 @@
                 templateUrl: 'src/windows/missive.html',
                 controller: 'MissiveController',
                 controllerAs: 'missive',
+                inputs: {
+                    object: this.object,
+                },
             });
         }
 

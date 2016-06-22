@@ -4,10 +4,10 @@
 
 <div class="left-part" ng-switch="message.object.messageType.source">
     <div class="message-source" ng-switch-when="用户">
-        <img class="avatar" webp-src="//storage.keylol.com/e81748fb2d4357b8f019368b429dfb61.png">
+        <a href="user/{{message.object.operatorIdCode}}"><img class="avatar" webp-src="//storage.keylol.com/e81748fb2d4357b8f019368b429dfb61.png"></a>
         <div class="name-group">
-            <p>{{message.object.operatorUserName}}</p>
-            <p>{{message.object.messageType.type}} / <span am-time-ago="message.object.createTime"></span></p>
+            <a href="user/{{message.object.operatorIdCode}}">{{message.object.operatorUserName}}</a>
+            <p div="user-message-info">{{message.object.messageType.type}} / <span am-time-ago="message.object.createTime"></span></p>
         </div>
     </div>
     <div class="message-source" ng-switch-default="">
@@ -22,7 +22,10 @@
     <div class="brief" ng-switch-default="">
         {{message.object.messageType.name}}
     </div>
-    <div class="detail">
+    <a href="" class="detail" ng-if="message.object.messageType.source !== '用户'" ng-click="message.showMissive()">
+        {{message.object.messageType.getSummary(message.object)}}
+    </a>
+    <div class="detail" ng-if="message.object.messageType.source === '用户'">
         {{message.object.messageType.getSummary(message.object)}}
     </div>
 </div>
