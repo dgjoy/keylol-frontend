@@ -17,13 +17,16 @@ article-comments {
 
     .name-group {
       flex-grow: 1;
+
       p {
         margin: 0;
       }
+
       p:first-of-type {
         font-weight: bold;
         color: $keylol-main-text;
       }
+
       p:nth-of-type(2) {
         color: $keylol-inertia-text;
         font-size: 12px;
@@ -38,13 +41,25 @@ article-comments {
 
       .action{
         visibility: hidden;
+
+        a {
+          margin: 0 5px;
+
+          &:last-of-type {
+            margin-right: 0;
+          }
+        }
+
+        >span>span {
+          margin: 0 5px 0 10px;
+        }
       }
 
       a {
-        margin-left: 15px;
         color: $keylol-highlight;
         &:hover { text-decoration: underline; }
       }
+
       p {
         margin: 0;
         color: $keylol-inertia-text;
@@ -53,15 +68,56 @@ article-comments {
     }
   }
 
+  .comment-to-reply {
+    @include keylol-shadow-1;
+    padding: 20px 12px;
+    margin-top: 20px;
+
+    p {
+      margin: 0;
+    }
+
+    .basic {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+
+      .avatar {
+        border-radius: 0;
+        width: 18px;
+        height: 18px;
+        margin-left: 8px;
+        margin-right: 5px;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      p {
+        display: flex;
+      }
+
+      span {
+        color: $keylol-inertia-text;
+      }
+    }
+
+    .comment-content {
+      @include ellipsis;
+    }
+  }
+
   .display {
     @include keylol-shadow-1();
     background-color: $keylol-card;
-    padding: 20px 15px;
+    padding: 20px 0;
 
     .header {
       display: flex;
       justify-content: space-between;
-      padding-top: 10px;
+      padding: 10px 15px 0;
 
       .count {
         p {
@@ -96,9 +152,14 @@ article-comments {
       }
 
       .comment {
-        margin: 0 -15px;
-        padding: 20px 15px;
+        margin: 0 15px;
+        padding: 20px 0;
         border-bottom: 1px solid $keylol-inertia-shape;
+
+        .comment-to-reply {
+          background-color: $keylol-inverted-text;
+        }
+
         &:last-of-type {
           border-bottom: 0;
         }
@@ -119,7 +180,11 @@ article-comments {
   }
 
   .sender {
-    padding: 30px 15px 20px 15px;
+    padding: 30px 15px 20px;
+
+    .comment-to-reply {
+      background-color: $keylol-card;
+    }
 
     .simditor-wrapper {
       background-color: #fff;

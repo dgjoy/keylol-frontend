@@ -23,43 +23,7 @@
             }
 
             return function getAndFlushComments(article, pageNumOrSqNum, getCommentsType, callback = () => {}) {
-                if (getCommentsType === 'hot') {
-                    $http.get(`${apiEndpoint}comment`, {
-                        params: {
-                            articleId: article.Id,
-                            orderBy: 'LikeCount',
-                            desc: true,
-                            take: 3,
-                        },
-                    }).then(response => {
-                        const preHotComments = response.data;
-                        const hotComments = [];
-                        for (let i = 0;i < preHotComments.length;i++) {
-                            if (preHotComments[i].LikeCount >= 5) {
-                                const hotComment = preHotComments[i];
-                                if (hotComment.Commentator) {
-                                    if (hotComment.Commentator.IdCode === article.authorIdCode) {
-                                        hotComment.Commentator.isAuthor = true;
-                                    }
-                                    if (union.$localStorage.user && hotComment.Commentator.IdCode === union.$localStorage.user.IdCode) {
-                                        hotComment.cannotLike = true;
-                                    }
-                                }
-                                if (hotComment.LikeCount > 0) {
-                                    hotComment.hasLike = true;
-                                }
-                                if (hotComment.Content) {
-                                    hotComment.Content = parseComments(hotComment.Content, hotComment.SequenceNumberForArticle);
-                                }
-                                hotComment.isHot = true;
-                                hotComments.push(hotComment);
-                            }
-                        }
-                        $.extend(union.hotComments, hotComments);
-                    }, response => {
-                        notification.error('发生未知错误，请重试或与站务职员联系', response);
-                    });
-                } else if (getCommentsType === 'page') {
+                if (getCommentsType === 'page') {
                     const pageNum = pageNumOrSqNum;
                     $http.get(`${apiEndpoint}comment`, {
                         params: {

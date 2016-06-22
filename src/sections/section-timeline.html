@@ -1,7 +1,7 @@
 ﻿<div class="wrapper" ng-switch="sectionTimeline.columnCount">
     <div class="first-column" ng-switch-when="two">
-        <div class="quick-edit">
-            <p ng-click="sectionTimeline.showActivityEditor($event)">刚刚结束的游戏体验如何？</p>
+        <div class="quick-edit" ng-click="sectionTimeline.showActivityEditor($event)">
+            <p>刚刚结束的游戏体验如何？</p>
             <a href="" ngf-select="sectionTimeline.uploadImage($file, $event)" ngf-fix-orientation="true" accept="image/*">
                 <svg aria-hidden="true">
                     <use ng-href="{{'image' | iconSvgUrl }}" xlink:href=""></use>

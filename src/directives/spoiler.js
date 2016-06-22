@@ -1,5 +1,5 @@
 ﻿(function () {
-    keylolApp.directive('spoiler', () => {
+    keylolApp.directive('spoiler', (stateTree, union) => {
         return {
             restrict: 'E',
             templateUrl: 'src/directives/spoiler.html',
@@ -11,7 +11,13 @@
                     element.find('.hint').remove();
                     element.find('.content').children().unwrap();
                     element.off('click');
+                    
+                    if (union.updateCommentsHeight) {
+                        union.updateCommentsHeight();
+                    }
                 });
+
+                scope.stateTree = stateTree;
             },
         };
     });

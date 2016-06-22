@@ -2,7 +2,8 @@
     <div class="header">
         <div class="count">
             <p>共 {{articleComments.article.commentCount}} 则讨论</p>
-            <p>最后回复于 <span am-time-ago="articleComments.article.latestCommentTime"></span></p>
+            <p ng-if="articleComments.article.latestCommentTime">最后回复于 <span am-time-ago="articleComments.article.latestCommentTime"></span></p>
+            <p ng-if="!articleComments.article.latestCommentTime">第一发回复会决定整个讨论的方向</p>
         </div>
         <pagination theme-color="articleComments.theme.light" ng-if="articleComments.article.commentPageCount > 1" on-page-changed="::articleComments.changePage(newPage, oldPage)" total="articleComments.article.commentPageCount" current="articleComments.currentPage"></pagination>
     </div>
@@ -22,9 +23,31 @@
                         </p>
                     </div>
                     <div class="action-date">
-                        <p class="action"><a href="">认可</a><a href="">回复</a><a href="">封存</a><a href="">警告</a></p>
+                        <p class="action">
+                            <span ng-if="comment.authorIdCode !== articleComments.stateTree.currentUser.idCode || articleComments.stateTree.currentUser.roles.indexOf('Operator') > -1">
+                                <a href="" ng-click="">编辑</a>
+                                <span>|</span>
+                            </span>
+                            <a href="" ng-if="comment.authorIdCode !== articleComments.stateTree.currentUser.idCode && !comment.liked">认可</a>
+                            <a href="" ng-click="articleComments.reply(comment)">回复</a>
+                            <span ng-if="comment.authorIdCode !== articleComments.stateTree.currentUser.idCode || articleComments.stateTree.currentUser.roles.indexOf('Operator') > -1">
+                                <span>|</span>
+                                <a href="">封存</a>
+                                <a ng-if="articleComments.stateTree.currentUser.roles.indexOf('Operator') > -1" href="">警告</a>
+                            </span>
+                        </p>
                         <p><span am-time-ago="comment.publishTime"></span> / #{{comment.sidForArticle}}</p>
                     </div>
+                </div>
+                <div ng-if="comment.replyToComment" class="comment-to-reply">
+                    <div class="basic">
+                        <p class="reply">
+                            <span>回复 #{{comment.replyToComment.sidForArticle}}</span>
+                            <img class="avatar" webp-src="{{comment.replyToComment.authorAvatarImage | avatarUrl: 'small'}}">
+                            <span>{{comment.replyToComment.authorUserName}}</span>
+                        </p>
+                    </div>
+                    <p class="comment-content">{{comment.replyToComment.content | extractText}}</p>
                 </div>
                 <article class="editor-style" bind-html-compile="comment.content"></article>
             </li>
@@ -47,8 +70,19 @@
             <p>#{{articleComments.article.commentCount + 1}}+</p>
         </div>
     </div>
+    <div ng-if="articleComments.replyToComment" class="comment-to-reply">
+        <div class="basic">
+            <p class="reply">
+                <span>回复 #{{articleComments.replyToComment.sidForArticle}}</span>
+                <img class="avatar" webp-src="{{articleComments.replyToComment.authorAvatarImage | avatarUrl: 'small'}}">
+                <span>{{articleComments.replyToComment.authorUserName}}</span>
+            </p>
+            <a href="" ng-click="articleComments.cancelReply()">取消回复</a>
+        </div>
+        <p class="comment-content">{{articleComments.replyToComment.content | extractText}}</p>
+    </div>
     <div simditor ng-model="articleComments.vm.content"></div>
     <div class="clearfix">
-        <raised-button text="回复" type="theme"></raised-button>
+        <raised-button text="回复" type="theme" click="articleComments.submit()"></raised-button>
     </div>
 </div>
