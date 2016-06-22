@@ -1,5 +1,5 @@
 ﻿(function () {
-    keylolApp.directive('spoiler', (stateTree, union) => {
+    keylolApp.directive('spoiler', (stateTree, union, utils) => {
         return {
             restrict: 'E',
             templateUrl: 'src/directives/spoiler.html',
@@ -18,6 +18,7 @@
                 });
 
                 scope.stateTree = stateTree;
+                scope.utils = utils;
             },
         };
     });

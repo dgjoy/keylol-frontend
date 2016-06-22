@@ -8,8 +8,8 @@
         </svg>
         <img ng-if="stateTree.content.article.pointBasicInfo.logo" class="point-icon" webp-src="{{stateTree.content.article.pointBasicInfo.logo | themeLogoUrl}}">
         <div ng-if="!stateTree.content.article.pointBasicInfo.logo" class="point-alt">
-            <p>{{stateTree.content.article.pointBasicInfo.chineseName}}</p>
-            <p>{{stateTree.content.article.pointBasicInfo.englishName}}</p>
+            <p>{{utils.getPreferredPointName(stateTree.content.article.pointBasicInfo, stateTree.currentUser)[0]}}</p>
+            <p>{{utils.getPreferredPointName(stateTree.content.article.pointBasicInfo, stateTree.currentUser)[1]}}</p>
         </div>
     </div>
     <div class="text">

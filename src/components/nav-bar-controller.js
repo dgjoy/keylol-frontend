@@ -1,9 +1,10 @@
 ﻿(function () {
     class NavBarController {
-        constructor (stateTree, window) {
+        constructor (stateTree, window, utils) {
             $.extend(this, {
                 stateTree,
                 window,
+                utils,
             });
         }
         showUserHub ($event) {

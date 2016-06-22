@@ -29,10 +29,11 @@
                     list: [
                         {
                             title: '昵称',
-                            subTitle: '每次修改后有 180 天的冷却时间',
+                            // subTitle: '每次修改后有 180 天的冷却时间',
                             type: 'text',
                             key: 'userName',
                             value: object.userName,
+                            editDisabled: true,
                         },
                         {
                             title: '个人识别码',
