@@ -1,6 +1,6 @@
 ﻿(function () {
     class ArticleCommentsController {
-        constructor (stateTree, $http, apiEndpoint, $element, $timeout, notification, union) {
+        constructor (stateTree, $http, apiEndpoint, $element, $timeout, notification, union, window) {
             $.extend(this, {
                 stateTree,
                 $http,
@@ -8,6 +8,7 @@
                 $element,
                 $timeout,
                 notification,
+                window,
             });
 
             this.currentPage = 1;
@@ -62,6 +63,27 @@
 
         cancelReply () {
             delete this.replyToComment;
+        }
+
+        edit ($index) {
+            this.window.show({
+                templateUrl: 'src/windows/comment-editor.html',
+                controller: 'CommentEditorController',
+                controllerAs: 'commentEditor',
+                inputs: {
+                    comment: this.article.comments[$index],
+                    theme: this.theme,
+                    options: {
+                        isGame: this.article.pointBasicInfo.type === 'game',
+                    },
+                },
+            }).then(window => {
+                return window.close;
+            }).then(result => {
+                if (result) {
+                    this.article.comments[$index] = result;
+                }
+            });
         }
 
         submit () {

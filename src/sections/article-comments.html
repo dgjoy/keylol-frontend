@@ -25,7 +25,7 @@
                     <div class="action-date">
                         <p class="action">
                             <span ng-if="comment.authorIdCode !== articleComments.stateTree.currentUser.idCode || articleComments.stateTree.currentUser.roles.indexOf('Operator') > -1">
-                                <a href="" ng-click="">编辑</a>
+                                <a href="" ng-click="articleComments.edit($index)">编辑</a>
                                 <span>|</span>
                             </span>
                             <a href="" ng-if="comment.authorIdCode !== articleComments.stateTree.currentUser.idCode && !comment.liked">认可</a>
@@ -83,6 +83,6 @@
     </div>
     <div simditor ng-model="articleComments.vm.content"></div>
     <div class="clearfix">
-        <raised-button text="回复" type="theme" click="articleComments.submit()"></raised-button>
+        <raised-button text="回复" type="theme" disabled="articleComments.submitLock" click="articleComments.submit()"></raised-button>
     </div>
 </div>

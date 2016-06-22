@@ -1,0 +1,117 @@
+.window-comment-editor {
+  @include grow-shrink-child();
+  .window {
+    background-color: $keylol-inverted-text;
+    width: 700px;
+    padding: 30px 15px 20px;
+
+    .simditor-wrapper {
+      background-color: #fff;
+
+      .simditor-toolbar {
+        background-color: #fff;
+      }
+
+      .simditor-body {
+        min-height: 30px;
+        padding: 20px 11px;
+      }
+    }
+
+    raised-button, flat-button {
+      float: right;
+    }
+
+    raised-button {
+      margin-left: 20px;
+    }
+
+    .basic-info {
+      display: flex;
+      align-items: center;
+
+      .avatar {
+        flex-grow: 0;
+        width: 32px;
+        height: 32px;
+        margin-right: 10px;
+      }
+
+      .name-group {
+        flex-grow: 1;
+
+        p {
+          margin: 0;
+
+          &:first-of-type {
+            font-weight: bold;
+            color: $keylol-main-text;
+          }
+
+          &:nth-of-type(2) {
+            color: $keylol-inertia-text;
+            font-size: 12px;
+          }
+        }
+      }
+
+      .action-date {
+        flex-grow: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+
+        p {
+          margin: 0;
+          color: $keylol-inertia-text;
+
+          &:nth-of-type(2) {
+            font-size: 12px;
+          }
+        }
+      }
+    }
+
+    .comment-to-reply {
+      @include keylol-shadow-1;
+      background-color: $keylol-card;
+      padding: 20px 12px;
+      margin-top: 20px;
+
+      p {
+        margin: 0;
+      }
+
+      .basic {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+
+        .avatar {
+          border-radius: 0;
+          width: 18px;
+          height: 18px;
+          margin-left: 8px;
+          margin-right: 5px;
+        }
+
+        a:hover {
+          text-decoration: underline;
+        }
+
+        p {
+          display: flex;
+        }
+
+        span {
+          color: $keylol-inertia-text;
+        }
+      }
+
+      .comment-content {
+        @include ellipsis;
+      }
+    }
+  }
+}
