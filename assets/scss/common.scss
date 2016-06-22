@@ -321,12 +321,6 @@ textarea {
   .bottom-text{
     @include text-protection();
 
-    .first-line,
-    .second-line {
-      position: relative;
-      z-index: 2;
-    }
-
     .first-line {
       color: $keylol-inverted-text;
       font-size: 20px;

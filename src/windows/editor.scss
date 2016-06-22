@@ -65,10 +65,11 @@
     .related-points {
       padding: 0 15px;
       margin-bottom: 30px;
+
       .fake {
         @include keylol-shadow-1();
         position: absolute;
-        height: 190px;
+        min-height: 190px;
         left: 0;
         width: 100%;
         background-color: $keylol-card;

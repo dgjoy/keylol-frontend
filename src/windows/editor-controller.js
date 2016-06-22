@@ -1,6 +1,7 @@
 ﻿(function () {
     class EditorController {
-        constructor($scope, close, $element, stateTree, $http, apiEndpoint, notification, $timeout, options, $window, utils) {
+        constructor($scope, close, $element, stateTree, $http, apiEndpoint,
+                    notification, $timeout, options, $window, utils, union, $state, $location) {
             $.extend(this,{
                 $scope,
                 close,
@@ -9,25 +10,16 @@
                 $http,
                 apiEndpoint,
                 notification,
+                union,
+                $timeout,
+                $state,
+                $location,
             });
 
             this.isSummaryOpened = false;
             this.isRepostOpened = false;
             this.canFillRelated = true;
             this.autoSaveInterval = 30000;
-            this.vm = {
-                content: '',
-                attachedPoints: [],
-                targetPoints: [],
-                pros: [],
-                cons: [],
-                reproductionRequirement: {
-                    reproduction: true,
-                    attribution: true,
-                    nonCommercial: true,
-                    noDerivation: false,
-                },
-            };
 
             const $$window = $($window);
             const eventName = `beforeunload.editor${utils.uniqueId()}`;
@@ -39,14 +31,82 @@
                 $$window.off(eventName);
             });
 
-            const detachLocationListener = $scope.$on('$locationChangeStart', e => {
+            this.detachLocationListener = $scope.$on('$locationChangeStart', e => {
                 if (confirm('未保存的内容将被弃置，确认离开？')) {
-                    detachLocationListener();
+                    this.detachLocationListener();
                     $$window.off(eventName);
                 } else {
                     e.preventDefault();
                 }
             });
+
+            const setupNewVM = () => {
+                this.vm = $.extend({
+                    content: '',
+                    attachedPoints: [],
+                    targetPoints: [],
+                    pros: [],
+                    cons: [],
+                    reproductionRequirement: {
+                        reproduction: true,
+                        attribution: true,
+                        nonCommercial: true,
+                        noDerivation: false,
+                    },
+                }, options.article ? {
+                    id: options.article.id,
+                    content: options.article.content,
+                    title: options.article.title,
+                    subtitle: options.article.subtitle,
+                    attachedPoints: options.article.attachedPoints,
+                    targetPoints: options.article.pointBasicInfo ? [options.article.pointBasicInfo] : undefined,
+                    pros: options.article.pros,
+                    cons: options.article.cons,
+                    reproductionRequirement: options.article.reproductionRequirement ? {
+                        reproduction: true,
+                        attribution: options.article.reproductionRequirement.attribution,
+                        nonCommercial: options.article.reproductionRequirement.nonCommercial,
+                        noDerivation: options.article.reproductionRequirement.noDerivation,
+                    } : {
+                        reproduction: false,
+                        attribution: true,
+                        nonCommercial: true,
+                        noDerivation: false,
+                    },
+                    coverImage: options.article.coverImage,
+                    rating: options.article.rating,
+                } : {});
+            };
+
+            this.saveDraft = () => {
+                this.$timeout.cancel(this.autoSaveTimeout);
+                this.union.$localStorage.editorDrafts[this.draftKey] = {
+                    vm: this.vm,
+                };
+                this.autoSaveTimeout = this.$timeout(this.saveDraft, this.autoSaveInterval);
+            };
+
+            if (!union.$localStorage.editorDrafts) union.$localStorage.editorDrafts = {};
+            this.draftKey = options.article ? options.article.id : 'new';
+            const draft = union.$localStorage.editorDrafts[this.draftKey];
+            if (draft) {
+                setupNewVM();
+                notification.attention({
+                    message: '直接编辑上次未完成的草稿',
+                },{
+                    text: '加载草稿',
+                    value: true,
+                }).then(result => {
+                    if (result) {
+                        this.vm = draft.vm;
+                        notification.success({ message: '本地草稿已加载' });
+                    }
+                    this.autoSaveTimeout = $timeout(this.saveDraft, this.autoSaveInterval);
+                });
+            } else {
+                setupNewVM();
+                this.autoSaveTimeout = $timeout(this.saveDraft, this.autoSaveInterval);
+            }
 
             $scope.$watch(() => {
                 return this.vm.targetPoints.length;
@@ -76,7 +136,17 @@
         }
 
         exit() {
-            this.close();
+            this.notification.attention({
+                message: '关闭文章编辑器需要额外确认',
+            },{
+                text: '关闭',
+                value: true,
+            }).then(result => {
+                if (result) {
+                    this.$timeout.cancel(this.autoSaveTimeout);
+                    this.close();
+                }
+            });
         }
 
         showExitToolTips ($event) {
@@ -262,13 +332,35 @@
                 delete submitObj.rating;
             }
 
-            this.$http.post(`${this.apiEndpoint}article`, submitObj).then(response => {
-                this.notification.success({ message: '提交成功' });
-                this.close();
-            }, response => {
-                this.notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
-                this.submitLock = false;
-            });
+            console.log(submitObj);
+
+            if (this.vm.id) {
+                delete submitObj.id;
+
+                this.$http.put(`${this.apiEndpoint}article/${this.vm.id}`, submitObj).then(response => {
+                    delete this.union.$localStorage.editorDrafts[this.draftKey];
+                    this.$timeout.cancel(this.autoSaveTimeout);
+                    this.close();
+                    this.detachLocationListener();
+                    this.$state.reload();
+                    this.notification.success({ message: '提交成功' });
+                }, response => {
+                    this.notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
+                    this.submitLock = false;
+                });
+            } else {
+                this.$http.post(`${this.apiEndpoint}article`, submitObj).then(response => {
+                    delete this.union.$localStorage.editorDrafts[this.draftKey];
+                    this.$timeout.cancel(this.autoSaveTimeout);
+                    this.close();
+                    this.detachLocationListener();
+                    this.$location.url(`article/${this.stateTree.currentUser.idCode}/${response.data}`);
+                    this.notification.success({ message: '提交成功' });
+                }, response => {
+                    this.notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
+                    this.submitLock = false;
+                });
+            }
         }
     }
     keylolApp.controller('EditorController', EditorController);
