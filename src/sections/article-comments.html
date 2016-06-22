@@ -4,7 +4,7 @@
             <p>共 {{articleComments.article.commentCount}} 则讨论</p>
             <p>最后回复于 <span am-time-ago="articleComments.article.latestCommentTime"></span></p>
         </div>
-        <pagination theme-color="articleComments.theme.light" on-page-changed="::articleComments.changePage(newPage, oldPage)" total="articleComments.article.commentPageCount" current="articleComments.currentPage"></pagination>
+        <pagination theme-color="articleComments.theme.light" ng-if="articleComments.article.commentPageCount > 1" on-page-changed="::articleComments.changePage(newPage, oldPage)" total="articleComments.article.commentPageCount" current="articleComments.currentPage"></pagination>
     </div>
     <div class="comments" ng-style="{height: articleComments.commentsHeight}" ng-class="{
     'to-next' : articleComments.isToNext,
@@ -30,7 +30,7 @@
             </li>
         </ul>
     </div>
-    <div class="footer clearfix"><pagination theme-color="articleComments.theme.light" on-page-changed="::articleComments.changePage(newPage, oldPage)" total="articleComments.article.commentPageCount" current="articleComments.currentPage"></pagination></div>
+    <div class="footer clearfix"><pagination theme-color="articleComments.theme.light" ng-if="articleComments.article.commentPageCount > 1" on-page-changed="::articleComments.changePage(newPage, oldPage)" total="articleComments.article.commentPageCount" current="articleComments.currentPage"></pagination></div>
 </div>
 <div class="sender">
     <div class="basic-info">

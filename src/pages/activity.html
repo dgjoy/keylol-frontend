@@ -1,12 +1,12 @@
-﻿<nav></nav>
+﻿<nav theme="theme"></nav>
 <div class="container" ng-if="stateTree.content.activity">
     <div class="flex-row" style="margin-top: 30px;">
         <div class="left-middle-lg row-sm">
-            <activity-card object="::stateTree.content.activity" style="margin-bottom:30px"></activity-card>
+            <activity-card theme="theme" object="::stateTree.content.activity" style="margin-bottom:30px"></activity-card>
         </div>
         <div class="right-lg hidden-sm flex-column">
-            <right-menus style="flex-grow: 1;"></right-menus>
+            <right-menus style="flex-grow: 1;" author="stateTree.content.activity.authorBasicInfo" point="stateTree.content.activity.pointBasicInfo"></right-menus>
         </div>
     </div>
 </div>
-<footer theme="stateTree.pointTheme"></footer>
+<footer theme="theme"></footer>

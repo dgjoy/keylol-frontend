@@ -70,7 +70,10 @@
                         popup: this.showSharedPopup,
                         event: $event,
                     },
-                    link: `${this.card.contentType}/${this.card.author.idCode}/${this.card.sidForAuthor}`,
+                    options: {
+                        link: `${this.card.contentType}/${this.card.author.idCode}/${this.card.sidForAuthor}`,
+                    },
+                    content: this.card,
                 },
             });
         }

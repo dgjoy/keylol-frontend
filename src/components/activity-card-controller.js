@@ -24,10 +24,15 @@
                 pageCount: parseInt((this.object.commentCount - 1) / 10) + 1,
             };
             this.commentsManager.pages[0] = this.object.comments;
+
+            if (stateTree.currentUser &&
+                (stateTree.currentUser.roles.indexOf('Operator') > -1 || stateTree.currentUser.id === this.object.authorBasicInfo.id)) {
+                this.canModerate = true;
+            }
         }
 
         showSourceList($event) {
-            this.showSharedPopup({
+            this.showSourceListPopup({
                 templateUrl: 'src/popup/source-list.html',
                 controller: 'SourceListController as sourceList',
                 event: $event,
@@ -50,7 +55,16 @@
                 align: 'top',
                 offsetX: -220,
                 offsetY: 0,
-                inputs: { origin: { popup:this.showSharedPopup, event: $event } },
+                inputs: {
+                    origin: {
+                        popup: this.showSharedPopup,
+                        event: $event,
+                    },
+                    content: this.object,
+                    options: {
+                        inActivity: true,
+                    },
+                },
             });
         }
         
@@ -119,6 +133,7 @@
         controllerAs: 'activityCard',
         bindings: {
             object: '<',
+            theme: '<',
         },
     });
 }());

@@ -1,6 +1,6 @@
 ﻿(function () {
     class ActivityEditorController {
-        constructor($scope, close, options, stateTree, $http, upyun, notification, $state) {
+        constructor($scope, close, options, stateTree, $http, upyun, notification, $state, $location) {
             $.extend(this, {
                 close,
                 stateTree,
@@ -8,6 +8,7 @@
                 upyun,
                 notification,
                 $state,
+                $location,
             });
             this.redirect = true;
 

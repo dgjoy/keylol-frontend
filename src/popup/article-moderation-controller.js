@@ -25,24 +25,24 @@
                             close();
                         },
                     },
-                    { type: 'horizon' },
-                    {
-                        type: 'item',
-                        text: '举报',
-                        clickAction ($event) {
-                            origin.popup({
-                                templateUrl: 'src/popup/report-abuse.html',
-                                controller: 'ReportAbuseController as reportAbuse',
-                                event: $event,
-                                attachSide: 'bottom',
-                                align: 'center',
-                                offsetX: 0,
-                                offsetY: 20,
-                                inputs: { content: 'hello' },
-                            });
-                            close();
-                        },
-                    },
+                    // { type: 'horizon' },
+                    // {
+                    //     type: 'item',
+                    //     text: '举报',
+                    //     clickAction ($event) {
+                    //         origin.popup({
+                    //             templateUrl: 'src/popup/report-abuse.html',
+                    //             controller: 'ReportAbuseController as reportAbuse',
+                    //             event: $event,
+                    //             attachSide: 'bottom',
+                    //             align: 'center',
+                    //             offsetX: 0,
+                    //             offsetY: 20,
+                    //             inputs: { content: 'hello' },
+                    //         });
+                    //         close();
+                    //     },
+                    // },
                 ],
             };
 

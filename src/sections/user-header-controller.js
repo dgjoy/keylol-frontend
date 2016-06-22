@@ -3,7 +3,7 @@
  */
 (function () {
     class userHeaderController {
-        constructor($scope, $window) {
+        constructor($scope, $window, utils) {
             this.subscribeSet = [
                 {
                     text: '关注',
@@ -15,9 +15,7 @@
                 },
             ];
 
-            this.subscribe = () => {
-                
-            };
+            this.subscribe = utils.subscribe;
 
             const $$window = $($window);
             let scrollTop = $$window.scrollTop();

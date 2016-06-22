@@ -1,13 +1,13 @@
 <div class="display-card">
     <div class="user-with-date">
-        <a class="user" href="user/{{activityCard.object.authorIdCode}}">
-            <img class="avatar" webp-src="{{activityCard.object.authorAvatarImage | avatarUrl}}"  alt="">
+        <a class="user" ng-href="user/{{activityCard.object.authorBasicInfo.idCode}}">
+            <img class="avatar" webp-src="{{activityCard.object.authorBasicInfo.avatarImage | avatarUrl}}"  alt="">
             <div class="name-group">
-                <p class="username">{{activityCard.object.authorUserName}}</p>
+                <p class="username">{{activityCard.object.authorBasicInfo.userName}}</p>
                 <p am-time-ago="activityCard.object.publishTime"></p>
             </div>
         </a>
-        <div ng-click="activityCard.showMenu($event)" popup="activityCard.showSharedPopup"><icon-button icon="dots-vertical">5 月 7 号</icon-button></div>
+        <div ng-if="activityCard.canModerate" popup="activityCard.showSharedPopup"><icon-button icon="dots-vertical" click="activityCard.showMenu(event)"></icon-button></div>
     </div>
     <div class="simple">
         <vote-circle ng-if="activityCard.object.rating" review="activityCard.object.rating" gray-background="true"></vote-circle>
@@ -15,15 +15,15 @@
         <img ng-if="activityCard.object.coverImage" webp-src="{{activityCard.object.coverImage | uriRelocate}}">
     </div>
     <div class="point-with-source">
-        <a class="point" href="point/{{::activityCard.relatedPoints.mainPoint.idCode}}" ripple>
+        <a class="point" ng-href="point/{{::activityCard.relatedPoints.mainPoint.idCode}}" ripple>
             <point-basic-info point="::activityCard.relatedPoints.mainPoint"></point-basic-info>
         </a>
-        <a class="source" href="" ng-click="activityCard.showSourceList($event)" popup="activityCard.showSharedPopup">{{::activityCard.relatedPoints.attachedPoints.length + 1}} 个据点来稿</a>
+        <a class="source" href="" ng-click="activityCard.showSourceList($event)" popup="activityCard.showSourceListPopup">{{::activityCard.relatedPoints.attachedPoints.length + 1}} 个据点来稿</a>
     </div>
 </div>
 <div class="communicate-card">
     <div class="review-area">
-        <pagination class="float-top" on-page-changed="::activityCard.changePage(newPage, oldPage)" total="activityCard.commentsManager.pageCount" current="activityCard.commentsManager.currentPage"></pagination>
+        <pagination theme-color="activityCard.theme.light" class="float-top" ng-if="activityCard.commentsManager.pageCount > 1" on-page-changed="::activityCard.changePage(newPage, oldPage)" total="activityCard.commentsManager.pageCount" current="activityCard.commentsManager.currentPage"></pagination>
         <div class="review-count">
             全部 {{activityCard.commentsManager.count}} 个评论
         </div>
@@ -41,7 +41,7 @@
                     </div>
                 </div>
             </div>
-            <pagination on-page-changed="::activityCard.changePage(newPage, oldPage)" total="activityCard.commentsManager.pageCount" current="activityCard.commentsManager.currentPage"></pagination>
+            <pagination theme-color="activityCard.theme.light" on-page-changed="::activityCard.changePage(newPage, oldPage)" ng-if="activityCard.commentsManager.pageCount > 1" total="activityCard.commentsManager.pageCount" current="activityCard.commentsManager.currentPage"></pagination>
         </div>
         <div class="hr"></div>
         <div class="review-sender">
@@ -54,6 +54,6 @@
         <div>
             <flat-button type="inertia" text="+{{activityCard.object.likeCount}}"></flat-button>
         </div>
-        <flat-button click="activityCard.submit()" text="评论" disabled="activityCard.vm.content.length === 0 || activityCard.submitLock"></flat-button>
+        <flat-button click="activityCard.submit()" theme-color="activityCard.theme.main" text="评论" disabled="activityCard.vm.content.length === 0 || activityCard.submitLock"></flat-button>
     </div>
 </div>

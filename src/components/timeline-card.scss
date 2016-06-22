@@ -71,19 +71,26 @@ timeline-card {
           transition: height .5s;
 
           >.expand {
-            bottom: 0;
+            bottom: -10px;
             left: 0;
             width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
             position: absolute;
-            background: linear-gradient(to bottom, rgba($keylol-card, .3), rgba($keylol-card, 1) 75%);
+            background: linear-gradient(to bottom, rgba($keylol-card, .3), rgba($keylol-card, 1) 50%);
 
             svg {
+              margin-top: 10px;
               width: 24px;
               height: 24px;
-              fill: $keylol-light-theme;
+              fill: $keylol-inertia-shape;
+            }
+
+            &:hover {
+              svg {
+                fill: $keylol-light-text;
+              }
             }
           }
         }

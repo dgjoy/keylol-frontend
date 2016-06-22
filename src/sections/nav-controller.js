@@ -129,18 +129,20 @@
                 }
             } else if (currentStateName.substr(0, 7) === 'content') {
                 this.inPoint = true;
-                let name;
+                let name, watchName;
                 if (currentStateName.substr(8, 15) === 'article') {
                     name = '文章';
+                    watchName = 'article';
                 } else if (currentStateName.substr(8, 16) === 'activity') {
                     name = '动态';
+                    watchName = 'activity';
                 }
 
                 this.tabArray = [
                     { name, 'float': 'left', href: $location.url() },
                 ];
                 this.currentPage = 0;
-                $scope.$watch('stateTree.content.article.pointBasicInfo', newValue => {
+                $scope.$watch(`stateTree.content.${watchName}.pointBasicInfo`, newValue => {
                     if (newValue && newValue.idCode) {
                         if (newValue.type === 'game' || newValue.type === 'hardware') {
                             Array.prototype.push.apply(this.tabArray, [
