@@ -168,8 +168,8 @@ activity-card {
       }
 
       >.review-list {
-        position: relative;
         @include page-change('ul');
+        position: relative;
         margin: 10px 0;
         overflow: hidden;
         transition: height .5s;

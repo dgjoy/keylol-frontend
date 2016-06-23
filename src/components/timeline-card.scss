@@ -161,6 +161,16 @@ timeline-card {
     align-items: center;
     margin: 0 10px;
     height: 50px;
+
+    a {
+      padding: 8px 15px;
+      font-weight: bold;
+      color: $keylol-inertia-text;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
 
   >.communicate-card>.review-area {
@@ -205,8 +215,19 @@ timeline-card {
 
     >.review-list {
       position: relative;
+
+      >a {
+        display: block;
+        margin: 10px 0;
+        text-align: center;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
       &.scroller {
-        height: 400px;
+        max-height: 400px;
         overflow: auto;
       }
 
@@ -239,11 +260,13 @@ timeline-card {
           >.user {
             font-weight: bold;
             color: $keylol-main-text;
-            >a {
+
+            >a, span {
               color: $keylol-inertia-text;
               font-weight: normal;
               margin-left: 6px;
             }
+
             >a:hover {
               text-decoration: underline;
             }
