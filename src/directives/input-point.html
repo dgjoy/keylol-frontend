@@ -3,8 +3,6 @@
          ng-class="{active: point.selected}"
          ng-style="{'background-color': point.selected ? theme.light : ''}"
          ng-click="selectPoint($index, $event)"
-         ng-mouseenter="showPreview($index, $event)"
-         popup="previewPopup[$index]"
          ng-repeat="point in pointArray track by point.id">
         <img webp-src="{{::point.avatarImage | avatarUrl}}" alt="{{utils.getPreferredPointName(point)[0]}}">
         <p>{{utils.getPreferredPointName(point)[0]}}</p>

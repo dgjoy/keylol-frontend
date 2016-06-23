@@ -25,18 +25,18 @@
                     }
                 };
 
-                scope.showPreview = function ($index, $event) {
-                    scope.previewPopup[$index]({
-                        templateUrl: 'src/popup/point-preview-card.html',
-                        controller: 'PointPreviewCardController as pointPreviewCard',
-                        attachSide: 'bottom',
-                        event: $event,
-                        align: 'center',
-                        // inputs: {
-                        //     idCode: scope.pointArray[$index].idCode,
-                        // },
-                    });
-                };
+                // scope.showPreview = function ($index, $event) {
+                //     scope.previewPopup[$index]({
+                //         templateUrl: 'src/popup/point-preview-card.html',
+                //         controller: 'PointPreviewCardController as pointPreviewCard',
+                //         attachSide: 'bottom',
+                //         event: $event,
+                //         align: 'center',
+                //         // inputs: {
+                //         //     idCode: scope.pointArray[$index].idCode,
+                //         // },
+                //     });
+                // };
 
                 scope.deleteSelectorPoint = function (index) {
                     scope.pointArray.splice(index, 1);

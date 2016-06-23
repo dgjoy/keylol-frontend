@@ -80,35 +80,35 @@
             }
         }
 
-        showCategoryPreview($event, $index) {
-            this.categoryPopup[$index]({
-                templateUrl: 'src/popup/point-preview-card.html',
-                controller: 'PointPreviewCardController as pointPreviewCard',
-                event: $event,
-                attachSide: 'bottom',
-                align: 'center',
-                offsetX: 0,
-                offsetY: 0,
-                inputs: {
-                    idCode: this.categories[$index].idCode,
-                },
-            });
-        }
-
-        showVendorPreview($event, $index) {
-            this.vendorPopup[$index]({
-                templateUrl: 'src/popup/point-preview-card.html',
-                controller: 'PointPreviewCardController as pointPreviewCard',
-                event: $event,
-                attachSide: 'bottom',
-                align: 'center',
-                offsetX: 0,
-                offsetY: 0,
-                // inputs: {
-                //     idCode: this.vendors[$index].idCode,
-                // },
-            });
-        }
+        // showCategoryPreview($event, $index) {
+        //     this.categoryPopup[$index]({
+        //         templateUrl: 'src/popup/point-preview-card.html',
+        //         controller: 'PointPreviewCardController as pointPreviewCard',
+        //         event: $event,
+        //         attachSide: 'bottom',
+        //         align: 'center',
+        //         offsetX: 0,
+        //         offsetY: 0,
+        //         inputs: {
+        //             idCode: this.categories[$index].idCode,
+        //         },
+        //     });
+        // }
+        //
+        // showVendorPreview($event, $index) {
+        //     this.vendorPopup[$index]({
+        //         templateUrl: 'src/popup/point-preview-card.html',
+        //         controller: 'PointPreviewCardController as pointPreviewCard',
+        //         event: $event,
+        //         attachSide: 'bottom',
+        //         align: 'center',
+        //         offsetX: 0,
+        //         offsetY: 0,
+        //         // inputs: {
+        //         //     idCode: this.vendors[$index].idCode,
+        //         // },
+        //     });
+        // }
 
         showMenu($event) {
             this.showMenuPopup({
