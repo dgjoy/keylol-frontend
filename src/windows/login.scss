@@ -145,6 +145,25 @@
           padding: 0 15px;
           justify-content: space-between;
           background-color: $keylol-inverted-text;
+          overflow: hidden;
+
+          &.ng-enter {
+            transition: height 800ms;
+            transition-delay: 800ms;
+            height: 0;
+          }
+
+          &.ng-enter-active {
+            height: 95px;
+          }
+
+          &.ng-leave {
+            transition: height 800ms;
+          }
+
+          &.ng-leave-active {
+            height: 0;
+          }
 
           .left {
             p {

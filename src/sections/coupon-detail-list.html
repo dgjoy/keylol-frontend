@@ -1,6 +1,6 @@
 ﻿<div class="header">
     <div class="text">
-        <p>{{couponDetailList.object.coupon | numberAbbreviation}} ◆</p>
+        <p>{{couponDetailList.object.coupon}} ◆</p>
         <p>当前文券数</p>
     </div>
     <img src="assets/images/piggy-bank.png">
@@ -21,7 +21,7 @@
             <div class="item" ng-repeat="item in couponDetailList.list">
                 <div class="cell">{{item.event}}</div>
                 <div class="cell right {{item.change >= 0 ? 'coupon-up' : 'coupon-down'}}">{{ item.change >= 0 ? '+ '+item.change : '- ' + couponDetailList.abs(item.change) }} ◆</div>
-                <div class="cell right">{{item.balance | numberAbbreviation}} ◆</div>
+                <div class="cell right">{{item.balance}} ◆</div>
                 <div class="cell inertia">{{item.createTime | amUtc | amLocal | amDateFormat:'YYYY-MM-DD HH:MM:SS'}}</div>
                 <div class="cell" ng-switch="item.event">
                     <span ng-switch-when="新注册">欢迎来到其乐游戏社区</span>
