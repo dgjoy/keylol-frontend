@@ -41,11 +41,11 @@
         </form>
     </div>
     <div class="action-hub" ng-if="navBar.stateTree.currentUser && !navBar.stateTree.empty">
-        <a href="post-office" ng-class="{active: navBar.stateTree.currentUser.messageCount}" ripple="#fff">
+        <a href="post-office" ng-class="{active: navBar.stateTree.currentUser.messageCount, focus: navBar.stateTree.postOffice}" ripple="#fff">
             <p>邮政</p>
             <p>{{navBar.stateTree.currentUser.messageCount || "O" | numberAbbreviation}}</p>
         </a>
-        <a href="coupon" ripple="#fff">
+        <a href="coupon" ng-class="{focus: navBar.stateTree.coupon }" ripple="#fff">
             <p>文券</p>
             <p>{{navBar.stateTree.currentUser.coupon | numberAbbreviation}} ◆</p>
         </a>

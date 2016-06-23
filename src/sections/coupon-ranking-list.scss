@@ -38,7 +38,7 @@ coupon-ranking-list {
 
   .list {
     .item-list {
-      @include page-change('.latest-list');
+      @include page-change('.wrapper');
       overflow: hidden;
       position: relative;
       transition: height .5s;
@@ -49,33 +49,32 @@ coupon-ranking-list {
       position: absolute;
       left: 0;
       top: 0;
-      @include page-change('.latest-list');
+      margin-top: -10px;
     }
 
     .item,
     .title {
-      height: 50px;
+      padding: 0 20px;
       display: flex;
       .cell {
         height: 100%;
         display: flex;
         align-items: center;
         justify-content: flex-start;
+        padding: 0 20px;
+        box-sizing: border-box;
+
         &:nth-of-type(1) {
-          padding-left: 40px;
-          width: 60px;
+          width: 100px;
         }
         &:nth-of-type(2) {
-          padding-left: 40px;
-          width: 400px;
+          width: 450px;
         }
         &:nth-of-type(3) {
-          padding-left: 40px;
-          width: 70px;
+          width: 100px;
         }
         &:nth-of-type(4) {
-          padding-left: 80px;
-          width: 100px;
+          width: 250px;
         }
 
         &.right {
@@ -85,15 +84,25 @@ coupon-ranking-list {
     }
 
     .title {
+      height: 50px;
       border-bottom: 1px solid $keylol-inertia-shape;
       .cell {
         font-weight: bold;
       }
     }
 
+    .item {
+      height: 72px;
+    }
+
     .item .cell{
       &.light-theme {
         color: $keylol-light-theme;
+      }
+
+      &.best-ranking {
+        color: $keylol-theme;
+        font-weight: bold;
       }
 
       &.user-info {
@@ -124,9 +133,8 @@ coupon-ranking-list {
     }
   }
 
-
   .footer {
-    padding: 50px 15px 20px;
+    padding: 10px 15px 20px;
     pagination {
       float: right;
     }

@@ -1,6 +1,6 @@
 ﻿<div class="header">
     <div class="text">
-        <p># 12</p>
+        <p># {{couponRankingList.object.myRanking > 0 ? couponRankingList.object.myRanking : '100+'}}</p>
         <p>当前社区排名</p>
     </div>
     <img src="assets/images/Trophy.png">
@@ -12,28 +12,28 @@
         <div class="cell right">文券</div>
         <div class="cell">获得认可</div>
     </div>
-    <div class="item-list" ng-style="{height: couponRankingList.list.length * 50}" ng-class="{
+    <div class="item-list" ng-style="{height: couponRankingList.list.length * 72 - 10}" ng-class="{
     'to-next' : couponRankingList.isToNext,
     'to-previous' : !couponRankingList.isToNext
     }">
-        <div class="wrapper">
-            <div class="item" ng-repeat="i in couponRankingList.list">
-                <div class="cell">{{$index + 1}}</div>
+        <div class="wrapper" ng-animate-swap="couponRankingList.currentPage">
+            <div class="item" ng-repeat="item in couponRankingList.list">
+                <div class="cell" ng-class="{'best-ranking':item.ranking <= 2}">{{item.ranking + 1}}</div>
                 <div class="cell user-info">
-                    <a href="user/haack">
-                        <img class="avatar" webp-src="{{'keylol://steam/app-icons/314970-f59e499005dcfbb2933c3701b9bed27e4ae8b2fd' | avatarUrl}}" alt="">
+                    <a href="user/{{item.userBasicInfo.idCode}}">
+                        <img class="avatar" webp-src="{{ item.userBasicInfo.avatarImage | avatarUrl}}" alt="">
                     </a>
                     <div class="name-group">
-                        <p><a href="user/haack">艾莎</a></p>
-                        <p>用户的签名</p>
+                        <p><a href="user/{{item.userBasicInfo.idCode}}">{{item.userBasicInfo.userName}}</a></p>
+                        <p>{{item.userBasicInfo.gamerTag}}</p>
                     </div>
                 </div>
-                <div class="cell right light-theme">143 ◆</div>
-                <div class="cell">285</div>
+                <div class="cell right light-theme">{{item.coupon | numberAbbreviation}} ◆</div>
+                <div class="cell">{{item.likeCount | numberAbbreviation}}</div>
             </div>
         </div>
     </div>
 </div>
 <div class="footer clearfix">
-    <pagination on-page-changed="couponRankingList.changePage(newPage, oldPage)" total="couponRankingList.totalPage" current="couponRankingList.currentPage"></pagination>
+    <pagination on-page-changed="couponRankingList.changePage(newPage, oldPage)" total="10" current="couponRankingList.currentPage"></pagination>
 </div>

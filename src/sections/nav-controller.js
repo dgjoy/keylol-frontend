@@ -156,9 +156,9 @@
                 $scope.$watch(() => {
                     return stateTree.currentUser;
                 },() => {
-                    if (stateTree.currentUser) {
+                    if (!$.isEmptyObject(stateTree.currentUser)) {
                         this.tabArray = [
-                            { state: '.unread',name: `未读 ${stateTree.currentUser.messageCount} 则` , float: 'left' },
+                            { state: '.unread',name: `未读 ${stateTree.currentUser.messageCount} 则` , 'float': 'left' },
                             { state: '.social-activity',name:'社交' },
                             { state: '.missive',name:'公函' },
                         ];

@@ -1,28 +1,28 @@
 ﻿(function () {
     class CouponRankingListController {
-        constructor () {
-            this.totalPage = 5;
+        constructor ($http, apiEndpoint) {
+            $.extend(this, {
+                $http,
+                apiEndpoint,
+            });
             this.currentPage = 1;
-            
-            this.list = [1,2,3,4,5,6,7,8];
         }
 
-        changePage(newVal, oldVal) {
-            this.list = [1,2,3,4,5];
-            // if (!this.changePageLock) {
-            //     this.changePageLock = true;
-            //     this.$http.get(`${this.apiEndpoint}${this.moduleApi}/?page=${newPage}`,{
-            //         params: this.requestParams,
-            //     }).then(response => {
-            //         this.currentPage = newPage;
-            //         this.isToNext = newPage > oldPage;
-            //         this.list = response.data;
-            //         this.changePageLock = false;
-            //     }, response => {
-            //         this.changePageLock = false;
-            //     });
-            // }
-            // return true;
+        changePage(newPage, oldPage) {
+            if (!this.changePageLock) {
+                this.changePageLock = true;
+                this.$http.get(`${this.apiEndpoint}states/coupon/ranking/ranking-users/?page=${newPage}`,{
+                    params: this.requestParams,
+                }).then(response => {
+                    this.currentPage = newPage;
+                    this.isToNext = newPage > oldPage;
+                    this.list = response.data;
+                    this.changePageLock = false;
+                }, response => {
+                    this.changePageLock = false;
+                });
+            }
+            return true;
         }
     }
 
@@ -30,5 +30,9 @@
         templateUrl: 'src/sections/coupon-ranking-list.html',
         controller: CouponRankingListController,
         controllerAs: 'couponRankingList',
+        bindings: {
+            list: '<',
+            object: '<',
+        },
     });
 }());

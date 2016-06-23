@@ -38,7 +38,7 @@ coupon-detail-list {
 
   .list {
     .item-list {
-      @include page-change('.latest-list');
+      @include page-change('.wrapper');
       overflow: hidden;
       position: relative;
       transition: height .5s;
@@ -49,37 +49,36 @@ coupon-detail-list {
       position: absolute;
       left: 0;
       top: 0;
-      @include page-change('.latest-list');
+      margin-top: -10px;
     }
 
     .item,
     .title {
-      height: 50px;
       display: flex;
+      padding: 0 20px;
+
       .cell {
         height: 100%;
         display: flex;
         align-items: center;
         justify-content: flex-start;
+        padding: 0 20px;
+        box-sizing: border-box;
+
         &:nth-of-type(1) {
-          padding-left: 40px;
-          width: 90px;
+          width: 120px;
         }
         &:nth-of-type(2) {
-          padding-left: 30px;
-          width: 70px;
+          width: 100px;
         }
         &:nth-of-type(3) {
-          padding-left: 30px;
-          width: 70px;
+          width: 100px;
         }
         &:nth-of-type(4) {
-          padding-left: 30px;
-          width: 170px;
+          width: 200px;
         }
         &:nth-of-type(5) {
-          padding-left: 30px;
-          width: 330px;
+          width: 380px;
         }
 
         &.right {
@@ -88,7 +87,12 @@ coupon-detail-list {
       }
     }
 
+    .item {
+      height: 60px;
+    }
+
     .title {
+      height: 50px;
       border-bottom: 1px solid $keylol-inertia-shape;
       .cell {
         font-weight: bold;
@@ -96,8 +100,11 @@ coupon-detail-list {
     }
 
     .item .cell{
-      &.coupon {
+      &.coupon-up {
         color: $keylol-review-good;
+      }
+      &.coupon-down {
+        color: $keylol-review-bad;
       }
 
       &.inertia {
@@ -117,7 +124,7 @@ coupon-detail-list {
 
 
   .footer {
-    padding: 50px 15px 20px;
+    padding: 10px 15px 20px;
     pagination {
       float: right;
     }

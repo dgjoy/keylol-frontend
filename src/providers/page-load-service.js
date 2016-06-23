@@ -1,5 +1,5 @@
 ﻿(function () {
-    keylolApp.factory('pageLoad', ($state, $http, stateTree, apiEndpoint, notification, $q) => {
+    keylolApp.factory('pageLoad', ($state, $http, stateTree, apiEndpoint, notification) => {
         return (stName, extraParams) => {
             const result = stName.split('.');
             const params = $state.params;
@@ -7,9 +7,8 @@
                 $.extend(params, extraParams);
             }
 
-            const defer = $q.defer();
             if (stateTree.empty) {
-                $http.get(`${apiEndpoint}states/[${stName}]/`,{ params }).then(response => {
+                return $http.get(`${apiEndpoint}states/[${stName}]/`,{ params }).then(response => {
                     console.log(response.data);
                     if (response.data.currentUser) {
                         _czc.push(['_setCustomVar', '登录用户',
@@ -36,7 +35,8 @@
                 }).then(target => {
                     if ($.isEmptyObject(target)) {
                         $state.go('not-found', {}, { location: false });
-                        defer.reject();
+                    } else {
+                        return target;
                     }
                 });
             } else {
@@ -72,12 +72,11 @@
                 }).then(target => {
                     if ($.isEmptyObject(target)) {
                         $state.go('not-found', {}, { location: false });
-                        defer.reject();
+                    } else {
+                        return target;
                     }
                 });
             }
-
-            return defer.promise;
         };
     });
 }());

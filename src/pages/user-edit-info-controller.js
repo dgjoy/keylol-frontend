@@ -1,6 +1,6 @@
 ﻿(function () {
     class UserEditInfoController {
-        constructor ($scope, pageHead, stateTree, pageLoad, $state) {
+        constructor ($scope, pageHead, stateTree, pageLoad, $state, $stateParams) {
             pageHead.setTitle('个人 - 编辑 - 资料 - 其乐');
 
             let fetchPromise;
@@ -12,6 +12,11 @@
             }
 
             fetchPromise.then(() => {
+                if (!stateTree.currentUser || (stateTree.currentUser && stateTree.currentUser.id !==  stateTree.aggregation.user.basicInfo.id && $.inArray('Operator', stateTree.currentUser.roles) === -1)) {
+                    $state.go('aggregation.user', $stateParams);
+                    return ;
+                }
+
                 const submitLink = `user/${stateTree.aggregation.user.basicInfo.id}`;
                 $scope.theme = {
                     main: stateTree.aggregation.user.basicInfo.themeColor,

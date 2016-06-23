@@ -140,6 +140,10 @@ nav-bar {
       color: $keylol-inverted-text;
       text-decoration: none;
 
+      &.focus {
+        background-color: $keylol-light-theme;
+      }
+
       &.active {
         color: $keylol-accent;
 

@@ -101,8 +101,8 @@
                 url: '/post-office',
                 templateUrl: 'src/pages/post-office.html',
                 controller: 'PostOfficeController',
-                onEnter (stateTree, $state, $stateParams) {
-                    if (!$.isEmptyObject(stateTree.currentUser)) {
+                onEnter (union, $state, $stateParams) {
+                    if (!union.$localStorage.Authorization) {
                         $state.go('entrance', $stateParams);
                     }
                 },
@@ -112,7 +112,7 @@
                     templateUrl: 'src/pages/unread.html',
                     controller: 'UnreadController',
                     onExit (stateTree) {
-                        delete stateTree.postOffice.unread;
+                        delete stateTree.postOffice;
                     },
                 })
                 .state('post-office.social-activity',{
@@ -125,7 +125,7 @@
                         templateUrl: 'src/pages/social-activity-reply.html',
                         controller: 'SocialActivityReplyController',
                         onExit (stateTree) {
-                            delete stateTree.postOffice.socialActivity;
+                            delete stateTree.postOffice;
                         },
                     })
                     .state('post-office.social-activity.approve',{
@@ -133,7 +133,7 @@
                         templateUrl: 'src/pages/social-activity-approve.html',
                         controller: 'SocialActivityApproveController',
                         onExit (stateTree) {
-                            delete stateTree.postOffice.socialActivity;
+                            delete stateTree.postOffice;
                         },
                     })
                     .state('post-office.social-activity.follower',{
@@ -141,7 +141,7 @@
                         templateUrl: 'src/pages/social-activity-follower.html',
                         controller: 'SocialActivityFollowerController',
                         onExit (stateTree) {
-                            delete stateTree.postOffice.socialActivity;
+                            delete stateTree.postOffice;
                         },
                     })
                 .state('post-office.missive',{
@@ -149,7 +149,7 @@
                     templateUrl: 'src/pages/missives.html',
                     controller: 'MissivesController',
                     onExit (stateTree) {
-                        delete stateTree.postOffice.missive;
+                        delete stateTree.postOffice;
                     },
                 })
             .state('coupon',{
@@ -157,7 +157,7 @@
                 templateUrl: 'src/pages/coupon.html',
                 controller: 'CouponController',
                 onEnter (stateTree, $state, $stateParams) {
-                    if (!stateTree.currentUser) {
+                    if (!union.$localStorage.Authorization) {
                         $state.go('entrance', $stateParams);
                     }
                 },
@@ -167,7 +167,7 @@
                     templateUrl: 'src/pages/coupon-detail.html',
                     controller: 'CouponDetailController',
                     onExit (stateTree) {
-                        delete stateTree.coupon.detail;
+                        delete stateTree.coupon;
                     },
                 })
                 // .state('coupon.store',{
@@ -180,7 +180,7 @@
                     templateUrl: 'src/pages/coupon-ranking.html',
                     controller: 'CouponRankingController',
                     onExit (stateTree) {
-                        delete stateTree.coupon.ranking;
+                        delete stateTree.coupon;
                     },
                 })
             .state('aggregation', {
@@ -299,8 +299,8 @@
                     url: '/edit',
                     templateUrl: 'src/pages/user-edit.html',
                     controller: 'UserEditController',
-                    onEnter (stateTree, $state, $stateParams) {
-                        if (!stateTree.currentUser || (stateTree.currentUser && stateTree.currentUser.id !==  stateTree.aggregation.user.basicInfo.id && $.inArray('Operator', stateTree.currentUser.roles) === -1)) {
+                    onEnter (union, $state, $stateParams) {
+                        if (!union.$localStorage.Authorization) {
                             $state.go('aggregation.user', $stateParams);
                         }
                     },
@@ -314,7 +314,9 @@
                         controller: 'UserEditInfoController',
                         onExit (stateTree) {
                             console.log('exit edit info');
-                            delete stateTree.aggregation.user.edit;
+                            if (stateTree.aggregation) {
+                                delete stateTree.aggregation.user.edit;
+                            }
                         },
                     })
                     .state('aggregation.user.edit.preference', {
@@ -323,7 +325,9 @@
                         controller: 'UserEditPreferenceController',
                         onExit (stateTree) {
                             console.log('exit edit preference');
-                            delete stateTree.aggregation.user.edit;
+                            if (stateTree.aggregation) {
+                                delete stateTree.aggregation.user.edit;
+                            }
                         },
                     })
             .state('content', {
