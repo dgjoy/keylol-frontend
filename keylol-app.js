@@ -156,7 +156,7 @@
                 url: '/coupon',
                 templateUrl: 'src/pages/coupon.html',
                 controller: 'CouponController',
-                onEnter (stateTree, $state, $stateParams) {
+                onEnter (union, $state, $stateParams) {
                     if (!union.$localStorage.Authorization) {
                         $state.go('entrance', $stateParams);
                     }
