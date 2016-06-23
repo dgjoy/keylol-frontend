@@ -183,7 +183,6 @@
 
         logout() {
             delete this.union.$localStorage.Authorization;
-            this.$state.go('aggregation.user');
         }
     }
 

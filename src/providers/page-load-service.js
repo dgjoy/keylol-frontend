@@ -1,5 +1,5 @@
 ﻿(function () {
-    keylolApp.factory('pageLoad', ($state, $http, stateTree, apiEndpoint, notification) => {
+    keylolApp.factory('pageLoad', ($state, $http, stateTree, apiEndpoint, notification, $q) => {
         return (stName, extraParams) => {
             const result = stName.split('.');
             const params = $state.params;
@@ -7,8 +7,9 @@
                 $.extend(params, extraParams);
             }
 
+            const defer = $q.defer();
             if (stateTree.empty) {
-                return $http.get(`${apiEndpoint}states/[${stName}]/`,{ params }).then(response => {
+                $http.get(`${apiEndpoint}states/[${stName}]/`,{ params }).then(response => {
                     console.log(response.data);
                     if (response.data.currentUser) {
                         _czc.push(['_setCustomVar', '登录用户',
@@ -25,13 +26,18 @@
                         });
                         target = target[tmp_result];
                     }
-                    if (target.current) {
+                    if (target && target.current) {
                         $state.go(`.${target.current}`, {}, { location: false });
                     }
 
                     return target;
                 }, response => {
                     notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
+                }).then(target => {
+                    if ($.isEmptyObject(target)) {
+                        $state.go('not-found', {}, { location: false });
+                        defer.reject();
+                    }
                 });
             } else {
                 let target = stateTree;
@@ -63,8 +69,15 @@
                     return target;
                 }, response => {
                     notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
+                }).then(target => {
+                    if ($.isEmptyObject(target)) {
+                        $state.go('not-found', {}, { location: false });
+                        defer.reject();
+                    }
                 });
             }
+
+            return defer.promise;
         };
     });
 }());

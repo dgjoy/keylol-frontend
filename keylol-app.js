@@ -101,6 +101,11 @@
                 url: '/post-office',
                 templateUrl: 'src/pages/post-office.html',
                 controller: 'PostOfficeController',
+                onEnter (stateTree, $state, $stateParams) {
+                    if (!$.isEmptyObject(stateTree.currentUser)) {
+                        $state.go('entrance', $stateParams);
+                    }
+                },
             })
                 .state('post-office.unread',{
                     url: '/unread',
@@ -151,21 +156,32 @@
                 url: '/coupon',
                 templateUrl: 'src/pages/coupon.html',
                 controller: 'CouponController',
+                onEnter (stateTree, $state, $stateParams) {
+                    if (!stateTree.currentUser) {
+                        $state.go('entrance', $stateParams);
+                    }
+                },
             })
                 .state('coupon.detail',{
                     url: '/detail',
                     templateUrl: 'src/pages/coupon-detail.html',
                     controller: 'CouponDetailController',
+                    onExit (stateTree) {
+                        delete stateTree.coupon.detail;
+                    },
                 })
-                .state('coupon.store',{
-                    url: '/store',
-                    templateUrl: 'src/pages/coupon-store.html',
-                    controller: 'CouponStoreController',
-                })
+                // .state('coupon.store',{
+                //     url: '/store',
+                //     templateUrl: 'src/pages/coupon-store.html',
+                //     controller: 'CouponStoreController',
+                // })
                 .state('coupon.ranking',{
                     url: '/ranking',
                     templateUrl: 'src/pages/coupon-ranking.html',
                     controller: 'CouponRankingController',
+                    onExit (stateTree) {
+                        delete stateTree.coupon.ranking;
+                    },
                 })
             .state('aggregation', {
                 'abstract': true,
@@ -283,6 +299,11 @@
                     url: '/edit',
                     templateUrl: 'src/pages/user-edit.html',
                     controller: 'UserEditController',
+                    onEnter (stateTree, $state, $stateParams) {
+                        if (!stateTree.currentUser || (stateTree.currentUser && stateTree.currentUser.id !==  stateTree.aggregation.user.basicInfo.id && $.inArray('Operator', stateTree.currentUser.roles) === -1)) {
+                            $state.go('aggregation.user', $stateParams);
+                        }
+                    },
                     onExit (stateTree) {
                         console.log('exit edit');
                     },

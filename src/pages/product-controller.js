@@ -163,7 +163,7 @@
                     if (list.length > 0) {
                         parts.push({
                             header: {
-                                mainTitle: 'series',
+                                mainTitle: '系列',
                                 subTitle: `此类 ${this.productCount} 部作品中有 ${list.length} 部属于此系列`,
                                 type: 'theme',
                             },

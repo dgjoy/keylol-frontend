@@ -85,18 +85,17 @@
             type: '评论',
             getName(message) {
                 const link = `article/${message.articleAuthorIdCode}/${message.articleSidForAuthor}`;
-                return `回复你在<a href="${link}">《${missiveTextReduce(message.articleTitle, 14)}》</a>` +
-                        `中的评论<a href="${link}">「${missiveTextReduce(message.commentContent, 14)}」</a>`;
+                return `回复你在<a href="${link}">《${missiveTextReduce(message.articleTitle, 14)}》</a>中的评论`;
             },
             getSummary (message) {
-                return '';
+                return message.commentContent;
             },
         },
         activityComment: {
             source: '用户',
             type: '评论',
             getName(message) {
-                return `回复你的动态<a href="activity/${message.activityAuthorIdCode}/${message.activitySidForAuthor}">《${missiveTextReduce(message.activityContent, 14)}》</a>`;
+                return `回复你的动态<a href="activity/${message.articleAuthorIdCode}/${message.articleSidForAuthor}">「${missiveTextReduce(message.activityContent, 14)}」</a>`;
             },
             getSummary (message) {
                 return message.commentContent;
@@ -106,12 +105,11 @@
             source: '用户',
             type: '评论',
             getName(message) {
-                const link = `activity/${message.activityAuthorIdCode}/${message.activitySidForAuthor}`;
-                return `回复你在<a href="${link}">「${missiveTextReduce(message.activityContent, 14)}」</a>` +
-                        `中的评论<a href="${link}">「${missiveTextReduce(message.commentContent, 14)}」</a>`;
+                const link = `activity/${message.articleAuthorIdCode}/${message.articleSidForAuthor}`;
+                return `回复你在<a href="${link}">「${missiveTextReduce(message.activityContent, 14)}」</a>中的评论`;
             },
             getSummary (message) {
-                return '';
+                return message.commentContent;
             },
         },
 
@@ -182,7 +180,7 @@
                 return `你的动态《${missiveTextReduce(message.activityContent, 14)}》已被封存，封存后该动态的内容和所有评论会被隐藏，同时这篇动态不会再显示于任何信息轨道上，你和站务职员仍然可以查看被隐藏的内容。`;
             },
             getHeader (message) {
-                const link = `activity/${message.activityAuthorIdCode}/${message.activitySidForAuthor}`;
+                const link = `activity/${message.articleAuthorIdCode}/${message.articleSidForAuthor}`;
                 const ac = `<a href="${link}">「${missiveTextReduce(message.activityContent, 14)}」</a>`;
                 return `你的动态${ac}已被封存，封存后该动态的内容和所有评论会被隐藏，同时这篇动态不会再显示于任何信息轨道上，你和站务职员仍然可以查看被隐藏的内容。`;
             },
@@ -195,7 +193,7 @@
                 return `动态《${missiveTextReduce(message.activityContent, 14)}》的封存已被撤销，该动态的内容和所有评论已重新公开，讯息轨道将不再隐藏这篇动态。`;
             },
             getHeader (message) {
-                const link = `activity/${message.activityAuthorIdCode}/${message.activitySidForAuthor}`;
+                const link = `activity/${message.articleAuthorIdCode}/${message.articleSidForAuthor}`;
                 const ac = `<a href="${link}">「${missiveTextReduce(message.activityContent, 14)}」</a>`;
                 return `动态${ac}的封存已被撤销，该动态的内容和所有评论已重新公开，讯息轨道将不再隐藏这篇动态。`;
             },
@@ -209,7 +207,7 @@
                     '封存后此则评论的内容和作者信息会被隐藏，你和站务职员仍然可以查看被隐藏的内容。';
             },
             getHeader (message) {
-                const link = `activity/${message.activityAuthorIdCode}/${message.activitySidForAuthor}`;
+                const link = `activity/${message.articleAuthorIdCode}/${message.articleSidForAuthor}`;
                 const ac = `<a href="${link}">「${missiveTextReduce(message.activityContent, 14)}」</a>`;
                 const cc = `<a href="${link}">「${missiveTextReduce(message.commentContent, 14)}」</a>`;
                 return `你在${ac}中的评论${cc}已被封存，` +
@@ -225,7 +223,7 @@
                     '的封存已被撤销，此则评论的内容和作者信息已重新公开。';
             },
             getHeader (message) {
-                const link = `activity/${message.activityAuthorIdCode}/${message.activitySidForAuthor}`;
+                const link = `activity/${message.articleAuthorIdCode}/${message.articleSidForAuthor}`;
                 const ac = `<a href="${link}">「${missiveTextReduce(message.activityContent, 14)}」</a>`;
                 const cc = `<a href="${link}">「${missiveTextReduce(message.commentContent, 14)}」</a>`;
                 return `动态${ac}下评论${cc}` +
@@ -266,7 +264,7 @@
                 return `很遗憾，你的动态《${missiveTextReduce(message.activityContent, 14)}》已被退稿，不会再出现于其他用户或据点的讯息轨道上，这篇动态后续的投稿也将被自动回绝。其他用户仍然可以直接通过链接继续访问这篇动态。`;
             },
             getHeader (message) {
-                const link = `activity/${message.activityAuthorIdCode}/${message.activitySidForAuthor}`;
+                const link = `activity/${message.articleAuthorIdCode}/${message.articleSidForAuthor}`;
                 const ac = `<a href="${link}">「${missiveTextReduce(message.activityContent, 14)}」</a>`;
                 return `很遗憾，你的动态${ac}已被退稿，不会再出现于其他用户或据点的讯息轨道上，这篇动态后续的投稿也将被自动回绝。其他用户仍然可以直接通过链接继续访问这篇动态。`;
             },
@@ -279,7 +277,7 @@
                 return `动态《${missiveTextReduce(message.activityContent, 14)}》的退稿限制已被撤销，其他用户首页的讯息轨道将不再隐藏这篇动态，后续的投稿也不再会被其他据点回绝。`;
             },
             getHeader (message) {
-                const link = `activity/${message.activityAuthorIdCode}/${message.activitySidForAuthor}`;
+                const link = `activity/${message.articleAuthorIdCode}/${message.articleSidForAuthor}`;
                 const ac = `<a href="${link}">「${missiveTextReduce(message.activityContent, 14)}」</a>`;
                 return `动态${ac}的退稿限制已被撤销，其他用户首页的讯息轨道将不再隐藏这篇动态，后续的投稿也不再会被其他据点回绝。`;
             },
@@ -378,7 +376,7 @@
                 return `你的动态《${missiveTextReduce(message.activityContent, 14)}》已被警告，若在 30 天之内收到两次警告，你的账户将被自动停权 14 天。该次警告已被录入统计中，请在此期间谨慎言行。`;
             },
             getHeader (message) {
-                const link = `activity/${message.activityAuthorIdCode}/${message.activitySidForAuthor}`;
+                const link = `activity/${message.articleAuthorIdCode}/${message.articleSidForAuthor}`;
                 const ac = `<a href="${link}">「${missiveTextReduce(message.activityContent, 14)}」</a>`;
                 return `你的动态${ac}已被警告，若在 30 天之内收到两次警告，你的账户将被自动停权 14 天。该次警告已被录入统计中，请在此期间谨慎言行。`;
             },
@@ -391,7 +389,7 @@
                 return `动态《${missiveTextReduce(message.activityContent, 14)}》的警告已被撤销，之前的警告将不再纳入停权计数器的考量中，除非你的账户已经因收到警告而被自动停权。`;
             },
             getHeader (message) {
-                const link = `activity/${message.activityAuthorIdCode}/${message.activitySidForAuthor}`;
+                const link = `activity/${message.articleAuthorIdCode}/${message.articleSidForAuthor}`;
                 const ac = `<a href="${link}">「${missiveTextReduce(message.activityContent, 14)}」</a>`;
                 return `动态${ac}的警告已被撤销，之前的警告将不再纳入停权计数器的考量中，除非你的账户已经因收到警告而被自动停权。`;
             },
@@ -405,7 +403,7 @@
                     '已被警告，若在 30 天之内收到两次警告，你的账户将被自动停权 14 天。该次警告已被录入统计中，请在此期间谨慎言行。';
             },
             getHeader (message) {
-                const link = `activity/${message.activityAuthorIdCode}/${message.activitySidForAuthor}`;
+                const link = `activity/${message.articleAuthorIdCode}/${message.articleSidForAuthor}`;
                 const ac = `<a href="${link}">「${missiveTextReduce(message.activityContent, 14)}」</a>`;
                 const cc = `<a href="${link}">「${missiveTextReduce(message.commentContent, 14)}」</a>`;
                 return `你在${ac}中的评论${cc}` +
@@ -421,7 +419,7 @@
                     '之前的警告将不再纳入停权计数器的考量中，除非你的账户已经因收到警告而被自动停权。';
             },
             getHeader (message) {
-                const link = `activity/${message.activityAuthorIdCode}/${message.activitySidForAuthor}`;
+                const link = `activity/${message.articleAuthorIdCode}/${message.articleSidForAuthor}`;
                 const ac = `<a href="${link}">「${missiveTextReduce(message.activityContent, 14)}」</a>`;
                 const cc = `<a href="${link}">「${missiveTextReduce(message.commentContent, 14)}」</a>`;
                 return `动态${ac}下评论${cc}收到的警告已被撤销，` +

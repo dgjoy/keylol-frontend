@@ -29,6 +29,7 @@
             showPopup: '=?',
             binarySet: '<',
             binaryValue: '<',
+            isSubmit: '<',
         },
     });
 }());

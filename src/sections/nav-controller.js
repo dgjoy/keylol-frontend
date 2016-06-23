@@ -83,19 +83,21 @@
                 $scope.$watch(() => {
                     return stateTree.currentUser;
                 },() => {
-                    if ($.inArray('Operator', stateTree.currentUser.roles) !== -1 || (stateTree.currentUser && stateTree.currentUser.idCode === stateTree.aggregation.user.basicInfo.idCode)) {
-                        this.tabArray[3] = { state: '.edit', name: '编辑', 'float': 'right' };
+                    if (!stateTree.currentUser || (stateTree.currentUser && stateTree.currentUser.id !==  stateTree.aggregation.user.basicInfo.id && $.inArray('Operator', stateTree.currentUser.roles) === -1)) {
+                        this.tabArray = [
+                            { state: '.dossier', name: '档案' },
+                            { state: '.people', name: '人脉' },
+                            { state: '.timeline', name: '轨道' },
+                        ];
                     } else {
-                        this.tabArray[3] = undefined;
+                        this.tabArray = [
+                            { state: '.dossier', name: '档案' },
+                            { state: '.people', name: '人脉' },
+                            { state: '.timeline', name: '轨道' },
+                            { state: '.edit', name: '编辑', 'float': 'right' },
+                        ];
                     }
                 });
-
-
-                this.tabArray = [
-                    { state: '.dossier', name: '档案' },
-                    { state: '.people', name: '人脉' },
-                    { state: '.timeline', name: '轨道' },
-                ];
 
                 $scope.$watch(() => {
                     return $state.current.name;
@@ -185,7 +187,7 @@
                 this.inEntrance = true;
                 this.tabArray = [
                     { state: '.detail', name:'明细' },
-                    { state: '.store', name:'商店' },
+                    // { state: '.store', name:'商店' },
                     { state: '.ranking', name:'排行' },
                 ];
 
@@ -197,11 +199,11 @@
                         case 'detail' :
                             this.currentPage = 0;
                             break;
-                        case 'store' :
-                            this.currentPage = 1;
-                            break;
+                        // case 'store' :
+                        //     this.currentPage = 1;
+                        //     break;
                         case 'ranking' :
-                            this.currentPage = 2;
+                            this.currentPage = 1;
                             break;
                     }
                 });
