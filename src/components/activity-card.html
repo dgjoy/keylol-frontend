@@ -10,15 +10,23 @@
         <div ng-if="activityCard.canModerate" popup="activityCard.showSharedPopup"><icon-button icon="dots-vertical" click="activityCard.showMenu(event)"></icon-button></div>
     </div>
     <div class="simple">
-        <vote-circle ng-if="activityCard.object.rating" review="activityCard.object.rating" gray-background="true"></vote-circle>
+        <vote-circle ng-if="activityCard.object.rating" review="activityCard.object.rating * 2 - 1" gray-background="true"></vote-circle>
         <p>{{activityCard.object.content}}</p>
         <img ng-if="activityCard.object.coverImage" webp-src="{{activityCard.object.coverImage | uriRelocate}}">
     </div>
     <div class="point-with-source">
-        <a class="point" ng-href="point/{{::activityCard.relatedPoints.mainPoint.idCode}}" ripple>
+        <a class="point" ng-href="point/{{::activityCard.relatedPoints.mainPoint.idCode}}">
             <point-basic-info point="::activityCard.relatedPoints.mainPoint"></point-basic-info>
         </a>
         <a class="source" href="" ng-click="activityCard.showSourceList($event)" popup="activityCard.showSourceListPopup">{{::activityCard.relatedPoints.attachedPoints.length + 1}} 个据点来稿</a>
+    </div>
+    <div class="agree">
+        <div class="action">
+            <raised-button type="theme" theme-color="activityCard.theme.main" text="+{{activityCard.object.likeCount}}"></raised-button>
+        </div>
+        <!--<div class="agree-list">-->
+        <!--<img ng-repeat="i in [1,2,3,4,5]" class="avatar" webp-src="//storage.keylol.com/fd0dfd38572adff068251606aa282b3f.jpg!avatar.medium" />-->
+        <!--</div>-->
     </div>
 </div>
 <div class="communicate-card">
@@ -27,33 +35,55 @@
         <div class="review-count">
             全部 {{activityCard.commentsManager.count}} 个评论
         </div>
-        <div class="review-list clearfix">
-            <div class="review" href="" ng-repeat="comment in activityCard.commentsManager.pages[activityCard.commentsManager.currentPage - 1]">
-                <img src="" webp-src="{{comment.authorAvatarImage | avatarUrl}}" alt="" class="avatar" />
-                <div class="content">
-                    <div class="info">
-                        <div class="user">{{comment.authorUserName}}<a href="">+{{comment.likeCount}}</a></div>
-                        <div class="date"><span am-time-ago="comment.publishTime"></span> / #{{comment.sidForActivity}}</div>
-                        <div class="actions"><a href="">认可</a><a href="">回复</a></div>
+        <div class="review-list" ng-style="{height: activityCard.commentsManager.commentsHeight}" ng-class="{
+        'to-next' : activityCard.commentsManager.isToNext,
+        'to-previous' : !activityCard.commentsManager.isToNext
+        }">
+            <ul ng-animate-swap="activityCard.commentsManager.currentPage">
+                <li class="review" ng-repeat="comment in activityCard.commentsManager.pages[activityCard.commentsManager.currentPage - 1]">
+                    <img src="" webp-src="{{comment.authorAvatarImage | avatarUrl}}" alt="" class="avatar" />
+                    <div class="content">
+                        <div class="info">
+                            <div class="user">{{comment.authorUserName}}<span>+{{comment.likeCount}}</span></div>
+                            <div class="date">
+                                <span ng-if="comment.authorPlayedTime">在档 {{comment.authorPlayedTime}} 小时 / </span>
+                                <span am-time-ago="comment.publishTime"></span> / #{{comment.sidForActivity}}
+                            <span ng-if="comment.authorIdCode === activityCard.object.authorBasicInfo.idCode">
+                                /
+                                <span ng-style="{color: activityCard.theme.light}" class="light-theme">动态作者</span>
+                            </span>
+                            <span ng-if="false">
+                                /
+                                <span class="error">封存中</span>
+                            </span>
+                            </div>
+                            <div class="actions">
+                                <a href="" ng-if="comment.authorIdCode !== activityCard.stateTree.currentUser.idCode && !comment.liked">认可</a>
+                                <a href="" ng-click="activityCard.reply(comment)">回复</a>
+                            <span ng-if="comment.authorIdCode !== activityCard.stateTree.currentUser.idCode || activityCard.stateTree.currentUser.roles.indexOf('Operator') > -1">
+                                <span>|</span>
+                                <a href="">封存</a>
+                                <a ng-if="activityCard.stateTree.currentUser.roles.indexOf('Operator') > -1" href="">警告</a>
+                            </span>
+                            </div>
+                        </div>
+                        <div class="text">
+                            {{comment.content}}
+                        </div>
                     </div>
-                    <div class="text">
-                        {{comment.content}}
-                    </div>
-                </div>
-            </div>
+                </li>
+            </ul>
+        </div>
+        <div class="clearfix">
             <pagination theme-color="activityCard.theme.light" on-page-changed="::activityCard.changePage(newPage, oldPage)" ng-if="activityCard.commentsManager.pageCount > 1" total="activityCard.commentsManager.pageCount" current="activityCard.commentsManager.currentPage"></pagination>
         </div>
         <div class="hr"></div>
         <div class="review-sender">
-            <img webp-src="{{ activityCard.stateTree.currentUser.avatarImage | avatarUrl}}" alt="" class="avatar">
-            <textarea elastic placeholder="发表见解..." ng-model="activityCard.vm.content"></textarea>
+            <img webp-src="{{activityCard.stateTree.currentUser.avatarImage | avatarUrl}}" alt="" class="avatar">
+            <textarea elastic placeholder="发表见解..." focus-me="activityCard.textFocus" ng-model="activityCard.vm.content"></textarea>
         </div>
     </div>
-
-    <div class="operation">
-        <div>
-            <flat-button type="inertia" text="+{{activityCard.object.likeCount}}"></flat-button>
-        </div>
+    <div class="clearfix">
         <flat-button click="activityCard.submit()" theme-color="activityCard.theme.main" text="评论" disabled="activityCard.vm.content.length === 0 || activityCard.submitLock"></flat-button>
     </div>
 </div>

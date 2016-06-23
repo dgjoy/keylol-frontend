@@ -24,7 +24,7 @@
                     </div>
                     <div class="action-date">
                         <p class="action">
-                            <span ng-if="comment.authorIdCode !== articleComments.stateTree.currentUser.idCode || articleComments.stateTree.currentUser.roles.indexOf('Operator') > -1">
+                            <span ng-if="comment.id && (comment.authorIdCode !== articleComments.stateTree.currentUser.idCode || articleComments.stateTree.currentUser.roles.indexOf('Operator') > -1)">
                                 <a href="" ng-click="articleComments.edit($index)">编辑</a>
                                 <span>|</span>
                             </span>

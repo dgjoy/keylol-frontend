@@ -1,11 +1,14 @@
 ﻿(function () {
     class ActivityCardController {
-        constructor(utils, $http, notification, stateTree) {
+        constructor(utils, $http, notification, stateTree, apiEndpoint, $timeout, $element) {
             $.extend(this,{
                 utils,
                 $http,
                 notification,
                 stateTree,
+                apiEndpoint,
+                $timeout,
+                $element,
             });
             this.relatedPoints = {
                 mainPoint: this.object.pointBasicInfo,
@@ -29,6 +32,17 @@
                 (stateTree.currentUser.roles.indexOf('Operator') > -1 || stateTree.currentUser.id === this.object.authorBasicInfo.id)) {
                 this.canModerate = true;
             }
+
+            this.setCommentsHeight();
+        }
+
+        reply(comment) {
+            if (!this.vm.content) {
+                this.vm.content = `#${comment.sidForActivity} `;
+            } else {
+                this.vm.content += `\n#${comment.sidForActivity} `;
+            }
+            this.textFocus = true;
         }
 
         showSourceList($event) {
@@ -75,13 +89,13 @@
                 activityId: this.object.id,
             };
 
-            this.$http.post(`${apiEndpoint}activity-comment`,submitObj).then(response => {
-                this.notification.success('提交成功');
+            this.$http.post(`${this.apiEndpoint}activity-comment`,submitObj).then(response => {
+                this.notification.success({ message: '提交成功' });
                 this.vm.content = '';
                 this.sync(response.data);
                 this.submitLock = false;
             }, response => {
-                this.notification.error('发生未知错误，请重试或与站务职员联系', response);
+                this.notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
                 this.submitLock = false;
             });
         }
@@ -89,40 +103,52 @@
         changePage (newPage, oldPage) {
             if (this.commentsManager.pages[newPage - 1]) {
                 this.commentsManager.currentPage = newPage;
-                return ;
+                this.commentsManager.isToNext = newPage > oldPage;
+                this.setCommentsHeight();
+                return true;
             }
 
             if (!this.changePageLock) {
                 this.changePageLock = true;
-                this.$http.get(`${apiEndpoint}states/content/activity/comments`,{
+                this.$http.get(`${this.apiEndpoint}states/content/activity/comments`,{
                     params: {
                         activity_id: this.object.id,
                         page: newPage,
                     },
                 }).then(response => {
                     this.commentsManager.currentPage = newPage;
+                    this.commentsManager.isToNext = newPage > oldPage;
+                    this.setCommentsHeight();
                     this.commentsManager.pages[newPage - 1] = response.data;
                     this.changePageLock = false;
                 }, response => {
+                    this.notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
                     this.changePageLock = false;
                 });
             }
+            return true;
         }
 
         sync (sid) {
             this.commentsManager.pageCount = parseInt((sid - 1) / 10) + 1;
-            this.commentsManager.currentPage = this.commentsManager.pageCount;
             console.log(this.commentsManager.pages.length);
-            this.$http.get(`${apiEndpoint}states/content/activity/comments`,{
+            this.$http.get(`${this.apiEndpoint}states/content/activity/comments`,{
                 params: {
                     activity_id: this.object.id,
-                    page: this.commentsManager.currentPage,
+                    page: this.commentsManager.pageCount,
                 },
             }).then(response => {
-                this.commentsManager.pages[this.commentsManager.currentPage - 1] = response.data;
+                this.commentsManager.pages[this.commentsManager.pageCount - 1] = response.data;
                 this.commentsManager.count = response.data.length + (this.commentsManager.currentPage - 1) * 10;
+                this.changePage(this.commentsManager.pageCount, this.commentsManager.currentPage);
             }, response => {
+                this.notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
+            });
+        }
 
+        setCommentsHeight () {
+            this.$timeout(() => {
+                this.commentsManager.commentsHeight = this.$element.find('.review-list>ul').height();
             });
         }
     }

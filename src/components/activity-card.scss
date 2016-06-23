@@ -25,6 +25,7 @@ activity-card {
             text-decoration: underline;
           }
         }
+
         >.avatar {
           flex-shrink: 0;
           width: 32px;
@@ -32,6 +33,7 @@ activity-card {
           border-radius: 16px;
           margin-right: 10px;
         }
+
         >.name-group {
           p {
             margin: 0;
@@ -93,156 +95,180 @@ activity-card {
       }
     }
 
-    >.indirect-sources {
-      margin-left: 35px;
-      padding-bottom: 5px;
-      display: flex;
-      flex-direction: column;
+    .agree {
+      margin: 0 15px;
+      border-top: 1px solid $keylol-inertia-shape;
 
-      >.indirect-source {
+      .action {
+        padding-top: 20px;
+        padding-bottom: 15px;
         display: flex;
-        align-items: center;
-        margin-bottom: 15px;
+        justify-content: center;
+      }
 
-        >.picture {
-          width: 18px;
-          height: 18px;
-          margin-right: 10px;
-        }
+      .agree-list {
+        display: flex;
+        justify-content: center;
 
-        >.desc {
-          color: $keylol-main-text;
-        }
-
-        &:hover>.desc {
-            text-decoration: underline;
+        img {
+          border-radius: 0;
+          width: 16px;
+          height: 16px;
+          margin: 0 5px;
         }
       }
     }
   }
 
-  .communicate-card>.operation {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 10px;
-    height: 50px;
-  }
-
-  >.communicate-card>.review-area {
-    position: relative;
-
-    >.float-top {
-      position: absolute;
-      top: 10px;
-      right: 0;
-    }
-
-    >.hr {
-      height: 1px;
-      background-color: $keylol-inertia-shape;
-    }
-
-    >.review-count {
-      padding: 20px 15px 10px;
-      color: $keylol-inertia-text;
-    }
-
-    >.review-sender {
-      display: flex;
-      margin-top: 25px;
-      margin-bottom: 10px;
-      padding: 0 15px;
-
-      .avatar {
-        flex-grow: 0;
-        width: 32px;
-        height: 32px;
-        margin-right: 10px;
-      }
-
-      textarea {
-        flex-grow: 1;
-        padding: 0;
-        outline: 0;
-        resize: none;
-      }
-    }
-
-    >.review-list {
+  >.communicate-card {
+    >.review-area {
       position: relative;
 
-      >pagination {
+      >.hr {
+        height: 1px;
+        background-color: $keylol-inertia-shape;
+      }
+
+      pagination {
         float: right;
         margin:20px 0;
       }
 
-      >.review {
-        @include hover-background();
-        padding: 15px 15px;
+      >.float-top {
+        position: absolute;
+        top: 10px;
+        right: 0;
+        margin: 10px 0;
+      }
+
+      >.review-count {
+        padding: 20px 15px 10px;
+        color: $keylol-inertia-text;
+      }
+
+      >.review-sender {
         display: flex;
+        margin-top: 25px;
+        margin-bottom: 10px;
+        padding: 0 15px;
 
-        &.blink {
-          animation: review-blink 5s;
-        }
-
-        >.avatar {
+        .avatar {
           flex-grow: 0;
           width: 32px;
-          height:32px;
+          height: 32px;
           margin-right: 10px;
         }
 
-        >.content {
+        textarea {
           flex-grow: 1;
-        }
-
-        >.content>.info {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          height: 20px;
-
-          >.user {
-            font-weight: bold;
-            color: $keylol-main-text;
-            >a {
-              color: $keylol-inertia-text;
-              font-weight: normal;
-              margin-left: 6px;
-            }
-            >a:hover {
-              text-decoration: underline;
-            }
-          }
-
-          >.date {
-            color: $keylol-inertia-text;
-          }
-
-          >.actions {
-            display: none;
-            >a {
-              margin-left: 15px;
-              color: $keylol-highlight;
-            }
-            >a:hover {
-              text-decoration: underline;
-            }
-          }
-        }
-
-        >.content>.text {
-          color: $keylol-main-text;
-        }
-
-        &:hover>.content>.info>.date {
-          display: none;
-        }
-        &:hover>.content>.info>.actions {
-          display: block;
+          padding: 0;
+          outline: 0;
+          resize: none;
         }
       }
+
+      >.review-list {
+        position: relative;
+        @include page-change('ul');
+        margin: 10px 0;
+        overflow: hidden;
+        transition: height .5s;
+
+        ul {
+          margin: 0;
+          padding: 0;
+          list-style: none;
+          width: 100%;
+          position: absolute;
+          left: 0;
+          top: 0;
+        }
+
+        .review {
+          @include hover-background();
+          padding: 15px 15px;
+          display: flex;
+
+          &.blink {
+            animation: review-blink 5s;
+          }
+
+          >.avatar {
+            flex-grow: 0;
+            width: 32px;
+            height:32px;
+            margin-right: 10px;
+          }
+
+          >.content {
+            flex-grow: 1;
+          }
+
+          >.content>.info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 20px;
+
+            a:hover {
+              text-decoration: underline;
+            }
+
+            >.user {
+              font-weight: bold;
+              color: $keylol-main-text;
+
+              >a, >span {
+                color: $keylol-inertia-text;
+                font-weight: normal;
+                margin-left: 6px;
+              }
+            }
+
+            >.date {
+              color: $keylol-inertia-text;
+
+              .light-theme {
+                color: $keylol-light-theme;
+              }
+            }
+
+            >.actions {
+              display: none;
+
+              >span>span {
+                color: $keylol-inertia-text;
+                margin: 0 5px 0 10px;
+              }
+
+              a {
+                margin: 0 5px;
+
+                &:last-of-type {
+                  margin-right: 0;
+                }
+              }
+            }
+          }
+
+          >.content>.text {
+            color: $keylol-main-text;
+          }
+
+          &:hover>.content>.info>.date {
+            display: none;
+          }
+          &:hover>.content>.info>.actions {
+            display: block;
+          }
+        }
+      }
+    }
+
+    flat-button {
+      float: right;
+      margin-right: 10px;
+      margin-bottom: 12px;
     }
   }
 }

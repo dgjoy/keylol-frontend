@@ -332,8 +332,6 @@
                 delete submitObj.rating;
             }
 
-            console.log(submitObj);
-
             if (this.vm.id) {
                 delete submitObj.id;
 

@@ -17,13 +17,13 @@
                     <p>{{activityEditor.inLibraryTime}}&nbsp;</p>
                 </div>
             </div>
-            <point-review bind-review="activityEditor.vm.rating" is-hollow="true"></point-review>
+            <point-review ng-if="activityEditor.hasRating" bind-review="activityEditor.vm.rating" is-hollow="true"></point-review>
         </div>
         <div class="edit">
             <textarea placeholder="谈谈最近的心得..." rows="4" elastic ng-model="activityEditor.vm.content"></textarea>
         </div>
         <div class="actions">
-            <a href="" ngf-select="activityEditor.uploadImage($file, $event)" ngf-fix-orientation="true" accept="image/*">{{activityEditor.extra.image ? '更换附图' : '上传一张附图'}}</a>
+            <a href="" ngf-select="activityEditor.uploadImage($file, $event)" ngf-fix-orientation="true" accept="image/*">{{(activityEditor.vm.coverImage || activityEditor.extra.image) ? '更换附图' : '上传一张附图'}}</a>
             <div class="buttons">
                 <flat-button text="放弃" type="inertia" click="activityEditor.close()"></flat-button>
                 <raised-button text="贴出动态"
@@ -34,7 +34,8 @@
             </div>
         </div>
     </div>
-    <div ng-if="activityEditor.extra.image" class="image-preview">
-        <img src="" ngf-src="activityEditor.extra.image">
+    <div ng-if="activityEditor.vm.coverImage || activityEditor.extra.image" class="image-preview">
+        <img ng-if="activityEditor.extra.image" src="" ngf-src="activityEditor.extra.image">
+        <img ng-if="!activityEditor.extra.image" src="" webp-src="{{activityEditor.vm.coverImage | uriRelocate}}">
     </div>
 </window>

@@ -10,7 +10,6 @@
                 $state,
                 $location,
             });
-            this.redirect = true;
 
             this.vm = {
                 targetPoints: [],
@@ -22,13 +21,25 @@
                 this.extra.image = options.file;
             }
 
+            if (options.activity) {
+                this.vm.id = options.activity.id;
+                this.vm.targetPoints.push(options.activity.pointBasicInfo);
+                this.vm.content = options.activity.content;
+                this.vm.rating = options.activity.rating;
+                this.vm.coverImage = options.activity.coverImage;
+            }
+
             $scope.$watchCollection(() => {
                 return this.vm.targetPoints;
             },() => {
-                if (this.vm.targetPoints[0] !== undefined) {
-                    console.log(this.vm.targetPoints[0]);
+                this.hasRating = false;
+                if (this.vm.targetPoints[0]) {
                     this.inLibraryTime = `${this.vm.targetPoints[0].totalPlayedTime ? this.vm.targetPoints[0].totalPlayedTime : '0'} 小时`;
                     this.getRelatedPoints();
+
+                    if (this.vm.targetPoints[0].type === 'game') {
+                        this.hasRating = true;
+                    }
                 } else {
                     this.inLibraryTime = '';
                     this.relatedPointCount = undefined;
@@ -53,23 +64,36 @@
 
         submit() {
             const submitHelper = () => {
-                this.submitLock = true;
-                this.$http.post(`${apiEndpoint}activity`,submitObj).then(response => {
-                    this.notification.success({ message: '提交成功' });
-                    if (this.redirect) {
+                if (this.vm.id) {
+                    this.$http.put(`${apiEndpoint}activity/${this.vm.id}`,submitObj).then(response => {
+                        this.notification.success({ message: '修改成功' });
+                        this.$state.reload();
+                        this.close();
+                    },response => {
+                        this.notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
+                        this.submitLock = false;
+                    });
+                } else {
+                    this.$http.post(`${apiEndpoint}activity`,submitObj).then(response => {
+                        this.notification.success({ message: '提交成功' });
                         this.$location.url(`activity/${this.stateTree.currentUser.idCode}/${response.data}`);
-                    }
-                    this.close();
-                },response => {
-                    this.notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
-                    this.submitLock = false;
-                });
+                        this.close();
+                    },response => {
+                        this.notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
+                        this.submitLock = false;
+                    });
+                }
             };
+
+            this.submitLock = true;
 
             const submitObj = {};
             submitObj.content = this.vm.content;
             submitObj.targetPointId = this.vm.targetPoints[0].id;
-            submitObj.rating = this.vm.rating;
+            if (this.hasRating) {
+                submitObj.rating = this.vm.rating;
+            }
+            submitObj.coverImage = this.vm.coverImage;
 
             if (this.extra.image !== undefined) {
                 this.notification.process({ message: '图像正在上传' });
@@ -81,9 +105,11 @@
                         submitHelper();
                     }, response => {
                         this.notification.error({ message: '图像上传失败' }, response);
+                        this.submitLock = false;
                     });
                 }, response => {
                     this.notification.error({ message: '文件上传验证失效' }, response);
+                    this.submitLock = false;
                 });
             } else {
                 submitHelper();

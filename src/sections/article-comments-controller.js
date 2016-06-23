@@ -115,6 +115,8 @@
                 delete this.replyToComment;
                 this.setCommentsHeight();
                 this.article.commentPageCount = Math.floor((response.data - 1) / 10) + 1;
+                this.article.commentCount = response.data;
+                this.article.latestCommentTime = this.article.comments[this.article.comments.length - 1].publishTime;
                 this.submitLock = false;
             }, response => {
                 this.notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);

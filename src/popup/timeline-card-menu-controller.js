@@ -1,6 +1,6 @@
 ﻿(function () {
     class TimelineCardMenuController {
-        constructor(origin, close, options, stateTree, content) {
+        constructor(origin, close, options, stateTree, content, window) {
             function showApproverList() {
                 close();
                 origin.popup({
@@ -102,9 +102,9 @@
                             type: 'item',
                             clickAction () {
                                 window.show({
-                                    templateUrl: 'src/windows/editor.html',
-                                    controller: 'EditorController',
-                                    controllerAs: 'editor',
+                                    templateUrl: 'src/windows/activity-editor.html',
+                                    controller: 'ActivityEditorController',
+                                    controllerAs: 'activityEditor',
                                     inputs: {
                                         options: {
                                             activity: content,
