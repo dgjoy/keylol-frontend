@@ -20,10 +20,10 @@
                 </thead>
                 <tbody ng-animate-swap="editShowCase.currentPage">
                     <tr ng-repeat="item in editShowCase.list" ng-class="{highlight: $index < editShowCase.highlightCount && editShowCase.currentPage === 1}">
-                        <td ng-repeat="(key, attr) in editShowCase.showAttrs">{{item[key]}}</td>
+                        <td ng-repeat="(key, attr) in editShowCase.showAttrs">{{ key === 'preferred' ? editShowCase.utils.getPreferredPointName(item, editShowCase.stateTree.currentUser)[0] : item[key]}}</td>
                         <td class="actions">
                             <a href="" ng-click="editShowCase.topItem(item.feedId)">{{(editShowCase.currentPage === 1 && $index === 0)? '': '置顶'}}</a>
-                            <a href="" ng-click="editShowCase.editItem(item)">编辑</a>
+                            <a href="" ng-if="!editShowCase.canNotEdit" ng-click="editShowCase.editItem(item)">编辑</a>
                             <a href="" ng-click="editShowCase.deleteItem(item.feedId)">删除</a>
                         </td>
                     </tr>

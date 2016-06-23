@@ -20,6 +20,7 @@
                     this.subTitle = '入口 - 广场 - 四格幻灯片';
                     this.captureUrl = 'entrance/discovery/slideshow-entries';
                     this.postUrl = 'slideshow-entry';
+                    this.dataType = 'body';
                     this.inputList = [
                         {
                             element: 'textArea',
@@ -75,6 +76,38 @@
                             label: '封面图片',
                         },
                     ];
+                    break;
+                case 'spotlightPoint':
+                    this.subTitle = '入口 - 广场 - 热门据点';
+                    this.postUrl = 'spotlight-point';
+                    this.dataType = 'query';
+                    this.inputList = [
+                        {
+                            element: 'textArea',
+                            type: 'uic',
+                            style: 'short',
+                            model: 'pointIdCode',
+                            label: '据点识别码',
+                        },
+                    ];
+                    this.formHeight = 'auto';
+                    this.expand = true;
+                    break;
+                case 'outpostPoint':
+                    this.subTitle = '入口 - 据点 - 哨所';
+                    this.postUrl = 'outpost-point';
+                    this.dataType = 'query';
+                    this.inputList = [
+                        {
+                            element: 'textArea',
+                            type: 'uic',
+                            style: 'short',
+                            model: 'pointIdCode',
+                            label: '据点识别码',
+                        },
+                    ];
+                    this.formHeight = 'auto';
+                    this.expand = true;
                     break;
             }
 
@@ -144,20 +177,31 @@
                 return;
             }
 
-            if (this.vm.feedId) {
-                this.$http.put(`${this.apiEndpoint}feed/${this.postUrl}/${this.vm.feedId}`, this.vm).then(response => {
-                    this.notification.success({ message: '推送成功' });
-                    this.close(this.vm);
-                }, error => {
-                    this.notification.error({ message: '推送失败，请重试' }, error);
-                });
-            } else {
-                this.$http.post(`${this.apiEndpoint}feed/${this.postUrl}`, this.vm).then(response => {
+            if (this.dataType === 'query') {
+                this.$http.post(`${this.apiEndpoint}feed/${this.postUrl}`, {}, {
+                    params: this.vm,
+                }).then(response => {
                     this.notification.success({ message: '推送成功' });
                     this.close();
                 }, error => {
                     this.notification.error({ message: '推送失败，请重试' }, error);
                 });
+            } else {
+                if (this.vm.feedId) {
+                    this.$http.put(`${this.apiEndpoint}feed/${this.postUrl}/${this.vm.feedId}`, this.vm).then(response => {
+                        this.notification.success({ message: '推送成功' });
+                        this.close(this.vm);
+                    }, error => {
+                        this.notification.error({ message: '推送失败，请重试' }, error);
+                    });
+                } else {
+                    this.$http.post(`${this.apiEndpoint}feed/${this.postUrl}`, this.vm).then(response => {
+                        this.notification.success({ message: '推送成功' });
+                        this.close();
+                    }, error => {
+                        this.notification.error({ message: '推送失败，请重试' }, error);
+                    });
+                }
             }
         }
     }

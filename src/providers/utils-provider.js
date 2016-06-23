@@ -364,7 +364,7 @@
                             platform: '平台',
                         };
 
-                        self.nameOfPlatformPoints = ['Steam', 'Origin','uPlay','战网','PlayStation','XBox','iOS',
+                        self.nameOfPlatformPoints = ['Steam', 'Origin','uPlay','战网','PlayStation','Xbox','iOS',
                             '安卓', 'Windows UWP 通用应用','GBA','NDS','3DS',
                             'Wii','WiiU','PSP', '独立客户端', '网页载体'];
                         self.idCodeOfPlatformPoints = ['STEAM', 'ORGIN','UPLAY','BTNET','PLYSN','MSBOX','APIOS',

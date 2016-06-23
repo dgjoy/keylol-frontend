@@ -1,5 +1,6 @@
 outpost-points {
   display: block;
+  position: relative;
 
   .wrapper {
     display: flex;
@@ -54,5 +55,11 @@ outpost-points {
     switch-pagination {
       height: 350px;
     }
+  }
+
+  .moderation-wrapper {
+    position: absolute;
+    right: 10px;
+    top: 22px;
   }
 }

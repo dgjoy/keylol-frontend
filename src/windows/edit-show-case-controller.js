@@ -1,6 +1,6 @@
 ﻿(function () {
     class EditShowCaseController {
-        constructor(type, close, $element, $http, apiEndpoint, notification, window) {
+        constructor(type, close, $element, $http, apiEndpoint, notification, window, utils, stateTree) {
             $.extend(this, {
                 type,
                 close,
@@ -9,6 +9,8 @@
                 apiEndpoint,
                 notification,
                 window,
+                utils,
+                stateTree,
             });
             this.currentPage = 1;
             this.list = [];
@@ -16,12 +18,33 @@
                 case 'slideShow':
                     this.subTitle = '入口 - 广场 - 四格幻灯片';
                     this.getUrl = 'entrance/discovery/slideshow-entries';
-                    this.changeUrl = 'slideshow-entry';
                     this.highlightCount = 4;
                     this.getContent();
                     this.showAttrs = {
                         title: '主标题',
                         minorTitle: '投稿据点',
+                    };
+                    break;
+                case 'spotlightPoint':
+                    this.subTitle = '入口 - 广场 - 热门据点';
+                    this.getUrl = 'entrance/discovery/spotlight-points';
+                    this.highlightCount = 6;
+                    this.getContent();
+                    this.canNotEdit = true;
+                    this.showAttrs = {
+                        preferred: '据点',
+                        idCode: '识别码',
+                    };
+                    break;
+                case 'outpostPoint':
+                    this.subTitle = '入口 - 据点 - 哨所';
+                    this.getUrl = 'entrance/points/outpost-points';
+                    this.highlightCount = 3;
+                    this.getContent();
+                    this.canNotEdit = true;
+                    this.showAttrs = {
+                        preferred: '据点',
+                        idCode: '识别码',
                     };
                     break;
             }
@@ -35,6 +58,7 @@
                     this.isToNext = newPage > oldPage;
                     this.list = response.data;
                     this.changePageLock = false;
+                    console.log(response);
                 }, response => {
                     this.notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
                     this.changePageLock = false;
@@ -44,7 +68,7 @@
         }
 
         topItem (id) {
-            this.$http.put(`${this.apiEndpoint}feed/${this.changeUrl}/top/${id}`).then(response => {
+            this.$http.put(`${this.apiEndpoint}feed/top/${id}`).then(response => {
                 this.getContent(1, this.currentPage);
                 this.notification.success({ message: '已置顶' });
             }, error => {
@@ -62,6 +86,7 @@
         }
 
         editItem (item) {
+            if (this.canNotEdit) return;
             this.window.show({
                 templateUrl: 'src/windows/push-entry.html',
                 controller: 'PushEntryController',

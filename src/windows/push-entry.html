@@ -9,11 +9,11 @@
         </div>
         <div class="content">
             <form ng-style="{height: pushEntry.formHeight}">
-                <div class="info-init">
+                <div class="info-init" ng-if="pushEntry.captureUrl">
                     <text-area class="long" type="text" state="pushEntry.expand ? 'disabled' : 'normal'" label="文章 / 页面链接" model="pushEntry.vm.link" tip="'如果推送非文章链接，需要补充展示信息'"></text-area>
                     <raised-button text="抓取" type="theme" disabled="pushEntry.expand || !pushEntry.vm.link" click="pushEntry.capture()"></raised-button>
                 </div>
-                <div class="info-detail">
+                <div class="info-detail" ng-class="{'no-init': !pushEntry.captureUrl}">
                     <text-area ng-if="item.element === 'textArea'" ng-repeat-start="item in pushEntry.inputList" class="{{item.style}}" type="{{item.type}}" label="{{item.label}}" model="pushEntry.vm[item.model]" tip="item.tip"></text-area>
                     <div ng-if="item.element === 'uploadImage'" class="upload-image {{item.style}}" ng-repeat-end>
                         <label>{{item.label}}</label>

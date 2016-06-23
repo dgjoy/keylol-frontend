@@ -33,7 +33,7 @@
                 offsetX: 29,
                 offsetY: -5,
                 inputs: {
-                    type: 'slideShow',
+                    type: 'spotlightPoint',
                 },
             });
         }

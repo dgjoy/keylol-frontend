@@ -26,6 +26,21 @@
                 this.activePage -= 1;
             }
         }
+
+        showModeration ($event) {
+            this.showModerationPopup({
+                templateUrl: 'src/popup/moderation.html',
+                controller: 'ModerationController as moderation',
+                event: $event,
+                attachSide: 'left',
+                align: 'top',
+                offsetX: 29,
+                offsetY: -5,
+                inputs: {
+                    type: 'outpostPoint',
+                },
+            });
+        }
     }
 
     keylolApp.component('outpostPoints', {

@@ -72,6 +72,12 @@
             margin-top: 15px;
           }
 
+          &.no-init {
+            text-area:first-of-type {
+              margin-top: 0;
+            }
+          }
+
           .upload-image {
             margin-top: 15px;
             display: flex;
