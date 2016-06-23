@@ -69,16 +69,24 @@ short-review {
           border-bottom: none;
         }
 
-        >p {
-          margin: 0;
+        a {
+          margin-left: 4px;
 
-          a {
-            margin-left: 4px;
+          &:hover {
+            text-decoration: underline;
+          }
+
+          &[disabled] {
+            cursor: default;
 
             &:hover {
-              text-decoration: underline;
+              text-decoration: none;
             }
           }
+        }
+
+        >p {
+          margin: 0;
         }
       }
     }

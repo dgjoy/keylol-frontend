@@ -261,6 +261,10 @@ timeline-card {
             font-weight: bold;
             color: $keylol-main-text;
 
+            .light {
+              color: $keylol-light-theme;
+            }
+
             >a, span {
               color: $keylol-inertia-text;
               font-weight: normal;

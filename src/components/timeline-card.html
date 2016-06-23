@@ -48,9 +48,9 @@
                 <img src="" webp-src="{{comment.authorAvatarImage | avatarUrl}}" alt="" class="avatar" />
                 <div class="content">
                     <div class="info">
-                        <div class="user">{{comment.authorUserName}} <span>+{{comment.likeCount}}</span></div>
+                        <div class="user">{{comment.authorUserName}} <span ng-style="{color: comment.liked ? timelineCard.theme.light : ''}" ng-class="{light: comment.liked}">+{{comment.likeCount}}</span></div>
                         <div class="date"><span am-time-ago="comment.publishTime"></span> / #{{comment.sidForActivity}}</div>
-                        <div class="actions"><a href="">认可</a><a href="" ng-click="timelineCard.replyComment(comment)">回复</a></div>
+                        <div class="actions"><a href="" ng-if="!comment.liked && comment.authorIdCode !== timelineCard.stateTree.currentUser.idCode" ng-click="timelineCard.utils.like(comment.id, comment, 'ActivityComment')">认可</a><a href="" ng-click="timelineCard.replyComment(comment)">回复</a></div>
                     </div>
                     <div class="text">{{comment.content}}</div>
                 </div>
@@ -64,7 +64,12 @@
     </div>
     <div class="operation" ng-switch="timelineCard.state">
         <div>
-            <flat-button type="inertia" text="+{{timelineCard.card.likeCount}}"></flat-button>
+            <flat-button click="timelineCard.utils.like(timelineCard.card.contentId, timelineCard.card, timelineCard.card.contentType === 'article' ? 'Article' : 'Activity')"
+                         type="{{timelineCard.card.liked ? 'light' : 'inertia'}}"
+                         theme-color="timelineCard.theme.light"
+                         disabled-with-color="timelineCard.card.author.idCode !== timelineCard.stateTree.currentUser.idCode"
+                         disabled="timelineCard.card.liked || timelineCard.card.author.idCode === timelineCard.stateTree.currentUser.idCode"
+                         text="+{{timelineCard.card.likeCount}}"></flat-button>
         </div>
         <flat-button ng-switch-when="open" text="评论" click="timelineCard.doComment()"></flat-button>
         <flat-button ng-if="timelineCard.card.contentType !== 'article'" ng-switch-when="close" type="inertia" text="···{{timelineCard.card.commentCount}}" click="timelineCard.openReviewArea()"></flat-button>

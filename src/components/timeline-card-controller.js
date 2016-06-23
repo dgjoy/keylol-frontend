@@ -144,6 +144,7 @@
         controllerAs: 'timelineCard',
         bindings: {
             card: '<',
+            theme: '<',
         },
     });
 }());

@@ -1,11 +1,12 @@
 ﻿(function () {
     class ArticleContentController {
-        constructor (union, $http, notification, apiEndpoint) {
+        constructor (union, $http, notification, apiEndpoint, utils) {
             $.extend(this, {
                 apiEndpoint,
                 union,
                 $http,
                 notification,
+                utils,
             });
         }
     }

@@ -1,6 +1,6 @@
 ﻿(function () {
     class ArticleCommentsController {
-        constructor (stateTree, $http, apiEndpoint, $element, $timeout, notification, union, window) {
+        constructor (stateTree, $http, apiEndpoint, $element, $timeout, notification, union, window, utils) {
             $.extend(this, {
                 stateTree,
                 $http,
@@ -9,6 +9,7 @@
                 $timeout,
                 notification,
                 window,
+                utils,
             });
 
             this.currentPage = 1;

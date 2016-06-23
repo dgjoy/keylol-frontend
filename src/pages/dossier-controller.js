@@ -1,6 +1,6 @@
 ﻿(function () {
     class DossierController {
-        constructor($scope, pageHead, stateTree, $state, $location, pageLoad, $http, notification, $window, $element) {
+        constructor($scope, pageHead, stateTree, $state, $location, pageLoad, $http, notification, $window, $element, apiEndpoint) {
             // $scope.changePage =  index => {
             //     $scope.currentPage = index;
             //     switch (index) {
@@ -68,7 +68,13 @@
                 const $elementHeight = $element.height();
                 if (shouldWindowScrollTop + windowHeight > elementOffsetTop + $elementHeight) {
                     $scope.$apply(() => {
-                        pageLoad('aggregation.user.timeline');
+                        $http.get(`${apiEndpoint}states/aggregation/user/timeline`, {
+                            params: $state.params,
+                        }).then(response => {
+                            stateTree.aggregation.user.timeline = response.data;
+                        }, response => {
+                            notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
+                        });
                         $$window.unbind('scroll', scrollCallback);
                         cancelListenRoute();
                     });

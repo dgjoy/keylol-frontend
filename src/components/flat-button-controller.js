@@ -24,6 +24,7 @@
             type: '@',
             click: '&',
             themeColor: '<',
+            disabledWithColor: '<',
             disabled: '<',
             binarySet: '<',
             binaryValue: '<',

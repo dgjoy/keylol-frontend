@@ -14,7 +14,7 @@
             if (/\.svg|gif$/i.test(input)) {
                 suffix = '';
             } else {
-                suffix = customVersion ? `!${customVersion}` : '';
+                suffix = customVersion ? `!${customVersion}/unsharp/true/quality/90` : '!/unsharp/true/quality/90';
             }
             if (match = input.match(/^keylol:\/\/([^\/]*)$/i))
                 return `//storage.keylol.com/${match[1]}${suffix}`;
@@ -34,6 +34,8 @@
                 return `//steamcdn.keylol.com/steam/apps/${match[1]}/ss_${match[2]}.jpg${suffix}`;
             if (match = input.match(/^keylol:\/\/steam\/avatars\/([^\/]*)$/i))
                 return `//steamcdn.keylol.com/steamcommunity/public/images/avatars/${match[1].substring(0, 2)}/${match[1]}_full.jpg${suffix}`;
+            if (match = input.match(/^keylol:\/\/steam\/app-resources\/(.*)$/i))
+                return `//steamcdn.keylol.com/steam/apps/${match[1]}${suffix}`;
 
             return null;
         }

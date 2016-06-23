@@ -120,6 +120,7 @@
         controllerAs: 'sectionTimeline',
         bindings: {
             cards: '<',
+            theme: '<',
         },
     });
 }());

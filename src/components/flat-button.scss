@@ -63,6 +63,15 @@ flat-button {
       }
     }
 
+    &[disabled] {
+      color: rgba($keylol-inertia-text, 0.6);
+      fill: rgba($keylol-inertia-text, 0.6);
+
+      &:hover {
+        background-color: transparent;
+      }
+    }
+
     &.theme {
       color: $keylol-theme;
       fill: $keylol-theme;
@@ -93,13 +102,9 @@ flat-button {
       fill: $keylol-user-theme;
     }
 
-    &[disabled] {
+    &.disabled-without-color[disabled] {
       color: rgba($keylol-inertia-text, 0.6);
       fill: rgba($keylol-inertia-text, 0.6);
-
-      &:hover {
-        background-color: transparent;
-      }
     }
   }
 }

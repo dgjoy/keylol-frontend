@@ -20,6 +20,16 @@ article-comments {
 
       p {
         margin: 0;
+
+        .like-count {
+          margin-left: 6px;
+          font-weight: normal;
+          color: $keylol-inertia-text;
+        }
+
+        .light-theme {
+          color: $keylol-light-theme;
+        }
       }
 
       p:first-of-type {

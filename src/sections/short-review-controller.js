@@ -1,10 +1,11 @@
 ﻿(function () {
     class ShortReviewController {
-        constructor (stateTree, $http, notification) {
+        constructor (stateTree, $http, notification, utils) {
             $.extend(this, {
                 stateTree,
                 $http,
                 notification,
+                utils,
             });
             this.type = {
                 mainTitle: '简评',
@@ -43,15 +44,11 @@
             });
         }
         
-        getPlayedTime(time,idCode) {
-            if (!idCode) {
-                return time ? time : '0';
+        getPlayedTime(time, idCode) {
+            if (idCode === this.stateTree.currentUser.idCode) {
+                return this.playedTime || '0';
             } else {
-                if (idCode === this.stateTree.currentUser.idCode) {
-                    return this.playedTime ? this.playedTime : '0';
-                } else {
-                    return time ? time : '0';
-                }
+                return time || '0';
             }
         }
     }

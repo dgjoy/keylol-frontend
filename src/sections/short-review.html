@@ -18,12 +18,12 @@
             <div class="header">
                 <div class="info">
                     <img webp-src="{{item.authorAvatarImage | avatarUrl: 'small'}}">
-                    <p>{{item.authorUserName}} / 在档 {{shortReview.getPlayedTime(item.totalPlayedTime,item.authorIdCode)}} 小时</p>
-                    <vote-circle review="item.rating"></vote-circle>
+                    <p>{{item.authorUserName}} / 在档 {{shortReview.getPlayedTime(item.totalPlayedTime, item.authorIdCode)}} 小时</p>
+                    <vote-circle review="item.rating * 2 - 1"></vote-circle>
                 </div>
-                <a href="" class="like">+{{item.likeCount || '0'}}</a>
+                <a ng-style="{color: item.liked ? shortReview.theme.light : ''}" ng-click="shortReview.utils.like(item.id, item, 'Activity')" ng-disabled="item.liked || item.authorIdCode === shortReview.stateTree.currentUser.idCode" href="" class="like">+{{item.likeCount}}</a>
             </div>
-            <p>{{item.content}}<a href="activity/{{item.authorIdCode}}/{{item.sidForAuthor}}">查看</a></p>
+            <p>{{item.content}}<a href="" ng-href="activity/{{item.authorIdCode}}/{{item.sidForAuthor}}">查看</a></p>
         </li>
     </ul>
 </div>

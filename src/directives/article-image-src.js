@@ -11,10 +11,10 @@
                             attrs.$set('src', $filter('uriRelocate')(value));
                             return;
                         }
-                        const destination = $filter('uriRelocate')(value, 'article.image');
+                        const destination = $filter('uriRelocate')(value, '/fw/670');
                         if (/^(?:http:|https:)?\/\/(storage|steamcdn)\.keylol\.com\//i.test(destination))
                             utils.supportWebp.then(() => {
-                                attrs.$set('src', `${destination}.webp`);
+                                attrs.$set('src', `${destination}/format/webp`);
                             }, () => {
                                 attrs.$set('src', destination);
                             });

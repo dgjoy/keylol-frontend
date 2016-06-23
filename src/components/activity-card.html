@@ -1,6 +1,7 @@
 <div class="display-card">
     <div class="user-with-date">
         <a class="user" ng-href="user/{{activityCard.object.authorBasicInfo.idCode}}">
+            <img-label ng-if="activityCard.object.authorBasicInfo.isFriend" type="friended"></img-label>
             <img class="avatar" webp-src="{{activityCard.object.authorBasicInfo.avatarImage | avatarUrl}}"  alt="">
             <div class="name-group">
                 <p class="username">{{activityCard.object.authorBasicInfo.userName}}</p>
@@ -22,7 +23,7 @@
     </div>
     <div class="agree">
         <div class="action">
-            <raised-button type="theme" theme-color="activityCard.theme.main" text="+{{activityCard.object.likeCount}}"></raised-button>
+            <raised-button type="theme" disabled="activityCard.object.liked" click="activityCard.utils.like(activityCard.object.id, activityCard.object, 'Activity')" theme-color="activityCard.theme.main" text="+{{activityCard.object.likeCount}}"></raised-button>
         </div>
         <!--<div class="agree-list">-->
         <!--<img ng-repeat="i in [1,2,3,4,5]" class="avatar" webp-src="//storage.keylol.com/fd0dfd38572adff068251606aa282b3f.jpg!avatar.medium" />-->
@@ -44,7 +45,7 @@
                     <img src="" webp-src="{{comment.authorAvatarImage | avatarUrl}}" alt="" class="avatar" />
                     <div class="content">
                         <div class="info">
-                            <div class="user">{{comment.authorUserName}}<span>+{{comment.likeCount}}</span></div>
+                            <div class="user"><span class="user-name">{{comment.authorUserName}}</span><span ng-style="{color: comment.liked ? activityCard.theme.light : ''}" ng-class="{'light-theme': comment.liked}">+{{comment.likeCount}}</span></div>
                             <div class="date">
                                 <span ng-if="comment.authorPlayedTime">在档 {{comment.authorPlayedTime}} 小时 / </span>
                                 <span am-time-ago="comment.publishTime"></span> / #{{comment.sidForActivity}}
@@ -58,13 +59,13 @@
                             </span>
                             </div>
                             <div class="actions">
-                                <a href="" ng-if="comment.authorIdCode !== activityCard.stateTree.currentUser.idCode && !comment.liked">认可</a>
+                                <a href="" ng-if="comment.authorIdCode !== activityCard.stateTree.currentUser.idCode && !comment.liked" ng-click="activityCard.utils.like(comment.id, comment, 'ActivityComment')">认可</a>
                                 <a href="" ng-click="activityCard.reply(comment)">回复</a>
-                            <span ng-if="comment.authorIdCode !== activityCard.stateTree.currentUser.idCode || activityCard.stateTree.currentUser.roles.indexOf('Operator') > -1">
-                                <span>|</span>
-                                <a href="">封存</a>
-                                <a ng-if="activityCard.stateTree.currentUser.roles.indexOf('Operator') > -1" href="">警告</a>
-                            </span>
+                                <span ng-if="comment.authorIdCode !== activityCard.stateTree.currentUser.idCode || activityCard.stateTree.currentUser.roles.indexOf('Operator') > -1">
+                                    <span>|</span>
+                                    <a href="">封存</a>
+                                    <a ng-if="activityCard.stateTree.currentUser.roles.indexOf('Operator') > -1" href="">警告</a>
+                                </span>
                             </div>
                         </div>
                         <div class="text">

@@ -1,6 +1,6 @@
 ﻿(function () {
     class FrontpageController {
-        constructor ($scope, pageHead, stateTree, pageLoad, $location, $state, $window, $element) {
+        constructor ($scope, pageHead, stateTree, pageLoad, $location, $state, $window, $element, $http, apiEndpoint, notification) {
             pageHead.setTitle('据点 - 扉页 - 其乐');
             let fetchPromise;
             if (!$location.url().match(/\/point\/[^\/]*\/?$/)) {
@@ -29,7 +29,13 @@
                 const $elementHeight = $element.height();
                 if (shouldWindowScrollTop + windowHeight > elementOffsetTop + $elementHeight) {
                     $scope.$apply(() => {
-                        pageLoad('aggregation.point.timeline');
+                        $http.get(`${apiEndpoint}states/aggregation/point/timeline`, {
+                            params: $state.params,
+                        }).then(response => {
+                            stateTree.aggregation.point.timeline = response.data;
+                        }, response => {
+                            notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
+                        });
                         $$window.unbind('scroll', scrollCallback);
                         cancelListenRoute();
                     });
