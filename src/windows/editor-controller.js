@@ -302,6 +302,7 @@
                 if (articleFirstImageSrc) {
                     submitObj.coverImage = articleFirstImageSrc;
                 } else {
+                    console.log(this.vm.targetPoints[0]);
                     submitObj.coverImage = this.vm.targetPoints[0].headerImage;
                 }
             }

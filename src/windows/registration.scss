@@ -70,11 +70,8 @@
     .conn {
       @include keylol-inset-shadow-1();
       background-color: $keylol-inverted-text;
+      position: relative;
       height: 95px;
-      display: flex;
-      align-items: center;
-      padding: 0 15px;
-      justify-content: space-between;
       transition: height 800ms;
       overflow: hidden;
 
@@ -84,59 +81,97 @@
       &.ng-enter-active {
         height: 95px;
       }
+      &.ng-leave {
+        height: 95px;
+      }
       &.ng-leave-active {
         height: 0;
       }
 
-      .left {
-        p {
-          margin: 0;
-        }
-        p:last-of-type {
-          color:$keylol-inertia-text;
-        }
-        .blue {
-          color: $keylol-light-theme;
-        }
-        a {
-          color: $keylol-highlight;
-          &:hover { text-decoration: underline; }
-        }
-        svg {
-          width: 20px;
-          height: 20px;
-          fill: $keylol-inertia-shape;
-          vertical-align: top;
-        }
-      }
-
-      .right .code {
-        color: $keylol-light-theme;
-        font-size: 20px;
-      }
-
-      .user {
-        display: flex;
+      .inner {
+        position: absolute;
+        box-sizing: border-box;
+        height: 95px;
+        padding: 0 15px;
         width: 100%;
-        justify-content: center;
-        img {
-          height: 50px;
-          width: 50px;
-          border-radius: 25px;
-          margin-right: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        &.ng-enter {
+          transition: all 800ms;
+          opacity: 0;
+          transform: translateY(100%);
         }
 
-        div {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
+        &.ng-enter-active {
+          opacity: 1;
+          transform: translateY(0);
+        }
 
+        &.ng-leave {
+          transition: all 800ms;
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        &.ng-leave-active {
+          opacity: 0;
+          transform: translateY(-100%);
+        }
+
+        .left {
           p {
             margin: 0;
           }
-
           p:last-of-type {
             color: $keylol-inertia-text;
+          }
+          .blue {
+            color: $keylol-light-theme;
+          }
+          a {
+            color: $keylol-highlight;
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+          svg {
+            width: 20px;
+            height: 20px;
+            fill: $keylol-inertia-shape;
+            vertical-align: top;
+          }
+        }
+
+        .right .code {
+          color: $keylol-light-theme;
+          font-size: 20px;
+        }
+
+        .user {
+          display: flex;
+          width: 100%;
+          justify-content: center;
+          img {
+            height: 50px;
+            width: 50px;
+            border-radius: 25px;
+            margin-right: 10px;
+          }
+
+          div {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            p {
+              margin: 0;
+            }
+
+            p:last-of-type {
+              color: $keylol-inertia-text;
+            }
           }
         }
       }
@@ -148,17 +183,19 @@
       padding: 0 15px;
       align-items: center;
       height: 75px;
-      .protocol {
+
+      .wrapper {
+        display: flex;
+        align-items: center;
         color: $keylol-inertia-text;
-      }
 
-      a {
-        color: $keylol-highlight;
-        &:hover { text-decoration: underline; }
-      }
-
-      raised-button {
-        margin-left: 20px;
+        .gap {
+          width: 20px;
+        }
+        a {
+          color: $keylol-highlight;
+          &:hover { text-decoration: underline; }
+        }
       }
     }
   }

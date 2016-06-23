@@ -31,7 +31,7 @@
 
             //robot
             this.steamRobotWayManager = {
-                phaseIndex: 1,
+                phaseIndex: 0,
                 code: '',
             };
             const connection = $.connection.new();
@@ -52,7 +52,7 @@
                         connection.stop();
                         this.steamRobotWayManager.avatarImage = avatarImage;
                         this.steamRobotWayManager.userName = userName;
-                        this.steamRobotWayManager.phaseIndex = 2;
+                        this.steamRobotWayManager.phaseIndex = 1;
                         $timeout(() => {
                             notification.success({ message: '登录成功，欢迎回到其乐' });
                             union.$localStorage.Authorization = response.data.access_token;

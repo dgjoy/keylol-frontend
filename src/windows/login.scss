@@ -137,32 +137,43 @@
         display: block;
         background-color: $keylol-card;
 
-        .inner {
+        .wrapper {
           @include keylol-inset-shadow-1();
+          position: relative;
           height: 95px;
-          display: flex;
-          align-items: center;
-          padding: 0 15px;
-          justify-content: space-between;
           background-color: $keylol-inverted-text;
           overflow: hidden;
+        }
+        .inner {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          position: absolute;
+          box-sizing: border-box;
+          height: 95px;
+          padding: 0 15px;
+          width: 100%;
 
           &.ng-enter {
-            transition: height 800ms;
-            transition-delay: 800ms;
-            height: 0;
+            transition: all 800ms;
+            opacity: 0;
+            transform: translateY(100%);
           }
 
           &.ng-enter-active {
-            height: 95px;
+            opacity: 1;
+            transform: translateY(0);
           }
 
           &.ng-leave {
-            transition: height 800ms;
+            transition: all 800ms;
+            opacity: 1;
+            transform: translateY(0);
           }
 
           &.ng-leave-active {
-            height: 0;
+            opacity: 0;
+            transform: translateY(-100%);
           }
 
           .left {

@@ -14,21 +14,23 @@
                 <!-- robot 方式-->
                 <div class="login-steam-robot" ng-if="login.currentWay === 0">
                     <phase phases="['在对话中发送验证码','登录成功']" index="login.steamRobotWayManager.phaseIndex"></phase>
-                    <div class="inner" ng-if="login.steamRobotWayManager.phaseIndex === 1">
-                        <div class="left">
-                            <p>在其乐好友中，向其乐机器人发送<span class="blue">验证码</span></p>
-                            <p>机器人已尝试发出对话邀请</p>
+                    <div class="wrapper">
+                        <div class="inner" ng-if="login.steamRobotWayManager.phaseIndex === 0">
+                            <div class="left">
+                                <p>在其乐好友中，向其乐机器人发送<span class="blue">验证码</span></p>
+                                <p>机器人已尝试发出对话邀请</p>
+                            </div>
+                            <div class="right font-consolas">
+                                {{login.steamRobotWayManager.code}}
+                            </div>
                         </div>
-                        <div class="right font-consolas">
-                            {{login.steamRobotWayManager.code}}
-                        </div>
-                    </div>
-                    <div class="inner" ng-if="login.steamRobotWayManager.phaseIndex === 2">
-                        <div class="user">
-                            <img webp-src="{{login.steamRobotWayManager.avatarImage | avatarUrl}}" />
-                            <div>
-                                <p>{{login.steamRobotWayManager.userName}}</p>
-                                <p>欢迎回来</p>
+                        <div class="inner" ng-if="login.steamRobotWayManager.phaseIndex === 1">
+                            <div class="user">
+                                <img webp-src="{{login.steamRobotWayManager.avatarImage | avatarUrl}}" />
+                                <div>
+                                    <p>{{login.steamRobotWayManager.userName}}</p>
+                                    <p>欢迎回来</p>
+                                </div>
                             </div>
                         </div>
                     </div>

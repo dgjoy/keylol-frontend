@@ -1,5 +1,6 @@
 ﻿(function () {
-    class PhaseController {}
+    class PhaseController {
+    }
 
     keylolApp.component('phase', {
         templateUrl: 'src/components/phase.html',
@@ -7,7 +8,7 @@
         controllerAs: 'phase',
         bindings: {
             phases:'<',
-            index: '=',
+            index: '<',
         },
     });
 }());
