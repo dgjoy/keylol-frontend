@@ -40,9 +40,30 @@ similar-games {
         display: flex;
         justify-content: center;
         align-items: center;
-         img {
-           height: 48px;
-         }
+
+        img {
+          max-height: 48px;
+          max-width: 100%;
+        }
+
+        .theme-alt {
+          max-width: 100%;
+
+          p {
+            @include ellipsis;
+            margin: 0;
+            color: $keylol-inverted-text;
+
+            &:first-of-type {
+              font-weight: bold;
+            }
+
+            &:last-of-type {
+              font-size: 12px;
+              opacity: 0.6;
+            }
+          }
+        }
       }
     }
   }

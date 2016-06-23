@@ -19,6 +19,7 @@
         <user-article-collection ng-if="::(stateTree.aggregation.user.dossier.selectedArticles.length > 0)" cards="::stateTree.aggregation.user.dossier.selectedArticles" count="::stateTree.aggregation.user.dossier.articleCount" theme="theme" style="margin-bottom: 20px;"></user-article-collection>
         <user-favorite-games ng-if="false" theme="theme" style="position: absolute;width: 100%;left: 0;"></user-favorite-games>
         <user-friends ng-if="false" theme="theme" style="margin-top:580px;"></user-friends>
+        <section-timeline ng-if="stateTree.aggregation.user.timeline.cards" theme="theme" cards="stateTree.aggregation.user.timeline.cards"></section-timeline>
     </div>
     <div class="right-lg hidden-sm flex-column">
         <user-menu style="margin-bottom: 20px" ng-if="stateTree.aggregation.user.basicInfo" object="stateTree.aggregation.user.basicInfo"></user-menu>

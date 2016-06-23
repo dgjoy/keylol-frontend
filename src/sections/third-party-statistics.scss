@@ -23,6 +23,7 @@ third-party-statistics {
 
       .alt {
         p {
+          @include ellipsis;
           margin: 0;
           color: $keylol-inverted-text;
         }

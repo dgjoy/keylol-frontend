@@ -3,7 +3,8 @@
 </a>
 <div class="point-img" webp-background="{{gameCard.card.titleCoverImage | defaultFallback | uriRelocate: '/both/220x100'}}"></div>
 <div class="actions">
-    <vote-circle review="::gameCard.card.averageRating" gray-background="true"></vote-circle>
+    <vote-circle ng-if="gameCard.card.averageRating !== undefined" review="::gameCard.card.averageRating" gray-background="true"></vote-circle>
+    <span ng-if="gameCard.card.averageRating === undefined">评价不足</span>
     <flat-button binary-set="gameCard.subscribeSet" binary-value="gameCard.card.subscribed"
                  click="gameCard.subscribe(gameCard.card.id, gameCard.card.subscribed, gameCard.card)"></flat-button>
 </div>

@@ -37,6 +37,11 @@ game-card {
       margin-left: 20px;
     }
 
+    >span {
+      margin-left: 20px;
+      color: $keylol-inertia-text;
+    }
+
     flat-button {
       margin-right: 5px;
     }

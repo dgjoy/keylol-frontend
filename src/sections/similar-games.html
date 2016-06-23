@@ -5,7 +5,11 @@
     </div>
     <div class="right-part">
         <div class="theme-icon">
-            <img webp-src="{{similarGames.theme.icon}}">
+            <img ng-if="similarGames.theme.icon" webp-src="{{similarGames.theme.icon | themeLogoUrl}}">
+            <div ng-if="!similarGames.theme.logo" class="theme-alt">
+                <p>{{similarGames.utils.getPreferredPointName(similarGames.stateTree.aggregation.point.basicInfo, similarGames.stateTree.currentUser)[0]}}</p>
+                <p>{{similarGames.utils.getPreferredPointName(similarGames.stateTree.aggregation.point.basicInfo, similarGames.stateTree.currentUser)[1]}}</p>
+            </div>
         </div>
         <game-card card="card" ng-repeat="card in similarGames.gameRightPart"></game-card>
     </div>

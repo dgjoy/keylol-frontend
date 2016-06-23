@@ -2,28 +2,28 @@
     <div class="theme-logo">
         <img ng-if="thirdPartyStatistics.theme.logo" webp-src="{{thirdPartyStatistics.theme.logo | themeLogoUrl}}">
         <div ng-if="!thirdPartyStatistics.theme.logo" class="alt">
-            <p>{{thirdPartyStatistics.basicInfo.chineseName}}</p>
-            <p>keylol.com/point/{{thirdPartyStatistics.basicInfo.idCode}}</p>
+            <p>{{thirdPartyStatistics.utils.getPreferredPointName(thirdPartyStatistics.basicInfo, thirdPartyStatistics.stateTree.currentUser)[0]}}</p>
+            <p>{{thirdPartyStatistics.utils.getPreferredPointName(thirdPartyStatistics.basicInfo, thirdPartyStatistics.stateTree.currentUser)[1]}}</p>
         </div>
     </div>
     <div class="some-times">
         <div class="other-times">
-            <div>
+            <div ng-if="thirdPartyStatistics.intel.publishDate">
                 <p>公开</p>
-                <p ng-style="{visibility: thirdPartyStatistics.intel.publishDate?'':'hidden'}">{{::thirdPartyStatistics.intel.releaseDate | amUtc | amLocal | amDateFormat:'YYYY-MM-DD'}}</p>
+                <p>{{::thirdPartyStatistics.intel.publishDate | amUtc | amLocal | amDateFormat:'YYYY-MM-DD'}}</p>
             </div>
-            <div>
+            <div ng-if="thirdPartyStatistics.intel.pointCreateTime">
                 <p>据点成立</p>
                 <p>{{::thirdPartyStatistics.intel.pointCreateTime | amUtc | amLocal | amDateFormat:'YYYY-MM-DD'}}</p>
             </div>
-            <div>
+            <div ng-if="thirdPartyStatistics.intel.preOrderDate">
                 <p>预售</p>
                 <p ng-style="{visibility: thirdPartyStatistics.intel.preOrderDate?'':'hidden'}">{{::thirdPartyStatistics.intel.preOrderDate | amUtc | amLocal | amDateFormat:'YYYY-MM-DD'}}</p>
             </div>
         </div>
-        <div class="sale-times">
+        <div class="sale-times" ng-if="thirdPartyStatistics.intel.releaseDate">
             <p>正式发行</p>
-            <p ng-style="{visibility: thirdPartyStatistics.intel.releaseDate?'':'hidden'}">{{::(thirdPartyStatistics.intel.publishDate | amUtc | amLocal | amDateFormat:'YYYY-MM-DD')}}</p>
+            <p>{{::(thirdPartyStatistics.intel.releaseDate | amUtc | amLocal | amDateFormat:'YYYY-MM-DD')}}</p>
         </div>
     </div>
 </div>

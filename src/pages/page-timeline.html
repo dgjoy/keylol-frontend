@@ -1,8 +1,12 @@
 ﻿<div class="flex-row" style="margin-top: 30px;">
     <div class="left-middle-lg row-sm">
         <section-timeline ng-if="stateTree.entrance.timeline.cards" cards="stateTree.entrance.timeline.cards"></section-timeline>
+        <section-timeline ng-if="stateTree.aggregation.point.timeline.cards" theme="theme" cards="stateTree.aggregation.point.timeline.cards"></section-timeline>
+        <section-timeline ng-if="stateTree.aggregation.user.timeline.cards" theme="theme" cards="stateTree.aggregation.user.timeline.cards"></section-timeline>
     </div>
     <div class="right-lg hidden-sm flex-column">
+        <point-menu ng-if="stateTree.aggregation.point.basicInfo" style="margin-bottom: 20px" object="::stateTree.aggregation.point.basicInfo"></point-menu>
+        <user-menu style="margin-bottom: 20px" ng-if="stateTree.aggregation.user.basicInfo" object="stateTree.aggregation.user.basicInfo"></user-menu>
         <right-menus style="flex-grow: 1;"></right-menus>
     </div>
 </div>

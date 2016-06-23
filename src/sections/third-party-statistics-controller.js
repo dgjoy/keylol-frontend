@@ -1,6 +1,10 @@
 ﻿(function () {
     class ThirdPartyStatisticsController {
-        constructor ($scope) {
+        constructor (utils) {
+            $.extend(this, {
+                utils,
+            });
+
             this.tabArray = [
                 { name:'玩家数目' },
                 { name:'在档时间' },
@@ -33,7 +37,7 @@
                         {
                             name: '十五日活跃玩家',
                             main: this.intel.twoWeekPlayerCount,
-                            sub: '±12,758(!)',
+                            sub: `±${this.intel.twoWeekPlayerCountVariance}`,
                         },
                         {
                             name: '是日同时在线',
@@ -51,8 +55,11 @@
                         },
                         {
                             name: '骨灰玩家',
-                            main: parseInt((this.intel.ccu / this.intel.twoWeekPlayerCount) * this.intel.totalPlayerCount),
-                            sub: '±12,758(!)',
+                            main: parseInt(this.intel.ccu / this.intel.twoWeekPlayerCount * this.intel.totalPlayerCount),
+                            sub: `±${parseInt(this.intel.ccu /
+                                (this.intel.twoWeekPlayerCount - this.intel.twoWeekPlayerCountVariance)
+                                * this.intel.totalPlayerCount) - parseInt(this.intel.ccu / this.intel.twoWeekPlayerCount
+                                * this.intel.totalPlayerCount)}`,
                         },
                     ],
                 },

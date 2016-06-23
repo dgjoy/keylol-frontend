@@ -1,6 +1,11 @@
 ﻿(function () {
     class SimilarGamesController {
-        constructor () {
+        constructor (stateTree, utils) {
+            $.extend(this, {
+                stateTree,
+                utils,
+            });
+
             this.gameLeftPart = [];
             this.gameRightPart = [];
             if (this.cards) {

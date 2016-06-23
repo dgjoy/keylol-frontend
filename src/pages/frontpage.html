@@ -9,6 +9,7 @@
                          theme="::theme"
                          style="margin-bottom: 30px;">
         </latest-articles>
+        <section-timeline ng-if="stateTree.aggregation.point.timeline.cards" theme="theme" cards="stateTree.aggregation.point.timeline.cards"></section-timeline>
     </div>
 
     <div class="left-middle-lg row-sm" ng-switch-when="hardware">
@@ -30,6 +31,7 @@
                          theme="::theme"
                          style="margin-bottom: 30px;">
         </latest-articles>
+        <section-timeline ng-if="stateTree.aggregation.point.timeline.cards" theme="theme" cards="stateTree.aggregation.point.timeline.cards"></section-timeline>
     </div>
 
     <div class="left-middle-lg row-sm" ng-switch-when="game">
@@ -60,6 +62,7 @@
                          theme="::theme"
                          style="margin-bottom: 30px;">
         </latest-articles>
+        <section-timeline ng-if="stateTree.aggregation.point.timeline.cards" theme="theme" cards="stateTree.aggregation.point.timeline.cards"></section-timeline>
     </div>
 
     <div class="right-lg hidden-sm flex-column">

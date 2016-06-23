@@ -1,12 +1,14 @@
 ﻿(function () {
     class SectionTimelineController {
-        constructor ($scope, $location, $window, window, $http, apiEndpoint, notification) {
+        constructor ($scope, $location, $window, window, $http, apiEndpoint, notification, $state, stateTree) {
             $.extend(this, {
                 $location,
                 window,
                 $http,
                 apiEndpoint,
                 notification,
+                $state,
+                stateTree,
             });
             this.columnCount = 'two';
             this.leftCards = [];
@@ -14,7 +16,7 @@
             this.preferLeft = false;
             this.setTwoColumn();
             this.first = true;
-            this.end = false;
+            this.end = this.cards.length < 6;
 
             const $$window = $($window);
 
@@ -50,7 +52,10 @@
                 controller: 'ActivityEditorController',
                 controllerAs: 'activityEditor',
                 inputs: {
-                    options: {},
+                    options: {
+                        targetPoint: this.$state.current.name.substr(0, 17) === 'aggregation.point' ?
+                            this.stateTree.aggregation.point.basicInfo : undefined,
+                    },
                 },
             });
         }
@@ -65,6 +70,8 @@
                     inputs: {
                         options: {
                             file: $file,
+                            targetPoint: this.$state.current.name.substr(0, 17) === 'aggregation.point' ?
+                                this.stateTree.aggregation.point.basicInfo : undefined,
                         },
                     },
                 });
@@ -76,17 +83,28 @@
             if (!this.end && !this.loadLock) {
                 this.loadLock = true;
                 const nowLength = this.cards.length;
-                this.$http.get(`${this.apiEndpoint}/states/entrance/timeline/cards`, {
-                    params: {
-                        before: this.cards[nowLength - 1].feedId,
-                        take: 12,
-                    },
+
+                let getUrl = `${this.apiEndpoint}/states/entrance/timeline/cards`;
+                const params = {
+                    before: this.cards[nowLength - 1].feedId,
+                    take: 12,
+                };
+                const currentStateName = this.$state.current.name;
+                if (currentStateName.substr(0, 17) === 'aggregation.point') {
+                    getUrl = `${this.apiEndpoint}/states/aggregation/point/timeline/cards`;
+                    params.point_id = this.stateTree.aggregation.point.basicInfo.id;
+                }
+                if (currentStateName.substr(0, 16) === 'aggregation.user') {
+                    getUrl = `${this.apiEndpoint}/states/aggregation/user/timeline/cards`;
+                    params.user_id = this.stateTree.aggregation.user.basicInfo.id;
+                }
+
+                this.$http.get(getUrl, {
+                    params,
                 }).then(response => {
                     Array.prototype.push.apply(this.cards, response.data);
                     this.setTwoColumn(nowLength);
-                    if (response.data.length < 12) {
-                        this.end = true;
-                    }
+                    this.end = response.data.length < 6;
                     this.loadLock = false;
                 }, response => {
                     this.notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);

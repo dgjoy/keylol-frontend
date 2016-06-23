@@ -9,7 +9,7 @@
             $scope.tabArray = [
                 { state: '.info', name:'资料' },
                 { state: '.style', name:'样式' },
-                { state: '.log', name:'变更日志' },
+                // { state: '.log', name:'变更日志' },
             ];
             $scope.$watch(() => {
                 return $state.current.name;

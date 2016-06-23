@@ -71,6 +71,9 @@
                         case 'intel' :
                             this.currentPage = 1;
                             break;
+                        case 'timeline' :
+                            this.currentPage = 2;
+                            break;
                         case 'edit' :
                         case 'edit.info' :
                         case 'edit.style' :
@@ -109,6 +112,9 @@
                             break;
                         case 'people' :
                             this.currentPage = 1;
+                            break;
+                        case 'timeline' :
+                            this.currentPage = 2;
                             break;
                         case 'edit' :
                         case 'edit.info' :

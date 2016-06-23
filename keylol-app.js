@@ -36,16 +36,6 @@
             //     templateUrl: 'src/pages/search-results.html',
             //     controller: 'ReadersController',
             // })
-            // .state('post-office', {
-            //     url: '/post-office',
-            //     templateUrl: 'src/pages/post-office.html',
-            //     controller: 'PostOfficeController',
-            // })
-            // .state('post-office-type', {
-            //     url: '/post-office/:type',
-            //     templateUrl: 'src/pages/post-office.html',
-            //     controller: 'PostOfficeController',
-            // })
             // .state('search', {
             //     url: '/search/:searchType/:keyword',
             //     templateUrl: 'src/pages/search-results.html',
@@ -259,15 +249,15 @@
                                 delete stateTree.aggregation.point.edit.style;
                             },
                         })
-                        .state('aggregation.point.edit.log', {
-                            url: '/log',
-                            templateUrl: 'src/pages/edit-log.html',
-                            controller: 'EditLogController',
-                            onExit (stateTree) {
-                                console.log('exit point edit log');
-                                delete stateTree.aggregation.point.edit;
-                            },
-                        })
+                        // .state('aggregation.point.edit.log', {
+                        //     url: '/log',
+                        //     templateUrl: 'src/pages/edit-log.html',
+                        //     controller: 'EditLogController',
+                        //     onExit (stateTree) {
+                        //         console.log('exit point edit log');
+                        //         delete stateTree.aggregation.point.edit;
+                        //     },
+                        // })
             .state('aggregation.user', {
                 url: '/user/:user_id_Code',
                 templateUrl: 'src/pages/user.html',
@@ -277,15 +267,15 @@
                     delete stateTree.aggregation.user;
                 },
             })
-            .state('aggregation.user.dossier', {
-                url: '/dossier',
-                templateUrl: 'src/pages/dossier.html',
-                controller: 'DossierController',
-                onExit (stateTree) {
-                    console.log('exit dossier');
-                    delete stateTree.aggregation.user.dossier;
-                },
-            })
+                .state('aggregation.user.dossier', {
+                    url: '/dossier',
+                    templateUrl: 'src/pages/dossier.html',
+                    controller: 'DossierController',
+                    onExit (stateTree) {
+                        console.log('exit dossier');
+                        delete stateTree.aggregation.user.dossier;
+                    },
+                })
                 .state('aggregation.user.people', {
                     url: '/people',
                     templateUrl: 'src/pages/people.html',
@@ -294,6 +284,11 @@
                         console.log('exit people');
                         delete stateTree.aggregation.user.people;
                     },
+                })
+                .state('aggregation.user.timeline', {
+                    url: '/timeline',
+                    templateUrl: 'src/pages/page-timeline.html',
+                    controller: 'PageTimelineController',
                 })
                 .state('aggregation.user.edit', {
                     url: '/edit',

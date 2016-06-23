@@ -1,6 +1,6 @@
 ﻿(function () {
     class DossierController {
-        constructor($scope, pageHead, stateTree, $state, $location, pageLoad, $http, notification) {
+        constructor($scope, pageHead, stateTree, $state, $location, pageLoad, $http, notification, $window, $element) {
             // $scope.changePage =  index => {
             //     $scope.currentPage = index;
             //     switch (index) {
@@ -58,6 +58,28 @@
             }
 
             $scope.stateTree = stateTree;
+
+
+            const $$window = $($window);
+            const scrollCallback = () => {
+                const shouldWindowScrollTop = $$window.scrollTop() + 94;
+                const windowHeight = $$window.height();
+                const elementOffsetTop = $element.offset().top;
+                const $elementHeight = $element.height();
+                if (shouldWindowScrollTop + windowHeight > elementOffsetTop + $elementHeight) {
+                    $scope.$apply(() => {
+                        pageLoad('aggregation.user.timeline');
+                        $$window.unbind('scroll', scrollCallback);
+                        cancelListenRoute();
+                    });
+                }
+            };
+            $$window.scroll(scrollCallback);
+
+            const cancelListenRoute = $scope.$on('$destroy', () => {
+                $$window.unbind('scroll', scrollCallback);
+                cancelListenRoute();
+            });
         }
     }
 

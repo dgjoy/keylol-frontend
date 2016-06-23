@@ -21,6 +21,10 @@
                 this.extra.image = options.file;
             }
 
+            if (options.targetPoint) {
+                this.vm.targetPoints.push(options.targetPoint);
+            }
+
             if (options.activity) {
                 this.vm.id = options.activity.id;
                 this.vm.targetPoints.push(options.activity.pointBasicInfo);

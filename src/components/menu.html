@@ -80,21 +80,21 @@
         <div class="paragraph">关注 <a href="">{{menu.object.header.basicInfo.subscribedUserCount}}</a></div>
         <div class="paragraph">听众 <a href="">{{menu.object.header.basicInfo.subscriberCount}}</a></div>
         <div class="horizon"></div>
-        <div class="icon-text">
+        <div ng-if="menu.object.header.basicInfo.steamProfileName" class="icon-text">
             <svg aria-hidden="true">
                 <use ng-href="{{'dtb-steam' | iconSvgUrl }}" xlink:href=""></use>
             </svg>
             <span>Steam</span>
         </div>
-        <div class="paragraph"><a href="">{{menu.object.header.basicInfo.steamProfileName}}</a></div>
+        <div ng-if="menu.object.header.basicInfo.steamProfileName" class="paragraph"><a href="" ng-href="http://steamcommunity.com/profiles/{{menu.utils.getSteamId64(menu.object.header.basicInfo.steamId)}}">{{menu.object.header.basicInfo.steamProfileName}}</a></div>
 
-        <div class="icon-text" ng-if="false">
-            <svg aria-hidden="true">
-                <use ng-href="{{'steamcn' | iconSvgUrl }}" xlink:href=""></use>
-            </svg>
-            <span>蒸汽动力<span class="is-friend"> (好友)</span></span>
-        </div>
-        <div class="paragraph" ng-if="false"><a href="">NPC 的小船</a></div>
+        <!--<div class="icon-text" ng-if="false">-->
+            <!--<svg aria-hidden="true">-->
+                <!--<use ng-href="{{'steamcn' | iconSvgUrl }}" xlink:href=""></use>-->
+            <!--</svg>-->
+            <!--<span>蒸汽动力<span class="is-friend"> (好友)</span></span>-->
+        <!--</div>-->
+        <!--<div class="paragraph" ng-if="false"><a href="">NPC 的小船</a></div>-->
     </div>
 
 </div>
