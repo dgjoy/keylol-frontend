@@ -73,7 +73,6 @@
                         this.result.push(this.currentPage - 1);
                     }, () => {
                         if (this.list[this.currentPage - 1].link !== '') {
-                            console.log(this.$filter('uriRelocate',this.list[this.currentPage - 1].link));
                             window.open(`${this.$filter('uriRelocate')(this.list[this.currentPage - 1].link)}`);
                         }
                     }],

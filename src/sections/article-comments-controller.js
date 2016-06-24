@@ -18,8 +18,6 @@
                 content: '',
             };
 
-            console.log(this.article.comments);
-
             this.setCommentsHeight();
 
             union.updateCommentsHeight = () => {

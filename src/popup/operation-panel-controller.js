@@ -36,8 +36,6 @@
                 notifyAuthor: this.vm.missive[0] === 0,
                 reasons: this.vm.reasons,
             };
-
-            console.log(this.api,submitObj);
             this.$http.put(this.api, submitObj).then(response => {
                 this.notification.success({ message: `${this.operation.mainTitle}成功` }, response);
                 this.close(submitObj.value);

@@ -104,7 +104,6 @@
             const appId = parseInt(matches[1]);
             this.captureLock = true;
             this.$http.get(`${apiEndpoint}states/point-to-create/?steam_app_id=${appId}`).then(response => {
-                console.log(response.data);
                 if (!response.data.failed) {
                     this.extra.SteamGame.thumbnailImage = response.data.thumbnailImage;
                     this.extra.SteamGame.avatarImage = response.data.avatarImage;
@@ -153,7 +152,6 @@
         }
 
         submit (type) {
-            console.log(`${type} submit`, this.vm[type]);
             if (this.submitLock) {
                 return;
             }

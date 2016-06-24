@@ -81,7 +81,6 @@
                     this.isToNext = newPage > oldPage;
                     this.list = response.data;
                     this.changePageLock = false;
-                    console.log(response);
                 }, response => {
                     this.notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
                     this.changePageLock = false;
