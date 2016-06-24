@@ -8,7 +8,7 @@
                         Archived: 'archived',
                         Warned: 'warned',
                         Rejected: 'rejected',
-                        Spotlight: 'spotlighted',
+                        Spotlighted: 'spotlighted',
                     };
 
                     origin.popup({
@@ -123,7 +123,7 @@
                             {
                                 type: 'item',
                                 text: `${content.spotlighted ? '撤销' : ''}萃选`,
-                                clickAction: showOperationPanel(`${content.spotlighted ? 'Un' : ''}Spotlight`),
+                                clickAction: showOperationPanel(`${content.spotlighted ? 'Un' : ''}Spotlighted`),
                             },
                             {
                                 type: 'item',

@@ -7,6 +7,9 @@
                 close,
             });
             this.operation = moderationText[options.operationType];
+            switch(options) {
+
+            }
 
             this.vm = {
                 reasons : [],
@@ -15,10 +18,10 @@
 
             this.op = {};
             if (options.operationType.slice(0,2) === 'Un') {
-                this.op.proverty = options.operationType.slice(2);
+                this.op.property = options.operationType.slice(2);
                 this.op.value = false;
             } else {
-                this.op.proverty = options.operationType;
+                this.op.property = options.operationType;
                 this.op.value = true;
             }
 
@@ -28,7 +31,7 @@
         submit () {
             this.submitLock = true;
             const submitObj = {
-                proverty: this.op.proverty,
+                property: this.op.property,
                 value: this.op.value,
                 notifyAuthor: this.vm.missive[0] === 0,
                 reasons: this.vm.reasons,
