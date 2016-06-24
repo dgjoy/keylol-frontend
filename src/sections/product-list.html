@@ -1,0 +1,8 @@
+﻿<section-header header="productList.object.header" theme="::productList.theme"></section-header>
+<div class="list">
+    <game-card ng-if="$index < (24 * productList.currentPage)" ng-repeat="card in productList.object.cards" card="card"></game-card>
+</div>
+<div class="action">
+    <raised-button text="{{productList.end?'已无更多':'展开更多'}}" type="theme" click="productList.load()" ng-if="productList.first||productList.end" disabled="productList.end" ></raised-button>
+</div>
+

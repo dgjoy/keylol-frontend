@@ -1,0 +1,7 @@
+<button class="{{fab.type}}" style="{{::(fab.themeColor ? 'background-color: ' + fab.themeColor + ';' : '')}}" ng-click="fab.click()" ripple="{{::(fab.themeColor? '#fff' : '#000')}}">
+    <div class="fab-wrapper">
+        <svg aria-hidden="true" style="{{::(fab.themeColor? 'fill: #fff;' : '')}}">
+            <use ng-href="{{ fab.icon | iconSvgUrl }}" xlink:href=""></use>
+        </svg>
+    </div>
+</button>

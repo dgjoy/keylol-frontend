@@ -1,0 +1,6 @@
+﻿<message-list
+        ng-if="stateTree.postOffice.unread.messages.length > 0"
+        module-api="states/post-office/unread/messages"
+        total-page="::stateTree.postOffice.unread.messagePageCount"
+        messages="::(stateTree.postOffice.unread.messages)">
+</message-list>

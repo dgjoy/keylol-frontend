@@ -1,0 +1,14 @@
+﻿<popup class="popup-operation-feedback">
+    <div class="feedback-content" ng-class="options.type">
+        <svg ng-if="options.icon" aria-hidden="true">
+            <use ng-href="{{ options.icon | iconSvgUrl }}" xlink:href=""></use>
+        </svg>
+        <div class="snack-main">
+            <div class="text">
+                <p class="message">{{options.message}}</p>
+                <p class="description" ng-if="options.description">{{options.description}}</p>
+            </div>
+            <flat-button type="invert" ng-if="options.action" click="close(options.action.value)" text="{{options.action.text}}">></flat-button>
+        </div>
+    </div>
+</popup>

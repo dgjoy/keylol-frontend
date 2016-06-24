@@ -1,0 +1,8 @@
+﻿<section-header header="userLatestSubscribe.header" theme="::userLatestSubscribe.theme"></section-header>
+<div class="flex-row">
+    <div class="point-card" ng-repeat="point in userLatestSubscribe.cards">
+        <a href="point/{{point.idCode}}">
+            <point-basic-info point="point"></point-basic-info>
+        </a>
+    </div>
+</div>

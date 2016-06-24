@@ -1,0 +1,44 @@
+input-uic {
+  display: flex;
+
+  span {
+    width: 26px;
+    padding-left: 1px;
+
+    &:last-of-type>.bottom {
+      border-right: 1px solid $keylol-inertia-shape;
+    }
+
+    input[type="text"] {
+      text-align: center;
+      text-transform: uppercase;
+      background-color: transparent;
+      padding: 0;
+      outline: 0;
+      width: 100%;
+      height: 16px;
+      padding-bottom: 5px;
+    }
+
+    .bottom {
+      width: 100%;
+      height: 5px;
+      border: 0;
+      border-left: 1px solid $keylol-inertia-shape;
+      border-bottom: 1px solid $keylol-inertia-shape;
+    }
+
+    &.theme .bottom {
+      border-color: $keylol-light-theme;
+    }
+
+    &.warn .bottom {
+      border-color: $keylol-review-bad;
+    }
+
+    &.disabled .bottom {
+      border-top: 0;
+      border-style: dotted;
+    }
+  }
+}

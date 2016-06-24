@@ -1,0 +1,14 @@
+spotlight-articles {
+  display: block;
+  position: relative;
+
+  .moderation-wrapper {
+    position: absolute;
+    right: 10px;
+    top: 22px;
+  }
+
+  spotlight-article-card {
+    margin-bottom: 20px;
+  }
+}

@@ -1,0 +1,41 @@
+﻿<window position="center" class="window-activity-editor">
+    <div class="window">
+        <div class="related">
+            <div class="related-point-count" ng-if="activityEditor.relatedPointCount !== undefined">
+                {{activityEditor.relatedPointCount}} 个关联据点
+            </div>
+            <text-area type="point"
+                       label="选择一个据点"
+                       model="activityEditor.vm.targetPoints"
+                       options="::{played_time: true}"
+                       limit="1">
+            </text-area>
+            <div class="user-info">
+                <img src="" class="avatar" webp-src="{{::activityEditor.stateTree.currentUser.avatarImage | avatarUrl}}">
+                <div class="name-group">
+                    <p>{{::activityEditor.stateTree.currentUser.userName}}</p>
+                    <p>{{activityEditor.inLibraryTime ? '在档' + activityEditor.inLibraryTime + ' 小时' : ''}}&nbsp;</p>
+                </div>
+            </div>
+            <point-review ng-if="activityEditor.hasRating" bind-review="activityEditor.vm.rating" is-hollow="true"></point-review>
+        </div>
+        <div class="edit">
+            <textarea placeholder="谈谈最近的心得..." rows="4" elastic ng-model="activityEditor.vm.content"></textarea>
+        </div>
+        <div class="actions">
+            <a href="" ngf-select="activityEditor.uploadImage($file, $event)" ngf-fix-orientation="true" accept="image/*">{{(activityEditor.vm.coverImage || activityEditor.extra.image) ? '更换附图' : '上传一张附图'}}</a>
+            <div class="buttons">
+                <flat-button text="放弃" type="inertia" click="activityEditor.close()"></flat-button>
+                <raised-button text="贴出动态"
+                               type="theme"
+                               click="activityEditor.submit()"
+                               disabled="(activityEditor.vm.targetPoints.length !== 1 || activityEditor.vm.content.length === 0) || activityEditor.submitLock">
+                </raised-button>
+            </div>
+        </div>
+    </div>
+    <div ng-if="activityEditor.vm.coverImage || activityEditor.extra.image" class="image-preview">
+        <img ng-if="activityEditor.extra.image" src="" ngf-src="activityEditor.extra.image">
+        <img ng-if="!activityEditor.extra.image" src="" webp-src="{{activityEditor.vm.coverImage | uriRelocate}}">
+    </div>
+</window>

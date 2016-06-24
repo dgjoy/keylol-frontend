@@ -1,0 +1,28 @@
+﻿<!--<tabs class="invert" invert="true" tab-array="tabArray" cur-tab="currentPage" click-handler="changePage(index)" style="margin-bottom: 40px;" ></tabs>-->
+<div style="margin-top: 30px" class="flex-row" ng-if="stateTree.aggregation.user.dossier && stateTree.aggregation.user.basicInfo">
+    <!--<div class="left-middle-lg row-sm" ng-if="currentPage === 0">-->
+        <!--<page-list ng-if="tempList.length > 0"-->
+                   <!--expanded="true"-->
+                   <!--list="tempList"-->
+                   <!--total-page="articlePageCount"-->
+                   <!--module-api="states/aggregation/user/dossier/selected-articles"-->
+                   <!--request-params="{user_id:stateTree.aggregation.user.basicInfo.id}"-->
+                   <!--style="margin-bottom: 50px"-->
+        <!--&gt;</page-list>-->
+    <!--</div>-->
+    <!--<div class="left-middle-lg row-sm" ng-if="currentPage === 1">-->
+
+    <!--</div>-->
+    <div class="left-middle-lg row-sm">
+        <user-associations object="::stateTree.aggregation.user.dossier" theme="theme" style="margin-bottom: 40px;"></user-associations>
+        <user-latest-subscribe ng-if="::(stateTree.aggregation.user.dossier.subscribedPoints.length > 0)" cards="::stateTree.aggregation.user.dossier.subscribedPoints" count="::stateTree.aggregation.user.dossier.subscribedPointCount" theme="theme" style="margin-bottom: 20px;"></user-latest-subscribe>
+        <user-article-collection ng-if="::(stateTree.aggregation.user.dossier.selectedArticles.length > 0)" author-id-code="::(stateTree.aggregation.user.basicInfo.idCode)" cards="::stateTree.aggregation.user.dossier.selectedArticles" count="::stateTree.aggregation.user.dossier.articleCount" theme="theme" style="margin-bottom: 20px;"></user-article-collection>
+        <!--<user-favorite-games ng-if="false" theme="theme" style="position: absolute;width: 100%;left: 0;"></user-favorite-games>-->
+        <!--<user-friends ng-if="false" theme="theme" style="margin-top:580px;"></user-friends>-->
+        <section-timeline ng-if="stateTree.aggregation.user.timeline.cards" theme="theme" cards="stateTree.aggregation.user.timeline.cards"></section-timeline>
+    </div>
+    <div class="right-lg hidden-sm flex-column">
+        <user-menu style="margin-bottom: 20px" ng-if="stateTree.aggregation.user.basicInfo" object="stateTree.aggregation.user.basicInfo"></user-menu>
+        <right-menus style="flex-grow: 1;"></right-menus>
+    </div>
+</div>

@@ -1,0 +1,269 @@
+.window-editor {
+  background-color: $keylol-background;
+
+  .editor {
+    width: 1060px;
+
+    .poster {
+      width: 100%;
+      height: 300px;
+      margin-bottom: 30px;
+      background: linear-gradient(to right, $keylol-inertia-shape 50%, $keylol-inertia-text 50%);
+      background-size: 100px 100%;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+
+      &.has-background {
+        background: no-repeat center;
+        background-size: cover;
+      }
+
+      .close {
+        position: absolute;
+        left: -120px;
+        top: 20px;
+        width: 100px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+
+        flat-button {
+          display: none;
+        }
+        
+        @media (min-width:1440px) {
+          flat-button {
+            display: block;
+          }
+        }
+      }
+
+      .titles {
+        position: relative;
+        padding: 20px 15px;
+        background-color: rgba($keylol-inverted-text, .85);
+        display: flex;
+        justify-content: space-between;
+
+        .main-title {
+          width: 450px;
+        }
+        .sub-title {
+          width: 550px;
+        }
+      }
+
+      raised-button {
+        position: absolute;
+        right: 20px;
+        top: 20px;
+      }
+    }
+
+    .related-points {
+      padding: 0 15px;
+      margin-bottom: 30px;
+
+      .fake {
+        @include keylol-shadow-1();
+        position: absolute;
+        min-height: 190px;
+        left: 0;
+        width: 100%;
+        background-color: $keylol-card;
+      }
+
+      .main-points {
+        position: relative;
+        padding-top: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        text-area {
+          width: 890px;
+        }
+      }
+
+      .sub-points {
+        position: relative;
+        padding-top: 10px;
+
+        text-area {
+          width: 100%;
+        }
+      }
+
+    }
+
+    .edit-tools {
+      display: flex;
+      justify-content: space-between;
+
+      .main {
+        @include keylol-shadow-1();
+        background-color: $keylol-card;
+        width: 700px;
+        min-height: 1024px;
+        margin-bottom: 20px;
+
+        .info-review {
+          padding: 20px 15px 0;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          .info {
+            display: flex;
+            align-items: center;
+
+            .avatar {
+              margin-right: 10px;
+              width: 32px;
+              height: 32px;
+            }
+
+            .name-group {
+              min-height: 32px;
+              max-width: calc(100% - 42px);
+              p {
+                @include ellipsis;
+                margin: 0;
+
+                &:first-of-type {
+                  color: $keylol-main-text;
+                  font-weight: bold;
+                }
+
+                &:nth-of-type(2) {
+                  color: $keylol-inertia-text;
+                  font-size: 12px;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .other {
+        width: 340px;
+        .card {
+          @include keylol-shadow-1();
+          background-color: $keylol-card;
+          padding: 20px 15px;
+          margin-bottom: 20px;
+
+          .toggle {
+            height: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            &:hover {
+              svg { fill: $keylol-light-text; }
+            }
+
+            p {
+              margin: 0;
+              line-height: 16px;
+              color: $keylol-main-text;
+            }
+            svg {
+              width: 16px;
+              height: 16px;
+              transform: rotate(270deg);
+              transition: transform .3s ease-in;
+              fill: $keylol-inertia-shape;
+
+              &.opened {
+                transform: rotate(90deg);
+              }
+            }
+          }
+
+          .good-bads {
+            height: 0;
+            overflow: hidden;
+            transition: height .3s ease-in;
+
+            &.opened {
+              height: 542px;
+            }
+
+            .good-bad {
+              padding: 10px 0;
+              width: 100%;
+              &:first-of-type {
+                padding-top: 30px;
+              }
+            }
+          }
+
+          .repost-options {
+            height: 0;
+            overflow: hidden;
+            transition: height .3s ease-in;
+
+            &.opened {
+              height: 200px;
+            }
+
+            .hr {
+              height: 1px;
+              background-color: $keylol-inertia-shape;
+              margin-top: 9px;
+              margin-bottom: 10px;
+            }
+
+            .repost-option {
+              height: 20px;
+              padding: 10px 0;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+
+              &:first-of-type {
+                padding-top: 35px;
+              }
+              &:last-of-type {
+                padding-bottom: 5px;
+              }
+
+              p {
+                margin: 0;
+                color: $keylol-main-text;
+              }
+            }
+          }
+
+          &.send-card {
+            p {
+              margin: 0;
+            }
+            p:first-of-type {
+              color: $keylol-inertia-text;
+              font-style: italic;
+              a {
+                color: $keylol-highlight;
+                font-style: normal;
+                &:hover { text-decoration: underline; }
+              }
+            }
+            p:last-of-type {
+              color: $keylol-main-text;
+              .theme {
+                color: $keylol-light-theme;
+              }
+            }
+
+            raised-button {
+              float: right;
+              margin-top: 20px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

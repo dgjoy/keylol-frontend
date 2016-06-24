@@ -1,0 +1,177 @@
+slide-show {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+
+  .slide-selector {
+    @include keylol-shadow-1();
+    position:relative;
+    width: 160px;
+    height: 240px;
+    background-color: $keylol-card;
+
+    .moveBackground {
+      position: absolute;
+      background-color: $keylol-theme;
+      width:100%;
+      top: 0;
+      bottom: 180px;
+      z-index: 1;
+
+      &.move-up {
+        transition: top 300ms, bottom 450ms;
+
+      }
+      &.move-down {
+        transition: top 450ms, bottom 300ms;
+      }
+
+      &.active-0 {
+        top: 0;
+        bottom: 180px;
+      }
+
+      &.active-1 {
+        top: 60px;
+        bottom: 120px;
+      }
+
+      &.active-2 {
+        top: 120px;
+        bottom: 60px;
+      }
+
+      &.active-3 {
+        top: 180px;
+        bottom: 0;
+      }
+    }
+    .moveBackground-triangle {
+      position: absolute;
+      top: 20px;
+      right: -10px;
+      width: 0;
+      height: 0;
+      border-top: 10px solid transparent;
+      border-left: 10px solid $keylol-theme;
+      border-bottom: 10px solid transparent;
+      transition: transform 300ms;
+
+      &.active-0 {
+        transform: translateY(0);
+      }
+
+      &.active-1 {
+        transform: translateY(60px);
+      }
+
+      &.active-2 {
+        transform: translateY(120px);
+      }
+
+      &.active-3 {
+        transform: translateY(180px);
+      }
+    }
+
+    .slide-shortcut {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height:60px;
+      padding:0 15px;
+
+      .title,
+      .sub-title {
+        @include ellipsis();
+
+        transition: color 450ms;
+      }
+
+      .title {
+        font-weight: bold;
+        color: $keylol-main-text;
+
+        &.active {
+          color: #fff;
+        }
+      }
+      .sub-title {
+        font-size: 12px;
+        color: $keylol-inertia-text;
+
+        &.active {
+          color: rgba(#fff,.6);
+        }
+      }
+    }
+  }
+
+  .slide-list {
+    @include keylol-shadow-1();
+    position: relative;
+    width: 760px;
+    height: 240px;
+    overflow: hidden;
+    background-color: $keylol-card;
+
+    .slide {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+
+      .bottom-text {
+        span.title {
+          margin-right: 15px;
+        }
+        span.sub-title {
+          font-size: 12px;
+          font-weight: normal;
+        }
+      }
+    }
+
+    &.to-up {
+      .swap-animation.ng-enter, .swap-animation.ng-leave {
+        transition: transform 450ms cubic-bezier(0.19, 1, 0.22, 1);
+      }
+      .swap-animation.ng-enter {
+        transform: translateY(100%);
+      }
+      .swap-animation.ng-enter-active {
+        transform: translateY(0);
+      }
+      .swap-animation.ng-leave {
+        transform: translateY(0);
+      }
+      .swap-animation.ng-leave-active {
+        transform: translateY(-100%);
+      }
+    }
+
+    &.to-down {
+      .swap-animation.ng-enter, .swap-animation.ng-leave {
+        transition: transform 450ms cubic-bezier(0.19, 1, 0.22, 1);
+      }
+      .swap-animation.ng-enter {
+        transform: translateY(-100%);
+      }
+      .swap-animation.ng-enter-active {
+        transform: translateY(0);
+      }
+      .swap-animation.ng-leave {
+        transform: translateY(0);
+      }
+      .swap-animation.ng-leave-active {
+        transform: translateY(100%);
+      }
+    }
+  }
+
+  .moderation-wrapper {
+    position: absolute;
+    right: -44px;
+  }
+}

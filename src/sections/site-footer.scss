@@ -1,0 +1,57 @@
+.section-site-footer {
+    text-align: right;
+    width: 100%;
+    min-width: 250px;
+    margin-top: -3px;
+}
+
+.section-site-footer p {
+    margin: 5px 0;
+}
+
+.section-site-footer .divider {
+    margin: 0 4px;
+    color: #BBB;
+}
+
+.section-site-footer,
+.section-site-footer a {
+    color: $keylol-highlight;
+}
+
+.section-site-footer .scroll-to-top {
+    position: fixed;
+    display: block;
+    right: 100px;
+    bottom: 50px;
+    background-color: $keylol-theme;
+    opacity: 0.5;
+}
+
+.section-site-footer .scroll-to-top:hover {
+    opacity: 1;
+}
+
+.section-site-footer .scroll-to-top img {
+    width: 48px;
+}
+
+.section-site-footer .scroll-to-top.ng-animate {
+    transition: 0.2s linear all;
+}
+
+.section-site-footer .scroll-to-top.ng-hide-add {
+    opacity: 0.5;
+}
+
+.section-site-footer .scroll-to-top.ng-hide-add.ng-hide-add-active {
+    opacity: 0;
+}
+
+.section-site-footer .scroll-to-top.ng-hide-remove {
+    opacity: 0;
+}
+
+.section-site-footer .scroll-to-top.ng-hide-remove.ng-hide-remove-active {
+    opacity: 0.5;
+}

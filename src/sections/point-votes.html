@@ -1,0 +1,41 @@
+﻿<div class="section-point-votes box-shadowed">
+    <div class="point-info clearfix">
+        <div class="avatar-anchor">
+            <img webp-src="{{pointVotes.point.AvatarImage |avatarUrl}}">
+        </div>
+        <div class="heading">
+            <point-link ng-if="pointVotes.point.IdCode" type="'point'" point-name="pointVotes.utils.getPointFirstName(pointVotes.point)" id-code="pointVotes.point.IdCode"></point-link>
+            <h2>{{pointVotes.utils.getPointSecondName(pointVotes.point)}}</h2>
+        </div>
+    </div>
+    <div class="reputation">
+        <div class="reputation-info">
+            <span>
+                <span class="reputation-number" ng-class="{
+                    awesome: pointVotes.point.votePercent >= 8,
+                    good: pointVotes.point.votePercent >= 6 && pointVotes.point.votePercent < 8,
+                    'not-bad': pointVotes.point.votePercent >= 4 && pointVotes.point.votePercent < 6,
+                    bad: pointVotes.point.votePercent >= 2 && pointVotes.point.votePercent < 4,
+                    terrible: pointVotes.point.votePercent < 2
+                }">{{pointVotes.point.votePercent}}</span> / 10
+            </span>
+            <p class="total">{{pointVotes.point.totalEvaluate}} 篇评测</p>
+        </div>
+        <div>
+            <div class="reputation-stat" ng-repeat="(stat, statCount) in pointVotes.point.VoteStats track by stat" ng-class="{active: stat === pointVotes.point.highlight}">
+                <div class="left-content">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="reputation-circle" ng-repeat="circle in pointVotes.circles[$index] track by $index">
+                        <circle cx="4" cy="6" r="4"></circle>
+                    </svg>
+                    <span ng-if="pointVotes.point.totalEvaluate">{{statCount / pointVotes.point.totalEvaluate * 100 | number: 0}}%</span>
+                    <span ng-if="!pointVotes.point.totalEvaluate">0%</span>
+                </div><!--
+            --><div class="reputation-level" style="width: {{statCount / pointVotes.point.totalEvaluate * 100 }}px;"></div>
+                <p>{{statCount}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="external-links" ng-if="pointVotes.point.SteamAppId">
+        <a ng-href="{{pointVotes.point.SteamAppId | storeUrlToSteamStore}}">Steam 商店</a><span class="divider">|</span><a ng-href="{{pointVotes.point.SteamAppId | storeUrlToSteamDB}}">SteamDB</a>
+    </div>
+</div>

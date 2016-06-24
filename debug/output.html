@@ -89,18 +89,17 @@
     var $body = $("body");
     var $scrollCheckbox = $("#scroll-checkbox");
     var write = function (text) {
+        if (!text.endsWith('\n'))
+            text = text + '\n';
         $("#debug-info").append(text);
         if ($scrollCheckbox.is(":checked"))
             $body.animate({scrollTop: $(document).height()}, {duration: "slow", queue: false});
     };
-    var writeLine = function (text) {
-        write(text + "\n");
-    };
-    if ($.connection.debugInfoHub) {
-        $.connection.debugInfoHub.client.Write = write;
-        $.connection.debugInfoHub.client.WriteLine = writeLine;
+    if ($.connection.logHub) {
+        $.connection.logHub.client.onWrite = write;
+        $.connection.hub.qs = { 'access_token': prompt("Bearer Token:") };
         $.connection.hub.start().then(function () {
-            writeLine("Connected.")
+            write("Connected.");
         });
     }
 </script>

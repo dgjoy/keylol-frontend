@@ -1,0 +1,10 @@
+﻿<tabs class="invert" invert="true" tab-array="tabArray" cur-tab="currentPage" click-handler="changePage(index)" ng-if="tabArray"></tabs>
+<div style="margin-top: 30px;" class="flex-row" ng-if="stateTree.aggregation.point.product&&stateTree.aggregation.point.basicInfo" ng-switch="stateTree.aggregation.point.basicInfo.type">
+    <div class="left-middle-lg row-sm">
+        <product-list object="productParts[currentPage]" theme="::stateTree.pointTheme"></product-list>
+    </div>
+    <div class="right-lg hidden-sm flex-column">
+        <menu ng-if="stateTree.specialMenu" style="margin-bottom: 20px" object="::stateTree.specialMenu"></menu>
+        <right-menus style="flex-grow: 1;"></right-menus>
+    </div>
+</div>

@@ -1,0 +1,73 @@
+input-point {
+  display: block;
+}
+
+input-point .wrapper {
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  border-bottom: 1px solid $keylol-inertia-shape;
+  padding-bottom: 1px;
+
+  &.theme {
+    border-bottom: 2px solid $keylol-light-theme;
+    padding-bottom: 0;
+  }
+
+  input[type="text"] {
+    flex-grow: 1;
+    padding: 13px 0 9px 0;
+    border: 0;
+    outline: 0;
+    background-color: transparent;
+
+    &[disabled] {
+      width: 0;
+    }
+  }
+
+  .point {
+    flex-grow: 0;
+    height: 32px;
+    border-radius: 16px;
+    margin-bottom: 9px;
+    margin-right: 10px;
+    background-color: #ddd;
+    display: flex;
+    align-items: center;
+    cursor: default;
+
+    &.active {
+      background-color: $keylol-light-theme;
+
+      p {
+        color: $keylol-inverted-text;
+      }
+
+      svg {
+        fill: rgba($keylol-inverted-text, 0.6);
+      }
+    }
+
+    img {
+      width: 32px;
+      height: 32px;
+      border-radius: 16px;
+    }
+
+    p {
+      @include ellipsis();
+      margin: 0 10px;
+      color: $keylol-main-text;
+      max-width: 80px;
+    }
+
+    svg {
+      cursor: pointer;
+      width: 16px;
+      height: 16px;
+      margin-right: 10px;
+      fill: $keylol-light-text;
+    }
+  }
+}

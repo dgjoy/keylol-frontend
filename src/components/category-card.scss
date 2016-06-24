@@ -1,0 +1,51 @@
+category-card {
+  @include keylol-shadow-1;
+  background-color: $keylol-card;
+  width: 220px;
+  display: flex;
+  flex-direction: column;
+
+  p {
+    margin: 0;
+  }
+
+  .info {
+    @include hover-background();
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 68px;
+    padding-left: 15px;
+    margin: 10px 0;
+
+    point-basic-info {
+      .avatar {
+        width: 48px;
+        height: 48px;
+        margin-right: 15px;
+      }
+    }
+  }
+
+  .hr {
+    margin: 0 20px;
+    background-color: $keylol-inertia-shape;
+    height: 1px;
+  }
+
+  .actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 51px;
+
+    .count {
+      margin-left: 25px;
+      color: $keylol-inertia-text;
+      @include ellipsis();
+    }
+    flat-button {
+      margin-right: 10px;
+    }
+  }
+}

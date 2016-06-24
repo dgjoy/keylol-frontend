@@ -1,0 +1,39 @@
+fab {
+  button {
+    @include keylol-button;
+    @include keylol-shadow-1;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+
+    &:active {
+      @include keylol-shadow-2;
+    }
+
+    &.theme {
+      background-color: $keylol-theme;
+    }
+
+    &.accent {
+      background-color: $keylol-accent;
+    }
+
+    .fab-wrapper {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      svg {
+        width: 30px;
+        height: 30px;
+        fill: $keylol-main-text;
+      }
+    }
+
+    .ripple-container {
+      @include circle-ripple-container;
+    }
+  }
+}

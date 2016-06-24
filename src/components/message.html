@@ -1,0 +1,31 @@
+﻿<div class="fake-background" ng-if="::(message.object.messageType.type === '公函')"
+     webp-background="{{ message.object.messageType.source === '编辑部'?'assets/images/css_logo-theme.png':'assets/images/pss-logo-theme.png' }}">
+</div>
+
+<div class="left-part" ng-switch="message.object.messageType.source">
+    <div class="message-source" ng-switch-when="用户">
+        <a ng-href="user/{{message.object.operatorIdCode}}"><img class="avatar" webp-src="{{message.object.operatorAvatarImage | avatarUrl}}"></a>
+        <div class="name-group">
+            <a ng-href="user/{{message.object.operatorIdCode}}">{{message.object.operatorUserName}}</a>
+            <p div="user-message-info">{{message.object.messageType.type}} / <span am-time-ago="message.object.createTime"></span></p>
+        </div>
+    </div>
+    <div class="message-source" ng-switch-default="">
+        <div class="name-group">
+            <p>{{message.object.messageType.source}}</p>
+            <p>公函 / <span am-time-ago="message.object.createTime"></span></p>
+        </div>
+    </div>
+</div>
+<div class="right-part" ng-switch="message.object.messageType.source">
+    <div class="brief" ng-switch-when="用户" ng-bind-html="message.$sce.trustAsHtml(message.object.messageType.getName(message.object))"></div>
+    <div class="brief" ng-switch-default="">
+        {{message.object.messageType.name}}
+    </div>
+    <a href="" class="detail" ng-if="message.object.messageType.source !== '用户'" ng-click="message.showMissive()">
+        {{message.object.messageType.getSummary(message.object)}}
+    </a>
+    <div class="detail" ng-if="message.object.messageType.source === '用户'">
+        {{message.object.messageType.getSummary(message.object)}}
+    </div>
+</div>

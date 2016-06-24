@@ -1,0 +1,81 @@
+.window-steam-connect .window {
+    width: 1024px;
+}
+
+.window-steam-connect.ng-enter {
+    transition: 0.7s;
+}
+
+.window-steam-connect.ng-enter .window {
+    animation: flipInX 0.7s linear;
+    backface-visibility: visible !important;
+}
+
+.window-steam-connect.ng-leave {
+    transition: 0.30s;
+}
+
+.window-steam-connect.ng-leave .window {
+    animation: flipOutX 0.5s linear;
+    backface-visibility: visible !important;
+}
+
+.window-steam-connect .content {
+    border: 4px solid transparent;
+    border-image: url(../../assets/images/border-slash.png) 30 round;
+}
+
+.window-steam-connect .heading {
+    padding: 20px 0 30px 20px;
+    position: relative;
+}
+
+.window-steam-connect .heading a {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-75%);
+    color: $keylol-highlight;
+}
+
+.window-steam-connect .steps {
+    background-color: white;
+    padding: 8px 5%;
+}
+
+.window-steam-connect .steps .step {
+    width: 50%;
+    float: left;
+    text-align: center;
+}
+
+.window-steam-connect .step img {
+    vertical-align: middle;
+    margin-right: 18px;
+}
+
+.window-steam-connect .steps .step-description {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+}
+
+.window-steam-connect .step-description h3 {
+    font-size: 18px;
+    font-weight: normal;
+    color: #57bae8;
+}
+
+.window-steam-connect .step-description a {
+    color: $keylol-highlight;
+}
+
+.window-steam-connect .step-description .auth-code {
+    font-weight: bold;
+    text-decoration: underline;
+    color: #333;
+}
+
+.window-steam-connect flashing-figure {
+    margin: 43px 0 27px;
+}

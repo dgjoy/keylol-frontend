@@ -1,0 +1,8 @@
+<div class="wrapper" ng-if="tabs.tabArray[0].state === undefined">
+    <a ng-repeat="tab in tabs.tabArray" href="" ng-href="{{tab.href}}" ng-class="{'link__selected':$index == tabs.curTab, 'float-right':tab.float === 'right' , 'float-left':tab.float === 'left'}" class="link font-myriad-keylol" ng-click="::tabs.changeTab($index)" ripple="{{tabs.invert?'#000':'#fff'}}">{{::tab.name}}</a>
+    <bottom-move-bar class="move-bar" cur-tab="tabs.curTab"></bottom-move-bar>
+</div>
+<div class="wrapper" ng-if="tabs.tabArray[0].state !== undefined">
+    <a ng-repeat="tab in tabs.tabArray" href="" ui-sref="{{tab.state}}" ng-class="{'link__selected':$index == tabs.curTab, 'float-right':tab.float === 'right' , 'float-left':tab.float === 'left'}" class="link font-myriad-keylol" ng-click="::tabs.changeTab($index)" ripple="{{tabs.invert?'#000':'#fff'}}">{{::tab.name}}</a>
+    <bottom-move-bar class="move-bar" cur-tab="tabs.curTab"></bottom-move-bar>
+</div>

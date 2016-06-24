@@ -1,0 +1,74 @@
+.popup-related-games {
+}
+
+.popup-related-games .wrapper {
+    background-color: white;
+    width: 550px;
+    padding: 6px 0 18px 0;
+}
+
+.popup-related-games .wrapper ul {
+    margin: 0;
+    list-style: none;
+}
+
+.popup-related-games .wrapper li > p {
+    margin: 0;
+    color: #BBB;
+    padding-bottom: 10px;
+}
+
+.popup-related-games .years {
+    padding: 10px;
+    margin: 0;
+}
+
+.popup-related-games .games {
+    padding-left: 10px;
+    padding-bottom: 10px;
+}
+
+.popup-related-games .games li {
+    padding: 10px;
+    float: left;
+    width: 153px;
+    height: 32px;
+}
+
+.popup-related-games .games li .avatar-anchor {
+    float: left;
+}
+
+.popup-related-games .games li .avatar-anchor img {
+    width: 32px;
+    height: 32px;
+}
+
+.popup-related-games .games li .title {
+    float: left;
+    margin-left: 14px;
+}
+
+.popup-related-games .games li .title p {
+    margin: 0;
+    line-height: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100px;
+}
+
+.popup-related-games .games li .title p:first-of-type {
+    color: $keylol-theme;
+    font-weight: bold;
+}
+
+.popup-related-games .games li .title p span {
+    color: #748a97;
+}
+
+.popup-related-games .view-all {
+    float: right;
+    margin-right: 20px;
+    color: $keylol-highlight;
+}

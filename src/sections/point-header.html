@@ -1,0 +1,20 @@
+﻿<div class="background" ng-style="{transform: pointHeader.transform}" webp-background="{{pointHeader.object.headerImage | headerImageFallback: pointHeader.object.type | pageHeaderUrl}}"></div>
+<div class="info" ng-switch="pointHeader.object.type">
+    <point-basic-info point="pointHeader.point"></point-basic-info>
+    <div class="attributes" ng-switch-when="game">
+        <div class="related"><div class="point" ng-repeat="category in pointHeader.categories"><a ng-href="point/{{category.idCode}}">{{category.chineseName}}</a></div></div>
+        <div class="related"><div class="point" ng-repeat="vendor in pointHeader.vendors"><a ng-href="point/{{vendor.idCode}}">{{vendor.name}}</a></div></div>
+    </div>
+    <div class="count" ng-switch-default>
+        <p>{{pointHeader.gameCount}}</p>
+    </div>
+    <div class="actions">
+        <div ng-if="pointHeader.stateTree.currentUser" popup="pointHeader.showMenuPopup">
+            <icon-button icon="dots-vertical" click="pointHeader.showMenu(event)" type="invert"></icon-button>
+        </div>
+        <raised-button ng-if="pointHeader.stateTree.currentUser" theme-color="pointHeader.theme.main"  binary-set="pointHeader.subscribeSet" binary-value="pointHeader.object.subscribed"
+                     click="pointHeader.subscribe(pointHeader.object.id, pointHeader.object.subscribed, pointHeader.object)"></raised-button>
+        <raised-button ng-if="!pointHeader.stateTree.currentUser" theme-color="pointHeader.theme.main" text="订阅"
+                       click="pointHeader.openRegistration(event)"></raised-button>
+    </div>
+</div>

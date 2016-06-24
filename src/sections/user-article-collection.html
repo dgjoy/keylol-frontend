@@ -1,0 +1,5 @@
+﻿<section-header header="userArticleCollection.header" theme="::userArticleCollection.theme"></section-header>
+<div class="flex-row">
+    <spotlight-article-card ng-if="$index <= 1" author-id-code="userArticleCollection.authorIdCode" card="card" no-user-header="true" ng-repeat="card in userArticleCollection.cards"></spotlight-article-card>
+    <simple-article-card ng-if="$index > 1" author-id-code="userArticleCollection.authorIdCode" card="card" ng-repeat="card in userArticleCollection.cards"></simple-article-card>
+</div>

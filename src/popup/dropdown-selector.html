@@ -1,0 +1,6 @@
+﻿<popup class="popup-dropdown-selector">
+    <div ng-if="dropdownSelector.object.title" class="tip">{{dropdownSelector.object.title}}</div>
+    <a class="item" ng-click="dropdownSelector.select($index)" ng-repeat="item in dropdownSelector.object.items" ripple>
+        {{item}}
+    </a>
+</popup>

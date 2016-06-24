@@ -1,0 +1,71 @@
+.window-good-detail {
+  .window {
+    @include keylol-shadow-3();
+    background-color: $keylol-card;
+    width: 700px;
+
+    .header {
+      height: 105px;
+      background-color: $keylol-light-theme;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      overflow: hidden;
+
+      .text {
+        margin-left: 15px;
+        p {
+          margin: 0;
+          padding: 0;
+          &:first-of-type {
+            font-weight: bold;
+            font-size: 20px;
+            margin-bottom: 2px;
+            color: $keylol-inverted-text;
+          }
+
+          &:last-of-type {
+            color: rgba($keylol-inverted-text, 0.6);
+          }
+        }
+      }
+      img {
+        width: 140px;
+        margin-right: 50px;
+      }
+    }
+
+    .content {
+      padding: 20px 15px;
+      .items {
+        .item {
+          margin-bottom: 10px;
+          p {
+            margin: 0;
+          }
+          p.inertia {
+            color: $keylol-inertia-text;
+            font-size: 12px;
+          }
+          p.main {
+            color: $keylol-main-text;
+            span { color: $keylol-theme; }
+          }
+          img {
+            display: block;
+            width: 100%;
+            margin-top: 10px;
+          }
+        }
+      }
+      .actions {
+        display: flex;
+        justify-content: flex-end;
+
+        flat-button {
+          margin-right: 20px;
+        }
+      }
+    }
+  }
+}

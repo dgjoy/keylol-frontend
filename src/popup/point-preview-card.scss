@@ -1,0 +1,22 @@
+.popup-point-preview-card {
+  @include keylol-shadow-3();
+  z-index: 1000;
+
+  .header {
+    width: 280px;
+    height: 80px;
+    background-color: $keylol-light-theme;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    p { margin: 0; }
+    p:first-of-type {
+      font-size: 20px;
+      color: $keylol-inverted-text;
+    }
+    p:last-of-type {
+      color: rgba($keylol-inverted-text,.6);
+    }
+  }
+}

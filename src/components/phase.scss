@@ -1,0 +1,48 @@
+phase {
+  height: 75px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .repeat-wrapper {
+    display: flex;
+    align-items: center;
+
+    .order {
+      width: 24px;
+      height: 24px;
+      line-height: 24px;
+      text-align: center;
+      display: block;
+      background-color: $keylol-inertia-shape;
+      color: $keylol-inverted-text;
+      border-radius: 12px;
+      margin-right: 10px;
+
+      &.completed {
+        background-color: $keylol-light-theme;
+      }
+      &.current {
+        background-color: $keylol-theme;
+        animation: phase-blink 1000ms infinite alternate;//待处理
+
+        .text {
+          font-weight: bold;
+        }
+      }
+
+      svg {
+        width: 100%;
+        height: 100%;
+        fill: $keylol-inverted-text;
+      }
+    }
+
+    .gap {
+      height: 1px;
+      width: 100px;
+      margin: 0 10px;
+      background-color: $keylol-inertia-shape;
+    }
+  }
+}

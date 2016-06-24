@@ -1,0 +1,12 @@
+﻿<section-header header="recentGames.type"></section-header>
+<div class="pages-wrapper" ng-class="{
+    'to-next' : recentGames.isToNext,
+    'to-previous' : !recentGames.isToNext
+    }">
+    <div class="cards-wrapper" ng-animate-swap="recentGames.currentPage">
+        <game-card card="card" ng-repeat="card in ::recentGames.list track by $index"></game-card>
+    </div>
+</div>
+<div class="pagination-wrapper">
+    <pagination total="recentGames.totalPage" current="recentGames.currentPage" on-page-changed="recentGames.changePage(newPage, oldPage)"></pagination>
+</div>

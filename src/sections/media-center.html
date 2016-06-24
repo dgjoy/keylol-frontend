@@ -1,0 +1,30 @@
+﻿<div class="header" webp-background="{{mediaCenter.headerImage | defaultFallback: 'media-center' | listHeaderUrl}}">
+    <div class="header-things">
+        <div class="header-text">
+            <p class="title">媒体中心</p>
+            <p class="sub-title">宣传片、截图、原画、粉丝艺术</p>
+        </div>
+        <div popup="mediaCenter.uploadImagePopup">
+            <raised-button ng-if="mediaCenter.stateTree.currentUser" ngf-select="mediaCenter.uploadImage($file, $event)" ngf-fix-orientation="true" accept="image/*" text="上传媒体" theme-color="mediaCenter.theme.main"></raised-button>
+            <raised-button ng-if="!mediaCenter.stateTree.currentUser" click="mediaCenter.openRegistration(event)" text="上传媒体" theme-color="mediaCenter.theme.main"></raised-button>
+        </div>
+    </div>
+</div>
+<div class="wrapper" ng-if="mediaCenter.list.length > 0">
+    <ul>
+        <li ng-repeat="item in mediaCenter.list track by $index" ng-if="$index < 6">
+            <a href="" webp-background="{{item.link | uriRelocate: '/sq/' + ($index <= 0 ? '160' : '90')}}" ng-click="mediaCenter.showMediaOverlayWindow($index+1)">
+                <p class="text" ng-if="item.isVideo">
+                    <span>{{$index === 0? item.text : ''}}</span>
+                    <svg aria-hidden="true">
+                        <use ng-href="{{'video-play' | iconSvgUrl }}" xlink:href=""></use>
+                    </svg>
+                </p>
+            </a>
+        </li>
+    </ul>
+    <div class="more">
+        <p>{{mediaCenter.artworkCount}} 张截图 / {{mediaCenter.screenshotCount}} 幅原画</p>
+        <p><a href="" ng-click="mediaCenter.showMediaOverlayWindow(1)">查看更多</a></p>
+    </div>
+</div>

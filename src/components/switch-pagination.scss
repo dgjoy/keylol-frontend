@@ -1,0 +1,121 @@
+switch-pagination {
+  display: flex;
+  align-items: center;
+
+  button {
+    @include keylol-button-card;
+    width: 40px;
+    background-color: $keylol-card;
+    position: relative;
+
+    >.wrapper {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 24px;
+      height: 24px;
+    }
+
+    svg {
+      width: 24px;
+      height: 24px;
+      fill: $keylol-light-text;
+    }
+  }
+
+  .previous {
+    position: absolute;
+    height: calc(100% - 10px);
+    width: 40px;
+    top: 0;
+    left: -60px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+
+    >span {
+      color: $keylol-inertia-text;
+      height: 45px;
+      width: 100%;
+      text-align: center;
+      line-height: 45px;
+    }
+
+    >.wrapper {
+      display: flex;
+      align-items: center;
+      height: calc(100% - 45px);
+
+      &.max-height {
+        height: 100%;
+      }
+
+      button {
+        height: 100%;
+      }
+    }
+
+    &.ng-hide-animate {
+      transition: 0.2s;
+
+      &>span, button{
+        transition: 0.2s;
+      }
+
+      &.ng-hide-add {
+        &>span {
+          transform: translateX(-100%);
+          opacity: 0;
+        }
+
+        button {
+          height: 0;
+        }
+      }
+
+      &.ng-hide-remove {
+        &>span {
+          transform: translateX(-100%);
+          opacity: 0;
+        }
+
+        button {
+          height: 0;
+        }
+      }
+
+      &.ng-hide-remove-active {
+        &>span {
+          transform: translateX(0);
+          opacity: 1;
+        }
+
+        button {
+          height: 100%;
+        }
+      }
+    }
+  }
+
+  .next {
+    height: 100%;
+
+    &.ng-hide-animate {
+      transition: 0.2s;
+
+      &.ng-hide-add-active {
+        height: 0;
+      }
+
+      &.ng-hide-remove {
+        height: 0;
+      }
+
+      &.ng-hide-remove-active {
+        height: 100%;
+      }
+    }
+  }
+}

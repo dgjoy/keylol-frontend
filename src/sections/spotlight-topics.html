@@ -1,0 +1,32 @@
+﻿<div class="moderation-wrapper" popup="spotlightTopics.showModerationPopup">
+    <icon-button icon="dots-vertical" click="::spotlightTopics.showModeration(event)"></icon-button>
+</div>
+<div class="header">
+    <div class="topic-selector">
+        <div class="moveBackground active-{{spotlightTopics.index}}" ng-class="{'move-up':spotlightTopics.isMoveUp,'move-down':!spotlightTopics.isMoveUp}"></div>
+        <div class="moveBackground-triangle active-{{spotlightTopics.index}}"></div>
+        <div class="shortcuts-wrapper">
+            <a href="" class="shortcut" ng-repeat="topic in spotlightTopics.topics" ng-click="spotlightTopics.slideTo($index)" ripple="topic">
+                <p class="main-title" ng-class="{'active':spotlightTopics.index == $index}">四月</p>
+                <p class="sub-title" ng-class="{'active':spotlightTopics.index == $index}">二战的是是非非</p>
+            </a>
+        </div>
+    </div>
+    <a class="right-header" href="">
+        <p class="main-title font-myriad-keylol">其乐专题</p>
+        <p class="sub-title">游戏文化的轻量级讲坛</p>
+    </a>
+</div>
+<div class="topic-list" ng-class="{
+        'to-down' : spotlightTopics.isMoveUp && spotlightTopics.oldIndex !== -1,
+        'to-up' : !spotlightTopics.isMoveUp && spotlightTopics.oldIndex !== -1,
+        }">
+    <a class="common-article common-article__topic topic swap-animation" ng-animate-swap="spotlightTopics.index" webp-background="//storage.keylol.com/39b7d020df471d6c0e3fa593802000bc.jpg!timeline.thumbnail.new" href="">
+        <div class="bottom-text">
+            <p class="first-line underline">标题{{spotlightTopics.index}}</p>
+            <p class="second-line">这是一段描述.</p>
+        </div>
+    </a>
+</div>
+
+

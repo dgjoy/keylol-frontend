@@ -1,0 +1,60 @@
+user-favorite-games {
+  display: block;
+  overflow-x: hidden;
+
+  >section-header {
+    width: 940px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  >.background {
+    display: block;
+    height: 440px;
+    background-size: cover;
+  }
+  >.background>.mask {
+    height: 100%;
+    box-sizing: border-box;
+    padding: 30px 0;
+    background-color: rgba(#fff,.85);
+    overflow:hidden;
+  }
+  >.background>.mask>.wrapper {
+    width: 940px;
+    margin: auto;
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+
+    game-time-card {
+      flex-shrink: 0;
+      margin: 72px 10px 0 10px;
+    }
+
+    game-guide-card {
+      position: absolute;
+      left: 0;
+      width: 340px;
+    }
+
+    >.left-part {
+      display: flex;
+      width: 530px;
+      flex-direction: row-reverse;
+
+      game-time-card:nth-of-type(2) {
+        margin-right: 370px;
+      }
+    }
+    >.right-part {
+      display: flex;
+      position: relative;
+      width: 410px;
+
+      game-time-card:nth-of-type(2) {
+        margin-left: 250px;
+      }
+    }
+  }
+}

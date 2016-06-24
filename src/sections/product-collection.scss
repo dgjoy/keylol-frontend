@@ -1,0 +1,13 @@
+product-collection {
+  display: block;
+  position: relative;
+
+  .list {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -10px;
+    game-card {
+      margin:0 10px 20px 10px;
+    }
+  }
+}

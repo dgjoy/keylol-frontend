@@ -1,0 +1,9 @@
+<popup class="popup-source-list">
+    <div class="title">
+        <p>来稿据点</p>
+        <p>一共 {{sourceList.object.attachedPoints.length + 1}} 个据点来稿</p>
+    </div>
+    <a ng-href="point/{{sourceList.object.mainPoint.idCode}}"><point-basic-info point="sourceList.object.mainPoint"></point-basic-info></a>
+    <div class="hr" ng-if="sourceList.object.attachedPoints.length > 0"></div>
+    <a ng-href="point/{{point.idCode}}" ng-repeat="point in sourceList.object.attachedPoints"><point-basic-info point="point"></point-basic-info></a>
+</popup>

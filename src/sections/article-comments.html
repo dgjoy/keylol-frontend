@@ -1,0 +1,112 @@
+﻿<div class="display">
+    <div class="header">
+        <div class="count">
+            <p>共 {{articleComments.article.commentCount}} 则讨论</p>
+            <p ng-if="articleComments.article.latestCommentTime">最后回复于 <span am-time-ago="articleComments.article.latestCommentTime"></span></p>
+            <p ng-if="!articleComments.article.latestCommentTime">第一发回复会决定整个讨论的方向</p>
+        </div>
+        <pagination theme-color="articleComments.theme.light" ng-if="articleComments.article.commentPageCount > 1" on-page-changed="::articleComments.changePage(newPage, oldPage)" total="articleComments.article.commentPageCount" current="articleComments.currentPage"></pagination>
+    </div>
+    <div class="comments" ng-style="{height: articleComments.commentsHeight}" ng-class="{
+    'to-next' : articleComments.isToNext,
+    'to-previous' : !articleComments.isToNext
+    }">
+        <ul ng-animate-swap="articleComments.currentPage">
+            <li class="comment" ng-repeat="comment in articleComments.article.comments">
+                <div class="basic-info">
+                    <a ng-href="user/{{comment.authorIdCode}}"><img class="avatar" webp-src="{{comment.authorAvatarImage | avatarUrl}}"></a>
+                    <div class="name-group">
+                        <p><a ng-href="user/{{comment.authorIdCode}}" class="username">{{comment.authorUserName}}</a><span class="like-count" ng-style="{color: comment.liked ? articleComments.theme.light : ''}" ng-class="{'light-theme': comment.liked}">+{{comment.likeCount}}</span></p>
+                        <p>
+                            <span ng-if="comment.authorIdCode === articleComments.article.authorBasicInfo.idCode" ng-style="{color: articleComments.theme.light}" class="light-theme">文章作者</span>
+                            <span ng-if="comment.authorIdCode === articleComments.article.authorBasicInfo.idCode && articleComments.article.pointBasicInfo.type === 'game'">/</span>
+                            <span ng-if="articleComments.article.pointBasicInfo.type === 'game'">
+                                <span ng-if="comment.authorPlayedTime">在档时间 {{comment.authorPlayedTime}} 小时</span>
+                                <span ng-if="!comment.authorPlayedTime">无在档记录</span>
+                            </span>
+                            <span ng-if="comment.archived">
+                                /
+                                <span class="error">封存中</span>
+                            </span>
+                            <span ng-if="comment.warned">
+                                /
+                                <span class="error">受到警告</span>
+                            </span>
+                        </p>
+                    </div>
+                    <div class="action-date">
+                        <p class="action">
+                            <span ng-if="comment.id && (comment.authorIdCode === articleComments.stateTree.currentUser.idCode || articleComments.stateTree.currentUser.roles.indexOf('Operator') > -1)">
+                                <a href="" ng-click="articleComments.edit($index)">编辑</a>
+                                <span>|</span>
+                            </span>
+                            <a href="" ng-if="articleComments.stateTree.currentUser && comment.authorIdCode !== articleComments.stateTree.currentUser.idCode && !comment.liked" ng-click="articleComments.utils.like(comment.id, comment, 'ArticleComment')">认可</a>
+                            <a href="" ng-if="articleComments.stateTree.currentUser" ng-click="articleComments.reply(comment)">回复</a>
+
+                            <a href="" ng-if="!articleComments.stateTree.currentUser" ng-click="articleComments.utils.openRegistration()">认可</a>
+                            <a href="" ng-if="!articleComments.stateTree.currentUser" ng-click="articleComments.utils.openRegistration()">回复</a>
+                            <span ng-if="comment.authorIdCode === articleComments.stateTree.currentUser.idCode || articleComments.stateTree.currentUser.roles.indexOf('Operator') > -1">
+                                <span>|</span>
+                                <a href=""
+                                   ng-click="articleComments.showArchive($index, $event, comment)"
+                                   popup="articleComments.showArchivePopup[$index]">
+                                    {{comment.archived?'撤销':''}}封存
+                                </a>
+                                <a ng-if="articleComments.stateTree.currentUser.roles.indexOf('Operator') > -1"
+                                   href=""
+                                   ng-click="articleComments.showWarn($index, $event, comment)"
+                                   popup="articleComments.showWarnPopup[$index]">
+                                    {{comment.warned?'撤销':''}}警告
+                                </a>
+                            </span>
+                        </p>
+                        <p><span am-time-ago="comment.publishTime"></span> / #{{comment.sidForArticle}}</p>
+                    </div>
+                </div>
+                <div ng-if="comment.replyToComment" class="comment-to-reply">
+                    <div class="basic">
+                        <p class="reply">
+                            <span>回复 #{{comment.replyToComment.sidForArticle}}</span>
+                            <a ng-href="user/{{comment.replyToComment.authorIdCode}}"><img class="avatar" webp-src="{{comment.replyToComment.authorAvatarImage | avatarUrl: 'small'}}"></a>
+                            <a ng-href="user/{{comment.replyToComment.authorIdCode}}">{{comment.replyToComment.authorUserName}}</a>
+                        </p>
+                    </div>
+                    <p class="comment-content">{{comment.replyToComment.content | extractText}}</p>
+                </div>
+                <article class="editor-style" bind-html-compile="comment.content"></article>
+            </li>
+        </ul>
+    </div>
+    <div class="footer clearfix"><pagination theme-color="articleComments.theme.light" ng-if="articleComments.article.commentPageCount > 1" on-page-changed="::articleComments.changePage(newPage, oldPage)" total="articleComments.article.commentPageCount" current="articleComments.currentPage"></pagination></div>
+</div>
+<div ng-if="articleComments.stateTree.currentUser" class="sender">
+    <div class="basic-info">
+        <img class="avatar" webp-src="{{articleComments.stateTree.currentUser.avatarImage | avatarUrl}}">
+        <div class="name-group">
+            <p>{{articleComments.stateTree.currentUser.userName}}</p>
+            <p ng-if="articleComments.article.pointBasicInfo.type === 'game'">
+                <span ng-if="articleComments.article.pointBasicInfo.totalPlayedTime">在档时间 {{articleComments.article.pointBasicInfo.totalPlayedTime}} 小时</span>
+                <span ng-if="!articleComments.article.pointBasicInfo.totalPlayedTime">无在档记录</span>
+            </p>
+        </div>
+        <div class="action-date">
+            <p>&nbsp</p>
+            <p>#{{articleComments.article.commentCount + 1}}+</p>
+        </div>
+    </div>
+    <div ng-if="articleComments.replyToComment" class="comment-to-reply">
+        <div class="basic">
+            <p class="reply">
+                <span>回复 #{{articleComments.replyToComment.sidForArticle}}</span>
+                <img class="avatar" webp-src="{{articleComments.replyToComment.authorAvatarImage | avatarUrl: 'small'}}">
+                <span>{{articleComments.replyToComment.authorUserName}}</span>
+            </p>
+            <a href="" ng-click="articleComments.cancelReply()">取消回复</a>
+        </div>
+        <p class="comment-content">{{articleComments.replyToComment.content | extractText}}</p>
+    </div>
+    <div simditor ng-model="articleComments.vm.content"></div>
+    <div class="clearfix">
+        <raised-button text="回复" type="theme" disabled="articleComments.submitLock" click="articleComments.submit()"></raised-button>
+    </div>
+</div>

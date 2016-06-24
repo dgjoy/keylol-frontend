@@ -1,0 +1,20 @@
+<a class="info" ng-href="point/{{::storeGameCard.card.idCode}}" href="" ripple>
+    <point-basic-info point="::storeGameCard.card"></point-basic-info>
+    <review-with-text review="::storeGameCard.card.averageRating"></review-with-text>
+</a>
+<span class="horizon"></span>
+<div class="actions">
+    <div class="platforms">
+        <a ng-href="{{store.link}}" ng-repeat="store in storeGameCard.stores">
+            <svg aria-hidden="true">
+                <use ng-href="{{store.icon | iconSvgUrl }}" xlink:href=""></use>
+            </svg>
+            <span class="discount" ng-if="store.discount">-{{store.discount}}</span>
+            <span ng-if="store.price">{{store.price}}</span>
+        </a>
+    </div>
+    <flat-button ng-if="storeGameCard.stateTree.currentUser" binary-set="storeGameCard.subscribeSet" binary-value="storeGameCard.card.subscribed"
+                   click="storeGameCard.subscribe(storeGameCard.card.id, storeGameCard.card.subscribed, storeGameCard.card)"></flat-button>
+    <flat-button ng-if="!storeGameCard.stateTree.currentUser" text="订阅"
+                 click="storeGameCard.openRegistration(event)"></flat-button>
+</div>

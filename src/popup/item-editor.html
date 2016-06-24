@@ -1,0 +1,28 @@
+﻿<popup class="popup-item-editor">
+    <form class="clearfix" ng-if="itemEditor.item.type === 'text' || itemEditor.item.type === 'appId' ||  itemEditor.item.type === 'attribute'">
+        <text-area type="text" state="itemEditor.textError ? 'warn' : 'normal'" error="itemEditor.textError" label="{{itemEditor.item.title}}" theme="itemEditor.theme" model="itemEditor.model"></text-area>
+        <raised-button click="itemEditor.submit()" text="提交" type="theme" theme-color="itemEditor.theme.main" disabled="itemEditor.model === itemEditor.item.value || itemEditor.submitLock"></raised-button>
+    </form>
+    <form class="clearfix" ng-if="itemEditor.item.type === 'password'">
+        <text-area ng-if="itemEditor.item.needPassword" type="password" state="itemEditor.textError ? 'warn' : 'normal'" error="itemEditor.textError" label="原口令" theme="itemEditor.theme" model="itemEditor.password"></text-area>
+        <text-area type="password" state="itemEditor.textError ? 'warn' : 'normal'" error="itemEditor.textError" label="新口令" theme="itemEditor.theme" model="itemEditor.newPassword"></text-area>
+        <raised-button click="itemEditor.submit()" text="提交" type="theme" theme-color="itemEditor.theme.main" disabled="itemEditor.submitLock"></raised-button>
+    </form>
+    <form class="clearfix" ng-if="itemEditor.item.type === 'point'">
+        <text-area whitelist="itemEditor.item.whitelist" type="point" state="itemEditor.textError ? 'warn' : 'normal'" error="itemEditor.textError" label="{{itemEditor.item.title}}" theme="itemEditor.theme" model="itemEditor.model"></text-area>
+        <raised-button click="itemEditor.submit()" text="提交" type="theme" theme-color="itemEditor.theme.main" disabled="itemEditor.submitLock"></raised-button>
+    </form>
+    <form class="clearfix" ng-if="itemEditor.item.type === 'date'">
+        <datepicker theme="itemEditor.theme" model="itemEditor.model"></datepicker>
+        <raised-button click="itemEditor.submit()" text="提交" type="theme" theme-color="itemEditor.theme.main" disabled="itemEditor.model === itemEditor.item.value || itemEditor.submitLock"></raised-button>
+    </form>
+    <form class="clearfix" ng-if="itemEditor.item.type === 'checkbox'">
+        <input-checkbox theme="itemEditor.theme" names="itemEditor.item.names" ng-model="itemEditor.model"></input-checkbox>
+        <raised-button click="itemEditor.submit()" text="提交" type="theme" theme-color="itemEditor.theme.main" disabled="itemEditor.submitLock"></raised-button>
+    </form>
+    <form class="clearfix" ng-if="itemEditor.item.type === 'color'">
+        <text-area type="text" state="itemEditor.textError ? 'warn' : 'normal'" error="itemEditor.textError" label="{{itemEditor.item.title}}" theme="itemEditor.theme" model="itemEditor.model" tip="'十六进制颜色码（HEX），例如 #5599DD'"></text-area>
+        <div class="color color-{{itemEditor.item.colorType}}" ng-style="{backgroundColor:itemEditor.colorCheck(itemEditor.model)?itemEditor.model:''}">这段文字应当比样本 A 更醒目<div class="sample">样本 A</div></div>
+        <raised-button click="itemEditor.submit()" text="提交" type="theme" theme-color="itemEditor.theme.main" disabled="itemEditor.submitLock"></raised-button>
+    </form>
+</popup>

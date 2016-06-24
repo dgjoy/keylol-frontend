@@ -1,0 +1,30 @@
+recent-games {
+  display: block;
+
+  .pages-wrapper {
+    @include page-change('.cards-wrapper');
+    overflow: hidden;
+    position: relative;
+    width: 720px;
+    height: 1000px;
+
+    .cards-wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: flex;
+      flex-wrap: wrap;
+      width: 720px;
+
+      game-card {
+        margin-right: 20px;
+        margin-bottom: 20px;
+      }
+    }
+  }
+
+  .pagination-wrapper {
+    display: flex;
+    justify-content: flex-end;
+  }
+}

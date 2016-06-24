@@ -1,0 +1,7 @@
+﻿<popup class="popup-point-selector">
+    <div>
+        <a href="" ng-repeat="point in pointSelector.pointArray" ng-click="pointSelector.selectPoint($event)" ng-class="{selected: point.selected}" ng-mouseenter="pointSelector.changeSelector($index)">
+            <point-basic-info point="point"></point-basic-info>
+        </a>
+    </div>
+</popup>

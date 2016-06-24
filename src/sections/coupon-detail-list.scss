@@ -1,0 +1,132 @@
+coupon-detail-list {
+  @include keylol-shadow-1();
+  display: block;
+  border-radius: 2px;
+  background-color: $keylol-card;
+  width: 100%;
+
+  .header {
+    height: 105px;
+    background-color: $keylol-light-theme;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+
+    .text {
+      margin-left: 15px;
+      p {
+        margin: 0;
+        padding: 0;
+        &:first-of-type {
+          font-weight: bold;
+          font-size: 20px;
+          margin-bottom: 2px;
+          color: $keylol-inverted-text;
+        }
+
+        &:last-of-type {
+          color: $keylol-inverted-text;
+        }
+      }
+    }
+    img {
+      height: 120px;
+      margin-right: 50px;
+    }
+  }
+
+  .list {
+    .item-list {
+      @include page-change('.wrapper');
+      overflow: hidden;
+      position: relative;
+      transition: height .5s;
+    }
+
+    .wrapper {
+      width: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      margin-top: 10px;
+    }
+
+    .item,
+    .title {
+      display: flex;
+      padding: 0 20px;
+
+      .cell {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 0 20px;
+        box-sizing: border-box;
+
+        &:nth-of-type(1) {
+          width: 120px;
+        }
+        &:nth-of-type(2) {
+          width: 100px;
+        }
+        &:nth-of-type(3) {
+          width: 100px;
+        }
+        &:nth-of-type(4) {
+          width: 200px;
+        }
+        &:nth-of-type(5) {
+          width: 380px;
+        }
+
+        &.right {
+          justify-content: flex-end;
+        }
+      }
+    }
+
+    .item {
+      height: 60px;
+    }
+
+    .title {
+      height: 50px;
+      border-bottom: 1px solid $keylol-inertia-shape;
+      .cell {
+        font-weight: bold;
+      }
+    }
+
+    .item .cell{
+      &.coupon-up {
+        color: $keylol-review-good;
+      }
+      &.coupon-down {
+        color: $keylol-review-bad;
+      }
+
+      &.inertia {
+        color: $keylol-inertia-text;
+      }
+
+      a {
+        @include ellipsis();
+        max-width: 120px;
+        color: $keylol-highlight;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+
+  .footer {
+    padding: 10px 15px 20px;
+    pagination {
+      float: right;
+    }
+  }
+}

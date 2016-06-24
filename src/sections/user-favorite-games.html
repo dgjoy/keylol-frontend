@@ -1,0 +1,15 @@
+﻿<section-header header="userFavoriteGames.type" type="userFavoriteGames.theme.main"></section-header>
+<div class="background" webp-background="http://dota2walls.com/wp-content/uploads/2015/01/shadow-from-the-dire-dota-2-wallpaper.png">
+    <div class="mask">
+        <div class="wrapper">
+            <game-guide-card card="userFavoriteGames.gameMiddlePart" bottom-type="'user'"></game-guide-card>
+            <div class="left-part">
+                <game-time-card card="card" ng-repeat="card in userFavoriteGames.gameLeftPart"></game-time-card>
+            </div>
+            <div class="right-part">
+                <game-time-card card="card" ng-repeat="card in userFavoriteGames.gameRightPart"></game-time-card>
+            </div>
+        </div>
+    </div>
+</div>
+

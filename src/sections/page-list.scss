@@ -1,0 +1,82 @@
+page-list {
+  @include keylol-shadow-1;
+  display: block;
+  background-color: $keylol-card;
+  border-radius: 2px;
+
+  .latest-wrapper {
+    @include page-change('.latest-list');
+    margin: 20px 0;
+    overflow: hidden;
+    position: relative;
+    transition: height .5s;
+
+    .latest-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      width: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+
+      li {
+        height: 86px;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid $keylol-inertia-shape;
+        padding: 0 20px;
+        justify-content: space-between;
+        &:last-of-type {
+          border-bottom: none;
+        }
+
+        .left {
+          display: flex;
+          align-items: center;
+
+          > a {
+            position: relative;
+            z-index: 0;
+
+            .avatar {
+              width: 32px;
+              height: 32px;
+              margin-right: 10px;
+            }
+          }
+
+          .name-group {
+            p {
+              margin: 0;
+              font-size: 12px;
+              color: $keylol-inertia-text;
+            }
+            a {
+              font-size: 14px;
+              color: $keylol-main-text;
+              font-weight: bold;
+              &:hover {
+                text-decoration: underline;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .footer {
+    flat-button {
+      display: block;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    pagination {
+      float: right;
+      margin-bottom: 20px;
+      margin-right: 20px;
+    }
+  }
+}

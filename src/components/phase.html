@@ -1,0 +1,11 @@
+<div class="repeat-wrapper" ng-repeat="p in phase.phases">
+    <span ng-class="{'completed':$index < phase.index,'current':$index === phase.index}" class="order">
+        <span ng-if="$index >= phase.index">{{$index+1}}</span>
+        <svg aria-hidden="true" ng-if="$index < phase.index">
+            <use ng-href="{{'check' | iconSvgUrl }}" xlink:href=""></use>
+        </svg>
+    </span>
+
+    <span class="text">{{p}}</span>
+    <span ng-if="$index !== phase.phases.length-1" class="gap"></span>
+</div>

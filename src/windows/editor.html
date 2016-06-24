@@ -1,0 +1,124 @@
+﻿<window position="center" class="window-editor">
+    <div class="editor">
+        <div class="poster" ng-class="{'has-background': editor.vm.coverImage}" webp-background="{{editor.vm.coverImage | uriRelocate}}">
+            <div class="close">
+                <icon-button icon="chevron-left" click="editor.exit()" ng-mouseenter="editor.showExitToolTips($event)" show-popup="editor.showExitPopup"></icon-button>
+            </div>
+            <div id="upload-article-header" ng-show="false" ngf-select="editor.uploadImage($file, $event)" ngf-fix-orientation="true" accept="image/*"></div>
+            <raised-button text="设置封面" type="theme" show-popup="editor.showHeaderPopup" click="editor.showSetHeaderMenu(event)"></raised-button>
+            <div class="titles">
+                <text-area class="main-title"
+                           label="主标题"
+                           state="(editor.titleEmpty && !editor.vm.title) ? 'warn' : 'normal'"
+                           type="text"
+                           model="editor.vm.title"
+                           error="'主标题不能为空'"
+                ></text-area>
+                <text-area class="sub-title"
+                           label="副标题"
+                           type="text"
+                           model="editor.vm.subtitle"
+                ></text-area>
+            </div>
+        </div>
+        <div class="related-points">
+            <div class="fake" ng-style="{height: editor.fakeHeight}"></div>
+            <div class="main-points">
+                <text-area label="主要投稿" state="(editor.targetEmpty && editor.vm.targetPoints.length <= 0) ? 'warn' : 'normal'" error="'主要投稿不能为空'" type="point" model="editor.vm.targetPoints" limit="1" options="::{header_image: true, played_time: true}"></text-area>
+                <flat-button disabled="editor.vm.targetPoints.length <= 0 || !editor.canFillRelated" click="editor.getRelatedPoints()" type="theme" text="填充关联投稿"></flat-button>
+            </div>
+            <div class="sub-points">
+                <text-area label="关联投稿" type="point" model="editor.vm.attachedPoints" limit="10"></text-area>
+            </div>
+        </div>
+        <div class="edit-tools">
+            <div class="main">
+                <div class="info-review">
+                    <div class="info">
+                        <img class="avatar" webp-src="{{::editor.stateTree.currentUser.avatarImage | avatarUrl}}" alt="{{::editor.stateTree.currentUser.userName}}">
+                        <div class="name-group">
+                            <p>{{::editor.stateTree.currentUser.userName}}</p>
+                            <p ng-if="editor.totalPlayedTime">在档 {{editor.totalPlayedTime}} 小时</p>
+                        </div>
+                    </div>
+                    <point-review ng-if="editor.hasRating" bind-review="editor.vm.rating" is-hollow="true"></point-review>
+                </div>
+                <div simditor ng-model="editor.vm.content"></div>
+            </div>
+            <div class="other">
+                <div class="card">
+                    <a href="" class="toggle" ng-click="editor.toggleSummary()">
+                        <p>总结优缺点</p>
+                        <svg ng-class="{opened:editor.isSummaryOpened}" aria-hidden="true">
+                            <use ng-href="{{ 'chevron-left' | iconSvgUrl }}" xlink:href=""></use>
+                        </svg>
+                    </a>
+                    <div class="good-bads" ng-class="{opened:editor.isSummaryOpened}">
+                        <text-area class="good-bad"
+                                   label="+"
+                                   type="text"
+                                   model="editor.vm.pros[0]"
+                        ></text-area>
+                        <text-area class="good-bad"
+                                   label="+"
+                                   type="text"
+                                   model="editor.vm.pros[1]"
+                        ></text-area>
+                        <text-area class="good-bad"
+                                   label="+"
+                                   type="text"
+                                   model="editor.vm.pros[2]"
+                        ></text-area>
+                        <text-area class="good-bad"
+                                   label="-"
+                                   type="text"
+                                   model="editor.vm.cons[0]"
+                        ></text-area>
+                        <text-area class="good-bad"
+                                   label="-"
+                                   type="text"
+                                   model="editor.vm.cons[1]"
+                        ></text-area>
+                        <text-area class="good-bad"
+                                   label="-"
+                                   type="text"
+                                   model="editor.vm.cons[2]"
+                        ></text-area>
+                    </div>
+                </div>
+                <div class="card">
+                    <a href="" class="toggle" ng-click="editor.toggleRepost()">
+                        <p>转载要求</p>
+                        <svg ng-class="{opened:editor.isRepostOpened}" aria-hidden="true">
+                            <use ng-href="{{ 'chevron-left' | iconSvgUrl }}" xlink:href=""></use>
+                        </svg>
+                    </a>
+                    <div class="repost-options" ng-class="{opened:editor.isRepostOpened}">
+                        <div class="repost-option">
+                            <p>允许转载</p>
+                            <input-switch model="editor.vm.reproductionRequirement.reproduction"></input-switch>
+                        </div>
+                        <div class="hr"></div>
+                        <div class="repost-option">
+                            <p>要求署名并标明出处</p>
+                            <input-switch disabled="!editor.vm.reproductionRequirement.reproduction" model="editor.vm.reproductionRequirement.attribution"></input-switch>
+                        </div>
+                        <div class="repost-option">
+                            <p>禁止商业性使用</p>
+                            <input-switch disabled="!editor.vm.reproductionRequirement.reproduction" model="editor.vm.reproductionRequirement.nonCommercial"></input-switch>
+                        </div>
+                        <div class="repost-option">
+                            <p>禁止变造改动和衍生创作</p>
+                            <input-switch disabled="!editor.vm.reproductionRequirement.reproduction" model="editor.vm.reproductionRequirement.noDerivation"></input-switch>
+                        </div>
+                    </div>
+                </div>
+                <div class="card send-card clearfix">
+                    <p>每发布一篇文章消耗 1 ◆ 文券<a href="">（这是为什么呢？）</a></p>
+                    <p>当前有 <span class="theme">{{editor.stateTree.currentUser.coupon | numberAbbreviation}} ◆</span> 文券</p>
+                    <raised-button disabled="editor.submitLock" click="editor.submit()" text="发布文章" type="theme"></raised-button>
+                </div>
+            </div>
+        </div>
+    </div>
+</window>

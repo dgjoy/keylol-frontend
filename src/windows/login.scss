@@ -1,0 +1,247 @@
+.window-login {
+  &.window-no-source {
+    @include grow-shrink-child();
+  }
+
+  /* 动画 */
+  .swap-helper {
+    flex-shrink: 0;
+    width: 100%;
+  }
+
+  .left {
+    .swap-helper.ng-enter,
+    .swap-helper.ng-leave {
+      transition: transform 200ms, opacity 180ms;
+    }
+    .swap-helper.ng-enter {
+      transition-timing-function: cubic-bezier(0.0, 0.0, 0.2, 1);
+      transition-delay: 300ms;
+      position: relative;
+      opacity: 0;
+      transform: translateX(100%);
+    }
+    .swap-helper.ng-enter-active {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .swap-helper.ng-leave {
+      transition-timing-function: cubic-bezier(0.4, 0.0, 1, 1);
+      position: absolute;
+      top: 0;
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .swap-helper.ng-leave-active {
+      opacity: 0;
+      transform: translateX(-100%);
+    }
+  }
+
+  .right {
+    .swap-helper.ng-enter,
+    .swap-helper.ng-leave {
+      transition: transform 200ms, opacity 180ms;
+    }
+
+    .swap-helper.ng-enter {
+      transition-timing-function: cubic-bezier(0.0, 0.0, 0.2, 1);
+      transition-delay: 300ms;
+      position: relative;
+      opacity: 0;
+      transform: translateX(-100%);
+    }
+    .swap-helper.ng-enter-active {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .swap-helper.ng-leave {
+      transition-timing-function: cubic-bezier(0.4, 0.0, 1, 1);
+      position: absolute;
+      top: 0;
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .swap-helper.ng-leave-active {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+  }
+
+  .actions {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 15px;
+    align-items: center;
+    height: 75px;
+
+    a {
+      color: $keylol-highlight;
+      &:hover { text-decoration: underline; }
+    }
+
+    raised-button {
+      margin-left: 20px;
+    }
+  }
+
+  .window {
+    width: 700px;
+
+    .header {
+      height: 105px;
+      background-color: $keylol-theme;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      overflow: hidden;
+
+      .text {
+        margin-left: 15px;
+
+        p {
+          margin: 0;
+          padding: 0;
+
+          &:first-of-type {
+            font-weight: bold;
+            font-size: 20px;
+            margin-bottom: 2px;
+            color: $keylol-inverted-text;
+          }
+
+          &:last-of-type {
+            color: rgba($keylol-inverted-text, 0.6);
+          }
+        }
+      }
+
+      img {
+        align-self: flex-end;
+        height: 115px;
+        margin-right: 65px;
+      }
+    }
+
+    .login-wrapper {
+      overflow: hidden;
+      display: block;
+      position: relative;
+      transition: height 300ms;
+
+      &.low {
+        height: 198px;
+      }
+      &.high {
+        height: 245px;
+      }
+
+      .login-api,
+      .login-steam-robot {
+        display: block;
+        background-color: $keylol-card;
+
+        .wrapper {
+          @include keylol-inset-shadow-1();
+          position: relative;
+          height: 95px;
+          background-color: $keylol-inverted-text;
+          overflow: hidden;
+        }
+        .inner {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          position: absolute;
+          box-sizing: border-box;
+          height: 95px;
+          padding: 0 15px;
+          width: 100%;
+
+          &.ng-enter {
+            transition: all 800ms;
+            opacity: 0;
+            transform: translateY(100%);
+          }
+
+          &.ng-enter-active {
+            opacity: 1;
+            transform: translateY(0);
+          }
+
+          &.ng-leave {
+            transition: all 800ms;
+            opacity: 1;
+            transform: translateY(0);
+          }
+
+          &.ng-leave-active {
+            opacity: 0;
+            transform: translateY(-100%);
+          }
+
+          .left {
+            p {
+              margin: 0;
+            }
+            p:last-of-type {
+              color:$keylol-inertia-text;
+            }
+            .green {
+              color: $keylol-review-good;
+            }
+            .blue {
+              color: $keylol-light-theme;
+            }
+          }
+
+          .right {
+            color: $keylol-light-theme;
+            font-size: 24px;
+          }
+
+          .user {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            img {
+              height: 50px;
+              width: 50px;
+              border-radius: 25px;
+              margin-right: 10px;
+            }
+
+            div {
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+
+              p {
+                margin: 0;
+              }
+
+              p:last-of-type {
+                color: $keylol-inertia-text;
+              }
+            }
+          }
+        }
+      }
+
+      .login-passcode {
+        display: block;
+
+        .passcode-wrapper {
+          overflow: hidden;
+          display: block;
+          position: relative;
+          .inputs {
+            padding-left: 15px;
+            padding-top: 20px;
+            display: flex;
+          }
+        }
+      }
+    }
+  }
+}

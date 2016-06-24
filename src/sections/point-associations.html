@@ -1,0 +1,19 @@
+﻿<div class="bundle">
+    <div class="stations">
+        <a href="" ng-href="point/{{platform.idCode}}" class="link-black" ng-repeat="platform in pointAssociations.platforms">
+            <svg aria-hidden="true">
+                <use ng-href="{{platform.icon | iconSvgUrl }}" xlink:href=""></use>
+            </svg>
+            <span>{{platform.name}}</span>
+        </a>
+    </div>
+    <a ng-if="pointAssociations.object.chineseAvailability" href="" class="chinese-support" ng-click="pointAssociations.showChineseSupport($event)" popup="pointAssociations.showChineseSupportPopup">华语支持</a>
+</div>
+<div class="characteristics" ng-if="pointAssociations.attributes.length > 0">
+    <span class="link-white" ng-repeat="attribute in pointAssociations.attributes">
+        <svg aria-hidden="true">
+            <use ng-href="{{attribute.icon | iconSvgUrl }}" xlink:href=""></use>
+        </svg>
+        <span>{{attribute.text}}</span>
+    </span>
+</div>

@@ -1,0 +1,29 @@
+﻿<div class="slide-selector">
+    <div class="moveBackground active-{{slideShow.index}}" ng-class="{'move-up':slideShow.isMoveUp,'move-down':!slideShow.isMoveUp}"></div>
+    <div class="moveBackground-triangle active-{{slideShow.index}}"></div>
+    <a ripple="theme" class="slide-shortcut" ng-repeat="slide in ::slideShow.slides" href="" ng-click="::slideShow.slideTo($index)">
+        <div class="title" ng-class="{'active':slideShow.index == $index}">{{::slide.minorTitle}}</div>
+        <div class="sub-title" ng-class="{'active':slideShow.index == $index}">{{::slide.minorSubtitle}}</div>
+    </a>
+</div>
+<div class="slide-list" ng-class="{
+    'to-down' : slideShow.isMoveUp && slideShow.oldIndex !== -1,
+    'to-up' : !slideShow.isMoveUp && slideShow.oldIndex !== -1
+    }">
+    <a class="common-article slide swap-animation" ng-animate-swap="slideShow.index" webp-background="{{slideShow.slides[slideShow.index].backgroundImage | uriRelocate: '/both/760x240'}}" href="" ng-href="{{slideShow.slides[slideShow.index].link}}">
+        <div class="bottom-text">
+            <div class="first-line">
+                <span class="underline title">{{slideShow.slides[slideShow.index].title}}</span>
+                <span class="sub-title">
+                    <span>{{slideShow.slides[slideShow.index].author}}</span>
+                    <span ng-if="slideShow.slides[slideShow.index].author && slideShow.slides[slideShow.index].date">/</span>
+                    <span>{{slideShow.slides[slideShow.index].date}}</span>
+                </span>
+            </div>
+            <div class="second-line">{{slideShow.slides[slideShow.index].subtitle}}</div>
+        </div>
+    </a>
+</div>
+<div ng-if="slideShow.stateTree.currentUser.roles.indexOf('Operator') > -1" class="moderation-wrapper" popup="slideShow.showModerationPopup">
+    <icon-button icon="dots-vertical" click="::slideShow.showModeration(event)"></icon-button>
+</div>

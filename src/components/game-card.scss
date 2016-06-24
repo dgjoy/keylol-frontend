@@ -1,0 +1,49 @@
+game-card {
+  @include keylol-shadow-1;
+  background-color: $keylol-card;
+  width: 220px;
+  display: flex;
+  flex-direction: column;
+
+  .info {
+    @include hover-background();
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 52px;
+    padding: 0 15px;
+    margin: 10px 0;
+
+    point-basic-info {
+      max-width: 100%;
+    }
+  }
+
+  .point-img {
+    width: 100%;
+    height: 100px;
+    background-size: cover;
+  }
+
+  .actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+    height: 38px;
+
+
+    vote-circle {
+      margin-left: 20px;
+    }
+
+    >span {
+      margin-left: 20px;
+      color: $keylol-inertia-text;
+    }
+
+    flat-button {
+      margin-right: 5px;
+    }
+  }
+}

@@ -1,0 +1,32 @@
+﻿<window position="center" class="window-push-entry">
+    <div class="window">
+        <div class="header">
+            <div class="text">
+                <p>{{pushEntry.title}}</p>
+                <p>{{pushEntry.subTitle}}</p>
+            </div>
+            <img src="assets/images/proofread-eye.png">
+        </div>
+        <div class="content">
+            <form ng-style="{height: pushEntry.formHeight}">
+                <div class="info-init" ng-if="pushEntry.captureUrl">
+                    <text-area ng-if="!pushEntry.captureOnlyArticle" class="long" type="text" state="pushEntry.expand ? 'disabled' : 'normal'" label="文章 / 页面链接" model="pushEntry.vm.link" tip="'如果推送非文章链接，需要补充展示信息'"></text-area>
+                    <text-area ng-if="pushEntry.captureOnlyArticle" class="long" type="text" state="pushEntry.expand ? 'disabled' : 'normal'" label="文章链接" model="pushEntry.vm.link" tip="'推送文章在其乐的完整链接'"></text-area>
+                    <raised-button text="抓取" type="theme" disabled="pushEntry.expand || !pushEntry.vm.link" click="pushEntry.capture()"></raised-button>
+                </div>
+                <div class="info-detail" ng-class="{'no-init': !pushEntry.captureUrl}">
+                    <text-area ng-if="item.element === 'textArea'" ng-repeat-start="item in pushEntry.inputList" state="item.disabled ? 'disabled' : 'normal'" class="{{item.style}}" type="{{item.type}}" label="{{item.label}}" model="pushEntry.vm[item.model]" tip="item.tip"></text-area>
+                    <div ng-if="item.element === 'uploadImage'" class="upload-image {{item.style}}" ng-repeat-end>
+                        <label>{{item.label}}</label>
+                        <a href="" popup="item.showUploadPreview" ngf-select="pushEntry.uploadImage($file, $event, item)" ngf-fix-orientation="true" accept="image/*">上传</a>
+                        <div class="preview" webp-background="{{pushEntry.vm[item.model] | uriRelocate}}"></div>
+                    </div>
+                </div>
+            </form>
+            <div class="actions">
+                <flat-button text="放弃" type="light-text" click="pushEntry.close()"></flat-button>
+                <raised-button text="推送" type="theme" disabled="!pushEntry.expand"  click="pushEntry.submit()"></raised-button>
+            </div>
+        </div>
+    </div>
+</window>

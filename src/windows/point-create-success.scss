@@ -1,0 +1,50 @@
+.window-point-create-success {
+  @include grow-shrink-child();
+  .window {
+    width: 700px;
+
+    .header {
+      height: 105px;
+      background: $keylol-theme center no-repeat;
+      background-size: cover;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+
+      .text {
+        @include text-protection();
+        margin: 0;
+        font-size: 20px;
+        font-weight: bold;
+        color: $keylol-inverted-text;
+      }
+    }
+
+    .point-create-success-wrapper {
+      padding: 25px 15px 20px;
+      > div {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .point-info {
+        max-width: 340px;
+        margin: auto;
+      }
+      .actions {
+        a {
+          margin-right: 15px;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+
+        raised-button {
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+}

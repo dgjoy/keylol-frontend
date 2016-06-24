@@ -1,0 +1,30 @@
+﻿<section-header header="shortReview.type" theme="shortReview.theme"></section-header>
+<div class="main-card">
+    <form ng-if="shortReview.stateTree.currentUser">
+        <div class="header">
+            <div class="info">
+                <a ng-href="user/{{shortReview.stateTree.currentUser.idCode}}"><img webp-src="{{shortReview.stateTree.currentUser.avatarImage | avatarUrl: 'small'}}"></a>
+                <p><a class="username" ng-href="user/{{shortReview.stateTree.currentUser.idCode}}">{{shortReview.stateTree.currentUser.userName}}</a> / <span>{{shortReview.playedTime ? '在档 ' + shortReview.playedTime + ' 小时': '无在档记录'}}</span></p>
+                <point-review bind-review="shortReview.vm.rating" no-string="true" is-hollow="true"></point-review>
+            </div>
+        </div>
+        <textarea elastic placeholder="添加一则简评" ng-model="shortReview.vm.content"></textarea>
+        <div class="actions">
+            <flat-button click="shortReview.submit()" disabled="!shortReview.vm.rating || !shortReview.vm.content || shortReview.submitLock" text="发布" type="inertia"></flat-button>
+        </div>
+    </form>
+    <ul ng-if="shortReview.list.length > 0">
+        <li ng-repeat="item in shortReview.list">
+            <div class="header">
+                <div class="info">
+                    <a ng-href="user/{{item.authorIdCode}}"><img webp-src="{{item.authorAvatarImage | avatarUrl: 'small'}}"></a>
+                    <p><a ng-href="user/{{item.authorIdCode}}">{{item.authorUserName}}</a> / {{shortReview.utils.getPlayedTime(item.authorPlayedTime, item.authorIdCode, shortReview.stateTree.currentUser, shortReview.playedTime)}}</p>
+                    <vote-circle review="item.rating * 2 - 1"></vote-circle>
+                </div>
+                <a ng-if="shortReview.stateTree.currentUser" ng-style="{color: item.liked ? shortReview.theme.light : ''}" ng-click="shortReview.utils.like(item.id, item, 'Activity')" ng-disabled="item.liked || item.authorIdCode === shortReview.stateTree.currentUser.idCode" href="" class="like">+{{item.likeCount}}</a>
+                <a ng-if="!shortReview.stateTree.currentUser" ng-click="shortReview.utils.openRegistration()" href="" class="like">+{{item.likeCount}}</a>
+            </div>
+            <p>{{item.content}}<a href="" ng-href="activity/{{item.authorIdCode}}/{{item.sidForAuthor}}">查看</a></p>
+        </li>
+    </ul>
+</div>

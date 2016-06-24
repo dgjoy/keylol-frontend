@@ -1,0 +1,112 @@
+.popup-search-selector {
+    width: 300px;
+}
+
+.popup-search-selector .selector-main {
+    background: white;
+}
+
+.popup-search-selector .selector-main {
+    background: white;
+}
+
+.popup-search-selector .selector-main .search-filter {
+    height: 30px;
+    padding-top: 10px;
+    float: right;
+}
+
+.popup-search-selector .selector-main .search-filter a {
+    margin-right: 12px;
+    color: #748a97;
+}
+
+.popup-search-selector .selector-main .search-filter a.active {
+    color: #000003;
+}
+
+.popup-search-selector .selector-main .default {
+    padding-top: 95px;
+    margin-bottom: 45px;
+    text-align: center;
+}
+
+.popup-search-selector .selector-main .default img {
+    height: 89px;
+    width: auto;
+}
+
+.popup-search-selector .selector-main .default h1 {
+    margin: 20px 0 0 0;
+    font-size: 24px;
+    color: #BBB;
+    font-weight: normal;
+}
+
+.popup-search-selector .selector-main ul {
+    padding: 0;
+    margin: 0;
+    clear: both;
+    height: 260px;
+}
+
+.popup-search-selector .selector-main li {
+    list-style: none;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+.popup-search-selector .selector-main li:hover {
+    background-color: #EEE;
+}
+
+.popup-search-selector .selector-main li .avatar-anchor {
+    float: left;
+}
+
+.popup-search-selector .selector-main li .avatar-anchor img {
+    width: 32px;
+    height: 32px;
+}
+
+.popup-search-selector .selector-main li .title {
+    float: left;
+    margin-left: 14px;
+}
+
+.popup-search-selector .selector-main li .title p {
+    margin: 0;
+    line-height: 16px;
+}
+
+.popup-search-selector .selector-main li .title p:first-of-type {
+    color: $keylol-theme;
+    font-weight: bold;
+}
+
+.popup-search-selector .selector-main li .title p span {
+    color: #748a97;
+}
+
+.popup-search-selector .selector-main li .title p.info {
+    height: 18px;
+    width: 100%;
+}
+
+.popup-search-selector .selector-main li .title p.info span {
+    margin-left: 8px;
+    color: #BBB;
+}
+
+.popup-search-selector .selector-main li .title p.info span:first-of-type {
+    margin-left: 0;
+}
+
+.popup-search-selector .selector-main .all-results {
+    float: right;
+    padding: 13px;
+}
+
+.popup-search-selector .selector-main .all-results a {
+    color: #748a97;
+}

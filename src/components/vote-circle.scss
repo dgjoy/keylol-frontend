@@ -1,0 +1,40 @@
+vote-circle {
+    display: flex;
+
+    svg {
+        width: 8px;
+        height: 6px;
+
+        &:last-of-type {
+            width: 6px;
+        }
+
+        &.awesome {
+            fill: $keylol-review-awesome !important;
+        }
+
+        &.good {
+            fill: $keylol-review-good !important;
+        }
+
+        &.not-bad {
+            fill: $keylol-review-not-bad !important;
+        }
+
+        &.bad {
+            fill: $keylol-review-bad !important;
+        }
+
+        &.terrible {
+            fill: $keylol-review-terrible !important;
+        }
+
+        &.whole-white {
+            fill: white !important;
+        }
+
+        &.disabled {
+            fill: $keylol-inertia-shape !important;
+        }
+    }
+}

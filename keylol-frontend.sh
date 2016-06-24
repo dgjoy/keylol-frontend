@@ -10,10 +10,10 @@ case ${ACTION} in
       dev)
         cp -rf node_modules ${BUILD_COPY_TARGET}/
         cp -rf assets ${BUILD_COPY_TARGET}/
-        cp -rf components ${BUILD_COPY_TARGET}/
+        cp -rf temporary ${BUILD_COPY_TARGET}/
+        cp -rf src ${BUILD_COPY_TARGET}/
         cp -f keylol-app.js ${BUILD_COPY_TARGET}/
         cp -f root-controller.js ${BUILD_COPY_TARGET}/
-        cp -f environment-config.js ${BUILD_COPY_TARGET}/
         cp -f user_agreement.pdf ${BUILD_COPY_TARGET}/
         cp -f index.html ${BUILD_COPY_TARGET}/
         ;;
@@ -28,6 +28,24 @@ case ${ACTION} in
         rm -f ${BUILD_COPY_TARGET}/assets/fonts/keylol-rail-sung-full.ttf
         rm -f ${BUILD_COPY_TARGET}/assets/fonts/lisong-full.ttf
         rm -f ${BUILD_COPY_TARGET}/assets/fonts/myriadpro-regular-full.woff
+        rm -f ${BUILD_COPY_TARGET}/assets/fonts/keylol.manifest.json
+        rm -f ${BUILD_COPY_TARGET}/assets/fonts/lisong.manifest.json
+        rm -rf ${BUILD_COPY_TARGET}/scss
+        ;;
+      lgbt)
+        cp -rf assets ${BUILD_COPY_TARGET}/
+        cp -rf bundles ${BUILD_COPY_TARGET}/
+        mkdir -p ${BUILD_COPY_TARGET}/node_modules/simditor/styles/
+        cp -rf node_modules/simditor/styles/fonts ${BUILD_COPY_TARGET}/node_modules/simditor/styles/
+        cp -f index.html ${BUILD_COPY_TARGET}/
+        cp -f user_agreement.pdf ${BUILD_COPY_TARGET}/
+        rm -rf ${BUILD_COPY_TARGET}/assets/stylesheets
+        rm -f ${BUILD_COPY_TARGET}/assets/fonts/keylol-rail-sung-full.ttf
+        rm -f ${BUILD_COPY_TARGET}/assets/fonts/lisong-full.ttf
+        rm -f ${BUILD_COPY_TARGET}/assets/fonts/myriadpro-regular-full.woff
+        rm -f ${BUILD_COPY_TARGET}/assets/fonts/keylol.manifest.json
+        rm -f ${BUILD_COPY_TARGET}/assets/fonts/lisong.manifest.json
+        rm -rf ${BUILD_COPY_TARGET}/scss
         ;;
     esac
     ;;

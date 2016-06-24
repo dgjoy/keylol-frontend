@@ -1,0 +1,10 @@
+.popup-media-menu {
+  @include grow-shrink-top-right(menu);
+  width: 220px;
+  z-index: 1000;
+
+  menu {
+    @include keylol-shadow-3;
+    border-radius: 0;
+  }
+}

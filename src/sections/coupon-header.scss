@@ -1,0 +1,56 @@
+coupon-header {
+  @include keylol-shadow-1();
+  display: block;
+  border-radius: 2px;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 30px 25px;
+  background-color: $keylol-card;
+
+  p {
+    margin: 0;
+    color: $keylol-main-text;
+    &.red {
+      color: $keylol-review-bad;
+    }
+    &.blue {
+      color: $keylol-light-theme;
+    }
+    &.green {
+      color: $keylol-review-good;
+    }
+    &.inertia {
+      color: $keylol-inertia-text;
+    }
+  }
+
+  a {
+    color: $keylol-highlight;
+    &:hover { text-decoration: underline; }
+  }
+
+  .head {
+    margin-bottom: 25px;
+    text-indent: 30px;
+  }
+
+  .cards {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    .card {
+      @include keylol-shadow-1();
+      background-color: $keylol-inverted-text;
+      margin: 0 15px;
+      padding: 20px 15px;
+      width: 190px;
+
+      .line {
+        display: flex;
+        justify-content: space-between;
+        line-height: 30px;
+      }
+    }
+  }
+}

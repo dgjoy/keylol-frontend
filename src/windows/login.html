@@ -1,0 +1,106 @@
+﻿<window position="center" class="window-login">
+    <div class="window">
+        <div class="header">
+            <div class="text">
+                <p>回到社区</p>
+                <p>在下方选择一种登录方式</p>
+            </div>
+            <img src="assets/images/key-and-locker.png">
+        </div>
+
+        <tabs tab-array="::login.tabArray" cur-tab="login.currentWay" click-handler="login.changeWay(index)"></tabs>
+        <div class="login-wrapper {{login.swapDirection}}" ng-class="{'low':login.currentWay == 1,'high':login.currentWay < 1}">
+            <div class="swap-helper" ng-animate-swap="login.currentWay">
+                <!-- robot 方式-->
+                <div class="login-steam-robot" ng-if="login.currentWay === 0">
+                    <phase phases="['在对话中发送验证码','登录成功']" index="login.steamRobotWayManager.phaseIndex"></phase>
+                    <div class="wrapper">
+                        <div class="inner" ng-if="login.steamRobotWayManager.phaseIndex === 0">
+                            <div class="left">
+                                <p>在其乐好友中，向其乐机器人发送<span class="blue">验证码</span></p>
+                                <p>机器人已尝试发出对话邀请</p>
+                            </div>
+                            <div class="right font-consolas">
+                                {{login.steamRobotWayManager.code}}
+                            </div>
+                        </div>
+                        <div class="inner" ng-if="login.steamRobotWayManager.phaseIndex === 1">
+                            <div class="user">
+                                <img webp-src="{{login.steamRobotWayManager.avatarImage | avatarUrl}}" />
+                                <div>
+                                    <p>{{login.steamRobotWayManager.userName}}</p>
+                                    <p>欢迎回来</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="actions">
+                        <a href="" ng-click="login.openRegistration()">尚未注册？点击这里加入其乐！</a>
+                        <flat-button text="放弃" type="inertia" click="login.close()"></flat-button>
+                    </div>
+                </div>
+                <!-- api 方式 -->
+                <!--<div class="login-api" ng-if="login.currentWay === 1">-->
+                    <!--<phase phases="['在威乐页面登录授权','登录成功']" index="login.apiWayManager.phaseIndex"></phase>-->
+                    <!--<div class="wrapper">-->
+                        <!--<div class="inner">-->
+                            <!--<div class="left" ng-switch-when="1">-->
+                                <!--<p>点击<span class="green">右侧按钮</span>，跳转至威乐官方页面并登录 Steam 账户</p>-->
+                                <!--<p>验证在官方接口完成，其乐不会接触密码与敏感信息</p>-->
+                            <!--</div>-->
+                            <!--<a class="right" ng-switch-when="1" href=""><img src="assets/images/sits_large_noborder_sc.png" /></a>-->
+                        <!--</div>-->
+                        <!--<div class="inner">-->
+                            <!--<div class="user" ng-switch-when="2">-->
+                                <!--<img webp-src="//storage.keylol.com/4ed8e4862422e8a584fb6bee9f32fedd.jpg!avatar.medium" />-->
+                                <!--<div>-->
+                                    <!--<p>用户名</p>-->
+                                    <!--<p>欢迎回来</p>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="actions">-->
+                        <!--<a href="" ng-click="login.openRegistration()">尚未注册？点击这里加入其乐！</a>-->
+                        <!--<flat-button text="放弃" type="inertia" click="login.close()"></flat-button>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!-- 口令方式 -->
+                <div class="login-passcode" ng-if="login.currentWay === 1">
+                    <tabs class="invert" invert="true" tab-array="login.passcodeWayManager.tabArray" cur-tab="0" click-handler="login.changePasscodeWay(index)"></tabs>
+                    <!--<div class="error">{{login.passcodeWayManager.error['vm.id_code']}}{{login.passcodeWayManager.error['vm.password']}}</div>-->
+                    <div class="passcode-wrapper {{login.passcodeWayManager.swapDirection}}">
+                        <form ng-submit="login.submit()" class="swap-helper swap-animation" ng-animate-swap="login.passcodeWayManager.curPage">
+                            <div class="inputs">
+                                <text-area type="{{login.passcodeWayManager.forms[login.passcodeWayManager.curPage][0].type}}"
+                                           label="{{login.passcodeWayManager.forms[login.passcodeWayManager.curPage][0].label}}"
+                                           model="login.passcodeWayManager.vm.id_code" style="margin-right: 30px;"
+                                           state="login.passcodeWayManager.id_code.state"
+                                           tip="login.passcodeWayManager.forms[login.passcodeWayManager.curPage][0].tip"
+                                           error="login.passcodeWayManager.id_code.error"
+                                           ng-style="{'width':(login.passcodeWayManager.curPage === 0)?'auto':'300px'}"
+                                ></text-area>
+                                <text-area type="{{login.passcodeWayManager.forms[login.passcodeWayManager.curPage][1].type}}"
+                                           label="{{login.passcodeWayManager.forms[login.passcodeWayManager.curPage][1].label}}"
+                                           model="login.passcodeWayManager.vm.password" style="width: 240px;"
+                                           state="login.passcodeWayManager.password.state"
+                                           tip="login.passcodeWayManager.forms[login.passcodeWayManager.curPage][1].tip"
+                                           error="login.passcodeWayManager.password.error"
+                                ></text-area>
+                            </div>
+                            <div class="actions">
+                                <a href="" ng-click="login.openRegistration()">尚未注册？点击这里加入其乐！</a>
+                                <div class="action">
+                                    <flat-button text="放弃" type="inertia" click="login.close()"></flat-button>
+                                    <raised-button is-submit="true" text="登录" type="theme"
+                                                   disabled="!login.passcodeWayManager.id_code.completed || !login.passcodeWayManager.password.completed || login.submitLock"></raised-button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="geetest-{{login.passcodeWayManager.geetestId}}" style="display:none;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</window>

@@ -1,0 +1,72 @@
+tabs {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  background-color: $keylol-light-theme;
+
+  >.wrapper {
+    height: 35px;
+    display: flex;
+
+    >.link {
+      height: 35px;
+      line-height: 35px;
+      font-size: 16px;
+      color: rgba(#fff, .6);
+      text-decoration: none;
+      padding: 0 15px;
+      margin: 0 15px;
+      cursor: pointer;
+
+      &:hover {
+        color: #fff;
+      }
+
+      &.link__selected {
+        color: #fff;
+      }
+
+      &.float-right {
+        position: absolute;
+        right: 15px;
+      }
+
+      &.float-left {
+        position: absolute;
+        left: 15px;
+      }
+    }
+
+    >.move-bar {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 2px;
+      width: auto;
+      background-color: $keylol-inverted-text;
+
+      transition: transform 300ms cubic-bezier(0.0, 0.0, 0.2, 1);
+      transform-origin: left;
+    }
+  }
+  &.invert {
+      background-color: $keylol-card;
+      border-bottom: 1px solid $keylol-inertia-shape;
+
+    >.wrapper>.link {
+      font-family: "Helvetica Neue", "Segoe UI", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", Arial, sans-serif;
+      font-size: 14px;
+      color: $keylol-inertia-text;
+
+      &:hover {
+        color: $keylol-main-text;
+      }
+      &.link__selected {
+        color: $keylol-main-text;
+      }
+    }
+    >.wrapper>.move-bar {
+      background-color: #000;
+    }
+  }
+}

@@ -1,0 +1,51 @@
+icon-button {
+  display: flex;
+
+  button {
+    @include keylol-button;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    background: transparent;
+
+    .icon-wrapper {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      svg {
+        width: 24px;
+        height: 24px;
+        fill: $keylol-inertia-shape;
+      }
+    }
+
+    .ripple-container {
+      @include circle-ripple-container;
+    }
+
+    &:hover {
+      svg {
+        fill: $keylol-light-text;
+      }
+    }
+
+    &.invert {
+      svg {
+        fill: $keylol-inverted-text;
+      }
+    }
+
+    &.half-invert {
+      svg {
+        fill: rgba($keylol-inverted-text, .6);
+      }
+
+      &:hover svg {
+        fill: $keylol-inverted-text;
+      }
+    }
+  }
+}

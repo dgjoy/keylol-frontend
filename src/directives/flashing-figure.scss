@@ -1,0 +1,96 @@
+flashing-figure {
+    display: block;
+    text-align: center;
+}
+
+flashing-figure .stations {
+    text-align: center;
+}
+
+flashing-figure .station {
+    width: 169px;
+    display: inline-block;
+}
+
+flashing-figure .station:first-child {
+    width: 84px;
+    text-align: left;
+}
+
+flashing-figure .station:last-child {
+    width: 84px;
+    text-align: right;
+    direction: rtl;
+}
+
+flashing-figure .station .light {
+    height: 34px;
+    background: url(../../assets/images/flashing-figure-background.png) no-repeat 0 -252px;
+    background-size: 169px 394px;
+    animation: 1s steps(3) infinite;
+}
+
+flashing-figure .station:first-child .light {
+    background-position: 0 -72px;
+    margin-left: -17px;
+}
+
+flashing-figure .station:last-child .light {
+    background-position: -1px -360px;
+    margin-right: -17px;
+}
+
+flashing-figure .station.current .light {
+    animation-name: current-light-blink;
+}
+
+flashing-figure .station.current:first-child .light {
+    animation-name: current-light-blink-first;
+}
+
+flashing-figure .station.current:last-child .light {
+    animation-name: none;
+}
+
+flashing-figure .station.current ~ .station .light {
+    background-position: 0 -108px;
+}
+
+flashing-figure .station.current ~ .station:last-child .light {
+    background-position: -1px -288px;
+}
+
+flashing-figure .station.current + .station .light {
+    animation-name: next-light-blink;
+}
+
+flashing-figure .station.current + .station:last-child .light {
+    animation-name: next-light-blink-last;
+}
+
+flashing-figure hgroup {
+    margin-top: 8px;
+    display: inline-block;
+    text-align: center;
+}
+
+flashing-figure .station:first-child hgroup {
+    transform: translateX(-50%);
+}
+
+flashing-figure .station:last-child hgroup {
+    transform: translateX(50%);
+}
+
+flashing-figure h1,
+.window flashing-figure h1 {
+    font-size: 17px;
+    color: #333;
+    margin: 0 0 2px 0;
+}
+
+flashing-figure h2,
+.window flashing-figure h2 {
+    font-size: 13px;
+    margin: 0;
+}

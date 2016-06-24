@@ -1,0 +1,69 @@
+section-header {
+  display: flex;
+  margin-top: -10px;
+  margin-bottom: 10px;
+
+  p {
+    margin: 0;
+  }
+
+  .wrapper {
+    display: flex;
+    align-items: center;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    height: 48px;
+
+    &.theme {
+      .logo {
+        fill: $keylol-theme;
+      }
+
+      .main-title {
+        color: $keylol-theme;
+      }
+    }
+
+    &.light-theme {
+      .logo {
+        fill: $keylol-light-theme;
+      }
+
+      .main-title {
+        color: $keylol-light-theme;
+      }
+    }
+
+    &.user {
+      .logo {
+        fill: $keylol-user-theme;
+      }
+
+      .main-title {
+        color: $keylol-user-theme;
+      }
+    }
+
+    .logo {
+      height: 32px;
+      width: 16px;
+      margin-right: 8px;
+    }
+
+    .text {
+      .main-title {
+        font-size: 20px;
+        margin-bottom: 2px;
+      }
+
+      .sub-title {
+        color: $keylol-inertia-text;
+      }
+    }
+  }
+
+  a:hover  .main-title {
+    text-decoration: underline;
+  }
+}

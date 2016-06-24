@@ -1,0 +1,34 @@
+﻿<window position="center" class="window-comment-editor">
+    <div class="window">
+        <div class="basic-info">
+            <img class="avatar" webp-src="{{commentEditor.comment.authorAvatarImage | avatarUrl}}">
+            <div class="name-group">
+                <p>{{commentEditor.comment.authorUserName}}</p>
+                <p ng-if="commentEditor.options.isGame">
+                    <span ng-if="commentEditor.comment.authorPlayedTime">在档时间 {{commentEditor.comment.authorPlayedTime}} 小时</span>
+                    <span ng-if="!commentEditor.comment.authorPlayedTime">无在档记录</span>
+                </p>
+            </div>
+            <div class="action-date">
+                <p class="action">&nbsp;</p>
+                <p><span am-time-ago="commentEditor.comment.publishTime"></span> / #{{commentEditor.comment.sidForArticle}}</p>
+            </div>
+        </div>
+        <div ng-if="commentEditor.replyToComment" class="comment-to-reply">
+            <div class="basic">
+                <p class="reply">
+                    <span>回复 #{{commentEditor.replyToComment.sidForArticle}}</span>
+                    <img class="avatar" webp-src="{{commentEditor.replyToComment.authorAvatarImage | avatarUrl: 'small'}}">
+                    <span>{{commentEditor.replyToComment.authorUserName}}</span>
+                </p>
+                <a href="" ng-click="commentEditor.cancelReply()">取消回复</a>
+            </div>
+            <p class="comment-content">{{commentEditor.replyToComment.content | extractText}}</p>
+        </div>
+        <div simditor ng-model="commentEditor.vm.content"></div>
+        <div class="clearfix">
+            <raised-button theme-color="commentEditor.theme.main" text="提交编辑" type="theme" disabled="commentEditor.submitLock" click="commentEditor.submit()"></raised-button>
+            <flat-button text="退出" type="inertia" click="commentEditor.close()"></flat-button>
+        </div>
+    </div>
+</window>

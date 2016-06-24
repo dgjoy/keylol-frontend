@@ -1,0 +1,20 @@
+﻿<section-header header="spotlightUsers.type"></section-header>
+<div class="wrapper">
+    <div class="line">
+        <div class="left-part">
+            <user-card user="card" type="user-theme" ng-repeat="card in spotlightUsers.steamFriendCardsPart1"></user-card>
+        </div>
+        <div class="right-part">
+            <user-card user="card" type="user-theme" ng-repeat="card in spotlightUsers.steamFriendCardsPart2"></user-card>
+        </div>
+    </div>
+    <div class="line">
+        <div class="left-part">
+            <user-card user="card" type="user-theme" ng-repeat="card in spotlightUsers.sameFriendCards"></user-card>
+        </div>
+        <div class="right-part">
+            <img src="assets/images/friends-strip-background.png">
+        </div>
+    </div>
+</div>
+

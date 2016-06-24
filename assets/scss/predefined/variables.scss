@@ -1,0 +1,297 @@
+//colors
+$keylol-theme: #159;
+$keylol-light-theme: #59d;
+$keylol-highlight: #89A;
+$keylol-accent: #fc3;
+$keylol-main-text : #444;
+$keylol-light-text : #888;
+$keylol-inertia-text : #bbb;
+$keylol-inverted-text : #fff;
+$keylol-inertia-shape: #ccc;
+$keylol-background : #eee;
+$keylol-card : #f5f6f7;
+$keylol-libraried : #a3cf06;
+$keylol-user-theme : #df9a35;
+$keylol-review-terrible: #5c170f;
+$keylol-review-bad: #ed1d24;
+$keylol-review-not-bad: #f7943e;
+$keylol-review-good: #6fb92b;
+$keylol-review-awesome: #00ab4e;
+$keylol-topic: #7976b1;
+
+/* ------------------- */
+/* Font Family Presets */
+/* ------------------- */
+.font-myriad-keylol {
+  font-family: "Myriad Pro", "Keylol Rail Sung", sans-serif;
+}
+
+.font-myriad-lisong {
+  font-family: "Myriad Pro", LiSong, sans-serif;
+}
+
+// font family mixins
+@mixin font-myriad-keylol {
+  font-family: "Myriad Pro", "Keylol Rail Sung", sans-serif;
+}
+
+@mixin font-consolas {
+  font-family: "Consolas Regular", "Consolas", Arial, sans-serif;
+}
+
+// shadow
+@mixin keylol-shadow-1 {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16);
+}
+
+@mixin keylol-shadow-2 {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+@mixin keylol-shadow-3 {
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+@mixin keylol-shadow-4 {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+@mixin keylol-shadow-5 {
+  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+}
+
+@mixin keylol-inset-shadow-1 {
+  box-shadow: 0 7px 5px -5px rgba(0, 0, 0, 0.16) inset, 0 -7px 5px -5px rgba(0, 0, 0, 0.16) inset;
+}
+
+// review color
+@mixin keylol-review($type: color, $no-stroke: false) {
+  &.awesome {
+    #{$type}: $keylol-review-awesome;
+    @if $no-stroke == true { circle { stroke-width: 0; } }
+  }
+
+  &.good {
+    #{$type}: $keylol-review-good;
+    @if $no-stroke == true { circle { stroke-width: 0; } }
+  }
+
+  &.not-bad {
+    #{$type}: $keylol-review-not-bad;
+    @if $no-stroke == true { circle { stroke-width: 0; } }
+  }
+
+  &.bad {
+    #{$type}: $keylol-review-bad;
+    @if $no-stroke == true { circle { stroke-width: 0; } }
+  }
+
+  &.terrible {
+    #{$type}: $keylol-review-terrible;
+    @if $no-stroke == true { circle { stroke-width: 0; } }
+  }
+}
+
+// button
+@mixin keylol-button {
+  border: none;
+  padding: 0;
+
+  &:focus {
+    outline: 0;
+  }
+}
+
+@mixin keylol-button-default {
+  @include keylol-button;
+  padding: 8px 15px;
+}
+
+@mixin keylol-button-card {
+  @include keylol-button;
+  @include keylol-shadow-1;
+  border-radius: 2px;
+}
+
+@mixin keylol-button-single {
+  @include keylol-button-default;
+  border-radius: 2px;
+  font-weight: bold;
+}
+
+// text protection
+@mixin text-protection ($position: bottom) {
+  padding: 15px 15px;
+  background: linear-gradient(to $position, rgba(#000,0), rgba(#000, .3) 67.7%, rgba(#000, .6));
+}
+
+// circle ripple-container
+@mixin circle-ripple-container {
+  border-radius: 50%;
+  background-clip: padding-box;
+  -webkit-mask-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC");
+}
+
+@mixin child-ripple-container-overflow ($overflow: 12) {
+  overflow: visible;
+
+  .ripple-container {
+    @include circle-ripple-container;
+    width: auto;
+    height: auto;
+    top: -#{$overflow}px;
+    left: -#{$overflow}px;
+    bottom: -#{$overflow}px;
+    right: -#{$overflow}px;
+  }
+}
+
+// hover
+@mixin hover-background($color: #000) {
+  &:hover {
+    background-color: rgba($color, 0.05);
+  }
+}
+
+// one-line with ellipsis
+@mixin ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// wrap ellipsis
+@mixin wrap-ellipsis {
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+}
+
+//usual angular enter leave animation
+@mixin grow-shrink-self {
+  &.ng-enter {
+    transform-origin: center;
+    animation: scale-y-grow 600ms cubic-bezier(0.19, 1, 0.22, 1);
+  }
+
+  &.ng-leave {
+    transform-origin: center;
+    animation: scale-y-shrink 500ms cubic-bezier(0.19, 1, 0.22, 1);
+  }
+}
+
+@mixin grow-shrink-child ($child: window) {
+  &.ng-enter {
+    opacity: 0;
+    transition: opacity 600ms cubic-bezier(0.19, 1, 0.22, 1);
+
+    &.ng-enter-active {
+      opacity: 1;
+    }
+
+    .#{$child} {
+      transform-origin: center;
+      animation: scale-y-grow 600ms cubic-bezier(0.19, 1, 0.22, 1);
+    }
+  }
+
+  &.ng-leave {
+    opacity: 1;
+    transition: opacity 500ms cubic-bezier(0.19, 1, 0.22, 1);
+
+    &.ng-leave-active {
+      opacity: 0;
+    }
+
+    .#{$child} {
+      transform-origin: center;
+      animation: scale-y-shrink 500ms cubic-bezier(0.19, 1, 0.22, 1);
+    }
+  }
+}
+
+@mixin grow-shrink-top-right ($card: &) {
+  &.ng-enter {
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    opacity: 0;
+    transform-origin: top right 0;
+    transform: scale(0, 0);
+
+    #{$card} > * {
+      transition: opacity 150ms cubic-bezier(.55, 0, .55, .2) 75ms;
+      opacity: 0;
+    }
+
+    &.ng-enter-active {
+      opacity: 1;
+      transform: scale(1, 1);
+
+      #{$card} > * {
+        opacity: 1;
+      }
+    }
+  }
+
+  &.ng-leave {
+    transition: all 0.2s cubic-bezier(0.95, 0.05, 0.795, 0.035);
+    opacity: 1;
+    transform-origin: top right 0;
+    transform: scale(1, 1);
+
+    #{$card} > * {
+      transition: opacity 100ms cubic-bezier(0.95, 0.05, 0.795, 0.035);
+      opacity: 1;
+    }
+
+    &.ng-leave-active {
+      opacity: 0;
+      transform: scale(0, 0);
+
+      #{$card} > * {
+        opacity: 0;
+      }
+    }
+  }
+}
+
+@mixin page-change ($child) {
+  &.to-next {
+    #{$child} {
+      &.ng-enter, &.ng-leave {
+        transition: transform .5s cubic-bezier(0.19, 1, 0.22, 1);
+      }
+
+      &.ng-enter {
+        transform: translateX(100%);
+      }
+
+      &.ng-enter-active, &.ng-leave {
+        transform: translateX(0);
+      }
+
+      &.ng-leave-active {
+        transform: translateX(-100%);
+      }
+    }
+  }
+
+  &.to-previous {
+    #{$child} {
+      &.ng-enter, &.ng-leave {
+        transition: transform .5s cubic-bezier(0.19, 1, 0.22, 1);
+      }
+
+      &.ng-enter {
+        transform: translateX(-100%);
+      }
+
+      &.ng-enter-active, &.ng-leave {
+        transform: translateX(0);
+      }
+
+      &.ng-leave-active {
+        transform: translateX(100%);
+      }
+    }
+  }
+}

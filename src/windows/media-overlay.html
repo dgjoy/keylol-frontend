@@ -1,0 +1,22 @@
+﻿<window position="center" class="window-media-overlay">
+    <div class="header">
+        <div class="name-group">
+            <p>{{mediaOverlay.getType(mediaOverlay.list[mediaOverlay.currentPage - 1].type)}}</p>
+            <p>{{mediaOverlay.point.name}}</p>
+        </div>
+        <div class="page">
+            <span>{{mediaOverlay.currentPage}}</span> / {{mediaOverlay.list.length}}
+        </div>
+        <div popup="mediaOverlay.showMenuPopup"><icon-button icon="dots-vertical" ng-click="mediaOverlay.showMenu($event)"></icon-button></div>
+    </div>
+    <div class="box">
+        <div class="picture" ng-repeat="media in mediaOverlay.list" ng-class="{
+            'left-hidden': $index + 1 < mediaOverlay.currentPage,
+            active: $index + 1 === mediaOverlay.currentPage,
+            'right-hidden': $index + 1 > mediaOverlay.currentPage,
+            }">
+            <img webp-src="{{media.link | uriRelocate: '/fxfn/1060x474'}}">
+        </div>
+        <switch-pagination next="mediaOverlay.nextPage()" previous="mediaOverlay.previousPage()" current="mediaOverlay.currentPage" total="mediaOverlay.list.length" no-page-count="true"></switch-pagination></div>
+    </div>
+</window>

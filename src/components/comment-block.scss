@@ -1,0 +1,130 @@
+.comment-block {
+    padding: 0 100px 0 20px;
+    margin-top: 25px;
+    position: relative;
+
+    &.highlight {
+        animation: comment-highlight 5s;
+    }
+
+    &:first-of-type {
+        margin-top: 28px;
+    }
+
+    &:hover {
+        .floor {
+            display: block;
+        }
+
+        article {
+            .header {
+                .action {
+                    display: inline;
+                }
+            }
+        }
+    }
+
+    .floor {
+        width: 47px;
+        height: 32px;
+        position: absolute;
+        right: 0;
+        top: 4px;
+        color: white;
+        background-color: #CCC;
+        text-align: center;
+        line-height: 32px;
+        display: none;
+    }
+
+    article {
+        margin-left: 40px;
+
+        .header {
+            height: 22px;
+            line-height: 22px;
+
+            .name {
+                font-weight: bold;
+            }
+
+            .as-author {
+                color: $keylol-highlight;
+            }
+
+            .time {
+                color: #BBB;
+            }
+
+            .moderated {
+                color: white;
+                background-color: #e30613;
+                padding: 0 3px;
+            }
+
+            .action {
+                color: #ccc;
+                display: none;
+
+                a {
+                    color: $keylol-highlight;
+                    margin: 5px;
+                }
+            }
+        }
+
+        &.archived .header {
+
+            .name a {
+                color: #bbb;
+            }
+
+            .title {
+                color: #bbb;
+                font-weight: bold;
+            }
+        }
+
+        .content {
+            line-height: 1.6em;
+            white-space: pre-wrap;
+
+            point-link {
+                white-space: nowrap;
+                margin-right: 10px;
+            }
+
+            a {
+                color: $keylol-highlight;
+            }
+
+            .like-count {
+                color: white;
+                background: $keylol-theme;
+                padding: 1px 4px;
+                margin-left: 7px;
+            }
+
+            .hot-signal {
+                color: white;
+                background: $keylol-theme;
+                padding: 1px 4px;
+                margin-left: 7px;
+            }
+        }
+
+        &.archived .content {
+            color: #bbb;
+
+            a {
+                color: #bbb;
+            }
+
+            .like-count,
+            .hot-signal {
+                background: #ccc;
+            }
+        }
+    }
+}

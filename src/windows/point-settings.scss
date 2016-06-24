@@ -1,0 +1,253 @@
+.window-point-settings .window {
+    padding: 14px;
+    width: 900px;
+}
+
+.window-point-settings h4 {
+    white-space: normal;
+}
+
+.window-point-settings .error {
+    color: red;
+}
+
+.window-point-settings .tab-changed {
+    position: relative;
+}
+
+.window-point-settings .tab-changed::after {
+    content: "*";
+    position: absolute;
+    top: 0;
+}
+
+.window-point-settings .heading {
+    margin: 28px 0;
+}
+
+.window-point-settings .heading .menu-right {
+    float: right;
+    font-size: 15px;
+    margin-top: 6px;
+}
+
+.window-point-settings .heading .menu-right ul li {
+    margin-left: 30px;
+}
+
+.window-point-settings .heading .menu-right ul li:first-of-type {
+    margin-left: 0;
+}
+
+.window-point-settings .heading .menu-right ul li a {
+    color: $keylol-highlight;
+}
+
+.window-point-settings .heading .menu-right ul li.current {
+    font-weight: bold;
+}
+
+.window-point-settings .heading .menu-right ul li.current a {
+    color: #333;
+    text-decoration: none;
+}
+
+.window-point-settings .avatar-box-left-spacing {
+    border: none;
+}
+
+.window-point-settings .upload-avatar {
+    margin: 14px 0;
+    text-align: center;
+    position: relative;
+}
+
+.window-point-settings .upload-avatar .clear-button {
+    position: absolute;
+    top: 0;
+    left: calc(50% + 49px);
+    width: 14px;
+    height: 14px;
+    background: url(../../assets/images/clear-button.png) no-repeat;
+    background-size: contain;
+    cursor: pointer;
+}
+
+.window-point-settings .upload-avatar .avatar {
+    width: 90px;
+    height: 90px;
+    margin: 0 auto;
+    background-size: cover;
+    background-position: center;
+}
+
+.window-point-settings .upload-avatar.no-image {
+    width: 90px;
+    height: 90px;
+    padding-top: 9px;
+    box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px dashed $keylol-highlight;
+}
+
+.window-point-settings .upload-cover {
+    margin: 14px 0;
+    text-align: center;
+    position: relative;
+}
+
+.window-point-settings .upload-cover .clear-button {
+    position: absolute;
+    top: 0;
+    left: calc(50% + 124px);
+    width: 14px;
+    height: 14px;
+    background: url(../../assets/images/clear-button.png) no-repeat;
+    background-size: contain;
+    cursor: pointer;
+}
+
+.window-point-settings .upload-cover .cover {
+    width: 240px;
+    height: 90px;
+    margin: 0 auto;
+    background-size: cover;
+    background-position: center;
+}
+
+.window-point-settings .upload-cover.no-image {
+    width: 90px;
+    height: 90px;
+    padding-top: 9px;
+    box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px dashed $keylol-highlight;
+}
+
+.window-point-settings table {
+    margin: 28px 0;
+    width: 100%;
+}
+
+.window-point-settings table input[type=text]:disabled,
+.window-point-settings table input[type=email]:disabled {
+    color: #BBB;
+}
+
+.window-point-settings table .description textarea {
+    padding: 5px;
+    height: 110px;
+}
+
+.window-point-settings table .description .char-count {
+    margin-right: 5px;
+    text-align: right;
+    display: block;
+    color: #BBB;
+}
+
+.window-point-settings table .description .char-count.error {
+    color: #e30613;
+}
+
+.window-point-settings table input-point {
+    background: none;
+    height: 100%;
+    width: 100%;
+    font-size: 17px;
+    box-sizing: border-box;
+    box-shadow: none;
+    border-radius: 0;
+    padding: 0 6px;
+}
+
+.window-point-settings table input-point .point-title:hover,
+.window-point-settings table input-point .point-title.selected {
+    background-color: #ddd;
+}
+
+.window-point-settings .id-code {
+    margin: 14px 0;
+    text-align: center;
+}
+
+.window-point-settings .profile-point-background {
+    margin: 14px 0;
+    text-align: center;
+    position: relative;
+}
+
+.window-point-settings .profile-point-background .clear-button {
+    position: absolute;
+    top: 0;
+    left: calc(50% + 325px);
+    width: 12px;
+    height: 12px;
+    background: url(../../assets/images/clear-button.png) no-repeat;
+    background-size: contain;
+    cursor: pointer;
+}
+
+.window-point-settings .profile-point-background .image {
+    width: 640px;
+    height: 92px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.window-point-settings .profile-point-background .image.as-background {
+    background-size: cover;
+    background-position: center;
+}
+
+.window-point-settings .profile-point-background.no-image {
+    width: 640px;
+    height: 92px;
+    padding-top: 18px;
+    box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px dashed $keylol-highlight;
+}
+
+.window-point-settings .profile-point-background.no-image h4 {
+    margin-bottom: 8px;
+}
+
+.window-point-settings .checkbox-group {
+    margin: 12px 0;
+}
+
+.window-point-settings .checkbox-group div {
+    display: block;
+    width: 20%;
+    float: left;
+    text-indent: 2%;
+}
+
+.window-point-settings .checkbox-group.more div {
+    width: 8%;
+}
+
+.window-point-settings .checkbox-group label {
+    padding-left: 2px;
+}
+
+.window-point-settings .tips {
+    max-width: 580px;
+    padding-top: 8px;
+}
+
+.window-point-settings .tips h3.single-line + h4 {
+    top: 6px;
+}
+
+.window-point-settings .tips p a {
+    color: #738a95;
+}
+
+.window-point-settings .window .window-confirm-button {
+    margin-right: -24px;
+}

@@ -1,0 +1,112 @@
+.window-edit-show-case {
+  @include grow-shrink-child();
+  .window {
+    width: 700px;
+
+    .header {
+      height: 105px;
+      background-color: $keylol-light-theme;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      overflow: hidden;
+
+      .text {
+        margin-left: 15px;
+
+        >p {
+          margin: 0;
+          padding: 0;
+
+          &:first-of-type {
+            font-weight: bold;
+            font-size: 20px;
+            margin-bottom: 2px;
+            color: $keylol-inverted-text;
+          }
+
+          &:last-of-type {
+            color: rgba($keylol-inverted-text, 0.6);
+          }
+        }
+      }
+
+      >img {
+        height: 85px;
+        margin-right: 30px;
+      }
+    }
+
+    .content {
+      padding: 20px 20px 20px 15px;
+
+      table {
+        @include page-change(tbody);
+        width: 100%;
+        margin-bottom: 45px;
+        overflow: hidden;
+        position: relative;
+        transition: height .5s;
+
+        tr td,
+        tr th {
+          &:first-of-type {
+            width: 305px;
+            padding-right: 20px;
+          }
+
+          &:nth-of-type(2) {
+            width: 185px;
+            padding-right: 30px;
+          }
+
+          &:last-of-type {
+            width: 120px;
+          }
+        }
+
+        thead {
+          th {
+            color: $keylol-inertia-text;
+            font-weight: normal;
+          }
+        }
+
+        tbody {
+          width: 100%;
+          position: absolute;
+          left: 0;
+          top: 25px;
+
+          tr {
+            td {
+              border: none;
+              padding: 6px 0;
+
+              a {
+                flex-grow: 1;
+                flex-basis: 30%;
+
+                &:hover {
+                  text-decoration: underline;
+                }
+              }
+            }
+
+            &.highlight {
+              td:first-of-type {
+                color: $keylol-light-theme;
+              }
+            }
+          }
+        }
+      }
+
+      .actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+  }
+}

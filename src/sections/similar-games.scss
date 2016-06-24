@@ -1,0 +1,70 @@
+similar-games {
+  display: block;
+  overflow-x: hidden;
+
+  section-header {
+    width: 940px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  >.wrapper {
+    padding: 30px 0;
+    background-color: $keylol-light-theme;
+    display: flex;
+
+    game-card {
+      flex-shrink: 0;
+      margin: 0 10px;
+    }
+    .left-part {
+      display: flex;
+      width: 50%;
+      flex-direction: row-reverse;
+    }
+    .right-part {
+      display: flex;
+      position: relative;
+      width: 50%;
+
+      game-card:nth-of-type(2) {
+        margin-left: 250px;
+      }
+
+      .theme-icon {
+        left: 250px;
+        top: 0;
+        position: absolute;
+        width: 220px;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        img {
+          max-height: 48px;
+          max-width: 100%;
+        }
+
+        .theme-alt {
+          max-width: 100%;
+
+          p {
+            @include ellipsis;
+            margin: 0;
+            color: $keylol-inverted-text;
+
+            &:first-of-type {
+              font-weight: bold;
+            }
+
+            &:last-of-type {
+              font-size: 12px;
+              opacity: 0.6;
+            }
+          }
+        }
+      }
+    }
+  }
+}

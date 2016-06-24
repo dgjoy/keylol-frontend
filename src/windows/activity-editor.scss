@@ -1,0 +1,116 @@
+.window-activity-editor {
+  &.window-no-source {
+    @include grow-shrink-child();
+  }
+
+  .window {
+    @include keylol-shadow-3();
+    width: 640px;
+    margin: auto;
+    background-color: $keylol-inverted-text;
+
+    .related {
+      @include keylol-shadow-1();
+      background-color: $keylol-card;
+      display: flex;
+      align-items: center;
+      padding: 15px;
+      position: relative;
+
+      .related-point-count {
+        position: absolute;
+        font-size: 12px;
+        color: $keylol-inertia-text;
+        width: 300px;
+        text-align: right;
+      }
+
+      text-area {
+        flex-grow: 0;
+        width: 300px;
+        margin-right: 25px;
+      }
+
+      point-review {
+        flex-grow: 0;
+        width: 85px;
+        text-align: right;
+        >div {
+          justify-content: flex-end;
+        }
+      }
+
+      .user-info {
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+        width: 200px;
+
+        .avatar {
+          width: 32px;
+          height: 32px;
+          margin-right: 10px;
+        }
+
+        .name-group {
+          p {
+            margin: 0;
+          }
+          p:first-of-type {
+            color: $keylol-main-text;
+          }
+          p:last-of-type {
+            color: $keylol-inertia-text;
+            font-size: 12px;
+          }
+        }
+      }
+    }
+
+    .edit {
+      textarea {
+        box-sizing: border-box;
+        width: 100%;
+        padding: 25px 15px;
+        background-color: transparent;
+        outline: 0;
+        resize: none;
+      }
+    }
+
+    .actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 15px;
+      background-color: $keylol-card;
+      box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.16);
+
+      a {
+        color: $keylol-highlight;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      .buttons {
+        display: flex;
+
+        raised-button {
+          margin-left: 20px;
+        }
+      }
+    }
+  }
+
+  .image-preview {
+    margin-top: 30px;
+    text-align: center;
+
+    img {
+      background-color: $keylol-card;
+      @include keylol-shadow-3();
+    }
+  }
+}

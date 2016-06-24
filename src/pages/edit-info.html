@@ -1,0 +1,8 @@
+﻿<div ng-if="stateTree.aggregation.point.edit.info">
+    <point-edit-section ng-if="type === 'game'|| type === 'other' || type === 'hardware'" object="basicInfo" theme="theme" style="margin-bottom: 50px;"></point-edit-section>
+    <point-edit-section ng-if="type === 'game' || type === 'hardware'" object="ways" theme="theme" style="margin-bottom: 50px;"></point-edit-section>
+    <point-edit-section ng-if="type === 'game' || type === 'hardware'" object="relative" theme="theme" style="margin-bottom: 50px;"></point-edit-section>
+    <point-edit-section ng-if="type === 'game' || type === 'hardware'" object="schedule" theme="theme" style="margin-bottom: 50px;"></point-edit-section>
+    <point-edit-section ng-if="type === 'game'" object="language" theme="theme" style="margin-bottom: 50px;"></point-edit-section>
+    <point-edit-section ng-if="type === 'game'" object="chinese" theme="theme" style="margin-bottom: 50px;"></point-edit-section>
+</div>

@@ -1,0 +1,59 @@
+.window-login-steam .window {
+    width: 1024px;
+}
+
+.window-login-steam .delete-recovery-anchor {
+    float: right;
+    color: $keylol-highlight;
+    margin: 32px 24px 0 0;
+}
+
+.window-login-steam .heading {
+    padding: 20px 0 30px 20px;
+}
+
+.window-login-steam .steps a {
+    color: $keylol-highlight;
+}
+
+.window-login-steam .steps {
+    background-color: white;
+    padding: 8px 5%;
+}
+
+.window-login-steam .steps .step {
+    text-align: center;
+}
+
+.window-login-steam .step img {
+    vertical-align: middle;
+    margin-right: 18px;
+}
+
+.window-login-steam .steps .step-description {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+}
+
+.window-login-steam .step-description h3 {
+    font-size: 18px;
+    font-weight: normal;
+    color: #57bae8;
+}
+
+.window-login-steam .step-description .auth-code {
+    font-weight: bold;
+    text-decoration: underline;
+    color: #333;
+}
+
+.window-login-steam flashing-figure {
+    margin: 43px 0 27px;
+}
+
+.login-password-button {
+    position: absolute;
+    bottom: 20px;
+    left: -5px;
+}

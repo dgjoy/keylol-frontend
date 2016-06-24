@@ -1,0 +1,33 @@
+user-latest-subscribe {
+  display: block;
+  position: relative;
+
+  .flex-row {
+    justify-content: flex-start;
+
+    .point-card {
+      @include keylol-shadow-1();
+      background-color: $keylol-card;
+      width: 220px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      margin-right: 20px;
+
+      &:nth-of-type(3) {
+        margin-right: 0;
+      }
+
+      >a {
+        @include hover-background();
+        width: 100%;
+        >point-basic-info {
+          position: relative;
+          z-index: 0;
+          margin: 10px 15px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,46 @@
+pro-con {
+    display: block;
+}
+
+pro-con div {
+    position: relative;
+    padding-bottom: 25px;
+}
+
+pro-con div::before {
+    content: "+";
+    position: absolute;
+    top: 15px;
+    transform: translateY(-50%);
+    left: 25px;
+    color: #BBB;
+}
+
+pro-con div.negative::before {
+    content: "-";
+}
+
+pro-con div input[type=text] {
+    padding-left: 28px;
+}
+
+pro-con div a {
+    float: right;
+    margin-right: 14px;
+    margin-top: 5px;
+    color: $keylol-highlight;
+    display: none;
+}
+
+pro-con div:hover a {
+    display: block;
+}
+
+pro-con p {
+    margin: 0;
+    margin-left: 14px;
+}
+
+pro-con p a {
+    color: $keylol-highlight;
+}

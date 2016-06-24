@@ -1,0 +1,78 @@
+.window-confirmation .window {
+    padding: 14px;
+    width: 900px;
+}
+
+.window-confirmation .heading {
+    margin: 16px 0 28px;
+}
+
+.window-confirmation .window .window-confirm-button {
+    margin-right: -24px;
+}
+
+.window-confirmation .window .info-detail {
+    margin-bottom: 10px;
+    padding: 82px 85px 100px 100px;
+    height: 226px;
+    background: url("../../assets/images/worned-backgound.png");
+    white-space: normal;
+}
+
+.window-confirmation .window .info-detail .left-content {
+    width: 380px;
+}
+
+.window-confirmation .window .info-detail .left-content .basic {
+    margin-bottom: 20px;
+}
+
+.window-confirmation .window .info-detail .left-content .basic .avatar-anchor {
+    float: left;
+    margin-right: 15px;
+}
+
+.window-confirmation .window .info-detail .left-content .basic .avatar-anchor img {
+    width: 48px;
+    height: 48px;
+}
+
+.window-confirmation .window .info-detail .left-content .name h2 {
+    color: #BBB;
+}
+
+.window-confirmation .window .info-detail .left-content .info-attribute p {
+    margin: 6px 0;
+}
+
+.window-confirmation .window .info-detail .left-content .info-attribute .title {
+    font-weight: bold;
+}
+
+.window-confirmation .window .info-detail .left-content .info-attribute a {
+    color: $keylol-highlight;
+}
+
+.window-confirmation .window .info-detail .right-content {
+    float: right;
+}
+
+.window-confirmation .window .info-detail .right-content .cover img {
+    float: right;
+    width: 120px;
+    height: 45px;
+}
+
+.window-confirmation .window .info-detail .right-content p {
+    width: 270px;
+    margin-top: 50px;
+}
+
+.window-confirmation .switch-to-edit-info button {
+    position: absolute;
+    left: -5px;
+}
+
+.window-confirmation .switch-to-edit-info p {
+    padding-top: 38px;
+}

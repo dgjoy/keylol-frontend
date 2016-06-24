@@ -1,0 +1,113 @@
+.window-push-entry {
+  @include grow-shrink-child();
+  .window {
+    width: 700px;
+
+    >.header {
+      height: 105px;
+      background-color: $keylol-light-theme;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      overflow: hidden;
+
+      >.text {
+        margin-left: 15px;
+
+        >p {
+          margin: 0;
+          padding: 0;
+
+          &:first-of-type {
+            font-weight: bold;
+            font-size: 20px;
+            margin-bottom: 2px;
+            color: $keylol-inverted-text;
+          }
+
+          &:last-of-type {
+            color: rgba($keylol-inverted-text, 0.6);
+          }
+        }
+      }
+
+      >img {
+        height: 85px;
+        margin-right: 30px;
+      }
+    }
+
+    >.content {
+      padding: 20px 20px 20px 15px;
+
+      raised-button {
+        margin-left: 20px;
+      }
+
+      form {
+        overflow: hidden;
+        height: 69px;
+        transition: height 300ms;
+
+        .long {
+          width: 400px;
+        }
+
+        .short {
+          width: 240px;
+        }
+
+        .info-init {
+          display: flex;
+          align-items: center;
+        }
+
+        .info-detail {
+          display: flex;
+          flex-wrap: wrap;
+
+          text-area {
+            flex-grow: 0;
+            margin-right: 30px;
+            margin-top: 15px;
+          }
+
+          &.no-init {
+            text-area:first-of-type {
+              margin-top: 0;
+            }
+          }
+
+          .upload-image {
+            margin-top: 15px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+
+            label {
+              color: $keylol-inertia-text;
+            }
+
+            a:hover {
+              text-decoration: underline;
+            }
+
+            .preview {
+              margin-top: 10px;
+              border-radius: 2px;
+              width: 100%;
+              height: 126px;
+              background: $keylol-inertia-shape no-repeat center;
+              background-size: cover;
+            }
+          }
+        }
+      }
+
+      .actions {
+        display: flex;
+        justify-content: flex-end;
+      }
+    }
+  }
+}
