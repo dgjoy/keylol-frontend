@@ -15,12 +15,17 @@
 
             this.stores = [];
             if (this.card.steamAppId) {
-                this.stores.push({
+                const steamItem = {
                     icon: 'dtb-steam',
-                    price: this.card.steamPrice,
                     discount: this.card.steamDiscountPrice ? `${parseInt(this.card.steamDiscountPrice / this.card.steamPrice * 100)}%` : undefined,
                     link: `http://store.steampowered.com/app/${this.card.steamAppId}`,
-                });
+                };
+                if (this.card.steamPrice) {
+                    steamItem.price = `¥ ${this.card.steamPrice}`;
+                } else if (this.card.steamPrice === 0) {
+                    steamItem.price = '免费';
+                }
+                this.stores.push(steamItem);
             }
 
             for (let i = 1;i !== stores.length; i++) {

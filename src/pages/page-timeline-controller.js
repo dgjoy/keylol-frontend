@@ -5,9 +5,9 @@
 
             const currentStateName = $state.current.name;
             let fetchPromise;
-            if (currentStateName === 'entrance.timeline' && $location.url() !== '/') {
+            if (currentStateName === 'entrance.timeline' && $location.path() !== '/') {
                 pageLoad('entrance.timeline');
-            } else if (currentStateName === 'aggregation.point.timeline' && !$location.url().match(/\/point\/[^\/]*\/?$/)) {
+            } else if (currentStateName === 'aggregation.point.timeline' && !$location.path().match(/\/point\/[^\/]*\/?$/)) {
                 pageHead.setTitle('据点 - 轨道 - 其乐');
                 if (stateTree.empty || (stateTree.aggregation && stateTree.aggregation.point
                     && stateTree.aggregation.point.basicInfo && stateTree.aggregation.point.basicInfo.idCode === $state.params.point_id_code) ) {
@@ -22,7 +22,7 @@
                         logo: stateTree.aggregation.point.basicInfo.logo,
                     };
                 });
-            } else if (currentStateName === 'aggregation.user.timeline' && !$location.url().match(/\/user\/[^\/]*\/?$/)) {
+            } else if (currentStateName === 'aggregation.user.timeline' && !$location.path().match(/\/user\/[^\/]*\/?$/)) {
                 pageHead.setTitle('用户 - 轨道 - 其乐');
                 if (stateTree.empty || (stateTree.aggregation && stateTree.aggregation.point
                     && stateTree.aggregation.point.basicInfo && stateTree.aggregation.point.basicInfo.idCode === $state.params.point_id_code) ) {

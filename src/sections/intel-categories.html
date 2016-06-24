@@ -1,8 +1,8 @@
 ﻿<section-header ng-if="::intelCategories.genre.length > 0" header="intelCategories.types[0]" theme="::intelCategories.theme"></section-header>
 <div class="flex-row">
-    <category-card card="::card" ng-repeat="card in intelCategories.genre"></category-card>
+    <category-card theme="intelCategories.theme" card="::card" ng-repeat="card in intelCategories.genre"></category-card>
 </div>
 <section-header ng-if="::intelCategories.cate.length > 0" header="intelCategories.types[1]" theme="::intelCategories.theme"></section-header>
 <div class="flex-row">
-    <category-card card="::card" ng-repeat="card in intelCategories.cate"></category-card>
+    <category-card theme="intelCategories.theme" card="::card" ng-repeat="card in intelCategories.cate"></category-card>
 </div>

@@ -2,7 +2,7 @@
     class SocialActivityController {
         constructor($scope, pageHead, $state, $location) {
             pageHead.setTitle('社交 - 邮政 - 其乐');
-            if ($location.url().match(/\/social-activity\/?$/)) {
+            if ($location.path().match(/\/social-activity\/?$/)) {
                 $state.go('.reply');
             }
 

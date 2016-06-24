@@ -1,6 +1,6 @@
 ﻿(function () {
     class UserEditInfoController {
-        constructor ($scope, pageHead, stateTree, pageLoad, $state, $stateParams) {
+        constructor ($scope, pageHead, stateTree, pageLoad, $state, $stateParams, utils) {
             pageHead.setTitle('个人 - 编辑 - 资料 - 其乐');
 
             let fetchPromise;
@@ -12,7 +12,8 @@
             }
 
             fetchPromise.then(() => {
-                if (!stateTree.currentUser || (stateTree.currentUser && stateTree.currentUser.id !==  stateTree.aggregation.user.basicInfo.id && $.inArray('Operator', stateTree.currentUser.roles) === -1)) {
+                if (!stateTree.currentUser || (stateTree.currentUser && stateTree.currentUser.id !==  stateTree.aggregation.user.basicInfo.id &&
+                    $.inArray('Operator', stateTree.currentUser.roles) === -1)) {
                     $state.go('aggregation.user', $stateParams);
                     return ;
                 }
@@ -49,7 +50,7 @@
                             title: '电邮地址',
                             type: 'text',
                             key: 'email',
-                            value: object.email,
+                            value: preference.email,
                         },
                         {
                             title: '玩家标签',
@@ -69,21 +70,28 @@
                     list: [
                         {
                             title: 'Steam 账号',
+                            type: 'link',
+                            link: object.steamId ?
+                                `http://steamcommunity.com/profiles/${utils.getSteamId64(object.steamId)}` : '',
                             value: object.steamProfileName,
                             editDisabled: true,
                         },
                         {
                             title: 'Steam 机器人',
                             subTitle: '当前绑定的机器人信息',
-                            value: `其乐机器人 keylol.com #${preference.steamBotSid}`,
+                            type: preference.steamBotLost ? 'lostBot' : 'link',
+                            link: preference.steamBotSteamId ?
+                                `http://steamcommunity.com/profiles/${utils.getSteamId64(preference.steamBotSteamId)}` : '',
+                            addLink: `steam://friends/add/${utils.getSteamId64(preference.steamBotSteamId)}`,
+                            value: preference.steamBotLost ? '已断开绑定' : preference.steamBotName,
                             editDisabled: true,
                         },
-                        {
-                            title: '蒸汽动力账号',
-                            type: 'text',
-                            value: '不可用',
-                            editDisabled: true,
-                        },
+                        // {
+                        //     title: '蒸汽动力账号',
+                        //     type: 'text',
+                        //     value: '不可用',
+                        //     editDisabled: true,
+                        // },
                     ],
                 };
                 $scope.vision = {

@@ -111,6 +111,7 @@
                     publishTime: new Date().toISOString(),
                     sidForArticle: response.data,
                     replyToComment: this.replyToComment,
+                    authorPlayedTime: this.article.pointBasicInfo.totalPlayedTime,
                 });
                 this.vm = {
                     articleId: this.article.id,

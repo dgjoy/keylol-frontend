@@ -26,7 +26,7 @@
                 templateUrl: 'src/windows/login.html',
                 controller: 'LoginController',
                 controllerAs: 'login',
-                inputs: { startPage: 2 },
+                inputs: { startPage: 0 },
             });
         }
         showRegistrationWindow (event) {

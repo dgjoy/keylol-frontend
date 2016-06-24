@@ -3,7 +3,7 @@
         constructor ($scope, stateTree, $location, $state) {
             $scope.stateTree = stateTree;
 
-            if ($location.url().match(/\/post-office\/?$/)) {
+            if ($location.path().match(/\/post-office\/?$/)) {
                 $state.go('.unread');
             }
         }

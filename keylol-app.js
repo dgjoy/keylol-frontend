@@ -51,7 +51,7 @@
                 url: '/',
                 templateUrl: 'src/pages/entrance.html',
                 controller ($location, pageLoad) {
-                    if ($location.url() === '/') {
+                    if ($location.path() === '/') {
                         console.log('load entrance?');
                         pageLoad('entrance');
                     }
@@ -259,7 +259,7 @@
                         //     },
                         // })
             .state('aggregation.user', {
-                url: '/user/:user_id_Code',
+                url: '/user/:user_id_code',
                 templateUrl: 'src/pages/user.html',
                 controller: 'UserController',
                 onExit (stateTree) {
@@ -274,6 +274,13 @@
                     onExit (stateTree) {
                         console.log('exit dossier');
                         delete stateTree.aggregation.user.dossier;
+                    },
+                })
+                .state('aggregation.user.peopleDefault', {
+                    url: '/people',
+                    template: '<div></div>',
+                    controller ($state) {
+                        $state.go('^.people', {}, { location: false });
                     },
                 })
                 .state('aggregation.user.people', {

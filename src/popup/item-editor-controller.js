@@ -1,6 +1,6 @@
 ﻿(function () {
     class ItemEditorController {
-        constructor(item, options, close, $http, notification, apiEndpoint, utils) {
+        constructor(item, options, close, $http, notification, apiEndpoint, utils, window, $state, union) {
             $.extend(this, {
                 $http,
                 notification,
@@ -8,6 +8,9 @@
                 close,
                 utils,
                 item,
+                window,
+                $state,
+                union,
                 theme: options.theme,
                 submitLink: options.submitLink,
                 updateObject: options.updateObject,
@@ -38,12 +41,12 @@
             switch (this.item.type) {
                 case 'password':
                     if (this.item.needPassword) {
-                        if (submitObj.newPassword.length === 0 || submitObj.password.length === 0) {
+                        if (this.newPassword.length === 0 || this.password.length === 0) {
                             this.submitLock = false;
                             return;
                         }
                     } else {
-                        if (submitObj.newPassword.length === 0) {
+                        if (this.newPassword.length === 0) {
                             this.submitLock = false;
                             return;
                         }
@@ -56,7 +59,8 @@
                     closeValue = '';
                     break;
                 case 'color':
-                    if (!this.colorCheck(this.model)) {
+                    if (this.model === '') {
+                    } else if (!this.colorCheck(this.model)) {
                         this.textError = '颜色格式错误';
                         this.submitLock = false;
                         return;
@@ -191,6 +195,24 @@
             this.$http.put(`${this.apiEndpoint}${this.submitLink}`, submitObj).then(response => {
                 this.notification.success({ message: '修改成功' });
                 this.close(closeValue);
+                if (this.item.type === 'password') {
+                    this.window.show({
+                        templateUrl: 'src/windows/login.html',
+                        controller: 'LoginController',
+                        controllerAs: 'login',
+                        inputs: {
+                            startPage: 0,
+                        },
+                    }).then(window => {
+                        return window.close;
+                    }).then(result => {
+                        if (!result) {
+                            this.$state.go('^.^.dossier').then(() => {
+                                delete this.union.$localStorage.Authorization;
+                            });
+                        }
+                    });
+                }
             }, response => {
                 this.notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
                 this.submitLock = false;

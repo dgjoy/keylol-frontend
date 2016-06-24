@@ -176,6 +176,7 @@
                 if (type === 'SteamGame') {
                     $.extend(pointObject, this.extra[type]);
                 }
+                pointObject.id = response.data;
                 this.window.show({
                     templateUrl: 'src/windows/point-create-success.html',
                     controller: 'PointCreateSuccessController',

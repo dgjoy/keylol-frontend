@@ -6,7 +6,8 @@
         <div class="point-create-success-wrapper">
             <div class="point-info">
                 <point-basic-info point="pointCreateSuccess.pointObject"></point-basic-info>
-                <flat-button type="theme" text="订阅"></flat-button>
+                <raised-button binary-set="pointCreateSuccess.subscribeSet" binary-value="pointCreateSuccess.pointObject.subscribed"
+                               click="pointCreateSuccess.subscribe(pointCreateSuccess.pointObject.id, pointCreateSuccess.pointObject.subscribed, pointCreateSuccess.pointObject)"></raised-button>
             </div>
             <div class="actions">
                 <div class="links">

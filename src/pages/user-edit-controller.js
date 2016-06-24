@@ -2,7 +2,7 @@
     class UserEditController {
         constructor ($scope, pageHead, stateTree, $state, $location, $timeout) {
             pageHead.setTitle('个人 - 编辑 - 其乐');
-            if ($location.url().match(/\/user\/[^\/]*\/edit\/?$/)) {
+            if ($location.path().match(/\/user\/[^\/]*\/edit\/?$/)) {
                 $timeout(() => {
                     $state.go('.info', {}, { location: false });
                 });

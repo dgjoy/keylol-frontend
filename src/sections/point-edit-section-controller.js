@@ -1,6 +1,6 @@
 ﻿(function () {
     class PointEditSectionController {
-        constructor ($element, apiEndpoint, $http, notification, union, $state) {
+        constructor ($element, apiEndpoint, $http, notification, union, $state, $stateParams) {
             $.extend(this, {
                 $element,
                 apiEndpoint,
@@ -8,6 +8,7 @@
                 notification,
                 union,
                 $state,
+                $stateParams,
             });
             this.showPopups = [];
         }
@@ -132,6 +133,7 @@
                     inputs: {
                         file: $file,
                         options: {
+                            theme: this.theme,
                             type: item.key === 'avatarImage' ? item.key : `edit-image` ,
                         },
                     },
@@ -182,7 +184,9 @@
         }
 
         logout() {
-            delete this.union.$localStorage.Authorization;
+            this.$state.go('^.^.dossier').then(() => {
+                delete this.union.$localStorage.Authorization;
+            });
         }
     }
 

@@ -5,24 +5,15 @@
                 window,
                 notification,
             });
-            this.binarySet = [
-                {
-                    icon: 'follower-mark',
-                    text: '订阅',
-                    type: 'theme',
-                },
-                {
-                    icon: 'friended-mark',
-                    text: '退订',
-                    type: 'light-text',
-                },
-            ];
 
-            this.binaryValue = false;
-        }
+            this.vm = {
+                label: [],
+                operate: [],
+            };
 
-        changeBinary () {
-            this.binaryValue = !this.binaryValue;
+            this.operatenames = ['Windows', 'Mac OS', 'Linux'];
+
+            this.platformnames = ['Steam', '战网', 'Uplay', 'Origin', '杉果', 'PS4', 'Xbox'];
         }
     }
 

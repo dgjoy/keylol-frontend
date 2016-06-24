@@ -3,7 +3,7 @@
         constructor ($scope, pageHead, stateTree, pageLoad, $location, $state, $window, $element, $http, apiEndpoint, notification) {
             pageHead.setTitle('据点 - 扉页 - 其乐');
             let fetchPromise;
-            if (!$location.url().match(/\/point\/[^\/]*\/?$/)) {
+            if (!$location.path().match(/\/point\/[^\/]*\/?$/)) {
                 if (stateTree.empty || (stateTree.aggregation && stateTree.aggregation.point
                     && stateTree.aggregation.point.basicInfo && stateTree.aggregation.point.basicInfo.idCode === $state.params.point_id_code) ) {
                     fetchPromise = pageLoad('aggregation.point.frontpage');
@@ -36,12 +36,12 @@
                         }, response => {
                             notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
                         });
-                        $$window.unbind('scroll', scrollCallback);
-                        cancelListenRoute();
                     });
+                    $$window.unbind('scroll', scrollCallback);
+                    cancelListenRoute();
                 }
             };
-            $$window.scroll(scrollCallback);
+            $$window.bind('scroll.loadTimeline', scrollCallback);
 
             const cancelListenRoute = $scope.$on('$destroy', () => {
                 $$window.unbind('scroll', scrollCallback);

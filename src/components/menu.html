@@ -13,13 +13,15 @@
     </a>
 
     <div ng-switch-when="point" class="for-point">
-        <a href="point/{{menu.object.header.idCode}}" ng-if="!menu.object.header.titleCoverImage"><point-basic-info point="menu.object.header.point"></point-basic-info></a>
-        <img ng-if="menu.object.header.titleCoverImage" class="cover" webp-src="{{ menu.object.header.titleCoverImage | uriRelocate: '/both/220x105'}}" alt="">
+        <a ripple="{{menu.object.header.titleCoverImage ? 'disabled' : ''}}" ng-href="point/{{menu.object.header.idCode}}" ng-class="{'for-image': menu.object.header.titleCoverImage}">
+            <point-basic-info ng-if="!menu.object.header.titleCoverImage" point="menu.object.header.point"></point-basic-info>
+            <img ng-if="menu.object.header.titleCoverImage" class="cover" webp-src="{{ menu.object.header.titleCoverImage | uriRelocate: '/both/220x105'}}" alt="">
+        </a>
         <div class="time-info">
-            <p ng-if="menu.object.header.totalPlayedTime">已在档 {{menu.object.header.totalPlayedTime}} 小时</p>
+            <p ng-if="menu.object.header.totalPlayedTime" class="in-library">已在档 {{menu.object.header.totalPlayedTime}} 小时</p>
             <p ng-if="menu.object.header.keylolAveragePlayedTime">玩家平均在档 {{menu.object.header.keylolAveragePlayedTime}} 小时</p>
         </div>
-        <a ripple href="" class="reputation-stat" ng-repeat="(stat, statCount) in menu.object.header.voteStats track by stat">
+        <span class="reputation-stat" ng-repeat="(stat, statCount) in menu.object.header.voteStats track by stat">
             <div class="left-content">
                 <svg xmlns="http://www.w3.org/2000/svg" class="reputation-circle" ng-repeat="circle in menu.circles[$index] track by $index">
                     <circle cx="4" cy="4" r="4"></circle>
@@ -30,7 +32,7 @@
             <div class="right-content">
                 <div class="reputation-level" ng-style="{width: statCount / menu.object.header.totalEvaluate * 100}"></div>
             </div>
-        </a>
+        </span>
         <div class="reputation-info" ng-if="menu.object.header.votePercent !== undefined">
             <span>
                 <span class="reputation-number" ng-class="{
@@ -51,8 +53,10 @@
     </div>
 
     <div ng-switch-when="point-other" class="for-point">
-        <a href="point/{{menu.object.header.idCode}}" ng-if="!menu.object.header.titleCoverImage"><point-basic-info point="menu.object.header.point"></point-basic-info></a>
-        <img ng-if="menu.object.header.titleCoverImage" class="cover" webp-src="{{ menu.object.header.titleCoverImage | uriRelocate: '/both/220x105'}}" alt="">
+        <a ripple="{{menu.object.header.titleCoverImage ? 'disabled' : ''}}" ng-href="point/{{menu.object.header.idCode}}" ng-class="{'for-image': menu.object.header.titleCoverImage}">
+            <point-basic-info ng-if="!menu.object.header.titleCoverImage" point="menu.object.header.point"></point-basic-info>
+            <img ng-if="menu.object.header.titleCoverImage" class="cover" webp-src="{{ menu.object.header.titleCoverImage | uriRelocate: '/both/220x105'}}" alt="">
+        </a>
         <div class="game-count">{{menu.object.header.gameCount}}</div>
         <div ng-if="menu.object.header.votePercent !== undefined" class="reputation-info">
             <span>
@@ -69,7 +73,7 @@
     </div>
 
     <div ng-switch-when="user-right" class="user-right">
-        <a href="user/{{menu.object.header.basicInfo.idCode}}">
+        <a ng-href="user/{{menu.object.header.basicInfo.idCode}}">
             <div class="user-basic-info">
                 <img webp-src="{{ menu.object.header.basicInfo.avatarImage| avatarUrl}}" alt="{{menu.object.header.basicInfo.userName}}" class="avatar">
                 <div class="name-group">
@@ -78,9 +82,9 @@
                 </div>
             </div>
         </a>
-        <div class="paragraph">好友 <a href="user/{{menu.object.header.basicInfo.idCode}}/people/friend">{{menu.object.header.basicInfo.friendCount}}</a></div>
-        <div class="paragraph">关注 <a href="user/{{menu.object.header.basicInfo.idCode}}/people/subscribedUser">{{menu.object.header.basicInfo.subscribedUserCount}}</a></div>
-        <div class="paragraph">听众 <a href="user/{{menu.object.header.basicInfo.idCode}}/people/subscriber">{{menu.object.header.basicInfo.subscriberCount}}</a></div>
+        <div class="paragraph">好友 <a ng-href="user/{{menu.object.header.basicInfo.idCode}}/people/friend">{{menu.object.header.basicInfo.friendCount}}</a></div>
+        <div class="paragraph">关注 <a ng-href="user/{{menu.object.header.basicInfo.idCode}}/people/subscribedUser">{{menu.object.header.basicInfo.subscribedUserCount}}</a></div>
+        <div class="paragraph">听众 <a ng-href="user/{{menu.object.header.basicInfo.idCode}}/people/subscriber">{{menu.object.header.basicInfo.subscriberCount}}</a></div>
         <div class="horizon"></div>
         <div ng-if="menu.object.header.basicInfo.steamProfileName" class="icon-text">
             <svg aria-hidden="true">
@@ -88,7 +92,7 @@
             </svg>
             <span>Steam</span>
         </div>
-        <div ng-if="menu.object.header.basicInfo.steamProfileName" class="paragraph"><a href="" ng-href="http://steamcommunity.com/profiles/{{menu.utils.getSteamId64(menu.object.header.basicInfo.steamId)}}">{{menu.object.header.basicInfo.steamProfileName}}</a></div>
+        <div ng-if="menu.object.header.basicInfo.steamId" class="paragraph"><a href="" ng-href="http://steamcommunity.com/profiles/{{menu.utils.getSteamId64(menu.object.header.basicInfo.steamId)}}">{{menu.object.header.basicInfo.steamProfileName}}</a></div>
 
         <!--<div class="icon-text" ng-if="false">-->
             <!--<svg aria-hidden="true">-->

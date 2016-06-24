@@ -1,11 +1,12 @@
 ﻿(function () {
     class LatestArticlesController {
-        constructor ($http, apiEndpoint, $state, stateTree, utils) {
+        constructor ($http, apiEndpoint, $state, stateTree, utils, window) {
             $.extend(this, {
                 $http,
                 apiEndpoint,
                 stateTree,
                 utils,
+                window,
             });
             this.currentPage = 1;
             this.headers = {
@@ -45,6 +46,17 @@
                 });
             }
             return true;
+        }
+
+        newArticle () {
+            this.window.show({
+                templateUrl: 'src/windows/editor.html',
+                controller: 'EditorController',
+                controllerAs: 'editor',
+                inputs: {
+                    options: {},
+                },
+            });
         }
     }
 

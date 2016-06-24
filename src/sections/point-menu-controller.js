@@ -36,13 +36,18 @@
                     items: [],
                 };
                 if (this.object.steamAppId) {
-                    this.specialMenu.items.push({
+                    const steamItem = {
                         type: 'item',
                         icon: 'dtb-steam',
                         text: 'Steam',
                         link: `http://store.steampowered.com/app/${this.object.steamAppId}`,
-                        subText: `¥ ${this.object.steamPrice}`,
-                    });
+                    };
+                    if (this.object.steamPrice) {
+                        steamItem.subText = `¥ ${this.object.steamPrice}`;
+                    } else if (this.object.steamPrice === 0) {
+                        steamItem.subText = '免费';
+                    }
+                    this.specialMenu.items.push(steamItem);
                 }
 
                 for (let i = 1;i !== stores.length; i++) {

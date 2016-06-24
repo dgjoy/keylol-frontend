@@ -88,11 +88,11 @@
                             });
                         },
                     },
-                    {
-                        type: 'item',
-                        icon: 'user',
-                        text: '邀请好友加入其乐',
-                    },
+                    // {
+                    //     type: 'item',
+                    //     icon: 'user',
+                    //     text: '邀请好友加入其乐',
+                    // },
                     // {
                     //     type: 'item',
                     //     icon: 'cuc',

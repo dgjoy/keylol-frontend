@@ -83,8 +83,13 @@ menu {
         display: block;
         @include hover-background;
         margin-top: 10px;
+
         point-basic-info {
           padding: 10px 15px;
+        }
+
+        &.for-image {
+          margin-top: 0;
         }
       }
 
@@ -95,12 +100,12 @@ menu {
       }
 
       .time-info {
-        padding: 20px 15px;
+        padding: 16px 15px 14px;
 
         p {
           margin: 0;
 
-          &:first-of-type {
+          &.in-library {
             color: $keylol-libraried;
           }
         }
@@ -141,7 +146,7 @@ menu {
       }
 
       .reputation-info {
-        padding: 0 15px;
+        padding: 10px 15px 0;
         display: flex;
         align-items: center;
         justify-content: space-between;

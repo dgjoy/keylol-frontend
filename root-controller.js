@@ -27,9 +27,7 @@
                 }
                 if (!firstLoad) {
                     stateTree.empty = true;
-                    $state.transitionTo($state.current, $stateParams, {
-                        reload: true, location: false,
-                    });
+                    $state.reload();
                 } else {
                     firstLoad = false;
                 }
@@ -56,6 +54,8 @@
                         }
                     }
                 }
+
+                $($window).unbind('scroll.loadTimeline');
             });
 
             $rootScope.$on('$stateChangeSuccess', () => {

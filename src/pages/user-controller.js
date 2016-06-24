@@ -3,7 +3,7 @@
         constructor ($scope, stateTree, $location, pageLoad) {
             $scope.stateTree = stateTree;
 
-            if ($location.url().match(/\/user\/[^\/]*\/?$/)) {
+            if ($location.path().match(/\/user\/[^\/]*\/?$/)) {
                 pageLoad('aggregation.user', { entrance: 'auto' }).then(() => {
                     $scope.theme = {
                         main: stateTree.aggregation.user.basicInfo.themeColor,

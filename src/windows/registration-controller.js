@@ -1,6 +1,6 @@
 ﻿(function () {
     class RegistrationController {
-        constructor(close, $scope, $timeout, notification, $http, utils, union, $q, apiEndpoint, $httpParamSerializerJQLike) {
+        constructor(close, $scope, $timeout, notification, $http, utils, union, $q, apiEndpoint, $httpParamSerializerJQLike, $location, $state) {
             $.extend(this,{
                 close,
                 notification,
@@ -9,6 +9,8 @@
                 union,
                 apiEndpoint,
                 $httpParamSerializerJQLike,
+                $location,
+                $state,
             });
             this.platform = '';
             this.platformsToSelect = {
@@ -102,7 +104,15 @@
         submit() {
             this.submitLock = true;
 
+
             this.conn.vm.IdCode = this.conn.vm.IdCode.toUpperCase();
+
+            if (this.$location.search().aff) {
+                this.conn.vm.inviterIdCode = this.$location.search().aff;
+            } else if (this.$state.current.name === 'content.article' || this.$state.current.name === 'content.activity') {
+                this.conn.vm.inviterIdCode = this.$state.params.author_id_code;
+            }
+
             this.$http.post(`${this.apiEndpoint}user`, this.conn.vm)
                 .then(response => {
                     this.union.$localStorage.firstOpenKeylol = true;

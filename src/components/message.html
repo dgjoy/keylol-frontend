@@ -4,9 +4,9 @@
 
 <div class="left-part" ng-switch="message.object.messageType.source">
     <div class="message-source" ng-switch-when="用户">
-        <a href="user/{{message.object.operatorIdCode}}"><img class="avatar" webp-src="{{message.object.operatorAvatarImage | avatarUrl}}"></a>
+        <a ng-href="user/{{message.object.operatorIdCode}}"><img class="avatar" webp-src="{{message.object.operatorAvatarImage | avatarUrl}}"></a>
         <div class="name-group">
-            <a href="user/{{message.object.operatorIdCode}}">{{message.object.operatorUserName}}</a>
+            <a ng-href="user/{{message.object.operatorIdCode}}">{{message.object.operatorUserName}}</a>
             <p div="user-message-info">{{message.object.messageType.type}} / <span am-time-ago="message.object.createTime"></span></p>
         </div>
     </div>

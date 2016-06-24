@@ -40,7 +40,11 @@
                 return `认可你的动态<a href="activity/${message.activityAuthorIdCode}/${message.activitySidForAuthor}">「${missiveTextReduce(message.activityContent, 14)}」</a>`;
             },
             getSummary (message) {
-                return `获得生涯第 ${message.count} 份认可，该动态已被认可 ${message.secondCount} 次`;
+                if (message.count === undefined) {
+                    return '获得认可';
+                } else {
+                    return `获得生涯第 ${message.count} 份认可，该动态已被认可 ${message.secondCount} 次`;
+                }
             },
         },
         articleCommentLike: {
@@ -53,7 +57,11 @@
                         `中的评论<a href="${link}">「${missiveTextReduce(message.commentContent, 14)}」</a>`;
             },
             getSummary (message) {
-                return `获得生涯第 ${message.count} 份认可，该评论已被认可 ${message.secondCount} 次`;
+                if (message.count === undefined) {
+                    return '获得认可';
+                } else {
+                    return `获得生涯第 ${message.count} 份认可，该评论已被认可 ${message.secondCount} 次`;
+                }
             },
         },
         activityCommentLike: {
@@ -66,7 +74,11 @@
                         `中的评论<a href="${link}">「${missiveTextReduce(message.commentContent, 14)}」</a>`;
             },
             getSummary (message) {
-                return `获得生涯第 ${message.count} 份认可，该评论已被认可 ${message.secondCount} 次`;
+                if (message.count === undefined) {
+                    return '获得认可';
+                } else {
+                    return `获得生涯第 ${message.count} 份认可，该评论已被认可 ${message.secondCount} 次`;
+                }
             },
         },
 

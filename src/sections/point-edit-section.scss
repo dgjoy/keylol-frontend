@@ -161,6 +161,10 @@ point-edit-section {
           p {
             @include ellipsis;
 
+            a:hover {
+              text-decoration: underline;
+            }
+
             &.disabled {
               color: $keylol-inertia-text;
             }

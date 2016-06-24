@@ -75,7 +75,9 @@
                     },
                     coverImage: options.article.coverImage,
                     rating: options.article.rating,
-                } : {});
+                } : {
+                    targetPoints: $state.current.name.substr(0, 17) === 'aggregation.point' ? [stateTree.aggregation.point.basicInfo] : undefined,
+                });
             };
 
             this.saveDraft = () => {

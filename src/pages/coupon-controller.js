@@ -4,7 +4,7 @@
 (function () {
     class CouponController {
         constructor($location, $state) {
-            if ($location.url().match(/\/coupon\/?$/)) {
+            if ($location.path().match(/\/coupon\/?$/)) {
                 $state.go('.detail');
             }
         }

@@ -83,7 +83,7 @@
                         {
                             title: '动态获得认可',
                             type: 'switch',
-                            key:'notifyOnAcitivityLiked',
+                            key:'notifyOnActivityLiked',
                             value: preference.notifyOnActivityLiked,
                         },
                         {
@@ -164,8 +164,8 @@
                         //     value: preference.
                         // },
                         {
-                            title: '萃选推选',
-                            subTitle: '订阅提供优秀作品的推荐',
+                            title: '编辑推荐',
+                            subTitle: '接收来自社区的精选阅读推荐',
                             type: 'switch',
                             key:'steamNotifyOnSpotlighted',
                             value: preference.steamNotifyOnSpotlighted,

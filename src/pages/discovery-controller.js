@@ -2,7 +2,7 @@
     class DiscoveryController {
         constructor ($scope, pageHead, stateTree, $location, pageLoad) {
             pageHead.setTitle('广场 - 其乐');
-            if ($location.url() !== '/') {
+            if ($location.path() !== '/') {
                 pageLoad('entrance.discovery');
             }
 

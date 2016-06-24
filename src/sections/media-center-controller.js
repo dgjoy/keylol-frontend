@@ -81,6 +81,7 @@
                         options: {
                             type: 'headerImage',
                             isMedia: true,
+                            theme: this.theme,
                         },
                     },
                 }).then(popup => {

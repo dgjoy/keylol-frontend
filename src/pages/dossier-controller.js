@@ -34,7 +34,7 @@
 
             pageHead.setTitle('个人 - 档案 - 其乐');
             let fetchPromise;
-            if (!$location.url().match(/\/point\/[^\/]*\/?$/)) {
+            if (!$location.path().match(/\/point\/[^\/]*\/?$/)) {
                 if (stateTree.empty || (stateTree.aggregation && stateTree.aggregation.point
                     && stateTree.aggregation.point.basicInfo && stateTree.aggregation.point.basicInfo.idCode === $state.params.point_id_code) ) {
                     fetchPromise = pageLoad('aggregation.user.dossier');
@@ -80,7 +80,7 @@
                     });
                 }
             };
-            $$window.scroll(scrollCallback);
+            $$window.bind('scroll.loadTimeline', scrollCallback);
 
             const cancelListenRoute = $scope.$on('$destroy', () => {
                 $$window.unbind('scroll', scrollCallback);

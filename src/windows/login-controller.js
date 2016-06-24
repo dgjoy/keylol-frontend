@@ -274,7 +274,7 @@
             }).then(response => {
                 this.union.$localStorage.Authorization = response.data.access_token;
                 this.notification.success({ message: '登录成功' });
-                this.close();
+                this.close(true);
             }, response => {
                 this.window.show({
                     templateUrl: 'src/windows/geetest.html',
@@ -294,7 +294,7 @@
                     }).then(response => {
                         this.union.$localStorage.Authorization = response.data.access_token;
                         this.notification.success({ message: '登录成功' });
-                        this.close();
+                        this.close(true);
                     },response => {
                         if (response.status === 400 && response.data.error) {
                             switch (response.data.error) {
@@ -312,6 +312,7 @@
                                     pwm.password.error = '账户被锁定';
                                     pwm.password.state = 'warn';
                                     pwm.password.completed = false;
+                                    break;
                                 default:
                                     this.notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
                             }
