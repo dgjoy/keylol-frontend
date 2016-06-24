@@ -1,6 +1,6 @@
 ﻿(function () {
     class RegistrationController {
-        constructor(close, $scope, $timeout, notification, $http, utils, union, $q, apiEndpoint) {
+        constructor(close, $scope, $timeout, notification, $http, utils, union, $q, apiEndpoint, $httpParamSerializerJQLike) {
             $.extend(this,{
                 close,
                 notification,
@@ -8,6 +8,7 @@
                 utils,
                 union,
                 apiEndpoint,
+                $httpParamSerializerJQLike,
             });
             this.platform = '';
             this.platformsToSelect = {
@@ -63,8 +64,8 @@
                                     connection.stop();
                                 });
 
-                                this.conn.index = 1;
-                                this.phase = '发送验证码';
+                                this.conn.index = 0;
+                                this.phase = '添加好友';
                                 this.conn.code = code;
                                 this.conn.botName = botName;
                                 this.conn.botSteamId64 = this.utils.getSteamId64(botSteamId);
@@ -104,14 +105,47 @@
             this.conn.vm.IdCode = this.conn.vm.IdCode.toUpperCase();
             this.$http.post(`${this.apiEndpoint}user`, this.conn.vm)
                 .then(response => {
-                    this.union.$localStorage.Authorization = response.data.access_token;
+                    this.union.$localStorage.firstOpenKeylol = true;
+
+                    this.$http.post(`${this.apiEndpoint}oauth/token`, this.$httpParamSerializerJQLike({
+                        token: response.data,
+                        grant_type: 'one_time_token',
+                        client_id: 'keylol-website',
+                    }), {
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                    }).then(response => {
+                        this.union.$localStorage.Authorization = response.data.access_token;
+                        this.notification.success('登录成功，欢迎回到其乐');
+                        this.close();
+                    }, response => {
+                        if (response.status === 400 && response.data.error) {
+                            switch (response.data.error) {
+                                case 'invalid_token':
+                                    this.notification.error({ mesage: 'Steam Id 无效' });
+                                    break;
+                                case 'user_non_existent':
+                                    this.notification.error({ message: '用户不存在' });
+                                    break;
+                                case 'account_locked_out':
+                                    this.notification.error({ message: '用户登录次数过多，暂时被锁定' });
+                                    break;
+                                default:
+                                    this.notification.error({ message: '发生未知错误，请重试或与站务职员联系' });
+                            }
+                        } else {
+                            this.notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
+                        }
+                        this.close();
+                    });
                 }, response => {
                     switch (response.status) {
                         case 400:
-                            this.error = response.data.modelState;
-                            this.error['requestDto.UserName'] = this.translate(`userName-${this.utils.modelErrorDetect.UserName(this.error['requestDto.UserName'])}`);
-                            this.error['requestDto.Password'] = this.translate(`password-${this.utils.modelErrorDetect.Password(this.error['requestDto.Password'])}`);
-                            this.error['requestDto.IdCode'] = this.translate(`idCode-${this.utils.modelErrorDetect.IdCode(this.error['requestDto.IdCode'])}`);
+                            this.error = {};
+                            this.error['requestDto.UserName'] = this.translate(response.data.modelState['requestDto.UserName']);
+                            this.error['requestDto.Password'] = this.translate(response.data.modelState['requestDto.Password']);
+                            this.error['requestDto.IdCode'] = this.translate(response.data.modelState['requestDto.IdCode']);
                             break;
                         default:
                             this.notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
@@ -121,21 +155,30 @@
         }
 
         translate(str) {
-            switch (str) {
-                case 'idCode-format':
+            if (str === undefined) {
+                return str;
+            }
+
+            switch (str[0]) {
+                case 'required':
+                case 'password_all_whitespace':
+                    return '必填。';
+                case 'invalid_id_code':
                     return '仅限使用字母、数字。';
-                case 'idCode-used':
+                case 'id_code_reserved':
+                    return '识别码已被预留。';
+                case 'id_code_used':
                     return '这个代码已经被别人使用。';
-                case 'password-length':
+                case 'password_too_short':
                     return '密码需要至少长 6 位。';
-                case 'userName-used':
+                case 'user_name_used':
                     return '这个昵称已被别人使用。';
-                case 'userName-format':
+                case 'user_name_invalid_character':
                     return '仅限使用字母、数字、汉字。';
-                case 'userName-length':
+                case 'user_name_invalid_length':
                     return '仅限 3-16 字节。';
                 default:
-                    return '';
+                    return '未知错误。';
             }
         }
         

@@ -30,22 +30,22 @@
                            label="昵称"
                            model="registration.conn.vm.UserName"
                            tip="'日常界面展示的社区名称'"
-                           state="registration.conn.error['vm.UserName']?'warn':'normal'"
-                           error="registration.conn.error['vm.UserName']"
+                           state="registration.error['requestDto.UserName']?'warn':'normal'"
+                           error="registration.error['requestDto.UserName']"
                 ></text-area>
                 <text-area class="fixed-width"
                            type="password"
                            label="登录口令"
                            model="registration.conn.vm.Password"
-                           state="registration.conn.error['vm.Password']?'warn':'normal'"
-                           error="registration.conn.error['vm.Password']"
-                           style="margin-right: 100px;"
+                           state="registration.error['requestDto.Password']?'warn':'normal'"
+                           error="registration.error['requestDto.Password']"
                 ></text-area>
                 <text-area type="uic"
                            label="用户识别码"
                            model="registration.conn.vm.IdCode"
-                           state="registration.conn.error['vm.IdCode']?'warn':'normal'"
-                           error="registration.conn.error['vm.IdCode']"
+                           state="registration.error['requestDto.IdCode']?'warn':'normal'"
+                           error="registration.error['requestDto.IdCode']"
+                           style="margin-right: 100px;margin-top: 10px;"
                 ></text-area>
             </div>
             <phase ng-if="registration.phase !== '未选择平台' && registration.phase !== '填写表单'" phases="registration.conn.phases" index="registration.conn.index"></phase>
