@@ -19,7 +19,6 @@
                 $scope.currentPage = index;
             };
 
-            pageHead.setTitle('个人 - 档案 - 其乐');
             let fetchPromise;
             if (!$location.path().match(/\/point\/[^\/]*\/?$/)) {
                 if (stateTree.empty || (stateTree.aggregation && stateTree.aggregation.point
@@ -29,6 +28,7 @@
                     fetchPromise = pageLoad('aggregation.user', { entrance: 'People' });
                 }
                 fetchPromise.then(() => {
+                    pageHead.setTitle(`${stateTree.aggregation.user.basicInfo.userName} - 人脉 - 其乐`);
                     $scope.theme = {
                         main: stateTree.aggregation.user.basicInfo.themeColor,
                         light: stateTree.aggregation.user.basicInfo.lightThemeColor,

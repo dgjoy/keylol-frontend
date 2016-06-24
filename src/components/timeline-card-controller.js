@@ -53,21 +53,25 @@
         }
 
         openReviewArea() {
-            this.$http.get(`${this.apiEndpoint}states/${this.reviewLink}/cards[${this.card.contentId}]/comments`, {
-                params: {
-                    take: 30,
-                },
-            }).then(response => {
-                this.comments = response.data;
-                this.state = 'open';
+            if (this.card.contentType === 'activity') {
+                this.$http.get(`${this.apiEndpoint}states/${this.reviewLink}/cards[${this.card.contentId}]/comments`, {
+                    params: {
+                        take: 30,
+                    },
+                }).then(response => {
+                    this.comments = response.data;
+                    this.state = 'open';
 
-                this.$timeout(() => {
-                    const e = this.$element.find('.review-list');
-                    e.animate({
-                        scrollTop: e.find(`[data-floor-id='#${this.comments[this.comments.length - 1].sidForActivity}']`).position().top,
+                    this.$timeout(() => {
+                        const e = this.$element.find('.review-list');
+                        e.animate({
+                            scrollTop: e.find(`[data-floor-id='#${this.comments[this.comments.length - 1].sidForActivity}']`).position().top,
+                        });
                     });
-                });
-            }, response => {});
+                }, response => {});
+            } else {
+                this.state = 'open';
+            }
         }
 
         replyComment(comment) {

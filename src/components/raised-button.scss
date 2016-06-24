@@ -112,6 +112,11 @@ raised-button {
 
     &[disabled] {
       background-color: $keylol-inertia-shape;
+
+      &:active {
+        @include keylol-shadow-1;
+      }
+
       &:hover {
         &::after {
           visibility: hidden;

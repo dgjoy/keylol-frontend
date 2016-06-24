@@ -1,7 +1,6 @@
 ﻿(function () {
     class FrontpageController {
         constructor ($scope, pageHead, stateTree, pageLoad, $location, $state, $window, $element, $http, apiEndpoint, notification) {
-            pageHead.setTitle('据点 - 扉页 - 其乐');
             let fetchPromise;
             if (!$location.path().match(/\/point\/[^\/]*\/?$/)) {
                 if (stateTree.empty || (stateTree.aggregation && stateTree.aggregation.point
@@ -11,6 +10,7 @@
                     fetchPromise = pageLoad('aggregation.point', { entrance: 'Frontpage' });
                 }
                 fetchPromise.then(() => {
+                    pageHead.setTitle(`${stateTree.aggregation.point.basicInfo.chineseName || stateTree.aggregation.point.basicInfo.englishName} - 扉页 - 其乐`);
                     $scope.theme = {
                         main: stateTree.aggregation.point.basicInfo.themeColor,
                         light: stateTree.aggregation.point.basicInfo.lightThemeColor,
