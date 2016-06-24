@@ -25,23 +25,23 @@
                 <div class="cell inertia">{{item.createTime | amUtc | amLocal | amDateFormat:'YYYY-MM-DD HH:MM:SS'}}</div>
                 <div class="cell" ng-switch="item.event">
                     <span ng-switch-when="新注册">欢迎来到其乐游戏社区</span>
-                    <span ng-switch-when="应邀注册">受<a>@</a>引荐而准备迎新文券</span>
-                    <span ng-switch-when="兑换商品">兑换商品<a href="">「」</a></span>
+                    <span ng-switch-when="应邀注册">受 <a href="user/{{item.description.Inviter.IdCode}}">{{item.description.Inviter.UserName}}</a> 引荐而准备迎新文券</span>
+                    <span ng-switch-when="兑换商品">兑换商品「{{item.description.CouponGift.Name}}」</span>
                     <span ng-switch-when="发布文章">
-                        发布文章<a>《{{item.description.Article.Title | maxLength: 9}}》</a>
+                        发布文章<a href="{{item.description.link}}">{{item.description.content}}</a>
                     </span>
-                    <span ng-switch-when="发出认可">
-                        认可<a>《{{item.description.Article.Title |maxLength: 9}}》</a>
-                    </span>
+                    <div ng-switch-when="发出认可">
+                        <span>
+                            认可<a href="{{item.description.link}}">{{item.description.content}}</a>
+                        </span>
+                    </div>
                     <span ng-switch-when="获得认可">
-                        <a>《{{item.description.Article.Title | maxLength: 9}}》</a>
-                        <a>「{{item.description.Comment.Content | maxLength: 9}}」</a>
-                        获得<a>@</a>的认可
+                        <a href="{{item.description.link}}">{{item.description.content}}</a>
+                        获得<a href="{{item.description.operatorLink}}">{{item.description.username}}</a>的认可
                     </span>
                     <span ng-switch-when="每日访问">每日访问其乐社区</span>
-                    <span ng-switch-when="邀请注册">邀请<a>@</a>加入其乐</span>
-                    <span ng-switch-when="发布简评">发布简评<a href="article/{{item.description.Article.IdCode}}/{{item.description.Article.SidForAuthor}}">「{{item.description.Article.Title | maxLength: 9}}」</a></span>
-                    <span ng-switch-default>{{record.description}}</span>
+                    <span ng-switch-when="邀请注册">邀请 <a href="user/{{item.description.User.IdCode}}">{{item.description.User.UserName}}</a> 加入其乐</span>
+                    <span ng-switch-when="其他">{{item.description}}</span>
                 </div>
             </div>
         </div>

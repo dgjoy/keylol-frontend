@@ -130,7 +130,16 @@
                         {
                             type: 'item',
                             text: `${article.push ? '撤销' : ''}推送`,
-                            clickAction: () => {},
+                            clickAction ($event) {
+                                window.show({
+                                    templateUrl: 'src/windows/article-pusher.html',
+                                    controller: 'ArticlePusherController as articlePusher',
+                                    inputs: {
+                                        article,
+                                    },
+                                });
+                                close();
+                            },
                         },
                     ]);
                 } else if (stateTree.currentUser.id === article.authorBasicInfo.id) {

@@ -8,7 +8,7 @@
                 stateTree,
             });
 
-            switch (object.type.messageType.name) {
+            switch (object.messageType.name) {
                 case '封存通告':
                     this.reasons = moderationText.Archived.reasonTexts;
                     break;

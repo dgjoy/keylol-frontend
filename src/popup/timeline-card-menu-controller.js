@@ -127,8 +127,17 @@
                             },
                             {
                                 type: 'item',
-                                text: `${content.push ? '撤销' : ''}推送`,
-                                clickAction: () => {},
+                                text: '推送',
+                                clickAction ($event) {
+                                    window.show({
+                                        templateUrl: 'src/windows/article-pusher.html',
+                                        controller: 'ArticlePusherController as articlePusher',
+                                        inputs: {
+                                            article: content,
+                                        },
+                                    });
+                                    close();
+                                },
                             },
                         ]);
                     }
