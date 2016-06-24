@@ -40,9 +40,12 @@
                                 <a href="" ng-click="articleComments.edit($index)">编辑</a>
                                 <span>|</span>
                             </span>
-                            <a href="" ng-if="comment.authorIdCode !== articleComments.stateTree.currentUser.idCode && !comment.liked" ng-click="articleComments.utils.like(comment.id, comment, 'ArticleComment')">认可</a>
-                            <a href="" ng-click="articleComments.reply(comment)">回复</a>
-                            <span ng-if="comment.authorIdCode !== articleComments.stateTree.currentUser.idCode || articleComments.stateTree.currentUser.roles.indexOf('Operator') > -1">
+                            <a href="" ng-if="articleComments.stateTree.currentUser && comment.authorIdCode !== articleComments.stateTree.currentUser.idCode && !comment.liked" ng-click="articleComments.utils.like(comment.id, comment, 'ArticleComment')">认可</a>
+                            <a href="" ng-if="articleComments.stateTree.currentUser" ng-click="articleComments.reply(comment)">回复</a>
+
+                            <a href="" ng-if="!articleComments.stateTree.currentUser" ng-click="articleComments.utils.openRegistration()">认可</a>
+                            <a href="" ng-if="!articleComments.stateTree.currentUser" ng-click="articleComments.utils.openRegistration()">回复</a>
+                            <span ng-if="comment.authorIdCode === articleComments.stateTree.currentUser.idCode || articleComments.stateTree.currentUser.roles.indexOf('Operator') > -1">
                                 <span>|</span>
                                 <a href=""
                                    ng-click="articleComments.showArchive($index, $event, comment)"

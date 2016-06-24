@@ -26,7 +26,7 @@
                 <span ng-if="articleContent.article.reproductionRequirement.nonCommercial">非商业性</span>
                 <span ng-if="articleContent.article.reproductionRequirement.nonCommercial && articleContent.article.reproductionRequirement.noDerivation">-</span>
                 <span ng-if="articleContent.article.reproductionRequirement.noDerivation">禁止编辑改动</span>
-                <span ng-if="!(articleContent.article.reproductionRequirement.attribution && articleContent.article.reproductionRequirement.nonCommercial && articleContent.article.reproductionRequirement.noDerivation)">自由版权 - 不得嵌套额外的约束或要求</span>
+                <span ng-if="!articleContent.article.reproductionRequirement.attribution && !articleContent.article.reproductionRequirement.nonCommercial && !articleContent.article.reproductionRequirement.noDerivation">自由版权 - 不得嵌套额外的约束或要求</span>
             </p>
             <p ng-if="!articleContent.article.reproductionRequirement">禁止在第三方场合刊载</p>
         </div>
@@ -54,7 +54,7 @@
         <!--</div>-->
     </div>
     <div class="agree">
-        <div class="action">
+        <div ng-if="articleContent.stateTree.currentUser" class="action">
             <flat-button ng-if="articleContent.article.authorBasicInfo.id === articleContent.stateTree.currentUser.id"
                          type="theme"
                          theme-color="articleContent.theme.main"
@@ -66,6 +66,13 @@
                            type="theme"
                            disabled="articleContent.article.liked"
                            click="articleContent.utils.like(articleContent.article.id, articleContent.article, 'Article')"
+                           theme-color="articleContent.theme.main"
+                           text="+{{articleContent.article.likeCount}}">
+            </raised-button>
+        </div>
+        <div ng-if="!articleContent.stateTree.currentUser" class="action">
+            <raised-button type="theme"
+                           click="articleContent.utils.openRegistration(event)"
                            theme-color="articleContent.theme.main"
                            text="+{{articleContent.article.likeCount}}">
             </raised-button>

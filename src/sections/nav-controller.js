@@ -162,15 +162,17 @@
                                 { href: `point/${newValue.idCode}/frontpage`, name: '扉页' },
                                 { href: `point/${newValue.idCode}/intel`, name: '情报' },
                                 { href: `point/${newValue.idCode}/timeline`, name: '轨道' },
-                                { href: `point/${newValue.idCode}/edit`, name: '编辑', 'float': 'right' },
                             ]);
                         } else {
                             Array.prototype.push.apply(this.tabArray, [
                                 { href: `point/${newValue.idCode}/frontpage`, name: '扉页' },
                                 { href: `point/${newValue.idCode}/product`, name: '作品' },
                                 { href: `point/${newValue.idCode}/timeline`, name: '轨道' },
-                                { href: `point/${newValue.idCode}/edit`, name: '编辑', 'float': 'right' },
                             ]);
+                        }
+
+                        if (stateTree.currentUser) {
+                            this.tabArray.push({ href: `point/${newValue.idCode}/edit`, name: '编辑', 'float': 'right' });
                         }
                     }
                 });

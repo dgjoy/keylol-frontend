@@ -66,14 +66,14 @@
                         type: 'item',
                         link: options.link,
                     },
-                    {
-                        type: 'horizon',
-                    },
                 ]);
             }
 
             if (stateTree.currentUser) {
                 const extraItems = [
+                    {
+                        type: 'horizon',
+                    },
                     {
                         text: `${content.archived ? '撤销' : ''}封存`,
                         type: 'item',

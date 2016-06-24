@@ -45,7 +45,7 @@
             <a class="source" href="" ng-click="activityCard.showSourceList($event)" popup="activityCard.showSourceListPopup">{{::activityCard.relatedPoints.attachedPoints.length + 1}} 个据点来稿</a>
         </div>
         <div class="agree">
-            <div class="action">
+            <div ng-if="activityCard.stateTree.currentUser" class="action">
                 <flat-button ng-if="activityCard.object.authorBasicInfo.id === activityCard.stateTree.currentUser.id"
                              type="theme"
                              theme-color="activityCard.theme.main"
@@ -56,6 +56,13 @@
                 <raised-button ng-if="activityCard.object.authorBasicInfo.id !== activityCard.stateTree.currentUser.id"
                                type="theme" disabled="activityCard.object.liked"
                                click="activityCard.utils.like(activityCard.object.id, activityCard.object, 'Activity')"
+                               theme-color="activityCard.theme.main"
+                               text="+{{activityCard.object.likeCount}}">
+                </raised-button>
+            </div>
+            <div ng-if="!activityCard.stateTree.currentUser" class="action">
+                <raised-button type="theme"
+                               click="activityCard.utils.openRegistration(event)"
                                theme-color="activityCard.theme.main"
                                text="+{{activityCard.object.likeCount}}">
                 </raised-button>
@@ -98,9 +105,12 @@
                                     </span>
                                 </div>
                                 <div class="actions">
-                                    <a href="" ng-if="comment.authorIdCode !== activityCard.stateTree.currentUser.idCode && !comment.liked" ng-click="activityCard.utils.like(comment.id, comment, 'ActivityComment')">认可</a>
-                                    <a href="" ng-click="activityCard.reply(comment)">回复</a>
-                                <span ng-if="comment.authorIdCode !== activityCard.stateTree.currentUser.idCode || activityCard.stateTree.currentUser.roles.indexOf('Operator') > -1">
+                                    <a href="" ng-if="activityCard.stateTree.currentUser && comment.authorIdCode !== activityCard.stateTree.currentUser.idCode && !comment.liked" ng-click="activityCard.utils.like(comment.id, comment, 'ActivityComment')">认可</a>
+                                    <a href="" ng-if="activityCard.stateTree.currentUser" ng-click="activityCard.reply(comment)">回复</a>
+
+                                    <a href="" ng-if="!activityCard.stateTree.currentUser" ng-click="activityCard.utils.openRegistration()">认可</a>
+                                    <a href="" ng-if="!activityCard.stateTree.currentUser" ng-click="activityCard.utils.openRegistration()">回复</a>
+                                <span ng-if="comment.authorIdCode === activityCard.stateTree.currentUser.idCode || activityCard.stateTree.currentUser.roles.indexOf('Operator') > -1">
                                     <span>|</span>
                                     <a href=""
                                        ng-click="activityCard.showArchive($index, $event, comment)"

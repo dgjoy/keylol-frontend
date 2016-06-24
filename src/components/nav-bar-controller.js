@@ -1,10 +1,11 @@
 ﻿(function () {
     class NavBarController {
-        constructor (stateTree, window, utils) {
+        constructor (stateTree, window, utils, $window) {
             $.extend(this, {
                 stateTree,
                 window,
                 utils,
+                $window,
             });
         }
         showUserHub ($event) {
@@ -36,6 +37,10 @@
                 controller: 'RegistrationController',
                 controllerAs: 'registration',
             });
+        }
+
+        search() {
+            this.$window.open(`https://www.google.com/search?q=site:keylol.com+${encodeURIComponent(this.searchText)}`);
         }
     }
 

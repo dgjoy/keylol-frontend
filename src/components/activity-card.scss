@@ -187,7 +187,6 @@ activity-card {
           padding: 0 15px;
 
           .avatar {
-            flex-grow: 0;
             width: 32px;
             height: 32px;
             margin-right: 10px;
@@ -222,20 +221,19 @@ activity-card {
             @include hover-background();
             padding: 15px 15px;
             display: flex;
+            justify-content: space-between;
 
             &.blink {
               animation: review-blink 5s;
             }
 
             >.avatar {
-              flex-grow: 0;
               width: 32px;
               height:32px;
-              margin-right: 10px;
             }
 
             >.content {
-              flex-grow: 1;
+              width: 628px;
             }
 
             >.content>.info {
