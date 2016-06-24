@@ -23,10 +23,19 @@
             if (currentStateName.substr(0, 8) === 'entrance') {
                 this.inEntrance = true;
                 this.tabArray = [
-                    { state:'.discovery',name:'广场' },
-                    { state:'.points',name:'据点' },
-                    { state:'.timeline',name:'轨道' },
+                    { state:'.discovery', name:'广场' },
+                    { state:'.points', name:'据点' },
                 ];
+                const timelineEntrance = { state:'.timeline',name:'轨道' };
+
+                $scope.$watch('stateTree.currentUser', newValue => {
+                    if (newValue) {
+                        if (this.tabArray.indexOf(timelineEntrance) === -1) {
+                            this.tabArray.push(timelineEntrance);
+                        }
+                    }
+                });
+
                 $scope.$watch(() => {
                     return $state.current.name;
                 }, () => {

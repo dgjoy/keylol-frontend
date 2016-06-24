@@ -9,6 +9,13 @@
             <span am-time-ago="timelineCard.card.publishTime"></span>
         </a>
     </div>
+    <div ng-if="timelineCard.card.likedByUser" class="indirect-sources row">
+        <a class="indirect-source" ng-href="user/{{timelineCard.card.likedByUser.idCode}}">
+            <img webp-src="{{timelineCard.card.likedByUser.avatarImage | avatarUrl: 'small'}}" class="picture" />
+            <span class="desc">{{timelineCard.card.likedByUser.userName}}</span>
+        </a>
+        <span class="desc">认可{{timelineCard.card.contentType === 'activity' ? '这则动态' : '这篇文章'}}</span>
+    </div>
     <div class="shortcut" ng-switch="timelineCard.card.contentType">
         <a ng-switch-when="article" class="common-article" webp-background="{{timelineCard.card.coverImage | articleCoverUrl}}" ng-href="article/{{timelineCard.card.author.idCode}}/{{timelineCard.card.sidForAuthor}}">
             <div class="bottom-text">
@@ -47,10 +54,10 @@
         <div class="review-list" ng-class="{scroller: timelineCard.hasScroller}">
             <a href="" ng-href="activity/{{timelineCard.card.author.idCode}}/{{timelineCard.card.sidForAuthor}}">查看更多</a>
             <div class="review" href="" data-floor-id="#{{comment.sidForActivity}}" ng-repeat="comment in timelineCard.comments" ng-class="{'blink':timelineCard.currentFloor === comment.sidForActivity}">
-                <img src="" webp-src="{{comment.authorAvatarImage | avatarUrl}}" alt="" class="avatar" />
+                <a ng-href="user/{{comment.authorIdCode}}"><img src="" webp-src="{{comment.authorAvatarImage | avatarUrl}}" alt="" class="avatar" /></a>
                 <div class="content">
                     <div class="info">
-                        <div class="user">{{comment.authorUserName}} <span ng-style="{color: comment.liked ? timelineCard.theme.light : ''}" ng-class="{light: comment.liked}">+{{comment.likeCount}}</span></div>
+                        <div class="user"><a class="username" ng-href="user/{{comment.authorIdCode}}">{{comment.authorUserName}}</a> <span ng-style="{color: comment.liked ? timelineCard.theme.light : ''}" ng-class="{light: comment.liked}">+{{comment.likeCount}}</span></div>
                         <div class="date"><span am-time-ago="comment.publishTime"></span> / #{{comment.sidForActivity}}</div>
                         <div class="actions"><a href="" ng-if="!comment.liked && comment.authorIdCode !== timelineCard.stateTree.currentUser.idCode" ng-click="timelineCard.utils.like(comment.id, comment, 'ActivityComment')">认可</a><a href="" ng-click="timelineCard.replyComment(comment)">回复</a></div>
                     </div>

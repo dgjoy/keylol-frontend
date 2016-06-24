@@ -18,7 +18,7 @@
                     light: stateTree.aggregation.point.basicInfo.lightThemeColor,
                 };
 
-                $scope.images = {
+                const images = {
                     submitLink,
                     header: {
                         mainTitle: '视像',
@@ -38,6 +38,11 @@
                             type: 'avatar',
                             value: stateTree.aggregation.point.basicInfo.avatarImage,
                         },
+                    ],
+                };
+
+                if (stateTree.aggregation.point.basicInfo.type === 'game' || stateTree.aggregation.point.basicInfo.type === 'hardware') {
+                    Array.prototype.push.apply(images.list, [
                         {
                             title: '媒体中心封面',
                             subTitle: '媒体中心的封面图片',
@@ -59,8 +64,11 @@
                             type: 'thumbnail',
                             value: stateTree.aggregation.point.edit.style.thumbnailImage,
                         },
-                    ],
-                };
+                    ]);
+                }
+
+                $scope.images = images;
+
                 $scope.themeDiy = {
                     submitLink,
                     header: {

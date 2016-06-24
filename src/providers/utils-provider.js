@@ -9,13 +9,13 @@
                 return _config;
             },
             $get: [
-                '$q', 'union', '$http', 'apiEndpoint', 'notification',
-                ($q, union, $http, apiEndpoint, notification) => {
+                '$q', 'union', '$http', 'apiEndpoint', 'notification', 'window', '$window',
+                ($q, union, $http, apiEndpoint, notification, window, $window) => {
                     function Utils() {
                         const self = this;
                         let _uniqueId = 1;
                         
-                        self.isPhantom = !!window.callPhantom;
+                        self.isPhantom = !!$window.callPhantom;
 
                         self.supportWebp = $q((resolve, reject) => {
                             if (self.isPhantom) reject();
@@ -48,8 +48,8 @@
                         };
 
                         self.createGeetest = function (product, onSuccess) {
-                            if (typeof window.activateGeetest === 'undefined') {
-                                window.activateGeetest = {};
+                            if (typeof $window.activateGeetest === 'undefined') {
+                                $window.activateGeetest = {};
                             }
                             const id = self.uniqueId();
                             const readyDeferred = $q.defer();
@@ -68,7 +68,7 @@
                                 });
                                 readyDeferred.resolve(gee);
                             };
-                            if (typeof window.Geetest === 'undefined') {
+                            if (typeof $window.Geetest === 'undefined') {
                                 const s = document.createElement('script');
                                 s.src = `//api.geetest.com/get.php?callback=activateGeetest[${id}]`;
                                 document.body.appendChild(s);
@@ -277,7 +277,7 @@
 
                         self.firefoxLinkFix = function (event) {
                             if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
-                                const newWindow = window.open($(event.currentTarget).attr('href'), 'newwindow', 'width=300, height=250');
+                                const newWindow = $window.open($(event.currentTarget).attr('href'), 'newwindow', 'width=300, height=250');
                                 newWindow.close();
                                 event.preventDefault();
                             }
@@ -353,6 +353,15 @@
                                 item[addValue]++;
                             }, response => {
                                 notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
+                            });
+                        };
+
+                        self.openRegistration = function (event) {
+                            window.show({
+                                event,
+                                templateUrl: 'src/windows/registration.html',
+                                controller: 'RegistrationController',
+                                controllerAs: 'registration',
                             });
                         };
 

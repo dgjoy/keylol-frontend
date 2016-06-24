@@ -36,6 +36,12 @@ article-summary {
             display: flex;
             align-items: center;
 
+            &:hover {
+              .username {
+                text-decoration: underline;
+              }
+            }
+
             .avatar {
               margin-right: 10px;
               width: 32px;

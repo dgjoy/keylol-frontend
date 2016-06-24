@@ -14,8 +14,10 @@
                     <p>{{item.articleCount}} 份文章 / {{item.activityCount}} 篇动态 / 获得 {{item.likeCount}} 则认可</p>
                 </div>
             </div>
-            <flat-button ng-if="item.idCode !== pageList.stateTree.currentUser.idCode" binary-set="pageList.subscribeSet" binary-value="item.subscribed"
+            <flat-button ng-if="pageList.stateTree.currentUser && item.idCode !== pageList.stateTree.currentUser.idCode" binary-set="pageList.subscribeSet" binary-value="item.subscribed"
                          type="{{item.subscribed ? 'inertia' : 'theme'}}" theme-color="pageList.theme.main" click="pageList.subscribe(item.id, item.subscribed, item, 'User')"></flat-button>
+            <flat-button ng-if="!pageList.stateTree.currentUser" text="关注" type="theme"
+                         click="pageList.openRegistration(event)"></flat-button>
         </li>
     </ul>
 </div>

@@ -1,6 +1,8 @@
 ﻿(function () {
     class GameCardController {
-        constructor (utils) {
+        constructor (utils, stateTree) {
+            this.stateTree = stateTree;
+
             this.subscribeSet = [
                 {
                     text: '订阅',
@@ -13,6 +15,7 @@
             ];
 
             this.subscribe = utils.subscribe;
+            this.openRegistration = utils.openRegistration;
         }
     }
 

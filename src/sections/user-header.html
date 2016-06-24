@@ -12,6 +12,12 @@
     </div>
     <div class="actions">
         <icon-button icon="dots-vertical" type="invert"></icon-button>
-        <raised-button theme-color="userHeader.theme.main" binary-set="userHeader.subscribeSet" binary-value="userHeader.object.subscribed" click="userHeader.subscribe(userHeader.object.id, userHeader.object.subscribed, userHeader.object, 'User')"></raised-button>
+        <raised-button ng-if="userHeader.stateTree.currentUser && userHeader.stateTree.currentUser.idCode !== userHeader.object.idCode" theme-color="userHeader.theme.main"
+                       binary-set="userHeader.subscribeSet" binary-value="userHeader.object.subscribed"
+                       click="userHeader.subscribe(userHeader.object.id, userHeader.object.subscribed, userHeader.object, 'User')"></raised-button>
+        <raised-button ng-if="userHeader.stateTree.currentUser && userHeader.stateTree.currentUser.idCode === userHeader.object.idCode" theme-color="userHeader.theme.main"
+                       text="编辑" click="userHeader.edit()"></raised-button>
+        <raised-button ng-if="!userHeader.stateTree.currentUser" theme-color="userHeader.theme.main" text="关注" type="theme"
+                     click="userHeader.openRegistration(event)"></raised-button>
     </div>
 </div>

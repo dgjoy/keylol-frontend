@@ -1,9 +1,11 @@
 ﻿(function () {
     class SalesTodayController {
-        constructor (utils, stateTree) {
+        constructor (utils, stateTree, $http, apiEndpoint) {
             $.extend(this, {
                 utils,
                 stateTree,
+                $http,
+                apiEndpoint,
             });
             this.currentPage = 1;
         }

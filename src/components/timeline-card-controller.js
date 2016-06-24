@@ -1,6 +1,6 @@
 ﻿(function () {
     class TimelineCardController {
-        constructor($element, $timeout, utils, stateTree, $http, apiEndpoint, notification) {
+        constructor($element, $timeout, utils, stateTree, $http, apiEndpoint, notification, $state) {
             $.extend(this,{
                 $element,
                 $timeout,
@@ -18,6 +18,15 @@
                 this.simpleHeight = $element.find('.display-card>.shortcut>.simple>p').height();
                 this.simpleHidden = this.simpleHeight > 100;
             });
+
+            const currentStateName = $state.current.name;
+            if (currentStateName.substr(0, 8) === 'entrance') {
+                this.reviewLink = 'entrance/timeline';
+            } else if (currentStateName.substr(0, 17) === 'aggregation.point') {
+                this.reviewLink = 'aggregation/point/timeline';
+            } else if (currentStateName.substr(0, 16) === 'aggregation.user') {
+                this.reviewLink = 'aggregation/user/timeline';
+            }
         }
 
         simpleExpand() {
@@ -44,7 +53,7 @@
         }
 
         openReviewArea() {
-            this.$http.get(`${this.apiEndpoint}states/entrance/timeline/cards[${this.card.contentId}]/comments`, {
+            this.$http.get(`${this.apiEndpoint}states/${this.reviewLink}/cards[${this.card.contentId}]/comments`, {
                 params: {
                     take: 30,
                 },
@@ -116,7 +125,6 @@
         }
 
         showMenu($event) {
-            console.log(this.card);
             this.showSharedPopup({
                 templateUrl: 'src/popup/timeline-card-menu.html',
                 controller: 'TimelineCardMenuController as timelineCardMenu',

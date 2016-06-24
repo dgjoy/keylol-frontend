@@ -8,5 +8,7 @@
         <p ng-if="false" class="remark">Steam 好友</p>
     </div>
 </a>
-<flat-button ng-if="userCard.user.idCode !== userCard.stateTree.currentUser.idCode" binary-set="userCard.subscribeSet" binary-value="userCard.user.subscribed"
+<flat-button ng-if="userCard.stateTree.currentUser && userCard.user.idCode !== userCard.stateTree.currentUser.idCode" binary-set="userCard.subscribeSet" binary-value="userCard.user.subscribed"
              click="userCard.subscribe(userCard.user.id, userCard.user.subscribed, userCard.user, 'User')"></flat-button>
+<flat-button ng-if="!userCard.stateTree.currentUser" text="关注" type="userCard.type"
+             click="userCard.openRegistration(event)"></flat-button>

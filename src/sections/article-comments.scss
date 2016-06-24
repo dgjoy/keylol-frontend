@@ -30,6 +30,13 @@ article-comments {
         .light-theme {
           color: $keylol-light-theme;
         }
+
+        .username {
+          color: $keylol-main-text;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
       }
 
       p:first-of-type {
@@ -101,16 +108,16 @@ article-comments {
         margin-right: 5px;
       }
 
-      a:hover {
-        text-decoration: underline;
-      }
-
       p {
         display: flex;
       }
 
-      span {
+      a {
         color: $keylol-inertia-text;
+
+        &:hover {
+          text-decoration: underline;
+        }
       }
     }
 

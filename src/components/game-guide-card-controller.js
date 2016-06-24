@@ -1,6 +1,8 @@
 ﻿(function () {
     class GameGuideCardController {
-        constructor($scope, pointAttributes, stateTree, utils, stores) {
+        constructor(pointAttributes, stateTree, utils, stores) {
+            this.stateTree = stateTree;
+
             this.subscribeSet = [
                 {
                     text: '订阅',
@@ -12,6 +14,7 @@
                 },
             ];
             this.subscribe = utils.subscribe;
+            this.openRegistration = utils.openRegistration;
 
             this.characteristics = [];
             for (const attr in this.card) {
@@ -64,8 +67,6 @@
                     link: `point/${this.card.idCode}`,
                 });
             }
-
-            $scope.stateTree = stateTree;
         }
 
         showTooltip($event, $index) {

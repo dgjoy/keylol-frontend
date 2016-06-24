@@ -4,6 +4,8 @@
 <div class="hr"></div>
 <div class="actions">
     <span class="count">{{categoryCard.card.gameCount}} 款游戏</span>
-    <flat-button binary-set="categoryCard.subscribeSet" binary-value="categoryCard.card.subscribed"
+    <flat-button ng-if="categoryCard.stateTree.currentUser" binary-set="categoryCard.subscribeSet" binary-value="categoryCard.card.subscribed"
                  click="categoryCard.subscribe(categoryCard.card.id, categoryCard.card.subscribed, categoryCard.card)"></flat-button>
+    <flat-button ng-if="!categoryCard.stateTree.currentUser" text="订阅"
+                 click="categoryCard.openRegistration(event)"></flat-button>
 </div>

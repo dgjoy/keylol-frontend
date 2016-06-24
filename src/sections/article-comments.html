@@ -14,9 +14,9 @@
         <ul ng-animate-swap="articleComments.currentPage">
             <li class="comment" ng-repeat="comment in articleComments.article.comments">
                 <div class="basic-info">
-                    <img class="avatar" webp-src="{{comment.authorAvatarImage | avatarUrl}}">
+                    <a ng-href="user/{{comment.authorIdCode}}"><img class="avatar" webp-src="{{comment.authorAvatarImage | avatarUrl}}"></a>
                     <div class="name-group">
-                        <p>{{comment.authorUserName}}<span class="like-count" ng-style="{color: comment.liked ? articleComments.theme.light : ''}" ng-class="{'light-theme': comment.liked}">+{{comment.likeCount}}</span></p>
+                        <p><a ng-href="user/{{comment.authorIdCode}}" class="username">{{comment.authorUserName}}</a><span class="like-count" ng-style="{color: comment.liked ? articleComments.theme.light : ''}" ng-class="{'light-theme': comment.liked}">+{{comment.likeCount}}</span></p>
                         <p>
                             <span ng-if="comment.authorIdCode === articleComments.article.authorBasicInfo.idCode" ng-style="{color: articleComments.theme.light}" class="light-theme">文章作者</span>
                             <span ng-if="comment.authorIdCode === articleComments.article.authorBasicInfo.idCode && articleComments.article.pointBasicInfo.type === 'game'">/</span>
@@ -36,7 +36,7 @@
                     </div>
                     <div class="action-date">
                         <p class="action">
-                            <span ng-if="comment.id && (comment.authorIdCode !== articleComments.stateTree.currentUser.idCode || articleComments.stateTree.currentUser.roles.indexOf('Operator') > -1)">
+                            <span ng-if="comment.id && (comment.authorIdCode === articleComments.stateTree.currentUser.idCode || articleComments.stateTree.currentUser.roles.indexOf('Operator') > -1)">
                                 <a href="" ng-click="articleComments.edit($index)">编辑</a>
                                 <span>|</span>
                             </span>
@@ -64,8 +64,8 @@
                     <div class="basic">
                         <p class="reply">
                             <span>回复 #{{comment.replyToComment.sidForArticle}}</span>
-                            <img class="avatar" webp-src="{{comment.replyToComment.authorAvatarImage | avatarUrl: 'small'}}">
-                            <span>{{comment.replyToComment.authorUserName}}</span>
+                            <a ng-href="user/{{comment.replyToComment.authorIdCode}}"><img class="avatar" webp-src="{{comment.replyToComment.authorAvatarImage | avatarUrl: 'small'}}"></a>
+                            <a ng-href="user/{{comment.replyToComment.authorIdCode}}">{{comment.replyToComment.authorUserName}}</a>
                         </p>
                     </div>
                     <p class="comment-content">{{comment.replyToComment.content | extractText}}</p>

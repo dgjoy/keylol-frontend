@@ -1,6 +1,7 @@
 ﻿(function () {
     class StoreGameCardController {
-        constructor(utils, stores) {
+        constructor(utils, stores, stateTree) {
+            this.stateTree = stateTree;
             this.subscribeSet = [
                 {
                     text: '订阅',
@@ -12,6 +13,7 @@
                 },
             ];
             this.subscribe = utils.subscribe;
+            this.openRegistration = utils.openRegistration;
 
             this.stores = [];
             if (this.card.steamAppId) {

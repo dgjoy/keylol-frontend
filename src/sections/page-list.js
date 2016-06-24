@@ -24,6 +24,7 @@
             ];
 
             this.subscribe = utils.subscribe;
+            this.openRegistration = utils.openRegistration;
         }
 
         expandMore () {

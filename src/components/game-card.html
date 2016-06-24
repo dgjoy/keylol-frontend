@@ -5,6 +5,8 @@
 <div class="actions">
     <vote-circle ng-if="gameCard.card.averageRating !== undefined" review="::gameCard.card.averageRating" gray-background="true"></vote-circle>
     <span ng-if="gameCard.card.averageRating === undefined">评价不足</span>
-    <flat-button binary-set="gameCard.subscribeSet" binary-value="gameCard.card.subscribed"
+    <flat-button ng-if="gameCard.stateTree.currentUser" binary-set="gameCard.subscribeSet" binary-value="gameCard.card.subscribed"
                  click="gameCard.subscribe(gameCard.card.id, gameCard.card.subscribed, gameCard.card)"></flat-button>
+    <flat-button ng-if="!gameCard.stateTree.currentUser" text="订阅"
+                 click="gameCard.openRegistration(event)"></flat-button>
 </div>

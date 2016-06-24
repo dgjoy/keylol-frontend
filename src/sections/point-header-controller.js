@@ -3,10 +3,11 @@
  */
 (function () {
     class pointHeaderController {
-        constructor($scope, $window, utils, $state, window) {
+        constructor($scope, $window, utils, $state, window, stateTree) {
             $.extend(this,{
                 $state,
                 window,
+                stateTree,
             });
             this.subscribeSet = [
                 {
@@ -20,6 +21,7 @@
             ];
 
             this.subscribe = utils.subscribe;
+            this.openRegistration = utils.openRegistration;
 
             const $$window = $($window);
             let scrollTop = $$window.scrollTop();

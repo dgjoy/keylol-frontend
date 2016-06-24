@@ -13,6 +13,8 @@
             <span ng-if="store.price">{{store.price}}</span>
         </a>
     </div>
-    <flat-button binary-set="storeGameCard.subscribeSet" binary-value="storeGameCard.card.subscribed"
+    <flat-button ng-if="storeGameCard.stateTree.currentUser" binary-set="storeGameCard.subscribeSet" binary-value="storeGameCard.card.subscribed"
                    click="storeGameCard.subscribe(storeGameCard.card.id, storeGameCard.card.subscribed, storeGameCard.card)"></flat-button>
+    <flat-button ng-if="!storeGameCard.stateTree.currentUser" text="订阅"
+                 click="storeGameCard.openRegistration(event)"></flat-button>
 </div>

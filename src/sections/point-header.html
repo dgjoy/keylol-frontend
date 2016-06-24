@@ -12,7 +12,9 @@
         <div ng-click="pointHeader.showMenu($event)" popup="pointHeader.showMenuPopup">
             <icon-button icon="dots-vertical" type="invert"></icon-button>
         </div>
-        <raised-button theme-color="pointHeader.theme.main"  binary-set="pointHeader.subscribeSet" binary-value="pointHeader.object.subscribed"
+        <raised-button ng-if="pointHeader.stateTree.currentUser" theme-color="pointHeader.theme.main"  binary-set="pointHeader.subscribeSet" binary-value="pointHeader.object.subscribed"
                      click="pointHeader.subscribe(pointHeader.object.id, pointHeader.object.subscribed, pointHeader.object)"></raised-button>
+        <raised-button ng-if="!pointHeader.stateTree.currentUser" theme-color="pointHeader.theme.main" text="订阅"
+                       click="pointHeader.openRegistration(event)"></raised-button>
     </div>
 </div>

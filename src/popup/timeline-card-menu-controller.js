@@ -62,7 +62,7 @@
             if (options.link) {
                 Array.prototype.unshift.apply(this.menu.items, [
                     {
-                        text: '进入文章',
+                        text: `进入${content.contentType === 'activity' ? '动态' : '文章'}`,
                         type: 'item',
                         link: options.link,
                     },

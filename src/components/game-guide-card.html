@@ -27,8 +27,10 @@
             <span ng-if="store.price">¥ {{store.price}}</span>
         </a>
     </div>
-    <flat-button binary-set="gameGuideCard.subscribeSet" binary-value="gameGuideCard.card.subscribed"
+    <flat-button ng-if="gameGuideCard.stateTree.currentUser" binary-set="gameGuideCard.subscribeSet" binary-value="gameGuideCard.card.subscribed"
                  click="gameGuideCard.subscribe(gameGuideCard.card.id, gameGuideCard.card.subscribed, gameGuideCard.card)"></flat-button>
+    <flat-button ng-if="!gameGuideCard.stateTree.currentUser" text="订阅"
+                 click="gameGuideCard.openRegistration(event)"></flat-button>
 </div>
 <div class="user-basic-info" ng-if="gameGuideCard.bottomType === 'user'">
     <img src="" class="avatar" webp-src="//storage.keylol.com/fd0dfd38572adff068251606aa282b3f.jpg!avatar.medium" alt="NPC之舟" />

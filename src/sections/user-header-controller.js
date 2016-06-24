@@ -3,7 +3,9 @@
  */
 (function () {
     class userHeaderController {
-        constructor($scope, $window, utils) {
+        constructor($scope, $window, utils, stateTree, $location) {
+            this.stateTree = stateTree;
+            this.$location = $location;
             this.subscribeSet = [
                 {
                     text: '关注',
@@ -16,6 +18,7 @@
             ];
 
             this.subscribe = utils.subscribe;
+            this.openRegistration = utils.openRegistration;
 
             const $$window = $($window);
             let scrollTop = $$window.scrollTop();
@@ -39,6 +42,10 @@
             } else {
                 this.transform = 'translateY(132px)';
             }
+        }
+
+        edit () {
+            this.$location.url(`user/${this.object.idCode}/edit`);
         }
     }
 

@@ -21,6 +21,20 @@ short-review {
           width: 18px;
           height: 18px;
           margin-right: 6px;
+          display: block;
+        }
+
+        a {
+          margin-left: 0;
+          color: $keylol-inertia-text;
+
+          &:hover {
+            text-decoration: underline;
+          }
+
+          &.username {
+            color: $keylol-main-text;
+          }
         }
 
         p {

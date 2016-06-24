@@ -133,6 +133,19 @@ timeline-card {
       display: flex;
       flex-direction: column;
 
+      &.row {
+        flex-direction: row;
+
+        >.desc {
+          margin-left: 5px;
+          color: $keylol-inertia-text;
+        }
+
+        >.indirect-source>.desc {
+          color: $keylol-inertia-text;
+        }
+      }
+
       >.indirect-source {
         display: flex;
         align-items: center;
@@ -240,10 +253,8 @@ timeline-card {
           animation: review-blink 5s;
         }
 
-        >.avatar {
+        >a {
           flex-grow: 0;
-          width: 32px;
-          height:32px;
           margin-right: 10px;
         }
 
@@ -269,6 +280,11 @@ timeline-card {
               color: $keylol-inertia-text;
               font-weight: normal;
               margin-left: 6px;
+            }
+
+            >.username {
+              color: $keylol-main-text;
+              margin-left: 0;
             }
 
             >a:hover {

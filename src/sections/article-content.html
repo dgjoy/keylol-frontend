@@ -26,6 +26,7 @@
                 <span ng-if="articleContent.article.reproductionRequirement.nonCommercial">非商业性</span>
                 <span ng-if="articleContent.article.reproductionRequirement.nonCommercial && articleContent.article.reproductionRequirement.noDerivation">-</span>
                 <span ng-if="articleContent.article.reproductionRequirement.noDerivation">禁止编辑改动</span>
+                <span ng-if="!(articleContent.article.reproductionRequirement.attribution && articleContent.article.reproductionRequirement.nonCommercial && articleContent.article.reproductionRequirement.noDerivation)">自由版权 - 不得嵌套额外的约束或要求</span>
             </p>
             <p ng-if="!articleContent.article.reproductionRequirement">禁止在第三方场合刊载</p>
         </div>
