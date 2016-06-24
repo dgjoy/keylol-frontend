@@ -158,6 +158,10 @@
           padding: 0 15px;
           width: 100%;
 
+          a:hover {
+            text-decoration: underline;
+          }
+
           &.ng-enter {
             transition: all 800ms;
             opacity: 0;

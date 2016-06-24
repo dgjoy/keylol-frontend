@@ -35,7 +35,6 @@
         }
 
         setTwoColumn (start = 0) {
-            console.log(start, this.cards);
             for (let i = start;i < this.cards.length;i++) {
                 if (this.preferLeft) {
                     this.leftCards.push(this.cards[i]);
@@ -54,10 +53,7 @@
                     controller: 'ActivityEditorController',
                     controllerAs: 'activityEditor',
                     inputs: {
-                        options: {
-                            targetPoint: this.$state.current.name.substr(0, 17) === 'aggregation.point' ?
-                                this.stateTree.aggregation.point.basicInfo : undefined,
-                        },
+                        options: {},
                     },
                 });
             } else {
@@ -75,8 +71,6 @@
                     inputs: {
                         options: {
                             file: $file,
-                            targetPoint: this.$state.current.name.substr(0, 17) === 'aggregation.point' ?
-                                this.stateTree.aggregation.point.basicInfo : undefined,
                         },
                     },
                 });

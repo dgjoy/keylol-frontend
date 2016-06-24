@@ -267,8 +267,6 @@
             delete submitObj.id_code;
             submitObj[['id_code','user_name','email'][this.passcodeWayManager.curPage]] = cont;
 
-            console.log(submitObj);
-
             this.submitLock = true;
             this.$http.post(`${this.apiEndpoint}oauth/token`, this.$httpParamSerializerJQLike(submitObj), {
                 headers: {
