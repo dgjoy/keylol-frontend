@@ -28,7 +28,7 @@
                         type: 'item',
                         icon: 'human-greeting',
                         text: '人脉',
-                        link: `user/${stateTree.currentUser.idCode}/people`,
+                        link: `user/${stateTree.currentUser.idCode}/people/`,
                     },
                     {
                         type: 'horizon',

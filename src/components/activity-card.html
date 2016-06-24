@@ -46,7 +46,19 @@
         </div>
         <div class="agree">
             <div class="action">
-                <raised-button type="theme" disabled="activityCard.object.liked" click="activityCard.utils.like(activityCard.object.id, activityCard.object, 'Activity')" theme-color="activityCard.theme.main" text="+{{activityCard.object.likeCount}}"></raised-button>
+                <flat-button ng-if="activityCard.object.authorBasicInfo.id === activityCard.stateTree.currentUser.id"
+                             type="theme"
+                             theme-color="activityCard.theme.main"
+                             disabled-with-color="true"
+                             disabled="true"
+                             text="+{{activityCard.object.likeCount}}">
+                </flat-button>
+                <raised-button ng-if="activityCard.object.authorBasicInfo.id !== activityCard.stateTree.currentUser.id"
+                               type="theme" disabled="activityCard.object.liked"
+                               click="activityCard.utils.like(activityCard.object.id, activityCard.object, 'Activity')"
+                               theme-color="activityCard.theme.main"
+                               text="+{{activityCard.object.likeCount}}">
+                </raised-button>
             </div>
             <!--<div class="agree-list">-->
             <!--<img ng-repeat="i in [1,2,3,4,5]" class="avatar" webp-src="//storage.keylol.com/fd0dfd38572adff068251606aa282b3f.jpg!avatar.medium" />-->
