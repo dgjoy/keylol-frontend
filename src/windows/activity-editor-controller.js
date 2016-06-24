@@ -21,8 +21,8 @@
                 this.extra.image = options.file;
             }
 
-            if (options.targetPoint) {
-                this.vm.targetPoints.push(options.targetPoint);
+            if ($state.current.name.substr(0, 17) === 'aggregation.point') {
+                this.vm.targetPoints.push(stateTree.aggregation.point.basicInfo);
             }
 
             if (options.activity) {

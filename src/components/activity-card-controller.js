@@ -184,7 +184,6 @@
 
         sync (sid) {
             this.commentsManager.pageCount = parseInt((sid - 1) / 10) + 1;
-            console.log(this.commentsManager.pages.length);
             this.$http.get(`${this.apiEndpoint}states/content/activity/comments`,{
                 params: {
                     activity_id: this.object.id,

@@ -18,7 +18,7 @@
                         <div class="inner" ng-if="login.steamRobotWayManager.phaseIndex === 0">
                             <div class="left">
                                 <p>在其乐好友中，向其乐机器人发送<span class="blue">验证码</span></p>
-                                <p>机器人已尝试发出对话邀请</p>
+                                <p>在 <a ng-click="login.utils.firefoxLinkFix($event)" ng-href="steam://open/friends">Steam 好友列表</a> 中发起对话</p>
                             </div>
                             <div class="right font-consolas">
                                 {{login.steamRobotWayManager.code}}

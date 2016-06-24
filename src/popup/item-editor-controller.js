@@ -188,8 +188,6 @@
                     }
                 }
                 submitObj = this.updateObject;
-
-                console.log(submitObj);
             }
 
             this.$http.put(`${this.apiEndpoint}${this.submitLink}`, submitObj).then(response => {

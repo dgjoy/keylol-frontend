@@ -20,7 +20,6 @@
                     this.isToNext = newPage > oldPage;
                     this.list = response.data;
                     this.pre(this.list);
-                    console.log(this.list);
                     this.changePageLock = false;
                 }, response => {
                     this.changePageLock = false;
