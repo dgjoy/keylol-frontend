@@ -1,0 +1,174 @@
+﻿<window position="center" class="window-point-creator">
+    <div class="window">
+        <div class="header">
+            <div class="text">
+                <p>开设新据点</p>
+                <p>按照主题选择据点类型</p>
+            </div>
+            <img src="assets/images/point-creating-bulb.png">
+        </div>
+        <tabs tab-array="::pointCreator.tabArray" cur-tab="pointCreator.currentType" click-handler="pointCreator.changeType(index)"></tabs>
+        <div class="point-creator-wrapper">
+            <div class="swap-animation" ng-class="{'swap-left': pointCreator.currentType > 0, 'swap-active': pointCreator.currentType === 0}">
+                <tabs class="invert" invert="true" tab-array="pointCreator.gameTabArray" cur-tab="pointCreator.currentGameType" click-handler="pointCreator.changeType(index, true)"></tabs>
+                <div class="game-wrapper">
+                    <form class="swap-animation" ng-class="{'swap-left': pointCreator.currentGameType > 0, 'swap-active': pointCreator.currentGameType === 0}">
+                        <div class="steam-game" ng-style="{'max-height': pointCreator.steamHeight}">
+                            <div class="text-content">
+                                <text-area class="app-id" state="pointCreator.steamExpanded? 'disabled' : pointCreator.extra.SteamGame.linkError ? 'warn' : 'normal'" error="pointCreator.extra.SteamGame.linkError" type="text" label="Steam 商店地址" tip="'也可以只填商店的数字 App ID'" model="pointCreator.extra.SteamGame.link"></text-area>
+                                <div ng-show="pointCreator.steamExpanded">
+                                    <text-area type="text" label="外文名" tip="'日系厂商和游戏的外文名为日语，其他情况均为英语'" model="pointCreator.vm.SteamGame.englishName"></text-area>
+                                    <text-area type="text" label="中文名" tip="'按官设、玩家习惯、自行翻译的先后顺序选择合适的中文名'" model="pointCreator.vm.SteamGame.chineseName "></text-area>
+                                    <text-area type="uic" label="据点识别码" tip="'选择五位代码代表据点，作为链接和后台的唯一凭证，设定后不可更改'" model="pointCreator.vm.SteamGame.idCode"></text-area>
+                                </div>
+                            </div>
+                            <div ng-show="pointCreator.steamExpanded" class="image-content">
+                                <div class="thumbnail-wrapper">
+                                    <p>缩略图</p>
+                                    <img webp-src="{{pointCreator.extra.SteamGame.thumbnailImage | thumbnailUrl}}">
+                                </div>
+                                <div class="avatar-wrapper">
+                                    <p>头像</p>
+                                    <div>
+                                        <img webp-src="{{pointCreator.extra.SteamGame.avatarImage | avatarUrl: 'big': true}}">
+                                        <div>
+                                            <img webp-src="{{pointCreator.extra.SteamGame.avatarImage | avatarUrl: '': true}}">
+                                            <img webp-src="{{pointCreator.extra.SteamGame.avatarImage | avatarUrl: 'small': true}}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="actions">
+                            <raised-button ng-if="!pointCreator.steamExpanded" type="theme" text="抓取" click="pointCreator.steamCapture()" disabled="pointCreator.captureLock || !pointCreator.extra.SteamGame.link"></raised-button>
+                            <raised-button ng-if="pointCreator.steamExpanded" click="pointCreator.submit('SteamGame')" disabled="pointCreator.submitLock || !(pointCreator.vm.SteamGame.englishName && pointCreator.vm.SteamGame.idCode.length === 5)" type="theme" text="开设"></raised-button>
+                            <flat-button type="inertia" text="放弃" click="pointCreator.close()"></flat-button>
+                        </div>
+                    </form>
+                    <form class="swap-animation" ng-class="{'swap-right': pointCreator.currentGameType < 1, 'swap-active': pointCreator.currentGameType === 1}">
+                        <div class="normal-point">
+                            <div class="header-image">
+                                <label>页眉照片</label>
+                                <a href="" popup="pointCreator.extra.OtherGame.headerImage" ngf-select="pointCreator.uploadImage($file, $event, 'OtherGame', 'headerImage')" ngf-fix-orientation="true" accept="image/*">{{pointCreator.vm.OtherGame.headerImage ? '重新' : ''}}上传</a>
+                                <div class="preview" ng-class="{empty: !pointCreator.vm.OtherGame.headerImage}" webp-background="{{pointCreator.vm.OtherGame.headerImage | uriRelocate}}">
+                                    <span>据点、来稿文章的顶部图片，建议使用游戏截图或艺术原画</span>
+                                    <span>适宜图像大小为 940 x 200 或更高像素</span>
+                                </div>
+                            </div>
+                            <div class="platform">
+                                <label>载体或平台</label>
+                                <input-checkbox names="pointCreator.nameOfPlatformPoints" ng-model="pointCreator.extra.OtherGame.platformPoints"></input-checkbox>
+                            </div>
+                            <div class="info-detail">
+                                <div class="text-content">
+                                    <text-area type="text" label="外文名" tip="'日系厂商和游戏的外文名为日语，其他情况均为英语'" model="pointCreator.vm.OtherGame.englishName"></text-area>
+                                    <text-area type="text" label="中文名" tip="'按官设、玩家习惯、自行翻译的先后顺序选择合适的中文名'" model="pointCreator.vm.OtherGame.chineseName "></text-area>
+                                    <text-area type="uic" label="据点识别码" tip="'选择五位代码代表据点，作为链接和后台的唯一凭证，设定后不可更改'" model="pointCreator.vm.OtherGame.idCode"></text-area>
+                                </div>
+                                <div class="avatar-wrapper">
+                                    <label>头像</label>
+                                    <a href="" popup="pointCreator.extra.OtherGame.avatarImage" ngf-select="pointCreator.uploadImage($file, $event, 'OtherGame', 'avatarImage')" ngf-fix-orientation="true" accept="image/*">{{pointCreator.vm.OtherGame.avatarImage ? '重新' : ''}}上传</a>
+                                    <div>
+                                        <span webp-background="{{pointCreator.vm.OtherGame.avatarImage | avatarUrl: 'large': true}}"></span>
+                                        <div>
+                                            <span webp-background="{{pointCreator.vm.OtherGame.avatarImage | avatarUrl: 'big': true}}"></span>
+                                            <div>
+                                                <span webp-background="{{pointCreator.vm.OtherGame.avatarImage | avatarUrl: '': true}}"></span>
+                                                <span webp-background="{{pointCreator.vm.OtherGame.avatarImage | avatarUrl: 'small': true}}"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="actions">
+                            <raised-button type="theme" text="开设" click="pointCreator.submit('OtherGame')" disabled="pointCreator.submitLock || !(pointCreator.vm.OtherGame.englishName && pointCreator.vm.OtherGame.headerImage && pointCreator.vm.OtherGame.avatarImage && pointCreator.vm.OtherGame.idCode.length === 5 && pointCreator.extra.OtherGame.platformPoints.length > 0)"></raised-button>
+                            <flat-button type="inertia" text="放弃" click="pointCreator.close()"></flat-button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <form class="swap-animation" ng-class="{'swap-left': pointCreator.currentType > 1, 'swap-right': pointCreator.currentType < 1, 'swap-active': pointCreator.currentType === 1}">
+                <div class="normal-point">
+                    <div class="header-image">
+                        <label>页眉照片</label>
+                        <a href="" popup="pointCreator.extra.Hardware.headerImage" ngf-select="pointCreator.uploadImage($file, $event, 'Hardware', 'headerImage')" ngf-fix-orientation="true" accept="image/*">{{pointCreator.vm.Hardware.headerImage ? '重新' : ''}}上传</a>
+                        <div class="preview" ng-class="{empty: !pointCreator.vm.Hardware.headerImage}" webp-background="{{pointCreator.vm.Hardware.headerImage | uriRelocate: '/both/670x142'}}">
+                            <span>据点、来稿文章的顶部图片，建议使用广告照片或概念艺术</span>
+                            <span>适宜图像大小为 940 x 200 或更高像素</span>
+                        </div>
+                    </div>
+                    <div class="info-detail">
+                        <div class="text-content">
+                            <text-area type="text" label="外文名" tip="'日系厂商和游戏的外文名为日语，其他情况均为英语'" model="pointCreator.vm.Hardware.englishName"></text-area>
+                            <text-area type="text" label="中文名" tip="'按官设、玩家习惯、自行翻译的先后顺序选择合适的中文名'" model="pointCreator.vm.Hardware.chineseName "></text-area>
+                            <text-area type="uic" label="据点识别码" tip="'选择五位代码代表据点，作为链接和后台的唯一凭证，设定后不可更改'" model="pointCreator.vm.Hardware.idCode"></text-area>
+                        </div>
+                    </div>
+                </div>
+                <div class="actions">
+                    <raised-button type="theme" text="开设" click="pointCreator.submit('Hardware')" disabled="pointCreator.submitLock || !(pointCreator.vm.Hardware.englishName && pointCreator.vm.Hardware.headerImage && pointCreator.vm.Hardware.idCode.length === 5)"></raised-button>
+                    <flat-button type="inertia" text="放弃" click="pointCreator.close()"></flat-button>
+                </div>
+            </form>
+            <form class="swap-animation" ng-class="{'swap-left': pointCreator.currentType > 2, 'swap-right': pointCreator.currentType < 2, 'swap-active': pointCreator.currentType === 2}">
+                <div class="normal-point">
+                    <div class="info-detail">
+                        <div class="text-content">
+                            <text-area type="text" label="外文名" tip="'日系厂商和游戏的外文名为日语，其他情况均为英语'" model="pointCreator.vm.Vendor.englishName"></text-area>
+                            <text-area type="text" label="中文名" tip="'按官设、玩家习惯、自行翻译的先后顺序选择合适的中文名'" model="pointCreator.vm.Vendor.chineseName "></text-area>
+                            <text-area type="uic" label="据点识别码" tip="'选择五位代码代表据点，作为链接和后台的唯一凭证，设定后不可更改'" model="pointCreator.vm.Vendor.idCode"></text-area>
+                        </div>
+                        <div class="avatar-wrapper">
+                            <label>头像</label>
+                            <a href="" popup="pointCreator.extra.Vendor.avatarImage" ngf-select="pointCreator.uploadImage($file, $event, 'Vendor', 'avatarImage')" ngf-fix-orientation="true" accept="image/*">{{pointCreator.vm.Vendor.avatarImage ? '重新' : ''}}上传</a>
+                            <div>
+                                <span webp-background="{{pointCreator.vm.Vendor.avatarImage | avatarUrl: 'large': true}}"></span>
+                                <div>
+                                    <span webp-background="{{pointCreator.vm.Vendor.avatarImage | avatarUrl: 'big': true}}"></span>
+                                    <div>
+                                        <span webp-background="{{pointCreator.vm.Vendor.avatarImage | avatarUrl: '': true}}"></span>
+                                        <span webp-background="{{pointCreator.vm.Vendor.avatarImage | avatarUrl: 'small': true}}"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="actions">
+                    <raised-button type="theme" text="开设" click="pointCreator.submit('Vendor')" disabled="pointCreator.submitLock || !(pointCreator.vm.Vendor.englishName && pointCreator.vm.Vendor.avatarImage && pointCreator.vm.Vendor.idCode.length === 5)"></raised-button>
+                    <flat-button type="inertia" text="放弃" click="pointCreator.close()"></flat-button>
+                </div>
+            </form>
+            <form class="swap-animation" ng-class="{'swap-right': pointCreator.currentType < 3, 'swap-active': pointCreator.currentType === 3}">
+                <div class="normal-point">
+                    <div class="info-detail">
+                        <div class="text-content">
+                            <text-area type="text" label="外文名" tip="'日系厂商和游戏的外文名为日语，其他情况均为英语'" model="pointCreator.vm.Category.englishName"></text-area>
+                            <text-area type="text" label="中文名" tip="'按官设、玩家习惯、自行翻译的先后顺序选择合适的中文名'" model="pointCreator.vm.Category.chineseName "></text-area>
+                            <text-area type="uic" label="据点识别码" tip="'选择五位代码代表据点，作为链接和后台的唯一凭证，设定后不可更改'" model="pointCreator.vm.Category.idCode"></text-area>
+                        </div>
+                        <div class="avatar-wrapper">
+                            <label>头像</label>
+                            <a href="" popup="pointCreator.extra.Category.avatarImage" ngf-select="pointCreator.uploadImage($file, $event, 'Category', 'avatarImage')" ngf-fix-orientation="true" accept="image/*">{{pointCreator.vm.Category.avatarImage ? '重新' : ''}}上传</a>
+                            <div>
+                                <span webp-background="{{pointCreator.vm.Category.avatarImage | avatarUrl: 'large': true}}"></span>
+                                <div>
+                                    <span webp-background="{{pointCreator.vm.Category.avatarImage | avatarUrl: 'big': true}}"></span>
+                                    <div>
+                                        <span webp-background="{{pointCreator.vm.Category.avatarImage | avatarUrl: '': true}}"></span>
+                                        <span webp-background="{{pointCreator.vm.Category.avatarImage | avatarUrl: 'small': true}}"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="actions">
+                    <raised-button type="theme" text="开设" click="pointCreator.submit('Category')" disabled="pointCreator.submitLock || !(pointCreator.vm.Category.englishName && pointCreator.vm.Category.avatarImage && pointCreator.vm.Category.idCode.length === 5)"></raised-button>
+                    <flat-button type="inertia" text="放弃" click="pointCreator.close()"></flat-button>
+                </div>
+            </form>
+        </div>
+    </div>
+</window>

@@ -1,0 +1,70 @@
+user-card {
+  @include keylol-shadow-1;
+  background-color: $keylol-card;
+  width: 160px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 140px;
+
+  p {
+    margin: 0;
+  }
+
+
+  .background {
+    background-size: cover;
+    width: 100%;
+    height: 30px;
+  }
+
+  a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 0;
+
+    img-label {
+      top: -9px;
+      left: calc(50% - 21px);
+    }
+
+    .avatar {
+      @include keylol-shadow-1;
+      margin-top: -16px;
+      border-radius: 16px;
+      width:32px;
+      height:32px;
+    }
+
+    .bundle {
+      height: 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      .nickname {
+        padding-top: 2px;
+        margin-bottom: -2px;
+        color: $keylol-main-text;
+        font-weight: bold;
+      }
+
+      .remark {
+        color: $keylol-inertia-text;
+        font-size: 12px;
+      }
+    }
+
+
+    &:hover {
+      .bundle {
+        .nickname {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}

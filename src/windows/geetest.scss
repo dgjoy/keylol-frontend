@@ -1,0 +1,10 @@
+.window-geetest {
+  .window {
+    @include keylol-shadow-3();
+    background-color: $keylol-card;
+
+    .gee {
+      padding: 50px;
+    }
+  }
+}

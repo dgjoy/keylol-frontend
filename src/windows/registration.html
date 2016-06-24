@@ -1,0 +1,144 @@
+﻿<window position="center" class="window-registration">
+    <div class="window">
+        <div class="header">
+            <div class="text">
+                <p>加入其乐游戏社区</p>
+                <p>连接游戏平台，获取量身订造的信息轨道</p>
+            </div>
+            <img src="assets/images/logo-arrow.png">
+        </div>
+        <div class="content">
+            <div class="input-conn">
+                <text-area type="dropdown"
+                           label="选择游戏平台"
+                           model="registration.platform"
+                           object="registration.platformsToSelect"
+                           state="registration.connected?'disabled':'normal'"
+                ></text-area>
+                <text-area ng-if="registration.phase === '连接成功' || registration.phase === '填写表单'"
+                           type="text"
+                           label="已连接 Steam 账户"
+                           model="registration.conn.vm.SteamProfileName"
+                           state="'disabled'"
+                           class="fixed-width"
+                ></text-area>
+                <img ng-if="registration.phase === '连接成功' || registration.phase === '填写表单'" class="avatar" webp-src="{{ registration.conn.vm.AvatarImage | avatarUrl}}" alt="">
+            </div>
+            <div class="input-user" ng-if="registration.phase === '填写表单'">
+                <text-area style="width: 200px;"
+                           type="text"
+                           label="昵称"
+                           model="registration.conn.vm.UserName"
+                           tip="'日常界面展示的社区名称'"
+                           state="registration.error['requestDto.UserName']?'warn':'normal'"
+                           error="registration.error['requestDto.UserName']"
+                ></text-area>
+                <text-area class="fixed-width"
+                           type="password"
+                           label="登录口令"
+                           model="registration.conn.vm.Password"
+                           state="registration.error['requestDto.Password']?'warn':'normal'"
+                           error="registration.error['requestDto.Password']"
+                ></text-area>
+                <text-area type="uic"
+                           label="用户识别码"
+                           model="registration.conn.vm.IdCode"
+                           state="registration.error['requestDto.IdCode']?'warn':'normal'"
+                           error="registration.error['requestDto.IdCode']"
+                           style="margin-right: 100px;margin-top: 10px;"
+                ></text-area>
+            </div>
+            <phase ng-if="registration.phase !== '未选择平台' && registration.phase !== '填写表单'" phases="registration.conn.phases" index="registration.conn.index"></phase>
+        </div>
+        <div class="conn" ng-if="registration.phase !== '未选择平台' && registration.phase !== '填写表单'">
+            <div class="inner" ng-if="registration.conn.index === 0">
+                <div class="left">
+                    <p>在 Steam 中将 <span class="blue">{{registration.conn.botName}}</span> 加为好友</p>
+                    <p>
+                        快速添加前需要启动 Steam，你也可以访问机器人的 <a ng-href="https://steamcommunity.com/profiles/{{registration.conn.botSteamId64}}">社区资料页</a>
+                        <svg aria-hidden="true">
+                            <use ng-href="{{'open-in-new' | iconSvgUrl }}" xlink:href=""></use>
+                        </svg>
+                        手动添加
+                    </p>
+                </div>
+                <div class="right" >
+                    <a ng-href="steam://friends/add/{{registration.conn.botSteamId64}}" ng-click="registration.utils.firefoxLinkFix($event)"><raised-button type="light-theme" text="快速添加"></raised-button></a>
+                </div>
+            </div>
+            <div class="inner" ng-if="registration.conn.index === 1">
+                <div class="left">
+                    <p>向其乐机器人发送 <span class="blue">验证码</span></p>
+                    <p>通过 Steam 对话发送右边的 8 位验证码</p>
+                </div>
+                <div class="right">
+                    <p class="code font-consolas">{{registration.conn.code}}</p>
+                </div>
+            </div>
+            <div class="inner" ng-if="registration.conn.index === 2">
+                <div class="user">
+                    <img webp-src="{{ registration.conn.vm.AvatarImage | avatarUrl }}" />
+                    <div>
+                        <p>{{ registration.conn.vm.SteamProfileName }}</p>
+                        <p>欢迎回来</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div ng-switch="registration.phase">
+            <div class="actions" ng-switch-when="未选择平台">
+                <a href="" ng-click="registration.openLogin()">已注册账号？在这里登录</a>
+                <div class="wrapper">
+                    <flat-button text="放弃" type="inertia" click="registration.close()"></flat-button>
+                    <div class="gap"></div>
+                    <raised-button text="注册" type="theme" disabled="true"></raised-button>
+                </div>
+            </div>
+
+            <div class="actions" ng-switch-when="添加好友">
+                <div class="wrapper">
+                    <span>若成功添加机器人后没有响应，你可以手动点击下一步继续</span>
+                </div>
+                <div class="wrapper">
+                    <flat-button text="放弃" type="inertia" click="registration.close()"></flat-button>
+                    <div class="gap"></div>
+                    <raised-button click="registration.goForward()" text="下一步" type="inertia"></raised-button>
+                </div>
+            </div>
+
+            <div class="actions" ng-switch-when="发送验证码">
+                <div class="wrapper">
+                    <raised-button click="registration.goBack()" text="上一步" type="inertia"></raised-button>
+                    <div class="gap"></div>
+                    <span>若未能成功添加机器人好友，你可以手动点击上一步返回</span>
+                </div>
+                <div class="wrapper">
+                    <flat-button text="放弃" type="inertia" click="registration.close()"></flat-button>
+                </div>
+            </div>
+
+            <div class="actions" ng-switch-when="连接成功">
+                <div class="wrapper">
+                    &nbsp;
+                </div>
+                <div class="wrapper">
+                    <flat-button text="放弃" type="inertia" click="registration.close()"></flat-button>
+                    <div class="gap"></div>
+                    <raised-button text="注册" type="theme" disabled="true"></raised-button>
+                </div>
+            </div>
+
+            <div class="actions" ng-switch-when="填写表单">
+                <div class="wrapper">
+                    注册用户需阅读并同意 <a href="">《其乐游戏社区 用户协议》</a>
+                </div>
+                <div class="wrapper">
+                    <flat-button text="放弃" type="inertia" click="registration.close()"></flat-button>
+                    <div class="gap"></div>
+                    <raised-button text="注册" type="theme" click="registration.submit()" disabled="!registration.conn.vm.UserName || !registration.conn.vm.IdCode || !registration.conn.vm.Password"></raised-button>
+                </div>
+            </div>
+        </div>
+    </div>
+</window>

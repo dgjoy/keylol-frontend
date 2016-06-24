@@ -1,0 +1,79 @@
+article-header {
+  display: block;
+  margin-bottom: 30px;
+  .fake-left {
+    position: absolute;
+    left: 0;
+    width: calc(50% + 230px);
+    height: 80px;
+    background-color: $keylol-theme;
+  }
+  .fake-right {
+    position: absolute;
+    right: 0;
+    width: calc(50% - 490px);
+    height: 80px;
+    background-color: $keylol-theme;
+  }
+
+  .name-group {
+    p {
+      margin: 0;
+      color: $keylol-inverted-text;
+    }
+    p:first-of-type {
+      font-size: 20px;
+    }
+  }
+
+  .title {
+    position: relative;
+    margin-bottom: 30px;
+    left: 0;
+    height: 80px;
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .name-group p:first-of-type {
+      font-weight: bold;
+      padding-bottom: 6px;
+    }
+
+    .action {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+
+      icon-button {
+        padding-bottom: 10px;
+      }
+
+      p {
+        margin: 0;
+        color: $keylol-inverted-text;
+      }
+    }
+  }
+
+  .moderation {
+    @include keylol-shadow-1();
+    background-color: $keylol-light-theme;
+    margin-bottom: 20px;
+    height: 80px;
+    padding: 0 15px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    img {
+      width: 180px;
+    }
+
+    .name-group p:first-of-type {
+      padding-bottom: 2px;
+    }
+  }
+}

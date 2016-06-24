@@ -1,0 +1,15 @@
+﻿<nav theme="theme"></nav>
+<div class="container">
+    <div ng-if="stateTree.content.article" class="flex-row" style="margin-top: 30px;">
+        <div class="left-middle-lg row-sm">
+            <article-header article="stateTree.content.article" theme="theme" style="margin-bottom:30px"></article-header>
+            <article-content theme="theme" article="stateTree.content.article" style="margin-bottom:30px;"></article-content>
+            <article-summary style="position: absolute;width: 100%;left: 0;" theme="theme" article="stateTree.content.article"></article-summary>
+            <article-comments style="margin-top:400px; margin-bottom:30px; " theme="theme" article="stateTree.content.article"></article-comments>
+        </div>
+        <div class="right-lg hidden-sm flex-column">
+            <right-menus style="flex-grow: 1" author="stateTree.content.article.authorBasicInfo" point="stateTree.content.article.pointBasicInfo"></right-menus>
+        </div>
+    </div>
+</div>
+<footer theme="theme"></footer>

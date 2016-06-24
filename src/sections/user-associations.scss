@@ -1,0 +1,66 @@
+user-associations {
+  @include keylol-shadow-1;
+  background-color: $keylol-card;
+  display: block;
+  border-radius: 2px;
+
+  >.statics {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 70px;
+
+    >.blank {
+      flex-grow: 1;
+    }
+    >.bundle {
+      flex-grow: 0;
+      margin-left: 15px;
+      margin-right: 35px;
+
+      >p {
+        margin: 0;
+      }
+      >p:first-of-type {
+        color: $keylol-inertia-text;
+        font-size: 12px;
+      }
+      >p:last-of-type {
+        color: $keylol-main-text;
+      }
+    }
+  }
+
+  >.characteristics {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    background-color: $keylol-inertia-shape;
+
+    >.link-white {
+      margin: 0 10px;
+      display: flex;
+      align-items: center;
+
+      >span {
+        color: $keylol-inverted-text;
+      }
+
+      >svg {
+        height: 24px;
+        width: 24px;
+        margin-right: 6px;
+        fill: $keylol-inverted-text;
+      }
+
+      .link {
+        color: $keylol-inverted-text;
+      }
+
+      .link:hover{
+        text-decoration: underline;
+      }
+    }
+  }
+}

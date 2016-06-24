@@ -1,0 +1,279 @@
+.window-settings .window {
+    padding: 14px;
+    width: 900px;
+}
+
+.window-settings .error {
+    color: red;
+}
+
+.window-settings .tab-changed {
+    position: relative;
+}
+
+.window-settings .tab-changed::after {
+    content: "*";
+    position: absolute;
+    top: 0;
+}
+
+.window-settings .tab-changed.tab-error::after {
+    color: red;
+}
+
+.window-settings .heading {
+    margin: 28px 0;
+}
+
+.window-settings .heading .menu-right {
+    float: right;
+    font-size: 15px;
+    margin-top: 6px;
+}
+
+.window-settings .heading .menu-right ul li {
+    margin-left: 30px;
+}
+
+.window-settings .heading .menu-right ul li:first-of-type {
+    margin-left: 0;
+}
+
+.window-settings .heading .menu-right ul li a {
+    color: $keylol-highlight;
+}
+
+.window-settings .heading .menu-right ul li.current {
+    font-weight: bold;
+}
+
+.window-settings .heading .menu-right ul li.current a {
+    color: #333;
+    text-decoration: none;
+    cursor: default;
+}
+
+.window-settings .avatar-box-left-spacing {
+    border: none;
+}
+
+.window-settings .upload-avatar {
+    text-align: center;
+    position: relative;
+}
+
+.window-settings .upload-avatar .avatar {
+    width: 112px;
+    height: 112px;
+    margin: 0 auto;
+    background-size: cover;
+    background-position: center;
+}
+
+.window-settings .upload-avatar .clear-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 12px;
+    height: 12px;
+    background: url(../../assets/images/clear-button.png) no-repeat;
+    background-size: contain;
+    cursor: pointer;
+}
+
+.window-settings table {
+    margin: 28px 0;
+    width: 100%;
+}
+
+.window-settings .profile-point-background {
+    margin: 14px 0;
+    text-align: center;
+    position: relative;
+}
+
+.window-settings .profile-point-background .clear-button {
+    position: absolute;
+    top: 0;
+    left: calc(50% + 325px);
+    width: 12px;
+    height: 12px;
+    background: url(../../assets/images/clear-button.png) no-repeat;
+    background-size: contain;
+    cursor: pointer;
+}
+
+.window-settings .profile-point-background .image {
+    width: 640px;
+    height: 92px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.window-settings .profile-point-background .image.as-background {
+    background-size: cover;
+    background-position: center;
+}
+
+.window-settings .profile-point-background.no-image {
+    width: 640px;
+    height: 92px;
+    padding-top: 18px;
+    box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px dashed $keylol-highlight;
+}
+
+.window-settings .profile-point-background.no-image h4 {
+    margin-bottom: 8px;
+}
+
+.window-settings .platform-status {
+    width: 18%;
+    float: left;
+    text-align: center;
+    position: relative;
+    margin: 7px 0 9px;
+    box-sizing: border-box;
+}
+
+.window-settings .platform-status [class^=light] {
+    border-radius: 50%;
+    height: 10px;
+    width: 10px;
+    display: inline-block;
+    margin-right: 4px;
+}
+
+.window-settings .platform-status .light-grey {
+    background-color: #CCC;
+}
+
+.window-settings .platform-status .light-red {
+    background-color: #e30613;
+}
+
+.window-settings .platform-status .light-green {
+    background-color: #00AF41;
+}
+
+.window-settings .platform-status.larger {
+    width: 28%;
+}
+
+.window-settings .platform-status.right-border {
+    border-right: 1px solid $keylol-highlight;
+}
+
+.window-settings .platform-status .text-block {
+    display: inline-block;
+    text-align: left;
+}
+
+.window-settings .platform-status .bot-steam-profile-anchor {
+    color: $keylol-highlight;
+}
+
+.window-settings .platform-status .pasted-card {
+    position: absolute;
+    top: 0;
+    left: -25px;
+    width: calc(100% + 25px);
+}
+
+.window-settings .resync {
+    float: right;
+    color: $keylol-highlight;
+    margin: 5px 5px 0;
+}
+
+.window-settings .checkbox-group {
+    margin: 12px 0;
+}
+
+.window-settings .checkbox-group div {
+    display: block;
+    width: 20%;
+    float: left;
+    text-indent: 2%;
+}
+
+.window-settings .checkbox-group.more div {
+    width: 8%;
+}
+
+.window-settings .checkbox-group label {
+    padding-left: 2px;
+}
+
+/* Customized Checkbox (Disabled) */
+/*.window-settings-checkbox {
+    width: 120px;
+    margin: 6px 26px;
+    position: relative;
+    float: left;
+}
+
+    .window-settings-checkbox span {
+        margin-left: 4px;
+    }
+
+    .window-settings-checkbox label {
+        cursor: pointer;
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        top: 0;
+        left: 0;
+        background: #eee;
+        border: 1px solid #ddd;
+    }
+
+        .window-settings-checkbox label:after {
+            opacity: 0.2;
+            content: '';
+            position: absolute;
+            width: 9px;
+            height: 5px;
+            background: transparent;
+            top: 2px;
+            left: 2px;
+            border: 3px solid #333;
+            border-top: none;
+            border-right: none;
+            -webkit-transform: rotate(-45deg);
+            -moz-transform: rotate(-45deg);
+            -o-transform: rotate(-45deg);
+            -ms-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+        }
+
+        .window-settings-checkbox label:hover::after {
+            opacity: 0.5;
+        }
+
+    .window-settings-checkbox input[type=checkbox]:checked + label:after {
+        opacity: 1;
+    }*/
+
+.window-settings [id^=geetest-] {
+    margin: 14px 0;
+}
+
+.window-settings .tips {
+    max-width: 580px;
+    padding-top: 8px;
+}
+
+.window-settings .tips h3.single-line + h4 {
+    top: 6px;
+}
+
+.window-settings .tips p a {
+    color: $keylol-highlight;
+}
+
+.window-settings .window .window-confirm-button {
+    margin-right: -24px;
+}

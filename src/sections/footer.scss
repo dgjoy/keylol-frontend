@@ -1,0 +1,124 @@
+footer {
+  width: 100%;
+  min-width: 1060px;
+
+  .wrapper {
+    margin: auto;
+    width: 1060px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .more-link {
+    background-color: $keylol-light-theme;
+
+    .wrapper {
+      height: 196px;
+      overflow: hidden;
+      color: $keylol-inverted-text;
+      fill: $keylol-inverted-text;
+
+      .intro {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 517px;
+
+        .site {
+          p {
+            margin: 0;
+
+            span {
+              margin-right: 10px;
+            }
+          }
+
+          .keylol {
+            p {
+              &:first-of-type {
+                margin-bottom: 4px;
+              }
+
+              span {
+                font-size: 24px;
+              }
+            }
+
+            margin-bottom: 34px;
+          }
+
+          .steamcn {
+            display: flex;
+            align-items: center;
+
+            p {
+              &:first-of-type {
+                margin-bottom: 4px;
+              }
+
+              span {
+                font-size: 20px;
+              }
+            }
+
+            svg {
+              width: 48px;
+              height: 48px;
+              margin-right: 10px;
+            }
+          }
+        }
+
+        img {
+          height: 232px;
+          width: auto;
+          transform: rotate(-15deg);
+          position: relative;
+          top: -11px;
+        }
+      }
+
+      .link {
+        display: flex;
+        justify-content: space-between;
+        width: 460px;
+
+        ul {
+          list-style: none;
+          margin: 30px 0 0;
+          padding-left: 15px;
+          box-sizing: border-box;
+          width: 100px;
+
+          li {
+            margin-bottom: 6px;
+
+            &:first-of-type {
+              font-weight: bold;
+              margin-bottom: 14px;
+            }
+
+            a {
+              color: $keylol-inverted-text;
+
+              &:hover {
+                text-decoration: underline;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .about {
+    background-color: $keylol-theme;
+    font-size: 12px;
+
+    .wrapper {
+      height: 36px;
+      align-items: center;
+      color: rgba($keylol-inverted-text, 0.6);
+    }
+  }
+}

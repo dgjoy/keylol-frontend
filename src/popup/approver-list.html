@@ -1,0 +1,21 @@
+﻿<popup class="popup-approver-list">
+    <div class="header">
+        <div class="bundle">
+            <p>点过认可的用户</p>
+            <p>一共 53 位用户点过认可</p>
+        </div>
+        <raised-button text="+53"></raised-button>
+    </div>
+    <div class="page-wrapper {{approverList.swapDirection}}">
+        <div class="page swap-animation" ng-animate-swap="approverList.currentPage">
+            <a href="" class="item" ng-repeat="i in approverList.pages[approverList.currentPage-1]">
+                <img class="avatar" webp-src="{{'keylol://steam/avatars/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb.jpg' | avatarUrl}}">
+                <div class="bundle">
+                    <p>程晓峰</p>
+                    <p>139 篇文章 / 3 则动态 / 获得 47 份认可</p>
+                </div>
+            </a>
+        </div>
+    </div>
+    <pagination total="approverList.totalPage" current="approverList.currentPage" on-page-changed="approverList.changePage(newPage, oldPage)"></pagination>
+</popup>

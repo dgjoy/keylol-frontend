@@ -1,12 +1,12 @@
 (function () {
-    "use strict";
+    'use strict';
 
     keylolApp.config([
-        "apiEndpointProvider",
+        'apiEndpointProvider',
         function(apiEndpointProvider){
-            apiEndpointProvider.setEndPoint("<%= apiEndpoint %>");
+            apiEndpointProvider.setEndPoint('<%= apiEndpoint %>');
         }
     ]);
 
-    window.apiEndpoint = "<%= apiEndpoint %>";
+    window.apiEndpoint = '<%= apiEndpoint %>';
 })();

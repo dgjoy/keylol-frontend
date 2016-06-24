@@ -1,0 +1,12 @@
+<a class="info" href="" ng-href="point/{{gameCard.card.idCode}}" ripple>
+    <point-basic-info point="gameCard.card"></point-basic-info>
+</a>
+<div class="point-img" webp-background="{{gameCard.card.titleCoverImage | defaultFallback | uriRelocate: '/both/220x100'}}"></div>
+<div class="actions">
+    <vote-circle ng-if="gameCard.card.averageRating !== undefined" review="::gameCard.card.averageRating" gray-background="true"></vote-circle>
+    <span ng-if="gameCard.card.averageRating === undefined">评价不足</span>
+    <flat-button ng-if="gameCard.stateTree.currentUser" binary-set="gameCard.subscribeSet" binary-value="gameCard.card.subscribed"
+                 click="gameCard.subscribe(gameCard.card.id, gameCard.card.subscribed, gameCard.card)"></flat-button>
+    <flat-button ng-if="!gameCard.stateTree.currentUser" text="订阅"
+                 click="gameCard.openRegistration(event)"></flat-button>
+</div>

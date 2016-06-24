@@ -1,0 +1,17 @@
+<button  type="{{raisedButton.isSubmit ? 'submit' : 'button'}}" popup="raisedButton.showPopup" class="{{raisedButton.type}}" ng-click="raisedButton.click({event: $event})" ng-class="{invert: raisedButton.invert}"
+         style="{{(raisedButton.themeColor && raisedButton.type === 'theme' && !raisedButton.disabled) ? (raisedButton.invert ? 'color: ' + raisedButton.themeColor + ';' + 'fill: ' + raisedButton.themeColor + ';' : 'background-color: ' + raisedButton.themeColor + ';') : ''}}"
+         ripple="{{raisedButton.invert ? raisedButton.themeColor || raisedButton.type : '#fff'}}" ng-disabled="raisedButton.disabled">
+    <span class="value false-value" ng-class="{active: !raisedButton.binaryValue}">
+        <svg ng-if="raisedButton.binarySet[0].icon"
+             aria-hidden="true">
+            <use ng-href="{{raisedButton.binarySet[0].icon | iconSvgUrl }}" xlink:href=""></use>
+        </svg>
+        <span>{{raisedButton.binarySet[0].text || raisedButton.text}}</span>
+    </span>
+    <span class="value true-value" ng-class="{active: raisedButton.binaryValue}">
+        <svg ng-if="raisedButton.binarySet[1].icon" aria-hidden="true">
+            <use ng-href="{{raisedButton.binarySet[1].icon | iconSvgUrl }}" xlink:href=""></use>
+        </svg>
+        <span>{{raisedButton.binarySet[1].text}}</span>
+    </span>
+</button>

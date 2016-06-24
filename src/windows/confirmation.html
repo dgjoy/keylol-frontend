@@ -1,0 +1,101 @@
+﻿<window position="center" class="window-confirmation">
+    <div class="window">
+        <div class="window-exit-button" ng-click="Confirmation.cancel()">
+            <div ng-include="'assets/images/exit.svg'"></div>
+        </div>
+        <img class="secret-barcode" src="assets/images/secret-barcode.png" alt="条形码">
+        <div class="heading">
+            <h1 class="font-myriad-lisong">残缺不堪的据点资料</h1>
+            <h2>你可以完善未获取的信息，也可以直接开设此据点</h2>
+        </div>
+        <form class="clearfix" ng-submit="Confirmation.submit()">
+            <flashing-figure stations='[
+                {
+                    cnName: "输入链接",
+                    enName: "Link Received"
+                },
+                {
+                    cnName: "抓取信息",
+                    enName: "Fetching Information"
+                },
+                {
+                    cnName: "确认据点",
+                    enName: "Confirm Point"
+                },
+                {
+                    cnName: "完成开设",
+                    enName: "Finish"
+                }
+            ]' current="2"></flashing-figure>
+            <div class="info-detail">
+                <div class="right-content">
+                    <div class="cover clearfix">
+                        <img src="{{Confirmation.point.CoverImage | coverUrl}}">
+                    </div>
+                    <p class="description">{{Confirmation.point.Description}}</p>
+                </div>
+                <div class="left-content">
+                    <div class="basic">
+                        <div class="avatar-anchor">
+                            <img class="avatar" webp-src="{{Confirmation.point.AvatarImage|avatarUrl}}">
+                        </div>
+                        <div class="name">
+                            <h1>{{Confirmation.utils.getPointFirstName(Confirmation.point)}}</h1>
+                            <h2>中文名有待完善</h2>
+                        </div>
+                    </div>
+                    <div class="info-attribute">
+                        <p ng-if="Confirmation.point.DeveloperPoints.length > 0">
+                            <span class="title">开发厂 ：</span>
+                            <point-link ng-repeat="point in Confirmation.point.DeveloperPoints" type="'point'" id-code="point.IdCode" point-name="'「' + Confirmation.utils.getPointFirstName(point) + '」'"></point-link>
+                        </p>
+                        <p ng-if="Confirmation.point.PublisherPoints.length > 0">
+                            <span class="title">发行商 ：</span>
+                            <point-link ng-repeat="point in Confirmation.point.PublisherPoints" type="'point'" id-code="point.IdCode" point-name="'「' + Confirmation.utils.getPointFirstName(point) + '」'"></point-link>
+                        </p>
+                        <p ng-if="Confirmation.point.SeriesPoints.length > 0">
+                            <span class="title">系列 ：</span>
+                            <point-link ng-repeat="point in Confirmation.point.SeriesPoints" type="'point'" id-code="point.IdCode" point-name="'「' + Confirmation.utils.getPointFirstName(point) + '」'"></point-link>
+                        </p>
+                        <p ng-if="Confirmation.point.GenrePoints.length > 0">
+                            <span class="title">流派 ：</span>
+                            <point-link ng-repeat="point in Confirmation.point.GenrePoints" type="'point'" id-code="point.IdCode" point-name="'「' + Confirmation.utils.getPointFirstName(point) + '」'"></point-link>
+                        </p>
+                        <p ng-if="Confirmation.point.TagPoints.length > 0">
+                            <span class="title">特性 ：</span>
+                            <point-link ng-repeat="point in Confirmation.point.TagPoints" type="'point'" id-code="point.IdCode" point-name="'「' + Confirmation.utils.getPointFirstName(point) + '」'"></point-link>
+                        </p>
+                        <p ng-if="Confirmation.point.DisplayAliases">
+                            <span class="title">别名 ：</span>
+                            <span>{{Confirmation.point.DisplayAliases.text}}</span>
+                        </p>
+                        <p ng-if="Confirmation.point.ReleaseDate">
+                            <span class="title">面市 ：</span>
+                            <span>{{Confirmation.point.ReleaseDate | date: 'yyyy-MM-dd'}}</span>
+                        </p>
+                        <p ng-if="Confirmation.point.MajorPlatformPoints.length > 0">
+                            <span class="title">平台 ：</span>
+                            <point-link ng-repeat="point in Confirmation.point.MajorPlatformPoints" type="'point'" id-code="point.IdCode" point-name="'「' + Confirmation.utils.getPointFirstName(point) + '」'"></point-link>
+                        </p>
+                        <p ng-if="Confirmation.point.MinorPlatformPoints.length > 0">
+                            <span class="title">次要平台 ：</span>
+                            <point-link ng-repeat="point in Confirmation.point.MinorPlatformPoints" type="'point'" id-code="point.IdCode" point-name="'「' + Confirmation.utils.getPointFirstName(point) + '」'"></point-link>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="window-confirm-button">
+                <img class="arrow-right" src="assets/images/arrow-right.png" alt="下一步">
+                <img class="new-point" src="assets/images/new-point.png" alt="提交">
+                <hgroup class="font-myriad-keylol">
+                    <h1>完成开设</h1>
+                    <h2>Finish</h2>
+                </hgroup>
+            </button>
+            <div class="switch-to-edit-info">
+                <button type="button" class="border-button left-border" ng-click="Confirmation.switchToEditInfo()">完善据点资料</button>
+                <p>你可以直接完成开设，日后再回到据点页面编辑完善这些资料。</p>
+            </div>
+        </form>
+    </div>
+</window>

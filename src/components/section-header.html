@@ -1,0 +1,18 @@
+<a ng-if="sectionHeader.header.state" href="" ui-sref="{{sectionHeader.header.state}}" class="wrapper {{sectionHeader.header.type}}">
+    <svg aria-hidden="true" class="logo" style="{{::(sectionHeader.theme.main ? 'fill: ' + sectionHeader.theme.main + ';' : '')}}">
+        <use ng-href="{{'keylol-logo-arrow' | iconSvgUrl }}" xlink:href=""></use>
+    </svg>
+    <div class="text">
+        <p  style="{{::(sectionHeader.theme.main ? 'color: ' + sectionHeader.theme.main + ';' : '')}}" class="main-title font-myriad-keylol">{{sectionHeader.header.mainTitle}}</p>
+        <p class="sub-title">{{sectionHeader.header.subTitle}}</p>
+    </div>
+</a>
+<div ng-if="!sectionHeader.header.state" class="wrapper {{sectionHeader.header.type}}">
+    <svg aria-hidden="true" class="logo" style="{{::(sectionHeader.theme.main ? 'fill: ' + sectionHeader.theme.main + ';' : '')}}">
+        <use ng-href="{{'keylol-logo-arrow' | iconSvgUrl }}" xlink:href=""></use>
+    </svg>
+    <div class="text">
+        <p  style="{{::(sectionHeader.theme.main ? 'color: ' + sectionHeader.theme.main + ';' : '')}}" class="main-title font-myriad-keylol">{{sectionHeader.header.mainTitle}}</p>
+        <p class="sub-title">{{sectionHeader.header.subTitle}}</p>
+    </div>
+</div>

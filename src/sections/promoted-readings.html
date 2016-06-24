@@ -1,0 +1,12 @@
+﻿<div class="section-promoted-readings box-shadowed">
+    <h1 class="labeled-heading">萃选文章</h1>
+    <div ng-repeat="article in promotedReadings.articles track by article.Id" class="article">
+        <h2>
+            <a ng-href="article/{{article.AuthorIdCode}}/{{article.SequenceNumberForAuthor}}">{{article.Title}}</a>
+        </h2>
+        <p>{{article.Content}}</p>
+        <footer>
+            <span ng-if="article.LikeCount">+{{article.LikeCount}}</span><span ng-if="article.CommentCount">　···{{article.CommentCount}}</span>
+        </footer>
+    </div>
+</div>

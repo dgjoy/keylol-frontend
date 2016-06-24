@@ -1,0 +1,36 @@
+<popup class="popup-calling-invitation">
+    <div class="head">
+        <div class="text">
+            <p>邀请作评</p>
+            <p>大海战 4</p>
+        </div>
+        <img src="assets/images/invitation-call-clipart.png" />
+    </div>
+    <div class="content">
+        <div class="user-info">
+            <img class="avatar" webp-src="{{'keylol://4ed8e4862422e8a584fb6bee9f32fedd.jpg' | avatarUrl}}">
+            <div class="name-group">
+                <p>用户名</p>
+                <p>14 篇文章 / 3 则动态 / 获得 480 份认可</p>
+            </div>
+        </div>
+        <text-area
+                model="''"
+                object="{
+                    title:'选择特邀稿费',
+                    items:[
+                        '1 ◆ 文券',
+                        '3 ◆ 文券',
+                        '5 ◆ 文券',
+                        '10 ◆ 文券'
+                    ]
+                }"
+                type="dropdown"
+                label="选择特邀稿费"
+        ></text-area>
+        <p>如果作者在 72 小时内没有响应，稿费会自动退还</p>
+        <div class="action">
+            <raised-button type="theme" text="邀评"></raised-button>
+        </div>
+    </div>
+</popup>

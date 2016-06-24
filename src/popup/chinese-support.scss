@@ -1,0 +1,105 @@
+.popup-chinese-support {
+  @include keylol-shadow-3();
+  @include grow-shrink-self;
+  background-color: $keylol-card;
+  width: 340px;
+  z-index: 1000;
+
+  p { margin: 0; }
+
+  >.head {
+    background-color: $keylol-light-theme;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+
+    >.text {
+      margin-left: 15px;
+      >p:first-of-type {
+        color: $keylol-inverted-text;
+        font-weight: bold;
+        font-size: 20px;
+      }
+
+      >p:last-of-type {
+        color: rgba($keylol-inverted-text,.6);
+      }
+    }
+
+    >img {
+      width: 128px;
+      margin-right: 40px;
+    }
+  }
+
+  >.content {
+    padding: 15px 15px 20px;
+
+    .header {
+      line-height: 25px;
+      font-size: 16px;
+      color: $keylol-theme;
+    }
+
+    table {
+      width: 100%;
+      margin: 10px 0 20px;
+
+      thead {
+        border-bottom: 1px solid $keylol-inertia-shape;
+
+        tr td {
+          padding-bottom: 9px;
+        }
+      }
+
+      tbody tr:first-of-type td {
+        padding-top: 9px;
+      }
+
+      td {
+        text-align: center;
+        height: 25px;
+
+        svg {
+          width: 16px;
+          height: 16px;
+          fill: $keylol-light-theme;
+        }
+      }
+
+      td.left-align {
+        text-align: left;
+      }
+    }
+
+    .third-party {
+      display: flex;
+      align-items: center;
+      line-height: 28px;
+
+      p {
+        flex-grow: 1;
+        margin: 0;
+        color: $keylol-main-text;
+      }
+
+      a {
+        flex-grow: 0;
+        display: flex;
+        align-items: center;
+        color: $keylol-highlight;
+        &:hover { text-decoration: underline; }
+      }
+
+      svg {
+        flex-grow: 0;
+        width: 20px;
+        height: 20px;
+        fill: $keylol-inertia-shape;
+      }
+    }
+  }
+}

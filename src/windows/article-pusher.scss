@@ -1,0 +1,55 @@
+.window-article-pusher {
+  @include grow-shrink-child();
+
+  .window {
+    width: 700px;
+    background-color: $keylol-inverted-text;
+
+    .header {
+      height: 105px;
+      background-color: $keylol-light-theme;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      overflow: hidden;
+
+      .text {
+        margin-left: 15px;
+
+        p {
+          margin: 0;
+          padding: 0;
+
+          &:first-of-type {
+            font-weight: bold;
+            font-size: 20px;
+            margin-bottom: 2px;
+            color: $keylol-inverted-text;
+          }
+
+          &:last-of-type {
+            color: rgba($keylol-inverted-text, 0.6);
+          }
+        }
+      }
+
+      img {
+        width: 125px;
+        margin-right: 60px;
+      }
+    }
+
+    .content {
+      padding: 20px 15px;
+
+      .actions {
+        display: flex;
+        justify-content: flex-end;
+
+        flat-button {
+          margin-right: 20px;
+        }
+      }
+    }
+  }
+}

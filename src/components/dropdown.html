@@ -1,0 +1,6 @@
+<a href="" class="dropdown {{dropdown.state}}" ng-click="dropdown.showSelector($event)" popup="dropdown.showSelectorPopup">
+    <div class="str">{{dropdown.object.items[dropdown.model]}}</div>
+    <svg aria-hidden="true">
+        <use ng-href="{{'menu-down' | iconSvgUrl }}" xlink:href=""></use>
+    </svg>
+</a>

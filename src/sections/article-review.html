@@ -1,0 +1,32 @@
+﻿<div class="section-article-review box-shadowed clearfix" webp-background="{{articleReview.point.BackgroundImage|reviewBackgroundUrl}}">
+    <div class="review-detail">
+        <div class="user-info" ng-if="articleReview.summary.idCode">
+            <div class="info-details">
+                <point-link type="'user'" avatar-url="articleReview.summary.avatar" id-code="articleReview.summary.idCode"></point-link>
+                <div class="title">
+                    <p>
+                        <point-link type="'user'" point-name="articleReview.summary.userName" id-code="articleReview.summary.idCode"></point-link>
+                        <span>{{articleReview.summary.head.subHead}}</span>
+                    </p>
+                    <p class="review-count">{{articleReview.summary.reviewCount}} 篇评测 / {{articleReview.summary.shortReviewCount}} 段简评</p>
+                </div>
+            </div>
+            <span ng-if="articleReview.point.hoursPlayed">游戏在档 <span class="game-hours">{{articleReview.point.hoursPlayed}}</span> 小时</span>
+        </div>
+        <blockquote>{{articleReview.article.Summary}}</blockquote>
+        <div class="pros-cons" ng-if="articleReview.article.Pros.length > 0 || articleReview.article.Cons.length > 0">
+            <ul class="pros">
+                <li ng-repeat="pro in articleReview.article.Pros track by $index">＋ {{pro}}</li>
+            </ul><!--
+             --><ul class="cons">
+            <li ng-repeat="con in articleReview.article.Cons track by $index">－ {{con}}</li>
+        </ul>
+        </div>
+    </div>
+    <div class="review-point {{articleReview.utils.getVoteColor(articleReview.article.Vote - 1)}}">
+        <div class="review-count">
+            <span>{{articleReview.article.Vote}}</span> / 5
+        </div>
+        <vote-circle ng-if="articleReview.article.Vote" vote="articleReview.article.Vote" whole-white="true"></vote-circle>
+    </div>
+</div>

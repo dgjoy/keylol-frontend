@@ -1,0 +1,72 @@
+point-associations {
+  @include keylol-shadow-1;
+  background-color: $keylol-card;
+  display: block;
+  border-radius: 2px;
+
+  >.bundle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 54px;
+    padding: 0 15px;
+
+    >.stations {
+      display: flex;
+
+      >.link-black {
+        margin-right: 15px;
+        display: flex;
+        align-items: center;
+
+        >span {
+          color: $keylol-main-text;
+        }
+
+        >svg {
+          height: 24px;
+          width: 24px;
+          margin-right: 6px;
+          fill: $keylol-main-text;
+        }
+
+        &:hover>span{
+          text-decoration: underline;
+        }
+      }
+    }
+
+    >.chinese-support {
+      color: $keylol-inertia-text;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+  >.characteristics {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0 5px;
+    background-color: $keylol-inertia-shape;
+
+    >.link-white {
+      margin: 0 10px 5px;
+      display: flex;
+      align-items: center;
+
+      >span {
+        color: $keylol-inverted-text;
+      }
+
+      >svg {
+        height: 24px;
+        width: 24px;
+        margin-right: 6px;
+        fill: $keylol-inverted-text;
+      }
+    }
+  }
+}

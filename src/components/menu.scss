@@ -1,0 +1,275 @@
+menu {
+  @include keylol-shadow-1;
+  background-color: $keylol-card;
+  padding: 0;
+  margin: 0;
+  border-radius: 2px;
+
+  &.popover {
+    border-radius: 0;
+    @include keylol-shadow-2;
+  }
+
+  .menu-header {
+    padding: 10px 0 0;
+    margin-bottom: -10px;
+
+    >a {
+      padding: 10px 15px;
+      display: flex;
+
+      &:hover {
+        background-color: rgba(#000, 0.05);
+      }
+
+      .avatar {
+        width: 48px;
+        height: 48px;
+        margin-right: 15px;
+      }
+    }
+
+    .header-text {
+      margin-top: 5px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      p {
+        margin: 0;
+
+        &:first-of-type {
+          color: $keylol-main-text;
+          margin-bottom: 2px;
+          font-size: 16px;
+        }
+
+        &:last-of-type {
+          color: $keylol-inertia-text;
+          font-size: 12px;
+        }
+      }
+
+      &.for-user {
+        margin-top: 0;
+        p {
+          &:first-of-type {
+            font-size: 14px;
+            font-weight: bold;
+          }
+
+          &:last-of-type {
+            @include font-consolas;
+            font-size: 16px;
+          }
+        }
+      }
+
+      &.no-image {
+        padding: 0 15px;
+      }
+    }
+
+    .for-point {
+      margin-top: -10px;
+
+      .game-count {
+        color: $keylol-inertia-text;
+        font-size: 12px;
+        padding:5px 15px 0;
+      }
+
+      a {
+        display: block;
+        @include hover-background;
+        margin-top: 10px;
+
+        point-basic-info {
+          padding: 10px 15px;
+        }
+
+        &.for-image {
+          margin-top: 0;
+        }
+      }
+
+      .cover {
+        width: 100%;
+        height: 105px;
+        display: block;
+      }
+
+      .time-info {
+        padding: 16px 15px 14px;
+
+        p {
+          margin: 0;
+
+          &.in-library {
+            color: $keylol-libraried;
+          }
+        }
+      }
+
+      .reputation-stat {
+        padding: 0 15px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .left-content {
+          display: flex;
+          align-items: center;
+
+          svg {
+            height: 8px;
+            width: 8px;
+            fill: $keylol-inertia-text;
+            margin-right: 2px;
+          }
+
+          span {
+            color: $keylol-inertia-text;
+            margin-left: 5px;
+          }
+        }
+
+        .right-content {
+          display: flex;
+          width: 100px;
+
+          .reputation-level {
+            background-color: $keylol-inertia-text;
+            height: 5px;
+          }
+        }
+      }
+
+      .reputation-info {
+        padding: 10px 15px 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .reputation-number {
+          margin-top: -2px;
+          @include keylol-review();
+          font-size: 20px;
+          font-weight: bold;
+        }
+
+        vote-circle {
+          position: relative;
+          top: 2px;
+        }
+
+        &.not-enough {
+          color: $keylol-inertia-text;
+          .reputation-number {
+            color: $keylol-inertia-text;
+          }
+        }
+      }
+
+      .horizon {
+        margin: 14px 20px 0;
+        height: 1px;
+        background-color: $keylol-inertia-shape;
+      }
+    }
+
+    .user-right {
+      padding: 0 15px;
+      margin-bottom: -30px;
+
+      >a {
+        display: block;
+        @include hover-background();
+        margin-top: 10px;
+        margin: 0 -15px;
+
+        >.user-basic-info {
+          padding: 10px 15px;
+
+          display: flex;
+          align-items: center;
+
+          .avatar {
+            margin-right: 10px;
+            width: 32px;
+            height: 32px;
+          }
+
+          .name-group {
+            max-width: calc(100% - 42px);
+            p {
+              @include ellipsis;
+              margin: 0;
+
+              &:first-of-type {
+                color: $keylol-main-text;
+                font-weight: bold;
+              }
+
+              &:nth-of-type(2) {
+                color: $keylol-inertia-text;
+                font-size: 12px;
+              }
+            }
+          }
+        }
+      }
+
+      >.paragraph {
+        color: $keylol-inertia-text;
+        font-size: 12px;
+        height: 30px;
+        line-height: 30px;
+
+        >a {
+          font-size: 14px;
+          color: $keylol-main-text;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+
+      >.icon-text {
+        color: $keylol-inertia-text;
+        height: 30px;
+        display: flex;
+        align-items: center;
+
+        >svg {
+          height: 20px;
+          width: 20px;
+          margin-right: 10px;
+          fill: $keylol-inertia-shape;
+        }
+
+        .is-friend {
+          color: $keylol-user-theme;
+        }
+      }
+
+      .horizon {
+        margin-top: 14px;
+        height: 1px;
+        margin-bottom: 20px;
+        background-color: $keylol-inertia-shape;
+      }
+    }
+  }
+
+  ul {
+    width: 100%;
+    padding: 20px 0;
+    margin: 0;
+    list-style: none;
+
+    li {
+      padding: 0;
+    }
+  }
+}

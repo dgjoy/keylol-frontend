@@ -1,0 +1,101 @@
+spoiler {
+  white-space: normal;
+
+  &.actionable {
+    @include keylol-shadow-1();
+    cursor: pointer;
+
+    &:hover>.hint>.icons>.eye-off{
+      display: none;
+    }
+
+    &:hover>.hint>.icons>.eye{
+      display: block;
+    }
+  }
+
+  .content {
+    display: none;
+  }
+
+  .hint {
+    display: flex;
+    height: 80px;
+    margin: 0;
+
+    .text {
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+      margin: 0;
+
+      h2 {
+        color: $keylol-light-theme;
+        margin: 0;
+        font-weight: normal;
+        font-size: 20px;
+      }
+
+      h3 {
+        color: $keylol-main-text;
+        margin: 0;
+        font-size: 14px;
+        font-weight: normal;
+      }
+    }
+
+    .icons {
+      padding: 0 10px;
+      background-color: $keylol-light-theme;
+      flex-grow: 0;
+      display: flex;
+      align-items: center;
+      margin: 0;
+
+      .eye,
+      .eye-off {
+        width: 40px;
+        height: 40px;
+        padding: 0 20px;
+        fill: $keylol-inverted-text;
+        border-right: 1px solid $keylol-inverted-text;
+      }
+
+      .eye-off {
+        display: block;
+      }
+
+      .eye {
+        display: none;
+      }
+
+      .point-icon {
+        max-height: 48px;
+        max-width: 200px;
+        margin: 0 20px;
+      }
+
+      .point-alt {
+        max-width: 200px;
+        margin: 0 20px;
+
+        p {
+          @include ellipsis;
+          margin: 0;
+          color: $keylol-inverted-text;
+
+          &:first-of-type {
+            font-weight: bold;
+          }
+
+          &:last-of-type {
+            font-size: 12px;
+            opacity: 0.6;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,65 @@
+menu-item {
+  display: block;
+  button {
+    @include keylol-button-default;
+    @include hover-background();
+    width: 100%;
+    box-sizing: border-box;
+    background: transparent;
+
+    .wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      >span {
+        display: flex;
+        align-items: center;
+        color: $keylol-main-text;
+
+        &.sub-text {
+          color: $keylol-inertia-text;
+          margin-right: 5px;
+        }
+
+        >span {
+          line-height: 24px;
+        }
+      }
+
+      svg {
+        width: 24px;
+        height: 24px;
+        fill: $keylol-light-text;
+        margin-right: 15px;
+      }
+    }
+
+    &[disabled] {
+      cursor: default;
+
+      .wrapper {
+        cursor: default;
+        > span {
+          color: $keylol-inertia-text;
+        }
+      }
+
+      &:hover {
+        background: transparent;
+      }
+
+      svg {
+        fill: $keylol-inertia-shape;
+      }
+    }
+  }
+
+  span.horizon {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    height: 1px;
+    background-color: $keylol-inertia-shape;
+  }
+}

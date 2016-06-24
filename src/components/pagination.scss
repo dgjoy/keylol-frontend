@@ -1,0 +1,158 @@
+pagination {
+  display: flex;
+
+  .wrapper {
+    @include page-change('.page');
+    height: 32px;
+    position: relative;
+    overflow: hidden;
+    margin: 0 12px;
+    transition: width .5s  cubic-bezier(0.19, 1, 0.22, 1);
+
+    .page {
+      display: flex;
+      position: absolute;
+      overflow: hidden;
+      top: 0;
+      right: 0;
+
+      .active-background {
+        width: 32px;
+        height: 32px;
+        border-radius: 2px;
+        background-color: $keylol-light-theme;
+        position: absolute;
+        top: 0;
+        transition: left .35s, right .35s;
+      }
+
+      a {
+        margin: 0 3px;
+      }
+    }
+
+    &.to-next {
+      .page {
+        .active-background {
+          left: 0;
+
+          &:not(.ng-hide) {
+            &.active-0 {
+              left: 3px;
+            }
+
+            &.active-1 {
+              left: 41px;
+            }
+
+            &.active-2 {
+              left: 79px;
+            }
+
+            &.active-3 {
+              left: 117px;
+            }
+
+            &.active-4 {
+              left: 155px;
+            }
+          }
+
+          &.ng-hide-remove {
+            transition: transform .2s,  left .5s;
+            transform: translateX(-100%);
+          }
+
+          &.ng-hide-remove-active {
+            transform: translateX(0);
+          }
+        }
+      }
+    }
+
+    &.to-previous {
+      .page {
+        .active-background {
+          right: 0;
+
+          &:not(.ng-hide) {
+            &.active-0 {
+              right: 155px;
+            }
+
+            &.active-1 {
+              right: 117px;
+            }
+
+            &.active-2 {
+              right: 79px;
+            }
+
+            &.active-3 {
+              right: 41px;
+            }
+
+            &.active-4 {
+              right: 3px;
+            }
+          }
+
+          &.ng-hide-remove {
+            transition: transform .2s, right .5s;
+            transform: translateX(100%);
+          }
+
+          &.ng-hide-remove-active {
+            transform: translateX(0);
+          }
+        }
+      }
+    }
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2px;
+    width: 32px;
+    height: 32px;
+    color: $keylol-light-text;
+    font-size: 16px;
+    transition: color .2s;
+
+    &:hover {
+      background-color: rgba(#000, 0.1);
+    }
+
+    &.active {
+      &, &:hover {
+        background-color: transparent;
+        color: $keylol-inverted-text;
+      }
+    }
+
+    &.disabled {
+      &, &:hover {
+        background-color: transparent;
+
+        svg {
+          fill: $keylol-inertia-shape
+        }
+      }
+    }
+
+    &.over {
+      svg {
+        fill: $keylol-light-theme;
+      }
+    }
+
+    svg {
+      width: 24px;
+      height: 24px;
+      fill: $keylol-light-text;
+      transition: fill .2s;
+    }
+  }
+}

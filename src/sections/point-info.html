@@ -1,0 +1,68 @@
+﻿<div class="section-point-info box-shadowed">
+    <p class="main-description" ng-class="{'has-description': pointInfo.point.Description}" popup="pointInfo.showRelatedPopup" >{{pointInfo.point.Description}}</p>
+    <div ng-if="pointInfo.point.Type === 'Game' || pointInfo.point.Type === 'Hardware'" class="info-details">
+        <div class="info-attribute">
+            <p ng-if="pointInfo.point.DeveloperPoints.length > 0">
+                <span class="title">开发厂 ：</span>
+                <point-link ng-repeat="point in pointInfo.point.DeveloperPoints" type="'point'" id-code="point.IdCode" point-name="'「' + pointInfo.utils.getPointFirstName(point) + '」'"></point-link>
+            </p>
+            <p ng-if="pointInfo.point.PublisherPoints.length > 0">
+                <span class="title">发行商 ：</span>
+                <point-link ng-repeat="point in pointInfo.point.PublisherPoints" type="'point'" id-code="point.IdCode" point-name="'「' + pointInfo.utils.getPointFirstName(point) + '」'"></point-link>
+            </p>
+            <p ng-if="pointInfo.point.SeriesPoints.length > 0">
+                <span class="title">系列 ：</span>
+                <point-link ng-repeat="point in pointInfo.point.SeriesPoints" type="'point'" id-code="point.IdCode" point-name="'「' + pointInfo.utils.getPointFirstName(point) + '」'"></point-link>
+            </p>
+            <p ng-if="pointInfo.point.GenrePoints.length > 0">
+                <span class="title">流派 ：</span>
+                <point-link ng-repeat="point in pointInfo.point.GenrePoints" type="'point'" id-code="point.IdCode" point-name="'「' + pointInfo.utils.getPointFirstName(point) + '」'"></point-link>
+            </p>
+            <p ng-if="pointInfo.point.TagPoints.length > 0">
+                <span class="title">特性 ：</span>
+                <point-link ng-repeat="point in pointInfo.point.TagPoints" type="'point'" id-code="point.IdCode" point-name="'「' + pointInfo.utils.getPointFirstName(point) + '」'"></point-link>
+            </p>
+            <p ng-if="pointInfo.point.DisplayAliases">
+                <span class="title">别名 ：</span>
+                <span>{{pointInfo.point.DisplayAliases}}</span>
+            </p>
+            <p ng-if="pointInfo.point.ReleaseDate">
+                <span class="title">面市 ：</span>
+                <span>{{pointInfo.point.ReleaseDate | date: 'yyyy-MM-dd'}}</span>
+            </p>
+            <p ng-if="pointInfo.point.MajorPlatformPoints.length > 0">
+                <span class="title">平台 ：</span>
+                <point-link ng-repeat="point in pointInfo.point.MajorPlatformPoints" type="'point'" id-code="point.IdCode" point-name="'「' + pointInfo.utils.getPointFirstName(point) + '」'"></point-link>
+            </p>
+            <p ng-if="pointInfo.point.MinorPlatformPoints.length > 0">
+                <span class="title">次要平台 ：</span>
+                <point-link ng-repeat="point in pointInfo.point.MinorPlatformPoints" type="'point'" id-code="point.IdCode" point-name="'「' + pointInfo.utils.getPointFirstName(point) + '」'"></point-link>
+            </p>
+        </div>
+        <div ng-if="pointInfo.union.$localStorage.user" class="info-review">
+            <img class="point-cover" webp-src="{{pointInfo.point.CoverImage | coverUrl}}">
+            <p ng-if="pointInfo.point.hoursPlayed" class="play-time">{{pointInfo.point.hoursPlayed}} 小时在档</p>
+            <point-review on-click-review="pointInfo.showShortReviewWindow(vote)" is-hollow="true"></point-review>
+            <div class="actions">
+                <a href="" class="short-review" ng-click="pointInfo.showShortReviewWindow()">写简评</a>
+                <a href="" class="full-review"  ng-click="pointInfo.showEditorWindow()">写长评</a>
+            </div>
+            <a href="" ng-click="pointInfo.showPointEdit(true)" class="edit-info">编辑资料</a>
+        </div>
+        <div ng-if="!pointInfo.union.$localStorage.user" class="info-review">
+            <img class="point-cover" webp-src="{{pointInfo.point.CoverImage | coverUrl}}">
+            <p class="join-review">
+                <span>参与评价</span>
+                <point-review no-string="true" on-click-review="pointInfo.showRegistrationWindow()" is-hollow="true"></point-review>
+            </p>
+        </div>
+    </div>
+    <div ng-if="pointInfo.union.point.Type !== 'Game'" class="info-actions clearfix">
+        <span class="related-list" ng-if="pointInfo.point.GameCountAsGenre"><a ng-click="pointInfo.showRelatedGames($event, 'Genre', pointInfo.point.GameCountAsGenre)">此流派的游戏</a>（{{pointInfo.point.GameCountAsGenre}}）</span>
+        <span class="related-list" ng-if="pointInfo.point.GameCountAsTag"><a ng-click="pointInfo.showRelatedGames($event, 'Tag', pointInfo.point.GameCountAsTag)">此特性的游戏</a>（{{pointInfo.point.GameCountAsTag}}）</span>
+        <span class="related-list" ng-if="pointInfo.point.GameCountAsSeries"><a ng-click="pointInfo.showRelatedGames($event, 'Series', pointInfo.point.GameCountAsSeries)">此系列的游戏</a>（{{pointInfo.point.GameCountAsSeries}}）</span>
+        <span class="related-list" ng-if="pointInfo.point.GameCountAsPublisher"><a ng-click="pointInfo.showRelatedGames($event, 'Publisher', pointInfo.point.GameCountAsPublisher)">历代发行游戏</a>（{{pointInfo.point.GameCountAsPublisher}}）</span>
+        <span class="related-list" ng-if="pointInfo.point.GameCountAsDeveloper"><a ng-click="pointInfo.showRelatedGames($event, 'Developer', pointInfo.point.GameCountAsDeveloper)">历代开发游戏</a>（{{pointInfo.point.GameCountAsDeveloper}}）</span>
+        <a ng-if="pointInfo.union.$localStorage.user" href="" ng-click="pointInfo.showPointEdit(false)" class="edit-info">编辑资料</a>
+    </div>
+</div>

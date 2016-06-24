@@ -1,0 +1,6 @@
+﻿<div ng-repeat="item in productCollection.list">
+    <section-header header="::item.header" theme="::productCollection.theme" ng-if="item.cards.length > 0"></section-header>
+    <div class="list">
+        <game-card theme="productCollection.theme" ng-repeat="card in item.cards" card="::card"></game-card>
+    </div>
+</div>

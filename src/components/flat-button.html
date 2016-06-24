@@ -1,0 +1,15 @@
+<button type="button" class="{{flatButton.type}}" ng-class="{'disabled-without-color': !flatButton.disabledWithColor}" style="{{flatButton.themeColor && (flatButton.type === 'theme' || flatButton.type === 'light') && (flatButton.disabledWithColor || !flatButton.disabled) ? 'color: ' + flatButton.themeColor + ';' + 'fill: ' + flatButton.themeColor + ';' : ''}}" ng-click="flatButton.click({event: $event})" ripple="{{flatButton.themeColor || flatButton.type}}" ng-disabled="flatButton.disabled">
+    <span class="value false-value" ng-class="{active: !flatButton.binaryValue}">
+        <svg ng-if="flatButton.binarySet[0].icon" aria-hidden="true">
+            <use ng-href="{{flatButton.binarySet[0].icon | iconSvgUrl }}" xlink:href=""></use>
+        </svg>
+        <span>{{flatButton.binarySet[0].text || flatButton.text}}</span>
+    </span>
+    <span class="value true-value" ng-class="{active: flatButton.binaryValue}">
+        <svg ng-if="flatButton.binarySet[1].icon" aria-hidden="true">
+            <use ng-href="{{flatButton.binarySet[1].icon | iconSvgUrl }}" xlink:href=""></use>
+        </svg>
+        <span>{{flatButton.binarySet[1].text}}</span>
+    </span>
+</button>
+

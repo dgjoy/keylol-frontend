@@ -1,0 +1,18 @@
+simple-article-card {
+  @include keylol-shadow-1;
+  background-color: $keylol-card;
+  width: 340px;
+  display: flex;
+  flex-direction: column;
+
+  .article {
+    height: 80px;
+    overflow: hidden;
+    >.bottom-text>.first-line {
+      @include ellipsis();
+    }
+    >.bottom-text>.second-line {
+      @include ellipsis();
+    }
+  }
+}

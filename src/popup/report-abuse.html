@@ -1,0 +1,19 @@
+<popup class="popup-report-abuse">
+    <div class="head">
+        <div class="text">
+            <p>举报</p>
+            <p>DK.FISH 的动态</p>
+        </div>
+        <img src="assets/images/Letter_256pxsq.png" />
+    </div>
+    <div class="content">
+        <p>我不开心</p>
+        <input-radio object="reportAbuse.myReasons" model="-1"></input-radio>
+        <p>社区或第三方不开心</p>
+        <input-radio object="reportAbuse.communityReasons" model="-1"></input-radio>
+        <text-area type="text" label="举报附言" model="''" tip="'帮助社区职员作出判断'"></text-area>
+        <div class="action">
+            <raised-button text="举报" type="theme"></raised-button>
+        </div>
+    </div>
+</popup>

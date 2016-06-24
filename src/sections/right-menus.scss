@@ -1,0 +1,20 @@
+right-menus {
+  position: relative;
+
+  >.wrapper {
+    padding-bottom: 50px;
+    width: 100%;
+
+    &.fixed-top {
+      width: 220px;
+      position: fixed;
+      top: 94px;
+    }
+
+    &.absolute-bottom {
+      width: 220px;
+      position: absolute;
+      bottom: 0;
+    }
+  }
+}

@@ -1,0 +1,17 @@
+﻿<div style="margin-top: 30px" class="flex-row" ng-if="stateTree.aggregation.point.intel&&stateTree.aggregation.point.basicInfo" ng-switch="stateTree.aggregation.point.basicInfo.type">
+    <div class="left-middle-lg row-sm" ng-switch-when="hardware">
+        <point-associations theme="::theme" style="margin-bottom: 40px;" object="::stateTree.aggregation.point.intel"></point-associations>
+        <point-vendors ng-if="::(stateTree.aggregation.point.intel.vendorPoints.length > 0)" cards="::(stateTree.aggregation.point.intel.vendorPoints)" theme="::theme" style="margin-bottom: 30px;"></point-vendors>
+    </div>
+    <div class="left-middle-lg row-sm" ng-switch-when="game">
+        <point-associations theme="::theme" style="margin-bottom: 40px;" object="::stateTree.aggregation.point.intel"></point-associations>
+        <point-vendors ng-if="::(stateTree.aggregation.point.intel.vendorPoints.length > 0)" cards="::(stateTree.aggregation.point.intel.vendorPoints)" theme="::theme" style="margin-bottom: 30px;"></point-vendors>
+        <third-party-statistics basic-info="::(stateTree.aggregation.point.basicInfo)" intel="::(stateTree.aggregation.point.intel)" theme="::theme" style="margin-bottom: 40px;"></third-party-statistics>
+        <staff-users from-vendor="::(stateTree.aggregation.point.intel.venderPointStaff)" staying="::(stateTree.aggregation.point.intel.pointStaff)" theme="::theme" style="margin-bottom: 20px"></staff-users>
+        <intel-categories genre="::(stateTree.aggregation.point.intel.genrePoints)" cate="::(stateTree.aggregation.point.intel.tagPoints)" theme="::theme" style="margin-bottom: 30px"></intel-categories>
+    </div>
+    <div class="right-lg hidden-sm flex-column">
+        <point-menu ng-if="stateTree.aggregation.point.basicInfo" style="margin-bottom: 20px" object="::stateTree.aggregation.point.basicInfo"></point-menu>
+        <right-menus style="flex-grow: 1;"></right-menus>
+    </div>
+</div>

@@ -1,0 +1,153 @@
+game-guide-card {
+  @include keylol-shadow-1;
+  background-color: $keylol-card;
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+
+  .info {
+    @include hover-background();
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 52px;
+    padding-left: 15px;
+    margin: 10px 0;
+
+    point-basic-info {
+      max-width: calc(100% - 64px);
+    }
+  }
+
+  .point-img {
+    width: 100%;
+    height: 130px;
+    background-size: cover;
+
+    &.user {
+      height: 160px;
+    }
+  }
+
+  .characteristic-container {
+    background-color: $keylol-light-theme;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    height: 36px;
+    padding: 0 15px;
+    margin: 10px 0;
+
+    .characteristic {
+      width: 30px;
+      height: 18px;
+      margin: 0 5px;
+
+      svg {
+        fill: $keylol-inverted-text;
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+
+  .category-container {
+    @include wrap-ellipsis();
+    justify-content: center;
+    padding: 0 10px;
+    height: 40px;
+    line-height: 40px;
+    .category {
+      color: $keylol-inertia-shape;
+      &:not(:first-of-type)::before {
+        content: '\00a0/';
+      }
+    }
+    a {
+      color: $keylol-main-text;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .user-basic-info {
+    display: flex;
+    align-items: center;
+    height: 52px;
+    margin-left: 15px;
+
+    .avatar {
+      margin-right: 10px;
+      width: 32px;
+      height: 32px;
+    }
+
+    .name-group {
+      max-width: calc(100% - 42px);
+      p {
+        @include ellipsis;
+        margin: 0;
+
+        &:first-of-type {
+          color: $keylol-main-text;
+          font-weight: bold;
+        }
+
+        &:last-of-type {
+          color: $keylol-light-text;
+          font-size: 12px;
+        }
+      }
+    }
+  }
+
+  .actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 52px;
+
+    .platforms {
+      padding-left: 10px;
+      display: flex;
+      align-items: center;
+
+      a {
+        display: flex;
+        align-items: center;
+        margin-left: 10px;
+
+        &:hover {
+          svg {
+            fill: $keylol-light-text;
+          }
+        }
+
+        svg {
+          width: 24px;
+          height: 24px;
+          fill: $keylol-inertia-shape;
+        }
+
+        span {
+          margin-left: 6px;
+          color: $keylol-inertia-text;
+
+          &.discount {
+            color: #a4d007;
+          }
+
+          &:last-of-type {
+            margin-right: 5px;
+          }
+        }
+      }
+    }
+
+    flat-button {
+      margin-right: 5px;
+    }
+  }
+}

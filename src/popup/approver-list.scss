@@ -1,0 +1,132 @@
+.popup-approver-list {
+  @include keylol-shadow-3();
+  @include grow-shrink-self;
+  background-color: $keylol-card;
+  padding: 15px 0;
+  width: 340px;
+
+  p {
+    margin: 0;
+  }
+
+  >.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+
+    >.bundle {
+      >p:first-of-type {
+        color: $keylol-main-text;
+        font-size: 20px;//待处理
+      }
+
+      >p:last-of-type {
+        color: $keylol-inertia-text;
+      }
+    }
+  }
+
+  >.page-wrapper {
+    overflow: hidden;
+    position: relative;
+
+    &.left {
+      >.page.swap-animation.ng-enter,
+      >.page.swap-animation.ng-leave {
+        transition: transform 150ms, opacity 120ms;
+      }
+
+      >.page.swap-animation.ng-enter {
+        transition-timing-function: cubic-bezier(0.0, 0.0, 0.2, 1);
+        transition-delay: 150ms;
+        position: relative;
+        opacity: 0;
+        transform: translateX(100%);
+      }
+
+      >.page.swap-animation.ng-enter-active {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      >.page.swap-animation.ng-leave {
+        transition-timing-function: cubic-bezier(0.4, 0.0, 1, 1);
+        position: absolute;
+        top: 0;
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      >.page.swap-animation.ng-leave-active {
+        opacity: 0;
+        transform: translateX(-100%);
+      }
+    }
+
+    &.right {
+      >.page.swap-animation.ng-enter,
+      >.page.swap-animation.ng-leave {
+        transition: transform 150ms, opacity 120ms;
+      }
+
+      >.page.swap-animation.ng-enter {
+        transition-timing-function: cubic-bezier(0.0, 0.0, 0.2, 1);
+        transition-delay: 150ms;
+        position: relative;
+        opacity: 0;
+        transform: translateX(-100%);
+      }
+
+      >.page.swap-animation.ng-enter-active {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      >.page.swap-animation.ng-leave {
+        transition-timing-function: cubic-bezier(0.4, 0.0, 1, 1);
+        position: absolute;
+        top: 0;
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      >.page.swap-animation.ng-leave-active {
+        opacity: 0;
+        transform: translateX(100%);
+      }
+    }
+
+    >.page {
+      >.item {
+        @include hover-background();
+        display: flex;
+        align-items: center;
+        padding: 15px;
+
+        >.avatar {
+          width: 32px;
+          height: 32px;
+          margin-right: 10px;
+        }
+
+        >.bundle {
+          >p:first-of-type {
+            color: $keylol-main-text;
+            font-weight: bold;
+          }
+
+          >p:last-of-type {
+            color: $keylol-inertia-text;
+            font-size: 12px;
+          }
+        }
+      }
+    }
+  }
+
+  >pagination {
+    margin-top: 15px;
+    padding: 0 15px;
+  }
+}

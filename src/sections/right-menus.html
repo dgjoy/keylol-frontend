@@ -1,0 +1,12 @@
+﻿<div class="wrapper {{rightMenus.position}}">
+    <div ng-if="!rightMenus.author && !rightMenus.point">
+        <menu ng-if="rightMenus.stateTree.currentUser" style="margin-bottom: 20px" object="::rightMenus.writtingMenu"></menu>
+        <menu ng-if="rightMenus.stateTree.currentUser" object="::rightMenus.personalMenu"></menu>
+        <menu ng-if="!rightMenus.stateTree.currentUser" style="margin-bottom: 20px" object="::rightMenus.registerMenu"></menu>
+        <menu ng-if="!rightMenus.stateTree.currentUser" object="::rightMenus.loginMenu"></menu>
+    </div>
+    <div ng-if="rightMenus.author || rightMenus.point" class="flex-column">
+        <user-menu ng-if="rightMenus.author" style="margin-bottom: 20px;" object="::rightMenus.author"></user-menu>
+        <point-menu ng-if="rightMenus.point" object="::rightMenus.point"></point-menu>
+    </div>
+</div>

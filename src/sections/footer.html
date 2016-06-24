@@ -1,0 +1,55 @@
+﻿<div class="more-link" style="{{footer.theme.light ? 'background-color: ' + footer.theme.light + ';' : ''}}">
+    <div class="wrapper">
+        <div class="intro">
+            <div class="site">
+                <div class="keylol">
+                    <p class="font-myriad-keylol"><span>其乐</span>Keylol.com</p>
+                    <p>发现、解读、分享游戏的价值</p>
+                </div>
+                <div class="steamcn">
+                    <svg aria-hidden="true">
+                        <use ng-href="{{'steamcn' | iconSvgUrl }}" xlink:href=""></use>
+                    </svg>
+                    <div>
+                        <p><span>蒸汽动力</span>旗下社区</p>
+                        <p>A Subsidiary Community of SteamCN</p>
+                    </div>
+                </div>
+            </div>
+            <img ng-if="!footer.theme" src="assets/images/logo-arrow.png">
+            <img ng-if="footer.theme" src="assets/images/logo-arrow-whiteout.png">
+        </div>
+        <div class="link">
+            <ul>
+                <li>读者</li>
+                <li><a href="">鉴赏家</a></li>
+                <!--<li><a href="">微信</a></li>-->
+                <li><a href="">知乎专栏</a></li>
+            </ul>
+            <ul>
+                <li>作者</li>
+                <li><a href="">写作手册</a></li>
+                <li><a href="">欢迎辞</a></li>
+                <li><a href="">据点帮助</a></li>
+                <li><a href="">反馈</a></li>
+            </ul>
+            <ul>
+                <li>业者</li>
+                <!--<li><a href="">登记</a></li>-->
+                <!--<li><a href="">先行评测</a></li>-->
+            </ul>
+            <ul>
+                <li>我们</li>
+                <li><a href="">关于</a></li>
+                <li><a href="">用户协议</a></li>
+                <!--<li><a href="">站务职员</a></li>-->
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="about" style="{{footer.theme.main ? 'background-color: ' + footer.theme.main + ';' : ''}}">
+    <div class="wrapper">
+        <span>© 2016 Keylol.com & SteamCN.com</span>
+        <span>晋 ICP 备 13004301　·　粤公网安备 44011302000153</span>
+    </div>
+</div>

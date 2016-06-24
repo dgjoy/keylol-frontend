@@ -1,0 +1,31 @@
+﻿<window position="center" class="window-good-detail">
+    <div class="window">
+        <div class="header">
+            <div class="text">
+                <p>冷衫</p>
+                <p>说明</p>
+            </div>
+            <img src="assets/images/store-icon.png">
+        </div>
+        <div class="content">
+            <div class="items">
+                <div class="item">
+                    <p class="inertia">售价</p>
+                    <p class="main">兑换价格为 <span>77 ◆</span> 文券，当前持有 <span>143 ◆</span> 文券</p>
+                </div>
+                <div class="item">
+                    <p class="inertia">商品预览</p>
+                    <img webp-src="{{ 'keylol://989df8e508510f8447aaf06ddadcac5f.jpg' | uriRelocate:'/fw/670'}}" alt="">
+                </div>
+                <div class="item">
+                    <p class="inertia">说明</p>
+                    <p class="main">这是商品的说明</p>
+                </div>
+            </div>
+            <div class="actions">
+                <flat-button text="放弃" type="light-text" click="goodDetail.close()"></flat-button>
+                <raised-button text="购买" type="theme"  click="goodDetail.submit()"></raised-button>
+            </div>
+        </div>
+    </div>
+</window>

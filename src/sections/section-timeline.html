@@ -1,0 +1,22 @@
+﻿<div class="wrapper" ng-switch="sectionTimeline.columnCount">
+    <div class="first-column" ng-switch-when="two">
+        <div class="quick-edit" ng-click="sectionTimeline.showActivityEditor($event)">
+            <p>刚刚结束的游戏体验如何？</p>
+            <a href="" ngf-select="sectionTimeline.uploadImage($file, $event)" ngf-fix-orientation="true" accept="image/*">
+                <svg aria-hidden="true">
+                    <use ng-href="{{'image' | iconSvgUrl }}" xlink:href=""></use>
+                </svg>
+            </a>
+        </div>
+        <timeline-card card="card" theme="sectionTimeline.theme" ng-repeat="card in sectionTimeline.leftCards track by $index"></timeline-card>
+    </div>
+    <div class="second-column" ng-switch-when="two">
+        <timeline-card card="card" theme="sectionTimeline.theme" ng-repeat="card in sectionTimeline.rightCards track by $index"></timeline-card>
+    </div>
+    <div class="only-column" ng-switch-when="one">
+        <timeline-card card="card" theme="sectionTimeline.theme" ng-repeat="card in sectionTimeline.cards track by $index"></timeline-card>
+    </div>
+</div>
+<div class="action">
+    <raised-button text="{{sectionTimeline.end?'已无更多':'展开更多'}}" theme-color="sectionTimeline.theme.main" type="theme" click="sectionTimeline.load()" ng-if="sectionTimeline.first||sectionTimeline.end" disabled="sectionTimeline.end" ></raised-button>
+</div>

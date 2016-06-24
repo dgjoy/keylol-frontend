@@ -1,0 +1,25 @@
+﻿<div class="background" ng-style="{transform: userHeader.transform}" webp-background="{{userHeader.object.headerImage | headerImageFallback: 'user' | pageHeaderUrl}}"></div>
+<div class="info">
+    <div class="user-basic-info">
+        <img class="avatar" webp-src="{{ userHeader.object.avatarImage | avatarUrl}}" alt="{{}}" />
+        <div class="name-group">
+            <p>{{userHeader.object.userName}}</p>
+            <p>{{userHeader.object.gamerTag}}</p>
+        </div>
+    </div>
+    <div class="attributes">
+        <p>{{userHeader.object.registerTime | amUtc | amLocal | amDateFormat:'YYYY-MM-DD'}} 加入其乐</p>
+    </div>
+    <div class="actions">
+        <div ng-if="userHeader.stateTree.currentUser && (userHeader.stateTree.currentUser.idCode === userHeader.object.idCode || userHeader.stateTree.currentUser.roles.indexOf('Operator') > -1)" popup="userHeader.showMenuPopup">
+            <icon-button icon="dots-vertical" click="userHeader.showMenu(event)" type="invert"></icon-button>
+        </div>
+        <raised-button ng-if="userHeader.stateTree.currentUser && userHeader.stateTree.currentUser.idCode !== userHeader.object.idCode" theme-color="userHeader.theme.main"
+                       binary-set="userHeader.subscribeSet" binary-value="userHeader.object.subscribed"
+                       click="userHeader.subscribe(userHeader.object.id, userHeader.object.subscribed, userHeader.object, 'User')"></raised-button>
+        <raised-button ng-if="userHeader.stateTree.currentUser && userHeader.stateTree.currentUser.idCode === userHeader.object.idCode" theme-color="userHeader.theme.main"
+                       text="编辑" click="userHeader.edit()"></raised-button>
+        <raised-button ng-if="!userHeader.stateTree.currentUser" theme-color="userHeader.theme.main" text="关注" type="theme"
+                     click="userHeader.openRegistration(event)"></raised-button>
+    </div>
+</div>

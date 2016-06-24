@@ -1,0 +1,48 @@
+﻿<tabs class="invert" invert="true" tab-array="tabArray" cur-tab="currentPage" click-handler="changePage(index)" style="margin-bottom: 40px;" ></tabs>
+<div style="margin-top: 30px" class="flex-row" ng-if="stateTree.aggregation.user.people && stateTree.aggregation.user.basicInfo">
+    <div class="left-middle-lg row-sm" ng-if="currentPage === undefined">
+        <div ng-repeat="module in modules" ng-if="module.list.length > 0">
+            <section-header header="module.header" theme="theme"></section-header>
+            <page-list list="module.list"
+                       total-page="module.totalPage"
+                       module-api="{{module.api}}"
+                       request-params="{user_id:target_id}"
+                       theme="theme"
+                       style="margin-bottom: 50px"
+            ></page-list>
+        </div>
+    </div>
+    <div class="left-middle-lg row-sm" ng-if="currentPage !== undefined">
+        <page-list expanded="true"
+                   list="modules[0].list"
+                   total-page="modules[0].totalPage"
+                   module-api="{{modules[0].api}}"
+                   request-params="{user_id:target_id}"
+                   theme="theme"
+                   style="margin-bottom: 50px"
+                   ng-if="currentPage === 0"
+        ></page-list>
+        <page-list expanded="true"
+                   list="modules[1].list"
+                   total-page="modules[1].totalPage"
+                   module-api="{{modules[1].api}}"
+                   request-params="{user_id:target_id}"
+                   theme="theme"
+                   style="margin-bottom: 50px"
+                   ng-if="currentPage === 1"
+        ></page-list>
+        <page-list expanded="true"
+                   list="modules[2].list"
+                   total-page="modules[2].totalPage"
+                   module-api="{{modules[2].api}}"
+                   request-params="{user_id:target_id}"
+                   theme="theme"
+                   style="margin-bottom: 50px"
+                   ng-if="currentPage === 2"
+        ></page-list>
+    </div>
+    <div class="right-lg hidden-sm flex-column">
+        <user-menu style="margin-bottom: 20px" ng-if="stateTree.aggregation.user.basicInfo" object="stateTree.aggregation.user.basicInfo"></user-menu>
+        <right-menus style="flex-grow: 1;"></right-menus>
+    </div>
+</div>

@@ -1,65 +1,66 @@
 ﻿(function () {
-    "use strict";
-
-    keylolApp.controller("RootController", [
-        "$scope", "pageHead", "union", "$http", "apiEndpoint", "notification", "$location", "$rootScope", "$route",
-        function ($scope, pageHead, union, $http, apiEndpoint, notification, $location, $rootScope, $route) {
+    keylolApp.controller('RootController',
+        ($scope, pageHead, union, $http, apiEndpoint, $window, notification, $location, $rootScope, $state, stateTree, $stateParams) => {
             pageHead.loading();
 
-            function getUserInfo() {
-                $http.get(apiEndpoint + "user/" + union.$localStorage.login.UserId, {
-                    params: {
-                        claims: true,
-                        stats: true,
-                        profilePointBackgroundImage: true,
-                        subscribeCount: true,
-                        commentLike: true,
-                        coupon: true
-                    }
-                }).then(function (response) {
-                    var beforeCoupon = union.$localStorage.user?union.$localStorage.user.Coupon:undefined;
-                    union.$localStorage.user = response.data;
-                    union.$localStorage.user.fakeCoupon = beforeCoupon;
-                    _czc.push(["_setCustomVar", "登录用户", response.data.IdCode + "-" + response.data.UserName, 1]);
-                }, function (response) {
-                    if (response.status === 401) {
-                        $http.delete(apiEndpoint + "login/current");
-                        delete union.$localStorage.login;
-                        notification.error("登录失效，请重新登录。");
-                    }
-                });
-            }
-
-            $scope.$watch(function () {
-                return union.$localStorage.login;
-            }, function (newLogin) {
-                if (newLogin) {
-                    getUserInfo();
+            let firstLoad = true;
+            $scope.$watch(() => {
+                return union.$localStorage.Authorization;
+            },newToken => {
+                if (newToken) {
+                    $http.defaults.headers.common.Authorization = `Bearer ${newToken}`;
                 } else {
-                    _czc.push(["_setCustomVar", "登录用户", "游客", 1]);
-                    for (var i in union.$localStorage) {
-                        if (union.$localStorage.hasOwnProperty(i) && i.indexOf("$") !== 0)
+                    _czc.push(['_setCustomVar', '登录用户', '游客', 1]);
+                    for (const i in union.$localStorage) {
+                        if (union.$localStorage.hasOwnProperty(i) && i.indexOf('$') !== 0)
                             delete union.$localStorage[i];
                     }
-                    for (var j in union.$sessionStorage) {
-                        if (union.$sessionStorage.hasOwnProperty(j) && j.indexOf("$") !== 0)
-                            delete union.$sessionStorage[j];
+                    for (const i in union.$sessionStorage) {
+                        if (union.$sessionStorage.hasOwnProperty(i) && i.indexOf('$') !== 0)
+                            delete union.$sessionStorage[i];
                     }
-                    $route.reload();
+                    console.log(stateTree);
+                    if (stateTree.currentUser) {
+                        delete stateTree.currentUser;
+                        delete $http.defaults.headers.common.Authorization;
+                    }
+                }
+                if (!firstLoad) {
+                    stateTree.empty = true;
+                    $state.reload();
+                } else {
+                    firstLoad = false;
                 }
             });
 
-            var firstLoad = true;
-            $rootScope.$on("$routeChangeSuccess", function () {
-                window.scrollTo(0, 0);
-                if (firstLoad) {
-                    firstLoad = false;
-                    return;
+            $rootScope.$on('$stateChangeStart', (event, toState, toParams, fromState, fromParams) => {
+                // 如果是从子状态跳出至父状态，则阻止其发生
+                if (fromState.name.includes(toState.name) && fromState.name !== toState.name) {
+                    let flag = true;
+                    for (const attr in toParams) {
+                        if (toParams.hasOwnProperty(attr) && toParams[attr] !== fromParams[attr]) {
+                            flag = false;
+                        }
+                    }
+                    if (flag) {
+                        for (const attr in fromParams) {
+                            if (fromParams.hasOwnProperty(attr) && fromParams[attr] !== toParams[attr]) {
+                                flag = false;
+                            }
+                        }
+                        if (flag) {
+                            event.preventDefault();
+                            console.log('prevent change');
+                        }
+                    }
                 }
-                if (union.$localStorage.login) {
-                    getUserInfo();
-                }
+
+                $($window).unbind('scroll.loadTimeline');
             });
-        }
-    ]);
-})();
+
+            $rootScope.$on('$stateChangeSuccess', () => {
+                $window.scrollTo(0, 0);
+                console.log($state.current);
+            });
+    });
+}());

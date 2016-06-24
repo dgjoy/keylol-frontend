@@ -1,0 +1,37 @@
+.popup-item-editor {
+  @include keylol-shadow-3();
+  @include grow-shrink-top-right();
+  background-color: $keylol-card;
+  width: 385px;
+  padding: 20px 15px;
+
+  raised-button {
+    margin-top: 15px;
+    float: right;
+  }
+
+  .color {
+    height: 32px;
+    width: 290px;
+    margin-top: 15px;
+    padding-left: 10px;
+    float: left;
+    position: relative;
+    line-height: 32px;
+    color: rgba($keylol-inverted-text,.6);
+
+    &.color-A { background-color: $keylol-theme; }
+    &.color-B { background-color: $keylol-light-theme; }
+
+    .sample {
+      position: absolute;
+      top:0;
+      right: 20px;
+      height: 32px;
+      line-height: 32px;
+      padding: 0 10px;
+      color: rgba($keylol-inverted-text,.6);
+      background-color: rgb(167,167,167);
+    }
+  }
+}

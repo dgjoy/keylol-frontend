@@ -1,0 +1,31 @@
+﻿<div class="background" webp-background="{{articleSummary.article.coverImage | uriRelocate}}">
+    <div class="mask">
+        <div class="wrapper">
+            <div class="left-part">
+                <a ng-href="user/{{articleSummary.article.authorBasicInfo.idCode}}" class="author">
+                    <img webp-src="{{articleSummary.article.authorBasicInfo.avatarImage | avatarUrl}}" alt="{{articleSummary.article.authorBasicInfo.userName}}" class="avatar">
+                    <div class="name-group">
+                        <p class="username">{{articleSummary.article.authorBasicInfo.userName}}</p>
+                        <p ng-if="articleSummary.article.pointBasicInfo.type === 'game' || articleSummary.article.pointBasicInfo.type === 'hardware'">
+                            <vote-circle ng-if="articleSummary.article.rating" review="articleSummary.article.rating * 2 - 1" gray-background="true"></vote-circle>
+                            {{articleSummary.article.rating ?'/' : ''}}
+                            <span ng-if="articleSummary.article.authorPlayedTime">在档 {{articleSummary.article.authorPlayedTime}} 小时</span>
+                            <span ng-if="!articleSummary.article.authorPlayedTime">无在档记录</span>
+                        </p>
+                        <p></p>
+                    </div>
+                </a>
+                <div class="summary">
+                    <p ng-repeat="text in articleSummary.article.pros">+ {{text}}</p>
+                </div>
+                <div class="summary">
+                    <p ng-repeat="text in articleSummary.article.cons">- {{text}}</p>
+                </div>
+            </div>
+            <div class="right-part">
+                <simple-article-card ng-repeat="card in articleSummary.article.recommendedArticles" card="::card"></simple-article-card>
+            </div>
+        </div>
+    </div>
+</div>
+

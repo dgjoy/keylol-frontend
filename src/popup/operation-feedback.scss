@@ -1,0 +1,90 @@
+.popup-operation-feedback {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  padding: 0 30px 30px;
+
+  &.ng-enter {
+    transition: transform 460ms cubic-bezier(0.4, 0.0, 0.2, 1);;
+    transform: translateY(100%);
+
+    &.ng-enter-active {
+      transform: translateY(0);
+    }
+  }
+
+  &.ng-leave {
+    transition: 400ms cubic-bezier(0.4, 0.0, 0.2, 1);;
+
+    &.ng-leave-active {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+  }
+
+  .feedback-content {
+    @include keylol-shadow-3;
+    border-radius: 2px;
+    width: 280px;
+    padding: 20px 10px 20px 15px;
+    display: flex;
+    align-items: center;
+
+    &.success {
+      background-color: $keylol-review-awesome;
+    }
+
+    &.error {
+      background-color: $keylol-review-bad;
+    }
+
+    &.attention {
+      background-color: $keylol-review-not-bad;
+    }
+
+    &.process {
+      background-color: $keylol-light-theme;
+    }
+
+    &.default {
+      background-color: $keylol-main-text;
+    }
+
+    svg {
+      flex-shrink: 0;
+      fill: $keylol-inverted-text;
+      width: 24px;
+      height: 24px;
+      margin-right: 10px;
+    }
+
+    .snack-main {
+      flex-grow: 1;
+      display: flex;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      align-items: center;
+
+      .text {
+        flex-grow: 1;
+
+        p {
+          color: $keylol-inverted-text;
+          margin: 0 5px 0 0;
+
+          &:nth-of-type(2) {
+            font-size: 12px;
+            opacity: 0.6;
+          }
+        }
+      }
+
+      flat-button {
+        margin-left: 10px;
+        margin-bottom: -10px;
+      }
+    }
+  }
+
+}

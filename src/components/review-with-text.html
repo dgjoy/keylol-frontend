@@ -1,0 +1,10 @@
+<span ng-class="{awesome: reviewWithText.review >= 8,
+    good: reviewWithText.review >= 6 && reviewWithText.review < 8,
+    'not-bad': reviewWithText.review >= 4 && reviewWithText.review < 6,
+    bad: reviewWithText.review >= 2 && reviewWithText.review < 4,
+    terrible: reviewWithText.review < 2}">{{reviewWithText.review.toFixed(1)}}</span>
+<vote-circle ng-if="reviewWithText.review" review="reviewWithText.review"></vote-circle>
+<div class="not-enough" ng-if="!reviewWithText.review">
+    <p>N/A</p>
+    <p>评价不足</p>
+</div>

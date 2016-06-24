@@ -1,0 +1,308 @@
+activity-card {
+  display: block;
+  width: 700px;
+
+  .moderation {
+    @include keylol-shadow-1();
+    background-color: $keylol-light-theme;
+    margin-bottom: 20px;
+    height: 80px;
+    padding: 0 15px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    p {
+      margin: 0;
+      color: $keylol-inverted-text;
+    }
+    p:first-of-type {
+      font-size: 20px;
+    }
+
+    img {
+      width: 180px;
+    }
+
+    .name-group p:first-of-type {
+      padding-bottom: 2px;
+    }
+  }
+
+
+  .activity-body {
+    @include keylol-shadow-1;
+    display: block;
+    background-color: $keylol-inverted-text;
+
+    >.display-card {
+      @include keylol-shadow-1;
+      background-color: $keylol-card;
+
+      >.user-with-date {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 72px;
+        padding: 0 15px;
+
+        >.user {
+          flex-shrink: 1;
+          display: flex;
+          align-items: center;
+          position: relative;
+          z-index: 0;
+
+          &:hover {
+            .username {
+              text-decoration: underline;
+            }
+          }
+
+          >.avatar {
+            flex-shrink: 0;
+            width: 32px;
+            height: 32px;
+            border-radius: 16px;
+            margin-right: 10px;
+          }
+
+          >.name-group {
+            p {
+              margin: 0;
+            }
+
+            p:first-of-type {
+              font-weight: bold;
+              color: $keylol-main-text;
+            }
+
+            p:last-of-type {
+              font-size: 12px;
+              color: $keylol-inertia-text;
+            }
+          }
+        }
+      }
+
+      >.simple {
+        >vote-circle {
+          padding: 0 15px;
+          margin-bottom: 20px;
+        }
+
+        >p {
+          margin: 0;
+          padding: 0 15px 20px 15px;
+          white-space: pre-wrap;
+        }
+
+        >img {
+          width: 100%;
+        }
+      }
+
+      .point-with-source {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 72px;
+        padding: 0 15px;
+
+        >.point {
+          flex-shrink: 1;
+
+          &:hover>point-basic-info>.name-group>p:first-of-type {
+            text-decoration: underline;
+          }
+        }
+
+        >.source {
+          flex-shrink: 0;
+          font-size: 12px;
+          color: $keylol-inertia-text;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+
+      .agree {
+        margin: 0 15px;
+        border-top: 1px solid $keylol-inertia-shape;
+
+        .action {
+          padding-top: 20px;
+          padding-bottom: 15px;
+          display: flex;
+          justify-content: center;
+        }
+
+        .agree-list {
+          display: flex;
+          justify-content: center;
+
+          img {
+            border-radius: 0;
+            width: 16px;
+            height: 16px;
+            margin: 0 5px;
+          }
+        }
+      }
+    }
+
+    >.communicate-card {
+      >.review-area {
+        position: relative;
+
+        >.hr {
+          height: 1px;
+          background-color: $keylol-inertia-shape;
+        }
+
+        pagination {
+          float: right;
+          margin:20px 0;
+        }
+
+        >.float-top {
+          position: absolute;
+          top: 10px;
+          right: 0;
+          margin: 10px 0;
+        }
+
+        >.review-count {
+          padding: 20px 15px 10px;
+          color: $keylol-inertia-text;
+        }
+
+        >.review-sender {
+          display: flex;
+          margin-top: 25px;
+          margin-bottom: 10px;
+          padding: 0 15px;
+
+          .avatar {
+            width: 32px;
+            height: 32px;
+            margin-right: 10px;
+          }
+
+          textarea {
+            flex-grow: 1;
+            padding: 0;
+            outline: 0;
+            resize: none;
+          }
+        }
+
+        >.review-list {
+          @include page-change('ul');
+          position: relative;
+          margin: 10px 0;
+          overflow: hidden;
+          transition: height .5s;
+
+          ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            width: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+          }
+
+          .review {
+            @include hover-background();
+            padding: 15px 15px;
+            display: flex;
+            justify-content: space-between;
+
+            &.blink {
+              animation: review-blink 5s;
+            }
+
+            >.avatar {
+              width: 32px;
+              height:32px;
+            }
+
+            >.content {
+              width: 628px;
+            }
+
+            >.content>.info {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              height: 20px;
+              color: $keylol-inertia-text;
+
+              a:hover {
+                text-decoration: underline;
+              }
+
+              >.user {
+
+                .user-name {
+                  font-weight: bold;
+                  color: $keylol-main-text;
+                }
+
+                >a, >span {
+                  margin-right: 6px;
+                }
+              }
+
+              >.actions {
+                display: none;
+
+                >span>span {
+                  margin: 0 5px 0 10px;
+                }
+
+                a {
+                  margin: 0 5px;
+
+                  &:last-of-type {
+                    margin-right: 0;
+                  }
+                }
+              }
+
+              .light-theme {
+                color: $keylol-light-theme;
+              }
+
+              .error {
+                color: $keylol-review-bad;
+              }
+            }
+
+            >.content>.text {
+              color: $keylol-main-text;
+            }
+
+            &:hover>.content>.info>.date {
+              display: none;
+            }
+            &:hover>.content>.info>.actions {
+              display: block;
+            }
+          }
+        }
+      }
+
+      flat-button {
+        float: right;
+        margin-right: 10px;
+        margin-bottom: 12px;
+      }
+    }
+  }
+}

@@ -1,0 +1,44 @@
+.section-home-operation {
+    background: white;
+}
+
+.section-home-operation .new-main {
+    padding: 20px 15px;
+}
+
+.section-home-operation .new-main a {
+    display: block;
+    margin-bottom: 20px;
+}
+
+.section-home-operation .new-main a:last-of-type {
+    margin-bottom: 0;
+}
+
+.section-home-operation .new-main .image {
+    display: inline-block;
+    height: 24px;
+    width: 24px;
+    margin-right: 10px;
+    background-size: cover;
+}
+
+.section-home-operation .new-main a * {
+    vertical-align: middle;
+}
+
+.section-home-operation .new-main a.new-point .image {
+    background-image: url('../../assets/images/point-marker.png');
+}
+
+.section-home-operation .new-main a.new-point:hover .image {
+    background-image: url('../../assets/images/point-marker-hover.png');
+}
+
+.section-home-operation .new-main a.invitation .image {
+    background-image: url('../../assets/images/invitation.png');
+}
+
+.section-home-operation .new-main a.invitation:hover .image {
+    background-image: url('../../assets/images/invitation-hover.png');
+}

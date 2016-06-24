@@ -1,0 +1,227 @@
+article-comments {
+  @include keylol-shadow-1();
+  display: block;
+  background-color: $keylol-inverted-text;
+
+
+  .basic-info {
+    display: flex;
+    align-items: center;
+
+    .avatar {
+      flex-grow: 0;
+      width: 32px;
+      height: 32px;
+      margin-right: 10px;
+    }
+
+    .name-group {
+      flex-grow: 1;
+
+      p {
+        margin: 0;
+
+        .like-count {
+          margin-left: 6px;
+          font-weight: normal;
+          color: $keylol-inertia-text;
+        }
+
+        .light-theme {
+          color: $keylol-light-theme;
+        }
+
+        .username {
+          color: $keylol-main-text;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+
+      p:first-of-type {
+        font-weight: bold;
+        color: $keylol-main-text;
+      }
+
+      p:nth-of-type(2) {
+        color: $keylol-inertia-text;
+        font-size: 12px;
+      }
+    }
+
+    .action-date {
+      flex-grow: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+
+      .action{
+        visibility: hidden;
+
+        a {
+          margin: 0 5px;
+
+          &:last-of-type {
+            margin-right: 0;
+          }
+        }
+
+        >span>span {
+          margin: 0 5px 0 10px;
+        }
+      }
+
+      a {
+        color: $keylol-highlight;
+        &:hover { text-decoration: underline; }
+      }
+
+      p {
+        margin: 0;
+        color: $keylol-inertia-text;
+        &:nth-of-type(2) { font-size: 12px; }
+      }
+    }
+  }
+
+  .comment-to-reply {
+    @include keylol-shadow-1;
+    padding: 20px 12px;
+    margin-top: 20px;
+
+    p {
+      margin: 0;
+    }
+
+    .basic {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+
+      .avatar {
+        border-radius: 0;
+        width: 18px;
+        height: 18px;
+        margin-left: 8px;
+        margin-right: 5px;
+      }
+
+      p {
+        display: flex;
+      }
+
+      a {
+        color: $keylol-inertia-text;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .comment-content {
+      @include ellipsis;
+    }
+  }
+
+  .display {
+    @include keylol-shadow-1();
+    background-color: $keylol-card;
+    padding: 20px 0;
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 15px 0;
+
+      .count {
+        p {
+          margin: 0;
+        }
+        p:first-of-type {
+          color: $keylol-main-text;
+          font-size: 20px;
+        }
+        p:nth-of-type(2) {
+          color:$keylol-inertia-text;
+          font-size: 12px;
+        }
+      }
+    }
+
+    .comments {
+      @include page-change('ul');
+      padding: 10px 0;
+      overflow: hidden;
+      position: relative;
+      transition: height .5s;
+
+      ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        width: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+
+      .comment {
+        margin: 0 15px;
+        padding: 20px 0;
+        border-bottom: 1px solid $keylol-inertia-shape;
+
+        .comment-to-reply {
+          background-color: $keylol-inverted-text;
+        }
+
+        &:last-of-type {
+          border-bottom: 0;
+        }
+
+        &:hover .action{
+          visibility: visible;
+        }
+
+        .error {
+          color: $keylol-review-bad;
+        }
+
+        .editor-style {
+          margin-top: 15px;
+        }
+      }
+    }
+
+    .footer pagination {
+      float: right;
+    }
+  }
+
+  .sender {
+    padding: 30px 15px 20px;
+
+    .comment-to-reply {
+      background-color: $keylol-card;
+    }
+
+    .simditor-wrapper {
+      background-color: #fff;
+
+      .simditor-toolbar {
+        background-color: #fff;
+      }
+
+      .simditor-body {
+        min-height: 30px;
+        padding: 20px 11px;
+      }
+    }
+
+    raised-button {
+      float: right;
+    }
+  }
+}

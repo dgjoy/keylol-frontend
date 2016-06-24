@@ -18,7 +18,7 @@ RUN chmod +x /usr/local/bin/keylol-frontend
 COPY *.js ./
 COPY *.ejs ./
 COPY *.pdf ./
-COPY components components/
+COPY src src/
 COPY assets assets/
 
 ENV BUILD_TASK prod

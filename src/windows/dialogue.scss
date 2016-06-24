@@ -1,0 +1,144 @@
+.window-dialogue {
+  .window {
+    @include keylol-shadow-3();
+    background-color: $keylol-inverted-text;
+    width: 940px;
+    position: relative;
+    overflow: visible;
+
+    .name-group {
+      p { margin: 0; }
+    }
+
+    .exit {
+      position: absolute;
+      right: -80px;
+      top: 15px;
+    }
+    .header {
+      display: flex;
+      padding: 0 15px;
+      height: 100px;
+      align-items: center;
+      background-color: $keylol-light-theme;
+
+      .user-info {
+        width: 560px;
+        display: flex;
+        align-items: center;
+
+        .avatar {
+          width: 48px;
+          height: 48px;
+          margin-right: 10px;
+        }
+
+        .name-group {
+          p:first-of-type {
+            color: $keylol-inverted-text;
+            vertical-align: bottom;
+          }
+          p:last-of-type {
+            font-size: 12px;
+            color: $keylol-inverted-text;
+          }
+          span {
+            @include font-consolas();
+            font-size: 12px;
+            color: rgba($keylol-inverted-text,.6);
+          }
+        }
+        raised-button {
+          margin-left: 30px;
+        }
+      }
+
+      >.name-group {
+        width: 160px;
+        p:first-of-type {
+          color: $keylol-inverted-text;
+        }
+
+        p:last-of-type {
+          font-size: 12px;
+          color: rgba($keylol-inverted-text,.6);
+        }
+      }
+    }
+
+    .sub {
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 15px;
+      background-color: $keylol-theme;
+
+      div:first-of-type {
+        font-size: 12px;
+        color: $keylol-inverted-text;
+      }
+
+      div:last-of-type {
+        font-size: 12px;
+        color: rgba($keylol-inverted-text,.6);
+        font-style: italic;
+      }
+    }
+
+    .dialogues {
+      @include keylol-shadow-1();
+      background-color: $keylol-card;
+      padding: 10px 0;
+    }
+
+    .go,
+    .come {
+      padding: 20px 15px;
+      border-top: 1px solid $keylol-inertia-shape;
+      display: flex;
+
+      &:first-of-type {
+        border-top: 0;
+      }
+
+      .name-group {
+        margin: 0 15px;
+
+        p:first-of-type {
+          color: $keylol-inertia-text;
+          font-size: 12px;
+        }
+        p:last-of-type {
+          color: $keylol-main-text;
+        }
+      }
+
+      .avatar {
+        width: 32px;
+        height: 32px;
+      }
+    }
+
+    .go { flex-direction: row-reverse; }
+
+    .sender {
+      display: flex;
+      padding: 0 15px;
+      height: 70px;
+      align-items: center;
+      justify-content: space-between;
+
+      input {
+        height: 100%;
+        padding: 0;
+        outline: 0;
+        border: 0;
+        flex-grow: 1;
+        margin-right: 20px;
+        background-color: transparent;
+        color: $keylol-main-text;
+      }
+    }
+  }
+}

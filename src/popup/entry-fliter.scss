@@ -1,0 +1,167 @@
+.popup-entry-filter {
+    overflow: hidden;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    padding-left: 1px;
+}
+
+.popup-entry-filter.ng-enter {
+    transition-duration: 460ms;
+}
+
+.popup-entry-filter.ng-leave {
+    transition-duration: 400ms;
+}
+
+.popup-entry-filter.ng-enter .filter-container {
+    transform: translateY(-100%);
+    opacity: 0;
+}
+
+.popup-entry-filter.ng-enter-active .filter-container {
+    transform: translateY(0);
+    opacity: 1;
+    transition: cubic-bezier(0.22, 0.61, 0.36, 1) 280ms;
+}
+
+.popup-entry-filter.ng-leave .filter-container {
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: cubic-bezier(0.22, 0.61, 0.36, 1) 400ms;
+}
+
+.popup-entry-filter.ng-enter .arrow-down {
+    transform: translateY(-100%);
+}
+
+.popup-entry-filter.ng-enter-active .arrow-down {
+    transform: translateY(0);
+    transition: 180ms 280ms;
+}
+
+.popup-entry-filter .arrow-down {
+    float: right;
+    margin: 0 30px 9px 0;
+}
+
+.popup-entry-filter .filter-main {
+    clear: both;
+    background-color: white;
+    position: relative;
+}
+
+.popup-entry-filter .filter-main button {
+    position: absolute;
+    right: 10px;
+    bottom: -5px;
+}
+
+.popup-entry-filter .filter-main form {
+    padding: 20px 15px 15px;
+}
+
+.popup-entry-filter .filter-main ul {
+    list-style: none;
+    margin: 0 0 20px 0;
+    padding: 0 30px 0 0;
+}
+
+.popup-entry-filter .filter-main ul li {
+    margin-bottom: 15px;
+    position: relative;
+    cursor: default;
+}
+
+.popup-entry-filter .in-home .filter-main ul li:first-of-type {
+    margin-bottom: 20px;
+}
+
+.popup-entry-filter .filter-main ul li div {
+    margin-top: 7px;
+    padding-left: 10px;
+}
+
+.popup-entry-filter .filter-main ul li input {
+    margin-right: 8px;
+}
+
+.popup-entry-filter .filter-main ul li label {
+    margin-right: 20px;
+}
+
+.popup-entry-filter .filter-main ul li span {
+    display: inline-block;
+    width: 22px;
+    background: transparent;
+    color: $keylol-theme;
+    text-align: center;
+    font-size: 15px;
+    padding: 2px 0;
+    margin: 0 15px 0 0;
+}
+
+.popup-entry-filter .filter-main ul li:first-of-type span {
+    width: 35px;
+}
+
+.popup-entry-filter .filter-main ul li span.active {
+    background: $keylol-theme;
+    color: white;
+}
+
+.popup-entry-filter .in-home .filter-main ul li:first-of-type span {
+    border: 1px solid #fff;
+    padding: 1px 0;
+}
+
+.popup-entry-filter .in-home .filter-main ul li:first-of-type span.part {
+    border-color: $keylol-theme;
+}
+
+.popup-entry-filter .filter-main ul li p {
+    display: inline-block;
+    margin: 0;
+}
+
+.popup-entry-filter .in-home .filter-main ul li:first-of-type p {
+    color: #bbb;
+}
+
+.popup-entry-filter .filter-main .source {
+    position: relative;
+    cursor: default;
+    margin-bottom: 20px;
+    padding-right: 45px;
+    padding-top: 20px;
+    border-top: solid #ccc 1px;
+}
+
+.popup-entry-filter .filter-main .source div {
+    margin-top: 7px;
+    padding-left: 10px;
+}
+
+.popup-entry-filter .filter-main .source input {
+    margin-right: 8px;
+}
+
+.popup-entry-filter .filter-main .source label {
+    margin-right: 20px;
+}
+
+.popup-entry-filter .filter-main .source p {
+    color: #bbb;
+    display: inline-block;
+    margin: 0;
+}
+
+.popup-entry-filter .filter-main .source span {
+    display: inline-block;
+    background: transparent;
+    color: $keylol-theme;
+    text-align: center;
+    font-size: 15px;
+    padding: 2px 0;
+    margin: 0 15px 0 0;
+    width: 35px;
+}

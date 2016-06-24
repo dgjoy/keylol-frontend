@@ -1,0 +1,52 @@
+﻿<div class="header">
+    <div class="text">
+        <p>{{couponDetailList.object.coupon}} ◆</p>
+        <p>当前文券数</p>
+    </div>
+    <img src="assets/images/piggy-bank.png">
+</div>
+<div class="list">
+    <div class="title">
+        <div class="cell">事件</div>
+        <div class="cell right">变更明细</div>
+        <div class="cell right">余额</div>
+        <div class="cell">时间</div>
+        <div class="cell">描述</div>
+    </div>
+    <div class="item-list" ng-style="{height: couponDetailList.list.length * 60 - 10}" ng-class="{
+    'to-next' : couponDetailList.isToNext,
+    'to-previous' : !couponDetailList.isToNext
+    }">
+        <div class="wrapper" ng-animate-swap="couponDetailList.currentPage">
+            <div class="item" ng-repeat="item in couponDetailList.list">
+                <div class="cell">{{item.event}}</div>
+                <div class="cell right {{item.change >= 0 ? 'coupon-up' : 'coupon-down'}}">{{ item.change >= 0 ? '+ '+item.change : '- ' + couponDetailList.abs(item.change) }} ◆</div>
+                <div class="cell right">{{item.balance}} ◆</div>
+                <div class="cell inertia">{{item.createTime | amUtc | amLocal | amDateFormat:'YYYY-MM-DD HH:MM:SS'}}</div>
+                <div class="cell" ng-switch="item.event">
+                    <span ng-switch-when="新注册">欢迎来到其乐游戏社区</span>
+                    <span ng-switch-when="应邀注册">受 <a href="user/{{item.description.Inviter.IdCode}}">{{item.description.Inviter.UserName}}</a> 引荐而准备迎新文券</span>
+                    <span ng-switch-when="兑换商品">兑换商品「{{item.description.CouponGift.Name}}」</span>
+                    <span ng-switch-when="发布文章">
+                        发布文章<a href="{{item.description.link}}">{{item.description.content}}</a>
+                    </span>
+                    <div ng-switch-when="发出认可">
+                        <span>
+                            认可<a href="{{item.description.link}}">{{item.description.content}}</a>
+                        </span>
+                    </div>
+                    <span ng-switch-when="获得认可">
+                        <a href="{{item.description.link}}">{{item.description.content}}</a>
+                        获得<a href="{{item.description.operatorLink}}">{{item.description.username}}</a>的认可
+                    </span>
+                    <span ng-switch-when="每日访问">每日访问其乐社区</span>
+                    <span ng-switch-when="邀请注册">邀请 <a href="user/{{item.description.User.IdCode}}">{{item.description.User.UserName}}</a> 加入其乐</span>
+                    <span ng-switch-when="其他">{{item.description}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer clearfix">
+    <pagination on-page-changed="couponDetailList.changePage(newPage, oldPage)" total="couponDetailList.totalPage" current="couponDetailList.currentPage"></pagination>
+</div>

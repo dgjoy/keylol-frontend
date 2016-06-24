@@ -1,0 +1,123 @@
+raised-button {
+  button {
+    @include keylol-button-single;
+    @include keylol-shadow-1;
+    color: $keylol-inverted-text;
+    fill: $keylol-inverted-text;
+    transition: .5s cubic-bezier(0.4, 0.0, 0.2, 1);
+    transition-property: color, background-color, fill;
+
+    .value {
+      display: flex;
+      align-items: center;
+      visibility: hidden;
+      position: absolute;
+      top: 10px;
+
+      &.active {
+        visibility: visible;
+        position: static;
+      }
+
+      &.active-add, &.active-remove {
+        transition: .4s cubic-bezier(0.4, 0.0, 0.2, 1);
+        transition-property: opacity, transform, visibility;
+      }
+
+      &.active-add {
+        opacity: 0;
+
+        &.false-value {
+          transform: translateY(-150%);
+        }
+
+        &.true-value {
+          transform: translateY(150%);
+        }
+
+        &.active-add-active {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      &.active-remove {
+        opacity: 1;
+
+        &.active-remove-active {
+          opacity: 0;
+
+          &.false-value {
+            transform: translateY(-150%);
+          }
+
+          &.true-value {
+            transform: translateY(150%);
+          }
+        }
+      }
+
+      svg {
+        width: 18px;
+        height: 18px;
+        margin-right: 6px;
+      }
+    }
+
+    &:active {
+      @include keylol-shadow-2;
+    }
+
+    &::after {
+      width: 100%;
+      height: 100%;
+      content: '';
+      position: absolute;
+      background-color: rgba(#000, 0.05);
+      left: 0;
+      top: 0;
+      visibility: hidden;
+    }
+
+    &:hover {
+      &::after {
+        visibility: visible;
+      }
+    }
+
+    &.theme {
+      background-color: $keylol-theme;
+
+      &.invert {
+        color: $keylol-theme;
+        fill: $keylol-theme;
+      }
+    }
+
+    &.light-theme {
+      background-color: $keylol-light-theme;
+    }
+
+    &.invert {
+      background-color: $keylol-inverted-text;
+    }
+
+    &.black {
+      background-color: $keylol-main-text;
+    }
+
+    &.light-text {
+      background-color: $keylol-light-text;
+    }
+
+    &[disabled] {
+      background-color: $keylol-inertia-shape;
+      &:hover {
+        &::after {
+          visibility: hidden;
+        }
+      }
+      color: rgba($keylol-inverted-text, 0.6);
+    }
+  }
+}

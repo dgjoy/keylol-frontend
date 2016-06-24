@@ -1,0 +1,32 @@
+<label class="
+        {{ textArea.activeState || ((textArea.model !== undefined && textArea.model.length !== 0) || textArea.pointCache) ? 'move-up':''}}
+        {{ textArea.warnState?'warn':textArea.activeState?'theme':''}}"
+       style="{{textArea.theme.light&&textArea.activeState&&!textArea.warnState?'color:'+textArea.theme.light+';':''}}"
+    >{{textArea.label}}</label>
+
+<div class="text {{textArea.disabledState?'disabled':textArea.warnState?'warn':textArea.activeState?'theme':''}}"
+     ng-if="textArea.type === 'text'"
+     style="{{textArea.theme.light&&textArea.activeState&&!textArea.warnState?'border-color:'+textArea.theme.light+';':''}}"
+    >
+    <input ng-model="textArea.model" type="text" ng-change="textArea.check()" ng-focus="textArea.focus()" ng-blur="textArea.blur()"
+           ng-disabled="textArea.disabledState"/>
+</div>
+
+<div class="text {{textArea.disabledState?'disabled':textArea.warnState?'warn':textArea.activeState?'theme':''}}"
+     ng-if="textArea.type === 'password'"
+     style="{{textArea.theme.light&&textArea.activeState&&!textArea.warnState?'border-color:'+textArea.theme.light+';':''}}"
+    >
+    <input ng-model="textArea.model" type="password" ng-change="textArea.check()" ng-focus="textArea.focus()" ng-blur="textArea.blur()"
+           ng-disabled="textArea.disabledState"/>
+</div>
+
+<input-uic ng-if="textArea.type === 'uic'" length="5" ng-model="textArea.model" focus-handler="textArea.focus()" blur-handler="textArea.blur()"
+           state="textArea.disabledState?'disabled':textArea.warnState?'warn':textArea.activeState?'theme':''"
+></input-uic>
+
+<input-point theme="textArea.theme" ng-if="textArea.type === 'point'" type-whitelist="textArea.whitelist" options="textArea.options" limit="textArea.limit" ng-model="textArea.model" focus-handler="textArea.focus()" blur-handler="textArea.blur()"
+             state="textArea.warnState?'warn':textArea.activeState?'theme':''" cache-handler="textArea.cacheHandler(isEmpty)"></input-point>
+
+<dropdown ng-if="textArea.type === 'dropdown'" object="textArea.object" model="textArea.model" state="textArea.disabledState?'disabled':'theme'"></dropdown>
+
+<div class="tip {{textArea.warnState?'warn':textArea.activeState?'theme':''}}">{{textArea.warnState?textArea.error:textArea.tip}}</div>

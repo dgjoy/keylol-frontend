@@ -1,0 +1,20 @@
+﻿<div class="hint">
+    <div class="icons">
+        <svg class="eye" aria-hidden="true">
+            <use ng-href="{{'eye' | iconSvgUrl }}" xlink:href=""></use>
+        </svg>
+        <svg class="eye-off" aria-hidden="true">
+            <use ng-href="{{'eye-off' | iconSvgUrl }}" xlink:href=""></use>
+        </svg>
+        <img ng-if="stateTree.content.article.pointBasicInfo.logo" class="point-icon" webp-src="{{stateTree.content.article.pointBasicInfo.logo | themeLogoUrl}}">
+        <div ng-if="!stateTree.content.article.pointBasicInfo.logo" class="point-alt">
+            <p>{{utils.getPreferredPointName(stateTree.content.article.pointBasicInfo, stateTree.currentUser)[0]}}</p>
+            <p>{{utils.getPreferredPointName(stateTree.content.article.pointBasicInfo, stateTree.currentUser)[1]}}</p>
+        </div>
+    </div>
+    <div class="text">
+        <h2 class="font-myriad-keylol">剧透警告</h2>
+        <h3>这段内容已被折叠。单击此区域会展开剧透信息。</h3>
+    </div>
+</div>
+<div class="content" ng-transclude></div>

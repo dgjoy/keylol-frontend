@@ -1,0 +1,64 @@
+section-timeline {
+  width: 700px;
+  display: flex;
+  flex-direction: column;
+
+  .wrapper {
+    display: flex;
+    justify-content: space-between;
+
+    .quick-edit {
+      @include keylol-shadow-1();
+      background-color: $keylol-inverted-text;
+      width: 310px;
+      height: 50px;
+      padding: 0 15px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: text;
+
+      p {
+        margin: 0;
+        color: $keylol-inertia-text;
+      }
+
+      a {
+        display: flex;
+
+        svg {
+          width: 32px;
+          height: 32px;
+          fill: $keylol-inertia-shape;
+        }
+      }
+    }
+
+    timeline-card {
+      margin-bottom: 20px;
+
+      &.ng-enter {
+        transition: all 500ms cubic-bezier(0.0, 0.0, 0.2, 1);
+        transform: translateY(100px);
+        opacity: .1;
+      }
+
+      &.ng-enter-active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  }
+
+  .action {
+    display: flex;
+    justify-content: center;
+
+    raised-button {
+      text-align: center;
+      margin-top: 20px;
+      margin-bottom: 30px;
+    }
+  }
+}

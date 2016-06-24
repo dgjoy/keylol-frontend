@@ -1,0 +1,286 @@
+.section-coupon-content {
+    width: 100%;
+    min-width: 870px;
+    position: relative;
+}
+
+.coupon-page {
+    position: absolute;
+    width: 100%;
+    box-sizing: border-box;
+    background: white;
+    padding: 30px 20px;
+}
+
+.coupon-page.ng-hide-add {
+    transition: 0.2s linear all;
+}
+
+.coupon-page.ng-hide-remove {
+    transition: 0.15s 0.2s linear all;
+}
+
+.coupon-page.ng-hide-add {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.coupon-page.ng-hide-add.ng-hide-add-active {
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.coupon-page.ng-hide-remove {
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.coupon-page.ng-hide-remove.ng-hide-remove-active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.section-coupon-content .heading p {
+    color: #bbb;
+    margin: 0;
+}
+
+.section-coupon-content .heading h1 {
+    color: $keylol-theme;
+    font-size: 28px;
+    font-weight: normal;
+    margin: 0;
+}
+
+.section-coupon-content .heading coupon-menu {
+    float: right;
+}
+
+.section-coupon-content pagination {
+    margin-top: 50px;
+    float: right;
+}
+
+.section-coupon-content table {
+    width: 100%;
+}
+
+.section-coupon-content a {
+    color: $keylol-highlight;
+}
+
+.section-coupon-content table tr {
+    border-bottom: 1px #ccc dashed;
+}
+
+.section-coupon-content table td,
+.section-coupon-content table th {
+    padding: 10px;
+}
+
+.section-coupon-content .records tr td:nth-of-type(1),
+.section-coupon-content .records tr th:nth-of-type(1) {
+    width: 100px;
+    text-align: left;
+}
+
+.section-coupon-content .records tr td:nth-of-type(2),
+.section-coupon-content .records tr th:nth-of-type(2),
+.section-coupon-content .records tr td:nth-of-type(3),
+.section-coupon-content .records tr th:nth-of-type(3) {
+    width: 90px;
+    text-align: right;
+}
+
+.section-coupon-content .records tr td:nth-of-type(2).plus {
+    color: #00ab4e;
+}
+
+.section-coupon-content .records tr td:nth-of-type(2).minus {
+    color: #e30613;
+}
+
+.section-coupon-content .records tr td:nth-of-type(4),
+.section-coupon-content .records tr th:nth-of-type(4) {
+    width: 130px;
+    text-align: left;
+    padding-left: 40px;
+}
+
+.section-coupon-content .records tr td:nth-of-type(4) {
+    color: #bbb;
+}
+
+.section-coupon-content .records tr td:nth-of-type(5),
+.section-coupon-content .records tr th:nth-of-type(5) {
+    text-align: left;
+}
+
+.section-coupon-content .shop ul {
+    margin: 0;
+    padding: 0 10px;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.section-coupon-content .shop li {
+    width: 250px;
+    margin: 30px 30px 0 0;
+}
+
+.section-coupon-content .shop li:nth-of-type(3n) {
+    margin-right: 0;
+}
+
+.section-coupon-content .shop li a {
+    height: 150px;
+    display: block;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.section-coupon-content .shop li a div {
+    position: absolute;
+    box-sizing: border-box;
+    bottom: 0;
+    width: 100%;
+    height: 45px;
+    background-color: rgba(256, 256, 256, 0.85);
+    transition: background-color 100ms ease-in-out;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.section-coupon-content .shop li a div span {
+    font-size: 15px;
+    color: $keylol-theme;
+}
+
+.section-coupon-content .shop li a:hover div span:first-of-type {
+    text-decoration: underline;
+}
+
+.section-coupon-content .shop li a:hover div {
+    background-color: rgba(256, 256, 256, 0.95);
+}
+
+.section-coupon-content .shop li > p {
+    margin: 10px 0 0;
+    text-align: right;
+    color: #bbb;
+}
+
+.section-coupon-content .ranks tr td:nth-of-type(1),
+.section-coupon-content .ranks tr th:nth-of-type(1) {
+    width: 80px;
+    text-align: left;
+}
+
+.section-coupon-content .ranks tr td:nth-of-type(2),
+.section-coupon-content .ranks tr th:nth-of-type(2) {
+    width: 410px;
+    text-align: left;
+}
+
+.section-coupon-content .ranks tr td:nth-of-type(3),
+.section-coupon-content .ranks tr th:nth-of-type(3) {
+    width: 90px;
+    text-align: right;
+}
+
+.section-coupon-content .ranks tr td:nth-of-type(4),
+.section-coupon-content .ranks tr th:nth-of-type(4) {
+    text-align: left;
+    padding-left: 90px;
+}
+
+.section-coupon-content .ranks tr td:nth-of-type(2) .avatar-anchor {
+    float: left;
+}
+
+.section-coupon-content .ranks tr td:nth-of-type(2) .avatar-anchor img {
+    width: 32px;
+    height: 32px;
+}
+
+.section-coupon-content .ranks tr td:nth-of-type(2) .title {
+    float: left;
+    margin-left: 14px;
+}
+
+.section-coupon-content .ranks tr td:nth-of-type(2) .title p {
+    margin: 0;
+    line-height: 16px;
+}
+
+.section-coupon-content .ranks tr td:nth-of-type(2) .title p:first-of-type a {
+    color: $keylol-theme;
+}
+
+.section-coupon-content .ranks tbody tr.best-three td:nth-of-type(1) {
+    font-weight: bold;
+    color: $keylol-theme;
+}
+
+.section-coupon-content .ranks tbody tr.best-three td:nth-of-type(2) .title p:first-of-type a {
+    font-weight: bold;
+}
+
+.section-coupon-content .ranks tbody tr.best-three td:nth-of-type(3) {
+    color: $keylol-theme;
+}
+
+.section-coupon-content .ranks tr td:nth-of-type(2) .title p span {
+    color: #748a97;
+}
+
+.section-coupon-content .invite p {
+    text-indent: 2em;
+}
+
+.section-coupon-content .invite .invite-rule {
+    display: flex;
+    margin: 30px -20px;
+}
+
+.section-coupon-content .invite .invite-rule div {
+    padding: 15px 95px;
+    flex: 1;
+}
+
+.section-coupon-content .invite .invite-rule div .rule-result {
+    float: right;
+}
+
+.section-coupon-content .invite .invite-rule div:first-of-type {
+    border-right: 1px solid #ccc;
+}
+
+.section-coupon-content .invite .invite-rule div:first-of-type .rule-result {
+    color: $keylol-theme;
+}
+
+.section-coupon-content .invite .invite-rule div:last-of-type .rule-result {
+    color: #00ab4e;
+}
+
+.section-coupon-content .invite input {
+    margin: 20px auto 0 auto;
+    padding: 4px 20px;
+    display: block;
+    width: 220px;
+}
+
+.section-coupon-content .bottom-sawtooth {
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+    height: 20px;
+    width: 100%;
+    background: repeat-x;
+    background-size: 29px auto;
+}

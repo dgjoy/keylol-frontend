@@ -1,0 +1,28 @@
+dropdown {
+  display: block;
+
+  .dropdown {
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+    border: 0;
+    border-bottom: 1px solid $keylol-inertia-shape;
+
+    .str {
+      height: 16px;
+      padding-bottom: 10px;
+      color: $keylol-main-text;
+    }
+
+    svg {
+      width: 24px;
+      height: 24px;
+      margin-bottom: 2px;
+      fill: $keylol-inertia-shape;
+    }
+
+    &.disabled {
+      border-style: dotted;
+    }
+  }
+}

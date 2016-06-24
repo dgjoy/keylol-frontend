@@ -1,0 +1,72 @@
+﻿<div style="margin-top: 30px" class="flex-row" ng-if="stateTree.aggregation.point.frontpage && stateTree.aggregation.point.basicInfo" ng-switch="stateTree.aggregation.point.basicInfo.type">
+    <div class="left-middle-lg row-sm" ng-switch-default>
+        <product-collection count="::stateTree.aggregation.point.basicInfo.productCount" object="::stateTree.aggregation.point.frontpage" type="::stateTree.aggregation.point.basicInfo.type" theme="::theme" style="margin-bottom: 10px;"></product-collection>
+        <latest-articles is-empty="stateTree.aggregation.point.frontpage.latestArticles.length === 0"
+                         articles="::stateTree.aggregation.point.frontpage.latestArticles"
+                         header-image="::stateTree.aggregation.point.frontpage.latestArticleHeaderImage"
+                         total-page="::stateTree.aggregation.point.frontpage.latestArticlePageCount"
+                         module-api="states/aggregation/point/frontpage/latest-articles"
+                         theme="::theme"
+                         style="margin-bottom: 30px;">
+        </latest-articles>
+        <section-timeline ng-if="stateTree.aggregation.point.timeline.cards" theme="theme" cards="stateTree.aggregation.point.timeline.cards"></section-timeline>
+    </div>
+
+    <div class="left-middle-lg row-sm" ng-switch-when="hardware">
+        <point-associations theme="::theme" style="margin-bottom: 40px;" object="::stateTree.aggregation.point.frontpage"></point-associations>
+        <short-review ng-if="::(stateTree.aggregation.point.frontpage.briefReviewCount > 0)"
+                      module-api="states/aggregation/point/frontpage/brief-reviews"
+                      point-id="::(stateTree.aggregation.point.basicInfo.id)"
+                      played-time="::(stateTree.aggregation.point.basicInfo.totalPlayedTime)"
+                      list="::(stateTree.aggregation.point.frontpage.briefReviews)"
+                      theme="::theme"
+                      style="margin-bottom: 50px;">
+        </short-review>
+        <media-center theme="::theme" style="margin-bottom: 40px;"></media-center>
+        <latest-articles is-empty="stateTree.aggregation.point.frontpage.latestArticles.length === 0"
+                         articles="::stateTree.aggregation.point.frontpage.latestArticles"
+                         header-image="::stateTree.aggregation.point.frontpage.latestArticleHeaderImage"
+                         total-page="::stateTree.aggregation.point.frontpage.latestArticlePageCount"
+                         module-api="states/aggregation/point/frontpage/latest-articles"
+                         theme="::theme"
+                         style="margin-bottom: 30px;">
+        </latest-articles>
+        <section-timeline ng-if="stateTree.aggregation.point.timeline.cards" theme="theme" cards="stateTree.aggregation.point.timeline.cards"></section-timeline>
+    </div>
+
+    <div class="left-middle-lg row-sm" ng-switch-when="game">
+        <point-associations theme="::theme" style="margin-bottom: 40px;" object="::stateTree.aggregation.point.frontpage"></point-associations>
+        <short-review module-api="states/aggregation/point/frontpage/brief-reviews"
+                      point-id="::(stateTree.aggregation.point.basicInfo.id)"
+                      played-time="::(stateTree.aggregation.point.basicInfo.totalPlayedTime)"
+                      list="::(stateTree.aggregation.point.frontpage.briefReviews)"
+                      theme="::theme"
+                      style="margin-bottom: 50px;">
+        </short-review>
+        <media-center theme="::theme" style="margin-bottom: 40px;"
+                      header-image="::(stateTree.aggregation.point.frontpage.mediaHeaderImage)"
+                      init-list="::(stateTree.aggregation.point.frontpage.media)"
+                      point-name="::(stateTree.aggregation.point.basicInfo.chineseName)"
+                      point-id="::(stateTree.aggregation.point.basicInfo.id)">
+        </media-center>
+        <addictive-users ng-if="::(stateTree.aggregation.point.frontpage.addictedUsers.length > 0)" cards="::(stateTree.aggregation.point.frontpage.addictedUsers)" theme="::theme"></addictive-users>
+        <similar-games ng-if="::(stateTree.aggregation.point.frontpage.similarPoints.length > 0)" cards="::(stateTree.aggregation.point.frontpage.similarPoints)" theme="::theme" style="position: absolute;width: 100%;left: 0;"></similar-games>
+        <div ng-if="::(stateTree.aggregation.point.frontpage.similarPoints.length > 0)" style="height: 435px;"></div>
+        <article-collection ng-if="::(stateTree.aggregation.point.frontpage.selectedArticles.length > 0)" cards="::(stateTree.aggregation.point.frontpage.selectedArticles)" theme="::theme" style="margin-bottom: 30px"></article-collection>
+        <latest-articles is-empty="stateTree.aggregation.point.frontpage.latestArticles.length === 0"
+                         articles="::stateTree.aggregation.point.frontpage.latestArticles"
+                         header-image="::stateTree.aggregation.point.frontpage.latestArticleHeaderImage"
+                         total-page="::stateTree.aggregation.point.frontpage.latestArticlePageCount"
+                         module-api="states/aggregation/point/frontpage/latest-articles"
+                         request-params="::({point_id:stateTree.aggregation.point.basicInfo.id})"
+                         theme="::theme"
+                         style="margin-bottom: 30px;">
+        </latest-articles>
+        <section-timeline ng-if="stateTree.aggregation.point.timeline.cards" theme="theme" cards="stateTree.aggregation.point.timeline.cards"></section-timeline>
+    </div>
+
+    <div class="right-lg hidden-sm flex-column">
+        <point-menu ng-if="stateTree.aggregation.point.basicInfo" style="margin-bottom: 20px" object="::stateTree.aggregation.point.basicInfo"></point-menu>
+        <right-menus style="flex-grow: 1;"></right-menus>
+    </div>
+</div>

@@ -1,0 +1,93 @@
+point-header {
+  margin: auto;
+  width: 940px;
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  .background {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: center no-repeat;
+    background-size: cover;
+  }
+
+  .info {
+      @include text-protection();
+      padding: 20px 0;
+      position: relative;
+      display: flex;
+      align-items: center;
+
+      > * {
+        flex: 1 30%;
+      }
+
+      point-basic-info {
+        margin-left: 15px;
+
+        .avatar {
+          box-sizing: content-box;
+          border: 3px #fff solid;
+        }
+
+        .name-group p {
+          &:first-of-type {
+            color: $keylol-inverted-text;
+          }
+
+          &:last-of-type {
+            color: $keylol-inverted-text;
+          }
+        }
+      }
+
+      .attributes {
+        .related {
+          @include wrap-ellipsis;
+          color: $keylol-inverted-text;
+          justify-content: center;
+          align-items: center;
+
+          &:first-of-type {
+            height: 21px;
+          }
+
+          &:last-of-type {
+            height: 14px;
+            font-size: 12px;
+          }
+
+          .point:not(:first-of-type)::before {
+            content: "\00a0/\00a0";
+          }
+
+          .point a {
+            color: $keylol-inverted-text;
+            &:hover { text-decoration: underline; }
+          }
+        }
+      }
+
+      .count {
+        text-align: center;
+        color: $keylol-inverted-text;
+      }
+
+      .actions {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+
+        raised-button {
+          margin: 0 15px;
+        }
+      }
+    }
+}
