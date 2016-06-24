@@ -9,7 +9,7 @@
         </div>
 
         <tabs tab-array="::login.tabArray" cur-tab="login.currentWay" click-handler="login.changeWay(index)"></tabs>
-        <div class="login-wrapper {{login.swapDirection}}" ng-class="{'low':login.currentWay == 2,'high':login.currentWay<2}">
+        <div class="login-wrapper {{login.swapDirection}}" ng-class="{'low':login.currentWay == 1,'high':login.currentWay < 1}">
             <div class="swap-helper" ng-animate-swap="login.currentWay">
                 <!-- robot 方式-->
                 <div class="login-steam-robot" ng-if="login.currentWay === 0">
@@ -35,12 +35,12 @@
                         </div>
                     </div>
                     <div class="actions">
-                        <a href="">尚未注册？点击这里加入其乐！</a>
+                        <a href="" ng-click="login.openRegistration()">尚未注册？点击这里加入其乐！</a>
                         <flat-button text="放弃" type="inertia" click="login.close()"></flat-button>
                     </div>
                 </div>
                 <!-- api 方式 -->
-                <div class="login-api" ng-if="login.currentWay === 1">
+                <!--<div class="login-api" ng-if="login.currentWay === 1">-->
                     <!--<phase phases="['在威乐页面登录授权','登录成功']" index="login.apiWayManager.phaseIndex"></phase>-->
                     <!--<div class="wrapper">-->
                         <!--<div class="inner">-->
@@ -61,12 +61,12 @@
                         <!--</div>-->
                     <!--</div>-->
                     <!--<div class="actions">-->
-                        <!--<a href="">尚未注册？点击这里加入其乐！</a>-->
+                        <!--<a href="" ng-click="login.openRegistration()">尚未注册？点击这里加入其乐！</a>-->
                         <!--<flat-button text="放弃" type="inertia" click="login.close()"></flat-button>-->
                     <!--</div>-->
-                </div>
+                <!--</div>-->
                 <!-- 口令方式 -->
-                <div class="login-passcode" ng-if="login.currentWay === 2">
+                <div class="login-passcode" ng-if="login.currentWay === 1">
                     <tabs class="invert" invert="true" tab-array="login.passcodeWayManager.tabArray" cur-tab="0" click-handler="login.changePasscodeWay(index)"></tabs>
                     <!--<div class="error">{{login.passcodeWayManager.error['vm.id_code']}}{{login.passcodeWayManager.error['vm.password']}}</div>-->
                     <div class="passcode-wrapper {{login.passcodeWayManager.swapDirection}}">
@@ -89,7 +89,7 @@
                                 ></text-area>
                             </div>
                             <div class="actions">
-                                <a href="">尚未注册？点击这里加入其乐！</a>
+                                <a href="" ng-click="login.openRegistration()">尚未注册？点击这里加入其乐！</a>
                                 <div class="action">
                                     <flat-button text="放弃" type="inertia" click="login.close()"></flat-button>
                                     <raised-button is-submit="true" text="登录" type="theme"

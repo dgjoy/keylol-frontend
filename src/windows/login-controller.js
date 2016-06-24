@@ -19,9 +19,9 @@
                 {
                     name: 'Steam 机器人',
                 },
-                {
-                    name: '网页 API',
-                },
+                // {
+                //     name: '网页 API',
+                // },
                 {
                     name: '口令组合',
                 },
@@ -147,7 +147,7 @@
                     password: 'normal',
                 },
             };
-            if (this.currentWay === 2) {
+            if (this.currentWay === 1) {
                 this.resetPasscode();
             }
 
@@ -207,6 +207,11 @@
             });
         }
 
+        openRegistration () {
+            this.utils.openRegistration();
+            this.close();
+        }
+
         changeWay(index) {
             if (index > this.currentWay) {
                 this.swapDirection = 'left';
@@ -219,8 +224,6 @@
                 case 0:
                     break;
                 case 1:
-                    break;
-                case 2:
                     this.passcodeWayManager.swapDirection = 'init';
                     this.passcodeWayManager.curPage = 0;
                     this.resetPasscode();

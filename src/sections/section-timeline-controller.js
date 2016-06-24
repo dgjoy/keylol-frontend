@@ -1,6 +1,6 @@
 ﻿(function () {
     class SectionTimelineController {
-        constructor ($scope, $location, $window, window, $http, apiEndpoint, notification, $state, stateTree) {
+        constructor ($scope, $location, $window, window, $http, apiEndpoint, notification, $state, stateTree, utils) {
             $.extend(this, {
                 $location,
                 window,
@@ -10,6 +10,7 @@
                 $state,
                 stateTree,
             });
+            this.openRegistration = utils.openRegistration;
             this.columnCount = 'two';
             this.leftCards = [];
             this.rightCards = [];
@@ -46,18 +47,22 @@
         }
 
         showActivityEditor (event) {
-            this.window.show({
-                event,
-                templateUrl: 'src/windows/activity-editor.html',
-                controller: 'ActivityEditorController',
-                controllerAs: 'activityEditor',
-                inputs: {
-                    options: {
-                        targetPoint: this.$state.current.name.substr(0, 17) === 'aggregation.point' ?
-                            this.stateTree.aggregation.point.basicInfo : undefined,
+            if (this.stateTree.currentUser) {
+                this.window.show({
+                    event,
+                    templateUrl: 'src/windows/activity-editor.html',
+                    controller: 'ActivityEditorController',
+                    controllerAs: 'activityEditor',
+                    inputs: {
+                        options: {
+                            targetPoint: this.$state.current.name.substr(0, 17) === 'aggregation.point' ?
+                                this.stateTree.aggregation.point.basicInfo : undefined,
+                        },
                     },
-                },
-            });
+                });
+            } else {
+                this.openRegistration(event);
+            }
         }
 
         uploadImage ($file, $event) {

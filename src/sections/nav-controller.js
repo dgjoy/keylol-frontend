@@ -59,16 +59,24 @@
                         { state: '.frontpage', name: '扉页' },
                         { state: '.intel', name: '情报' },
                         { state: '.timeline', name: '轨道' },
-                        { state: '.edit', name: '编辑', 'float': 'right' },
                     ];
                 } else {
                     this.tabArray = [
                         { state: '.frontpage', name: '扉页' },
                         { state: '.product', name: '作品' },
                         { state: '.timeline', name: '轨道' },
-                        { state: '.edit', name: '编辑', 'float': 'right' },
                     ];
                 }
+                const editEntrance = { state: '.edit', name: '编辑', 'float': 'right' };
+
+                $scope.$watch('stateTree.currentUser', newValue => {
+                    if (newValue) {
+                        if (this.tabArray.indexOf(editEntrance) === -1) {
+                            this.tabArray.push(editEntrance);
+                        }
+                    }
+                });
+
                 $scope.$watch(() => {
                     return $state.current.name;
                 }, () => {

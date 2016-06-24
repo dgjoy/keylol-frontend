@@ -1,4 +1,8 @@
 .window-registration {
+  &.window-no-source {
+    @include grow-shrink-child();
+  }
+
   .window {
     width: 700px;
     background-color: $keylol-card;

@@ -1,6 +1,6 @@
 ﻿(function () {
     class RightMenusController {
-        constructor ($scope, $element, $window, stateTree, window) {
+        constructor ($scope, $element, $window, stateTree, window ,utils) {
             $.extend(this, {
                 stateTree,
             });
@@ -110,6 +110,9 @@
                         type: 'item',
                         icon: 'dtb-steam',
                         text: 'Steam',
+                        clickAction (event) {
+                            utils.openRegistration(event);
+                        },
                     },
                     {
                         type: 'item',
@@ -126,7 +129,8 @@
                     {
                         type: 'item',
                         icon: 'register',
-                        text: '无平台注册',
+                        text: '无平台（暂未开放）',
+                        disabled: true,
                     },
                 ],
             };
@@ -140,23 +144,35 @@
                         type: 'item',
                         icon: 'login-steam-bot',
                         text: 'Steam 机器人',
-                    },
-                    {
-                        type: 'item',
-                        icon: 'login-steam-web-api',
-                        text: 'Steam 网页 API',
-                    },
-                    {
-                        type: 'item',
-                        icon: 'login-passcode',
-                        text: '口令组合',
-                        clickAction () {
+                        clickAction (event) {
                             window.show({
+                                event,
                                 templateUrl: 'src/windows/login.html',
                                 controller: 'LoginController',
                                 controllerAs: 'login',
                                 inputs: {
-                                    startPage: 2,
+                                    startPage: 0,
+                                },
+                            });
+                        },
+                    },
+                    // {
+                    //     type: 'item',
+                    //     icon: 'login-steam-web-api',
+                    //     text: 'Steam 网页 API',
+                    // },
+                    {
+                        type: 'item',
+                        icon: 'login-passcode',
+                        text: '口令组合',
+                        clickAction (event) {
+                            window.show({
+                                event,
+                                templateUrl: 'src/windows/login.html',
+                                controller: 'LoginController',
+                                controllerAs: 'login',
+                                inputs: {
+                                    startPage: 1,
                                 },
                             });
                         },

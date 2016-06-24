@@ -3,7 +3,8 @@
         <p class="title">{{::latestArticles.headers[latestArticles.type].title}}</p>
         <p class="sub-title">{{::latestArticles.headers[latestArticles.type].subTitle}}</p>
     </div>
-    <fab click="latestArticles.newArticle()" icon="new-article" type="accent" theme-color="latestArticles.theme.main"></fab>
+    <fab ng-if="latestArticles.stateTree.currentUser" click="latestArticles.newArticle()" icon="new-article" type="accent" theme-color="latestArticles.theme.main"></fab>
+    <fab ng-if="!latestArticles.stateTree.currentUser" click="latestArticles.utils.openRegistration(event)" icon="new-article" type="accent" theme-color="latestArticles.theme.main"></fab>
 </div>
 <div ng-if="latestArticles.isEmpty" class="empty">
     <img src="assets/images/portal-cake.png" alt="">

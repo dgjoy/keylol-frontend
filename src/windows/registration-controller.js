@@ -1,6 +1,6 @@
 ﻿(function () {
     class RegistrationController {
-        constructor(close, $scope, $timeout, notification, $http, utils, union, $q, apiEndpoint, $httpParamSerializerJQLike, $location, $state) {
+        constructor(close, $scope, $timeout, notification, $http, utils, union, $q, apiEndpoint, $httpParamSerializerJQLike, $location, $state, window) {
             $.extend(this,{
                 close,
                 notification,
@@ -11,6 +11,7 @@
                 $httpParamSerializerJQLike,
                 $location,
                 $state,
+                window,
             });
             this.platform = '';
             this.platformsToSelect = {
@@ -190,6 +191,18 @@
                 default:
                     return '未知错误。';
             }
+        }
+
+        openLogin () {
+            this.window.show({
+                templateUrl: 'src/windows/login.html',
+                controller: 'LoginController',
+                controllerAs: 'login',
+                inputs: {
+                    startPage: 0,
+                },
+            });
+            this.close();
         }
         
         exit() {

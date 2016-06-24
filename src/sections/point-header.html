@@ -9,7 +9,7 @@
         <p>{{pointHeader.gameCount}}</p>
     </div>
     <div class="actions">
-        <div ng-click="pointHeader.showMenu($event)" popup="pointHeader.showMenuPopup">
+        <div ng-if="pointHeader.stateTree.currentUser" ng-click="pointHeader.showMenu($event)" popup="pointHeader.showMenuPopup">
             <icon-button icon="dots-vertical" type="invert"></icon-button>
         </div>
         <raised-button ng-if="pointHeader.stateTree.currentUser" theme-color="pointHeader.theme.main"  binary-set="pointHeader.subscribeSet" binary-value="pointHeader.object.subscribed"

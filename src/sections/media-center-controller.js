@@ -1,14 +1,16 @@
 ﻿(function () {
     class MediaCenterController {
-        constructor (window, $http, notification, apiEndpoint) {
+        constructor (window, $http, notification, apiEndpoint, stateTree, utils) {
             $.extend(this,{
                 window,
                 $http,
                 notification,
                 apiEndpoint,
+                stateTree,
             });
             this.list = this.initList;
             this.reCalculate();
+            this.openRegistration = utils.openRegistration;
         }
 
         reCalculate() {

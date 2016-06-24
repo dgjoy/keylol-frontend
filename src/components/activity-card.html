@@ -126,13 +126,13 @@
             <div class="clearfix">
                 <pagination theme-color="activityCard.theme.light" on-page-changed="::activityCard.changePage(newPage, oldPage)" ng-if="activityCard.commentsManager.pageCount > 1" total="activityCard.commentsManager.pageCount" current="activityCard.commentsManager.currentPage"></pagination>
             </div>
-            <div class="hr"></div>
-            <div class="review-sender">
+            <div ng-if="activityCard.stateTree.currentUser" class="hr"></div>
+            <div ng-if="activityCard.stateTree.currentUser" class="review-sender">
                 <img webp-src="{{activityCard.stateTree.currentUser.avatarImage | avatarUrl}}" alt="" class="avatar">
                 <textarea elastic placeholder="发表见解..." focus-me="activityCard.textFocus" focus-me-scroll="true" ng-model="activityCard.vm.content"></textarea>
             </div>
         </div>
-        <div class="clearfix">
+        <div ng-if="activityCard.stateTree.currentUser" class="clearfix">
             <flat-button click="activityCard.submit()" theme-color="activityCard.theme.main" text="评论" disabled="activityCard.vm.content.length === 0 || activityCard.submitLock"></flat-button>
         </div>
     </div>

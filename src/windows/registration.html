@@ -88,7 +88,7 @@
 
         <div ng-switch="registration.phase">
             <div class="actions" ng-switch-when="未选择平台">
-                <a href="">已注册账号？在这里登录</a>
+                <a href="" ng-click="registration.openLogin()">已注册账号？在这里登录</a>
                 <div class="wrapper">
                     <flat-button text="放弃" type="inertia" click="registration.close()"></flat-button>
                     <div class="gap"></div>

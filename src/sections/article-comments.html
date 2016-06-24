@@ -76,7 +76,7 @@
     </div>
     <div class="footer clearfix"><pagination theme-color="articleComments.theme.light" ng-if="articleComments.article.commentPageCount > 1" on-page-changed="::articleComments.changePage(newPage, oldPage)" total="articleComments.article.commentPageCount" current="articleComments.currentPage"></pagination></div>
 </div>
-<div class="sender">
+<div ng-if="articleComments.stateTree.currentUser" class="sender">
     <div class="basic-info">
         <img class="avatar" webp-src="{{articleComments.stateTree.currentUser.avatarImage | avatarUrl}}">
         <div class="name-group">

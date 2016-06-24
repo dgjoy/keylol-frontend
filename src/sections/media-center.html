@@ -5,7 +5,8 @@
             <p class="sub-title">宣传片、截图、原画、粉丝艺术</p>
         </div>
         <div popup="mediaCenter.uploadImagePopup">
-            <raised-button ngf-select="mediaCenter.uploadImage($file, $event)" ngf-fix-orientation="true" accept="image/*" text="上传媒体" theme-color="mediaCenter.theme.main"></raised-button>
+            <raised-button ng-if="mediaCenter.stateTree.currentUser" ngf-select="mediaCenter.uploadImage($file, $event)" ngf-fix-orientation="true" accept="image/*" text="上传媒体" theme-color="mediaCenter.theme.main"></raised-button>
+            <raised-button ng-if="!mediaCenter.stateTree.currentUser" click="mediaCenter.openRegistration(event)" text="上传媒体" theme-color="mediaCenter.theme.main"></raised-button>
         </div>
     </div>
 </div>

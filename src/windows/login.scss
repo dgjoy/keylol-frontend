@@ -1,4 +1,8 @@
 .window-login {
+  &.window-no-source {
+    @include grow-shrink-child();
+  }
+
   /* 动画 */
   .swap-helper {
     flex-shrink: 0;

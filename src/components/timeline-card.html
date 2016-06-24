@@ -66,7 +66,7 @@
             </div>
         </div>
         <div class="hr"></div>
-        <div class="review-sender">
+        <div ng-if="timelineCard.stateTree.currentUser" class="review-sender">
             <img webp-src="{{timelineCard.stateTree.currentUser.avatarImage | avatarUrl}}" alt="" class="avatar">
             <textarea focus-me="timelineCard.commentFocus" elastic placeholder="发表见解..." ng-model="timelineCard.comment"></textarea>
         </div>

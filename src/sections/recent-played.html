@@ -1,6 +1,6 @@
 ﻿<div class="header" webp-background="{{recentPlayed.headerImage | listHeaderUrl}}">
     <raised-button ng-if="recentPlayed.stateTree.currentUser" text="全部订阅" disabled="recentPlayed.subscribeAllDisable" type="theme" click="recentPlayed.subscribeAll()"></raised-button>
-    <raised-button ng-if="!recentPlayed.stateTree.currentUser" text="全部订阅" disabled="recentPlayed.subscribeAllDisable" type="theme" click="recentPlayed.openRegistration(event)"></raised-button>
+    <raised-button ng-if="!recentPlayed.stateTree.currentUser" text="全部订阅" disabled="recentPlayed.subscribeAllDisable" type="theme" click="recentPlayed.utils.openRegistration(event)"></raised-button>
     <div class="header-text">
         <p class="title">订阅</p>
         <p class="sub-title">最近接触的游戏</p>
