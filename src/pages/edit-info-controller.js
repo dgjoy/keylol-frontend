@@ -1,7 +1,6 @@
 ﻿(function () {
     class EditInfoController {
         constructor ($scope, pageHead, stateTree, pageLoad, $state, utils, pointAttributes, moment) {
-            pageHead.setTitle('据点 - 编辑 - 资料 - 其乐');
 
             let fetchPromise;
             if (stateTree.empty || (stateTree.aggregation && stateTree.aggregation.point
@@ -12,6 +11,7 @@
             }
 
             fetchPromise.then(() => {
+                pageHead.setTitle(`${stateTree.aggregation.point.basicInfo.chineseName || stateTree.aggregation.point.basicInfo.englishName} - 编辑 - 资料 - 其乐`);
                 const submitLink = `point/${stateTree.aggregation.point.basicInfo.id}`;
                 $scope.theme = {
                     main: stateTree.aggregation.point.basicInfo.themeColor,

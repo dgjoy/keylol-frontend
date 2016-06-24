@@ -1,7 +1,6 @@
 ﻿(function () {
     class ProductController {
         constructor ($scope, pageHead, stateTree, pageLoad, $state) {
-            pageHead.setTitle('据点 - 作品 - 其乐');
 
             let promise;
             if (stateTree.empty || stateTree.aggregation && stateTree.aggregation.point
@@ -11,6 +10,7 @@
                 promise = pageLoad('aggregation.point', { entrance: 'Product' });
             }
             promise.then(() => {
+                pageHead.setTitle(`${stateTree.aggregation.point.basicInfo.chineseName || stateTree.aggregation.point.basicInfo.englishName} - 作品 - 其乐`);
                 $scope.currentPage = 0;
                 switch (stateTree.aggregation.point.basicInfo.type) {
                     case 'vendor':

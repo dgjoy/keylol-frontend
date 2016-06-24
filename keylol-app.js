@@ -52,12 +52,10 @@
                 templateUrl: 'src/pages/entrance.html',
                 controller ($location, pageLoad) {
                     if ($location.path() === '/') {
-                        console.log('load entrance?');
                         pageLoad('entrance');
                     }
                 },
                 onExit (stateTree) {
-                    console.log('exit entrance');
                     delete stateTree.entrance;
                 },
             })
@@ -66,7 +64,6 @@
                     templateUrl: 'src/pages/discovery.html',
                     controller: 'DiscoveryController',
                     onExit (stateTree) {
-                        console.log('exit discovery');
                         delete stateTree.entrance.discovery;
                     },
                 })
@@ -76,7 +73,6 @@
                         pageLoad('entrance.points');
                     },
                     onExit (stateTree) {
-                        console.log('exit points');
                         delete stateTree.entrance.points;
                     },
                     templateUrl: 'src/pages/points.html',
@@ -177,7 +173,6 @@
                 'abstract': true,
                 template: '<div ui-view></div>',
                 onExit (stateTree) {
-                    console.log('exit aggregation');
                     delete stateTree.aggregation;
                 },
             })
@@ -186,7 +181,6 @@
                     templateUrl: 'src/pages/point.html',
                     controller: 'PointController',
                     onExit (stateTree) {
-                        console.log('exit aggregation.point');
                         delete stateTree.aggregation.point;
                     },
                 })
@@ -195,7 +189,6 @@
                         templateUrl: 'src/pages/frontpage.html',
                         controller: 'FrontpageController',
                         onExit (stateTree) {
-                            console.log('exit frontpage');
                             delete stateTree.aggregation.point.frontpage;
                         },
                     })
@@ -204,7 +197,6 @@
                         templateUrl: 'src/pages/intel.html',
                         controller: 'IntelController',
                         onExit (stateTree) {
-                            console.log('exit intel');
                             delete stateTree.aggregation.point.intel;
                         },
                     })
@@ -213,7 +205,6 @@
                         templateUrl: 'src/pages/product.html',
                         controller: 'ProductController',
                         onExit (stateTree) {
-                            console.log('exit product');
                             delete stateTree.aggregation.point.product;
                         },
                     })
@@ -227,7 +218,6 @@
                         templateUrl: 'src/pages/point-edit.html',
                         controller: 'PointEditController',
                         onExit (stateTree) {
-                            console.log('exit point edit');
                             delete stateTree.aggregation.point.edit;
                         },
                     })
@@ -236,7 +226,6 @@
                             templateUrl: 'src/pages/edit-info.html',
                             controller: 'EditInfoController',
                             onExit (stateTree) {
-                                console.log('exit point edit info');
                                 delete stateTree.aggregation.point.edit.info;
                             },
                         })
@@ -245,7 +234,6 @@
                             templateUrl: 'src/pages/edit-style.html',
                             controller: 'EditStyleController',
                             onExit (stateTree) {
-                                console.log('exit point edit style');
                                 delete stateTree.aggregation.point.edit.style;
                             },
                         })
@@ -254,7 +242,6 @@
                         //     templateUrl: 'src/pages/edit-log.html',
                         //     controller: 'EditLogController',
                         //     onExit (stateTree) {
-                        //         console.log('exit point edit log');
                         //         delete stateTree.aggregation.point.edit;
                         //     },
                         // })
@@ -263,7 +250,6 @@
                 templateUrl: 'src/pages/user.html',
                 controller: 'UserController',
                 onExit (stateTree) {
-                    console.log('exit aggregation.user');
                     delete stateTree.aggregation.user;
                 },
             })
@@ -272,7 +258,6 @@
                     templateUrl: 'src/pages/dossier.html',
                     controller: 'DossierController',
                     onExit (stateTree) {
-                        console.log('exit dossier');
                         delete stateTree.aggregation.user.dossier;
                     },
                 })
@@ -288,7 +273,6 @@
                     templateUrl: 'src/pages/people.html',
                     controller: 'PeopleController',
                     onExit (stateTree) {
-                        console.log('exit people');
                         delete stateTree.aggregation.user.people;
                     },
                 })
@@ -307,7 +291,6 @@
                         }
                     },
                     onExit (stateTree) {
-                        console.log('exit edit');
                     },
                 })
                     .state('aggregation.user.edit.info', {
@@ -315,7 +298,6 @@
                         templateUrl: 'src/pages/user-edit-info.html',
                         controller: 'UserEditInfoController',
                         onExit (stateTree) {
-                            console.log('exit edit info');
                             if (stateTree.aggregation) {
                                 delete stateTree.aggregation.user.edit;
                             }
@@ -326,7 +308,6 @@
                         templateUrl: 'src/pages/user-edit-preference.html',
                         controller: 'UserEditPreferenceController',
                         onExit (stateTree) {
-                            console.log('exit edit preference');
                             if (stateTree.aggregation) {
                                 delete stateTree.aggregation.user.edit;
                             }
@@ -336,7 +317,6 @@
                 'abstract': true,
                 template: '<div ui-view></div>',
                 onExit (stateTree) {
-                    console.log('exit content');
                     delete stateTree.content;
                 },
             })
@@ -345,7 +325,6 @@
                     templateUrl: 'src/pages/article.html',
                     controller: 'ArticleController',
                     onExit (stateTree) {
-                        console.log('exit article');
                         delete stateTree.content.article;
                     },
                 })
@@ -354,7 +333,6 @@
                     templateUrl: 'src/pages/activity.html',
                     controller: 'ActivityController',
                     onExit (stateTree) {
-                        console.log('exit activity');
                         delete stateTree.content.activity;
                     },
                 })

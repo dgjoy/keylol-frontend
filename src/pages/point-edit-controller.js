@@ -1,7 +1,6 @@
 ﻿(function () {
     class PointEditController {
         constructor ($scope, pageHead, stateTree, $state, $location, $timeout) {
-            pageHead.setTitle('据点 - 编辑 - 其乐');
             if ($location.path().match(/\/point\/[^\/]*\/edit\/?$/)) {
                 $state.go('.info', {}, { location: false });
             }

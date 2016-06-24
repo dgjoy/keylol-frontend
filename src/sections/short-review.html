@@ -21,7 +21,8 @@
                     <p><a ng-href="user/{{item.authorIdCode}}">{{item.authorUserName}}</a> / {{shortReview.utils.getPlayedTime(item.authorPlayedTime, item.authorIdCode, shortReview.stateTree.currentUser, shortReview.playedTime)}}</p>
                     <vote-circle review="item.rating * 2 - 1"></vote-circle>
                 </div>
-                <a ng-if="shortReview.stateTree.currentUser" ng-style="{color: item.liked ? shortReview.theme.light : ''}" ng-click="shortReview.utils.like(item.id, item, 'Activity')" ng-disabled="item.liked || item.authorIdCode === shortReview.stateTree.currentUser.idCode" href="" class="like">+{{item.likeCount}}</a>
+                <a ng-if="shortReview.stateTree.currentUser && (item.liked || item.authorIdCode === shortReview.stateTree.currentUser.idCode)" ng-style="{color: item.liked ? shortReview.theme.light : ''}" ng-disabled="true" href="" class="like">+{{item.likeCount}}</a>
+                <a ng-if="shortReview.stateTree.currentUser && !(item.liked || item.authorIdCode === shortReview.stateTree.currentUser.idCode)" ng-click="shortReview.utils.like(item.id, item, 'Activity')" href="" class="like">+{{item.likeCount}}</a>
                 <a ng-if="!shortReview.stateTree.currentUser" ng-click="shortReview.utils.openRegistration()" href="" class="like">+{{item.likeCount}}</a>
             </div>
             <p>{{item.content}}<a href="" ng-href="activity/{{item.authorIdCode}}/{{item.sidForAuthor}}">查看</a></p>

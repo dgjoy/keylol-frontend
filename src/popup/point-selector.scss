@@ -5,11 +5,11 @@
   background-color: $keylol-card;
   z-index: 1000;
 
-  div {
+  >div {
     margin: 10px 0;
     a {
       display: block;
-      padding: 0 15px;
+      padding: 8px 15px;
 
       &.selected {
         background-color: rgba(#000, .05);

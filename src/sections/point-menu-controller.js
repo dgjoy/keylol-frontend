@@ -57,7 +57,7 @@
                             icon: stores[i].icon,
                             text: stores[i].name,
                             link: this.object[`${stores[i].prefix}Link`],
-                            subText: `${this.object[`${stores[i].prefix}Price`]}`,
+                            subText: this.object[`${stores[i].prefix}Price`],
                         });
                     }
                 }

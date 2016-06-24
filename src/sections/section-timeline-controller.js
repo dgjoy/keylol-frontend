@@ -23,7 +23,7 @@
 
             const scrollHandler = $$window.bind('scroll', () => {
                 if (!this.first && !this.end && !this.loadLock) {
-                    if ($(document).scrollTop() + $$window.height() >= $(document).height()) {
+                    if ($$window.scrollTop() + $$window.height() >= $('body').height() - 500) {
                         this.load();
                     }
                 }

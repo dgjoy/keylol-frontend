@@ -19,7 +19,6 @@
                         if (union.$sessionStorage.hasOwnProperty(i) && i.indexOf('$') !== 0)
                             delete union.$sessionStorage[i];
                     }
-                    console.log(stateTree);
                     if (stateTree.currentUser) {
                         delete stateTree.currentUser;
                         delete $http.defaults.headers.common.Authorization;
@@ -50,7 +49,6 @@
                         }
                         if (flag) {
                             event.preventDefault();
-                            console.log('prevent change');
                         }
                     }
                 }
@@ -60,7 +58,6 @@
 
             $rootScope.$on('$stateChangeSuccess', () => {
                 $window.scrollTo(0, 0);
-                console.log($state.current);
             });
     });
 }());
