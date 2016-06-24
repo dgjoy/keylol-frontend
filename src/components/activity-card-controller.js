@@ -123,7 +123,7 @@
                     options: {
                         contentId: comment.id,
                         contentType: 'activity-comment',
-                        operationType: `${comment.archived ? 'Un' : ''}Warned`,
+                        operationType: `${comment.warned ? 'Un' : ''}Warned`,
                     },
                 },
             }).then(popup => {

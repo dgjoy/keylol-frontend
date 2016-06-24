@@ -166,7 +166,7 @@
                     options: {
                         contentId: comment.id,
                         contentType: 'article-comment',
-                        operationType: `${comment.archived ? 'Un' : ''}Warned`,
+                        operationType: `${comment.warned ? 'Un' : ''}Warned`,
                     },
                 },
             }).then(popup => {
