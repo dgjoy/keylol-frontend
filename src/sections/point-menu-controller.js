@@ -2,7 +2,6 @@
 (function () {
     class pointMenuController {
         constructor($scope, $window, $timeout, stores) {
-
             const arr = [
                 this.object.oneStarCount,
                 this.object.twoStarCount,
@@ -32,6 +31,7 @@
                         titleCoverImage: this.object.titleCoverImage,
                         keylolAveragePlayedTime: this.object.keylolAveragePlayedTime,
                         totalPlayedTime: this.object.totalPlayedTime,
+                        idCode: this.object.idCode,
                     },
                     items: [],
                 };
@@ -41,6 +41,7 @@
                         icon: 'dtb-steam',
                         text: 'Steam',
                         link: `http://store.steampowered.com/app/${this.object.steamAppId}`,
+                        subText: `¥ ${this.object.steamPrice}`,
                     });
                 }
 
@@ -51,6 +52,7 @@
                             icon: stores[i].icon,
                             text: stores[i].name,
                             link: this.object[`${stores[i].prefix}Link`],
+                            subText: `${this.object[`${stores[i].prefix}Price`]}`,
                         });
                     }
                 }
@@ -74,6 +76,7 @@
                         gameCount,
                         votePercent: this.object.averageRating !== undefined ? this.object.averageRating.toFixed(1) : undefined,
                         titleCoverImage: this.object.titleCoverImage,
+                        idCode: this.object.idCode,
                     },
                 };
             }

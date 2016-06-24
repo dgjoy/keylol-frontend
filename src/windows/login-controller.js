@@ -184,7 +184,7 @@
                              this.passcodeWayManager.id_code.completed = false;
                          } else if (!/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(newValue)) {
                              this.passcodeWayManager.id_code.state = 'warn';
-                             this.passcodeWayManager.id_code.error = '格式错误';
+                             this.passcodeWayManager.id_code.error = '邮箱格式错误';
                              this.passcodeWayManager.id_code.completed = false;
                          } else {
                              this.passcodeWayManager.id_code.state = 'normal';
@@ -257,6 +257,8 @@
         }
         
         submit () {
+            const pwm = this.passcodeWayManager;
+            
             const submitObj = $.extend({},this.passcodeWayManager.vm,true);
             const cont = submitObj.id_code;
             delete submitObj.id_code;

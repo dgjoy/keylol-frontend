@@ -79,8 +79,13 @@ menu {
         padding:5px 15px 0;
       }
 
-      point-basic-info {
-        margin: 20px 15px 10px 15px;
+      a {
+        display: block;
+        @include hover-background;
+        margin-top: 10px;
+        point-basic-info {
+          padding: 10px 15px;
+        }
       }
 
       .cover {
@@ -172,33 +177,39 @@ menu {
       padding: 0 15px;
       margin-bottom: -30px;
 
-      >.user-basic-info {
-        margin-top: 20px;
-        margin-bottom: 10px;
+      >a {
+        display: block;
+        @include hover-background();
+        margin-top: 10px;
+        margin: 0 -15px;
 
-        display: flex;
-        align-items: center;
+        >.user-basic-info {
+          padding: 10px 15px;
 
-        .avatar {
-          margin-right: 10px;
-          width: 32px;
-          height: 32px;
-        }
+          display: flex;
+          align-items: center;
 
-        .name-group {
-          max-width: calc(100% - 42px);
-          p {
-            @include ellipsis;
-            margin: 0;
+          .avatar {
+            margin-right: 10px;
+            width: 32px;
+            height: 32px;
+          }
 
-            &:first-of-type {
-              color: $keylol-main-text;
-              font-weight: bold;
-            }
+          .name-group {
+            max-width: calc(100% - 42px);
+            p {
+              @include ellipsis;
+              margin: 0;
 
-            &:nth-of-type(2) {
-              color: $keylol-inertia-text;
-              font-size: 12px;
+              &:first-of-type {
+                color: $keylol-main-text;
+                font-weight: bold;
+              }
+
+              &:nth-of-type(2) {
+                color: $keylol-inertia-text;
+                font-size: 12px;
+              }
             }
           }
         }

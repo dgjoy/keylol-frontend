@@ -4,7 +4,7 @@
     <span class="username">{{::spotlightArticleCard.card.authorUserName}}</span>
     <span class="date" am-time-ago="::spotlightArticleCard.card.publishTime"></span>
 </a>
-<a class="common-article article" webp-background="{{::spotlightArticleCard.card.coverImage | uriRelocate: '/both/340x200'}}" href="" ng-href="article/{{::spotlightArticleCard.card.authorIdCode}}/{{::spotlightArticleCard.card.sidForAuthor}}">
+<a class="common-article article" webp-background="{{::spotlightArticleCard.card.coverImage | uriRelocate: '/both/340x200'}}" href="" ng-href="article/{{::(spotlightArticleCard.authorIdCode?spotlightArticleCard.authorIdCode:spotlightArticleCard.card.authorIdCode)}}/{{::spotlightArticleCard.card.sidForAuthor}}">
     <div class="bottom-text">
         <div class="first-line underline">{{::spotlightArticleCard.card.title}}</div>
         <div class="second-line">{{::spotlightArticleCard.card.subtitle}}</div>

@@ -1,6 +1,6 @@
 ﻿(function () {
     class PageListController {
-        constructor ($http, apiEndpoint, $state, stateTree, utils) {
+        constructor ($http, apiEndpoint, stateTree, utils) {
             $.extend(this, {
                 $http,
                 apiEndpoint,
@@ -11,6 +11,19 @@
             if (this.expanded) {
                 this.hasBeenExpanded = true;
             }
+
+            this.subscribeSet = [
+                {
+                    text: '关注',
+                    type: this.type,
+                },
+                {
+                    text: '取关',
+                    type: 'light-text',
+                },
+            ];
+
+            this.subscribe = utils.subscribe;
         }
 
         expandMore () {

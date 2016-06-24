@@ -277,7 +277,7 @@
                     },
                 })
                 .state('aggregation.user.people', {
-                    url: '/people',
+                    url: '/people/:route',
                     templateUrl: 'src/pages/people.html',
                     controller: 'PeopleController',
                     onExit (stateTree) {

@@ -16,9 +16,9 @@
     <div class="left-middle-lg row-sm">
         <user-associations object="::stateTree.aggregation.user.dossier" theme="theme" style="margin-bottom: 40px;"></user-associations>
         <user-latest-subscribe ng-if="::(stateTree.aggregation.user.dossier.subscribedPoints.length > 0)" cards="::stateTree.aggregation.user.dossier.subscribedPoints" count="::stateTree.aggregation.user.dossier.subscribedPointCount" theme="theme" style="margin-bottom: 20px;"></user-latest-subscribe>
-        <user-article-collection ng-if="::(stateTree.aggregation.user.dossier.selectedArticles.length > 0)" cards="::stateTree.aggregation.user.dossier.selectedArticles" count="::stateTree.aggregation.user.dossier.articleCount" theme="theme" style="margin-bottom: 20px;"></user-article-collection>
-        <user-favorite-games ng-if="false" theme="theme" style="position: absolute;width: 100%;left: 0;"></user-favorite-games>
-        <user-friends ng-if="false" theme="theme" style="margin-top:580px;"></user-friends>
+        <user-article-collection ng-if="::(stateTree.aggregation.user.dossier.selectedArticles.length > 0)" author-id-code="::(stateTree.aggregation.user.basicInfo.idCode)" cards="::stateTree.aggregation.user.dossier.selectedArticles" count="::stateTree.aggregation.user.dossier.articleCount" theme="theme" style="margin-bottom: 20px;"></user-article-collection>
+        <!--<user-favorite-games ng-if="false" theme="theme" style="position: absolute;width: 100%;left: 0;"></user-favorite-games>-->
+        <!--<user-friends ng-if="false" theme="theme" style="margin-top:580px;"></user-friends>-->
         <section-timeline ng-if="stateTree.aggregation.user.timeline.cards" theme="theme" cards="stateTree.aggregation.user.timeline.cards"></section-timeline>
     </div>
     <div class="right-lg hidden-sm flex-column">

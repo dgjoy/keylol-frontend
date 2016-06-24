@@ -8,6 +8,7 @@
         bindings: {
             card: '<',
             noUserHeader: '<',
+            authorIdCode: '<',
         },
     });
 }());

@@ -7,6 +7,7 @@
         controllerAs: 'simpleArticleCard',
         bindings: {
             card: '<',
+            authorIdCode: '<',
         },
     });
 }());

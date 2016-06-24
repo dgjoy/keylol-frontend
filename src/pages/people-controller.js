@@ -1,6 +1,20 @@
 ﻿(function () {
     class PeopleController {
-        constructor($scope, pageHead, stateTree, $state, $location, pageLoad, $http, notification) {
+        constructor($scope, pageHead, stateTree, $state, $location, pageLoad, $stateParams) {
+            if ($stateParams.route !== undefined) {
+                switch ($stateParams.route.toLowerCase()) {
+                    case 'friend':
+                        $scope.currentPage = 0;
+                        break;
+                    case 'subscribeduser':
+                        $scope.currentPage = 1;
+                        break;
+                    case 'subscriber':
+                        $scope.currentPage = 2;
+                        break;
+                }
+            }
+
             $scope.changePage =  index => {
                 $scope.currentPage = index;
             };

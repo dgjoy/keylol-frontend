@@ -7,6 +7,7 @@
                        total-page="module.totalPage"
                        module-api="{{module.api}}"
                        request-params="{user_id:target_id}"
+                       theme="theme"
                        style="margin-bottom: 50px"
             ></page-list>
         </div>
@@ -17,6 +18,7 @@
                    total-page="modules[0].totalPage"
                    module-api="{{modules[0].api}}"
                    request-params="{user_id:target_id}"
+                   theme="theme"
                    style="margin-bottom: 50px"
                    ng-if="currentPage === 0"
         ></page-list>
@@ -25,6 +27,7 @@
                    total-page="modules[1].totalPage"
                    module-api="{{modules[1].api}}"
                    request-params="{user_id:target_id}"
+                   theme="theme"
                    style="margin-bottom: 50px"
                    ng-if="currentPage === 1"
         ></page-list>
@@ -33,6 +36,7 @@
                    total-page="modules[2].totalPage"
                    module-api="{{modules[2].api}}"
                    request-params="{user_id:target_id}"
+                   theme="theme"
                    style="margin-bottom: 50px"
                    ng-if="currentPage === 2"
         ></page-list>

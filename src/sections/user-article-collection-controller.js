@@ -16,6 +16,7 @@
             theme: '<',
             cards: '<',
             count: '<',
+            authorIdCode: '<',
         },
     });
 }());

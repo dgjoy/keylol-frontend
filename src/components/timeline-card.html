@@ -5,7 +5,9 @@
             <img class="avatar" webp-src="{{timelineCard.card.author.avatarImage | avatarUrl}}"  alt="{{timelineCard.card.author.userName}}">
             <span class="username">{{timelineCard.card.author.userName}}</span>
         </a>
-        <a class="date" href="" ng-click="timelineCard.showMenu($event)" popup="timelineCard.showSharedPopup"><span am-time-ago="timelineCard.card.publishTime"></span></a>
+        <a class="date" onclick="return false;" ng-href="{{timelineCard.card.contentType}}/{{timelineCard.card.author.idCode}}/{{timelineCard.card.sidForAuthor}}" ng-click="timelineCard.showMenu($event)" popup="timelineCard.showSharedPopup">
+            <span am-time-ago="timelineCard.card.publishTime"></span>
+        </a>
     </div>
     <div class="shortcut" ng-switch="timelineCard.card.contentType">
         <a ng-switch-when="article" class="common-article" webp-background="{{timelineCard.card.coverImage | articleCoverUrl}}" ng-href="article/{{timelineCard.card.author.idCode}}/{{timelineCard.card.sidForAuthor}}">
