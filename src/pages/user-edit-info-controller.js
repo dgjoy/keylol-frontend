@@ -1,7 +1,6 @@
 ﻿(function () {
     class UserEditInfoController {
         constructor ($scope, pageHead, stateTree, pageLoad, $state, $stateParams, utils) {
-            pageHead.setTitle('个人 - 编辑 - 资料 - 其乐');
 
             let fetchPromise;
             if (stateTree.empty || (stateTree.aggregation && stateTree.aggregation.user
@@ -12,6 +11,7 @@
             }
 
             fetchPromise.then(() => {
+                pageHead.setTitle(`${stateTree.aggregation.user.basicInfo.userName} - 编辑 - 资料 - 其乐`);
                 if (!stateTree.currentUser || (stateTree.currentUser && stateTree.currentUser.id !==  stateTree.aggregation.user.basicInfo.id &&
                     $.inArray('Operator', stateTree.currentUser.roles) === -1)) {
                     $state.go('aggregation.user', $stateParams);

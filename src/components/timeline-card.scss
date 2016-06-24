@@ -20,6 +20,7 @@ timeline-card {
         display: flex;
         align-items: center;
         position: relative;
+        z-index: 0;
 
         &:hover {
           >.username {
@@ -203,6 +204,14 @@ timeline-card {
     >.review-count {
       padding: 20px 15px 10px;
       color: $keylol-inertia-text;
+
+      a {
+        float: right;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
     }
 
     >.review-sender {
@@ -228,16 +237,6 @@ timeline-card {
 
     >.review-list {
       position: relative;
-
-      >a {
-        display: block;
-        margin: 10px 0;
-        text-align: center;
-
-        &:hover {
-          text-decoration: underline;
-        }
-      }
 
       &.scroller {
         max-height: 400px;

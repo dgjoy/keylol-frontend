@@ -34,7 +34,7 @@
         </div>
     </div>
     <div ng-if="timelineCard.card.attachedPoints[0]" class="point-with-source">
-        <a class="point" ng-href="point/{{timelineCard.card.attachedPoints[0].idCode}}" ripple>
+        <a class="point" ng-href="point/{{timelineCard.card.attachedPoints[0].idCode}}">
             <point-basic-info point="timelineCard.card.attachedPoints[0]"></point-basic-info>
         </a>
         <!--<a class="source" href="" ng-click="timelineCard.showSourceList($event)" popup="timelineCard.showSharedPopup">5 个据点来稿</a>-->
@@ -48,16 +48,16 @@
 </div>
 <div class="communicate-card">
     <div class="review-area" ng-class="{'open': timelineCard.state === 'open'}">
-        <div class="review-count">
-            全部 {{timelineCard.card.commentCount}} 个评论
+        <div class="review-count clearfix">
+            <span ng-if="timelineCard.card.commentCount">全部 {{timelineCard.card.commentCount}} 个评论</span>
+            <a href="" ng-href="{{timelineCard.card.contentType}}/{{timelineCard.card.author.idCode}}/{{timelineCard.card.sidForAuthor}}">查看更多</a>
         </div>
         <div class="review-list" ng-class="{scroller: timelineCard.hasScroller}">
-            <a href="" ng-href="activity/{{timelineCard.card.author.idCode}}/{{timelineCard.card.sidForAuthor}}">查看更多</a>
             <div class="review" href="" data-floor-id="#{{comment.sidForActivity}}" ng-repeat="comment in timelineCard.comments" ng-class="{'blink':timelineCard.currentFloor === comment.sidForActivity}">
                 <a ng-href="user/{{comment.authorIdCode}}"><img src="" webp-src="{{comment.authorAvatarImage | avatarUrl}}" alt="" class="avatar" /></a>
                 <div class="content">
                     <div class="info">
-                        <div class="user"><a class="username" ng-href="user/{{comment.authorIdCode}}">{{comment.authorUserName}}</a> <span ng-style="{color: comment.liked ? timelineCard.theme.light : ''}" ng-class="{light: comment.liked}">+{{comment.likeCount}}</span></div>
+                        <div class="user"><a class="username" ng-href="user/{{comment.authorIdCode}}">{{comment.authorUserName}}</a> <span ng-if="comment.likeCount" ng-style="{color: comment.liked ? timelineCard.theme.light : ''}" ng-class="{light: comment.liked}">+{{comment.likeCount}}</span></div>
                         <div class="date"><span am-time-ago="comment.publishTime"></span> / #{{comment.sidForActivity}}</div>
                         <div class="actions">
                             <a href="" ng-if="timelineCard.stateTree.currentUser && !comment.liked && comment.authorIdCode !== timelineCard.stateTree.currentUser.idCode" ng-click="timelineCard.utils.like(comment.id, comment, 'ActivityComment')">认可</a>
@@ -72,7 +72,7 @@
             </div>
         </div>
         <div class="hr"></div>
-        <div ng-if="timelineCard.stateTree.currentUser" class="review-sender">
+        <div ng-if="timelineCard.stateTree.currentUser && timelineCard.card.contentType === 'activity'" class="review-sender">
             <img webp-src="{{timelineCard.stateTree.currentUser.avatarImage | avatarUrl}}" alt="" class="avatar">
             <textarea focus-me="timelineCard.commentFocus" elastic placeholder="发表见解..." ng-model="timelineCard.comment"></textarea>
         </div>
@@ -90,7 +90,6 @@
                          text="+{{timelineCard.card.likeCount}}"></flat-button>
         </div>
         <flat-button ng-switch-when="open" text="评论" click="timelineCard.doComment()"></flat-button>
-        <flat-button ng-if="timelineCard.card.contentType !== 'article'" ng-switch-when="close" type="inertia" text="···{{timelineCard.card.commentCount}}" click="timelineCard.openReviewArea()"></flat-button>
-        <a href="" ng-href="article/{{timelineCard.card.author.idCode}}/{{timelineCard.card.sidForAuthor}}" ng-if="timelineCard.card.contentType === 'article'">···{{timelineCard.card.commentCount}}</a>
+        <flat-button ng-switch-when="close" type="inertia" text="···{{timelineCard.card.commentCount}}" click="timelineCard.openReviewArea()"></flat-button>
     </div>
 </div>

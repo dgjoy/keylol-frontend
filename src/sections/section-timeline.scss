@@ -27,6 +27,12 @@ section-timeline {
       a {
         display: flex;
 
+        &:hover {
+          svg {
+            fill: $keylol-light-text;
+          }
+        }
+
         svg {
           width: 32px;
           height: 32px;
