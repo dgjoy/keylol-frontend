@@ -1,18 +1,18 @@
 <popup class="popup-operation-panel">
     <div class="head">
         <div class="text">
-            <p>退稿</p>
-            <p>退稿后只能通过链接或者作者的个人页面访问文章</p>
+            <p>{{operationPanel.operation.mainTitle}}</p>
+            <p>{{operationPanel.operation.subTitle}}</p>
         </div>
         <img src="assets/images/pss-logo-accent.png" />
     </div>
     <div class="content">
-        <p>缘由</p>
-        <input-checkbox names="operationPanel.reasons" ng-model="this.vm.reason"></input-checkbox>
-        <text-area type="text" label="附言" model="''"></text-area>
-        <input-checkbox names="['发送公函通知作者']" ng-model="this.vm.missive"></input-checkbox>
+        <p ng-if="operationPanel.reasons.length > 0">缘由</p>
+        <input-checkbox style="margin-bottom: 20px;" ng-if="operationPanel.operation.reasonTexts.length > 0" names="operationPanel.operation.reasonTexts" ng-model="operationPanel.vm.reasons"></input-checkbox>
+        <!--<text-area type="text" label="附言" model="''"></text-area>-->
+        <input-checkbox names="['发送公函通知作者']" ng-model="operationPanel.vm.missive"></input-checkbox>
         <div class="action">
-            <raised-button text="执行" type="theme"></raised-button>
+            <raised-button disabled="operationPanel.submitLock" click="operationPanel.submit()" text="执行" type="theme"></raised-button>
         </div>
     </div>
 </popup>

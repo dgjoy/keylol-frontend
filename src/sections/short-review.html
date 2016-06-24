@@ -4,7 +4,7 @@
         <div class="header">
             <div class="info">
                 <img webp-src="{{shortReview.stateTree.currentUser.avatarImage | avatarUrl: 'small'}}">
-                <p><span>{{shortReview.stateTree.currentUser.userName}}</span> / <span>在档 {{shortReview.getPlayedTime(shortReview.playedTime)}} 小时</span></p>
+                <p><span>{{shortReview.stateTree.currentUser.userName}}</span> / <span>{{shortReview.playedTime ? '在档 ' + shortReview.playedTime + ' 小时': '无在档记录'}}</span></p>
                 <point-review bind-review="shortReview.vm.rating" no-string="true" is-hollow="true"></point-review>
             </div>
         </div>
@@ -18,7 +18,7 @@
             <div class="header">
                 <div class="info">
                     <img webp-src="{{item.authorAvatarImage | avatarUrl: 'small'}}">
-                    <p>{{item.authorUserName}} / 在档 {{shortReview.getPlayedTime(item.totalPlayedTime, item.authorIdCode)}} 小时</p>
+                    <p>{{item.authorUserName}} / {{shortReview.utils.getPlayedTime(item.authorPlayedTime, item.authorIdCode, shortReview.stateTree.currentUser, shortReview.playedTime)}}</p>
                     <vote-circle review="item.rating * 2 - 1"></vote-circle>
                 </div>
                 <a ng-style="{color: item.liked ? shortReview.theme.light : ''}" ng-click="shortReview.utils.like(item.id, item, 'Activity')" ng-disabled="item.liked || item.authorIdCode === shortReview.stateTree.currentUser.idCode" href="" class="like">+{{item.likeCount}}</a>

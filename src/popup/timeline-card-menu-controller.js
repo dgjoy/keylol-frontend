@@ -1,46 +1,44 @@
 ﻿(function () {
     class TimelineCardMenuController {
-        constructor(origin, close, options, stateTree, content, window) {
-            function showApproverList() {
-                close();
-                origin.popup({
-                    templateUrl: 'src/popup/approver-list.html',
-                    controller: 'ApproverListController as approverList',
-                    event: origin.event,
-                    attachSide: 'bottom',
-                    align: 'center',
-                    offsetX: 0,
-                    offsetY: 20,
-                    inputs: { content: 'hello' },
-                });
+        constructor(origin, content, options, stateTree, close, window) {
+            function showOperationPanel (operationType) {
+                return () => {
+                    close();
+                    const key = {
+                        Archived: 'archived',
+                        Warned: 'warned',
+                        Rejected: 'rejected',
+                        Spotlight: 'spotlighted',
+                    };
+
+                    origin.popup({
+                        templateUrl: 'src/popup/operation-panel.html',
+                        controller: 'OperationPanelController as operationPanel',
+                        event: origin.event,
+                        attachSide: 'bottom',
+                        align: 'center',
+                        offsetX: 0,
+                        offsetY: 20,
+                        inputs: {
+                            options: {
+                                contentId: content.contentId,
+                                contentType: content.contentType,
+                                operationType,
+                            },
+                        },
+                    }).then(popup => {
+                        return popup.close;
+                    }).then(result => {
+                        if (result !== undefined) {
+                            content[key[operationType]] = result;
+                        }
+                    });
+                };
             }
 
-            function showReportAbuse() {
-                close();
-                origin.popup({
-                    templateUrl: 'src/popup/report-abuse.html',
-                    controller: 'ReportAbuseController as reportAbuse',
-                    event: origin.event,
-                    attachSide: 'bottom',
-                    align: 'center',
-                    offsetX: 0,
-                    offsetY: 20,
-                    inputs: { content: 'hello' },
-                });
-            }
-
-            function showOperationPanel() {
-                close();
-                origin.popup({
-                    templateUrl: 'src/popup/operation-panel.html',
-                    controller: 'OperationPanelController as operationPanel',
-                    event: origin.event,
-                    attachSide: 'bottom',
-                    align: 'center',
-                    offsetX: 0,
-                    offsetY: 20,
-                    inputs: { content: 'hello' },
-                });
+            if (options.inActivity) {
+                content.contentId = content.id;
+                content.contentType = 'activity';
             }
 
             this.menu = {
@@ -77,21 +75,9 @@
             if (stateTree.currentUser) {
                 const extraItems = [
                     {
+                        text: `${content.archived ? '撤销' : ''}封存`,
                         type: 'item',
-                        text: '封存',
-                        clickAction ($event) {
-                            origin.popup({
-                                templateUrl: 'src/popup/operation-panel.html',
-                                controller: 'OperationPanelController as operationPanel',
-                                event: $event,
-                                attachSide: 'bottom',
-                                align: 'center',
-                                offsetX: 0,
-                                offsetY: 20,
-                                inputs: { content: 'hello' },
-                            });
-                            close();
-                        },
+                        clickAction: showOperationPanel(`${content.archived ? 'Un' : ''}Archived`),
                     },
                 ];
 
@@ -121,13 +107,14 @@
                     Array.prototype.push.apply(this.menu.items, extraItems);
                     Array.prototype.push.apply(this.menu.items, [
                         {
-                            text: '退稿',
+                            text: `${content.rejected ? '撤销' : ''}退稿`,
                             type: 'item',
-                            clickAction: showOperationPanel,
+                            clickAction: showOperationPanel(`${content.rejected ? 'Un' : ''}Rejected`),
                         },
                         {
-                            text: '警告',
+                            text: `${content.warned ? '撤销' : ''}警告`,
                             type: 'item',
+                            clickAction: showOperationPanel(`${content.warned ? 'Un' : ''}Warned`),
                         },
                     ]);
 
@@ -135,11 +122,13 @@
                         Array.prototype.push.apply(this.menu.items, [
                             {
                                 type: 'item',
-                                text: '萃选',
+                                text: `${content.spotlighted ? '撤销' : ''}萃选`,
+                                clickAction: showOperationPanel(`${content.spotlighted ? 'Un' : ''}Spotlight`),
                             },
                             {
                                 type: 'item',
-                                text: '推送',
+                                text: `${content.push ? '撤销' : ''}推送`,
+                                clickAction: () => {},
                             },
                         ]);
                     }
@@ -157,6 +146,38 @@
                 }
             }
         }
+
+        getText() {
+
+        }
+
+        // function showApproverList() {
+        //     close();
+        //     origin.popup({
+        //         templateUrl: 'src/popup/approver-list.html',
+        //         controller: 'ApproverListController as approverList',
+        //         event: origin.event,
+        //         attachSide: 'bottom',
+        //         align: 'center',
+        //         offsetX: 0,
+        //         offsetY: 20,
+        //         inputs: { content: 'hello' },
+        //     });
+        // }
+
+        // function showReportAbuse() {
+        //     close();
+        //     origin.popup({
+        //         templateUrl: 'src/popup/report-abuse.html',
+        //         controller: 'ReportAbuseController as reportAbuse',
+        //         event: origin.event,
+        //         attachSide: 'bottom',
+        //         align: 'center',
+        //         offsetX: 0,
+        //         offsetY: 20,
+        //         inputs: { content: 'hello' },
+        //     });
+        // }
     }
 
     keylolApp.controller('TimelineCardMenuController', TimelineCardMenuController);

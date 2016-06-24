@@ -14,8 +14,8 @@
                 <div class="border-3"></div>
                 <div class="border-4"></div>
                 <p>受文者：</p>
-                <p>Lee</p>
-                <p>UIC：LEEEE</p>
+                <p>{{missive.stateTree.currentUser.userName}}</p>
+                <p>UIC：{{missive.stateTree.currentUser.idCode}}</p>
             </div>
         </div>
         <div class="title">
@@ -24,8 +24,9 @@
         <div class="text">
             <p class="indent" ng-bind-html="missive.$sce.trustAsHtml(missive.object.messageType.getHeader(missive.object))"></p>
             <missive-quote ng-repeat="item in missive.object.reasons" reason-text="missive.reasons[item]"></missive-quote>
-            <p class="indent" ng-if="missive.object.type !== 'spotlight'">若对以上操作持有异议或不解，烦请致函其乐职员团队的 <a href="mailto:alpha.appeal@keylol.com">反馈邮箱</a> 邮件中需注明此函右下角的公函编号并附相关参考资料作为佐证。投诉反馈流程繁琐之处，敬请谅解。</p>
+            <p class="indent" ng-if="missive.object.type !== 'spotlight'&&missive.object.type !== 'push'">若对以上操作持有异议或不解，烦请致函其乐职员团队的 <a href="mailto:alpha.appeal@keylol.com">反馈邮箱</a> 邮件中需注明此函右下角的公函编号并附相关参考资料作为佐证。投诉反馈流程繁琐之处，敬请谅解。</p>
             <p class="indent" ng-if="missive.object.type === 'spotlight'">你可以随时在文章中执行「撤销萃选」的操作，萃选一经撤销将无法自行重新萃选。如需了解更多详情，可致函其乐职员团队的 反馈邮箱，邮件中请注明此函底部的公函编号并附其他有帮助的信息以供参考。</p>
+            <p class="indent" ng-if="missive.object.type === 'push'">若希望从广场栏目中撤下自己的文章，你可以随时在文章中执行「撤销推送」的操作。如需了解更多详情，可致函其乐职员团队的 反馈邮箱，邮件中请注明此函底部的公函编号并附其他有帮助的信息以供参考。</p>
         </div>
         <div class="signature">
             <img class="correctional-systems" webp-src="{{missive.object.messageType.source === '惩教系统'?'assets/images/css-signature.png':'assets/images/pss-signature.png'}}">

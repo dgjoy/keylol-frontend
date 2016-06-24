@@ -178,6 +178,10 @@ article-comments {
           visibility: visible;
         }
 
+        .error {
+          color: $keylol-review-bad;
+        }
+
         .editor-style {
           margin-top: 15px;
         }

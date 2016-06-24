@@ -25,6 +25,9 @@
             union.updateCommentsHeight = () => {
                 this.setCommentsHeight();
             };
+
+            this.showArchivePopup = [];
+            this.showWarnPopup = [];
         }
 
         changePage (newPage, oldPage) {
@@ -122,6 +125,56 @@
             }, response => {
                 this.notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
                 this.submitLock = false;
+            });
+        }
+
+        showArchive($index, $event, comment) {
+            this.showArchivePopup[$index]({
+                templateUrl: 'src/popup/operation-panel.html',
+                controller: 'OperationPanelController as operationPanel',
+                event: $event,
+                attachSide: 'bottom',
+                align: 'center',
+                offsetX: 0,
+                offsetY: -90,
+                inputs: {
+                    options: {
+                        contentId: comment.id,
+                        contentType: 'article-comment',
+                        operationType: `${comment.archived ? 'Un' : ''}Archived`,
+                    },
+                },
+            }).then(popup => {
+                return popup.close;
+            }).then(result => {
+                if (result !== undefined) {
+                    comment.archived = result;
+                }
+            });
+        }
+
+        showWarn($index, $event, comment) {
+            this.showWarnPopup[$index]({
+                templateUrl: 'src/popup/operation-panel.html',
+                controller: 'OperationPanelController as operationPanel',
+                event: $event,
+                attachSide: 'bottom',
+                align: 'center',
+                offsetX: 0,
+                offsetY: -90,
+                inputs: {
+                    options: {
+                        contentId: comment.id,
+                        contentType: 'article-comment',
+                        operationType: `${comment.archived ? 'Un' : ''}Warned`,
+                    },
+                },
+            }).then(popup => {
+                return popup.close;
+            }).then(result => {
+                if (result !== undefined) {
+                    comment.warned = result;
+                }
             });
         }
     }

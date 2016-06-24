@@ -308,6 +308,32 @@
                 return `文章${at}的萃选推荐已被撤销，该文章已经提前从「萃选文章」栏目撤下。`;
             },
         },
+        push: {
+            source: '编辑部',
+            type: '公函',
+            name: '推送通告',
+            getSummary (message) {
+                return `作为社区编辑对优秀文章的认可，你的文章《${missiveTextReduce(message.articleTitle, 14)}》已被推送至首页广场的「${message.pushSection}」栏目顶部展示，直至此栏目的新内容替换展示位置为止。`;
+            },
+            getHeader(message) {
+                const link = `article/${message.articleAuthorIdCode}/${message.articleSidForAuthor}`;
+                const at = `<a href="${link}">《${missiveTextReduce(message.articleTitle, 14)}》</a>`;
+                return `作为社区编辑对优秀文章的认可，你的文章${at}已被推送至首页广场的「${message.pushSection}」栏目顶部展示，直至此栏目的新内容替换展示位置为止。`;
+            },
+        },
+        pushCancel: {
+            source: '编辑部',
+            type: '公函',
+            name: '推送撤销通告',
+            getSummary (message) {
+                return `文章《${missiveTextReduce(message.articleTitle, 14)}》的推送已被撤销，该文章已经从「${message.pushSection}」栏目撤下。`
+            },
+            getHeader (message) {
+                const link = `article/${message.articleAuthorIdCode}/${message.articleSidForAuthor}`;
+                const at = `<a href="${link}">《${missiveTextReduce(message.articleTitle, 14)}》</a>`;
+                return `文章${at}的推送已被撤销，该文章已经从「${message.pushSection}」栏目撤下。`
+            },
+        },
 
         // 惩教系统
         articleWarning: {

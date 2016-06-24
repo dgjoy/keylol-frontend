@@ -13,6 +13,7 @@
                     article: this.article,
                     origin: {
                         popup: this.showModerationPopup,
+                        event: $event,
                     },
                 },
             });

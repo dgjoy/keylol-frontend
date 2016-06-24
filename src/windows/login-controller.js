@@ -308,6 +308,10 @@
                                     pwm.password.state = 'warn';
                                     pwm.password.completed = false;
                                     break;
+                                case 'account_locked_out':
+                                    pwm.password.error = '账户被锁定';
+                                    pwm.password.state = 'warn';
+                                    pwm.password.completed = false;
                                 default:
                                     this.notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
                             }

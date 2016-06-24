@@ -24,6 +24,14 @@
                                 <span ng-if="comment.authorPlayedTime">在档时间 {{comment.authorPlayedTime}} 小时</span>
                                 <span ng-if="!comment.authorPlayedTime">无在档记录</span>
                             </span>
+                            <span ng-if="comment.archived">
+                                /
+                                <span class="error">封存中</span>
+                            </span>
+                            <span ng-if="comment.warned">
+                                /
+                                <span class="error">受到警告</span>
+                            </span>
                         </p>
                     </div>
                     <div class="action-date">
@@ -36,8 +44,17 @@
                             <a href="" ng-click="articleComments.reply(comment)">回复</a>
                             <span ng-if="comment.authorIdCode !== articleComments.stateTree.currentUser.idCode || articleComments.stateTree.currentUser.roles.indexOf('Operator') > -1">
                                 <span>|</span>
-                                <a href="">封存</a>
-                                <a ng-if="articleComments.stateTree.currentUser.roles.indexOf('Operator') > -1" href="">警告</a>
+                                <a href=""
+                                   ng-click="articleComments.showArchive($index, $event, comment)"
+                                   popup="articleComments.showArchivePopup[$index]">
+                                    {{comment.archived?'撤销':''}}封存
+                                </a>
+                                <a ng-if="articleComments.stateTree.currentUser.roles.indexOf('Operator') > -1"
+                                   href=""
+                                   ng-click="articleComments.showWarn($index, $event, comment)"
+                                   popup="articleComments.showWarnPopup[$index]">
+                                    {{comment.warned?'撤销':''}}警告
+                                </a>
                             </span>
                         </p>
                         <p><span am-time-ago="comment.publishTime"></span> / #{{comment.sidForArticle}}</p>

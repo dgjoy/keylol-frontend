@@ -14,7 +14,7 @@
                 <img src="" class="avatar" webp-src="{{::activityEditor.stateTree.currentUser.avatarImage | avatarUrl}}">
                 <div class="name-group">
                     <p>{{::activityEditor.stateTree.currentUser.userName}}</p>
-                    <p>{{activityEditor.inLibraryTime}}&nbsp;</p>
+                    <p>{{activityEditor.inLibraryTime ? '在档' + activityEditor.inLibraryTime + ' 小时' : ''}}&nbsp;</p>
                 </div>
             </div>
             <point-review ng-if="activityEditor.hasRating" bind-review="activityEditor.vm.rating" is-hollow="true"></point-review>

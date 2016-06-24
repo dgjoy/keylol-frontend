@@ -53,6 +53,7 @@ point-header {
           @include wrap-ellipsis;
           color: $keylol-inverted-text;
           justify-content: center;
+          align-items: center;
 
           &:first-of-type {
             height: 21px;

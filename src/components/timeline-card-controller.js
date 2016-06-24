@@ -116,6 +116,7 @@
         }
 
         showMenu($event) {
+            console.log(this.card);
             this.showSharedPopup({
                 templateUrl: 'src/popup/timeline-card-menu.html',
                 controller: 'TimelineCardMenuController as timelineCardMenu',

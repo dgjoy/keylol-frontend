@@ -1,6 +1,42 @@
 ﻿(function () {
     class ArticleModerationController {
         constructor (close, window, origin, article, stateTree) {
+            function showOperationPanel (operationType) {
+                return () => {
+                    close();
+                    const key = {
+                        Archived: 'archived',
+                        Warned: 'warned',
+                        Rejected: 'rejected',
+                        Spotlight: 'spotlighted',
+                    };
+
+                    origin.popup({
+                        templateUrl: 'src/popup/operation-panel.html',
+                        controller: 'OperationPanelController as operationPanel',
+                        event: origin.event,
+                        attachSide: 'bottom',
+                        align: 'center',
+                        offsetX: 0,
+                        offsetY: 20,
+                        inputs: {
+                            options: {
+                                contentId: article.id,
+                                contentType: 'article',
+                                operationType,
+                            },
+                        },
+                    }).then(popup => {
+                        return popup.close;
+                    }).then(result => {
+                        if (result !== undefined) {
+                            article[key[operationType]] = result;
+                        }
+                    });
+                };
+            }
+
+
             this.moderationMenu = {
                 items: [
                     {
@@ -67,21 +103,9 @@
                         },
                     },
                     {
+                        text: `${article.archived ? '撤销' : ''}封存`,
                         type: 'item',
-                        text: '封存',
-                        clickAction ($event) {
-                            origin.popup({
-                                templateUrl: 'src/popup/operation-panel.html',
-                                controller: 'OperationPanelController as operationPanel',
-                                event: $event,
-                                attachSide: 'bottom',
-                                align: 'center',
-                                offsetX: 0,
-                                offsetY: 20,
-                                inputs: { content: 'hello' },
-                            });
-                            close();
-                        },
+                        clickAction: showOperationPanel(`${article.archived ? 'Un' : ''}Archived`),
                     },
                 ];
 
@@ -89,69 +113,24 @@
                     Array.prototype.push.apply(this.moderationMenu.items, extraItems);
                     Array.prototype.push.apply(this.moderationMenu.items, [
                         {
+                            text: `${article.rejected ? '撤销' : ''}退稿`,
                             type: 'item',
-                            text: '退稿',
-                            clickAction ($event) {
-                                origin.popup({
-                                    templateUrl: 'src/popup/operation-panel.html',
-                                    controller: 'OperationPanelController as operationPanel',
-                                    event: $event,
-                                    attachSide: 'bottom',
-                                    align: 'center',
-                                    offsetX: 0,
-                                    offsetY: 20,
-                                    inputs: { content: 'hello' },
-                                });
-                                close();
-                            },
+                            clickAction: showOperationPanel(`${article.rejected ? 'Un' : ''}Rejected`),
+                        },
+                        {
+                            text: `${article.warned ? '撤销' : ''}警告`,
+                            type: 'item',
+                            clickAction: showOperationPanel(`${article.warned ? 'Un' : ''}Warned`),
                         },
                         {
                             type: 'item',
-                            text: '警告',
-                            clickAction ($event) {
-                                origin.popup({
-                                    templateUrl: 'src/popup/operation-panel.html',
-                                    controller: 'OperationPanelController as operationPanel',
-                                    event: $event,
-                                    attachSide: 'bottom',
-                                    align: 'center',
-                                    offsetX: 0,
-                                    offsetY: 20,
-                                    inputs: { content: 'hello' },
-                                });
-                                close();
-                            },
+                            text: `${article.spotlighted ? '撤销' : ''}萃选`,
+                            clickAction: showOperationPanel(`${article.spotlighted ? 'Un' : ''}Spotlight`),
                         },
                         {
                             type: 'item',
-                            text: '萃选',
-                            clickAction ($event) {
-                                origin.popup({
-                                    templateUrl: 'src/popup/operation-panel.html',
-                                    controller: 'OperationPanelController as operationPanel',
-                                    event: $event,
-                                    attachSide: 'bottom',
-                                    align: 'center',
-                                    offsetX: 0,
-                                    offsetY: 20,
-                                    inputs: { content: 'hello' },
-                                });
-                                close();
-                            },
-                        },
-                        {
-                            type: 'item',
-                            text: '推送',
-                            clickAction ($event) {
-                                window.show({
-                                    templateUrl: 'src/windows/article-pusher.html',
-                                    controller: 'ArticlePusherController as articlePusher',
-                                    inputs: {
-                                        article,
-                                    },
-                                });
-                                close();
-                            },
+                            text: `${article.push ? '撤销' : ''}推送`,
+                            clickAction: () => {},
                         },
                     ]);
                 } else if (stateTree.currentUser.id === article.authorBasicInfo.id) {

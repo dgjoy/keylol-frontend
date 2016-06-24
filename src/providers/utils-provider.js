@@ -373,6 +373,18 @@
                         self.iconOfPlatformPoints = ['dtb-steam', 'dtb-origin','dtb-uplay','dtb-battlenet','dtb-playstation','dtb-xbox','dtb-ios',
                             'dtb-android', 'dtb-windows-store','dtb-gba','dtb-nds','dtb3ds',
                             'dtb-wii','dtb-wiiu','dtb-psp', 'dtb-client', 'dtb-browser'];
+
+                        self.getPlayedTime = (time, idCode, currentUser, fall_back) => {
+                            if (currentUser !== undefined) {
+                                if (currentUser.idCode === idCode) {
+                                    return fall_back ? `在档 ${fall_back} 小时` : '无在档记录';
+                                } else {
+                                    return time ? `在档 ${time} 小时` : '无在档记录';
+                                }
+                            } else {
+                                return time ? `在档 ${time} 小时` : '无在档记录';
+                            }
+                        };
                     }
 
                     return new Utils();

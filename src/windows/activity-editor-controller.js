@@ -38,7 +38,7 @@
             },() => {
                 this.hasRating = false;
                 if (this.vm.targetPoints[0]) {
-                    this.inLibraryTime = `${this.vm.targetPoints[0].totalPlayedTime ? this.vm.targetPoints[0].totalPlayedTime : '0'} 小时`;
+                    this.inLibraryTime = this.vm.targetPoints[0].totalPlayedTime;
                     this.getRelatedPoints();
 
                     if (this.vm.targetPoints[0].type === 'game') {

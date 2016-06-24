@@ -1,24 +1,21 @@
 ﻿(function () {
     class MissiveController {
-        constructor(close, $sce, object, moderationText) {
+        constructor(close, $sce, object, moderationText, stateTree) {
             $.extend(this,{
                 close,
                 object,
                 $sce,
+                stateTree,
             });
 
-            console.log(object.type);
-
-            switch (object.type) {
-                case 'articleArchive':
-                case 'commentArchive':
+            switch (object.type.messageType.name) {
+                case '封存通告':
                     this.reasons = moderationText.Archived.reasonTexts;
                     break;
-                case 'articleWarning':
-                case 'commentWarning':
+                case '惩教警告':
                     this.reasons = moderationText.Warned.reasonTexts;
                     break;
-                case 'rejection':
+                case '退稿函':
                     this.reasons = moderationText.Rejected.reasonTexts;
                     break;
                 default:

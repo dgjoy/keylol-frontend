@@ -43,14 +43,6 @@
                 this.submitLock = false;
             });
         }
-        
-        getPlayedTime(time, idCode) {
-            if (idCode === this.stateTree.currentUser.idCode) {
-                return this.playedTime || '0';
-            } else {
-                return time || '0';
-            }
-        }
     }
 
     keylolApp.component('shortReview', {
