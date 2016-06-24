@@ -6,6 +6,7 @@
         <li ng-repeat="item in ::pageList.list track by $index">
             <div class="left">
                 <a href="user/{{item.idCode}}">
+                    <img-label ng-if="item.isFriend" type="friended"></img-label>
                     <img class="avatar" webp-src="{{item.avatarImage | avatarUrl}}" alt="">
                 </a>
                 <div class="name-group">

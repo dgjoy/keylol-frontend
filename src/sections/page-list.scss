@@ -34,10 +34,16 @@ page-list {
         .left {
           display: flex;
           align-items: center;
-          .avatar {
-            width: 32px;
-            height: 32px;
-            margin-right: 10px;
+
+          > a {
+            position: relative;
+            z-index: 0;
+
+            .avatar {
+              width: 32px;
+              height: 32px;
+              margin-right: 10px;
+            }
           }
 
           .name-group {

@@ -21,6 +21,7 @@
                 <div class="cell" ng-class="{'best-ranking':item.ranking <= 2}">{{item.ranking + 1}}</div>
                 <div class="cell user-info">
                     <a href="user/{{item.userBasicInfo.idCode}}">
+                        <img-label ng-if="item.userBasicInfo.isFriend" type="friended"></img-label>
                         <img class="avatar" webp-src="{{ item.userBasicInfo.avatarImage | avatarUrl}}" alt="">
                     </a>
                     <div class="name-group">
