@@ -1,12 +1,14 @@
 ﻿(function () {
     class PointPusherController {
-        constructor(close, $http, apiEndpoint, notification, pointIdCode) {
+        constructor(close, $http, apiEndpoint, notification, point, utils, stateTree) {
             $.extend(this, {
                 close,
                 $http,
                 apiEndpoint,
                 notification,
-                pointIdCode,
+                point,
+                utils,
+                stateTree,
             });
 
             this.vm = {
@@ -28,10 +30,10 @@
             const place = ['spotlight-point', 'outpost-point'][this.vm.place];
             this.$http.post(`${this.apiEndpoint}feed/${place}`,{},{
                 params: {
-                    pointIdCode: this.pointIdCode,
+                    pointIdCode: this.point.idCode,
                 },
             }).then(response => {
-                this.notification.success('推送成功');
+                this.notification.success({ message: '推送成功' });
                 this.close();
             }, response => {
                 this.notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);

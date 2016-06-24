@@ -127,7 +127,7 @@
                             templateUrl: 'src/windows/point-pusher.html',
                             controller: 'PointPusherController as pointPusher',
                             inputs: {
-                                pointIdCode: this.object.idCode,
+                                point: this.object,
                             },
                         });
                     }],

@@ -1,6 +1,6 @@
 ﻿(function () {
     class ModerationController {
-        constructor (close, type, window) {
+        constructor (close, type, window, options) {
             this.moderationMenu = {
                 items: [
                     {
@@ -13,6 +13,7 @@
                                 controllerAs: 'editShowCase',
                                 inputs: {
                                     type,
+                                    options,
                                 },
                             });
                             close();
@@ -28,7 +29,7 @@
                                 controllerAs: 'pushEntry',
                                 inputs: {
                                     type,
-                                    options: {},
+                                    options,
                                 },
                             });
                             close();

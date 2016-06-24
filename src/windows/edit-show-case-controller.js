@@ -1,6 +1,6 @@
 ﻿(function () {
     class EditShowCaseController {
-        constructor(type, close, $element, $http, apiEndpoint, notification, window, utils, stateTree) {
+        constructor(type, close, $element, $http, apiEndpoint, notification, window, utils, stateTree, options) {
             $.extend(this, {
                 type,
                 close,
@@ -11,6 +11,7 @@
                 window,
                 utils,
                 stateTree,
+                options,
             });
             this.currentPage = 1;
             this.list = [];
@@ -22,11 +23,11 @@
                     this.getContent();
                     this.showAttrs = {
                         title: '主标题',
-                        minorTitle: '投稿据点',
+                        minorTitle: '滑卡标题',
                     };
                     break;
                 case 'spotlightPoint':
-                    this.subTitle = '入口 - 广场 - 热门据点';
+                    this.subTitle = '入口 - 广场 - 六格滚轴';
                     this.getUrl = 'entrance/discovery/spotlight-points';
                     this.highlightCount = 6;
                     this.getContent();
@@ -45,6 +46,28 @@
                     this.showAttrs = {
                         preferred: '据点',
                         idCode: '识别码',
+                    };
+                    break;
+                case 'spotlightArticle':
+                    switch (options.articleType) {
+                        case 'Review':
+                            this.subTitle = '入口 - 广场 - 评';
+                            this.getUrl = 'entrance/discovery/spotlight-reviews';
+                            break;
+                        case 'Study':
+                            this.subTitle = '入口 - 广场 - 研';
+                            this.getUrl = 'entrance/discovery/spotlight-studies';
+                            break;
+                        case 'Story':
+                            this.subTitle = '入口 - 广场 - 谈';
+                            this.getUrl = 'entrance/discovery/spotlight-stories';
+                            break;
+                    }
+                    this.highlightCount = 4;
+                    this.getContent();
+                    this.showAttrs = {
+                        title: '主标题',
+                        pointPreferred: '投稿据点',
                     };
                     break;
             }
@@ -95,6 +118,7 @@
                     type: this.type,
                     options: {
                         item,
+                        articleType: this.options.articleType,
                     },
                 },
             }).then(window => {

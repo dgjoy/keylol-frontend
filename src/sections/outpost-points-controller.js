@@ -38,6 +38,7 @@
                 offsetY: -5,
                 inputs: {
                     type: 'outpostPoint',
+                    options: {},
                 },
             });
         }

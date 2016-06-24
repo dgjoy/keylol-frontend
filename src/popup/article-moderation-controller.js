@@ -143,15 +143,12 @@
                             type: 'item',
                             text: '推送',
                             clickAction ($event) {
-                                origin.popup({
-                                    templateUrl: 'src/popup/operation-panel.html',
-                                    controller: 'OperationPanelController as operationPanel',
-                                    event: $event,
-                                    attachSide: 'bottom',
-                                    align: 'center',
-                                    offsetX: 0,
-                                    offsetY: 20,
-                                    inputs: { content: 'hello' },
+                                window.show({
+                                    templateUrl: 'src/windows/article-pusher.html',
+                                    controller: 'ArticlePusherController as articlePusher',
+                                    inputs: {
+                                        article,
+                                    },
                                 });
                                 close();
                             },

@@ -45,6 +45,7 @@
                 offsetY: -5,
                 inputs: {
                     type: 'slideShow',
+                    options: {},
                 },
             });
         }

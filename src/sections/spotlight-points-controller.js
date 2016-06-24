@@ -34,6 +34,7 @@
                 offsetY: -5,
                 inputs: {
                     type: 'spotlightPoint',
+                    options: {},
                 },
             });
         }

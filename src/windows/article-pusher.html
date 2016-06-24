@@ -1,0 +1,31 @@
+﻿<window position="center" class="window-article-pusher">
+    <div class="window">
+        <div class="header">
+            <div class="text">
+                <p>推送文章</p>
+                <p>{{articlePusher.article.title}}</p>
+            </div>
+            <img src="assets/images/pss-logo-accent.png">
+        </div>
+        <div class="content">
+            <text-area
+                    model="articlePusher.place"
+                    object="{
+                        title:'选择推送栏目',
+                        items:[
+                            '广场 - 四格幻灯片',
+                            '广场 - 评',
+                            '广场 - 研',
+                            '广场 - 谈',
+                        ],
+                    }"
+                    type="dropdown"
+                    label="选择推送栏目"
+            ></text-area>
+            <div class="actions">
+                <flat-button text="放弃" type="inertia" click="articlePusher.close()"></flat-button>
+                <raised-button click="articlePusher.submit()" text="推送" type="theme" disabled="articlePusher.place === undefined"></raised-button>
+            </div>
+        </div>
+    </div>
+</window>

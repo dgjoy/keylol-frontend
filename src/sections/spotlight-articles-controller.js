@@ -6,15 +6,15 @@
                 $location,
             });
             this.types = {
-                reviews: {
+                Review: {
                     mainTitle: '评',
                     subTitle: '解读 · 分析 · 导购',
                 },
-                studies: {
+                Study: {
                     mainTitle: '研',
                     subTitle: '攻略 · 探讨 · 教程',
                 },
-                stories: {
+                Story: {
                     mainTitle: '谈',
                     subTitle: '故事 · 感想 · 随想',
                 },
@@ -31,7 +31,10 @@
                 offsetX: 29,
                 offsetY: -5,
                 inputs: {
-                    type: 'slideShow',
+                    type: 'spotlightArticle',
+                    options: {
+                        articleType: this.type,
+                    },
                 },
             });
         }

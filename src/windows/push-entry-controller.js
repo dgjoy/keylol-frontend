@@ -9,7 +9,9 @@
                 apiEndpoint,
                 notification,
             });
-            this.vm = {};
+            this.vm = {
+                link: options.link,
+            };
             this.files = {};
             this.formHeight = 73;
             this.expand = false;
@@ -78,7 +80,7 @@
                     ];
                     break;
                 case 'spotlightPoint':
-                    this.subTitle = '入口 - 广场 - 热门据点';
+                    this.subTitle = '入口 - 广场 - 六格滚轴';
                     this.postUrl = 'spotlight-point';
                     this.dataType = 'query';
                     this.inputList = [
@@ -109,10 +111,70 @@
                     this.formHeight = 'auto';
                     this.expand = true;
                     break;
+                case 'spotlightArticle':
+                    switch (options.articleType) {
+                        case 'Review':
+                            this.subTitle = '入口 - 广场 - 评';
+                            break;
+                        case 'Study':
+                            this.subTitle = '入口 - 广场 - 研';
+                            break;
+                        case 'Story':
+                            this.subTitle = '入口 - 广场 - 谈';
+                            break;
+                    }
+                    this.captureUrl = 'entrance/discovery/spotlight-reviews';
+                    this.captureOnlyArticle = true;
+                    this.postUrl = 'spotlight-article';
+                    this.dataType = 'body';
+                    this.params = {
+                        category: options.articleType,
+                    };
+                    this.inputList = [
+                        {
+                            element: 'textArea',
+                            type: 'text',
+                            style: 'long',
+                            model: 'title',
+                            label: '主标题',
+                            tip: '一旦手动编辑，推送条目将不会和原文自动同步',
+                        },
+                        {
+                            element: 'textArea',
+                            type: 'text',
+                            style: 'long',
+                            model: 'subtitle',
+                            label: '副标题',
+                            tip: '一旦手动编辑，推送条目将不会和原文自动同步',
+                        },
+                        {
+                            element: 'textArea',
+                            type: 'uic',
+                            style: 'short',
+                            model: 'authorIdCode',
+                            label: '作者识别码',
+                            disabled: true,
+                        },
+                        {
+                            element: 'textArea',
+                            type: 'uic',
+                            style: 'short',
+                            model: 'pointIdCode',
+                            label: '据点识别码',
+                            disabled: true,
+                        },
+                    ];
+                    break;
             }
 
             if (options.item) {
                 $.extend(this.vm, options.item);
+                if (type === 'spotlightArticle') {
+                    this.vm.articleId = this.vm.id;
+                    delete this.vm.id;
+
+                    this.vm.link = `https://www.keylol.com/article/${this.vm.authorIdCode}/${this.vm.sidForAuthor}`;
+                }
 
                 this.title = '调整内容';
                 this.formHeight = 'auto';
@@ -125,6 +187,10 @@
                 this.captureLock = true;
                 this.$http.get(`${this.apiEndpoint}states/${this.captureUrl}/reference/?link=${this.vm.link}`).then(response => {
                     $.extend(this.vm, response.data);
+                    if (this.type === 'spotlightArticle') {
+                        this.vm.articleId = this.vm.id;
+                        delete this.vm.id;
+                    }
                     this.expand = true;
                     let detailHeight = 0;
                     const $detail = this.$element.find('form .info-detail');
@@ -188,14 +254,18 @@
                 });
             } else {
                 if (this.vm.feedId) {
-                    this.$http.put(`${this.apiEndpoint}feed/${this.postUrl}/${this.vm.feedId}`, this.vm).then(response => {
+                    this.$http.put(`${this.apiEndpoint}feed/${this.postUrl}/${this.vm.feedId}`, this.vm, {
+                        params: this.params,
+                    }).then(response => {
                         this.notification.success({ message: '推送成功' });
                         this.close(this.vm);
                     }, error => {
                         this.notification.error({ message: '推送失败，请重试' }, error);
                     });
                 } else {
-                    this.$http.post(`${this.apiEndpoint}feed/${this.postUrl}`, this.vm).then(response => {
+                    this.$http.post(`${this.apiEndpoint}feed/${this.postUrl}`, this.vm, {
+                        params: this.params,
+                    }).then(response => {
                         this.notification.success({ message: '推送成功' });
                         this.close();
                     }, error => {
