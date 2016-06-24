@@ -1,8 +1,9 @@
 ﻿(function () {
     class SlideShowController {
-        constructor($timeout) {
+        constructor($timeout, stateTree) {
             $.extend(this,{
                 $timeout,
+                stateTree,
             });
             this.index = 0;
             this.oldIndex = -1;

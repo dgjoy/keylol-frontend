@@ -1,6 +1,6 @@
 ﻿(function () {
     class PointHeaderMenuController {
-        constructor (actions, close) {
+        constructor (actions, close, stateTree) {
             this.menu = {
                 items: [
                     {
@@ -11,16 +11,19 @@
                             close();
                         },
                     },
-                    {
-                        type: 'item',
-                        text: '推送',
-                        clickAction () {
-                            actions[1]();
-                            close();
-                        },
-                    },
                 ],
             };
+
+            if (stateTree.currentUser.roles.indexOf('Operator') > -1 && actions.length > 1) {
+                this.menu.items.push({
+                    type: 'item',
+                    text: '推送',
+                    clickAction () {
+                        actions[1]();
+                        close();
+                    },
+                });
+            }
         }
     }
 

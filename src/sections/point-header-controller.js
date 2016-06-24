@@ -3,11 +3,12 @@
  */
 (function () {
     class pointHeaderController {
-        constructor($scope, $window, utils, $state, window, stateTree) {
+        constructor($scope, $window, utils, $state, window, stateTree, $location) {
             $.extend(this,{
                 $state,
                 window,
                 stateTree,
+                $location,
             });
             this.subscribeSet = [
                 {
@@ -123,7 +124,7 @@
                 offsetY: -24,
                 inputs: {
                     actions: [() => {
-                        this.$state.go('aggregation.point.edit.info');
+                        this.$location.url(`point/${this.object.idCode}/edit`);
                     },() => {
                         this.window.show({
                             templateUrl: 'src/windows/point-pusher.html',

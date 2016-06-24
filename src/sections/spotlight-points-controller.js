@@ -1,6 +1,7 @@
 ﻿(function () {
     class SpotlightPointsController {
-        constructor () {
+        constructor (stateTree) {
+            this.stateTree = stateTree;
             this.pages = [];
             for (let i = 0;i < this.cards.length;i++) {
                 if (this.pages.length === 0 || this.pages[this.pages.length - 1].length >= 6) {

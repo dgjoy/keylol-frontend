@@ -69,14 +69,6 @@
                 }
                 const editEntrance = { state: '.edit', name: '编辑', 'float': 'right' };
 
-                $scope.$watch('stateTree.currentUser', newValue => {
-                    if (newValue) {
-                        if (this.tabArray.indexOf(editEntrance) === -1) {
-                            this.tabArray.push(editEntrance);
-                        }
-                    }
-                });
-
                 $scope.$watch(() => {
                     return $state.current.name;
                 }, () => {
@@ -84,40 +76,41 @@
                     switch (subState) {
                         case 'frontpage' :
                             this.currentPage = 0;
+                            if (this.tabArray.indexOf(editEntrance) > -1) {
+                                this.tabArray.splice(this.tabArray.indexOf(editEntrance), 1);
+                            }
                             break;
                         case 'intel' :
+                        case 'product' :
                             this.currentPage = 1;
+                            if (this.tabArray.indexOf(editEntrance) > -1) {
+                                this.tabArray.splice(this.tabArray.indexOf(editEntrance), 1);
+                            }
                             break;
                         case 'timeline' :
                             this.currentPage = 2;
+                            if (this.tabArray.indexOf(editEntrance) > -1) {
+                                this.tabArray.splice(this.tabArray.indexOf(editEntrance), 1);
+                            }
                             break;
                         case 'edit' :
                         case 'edit.info' :
                         case 'edit.style' :
+                            if (this.tabArray.indexOf(editEntrance) === -1) {
+                                this.tabArray.push(editEntrance);
+                            }
                             this.currentPage = 3;
                             break;
                     }
                 });
             } else if (currentStateName.substr(0, 16) === 'aggregation.user') {
                 this.inUser = true;
-                $scope.$watch(() => {
-                    return stateTree.currentUser;
-                },() => {
-                    if (!stateTree.currentUser || (stateTree.currentUser && stateTree.currentUser.id !==  stateTree.aggregation.user.basicInfo.id && $.inArray('Operator', stateTree.currentUser.roles) === -1)) {
-                        this.tabArray = [
-                            { state: '.dossier', name: '档案' },
-                            { state: '.people', name: '人脉' },
-                            { state: '.timeline', name: '轨道' },
-                        ];
-                    } else {
-                        this.tabArray = [
-                            { state: '.dossier', name: '档案' },
-                            { state: '.people', name: '人脉' },
-                            { state: '.timeline', name: '轨道' },
-                            { state: '.edit', name: '编辑', 'float': 'right' },
-                        ];
-                    }
-                });
+                this.tabArray = [
+                    { state: '.dossier', name: '档案' },
+                    { state: '.people', name: '人脉' },
+                    { state: '.timeline', name: '轨道' },
+                ];
+                const editEntrance = { state: '.edit', name: '编辑', 'float': 'right' };
 
                 $scope.$watch(() => {
                     return $state.current.name;
@@ -126,16 +119,28 @@
                     switch (subState) {
                         case 'dossier' :
                             this.currentPage = 0;
+                            if (this.tabArray.indexOf(editEntrance) > -1) {
+                                this.tabArray.splice(this.tabArray.indexOf(editEntrance), 1);
+                            }
                             break;
                         case 'people' :
                             this.currentPage = 1;
+                            if (this.tabArray.indexOf(editEntrance) > -1) {
+                                this.tabArray.splice(this.tabArray.indexOf(editEntrance), 1);
+                            }
                             break;
                         case 'timeline' :
                             this.currentPage = 2;
+                            if (this.tabArray.indexOf(editEntrance) > -1) {
+                                this.tabArray.splice(this.tabArray.indexOf(editEntrance), 1);
+                            }
                             break;
                         case 'edit' :
                         case 'edit.info' :
                         case 'edit.preference' :
+                            if (this.tabArray.indexOf(editEntrance) === -1) {
+                                this.tabArray.push(editEntrance);
+                            }
                             this.currentPage = 3;
                             break;
                     }
@@ -169,10 +174,6 @@
                                 { href: `point/${newValue.idCode}/product`, name: '作品' },
                                 { href: `point/${newValue.idCode}/timeline`, name: '轨道' },
                             ]);
-                        }
-
-                        if (stateTree.currentUser) {
-                            this.tabArray.push({ href: `point/${newValue.idCode}/edit`, name: '编辑', 'float': 'right' });
                         }
                     }
                 });

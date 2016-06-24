@@ -1,5 +1,5 @@
 ﻿<section-header header="outpostPoints.type"></section-header>
-<div class="moderation-wrapper" popup="outpostPoints.showModerationPopup">
+<div ng-if="outpostPoints.stateTree.currentUser.roles.indexOf('Operator') > -1" class="moderation-wrapper" popup="outpostPoints.showModerationPopup">
     <icon-button icon="dots-vertical" click="::outpostPoints.showModeration(event)"></icon-button>
 </div>
 <div class="wrapper">

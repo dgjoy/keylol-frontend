@@ -8,6 +8,6 @@
     </div>
 </div>
 <switch-pagination next="spotlightPoints.nextPage()" previous="spotlightPoints.previousPage()" current="spotlightPoints.activePage" total="::spotlightPoints.pages.length"></switch-pagination>
-<div class="moderation-wrapper" popup="spotlightPoints.showModerationPopup">
+<div ng-if="spotlightPoints.stateTree.currentUser.roles.indexOf('Operator') > -1" class="moderation-wrapper" popup="spotlightPoints.showModerationPopup">
     <icon-button icon="dots-vertical" click="::spotlightPoints.showModeration(event)"></icon-button>
 </div>

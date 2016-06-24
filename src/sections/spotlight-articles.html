@@ -1,5 +1,5 @@
 ﻿<section-header header="::spotlightArticles.types[spotlightArticles.type]"></section-header>
-<div class="moderation-wrapper" popup="spotlightArticles.showModerationPopup">
+<div ng-if="spotlightArticles.stateTree.currentUser.roles.indexOf('Operator') > -1" class="moderation-wrapper" popup="spotlightArticles.showModerationPopup">
     <icon-button icon="dots-vertical" click="::spotlightArticles.showModeration(event)"></icon-button>
 </div>
 <div class="flex-row">

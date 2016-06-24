@@ -24,6 +24,6 @@
         </div>
     </a>
 </div>
-<div class="moderation-wrapper" popup="slideShow.showModerationPopup">
+<div ng-if="slideShow.stateTree.currentUser.roles.indexOf('Operator') > -1" class="moderation-wrapper" popup="slideShow.showModerationPopup">
     <icon-button icon="dots-vertical" click="::slideShow.showModeration(event)"></icon-button>
 </div>

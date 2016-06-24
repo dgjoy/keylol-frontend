@@ -1,6 +1,7 @@
 ﻿(function () {
     class OutpostPointsController {
-        constructor () {
+        constructor (stateTree) {
+            this.stateTree = stateTree;
             this.type = {
                 mainTitle: '哨所',
                 subTitle: '近期热点观察',

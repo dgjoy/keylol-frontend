@@ -11,7 +11,9 @@
         <p>{{userHeader.object.registerTime | amUtc | amLocal | amDateFormat:'YYYY-MM-DD'}} 加入其乐</p>
     </div>
     <div class="actions">
-        <icon-button icon="dots-vertical" type="invert"></icon-button>
+        <div ng-if="userHeader.stateTree.currentUser && (userHeader.stateTree.currentUser.idCode === userHeader.object.idCode || userHeader.stateTree.currentUser.roles.indexOf('Operator') > -1)" popup="userHeader.showMenuPopup">
+            <icon-button icon="dots-vertical" click="userHeader.showMenu(event)" type="invert"></icon-button>
+        </div>
         <raised-button ng-if="userHeader.stateTree.currentUser && userHeader.stateTree.currentUser.idCode !== userHeader.object.idCode" theme-color="userHeader.theme.main"
                        binary-set="userHeader.subscribeSet" binary-value="userHeader.object.subscribed"
                        click="userHeader.subscribe(userHeader.object.id, userHeader.object.subscribed, userHeader.object, 'User')"></raised-button>

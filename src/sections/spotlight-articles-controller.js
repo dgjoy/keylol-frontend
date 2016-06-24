@@ -1,9 +1,10 @@
 ﻿(function () {
     class SpotlightArticlesController {
-        constructor ($rootScope, $location) {
+        constructor ($rootScope, $location, stateTree) {
             $.extend(this, {
                 $rootScope,
                 $location,
+                stateTree,
             });
             this.types = {
                 Review: {

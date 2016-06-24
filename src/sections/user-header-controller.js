@@ -47,6 +47,23 @@
         edit () {
             this.$location.url(`user/${this.object.idCode}/edit`);
         }
+
+        showMenu($event) {
+            this.showMenuPopup({
+                templateUrl: 'src/popup/point-header-menu.html',
+                controller: 'PointHeaderMenuController as pointHeaderMenu',
+                event: $event,
+                attachSide: 'bottom',
+                align: 'right',
+                offsetX: 0,
+                offsetY: -24,
+                inputs: {
+                    actions: [() => {
+                        this.$location.url(`user/${this.object.idCode}/edit`);
+                    }],
+                },
+            });
+        }
     }
 
     keylolApp.component('userHeader', {
