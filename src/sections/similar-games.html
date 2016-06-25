@@ -1,11 +1,11 @@
-﻿<section-header header="similarGames.type"></section-header>
-<div class="wrapper">
+﻿<section-header header="similarGames.type" theme="similarGames.theme"></section-header>
+<div class="wrapper" ng-style="{backgroundColor: similarGames.theme.main}">
     <div class="left-part">
         <game-card card="card" ng-repeat="card in similarGames.gameLeftPart"></game-card>
     </div>
     <div class="right-part">
-        <div class="theme-icon">
-            <img ng-if="similarGames.theme.icon" webp-src="{{similarGames.theme.icon | themeLogoUrl}}">
+        <div class="theme-logo">
+            <img ng-if="similarGames.theme.logo" webp-src="{{similarGames.theme.logo | uriRelocate: '/fwfh/225x125'}}">
             <div ng-if="!similarGames.theme.logo" class="theme-alt">
                 <p>{{similarGames.utils.getPreferredPointName(similarGames.stateTree.aggregation.point.basicInfo, similarGames.stateTree.currentUser)[0]}}</p>
                 <p>{{similarGames.utils.getPreferredPointName(similarGames.stateTree.aggregation.point.basicInfo, similarGames.stateTree.currentUser)[1]}}</p>
