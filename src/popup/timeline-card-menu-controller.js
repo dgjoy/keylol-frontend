@@ -142,14 +142,14 @@
                         ]);
                     }
                 } else {
-                    let authorId;
+                    let authorIdCode;
                     if (content.authorBasicInfo) {
-                        authorId = content.authorBasicInfo.id;
+                        authorIdCode = content.authorBasicInfo.id;
                     } else if (content.author) {
-                        authorId = content.authorBasicInfo.id;
+                        authorIdCode = content.author.idCode;
                     }
 
-                    if (stateTree.currentUser.id === authorId) {
+                    if (stateTree.currentUser.idCode === authorIdCode) {
                         Array.prototype.push.apply(this.menu.items, extraItems);
                     }
                 }

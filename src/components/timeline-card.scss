@@ -4,18 +4,18 @@ timeline-card {
   display: block;
   background-color: $keylol-inverted-text;
 
-  >.display-card {
+  .display-card {
     @include keylol-shadow-1;
     background-color: $keylol-card;
 
-    >.user-with-date {
+    .user-with-date {
       display: flex;
       justify-content: space-between;
       align-items: center;
       height: 72px;
       padding: 0 15px;
 
-      >.user {
+      .user {
         flex-shrink: 1;
         display: flex;
         align-items: center;
@@ -23,25 +23,25 @@ timeline-card {
         z-index: 0;
 
         &:hover {
-          >.username {
+          .username {
             text-decoration: underline;
           }
         }
-        >.avatar {
+        .avatar {
           flex-shrink: 0;
           width: 32px;
           height: 32px;
           border-radius: 16px;
           margin-right: 10px;
         }
-        >.username {
+        .username {
           flex-shrink: 1;
           font-weight: bold;
           color: $keylol-main-text;
         }
       }
 
-      >.date {
+      .date {
         flex-shrink: 0;
         font-size: 12px;
         color: $keylol-inertia-text;
@@ -52,12 +52,12 @@ timeline-card {
       }
     }
 
-    >.shortcut {
+    .shortcut {
       .common-article {
         height: 200px;
       }
 
-      >.simple {
+      .simple {
         vote-circle {
           padding: 0 15px;
           margin-bottom: 20px;
@@ -72,7 +72,7 @@ timeline-card {
           position: relative;
           transition: height .5s;
 
-          >.expand {
+          .expand {
             bottom: -10px;
             left: 0;
             width: 100%;
@@ -110,7 +110,7 @@ timeline-card {
       height: 72px;
       padding: 0 15px;
 
-      >.point {
+      .point {
         flex-shrink: 1;
 
         &:hover>point-basic-info>.name-group>p:first-of-type {
@@ -118,7 +118,7 @@ timeline-card {
         }
       }
 
-      >.source {
+      .source {
         flex-shrink: 0;
         font-size: 12px;
         color: $keylol-inertia-text;
@@ -129,7 +129,7 @@ timeline-card {
       }
     }
 
-    >.indirect-sources {
+    .indirect-sources {
       margin-left: 35px;
       padding-bottom: 5px;
       display: flex;
@@ -138,39 +138,39 @@ timeline-card {
       &.row {
         flex-direction: row;
 
-        >.desc {
+        .desc {
           margin-left: 5px;
           color: $keylol-inertia-text;
         }
 
-        >.indirect-source>.desc {
+        .indirect-source .desc {
           color: $keylol-inertia-text;
         }
       }
 
-      >.indirect-source {
+      .indirect-source {
         display: flex;
         align-items: center;
         margin-bottom: 15px;
 
-        >.picture {
+        .picture {
           width: 18px;
           height: 18px;
           margin-right: 10px;
         }
 
-        >.desc {
+        .desc {
           color: $keylol-main-text;
         }
 
-        &:hover>.desc {
+        &:hover .desc {
             text-decoration: underline;
         }
       }
     }
   }
 
-  .communicate-card>.operation {
+  .communicate-card .operation {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -188,21 +188,21 @@ timeline-card {
     }
   }
 
-  >.communicate-card>.review-area {
-    transition: max-height 1000ms;//待处理-曲线
+  .communicate-card .review-area {
+    transition: max-height 1000ms;
     max-height: 0;
     overflow: hidden;
 
     &.open {
-      max-height: 1000px; //尽量大
+      max-height: 1000px;
     }
 
-    >.hr {
+    .hr {
       height: 1px;
       background-color: $keylol-inertia-shape;
     }
 
-    >.review-count {
+    .review-count {
       padding: 20px 15px 10px;
       color: $keylol-inertia-text;
 
@@ -215,7 +215,7 @@ timeline-card {
       }
     }
 
-    >.review-sender {
+    .review-sender {
       display: flex;
       margin-top: 25px;
       margin-bottom: 10px;
@@ -236,39 +236,41 @@ timeline-card {
       }
     }
 
-    >.review-list {
+    .review-list {
       position: relative;
 
-      &.scroller {
-        max-height: 400px;
-        overflow: auto;
-      }
-
-      >.review {
+      .review {
         @include hover-background();
         padding: 15px 15px;
         display: flex;
+
+        &:hover .content .info .date {
+          display: none;
+        }
+        &:hover .content .info .actions {
+          display: block;
+        }
 
         &.blink {
           animation: review-blink 5s;
         }
 
-        >a {
+        .avatar {
           flex-grow: 0;
           margin-right: 10px;
         }
 
-        >.content {
+        .content {
           flex-grow: 1;
         }
 
-        >.content>.info {
+        .content .info {
           display: flex;
           justify-content: space-between;
           align-items: center;
           height: 20px; //待处理 - info高度
 
-          >.user {
+          .user {
             font-weight: bold;
             color: $keylol-main-text;
 
@@ -276,49 +278,44 @@ timeline-card {
               color: $keylol-light-theme;
             }
 
-            >a, span {
+            a, span {
               color: $keylol-inertia-text;
               font-weight: normal;
               margin-left: 6px;
             }
 
-            >.username {
+            .username {
+              font-weight: bold;
               color: $keylol-main-text;
               margin-left: 0;
             }
 
-            >a:hover {
+            a:hover {
               text-decoration: underline;
             }
           }
 
-          >.date {
+          .date {
             color: $keylol-inertia-text;
           }
 
-          >.actions {
+          .actions {
             display: none;
-            >a {
+            a {
               margin-left: 15px;
               color: $keylol-highlight;
             }
-            >a:hover {
+            a:hover {
               text-decoration: underline;
             }
           }
         }
 
-        >.content>.text {
+        .content .text {
+          margin: 0;
           color: $keylol-main-text;
           word-break: break-all;
           white-space: pre-wrap;
-        }
-
-        &:hover>.content>.info>.date {
-          display: none;
-        }
-        &:hover>.content>.info>.actions {
-          display: block;
         }
       }
     }
