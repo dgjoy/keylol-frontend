@@ -16,6 +16,13 @@
         </a>
         <span class="desc">认可{{timelineCard.card.contentType === 'activity' ? '这则动态' : '这篇文章'}}</span>
     </div>
+    <div ng-if="timelineCard.card.likedByThisUser" class="indirect-sources row">
+        <a class="indirect-source" ng-href="user/{{timelineCard.stateTree.aggregation.user.basicInfo.idCode}}">
+            <img webp-src="{{timelineCard.stateTree.aggregation.user.basicInfo.avatarImage | avatarUrl: 'small'}}" class="picture" />
+            <span class="desc">{{timelineCard.stateTree.aggregation.user.basicInfo.userName}}</span>
+        </a>
+        <span class="desc">认可{{timelineCard.card.contentType === 'activity' ? '这则动态' : '这篇文章'}}</span>
+    </div>
     <div class="shortcut" ng-switch="timelineCard.card.contentType">
         <a ng-switch-when="article" class="common-article" webp-background="{{timelineCard.card.coverImage | articleCoverUrl}}" ng-href="article/{{timelineCard.card.author.idCode}}/{{timelineCard.card.sidForAuthor}}">
             <div class="bottom-text">

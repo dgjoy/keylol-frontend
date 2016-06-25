@@ -25,6 +25,7 @@
             invert: '<',
             themeColor: '<',
             disabled: '<',
+            longDisabled: '<',
             click: '&',
             showPopup: '=?',
             binarySet: '<',
