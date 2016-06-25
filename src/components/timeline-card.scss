@@ -58,15 +58,15 @@ timeline-card {
       }
 
       >.simple {
-        >vote-circle {
+        vote-circle {
           padding: 0 15px;
           margin-bottom: 20px;
         }
 
-        >p {
+        p {
           margin: 0 0 20px;
           padding: 0 15px;
-          white-space: pre-wrap;
+          word-wrap: break-word;
           overflow: hidden;
           position: relative;
           transition: height .5s;
@@ -309,6 +309,7 @@ timeline-card {
 
         >.content>.text {
           color: $keylol-main-text;
+          word-break: break-all;
         }
 
         &:hover>.content>.info>.date {

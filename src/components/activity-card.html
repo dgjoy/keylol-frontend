@@ -1,96 +1,97 @@
-<div class="moderation" ng-if="activityCard.object.spotlighted" style="{{activityCard.theme.light ? 'background-color:' + activityCard.theme.light + ';': ''}}">
-    <div class="name-group">
-        <p class="font-myriad-keylol">萃选文章</p>
-        <p>由站务职员推荐的文章</p>
+<div class="activity-card">
+    <div class="moderation" ng-if="activityCard.object.spotlighted" style="{{activityCard.theme.light ? 'background-color:' + activityCard.theme.light + ';': ''}}">
+        <div class="name-group">
+            <p class="font-myriad-keylol">萃选文章</p>
+            <p>由站务职员推荐的文章</p>
+        </div>
+        <img webp-src="assets/images/pss-logo.png">
     </div>
-    <img webp-src="assets/images/pss-logo.png">
-</div>
-<div class="moderation" ng-if="activityCard.object.archived" style="{{activityCard.theme.light ? 'background-color:' + activityCard.theme.light + ';': ''}}">
-    <div class="name-group">
-        <p class="font-myriad-keylol">这篇文章已被封存</p>
-        <p>封存后只有作者和站务职员可以看到文章内容</p>
+    <div class="moderation" ng-if="activityCard.object.archived" style="{{activityCard.theme.light ? 'background-color:' + activityCard.theme.light + ';': ''}}">
+        <div class="name-group">
+            <p class="font-myriad-keylol">这篇文章已被封存</p>
+            <p>封存后只有作者和站务职员可以看到文章内容</p>
+        </div>
+        <img webp-src="assets/images/css_logo.png">
     </div>
-    <img webp-src="assets/images/css_logo.png">
-</div>
-<div class="moderation" ng-if="activityCard.object.rejected" style="{{activityCard.theme.light ? 'background-color:' + activityCard.theme.light + ';': ''}}">
-    <div class="name-group">
-        <p class="font-myriad-keylol">这篇文章已被退稿</p>
-        <p>退稿后只能通过链接或者作者的个人页面访问文章</p>
+    <div class="moderation" ng-if="activityCard.object.rejected" style="{{activityCard.theme.light ? 'background-color:' + activityCard.theme.light + ';': ''}}">
+        <div class="name-group">
+            <p class="font-myriad-keylol">这篇文章已被退稿</p>
+            <p>退稿后只能通过链接或者作者的个人页面访问文章</p>
+        </div>
+        <img webp-src="assets/images/css_logo.png">
     </div>
-    <img webp-src="assets/images/css_logo.png">
-</div>
 
-<div class="activity-body">
-    <div class="display-card">
-        <div class="user-with-date">
-            <a class="user" ng-href="user/{{activityCard.object.authorBasicInfo.idCode}}">
-                <img-label ng-if="activityCard.object.authorBasicInfo.isFriend" type="friended"></img-label>
-                <img class="avatar" webp-src="{{activityCard.object.authorBasicInfo.avatarImage | avatarUrl}}"  alt="">
-                <div class="name-group">
-                    <p class="username">{{activityCard.object.authorBasicInfo.userName}}</p>
-                    <p am-time-ago="activityCard.object.publishTime"></p>
+    <div class="activity-body">
+        <div class="display-card">
+            <div class="user-with-date">
+                <a class="user" ng-href="user/{{activityCard.object.authorBasicInfo.idCode}}">
+                    <img-label ng-if="activityCard.object.authorBasicInfo.isFriend" type="friended"></img-label>
+                    <img class="avatar" webp-src="{{activityCard.object.authorBasicInfo.avatarImage | avatarUrl}}"  alt="">
+                    <div class="name-group">
+                        <p class="username">{{activityCard.object.authorBasicInfo.userName}}</p>
+                        <p am-time-ago="activityCard.object.publishTime"></p>
+                    </div>
+                </a>
+                <div ng-if="activityCard.canModerate" popup="activityCard.showSharedPopup"><icon-button icon="dots-vertical" click="activityCard.showMenu(event)"></icon-button></div>
+            </div>
+            <div class="simple">
+                <vote-circle ng-if="activityCard.object.rating" review="activityCard.object.rating * 2 - 1" gray-background="true"></vote-circle>
+                <p>{{activityCard.object.content}}</p>
+                <img ng-if="activityCard.object.coverImage" webp-src="{{activityCard.object.coverImage | uriRelocate: '/fw/580'}}">
+            </div>
+            <div class="point-with-source">
+                <a class="point" ng-href="point/{{::activityCard.relatedPoints.mainPoint.idCode}}">
+                    <point-basic-info point="::activityCard.relatedPoints.mainPoint"></point-basic-info>
+                </a>
+                <a class="source" href="" ng-click="activityCard.showSourceList($event)" popup="activityCard.showSourceListPopup">{{::activityCard.relatedPoints.attachedPoints.length + 1}} 个据点来稿</a>
+            </div>
+            <div class="agree">
+                <div ng-if="activityCard.stateTree.currentUser" class="action">
+                    <flat-button ng-if="activityCard.object.authorBasicInfo.id === activityCard.stateTree.currentUser.id"
+                                 type="theme"
+                                 theme-color="activityCard.theme.main"
+                                 disabled-with-color="true"
+                                 disabled="true"
+                                 text="+{{activityCard.object.likeCount}}">
+                    </flat-button>
+                    <raised-button ng-if="activityCard.object.authorBasicInfo.id !== activityCard.stateTree.currentUser.id"
+                                   type="theme" disabled="activityCard.object.liked"
+                                   click="activityCard.utils.like(activityCard.object.id, activityCard.object, 'Activity')"
+                                   theme-color="activityCard.theme.main"
+                                   text="+{{activityCard.object.likeCount}}">
+                    </raised-button>
                 </div>
-            </a>
-            <div ng-if="activityCard.canModerate" popup="activityCard.showSharedPopup"><icon-button icon="dots-vertical" click="activityCard.showMenu(event)"></icon-button></div>
-        </div>
-        <div class="simple">
-            <vote-circle ng-if="activityCard.object.rating" review="activityCard.object.rating * 2 - 1" gray-background="true"></vote-circle>
-            <p>{{activityCard.object.content}}</p>
-            <img ng-if="activityCard.object.coverImage" webp-src="{{activityCard.object.coverImage | uriRelocate}}">
-        </div>
-        <div class="point-with-source">
-            <a class="point" ng-href="point/{{::activityCard.relatedPoints.mainPoint.idCode}}">
-                <point-basic-info point="::activityCard.relatedPoints.mainPoint"></point-basic-info>
-            </a>
-            <a class="source" href="" ng-click="activityCard.showSourceList($event)" popup="activityCard.showSourceListPopup">{{::activityCard.relatedPoints.attachedPoints.length + 1}} 个据点来稿</a>
-        </div>
-        <div class="agree">
-            <div ng-if="activityCard.stateTree.currentUser" class="action">
-                <flat-button ng-if="activityCard.object.authorBasicInfo.id === activityCard.stateTree.currentUser.id"
-                             type="theme"
-                             theme-color="activityCard.theme.main"
-                             disabled-with-color="true"
-                             disabled="true"
-                             text="+{{activityCard.object.likeCount}}">
-                </flat-button>
-                <raised-button ng-if="activityCard.object.authorBasicInfo.id !== activityCard.stateTree.currentUser.id"
-                               type="theme" disabled="activityCard.object.liked"
-                               click="activityCard.utils.like(activityCard.object.id, activityCard.object, 'Activity')"
-                               theme-color="activityCard.theme.main"
-                               text="+{{activityCard.object.likeCount}}">
-                </raised-button>
+                <div ng-if="!activityCard.stateTree.currentUser" class="action">
+                    <raised-button type="theme"
+                                   click="activityCard.utils.openRegistration(event)"
+                                   theme-color="activityCard.theme.main"
+                                   text="+{{activityCard.object.likeCount}}">
+                    </raised-button>
+                </div>
+                <!--<div class="agree-list">-->
+                <!--<img ng-repeat="i in [1,2,3,4,5]" class="avatar" webp-src="//storage.keylol.com/fd0dfd38572adff068251606aa282b3f.jpg!avatar.medium" />-->
+                <!--</div>-->
             </div>
-            <div ng-if="!activityCard.stateTree.currentUser" class="action">
-                <raised-button type="theme"
-                               click="activityCard.utils.openRegistration(event)"
-                               theme-color="activityCard.theme.main"
-                               text="+{{activityCard.object.likeCount}}">
-                </raised-button>
-            </div>
-            <!--<div class="agree-list">-->
-            <!--<img ng-repeat="i in [1,2,3,4,5]" class="avatar" webp-src="//storage.keylol.com/fd0dfd38572adff068251606aa282b3f.jpg!avatar.medium" />-->
-            <!--</div>-->
         </div>
-    </div>
-    <div class="communicate-card">
-        <div class="review-area">
-            <pagination theme-color="activityCard.theme.light" class="float-top" ng-if="activityCard.commentsManager.pageCount > 1" on-page-changed="::activityCard.changePage(newPage, oldPage)" total="activityCard.commentsManager.pageCount" current="activityCard.commentsManager.currentPage"></pagination>
-            <div class="review-count">
-                全部 {{activityCard.commentsManager.count}} 个评论
-            </div>
-            <div class="review-list" ng-style="{height: activityCard.commentsManager.commentsHeight}" ng-class="{
+        <div class="communicate-card">
+            <div class="review-area">
+                <pagination theme-color="activityCard.theme.light" class="float-top" ng-if="activityCard.commentsManager.pageCount > 1" on-page-changed="::activityCard.changePage(newPage, oldPage)" total="activityCard.commentsManager.pageCount" current="activityCard.commentsManager.currentPage"></pagination>
+                <div class="review-count">
+                    全部 {{activityCard.commentsManager.count}} 个评论
+                </div>
+                <div class="review-list" ng-style="{height: activityCard.commentsManager.commentsHeight}" ng-class="{
         'to-next' : activityCard.commentsManager.isToNext,
         'to-previous' : !activityCard.commentsManager.isToNext
         }">
-                <ul ng-animate-swap="activityCard.commentsManager.currentPage">
-                    <li class="review" ng-repeat="comment in activityCard.commentsManager.pages[activityCard.commentsManager.currentPage - 1]">
-                        <img src="" webp-src="{{comment.authorAvatarImage | avatarUrl}}" alt="" class="avatar" />
-                        <div class="content">
-                            <div class="info">
-                                <div class="user"><span class="user-name">{{comment.authorUserName}}</span><span ng-style="{color: comment.liked ? activityCard.theme.light : ''}" ng-class="{'light-theme': comment.liked}">+{{comment.likeCount}}</span></div>
-                                <div class="date">
-                                    <span ng-if="comment.authorPlayedTime">在档 {{comment.authorPlayedTime}} 小时 / </span>
-                                    <span am-time-ago="comment.publishTime"></span> / #{{comment.sidForActivity}}
+                    <ul ng-animate-swap="activityCard.commentsManager.currentPage">
+                        <li class="review" ng-repeat="comment in activityCard.commentsManager.pages[activityCard.commentsManager.currentPage - 1]">
+                            <img src="" webp-src="{{comment.authorAvatarImage | avatarUrl}}" alt="" class="avatar" />
+                            <div class="content">
+                                <div class="info">
+                                    <div class="user"><span class="user-name">{{comment.authorUserName}}</span><span ng-style="{color: comment.liked ? activityCard.theme.light : ''}" ng-class="{'light-theme': comment.liked}">+{{comment.likeCount}}</span></div>
+                                    <div class="date">
+                                        <span ng-if="comment.authorPlayedTime">在档 {{comment.authorPlayedTime}} 小时 / </span>
+                                        <span am-time-ago="comment.publishTime"></span> / #{{comment.sidForActivity}}
                                     <span ng-if="comment.authorIdCode === activityCard.object.authorBasicInfo.idCode">
                                         /
                                         <span ng-style="{color: activityCard.theme.light}" class="light-theme">动态作者</span>
@@ -103,13 +104,13 @@
                                         /
                                         <span class="error">受到警告</span>
                                     </span>
-                                </div>
-                                <div class="actions">
-                                    <a href="" ng-if="activityCard.stateTree.currentUser && comment.authorIdCode !== activityCard.stateTree.currentUser.idCode && !comment.liked" ng-click="activityCard.utils.like(comment.id, comment, 'ActivityComment')">认可</a>
-                                    <a href="" ng-if="activityCard.stateTree.currentUser" ng-click="activityCard.reply(comment)">回复</a>
+                                    </div>
+                                    <div class="actions">
+                                        <a href="" ng-if="activityCard.stateTree.currentUser && comment.authorIdCode !== activityCard.stateTree.currentUser.idCode && !comment.liked" ng-click="activityCard.utils.like(comment.id, comment, 'ActivityComment')">认可</a>
+                                        <a href="" ng-if="activityCard.stateTree.currentUser" ng-click="activityCard.reply(comment)">回复</a>
 
-                                    <a href="" ng-if="!activityCard.stateTree.currentUser" ng-click="activityCard.utils.openRegistration()">认可</a>
-                                    <a href="" ng-if="!activityCard.stateTree.currentUser" ng-click="activityCard.utils.openRegistration()">回复</a>
+                                        <a href="" ng-if="!activityCard.stateTree.currentUser" ng-click="activityCard.utils.openRegistration()">认可</a>
+                                        <a href="" ng-if="!activityCard.stateTree.currentUser" ng-click="activityCard.utils.openRegistration()">回复</a>
                                 <span ng-if="comment.authorIdCode === activityCard.stateTree.currentUser.idCode || activityCard.stateTree.currentUser.roles.indexOf('Operator') > -1">
                                     <span>|</span>
                                     <a href=""
@@ -124,26 +125,27 @@
                                         {{comment.warned?'撤销':''}}警告
                                     </a>
                                 </span>
+                                    </div>
+                                </div>
+                                <div class="text">
+                                    {{comment.content}}
                                 </div>
                             </div>
-                            <div class="text">
-                                {{comment.content}}
-                            </div>
-                        </div>
-                    </li>
-                </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="clearfix">
+                    <pagination theme-color="activityCard.theme.light" on-page-changed="::activityCard.changePage(newPage, oldPage)" ng-if="activityCard.commentsManager.pageCount > 1" total="activityCard.commentsManager.pageCount" current="activityCard.commentsManager.currentPage"></pagination>
+                </div>
+                <div ng-if="activityCard.stateTree.currentUser" class="hr"></div>
+                <div ng-if="activityCard.stateTree.currentUser" class="review-sender">
+                    <img webp-src="{{activityCard.stateTree.currentUser.avatarImage | avatarUrl}}" alt="" class="avatar">
+                    <textarea elastic placeholder="发表见解..." focus-me="activityCard.textFocus" focus-me-scroll="true" ng-model="activityCard.vm.content"></textarea>
+                </div>
             </div>
-            <div class="clearfix">
-                <pagination theme-color="activityCard.theme.light" on-page-changed="::activityCard.changePage(newPage, oldPage)" ng-if="activityCard.commentsManager.pageCount > 1" total="activityCard.commentsManager.pageCount" current="activityCard.commentsManager.currentPage"></pagination>
+            <div ng-if="activityCard.stateTree.currentUser" class="clearfix">
+                <flat-button click="activityCard.submit()" theme-color="activityCard.theme.main" text="评论" disabled="activityCard.vm.content.length === 0 || activityCard.submitLock"></flat-button>
             </div>
-            <div ng-if="activityCard.stateTree.currentUser" class="hr"></div>
-            <div ng-if="activityCard.stateTree.currentUser" class="review-sender">
-                <img webp-src="{{activityCard.stateTree.currentUser.avatarImage | avatarUrl}}" alt="" class="avatar">
-                <textarea elastic placeholder="发表见解..." focus-me="activityCard.textFocus" focus-me-scroll="true" ng-model="activityCard.vm.content"></textarea>
-            </div>
-        </div>
-        <div ng-if="activityCard.stateTree.currentUser" class="clearfix">
-            <flat-button click="activityCard.submit()" theme-color="activityCard.theme.main" text="评论" disabled="activityCard.vm.content.length === 0 || activityCard.submitLock"></flat-button>
         </div>
     </div>
 </div>

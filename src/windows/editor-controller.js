@@ -135,6 +135,36 @@
                     });
                 }
             });
+
+            const scrollCallback = () => {
+                const $wrapper = $element.find('.other .wrapper');
+
+                let newPosition;
+                const shouldWindowScrollTop = (this.fakeHeight ? this.fakeHeight : 190)  + 330;
+                const elementOffsetTop = $element.scrollTop();
+                const shouldWrapperHeight = $wrapper.height() + 50;
+                const $elementHeight = $element.find('.editor').height();
+
+                if (elementOffsetTop <= shouldWindowScrollTop) {
+                    newPosition = '';
+                } else if ($elementHeight - elementOffsetTop > shouldWrapperHeight) {
+                    newPosition = 'fixed-top';
+                } else {
+                    newPosition = 'absolute-bottom';
+                }
+
+                if (this.position !== newPosition) {
+                    $scope.$apply(() => {
+                        this.position = newPosition;
+                    });
+                }
+            };
+            $element.scroll(scrollCallback);
+
+            const cancelListenRoute = $scope.$on('$destroy', () => {
+                $element.unbind('scroll', scrollCallback);
+                cancelListenRoute();
+            });
         }
 
         exit() {

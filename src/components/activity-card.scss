@@ -1,7 +1,11 @@
 activity-card {
-  display: block;
-  width: 700px;
+  display: flex;
+  justify-content: flex-end;
+}
 
+.activity-card {
+  display: block;
+  width: 580px;
   .moderation {
     @include keylol-shadow-1();
     background-color: $keylol-light-theme;
@@ -95,7 +99,7 @@ activity-card {
         >p {
           margin: 0;
           padding: 0 15px 20px 15px;
-          white-space: pre-wrap;
+          word-wrap: break-word;
         }
 
         >img {
@@ -228,12 +232,14 @@ activity-card {
             }
 
             >.avatar {
+              flex-grow: 0;
               width: 32px;
-              height:32px;
+              height: 32px;
+              margin-right: 10px;
             }
 
             >.content {
-              width: 628px;
+              flex-grow: 1;
             }
 
             >.content>.info {
@@ -248,7 +254,6 @@ activity-card {
               }
 
               >.user {
-
                 .user-name {
                   font-weight: bold;
                   color: $keylol-main-text;
@@ -286,6 +291,7 @@ activity-card {
 
             >.content>.text {
               color: $keylol-main-text;
+              word-break: break-all;
             }
 
             &:hover>.content>.info>.date {

@@ -101,12 +101,13 @@
     .edit-tools {
       display: flex;
       justify-content: space-between;
+      align-items: stretch;
 
       .main {
         @include keylol-shadow-1();
         background-color: $keylol-card;
         width: 700px;
-        min-height: 1024px;
+        min-height: 1800px;
         margin-bottom: 20px;
 
         .info-review {
@@ -148,118 +149,140 @@
       }
 
       .other {
+        position: relative;
         width: 340px;
-        .card {
-          @include keylol-shadow-1();
-          background-color: $keylol-card;
-          padding: 20px 15px;
-          margin-bottom: 20px;
 
-          .toggle {
-            height: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            &:hover {
-              svg { fill: $keylol-light-text; }
-            }
+        .wrapper {
+          width: 100%;
 
-            p {
-              margin: 0;
-              line-height: 16px;
-              color: $keylol-main-text;
-            }
-            svg {
-              width: 16px;
+          &.fixed-top {
+            width: 340px;
+            position: fixed;
+            top: 25px;
+          }
+
+          &.absolute-bottom {
+            width: 340px;
+            position: absolute;
+            bottom: 0;
+          }
+
+          .card {
+            @include keylol-shadow-1();
+            background-color: $keylol-card;
+            padding: 20px 15px;
+            margin-bottom: 20px;
+
+            .toggle {
               height: 16px;
-              transform: rotate(270deg);
-              transition: transform .3s ease-in;
-              fill: $keylol-inertia-shape;
-
-              &.opened {
-                transform: rotate(90deg);
-              }
-            }
-          }
-
-          .good-bads {
-            height: 0;
-            overflow: hidden;
-            transition: height .3s ease-in;
-
-            &.opened {
-              height: 542px;
-            }
-
-            .good-bad {
-              padding: 10px 0;
-              width: 100%;
-              &:first-of-type {
-                padding-top: 30px;
-              }
-            }
-          }
-
-          .repost-options {
-            height: 0;
-            overflow: hidden;
-            transition: height .3s ease-in;
-
-            &.opened {
-              height: 200px;
-            }
-
-            .hr {
-              height: 1px;
-              background-color: $keylol-inertia-shape;
-              margin-top: 9px;
-              margin-bottom: 10px;
-            }
-
-            .repost-option {
-              height: 20px;
-              padding: 10px 0;
               display: flex;
-              justify-content: space-between;
               align-items: center;
-
-              &:first-of-type {
-                padding-top: 35px;
-              }
-              &:last-of-type {
-                padding-bottom: 5px;
+              justify-content: space-between;
+              &:hover {
+                svg {
+                  fill: $keylol-light-text;
+                }
               }
 
               p {
                 margin: 0;
+                line-height: 16px;
                 color: $keylol-main-text;
               }
-            }
-          }
+              svg {
+                width: 16px;
+                height: 16px;
+                transform: rotate(270deg);
+                transition: transform .3s ease-in;
+                fill: $keylol-inertia-shape;
 
-          &.send-card {
-            p {
-              margin: 0;
-            }
-            p:first-of-type {
-              color: $keylol-inertia-text;
-              font-style: italic;
-              a {
-                color: $keylol-highlight;
-                font-style: normal;
-                &:hover { text-decoration: underline; }
-              }
-            }
-            p:last-of-type {
-              color: $keylol-main-text;
-              .theme {
-                color: $keylol-light-theme;
+                &.opened {
+                  transform: rotate(90deg);
+                }
               }
             }
 
-            raised-button {
-              float: right;
-              margin-top: 20px;
+            .good-bads {
+              height: 0;
+              overflow: hidden;
+              transition: height .3s ease-in;
+
+              &.opened {
+                height: 542px;
+              }
+
+              .good-bad {
+                padding: 10px 0;
+                width: 100%;
+                &:first-of-type {
+                  padding-top: 30px;
+                }
+              }
+            }
+
+            .repost-options {
+              height: 0;
+              overflow: hidden;
+              transition: height .3s ease-in;
+
+              &.opened {
+                height: 200px;
+              }
+
+              .hr {
+                height: 1px;
+                background-color: $keylol-inertia-shape;
+                margin-top: 9px;
+                margin-bottom: 10px;
+              }
+
+              .repost-option {
+                height: 20px;
+                padding: 10px 0;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                &:first-of-type {
+                  padding-top: 35px;
+                }
+                &:last-of-type {
+                  padding-bottom: 5px;
+                }
+
+                p {
+                  margin: 0;
+                  color: $keylol-main-text;
+                }
+              }
+            }
+
+            &.send-card {
+              p {
+                margin: 0;
+              }
+              p:first-of-type {
+                color: $keylol-inertia-text;
+                font-style: italic;
+                a {
+                  color: $keylol-highlight;
+                  font-style: normal;
+                  &:hover {
+                    text-decoration: underline;
+                  }
+                }
+              }
+              p:last-of-type {
+                color: $keylol-main-text;
+                .theme {
+                  color: $keylol-light-theme;
+                }
+              }
+
+              raised-button {
+                float: right;
+                margin-top: 20px;
+              }
             }
           }
         }
