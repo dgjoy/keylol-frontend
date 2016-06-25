@@ -1,8 +1,9 @@
 menu-item {
   display: block;
-  button {
+  button, a {
     @include keylol-button-default;
     @include hover-background();
+    display: block;
     width: 100%;
     box-sizing: border-box;
     background: transparent;
