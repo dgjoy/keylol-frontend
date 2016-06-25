@@ -107,7 +107,6 @@
         @include keylol-shadow-1();
         background-color: $keylol-card;
         width: 700px;
-        min-height: 1800px;
         margin-bottom: 20px;
 
         .info-review {
@@ -145,6 +144,10 @@
               }
             }
           }
+        }
+
+        .simditor .simditor-body {
+          min-height: 1650px;
         }
       }
 

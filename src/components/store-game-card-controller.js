@@ -41,11 +41,11 @@
                     icon: 'dtb-sonkwo',
                     link: `https://www.sonkwo.com/products/${this.card.sonkwoProductId}`,
                 };
-                // if (this.card.sonkwoPrice) {
-                //     sonkwoItem.price = `¥ ${this.card.sonkwoPrice}`;
-                // } else if (this.card.sonkwoPrice === 0) {
-                //     sonkwoItem.price = '免费';
-                // }
+                if (this.card.sonkwoPrice) {
+                    sonkwoItem.price = `¥ ${this.card.sonkwoPrice}`;
+                } else if (this.card.sonkwoPrice === 0) {
+                    sonkwoItem.price = '免费';
+                }
                 this.stores.push(sonkwoItem);
             }
 
@@ -53,7 +53,7 @@
                 if (this.card[`${stores[i].prefix}Link`] && this.card[`${stores[i].prefix}Link`] !== '') {
                     this.stores.push({
                         icon: stores[i].icon,
-                        // price: this.card[`${stores[i].prefix}Price`],
+                        price: this.card[`${stores[i].prefix}Price`],
                         link: this.card[`${stores[i].prefix}Link`],
                     });
                 }

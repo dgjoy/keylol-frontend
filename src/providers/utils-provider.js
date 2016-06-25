@@ -367,7 +367,7 @@
 
                         self.pointTypeHash = {
                             game: '游戏',
-                            hardWare: '硬件',
+                            hardware: '硬件',
                             category: '类型',
                             vendor: '厂商',
                             platform: '平台',

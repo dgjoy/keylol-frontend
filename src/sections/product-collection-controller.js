@@ -7,7 +7,6 @@
             }
             switch (this.type) {
                 case 'vendor':
-                    this.count = this.object.developerProductCount + this.object.publisherProductCount + this.object.manufacturerProductCount + this.object.resellerProductCount;
                     this.list.push({
                         header: {
                             mainTitle: '开发',
@@ -47,8 +46,6 @@
                     });
                     break;
                 case 'category':
-                    this.count = this.object.genreProductCount + this.object.seriesProductCount
-                        + this.object.tagProductCount;
                     this.list.push({
                         header: {
                             mainTitle: '特性',

@@ -36,21 +36,6 @@
                     items: [],
                 };
 
-                if (this.object.sonkwoProductId) {
-                    const sonkwoItem = {
-                        type: 'item',
-                        icon: 'dtb-sonkwo',
-                        text: '杉果',
-                        link: `https://www.sonkwo.com/products/${this.object.sonkwoProductId}`,
-                    };
-                    if (this.object.sonkwoPrice) {
-                        sonkwoItem.subText = `¥ ${this.object.sonkwoPrice}`;
-                    } else if (this.object.sonkwoPrice === 0) {
-                        sonkwoItem.subText = '免费';
-                    }
-                    this.specialMenu.items.push(sonkwoItem);
-                }
-
                 if (this.object.steamAppId) {
                     const steamItem = {
                         type: 'item',
@@ -69,6 +54,21 @@
                         steamItem.subText = `¥ ${this.object.steamDiscountedPrice}`;
                     }
                     this.specialMenu.items.push(steamItem);
+                }
+
+                if (this.object.sonkwoProductId) {
+                    const sonkwoItem = {
+                        type: 'item',
+                        icon: 'dtb-sonkwo',
+                        text: '杉果',
+                        link: `https://www.sonkwo.com/products/${this.object.sonkwoProductId}`,
+                    };
+                    if (this.object.sonkwoPrice) {
+                        sonkwoItem.subText = `¥ ${this.object.sonkwoPrice}`;
+                    } else if (this.object.sonkwoPrice === 0) {
+                        sonkwoItem.subText = '免费';
+                    }
+                    this.specialMenu.items.push(sonkwoItem);
                 }
 
                 for (let i = 2;i !== stores.length; i++) {
