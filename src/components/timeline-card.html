@@ -96,7 +96,10 @@
                          type="inertia"
                          text="+{{timelineCard.card.likeCount}}"></flat-button>
         </div>
-        <flat-button ng-switch-when="open" text="评论" click="timelineCard.doComment()"></flat-button>
+        <div ng-switch-when="open">
+            <flat-button ng-if="!timelineCard.stateTree.currentUser" text="评论" click="timelineCard.utils.openRegistration()"></flat-button>
+            <flat-button ng-if="timelineCard.stateTree.currentUser" text="评论" click="timelineCard.doComment()"></flat-button>
+        </div>
         <flat-button ng-switch-when="close" type="inertia" text="···{{timelineCard.card.commentCount}}" click="timelineCard.openReviewArea()"></flat-button>
     </div>
 </div>

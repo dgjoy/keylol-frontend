@@ -232,6 +232,28 @@ activity-card {
             display: flex;
             justify-content: space-between;
 
+            .archived {
+              width: 100%;
+              display: flex;
+              justify-content: space-between;
+              .name-group {
+                p {
+                  margin: 0;
+                  color: $keylol-inertia-text;
+                }
+                p:first-of-type {
+                  font-weight: bold;
+                }
+                p:last-of-type {
+                  font-size: 12px;
+                }
+              }
+
+              .floor {
+                color: $keylol-inertia-text;
+              }
+            }
+
             &:hover .content .info .date {
               display: none;
             }

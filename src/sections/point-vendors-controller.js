@@ -6,7 +6,7 @@
             });
             this.type = {
                 mainTitle: '厂商',
-                subTitle: '编辑艺术的工匠与演绎商品的巨人',
+                subTitle: '编织艺术的工匠与演绎作品的商人',
             };
         }
     }

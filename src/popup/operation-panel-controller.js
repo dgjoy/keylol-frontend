@@ -7,8 +7,17 @@
                 close,
             });
             this.operation = moderationText[options.operationType];
-            switch(options) {
-
+            switch (options.contentType) {
+                case 'activity':
+                    this.operation.subTitle = this.operation.subTitleForActivity;
+                    break;
+                case 'article':
+                    this.operation.subTitle = this.operation.subTitleForArticle;
+                    break;
+                case 'article-comment':
+                case 'activity-comment':
+                    this.operation.subTitle = this.operation.subTitleForComment;
+                    break;
             }
 
             this.vm = {

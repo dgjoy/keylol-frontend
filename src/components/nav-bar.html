@@ -16,7 +16,7 @@
                     <p>{{navBar.utils.getPreferredPointName(navBar.stateTree.aggregation.point.basicInfo, navBar.stateTree.currentUser)[1]}}</p>
                 </div>
             </a>
-            <a ng-if="navBar.stateTree.content.article.pointBasicInfo || navBar.stateTree.content.activity.pointBasicInfo" href="" ng-href="point/{{navBar.stateTree.content.article.pointBasicInfo.idCode}}" ripple="#fff">
+            <a ng-if="navBar.stateTree.content.article.pointBasicInfo || navBar.stateTree.content.activity.pointBasicInfo" href="" ng-href="point/{{navBar.stateTree.content.article.pointBasicInfo.idCode || navBar.stateTree.content.activity.pointBasicInfo.idCode}}" ripple="#fff">
                 <img ng-if="navBar.theme.logo" webp-src="{{navBar.theme.logo | themeLogoUrl}}">
                 <div ng-if="!navBar.theme.logo" class="theme-alt">
                     <p>{{navBar.utils.getPreferredPointName(navBar.stateTree.content.article.pointBasicInfo || navBar.stateTree.content.activity.pointBasicInfo, navBar.stateTree.currentUser)[0]}}</p>
