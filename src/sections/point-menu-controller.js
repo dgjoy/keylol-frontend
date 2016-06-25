@@ -35,11 +35,28 @@
                     },
                     items: [],
                 };
+
+                if (this.object.sonkwoProductId) {
+                    const sonkwoItem = {
+                        type: 'item',
+                        icon: 'dtb-sonkwo',
+                        text: '杉果',
+                        link: `https://www.sonkwo.com/products/${this.object.sonkwoProductId}`,
+                    };
+                    if (this.object.sonkwoPrice) {
+                        sonkwoItem.subText = `¥ ${this.object.sonkwoPrice}`;
+                    } else if (this.object.sonkwoPrice === 0) {
+                        sonkwoItem.subText = '免费';
+                    }
+                    this.specialMenu.items.push(sonkwoItem);
+                }
+
                 if (this.object.steamAppId) {
                     const steamItem = {
                         type: 'item',
                         icon: 'dtb-steam',
                         text: 'Steam',
+                        discount: this.object.steamDiscountedPrice ? `${parseInt((this.object.steamPrice - this.object.steamDiscountedPrice) / this.object.steamPrice * 100)}%` : undefined,
                         link: `http://store.steampowered.com/app/${this.object.steamAppId}`,
                     };
                     if (this.object.steamPrice) {
@@ -47,12 +64,16 @@
                     } else if (this.object.steamPrice === 0) {
                         steamItem.subText = '免费';
                     }
+
+                    if (this.object.steamDiscountedPrice) {
+                        steamItem.subText = `¥ ${this.object.steamDiscountedPrice}`;
+                    }
                     this.specialMenu.items.push(steamItem);
                 }
 
-                for (let i = 1;i !== stores.length; i++) {
+                for (let i = 2;i !== stores.length; i++) {
                     if (this.object[`${stores[i].prefix}Link`] && this.object[`${stores[i].prefix}Link`] !== '') {
-                        this.specialMenu.items.push(                        {
+                        this.specialMenu.items.push({
                             type: 'item',
                             icon: stores[i].icon,
                             text: stores[i].name,

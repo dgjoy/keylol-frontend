@@ -17,7 +17,7 @@
             </svg>
             <span>{{::menuItem.data.text}}</span>
         </span>
-        <span class="sub-text" ng-if="::(menuItem.data.subText !== undefined)">{{::menuItem.data.subText}}</span>
+        <span class="sub-text" ng-if="::(menuItem.data.subText !== undefined)"><span class="discount" ng-if="menuItem.data.discount">-{{menuItem.data.discount}}</span>{{::menuItem.data.subText}}</span>
     </div>
 </a>
 <span class="horizon" ng-if="::(menuItem.data.type === 'horizon')"></span>
