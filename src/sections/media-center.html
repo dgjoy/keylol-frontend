@@ -13,7 +13,7 @@
 <div class="wrapper" ng-if="mediaCenter.list.length > 0">
     <ul>
         <li ng-repeat="item in mediaCenter.list track by $index" ng-if="$index < 6">
-            <a href="" webp-background="{{item.link | uriRelocate: '/sq/' + ($index <= 0 ? '160' : '90')}}" ng-click="mediaCenter.showMediaOverlayWindow($index+1)">
+            <a href="" webp-background="{{item.link | uriRelocate: '/sq/' + ($index <= 0 ? '200' : '113')}}" ng-click="mediaCenter.showMediaOverlayWindow($index+1)">
                 <p class="text" ng-if="item.isVideo">
                     <span>{{$index === 0? item.text : ''}}</span>
                     <svg aria-hidden="true">

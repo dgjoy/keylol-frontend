@@ -4,19 +4,19 @@
             let sizeVersion;
             switch (size) {
                 case 'large':
-                    sizeVersion = '/sq/96';
+                    sizeVersion = '/sq/120';
                     break;
 
                 case 'big':
-                    sizeVersion = '/sq/48';
+                    sizeVersion = '/sq/60';
                     break;
 
                 case 'small':
-                    sizeVersion = '/sq/18';
+                    sizeVersion = '/sq/23';
                     break;
 
                 default:
-                    sizeVersion = '/sq/32';
+                    sizeVersion = '/sq/40';
                     break;
             }
             if (noFallback) return $filter('uriRelocate')(input, sizeVersion);
