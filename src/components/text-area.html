@@ -30,3 +30,4 @@
 <dropdown ng-if="textArea.type === 'dropdown'" object="textArea.object" model="textArea.model" state="textArea.disabledState?'disabled':'theme'"></dropdown>
 
 <div class="tip {{textArea.warnState?'warn':textArea.activeState?'theme':''}}">{{textArea.warnState?textArea.error:textArea.tip}}</div>
+<div class="limit {{textArea.warnState?'warn':textArea.activeState?'theme':''}}" ng-if="textArea.type === 'text'&&textArea.limit!==undefined">{{textArea.model.length === undefined?0:textArea.model.length}}/{{textArea.limit}}</div>

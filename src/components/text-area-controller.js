@@ -15,6 +15,17 @@
             //为 point 设定的属性
             this.pointCache = false;
 
+            if (this.type === 'text' && this.limit !== undefined) {
+                $scope.$watch(() => {
+                    return this.model;
+                }, newValue => {
+                    if (this.model !== undefined) {
+                        this.warnState = newValue.length > this.limit;
+                        this.error = '';
+                    }
+                });
+            }
+
             $scope.$watch(() => {
                 return this.state;
             }, newValue => {

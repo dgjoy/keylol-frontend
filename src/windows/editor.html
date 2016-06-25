@@ -13,11 +13,15 @@
                            type="text"
                            model="editor.vm.title"
                            error="'主标题不能为空'"
+                           tip="'概括核心思想，避免包含写作对象。例如「这个世界需要暴白和英雄」'"
+                           limit="20"
                 ></text-area>
                 <text-area class="sub-title"
                            label="副标题"
                            type="text"
                            model="editor.vm.subtitle"
+                           limit="20"
+                           tip="'直接说明文章本质和写作对象，如「《守望先锋》首测印象」'"
                 ></text-area>
             </div>
         </div>
@@ -59,31 +63,37 @@
                                        label="+"
                                        type="text"
                                        model="editor.vm.pros[0]"
+                                       limit="20"
                             ></text-area>
                             <text-area class="good-bad"
                                        label="+"
                                        type="text"
                                        model="editor.vm.pros[1]"
+                                       limit="20"
                             ></text-area>
                             <text-area class="good-bad"
                                        label="+"
                                        type="text"
                                        model="editor.vm.pros[2]"
+                                       limit="20"
                             ></text-area>
                             <text-area class="good-bad"
                                        label="-"
                                        type="text"
                                        model="editor.vm.cons[0]"
+                                       limit="20"
                             ></text-area>
                             <text-area class="good-bad"
                                        label="-"
                                        type="text"
                                        model="editor.vm.cons[1]"
+                                       limit="20"
                             ></text-area>
                             <text-area class="good-bad"
                                        label="-"
                                        type="text"
                                        model="editor.vm.cons[2]"
+                                       limit="20"
                             ></text-area>
                         </div>
                     </div>

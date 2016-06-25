@@ -29,6 +29,10 @@
             this.phase = '未选择平台'; // 未选择平台,添加好友,发送验证码,连接成功,填写表单
             this.conn = null;
 
+            $scope.$on('$destroy', () => {
+                connection.stop();
+            });
+
             $scope.$watch(() => {
                 return this.platform;
             },newVal => {

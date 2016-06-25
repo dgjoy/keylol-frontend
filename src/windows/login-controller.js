@@ -37,6 +37,10 @@
             const connection = $.connection.new();
             const steamLoginHubProxy = connection.steamLoginHub;
 
+            $scope.$on('$destroy', () => {
+                connection.stop();
+            });
+
             steamLoginHubProxy.client.onLoginOneTimeToken = (token, userName, avatarImage) => {
                 // 用户在 Steam 输入验证码并输入正确后，服务器会通过这个方法通知浏览器，token 是登录用的 one-time token
                 $scope.$apply(() => {
