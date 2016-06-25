@@ -16,6 +16,9 @@
             getSummary (message) {
                 return `成为你的第 ${message.count} 位听众`;
             },
+            getLink(message) {
+                return `user/${message.operatorIdCode}`;
+            },
         },
         articleLike: {
             source: '用户',
@@ -31,6 +34,9 @@
                     return `获得生涯第 ${message.count} 份认可，该文章已被认可 ${message.secondCount} 次`;
                 }
             },
+            getLink(message) {
+                return `article/${message.articleAuthorIdCode}/${message.articleSidForAuthor}`;
+            },
         },
         activityLike: {
             source: '用户',
@@ -45,6 +51,9 @@
                 } else {
                     return `获得生涯第 ${message.count} 份认可，该动态已被认可 ${message.secondCount} 次`;
                 }
+            },
+            getLink(message) {
+                return `activity/${message.activityAuthorIdCode}/${message.activitySidForAuthor}`;
             },
         },
         articleCommentLike: {
@@ -63,6 +72,9 @@
                     return `获得生涯第 ${message.count} 份认可，该评论已被认可 ${message.secondCount} 次`;
                 }
             },
+            getLink(message) {
+                return `article/${message.articleAuthorIdCode}/${message.articleSidForAuthor}`;
+            },
         },
         activityCommentLike: {
             source: '用户',
@@ -80,6 +92,9 @@
                     return `获得生涯第 ${message.count} 份认可，该评论已被认可 ${message.secondCount} 次`;
                 }
             },
+            getLink(message) {
+                return `activity/${message.activityAuthorIdCode}/${message.activitySidForAuthor}`;
+            },
         },
 
         articleComment: {
@@ -90,6 +105,9 @@
             },
             getSummary (message) {
                 return message.commentContent;
+            },
+            getLink(message) {
+                return `article/${message.articleAuthorIdCode}/${message.articleSidForAuthor}`;
             },
         },
         articleCommentReply: {
@@ -102,6 +120,9 @@
             getSummary (message) {
                 return message.commentContent;
             },
+            getLink(message) {
+                return `article/${message.articleAuthorIdCode}/${message.articleSidForAuthor}`;
+            },
         },
         activityComment: {
             source: '用户',
@@ -111,6 +132,9 @@
             },
             getSummary (message) {
                 return message.commentContent;
+            },
+            getLink(message) {
+                return `activity/${message.activityAuthorIdCode}/${message.activitySidForAuthor}`;
             },
         },
         activityCommentReply: {
@@ -122,6 +146,9 @@
             },
             getSummary (message) {
                 return message.commentContent;
+            },
+            getLink(message) {
+                return `activity/${message.activityAuthorIdCode}/${message.activitySidForAuthor}`;
             },
         },
 
