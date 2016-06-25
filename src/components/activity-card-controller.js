@@ -1,6 +1,6 @@
 ﻿(function () {
     class ActivityCardController {
-        constructor(utils, $http, notification, stateTree, apiEndpoint, $timeout, $element) {
+        constructor(utils, $http, notification, stateTree, apiEndpoint, $timeout, $element, $window) {
             $.extend(this,{
                 utils,
                 $http,
@@ -9,6 +9,7 @@
                 apiEndpoint,
                 $timeout,
                 $element,
+                $window,
             });
             this.relatedPoints = {
                 mainPoint: this.object.pointBasicInfo,
@@ -37,6 +38,10 @@
 
             this.showArchivePopup = [];
             this.showWarnPopup = [];
+        }
+
+        back () {
+            this.$window.history.back();
         }
 
         reply(comment) {

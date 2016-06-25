@@ -66,7 +66,8 @@ timeline-card {
         p {
           margin: 0 0 20px;
           padding: 0 15px;
-          word-wrap: break-word;
+          word-break: break-all;
+          white-space: pre-wrap;
           overflow: hidden;
           position: relative;
           transition: height .5s;
@@ -310,6 +311,7 @@ timeline-card {
         >.content>.text {
           color: $keylol-main-text;
           word-break: break-all;
+          white-space: pre-wrap;
         }
 
         &:hover>.content>.info>.date {

@@ -1,11 +1,19 @@
 activity-card {
   display: flex;
   justify-content: flex-end;
+  position: relative;
+
+  .back-button {
+    position: absolute;
+    left: 0;
+  }
 }
 
 .activity-card {
   display: block;
   width: 580px;
+  position: relative;
+
   .moderation {
     @include keylol-shadow-1();
     background-color: $keylol-light-theme;
@@ -91,18 +99,19 @@ activity-card {
       }
 
       >.simple {
-        >vote-circle {
+        vote-circle {
           padding: 0 15px;
           margin-bottom: 20px;
         }
 
-        >p {
+        p {
           margin: 0;
           padding: 0 15px 20px 15px;
-          word-wrap: break-word;
+          word-break: break-all;
+          white-space: pre-wrap;
         }
 
-        >img {
+        img {
           width: 100%;
         }
       }
@@ -292,6 +301,8 @@ activity-card {
             >.content>.text {
               color: $keylol-main-text;
               word-break: break-all;
+              white-space: pre-wrap;
+
             }
 
             &:hover>.content>.info>.date {

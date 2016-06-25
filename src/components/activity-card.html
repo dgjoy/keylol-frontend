@@ -1,3 +1,4 @@
+<flat-button class="back-button" text="后退" type="inertia"  click="activityCard.back()"></flat-button>
 <div class="activity-card">
     <div class="moderation" ng-if="activityCard.object.spotlighted" style="{{activityCard.theme.light ? 'background-color:' + activityCard.theme.light + ';': ''}}">
         <div class="name-group">
@@ -37,7 +38,7 @@
             <div class="simple">
                 <vote-circle ng-if="activityCard.object.rating" review="activityCard.object.rating * 2 - 1" gray-background="true"></vote-circle>
                 <p>{{activityCard.object.content}}</p>
-                <img ng-if="activityCard.object.coverImage" webp-src="{{activityCard.object.coverImage | uriRelocate: '/fw/580'}}">
+                <img ng-if="activityCard.object.coverImage" webp-src="{{activityCard.object.coverImage | uriRelocate: '/fw/725'}}">
             </div>
             <div class="point-with-source">
                 <a class="point" ng-href="point/{{::activityCard.relatedPoints.mainPoint.idCode}}">

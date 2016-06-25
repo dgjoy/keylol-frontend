@@ -1,6 +1,6 @@
 ﻿(function () {
     class UserController {
-        constructor ($scope, stateTree, $location, pageLoad) {
+        constructor ($scope, stateTree, $location, pageLoad, pageHead) {
             $scope.stateTree = stateTree;
 
             if ($location.path().match(/\/user\/[^\/]*\/?$/)) {
