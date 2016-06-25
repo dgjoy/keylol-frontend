@@ -30,41 +30,49 @@ var buildConfigs = {
     local: {
         bundle: false,
         apiEndpoint: "https://localhost:44300/",
-        urlCanonical: false
+        urlCanonical: false,
+        enableStats: false
     },
     dev: {
         bundle: false,
         apiEndpoint: "https://lgbt-api.keylol.com/",
-        urlCanonical: false
+        urlCanonical: false,
+        enableStats: true
     },
     lgbt: {
         bundle: true,
         apiEndpoint: "https://lgbt-api.keylol.com/",
-        urlCanonical: false
+        urlCanonical: false,
+        enableStats: false
     },
     prod: {
         bundle: true,
         apiEndpoint: "https://api.keylol.com/",
-        urlCanonical: true
+        urlCanonical: true,
+        enableStats: true
     }
 };
 
-var vendorScripts = [
-    "node_modules/jquery/dist/jquery.js",
-    "node_modules/ms-signalr-client/jquery.signalr-2.2.0.js",
-    "node_modules/svgxuse/svgxuse.js",
-    "node_modules/moment/moment.js",
+var vendorMinScripts = [
+    "node_modules/jquery/dist/jquery.min.js",
+    "node_modules/svgxuse/svgxuse.min.js",
+    "node_modules/moment/min/moment.min.js",
     "node_modules/moment/locale/zh-cn.js",
-    "node_modules/moment-timezone/builds/moment-timezone-with-data.js",
-    "node_modules/angular/angular.js",
+    "node_modules/moment-timezone/builds/moment-timezone-with-data.min.js",
+    "node_modules/angular/angular.min.js",
+    "node_modules/angular-ui-router/release/angular-ui-router.min.js",
+    "node_modules/angular-animate/angular-animate.min.js",
+    "node_modules/angular-moment/angular-moment.min.js",
+    "node_modules/ngstorage/ngStorage.min.js",
+    "node_modules/ng-file-upload/dist/ng-file-upload.min.js",
+    "node_modules/angular-utf8-base64/angular-utf8-base64.min.js",
+    "node_modules/angulartics/dist/angulartics.min.js",
+    "node_modules/angulartics-google-analytics/dist/angulartics-ga.min.js",
+    "node_modules/ms-signalr-client/jquery.signalr-2.2.0.min.js" // 这个文件一定要放在最后
+];
+
+var vendorScripts = [
     "node_modules/angular-i18n/angular-locale_zh.js",
-    "node_modules/angular-ui-router/release/angular-ui-router.js",
-    "node_modules/angular-animate/angular-animate.js",
-    "node_modules/angular-moment/angular-moment.js",
-    "node_modules/ngstorage/ngStorage.js",
-    "node_modules/ng-file-upload/dist/ng-file-upload.js",
-    "node_modules/angular-utf8-base64/angular-utf8-base64.js",
-    "node_modules/angulartics/src/angulartics.js",
     "node_modules/simple-module/lib/module.js",
     "node_modules/simple-hotkeys/lib/hotkeys.js",
     "node_modules/simple-uploader/lib/uploader.js",
@@ -232,9 +240,14 @@ var getBuildTask = function (configName) {
             .pipe(rename("environment-config.js"))
             .pipe(gulp.dest("temporary/"));
     }, config.bundle ? gulp.parallel("scss:bundle", "babel:bundle") : gulp.parallel("sass", "babel"),
-        config.bundle ? gulp.parallel(function buildVendorScriptBundle() {
+        config.bundle ? gulp.parallel(function concatVendorMinScriptBundle() {
+        return gulp.src(vendorMinScripts)
+            .pipe(concat("vendor-a.min.js"))
+            .pipe(rev())
+            .pipe(gulp.dest("bundles"));
+    }, function buildVendorScriptsBundle() {
         return gulp.src(vendorScripts)
-            .pipe(concat("vendor.min.js"))
+            .pipe(concat("vendor-b.min.js"))
             .pipe(uglify())
             .pipe(rev())
             .pipe(gulp.dest("bundles"));
@@ -278,14 +291,15 @@ var getBuildTask = function (configName) {
             scriptFiles = getFiles(["bundles/vendor-*.min.js", "bundles/app-*.min.js", "bundles/templates-*.min.js"]);
             stylesheetFiles = getFiles(["bundles/stylesheets-*.min.css"]);
         } else {
-            scriptFiles = getFiles(vendorScripts.concat(appScripts));
+            scriptFiles = getFiles(vendorMinScripts.concat(vendorScripts).concat(appScripts));
             stylesheetFiles = getFiles(stylesheets);
         }
         var stream = gulp.src("index.html.ejs")
             .pipe(template({
                 scripts: scriptFiles,
                 stylesheets: stylesheetFiles,
-                urlCanonical: config.urlCanonical
+                urlCanonical: config.urlCanonical,
+                enableStats: config.enableStats
             }))
             .pipe(rename("index.html"));
         if (config.bundle) {

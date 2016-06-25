@@ -12,41 +12,15 @@
         'ngFileUpload',
         'ab-base64',
         'angulartics',
+        'angulartics.google.analytics',
         'ui.router',
     ]);
     app.config(($stateProvider, $locationProvider, utilsProvider, pageHeadProvider, $localStorageProvider,
                 $httpProvider, $compileProvider, $analyticsProvider, $anchorScrollProvider, $urlRouterProvider) => {
         $locationProvider.html5Mode(true);
-
-        $anchorScrollProvider.disableAutoScrolling();
+        
         $urlRouterProvider.otherwise('/not-found');
         $stateProvider
-            // .state('latest', {
-            //     url: '/latest',
-            //     templateUrl: 'src/pages/search-results.html',
-            //     controller: 'AllArticlesController',
-            // })
-            // .state('subscriptions', {
-            //     url: '/subscriptions',
-            //     templateUrl: 'src/pages/search-results.html',
-            //     controller: 'SubscriptionsController',
-            // })
-            // .state('readers', {
-            //     url: '/readers',
-            //     templateUrl: 'src/pages/search-results.html',
-            //     controller: 'ReadersController',
-            // })
-            // .state('search', {
-            //     url: '/search/:searchType/:keyword',
-            //     templateUrl: 'src/pages/search-results.html',
-            //     controller: 'SearchResultsController',
-            // })
-            // .state('related', {
-            //     url: '/related/:idCode/:type',
-            //     templateUrl: 'src/pages/search-results.html',
-            //     controller: 'RelatedController',
-            // })
-            // state after refactoring
             .state('entrance', {
                 url: '/',
                 templateUrl: 'src/pages/entrance.html',
@@ -58,6 +32,7 @@
                 onExit (stateTree) {
                     delete stateTree.entrance;
                 },
+                data: { virtual: true },
             })
                 .state('entrance.discovery', {
                     url: 'discovery',
@@ -82,6 +57,9 @@
                     url: 'timeline',
                     templateUrl: 'src/pages/page-timeline.html',
                     controller: 'PageTimelineController',
+                    onExit (stateTree) {
+                        delete stateTree.timeline;
+                    },
                 })
             .state('post-office',{
                 url: '/post-office',
@@ -92,26 +70,34 @@
                         $state.go('entrance', $stateParams);
                     }
                 },
+                onExit (stateTree) {
+                    delete stateTree.postOffice;
+                },
+                data: { virtual: true },
             })
                 .state('post-office.unread',{
                     url: '/unread',
                     templateUrl: 'src/pages/unread.html',
                     controller: 'UnreadController',
                     onExit (stateTree) {
-                        delete stateTree.postOffice;
+                        delete stateTree.postOffice.unread;
                     },
                 })
                 .state('post-office.social-activity',{
                     url: '/social-activity',
                     templateUrl: 'src/pages/social-activity.html',
                     controller: 'SocialActivityController',
+                    onExit (stateTree) {
+                        delete stateTree.postOffice.socialActivity;
+                    },
+                    data: { virtual: true },
                 })
                     .state('post-office.social-activity.reply',{
                         url: '/reply',
                         templateUrl: 'src/pages/social-activity-reply.html',
                         controller: 'SocialActivityReplyController',
                         onExit (stateTree) {
-                            delete stateTree.postOffice;
+                            delete stateTree.postOffice.socialActivity.comment;
                         },
                     })
                     .state('post-office.social-activity.approve',{
@@ -119,7 +105,7 @@
                         templateUrl: 'src/pages/social-activity-approve.html',
                         controller: 'SocialActivityApproveController',
                         onExit (stateTree) {
-                            delete stateTree.postOffice;
+                            delete stateTree.postOffice.socialActivity.like;
                         },
                     })
                     .state('post-office.social-activity.follower',{
@@ -127,7 +113,7 @@
                         templateUrl: 'src/pages/social-activity-follower.html',
                         controller: 'SocialActivityFollowerController',
                         onExit (stateTree) {
-                            delete stateTree.postOffice;
+                            delete stateTree.postOffice.socialActivity.subscriber;
                         },
                     })
                 .state('post-office.missive',{
@@ -135,7 +121,7 @@
                     templateUrl: 'src/pages/missives.html',
                     controller: 'MissivesController',
                     onExit (stateTree) {
-                        delete stateTree.postOffice;
+                        delete stateTree.postOffice.missive;
                     },
                 })
             .state('coupon',{
@@ -147,13 +133,17 @@
                         $state.go('entrance', $stateParams);
                     }
                 },
+                onExit (stateTree) {
+                    delete stateTree.coupon;
+                },
+                data: { virtual: true },
             })
                 .state('coupon.detail',{
                     url: '/detail',
                     templateUrl: 'src/pages/coupon-detail.html',
                     controller: 'CouponDetailController',
                     onExit (stateTree) {
-                        delete stateTree.coupon;
+                        delete stateTree.coupon.detail;
                     },
                 })
                 // .state('coupon.store',{
@@ -166,7 +156,7 @@
                     templateUrl: 'src/pages/coupon-ranking.html',
                     controller: 'CouponRankingController',
                     onExit (stateTree) {
-                        delete stateTree.coupon;
+                        delete stateTree.coupon.ranking;
                     },
                 })
             .state('aggregation', {
@@ -183,6 +173,7 @@
                     onExit (stateTree) {
                         delete stateTree.aggregation.point;
                     },
+                    data: { virtual: true },
                 })
                     .state('aggregation.point.frontpage', {
                         url: '/frontpage',
@@ -212,6 +203,9 @@
                         url: '/timeline',
                         templateUrl: 'src/pages/page-timeline.html',
                         controller: 'PageTimelineController',
+                        onExit (stateTree) {
+                            delete stateTree.aggregation.point.timeline;
+                        },
                     })
                     .state('aggregation.point.edit', {
                         url: '/edit',
@@ -220,6 +214,7 @@
                         onExit (stateTree) {
                             delete stateTree.aggregation.point.edit;
                         },
+                        data: { virtual: true },
                     })
                         .state('aggregation.point.edit.info', {
                             url: '/info',
@@ -242,7 +237,7 @@
                         //     templateUrl: 'src/pages/edit-log.html',
                         //     controller: 'EditLogController',
                         //     onExit (stateTree) {
-                        //         delete stateTree.aggregation.point.edit;
+                        //         delete stateTree.aggregation.point.edit.log;
                         //     },
                         // })
             .state('aggregation.user', {
@@ -252,6 +247,7 @@
                 onExit (stateTree) {
                     delete stateTree.aggregation.user;
                 },
+                data: { virtual: true },
             })
                 .state('aggregation.user.dossier', {
                     url: '/dossier',
@@ -267,6 +263,7 @@
                     controller ($state) {
                         $state.go('^.people', {}, { location: false });
                     },
+                    data: { virtual: true },
                 })
                 .state('aggregation.user.people', {
                     url: '/people/:route',
@@ -280,6 +277,9 @@
                     url: '/timeline',
                     templateUrl: 'src/pages/page-timeline.html',
                     controller: 'PageTimelineController',
+                    onExit (stateTree) {
+                        delete stateTree.aggregation.user.timeline;
+                    },
                 })
                 .state('aggregation.user.edit', {
                     url: '/edit',
@@ -291,27 +291,19 @@
                         }
                     },
                     onExit (stateTree) {
+                        delete stateTree.aggregation.user.edit;
                     },
+                    data: { virtual: true },
                 })
                     .state('aggregation.user.edit.info', {
                         url: '/info',
                         templateUrl: 'src/pages/user-edit-info.html',
                         controller: 'UserEditInfoController',
-                        onExit (stateTree) {
-                            if (stateTree.aggregation) {
-                                delete stateTree.aggregation.user.edit;
-                            }
-                        },
                     })
                     .state('aggregation.user.edit.preference', {
                         url: '/preference',
                         templateUrl: 'src/pages/user-edit-preference.html',
                         controller: 'UserEditPreferenceController',
-                        onExit (stateTree) {
-                            if (stateTree.aggregation) {
-                                delete stateTree.aggregation.user.edit;
-                            }
-                        },
                     })
             .state('content', {
                 'abstract': true,
@@ -372,6 +364,31 @@
                 prop.value,
                 prop.nodeid,
             ]);
+        });
+
+        $analyticsProvider.registerEventTrack((action, prop) => {
+            _czc.push([
+                '_trackEvent',
+                prop.category || '未分类',
+                action,
+                prop.label,
+                prop.value,
+                prop.nodeid,
+            ]);
+        });
+
+        $analyticsProvider.registerSetUsername(username => {
+            _czc.push(['_setCustomVar', '登录用户', username, 1]);
+        });
+
+        $analyticsProvider.trackExceptions(true);
+        $analyticsProvider.virtualPageviews(false);
+    });
+    app.run(($analytics, $rootScope, $location) => {
+        $rootScope.$on('$stateChangeSuccess', (event, current) => {
+            if (current.data.hasOwnProperty('virtual')) return;
+            const url = $analytics.settings.pageTracking.basePath + $location.url();
+            $analytics.pageTrack(url, $location);
         });
     });
     app.run(['amMoment', amMoment => {

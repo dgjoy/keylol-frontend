@@ -1,6 +1,6 @@
 ﻿(function () {
     keylolApp.controller('RootController',
-        ($scope, pageHead, union, $http, apiEndpoint, $window, notification, $location, $rootScope, $state, stateTree, $stateParams) => {
+        ($scope, pageHead, union, $http, apiEndpoint, $window, notification, $location, $rootScope, $state, stateTree, $analytics) => {
             pageHead.loading();
 
             let firstLoad = true;
@@ -10,7 +10,7 @@
                 if (newToken) {
                     $http.defaults.headers.common.Authorization = `Bearer ${newToken}`;
                 } else {
-                    _czc.push(['_setCustomVar', '登录用户', '游客', 1]);
+                    $analytics.setUsername('游客');
                     for (const i in union.$localStorage) {
                         if (union.$localStorage.hasOwnProperty(i) && i.indexOf('$') !== 0)
                             delete union.$localStorage[i];

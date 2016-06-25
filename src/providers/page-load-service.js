@@ -1,5 +1,5 @@
 ﻿(function () {
-    keylolApp.factory('pageLoad', ($state, $http, stateTree, apiEndpoint, notification) => {
+    keylolApp.factory('pageLoad', ($state, $http, stateTree, apiEndpoint, notification, $analytics) => {
         return (stName, extraParams) => {
             const result = stName.split('.');
             const params = $state.params;
@@ -10,8 +10,7 @@
             if (stateTree.empty) {
                 return $http.get(`${apiEndpoint}states/[${stName}]/`,{ params }).then(response => {
                     if (response.data.currentUser) {
-                        _czc.push(['_setCustomVar', '登录用户',
-                            `${response.data.currentUser.idCode}-${response.data.currentUser.userName}`, 1]);
+                        $analytics.setUsername(`${response.data.currentUser.idCode}-${response.data.currentUser.userName}`);
                     }
 
                     $.extend(stateTree, response.data);
