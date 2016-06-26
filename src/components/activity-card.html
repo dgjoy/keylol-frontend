@@ -1,13 +1,13 @@
 <flat-button class="back-button" text="返回" type="inertia"  click="activityCard.back()"></flat-button>
 <div class="activity-card">
-    <div class="moderation" ng-if="activityCard.object.archived" style="{{activityCard.theme.light ? 'background-color:' + activityCard.theme.light + ';': ''}}">
+    <div class="moderation" ng-if="activityCard.object.archived" ng-style="{backgroundColor: activityCard.theme.light}">
         <div class="name-group">
             <p class="font-myriad-keylol">这篇动态已被封存</p>
             <p>封存后只有作者和站务职员可以看到动态内容</p>
         </div>
         <img webp-src="assets/images/css_logo.png">
     </div>
-    <div class="moderation" ng-if="activityCard.object.rejected" style="{{activityCard.theme.light ? 'background-color:' + activityCard.theme.light + ';': ''}}">
+    <div class="moderation" ng-if="activityCard.object.rejected" ng-style="{backgroundColor: activityCard.theme.light}">
         <div class="name-group">
             <p class="font-myriad-keylol">这篇动态已被退稿</p>
             <p>退稿后只能通过链接或者作者的个人页面访问动态</p>

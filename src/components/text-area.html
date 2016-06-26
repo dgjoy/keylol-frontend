@@ -1,12 +1,12 @@
 <label class="
         {{ textArea.activeState || ((textArea.model !== undefined && textArea.model.length !== 0) || textArea.pointCache) ? 'move-up':''}}
         {{ textArea.warnState?'warn':textArea.activeState?'theme':''}}"
-       style="{{textArea.theme.light&&textArea.activeState&&!textArea.warnState?'color:'+textArea.theme.light+';':''}}"
+       ng-style="{color: textArea.theme.light && textArea.activeState && !textArea.warnState ? textArea.theme.light : null}"
     >{{textArea.label}}</label>
 
 <div class="text {{textArea.disabledState?'disabled':textArea.warnState?'warn':textArea.activeState?'theme':''}}"
      ng-if="textArea.type === 'text'"
-     style="{{textArea.theme.light&&textArea.activeState&&!textArea.warnState?'border-color:'+textArea.theme.light+';':''}}"
+     ng-style="{borderColor: textArea.theme.light && textArea.activeState && !textArea.warnState ? textArea.theme.light : null}"
     >
     <input ng-model="textArea.model" type="text" ng-change="textArea.check()" ng-focus="textArea.focus()" ng-blur="textArea.blur()"
            ng-disabled="textArea.disabledState"/>
@@ -14,7 +14,7 @@
 
 <div class="text {{textArea.disabledState?'disabled':textArea.warnState?'warn':textArea.activeState?'theme':''}}"
      ng-if="textArea.type === 'password'"
-     style="{{textArea.theme.light&&textArea.activeState&&!textArea.warnState?'border-color:'+textArea.theme.light+';':''}}"
+     ng-style="{borderColor: textArea.theme.light && textArea.activeState && !textArea.warnState ? textArea.theme.light : null}"
     >
     <input ng-model="textArea.model" type="password" ng-change="textArea.check()" ng-focus="textArea.focus()" ng-blur="textArea.blur()"
            ng-disabled="textArea.disabledState"/>

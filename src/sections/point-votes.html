@@ -30,7 +30,7 @@
                     <span ng-if="pointVotes.point.totalEvaluate">{{statCount / pointVotes.point.totalEvaluate * 100 | number: 0}}%</span>
                     <span ng-if="!pointVotes.point.totalEvaluate">0%</span>
                 </div><!--
-            --><div class="reputation-level" style="width: {{statCount / pointVotes.point.totalEvaluate * 100 }}px;"></div>
+            --><div class="reputation-level" ng-style="{width: statCount / pointVotes.point.totalEvaluate * 100 + 'px'}"></div>
                 <p>{{statCount}}</p>
             </div>
         </div>

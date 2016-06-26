@@ -1,5 +1,5 @@
 <raised-button class="back-button" text="后退" type="theme"  click="archivedHeader.back()"></raised-button>
-<div class="moderation" style="{{activityCard.theme.light ? 'background-color:' + activityCard.theme.light + ';': ''}}">
+<div class="moderation" ng-style="{backgroundColor: activityCard.theme.light}">
     <div class="name-group">
         <p class="font-myriad-keylol">这篇{{archivedHeader.type}}已被封存</p>
         <p>封存后只有作者和站务职员可以看到{{archivedHeader.type}}内容</p>
