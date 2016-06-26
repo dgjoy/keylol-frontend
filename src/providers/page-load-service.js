@@ -1,10 +1,15 @@
 ﻿(function () {
-    keylolApp.factory('pageLoad', ($state, $http, stateTree, apiEndpoint, notification, $analytics) => {
-        return (stName, extraParams) => {
+    keylolApp.factory('pageLoad', ($state, $stateParams, $http, stateTree, apiEndpoint, notification, $analytics) => {
+        return (stName, extraParams, useExtraParamsOnly) => {
             const result = stName.split('.');
-            const params = $state.params;
-            if (extraParams) {
-                $.extend(params, extraParams);
+            let params;
+            if (useExtraParamsOnly) {
+                params = extraParams;
+            } else {
+                params = $.extend({}, $stateParams);
+                if (extraParams) {
+                    $.extend(params, extraParams);
+                }
             }
 
             if (stateTree.empty) {
@@ -23,7 +28,7 @@
                         target = target[tmp_result];
                     }
                     if (target && target.current) {
-                        $state.go(`.${target.current}`, {}, { location: false });
+                        $state.go(`.${target.current}`, $stateParams, { location: false });
                     }
 
                     return target;
@@ -31,7 +36,7 @@
                     notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
                 }).then(target => {
                     if ($.isEmptyObject(target)) {
-                        $state.go('not-found', {}, { location: false });
+                        $state.go('not-found', $stateParams, { location: false });
                     } else {
                         return target;
                     }
@@ -59,7 +64,7 @@
                     target[result[result.length - 1]] = response.data;
                     target = target[result[result.length - 1]];
                     if (target.current) {
-                        $state.go(`.${target.current}`, {}, { location: false });
+                        $state.go(`.${target.current}`, $stateParams, { location: false });
                     }
 
                     return target;
@@ -67,7 +72,7 @@
                     notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
                 }).then(target => {
                     if ($.isEmptyObject(target)) {
-                        $state.go('not-found', {}, { location: false });
+                        $state.go('not-found', $stateParams, { location: false });
                     } else {
                         return target;
                     }

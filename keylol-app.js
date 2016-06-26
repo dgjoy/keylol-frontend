@@ -24,7 +24,7 @@
             .state('entrance', {
                 url: '/',
                 templateUrl: 'src/pages/entrance.html',
-                controller ($location, pageLoad) {
+                onEnter ($location, pageLoad) {
                     if ($location.path() === '/') {
                         pageLoad('entrance');
                     }
@@ -64,10 +64,13 @@
             .state('post-office',{
                 url: '/post-office',
                 templateUrl: 'src/pages/post-office.html',
-                controller: 'PostOfficeController',
-                onEnter (union, $state, $stateParams) {
+                onEnter (union, $state, $stateParams, $location, $timeout) {
                     if (!union.$localStorage.Authorization) {
                         $state.go('entrance', $stateParams);
+                    } else if ($location.path().match(/\/post-office\/?$/)) {
+                        $timeout(() => {
+                            $state.go('post-office.unread', $stateParams, { location: false });
+                        });
                     }
                 },
                 onExit (stateTree) {
@@ -87,6 +90,13 @@
                     url: '/social-activity',
                     templateUrl: 'src/pages/social-activity.html',
                     controller: 'SocialActivityController',
+                    onEnter ($state, $location, $timeout, $stateParams) {
+                        $timeout(() => {
+                            if ($location.path().match(/\/social-activity\/?$/)) {
+                                $state.go('post-office.social-activity.reply', $stateParams, { location: false });
+                            }
+                        });
+                    },
                     onExit (stateTree) {
                         delete stateTree.postOffice.socialActivity;
                     },
@@ -127,10 +137,13 @@
             .state('coupon',{
                 url: '/coupon',
                 templateUrl: 'src/pages/coupon.html',
-                controller: 'CouponController',
-                onEnter (union, $state, $stateParams) {
+                onEnter (union, $state, $stateParams, $location, $timeout) {
                     if (!union.$localStorage.Authorization) {
                         $state.go('entrance', $stateParams);
+                    } else if ($location.path().match(/\/coupon\/?$/)) {
+                        $timeout(() => {
+                            $state.go('coupon.detail', $stateParams, { location: false });
+                        });
                     }
                 },
                 onExit (stateTree) {
@@ -170,6 +183,11 @@
                     url: '/point/:point_id_code',
                     templateUrl: 'src/pages/point.html',
                     controller: 'PointController',
+                    onEnter ($location, pageLoad, $stateParams) {
+                        if ($location.path().match(/\/point\/[^\/]*\/?$/)) {
+                            pageLoad('aggregation.point', { entrance: 'auto', point_id_code: $stateParams.point_id_code }, true);
+                        }
+                    },
                     onExit (stateTree) {
                         delete stateTree.aggregation.point;
                     },
@@ -211,6 +229,13 @@
                         url: '/edit',
                         templateUrl: 'src/pages/point-edit.html',
                         controller: 'PointEditController',
+                        onEnter ($location, $state, $timeout) {
+                            if ($location.path().match(/\/point\/[^\/]*\/edit\/?$/)) {
+                                $timeout(() => {
+                                    $state.go('.info', {}, { location: false });
+                                });
+                            }
+                        },
                         onExit (stateTree) {
                             delete stateTree.aggregation.point.edit;
                         },
@@ -244,6 +269,11 @@
                 url: '/user/:user_id_code',
                 templateUrl: 'src/pages/user.html',
                 controller: 'UserController',
+                onEnter ($location, pageLoad, $stateParams) {
+                    if ($location.path().match(/\/user\/[^\/]*\/?$/)) {
+                        pageLoad('aggregation.user', { entrance: 'auto' , user_id_code: $stateParams.user_id_code }, true);
+                    }
+                },
                 onExit (stateTree) {
                     delete stateTree.aggregation.user;
                 },
@@ -386,7 +416,7 @@
     });
     app.run(($analytics, $rootScope, $location) => {
         $rootScope.$on('$stateChangeSuccess', (event, current) => {
-            if (current.data.hasOwnProperty('virtual')) return;
+            if (current.data && current.data.hasOwnProperty('virtual')) return;
             const url = $analytics.settings.pageTracking.basePath + $location.url();
             $analytics.pageTrack(url, $location);
         });

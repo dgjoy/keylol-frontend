@@ -1,10 +1,6 @@
 ﻿(function () {
     class PointEditController {
-        constructor ($scope, pageHead, stateTree, $state, $location, $timeout) {
-            if ($location.path().match(/\/point\/[^\/]*\/edit\/?$/)) {
-                $state.go('.info', {}, { location: false });
-            }
-
+        constructor ($scope, $state) {
             $scope.tabArray = [
                 { state: '.info', name:'资料' },
                 { state: '.style', name:'样式' },

@@ -23,8 +23,8 @@
                     };
                 });
             } else if (currentStateName === 'aggregation.user.timeline' && !$location.path().match(/\/user\/[^\/]*\/?$/)) {
-                if (stateTree.empty || (stateTree.aggregation && stateTree.aggregation.point
-                    && stateTree.aggregation.point.basicInfo && stateTree.aggregation.point.basicInfo.idCode === $state.params.point_id_code) ) {
+                if (stateTree.empty || (stateTree.aggregation && stateTree.aggregation.user
+                    && stateTree.aggregation.user.basicInfo && stateTree.aggregation.user.basicInfo.idCode === $state.params.user_id_code) ) {
                     fetchPromise = pageLoad('aggregation.user.timeline');
                 } else {
                     fetchPromise = pageLoad('aggregation.user', { entrance: 'Timeline' });

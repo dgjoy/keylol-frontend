@@ -1,6 +1,6 @@
 ﻿(function () {
     keylolApp.controller('RootController',
-        ($scope, pageHead, union, $http, apiEndpoint, $window, notification, $location, $rootScope, $state, stateTree, $analytics) => {
+        ($scope, pageHead, union, $http, apiEndpoint, $window, notification, $location, $rootScope, $state, stateTree, $analytics, $injector) => {
             pageHead.loading();
 
             let firstLoad = true;
@@ -51,6 +51,11 @@
                         }
                         if (flag) {
                             event.preventDefault();
+                            $state.go(toState.name, toParams, { notify: false }).then(current => {
+                                if (typeof current.onEnter === 'function') {
+                                    $injector.invoke(current.onEnter);
+                                }
+                            });
                         }
                     }
                 }
@@ -58,7 +63,7 @@
                 $($window).unbind('scroll.loadTimeline');
             });
 
-            $rootScope.$on('$stateChangeSuccess', () => {
+            $rootScope.$on('$stateChangeSuccess', (event, toState, toParams, fromState) => {
                 $window.scrollTo(0, 0);
             });
     });
