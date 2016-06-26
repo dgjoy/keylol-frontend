@@ -52,7 +52,7 @@
                         if (flag) {
                             event.preventDefault();
                             $state.go(toState.name, toParams, { notify: false }).then(current => {
-                                if (typeof current.onEnter === 'function') {
+                                if (current.onEnter) {
                                     $injector.invoke(current.onEnter);
                                 }
                             });
