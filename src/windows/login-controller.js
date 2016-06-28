@@ -23,6 +23,9 @@
                 //     name: '网页 API',
                 // },
                 {
+                    name: '蒸汽动力',
+                },
+                {
                     name: '口令组合',
                 },
             ];
@@ -96,14 +99,93 @@
                 connection.stop();
             });
 
-
-
             //api
             this.apiWayManager = {
                 phaseIndex: 1,
             };
 
-            
+            //steamcn
+            this.steamcnWayManager = {
+                swapDirection: 'init',
+                tabArray: [{
+                    name: '用户名',
+                }, {
+                    name: 'UID',
+                }],
+                curPage: 0,
+                forms: [[
+                    { label: '论坛用户名', type: 'text' ,tip:'主站的论坛用户名' },
+                    { label: '密码', type: 'password' },
+                ], [
+                    { label: '论坛数字 UID', type: 'text', tip:'主站的论坛 UID' },
+                    { label: '密码', type: 'password' },
+                ]],
+                errorDetect: utils.modelErrorDetect,
+                vm : {
+                    grant_type: 'steamcn_password',
+                    client_id: 'keylol-website',
+                    id_code: '',
+                    password: '',
+                },
+                id_code: {
+                    state: 'normal',
+                    error: '',
+                    completed: '',
+                },
+                password: {
+                    state: 'normal',
+                    error: '',
+                    completed: '',
+                },
+                state: {
+                    id_code: 'normal',
+                    password: 'normal',
+                },
+            };
+            if (this.currentWay === 1) {
+                this.resetSteamcn();
+            }
+
+            $scope.$watch(() => {
+                return this.steamcnWayManager.vm.id_code;
+            },newValue => {
+                switch (this.steamcnWayManager.curPage) {
+                    case 0:
+                        if (newValue.length === 0) {
+                            this.steamcnWayManager.id_code.state = 'normal';
+                            this.steamcnWayManager.id_code.completed = false;
+                        }  else {
+                            this.steamcnWayManager.id_code.state = 'normal';
+                            this.steamcnWayManager.id_code.completed = true;
+                        }
+                        break;
+                    case 1:
+                        if (newValue.length === 0) {
+                            this.steamcnWayManager.id_code.state = 'normal';
+                            this.steamcnWayManager.id_code.completed = false;
+                        } else if (!/^[0-9]+$/.test(newValue)) {
+                            this.steamcnWayManager.id_code.state = 'warn';
+                            this.steamcnWayManager.id_code.error = 'UID 只可能是数字';
+                            this.steamcnWayManager.id_code.completed = false;
+                        } else {
+                            this.steamcnWayManager.id_code.state = 'normal';
+                            this.steamcnWayManager.id_code.completed = true;
+                        }
+                        break;
+                }
+            });
+
+            $scope.$watch(() => {
+                return this.steamcnWayManager.vm.password;
+            },newValue => {
+                if (newValue.length === 0) {
+                    this.steamcnWayManager.password.state = 'normal';
+                    this.steamcnWayManager.password.completed = false;
+                } else {
+                    this.steamcnWayManager.password.state = 'normal';
+                    this.steamcnWayManager.password.completed = true;
+                }
+            });
 
             //passcode 方式
             this.passcodeWayManager = {
@@ -151,7 +233,7 @@
                     password: 'normal',
                 },
             };
-            if (this.currentWay === 1) {
+            if (this.currentWay === 2) {
                 this.resetPasscode();
             }
 
@@ -228,8 +310,11 @@
                 case 0:
                     break;
                 case 1:
+                    this.steamcnWayManager.swapDirection = 'init';
+                    this.resetSteamcn();
+                    break;
+                case 2:
                     this.passcodeWayManager.swapDirection = 'init';
-                    this.passcodeWayManager.curPage = 0;
                     this.resetPasscode();
                     break;
                 default:
@@ -249,6 +334,18 @@
             this.resetPasscode();
         }
 
+        changeSteamcnWay(index) {
+            if (index > this.steamcnWayManager.curPage) {
+                this.steamcnWayManager.swapDirection = 'left';
+            } else if (index < this.steamcnWayManager.curPage) {
+                this.steamcnWayManager.swapDirection = 'right';
+            }
+
+            // 切换 passcode 的内部方式时
+            this.steamcnWayManager.curPage = index;
+            this.resetSteamcn();
+        }
+
         resetPasscode() {
             const pwm = this.passcodeWayManager;
             pwm.vm.id_code = '';
@@ -262,14 +359,36 @@
             pwm.id_code.completed = false;
             pwm.password.completed = false;
         }
+
+        resetSteamcn() {
+            const manager = this.steamcnWayManager;
+            manager.vm.id_code = '';
+            manager.vm.password = '';
+
+            manager.id_code.state = 'normal';
+            manager.password.state = 'normal';
+            manager.id_code.completed = false;
+            manager.password.completed = false;
+            manager.registerExpand = false;
+        }
         
         submit () {
-            const pwm = this.passcodeWayManager;
-            
-            const submitObj = $.extend({},this.passcodeWayManager.vm,true);
-            const cont = submitObj.id_code;
-            delete submitObj.id_code;
-            submitObj[['id_code','user_name','email'][this.passcodeWayManager.curPage]] = cont;
+            const currWay = this.currentWay;
+            let manager;
+
+            const submitObj = {};
+            if (currWay === 2) {
+                manager = this.passcodeWayManager;
+                $.extend(submitObj, manager.vm, true);
+                const cont = submitObj.id_code;
+                delete submitObj.id_code;
+                submitObj[['id_code','user_name','email'][manager.curPage]] = cont;
+            } else if (currWay === 1) {
+                manager = this.steamcnWayManager;
+                $.extend(submitObj, manager.vm, true);
+                submitObj[['user_name','uid'][manager.curPage]] = submitObj.id_code;
+                delete submitObj.id_code;
+            }
 
             this.submitLock = true;
             this.$http.post(`${this.apiEndpoint}oauth/token`, this.$httpParamSerializerJQLike(submitObj), {
@@ -281,50 +400,77 @@
                 this.notification.success({ message: '登录成功' });
                 this.close(true);
             }, response => {
-                this.window.show({
-                    templateUrl: 'src/windows/geetest.html',
-                    controller: 'GeetestController',
-                    controllerAs: 'geetest',
-                }).then(window => {
-                    return window.close;
-                }).then(result => {
-                    // 登录失败的时候, 尝试使用极验
-                    submitObj.geetest_challenge = result.geetest_challenge;
-                    submitObj.geetest_seccode = result.geetest_seccode;
-                    submitObj.geetest_validate = result.geetest_validate;
-                    this.$http.post(`${this.apiEndpoint}oauth/token`, this.$httpParamSerializerJQLike(submitObj), {
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded',
-                        },
-                    }).then(response => {
-                        this.union.$localStorage.Authorization = response.data.access_token;
-                        this.notification.success({ message: '登录成功' });
-                        this.close(true);
-                    },response => {
-                        if (response.status === 400 && response.data.error) {
-                            switch (response.data.error) {
-                                case 'user_non_existent':
-                                    pwm.id_code.error = '没有这个用户的注册记录';
-                                    pwm.id_code.state = 'warn';
-                                    pwm.id_code.completed = false;
-                                    break;
-                                case 'invalid_password':
-                                    pwm.password.error = '密码有误，留意大写锁定是否开启';
-                                    pwm.password.state = 'warn';
-                                    pwm.password.completed = false;
-                                    break;
-                                case 'account_locked_out':
-                                    pwm.password.error = '账户被锁定';
-                                    pwm.password.state = 'warn';
-                                    pwm.password.completed = false;
-                                    break;
-                                default:
-                                    this.notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
+                if (currWay === 2) {
+                    this.window.show({
+                        templateUrl: 'src/windows/geetest.html',
+                        controller: 'GeetestController',
+                        controllerAs: 'geetest',
+                    }).then(window => {
+                        return window.close;
+                    }).then(result => {
+                        // 登录失败的时候, 尝试使用极验
+                        submitObj.geetest_challenge = result.geetest_challenge;
+                        submitObj.geetest_seccode = result.geetest_seccode;
+                        submitObj.geetest_validate = result.geetest_validate;
+                        this.$http.post(`${this.apiEndpoint}oauth/token`, this.$httpParamSerializerJQLike(submitObj), {
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded',
+                            },
+                        }).then(response => {
+                            this.union.$localStorage.Authorization = response.data.access_token;
+                            this.notification.success({ message: '登录成功' });
+                            this.close(true);
+                        }, response => {
+                            if (response.status === 400 && response.data.error) {
+                                switch (response.data.error) {
+                                    case 'user_non_existent':
+                                        manager.id_code.error = '主站不存在这个用户';
+                                        manager.id_code.state = 'warn';
+                                        manager.id_code.completed = false;
+                                        break;
+                                    case 'invalid_password':
+                                        manager.password.error = '密码有误，留意大写锁定是否开启';
+                                        manager.password.state = 'warn';
+                                        manager.password.completed = false;
+                                        break;
+                                    case 'account_locked_out':
+                                        manager.password.error = '账户被锁定';
+                                        manager.password.state = 'warn';
+                                        manager.password.completed = false;
+                                        break;
+                                    default:
+                                        this.notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
+                                }
+                            } else {
+                                this.notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
                             }
-                        }
-                        this.submitLock = false;
+                            this.submitLock = false;
+                        });
                     });
-                });
+                } else {
+                    if (response.status === 400 && response.data.error) {
+                        switch (response.data.error) {
+                            case 'user_non_existent':
+                                manager.id_code.error = '没有这个用户的注册记录';
+                                manager.id_code.state = 'warn';
+                                manager.id_code.completed = false;
+                                break;
+                            case 'invalid_password':
+                                manager.password.error = '密码有误，留意大写锁定是否开启';
+                                manager.password.state = 'warn';
+                                manager.password.completed = false;
+                                break;
+                            case 'no_corresponding_user':
+                                manager.registerExpand = true;
+                                break;
+                            default:
+                                this.notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
+                        }
+                    } else {
+                        this.notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
+                    }
+                    this.submitLock = false;
+                }
             });
         }
     }

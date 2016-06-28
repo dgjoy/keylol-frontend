@@ -163,6 +163,22 @@
                     // },
                     {
                         type: 'item',
+                        icon: 'login-steamcn',
+                        text: '蒸汽动力',
+                        clickAction (event) {
+                            window.show({
+                                event,
+                                templateUrl: 'src/windows/login.html',
+                                controller: 'LoginController',
+                                controllerAs: 'login',
+                                inputs: {
+                                    startPage: 1,
+                                },
+                            });
+                        },
+                    },
+                    {
+                        type: 'item',
                         icon: 'login-passcode',
                         text: '口令组合',
                         clickAction (event) {
@@ -172,7 +188,7 @@
                                 controller: 'LoginController',
                                 controllerAs: 'login',
                                 inputs: {
-                                    startPage: 1,
+                                    startPage: 2,
                                 },
                             });
                         },
