@@ -15,7 +15,7 @@
     <div ng-switch-when="point" class="for-point">
         <a ripple="{{menu.object.header.titleCoverImage ? 'disabled' : ''}}" ng-href="point/{{menu.object.header.idCode}}" ng-class="{'for-image': menu.object.header.titleCoverImage}">
             <point-basic-info ng-if="!menu.object.header.titleCoverImage" point="menu.object.header.point"></point-basic-info>
-            <img ng-if="menu.object.header.titleCoverImage" class="cover" webp-src="{{ menu.object.header.titleCoverImage | uriRelocate: '/both/220x105'}}" alt="">
+            <img ng-if="menu.object.header.titleCoverImage" class="cover" webp-src="{{ menu.object.header.titleCoverImage | uriRelocate: '/both/275x131'}}" alt="">
         </a>
         <div class="time-info">
             <p ng-if="menu.object.header.totalPlayedTime" class="in-library">已在档 {{menu.object.header.totalPlayedTime}} 小时</p>
@@ -55,7 +55,7 @@
     <div ng-switch-when="point-other" class="for-point">
         <a ripple="{{menu.object.header.titleCoverImage ? 'disabled' : ''}}" ng-href="point/{{menu.object.header.idCode}}" ng-class="{'for-image': menu.object.header.titleCoverImage}">
             <point-basic-info ng-if="!menu.object.header.titleCoverImage" point="menu.object.header.point"></point-basic-info>
-            <img ng-if="menu.object.header.titleCoverImage" class="cover" webp-src="{{ menu.object.header.titleCoverImage | uriRelocate: '/both/220x105'}}" alt="">
+            <img ng-if="menu.object.header.titleCoverImage" class="cover" webp-src="{{ menu.object.header.titleCoverImage | uriRelocate: '/both/275x131'}}" alt="">
         </a>
         <div class="game-count">{{menu.object.header.gameCount}}</div>
         <div ng-if="menu.object.header.votePercent !== undefined" class="reputation-info">

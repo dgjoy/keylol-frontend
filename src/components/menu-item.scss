@@ -1,8 +1,9 @@
 menu-item {
   display: block;
-  button {
+  button, a {
     @include keylol-button-default;
     @include hover-background();
+    display: block;
     width: 100%;
     box-sizing: border-box;
     background: transparent;
@@ -24,6 +25,12 @@ menu-item {
 
         >span {
           line-height: 24px;
+
+          &.discount {
+            line-height: normal;
+            margin-right: 6px;
+            color: #a4d007;
+          }
         }
       }
 

@@ -17,6 +17,7 @@
             if (this.list === undefined || this.list.length === 0) {
                 this.artworkCount = 0;
                 this.screenshotCount = 0;
+                this.list = [];
                 return;
             }
             this.artworkCount = this.list.filter(e => {

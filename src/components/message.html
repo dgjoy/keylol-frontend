@@ -25,7 +25,7 @@
     <a href="" class="detail" ng-if="message.object.messageType.source !== '用户'" ng-click="message.showMissive()">
         {{message.object.messageType.getSummary(message.object)}}
     </a>
-    <div class="detail" ng-if="message.object.messageType.source === '用户'">
+    <a class="detail" href="{{message.object.messageType.getLink(message.object)}}" ng-if="message.object.messageType.source === '用户'">
         {{message.object.messageType.getSummary(message.object)}}
-    </div>
+    </a>
 </div>

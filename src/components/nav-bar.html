@@ -9,25 +9,25 @@
             </div>
         </a>
         <div ng-if="navBar.theme" class="theme-logo">
-            <a ng-if="navBar.stateTree.aggregation.point.basicInfo" href="" ui-sref=".frontpage" ripple="#fff">
+            <a ng-if="navBar.stateTree.aggregation.point.basicInfo" href="" ng-href="point/{{navBar.stateTree.aggregation.point.basicInfo.idCode}}" ripple="#fff">
                 <img ng-if="navBar.theme.logo" webp-src="{{navBar.theme.logo | themeLogoUrl}}">
                 <div ng-if="!navBar.theme.logo" class="theme-alt">
                     <p>{{navBar.utils.getPreferredPointName(navBar.stateTree.aggregation.point.basicInfo, navBar.stateTree.currentUser)[0]}}</p>
                     <p>{{navBar.utils.getPreferredPointName(navBar.stateTree.aggregation.point.basicInfo, navBar.stateTree.currentUser)[1]}}</p>
                 </div>
             </a>
-            <a ng-if="navBar.stateTree.content.article.pointBasicInfo || navBar.stateTree.content.activity.pointBasicInfo" href="" ng-href="point/{{navBar.stateTree.content.article.pointBasicInfo.idCode}}" ripple="#fff">
+            <a ng-if="navBar.stateTree.content.article.pointBasicInfo || navBar.stateTree.content.activity.pointBasicInfo" href="" ng-href="point/{{navBar.stateTree.content.article.pointBasicInfo.idCode || navBar.stateTree.content.activity.pointBasicInfo.idCode}}" ripple="#fff">
                 <img ng-if="navBar.theme.logo" webp-src="{{navBar.theme.logo | themeLogoUrl}}">
                 <div ng-if="!navBar.theme.logo" class="theme-alt">
                     <p>{{navBar.utils.getPreferredPointName(navBar.stateTree.content.article.pointBasicInfo || navBar.stateTree.content.activity.pointBasicInfo, navBar.stateTree.currentUser)[0]}}</p>
                     <p>{{navBar.utils.getPreferredPointName(navBar.stateTree.content.article.pointBasicInfo || navBar.stateTree.content.activity.pointBasicInfo, navBar.stateTree.currentUser)[1]}}</p>
                 </div>
             </a>
-            <a ng-if="navBar.stateTree.aggregation.user.basicInfo" href="" ui-sref=".dossier" ripple="#fff">
+            <a ng-if="navBar.stateTree.aggregation.user.basicInfo" href="" ng-href="user/{{navBar.stateTree.aggregation.user.basicInfo.idCode}}" ripple="#fff">
                 <img ng-if="navBar.theme.logo" webp-src="{{navBar.theme.logo | themeLogoUrl}}">
                 <div ng-if="!navBar.theme.logo" class="theme-alt">
                     <p>{{navBar.stateTree.aggregation.user.basicInfo.userName}}</p>
-                    <p>keylol.com/user/{{navBar.stateTree.aggregation.user.basicInfo.idCode}}</p>
+                    <p>Keylol.com/user/{{navBar.stateTree.aggregation.user.basicInfo.idCode}}</p>
                 </div>
             </a>
         </div>

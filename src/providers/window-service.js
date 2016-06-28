@@ -118,7 +118,7 @@
                             }
                         }
 
-                        const cancelListen = $rootScope.$on('$locationChangeSuccess', () => {
+                        const cancelListen = $rootScope.$on('$stateChangeSuccess', () => {
                             close();
                         });
 

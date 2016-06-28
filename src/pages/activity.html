@@ -1,11 +1,19 @@
 ﻿<nav theme="theme"></nav>
-<div class="container" ng-if="stateTree.content.activity">
-    <div class="flex-row" style="margin-top: 30px;">
+<div class="container">
+    <div ng-if="visible === true" class="flex-row" style="margin-top: 30px;">
         <div class="left-middle-lg row-sm">
             <activity-card theme="theme" object="::stateTree.content.activity" style="margin-bottom:30px"></activity-card>
         </div>
         <div class="right-lg hidden-sm flex-column">
             <right-menus style="flex-grow: 1;" author="stateTree.content.activity.authorBasicInfo" point="stateTree.content.activity.pointBasicInfo"></right-menus>
+        </div>
+    </div>
+    <div ng-if="visible === false" class="flex-row" style="margin-top: 30px;">
+        <div class="left-middle-lg row-sm">
+            <archived-header type="动态"></archived-header>
+        </div>
+        <div class="right-lg hidden-sm flex-column">
+            <right-menus style="flex-grow: 1"></right-menus>
         </div>
     </div>
 </div>

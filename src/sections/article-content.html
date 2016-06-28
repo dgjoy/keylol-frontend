@@ -19,7 +19,7 @@
 <div class="other">
     <div class="repost-declaration">
         <div class="bundle">
-            <p style="color: {{articleContent.theme.light}};">作者声明以下转载要求：</p>
+            <p ng-style="{color: articleContent.theme.light}">作者声明以下转载要求：</p>
             <p ng-if="articleContent.article.reproductionRequirement">
                 <span ng-if="articleContent.article.reproductionRequirement.attribution">署名 - 注明出处及链接</span>
                 <span ng-if="articleContent.article.reproductionRequirement.attribution && (articleContent.article.reproductionRequirement.nonCommercial || articleContent.article.reproductionRequirement.noDerivation)">-</span>

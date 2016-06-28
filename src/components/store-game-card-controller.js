@@ -16,10 +16,11 @@
             this.openRegistration = utils.openRegistration;
 
             this.stores = [];
+
             if (this.card.steamAppId) {
                 const steamItem = {
                     icon: 'dtb-steam',
-                    discount: this.card.steamDiscountPrice ? `${parseInt(this.card.steamDiscountPrice / this.card.steamPrice * 100)}%` : undefined,
+                    discount: this.card.steamDiscountedPrice ? `${parseInt((this.card.steamPrice - this.card.steamDiscountedPrice) / this.card.steamPrice * 100)}%` : undefined,
                     link: `http://store.steampowered.com/app/${this.card.steamAppId}`,
                 };
                 if (this.card.steamPrice) {
@@ -27,10 +28,28 @@
                 } else if (this.card.steamPrice === 0) {
                     steamItem.price = '免费';
                 }
+
+                if (this.card.steamDiscountedPrice) {
+                    steamItem.price = `¥ ${this.card.steamDiscountedPrice}`;
+                }
+
                 this.stores.push(steamItem);
             }
 
-            for (let i = 1;i !== stores.length; i++) {
+            if (this.card.sonkwoProductId) {
+                const sonkwoItem = {
+                    icon: 'dtb-sonkwo',
+                    link: `https://www.sonkwo.com/products/${this.card.sonkwoProductId}`,
+                };
+                if (this.card.sonkwoPrice) {
+                    sonkwoItem.price = `¥ ${this.card.sonkwoPrice}`;
+                } else if (this.card.sonkwoPrice === 0) {
+                    sonkwoItem.price = '免费';
+                }
+                this.stores.push(sonkwoItem);
+            }
+
+            for (let i = 2;i !== stores.length; i++) {
                 if (this.card[`${stores[i].prefix}Link`] && this.card[`${stores[i].prefix}Link`] !== '') {
                     this.stores.push({
                         icon: stores[i].icon,

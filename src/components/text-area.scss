@@ -1,5 +1,6 @@
 text-area {
   display: block;
+  position: relative;
 
   label {
     display: block;
@@ -80,6 +81,24 @@ text-area {
     &.warn {
       visibility: visible;
       color: $keylol-review-bad;
+    }
+  }
+
+  .limit {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    color: $keylol-inertia-text;
+    display: none;
+    height: 12px;
+
+    &.theme {
+      display: block;
+    }
+
+    &.warn {
+      color: $keylol-review-bad;
+      display: block;
     }
   }
 }

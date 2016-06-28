@@ -20,7 +20,6 @@
             this.type = {
                 mainTitle: '近畿',
                 subTitle: '特色相邻的游戏',
-                type: 'light-theme',
             };
         }
     }

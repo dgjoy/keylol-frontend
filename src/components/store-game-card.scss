@@ -37,11 +37,15 @@ store-game-card {
       height: 52px;
       padding-left: 10px;
       display: flex;
+      overflow: hidden;
+      flex-wrap: wrap;
       align-items: center;
 
       a {
+        flex-shrink: 0;
         display: flex;
         align-items: center;
+        height: 100%;
         margin-left: 10px;
 
         svg {
@@ -72,6 +76,7 @@ store-game-card {
     }
 
     flat-button {
+      flex-shrink: 0;
       margin-right: 5px;
     }
   }

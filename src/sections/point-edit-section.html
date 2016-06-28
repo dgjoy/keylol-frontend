@@ -4,11 +4,11 @@
         <ul>
             <li ng-repeat="item in pointEditSection.object.list track by $index" ng-switch="item.type">
                 <div class="title">
-                    <p style="{{item.editActive && pointEditSection.theme.main ? 'color:' + pointEditSection.theme.main + ';' :''}}">{{item.title}}</p>
+                    <p ng-style="{color: item.editActive && pointEditSection.theme.main ? pointEditSection.theme.main : null}">{{item.title}}</p>
                     <p>{{item.subTitle}}</p>
                 </div>
                 <div class="content" ng-if="item.type !== 'switch' && item.type !== 'password' && item.type !== 'logout'">
-                    <img class="content-cover" webp-src="{{item.value | uriRelocate: '/both/340x140'}}" alt="" ng-switch-when="cover">
+                    <img class="content-cover" webp-src="{{item.value | uriRelocate: '/both/425x175'}}" alt="" ng-switch-when="cover">
                     <img class="content-thumbnail" webp-src="{{item.value | thumbnailUrl}}" alt="" ng-switch-when="thumbnail">
                     <div class="content-avatar" ng-switch-when="avatar">
                         <img webp-src="{{item.value | avatarUrl: 'large'}}" alt="">
@@ -44,7 +44,7 @@
             <ul>
                 <li ng-repeat="item in pointEditSection.object.extraList track by $index">
                     <div class="title">
-                        <p style="{{item.editActive && pointEditSection.theme.main ? 'color:' + pointEditSection.theme.main + ';' :''}}">{{item.title}}</p>
+                        <p ng-style="{color: item.editActive && pointEditSection.theme.main ? pointEditSection.theme.main : null}">{{item.title}}</p>
                         <p>{{item.subTitle}}</p>
                     </div>
                     <p class="content" ng-class="{disabled: item.editDisabled}">{{item.value}}</p>

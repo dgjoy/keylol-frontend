@@ -13,7 +13,15 @@
     }">
         <ul ng-animate-swap="articleComments.currentPage">
             <li class="comment" ng-repeat="comment in articleComments.article.comments">
-                <div class="basic-info">
+                <div class="archived" ng-if="!articleComments.authorize_view(comment)">
+                    <div class="name-group">
+                        <p>这则评论已被封存</p>
+                        <p>评论内容和作者信息已被隐藏</p>
+                    </div>
+                    <div class="floor">#{{comment.sidForArticle}}</div>
+                </div>
+
+                <div ng-if="articleComments.authorize_view(comment)" class="basic-info">
                     <a ng-href="user/{{comment.authorIdCode}}"><img class="avatar" webp-src="{{comment.authorAvatarImage | avatarUrl}}"></a>
                     <div class="name-group">
                         <p><a ng-href="user/{{comment.authorIdCode}}" class="username">{{comment.authorUserName}}</a><span class="like-count" ng-style="{color: comment.liked ? articleComments.theme.light : ''}" ng-class="{'light-theme': comment.liked}">+{{comment.likeCount}}</span></p>
@@ -45,7 +53,7 @@
 
                             <a href="" ng-if="!articleComments.stateTree.currentUser" ng-click="articleComments.utils.openRegistration()">认可</a>
                             <a href="" ng-if="!articleComments.stateTree.currentUser" ng-click="articleComments.utils.openRegistration()">回复</a>
-                            <span ng-if="comment.authorIdCode === articleComments.stateTree.currentUser.idCode || articleComments.stateTree.currentUser.roles.indexOf('Operator') > -1">
+                            <span ng-if="articleComments.authorize_edit(comment)">
                                 <span>|</span>
                                 <a href=""
                                    ng-click="articleComments.showArchive($index, $event, comment)"
@@ -63,7 +71,7 @@
                         <p><span am-time-ago="comment.publishTime"></span> / #{{comment.sidForArticle}}</p>
                     </div>
                 </div>
-                <div ng-if="comment.replyToComment" class="comment-to-reply">
+                <div ng-if="comment.replyToComment&&articleComments.authorize_view(comment)" class="comment-to-reply">
                     <div class="basic">
                         <p class="reply">
                             <span>回复 #{{comment.replyToComment.sidForArticle}}</span>
@@ -73,7 +81,7 @@
                     </div>
                     <p class="comment-content">{{comment.replyToComment.content | extractText}}</p>
                 </div>
-                <article class="editor-style" bind-html-compile="comment.content"></article>
+                <article ng-if="articleComments.authorize_view(comment)" class="editor-style" bind-html-compile="comment.content"></article>
             </li>
         </ul>
     </div>

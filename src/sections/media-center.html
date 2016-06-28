@@ -13,7 +13,7 @@
 <div class="wrapper" ng-if="mediaCenter.list.length > 0">
     <ul>
         <li ng-repeat="item in mediaCenter.list track by $index" ng-if="$index < 6">
-            <a href="" webp-background="{{item.link | uriRelocate: '/sq/' + ($index <= 0 ? '160' : '90')}}" ng-click="mediaCenter.showMediaOverlayWindow($index+1)">
+            <a href="" webp-background="{{item.link | uriRelocate: '/sq/' + ($index <= 0 ? '200' : '113')}}" ng-click="mediaCenter.showMediaOverlayWindow($index+1)">
                 <p class="text" ng-if="item.isVideo">
                     <span>{{$index === 0? item.text : ''}}</span>
                     <svg aria-hidden="true">
@@ -24,7 +24,7 @@
         </li>
     </ul>
     <div class="more">
-        <p>{{mediaCenter.artworkCount}} 张截图 / {{mediaCenter.screenshotCount}} 幅原画</p>
+        <p>{{mediaCenter.screenshotCount}} 张截图 / {{mediaCenter.artworkCount}} 幅原画</p>
         <p><a href="" ng-click="mediaCenter.showMediaOverlayWindow(1)">查看更多</a></p>
     </div>
 </div>

@@ -135,6 +135,36 @@
                     });
                 }
             });
+
+            const scrollCallback = () => {
+                const $wrapper = $element.find('.other .wrapper');
+
+                let newPosition;
+                const shouldWindowScrollTop = (this.fakeHeight ? this.fakeHeight : 190)  + 330;
+                const elementOffsetTop = $element.scrollTop();
+                const shouldWrapperHeight = $wrapper.height() + 50;
+                const $elementHeight = $element.find('.editor').height();
+
+                if (elementOffsetTop <= shouldWindowScrollTop) {
+                    newPosition = '';
+                } else if ($elementHeight - elementOffsetTop > shouldWrapperHeight) {
+                    newPosition = 'fixed-top';
+                } else {
+                    newPosition = 'absolute-bottom';
+                }
+
+                if (this.position !== newPosition) {
+                    $scope.$apply(() => {
+                        this.position = newPosition;
+                    });
+                }
+            };
+            $element.scroll(scrollCallback);
+
+            const cancelListenRoute = $scope.$on('$destroy', () => {
+                $element.unbind('scroll', scrollCallback);
+                cancelListenRoute();
+            });
         }
 
         exit() {
@@ -343,7 +373,7 @@
                     this.close();
                     this.detachLocationListener();
                     this.$state.reload();
-                    this.notification.success({ message: '提交成功' });
+                    this.notification.success({ message: '修改成功' });
                 }, response => {
                     this.notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
                     this.submitLock = false;
@@ -354,8 +384,9 @@
                     this.$timeout.cancel(this.autoSaveTimeout);
                     this.close();
                     this.detachLocationListener();
+                    this.stateTree.currentUser.coupon -= 3;
                     this.$location.url(`article/${this.stateTree.currentUser.idCode}/${response.data}`);
-                    this.notification.success({ message: '提交成功' });
+                    this.notification.success({ message: '发布成功，发布文章会消耗 3 文券' });
                 }, response => {
                     this.notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
                     this.submitLock = false;

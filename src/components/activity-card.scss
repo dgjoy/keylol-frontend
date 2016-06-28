@@ -1,6 +1,18 @@
 activity-card {
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+
+  .back-button {
+    position: absolute;
+    left: 0;
+  }
+}
+
+.activity-card {
   display: block;
-  width: 700px;
+  width: 580px;
+  position: relative;
 
   .moderation {
     @include keylol-shadow-1();
@@ -19,35 +31,31 @@ activity-card {
     }
     p:first-of-type {
       font-size: 20px;
+      padding-bottom: 2px;
     }
 
     img {
       width: 180px;
     }
-
-    .name-group p:first-of-type {
-      padding-bottom: 2px;
-    }
   }
-
 
   .activity-body {
     @include keylol-shadow-1;
     display: block;
     background-color: $keylol-inverted-text;
 
-    >.display-card {
+    .display-card {
       @include keylol-shadow-1;
       background-color: $keylol-card;
 
-      >.user-with-date {
+      .user-with-date {
         display: flex;
         justify-content: space-between;
         align-items: center;
         height: 72px;
         padding: 0 15px;
 
-        >.user {
+        .user {
           flex-shrink: 1;
           display: flex;
           align-items: center;
@@ -60,7 +68,7 @@ activity-card {
             }
           }
 
-          >.avatar {
+          .avatar {
             flex-shrink: 0;
             width: 32px;
             height: 32px;
@@ -68,7 +76,7 @@ activity-card {
             margin-right: 10px;
           }
 
-          >.name-group {
+          .name-group {
             p {
               margin: 0;
             }
@@ -86,19 +94,20 @@ activity-card {
         }
       }
 
-      >.simple {
-        >vote-circle {
+      .simple {
+        vote-circle {
           padding: 0 15px;
           margin-bottom: 20px;
         }
 
-        >p {
+        p {
           margin: 0;
           padding: 0 15px 20px 15px;
+          word-break: break-all;
           white-space: pre-wrap;
         }
 
-        >img {
+        img {
           width: 100%;
         }
       }
@@ -110,7 +119,7 @@ activity-card {
         height: 72px;
         padding: 0 15px;
 
-        >.point {
+        .point {
           flex-shrink: 1;
 
           &:hover>point-basic-info>.name-group>p:first-of-type {
@@ -118,7 +127,7 @@ activity-card {
           }
         }
 
-        >.source {
+        .source {
           flex-shrink: 0;
           font-size: 12px;
           color: $keylol-inertia-text;
@@ -154,11 +163,11 @@ activity-card {
       }
     }
 
-    >.communicate-card {
-      >.review-area {
+    .communicate-card {
+      .review-area {
         position: relative;
 
-        >.hr {
+        .hr {
           height: 1px;
           background-color: $keylol-inertia-shape;
         }
@@ -168,19 +177,19 @@ activity-card {
           margin:20px 0;
         }
 
-        >.float-top {
+        .float-top {
           position: absolute;
           top: 10px;
           right: 0;
           margin: 10px 0;
         }
 
-        >.review-count {
+        .review-count {
           padding: 20px 15px 10px;
           color: $keylol-inertia-text;
         }
 
-        >.review-sender {
+        .review-sender {
           display: flex;
           margin-top: 25px;
           margin-bottom: 10px;
@@ -200,7 +209,7 @@ activity-card {
           }
         }
 
-        >.review-list {
+        .review-list {
           @include page-change('ul');
           position: relative;
           margin: 10px 0;
@@ -223,20 +232,51 @@ activity-card {
             display: flex;
             justify-content: space-between;
 
+            .archived {
+              width: 100%;
+              display: flex;
+              justify-content: space-between;
+              .name-group {
+                p {
+                  margin: 0;
+                  color: $keylol-inertia-text;
+                }
+                p:first-of-type {
+                  font-weight: bold;
+                }
+                p:last-of-type {
+                  font-size: 12px;
+                }
+              }
+
+              .floor {
+                color: $keylol-inertia-text;
+              }
+            }
+
+            &:hover .content .info .date {
+              display: none;
+            }
+            &:hover .content .info .actions {
+              display: block;
+            }
+
             &.blink {
               animation: review-blink 5s;
             }
 
-            >.avatar {
+            .avatar {
+              flex-grow: 0;
               width: 32px;
-              height:32px;
+              height: 32px;
+              margin-right: 10px;
             }
 
-            >.content {
-              width: 628px;
+            .content {
+              flex-grow: 1;
             }
 
-            >.content>.info {
+            .content .info {
               display: flex;
               justify-content: space-between;
               align-items: center;
@@ -247,22 +287,21 @@ activity-card {
                 text-decoration: underline;
               }
 
-              >.user {
-
+              .user {
                 .user-name {
                   font-weight: bold;
                   color: $keylol-main-text;
                 }
 
-                >a, >span {
+                a, span {
                   margin-right: 6px;
                 }
               }
 
-              >.actions {
+              .actions {
                 display: none;
 
-                >span>span {
+                span>span {
                   margin: 0 5px 0 10px;
                 }
 
@@ -284,15 +323,10 @@ activity-card {
               }
             }
 
-            >.content>.text {
+            .content .text {
               color: $keylol-main-text;
-            }
-
-            &:hover>.content>.info>.date {
-              display: none;
-            }
-            &:hover>.content>.info>.actions {
-              display: block;
+              word-break: break-all;
+              white-space: pre-wrap;
             }
           }
         }

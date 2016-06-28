@@ -3,6 +3,29 @@ article-comments {
   display: block;
   background-color: $keylol-inverted-text;
 
+  .archived {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    .name-group {
+      margin-left: 40px;
+      p {
+        margin: 0;
+        color: $keylol-inertia-text;
+      }
+      p:first-of-type {
+        font-weight: bold;
+      }
+      p:last-of-type {
+        font-size: 12px;
+      }
+    }
+
+    .floor {
+      color: $keylol-inertia-text;
+    }
+  }
 
   .basic-info {
     display: flex;

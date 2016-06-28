@@ -1,6 +1,6 @@
 <div class="{{ datepicker.isError?'warn':datepicker.isFocus?'theme':'' }}"
      popup="datepicker.showSelectorPopup"
-     style="{{datepicker.theme.light&&datepicker.isFocus&&!datepicker.isError?'border-color:' + datepicker.theme.light + ';' : '' }}"
+     ng-style="{borderColor:datepicker.theme.light && datepicker.isFocus && !datepicker.isError ? datepicker.theme.light : null}"
     >
     <input type="text"
            ng-model="datepicker.model"

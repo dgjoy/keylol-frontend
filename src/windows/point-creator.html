@@ -41,7 +41,7 @@
                         </div>
                         <div class="actions">
                             <raised-button ng-if="!pointCreator.steamExpanded" type="theme" text="抓取" click="pointCreator.steamCapture()" disabled="pointCreator.captureLock || !pointCreator.extra.SteamGame.link"></raised-button>
-                            <raised-button ng-if="pointCreator.steamExpanded" click="pointCreator.submit('SteamGame')" disabled="pointCreator.submitLock || !(pointCreator.vm.SteamGame.englishName && pointCreator.vm.SteamGame.idCode.length === 5)" type="theme" text="开设"></raised-button>
+                            <raised-button ng-if="pointCreator.steamExpanded" click="pointCreator.submit('SteamGame')" long-disabled="pointCreator.submitLock || !(pointCreator.vm.SteamGame.englishName && pointCreator.vm.SteamGame.idCode.length === 5)" type="theme" text="开设"></raised-button>
                             <flat-button type="inertia" text="放弃" click="pointCreator.close()"></flat-button>
                         </div>
                     </form>
@@ -82,7 +82,7 @@
                             </div>
                         </div>
                         <div class="actions">
-                            <raised-button type="theme" text="开设" click="pointCreator.submit('OtherGame')" disabled="pointCreator.submitLock || !(pointCreator.vm.OtherGame.englishName && pointCreator.vm.OtherGame.headerImage && pointCreator.vm.OtherGame.avatarImage && pointCreator.vm.OtherGame.idCode.length === 5 && pointCreator.extra.OtherGame.platformPoints.length > 0)"></raised-button>
+                            <raised-button type="theme" text="开设" click="pointCreator.submit('OtherGame')" long-disabled="pointCreator.submitLock || !(pointCreator.vm.OtherGame.englishName && pointCreator.vm.OtherGame.headerImage && pointCreator.vm.OtherGame.avatarImage && pointCreator.vm.OtherGame.idCode.length === 5 && pointCreator.extra.OtherGame.platformPoints.length > 0)"></raised-button>
                             <flat-button type="inertia" text="放弃" click="pointCreator.close()"></flat-button>
                         </div>
                     </form>
@@ -93,7 +93,7 @@
                     <div class="header-image">
                         <label>页眉照片</label>
                         <a href="" popup="pointCreator.extra.Hardware.headerImage" ngf-select="pointCreator.uploadImage($file, $event, 'Hardware', 'headerImage')" ngf-fix-orientation="true" accept="image/*">{{pointCreator.vm.Hardware.headerImage ? '重新' : ''}}上传</a>
-                        <div class="preview" ng-class="{empty: !pointCreator.vm.Hardware.headerImage}" webp-background="{{pointCreator.vm.Hardware.headerImage | uriRelocate: '/both/670x142'}}">
+                        <div class="preview" ng-class="{empty: !pointCreator.vm.Hardware.headerImage}" webp-background="{{pointCreator.vm.Hardware.headerImage | uriRelocate: '/both/838x178'}}">
                             <span>据点、来稿文章的顶部图片，建议使用广告照片或概念艺术</span>
                             <span>适宜图像大小为 940 x 200 或更高像素</span>
                         </div>
@@ -107,7 +107,7 @@
                     </div>
                 </div>
                 <div class="actions">
-                    <raised-button type="theme" text="开设" click="pointCreator.submit('Hardware')" disabled="pointCreator.submitLock || !(pointCreator.vm.Hardware.englishName && pointCreator.vm.Hardware.headerImage && pointCreator.vm.Hardware.idCode.length === 5)"></raised-button>
+                    <raised-button type="theme" text="开设" click="pointCreator.submit('Hardware')" long-disabled="pointCreator.submitLock || !(pointCreator.vm.Hardware.englishName && pointCreator.vm.Hardware.headerImage && pointCreator.vm.Hardware.idCode.length === 5)"></raised-button>
                     <flat-button type="inertia" text="放弃" click="pointCreator.close()"></flat-button>
                 </div>
             </form>
@@ -136,7 +136,7 @@
                     </div>
                 </div>
                 <div class="actions">
-                    <raised-button type="theme" text="开设" click="pointCreator.submit('Vendor')" disabled="pointCreator.submitLock || !(pointCreator.vm.Vendor.englishName && pointCreator.vm.Vendor.avatarImage && pointCreator.vm.Vendor.idCode.length === 5)"></raised-button>
+                    <raised-button type="theme" text="开设" click="pointCreator.submit('Vendor')" long-disabled="pointCreator.submitLock || !(pointCreator.vm.Vendor.englishName && pointCreator.vm.Vendor.avatarImage && pointCreator.vm.Vendor.idCode.length === 5)"></raised-button>
                     <flat-button type="inertia" text="放弃" click="pointCreator.close()"></flat-button>
                 </div>
             </form>
@@ -165,7 +165,7 @@
                     </div>
                 </div>
                 <div class="actions">
-                    <raised-button type="theme" text="开设" click="pointCreator.submit('Category')" disabled="pointCreator.submitLock || !(pointCreator.vm.Category.englishName && pointCreator.vm.Category.avatarImage && pointCreator.vm.Category.idCode.length === 5)"></raised-button>
+                    <raised-button type="theme" text="开设" click="pointCreator.submit('Category')" long-disabled="pointCreator.submitLock || !(pointCreator.vm.Category.englishName && pointCreator.vm.Category.avatarImage && pointCreator.vm.Category.idCode.length === 5)"></raised-button>
                     <flat-button type="inertia" text="放弃" click="pointCreator.close()"></flat-button>
                 </div>
             </form>

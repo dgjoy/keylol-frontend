@@ -30,41 +30,49 @@ var buildConfigs = {
     local: {
         bundle: false,
         apiEndpoint: "https://localhost:44300/",
-        urlCanonical: false
+        urlCanonical: false,
+        enableStats: false
     },
     dev: {
         bundle: false,
         apiEndpoint: "https://lgbt-api.keylol.com/",
-        urlCanonical: false
+        urlCanonical: false,
+        enableStats: true
     },
     lgbt: {
         bundle: true,
         apiEndpoint: "https://lgbt-api.keylol.com/",
-        urlCanonical: false
+        urlCanonical: false,
+        enableStats: false
     },
     prod: {
         bundle: true,
         apiEndpoint: "https://api.keylol.com/",
-        urlCanonical: true
+        urlCanonical: true,
+        enableStats: true
     }
 };
 
-var vendorScripts = [
-    "node_modules/jquery/dist/jquery.js",
-    "node_modules/ms-signalr-client/jquery.signalr-2.2.0.js",
-    "node_modules/svgxuse/svgxuse.js",
-    "node_modules/moment/moment.js",
+var vendorMinScripts = [
+    "node_modules/jquery/dist/jquery.min.js",
+    "node_modules/svgxuse/svgxuse.min.js",
+    "node_modules/moment/min/moment.min.js",
     "node_modules/moment/locale/zh-cn.js",
-    "node_modules/moment-timezone/builds/moment-timezone-with-data.js",
-    "node_modules/angular/angular.js",
+    "node_modules/moment-timezone/builds/moment-timezone-with-data.min.js",
+    "node_modules/angular/angular.min.js",
+    "node_modules/angular-ui-router/release/angular-ui-router.min.js",
+    "node_modules/angular-animate/angular-animate.min.js",
+    "node_modules/angular-moment/angular-moment.min.js",
+    "node_modules/ngstorage/ngStorage.min.js",
+    "node_modules/ng-file-upload/dist/ng-file-upload.min.js",
+    "node_modules/angular-utf8-base64/angular-utf8-base64.min.js",
+    "node_modules/angulartics/dist/angulartics.min.js",
+    "node_modules/angulartics-google-analytics/dist/angulartics-ga.min.js",
+    "node_modules/ms-signalr-client/jquery.signalr-2.2.0.min.js" // 这个文件一定要放在最后
+];
+
+var vendorScripts = [
     "node_modules/angular-i18n/angular-locale_zh.js",
-    "node_modules/angular-ui-router/release/angular-ui-router.js",
-    "node_modules/angular-animate/angular-animate.js",
-    "node_modules/angular-moment/angular-moment.js",
-    "node_modules/ngstorage/ngStorage.js",
-    "node_modules/ng-file-upload/dist/ng-file-upload.js",
-    "node_modules/angular-utf8-base64/angular-utf8-base64.js",
-    "node_modules/angulartics/src/angulartics.js",
     "node_modules/simple-module/lib/module.js",
     "node_modules/simple-hotkeys/lib/hotkeys.js",
     "node_modules/simple-uploader/lib/uploader.js",
@@ -96,7 +104,7 @@ var sassStylesheets = [
     "src/**/*.scss"
 ];
 
-var keylolTextList = "`{}>▾▴其乐推荐据点客务中心讯息轨道评测好资差模组感悟请无视游戏与艺术之间的空隙提交注册申登入发布文章由你筛选变更函会员研谈档邮政服私信蒸汽动力进社区噪音零死角讨论独特鼓励机制志同合琴瑟曲即日内欲知情关联意成功错误认可索取表单开设此阅读搜结果传送装置已就位个人从兴趣始慢搭建一条收到出未能撞到处理这位用户尚或任何当前投稿厂商类型平台剧透警告简完编辑确料定太瞎了获不态了跳过步正在生首页并立案稍候糕块里如也连蛋都没有需验证陆加现解分享放公篇被封存科退通职团队惩教萃撤销录兌換品广场专题器网口令哨所性玩家焦扉报坑仁近畿集数目时驻流派基本渠程原语言华度像界面化硬件对私公函缺失作新脉订友听众安全醒互明细店排行券则";
+var keylolTextList = "`{}>▾▴其乐推荐据点客务中心讯息轨道评测好资差模组感悟请无视游戏与艺术之间的空隙提交注册申登入发布文章由你筛选变更函会员研谈档邮政服私信蒸汽动力进社区噪音零死角讨论独特鼓励机制志同合琴瑟曲即日内欲知情关联意成功错误认可索取表单开设此阅读搜结果传送装置已就位个人从兴趣始慢搭建一条收到出未能撞到处理这位用户尚或任何当前投稿厂商类型平台剧透警告简完编辑确料定太瞎了获不态了跳过步正在生首页并立案稍候糕块里如也连蛋都没有需验证陆加现解分享放公篇被封存科退通职团队惩教萃撤销录兌換品广场专题器网口令哨所性玩家焦扉报坑仁近畿集数目时驻流派基本渠程原语言华度像界面化硬件对私公函缺失作新脉订友听众安全醒互明细店排行券则系列";
 
 var lisongTextList = "/评测好差模组资讯会员注册表单连接游戏平台昵称账户头像登录口令确认电子邮箱人机验证声明桌面类蒸汽第一称射击时空枪使命召唤侠盗猎车手橘子孢子上帝视角文明红色警戒拟城市塔防即时策略折扣原声控僵尸末日泰拉瑞亚独立用户识别码玩家标签个人据点横幅信息变更函提示守则平台账户分享社区动态当前确新录保护件订阅简通知等待添加成为友收到验证码绑定功平台连接向导邀请内列中名英章数读者操作开设型唯商店链背景图关联偏（能暂未放）输入残缺不堪的料完索引介绍补充善于期发行厂流派特性系次要封大匹配题语言抓取同步周器加社区其乐抚鳞品预览说力编号架间冷衫";
 
@@ -232,9 +240,14 @@ var getBuildTask = function (configName) {
             .pipe(rename("environment-config.js"))
             .pipe(gulp.dest("temporary/"));
     }, config.bundle ? gulp.parallel("scss:bundle", "babel:bundle") : gulp.parallel("sass", "babel"),
-        config.bundle ? gulp.parallel(function buildVendorScriptBundle() {
+        config.bundle ? gulp.parallel(function concatVendorMinScriptBundle() {
+        return gulp.src(vendorMinScripts)
+            .pipe(concat("vendor-a.min.js"))
+            .pipe(rev())
+            .pipe(gulp.dest("bundles"));
+    }, function buildVendorScriptsBundle() {
         return gulp.src(vendorScripts)
-            .pipe(concat("vendor.min.js"))
+            .pipe(concat("vendor-b.min.js"))
             .pipe(uglify())
             .pipe(rev())
             .pipe(gulp.dest("bundles"));
@@ -278,14 +291,15 @@ var getBuildTask = function (configName) {
             scriptFiles = getFiles(["bundles/vendor-*.min.js", "bundles/app-*.min.js", "bundles/templates-*.min.js"]);
             stylesheetFiles = getFiles(["bundles/stylesheets-*.min.css"]);
         } else {
-            scriptFiles = getFiles(vendorScripts.concat(appScripts));
+            scriptFiles = getFiles(vendorMinScripts.concat(vendorScripts).concat(appScripts));
             stylesheetFiles = getFiles(stylesheets);
         }
         var stream = gulp.src("index.html.ejs")
             .pipe(template({
                 scripts: scriptFiles,
                 stylesheets: stylesheetFiles,
-                urlCanonical: config.urlCanonical
+                urlCanonical: config.urlCanonical,
+                enableStats: config.enableStats
             }))
             .pipe(rename("index.html"));
         if (config.bundle) {

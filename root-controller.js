@@ -1,6 +1,6 @@
 ﻿(function () {
     keylolApp.controller('RootController',
-        ($scope, pageHead, union, $http, apiEndpoint, $window, notification, $location, $rootScope, $state, stateTree, $stateParams) => {
+        ($scope, pageHead, union, $http, apiEndpoint, $window, notification, $location, $rootScope, $state, stateTree, $analytics, $injector) => {
             pageHead.loading();
 
             let firstLoad = true;
@@ -10,7 +10,7 @@
                 if (newToken) {
                     $http.defaults.headers.common.Authorization = `Bearer ${newToken}`;
                 } else {
-                    _czc.push(['_setCustomVar', '登录用户', '游客', 1]);
+                    $analytics.setUsername('游客');
                     for (const i in union.$localStorage) {
                         if (union.$localStorage.hasOwnProperty(i) && i.indexOf('$') !== 0)
                             delete union.$localStorage[i];
@@ -32,23 +32,30 @@
                 }
             });
 
+            const paramsOut = ['entrance', 'route'];
+
             $rootScope.$on('$stateChangeStart', (event, toState, toParams, fromState, fromParams) => {
                 // 如果是从子状态跳出至父状态，则阻止其发生
                 if (fromState.name.includes(toState.name) && fromState.name !== toState.name) {
                     let flag = true;
                     for (const attr in toParams) {
-                        if (toParams.hasOwnProperty(attr) && toParams[attr] !== fromParams[attr]) {
+                        if (toParams.hasOwnProperty(attr) && paramsOut.indexOf(attr) === -1 && toParams[attr] !== fromParams[attr]) {
                             flag = false;
                         }
                     }
                     if (flag) {
                         for (const attr in fromParams) {
-                            if (fromParams.hasOwnProperty(attr) && fromParams[attr] !== toParams[attr]) {
+                            if (fromParams.hasOwnProperty(attr) && paramsOut.indexOf(attr) === -1 && fromParams[attr] !== toParams[attr]) {
                                 flag = false;
                             }
                         }
                         if (flag) {
                             event.preventDefault();
+                            $state.go(toState.name, toParams, { notify: false }).then(current => {
+                                if (current.onEnter) {
+                                    $injector.invoke(current.onEnter);
+                                }
+                            });
                         }
                     }
                 }
@@ -56,7 +63,7 @@
                 $($window).unbind('scroll.loadTimeline');
             });
 
-            $rootScope.$on('$stateChangeSuccess', () => {
+            $rootScope.$on('$stateChangeSuccess', (event, toState, toParams, fromState) => {
                 $window.scrollTo(0, 0);
             });
     });

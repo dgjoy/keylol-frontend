@@ -1,6 +1,10 @@
 <button  type="{{raisedButton.isSubmit ? 'submit' : 'button'}}" popup="raisedButton.showPopup" class="{{raisedButton.type}}" ng-click="raisedButton.click({event: $event})" ng-class="{invert: raisedButton.invert}"
-         style="{{(raisedButton.themeColor && raisedButton.type === 'theme' && !raisedButton.disabled) ? (raisedButton.invert ? 'color: ' + raisedButton.themeColor + ';' + 'fill: ' + raisedButton.themeColor + ';' : 'background-color: ' + raisedButton.themeColor + ';') : ''}}"
-         ripple="{{raisedButton.invert ? raisedButton.themeColor || raisedButton.type : '#fff'}}" ng-disabled="raisedButton.disabled">
+         ng-style="{
+         color: (raisedButton.type === 'theme' && !raisedButton.disabled && !raisedButton.longDisabled && raisedButton.invert) ? (raisedButton.themeColor || '') : '',
+         fill: (raisedButton.type === 'theme' && !raisedButton.disabled && !raisedButton.longDisabled && raisedButton.invert) ? (raisedButton.themeColor || '') : '',
+         'background-color': (raisedButton.type === 'theme' && !raisedButton.disabled && !raisedButton.longDisabled && !raisedButton.invert) ? (raisedButton.themeColor || '') : ''
+          }"
+         ripple="{{raisedButton.invert ? raisedButton.themeColor || raisedButton.type : '#fff'}}" ng-disabled="raisedButton.disabled || raisedButton.longDisabled">
     <span class="value false-value" ng-class="{active: !raisedButton.binaryValue}">
         <svg ng-if="raisedButton.binarySet[0].icon"
              aria-hidden="true">

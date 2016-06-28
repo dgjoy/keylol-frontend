@@ -1,0 +1,36 @@
+archived-header {
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+
+  .back-button {
+    left: -88px;
+    position: absolute;
+  }
+
+  .moderation {
+    @include keylol-shadow-1();
+    background-color: $keylol-light-theme;
+    margin-bottom: 20px;
+    width: 580px;
+    height: 80px;
+    padding: 0 15px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    p {
+      margin: 0;
+      color: $keylol-inverted-text;
+    }
+    p:first-of-type {
+      font-size: 20px;
+      padding-bottom: 2px;
+    }
+
+    img {
+      width: 180px;
+    }
+  }
+}

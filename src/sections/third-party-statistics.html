@@ -1,4 +1,4 @@
-﻿<div class="header" style="{{::(thirdPartyStatistics.theme.main ? 'background-color: ' + thirdPartyStatistics.theme.main + ';' : '')}}">
+﻿<div class="header" ng-style="{backgroundColor: thirdPartyStatistics.theme.main}">
     <div class="theme-logo">
         <img ng-if="thirdPartyStatistics.theme.logo" webp-src="{{thirdPartyStatistics.theme.logo | themeLogoUrl}}">
         <div ng-if="!thirdPartyStatistics.theme.logo" class="alt">
@@ -27,7 +27,7 @@
         </div>
     </div>
 </div>
-<tabs ng-if="::thirdPartyStatistics.datas" style="{{::(thirdPartyStatistics.theme.light ? 'background-color: ' + thirdPartyStatistics.theme.light + ';' : '')}}" click-handler="thirdPartyStatistics.changeTab(index)" tab-array="::thirdPartyStatistics.tabArray" cur-tab="thirdPartyStatistics.currentPage"></tabs>
+<tabs ng-if="::thirdPartyStatistics.datas" ng-style="{backgroundColor: thirdPartyStatistics.theme.light}" click-handler="thirdPartyStatistics.changeTab(index)" tab-array="::thirdPartyStatistics.tabArray" cur-tab="thirdPartyStatistics.currentPage"></tabs>
 <div ng-if="::thirdPartyStatistics.datas" class="wrapper">
     <div class="statistics {{::thirdPartyStatistics.datas[thirdPartyStatistics.currentPage].name}}" ng-animate-swap="thirdPartyStatistics.currentPage">
         <div class="main">

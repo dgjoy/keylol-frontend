@@ -63,6 +63,10 @@
                     this.state = 'open';
 
                     this.$timeout(() => {
+                        if (this.comments.length === 0) {
+                            return;
+                        }
+
                         const e = this.$element.find('.review-list');
                         e.animate({
                             scrollTop: e.find(`[data-floor-id='#${this.comments[this.comments.length - 1].sidForActivity}']`).position().top,

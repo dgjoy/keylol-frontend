@@ -16,6 +16,13 @@
         </a>
         <span class="desc">认可{{timelineCard.card.contentType === 'activity' ? '这则动态' : '这篇文章'}}</span>
     </div>
+    <div ng-if="timelineCard.card.likedByThisUser" class="indirect-sources row">
+        <a class="indirect-source" ng-href="user/{{timelineCard.stateTree.aggregation.user.basicInfo.idCode}}">
+            <img webp-src="{{timelineCard.stateTree.aggregation.user.basicInfo.avatarImage | avatarUrl: 'small'}}" class="picture" />
+            <span class="desc">{{timelineCard.stateTree.aggregation.user.basicInfo.userName}}</span>
+        </a>
+        <span class="desc">认可{{timelineCard.card.contentType === 'activity' ? '这则动态' : '这篇文章'}}</span>
+    </div>
     <div class="shortcut" ng-switch="timelineCard.card.contentType">
         <a ng-switch-when="article" class="common-article" webp-background="{{timelineCard.card.coverImage | articleCoverUrl}}" ng-href="article/{{timelineCard.card.author.idCode}}/{{timelineCard.card.sidForAuthor}}">
             <div class="bottom-text">
@@ -30,7 +37,7 @@
                     <use ng-href="{{ 'more' | iconSvgUrl }}" xlink:href=""></use>
                 </svg>
             </a></p>
-            <a target="_blank" ng-href="{{timelineCard.card.coverImage | uriRelocate}}"><img ng-if="timelineCard.card.coverImage" webp-src="{{timelineCard.card.coverImage | uriRelocate: '/fw/340'}}"></a>
+            <a target="_blank" ng-href="{{timelineCard.card.coverImage | uriRelocate}}"><img ng-if="timelineCard.card.coverImage" webp-src="{{timelineCard.card.coverImage | uriRelocate: '/fw/425'}}"></a>
         </div>
     </div>
     <div ng-if="timelineCard.card.attachedPoints[0]" class="point-with-source">
@@ -67,7 +74,7 @@
                             <a href="" ng-if="!timelineCard.stateTree.currentUser" ng-click="timelineCard.utils.openRegistration()">回复</a>
                         </div>
                     </div>
-                    <div class="text">{{comment.content}}</div>
+                    <p class="text">{{comment.content}}</p>
                 </div>
             </div>
         </div>
@@ -89,7 +96,10 @@
                          type="inertia"
                          text="+{{timelineCard.card.likeCount}}"></flat-button>
         </div>
-        <flat-button ng-switch-when="open" text="评论" click="timelineCard.doComment()"></flat-button>
+        <div ng-switch-when="open">
+            <flat-button ng-if="!timelineCard.stateTree.currentUser" text="评论" click="timelineCard.utils.openRegistration()"></flat-button>
+            <flat-button ng-if="timelineCard.stateTree.currentUser" text="评论" click="timelineCard.doComment()"></flat-button>
+        </div>
         <flat-button ng-switch-when="close" type="inertia" text="···{{timelineCard.card.commentCount}}" click="timelineCard.openReviewArea()"></flat-button>
     </div>
 </div>

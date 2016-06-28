@@ -1,6 +1,6 @@
 ﻿(function () {
     class ActivityCardController {
-        constructor(utils, $http, notification, stateTree, apiEndpoint, $timeout, $element) {
+        constructor(utils, $http, notification, stateTree, apiEndpoint, $timeout, $element, $window) {
             $.extend(this,{
                 utils,
                 $http,
@@ -9,6 +9,7 @@
                 apiEndpoint,
                 $timeout,
                 $element,
+                $window,
             });
             this.relatedPoints = {
                 mainPoint: this.object.pointBasicInfo,
@@ -37,6 +38,26 @@
 
             this.showArchivePopup = [];
             this.showWarnPopup = [];
+
+            if (!stateTree.currentUser) {
+                this.currentIdCode = '';
+                this.isManager = false;
+            } else {
+                this.currentIdCode = stateTree.currentUser.idCode;
+                this.isManager = (stateTree.currentUser.roles.indexOf('Operator') > -1);
+            }
+        }
+
+        authorize_view (comment) {
+            return !comment.archived || (comment.authorIdCode === this.currentIdCode || this.isManager);
+        }
+        
+        authorize_edit (comment) {
+            return (comment.authorIdCode === this.currentIdCode && this.currentIdCode === this.object.authorBasicInfo.idCode ) || this.isManager;
+        }
+
+        back () {
+            this.$window.history.back();
         }
 
         reply(comment) {
