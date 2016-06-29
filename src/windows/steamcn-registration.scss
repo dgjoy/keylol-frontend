@@ -1,0 +1,206 @@
+.window-steamcn-registration {
+  &.window-no-source {
+    @include grow-shrink-child();
+  }
+
+  .window {
+    width: 700px;
+    background-color: $keylol-card;
+
+    .header {
+      height: 105px;
+      background-color: $keylol-light-theme;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      overflow: hidden;
+
+      .text {
+        margin-left: 15px;
+
+        p {
+          margin: 0;
+          padding: 0;
+
+          &:first-of-type {
+            font-weight: bold;
+            font-size: 20px;
+            margin-bottom: 2px;
+            color: $keylol-inverted-text;
+          }
+
+          &:last-of-type {
+            color: rgba($keylol-inverted-text, 0.6);
+          }
+        }
+      }
+
+      img {
+        position: relative;
+        transform: rotate(-15deg);
+        width: 100px;
+        margin-right: 30px;
+      }
+    }
+
+    .content {
+      text-area {
+        margin-right: 30px;
+      }
+
+      .fixed-width {
+        width: 240px;
+      }
+
+      .input-conn {
+        padding-left: 15px;
+        padding-top: 20px;
+        display: flex;
+
+        .avatar {
+          width: 32px;
+          height: 32px;
+          margin: 17px 0 0 -20px;
+        }
+      }
+
+      .input-user {
+        padding-left: 15px;
+        display: flex;
+        flex-wrap: wrap;
+      }
+    }
+
+    .conn {
+      @include keylol-inset-shadow-1();
+      background-color: $keylol-inverted-text;
+      position: relative;
+      height: 95px;
+      transition: height 800ms;
+      overflow: hidden;
+
+      &.ng-enter {
+        height: 0;
+      }
+      &.ng-enter-active {
+        height: 95px;
+      }
+      &.ng-leave {
+        height: 95px;
+      }
+      &.ng-leave-active {
+        height: 0;
+      }
+
+      .inner {
+        position: absolute;
+        box-sizing: border-box;
+        height: 95px;
+        padding: 0 15px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        &.ng-enter {
+          transition: all 800ms;
+          opacity: 0;
+          transform: translateY(100%);
+        }
+
+        &.ng-enter-active {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        &.ng-leave {
+          transition: all 800ms;
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        &.ng-leave-active {
+          opacity: 0;
+          transform: translateY(-100%);
+        }
+
+        .left {
+          p {
+            margin: 0;
+          }
+          p:last-of-type {
+            color: $keylol-inertia-text;
+          }
+          .blue {
+            color: $keylol-light-theme;
+          }
+          a {
+            color: $keylol-highlight;
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+          svg {
+            width: 20px;
+            height: 20px;
+            fill: $keylol-inertia-shape;
+            vertical-align: top;
+          }
+        }
+
+        .right .code {
+          color: $keylol-light-theme;
+          font-size: 20px;
+        }
+
+        .user {
+          display: flex;
+          width: 100%;
+          justify-content: center;
+          img {
+            height: 50px;
+            width: 50px;
+            border-radius: 25px;
+            margin-right: 10px;
+          }
+
+          div {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            p {
+              margin: 0;
+            }
+
+            p:last-of-type {
+              color: $keylol-inertia-text;
+            }
+          }
+        }
+      }
+    }
+
+    .actions {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 15px;
+      align-items: center;
+      height: 75px;
+
+      .wrapper {
+        display: flex;
+        align-items: center;
+        color: $keylol-inertia-text;
+
+        .gap {
+          width: 20px;
+        }
+        a {
+          color: $keylol-highlight;
+          &:hover { text-decoration: underline; }
+        }
+      }
+    }
+  }
+}

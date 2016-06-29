@@ -14,9 +14,14 @@
         }
 
         showEditPopup ($event, $index) {
-             if ($index < this.object.list.length && $.inArray(this.object.list[$index].type,['thumbnail','cover','avatar','logo']) !== -1) {
-                // 修改图片时,弹出的是菜单
+            if ($index < this.object.list.length) {
                 this.object.list[$index].editActive = true;
+            } else {
+                this.object.extraList[$index - this.object.list.length].editActive = true;
+            }
+
+            if ($index < this.object.list.length && $.inArray(this.object.list[$index].type,['thumbnail','cover','avatar','logo']) !== -1) {
+                // 修改图片时,弹出的是菜单
                 this.showPopups[$index]({
                     templateUrl: 'src/popup/upload-menu.html',
                     controller: 'UploadMenuController as uploadMenu',
@@ -41,12 +46,6 @@
                     this.object.list[$index].editActive = false;
                 });
             } else {
-                if ($index < this.object.list.length) {
-                    this.object.list[$index].editActive = true;
-                } else {
-                    this.object.extraList[$index - this.object.list.length].editActive = true;
-                }
-
                 this.showPopups[$index]({
                     templateUrl: 'src/popup/item-editor.html',
                     controller: 'ItemEditorController as itemEditor',
@@ -69,6 +68,9 @@
                     if (result || result === '') {
                         if ($index < this.object.list.length) {
                             this.object.list[$index].value = result;
+                            if (this.object.list[$index].type === 'steamcn') {
+                                this.object.list[$index].editDisabled = true;
+                            }
                         } else {
                             this.object.extraList[$index - this.object.list.length].value = result;
                         }

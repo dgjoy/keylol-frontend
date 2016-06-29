@@ -21,6 +21,10 @@
                 case 'point':
                     this.model = item.selects;
                     break;
+                case 'steamcn':
+                    this.username = '';
+                    this.password = '';
+                    break;
                 case 'password':
                     this.password = '';
                     this.newPassword = '';
@@ -57,6 +61,12 @@
                         submitObj.password = this.password;
                     }
                     closeValue = '';
+                    break;
+                case 'steamcn':
+                    submitObj.steamCnUserName = this.username;
+                    submitObj.steamCnPassword = this.password;
+
+                    closeValue = this.username;
                     break;
                 case 'color':
                     if (this.model === '') {

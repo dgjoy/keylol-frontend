@@ -3,6 +3,11 @@
         <text-area type="text" state="itemEditor.textError ? 'warn' : 'normal'" error="itemEditor.textError" label="{{itemEditor.item.title}}" theme="itemEditor.theme" model="itemEditor.model"></text-area>
         <raised-button click="itemEditor.submit()" text="提交" type="theme" theme-color="itemEditor.theme.main" disabled="itemEditor.model === itemEditor.item.value || itemEditor.submitLock"></raised-button>
     </form>
+    <form class="clearfix" ng-if="itemEditor.item.type === 'steamcn'">
+        <text-area type="text" state="itemEditor.textError ? 'warn' : 'normal'" error="itemEditor.textError" label="论坛用户名" theme="itemEditor.theme" model="itemEditor.username"></text-area>
+        <text-area type="password" state="itemEditor.textError ? 'warn' : 'normal'" error="itemEditor.textError" label="密码" theme="itemEditor.theme" model="itemEditor.password"></text-area>
+        <raised-button click="itemEditor.submit()" text="提交" type="theme" theme-color="itemEditor.theme.main" disabled="!itemEditor.username || !itemEditor.password || itemEditor.submitLock"></raised-button>
+    </form>
     <form class="clearfix" ng-if="itemEditor.item.type === 'password'">
         <text-area ng-if="itemEditor.item.needPassword" type="password" state="itemEditor.textError ? 'warn' : 'normal'" error="itemEditor.textError" label="原口令" theme="itemEditor.theme" model="itemEditor.password"></text-area>
         <text-area type="password" state="itemEditor.textError ? 'warn' : 'normal'" error="itemEditor.textError" label="新口令" theme="itemEditor.theme" model="itemEditor.newPassword"></text-area>

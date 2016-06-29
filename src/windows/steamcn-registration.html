@@ -1,0 +1,134 @@
+﻿<window position="center" class="window-steamcn-registration">
+    <div class="window">
+        <div class="header">
+            <div class="text">
+                <p>第一次通过蒸汽动力账户登录</p>
+                <p>需要与其乐机器人加为 Steam 好友</p>
+            </div>
+            <img src="assets/images/logo-arrow.png">
+        </div>
+        <div class="content">
+            <div class="input-conn">
+                <text-area type="text"
+                           label="论坛用户名"
+                           model="steamcnRegistration.steamCn.userName"
+                           state="'disabled'"
+                ></text-area>
+                <text-area ng-if="steamcnRegistration.phase === '连接成功' || steamcnRegistration.phase === '填写表单'"
+                           type="text"
+                           label="已连接 Steam 账户"
+                           model="steamcnRegistration.conn.vm.SteamProfileName"
+                           state="'disabled'"
+                           class="fixed-width"
+                ></text-area>
+                <img ng-if="steamcnRegistration.phase === '连接成功' || steamcnRegistration.phase === '填写表单'" class="avatar" webp-src="{{ steamcnRegistration.conn.vm.AvatarImage | avatarUrl}}" alt="">
+            </div>
+            <div class="input-user" ng-if="steamcnRegistration.phase === '填写表单'">
+                <text-area style="width: 200px;"
+                           type="text"
+                           label="昵称"
+                           model="steamcnRegistration.conn.vm.UserName"
+                           tip="'日常界面展示的社区名称'"
+                           state="steamcnRegistration.error['requestDto.UserName']?'warn':'normal'"
+                           error="steamcnRegistration.error['requestDto.UserName']"
+                ></text-area>
+                <text-area class="fixed-width"
+                           type="password"
+                           label="登录口令"
+                           model="steamcnRegistration.conn.vm.Password"
+                           state="steamcnRegistration.error['requestDto.Password']?'warn':'normal'"
+                           error="steamcnRegistration.error['requestDto.Password']"
+                ></text-area>
+                <text-area type="uic"
+                           label="用户识别码"
+                           model="steamcnRegistration.conn.vm.IdCode"
+                           state="steamcnRegistration.error['requestDto.IdCode']?'warn':'normal'"
+                           error="steamcnRegistration.error['requestDto.IdCode']"
+                           style="margin-right: 100px;margin-top: 10px;"
+                ></text-area>
+            </div>
+            <phase ng-if="steamcnRegistration.phase !== '填写表单'" phases="steamcnRegistration.conn.phases" index="steamcnRegistration.conn.index" gap-length="40"></phase>
+        </div>
+        <div class="conn" ng-if="steamcnRegistration.phase !== '填写表单'">
+            <div class="inner" ng-if="steamcnRegistration.conn.index === 1">
+                <div class="left">
+                    <p>在 Steam 中将 <span class="blue">{{steamcnRegistration.conn.botName}}</span> 加为好友</p>
+                    <p>
+                        快速添加前需要启动 Steam，你也可以访问机器人的 <a ng-href="https://steamcommunity.com/profiles/{{steamcnRegistration.conn.botSteamId64}}">社区资料页</a>
+                        <svg aria-hidden="true">
+                            <use ng-href="{{'open-in-new' | iconSvgUrl }}" xlink:href=""></use>
+                        </svg>
+                        手动添加
+                    </p>
+                </div>
+                <div class="right" >
+                    <a ng-href="steam://friends/add/{{steamcnRegistration.conn.botSteamId64}}" ng-click="steamcnRegistration.utils.firefoxLinkFix($event)"><raised-button type="light-theme" text="快速添加"></raised-button></a>
+                </div>
+            </div>
+            <div class="inner" ng-if="steamcnRegistration.conn.index === 2">
+                <div class="left">
+                    <p>向其乐机器人发送 <span class="blue">验证码</span></p>
+                    <p>通过 Steam 对话发送右边的 8 位验证码</p>
+                </div>
+                <div class="right">
+                    <p class="code font-consolas">{{steamcnRegistration.conn.code}}</p>
+                </div>
+            </div>
+            <div class="inner" ng-if="steamcnRegistration.conn.index === 3">
+                <div class="user">
+                    <img webp-src="{{ steamcnRegistration.conn.vm.AvatarImage | avatarUrl }}" />
+                    <div>
+                        <p>{{ steamcnRegistration.conn.vm.SteamProfileName }}</p>
+                        <p>欢迎回来</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div ng-switch="steamcnRegistration.phase">
+            <div class="actions" ng-switch-when="添加好友">
+                <div class="wrapper">
+                    <span>若成功添加机器人后没有响应，你可以手动点击下一步继续</span>
+                </div>
+                <div class="wrapper">
+                    <flat-button text="放弃" type="inertia" click="steamcnRegistration.close()"></flat-button>
+                    <div class="gap"></div>
+                    <raised-button click="steamcnRegistration.goForward()" text="下一步" type="inertia"></raised-button>
+                </div>
+            </div>
+
+            <div class="actions" ng-switch-when="发送验证码">
+                <div class="wrapper">
+                    <raised-button click="steamcnRegistration.goBack()" text="上一步" type="inertia"></raised-button>
+                    <div class="gap"></div>
+                    <span>若未能成功添加机器人好友，你可以手动点击上一步返回</span>
+                </div>
+                <div class="wrapper">
+                    <flat-button text="放弃" type="inertia" click="steamcnRegistration.close()"></flat-button>
+                </div>
+            </div>
+
+            <div class="actions" ng-switch-when="连接成功">
+                <div class="wrapper">
+                    &nbsp;
+                </div>
+                <div class="wrapper">
+                    <flat-button text="放弃" type="inertia" click="steamcnRegistration.close()"></flat-button>
+                    <div class="gap"></div>
+                    <raised-button text="注册" type="theme" disabled="true"></raised-button>
+                </div>
+            </div>
+
+            <div class="actions" ng-switch-when="填写表单">
+                <div class="wrapper">
+                    只差一步了！补充你在其乐的社交信息
+                </div>
+                <div class="wrapper">
+                    <flat-button text="放弃" type="inertia" click="steamcnRegistration.close()"></flat-button>
+                    <div class="gap"></div>
+                    <raised-button text="登录" type="theme" click="steamcnRegistration.submit()" long-disabled="!steamcnRegistration.conn.vm.UserName || !steamcnRegistration.conn.vm.IdCode || !steamcnRegistration.conn.vm.Password"></raised-button>
+                </div>
+            </div>
+        </div>
+    </div>
+</window>

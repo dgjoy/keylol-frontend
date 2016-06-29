@@ -65,10 +65,41 @@
                         <!--<flat-button text="放弃" type="inertia" click="login.close()"></flat-button>-->
                     <!--</div>-->
                 <!--</div>-->
+                <!-- SteamCN 方式 -->
+                <div class="login-steamcn" ng-if="login.currentWay === 1">
+                    <tabs class="invert" invert="true" tab-array="login.steamcnWayManager.tabArray" cur-tab="login.steamcnWayManager.curPage" click-handler="login.changeSteamcnWay(index)"></tabs>
+                    <div class="steamcn-wrapper {{login.steamcnWayManager.swapDirection}}">
+                        <form ng-submit="login.submit()" class="swap-helper swap-animation" ng-animate-swap="login.steamcnWayManager.curPage">
+                            <div class="inputs">
+                                <text-area type="{{login.steamcnWayManager.forms[login.steamcnWayManager.curPage][0].type}}"
+                                           label="{{login.steamcnWayManager.forms[login.steamcnWayManager.curPage][0].label}}"
+                                           model="login.steamcnWayManager.vm.id_code" style="margin-right: 30px;"
+                                           state="login.steamcnWayManager.id_code.state"
+                                           tip="login.steamcnWayManager.forms[login.steamcnWayManager.curPage][0].tip"
+                                           error="login.steamcnWayManager.id_code.error"
+                                ></text-area>
+                                <text-area type="{{login.steamcnWayManager.forms[login.steamcnWayManager.curPage][1].type}}"
+                                           label="{{login.steamcnWayManager.forms[login.steamcnWayManager.curPage][1].label}}"
+                                           model="login.steamcnWayManager.vm.password" style="width: 240px;"
+                                           state="login.steamcnWayManager.password.state"
+                                           tip="login.steamcnWayManager.forms[login.steamcnWayManager.curPage][1].tip"
+                                           error="login.steamcnWayManager.password.error"
+                                ></text-area>
+                            </div>
+                            <div class="actions">
+                                <p>如果你曾注册过其乐账号，请先用其他方式登录并在「信息与资料」中登记蒸汽动力账号</p>
+                                <div class="action">
+                                    <flat-button text="放弃" type="inertia" click="login.close()"></flat-button>
+                                    <raised-button is-submit="true" text="登录" type="theme"
+                                                   disabled="!login.steamcnWayManager.id_code.completed || !login.steamcnWayManager.password.completed || login.submitLock"></raised-button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
                 <!-- 口令方式 -->
-                <div class="login-passcode" ng-if="login.currentWay === 1">
-                    <tabs class="invert" invert="true" tab-array="login.passcodeWayManager.tabArray" cur-tab="0" click-handler="login.changePasscodeWay(index)"></tabs>
-                    <!--<div class="error">{{login.passcodeWayManager.error['vm.id_code']}}{{login.passcodeWayManager.error['vm.password']}}</div>-->
+                <div class="login-passcode" ng-if="login.currentWay === 2">
+                    <tabs class="invert" invert="true" tab-array="login.passcodeWayManager.tabArray" cur-tab="login.passcodeWayManager.curPage" click-handler="login.changePasscodeWay(index)"></tabs>
                     <div class="passcode-wrapper {{login.passcodeWayManager.swapDirection}}">
                         <form ng-submit="login.submit()" class="swap-helper swap-animation" ng-animate-swap="login.passcodeWayManager.curPage">
                             <div class="inputs">

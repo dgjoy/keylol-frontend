@@ -9,6 +9,7 @@
         bindings: {
             phases:'<',
             index: '<',
+            gapLength: '<',
         },
     });
 }());
