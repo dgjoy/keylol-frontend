@@ -21,7 +21,7 @@
                     <td>{{record.Event}}</td>
                     <td ng-class="{plus: record.Change > 0, minus: record.Change < 0}">{{record.Change<0?"－":"＋"}} {{record.Change<0?-record.Change:record.Change}} ◆</td>
                     <td>{{record.Balance}} ◆</td>
-                    <td>{{record.CreateTime|amDateFormat: "YYYY-MM-DD HH:mm:ss"}}</td>
+                    <td>{{record.CreateTime | amDateFormat: "YYYY-MM-DD HH:mm:ss"}}</td>
                     <td ng-switch="record.Event">
                         <span ng-switch-when="新注册">欢迎来到其乐游戏社区</span>
                         <span ng-switch-when="应邀注册">受 <point-link ng-if="record.Description.Inviter" type="'user'" point-name="'@'+record.Description.Inviter.UserName" id-code="record.Description.Inviter.IdCode"></point-link> 引荐而准备迎新文券</span>
