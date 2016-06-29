@@ -26,6 +26,8 @@
 
                 const object = stateTree.aggregation.user.basicInfo;
                 const preference = stateTree.aggregation.user.edit;
+
+                console.log(object, preference);
                 $scope.basicInfo = {
                     submitLink,
                     header: {
@@ -86,12 +88,14 @@
                             value: preference.steamBotLost ? '已断开绑定' : preference.steamBotName,
                             editDisabled: true,
                         },
-                        // {
-                        //     title: '蒸汽动力账号',
-                        //     type: 'text',
-                        //     value: '不可用',
-                        //     editDisabled: true,
-                        // },
+                        {
+                            title: '蒸汽动力账号',
+                            type: 'steamcn',
+                            key: 'steamcn',
+                            link: object.steamCnUid ? `http://steamcn.com/suid-${object.steamCnUid}` : undefined,
+                            value: object.steamCnUserName,
+                            editDisabled: !!object.steamCnUserName,
+                        },
                     ],
                 };
                 $scope.vision = {

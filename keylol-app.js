@@ -396,17 +396,6 @@
             ]);
         });
 
-        $analyticsProvider.registerEventTrack((action, prop) => {
-            _czc.push([
-                '_trackEvent',
-                prop.category || '未分类',
-                action,
-                prop.label,
-                prop.value,
-                prop.nodeid,
-            ]);
-        });
-
         $analyticsProvider.registerSetUsername(username => {
             _czc.push(['_setCustomVar', '登录用户', username, 1]);
         });

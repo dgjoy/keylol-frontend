@@ -75,6 +75,12 @@
     align-items: center;
     height: 75px;
 
+    p {
+      color: $keylol-inertia-text;
+      margin: 0;
+      font-size: 12px;
+    }
+
     a {
       color: $keylol-highlight;
       &:hover { text-decoration: underline; }
@@ -148,6 +154,7 @@
           background-color: $keylol-inverted-text;
           overflow: hidden;
         }
+
         .inner {
           display: flex;
           align-items: center;
@@ -236,6 +243,21 @@
         display: block;
 
         .passcode-wrapper {
+          overflow: hidden;
+          display: block;
+          position: relative;
+          .inputs {
+            padding-left: 15px;
+            padding-top: 20px;
+            display: flex;
+          }
+        }
+      }
+
+      .login-steamcn {
+        display: block;
+
+        .steamcn-wrapper {
           overflow: hidden;
           display: block;
           position: relative;
