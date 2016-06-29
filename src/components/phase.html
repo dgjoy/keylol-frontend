@@ -7,5 +7,5 @@
     </span>
 
     <span class="text">{{p}}</span>
-    <span ng-if="$index !== phase.phases.length-1" class="gap"></span>
+    <span ng-style="{width: phase.gapLength}" ng-if="$index !== phase.phases.length-1" class="gap"></span>
 </div>

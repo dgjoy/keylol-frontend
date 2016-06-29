@@ -31,6 +31,10 @@
                         </div>
                     </div>
                     <p ng-switch-when="link"><a ng-href="{{item.link}}">{{item.value}}</a></p>
+                    <p ng-switch-when="steamcn" ng-class="{disabled: !item.value}">
+                        <a ng-if="item.value" ng-href="{{item.link}}">{{item.value}}</a>
+                        <span ng-if="!item.value">{{item.value || '尚未绑定蒸汽动力'}}</span>
+                    </p>
                     <p ng-switch-when="lostBot" ng-class="{disabled: item.editDisabled}">{{item.value}}&nbsp;&nbsp;&nbsp;<a ng-href="{{item.addLink}}">点击这里快速添加</a>&nbsp;&nbsp;&nbsp;<a ng-href="{{item.link}}">前往资料页添加</a></p>
                     <p ng-switch-default="" ng-class="{disabled: item.editDisabled}">{{item.value}}</p>
                 </div>

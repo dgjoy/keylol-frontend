@@ -298,6 +298,21 @@
             this.close();
         }
 
+        openSteamcn (steamCn, steamCnPassword) {
+            this.window.show({
+                templateUrl: 'src/windows/steamcn-registration.html',
+                controller: 'SteamCnRegistrationController',
+                controllerAs: 'steamcnRegistration',
+                inputs: {
+                    steamCn: {
+                        email: steamCn[0],
+                        userName: steamCn[1],
+                        password: steamCnPassword,
+                    },
+                },
+            });
+        }
+
         changeWay(index) {
             if (index > this.currentWay) {
                 this.swapDirection = 'left';
@@ -461,7 +476,7 @@
                                 manager.password.completed = false;
                                 break;
                             case 'no_corresponding_user':
-                                manager.registerExpand = true;
+                                this.openSteamcn(response.data.error_description.split(':'), manager.vm.password);
                                 break;
                             default:
                                 this.notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
