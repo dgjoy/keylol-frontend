@@ -122,7 +122,13 @@ $keylol-topic: #7976b1;
 // text protection
 @mixin text-protection ($position: bottom) {
   padding: 15px 15px;
-  background: linear-gradient(to $position, rgba(#000,0), rgba(#000, .3) 67.7%, rgba(#000, .6));
+  background: linear-gradient(to $position, rgba(#000,0), rgba(#000, .4) 67.7%, rgba(#000, .7));
+}
+
+// text protection
+@mixin text-protection-deep ($position: bottom) {
+  padding: 15px 15px;
+  background: linear-gradient(to $position, rgba(#000,0), rgba(#000, .5) 67.7%, rgba(#000, .8));
 }
 
 // circle ripple-container

@@ -120,8 +120,6 @@
 
             this.$http.post(`${this.apiEndpoint}user`, this.conn.vm)
                 .then(response => {
-                    this.union.$localStorage.firstOpenKeylol = true;
-
                     this.$http.post(`${this.apiEndpoint}oauth/token`, this.$httpParamSerializerJQLike({
                         token: response.data,
                         grant_type: 'one_time_token',

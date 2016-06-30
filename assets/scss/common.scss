@@ -316,6 +316,10 @@ textarea {
     .underline {
       text-decoration: underline;
     }
+
+    .bottom-text {
+      @include text-protection-deep();
+    }
   }
 
   .bottom-text{

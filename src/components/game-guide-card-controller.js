@@ -16,9 +16,6 @@
             this.subscribe = utils.subscribe;
             this.openRegistration = utils.openRegistration;
 
-
-            console.log(this.card.categories);
-
             this.characteristics = [];
             for (const attr in this.card) {
                 if (this.card.hasOwnProperty(attr)) {

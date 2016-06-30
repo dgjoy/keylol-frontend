@@ -28,6 +28,7 @@
                 case 'password':
                     this.password = '';
                     this.newPassword = '';
+                    this.newRepeatPassword = '';
                     break;
                 default:
                     this.model = item.value;
@@ -53,6 +54,11 @@
                         if (this.newPassword.length === 0) {
                             this.submitLock = false;
                             return;
+                        }
+                        
+                        if (this.newPassword !== this.newRepeatPassword) {
+                            this.textError = '两次口令输入不一致';
+                            this.submitLock = false;
                         }
                     }
 

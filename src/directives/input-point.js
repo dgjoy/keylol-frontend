@@ -1,5 +1,5 @@
 ﻿(function () {
-    keylolApp.directive('inputPoint', ($window, union, $timeout, $http, utils, apiEndpoint, notification) => {
+    keylolApp.directive('inputPoint', ($window, $timeout, $http, utils, apiEndpoint, notification) => {
         return {
             restrict: 'E',
             templateUrl: 'src/directives/input-point.html',
@@ -109,7 +109,7 @@
                                     popup.closeNow();
                                 });
                             }
-                            $window.removeEventListener('keydown', union.keydownCallback, true);
+                            $($window).off('keydown.pointSelector');
                             if (newValue) {
                                 const params  = {
                                     keyword: newValue,
@@ -161,6 +161,7 @@
                         $timeout.cancel(scope.dataChangeTimeout);
                     }
                     $window.removeEventListener('keydown', deleteKeyCallback, true);
+                    $($window).off('keydown.pointSelector');
                     scope.disWatchData();
                     scope.blurHandler();
                     scope.$apply();
