@@ -65,6 +65,7 @@
 
             $rootScope.$on('$stateChangeSuccess', (event, toState, toParams, fromState) => {
                 $window.scrollTo(0, 0);
+                pageHead.setNotFound();
             });
     });
 }());

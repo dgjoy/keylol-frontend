@@ -63,7 +63,7 @@
                         $timeout(() => {
                             notification.success({ message: '登录成功，欢迎回到其乐' });
                             union.$localStorage.Authorization = response.data.access_token;
-                        }, 5000);
+                        }, 2000);
                     }, response => {
                         if (response.status === 400 && response.data.error) {
                             switch (response.data.error) {

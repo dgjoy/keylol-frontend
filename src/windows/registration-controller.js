@@ -132,7 +132,6 @@
                         },
                     }).then(response => {
                         this.union.$localStorage.Authorization = response.data.access_token;
-                        this.notification.success('登录成功，欢迎回到其乐');
                         this.close();
                     }, response => {
                         if (response.status === 400 && response.data.error) {
