@@ -1,7 +1,6 @@
 ﻿(function () {
     class UserEditInfoController {
-        constructor ($scope, pageHead, stateTree, pageLoad, $state, $stateParams, utils) {
-
+        constructor ($scope, pageHead, stateTree, pageLoad, $state, $stateParams, utils, $location) {
             let fetchPromise;
             if (stateTree.empty || (stateTree.aggregation && stateTree.aggregation.user
                 && stateTree.aggregation.user.basicInfo && stateTree.aggregation.user.basicInfo.idCode === $state.params.user_id_code)) {
@@ -11,7 +10,12 @@
             }
 
             fetchPromise.then(() => {
-                pageHead.setTitle(`${stateTree.aggregation.user.basicInfo.userName} - 编辑 - 资料 - 其乐`);
+                if ($location.path().match(/\/user\/[^\/]*\/edit\/?$/)) {
+                    pageHead.setTitle(`编辑 - ${stateTree.aggregation.user.basicInfo.userName} - 其乐`);
+                } else {
+                    pageHead.setTitle(`信息与资料 - 编辑 - ${stateTree.aggregation.user.basicInfo.userName} - 其乐`);
+                }
+
                 if (!stateTree.currentUser || (stateTree.currentUser && stateTree.currentUser.id !==  stateTree.aggregation.user.basicInfo.id &&
                     $.inArray('Operator', stateTree.currentUser.roles) === -1)) {
                     $state.go('aggregation.user', $stateParams);

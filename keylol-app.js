@@ -64,7 +64,10 @@
             .state('post-office',{
                 url: '/post-office',
                 templateUrl: 'src/pages/post-office.html',
-                onEnter (union, $state, $stateParams, $location, $timeout) {
+                onEnter (union, $state, $stateParams, $location, $timeout, pageHead) {
+                    pageHead.setDescription('游戏社区');
+                    pageHead.setKeywords('邮政, 信息, 私信, 公函, keylol, steam, 评测, 社区, 折扣, 史低');
+
                     if (!union.$localStorage.Authorization) {
                         $state.go('entrance', $stateParams);
                     } else if ($location.path().match(/\/post-office\/?$/)) {
@@ -137,7 +140,10 @@
             .state('coupon',{
                 url: '/coupon',
                 templateUrl: 'src/pages/coupon.html',
-                onEnter (union, $state, $stateParams, $location, $timeout) {
+                onEnter (union, $state, $stateParams, $location, $timeout, pageHead) {
+                    pageHead.setDescription('游戏社区');
+                    pageHead.setKeywords('文券, 是什么, keylol, steam, 评测, 社区, 折扣, 史低');
+
                     if (!union.$localStorage.Authorization) {
                         $state.go('entrance', $stateParams);
                     } else if ($location.path().match(/\/coupon\/?$/)) {
