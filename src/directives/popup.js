@@ -75,6 +75,7 @@
                                         template: options.template,
                                         templateUrl: options.templateUrl,
                                         controller: options.controller,
+                                        controllerAs: options.controllerAs,
                                         adjustScrollBar: false,
                                         delayAppend: true,
                                         inputs: options.inputs,

@@ -1,112 +1,121 @@
 .popup-search-selector {
-    width: 300px;
-}
+  width: 280px;
+  z-index: 999;
 
-.popup-search-selector .selector-main {
-    background: white;
-}
+  .selector-main {
+    @include keylol-shadow-3();
+    background-color: $keylol-card;
 
-.popup-search-selector .selector-main {
-    background: white;
-}
+    .default {
+      height: 270px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
 
-.popup-search-selector .selector-main .search-filter {
-    height: 30px;
-    padding-top: 10px;
-    float: right;
-}
+      svg {
+        width: 128px;
+        height: 128px;
+        fill: $keylol-theme;
+      }
 
-.popup-search-selector .selector-main .search-filter a {
-    margin-right: 12px;
-    color: #748a97;
-}
+      h1 {
+        margin: 17px 0 0 0;
+        font-size: 20px;
+        font-weight: normal;
+        color: $keylol-theme;
+      }
 
-.popup-search-selector .selector-main .search-filter a.active {
-    color: #000003;
-}
+      p {
+        margin: 4px 0 0 0;
+        color: $keylol-inertia-text;
+      }
+    }
 
-.popup-search-selector .selector-main .default {
-    padding-top: 95px;
-    margin-bottom: 45px;
-    text-align: center;
-}
+    ul {
+      padding: 0;
+      margin: 0;
+      clear: both;
+      height: 260px;
 
-.popup-search-selector .selector-main .default img {
-    height: 89px;
-    width: auto;
-}
+      li {
+        list-style: none;
+        padding: 10px 15px;
+        cursor: pointer;
 
-.popup-search-selector .selector-main .default h1 {
-    margin: 20px 0 0 0;
-    font-size: 24px;
-    color: #BBB;
-    font-weight: normal;
-}
+        &:hover {
+          background-color: #EEE;
+        }
 
-.popup-search-selector .selector-main ul {
-    padding: 0;
-    margin: 0;
-    clear: both;
-    height: 260px;
-}
+        .avatar-anchor {
+          float: left;
 
-.popup-search-selector .selector-main li {
-    list-style: none;
-    padding: 10px 15px;
-    cursor: pointer;
-}
+          img {
+            width: 32px;
+            height: 32px;
+          }
+        }
 
-.popup-search-selector .selector-main li:hover {
-    background-color: #EEE;
-}
+        .title {
+          float: left;
+          margin-left: 14px;
 
-.popup-search-selector .selector-main li .avatar-anchor {
-    float: left;
-}
+          p {
+            margin: 0;
+            line-height: 16px;
 
-.popup-search-selector .selector-main li .avatar-anchor img {
-    width: 32px;
-    height: 32px;
-}
+            &:first-of-type {
+              color: $keylol-theme;
+              font-weight: bold;
+            }
 
-.popup-search-selector .selector-main li .title {
-    float: left;
-    margin-left: 14px;
-}
+            span {
+              color: #748a97;
+            }
 
-.popup-search-selector .selector-main li .title p {
-    margin: 0;
-    line-height: 16px;
-}
+            &.info {
+              height: 18px;
+              width: 100%;
 
-.popup-search-selector .selector-main li .title p:first-of-type {
-    color: $keylol-theme;
-    font-weight: bold;
-}
+              span {
+                margin-left: 8px;
+                color: #BBB;
 
-.popup-search-selector .selector-main li .title p span {
-    color: #748a97;
-}
+                &:first-of-type {
+                  margin-left: 0;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
 
-.popup-search-selector .selector-main li .title p.info {
-    height: 18px;
-    width: 100%;
-}
+    .search-engine {
+      height: 45px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
 
-.popup-search-selector .selector-main li .title p.info span {
-    margin-left: 8px;
-    color: #BBB;
-}
+      a {
+        display: flex;
+        align-items: center;
 
-.popup-search-selector .selector-main li .title p.info span:first-of-type {
-    margin-left: 0;
-}
+        svg {
+          width: 24px;
+          height: 24px;
+          margin-right: 12px;
+          fill: $keylol-inertia-shape
+        }
 
-.popup-search-selector .selector-main .all-results {
-    float: right;
-    padding: 13px;
-}
+        &:hover {
+          text-decoration: underline;
 
-.popup-search-selector .selector-main .all-results a {
-    color: #748a97;
+          svg {
+            fill: $keylol-light-text;
+          }
+        }
+      }
+    }
+  }
 }

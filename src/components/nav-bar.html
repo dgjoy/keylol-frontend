@@ -31,9 +31,9 @@
                 </div>
             </a>
         </div>
-        <form class="search-box" ng-submit="navBar.search()">
-            <input type="search" ng-model="navBar.searchText">
-            <a href="" ng-click="navBar.search()" aria-label="搜索">
+        <form popup="navBar.showSearchSelectorPopup" class="search-box" ng-submit="navBar.onSearching()">
+            <input type="search" ng-focus="navBar.getSearchResults($event)" ng-model="navBar.searchText">
+            <a href="" ng-click="navBar.onSearching()" aria-label="搜索">
                 <svg aria-hidden="true">
                     <use ng-href="{{'search' | iconSvgUrl }}" xlink:href=""></use>
                 </svg>

@@ -24,7 +24,6 @@
 
             const connection = $.connection.new();
             const steamBindingHubProxy = connection.steamBindingHub;
-            let tokenId;
 
             this.phase = '未选择平台'; // 未选择平台,添加好友,发送验证码,连接成功,填写表单
             this.conn = null;
