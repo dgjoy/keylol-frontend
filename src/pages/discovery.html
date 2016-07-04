@@ -13,7 +13,8 @@
             <spotlight-articles cards="::stateTree.entrance.discovery.spotlightStudies" style="margin-bottom: 30px" type="Study"></spotlight-articles>
             <sales-today ng-if="::(stateTree.entrance.discovery.onSalePoints.length > 0)" list="::stateTree.entrance.discovery.onSalePoints" header-image="::stateTree.entrance.discovery.onSalePointHeaderImage" total-page="::stateTree.entrance.discovery.onSalePointPageCount" style="margin-bottom: 40px"></sales-today>
             <spotlight-articles cards="::stateTree.entrance.discovery.spotlightStories" style="margin-bottom: 30px" type="Story" ></spotlight-articles>
-            <section-timeline ng-if="stateTree.entrance.timeline.cards" cards="stateTree.entrance.timeline.cards"></section-timeline>
+            <section-header header="::{mainTitle: '动态', subTitle: '用吐槽和随笔分享乐趣', type: 'theme'}"></section-header>
+            <section-timeline cards="stateTree.entrance.discovery.latestActivities"></section-timeline>
         </div>
         <right-menus class="right-lg hidden-sm"></right-menus>
     </div>

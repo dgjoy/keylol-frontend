@@ -331,7 +331,7 @@
             getHeader (message) {
                 const link = `article/${message.articleAuthorIdCode}/${message.articleSidForAuthor}`;
                 const at = `<a href="${link}">《${missiveTextReduce(message.articleTitle, 14)}》</a>`;
-                return `感谢你对其乐社区质量的认可与贡献！你的文章${at}已被推荐为萃选文章。此次萃选已记录在你的生涯档案中，并在文章中永久展示萃选标记。`;
+                return `感谢你对其乐社区质量的认可与贡献！你的文章${at}已被推荐为萃选文章。此次萃选已记录在你的生涯档案中，并在文章中永久展示萃选标记。<p class="indent">社区编辑会以官方身份定期将部分萃选文章转载至其他媒体，并附注前往文章的链接。你可以随时在文章中执行「撤销萃选」的操作，萃选一经撤销将无法自行重新萃选。</p>`;
             },
         },
         spotlightCancel: {

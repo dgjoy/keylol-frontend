@@ -104,6 +104,10 @@
         &.indent {
           text-indent: 20px;
         }
+
+        a:hover {
+          text-decoration: underline;
+        }
       }
       .italic {
         font-style: italic;

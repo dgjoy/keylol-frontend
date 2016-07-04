@@ -92,7 +92,18 @@
             </svg>
             <span>Steam</span>
         </div>
-        <div ng-if="menu.object.header.basicInfo.steamId" class="paragraph"><a href="" ng-href="http://steamcommunity.com/profiles/{{menu.utils.getSteamId64(menu.object.header.basicInfo.steamId)}}">{{menu.object.header.basicInfo.steamProfileName}}</a></div>
+        <div ng-if="menu.object.header.basicInfo.steamId" class="paragraph">
+            <a href="" ng-href="http://steamcommunity.com/profiles/{{menu.utils.getSteamId64(menu.object.header.basicInfo.steamId)}}">{{menu.object.header.basicInfo.steamProfileName}}</a>
+        </div>
+        <div ng-if="menu.object.header.basicInfo.steamCnUid" class="icon-text">
+            <svg aria-hidden="true">
+                <use ng-href="{{'steamcn' | iconSvgUrl }}" xlink:href=""></use>
+            </svg>
+            <span>蒸汽动力</span>
+        </div>
+        <div ng-if="menu.object.header.basicInfo.steamCnUid" class="paragraph">
+            <a href="" ng-href="http://steamcn.com/suid-{{menu.object.header.basicInfo.steamCnUid}}">{{menu.object.header.basicInfo.steamCnUserName}}</a>
+        </div>
 
         <!--<div class="icon-text" ng-if="false">-->
             <!--<svg aria-hidden="true">-->

@@ -83,18 +83,22 @@
                 this.loadLock = true;
                 const nowLength = this.cards.length;
 
-                let getUrl = `${this.apiEndpoint}/states/entrance/timeline/cards`;
+                let getUrl = `${this.apiEndpoint}states/entrance/discovery/latest-activities`;
                 const params = {
                     before: this.cards[nowLength - 1].feedId,
                     take: 12,
                 };
                 const currentStateName = this.$state.current.name;
+                if (currentStateName.substr(0, 17) === 'entrance.timeline') {
+                    getUrl = `${this.apiEndpoint}states/entrance/timeline/cards`;
+                    params.point_id = this.stateTree.aggregation.point.basicInfo.id;
+                }
                 if (currentStateName.substr(0, 17) === 'aggregation.point') {
-                    getUrl = `${this.apiEndpoint}/states/aggregation/point/timeline/cards`;
+                    getUrl = `${this.apiEndpoint}states/aggregation/point/timeline/cards`;
                     params.point_id = this.stateTree.aggregation.point.basicInfo.id;
                 }
                 if (currentStateName.substr(0, 16) === 'aggregation.user') {
-                    getUrl = `${this.apiEndpoint}/states/aggregation/user/timeline/cards`;
+                    getUrl = `${this.apiEndpoint}states/aggregation/user/timeline/cards`;
                     params.user_id = this.stateTree.aggregation.user.basicInfo.id;
                 }
 

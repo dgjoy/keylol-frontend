@@ -5,6 +5,14 @@
 
             $scope.$watch('stateTree.aggregation.user', () => {
                 if (!stateTree.aggregation || !stateTree.aggregation.user) return;
+
+                if ($location.path().match(/\/user\/[^\/]*\/?$/)) {
+                    pageHead.setTitle(`${stateTree.aggregation.user.basicInfo.userName} - 其乐`);
+                }
+                
+                pageHead.setDescription(`${stateTree.aggregation.user.basicInfo.userName} 个人页面`);
+                pageHead.setKeywords([stateTree.aggregation.user.basicInfo.userName, '是谁, keylol, steam, 评测, 社区, 折扣, 史低']);
+
                 if (stateTree.aggregation.user.current === 'dossier') {
                     pageHead.setTitle(`${stateTree.aggregation.user.basicInfo.userName} - 档案 - 其乐`);
                 } else {

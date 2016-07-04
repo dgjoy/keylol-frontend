@@ -20,12 +20,14 @@
             });
 
             const currentStateName = $state.current.name;
-            if (currentStateName.substr(0, 8) === 'entrance') {
-                this.reviewLink = 'entrance/timeline';
+            if (currentStateName.substr(0, 18) === 'entrance.discovery') {
+                this.reviewLink = 'entrance/discovery/latest-activities';
+            } else if (currentStateName.substr(0, 17) === 'entrance.timeline') {
+                this.reviewLink = 'entrance/timeline/cards';
             } else if (currentStateName.substr(0, 17) === 'aggregation.point') {
-                this.reviewLink = 'aggregation/point/timeline';
+                this.reviewLink = 'aggregation/point/timeline/cards';
             } else if (currentStateName.substr(0, 16) === 'aggregation.user') {
-                this.reviewLink = 'aggregation/user/timeline';
+                this.reviewLink = 'aggregation/user/timeline/cards';
             }
         }
 
@@ -54,7 +56,7 @@
 
         openReviewArea() {
             if (this.card.contentType === 'activity') {
-                this.$http.get(`${this.apiEndpoint}states/${this.reviewLink}/cards[${this.card.contentId}]/comments`, {
+                this.$http.get(`${this.apiEndpoint}states/${this.reviewLink}[${this.card.contentId}]/comments`, {
                     params: {
                         take: 30,
                     },

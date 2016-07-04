@@ -1,7 +1,6 @@
 ﻿(function () {
     class EditInfoController {
-        constructor ($scope, pageHead, stateTree, pageLoad, $state, utils, pointAttributes, moment) {
-
+        constructor ($scope, pageHead, stateTree, pageLoad, $state, utils, pointAttributes, moment, $location) {
             let fetchPromise;
             if (stateTree.empty || (stateTree.aggregation && stateTree.aggregation.point
                 && stateTree.aggregation.point.basicInfo && stateTree.aggregation.point.basicInfo.idCode === $state.params.point_id_code)) {
@@ -11,7 +10,24 @@
             }
 
             fetchPromise.then(() => {
-                pageHead.setTitle(`${stateTree.aggregation.point.basicInfo.chineseName || stateTree.aggregation.point.basicInfo.englishName} - 编辑 - 资料 - 其乐`);
+                if ($location.path().match(/\/point\/[^\/]*\/edit\/?$/)) {
+                    pageHead.setTitle(
+                        `编辑据点 - ${stateTree.aggregation.point.basicInfo.chineseName ? `${stateTree.aggregation.point.basicInfo.chineseName} - ` : ''}`
+                        + `${stateTree.aggregation.point.basicInfo.englishName} - 其乐`);
+                } else {
+                    pageHead.setTitle(
+                        `资料 - 编辑据点 - ${stateTree.aggregation.point.basicInfo.chineseName ?
+                            `${stateTree.aggregation.point.basicInfo.chineseName} - ` : ''}`
+                        + `${stateTree.aggregation.point.basicInfo.englishName} - 其乐`);
+                }
+                pageHead.setDescription(`${stateTree.aggregation.point.basicInfo.chineseName
+                || stateTree.aggregation.point.basicInfo.englishName} 社区`);
+                const keywords = [stateTree.aggregation.point.basicInfo.englishName, '编辑, steam, 杉果, 评测, 社区, 折扣, 史低'];
+                if (stateTree.aggregation.point.basicInfo.chineseName) {
+                    keywords.unshift(stateTree.aggregation.point.basicInfo.chineseName);
+                }
+                pageHead.setKeywords(keywords);
+
                 const submitLink = `point/${stateTree.aggregation.point.basicInfo.id}`;
                 $scope.theme = {
                     main: stateTree.aggregation.point.basicInfo.themeColor,

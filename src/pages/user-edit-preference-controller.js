@@ -12,8 +12,9 @@
             }
 
             fetchPromise.then(() => {
-                pageHead.setTitle(`${stateTree.aggregation.user.basicInfo.userName} - 编辑 - 偏好 - 其乐`);
-                if (!stateTree.currentUser || (stateTree.currentUser && stateTree.currentUser.id !==  stateTree.aggregation.user.basicInfo.id && $.inArray('Operator', stateTree.currentUser.roles) === -1)) {
+                pageHead.setTitle(`调整偏好 - 编辑 - ${stateTree.aggregation.user.basicInfo.userName} - 其乐`);
+                if (!stateTree.currentUser || (stateTree.currentUser && stateTree.currentUser.id !==  stateTree.aggregation.user.basicInfo.id
+                    && $.inArray('Operator', stateTree.currentUser.roles) === -1)) {
                     $state.go('aggregation.user', $stateParams);
                     return ;
                 }
