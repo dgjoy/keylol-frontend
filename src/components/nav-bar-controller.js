@@ -1,17 +1,36 @@
 ﻿(function () {
     class NavBarController {
-        constructor ($scope, stateTree, window, utils, $window, $timeout, union) {
+        constructor ($scope, stateTree, window, utils, $window, $timeout, union, $location) {
             $.extend(this, {
                 stateTree,
                 window,
                 utils,
                 $window,
                 union,
+                $location,
                 searchSelectorDisplayed: false,
                 searchSelectorOptions: {
                     onSearching: this.onSearching,
                 },
             });
+
+            if (!union.searchFilter) {
+                union.searchFilter = [
+                    {
+                        type: 'point',
+                        name: '据点',
+                        active: true,
+                    },
+                    {
+                        type: 'article',
+                        name: '文章',
+                    },
+                    {
+                        type: 'user',
+                        name: '用户',
+                    },
+                ];
+            }
 
             $scope.$watch(() => {
                 return this.searchText;

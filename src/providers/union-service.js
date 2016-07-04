@@ -6,12 +6,13 @@
                 $localStorage,
                 $sessionStorage,
             };
+            const crossPageVariables = ['searchFilter', '$localStorage', '$sessionStorage'];
             $rootScope.$on('$stateChangeSuccess', () => {
                 for (const member in union) {
-                    delete union[member];
+                    if (union.hasOwnProperty(member) && crossPageVariables.indexOf(member) === -1) {
+                        delete union[member];
+                    }
                 }
-                union.$localStorage = $localStorage;
-                union.$sessionStorage = $sessionStorage;
             });
             return union;
         },

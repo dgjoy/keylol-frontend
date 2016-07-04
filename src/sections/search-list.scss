@@ -1,0 +1,169 @@
+search-list {
+  display: block;
+  margin-bottom: 40px;
+
+  .empty {
+    height: 460px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      width: 128px;
+      margin-bottom: 20px;
+    }
+    .bundle {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      p {
+        margin: 0;
+        color: $keylol-inertia-text;
+      }
+      p:first-of-type {
+        font-size: 20px;
+      }
+      p:last-of-type {
+        position: relative;
+        left: 20px;
+      }
+    }
+  }
+
+  .results-card {
+    @include keylol-shadow-1;
+    background-color: $keylol-card;
+    border-radius: 2px;
+    display: flex;
+    flex-direction: column;
+
+    .list-wrapper {
+      @include page-change('.result-list');
+      margin: 10px 0;
+      overflow: hidden;
+      position: relative;
+      transition: height .5s;
+
+      .result-list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        width: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+
+        li {
+          height: 86px;
+          display: flex;
+          align-items: center;
+          border-bottom: 1px solid $keylol-inertia-shape;
+
+          &.point {
+            height: 72px;
+            padding: 0 20px;
+
+            .avatar {
+              width: 32px;
+              height: 32px;
+            }
+
+            .info {
+              flex-grow: 1;
+              margin: 0 10px;
+
+              p {
+                margin: 0;
+                color: $keylol-inertia-text;
+
+                a {
+                  color: $keylol-main-text;
+                  font-weight: bold;
+
+                  &:hover {
+                    text-decoration: underline;
+                  }
+                }
+              }
+            }
+          }
+
+          .count {
+            width: 106px;
+            margin-right: 6px;
+            display: flex;
+            justify-content: center;
+            color: $keylol-light-theme;
+
+            span:first-of-type {
+              margin-right: 15px;
+            }
+          }
+
+          .article {
+            flex-grow: 1;
+
+            p {
+              margin: 0;
+
+              &:first-of-type {
+                margin-bottom: 6px;
+
+                a {
+                  color: $keylol-main-text;
+                  font-weight: bold;
+                  font-size: 16px;
+
+                  &:hover {
+                    text-decoration: underline;
+                  }
+                }
+              }
+
+              &:last-of-type {
+                color: $keylol-inertia-text;
+                display: flex;
+
+                a {
+                  color: $keylol-inertia-text;
+                  display: flex;
+                  margin-left: 10px;
+
+                  &:hover {
+                    text-decoration: underline;
+                  }
+
+                  .avatar {
+                    border-radius: 0;
+                    width: 18px;
+                    height: 18px;
+                    margin-right: 6px;
+                  }
+                }
+              }
+            }
+          }
+
+          &:last-of-type {
+            border-bottom: none;
+          }
+        }
+      }
+    }
+
+    .footer {
+      flat-button {
+        display: block;
+        text-align: center;
+        margin-bottom: 10px;
+      }
+
+      pagination {
+        float: right;
+        margin-bottom: 20px;
+        margin-right: 20px;
+      }
+    }
+  }
+}

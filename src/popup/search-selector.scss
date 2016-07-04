@@ -33,59 +33,19 @@
     }
 
     ul {
-      padding: 0;
+      padding: 10px 0 0;
       margin: 0;
-      clear: both;
-      height: 260px;
+      min-height: 250px;
 
       li {
         list-style: none;
-        padding: 10px 15px;
-        cursor: pointer;
 
-        &:hover {
-          background-color: #EEE;
-        }
+        a {
+          padding: 10px 15px;
+          display: block;
 
-        .avatar-anchor {
-          float: left;
-
-          img {
-            width: 32px;
-            height: 32px;
-          }
-        }
-
-        .title {
-          float: left;
-          margin-left: 14px;
-
-          p {
-            margin: 0;
-            line-height: 16px;
-
-            &:first-of-type {
-              color: $keylol-theme;
-              font-weight: bold;
-            }
-
-            span {
-              color: #748a97;
-            }
-
-            &.info {
-              height: 18px;
-              width: 100%;
-
-              span {
-                margin-left: 8px;
-                color: #BBB;
-
-                &:first-of-type {
-                  margin-left: 0;
-                }
-              }
-            }
+          &:hover {
+            background-color: rgba(#000, 0.05);
           }
         }
       }

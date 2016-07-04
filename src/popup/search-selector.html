@@ -1,6 +1,6 @@
 ﻿<popup class="popup-search-selector">
     <div class="selector-main">
-        <tabs class="invert" invert="true" tab-array="searchSelector.filterArray" cur-tab="0"></tabs>
+        <tabs class="invert" invert="true" tab-array="searchSelector.filterArray" cur-tab="searchSelector.currentFilter" click-handler="searchSelector.changeFilter(index)"></tabs>
         <div class="default" ng-if="!searchSelector.resultArray && !searchSelector.notFound">
             <svg aria-hidden="true">
                 <use ng-href="{{'clipart-teleporter' | iconSvgUrl }}" xlink:href=""></use>
@@ -16,33 +16,28 @@
             <p>输入关键字进行简易查找</p>
         </div>
         <ul class="result-list" ng-if="searchSelector.resultArray">
-            <li ng-repeat="result in searchSelector.resultArray" class="clearfix" ng-click="searchSelector.jumpTo(result.url)">
-                <div class="avatar-anchor" ng-if="filterText !== '文章'">
-                    <img class="avatar" webp-src="{{result.avatar | avatarUrl}}">
-                </div>
-                <div class="title">
-                    <p>{{result.mainTitle|maxLength:14|userName:result.isUser}}</p>
-                    <p ng-if="filterText !== '文章'">
-                        <span ng-if="result.type">[{{result.type}}]</span>
-                        {{result.subTitle|maxLength:14}}
-                    </p>
-                    <p class="info" ng-if="result.articleInfo">
-                        <span ng-if="result.articleInfo.acknowledgeNum">[+1] {{result.articleInfo.acknowledgeNum}}</span><!--
-                        --><span ng-if="result.articleInfo.commentNum">(···) {{result.articleInfo.commentNum}}</span>
-                    </p>
-                </div>
+            <li ng-repeat="result in searchSelector.resultArray" ng-switch="searchSelector.filterType">
+                <a ripple href="" ng-href="point/{{result.idCode}}" ng-switch-when="point">
+                    <point-basic-info point="result"></point-basic-info>
+                </a>
+                <a ripple href="" ng-href="article//{{result.sidForAuther}}" ng-switch-when="article">
+
+                </a>
+                <a ripple href="" ng-href="user/{{result.idCode}}" ng-switch-when="user">
+                    <point-basic-info point="result"></point-basic-info>
+                </a>
             </li>
         </ul>
         <div class="search-engine">
             <a href="" ng-href="https://www.bing.com/search?q=site:keylol.com+{{searchSelector.options.searchText | encodeURIComponent}}">
                 <svg aria-hidden="true">
-                    <use ng-href="{{'clipart-cake' | iconSvgUrl }}" xlink:href=""></use>
+                    <use ng-href="{{'bing' | iconSvgUrl }}" xlink:href=""></use>
                 </svg>
                 <span>必应站内</span>
             </a>
             <a href="" ng-href="https://www.google.com/search?q=site:keylol.com+{{searchSelector.options.searchText | encodeURIComponent}}">
                 <svg aria-hidden="true">
-                    <use ng-href="{{'clipart-cake' | iconSvgUrl }}" xlink:href=""></use>
+                    <use ng-href="{{'google' | iconSvgUrl }}" xlink:href=""></use>
                 </svg>
                 <span>谷歌站内</span>
             </a>

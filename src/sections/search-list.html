@@ -1,0 +1,88 @@
+﻿<div ng-if="searchList.isEmpty" class="empty">
+    <img src="assets/images/portal-cake.png" alt="">
+    <div class="bundle">
+        <p class="font-myriad-keylol">这里空空如也，连块蛋糕都没有。</p>
+        <p>来一发投稿如何？</p>
+    </div>
+</div>
+<div ng-if="!searchList.isEmpty" class="results-card" ng-switch="searchList.searchType">
+    <div ng-switch-when="point" class="list-wrapper" ng-style="{height: searchList.list.length * 74}" ng-class="{
+    'to-next' : searchList.isToNext,
+    'to-previous' : !searchList.isToNext
+    }">
+        <ul class="result-list" ng-animate-swap="searchList.currentPage">
+            <li class="point" ng-repeat="point in ::searchList.list track by $index">
+                <a href="" ng-href="point/{{point.idCode}}">
+                    <img-label ng-if="point.inLibrary" type="libraried"></img-label>
+                    <img class="avatar" src="" webp-src="{{point.avatarImage | avatarUrl}}">
+                </a>
+                <div class="info">
+                    <p>
+                        <a href="" ng-href="point/{{point.idCode}}">{{searchList.utils.getPreferredPointName(point, searchList.stateTree.currentUser)[0]}}</a>
+                        <span>{{searchList.utils.getPreferredPointName(point, searchList.stateTree.currentUser)[1]}}</span>
+                    </p>
+                    <p>{{point.readerCount}} 读者 / {{point.articleCount}} 来稿文章 / {{point.activityCount}} 动态</p>
+                </div>
+                <flat-button ng-if="searchList.stateTree.currentUser" binary-set="searchList.pointSubscribeSet" binary-value="point.subscribed"
+                             click="searchList.subscribe(point.id, point.subscribed, point)"></flat-button>
+                <flat-button ng-if="!searchList.stateTree.currentUser" text="订阅"
+                             click="searchList.openRegistration(event)"></flat-button>
+            </li>
+        </ul>
+    </div>
+    <div ng-switch-when="article" class="list-wrapper" ng-style="{height: searchList.list.length * 87}" ng-class="{
+    'to-next' : searchList.isToNext,
+    'to-previous' : !searchList.isToNext
+    }">
+        <ul class="result-list" ng-animate-swap="searchList.currentPage">
+            <li ng-repeat="article in ::searchList.articles track by $index">
+                <div class="count" ng-style="{color: searchList.theme.light}">
+                    <span>+{{::article.likeCount}}</span><span>···{{::article.commentCount}}</span>
+                </div>
+                <div class="article">
+                    <p><a ng-href="article/{{::article.authorIdCode}}/{{::article.sidForAuthor}}">{{::article.title}}</a></p>
+                    <p>
+                        <span class="datetime" am-time-ago="article.publishTime"></span>
+                        <a href="" ng-href="user/{{::article.authorIdCode}}">
+                            <img class="avatar" src="" webp-src="{{::article.authorAvatarImage | avatarUrl: 'small'}}" alt="{{::article.authorUserName}}">
+                            <span>{{::article.authorUserName}}</span>
+                        </a>
+                        <a ng-if="::article.pointIdCode" href="" ng-href="point/{{::article.pointIdCode}}">
+                            <img class="avatar" src="" webp-src="{{::article.pointAvatarImage | avatarUrl: 'small'}}" alt="{{::searchList.utils.getPreferredPointNamePrefixPoint(article, searchList.stateTree.currentUser)[0]}}">
+                            <span>{{::searchList.utils.getPreferredPointNamePrefixPoint(article, searchList.stateTree.currentUser)[0]}}</span>
+                        </a>
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div ng-switch-when="user" class="list-wrapper" ng-style="{height: searchList.list.length * 74}" ng-class="{
+    'to-next' : searchList.isToNext,
+    'to-previous' : !searchList.isToNext
+    }">
+        <ul class="result-list" ng-animate-swap="searchList.currentPage">
+            <li ng-repeat="article in ::searchList.articles track by $index">
+                <div class="count" ng-style="{color: searchList.theme.light}">
+                    <span>+{{::article.likeCount}}</span><span>···{{::article.commentCount}}</span>
+                </div>
+                <div class="article">
+                    <p><a ng-href="article/{{::article.authorIdCode}}/{{::article.sidForAuthor}}">{{::article.title}}</a></p>
+                    <p>
+                        <span class="datetime" am-time-ago="article.publishTime"></span>
+                        <a href="" ng-href="user/{{::article.authorIdCode}}">
+                            <img class="avatar" src="" webp-src="{{::article.authorAvatarImage | avatarUrl: 'small'}}" alt="{{::article.authorUserName}}">
+                            <span>{{::article.authorUserName}}</span>
+                        </a>
+                        <a ng-if="::article.pointIdCode" href="" ng-href="point/{{::article.pointIdCode}}">
+                            <img class="avatar" src="" webp-src="{{::article.pointAvatarImage | avatarUrl: 'small'}}" alt="{{::searchList.utils.getPreferredPointNamePrefixPoint(article, searchList.stateTree.currentUser)[0]}}">
+                            <span>{{::searchList.utils.getPreferredPointNamePrefixPoint(article, searchList.stateTree.currentUser)[0]}}</span>
+                        </a>
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="footer clearfix">
+        <pagination on-page-changed="::searchList.changePage(newPage, oldPage)" total="::50" current="searchList.currentPage"></pagination>
+    </div>
+</div>

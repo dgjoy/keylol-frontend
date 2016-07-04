@@ -21,7 +21,7 @@
 
             const currentStateName = $state.current.name;
             if (currentStateName.substr(0, 8) === 'entrance') {
-                this.inEntrance = true;
+                this.hasFakeTabs = true;
                 this.tabArray = [
                     { state:'.discovery', name:'广场' },
                     { state:'.points', name:'据点' },
@@ -178,7 +178,7 @@
                     }
                 });
             } else if (currentStateName.substr(0,11) === 'post-office') {
-                this.inEntrance = true;
+                this.hasFakeTabs = true;
                 $scope.$watch(() => {
                     return stateTree.currentUser;
                 },() => {
@@ -210,7 +210,7 @@
                     }
                 });
             } else if (currentStateName.substr(0,6) === 'coupon') {
-                this.inEntrance = true;
+                this.hasFakeTabs = true;
                 this.tabArray = [
                     { state: '.detail', name:'明细' },
                     // { state: '.store', name:'商店' },
@@ -230,6 +230,30 @@
                         //     break;
                         case 'ranking' :
                             this.currentPage = 1;
+                            break;
+                    }
+                });
+            } else if (currentStateName.substr(0, 6) === 'search') {
+                this.hasFakeTabs = true;
+                this.tabArray = [
+                    { state:'.point', name:'据点' },
+                    { state:'.article', name:'文章' },
+                    { state:'.user', name:'用户' },
+                ];
+
+                $scope.$watch(() => {
+                    return $state.current.name;
+                }, () => {
+                    const subState = $state.current.name.substr(7);
+                    switch (subState) {
+                        case 'point' :
+                            this.currentPage = 0;
+                            break;
+                        case 'article' :
+                            this.currentPage = 1;
+                            break;
+                        case 'user' :
+                            this.currentPage = 2;
                             break;
                     }
                 });
