@@ -126,18 +126,26 @@
                         };
 
                         self.getPreferredPointName = function (point, user) {
-                            if (!point.chineseName || (!(user ? user.preferredPointName === 'chinese' : true) && point.englishName)) {
-                                return [point.englishName, point.chineseName];
+                            if (point) {
+                                if (!point.chineseName || (!(user ? user.preferredPointName === 'chinese' : true) && point.englishName)) {
+                                    return [point.englishName, point.chineseName];
+                                } else {
+                                    return [point.chineseName, point.englishName];
+                                }
                             } else {
-                                return [point.chineseName, point.englishName];
+                                return [];
                             }
                         };
 
                         self.getPreferredPointNamePrefixPoint = function (item, user) {
-                            if (!item.pointChineseName || (!(user ? user.preferredPointName === 'chinese' : true) && item.pointEnglishName)) {
-                                return [item.pointEnglishName, item.pointChineseName];
+                            if (item) {
+                                if (!item.pointChineseName || (!(user ? user.preferredPointName === 'chinese' : true) && item.pointEnglishName)) {
+                                    return [item.pointEnglishName, item.pointChineseName];
+                                } else {
+                                    return [item.pointChineseName, item.pointEnglishName];
+                                }
                             } else {
-                                return [item.pointChineseName, item.pointEnglishName];
+                                return [];
                             }
                         };
 
