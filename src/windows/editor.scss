@@ -263,10 +263,12 @@
             &.send-card {
               p {
                 margin: 0;
-              }
-              p:first-of-type {
-                color: $keylol-inertia-text;
-                font-style: italic;
+                color: $keylol-main-text;
+
+                .theme {
+                  color: $keylol-light-theme;
+                }
+
                 a {
                   color: $keylol-highlight;
                   font-style: normal;
@@ -275,11 +277,10 @@
                   }
                 }
               }
-              p:last-of-type {
-                color: $keylol-main-text;
-                .theme {
-                  color: $keylol-light-theme;
-                }
+
+              p:first-of-type {
+                color: $keylol-inertia-text;
+                font-style: italic;
               }
 
               raised-button {

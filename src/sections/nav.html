@@ -1,4 +1,4 @@
-﻿<nav-bar theme="nav.theme" ng-class="{shadowed: nav.hasShadow}" ng-style="{backgroundColor: nav.theme.main}"></nav-bar>
+﻿<nav-bar theme="nav.theme" ng-class="{shadowed: nav.hasShadow}" ng-style="{backgroundColor: nav.theme.main}" ng-dblclick="nav.scrollToTop($event)"></nav-bar>
 <point-header ng-if="nav.inPoint && stateTree.aggregation.point.basicInfo" object="stateTree.aggregation.point.basicInfo" theme="::nav.theme"></point-header>
 <point-header ng-if="nav.inPoint && stateTree.content.article.pointBasicInfo" object="stateTree.content.article.pointBasicInfo" theme="::nav.theme"></point-header>
 <point-header ng-if="nav.inPoint && stateTree.content.activity.pointBasicInfo" object="stateTree.content.activity.pointBasicInfo" theme="::nav.theme"></point-header>

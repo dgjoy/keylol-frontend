@@ -77,6 +77,7 @@
                     }
                 },
                 onExit (stateTree) {
+                    stateTree.currentUser.messageCount = 0;
                     delete stateTree.postOffice;
                 },
                 data: { virtual: true },
@@ -86,6 +87,7 @@
                     templateUrl: 'src/pages/unread.html',
                     controller: 'UnreadController',
                     onExit (stateTree) {
+                        stateTree.currentUser.messageCount = 0;
                         delete stateTree.postOffice.unread;
                     },
                 })

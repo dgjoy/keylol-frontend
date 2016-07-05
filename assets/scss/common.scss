@@ -34,6 +34,10 @@ textarea {
   border: none;
   padding: 8px;
   background: white;
+
+  &:disabled {
+    color: $keylol-inertia-text;
+  }
 }
 
 .simditor {

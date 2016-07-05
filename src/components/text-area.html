@@ -5,11 +5,11 @@
     >{{textArea.label}}</label>
 
 <div class="text {{textArea.disabledState?'disabled':textArea.warnState?'warn':textArea.activeState?'theme':''}}"
-     ng-if="textArea.type === 'text'"
+     ng-if="textArea.type === 'text' || textArea.type === 'email'"
      ng-style="{borderColor: textArea.theme.light && textArea.activeState && !textArea.warnState ? textArea.theme.light : null}"
     >
     <input ng-model="textArea.model" type="text" ng-change="textArea.check()" ng-focus="textArea.focus()" ng-blur="textArea.blur()"
-           ng-disabled="textArea.disabledState"/>
+           ng-disabled="textArea.disabledState" ng-model-options="{ updateOn: textArea.type === 'email' ? 'blur' : undefined }"/>
 </div>
 
 <div class="text {{textArea.disabledState?'disabled':textArea.warnState?'warn':textArea.activeState?'theme':''}}"

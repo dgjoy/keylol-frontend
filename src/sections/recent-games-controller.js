@@ -1,15 +1,21 @@
 ﻿(function () {
     class recentGamesController {
-        constructor ($http, apiEndpoint) {
+        constructor ($http, apiEndpoint, $element, utils) {
             $.extend(this, {
                 $http,
                 apiEndpoint,
+                $element,
+                utils,
             });
             this.currentPage = 1;
             this.type = {
                 mainTitle: '焦点',
                 subTitle: '刚刚收到投稿或动态的游戏',
             };
+        }
+
+        scrollToTop() {
+            this.utils.scrollTo(this.$element);
         }
 
         changePage (newPage, oldPage) {
@@ -20,6 +26,7 @@
                     this.isToNext = newPage > oldPage;
                     this.list = response.data;
                     this.changePageLock = false;
+                    this.scrollToTop();
                 }, response => {
                     this.changePageLock = false;
                 });

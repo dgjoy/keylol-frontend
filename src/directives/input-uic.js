@@ -39,8 +39,8 @@
                     }
                 };
                 scope.focusFirstIfEmpty = function (index) {
+                    scope.focusHandler();
                     if (index === 0) {
-                        scope.focusHandler();
                         return;
                     }
                     for (let l = 0; l < scope.length; ++l) {

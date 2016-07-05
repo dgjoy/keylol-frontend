@@ -9,8 +9,8 @@
                 return _config;
             },
             $get: [
-                '$q', 'union', '$http', 'apiEndpoint', 'notification', 'window', '$window',
-                ($q, union, $http, apiEndpoint, notification, window, $window) => {
+                '$q', 'union', '$http', 'apiEndpoint', 'notification', 'window', '$window', '$rootScope',
+                ($q, union, $http, apiEndpoint, notification, window, $window, $rootScope) => {
                     function Utils() {
                         const self = this;
                         let _uniqueId = 1;
@@ -401,6 +401,18 @@
                             } else {
                                 return time ? `在档 ${time} 小时` : '无在档记录';
                             }
+                        };
+
+                        self.scrollTo = element => {
+                            $rootScope.$emit('scrollToElementStart');
+                            $('html, body').animate({
+                                scrollTop: typeof element === 'number' ? element : element.offset().top - 64,
+                            }, {
+                                duration: 500,
+                                always: () => {
+                                    $rootScope.$emit('scrollToElementSuccess');
+                                },
+                            });
                         };
                     }
 
