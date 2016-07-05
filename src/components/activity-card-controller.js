@@ -175,9 +175,7 @@
         }
 
         scrollToComments() {
-            $('html, body').animate({
-                scrollTop: this.$element.find('.communicate-card').offset().top - 64,
-            }, 500);
+            this.utils.scrollTo(this.$element.find('.communicate-card'));
         }
 
         changePage (newPage, oldPage, scrollToTop) {

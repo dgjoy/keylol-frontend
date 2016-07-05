@@ -1,18 +1,17 @@
 ﻿(function () {
     class CouponRankingListController {
-        constructor ($http, apiEndpoint, $element) {
+        constructor ($http, apiEndpoint, $element, utils) {
             $.extend(this, {
                 $http,
                 apiEndpoint,
                 $element,
+                utils,
             });
             this.currentPage = 1;
         }
 
         scrollToTop() {
-            $('html, body').animate({
-                scrollTop: this.$element.offset().top - 64,
-            }, 500);
+            this.utils.scrollTo(this.$element);
         }
 
         changePage(newPage, oldPage) {

@@ -74,9 +74,7 @@
         }
 
         scrollToTop() {
-            $('html, body').animate({
-                scrollTop: this.$element.offset().top - 64,
-            }, 500);
+            this.utils.scrollTo(this.$element);
         }
 
         reply (comment) {

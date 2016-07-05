@@ -1,6 +1,6 @@
 ﻿(function () {
     class NavController {
-        constructor ($scope, $window, $state, stateTree, $location, $timeout, notification) {
+        constructor ($scope, $window, $state, stateTree, $location, $timeout, notification, $rootScope) {
             const $$window = $($window);
 
             let scrollToTopCheckTimeout;
@@ -26,6 +26,14 @@
                 lastScrollTop = scrollTop;
             };
             $$window.scroll(scrollCallback);
+
+            $rootScope.$on('scrollToElementStart', () => {
+                this.scrollNotificationLock = true;
+            });
+
+            $rootScope.$on('scrollToElementSuccess', () => {
+                this.scrollNotificationLock = false;
+            });
 
             const cancelListenRoute = $scope.$on('$destroy', () => {
                 $$window.unbind('scroll', scrollCallback);
@@ -255,10 +263,12 @@
             this.scrollNotificationLock = true;
             $('html, body').animate({
                 scrollTop: 0,
-            }, 500).then(() => {
-                this.scrollNotificationLock = false;
+            }, {
+                duration: 500,
+                always: () => {
+                    this.scrollNotificationLock = false;
+                },
             });
-            event.preventDefault();
         }
     }
 

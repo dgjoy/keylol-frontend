@@ -1,8 +1,10 @@
 ﻿(function () {
     class SiteFooterController {
-        constructor ($scope, $element, $window) {
+        constructor ($scope, $element, $window, utils) {
             $.extend(this, {
                 window,
+                $element,
+                utils,
             });
 
             const $$window = $($window);
@@ -20,9 +22,7 @@
             });
         }
         scrollToTop () {
-            $('html,body').animate({
-                scrollTop: 0,
-            });
+            this.utils.scrollTo(0);
         }
     }
 

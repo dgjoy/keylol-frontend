@@ -1,18 +1,16 @@
 ﻿(function () {
     class MessageListController {
-        constructor ($http, apiEndpoint, $element) {
+        constructor ($http, apiEndpoint, utils) {
             $.extend(this, {
                 $http,
                 apiEndpoint,
-                $element,
+                utils,
             });
             this.currentPage = 1;
         }
 
         scrollToTop() {
-            $('html, body').animate({
-                scrollTop: 0,
-            }, 500);
+            this.utils.scrollTo(0);
         }
 
         changePage (newPage, oldPage) {
