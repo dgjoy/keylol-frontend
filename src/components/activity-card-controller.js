@@ -174,11 +174,19 @@
             });
         }
 
-        changePage (newPage, oldPage) {
+        scrollToComments() {
+            $('html, body').animate({
+                scrollTop: this.$element.find('.communicate-card').offset().top - 64,
+            }, 500);
+        }
+
+        changePage (newPage, oldPage, scrollToTop) {
             if (this.commentsManager.pages[newPage - 1]) {
                 this.commentsManager.currentPage = newPage;
                 this.commentsManager.isToNext = newPage > oldPage;
                 this.setCommentsHeight();
+                if (scrollToTop)
+                    this.scrollToComments();
                 return true;
             }
 
@@ -193,6 +201,8 @@
                     this.commentsManager.currentPage = newPage;
                     this.commentsManager.isToNext = newPage > oldPage;
                     this.setCommentsHeight();
+                    if (scrollToTop)
+                        this.scrollToComments();
                     this.commentsManager.pages[newPage - 1] = response.data;
                     this.changePageLock = false;
                 }, response => {

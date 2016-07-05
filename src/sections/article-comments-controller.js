@@ -44,7 +44,7 @@
             return (comment.authorIdCode === this.currentIdCode && this.currentIdCode === this.article.authorBasicInfo.idCode ) || this.isManager;
         }
 
-        changePage (newPage, oldPage) {
+        changePage (newPage, oldPage, scrollToTop) {
             if (!this.changePageLock) {
                 this.changePageLock = true;
                 this.$http.get(`${this.apiEndpoint}states/content/article/comments`,{
@@ -58,6 +58,8 @@
                     this.article.comments = response.data;
                     this.changePageLock = false;
                     this.setCommentsHeight();
+                    if (scrollToTop)
+                        this.scrollToTop();
                 }, response => {
                     this.changePageLock = false;
                 });
@@ -69,6 +71,12 @@
             this.$timeout(() => {
                 this.commentsHeight = this.$element.find('.comments>ul').height();
             });
+        }
+
+        scrollToTop() {
+            $('html, body').animate({
+                scrollTop: this.$element.offset().top - 64,
+            }, 500);
         }
 
         reply (comment) {

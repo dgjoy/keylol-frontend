@@ -1,12 +1,13 @@
 ﻿(function () {
     class LatestArticlesController {
-        constructor ($http, apiEndpoint, $state, stateTree, utils, window) {
+        constructor ($http, apiEndpoint, $state, stateTree, utils, window, $element) {
             $.extend(this, {
                 $http,
                 apiEndpoint,
                 stateTree,
                 utils,
                 window,
+                $element,
             });
             this.currentPage = 1;
             this.headers = {
@@ -30,6 +31,12 @@
         expandMore () {
             this.hasBeenExpanded = true;
         }
+
+        scrollToTop() {
+            $('html, body').animate({
+                scrollTop: this.$element.offset().top - 64,
+            }, 500);
+        }
         
         changePage (newPage, oldPage) {
             if (!this.changePageLock) {
@@ -41,6 +48,7 @@
                     this.isToNext = newPage > oldPage;
                     this.articles = response.data;
                     this.changePageLock = false;
+                    this.scrollToTop();
                 }, response => {
                     this.changePageLock = false;
                 });

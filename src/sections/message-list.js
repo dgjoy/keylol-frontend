@@ -1,11 +1,18 @@
 ﻿(function () {
     class MessageListController {
-        constructor ($http, apiEndpoint) {
+        constructor ($http, apiEndpoint, $element) {
             $.extend(this, {
                 $http,
                 apiEndpoint,
+                $element,
             });
             this.currentPage = 1;
+        }
+
+        scrollToTop() {
+            $('html, body').animate({
+                scrollTop: 0,
+            }, 500);
         }
 
         changePage (newPage, oldPage) {
@@ -16,6 +23,7 @@
                     this.isToNext = newPage > oldPage;
                     this.messages = response.data;
                     this.changePageLock = false;
+                    this.scrollToTop();
                 }, response => {
                     this.changePageLock = false;
                 });

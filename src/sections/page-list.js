@@ -1,11 +1,12 @@
 ﻿(function () {
     class PageListController {
-        constructor ($http, apiEndpoint, stateTree, utils) {
+        constructor ($http, apiEndpoint, stateTree, utils, $element) {
             $.extend(this, {
                 $http,
                 apiEndpoint,
                 stateTree,
                 utils,
+                $element,
             });
             this.currentPage = 1;
             if (this.expanded) {
@@ -30,6 +31,12 @@
         expandMore () {
             this.hasBeenExpanded = true;
         }
+
+        scrollToTop() {
+            $('html, body').animate({
+                scrollTop: this.$element.offset().top - 64,
+            }, 500);
+        }
         
         changePage (newPage, oldPage) {
             if (!this.changePageLock) {
@@ -41,6 +48,7 @@
                     this.isToNext = newPage > oldPage;
                     this.list = response.data;
                     this.changePageLock = false;
+                    this.scrollToTop();
                 }, response => {
                     this.changePageLock = false;
                 });

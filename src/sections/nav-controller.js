@@ -1,14 +1,29 @@
 ﻿(function () {
     class NavController {
-        constructor ($scope, $window, $state, stateTree, $location) {
+        constructor ($scope, $window, $state, stateTree, $location, $timeout, notification) {
             const $$window = $($window);
+
+            let scrollToTopCheckTimeout;
+            let lastScrollTop = 0;
             const scrollCallback = () => {
-                const newHasShadow = $$window.scrollTop() > 0;
+                const scrollTop = $$window.scrollTop();
+                const newHasShadow = scrollTop > 0;
                 if (this.hasShadow !== newHasShadow) {
                     $scope.$apply(() => {
                         this.hasShadow = newHasShadow;
                     });
                 }
+                if (scrollTop > lastScrollTop) this.scrollNotificationLock = false;
+                if (!scrollToTopCheckTimeout && !this.scrollNotificationLock) {
+                    scrollToTopCheckTimeout = $timeout(() => {
+                        if (scrollTop - $$window.scrollTop() > 800) {
+                            notification.default({ message: '双击导航栏可以快速返回顶部' });
+                            this.scrollNotificationLock = true;
+                        }
+                        scrollToTopCheckTimeout = null;
+                    }, 500, false);
+                }
+                lastScrollTop = scrollTop;
             };
             $$window.scroll(scrollCallback);
 
@@ -234,6 +249,16 @@
                     }
                 });
             }
+        }
+
+        scrollToTop(event) {
+            this.scrollNotificationLock = true;
+            $('html, body').animate({
+                scrollTop: 0,
+            }, 500).then(() => {
+                this.scrollNotificationLock = false;
+            });
+            event.preventDefault();
         }
     }
 

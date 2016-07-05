@@ -124,10 +124,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card send-card clearfix">
+                    <div ng-if="!editor.vm.id" class="card send-card clearfix">
                         <p>每发布一篇文章消耗 3 ◆ 文券<a href="coupon/detail">（这是为什么呢？）</a></p>
                         <p>当前有 <span class="theme">{{editor.stateTree.currentUser.coupon | numberAbbreviation}} ◆</span> 文券</p>
                         <raised-button disabled="editor.submitLock" click="editor.submit()" text="发布文章" type="theme"></raised-button>
+                    </div>
+                    <div ng-if="editor.vm.id" class="card send-card clearfix">
+                        <p>编辑文章不需要消耗文券</p>
+                        <raised-button disabled="editor.submitLock" click="editor.submit()" text="提交编辑" type="theme"></raised-button>
                     </div>
                 </div>
             </div>
