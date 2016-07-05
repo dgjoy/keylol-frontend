@@ -45,8 +45,12 @@
           display: flex;
           align-items: center;
 
-          point-basic-info.libraried .name-group p:first-of-type {
+          point-basic-info {
+            width: 250px;
+            
+            &.libraried .name-group p:first-of-type {
               color: $keylol-libraried;
+            }
           }
 
           &.article {
