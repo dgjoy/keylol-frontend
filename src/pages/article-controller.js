@@ -6,6 +6,7 @@
                     $scope.visible = false;
                     pageHead.setTitle('文章封存中 - 其乐');
                 } else {
+                    [result.pointBasicInfo.headerImage, result.coverImage] = [result.coverImage, result.pointBasicInfo.headerImage];
                     pageHead.setTitle(
                         `${result.title} - ${result.subtitle ? `${result.subtitle} - ` : ''}`
                         + `${result.pointBasicInfo.chineseName || result.pointBasicInfo.englishName} - 其乐`);
