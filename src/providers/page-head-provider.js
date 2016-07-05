@@ -23,6 +23,9 @@
                     setDescription(description) {
                         $rootScope.pageHead.description = description;
                     },
+                    setNotFound(notFound = false) {
+                        $rootScope.pageHead.notFound = notFound;
+                    },
                     loading () {
                         $rootScope.pageHead = _loadingHead;
                     },

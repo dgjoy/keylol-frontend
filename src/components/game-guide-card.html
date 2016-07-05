@@ -24,7 +24,7 @@
                 <use ng-href="{{store.icon | iconSvgUrl }}" xlink:href=""></use>
             </svg>
             <span class="discount" ng-if="store.discount">-{{store.discount}}</span>
-            <span ng-if="store.price">¥ {{store.price}}</span>
+            <span ng-if="store.price">{{store.price}}</span>
         </a>
     </div>
     <flat-button ng-if="gameGuideCard.stateTree.currentUser" binary-set="gameGuideCard.subscribeSet" binary-value="gameGuideCard.card.subscribed"

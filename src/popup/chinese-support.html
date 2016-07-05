@@ -52,7 +52,7 @@
                 </tr>
             </tbody>
         </table>
-        <div class="header" ng-style="{color: chineseSupport.theme.main}">第三方支持</div>
+        <div class="header" ng-if="chineseSupport.object.thirdPartyLinks && chineseSupport.object.thirdPartyLinks.length" ng-style="{color: chineseSupport.theme.main}">第三方支持</div>
         <div class="third-party" ng-repeat="thirdParty in chineseSupport.object.thirdPartyLinks">
             <p>{{thirdParty.title}}</p>
             <a href="" ng-href="{{thirdParty.link}}">外部页面</a>

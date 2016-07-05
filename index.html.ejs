@@ -16,6 +16,7 @@
     <% } %><title ng-bind="pageHead.title">其乐 - 甄选并传递游戏的价值</title>
     <meta name="keywords" content="{{pageHead.keywords}}" ng-if="pageHead.keywords">
     <meta name="description" content="{{pageHead.description}}" ng-if="pageHead.description">
+    <meta ng-if="pageHead.notFound" name="prerender-status-code" content="404">
     <link rel="apple-touch-icon" href="assets/images/apple-touch-icon-180.png">
     <link rel="icon" href="assets/images/favicon.ico">
     <% _.forEach(stylesheets, function(stylesheet) { %><link rel="stylesheet" href="<%= stylesheet %>">

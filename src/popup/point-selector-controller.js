@@ -18,7 +18,7 @@
                 this.pointArray[selector].selected = false;
                 close(this.pointArray[selector]);
             };
-            union.keydownCallback = e => {
+            const keydownCallback = e => {
                 $scope.$apply(() => {
                     if (e.keyCode === 40) {
                         if (selector < this.pointArray.length - 1) {
@@ -38,7 +38,7 @@
                     }
                 });
             };
-            $window.addEventListener('keydown', union.keydownCallback, true);
+            $($window).on('keydown.pointSelector', keydownCallback);
         }
     }
 

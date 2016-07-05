@@ -5,7 +5,7 @@
             <p ng-if="articleComments.article.latestCommentTime">最后回复于 <span am-time-ago="articleComments.article.latestCommentTime"></span></p>
             <p ng-if="!articleComments.article.latestCommentTime">第一发回复会决定整个讨论的方向</p>
         </div>
-        <pagination theme-color="articleComments.theme.light" ng-if="articleComments.article.commentPageCount > 1" on-page-changed="::articleComments.changePage(newPage, oldPage)" total="articleComments.article.commentPageCount" current="articleComments.currentPage"></pagination>
+        <pagination theme-color="articleComments.theme.light" ng-if="articleComments.article.commentPageCount > 1" on-page-changed="::articleComments.changePage(newPage, oldPage, false)" total="articleComments.article.commentPageCount" current="articleComments.currentPage"></pagination>
     </div>
     <div class="comments" ng-style="{height: articleComments.commentsHeight}" ng-class="{
     'to-next' : articleComments.isToNext,
@@ -24,7 +24,7 @@
                 <div ng-if="articleComments.authorize_view(comment)" class="basic-info">
                     <a ng-href="user/{{comment.authorIdCode}}"><img class="avatar" webp-src="{{comment.authorAvatarImage | avatarUrl}}"></a>
                     <div class="name-group">
-                        <p><a ng-href="user/{{comment.authorIdCode}}" class="username">{{comment.authorUserName}}</a><span class="like-count" ng-style="{color: comment.liked ? articleComments.theme.light : ''}" ng-class="{'light-theme': comment.liked}">+{{comment.likeCount}}</span></p>
+                        <p><a ng-href="user/{{comment.authorIdCode}}" class="username">{{comment.authorUserName}}</a><span class="like-count" ng-if="comment.likeCount" ng-style="{color: comment.liked ? articleComments.theme.light : ''}" ng-class="{'light-theme': comment.liked}">+{{comment.likeCount}}</span></p>
                         <p>
                             <span ng-if="comment.authorIdCode === articleComments.article.authorBasicInfo.idCode" ng-style="{color: articleComments.theme.light}" class="light-theme">文章作者</span>
                             <span ng-if="comment.authorIdCode === articleComments.article.authorBasicInfo.idCode && articleComments.article.pointBasicInfo.type === 'game'">/</span>
@@ -85,7 +85,7 @@
             </li>
         </ul>
     </div>
-    <div class="footer clearfix"><pagination theme-color="articleComments.theme.light" ng-if="articleComments.article.commentPageCount > 1" on-page-changed="::articleComments.changePage(newPage, oldPage)" total="articleComments.article.commentPageCount" current="articleComments.currentPage"></pagination></div>
+    <div class="footer clearfix"><pagination theme-color="articleComments.theme.light" ng-if="articleComments.article.commentPageCount > 1" on-page-changed="::articleComments.changePage(newPage, oldPage, true)" total="articleComments.article.commentPageCount" current="articleComments.currentPage"></pagination></div>
 </div>
 <div ng-if="articleComments.stateTree.currentUser" class="sender">
     <div class="basic-info">

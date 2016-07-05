@@ -8,6 +8,7 @@
                 $window,
             });
         }
+
         showUserHub ($event) {
             this.showUserHubPopup({
                 templateUrl: 'src/popup/user-hub.html',
@@ -21,6 +22,7 @@
                 inputs: {},
             });
         }
+
         showLoginWindow (event) {
             this.window.show({
                 event,
@@ -30,6 +32,7 @@
                 inputs: { startPage: 0 },
             });
         }
+
         showRegistrationWindow (event) {
             this.window.show({
                 event,

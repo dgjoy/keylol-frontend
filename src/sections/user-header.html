@@ -8,7 +8,7 @@
         </div>
     </div>
     <div class="attributes">
-        <p>{{userHeader.object.registerTime | amUtc | amLocal | amDateFormat:'YYYY-MM-DD'}} 加入其乐</p>
+        <p>{{userHeader.object.registerTime | amDateFormat:'YYYY-MM-DD'}} 加入其乐</p>
     </div>
     <div class="actions">
         <div ng-if="userHeader.stateTree.currentUser && (userHeader.stateTree.currentUser.idCode === userHeader.object.idCode || userHeader.stateTree.currentUser.roles.indexOf('Operator') > -1)" popup="userHeader.showMenuPopup">

@@ -1,13 +1,19 @@
 ﻿(function () {
     class CouponDetailListController {
-        constructor ($http, apiEndpoint, $filter) {
+        constructor ($http, apiEndpoint, $filter, $element, utils) {
             $.extend(this, {
                 $http,
                 apiEndpoint,
                 $filter,
+                $element,
+                utils,
             });
             this.currentPage = 1;
             this.pre(this.list);
+        }
+
+        scrollToTop() {
+            this.utils.scrollTo(this.$element);
         }
 
         changePage(newPage, oldPage) {
@@ -21,6 +27,7 @@
                     this.list = response.data;
                     this.pre(this.list);
                     this.changePageLock = false;
+                    this.scrollToTop();
                 }, response => {
                     this.changePageLock = false;
                 });

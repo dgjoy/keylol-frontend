@@ -11,7 +11,18 @@
             }
 
             fetchPromise.then(() => {
-                pageHead.setTitle(`${stateTree.aggregation.point.basicInfo.chineseName || stateTree.aggregation.point.basicInfo.englishName} - 编辑 - 样式 - 其乐`);
+                pageHead.setTitle(
+                    `样式 - 编辑据点 - ${stateTree.aggregation.point.basicInfo.chineseName ?
+                        `${stateTree.aggregation.point.basicInfo.chineseName} - ` : ''}`
+                    + `${stateTree.aggregation.point.basicInfo.englishName} - 其乐`);
+                pageHead.setDescription(`${stateTree.aggregation.point.basicInfo.chineseName
+                || stateTree.aggregation.point.basicInfo.englishName} 社区`);
+                const keywords = [stateTree.aggregation.point.basicInfo.englishName, '编辑, steam, 杉果, 评测, 社区, 折扣, 史低'];
+                if (stateTree.aggregation.point.basicInfo.chineseName) {
+                    keywords.unshift(stateTree.aggregation.point.basicInfo.chineseName);
+                }
+                pageHead.setKeywords(keywords);
+
                 const submitLink = `point/${stateTree.aggregation.point.basicInfo.id}`;
                 $scope.theme = {
                     main: stateTree.aggregation.point.basicInfo.themeColor,

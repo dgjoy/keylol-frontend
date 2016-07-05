@@ -120,8 +120,6 @@
 
             this.$http.post(`${this.apiEndpoint}user`, this.conn.vm)
                 .then(response => {
-                    this.union.$localStorage.firstOpenKeylol = true;
-
                     this.$http.post(`${this.apiEndpoint}oauth/token`, this.$httpParamSerializerJQLike({
                         token: response.data,
                         grant_type: 'one_time_token',
@@ -132,7 +130,6 @@
                         },
                     }).then(response => {
                         this.union.$localStorage.Authorization = response.data.access_token;
-                        this.notification.success('登录成功，欢迎回到其乐');
                         this.close();
                     }, response => {
                         if (response.status === 400 && response.data.error) {

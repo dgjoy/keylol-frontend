@@ -63,7 +63,7 @@
                         $timeout(() => {
                             notification.success({ message: '登录成功，欢迎回到其乐' });
                             union.$localStorage.Authorization = response.data.access_token;
-                        }, 5000);
+                        }, 2000);
                     }, response => {
                         if (response.status === 400 && response.data.error) {
                             switch (response.data.error) {
@@ -205,7 +205,7 @@
                     { label: '昵称', type: 'text', tip:'请输入昵称' },
                     { label: '登录口令', type: 'password' },
                 ], [
-                    { label: '电邮地址', type: 'text', tip:'请输入邮件' },
+                    { label: '电邮地址', type: 'email', tip:'请输入邮件' },
                     { label: '登录口令', type: 'password' },
                 ]],
                 errorDetect: utils.modelErrorDetect,
@@ -246,7 +246,7 @@
                          if (newValue.length === 0) {
                              this.passcodeWayManager.id_code.state = 'normal';
                              this.passcodeWayManager.id_code.completed = false;
-                         } else if (!/^[a-zA-Z0-9]{5}$/.test(newValue)) {
+                         } else if (!/^[a-zA-Z0-9]{1,5}$/.test(newValue)) {
                              this.passcodeWayManager.id_code.state = 'warn';
                              this.passcodeWayManager.id_code.error = 'UIC 只可能是 5 位的字母 / 数字代码';
                              this.passcodeWayManager.id_code.completed = false;

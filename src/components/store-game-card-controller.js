@@ -58,6 +58,7 @@
                     });
                 }
             }
+            
             if (this.stores.length > 3) {
                 this.stores = this.stores.slice(0,2);
                 this.stores.push({

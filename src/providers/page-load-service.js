@@ -1,5 +1,5 @@
 ﻿(function () {
-    keylolApp.factory('pageLoad', ($state, $stateParams, $http, stateTree, apiEndpoint, notification, $analytics) => {
+    keylolApp.factory('pageLoad', ($state, $stateParams, $http, stateTree, apiEndpoint, notification, $analytics, $q) => {
         return (stName, extraParams, useExtraParamsOnly) => {
             const result = stName.split('.');
             let params;
@@ -37,6 +37,7 @@
                 }).then(target => {
                     if ($.isEmptyObject(target)) {
                         $state.go('not-found', $stateParams, { location: false });
+                        return $q.reject('404');
                     } else {
                         return target;
                     }
@@ -73,6 +74,7 @@
                 }).then(target => {
                     if ($.isEmptyObject(target)) {
                         $state.go('not-found', $stateParams, { location: false });
+                        return $q.reject('404');
                     } else {
                         return target;
                     }

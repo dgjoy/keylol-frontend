@@ -34,6 +34,10 @@ textarea {
   border: none;
   padding: 8px;
   background: white;
+
+  &:disabled {
+    color: $keylol-inertia-text;
+  }
 }
 
 .simditor {
@@ -315,6 +319,10 @@ textarea {
   &:hover {
     .underline {
       text-decoration: underline;
+    }
+
+    .bottom-text {
+      @include text-protection-deep();
     }
   }
 

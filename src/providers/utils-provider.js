@@ -9,8 +9,8 @@
                 return _config;
             },
             $get: [
-                '$q', 'union', '$http', 'apiEndpoint', 'notification', 'window', '$window',
-                ($q, union, $http, apiEndpoint, notification, window, $window) => {
+                '$q', 'union', '$http', 'apiEndpoint', 'notification', 'window', '$window', '$rootScope',
+                ($q, union, $http, apiEndpoint, notification, window, $window, $rootScope) => {
                     function Utils() {
                         const self = this;
                         let _uniqueId = 1;
@@ -126,18 +126,26 @@
                         };
 
                         self.getPreferredPointName = function (point, user) {
-                            if (!point.chineseName || (!(user ? user.preferredPointName === 'chinese' : true) && point.englishName)) {
-                                return [point.englishName, point.chineseName];
+                            if (point) {
+                                if (!point.chineseName || (!(user ? user.preferredPointName === 'chinese' : true) && point.englishName)) {
+                                    return [point.englishName, point.chineseName];
+                                } else {
+                                    return [point.chineseName, point.englishName];
+                                }
                             } else {
-                                return [point.chineseName, point.englishName];
+                                return [];
                             }
                         };
 
                         self.getPreferredPointNamePrefixPoint = function (item, user) {
-                            if (!item.pointChineseName || (!(user ? user.preferredPointName === 'chinese' : true) && item.pointEnglishName)) {
-                                return [item.pointEnglishName, item.pointChineseName];
+                            if (item) {
+                                if (!item.pointChineseName || (!(user ? user.preferredPointName === 'chinese' : true) && item.pointEnglishName)) {
+                                    return [item.pointEnglishName, item.pointChineseName];
+                                } else {
+                                    return [item.pointChineseName, item.pointEnglishName];
+                                }
                             } else {
-                                return [item.pointChineseName, item.pointEnglishName];
+                                return [];
                             }
                         };
 
@@ -393,6 +401,18 @@
                             } else {
                                 return time ? `在档 ${time} 小时` : '无在档记录';
                             }
+                        };
+
+                        self.scrollTo = element => {
+                            $rootScope.$emit('scrollToElementStart');
+                            $('html, body').animate({
+                                scrollTop: typeof element === 'number' ? element : element.offset().top - 64,
+                            }, {
+                                duration: 500,
+                                always: () => {
+                                    $rootScope.$emit('scrollToElementSuccess');
+                                },
+                            });
                         };
                     }
 

@@ -69,7 +69,7 @@
         </div>
         <div class="communicate-card">
             <div class="review-area">
-                <pagination theme-color="activityCard.theme.light" class="float-top" ng-if="activityCard.commentsManager.pageCount > 1" on-page-changed="::activityCard.changePage(newPage, oldPage)" total="activityCard.commentsManager.pageCount" current="activityCard.commentsManager.currentPage"></pagination>
+                <pagination theme-color="activityCard.theme.light" class="float-top" ng-if="activityCard.commentsManager.pageCount > 1" on-page-changed="::activityCard.changePage(newPage, oldPage, false)" total="activityCard.commentsManager.pageCount" current="activityCard.commentsManager.currentPage"></pagination>
                 <div class="review-count">
                     全部 {{activityCard.commentsManager.count}} 个评论
                 </div>
@@ -93,7 +93,7 @@
                                  class="avatar" />
                             <div class="content" ng-if="activityCard.authorize_view(comment)">
                                 <div class="info">
-                                    <div class="user"><span class="user-name">{{comment.authorUserName}}</span><span ng-style="{color: comment.liked ? activityCard.theme.light : ''}" ng-class="{'light-theme': comment.liked}">+{{comment.likeCount}}</span></div>
+                                    <div class="user"><span class="user-name">{{comment.authorUserName}}</span><span ng-if="comment.likeCount" ng-style="{color: comment.liked ? activityCard.theme.light : ''}" ng-class="{'light-theme': comment.liked}">+{{comment.likeCount}}</span></div>
                                     <div class="date">
                                         <span ng-if="comment.authorPlayedTime">在档 {{comment.authorPlayedTime}} 小时 / </span>
                                         <span am-time-ago="comment.publishTime"></span> / #{{comment.sidForActivity}}
@@ -138,7 +138,7 @@
                     </ul>
                 </div>
                 <div class="clearfix">
-                    <pagination theme-color="activityCard.theme.light" on-page-changed="::activityCard.changePage(newPage, oldPage)" ng-if="activityCard.commentsManager.pageCount > 1" total="activityCard.commentsManager.pageCount" current="activityCard.commentsManager.currentPage"></pagination>
+                    <pagination theme-color="activityCard.theme.light" on-page-changed="::activityCard.changePage(newPage, oldPage, true)" ng-if="activityCard.commentsManager.pageCount > 1" total="activityCard.commentsManager.pageCount" current="activityCard.commentsManager.currentPage"></pagination>
                 </div>
                 <div ng-if="activityCard.stateTree.currentUser" class="hr"></div>
                 <div ng-if="activityCard.stateTree.currentUser" class="review-sender">

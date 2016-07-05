@@ -1,17 +1,22 @@
 ﻿(function () {
     class SalesTodayController {
-        constructor (utils, stateTree, $http, apiEndpoint) {
+        constructor (utils, stateTree, $http, apiEndpoint, $element) {
             $.extend(this, {
                 utils,
                 stateTree,
                 $http,
                 apiEndpoint,
+                $element,
             });
             this.currentPage = 1;
         }
 
         expandMore () {
             this.hasBeenExpanded = true;
+        }
+
+        scrollToTop() {
+            this.utils.scrollTo(this.$element);
         }
 
         changePage (newPage, oldPage) {
@@ -22,6 +27,7 @@
                     this.isToNext = newPage > oldPage;
                     this.list = response.data;
                     this.changePageLock = false;
+                    this.scrollToTop();
                 }, response => {
                     this.changePageLock = false;
                 });

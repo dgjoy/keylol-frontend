@@ -6,7 +6,7 @@
 
             this.object = object;
 
-            this.languageAvailability = ['fullAudio', 'interface', 'subtitles'];
+            this.languageAvailability = ['interface', 'subtitles', 'fullAudio'];
         }
     }
 
