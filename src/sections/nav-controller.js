@@ -279,12 +279,15 @@
                             this.currentPage = 2;
                             break;
                     }
+                });
 
-                    const keyword = $state.params.keyword;
-                    if (keyword) {
-                        this.tabArray[0].href = this.tabArray[0].href.substr(0, 13) + keyword;
-                        this.tabArray[1].href = this.tabArray[1].href.substr(0, 15) + keyword;
-                        this.tabArray[2].href = this.tabArray[2].href.substr(0, 12) + keyword;
+                $scope.$watch(() => {
+                    return $state.params.keyword;
+                }, newValue => {
+                    if (newValue) {
+                        this.tabArray[0].href = this.tabArray[0].href.substr(0, 13) + newValue;
+                        this.tabArray[1].href = this.tabArray[1].href.substr(0, 15) + newValue;
+                        this.tabArray[2].href = this.tabArray[2].href.substr(0, 12) + newValue;
                     }
                 });
             }

@@ -31,7 +31,6 @@
                 const object = stateTree.aggregation.user.basicInfo;
                 const preference = stateTree.aggregation.user.edit;
 
-                console.log(object, preference);
                 $scope.basicInfo = {
                     submitLink,
                     header: {

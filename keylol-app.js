@@ -384,7 +384,6 @@
                             if (result.results.length === 0) {
                                 $scope.empty = true;
                             }
-                            console.log(result);
                         });
                     },
                     onExit (stateTree) {
@@ -399,7 +398,6 @@
                             if (result.results.length === 0) {
                                 $scope.empty = true;
                             }
-                            console.log(result);
                         });
                     },
                     onExit (stateTree) {
@@ -414,7 +412,6 @@
                             if (result.results.length === 0) {
                                 $scope.empty = true;
                             }
-                            console.log(result);
                         });
                     },
                     onExit (stateTree) {
