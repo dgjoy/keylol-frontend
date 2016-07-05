@@ -107,6 +107,7 @@ nav-bar {
     input[type=search] {
       height: 25px;
       width: 240px;
+      box-sizing: border-box;
       padding: 0 6px;
       margin-right: 8px;
       background-color: rgba(#fff, 0.1);

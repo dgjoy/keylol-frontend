@@ -44,7 +44,7 @@
 
             const currentStateName = $state.current.name;
             if (currentStateName.substr(0, 8) === 'entrance') {
-                this.inEntrance = true;
+                this.hasFakeTabs = true;
                 this.tabArray = [
                     { state:'.discovery', name:'广场' },
                     { state:'.points', name:'据点' },
@@ -201,7 +201,7 @@
                     }
                 });
             } else if (currentStateName.substr(0,11) === 'post-office') {
-                this.inEntrance = true;
+                this.hasFakeTabs = true;
                 $scope.$watch(() => {
                     return stateTree.currentUser;
                 },() => {
@@ -233,7 +233,7 @@
                     }
                 });
             } else if (currentStateName.substr(0,6) === 'coupon') {
-                this.inEntrance = true;
+                this.hasFakeTabs = true;
                 this.tabArray = [
                     { state: '.detail', name:'明细' },
                     // { state: '.store', name:'商店' },
@@ -254,6 +254,37 @@
                         case 'ranking' :
                             this.currentPage = 1;
                             break;
+                    }
+                });
+            } else if (currentStateName.substr(0, 6) === 'search') {
+                this.hasFakeTabs = true;
+                this.tabArray = [
+                    { href: 'search/point/', name:'据点' },
+                    { href: 'search/article/', name:'文章' },
+                    { href: 'search/user/', name:'用户' },
+                ];
+
+                $scope.$watch(() => {
+                    return $state.current.name;
+                }, () => {
+                    const subState = $state.current.name.substr(7);
+                    switch (subState) {
+                        case 'point' :
+                            this.currentPage = 0;
+                            break;
+                        case 'article' :
+                            this.currentPage = 1;
+                            break;
+                        case 'user' :
+                            this.currentPage = 2;
+                            break;
+                    }
+
+                    const keyword = $state.params.keyword;
+                    if (keyword) {
+                        this.tabArray[0].href = this.tabArray[0].href.substr(0, 13) + keyword;
+                        this.tabArray[1].href = this.tabArray[1].href.substr(0, 15) + keyword;
+                        this.tabArray[2].href = this.tabArray[2].href.substr(0, 12) + keyword;
                     }
                 });
             }

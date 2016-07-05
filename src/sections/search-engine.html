@@ -1,0 +1,6 @@
+﻿<p class="inertia">通过第三方引擎站内搜索</p>
+<p>{{searchEngine.$stateParams.keyword}}</p>
+<div class="search-engine">
+    <a href="" class="bing" ng-href="https://www.bing.com/search?q=site:keylol.com+{{searchEngine.$stateParams.keyword | encodeURIComponent}}"></a>
+    <a href="" class="google" ng-href="https://www.google.com/search?q=site:keylol.com+{{searchEngine.$stateParams.keyword | encodeURIComponent}}"></a>
+</div>
