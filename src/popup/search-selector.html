@@ -18,13 +18,27 @@
         <ul class="result-list" ng-if="searchSelector.resultArray">
             <li ng-repeat="result in searchSelector.resultArray" ng-switch="searchSelector.filterType">
                 <a ripple href="" ng-href="point/{{result.idCode}}" ng-switch-when="point">
-                    <point-basic-info point="result"></point-basic-info>
+                    <point-basic-info point="result" ng-class="{libraried: result.inLibrary}"></point-basic-info>
                 </a>
-                <a ripple href="" ng-href="article//{{result.sidForAuther}}" ng-switch-when="article">
-
+                <a class="article" ripple href="" ng-href="article/{{result.authorIdCode}}/{{result.sidForAuthor}}" ng-switch-when="article">
+                    <span class="like-count">+{{result.likeCount | numberAbbreviation}}</span>
+                    <div class="title">
+                        <p>{{result.title}}</p>
+                        <p>{{result.subTitle}}</p>
+                    </div>
                 </a>
-                <a ripple href="" ng-href="user/{{result.idCode}}" ng-switch-when="user">
-                    <point-basic-info point="result"></point-basic-info>
+                <a class="user" ripple href="" ng-href="user/{{result.idCode}}" ng-switch-when="user">
+                    <div class="avatar-anchor">
+                        <img-label ng-if="result.isFriend" type="friended"></img-label>
+                        <img class="avatar" src="" webp-src="{{result.avatarImage | avatarUrl}}">
+                    </div>
+                    <div class="info">
+                        <p>
+                            <span class="name" ng-class="{friended: result.isFriend}">{{result.userName}}</span>
+                            <span>{{result.gamerTag}}</span>
+                        </p>
+                        <p>{{result.articleCount}} 文章 / {{result.activityCount}} 动态 / {{result.likeCount}} 认可</p>
+                    </div>
                 </a>
             </li>
         </ul>

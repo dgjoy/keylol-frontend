@@ -236,9 +236,9 @@
             } else if (currentStateName.substr(0, 6) === 'search') {
                 this.hasFakeTabs = true;
                 this.tabArray = [
-                    { state:'.point', name:'据点' },
-                    { state:'.article', name:'文章' },
-                    { state:'.user', name:'用户' },
+                    { href: 'search/point/', name:'据点' },
+                    { href: 'search/article/', name:'文章' },
+                    { href: 'search/user/', name:'用户' },
                 ];
 
                 $scope.$watch(() => {
@@ -255,6 +255,13 @@
                         case 'user' :
                             this.currentPage = 2;
                             break;
+                    }
+
+                    const keyword = $state.params.keyword;
+                    if (keyword) {
+                        this.tabArray[0].href = this.tabArray[0].href.substr(0, 13) + keyword;
+                        this.tabArray[1].href = this.tabArray[1].href.substr(0, 15) + keyword;
+                        this.tabArray[2].href = this.tabArray[2].href.substr(0, 12) + keyword;
                     }
                 });
             }

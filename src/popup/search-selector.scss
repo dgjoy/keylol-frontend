@@ -7,7 +7,7 @@
     background-color: $keylol-card;
 
     .default {
-      height: 270px;
+      height: 280px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -35,14 +35,86 @@
     ul {
       padding: 10px 0 0;
       margin: 0;
-      min-height: 250px;
+      min-height: 275px;
 
       li {
         list-style: none;
 
         a {
           padding: 10px 15px;
-          display: block;
+          display: flex;
+          align-items: center;
+
+          point-basic-info.libraried .name-group p:first-of-type {
+              color: $keylol-libraried;
+          }
+
+          &.article {
+            padding: 0;
+            height: 55px;
+            width: 100%;
+
+            .like-count {
+              flex-shrink: 0;
+              width: 55px;
+              text-align: center;
+              color: $keylol-light-theme;
+            }
+
+            .title {
+              max-width: calc(100% - 75px);
+
+              p {
+                @include ellipsis;
+                margin: 0;
+
+                &:first-of-type {
+                  color: $keylol-main-text;
+                  font-weight: bold;
+                }
+
+                &:nth-of-type(2) {
+                  color: $keylol-inertia-text;
+                }
+              }
+            }
+          }
+
+          &.user {
+            .avatar-anchor {
+              width: 32px;
+              height: 32px;
+              z-index: 0;
+              position: relative;
+              margin-right: 10px;
+
+              .avatar {
+                width: 32px;
+                height: 32px;
+              }
+            }
+
+            .info {
+              max-width: calc(100% - 42px);
+
+              p {
+                @include ellipsis;
+                margin: 0;
+                color: $keylol-inertia-text;
+                font-size: 12px;
+
+                .name {
+
+                  &.friended {
+                    color: $keylol-user-theme;
+                  }
+                  color: $keylol-main-text;
+                  font-weight: bold;
+                  font-size: 14px;
+                }
+              }
+            }
+          }
 
           &:hover {
             background-color: rgba(#000, 0.05);

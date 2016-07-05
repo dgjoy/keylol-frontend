@@ -21,6 +21,16 @@
                     type: 'light-text',
                 },
             ];
+            this.userSubscribeSet = [
+                {
+                    text: '关注',
+                    type: 'theme',
+                },
+                {
+                    text: '取关',
+                    type: 'light-text',
+                },
+            ];
 
             this.subscribe = utils.subscribe;
             this.openRegistration = utils.openRegistration;
@@ -36,6 +46,10 @@
                 case 'user':
                     this.list = stateTree.search.user.results;
                     break;
+            }
+
+            if (this.list && this.list.length < 10) {
+                this.hasNoPagination = true;
             }
         }
         

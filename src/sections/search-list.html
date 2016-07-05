@@ -1,8 +1,10 @@
 ﻿<div ng-if="searchList.isEmpty" class="empty">
-    <img src="assets/images/portal-cake.png" alt="">
+    <svg aria-hidden="true">
+        <use ng-href="{{'clipart-hit' | iconSvgUrl }}" xlink:href=""></use>
+    </svg>
     <div class="bundle">
-        <p class="font-myriad-keylol">这里空空如也，连块蛋糕都没有。</p>
-        <p>来一发投稿如何？</p>
+        <p class="font-myriad-keylol">未能撞到任何实用结果</p>
+        <p>试试右边的第三方搜索引擎？</p>
     </div>
 </div>
 <div ng-if="!searchList.isEmpty" class="results-card" ng-switch="searchList.searchType">
@@ -18,10 +20,10 @@
                 </a>
                 <div class="info">
                     <p>
-                        <a href="" ng-href="point/{{point.idCode}}">{{searchList.utils.getPreferredPointName(point, searchList.stateTree.currentUser)[0]}}</a>
+                        <a href="" ng-href="point/{{point.idCode}}" ng-class="{libraried: point.inLibrary}">{{searchList.utils.getPreferredPointName(point, searchList.stateTree.currentUser)[0]}}</a>
                         <span>{{searchList.utils.getPreferredPointName(point, searchList.stateTree.currentUser)[1]}}</span>
                     </p>
-                    <p>{{point.readerCount}} 读者 / {{point.articleCount}} 来稿文章 / {{point.activityCount}} 动态</p>
+                    <p>{{point.subscriberCount}} 读者 / {{point.articleCount}} 来稿文章 / {{point.activityCount}} 动态</p>
                 </div>
                 <flat-button ng-if="searchList.stateTree.currentUser" binary-set="searchList.pointSubscribeSet" binary-value="point.subscribed"
                              click="searchList.subscribe(point.id, point.subscribed, point)"></flat-button>
@@ -35,8 +37,8 @@
     'to-previous' : !searchList.isToNext
     }">
         <ul class="result-list" ng-animate-swap="searchList.currentPage">
-            <li ng-repeat="article in ::searchList.articles track by $index">
-                <div class="count" ng-style="{color: searchList.theme.light}">
+            <li ng-repeat="article in ::searchList.list track by $index">
+                <div class="count">
                     <span>+{{::article.likeCount}}</span><span>···{{::article.commentCount}}</span>
                 </div>
                 <div class="article">
@@ -61,28 +63,26 @@
     'to-previous' : !searchList.isToNext
     }">
         <ul class="result-list" ng-animate-swap="searchList.currentPage">
-            <li ng-repeat="article in ::searchList.articles track by $index">
-                <div class="count" ng-style="{color: searchList.theme.light}">
-                    <span>+{{::article.likeCount}}</span><span>···{{::article.commentCount}}</span>
-                </div>
-                <div class="article">
-                    <p><a ng-href="article/{{::article.authorIdCode}}/{{::article.sidForAuthor}}">{{::article.title}}</a></p>
+            <li class="point" ng-repeat="user in ::searchList.list track by $index">
+                <a href="" ng-href="user/{{user.idCode}}">
+                    <img-label ng-if="user.isFriend" type="friended"></img-label>
+                    <img class="avatar" src="" webp-src="{{user.avatarImage | avatarUrl}}">
+                </a>
+                <div class="info">
                     <p>
-                        <span class="datetime" am-time-ago="article.publishTime"></span>
-                        <a href="" ng-href="user/{{::article.authorIdCode}}">
-                            <img class="avatar" src="" webp-src="{{::article.authorAvatarImage | avatarUrl: 'small'}}" alt="{{::article.authorUserName}}">
-                            <span>{{::article.authorUserName}}</span>
-                        </a>
-                        <a ng-if="::article.pointIdCode" href="" ng-href="point/{{::article.pointIdCode}}">
-                            <img class="avatar" src="" webp-src="{{::article.pointAvatarImage | avatarUrl: 'small'}}" alt="{{::searchList.utils.getPreferredPointNamePrefixPoint(article, searchList.stateTree.currentUser)[0]}}">
-                            <span>{{::searchList.utils.getPreferredPointNamePrefixPoint(article, searchList.stateTree.currentUser)[0]}}</span>
-                        </a>
+                        <a href="" ng-href="user/{{user.idCode}}" ng-class="{friended: user.isFriend}">{{user.userName}}</a>
+                        <span>{{user.gamerTag}}</span>
                     </p>
+                    <p>{{user.articleCount}} 文章 / {{user.activityCount}} 动态 / {{user.likeCount}} 认可</p>
                 </div>
+                <flat-button ng-if="searchList.stateTree.currentUser" binary-set="searchList.userSubscribeSet" binary-value="user.subscribed"
+                             click="searchList.subscribe(user.id, user.subscribed, user)"></flat-button>
+                <flat-button ng-if="!searchList.stateTree.currentUser" text="订阅"
+                             click="searchList.openRegistration(event)"></flat-button>
             </li>
         </ul>
     </div>
     <div class="footer clearfix">
-        <pagination on-page-changed="::searchList.changePage(newPage, oldPage)" total="::50" current="searchList.currentPage"></pagination>
+        <pagination ng-if="!searchList.hasNoPagination" on-page-changed="::searchList.changePage(newPage, oldPage)" total="::50" current="searchList.currentPage"></pagination>
     </div>
 </div>

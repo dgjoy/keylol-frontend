@@ -36,7 +36,13 @@
                         search_all: false,
                     },
                 }).then(response => {
-                    this.resultArray = response.data.results;
+                    if (response.data.results.length > 0) {
+                        this.resultArray = response.data.results;
+                        this.notFound = false;
+                    } else {
+                        delete this.resultArray;
+                        this.notFound = true;
+                    }
                     console.log(response.data);
                 }, response => {
                     this.notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
