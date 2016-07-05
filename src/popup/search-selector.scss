@@ -1,112 +1,157 @@
 .popup-search-selector {
-    width: 300px;
-}
+  width: 280px;
+  z-index: 999;
 
-.popup-search-selector .selector-main {
-    background: white;
-}
+  .selector-main {
+    @include keylol-shadow-3();
+    background-color: $keylol-card;
 
-.popup-search-selector .selector-main {
-    background: white;
-}
+    .default {
+      height: 280px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
 
-.popup-search-selector .selector-main .search-filter {
-    height: 30px;
-    padding-top: 10px;
-    float: right;
-}
+      svg {
+        width: 128px;
+        height: 128px;
+        fill: $keylol-theme;
+      }
 
-.popup-search-selector .selector-main .search-filter a {
-    margin-right: 12px;
-    color: #748a97;
-}
+      h1 {
+        margin: 17px 0 0 0;
+        font-size: 20px;
+        font-weight: normal;
+        color: $keylol-theme;
+      }
 
-.popup-search-selector .selector-main .search-filter a.active {
-    color: #000003;
-}
+      p {
+        margin: 4px 0 0 0;
+        color: $keylol-inertia-text;
+      }
+    }
 
-.popup-search-selector .selector-main .default {
-    padding-top: 95px;
-    margin-bottom: 45px;
-    text-align: center;
-}
+    ul {
+      padding: 10px 0 0;
+      margin: 0;
+      min-height: 275px;
 
-.popup-search-selector .selector-main .default img {
-    height: 89px;
-    width: auto;
-}
+      li {
+        list-style: none;
 
-.popup-search-selector .selector-main .default h1 {
-    margin: 20px 0 0 0;
-    font-size: 24px;
-    color: #BBB;
-    font-weight: normal;
-}
+        a {
+          padding: 10px 15px;
+          display: flex;
+          align-items: center;
 
-.popup-search-selector .selector-main ul {
-    padding: 0;
-    margin: 0;
-    clear: both;
-    height: 260px;
-}
+          point-basic-info {
+            width: 250px;
+            
+            &.libraried .name-group p:first-of-type {
+              color: $keylol-libraried;
+            }
+          }
 
-.popup-search-selector .selector-main li {
-    list-style: none;
-    padding: 10px 15px;
-    cursor: pointer;
-}
+          &.article {
+            padding: 0;
+            height: 55px;
+            width: 100%;
 
-.popup-search-selector .selector-main li:hover {
-    background-color: #EEE;
-}
+            .like-count {
+              flex-shrink: 0;
+              width: 55px;
+              text-align: center;
+              color: $keylol-light-theme;
+            }
 
-.popup-search-selector .selector-main li .avatar-anchor {
-    float: left;
-}
+            .title {
+              max-width: calc(100% - 75px);
 
-.popup-search-selector .selector-main li .avatar-anchor img {
-    width: 32px;
-    height: 32px;
-}
+              p {
+                @include ellipsis;
+                margin: 0;
 
-.popup-search-selector .selector-main li .title {
-    float: left;
-    margin-left: 14px;
-}
+                &:first-of-type {
+                  color: $keylol-main-text;
+                  font-weight: bold;
+                }
 
-.popup-search-selector .selector-main li .title p {
-    margin: 0;
-    line-height: 16px;
-}
+                &:nth-of-type(2) {
+                  color: $keylol-inertia-text;
+                }
+              }
+            }
+          }
 
-.popup-search-selector .selector-main li .title p:first-of-type {
-    color: $keylol-theme;
-    font-weight: bold;
-}
+          &.user {
+            .avatar-anchor {
+              width: 32px;
+              height: 32px;
+              z-index: 0;
+              position: relative;
+              margin-right: 10px;
 
-.popup-search-selector .selector-main li .title p span {
-    color: #748a97;
-}
+              .avatar {
+                width: 32px;
+                height: 32px;
+              }
+            }
 
-.popup-search-selector .selector-main li .title p.info {
-    height: 18px;
-    width: 100%;
-}
+            .info {
+              max-width: calc(100% - 42px);
 
-.popup-search-selector .selector-main li .title p.info span {
-    margin-left: 8px;
-    color: #BBB;
-}
+              p {
+                @include ellipsis;
+                margin: 0;
+                color: $keylol-inertia-text;
+                font-size: 12px;
 
-.popup-search-selector .selector-main li .title p.info span:first-of-type {
-    margin-left: 0;
-}
+                .name {
 
-.popup-search-selector .selector-main .all-results {
-    float: right;
-    padding: 13px;
-}
+                  &.friended {
+                    color: $keylol-user-theme;
+                  }
+                  color: $keylol-main-text;
+                  font-weight: bold;
+                  font-size: 14px;
+                }
+              }
+            }
+          }
 
-.popup-search-selector .selector-main .all-results a {
-    color: #748a97;
+          &:hover {
+            background-color: rgba(#000, 0.05);
+          }
+        }
+      }
+    }
+
+    .search-engine {
+      height: 45px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+
+      a {
+        display: flex;
+        align-items: center;
+
+        svg {
+          width: 24px;
+          height: 24px;
+          margin-right: 12px;
+          fill: $keylol-inertia-shape
+        }
+
+        &:hover {
+          text-decoration: underline;
+
+          svg {
+            fill: $keylol-light-text;
+          }
+        }
+      }
+    }
+  }
 }

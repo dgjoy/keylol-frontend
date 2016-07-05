@@ -366,6 +366,61 @@
                         delete stateTree.content.activity;
                     },
                 })
+            .state('search', {
+                'abstract': true,
+                templateUrl: 'src/pages/search-results.html',
+                controller ($scope, stateTree) {
+                    $scope.stateTree = stateTree;
+                },
+                onExit (stateTree) {
+                    delete stateTree.search;
+                },
+            })
+                .state('search.point', {
+                    url: '/search/point/:keyword',
+                    template: '<search-list ng-if="stateTree.search.point" is-empty="empty"></search-list>',
+                    controller (pageLoad, $scope) {
+                        pageLoad('search.point').then(result => {
+                            if (result.results.length === 0) {
+                                $scope.empty = true;
+                            }
+                            console.log(result);
+                        });
+                    },
+                    onExit (stateTree) {
+                        delete stateTree.search;
+                    },
+                })
+                .state('search.article', {
+                    url: '/search/article/:keyword',
+                    template: '<search-list ng-if="stateTree.search.article" is-empty="empty"></search-list>',
+                    controller (pageLoad, $scope) {
+                        pageLoad('search.article').then(result => {
+                            if (result.results.length === 0) {
+                                $scope.empty = true;
+                            }
+                            console.log(result);
+                        });
+                    },
+                    onExit (stateTree) {
+                        delete stateTree.search;
+                    },
+                })
+                .state('search.user', {
+                    url: '/search/user/:keyword',
+                    template: '<search-list ng-if="stateTree.search.user" is-empty="empty"></search-list>',
+                    controller (pageLoad, $scope) {
+                        pageLoad('search.user').then(result => {
+                            if (result.results.length === 0) {
+                                $scope.empty = true;
+                            }
+                            console.log(result);
+                        });
+                    },
+                    onExit (stateTree) {
+                        delete stateTree.search;
+                    },
+                })
             .state('not-found', {
                 url: '/not-found',
                 templateUrl: 'src/pages/not-found.html',

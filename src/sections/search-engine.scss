@@ -1,0 +1,43 @@
+search-engine {
+  p {
+    margin: 0;
+
+    &.inertia {
+      color: $keylol-inertia-text;
+    }
+  }
+
+  .search-engine {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    height: 32px;
+
+    a {
+      height: 100%;
+      width: 50%;
+      flex-grow: 0;
+      flex-shrink: 0;
+      background: center no-repeat;
+      background-size: contain;
+
+      &.bing {
+        background-image: url('/assets/images/bing.png');
+      }
+
+      &.google {
+        background-image: url('/assets/images/google.png');
+      }
+
+      &:hover {
+        &.bing {
+          background-image: url('/assets/images/bing-hover.png');
+        }
+
+        &.google {
+          background-image: url('/assets/images/google-hover.png');
+        }
+      }
+    }
+  }
+}
