@@ -64,7 +64,7 @@ timeline-card {
         }
 
         p {
-          margin: 0 0 20px;
+          margin: 0;
           padding: 0 15px;
           word-break: break-all;
           white-space: pre-wrap;
@@ -98,7 +98,8 @@ timeline-card {
         }
 
         img {
-          width: 100%;
+          margin: 15px 0 0 -15px;
+          width: calc(100% + 30px);
         }
       }
     }

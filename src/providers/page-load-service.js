@@ -64,7 +64,7 @@
                 return $http.get(`${apiEndpoint}states${urlParams}`,{ params }).then(response => {
                     target[result[result.length - 1]] = response.data;
                     target = target[result[result.length - 1]];
-                    if (target.current) {
+                    if (target.current && !$state.is(`.${target.current}`)) {
                         $state.go(`.${target.current}`, $stateParams, { location: false });
                     }
 

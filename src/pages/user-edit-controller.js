@@ -1,12 +1,6 @@
 ﻿(function () {
     class UserEditController {
         constructor ($scope, pageHead, stateTree, $state, $location, $timeout) {
-            if ($location.path().match(/\/user\/[^\/]*\/edit\/?$/)) {
-                $timeout(() => {
-                    $state.go('.info', {}, { location: false });
-                });
-            }
-
             $scope.tabArray = [
                 { state: '.info', name:'信息与资料' },
                 { state: '.preference', name:'调整偏好' },

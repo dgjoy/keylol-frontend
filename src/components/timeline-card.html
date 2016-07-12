@@ -32,12 +32,11 @@
         </a>
         <div ng-switch-when="activity" class="simple">
             <vote-circle ng-if="timelineCard.card.rating" review="timelineCard.card.rating * 2 - 1" gray-background="true"></vote-circle>
-            <p ng-style="{height: timelineCard.simpleHidden ? 99 : timelineCard.simpleHeight || ''}">{{timelineCard.card.content}}<a href="" ng-click="timelineCard.simpleExpand()" ng-if="timelineCard.simpleHidden" class="expand">
+            <p ng-style="{maxHeight: timelineCard.simpleHidden ? timelineCard.simpleMaxHeight : null}">{{timelineCard.card.content}}<a target="_blank" ng-href="{{timelineCard.card.coverImage | uriRelocate}}"><img ng-if="timelineCard.card.coverImage" webp-src="{{timelineCard.card.coverImage | uriRelocate: '/fw/425'}}"></a><a href="" ng-click="timelineCard.simpleExpand()" ng-if="timelineCard.simpleHidden" class="expand">
                 <svg aria-hidden="true">
                     <use ng-href="{{ 'more' | iconSvgUrl }}" xlink:href=""></use>
                 </svg>
             </a></p>
-            <a target="_blank" ng-href="{{timelineCard.card.coverImage | uriRelocate}}"><img ng-if="timelineCard.card.coverImage" webp-src="{{timelineCard.card.coverImage | uriRelocate: '/fw/425'}}"></a>
         </div>
     </div>
     <div ng-if="timelineCard.card.attachedPoints[0]" class="point-with-source">
