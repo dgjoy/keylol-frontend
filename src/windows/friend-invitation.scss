@@ -1,0 +1,106 @@
+.window-friend-invitation {
+  .window {
+    width: 700px;
+    background-color: $keylol-card;
+
+    .header {
+      height: 105px;
+      background-color: $keylol-review-awesome;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      overflow: hidden;
+
+      .text {
+        margin-left: 15px;
+
+        p {
+          margin: 0;
+          padding: 0;
+
+          &:first-of-type {
+            font-weight: bold;
+            font-size: 20px;
+            margin-bottom: 2px;
+            color: $keylol-inverted-text;
+          }
+
+          &:last-of-type {
+            color: rgba($keylol-inverted-text, 0.6);
+          }
+        }
+      }
+
+      img {
+        width: 135px;
+        margin-right: 50px;
+      }
+    }
+
+    .content {
+      padding: 5px 15px 20px;
+
+      p {
+        white-space: normal;
+        margin: 0;
+
+        &.blue {
+          color: $keylol-light-theme;
+        }
+
+        &.green {
+          color: $keylol-review-good;
+        }
+      }
+
+      text-area {
+        width: 310px;
+        margin: auto;
+      }
+
+      .head {
+        margin: 15px;
+        text-indent: 30px;
+      }
+
+      .cards {
+        display: flex;
+        justify-content: center;
+
+        .card {
+          @include keylol-shadow-1();
+          background-color: $keylol-inverted-text;
+          margin: 0 15px;
+          padding: 20px 15px;
+          width: 190px;
+
+          .line {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            line-height: 30px;
+
+            p {
+              flex-grow: 1;
+
+              &:nth-of-type(2) {
+                min-width: 100px;
+                text-align: right;
+              }
+            }
+          }
+        }
+      }
+
+      .actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .invited {
+          color: $keylol-inertia-text;
+        }
+      }
+    }
+  }
+}

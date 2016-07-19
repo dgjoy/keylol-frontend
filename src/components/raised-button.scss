@@ -98,6 +98,10 @@ raised-button {
       background-color: $keylol-light-theme;
     }
 
+    &.awesome {
+      background-color: $keylol-review-awesome;
+    }
+
     &.invert {
       background-color: $keylol-inverted-text;
     }

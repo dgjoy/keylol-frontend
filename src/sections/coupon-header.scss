@@ -10,15 +10,19 @@ coupon-header {
   p {
     margin: 0;
     color: $keylol-main-text;
+
     &.red {
       color: $keylol-review-bad;
     }
+
     &.blue {
       color: $keylol-light-theme;
     }
+
     &.green {
       color: $keylol-review-good;
     }
+
     &.inertia {
       color: $keylol-inertia-text;
     }
