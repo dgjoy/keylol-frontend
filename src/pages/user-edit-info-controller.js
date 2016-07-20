@@ -87,7 +87,7 @@
                             type: preference.steamBotLost ? 'lostBot' : 'link',
                             link: preference.steamBotSteamId ?
                                 `http://steamcommunity.com/profiles/${utils.getSteamId64(preference.steamBotSteamId)}` : '',
-                            addLink: `steam://friends/add/${utils.getSteamId64(preference.steamBotSteamId)}`,
+                            addLink: preference.steamBotSteamId ? `steam://friends/add/${utils.getSteamId64(preference.steamBotSteamId)}` : '',
                             value: preference.steamBotLost ? '已断开绑定' : preference.steamBotName,
                             editDisabled: true,
                         },
