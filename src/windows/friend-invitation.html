@@ -22,10 +22,10 @@
                 </div>
             </div>
             <p class="head">我们格外建议将文章转载至其他友善的玩家集中地，比如知乎、豆瓣或是 Steam 个人评测，这些用户能和我们一起养成更理想的社区氛围，还会获得应邀注册的文券奖励。</p>
-            <text-area type="text" label="你的推广链接" tip="'在第三方站点张贴链接时，记得遵守用户协议'" model="pointCreator.vm.OtherGame.englishName"></text-area>
+            <text-area selected-on-focus="true" type="text" label="你的推广链接" tip="'在第三方站点张贴链接时，记得遵守用户协议'" model="friendInvitation.inviteLink"></text-area>
             <p class="head">除此之外，你还可以分享上面的这段链接给你的好友，或是附在论坛个人签名中，当游客通过这个链接访问其乐并注册后，你会获得同样的文券奖励。</p>
             <div class="actions">
-                <p class="invited">目前已邀请 39 位用户加入其乐</p>
+                <p class="invited">目前已邀请 {{friendInvitation.inviteCount}} 位用户加入其乐</p>
                 <raised-button click="friendInvitation.close()" text="可以，这很善良" type="awesome"></raised-button>
             </div>
         </div>

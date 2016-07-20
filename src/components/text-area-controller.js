@@ -63,6 +63,7 @@
             theme:'<',
             whitelist: '<',
             options: '<',
+            selectedOnFocus: '<',
         },
     });
 }());
