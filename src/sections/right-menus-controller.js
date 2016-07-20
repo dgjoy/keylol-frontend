@@ -213,6 +213,7 @@
         bindings: {
             author: '<',
             point: '<',
+            rating: '<',
         },
     });
 }());

@@ -21,7 +21,7 @@
             <p ng-if="menu.object.header.totalPlayedTime" class="in-library">已在档 {{menu.object.header.totalPlayedTime}} 小时</p>
             <p ng-if="menu.object.header.keylolAveragePlayedTime">玩家平均在档 {{menu.object.header.keylolAveragePlayedTime}} 小时</p>
         </div>
-        <span class="reputation-stat" ng-repeat="(stat, statCount) in menu.object.header.voteStats track by stat">
+        <span class="reputation-stat" ng-repeat="(stat, statCount) in menu.object.header.voteStats track by stat"  ng-class="{active: $index + 1 === menu.object.header.rating}">
             <div class="left-content">
                 <svg xmlns="http://www.w3.org/2000/svg" class="reputation-circle" ng-repeat="circle in menu.circles[$index] track by $index">
                     <circle cx="4" cy="4" r="4"></circle>

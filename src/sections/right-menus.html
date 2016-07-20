@@ -7,6 +7,6 @@
     </div>
     <div ng-if="rightMenus.author || rightMenus.point" class="flex-column">
         <user-menu ng-if="rightMenus.author" style="margin-bottom: 20px;" object="::rightMenus.author"></user-menu>
-        <point-menu ng-if="rightMenus.point" object="::rightMenus.point"></point-menu>
+        <point-menu ng-if="rightMenus.point" rating="rightMenus.rating" object="::rightMenus.point"></point-menu>
     </div>
 </div>

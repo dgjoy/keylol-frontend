@@ -1,3 +1,18 @@
+@mixin menu-for-point-rating-active ($color) {
+  .left-content {
+    svg {
+      fill: $color;
+    }
+
+    span {
+      color: $color;
+    }
+  }
+  .right-content .reputation-level {
+    background-color: $color;
+  }
+}
+
 menu {
   @include keylol-shadow-1;
   background-color: $keylol-card;
@@ -80,8 +95,8 @@ menu {
       }
 
       a {
-        display: block;
         @include hover-background;
+        display: block;
         margin-top: 10px;
 
         point-basic-info {
@@ -116,6 +131,27 @@ menu {
         display: flex;
         align-items: center;
         justify-content: space-between;
+        @include menu-for-point-rating-active($keylol-inertia-text);
+
+        &:first-of-type.active {
+          @include menu-for-point-rating-active($keylol-review-terrible);
+        }
+
+        &:nth-of-type(2).active {
+          @include menu-for-point-rating-active($keylol-review-bad);
+        }
+
+        &:nth-of-type(3).active {
+          @include menu-for-point-rating-active($keylol-review-not-bad);
+        }
+
+        &:nth-of-type(4).active {
+          @include menu-for-point-rating-active($keylol-review-good);
+        }
+
+        &:nth-of-type(5).active {
+          @include menu-for-point-rating-active($keylol-review-awesome);
+        }
 
         .left-content {
           display: flex;
@@ -124,12 +160,10 @@ menu {
           svg {
             height: 8px;
             width: 8px;
-            fill: $keylol-inertia-text;
             margin-right: 2px;
           }
 
           span {
-            color: $keylol-inertia-text;
             margin-left: 5px;
           }
         }
@@ -139,7 +173,6 @@ menu {
           width: 100px;
 
           .reputation-level {
-            background-color: $keylol-inertia-text;
             height: 5px;
           }
         }
@@ -152,8 +185,8 @@ menu {
         justify-content: space-between;
 
         .reputation-number {
-          margin-top: -2px;
           @include keylol-review();
+          margin-top: -2px;
           font-size: 20px;
           font-weight: bold;
         }

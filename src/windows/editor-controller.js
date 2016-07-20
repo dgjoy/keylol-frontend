@@ -384,7 +384,6 @@
                     this.$timeout.cancel(this.autoSaveTimeout);
                     this.close();
                     this.detachLocationListener();
-                    this.stateTree.currentUser.coupon -= 3;
                     this.$location.url(`article/${this.stateTree.currentUser.idCode}/${response.data}`);
                     this.notification.success({ message: '发布成功，发布文章会消耗 3 文券' });
                 }, response => {

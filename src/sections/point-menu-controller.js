@@ -26,6 +26,7 @@
                             '4': arr[3],
                             '5': arr[4],
                         },
+                        rating: this.rating,
                         totalEvaluate: total,
                         votePercent: this.object.averageRating,
                         titleCoverImage: this.object.titleCoverImage,
@@ -125,6 +126,7 @@
         bindings: {
             theme: '<',
             object: '<',
+            rating: '<',
         },
     });
 }());

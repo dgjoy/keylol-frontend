@@ -45,16 +45,22 @@
         </form>
     </div>
     <div class="action-hub" ng-if="navBar.stateTree.currentUser && !navBar.stateTree.empty">
-        <a href="post-office" ng-class="{active: navBar.stateTree.currentUser.messageCount, focus: navBar.stateTree.postOffice}" ripple="#fff">
+        <a class="message-count" href="post-office" ng-class="{active: navBar.stateTree.currentUser.messageCount, focus: navBar.stateTree.postOffice}" ripple="#fff">
             <p>邮政</p>
-            <p>{{navBar.stateTree.currentUser.messageCount || "O" | numberAbbreviation}}</p>
+            <p ng-class="{rubberBand: navBar.messageCountChange}">{{navBar.stateTree.currentUser.messageCount || "O" | numberAbbreviation}}</p>
         </a>
         <a href="coupon" ng-class="{focus: navBar.stateTree.coupon }" ripple="#fff">
             <p>文券</p>
             <p>{{navBar.stateTree.currentUser.coupon | numberAbbreviation}} ◆</p>
+            <div class="coupon-change-animation" ng-repeat="couponChange in navBar.couponChanges track by $index">
+                <div class="event-container" ng-class="{plus: couponChange.change >= 0, minus: couponChange.change < 0}">
+                    <p>{{couponChange.event}}</p>
+                    <p>{{couponChange.change<0?"－":"＋"}} {{couponChange.change < 0 ? -couponChange.change : couponChange.change}} ◆</p>
+                </div>
+            </div>
         </a>
         <a href="" ng-click="navBar.showUserHub($event)" popup="navBar.showUserHubPopup">
-            <img class="avatar" webp-src="{{navBar.stateTree.currentUser.avatarImage | avatarUrl: 'big'}}" alt="{{navBar.stateTree.currentUser.userName}}">
+            <img src="" class="avatar" webp-src="{{navBar.stateTree.currentUser.avatarImage | avatarUrl: 'big'}}" alt="{{navBar.stateTree.currentUser.userName}}">
         </a>
     </div>
     <div class="action-hub" ng-if="!navBar.stateTree.currentUser && !navBar.stateTree.empty">

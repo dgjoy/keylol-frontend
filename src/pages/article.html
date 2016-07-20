@@ -1,6 +1,6 @@
 ﻿<nav theme="theme"></nav>
-<div ng-if="stateTree.content.article" class="container">
-    <div ng-if="visible === true" class="flex-row" style="margin-top: 30px;">
+<div class="container">
+    <div ng-if="stateTree.content.article && visible === true" class="flex-row" style="margin-top: 30px;">
         <div class="left-middle-lg row-sm">
             <article-header article="stateTree.content.article" theme="theme" style="margin-bottom:30px"></article-header>
             <article-content theme="theme" article="stateTree.content.article" style="margin-bottom:30px;"></article-content>
@@ -8,10 +8,10 @@
             <article-comments style="margin-top:400px; margin-bottom:30px; " theme="theme" article="stateTree.content.article"></article-comments>
         </div>
         <div class="right-lg hidden-sm flex-column">
-            <right-menus style="flex-grow: 1" author="stateTree.content.article.authorBasicInfo" point="stateTree.content.article.pointBasicInfo"></right-menus>
+            <right-menus style="flex-grow: 1" rating="stateTree.content.article.rating" author="stateTree.content.article.authorBasicInfo" point="stateTree.content.article.pointBasicInfo"></right-menus>
         </div>
     </div>
-    <div ng-if="visible === false" class="flex-row" style="margin-top: 30px;">
+    <div ng-if="stateTree.content.article && visible === false" class="flex-row" style="margin-top: 30px;">
         <div class="left-middle-lg row-sm">
             <archived-header type="文章"></archived-header>
         </div>
