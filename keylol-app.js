@@ -323,9 +323,13 @@
                     url: '/edit',
                     templateUrl: 'src/pages/user-edit.html',
                     controller: 'UserEditController',
-                    onEnter (union, $state, $stateParams) {
+                    onEnter (union, $state, $stateParams, $timeout) {
                         if (!union.$localStorage.Authorization) {
                             $state.go('aggregation.user', $stateParams);
+                        } else {
+                            $timeout(() => {
+                                $state.go('.info', {}, { location: false });
+                            });
                         }
                     },
                     onExit (stateTree) {

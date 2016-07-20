@@ -9,8 +9,15 @@
         </div>
     </div>
     <div class="line">
-        <div class="left-part">
+        <div ng-if="spotlightUsers.sameFriendCards.length !== 0" class="left-part">
             <user-card user="card" type="user-theme" ng-repeat="card in spotlightUsers.sameFriendCards"></user-card>
+        </div>
+        <div ng-if="spotlightUsers.sameFriendCards.length === 0" class="left-part">
+            <div class="invite">
+                <p>让更多人知道其乐</p>
+                <p>独乐乐不如众乐乐，在这里共享游戏的乐趣。</p>
+                <p><raised-button text="邀请好友加入" type="user-theme" click="spotlightUsers.inviteFriend(event)" invert="true"></raised-button></p>
+            </div>
         </div>
         <div class="right-part">
             <img src="assets/images/friends-strip-background.png">

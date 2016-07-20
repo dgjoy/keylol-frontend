@@ -125,6 +125,7 @@
         controllerAs: 'navBar',
         bindings: {
             theme: '<',
+            logoType: '<',
         },
     });
 }());

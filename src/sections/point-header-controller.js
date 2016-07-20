@@ -52,6 +52,7 @@
                 avatarImage: this.object.avatarImage,
                 chineseName: this.object.chineseName,
                 englishName: this.object.englishName,
+                idCode: this.object.idCode,
                 inLibrary: this.object.inLibrary,
             };
 

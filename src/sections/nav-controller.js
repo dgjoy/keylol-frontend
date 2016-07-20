@@ -202,6 +202,7 @@
                 });
             } else if (currentStateName.substr(0,11) === 'post-office') {
                 this.hasFakeTabs = true;
+                this.logoType = 'post';
                 $scope.$watch(() => {
                     return stateTree.currentUser;
                 },() => {
@@ -234,6 +235,7 @@
                 });
             } else if (currentStateName.substr(0,6) === 'coupon') {
                 this.hasFakeTabs = true;
+                this.logoType = 'coupon';
                 this.tabArray = [
                     { state: '.detail', name:'明细' },
                     // { state: '.store', name:'商店' },

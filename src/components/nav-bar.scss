@@ -47,8 +47,12 @@ nav-bar {
         color: $keylol-inverted-text;
 
         &:nth-of-type(2) {
-          font-size: 14px;
+          font-size: 12px;
           opacity: 0.6;
+
+          &.font-myriad-keylol {
+            font-size: 14px;
+          }
         }
       }
     }

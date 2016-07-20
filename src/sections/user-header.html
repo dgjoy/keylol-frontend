@@ -1,12 +1,12 @@
 ﻿<div class="background" ng-style="{transform: userHeader.transform}" webp-background="{{userHeader.object.headerImage | headerImageFallback: 'user' | pageHeaderUrl}}"></div>
 <div class="info">
-    <div class="user-basic-info">
-        <img class="avatar" webp-src="{{ userHeader.object.avatarImage | avatarUrl}}" alt="{{}}" />
+    <a ng-href="user/{{userHeader.object.idCode}}" class="user-basic-info">
+        <img class="avatar" webp-src="{{ userHeader.object.avatarImage | avatarUrl}}" alt="{{userHeader.object.userName}}" />
         <div class="name-group">
             <p>{{userHeader.object.userName}}</p>
             <p>{{userHeader.object.gamerTag}}</p>
         </div>
-    </div>
+    </a>
     <div class="attributes">
         <p>{{userHeader.object.registerTime | amDateFormat:'YYYY-MM-DD'}} 加入其乐</p>
     </div>

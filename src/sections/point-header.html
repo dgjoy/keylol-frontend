@@ -1,6 +1,8 @@
 ﻿<div class="background" ng-style="{transform: pointHeader.transform}" webp-background="{{pointHeader.object.headerImage | headerImageFallback: pointHeader.object.type | pageHeaderUrl}}"></div>
 <div class="info" ng-switch="pointHeader.object.type">
-    <point-basic-info point="pointHeader.point"></point-basic-info>
+    <a ng-href="point/{{pointHeader.point.idCode}}">
+        <point-basic-info point="pointHeader.point"></point-basic-info>
+    </a>
     <div class="attributes" ng-switch-when="game">
         <div class="related"><div class="point" ng-repeat="category in pointHeader.categories"><a ng-href="point/{{category.idCode}}">{{category.chineseName}}</a></div></div>
         <div class="related"><div class="point" ng-repeat="vendor in pointHeader.vendors"><a ng-href="point/{{vendor.idCode}}">{{vendor.name}}</a></div></div>
