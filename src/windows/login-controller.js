@@ -61,10 +61,8 @@
                         this.steamRobotWayManager.userName = userName;
                         this.steamRobotWayManager.phaseIndex = 1;
                         $timeout(() => {
-                            notification.success({ message: '登录成功，欢迎回到其乐' }).then(() => {
-                                union.$localStorage.Authorization = response.data.access_token;
-                                close(true);
-                            });
+                            notification.success({ message: '登录成功，欢迎回到其乐' });
+                            union.$localStorage.Authorization = response.data.access_token;
                         }, 2000);
                     }, response => {
                         if (response.status === 400 && response.data.error) {
@@ -413,10 +411,9 @@
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
             }).then(response => {
-                this.notification.success({ message: '登录成功，欢迎回到其乐' }).then(() => {
-                    this.union.$localStorage.Authorization = response.data.access_token;
-                    this.close(true);
-                });
+                this.union.$localStorage.Authorization = response.data.access_token;
+                this.notification.success({ message: '登录成功，欢迎回到其乐' });
+                this.close(true);
             }, response => {
                 if (currWay === 2) {
                     this.window.show({
@@ -435,10 +432,9 @@
                                 'Content-Type': 'application/x-www-form-urlencoded',
                             },
                         }).then(response => {
-                            this.notification.success({ message: '登录成功，欢迎回到其乐' }).then(() => {
-                                this.union.$localStorage.Authorization = response.data.access_token;
-                                this.close(true);
-                            });
+                            this.union.$localStorage.Authorization = response.data.access_token;
+                            this.notification.success({ message: '登录成功，欢迎回到其乐' });
+                            this.close(true);
                         }, response => {
                             if (response.status === 400 && response.data.error) {
                                 switch (response.data.error) {
