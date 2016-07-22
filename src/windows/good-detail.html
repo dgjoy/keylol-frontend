@@ -2,26 +2,29 @@
     <div class="window">
         <div class="header">
             <div class="text">
-                <p>冷衫</p>
-                <p>说明</p>
+                <p>{{goodDetail.good.title}}</p>
+                <p>{{goodDetail.good.description}}</p>
             </div>
             <img src="assets/images/store-icon.png">
         </div>
         <div class="content">
-            <div class="items">
+            <img webp-src="{{ goodDetail.good.image | uriRelocate:'/sq/220' }}" alt="{{goodDetail.good.title}}">
+            <div class="detail">
+                <p>{{goodDetail.good.detail}}</p>
+                <div class="item">
+                    <p class="inertia">电邮地址</p>
+                    <p class="main">{{goodDetail.stateTree.currentUser.email}}</p>
+                </div>
                 <div class="item">
                     <p class="inertia">售价</p>
-                    <p class="main">兑换价格为 <span>77 ◆</span> 文券，当前持有 <span>143 ◆</span> 文券</p>
+                    <p class="main">兑换价格为 <span>{{goodDetail.good.price}} ◆</span> 文券，当前持有 <span>{{goodDetail.stateTree.currentUser.coupon}} ◆</span> 文券</p>
                 </div>
                 <div class="item">
-                    <p class="inertia">商品预览</p>
-                    <img webp-src="{{ 'keylol://989df8e508510f8447aaf06ddadcac5f.jpg' | uriRelocate:'/fw/838'}}" alt="">
-                </div>
-                <div class="item">
-                    <p class="inertia">说明</p>
-                    <p class="main">这是商品的说明</p>
+                    <p class="inertia">额度</p>
+                    <p class="main" ng-bind-html="goodDetail.limit"></p>
                 </div>
             </div>
+            <p class="inertia">{{goodDetail.good.remark}}</p>
             <div class="actions">
                 <flat-button text="放弃" type="light-text" click="goodDetail.close()"></flat-button>
                 <raised-button text="购买" type="theme"  click="goodDetail.submit()"></raised-button>

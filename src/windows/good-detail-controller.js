@@ -1,12 +1,12 @@
 ﻿(function () {
     class GoodDetailController {
-        constructor(close) {
+        constructor(close, good, stateTree ,$sce) {
             $.extend(this,{
                 close,
+                good,
+                stateTree,
             });
-        }
-        exit() {
-            this.close();
+            this.limit = $sce.trustAsHtml(good.limit);
         }
     }
     keylolApp.controller('GoodDetailController', GoodDetailController);
