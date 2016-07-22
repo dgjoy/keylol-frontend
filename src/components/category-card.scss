@@ -10,7 +10,7 @@ category-card {
   }
 
   .info {
-    @include hover-background();
+    @include hover-point-info-underline();
     display: flex;
     justify-content: flex-start;
     align-items: center;

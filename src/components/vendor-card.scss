@@ -17,7 +17,7 @@ vendor-card {
   }
 
   .info {
-    @include hover-background();
+    @include hover-point-info-underline();
     display: flex;
     align-items: center;
     height: 52px;

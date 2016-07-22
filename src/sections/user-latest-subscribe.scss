@@ -20,8 +20,9 @@ user-latest-subscribe {
       }
 
       >a {
-        @include hover-background();
+        @include hover-point-info-underline();
         width: 100%;
+
         >point-basic-info {
           position: relative;
           z-index: 0;

@@ -188,7 +188,7 @@
                     {
                         type: 'item',
                         icon: 'login-passcode',
-                        text: '口令组合',
+                        text: '密码组合',
                         clickAction (event) {
                             window.show({
                                 event,

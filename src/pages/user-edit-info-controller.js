@@ -163,19 +163,19 @@
                     submitLink,
                     header: {
                         mainTitle: '安全信息',
-                        subTitle: '设置登录口令和账号保护',
+                        subTitle: '设置密码和账号保护',
                     },
                     list: [
                         {
-                            title: '口令',
-                            subTitle: '设置后可以通过口令组合登录其乐',
+                            title: '密码',
+                            subTitle: '设置后可以通过密码组合登录其乐',
                             key: 'newPassword',
                             type: 'password',
                             needPassword,
                         },
                         {
                             title: '登录保护',
-                            subTitle: '如果开启此项，使用口令登录失败连续十次时，锁定登录三十分钟。',
+                            subTitle: '如果开启此项，使用密码登录失败连续十次时，锁定登录三十分钟。',
                             type: 'switch',
                             key: 'lockoutEnabled',
                             value: preference.lockoutEnabled,

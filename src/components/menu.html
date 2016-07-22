@@ -4,7 +4,7 @@
         <p>{{ menu.object.header.sub }}</p>
     </div>
 
-    <a ng-switch-when="user" ripple ng-href="user/{{menu.stateTree.currentUser.idCode}}">
+    <a ng-switch-when="user" ng-href="user/{{menu.stateTree.currentUser.idCode}}">
         <img class="avatar" webp-src="{{menu.stateTree.currentUser.avatarImage | avatarUrl: 'big'}}" alt="{{menu.stateTree.currentUser.userName}}">
         <div class="header-text for-user">
             <p>{{ menu.stateTree.currentUser.userName }}</p>
@@ -13,7 +13,7 @@
     </a>
 
     <div ng-switch-when="point" class="for-point">
-        <a ripple="{{menu.object.header.titleCoverImage ? 'disabled' : ''}}" ng-href="point/{{menu.object.header.idCode}}" ng-class="{'for-image': menu.object.header.titleCoverImage}">
+        <a ng-href="point/{{menu.object.header.idCode}}" ng-class="{'for-image': menu.object.header.titleCoverImage}">
             <point-basic-info ng-if="!menu.object.header.titleCoverImage" point="menu.object.header.point"></point-basic-info>
             <img ng-if="menu.object.header.titleCoverImage" class="cover" webp-src="{{ menu.object.header.titleCoverImage | uriRelocate: '/both/275x131'}}" alt="">
         </a>
@@ -53,7 +53,7 @@
     </div>
 
     <div ng-switch-when="point-other" class="for-point">
-        <a ripple="{{menu.object.header.titleCoverImage ? 'disabled' : ''}}" ng-href="point/{{menu.object.header.idCode}}" ng-class="{'for-image': menu.object.header.titleCoverImage}">
+        <a ng-href="point/{{menu.object.header.idCode}}" ng-class="{'for-image': menu.object.header.titleCoverImage}">
             <point-basic-info ng-if="!menu.object.header.titleCoverImage" point="menu.object.header.point"></point-basic-info>
             <img ng-if="menu.object.header.titleCoverImage" class="cover" webp-src="{{ menu.object.header.titleCoverImage | uriRelocate: '/both/275x131'}}" alt="">
         </a>

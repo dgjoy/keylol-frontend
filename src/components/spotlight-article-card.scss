@@ -6,7 +6,7 @@ spotlight-article-card {
   flex-direction: column;
 
   .point {
-    @include hover-background();
+    @include hover-point-info-underline;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -20,7 +20,8 @@ spotlight-article-card {
   }
 
   .user {
-    @include hover-background();
+    @include hover-child-underline();
+    position: relative;
     display: flex;
     justify-content: flex-start;
     align-items: center;

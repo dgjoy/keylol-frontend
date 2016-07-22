@@ -9,13 +9,13 @@
         <span class="sub-text" ng-if="::(menuItem.data.subText !== undefined)">{{::menuItem.data.subText}}</span>
     </div>
 </button>
-<a href="" ng-href="{{menuItem.data.link}}" ripple="{{::(menuItem.data.disabled? 'disabled' : '')}}" ng-if="::(menuItem.data.type === 'item' && menuItem.data.link)">
+<a href="" ng-href="{{menuItem.data.link}}" ng-if="::(menuItem.data.type === 'item' && menuItem.data.link)">
     <div class="wrapper">
         <span>
             <svg ng-if="::menuItem.data.icon" aria-hidden="true">
                 <use ng-href="{{::menuItem.data.icon | iconSvgUrl }}" xlink:href=""></use>
             </svg>
-            <span>{{::menuItem.data.text}}</span>
+            <span class="main-text">{{::menuItem.data.text}}</span>
         </span>
         <span class="sub-text" ng-if="::(menuItem.data.subText !== undefined)"><span class="discount" ng-if="menuItem.data.discount">-{{menuItem.data.discount}}</span>{{::menuItem.data.subText}}</span>
     </div>

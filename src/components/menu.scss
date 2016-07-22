@@ -30,12 +30,9 @@ menu {
     margin-bottom: -10px;
 
     >a {
+      @include hover-child-underline('.for-user p:first-of-type');
       padding: 10px 15px;
       display: flex;
-
-      &:hover {
-        background-color: rgba(#000, 0.05);
-      }
 
       .avatar {
         width: 48px;
@@ -95,7 +92,7 @@ menu {
       }
 
       a {
-        @include hover-background;
+        @include hover-point-info-underline;
         display: block;
         margin-top: 10px;
 
@@ -216,8 +213,8 @@ menu {
       margin-bottom: -30px;
 
       >a {
+        @include hover-child-underline('>.user-basic-info .name-group p:first-of-type');
         display: block;
-        @include hover-background();
         margin-top: 10px;
         margin: 0 -15px;
 
