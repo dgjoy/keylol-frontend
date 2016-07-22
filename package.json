@@ -9,6 +9,7 @@
   "devDependencies": {
     "angular": "~1.5.7",
     "angular-animate": "~1.5.7",
+    "angular-applicationinsights": "stackia/angular-applicationinsights",
     "angular-i18n": "~1.5.7",
     "angular-moment": "~1.0.0-beta.5",
     "angular-ui-router": "^0.2.18",

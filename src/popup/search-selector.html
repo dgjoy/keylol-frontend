@@ -17,17 +17,20 @@
         </div>
         <ul class="result-list" ng-if="searchSelector.resultArray">
             <li ng-repeat="result in searchSelector.resultArray" ng-switch="searchSelector.filterType">
-                <a ripple href="" ng-href="point/{{result.idCode}}" ng-switch-when="point">
+                <a ripple href="" ng-href="point/{{result.idCode}}" ng-switch-when="point"
+                   analytics-on analytics-event="搜索据点" analytics-category="浮窗搜索" analytics-label="{{ searchSelector.options.searchText }}">
                     <point-basic-info point="result" ng-class="{libraried: result.inLibrary}"></point-basic-info>
                 </a>
-                <a class="article" ripple href="" ng-href="article/{{result.authorIdCode}}/{{result.sidForAuthor}}" ng-switch-when="article">
+                <a class="article" ripple href="" ng-href="article/{{result.authorIdCode}}/{{result.sidForAuthor}}" ng-switch-when="article"
+                   analytics-on analytics-event="搜索文章" analytics-category="浮窗搜索" analytics-label="{{ searchSelector.options.searchText }}">
                     <span class="like-count">+{{result.likeCount | numberAbbreviation}}</span>
                     <div class="title">
                         <p>{{result.title}}</p>
                         <p>{{result.subTitle}}</p>
                     </div>
                 </a>
-                <a class="user" ripple href="" ng-href="user/{{result.idCode}}" ng-switch-when="user">
+                <a class="user" ripple href="" ng-href="user/{{result.idCode}}" ng-switch-when="user"
+                   analytics-on analytics-event="搜索用户" analytics-category="浮窗搜索" analytics-label="{{ searchSelector.options.searchText }}">
                     <div class="avatar-anchor">
                         <img-label ng-if="result.isFriend" type="friended"></img-label>
                         <img class="avatar" src="" webp-src="{{result.avatarImage | avatarUrl}}">
@@ -43,13 +46,15 @@
             </li>
         </ul>
         <div class="search-engine">
-            <a href="" ng-href="https://www.bing.com/search?q=site:keylol.com+{{searchSelector.options.searchText | encodeURIComponent}}">
+            <a href="" ng-href="https://www.bing.com/search?q=site:keylol.com+{{searchSelector.options.searchText | encodeURIComponent}}"
+               analytics-on analytics-event="使用必应" analytics-category="浮窗搜索" analytics-label="{{ searchSelector.options.searchText }}">
                 <svg aria-hidden="true">
                     <use ng-href="{{'bing' | iconSvgUrl }}" xlink:href=""></use>
                 </svg>
                 <span>必应站内</span>
             </a>
-            <a href="" ng-href="https://www.google.com/search?q=site:keylol.com+{{searchSelector.options.searchText | encodeURIComponent}}">
+            <a href="" ng-href="https://www.google.com/search?q=site:keylol.com+{{searchSelector.options.searchText | encodeURIComponent}}"
+               analytics-on analytics-event="使用 Google" analytics-category="浮窗搜索" analytics-label="{{ searchSelector.options.searchText }}">
                 <svg aria-hidden="true">
                     <use ng-href="{{'google' | iconSvgUrl }}" xlink:href=""></use>
                 </svg>

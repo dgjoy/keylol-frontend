@@ -68,6 +68,7 @@ var vendorMinScripts = [
     "node_modules/angular-utf8-base64/angular-utf8-base64.min.js",
     "node_modules/angulartics/dist/angulartics.min.js",
     "node_modules/angulartics-google-analytics/dist/angulartics-ga.min.js",
+    "node_modules/angular-applicationinsights/dist/angular-applicationinsights.min.js",
     "node_modules/babel-polyfill/dist/polyfill.min.js",
     "node_modules/ms-signalr-client/jquery.signalr-2.2.0.min.js" // 这个文件一定要放在最后
 ];
