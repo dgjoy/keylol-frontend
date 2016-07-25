@@ -7,7 +7,8 @@ coupon-ranking-list {
 
   .header {
     height: 105px;
-    background-color: $keylol-light-theme;
+    background: url(../../assets/images/summer-art-ranking.jpg);
+    background-size: cover;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -68,17 +69,15 @@ coupon-ranking-list {
           width: 100px;
         }
         &:nth-of-type(2) {
-          width: 450px;
+          width: 405px;
         }
         &:nth-of-type(3) {
-          width: 100px;
+          width: 150px;
+          justify-content: center;
         }
         &:nth-of-type(4) {
           width: 250px;
-        }
-
-        &.right {
-          justify-content: flex-end;
+          justify-content: center;
         }
       }
     }
@@ -96,10 +95,6 @@ coupon-ranking-list {
     }
 
     .item .cell{
-      &.light-theme {
-        color: $keylol-light-theme;
-      }
-
       &.best-ranking {
         color: $keylol-theme;
         font-weight: bold;

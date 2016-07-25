@@ -43,9 +43,8 @@
             for (let i = 0; i !== list.length; i++) {
                 const item = list[i];
 
-                if (!item.description) {
-                    return;
-                }
+                if (typeof item.description !== 'object')
+                    continue;
 
                 if (item.description.ArticleComment) {
                     item.description.link = `article/${item.description.ArticleComment.ArticleAuthorIdCode}/${item.description.ArticleComment.SidForAuthor}`;

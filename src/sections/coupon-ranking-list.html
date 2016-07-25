@@ -1,7 +1,7 @@
 ﻿<div class="header">
     <div class="text">
-        <p># {{couponRankingList.object.myRanking > 0 ? couponRankingList.object.myRanking : '100+'}}</p>
-        <p>当前社区排名</p>
+        <p>2016 夏季认可排行</p>
+        <p>6月1日 - 8月31日</p>
     </div>
     <img src="assets/images/Trophy.png">
 </div>
@@ -9,8 +9,8 @@
     <div class="title">
         <div class="cell">#</div>
         <div class="cell">用户</div>
-        <div class="cell right">文券</div>
-        <div class="cell">获得认可</div>
+        <div class="cell">当季文章认可</div>
+        <div class="cell">文券</div>
     </div>
     <div class="item-list" ng-style="{height: couponRankingList.list.length * 72 - 10}" ng-class="{
     'to-next' : couponRankingList.isToNext,
@@ -29,8 +29,8 @@
                         <p>{{item.userBasicInfo.gamerTag}}</p>
                     </div>
                 </div>
-                <div class="cell right light-theme">{{item.coupon}} ◆</div>
-                <div class="cell">{{item.likeCount}}</div>
+                <div class="cell">{{item.seasonLikeCount}}</div>
+                <div class="cell">{{item.coupon}} ◆</div>
             </div>
         </div>
     </div>
