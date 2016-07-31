@@ -1,4 +1,5 @@
 .popup-wechat-card {
+  @include grow-shrink-self();
   @include keylol-shadow-3();
   width: 340px;
   z-index: 1000;
