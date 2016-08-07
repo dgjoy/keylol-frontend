@@ -167,11 +167,14 @@
                         delete stateTree.coupon.detail;
                     },
                 })
-                // .state('coupon.store',{
-                //     url: '/store',
-                //     templateUrl: 'src/pages/coupon-store.html',
-                //     controller: 'CouponStoreController',
-                // })
+                .state('coupon.store',{
+                    url: '/store',
+                    templateUrl: 'src/pages/coupon-store.html',
+                    controller: 'CouponStoreController',
+                    onExit (stateTree) {
+                        delete stateTree.coupon.store;
+                    },
+                })
                 .state('coupon.ranking',{
                     url: '/ranking',
                     templateUrl: 'src/pages/coupon-ranking.html',

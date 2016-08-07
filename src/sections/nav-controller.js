@@ -238,7 +238,7 @@
                 this.logoType = 'coupon';
                 this.tabArray = [
                     { state: '.detail', name:'明细' },
-                    // { state: '.store', name:'商店' },
+                    { state: '.store', name:'商店' },
                     { state: '.ranking', name:'排行' },
                 ];
 
@@ -250,11 +250,11 @@
                         case 'detail' :
                             this.currentPage = 0;
                             break;
-                        // case 'store' :
-                        //     this.currentPage = 1;
-                        //     break;
-                        case 'ranking' :
+                        case 'store' :
                             this.currentPage = 1;
+                            break;
+                        case 'ranking' :
+                            this.currentPage = 2;
                             break;
                     }
                 });

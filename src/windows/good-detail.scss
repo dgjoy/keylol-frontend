@@ -77,6 +77,10 @@
 
           span {
             font-weight: bold;
+
+            &.not-enough {
+              color: $keylol-review-bad;
+            }
           }
         }
       }

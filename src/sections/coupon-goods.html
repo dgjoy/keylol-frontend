@@ -1,8 +1,8 @@
 ﻿<div class="good" ng-repeat="good in couponGoods.goods">
-    <img webp-src="{{ good.image | uriRelocate:'/sq/220' }}">
+    <img webp-src="{{ good.thumbnailImage | uriRelocate:'/sq/220' }}">
     <div class="name-group">
-        <p>{{good.title}}</p>
-        <p>{{good.description}}</p>
+        <p>{{good.name}}</p>
+        <p>{{good.descriptions[0]}}</p>
     </div>
     <div class="actions">
         <p>{{good.saleOut ? '售罄' : '&nbsp;'}}</p>

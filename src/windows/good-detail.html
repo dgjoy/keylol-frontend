@@ -2,32 +2,40 @@
     <div class="window">
         <div class="header">
             <div class="text">
-                <p>{{goodDetail.good.title}}</p>
-                <p>{{goodDetail.good.description}}</p>
+                <p>{{goodDetail.good.name}}</p>
+                <p>{{goodDetail.good.descriptions[0]}}</p>
             </div>
             <img src="assets/images/store-icon.png">
         </div>
-        <div class="content">
-            <img webp-src="{{ goodDetail.good.image | uriRelocate:'/sq/220' }}" alt="{{goodDetail.good.title}}">
+        <div class="content" ng-switch="goodDetail.good.type">
+            <img webp-src="{{ goodDetail.good.thumbnailImage | uriRelocate:'/sq/220' }}" alt="{{goodDetail.good.name}}">
             <div class="detail">
-                <p>{{goodDetail.good.detail}}</p>
-                <div class="item">
+                <p>{{goodDetail.good.descriptions[1]}}</p>
+                <div class="item" ng-switch-when="steamGiftCard">
                     <p class="inertia">电邮地址</p>
-                    <p class="main">{{goodDetail.stateTree.currentUser.email}}</p>
+                    <p class="main"  ng-if="goodDetail.good.email">{{goodDetail.good.email}}</p>
+                    <p class="main"  ng-if="!goodDetail.good.email"><a ng-href="user/{{goodDetail.stateTree.currentUser.idCode}}/edit">尚未登记</a></p>
+                </div>
+                <div class="item" ng-switch-when="steamCnCredit">
+                    <p class="inertia">蒸汽动力账号</p>
+                    <p class="main"  ng-if="goodDetail.good.steamCnUid"><a ng-href="http://steamcn.com/suid-{{goodDetail.good.steamCnUid}}">{{goodDetail.good.steamCnUserName}}</a> (UID:37197{{goodDetail.good.steamCnUid}})</p>
+                    <p class="main"  ng-if="!goodDetail.good.steamCnUid"><a ng-href="user/{{goodDetail.stateTree.currentUser.idCode}}/edit">尚未登记</a></p>
                 </div>
                 <div class="item">
                     <p class="inertia">售价</p>
-                    <p class="main">兑换价格为 <span>{{goodDetail.good.price}} ◆</span> 文券，当前持有 <span>{{goodDetail.stateTree.currentUser.coupon}} ◆</span> 文券</p>
+                    <p class="main">兑换价格为 <span>{{goodDetail.good.price}} ◆</span> 文券，当前持有 <span ng-class="{'not-enough': goodDetail.good.price > goodDetail.stateTree.currentUser.coupon}">{{goodDetail.stateTree.currentUser.coupon}} ◆</span> 文券</p>
                 </div>
                 <div class="item">
                     <p class="inertia">额度</p>
-                    <p class="main" ng-bind-html="goodDetail.limit"></p>
+                    <p class="main" ng-switch-when="steamGiftCard">你在本月还可以兑换 <span ng-class="{'not-enough': goodDetail.good.value > goodDetail.good.credit}">¥ {{goodDetail.good.credit}} CNY</span> 的 Steam 钱包卡，这个额度会随着你文章在当季获得的认可数量增长</p>
+                    <p class="main" ng-switch-when="steamCnCredit">你在本月还可以兑换 <span ng-class="{'not-enough': goodDetail.good.value > goodDetail.good.credit}">{{goodDetail.good.credit}}</span> 点蒸汽。</p>
                 </div>
             </div>
-            <p class="inertia">{{goodDetail.good.remark}}</p>
+            <p class="inertia" ng-switch-when="steamGiftCard">充值卡将以代码的格式在兑换后 96 小时内通过电邮发放</p>
+            <p class="inertia" ng-switch-when="steamCnCredit">蒸汽会在兑换后直接转入蒸汽动力帐号中</p>
             <div class="actions">
                 <flat-button text="放弃" type="light-text" click="goodDetail.close()"></flat-button>
-                <raised-button text="购买" type="theme"  click="goodDetail.submit()"></raised-button>
+                <raised-button text="购买" type="theme" disabled="goodDetail.submitDisabled" click="goodDetail.submit()"></raised-button>
             </div>
         </div>
     </div>
