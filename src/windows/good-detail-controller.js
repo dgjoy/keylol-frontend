@@ -1,6 +1,6 @@
 ﻿(function () {
     class GoodDetailController {
-        constructor(close, good, stateTree, $http, apiEndpoint, notification, $state) {
+        constructor(close, good, stateTree, $http, apiEndpoint, notification, $state, $timeout) {
             $.extend(this,{
                 close,
                 good,
@@ -9,6 +9,7 @@
                 apiEndpoint,
                 notification,
                 $state,
+                $timeout,
             });
 
             switch (good.type) {
@@ -39,12 +40,10 @@
                 },
             }).then(() => {
                 if (this.good.type === 'steamCnCredit') {
-                    this.notification.success({ message: '兑换成功，蒸汽已发放' });
+                    this.submitSuccess('兑换成功，蒸汽已发放');
                 } else {
-                    this.notification.success({ message: '兑换成功' });
+                    this.submitSuccess();
                 }
-                this.close();
-                this.$state.reload();
             }, response => {
                 if (response.status === 404) {
                     this.notification.error({ message: '指定文券商品不存在' });
@@ -67,10 +66,7 @@
                             break;
                         default:
                             if (this.good.type === 'steamCnCredit') {
-                                this.notification.success({ message: '兑换成功' });
-
-                                this.close();
-                                this.$state.reload();
+                                this.submitSuccess();
                             } else {
                                 this.notification.error({ message: '发生未知错误，请重试或与站务职员联系' }, response);
                             }
@@ -80,6 +76,15 @@
                 }
                 this.submitDisabled = false;
             });
+        }
+
+        submitSuccess (message = '兑换成功') {
+            this.notification.success({ message });
+
+            this.$timeout(() => {
+                this.close();
+                this.$state.reload();
+            }, 2000);
         }
     }
     keylolApp.controller('GoodDetailController', GoodDetailController);
