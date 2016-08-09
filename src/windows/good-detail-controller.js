@@ -18,7 +18,7 @@
                     }
                     break;
                 case 'steamGiftCard':
-                    if (!good.steamCnUid) {
+                    if (!good.email) {
                         this.submitDisabled = true;
                     }
                     break;

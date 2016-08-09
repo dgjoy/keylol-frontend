@@ -18,7 +18,7 @@
                 </div>
                 <div class="item" ng-switch-when="steamCnCredit">
                     <p class="inertia">蒸汽动力账号</p>
-                    <p class="main"  ng-if="goodDetail.good.steamCnUid"><a ng-href="http://steamcn.com/suid-{{goodDetail.good.steamCnUid}}">{{goodDetail.good.steamCnUserName}}</a> (UID:37197{{goodDetail.good.steamCnUid}})</p>
+                    <p class="main"  ng-if="goodDetail.good.steamCnUid"><a ng-href="http://steamcn.com/suid-{{goodDetail.good.steamCnUid}}">{{goodDetail.good.steamCnUserName}}</a> (UID:{{goodDetail.good.steamCnUid}})</p>
                     <p class="main"  ng-if="!goodDetail.good.steamCnUid"><a ng-href="user/{{goodDetail.stateTree.currentUser.idCode}}/edit">尚未登记</a></p>
                 </div>
                 <div class="item">
