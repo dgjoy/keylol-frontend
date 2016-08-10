@@ -72,7 +72,7 @@
         </div>
     </div>
 
-    <div ng-switch-when="user-right" class="user-right">
+    <div ng-switch-when="user-right" class="user-right" ng-class="{'in-article': menu.object.header.inArticle}">
         <a ng-href="user/{{menu.object.header.basicInfo.idCode}}">
             <div class="user-basic-info">
                 <img webp-src="{{ menu.object.header.basicInfo.avatarImage| avatarUrl}}" alt="{{menu.object.header.basicInfo.userName}}" class="avatar">

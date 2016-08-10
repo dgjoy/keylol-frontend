@@ -215,7 +215,6 @@ menu {
       >a {
         @include hover-child-underline('>.user-basic-info .name-group p:first-of-type');
         display: block;
-        margin-top: 10px;
         margin: 0 -15px;
 
         >.user-basic-info {
@@ -232,6 +231,7 @@ menu {
 
           .name-group {
             max-width: calc(100% - 42px);
+
             p {
               @include ellipsis;
               margin: 0;
@@ -287,6 +287,32 @@ menu {
         height: 1px;
         margin-bottom: 20px;
         background-color: $keylol-inertia-shape;
+      }
+
+      &.in-article {
+        >a {
+          margin: -10px -15px 0;
+
+          >.user-basic-info {
+            position: relative;
+
+            .avatar {
+              position: absolute;
+              top: -16px;
+              left: 50%;
+              transform: translateX(-50%);
+            }
+
+            .name-group {
+              max-width: 100%;
+              width: 100%;
+
+              p {
+                text-align: center;
+              }
+            }
+          }
+        }
       }
     }
   }

@@ -6,6 +6,7 @@
                 header: {
                     type: 'user-right',
                     basicInfo: this.object,
+                    inArticle: this.inArticle,
                 },
             };
         }
@@ -17,6 +18,7 @@
         controllerAs: 'userMenu',
         bindings: {
             object: '<',
+            inArticle: '<',
         },
     });
 }());
