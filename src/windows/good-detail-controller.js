@@ -25,7 +25,7 @@
                     break;
             }
 
-            if (good.value > good.credit && good.price > stateTree.currentUser.coupon) {
+            if (good.value > good.credit || good.price > stateTree.currentUser.coupon) {
                 this.submitDisabled = true;
             }
         }
@@ -48,7 +48,7 @@
                 if (response.status === 404) {
                     this.notification.error({ message: '指定文券商品不存在' });
                 } else if (response.status === 400) {
-                    switch (response.data.modelState.giftId) {
+                    switch (response.data.modelState.giftId[0]) {
                         case 'not_enough_coupon':
                             this.notification.error({ message: '文券不足' });
                             break;
