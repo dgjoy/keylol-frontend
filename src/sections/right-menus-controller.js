@@ -214,6 +214,7 @@
             author: '<',
             point: '<',
             rating: '<',
+            theme: '<',
         },
     });
 }());

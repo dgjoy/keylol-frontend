@@ -1,12 +1,24 @@
 
 (function () {
     class userMenuController {
-        constructor() {
+        constructor(utils) {
             this.specialMenu = {
                 header: {
                     type: 'user-right',
                     basicInfo: this.object,
                     inArticle: this.inArticle,
+                    subscribeSet: [
+                        {
+                            text: '关注',
+                            type: 'theme',
+                        },
+                        {
+                            text: '取关',
+                            type: 'light-text',
+                        },
+                    ],
+                    subscribe: utils.subscribe,
+                    openRegistration: utils.openRegistration,
                 },
             };
         }
@@ -18,6 +30,7 @@
         controllerAs: 'userMenu',
         bindings: {
             object: '<',
+            theme: '<',
             inArticle: '<',
         },
     });

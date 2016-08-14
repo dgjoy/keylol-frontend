@@ -223,8 +223,13 @@ menu {
           display: flex;
           align-items: center;
 
-          .avatar {
+          .avatar-wrapper {
+            position: relative;
             margin-right: 10px;
+            z-index: 0;
+          }
+
+          .avatar {
             width: 32px;
             height: 32px;
           }
@@ -245,12 +250,16 @@ menu {
                 color: $keylol-inertia-text;
                 font-size: 12px;
               }
+
+              &.friended {
+                color: $keylol-user-theme;
+              }
             }
           }
         }
       }
 
-      >.paragraph {
+      .paragraph {
         color: $keylol-inertia-text;
         font-size: 12px;
         line-height: 30px;
@@ -295,12 +304,17 @@ menu {
 
           >.user-basic-info {
             position: relative;
+            padding: 25px 15px 10px;
 
-            .avatar {
+            .avatar-wrapper {
               position: absolute;
               top: -16px;
               left: 50%;
               transform: translateX(-50%);
+
+              .avatar {
+                @include keylol-shadow-1;
+              }
             }
 
             .name-group {
@@ -311,6 +325,28 @@ menu {
                 text-align: center;
               }
             }
+          }
+        }
+
+        .relations {
+          display: flex;
+          justify-content: space-around;
+
+          .paragraph {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            line-height: normal;
+            text-align: center;
+          }
+        }
+
+        .actions {
+          display: flex;
+          justify-content: flex-end;
+
+          raised-button {
+            margin: 10px 0;
           }
         }
       }
