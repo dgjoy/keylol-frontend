@@ -147,6 +147,7 @@
         bindings: {
             theme: '<',
             object: '<',
+            cover: '<',
         },
     });
 }());
