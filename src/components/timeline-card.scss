@@ -113,6 +113,7 @@ timeline-card {
 
       .point {
         flex-shrink: 1;
+        max-width: 100%;
 
         &:hover>point-basic-info>.name-group>p:first-of-type {
           text-decoration: underline;
