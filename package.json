@@ -7,10 +7,10 @@
     "url": "https://github.com/stackia/keylol-frontend"
   },
   "devDependencies": {
-    "angular": "~1.5.7",
-    "angular-animate": "~1.5.7",
+    "angular": "^1.6.3",
+    "angular-animate": "^1.6.3",
     "angular-applicationinsights": "stackia/angular-applicationinsights",
-    "angular-i18n": "~1.5.7",
+    "angular-i18n": "^1.6.3",
     "angular-moment": "~1.0.0-beta.5",
     "angular-ui-router": "^0.2.18",
     "angular-utf8-base64": "stranger82/angular-utf8-base64#v0.0.5",
