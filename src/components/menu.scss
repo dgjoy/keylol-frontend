@@ -1,3 +1,18 @@
+@mixin menu-for-point-rating-active ($color) {
+  .left-content {
+    svg {
+      fill: $color;
+    }
+
+    span {
+      color: $color;
+    }
+  }
+  .right-content .reputation-level {
+    background-color: $color;
+  }
+}
+
 menu {
   @include keylol-shadow-1;
   background-color: $keylol-card;
@@ -15,12 +30,9 @@ menu {
     margin-bottom: -10px;
 
     >a {
+      @include hover-child-underline('.for-user p:first-of-type');
       padding: 10px 15px;
       display: flex;
-
-      &:hover {
-        background-color: rgba(#000, 0.05);
-      }
 
       .avatar {
         width: 48px;
@@ -80,8 +92,8 @@ menu {
       }
 
       a {
+        @include hover-point-info-underline;
         display: block;
-        @include hover-background;
         margin-top: 10px;
 
         point-basic-info {
@@ -116,6 +128,27 @@ menu {
         display: flex;
         align-items: center;
         justify-content: space-between;
+        @include menu-for-point-rating-active($keylol-inertia-text);
+
+        &:first-of-type.active {
+          @include menu-for-point-rating-active($keylol-review-terrible);
+        }
+
+        &:nth-of-type(2).active {
+          @include menu-for-point-rating-active($keylol-review-bad);
+        }
+
+        &:nth-of-type(3).active {
+          @include menu-for-point-rating-active($keylol-review-not-bad);
+        }
+
+        &:nth-of-type(4).active {
+          @include menu-for-point-rating-active($keylol-review-good);
+        }
+
+        &:nth-of-type(5).active {
+          @include menu-for-point-rating-active($keylol-review-awesome);
+        }
 
         .left-content {
           display: flex;
@@ -124,12 +157,10 @@ menu {
           svg {
             height: 8px;
             width: 8px;
-            fill: $keylol-inertia-text;
             margin-right: 2px;
           }
 
           span {
-            color: $keylol-inertia-text;
             margin-left: 5px;
           }
         }
@@ -139,7 +170,6 @@ menu {
           width: 100px;
 
           .reputation-level {
-            background-color: $keylol-inertia-text;
             height: 5px;
           }
         }
@@ -152,8 +182,8 @@ menu {
         justify-content: space-between;
 
         .reputation-number {
-          margin-top: -2px;
           @include keylol-review();
+          margin-top: -2px;
           font-size: 20px;
           font-weight: bold;
         }
@@ -183,9 +213,8 @@ menu {
       margin-bottom: -30px;
 
       >a {
+        @include hover-child-underline('>.user-basic-info .name-group p:first-of-type');
         display: block;
-        @include hover-background();
-        margin-top: 10px;
         margin: 0 -15px;
 
         >.user-basic-info {
@@ -194,14 +223,20 @@ menu {
           display: flex;
           align-items: center;
 
-          .avatar {
+          .avatar-wrapper {
+            position: relative;
             margin-right: 10px;
+            z-index: 0;
+          }
+
+          .avatar {
             width: 32px;
             height: 32px;
           }
 
           .name-group {
             max-width: calc(100% - 42px);
+
             p {
               @include ellipsis;
               margin: 0;
@@ -215,15 +250,18 @@ menu {
                 color: $keylol-inertia-text;
                 font-size: 12px;
               }
+
+              &.friended {
+                color: $keylol-user-theme;
+              }
             }
           }
         }
       }
 
-      >.paragraph {
+      .paragraph {
         color: $keylol-inertia-text;
         font-size: 12px;
-        height: 30px;
         line-height: 30px;
 
         >a {
@@ -258,6 +296,59 @@ menu {
         height: 1px;
         margin-bottom: 20px;
         background-color: $keylol-inertia-shape;
+      }
+
+      &.in-article {
+        >a {
+          margin: -10px -15px 0;
+
+          >.user-basic-info {
+            position: relative;
+            padding: 25px 15px 10px;
+
+            .avatar-wrapper {
+              position: absolute;
+              top: -16px;
+              left: 50%;
+              transform: translateX(-50%);
+
+              .avatar {
+                @include keylol-shadow-1;
+              }
+            }
+
+            .name-group {
+              max-width: 100%;
+              width: 100%;
+
+              p {
+                text-align: center;
+              }
+            }
+          }
+        }
+
+        .relations {
+          display: flex;
+          justify-content: space-around;
+
+          .paragraph {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            line-height: normal;
+            text-align: center;
+          }
+        }
+
+        .actions {
+          display: flex;
+          justify-content: flex-end;
+
+          raised-button {
+            margin: 10px 0;
+          }
+        }
       }
     }
   }

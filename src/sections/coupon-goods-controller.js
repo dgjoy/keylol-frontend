@@ -11,12 +11,15 @@
             };
         }
 
-        showWindow(index) {
+        showWindow(good, event) {
             this.window.show({
+                event,
                 templateUrl: 'src/windows/good-detail.html',
                 controller: 'GoodDetailController',
                 controllerAs: 'goodDetail',
-                inputs: {},
+                inputs: {
+                    good,
+                },
             });
         }
     }
@@ -25,5 +28,8 @@
         templateUrl: 'src/sections/coupon-goods.html',
         controller: CouponGoodsController,
         controllerAs: 'couponGoods',
+        bindings: {
+            goods: '<',
+        },
     });
 }());

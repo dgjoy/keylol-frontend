@@ -57,7 +57,7 @@
                         }
                         
                         if (this.newPassword !== this.newRepeatPassword) {
-                            this.textError = '两次口令输入不一致';
+                            this.textError = '两次密码输入不一致';
                             this.submitLock = false;
                         }
                     }

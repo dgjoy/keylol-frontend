@@ -78,11 +78,21 @@
             registerHubProxies(proxies, false);
         });
 
+        proxies['couponHub'] = this.createHubProxy('couponHub');
+        proxies['couponHub'].client = { };
+        proxies['couponHub'].server = {
+        };
+
         proxies['logHub'] = this.createHubProxy('logHub');
         proxies['logHub'].client = { };
         proxies['logHub'].server = {
         };
 
+        proxies['messageHub'] = this.createHubProxy('messageHub');
+        proxies['messageHub'].client = { };
+        proxies['messageHub'].server = {
+        };
+        
         proxies['steamBindingHub'] = this.createHubProxy('steamBindingHub');
         proxies['steamBindingHub'].client = { };
         proxies['steamBindingHub'].server = {

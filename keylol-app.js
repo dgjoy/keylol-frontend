@@ -14,9 +14,11 @@
         'angulartics',
         'angulartics.google.analytics',
         'ui.router',
+        'ApplicationInsightsModule',
     ]);
     app.config(($stateProvider, $locationProvider, utilsProvider, pageHeadProvider, $localStorageProvider,
-                $httpProvider, $compileProvider, $analyticsProvider, $anchorScrollProvider, $urlRouterProvider) => {
+                $httpProvider, $compileProvider, $analyticsProvider, $anchorScrollProvider, $urlRouterProvider,
+                applicationInsightsServiceProvider) => {
         $locationProvider.html5Mode(true);
         
         $urlRouterProvider.otherwise('/not-found');
@@ -77,7 +79,6 @@
                     }
                 },
                 onExit (stateTree) {
-                    stateTree.currentUser.messageCount = 0;
                     delete stateTree.postOffice;
                 },
                 data: { virtual: true },
@@ -87,7 +88,6 @@
                     templateUrl: 'src/pages/unread.html',
                     controller: 'UnreadController',
                     onExit (stateTree) {
-                        stateTree.currentUser.messageCount = 0;
                         delete stateTree.postOffice.unread;
                     },
                 })
@@ -167,11 +167,14 @@
                         delete stateTree.coupon.detail;
                     },
                 })
-                // .state('coupon.store',{
-                //     url: '/store',
-                //     templateUrl: 'src/pages/coupon-store.html',
-                //     controller: 'CouponStoreController',
-                // })
+                .state('coupon.store',{
+                    url: '/store',
+                    templateUrl: 'src/pages/coupon-store.html',
+                    controller: 'CouponStoreController',
+                    onExit (stateTree) {
+                        delete stateTree.coupon.store;
+                    },
+                })
                 .state('coupon.ranking',{
                     url: '/ranking',
                     templateUrl: 'src/pages/coupon-ranking.html',
@@ -323,9 +326,13 @@
                     url: '/edit',
                     templateUrl: 'src/pages/user-edit.html',
                     controller: 'UserEditController',
-                    onEnter (union, $state, $stateParams) {
+                    onEnter (union, $state, $stateParams, $timeout) {
                         if (!union.$localStorage.Authorization) {
                             $state.go('aggregation.user', $stateParams);
+                        } else {
+                            $timeout(() => {
+                                $state.go('.info', {}, { location: false });
+                            });
                         }
                     },
                     onExit (stateTree) {
@@ -384,7 +391,6 @@
                             if (result.results.length === 0) {
                                 $scope.empty = true;
                             }
-                            console.log(result);
                         });
                     },
                     onExit (stateTree) {
@@ -399,7 +405,6 @@
                             if (result.results.length === 0) {
                                 $scope.empty = true;
                             }
-                            console.log(result);
                         });
                     },
                     onExit (stateTree) {
@@ -414,7 +419,6 @@
                             if (result.results.length === 0) {
                                 $scope.empty = true;
                             }
-                            console.log(result);
                         });
                     },
                     onExit (stateTree) {
@@ -463,14 +467,35 @@
             _czc.push(['_setCustomVar', '登录用户', username, 1]);
         });
 
-        $analyticsProvider.trackExceptions(true);
+        $analyticsProvider.firstPageview(false);
         $analyticsProvider.virtualPageviews(false);
+
+        applicationInsightsServiceProvider.configure('e2a85814-dce7-4592-8714-66e517de6887', { autoPageViewTracking: false, developerMode: false });
     });
-    app.run(($analytics, $rootScope, $location) => {
+    app.run(($analytics, $rootScope, $location, applicationInsightsService, $timeout) => {
+        let startTime = 0;
+        let toStateName = null;
+        let loadingViews = 0;
+        $rootScope.$on('$viewContentLoading', () => {
+            loadingViews++;
+        });
+        $rootScope.$on('$viewContentLoaded', () => {
+            loadingViews--;
+            if (loadingViews === 0 && toStateName) {
+                $timeout(() => {
+                    applicationInsightsService.trackPageView(toStateName, null, null, null, (new Date()).getTime() - startTime);
+                    toStateName = null;
+                });
+            }
+        });
+        $rootScope.$on('$stateChangeStart', () => {
+            startTime = (new Date()).getTime();
+        });
         $rootScope.$on('$stateChangeSuccess', (event, current) => {
             if (current.data && current.data.hasOwnProperty('virtual')) return;
             const url = $analytics.settings.pageTracking.basePath + $location.url();
             $analytics.pageTrack(url, $location);
+            toStateName = current.name;
         });
     });
     app.run(['amMoment', amMoment => {

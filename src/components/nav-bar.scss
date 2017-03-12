@@ -47,8 +47,12 @@ nav-bar {
         color: $keylol-inverted-text;
 
         &:nth-of-type(2) {
-          font-size: 14px;
+          font-size: 12px;
           opacity: 0.6;
+
+          &.font-myriad-keylol {
+            font-size: 14px;
+          }
         }
       }
     }
@@ -174,6 +178,26 @@ nav-bar {
         margin-left: 15px;
       }
 
+      &.message-count {
+        .ripple .active-circle {
+          display: block;
+          border-radius: 50%;
+          transform: scale(0);
+          opacity: 1;
+          width: 100%;
+          height: 100%;
+          transition: opacity .3s cubic-bezier(.25,.8,.25,1), transform .6s cubic-bezier(.25,.8,.25,1);
+
+          &.animate-appear {
+            transform: scale(1);
+          }
+
+          &.animate-disappear {
+            opacity: 0;
+          }
+        }
+      }
+
       p {
         font-size: 16px;
         padding: 0;
@@ -191,6 +215,89 @@ nav-bar {
         width: 48px;
         height: 48px;
         border: 3px solid #fff;
+      }
+
+      .rubberBand {
+        animation: rubberBand 1.5s;
+      }
+
+      .coupon-change-animation {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        transform: translateX(110%);
+        transition: transform 0.3s 1s;
+
+        &.ng-enter {
+          transform: translateX(0);
+
+          .event-container {
+            transform: translateX(-100%);
+
+            p {
+              &:first-of-type {
+                transform: translateY(-200%);
+              }
+
+              &:nth-of-type(2) {
+                transform: translateY(200%);
+              }
+            }
+          }
+        }
+
+        &.ng-enter-active {
+          transform: translateX(110%);
+
+          .event-container {
+            transform: translateX(0);
+            transition: transform 0.3s;
+
+            p {
+              &:first-of-type {
+                transform: translateY(0);
+              }
+
+              &:nth-of-type(2) {
+                transform: translateY(0);
+              }
+              transition: transform 0.3s 0.3s;
+            }
+          }
+        }
+
+        .event-container {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          overflow: hidden;
+
+          &.plus {
+            background-color: #00ab4e;
+          }
+
+          &.minus {
+            background-color: #e30613;
+          }
+
+          p {
+            &:first-of-type {
+              font-size: 14px;
+            }
+
+            &:nth-of-type(2) {
+              margin-top: 0;
+              opacity: 1;
+            }
+          }
+        }
       }
     }
   }

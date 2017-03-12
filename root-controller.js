@@ -1,15 +1,34 @@
 ﻿(function () {
     keylolApp.controller('RootController',
-        ($scope, pageHead, union, $http, apiEndpoint, $window, notification, $location, $rootScope, $state, stateTree, $analytics, $injector) => {
+        ($scope, pageHead, union, $http, apiEndpoint, $window, notification, $location,
+         $rootScope, $state, stateTree, $analytics, $injector, $timeout) => {
             pageHead.loading();
 
+            let connection;
             let firstLoad = true;
             $scope.$watch(() => {
                 return union.$localStorage.Authorization;
             },newToken => {
+                if (connection) {
+                    connection.stop();
+                }
+
                 if (newToken) {
                     $http.defaults.headers.common.Authorization = `Bearer ${newToken}`;
+
+                    connection = $.connection.new();
+                    connection.qs = { 'access_token': newToken };
+                    connection.couponHub.client.onCouponChanged = (event, change, balance) => {
+                        $rootScope.$broadcast('couponChanged', event, change, balance);
+                    };
+                    connection.messageHub.client.onUnreadCountChanged = newCount => {
+                        $rootScope.$broadcast('unreadCountChanged', newCount);
+                    };
+                    connection.start().fail(() => {
+                        connection.stop();
+                    });
                 } else {
+                    connection = undefined;
                     $analytics.setUsername('游客');
                     for (const i in union.$localStorage) {
                         if (union.$localStorage.hasOwnProperty(i) && i.indexOf('$') !== 0)

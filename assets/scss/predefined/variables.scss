@@ -159,6 +159,18 @@ $keylol-topic: #7976b1;
   }
 }
 
+@mixin hover-point-info-underline() {
+  &:hover point-basic-info .name-group p:first-of-type {
+    text-decoration: underline;
+  }
+}
+
+@mixin hover-child-underline($child: '.username') {
+  &:hover #{$child} {
+    text-decoration: underline;
+  }
+}
+
 // one-line with ellipsis
 @mixin ellipsis {
   overflow: hidden;

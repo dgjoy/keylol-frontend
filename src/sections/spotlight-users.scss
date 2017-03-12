@@ -17,6 +17,31 @@ spotlight-users {
       margin: 0 10px;
     }
 
+    .invite {
+      width: 350px;
+      height: 140px;
+
+      p {
+        margin: 0;
+        color: $keylol-inverted-text;
+
+        &:first-of-type {
+          margin-top: 25px;
+          font-size: 20px;
+          font-weight: bold;
+        }
+
+        &:nth-of-type(2) {
+          margin-top: 5px;
+          opacity: 0.6;
+        }
+
+        &:nth-of-type(3) {
+          margin-top: 20px;
+        }
+      }
+    }
+
     .line {
       display: flex;
 
@@ -29,6 +54,7 @@ spotlight-users {
         width: 50%;
         flex-direction: row-reverse;
       }
+
       .right-part {
         display: flex;
         position: relative;

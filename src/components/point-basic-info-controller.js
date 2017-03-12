@@ -13,6 +13,7 @@
         controllerAs: 'pointBasicInfo',
         bindings: {
             point: '<',
+            avatarVersion: '@',
         },
     });
 }());

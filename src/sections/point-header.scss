@@ -19,75 +19,79 @@ point-header {
   }
 
   .info {
-      @include text-protection();
-      padding: 20px 0;
-      position: relative;
-      display: flex;
-      align-items: center;
+    @include text-protection();
+    padding: 20px 0;
+    position: relative;
+    display: flex;
+    align-items: center;
 
-      > * {
-        flex: 1 30%;
+    > * {
+      flex: 1 30%;
+    }
+
+    > a:hover point-basic-info .name-group p:first-of-type {
+      text-decoration: underline;
+    }
+
+    point-basic-info {
+      margin-left: 15px;
+
+      .avatar {
+        box-sizing: content-box;
+        border: 3px #fff solid;
       }
 
-      point-basic-info {
-        margin-left: 15px;
-
-        .avatar {
-          box-sizing: content-box;
-          border: 3px #fff solid;
-        }
-
-        .name-group p {
-          &:first-of-type {
-            color: $keylol-inverted-text;
-          }
-
-          &:last-of-type {
-            color: $keylol-inverted-text;
-          }
-        }
-      }
-
-      .attributes {
-        .related {
-          @include wrap-ellipsis;
+      .name-group p {
+        &:first-of-type {
           color: $keylol-inverted-text;
-          justify-content: center;
-          align-items: center;
-
-          &:first-of-type {
-            height: 21px;
-          }
-
-          &:last-of-type {
-            height: 14px;
-            font-size: 12px;
-          }
-
-          .point:not(:first-of-type)::before {
-            content: "\00a0/\00a0";
-          }
-
-          .point a {
-            color: $keylol-inverted-text;
-            &:hover { text-decoration: underline; }
-          }
         }
-      }
 
-      .count {
-        text-align: center;
-        color: $keylol-inverted-text;
-      }
-
-      .actions {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-
-        raised-button {
-          margin: 0 15px;
+        &:last-of-type {
+          color: $keylol-inverted-text;
         }
       }
     }
+
+    .attributes {
+      .related {
+        @include wrap-ellipsis;
+        color: $keylol-inverted-text;
+        justify-content: center;
+        align-items: center;
+
+        &:first-of-type {
+          height: 21px;
+        }
+
+        &:last-of-type {
+          height: 14px;
+          font-size: 12px;
+        }
+
+        .point:not(:first-of-type)::before {
+          content: "\00a0/\00a0";
+        }
+
+        .point a {
+          color: $keylol-inverted-text;
+          &:hover { text-decoration: underline; }
+        }
+      }
+    }
+
+    .count {
+      text-align: center;
+      color: $keylol-inverted-text;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+
+      raised-button {
+        margin: 0 15px;
+      }
+    }
+  }
 }

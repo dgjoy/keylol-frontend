@@ -26,12 +26,14 @@
                             '4': arr[3],
                             '5': arr[4],
                         },
+                        rating: this.rating,
                         totalEvaluate: total,
                         votePercent: this.object.averageRating,
                         titleCoverImage: this.object.titleCoverImage,
                         keylolAveragePlayedTime: this.object.keylolAveragePlayedTime,
                         totalPlayedTime: this.object.totalPlayedTime,
                         idCode: this.object.idCode,
+                        inArticle: this.inArticle,
                     },
                     items: [],
                 };
@@ -103,6 +105,7 @@
                         votePercent: this.object.averageRating !== undefined ? this.object.averageRating.toFixed(1) : undefined,
                         titleCoverImage: this.object.titleCoverImage,
                         idCode: this.object.idCode,
+                        inArticle: this.inArticle,
                     },
                 };
             }
@@ -125,6 +128,8 @@
         bindings: {
             theme: '<',
             object: '<',
+            rating: '<',
+            inArticle: '<',
         },
     });
 }());

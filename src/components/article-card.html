@@ -4,7 +4,7 @@
         <div class="second-line">{{::articleCard.card.subtitle}}</div>
     </div>
 </a>
-<a class="user" href="" ng-href="user/{{::articleCard.card.authorIdCode}}" ripple>
+<a class="user" href="" ng-href="user/{{::articleCard.card.authorIdCode}}">
     <img-label ng-if="articleCard.card.authorIsFriend" type="friended"></img-label>
     <img src="" class="avatar" webp-src="{{::articleCard.card.authorAvatarImage | avatarUrl}}"  alt="{{::articleCard.card.authorUserName}}">
     <span class="username">{{::articleCard.card.authorUserName}}</span>

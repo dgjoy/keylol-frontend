@@ -91,7 +91,6 @@
                 const currentStateName = this.$state.current.name;
                 if (currentStateName.substr(0, 17) === 'entrance.timeline') {
                     getUrl = `${this.apiEndpoint}states/entrance/timeline/cards`;
-                    params.point_id = this.stateTree.aggregation.point.basicInfo.id;
                 }
                 if (currentStateName.substr(0, 17) === 'aggregation.point') {
                     getUrl = `${this.apiEndpoint}states/aggregation/point/timeline/cards`;

@@ -68,7 +68,9 @@ var vendorMinScripts = [
     "node_modules/angular-utf8-base64/angular-utf8-base64.min.js",
     "node_modules/angulartics/dist/angulartics.min.js",
     "node_modules/angulartics-google-analytics/dist/angulartics-ga.min.js",
-    "node_modules/ms-signalr-client/jquery.signalr-2.2.0.min.js" // 这个文件一定要放在最后
+    "node_modules/angular-applicationinsights/dist/angular-applicationinsights.min.js",
+    "node_modules/babel-polyfill/dist/polyfill.min.js",
+    "node_modules/ms-signalr-client/jquery.signalR.min.js" // 这个文件一定要放在最后
 ];
 
 var vendorScripts = [
@@ -104,9 +106,7 @@ var sassStylesheets = [
     "src/**/*.scss"
 ];
 
-var keylolTextList = "`{}>▾▴其乐推荐据点客务中心讯息轨道评测好资差模组感悟请无视游戏与艺术之间的空隙提交注册申登入发布文章由你筛选变更函会员研谈档邮政服私信蒸汽动力进社区噪音零死角讨论独特鼓励机制志同合琴瑟曲即日内欲知情关联意成功错误认可索取表单开设此阅读搜结果传送装置已就位个人从兴趣始慢搭建一条收到出未能撞到处理这位用户尚或任何当前投稿厂商类型平台剧透警告简完编辑确料定太瞎了获不态了跳过步正在生首页并立案稍候糕块里如也连蛋都没有需验证陆加现解分享放公篇被封存科退通职团队惩教萃撤销录兌換品广场专题器网口令哨所性玩家焦扉报坑仁近畿集数目时驻流派基本渠程原语言华度像界面化硬件对私公函缺失作新脉订友听众安全醒互明细店排行券则系列实";
-
-var lisongTextList = "/评测好差模组资讯会员注册表单连接游戏平台昵称账户头像登录口令确认电子邮箱人机验证声明桌面类蒸汽第一称射击时空枪使命召唤侠盗猎车手橘子孢子上帝视角文明红色警戒拟城市塔防即时策略折扣原声控僵尸末日泰拉瑞亚独立用户识别码玩家标签个人据点横幅信息变更函提示守则平台账户分享社区动态当前确新录保护件订阅简通知等待添加成为友收到验证码绑定功平台连接向导邀请内列中名英章数读者操作开设型唯商店链背景图关联偏（能暂未放）输入残缺不堪的料完索引介绍补充善于期发行厂流派特性系次要封大匹配题语言抓取同步周器加社区其乐抚鳞品预览说力编号架间冷衫";
+var keylolTextList = "`{}>▾▴其乐推荐据点客务中心讯息轨道评测好资差模组感悟请无视游戏与艺术之间的空隙提交注册申登入发布文章由你筛选变更函会员研谈档邮政服私信蒸汽动力进社区噪音零死角讨论独特鼓励机制志同合琴瑟曲即日内欲知情关联意成功错误认可索取表单开设此阅读搜结果传送装置已就位个人从兴趣始慢搭建一条收到出未能撞到处理这位用户尚或任何当前投稿厂商类型平台剧透警告简完编辑确料定太瞎了获不态了跳过步正在生首页并立案稍候糕块里如也连蛋都没有需验证陆加现解分享放公篇被封存科退通职团队惩教萃撤销录兌換品广场专题器网口令哨所性玩家焦扉报坑仁近畿集数目时驻流派基本渠程原语言华度像界面化硬件对私公函缺失作新脉订友听众安全醒互明细店排行券则系列实密码";
 
 var getFiles = function (arr) {
     return _.union.apply(this, _.map(arr, function (path) {
@@ -130,22 +130,6 @@ function fontKeylol() {
     });
 }
 
-function fontLisong() {
-    return gulp.series(function cleanFontLisong() {
-        return del("assets/fonts/lisong-subset-*");
-    }, function generateFontLisong() {
-        return gulp.src("assets/fonts/lisong-full.ttf")
-            .pipe(rename("lisong-subset.ttf"))
-            .pipe(fontmin({
-                text: lisongTextList
-            }))
-            .pipe(rev())
-            .pipe(gulp.dest("assets/fonts"))
-            .pipe(rev.manifest("lisong.manifest.json"))
-            .pipe(gulp.dest('assets/fonts'));
-    })
-}
-
 gulp.task("store-font", function () {
     return gulp.src(['assets/fonts/*.json', 'assets/scss/predefined/fonts.template.scss'])
         .pipe(revCollector({
@@ -155,11 +139,7 @@ gulp.task("store-font", function () {
         .pipe(gulp.dest('assets/scss/predefined/'));
 });
 
-gulp.task("font-keylol", gulp.series(fontKeylol(), "store-font"));
-
-gulp.task("font-lisong", gulp.series(fontLisong(), "store-font"));
-
-gulp.task("font", gulp.series(gulp.parallel(fontKeylol(), fontLisong()), "store-font"));
+gulp.task("font", gulp.series(fontKeylol(), "store-font"));
 
 gulp.task("clean", function () {
     return del(["bundles/!(web.config)", "index.html", "temporary/*"]);

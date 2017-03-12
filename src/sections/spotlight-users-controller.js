@@ -1,9 +1,17 @@
 ﻿(function () {
     class SpotlightUsersController {
-        constructor () {
-            this.steamFriendCardsPart1 = [];
-            this.steamFriendCardsPart2 = [];
-            this.sameFriendCards = [];
+        constructor (window) {
+            $.extend(this, {
+                window,
+                steamFriendCardsPart1: [],
+                steamFriendCardsPart2: [],
+                sameFriendCards: [],
+                type: {
+                    mainTitle: '玩家',
+                    subTitle: '与游戏好友一起在其乐融融',
+                    type: 'user',
+                },
+            });
             if (this.cards) {
                 for (let i = 0;i < this.cards.length;i++) {
                     if (i < 3) {
@@ -19,11 +27,15 @@
                     }
                 }
             }
-            this.type = {
-                mainTitle: '玩家',
-                subTitle: '与游戏好友一起在其乐融融',
-                type: 'user',
-            };
+        }
+
+        inviteFriend (event) {
+            this.window.show({
+                event,
+                templateUrl: 'src/windows/friend-invitation.html',
+                controller: 'FriendInvitationController',
+                controllerAs: 'friendInvitation',
+            });
         }
     }
 

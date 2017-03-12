@@ -26,7 +26,7 @@
                     name: '蒸汽动力',
                 },
                 {
-                    name: '口令组合',
+                    name: '密码组合',
                 },
             ];
             this.currentWay = startPage;
@@ -200,13 +200,13 @@
                 curPage: 0,
                 forms: [[
                     { label: '用户识别码', type: 'uic' ,tip:'注册时定义的五位代码' },
-                    { label: '登录口令', type: 'password' },
+                    { label: '密码', type: 'password' },
                 ], [
                     { label: '昵称', type: 'text', tip:'请输入昵称' },
-                    { label: '登录口令', type: 'password' },
+                    { label: '密码', type: 'password' },
                 ], [
                     { label: '电邮地址', type: 'email', tip:'请输入邮件' },
-                    { label: '登录口令', type: 'password' },
+                    { label: '密码', type: 'password' },
                 ]],
                 errorDetect: utils.modelErrorDetect,
                 vm : {
@@ -412,7 +412,7 @@
                 },
             }).then(response => {
                 this.union.$localStorage.Authorization = response.data.access_token;
-                this.notification.success({ message: '登录成功' });
+                this.notification.success({ message: '登录成功，欢迎回到其乐' });
                 this.close(true);
             }, response => {
                 if (currWay === 2) {
@@ -433,7 +433,7 @@
                             },
                         }).then(response => {
                             this.union.$localStorage.Authorization = response.data.access_token;
-                            this.notification.success({ message: '登录成功' });
+                            this.notification.success({ message: '登录成功，欢迎回到其乐' });
                             this.close(true);
                         }, response => {
                             if (response.status === 400 && response.data.error) {

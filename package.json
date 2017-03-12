@@ -7,14 +7,16 @@
     "url": "https://github.com/stackia/keylol-frontend"
   },
   "devDependencies": {
-    "angular": "~1.5.7",
-    "angular-animate": "~1.5.7",
-    "angular-i18n": "~1.5.7",
+    "angular": "^1.6.3",
+    "angular-animate": "^1.6.3",
+    "angular-applicationinsights": "stackia/angular-applicationinsights",
+    "angular-i18n": "^1.6.3",
     "angular-moment": "~1.0.0-beta.5",
     "angular-ui-router": "^0.2.18",
     "angular-utf8-base64": "stranger82/angular-utf8-base64#v0.0.5",
     "angulartics": "~1.1.2",
     "angulartics-google-analytics": "^0.2.0",
+    "babel-polyfill": "^6.9.1",
     "babel-preset-es2015": "~6.9.0",
     "del": "~2.2.1",
     "eslint": "~2.13.1",
@@ -41,10 +43,10 @@
     "lodash": "~4.13.1",
     "moment": "~2.13.0",
     "moment-timezone": "~0.5.4",
-    "ms-signalr-client": "~2.2.3",
+    "ms-signalr-client": "~2.2.5",
     "ng-file-upload": "~12.0.1",
     "ngstorage": "~0.3.10",
-    "simditor": "rexdainiel/keylol-simditor",
+    "simditor": "ZenDay/keylol-simditor",
     "svgxuse": "^1.1.17"
   }
 }

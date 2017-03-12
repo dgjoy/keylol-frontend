@@ -1,10 +1,11 @@
-<div class="background" webp-background="{{userCard.user.headerImage | uriRelocate: '/both/200x38'}}"></div>
+<div class="background" webp-background="{{userCard.user.headerImage | headerImageFallback: 'user' | uriRelocate: '/both/200x38'}}"></div>
 <a href="" ng-href="user/{{userCard.user.idCode}}">
     <img-label ng-if="userCard.user.isFriend" type="friended"></img-label>
     <img class="avatar" webp-src="{{userCard.user.avatarImage | avatarUrl}}">
     <div class="bundle">
         <p class="nickname">{{userCard.user.userName}}</p>
         <p ng-if="userCard.user.role" class="remark">{{userCard.user.role}}</p>
+        <p ng-if="userCard.user.totalPlayedTime" class="remark">在档 {{userCard.user.totalPlayedTime}} 小时</p>
         <p ng-if="false" class="remark">Steam 好友</p>
     </div>
 </a>

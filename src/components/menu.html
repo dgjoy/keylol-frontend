@@ -4,7 +4,7 @@
         <p>{{ menu.object.header.sub }}</p>
     </div>
 
-    <a ng-switch-when="user" ripple ng-href="user/{{menu.stateTree.currentUser.idCode}}">
+    <a ng-switch-when="user" ng-href="user/{{menu.stateTree.currentUser.idCode}}">
         <img class="avatar" webp-src="{{menu.stateTree.currentUser.avatarImage | avatarUrl: 'big'}}" alt="{{menu.stateTree.currentUser.userName}}">
         <div class="header-text for-user">
             <p>{{ menu.stateTree.currentUser.userName }}</p>
@@ -13,7 +13,7 @@
     </a>
 
     <div ng-switch-when="point" class="for-point">
-        <a ripple="{{menu.object.header.titleCoverImage ? 'disabled' : ''}}" ng-href="point/{{menu.object.header.idCode}}" ng-class="{'for-image': menu.object.header.titleCoverImage}">
+        <a ng-href="point/{{menu.object.header.idCode}}" ng-class="{'for-image': menu.object.header.titleCoverImage}">
             <point-basic-info ng-if="!menu.object.header.titleCoverImage" point="menu.object.header.point"></point-basic-info>
             <img ng-if="menu.object.header.titleCoverImage" class="cover" webp-src="{{ menu.object.header.titleCoverImage | uriRelocate: '/both/275x131'}}" alt="">
         </a>
@@ -21,7 +21,7 @@
             <p ng-if="menu.object.header.totalPlayedTime" class="in-library">已在档 {{menu.object.header.totalPlayedTime}} 小时</p>
             <p ng-if="menu.object.header.keylolAveragePlayedTime">玩家平均在档 {{menu.object.header.keylolAveragePlayedTime}} 小时</p>
         </div>
-        <span class="reputation-stat" ng-repeat="(stat, statCount) in menu.object.header.voteStats track by stat">
+        <span class="reputation-stat" ng-repeat="(stat, statCount) in menu.object.header.voteStats track by stat"  ng-class="{active: $index + 1 === menu.object.header.rating}">
             <div class="left-content">
                 <svg xmlns="http://www.w3.org/2000/svg" class="reputation-circle" ng-repeat="circle in menu.circles[$index] track by $index">
                     <circle cx="4" cy="4" r="4"></circle>
@@ -53,7 +53,7 @@
     </div>
 
     <div ng-switch-when="point-other" class="for-point">
-        <a ripple="{{menu.object.header.titleCoverImage ? 'disabled' : ''}}" ng-href="point/{{menu.object.header.idCode}}" ng-class="{'for-image': menu.object.header.titleCoverImage}">
+        <a ng-href="point/{{menu.object.header.idCode}}" ng-class="{'for-image': menu.object.header.titleCoverImage}">
             <point-basic-info ng-if="!menu.object.header.titleCoverImage" point="menu.object.header.point"></point-basic-info>
             <img ng-if="menu.object.header.titleCoverImage" class="cover" webp-src="{{ menu.object.header.titleCoverImage | uriRelocate: '/both/275x131'}}" alt="">
         </a>
@@ -72,19 +72,24 @@
         </div>
     </div>
 
-    <div ng-switch-when="user-right" class="user-right">
+    <div ng-switch-when="user-right" class="user-right" ng-class="{'in-article': menu.object.header.inArticle}">
         <a ng-href="user/{{menu.object.header.basicInfo.idCode}}">
             <div class="user-basic-info">
-                <img webp-src="{{ menu.object.header.basicInfo.avatarImage| avatarUrl}}" alt="{{menu.object.header.basicInfo.userName}}" class="avatar">
+                <div class="avatar-wrapper">
+                    <img-label ng-if="menu.object.header.basicInfo.isFriend" type="friended"></img-label>
+                    <img webp-src="{{ menu.object.header.basicInfo.avatarImage| avatarUrl}}" alt="{{menu.object.header.basicInfo.userName}}" class="avatar">
+                </div>
                 <div class="name-group">
-                    <p>{{menu.object.header.basicInfo.userName}}</p>
+                    <p ng-class="{friended: menu.object.header.basicInfo.isFriend}">{{menu.object.header.basicInfo.userName}}</p>
                     <p>{{menu.object.header.basicInfo.playedTime ? '在档 ' + menu.object.header.basicInfo.playedTime + ' 小时' :menu.object.header.basicInfo.isFriend?'互相关注':menu.object.header.basicInfo.subscribed?'单向关注':'&nbsp;'}}</p>
                 </div>
             </div>
         </a>
-        <div class="paragraph">好友 <a ng-href="user/{{menu.object.header.basicInfo.idCode}}/people/friend">{{menu.object.header.basicInfo.friendCount}}</a></div>
-        <div class="paragraph">关注 <a ng-href="user/{{menu.object.header.basicInfo.idCode}}/people/subscribedUser">{{menu.object.header.basicInfo.subscribedUserCount}}</a></div>
-        <div class="paragraph">听众 <a ng-href="user/{{menu.object.header.basicInfo.idCode}}/people/subscriber">{{menu.object.header.basicInfo.subscriberCount}}</a></div>
+        <div class="relations">
+            <div class="paragraph"><span>好友</span> <a ng-href="user/{{menu.object.header.basicInfo.idCode}}/people/friend">{{menu.object.header.basicInfo.friendCount}}</a></div>
+            <div class="paragraph"><span>关注</span> <a ng-href="user/{{menu.object.header.basicInfo.idCode}}/people/subscribedUser">{{menu.object.header.basicInfo.subscribedUserCount}}</a></div>
+            <div class="paragraph"><span>听众</span> <a ng-href="user/{{menu.object.header.basicInfo.idCode}}/people/subscriber">{{menu.object.header.basicInfo.subscriberCount}}</a></div>
+        </div>
         <div class="horizon"></div>
         <div ng-if="menu.object.header.basicInfo.steamProfileName" class="icon-text">
             <svg aria-hidden="true">
@@ -103,6 +108,13 @@
         </div>
         <div ng-if="menu.object.header.basicInfo.steamCnUid" class="paragraph">
             <a href="" ng-href="http://steamcn.com/suid-{{menu.object.header.basicInfo.steamCnUid}}">{{menu.object.header.basicInfo.steamCnUserName}}</a>
+        </div>
+        <div class="actions" ng-if="menu.object.header.inArticle">
+            <raised-button theme-color="menu.theme.main" ng-if="menu.stateTree.currentUser && menu.object.header.basicInfo.idCode !== menu.stateTree.currentUser.idCode"
+                           binary-set="menu.object.header.subscribeSet" binary-value="menu.object.header.basicInfo.subscribed"
+                           click="menu.object.header.subscribe(menu.object.header.basicInfo.id, menu.object.header.basicInfo.subscribed, menu.object.header.basicInfo, 'User')"></raised-button>
+            <raised-button theme-color="menu.theme.main" ng-if="!menu.stateTree.currentUser" text="关注" type="menu.object.header.type"
+                           click="menu.object.header.openRegistration(event)"></raised-button>
         </div>
 
         <!--<div class="icon-text" ng-if="false">-->

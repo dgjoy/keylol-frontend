@@ -88,11 +88,19 @@
                             });
                         },
                     },
-                    // {
-                    //     type: 'item',
-                    //     icon: 'user',
-                    //     text: '邀请好友加入其乐',
-                    // },
+                    {
+                        type: 'item',
+                        icon: 'user',
+                        text: '邀请好友加入其乐',
+                        clickAction (event) {
+                            window.show({
+                                event,
+                                templateUrl: 'src/windows/friend-invitation.html',
+                                controller: 'FriendInvitationController',
+                                controllerAs: 'friendInvitation',
+                            });
+                        },
+                    },
                     // {
                     //     type: 'item',
                     //     icon: 'cuc',
@@ -180,7 +188,7 @@
                     {
                         type: 'item',
                         icon: 'login-passcode',
-                        text: '口令组合',
+                        text: '密码组合',
                         clickAction (event) {
                             window.show({
                                 event,
@@ -205,6 +213,8 @@
         bindings: {
             author: '<',
             point: '<',
+            rating: '<',
+            theme: '<',
         },
     });
 }());

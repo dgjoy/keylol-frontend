@@ -10,9 +10,7 @@ section-header {
   .wrapper {
     display: flex;
     align-items: center;
-    padding-right: 10px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding: 10px 10px 10px 0;
     height: 48px;
 
     &.theme {
@@ -45,6 +43,39 @@ section-header {
       }
     }
 
+    &.has-background {
+      padding-top: 30px;
+      margin-bottom: 35px;
+      display: block;
+
+      .background {
+        position: absolute;
+        width: 100%;
+        height: 765px;
+        background: center no-repeat;
+        background-size: cover;
+        left: 0;
+        margin-top: -30px;
+        z-index: -1;
+
+        .mask {
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(to bottom, rgba($keylol-background, .9), rgba($keylol-background, .9) 50%, rgba($keylol-background, 1));
+        }
+      }
+
+      .text {
+        .main-title {
+          font-size: 24px;
+        }
+
+        .sub-title {
+          color: $keylol-main-text;
+        }
+      }
+    }
+
     .logo {
       height: 32px;
       width: 16px;
@@ -59,6 +90,7 @@ section-header {
 
       .sub-title {
         color: $keylol-inertia-text;
+        white-space: pre-line;
       }
     }
   }

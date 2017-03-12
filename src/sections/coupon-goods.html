@@ -1,14 +1,11 @@
-﻿<section-header type="theme" header="::couponGoods.header"></section-header>
-<div class="goods">
-    <div class="good" ng-repeat="i in [0,1,2,3,4,5,6]">
-        <img webp-src="{{ 'keylol://39b7d020df471d6c0e3fa593802000bc.jpg' | uriRelocate:'/both/275x300' }}">
-        <div class="name-group">
-            <p>冷衫</p>
-            <p>产品说明</p>
-        </div>
-        <div class="actions">
-            <p>25 人购买</p>
-            <raised-button type="theme" text="177 ◆" click="couponGoods.showWindow($index)"></raised-button>
-        </div>
+﻿<div class="good" ng-repeat="good in couponGoods.goods">
+    <img webp-src="{{ good.thumbnailImage | uriRelocate:'/sq/220' }}">
+    <div class="name-group">
+        <p>{{good.name}}</p>
+        <p>{{good.descriptions[0]}}</p>
+    </div>
+    <div class="actions">
+        <p>{{good.saleOut ? '售罄' : '&nbsp;'}}</p>
+        <raised-button type="theme" disabled="good.saleOut" text="{{good.price}} ◆" click="couponGoods.showWindow(good, event)"></raised-button>
     </div>
 </div>

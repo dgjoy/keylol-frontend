@@ -20,6 +20,7 @@
         controllerAs: 'menu',
         bindings: {
             object: '<',
+            theme: '<',
         },
     });
 }());

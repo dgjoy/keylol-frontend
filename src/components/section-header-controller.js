@@ -16,6 +16,7 @@
         bindings: {
             header: '<',
             theme: '<',
+            hasBackground: '<',
         },
     });
 }());

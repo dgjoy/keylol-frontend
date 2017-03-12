@@ -1,0 +1,53 @@
+.popup-wechat-card {
+  @include grow-shrink-self();
+  @include keylol-shadow-3();
+  width: 340px;
+  z-index: 1000;
+  border-radius: 2px;
+  overflow: hidden;
+
+  .header {
+    height: 105px;
+    background-color: #7DB83E;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+
+    .text {
+      margin-left: 15px;
+
+      p {
+        margin: 0;
+        padding: 0;
+
+        &:first-of-type {
+          font-weight: bold;
+          font-size: 20px;
+          margin-bottom: 2px;
+          color: $keylol-inverted-text;
+        }
+
+        &:last-of-type {
+          color: rgba($keylol-inverted-text, 0.6);
+        }
+      }
+    }
+
+    img {
+      width: 135px;
+      margin-right: 20px;
+    }
+  }
+
+  .qr-code {
+    padding: 35px 0;
+    background-color: $keylol-card;
+    img {
+      display: block;
+      margin: auto;
+      height: 185px;
+      width: 185px;
+    }
+  }
+}

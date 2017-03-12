@@ -1,0 +1,33 @@
+﻿<window position="center" class="window-friend-invitation">
+    <div class="window">
+        <div class="header">
+            <div class="text">
+                <p>邀请好友加入其乐</p>
+                <p>召唤友善的用户、搭建善良的社区</p>
+            </div>
+            <img src="assets/images/contacts.png">
+        </div>
+        <div class="content">
+            <p class="head">如果有游客在阅读你的文章时加入其乐，你会自动获得一定数量的文券作为邀请注册奖励。</p>
+            <div class="cards">
+                <div class="card">
+                    <div class="line">
+                        <p>应邀注册用户的初始积分</p><p class="blue">= 15 ◆</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="line">
+                        <p>每次邀请好友注册奖励</p><p class="green">+ 3 ◆</p>
+                    </div>
+                </div>
+            </div>
+            <p class="head">我们格外建议将文章转载至其他友善的玩家集中地，比如知乎、豆瓣或是 Steam 个人评测，这些用户能和我们一起养成更理想的社区氛围，还会获得应邀注册的文券奖励。</p>
+            <text-area selected-on-focus="true" type="text" label="你的推广链接" tip="'在第三方站点张贴链接时，记得遵守用户协议'" model="friendInvitation.inviteLink"></text-area>
+            <p class="head">除此之外，你还可以分享上面的这段链接给你的好友，或是附在论坛个人签名中，当游客通过这个链接访问其乐并注册后，你会获得同样的文券奖励。</p>
+            <div class="actions">
+                <p class="invited">目前已邀请 {{friendInvitation.inviteCount}} 位用户加入其乐</p>
+                <raised-button click="friendInvitation.close()" text="可以，这很善良" type="awesome"></raised-button>
+            </div>
+        </div>
+    </div>
+</window>

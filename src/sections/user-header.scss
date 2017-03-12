@@ -35,6 +35,10 @@ user-header {
         align-items: center;
         margin-left: 15px;
 
+        &:hover .name-group p:first-of-type {
+          text-decoration: underline;
+        }
+
         .avatar {
           margin-right: 10px;
           width: 32px;
@@ -48,14 +52,13 @@ user-header {
           p {
             @include ellipsis;
             margin: 0;
+            color: $keylol-inverted-text;
 
             &:first-of-type {
-              color: $keylol-inverted-text;
               font-weight: bold;
             }
 
             &:nth-of-type(2) {
-              color: $keylol-inverted-text;
               font-size: 12px;
             }
           }

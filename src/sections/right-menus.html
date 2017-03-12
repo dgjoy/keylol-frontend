@@ -6,7 +6,7 @@
         <menu ng-if="!rightMenus.stateTree.currentUser" object="::rightMenus.loginMenu"></menu>
     </div>
     <div ng-if="rightMenus.author || rightMenus.point" class="flex-column">
-        <user-menu ng-if="rightMenus.author" style="margin-bottom: 20px;" object="::rightMenus.author"></user-menu>
-        <point-menu ng-if="rightMenus.point" object="::rightMenus.point"></point-menu>
+        <user-menu ng-if="rightMenus.author" style="margin-bottom: 20px;" theme="rightMenus.theme" in-article="true" object="::rightMenus.author"></user-menu>
+        <point-menu ng-if="rightMenus.point" in-article="true" theme="rightMenus.theme" rating="rightMenus.rating" object="::rightMenus.point"></point-menu>
     </div>
 </div>

@@ -1,7 +1,8 @@
 (function () {
-    keylolApp.directive('bottomMoveBar', $timeout => {
+    keylolApp.directive('bottomMoveBar', () => {
         return {
             restrict: 'E',
+            priority: -1,
             scope: {
                 curTab: '<',
             },
@@ -27,7 +28,7 @@
                             visibility: 'hidden',
                             width: firstTab.width,
                         });
-                    } else {
+                    } else if (tabs[scope.curTab] !== undefined) {
                         element.css({
                             visibility: 'visible',
                             transform: `translateX(${tabs[scope.curTab].left}px) scaleX(${tabs[scope.curTab].width / firstTab.width}`,

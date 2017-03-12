@@ -3,9 +3,11 @@
         return {
             restrict: 'A',
             link (scope, element, attrs) {
-                element.on('click', function () {
-                    this.setSelectionRange(0, this.value.length);
-                });
+                if (attrs.selectedOnClick) {
+                    element.on('click', function () {
+                        this.setSelectionRange(0, this.value.length);
+                    });
+                }
             },
         };
     });

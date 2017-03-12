@@ -1,8 +1,16 @@
 menu-item {
   display: block;
+
+  button {
+    @include hover-background();
+  }
+
+  a {
+    @include hover-child-underline('.main-text');
+  }
+
   button, a {
     @include keylol-button-default;
-    @include hover-background();
     display: block;
     width: 100%;
     box-sizing: border-box;

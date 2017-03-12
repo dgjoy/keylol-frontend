@@ -1,6 +1,6 @@
 ﻿(function () {
     class TimelineCardController {
-        constructor($element, $timeout, utils, stateTree, $http, apiEndpoint, notification, $state) {
+        constructor($element, $timeout, utils, stateTree, $http, apiEndpoint, notification, $state, $scope) {
             $.extend(this,{
                 $element,
                 $timeout,
@@ -15,9 +15,10 @@
             this.currentFloor = 0;
 
             $timeout(() => {
+                this.simpleMaxHeight = this.card.coverImage ? 300 : 100;
                 this.simpleHeight = $element.find('.display-card>.shortcut>.simple>p').height();
-                this.simpleHidden = this.simpleHeight > 100;
-            });
+                this.simpleHidden = this.simpleHeight > this.simpleMaxHeight;
+            }, 3000);
 
             const currentStateName = $state.current.name;
             if (currentStateName.substr(0, 18) === 'entrance.discovery') {

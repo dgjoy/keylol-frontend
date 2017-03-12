@@ -10,7 +10,8 @@ article-card {
   }
 
   .user {
-    @include hover-background();
+    @include hover-child-underline();
+    position: relative;
     display: flex;
     justify-content: flex-start;
     align-items: center;

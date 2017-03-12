@@ -7,10 +7,13 @@
         <p class="sub-title">{{sectionHeader.header.subTitle}}</p>
     </div>
 </a>
-<div ng-if="!sectionHeader.header.state" class="wrapper {{sectionHeader.header.type}}">
-    <svg aria-hidden="true" class="logo" ng-style="{fill: sectionHeader.theme.main}">
+<div ng-if="!sectionHeader.header.state" class="wrapper {{sectionHeader.header.type}}" ng-class="{'has-background': sectionHeader.hasBackground}">
+    <svg ng-if="!sectionHeader.hasBackground" aria-hidden="true" class="logo" ng-style="{fill: sectionHeader.theme.main}">
         <use ng-href="{{'keylol-logo-arrow' | iconSvgUrl }}" xlink:href=""></use>
     </svg>
+    <div ng-if="sectionHeader.hasBackground" class="background" webp-background="{{sectionHeader.header.background | uriRelocate}}">
+        <div class="mask"></div>
+    </div>
     <div class="text">
         <p  ng-style="{color: sectionHeader.theme.main}" class="main-title font-myriad-keylol">{{sectionHeader.header.mainTitle}}</p>
         <p class="sub-title">{{sectionHeader.header.subTitle}}</p>

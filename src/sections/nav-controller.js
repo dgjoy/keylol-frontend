@@ -202,6 +202,7 @@
                 });
             } else if (currentStateName.substr(0,11) === 'post-office') {
                 this.hasFakeTabs = true;
+                this.logoType = 'post';
                 $scope.$watch(() => {
                     return stateTree.currentUser;
                 },() => {
@@ -234,9 +235,10 @@
                 });
             } else if (currentStateName.substr(0,6) === 'coupon') {
                 this.hasFakeTabs = true;
+                this.logoType = 'coupon';
                 this.tabArray = [
                     { state: '.detail', name:'明细' },
-                    // { state: '.store', name:'商店' },
+                    { state: '.store', name:'商店' },
                     { state: '.ranking', name:'排行' },
                 ];
 
@@ -248,11 +250,11 @@
                         case 'detail' :
                             this.currentPage = 0;
                             break;
-                        // case 'store' :
-                        //     this.currentPage = 1;
-                        //     break;
-                        case 'ranking' :
+                        case 'store' :
                             this.currentPage = 1;
+                            break;
+                        case 'ranking' :
+                            this.currentPage = 2;
                             break;
                     }
                 });
@@ -279,12 +281,15 @@
                             this.currentPage = 2;
                             break;
                     }
+                });
 
-                    const keyword = $state.params.keyword;
-                    if (keyword) {
-                        this.tabArray[0].href = this.tabArray[0].href.substr(0, 13) + keyword;
-                        this.tabArray[1].href = this.tabArray[1].href.substr(0, 15) + keyword;
-                        this.tabArray[2].href = this.tabArray[2].href.substr(0, 12) + keyword;
+                $scope.$watch(() => {
+                    return $state.params.keyword;
+                }, newValue => {
+                    if (newValue) {
+                        this.tabArray[0].href = this.tabArray[0].href.substr(0, 13) + newValue;
+                        this.tabArray[1].href = this.tabArray[1].href.substr(0, 15) + newValue;
+                        this.tabArray[2].href = this.tabArray[2].href.substr(0, 12) + newValue;
                     }
                 });
             }

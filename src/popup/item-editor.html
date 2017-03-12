@@ -9,9 +9,9 @@
         <raised-button click="itemEditor.submit()" text="提交" type="theme" theme-color="itemEditor.theme.main" disabled="!itemEditor.username || !itemEditor.password || itemEditor.submitLock"></raised-button>
     </form>
     <form class="clearfix" ng-if="itemEditor.item.type === 'password'">
-        <text-area ng-if="itemEditor.item.needPassword" type="password" state="itemEditor.textError ? 'warn' : 'normal'" error="itemEditor.textError" label="原口令" theme="itemEditor.theme" model="itemEditor.password"></text-area>
-        <text-area type="password" state="itemEditor.textError ? 'warn' : 'normal'" error="itemEditor.textError" label="新口令" theme="itemEditor.theme" model="itemEditor.newPassword"></text-area>
-        <text-area type="password" state="((itemEditor.newRepeatPassword.length > 0 || itemEditor.textError) && itemEditor.newPassword !== itemEditor.newRepeatPassword) ? 'warn' : 'normal'" error="itemEditor.textError || '两次口令输入不一致'" label="重复新口令" theme="itemEditor.theme" model="itemEditor.newRepeatPassword"></text-area>
+        <text-area ng-if="itemEditor.item.needPassword" type="password" state="itemEditor.textError ? 'warn' : 'normal'" error="itemEditor.textError" label="原密码" theme="itemEditor.theme" model="itemEditor.password"></text-area>
+        <text-area type="password" state="itemEditor.textError ? 'warn' : 'normal'" error="itemEditor.textError" label="新密码" theme="itemEditor.theme" model="itemEditor.newPassword"></text-area>
+        <text-area type="password" state="((itemEditor.newRepeatPassword.length > 0 || itemEditor.textError) && itemEditor.newPassword !== itemEditor.newRepeatPassword) ? 'warn' : 'normal'" error="itemEditor.textError || '两次密码输入不一致'" label="重复新密码" theme="itemEditor.theme" model="itemEditor.newRepeatPassword"></text-area>
         <raised-button click="itemEditor.submit()" text="提交" type="theme" theme-color="itemEditor.theme.main" disabled="itemEditor.submitLock || itemEditor.newPassword !== itemEditor.newRepeatPassword"></raised-button>
     </form>
     <form class="clearfix" ng-if="itemEditor.item.type === 'point'">

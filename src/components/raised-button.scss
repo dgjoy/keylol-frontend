@@ -94,8 +94,21 @@ raised-button {
       }
     }
 
+    &.user-theme {
+      background-color: $keylol-user-theme;
+
+      &.invert {
+        color: $keylol-user-theme;
+        fill: $keylol-user-theme;
+      }
+    }
+
     &.light-theme {
       background-color: $keylol-light-theme;
+    }
+
+    &.awesome {
+      background-color: $keylol-review-awesome;
     }
 
     &.invert {

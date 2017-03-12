@@ -6,7 +6,7 @@ game-card {
   flex-direction: column;
 
   .info {
-    @include hover-background();
+    @include hover-point-info-underline();
     display: flex;
     justify-content: space-between;
     align-items: center;
