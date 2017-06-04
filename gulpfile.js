@@ -48,7 +48,7 @@ var buildConfigs = {
     prod: {
         bundle: true,
         apiEndpoint: "https://api.keylol.com/",
-        urlCanonical: true,
+        urlCanonical: false,
         enableStats: true
     }
 };
